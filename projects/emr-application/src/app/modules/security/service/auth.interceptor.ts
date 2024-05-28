@@ -10,37 +10,37 @@ import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { KcAuthService } from './kc-auth.service';
+import { UserService } from '../../administration/services/user/user.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private kcAuthServiceService: KcAuthService, private keycloakService: KeycloakService
-    , private spinner: NgxSpinnerService, private router: Router) { }
+  constructor(private spinner: NgxSpinnerService
+    , private keycloakAngular: KeycloakService
+    , private userService: UserService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.spinner.show();
-    return from(this.kcAuthServiceService.getToken())
+    return from(this.userService.getAccessToken())
       .pipe(
         mergeMap(token => {
-          if (localStorage.getItem('access-token') === null) {
-            localStorage.setItem('access-token', token)
-          }
           request = request.clone({
-            setHeaders: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
+            setHeaders: { Authorization: `Bearer ${token}` }
           });
           return next.handle(request);
         }
         ),
         finalize(() => {
           this.spinner.hide();
-        }), 
+        }),
         catchError(error => {
           console.log(JSON.stringify(error))
+          this.spinner.hide();
           if (error.status === 401) {
-            this.kcAuthServiceService.logout();
+            this.keycloakAngular.logout();
           }
           if (error.error.errorCode === 'UNAUTHORIZED') {
-            this.kcAuthServiceService.logout();
+            this.keycloakAngular.logout();
           } else {
             return throwError(error);
           }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { INavData } from '@coreui/angular-pro';
+import { RenderNavItemsService } from '../../modules/security/service/render-nav-items.service';
 import { NavItems } from './_nav';
 @Component({
   selector: 'app-default-layout',
@@ -8,10 +9,12 @@ import { NavItems } from './_nav';
 })
 export class DefaultLayoutComponent implements OnInit {
   navItems: INavData[] | null | undefined;
-  constructor() { }
+  constructor(private renderNavItemsService: RenderNavItemsService) { }
 
   ngOnInit(): void {
-    this.navItems = NavItems;
+    this.renderNavItemsService.renderItems$.subscribe((renderItems: INavData[]) => {
+      this.navItems = renderItems;
+    })
   }
 
 }

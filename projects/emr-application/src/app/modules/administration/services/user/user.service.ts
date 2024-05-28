@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { environment } from 'projects/emr-application/src/environments/environment';
+import { from, map, of } from 'rxjs';
 import { User } from '../../model/user/user';
 
 @Injectable({
@@ -8,7 +10,10 @@ import { User } from '../../model/user/user';
 })
 export class UserService {
   private userUrl = environment.baseURL + 'user'
-  constructor(private httpClient: HttpClient) { }
+  uuid: string
+  accessToken: string;
+  constructor(private httpClient: HttpClient
+    ,private keycloakAngular: KeycloakService) { }
   create(user: User) {
     const headers = { 'content-type': 'application/json' }
     var createURL = this.userUrl + '/create'
@@ -22,5 +27,35 @@ export class UserService {
   getByUUID(uuid: string) {
     var url = this.userUrl + '/find/uuid/' + uuid;
     return this.httpClient.get(url);
+  }
+  public gteUUID() {
+    if (this.uuid === undefined) {
+      return from(this.keycloakAngular.getKeycloakInstance().loadUserInfo()).pipe(
+        map((userProfile: any) => {
+
+          this.uuid = userProfile.sub;
+          return userProfile.sub;
+        })
+      )
+    } else {
+      return of(this.uuid);
+    }
+  }
+  public findUSerRoleScope(uuid: string, roles: string[]) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.userUrl + '/scope/find/uuid/' + uuid + '/roles/' + roles;
+    return this.httpClient.get(`${url}`, { 'headers': headers })
+  }
+  public getAccessToken() {
+    if (this.accessToken === undefined) {
+      return from(this.keycloakAngular.getToken()).pipe(
+        map((accessToken: any) => {
+          this.accessToken = accessToken;
+          return accessToken;
+        })
+      )
+    } else {
+      return of(this.accessToken);
+    }
   }
 }

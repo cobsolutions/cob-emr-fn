@@ -28,7 +28,7 @@ export class ClinicService {
     return this.httpClient.post(`${createURL}`, JSON.stringify(clinic), { 'headers': headers })
   }
   getByUserId(userId: string | undefined) {
-    const url = this.userUrl + '/find' + '/clinics/userUUID/' + userId;
+    const url = this.userUrl + '/find' + '/user/' + userId;
     return this.httpClient.get(url).pipe(
       map((response: any) => <Clinic[]>response));
   }

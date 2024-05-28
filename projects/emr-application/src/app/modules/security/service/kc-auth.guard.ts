@@ -2,12 +2,19 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
+import { INavData } from '@coreui/angular-pro';
+import { MenuItemsConstructor } from '../menu.items.constructor';
+import { RenderNavItemsService } from './render-nav-items.service';
+import { RoleScopeFinderService } from './role-scope-finder.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KcAuthGuard extends KeycloakAuthGuard {
-  constructor(protected override router: Router, protected override keycloakAngular: KeycloakService) {
+  constructor(protected override router: Router
+    , protected override keycloakAngular: KeycloakService
+    , private renderNavItemsService: RenderNavItemsService
+    , private roleScopeFinderService: RoleScopeFinderService) {
     super(router, keycloakAngular);
   }
   async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
@@ -16,6 +23,10 @@ export class KcAuthGuard extends KeycloakAuthGuard {
         redirectUri: window.location.origin + state.url,
       });
     }
+    var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles)
+    this.renderNavItemsService.renderItems$.next(filteredList)
+    this.roleScopeFinderService.find();
+    
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
     // Allow the user to to proceed if no additional roles are required to access the route.

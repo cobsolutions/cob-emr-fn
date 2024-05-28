@@ -15,7 +15,7 @@ export class DotorUserService extends BasePaginationService {
   constructor(httpClient: HttpClient,clinicEmittingService :ClinicEmittingService) { super(httpClient,clinicEmittingService) }
 
   getDoctorUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
-    return this.get(config$, this.baseUrl + "/find/doctors/clinicId/")
+    return this.get(config$, this.baseUrl + "/find/clinical/clinicId/")
   }
   deleteDoctor(uuid: string) {
     var url = this.baseUrl + '/delete/doctor/' + uuid

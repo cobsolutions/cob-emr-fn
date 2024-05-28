@@ -4,7 +4,6 @@ import { environment } from 'projects/emr-application/src/environments/environme
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../../common/service/base-pagination.service';
-import { CacheService } from '../../../../common/service/cahce/cache.service';
 import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 
 @Injectable({
@@ -15,7 +14,7 @@ export class ClinicalUserService extends BasePaginationService {
   constructor(httpClient: HttpClient,clinicEmittingService :ClinicEmittingService) { super(httpClient,clinicEmittingService) }
 
   getClinicalUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
-    return this.get(config$, this.baseUrl + "/find/clinicals/clinicId/")
+    return this.get(config$, this.baseUrl + "/find/clerical/clinicId/")
   }
   deleteUser(uuid: string) {
     console.log('Service')

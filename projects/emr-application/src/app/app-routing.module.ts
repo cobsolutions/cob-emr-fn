@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core';
+import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 
 const routes: Routes = [
@@ -14,8 +15,7 @@ const routes: Routes = [
     component: DefaultLayoutComponent,
     canActivate: [KcAuthGuard],
     data: {
-      title: 'Home',
-      roles: ['administration_emr_role','clinical_emr_role','clerical_emr_role','billing_emr_role']
+      title: 'Home'
     },
     children: [
       {
@@ -25,6 +25,11 @@ const routes: Routes = [
       },
       {
         path: 'patient',
+        data: {
+          title: 'Patient',
+          roles: [Role.PATIENT_ROLE]
+        },
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/patient/patient.module').then((m) => m.PatientModule)
       },

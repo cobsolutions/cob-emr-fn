@@ -10,13 +10,13 @@
       <div [visible]="this.details_visible[item.id] === true" cCollapse>
         <c-card class="rounded-0">
           <c-card-body>
-            <strong>Doctor Npi : </strong> {{item['doctor']['npi']}}
+            <strong>Doctor Npi : </strong> {{item.npi}}
             <br>
-            <strong>Doctor Licence : </strong> {{item['doctor']['licence']}}
+            <strong>Doctor Licence : </strong> {{item.licence}}
             <br>
-            <strong>Doctor Speciality : </strong> {{item['doctor']['speciality']}}
+            <strong>Doctor Speciality : </strong> {{item.speciality}}
             <br>
-            <strong>Doctor Credential : </strong> {{item['doctor']['credential']}}
+            <strong>Doctor Credential : </strong> {{item.credential}}
             <br>
           </c-card-body>
         </c-card>
