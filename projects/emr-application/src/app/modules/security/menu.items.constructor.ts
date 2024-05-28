@@ -3,6 +3,7 @@ import { NavItems } from "../../core/layout/_nav";
 import { MenuItem } from "./model/nav.item";
 import { AdministrationRoleItemConverter } from "./role.item.converter/administration.role.item.converter";
 import { ClientRoleItemConverter } from "./role.item.converter/client.role.item.converter";
+import { OrganizationRoleItemConverter } from "./role.item.converter/organization.role.item.converter";
 import { SchedulerRoleItemConverter } from "./role.item.converter/scheduler.role.item.converter";
 export class MenuItemsConstructor{
     public static construct(roles: string[]) {
@@ -10,6 +11,7 @@ export class MenuItemsConstructor{
         ClientRoleItemConverter.convert(roles, menuItems);
         AdministrationRoleItemConverter.convert(roles, menuItems);
         SchedulerRoleItemConverter.convert(roles, menuItems)
+        OrganizationRoleItemConverter.convert(roles, menuItems);
         return this.filterNavItems(menuItems)
     }
 
