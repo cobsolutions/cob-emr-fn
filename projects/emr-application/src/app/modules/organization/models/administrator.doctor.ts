@@ -1,6 +1,6 @@
 export interface AdministratorDoctor{
     id?: number;
-    userName?: string,
+    accountName?: string,
     password?:string,
     firstName?: string
     middleName?: string,

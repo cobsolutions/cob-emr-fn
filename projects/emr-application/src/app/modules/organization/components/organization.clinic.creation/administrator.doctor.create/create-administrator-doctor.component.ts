@@ -30,7 +30,7 @@ export class CreateAdministratorDoctorComponent implements OnInit {
       this.users = response.body;
     })
   }
-  
+
   pick(event: any) {
     this.isDoctorPicked = true;
     this.administratorDoctor = event;
@@ -40,20 +40,19 @@ export class CreateAdministratorDoctorComponent implements OnInit {
     this.administratorDoctor.credential = event.doctor.credential;
   }
   unpick(event: any) {
-    this.administratorDoctor={}
+    this.administratorDoctor = {}
     this.isDoctorPicked = false;
   }
   saveDoctor() {
-    if (this.checkCreatedDoctor()) {
-      this.errorMessage = 'Doctor is already exsists';
-    }
-    else if (this.doctorForm.valid) {
+    // if (this.checkCreatedDoctor()) {
+    //   this.errorMessage = 'Doctor is already exsists';
+    // }
+    if (this.doctorForm.valid) {
       this.administratorDoctor.password = this.encryptService.encrypt(this.administratorDoctor.password);
       this.isValidDoctor = true;
       this.doctorForm.reset;
       this.errorMessage = null;
       this.closeModal.emit(this.administratorDoctor);
-      this.administratorDoctor={}
     } else {
       this.errorMessage = 'Invalid data';
       return;
@@ -62,15 +61,15 @@ export class CreateAdministratorDoctorComponent implements OnInit {
   selectDoctor() {
     this.isValidDoctor = true;
     this.closeModal.emit(this.administratorDoctor);
-    this.administratorDoctor={}
+    this.administratorDoctor = {}
     this.isDoctorPicked = false;
   }
-  private checkCreatedDoctor(): boolean {
-    var invalid: boolean = false;
-    this.users.forEach(user => {
-      if (user.userName === this.administratorDoctor.userName)
-        invalid = true
-    });
-    return invalid;
-  }
+  // private checkCreatedDoctor(): boolean {
+  //   var invalid: boolean = false;
+  //   this.users.forEach(user => {
+  //     if (user.userName === this.administratorDoctor.userName)
+  //       invalid = true
+  //   });
+  //   return invalid;
+  // }
 }

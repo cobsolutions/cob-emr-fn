@@ -59,7 +59,7 @@ export class CreateOrganizationComponent extends BasicComponent implements OnIni
   create() {
     this.valid = this.validate();
     if (this.valid) {
-      this.organization.clinics = this.organizationClinicsCreationComponent.clinics
+      this.organization.clinics = this.organizationClinicsCreationComponent.clinicDataHolders
       this.organizationService.create(this.organization)
         .subscribe(() => {
           this.reset();
@@ -80,7 +80,7 @@ export class CreateOrganizationComponent extends BasicComponent implements OnIni
     console.log('update ')
     this.valid = this.validate();
     if (this.valid) {
-      this.organization.clinics = this.organizationClinicsCreationComponent.clinics
+      this.organization.clinics = this.organizationClinicsCreationComponent.clinicDataHolders
       this.organizationService.update(this.organization)
         .subscribe(() => {
           this.reset();
@@ -103,7 +103,7 @@ export class CreateOrganizationComponent extends BasicComponent implements OnIni
   }
   validate(): boolean {
     var valid: boolean = true;
-    this.isvalidClinics = this.organizationClinicsCreationComponent.clinics.length > 0
+    this.isvalidClinics = this.organizationClinicsCreationComponent.clinicDataHolders.length > 0
     valid = valid && this.isValid() && this.isvalidClinics;
     this.basicInvalidFields = [];
     if (!valid)

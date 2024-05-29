@@ -4,6 +4,7 @@ import { User } from '../../../administration/model/user/user';
 import { SingleAddressComponent } from '../../../common/components/single.address/single-address.component';
 import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../patient/models/clinic';
+import { ClinicDataHolder } from '../../../patient/models/clinic.data.holder';
 import { AdministratorDoctor } from '../../models/administrator.doctor';
 import { DoctorUserService } from '../../services/doctor.user.autocomplete/doctor-user.service';
 import { CreateAdministratorDoctorComponent } from './administrator.doctor.create/create-administrator-doctor.component';
@@ -33,6 +34,8 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
   @ViewChild('clinicForm') clinicForm: NgForm;
 
   clinics: Clinic[] = new Array();
+  clinicDataHolders:ClinicDataHolder[] =[]
+  clinicDataHolder:ClinicDataHolder= {}
   constructor() { }
 
   ngOnInit(): void {
@@ -40,7 +43,11 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
   add() {
     if (this.clinicForm.valid && this.createdClinic.administratorDoctor !== undefined) {
       this.createdClinic.address = this.clinicAddress.getAddress();
-      this.clinics.push(this.createdClinic);
+      this.clinicDataHolder.clinicModel = this.createdClinic;
+      console.log(JSON.stringify(this.createAdministratorDoctorComponent.administratorDoctor))
+      this.clinicDataHolder.administratorDoctor = this.createAdministratorDoctorComponent.administratorDoctor
+      this.clinicDataHolders.push(this.clinicDataHolder);
+   //   this.clinics.push(this.createdClinic);
       this.clearAll();
     } else {
       this.submitted = true;
@@ -71,6 +78,7 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
     this.createDoctorVisible = !this.createDoctorVisible;
   }
   handleCloseDoctorModal(event: any) {
+    this.clinicDataHolder.administratorDoctor = this.createdClinic.administratorDoctor ;
     this.createdClinic.administratorDoctor = event
     this.closeCreateDoctorModal();
   }

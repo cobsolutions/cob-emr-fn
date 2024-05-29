@@ -29,10 +29,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let clinic of clinics;let i=index;" scope="row">
+        <tr *ngFor="let clinic of clinicDataHolders;let i=index;" scope="row">
             <th scope="row">1</th>
-            <td>{{clinic.name}}</td>
-            <td><app-view-address [address]="clinic.address"[addressView] ="'row'"></app-view-address></td>
+            <td>{{clinic.clinicModel.name}}</td>
+            <td><app-view-address [address]="clinic.clinicModel.address"[addressView] ="'row'"></app-view-address></td>
             
             <td>
                 <div class="btn-group " role="group" aria-label="Basic example">
@@ -50,6 +50,6 @@
         <button (click)="closeCreateDoctorModal()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <app-create-administrator-doctor (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
+        <app-create-administrator-doctor #createAdministratorDoctorComponent (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
     </c-modal-body>
 </c-modal>
