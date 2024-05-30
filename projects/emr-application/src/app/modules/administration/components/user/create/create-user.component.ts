@@ -68,9 +68,7 @@ export class CreateUserComponent implements OnInit {
     , private toastr: ToastrService
     , private router: Router
     , private encryptService: EncryptService
-    , private route: ActivatedRoute
-    , private clinicalUserService: ClinicalUserService
-    , private clinicEmittingService: ClinicEmittingService) { }
+    , private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     var organizationId: number = Number(localStorage.getItem('org'));

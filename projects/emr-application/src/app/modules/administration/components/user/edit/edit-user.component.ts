@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { switchMap } from 'rxjs';
+import { Specialties } from '../../../../common/models/enums/doctor/specialties';
 import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { Clinic } from '../../../../patient/models/clinic';
 import { Role } from '../../../../security/model/role';
@@ -18,7 +19,7 @@ import { DotorUserService } from '../../../services/user/doctor.user/dotor-user.
 export class EditUserComponent implements OnInit {
   @Input() uuid: string
   @Input() userType: string
-  @ViewChild('editUserRoles') userRoles: SmartTableComponent;
+  @ViewChild('editUserRoles') editUserRoles: SmartTableComponent;
   user: User
   clinics: Clinic[];
   columns = [
@@ -40,6 +41,8 @@ export class EditUserComponent implements OnInit {
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
+  credentials: string[];
+  specialties = Specialties;
   constructor(private clericalUSerService: ClinicalUserService
     , private clinicEmittingService: ClinicEmittingService
     , private clinicService: ClinicService
@@ -75,7 +78,6 @@ export class EditUserComponent implements OnInit {
         return this.clinicalUserService.getClinicalUser(clinicID, this.uuid)
       })
     ).subscribe(result => {
-      console.log(JSON.stringify(result))
       this.populateUser(result)
     })
   }
@@ -84,15 +86,16 @@ export class EditUserComponent implements OnInit {
     this.populateUserName();
     this.populateClinics(this.user)
     this.populateRoles()
+    this.getDoctorCredentials()
   }
   private populateUserName() {
-    
+
     this.user.firstName = this.user.fullName.split(',')[0]
     this.user.middleName = this.user.fullName.split(',')[1]
     this.user.lastName = this.user.fullName.split(',')[2]
   }
   private populateRoles() {
-    this.userRoles.items.forEach((item: any) => {
+    this.editUserRoles.items.forEach((item: any) => {
       item.scope = this.user.roleScope.find(roleScope => roleScope.role === item.name).scope;
     })
   }
@@ -104,5 +107,18 @@ export class EditUserComponent implements OnInit {
         clinic.selected = false;
     })
   }
-
+  getDoctorCredentials() {
+    if (this.user.speciality === 'Physical_Therapy') {
+      this.credentials = ['DPT', 'PTA']
+    }
+    if (this.user.speciality === 'Occupational_Therapy') {
+      this.credentials = ['OTD', 'COTA']
+    }
+    if (this.user.speciality === 'Speech_Language_Pathology') {
+      this.credentials = ['SLP', 'SLPA']
+    }
+    if (this.user.speciality === 'Dentistry') {
+      this.credentials = ['DMD', 'DDS', 'CDA']
+    }
+  }
 }

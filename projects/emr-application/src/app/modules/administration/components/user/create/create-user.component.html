@@ -123,7 +123,7 @@
                             <small
                                 *ngIf="submitted   && (licence.errors) || (licence.invalid && (licence.dirty || licence.touched))"
                                 class="form-text text-danger">
-                                Doctor npi is required
+                                Doctor Licence is required
                             </small>
                             <c-input-group class="mb-3">
                                 <input autoComplete="name" cFormControl id="licence" name="licence" sizing="sm"
@@ -196,12 +196,6 @@
                                         <ng-container *ngSwitchDefault>
                                             {{tdContent}}
                                         </ng-container>
-                                        <!-- <ng-container *ngSwitchCase="'show'" class="py-2">
-                                            <button (click)="toggleDetails(item['_id'])" cButton color="primary"
-                                                size="sm" variant="outline">
-                                                Show
-                                            </button>
-                                        </ng-container> -->
                                         <ng-container *ngSwitchCase="'scope'" class="py-2">
                                             <c-form-check [inline]="true" [switch]="true">
                                                 <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"

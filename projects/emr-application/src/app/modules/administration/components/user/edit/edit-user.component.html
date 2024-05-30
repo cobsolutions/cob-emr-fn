@@ -89,6 +89,40 @@
             </c-row>
         </c-card-body>
     </c-card>
+    <c-card *ngIf="user && userType ==='Clinical'">
+        <c-card-header>
+            <h5>Clinical User Details</h5>
+        </c-card-header>
+        <c-card-body>
+            <c-input-group class="mb-3">
+                <input autoComplete="name" cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter Doctor npi"
+                    required [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}"
+                    [(ngModel)]="user.npi" #npi="ngModel" />
+            </c-input-group>
+            <c-input-group class="mb-3">
+                <input autoComplete="name" cFormControl id="licence" name="licence" sizing="sm"
+                    placeholder="Enter Doctor Licence" required
+                    [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
+                    [(ngModel)]="user.licence" #licence="ngModel" />
+            </c-input-group>
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality" required
+                [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
+                [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
+                <option [ngValue]="null" disabled selected>Select Doctor Speciality</option>
+                <option *ngFor="let specialty of specialties | keyvalue" [value]="specialty.key">
+                    {{specialty.value}}
+                </option>
+            </select>
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential" required
+                [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
+                [(ngModel)]="user.credential" #credential="ngModel">
+                <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
+                <option *ngFor="let credential of credentials" [value]="credential">
+                    {{credential}}
+                </option>
+            </select>
+        </c-card-body>
+    </c-card>
     <c-card>
         <c-card-header>
             <h5>Clinics</h5>
