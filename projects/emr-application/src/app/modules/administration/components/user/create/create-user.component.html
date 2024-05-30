@@ -7,6 +7,7 @@
 <hr />
 <c-container fluid>
     <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+        <!--Basic Information-->
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -52,8 +53,8 @@
                         </small>
                         <c-input-group class="mb-3" sizing="sm">
                             <span cInputGroupText id="basic-addon1">&#64;</span>
-                            <input aria-describedby="basic-addon1" id="email" name="email" cFormControl required [disabled]="!isCreated"
-                                placeholder="email" #email="ngModel" [(ngModel)]="user.email" />
+                            <input aria-describedby="basic-addon1" id="email" name="email" cFormControl required
+                                [disabled]="!isCreated" placeholder="email" #email="ngModel" [(ngModel)]="user.email" />
                         </c-input-group>
                         <small
                             *ngIf="submitted   && (password.errors) || (password.invalid && (password.dirty || password.touched))"
@@ -64,9 +65,9 @@
                             <span cInputGroupText id="basic-addon1">
                                 <svg cIcon name="cilLockLocked"></svg>
                             </span>
-                            <input aria-describedby="basic-addon1" id="password" name="password" cFormControl required [disabled]="!isCreated"
-                                placeholder="password" #password="ngModel" [(ngModel)]="user.password"
-                                type="password" />
+                            <input aria-describedby="basic-addon1" id="password" name="password" cFormControl required
+                                [disabled]="!isCreated" placeholder="password" #password="ngModel"
+                                [(ngModel)]="user.password" type="password" />
                         </c-input-group>
                         <small
                             *ngIf="submitted   && (username.errors) || (username.invalid && (username.dirty || username.touched))"
@@ -77,13 +78,15 @@
                             <span cInputGroupText id="basic-addon1">
                                 <svg cIcon name="cilUser"></svg>
                             </span>
-                            <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required [disabled]="!isCreated"
-                                placeholder="username" #username="ngModel" [(ngModel)]="user.userName" />
+                            <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required
+                                [disabled]="!isCreated" placeholder="username" #username="ngModel"
+                                [(ngModel)]="user.userName" />
                         </c-input-group>
                     </c-card-body>
                 </c-card>
             </c-col>
         </c-row>
+        <!--User Type-->
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -95,7 +98,8 @@
                             class="form-text text-danger">
                             Role is required
                         </small>
-                        <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role" [disabled]="!isCreated"
+                        <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role"
+                            [disabled]="!isCreated"
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
                             [(ngModel)]="user.role" #role="ngModel">
                             <option [ngValue]="null" disabled selected>Select User Type</option>
@@ -164,6 +168,64 @@
                 </c-card>
             </c-col>
         </c-row>
+        <!--Permissions-->
+        <c-row>
+            <c-col class="col">
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header>
+                        <h5>Permissions</h5>
+                    </c-card-header>
+                    <c-card-body>
+                        <c-smart-table [items]="roles" [columns]="columns" #userRoles
+                            [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
+                            <ng-template cTemplateId="tableDetails" let-item="item">
+                                <div [visible]="this.details_visible[item._id]===true" cCollapse>
+                                    <c-card class="rounded-0">
+                                        <c-card-body>
+                                            <h5>{{item | json}}</h5>
+                                        </c-card-body>
+                                    </c-card>
+                                </div>
+                            </ng-template>
+                            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+                                let-tdContent="tdContent">
+                                <td>
+                                    <ng-container [ngSwitch]="columnName">
+                                        <ng-container *ngSwitchDefault>
+                                            {{tdContent}}
+                                        </ng-container>
+                                        <!-- <ng-container *ngSwitchCase="'show'" class="py-2">
+                                            <button (click)="toggleDetails(item['_id'])" cButton color="primary"
+                                                size="sm" variant="outline">
+                                                Show
+                                            </button>
+                                        </ng-container> -->
+                                        <ng-container *ngSwitchCase="'scope'" class="py-2">
+                                            <c-form-check [inline]="true" [switch]="true">
+                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                    value="hidden" [(ngModel)]="item.scope" />
+                                                <label cFormCheckLabel>Hidden</label>
+                                            </c-form-check>
+                                            <c-form-check [inline]="true" [switch]="true">
+                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                    value="view" [(ngModel)]="item.scope" />
+                                                <label cFormCheckLabel>View</label>
+                                            </c-form-check>
+                                            <c-form-check [inline]="true" [switch]="true">
+                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                    value="edit" [(ngModel)]="item.scope" />
+                                                <label cFormCheckLabel>edit</label>
+                                            </c-form-check>
+                                        </ng-container>
+                                    </ng-container>
+                                </td>
+                            </ng-template>
+                        </c-smart-table>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <!--Clinics-->
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -176,8 +238,8 @@
                             class="form-text text-danger">
                             Clinics is required
                         </small>
-                        <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"  required [selectAll]="false"
-                            [(ngModel)]="user.clinics" #selectedClinic="ngModel">
+                        <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
+                            [selectAll]="false" [(ngModel)]="user.clinics" #selectedClinic="ngModel">
                             <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
                                 [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
                         </c-multi-select>

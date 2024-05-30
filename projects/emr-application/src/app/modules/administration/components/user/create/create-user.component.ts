@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SmartTableComponent } from '@coreui/angular-pro';
+import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { from, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
@@ -20,13 +22,33 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class CreateUserComponent implements OnInit {
   @ViewChild('userCreateForm') userCreateForm: NgForm;
+  @ViewChild('userRoles') userRoles: SmartTableComponent;
   submitted: boolean = false;
   validAddress: boolean = true;
-  roles = Roles;
   specialties = Specialties;
   credentials: string[];
   clinics: Clinic[];
   isCreated: boolean = true;
+  readonly selectedItemsCount = []
+  columns = [
+    {
+      key: 'role',
+      label: 'Permission',
+      _style: { width: '70%' }
+    },
+    { key: 'scope', label: 'Scope', _style: { width: '30%' } },
+  ];
+  roles: IItem[] = [
+    { role: 'Patient', scope: '' },
+    { role: 'Clinic', scope: '' },
+    { role: 'Insurance Company', scope: '' },
+    { role: 'Referring Provider', scope: '' },
+    { role: 'Patient Payment', scope: '' },
+    { role: 'Calendar', scope: '' },
+    { role: 'Medical Note-Initialization', scope: '' },
+    { role: 'Medical Note-Forward', scope: '' },
+    { role: 'Medical Note-Finalization', scope: '' },
+  ]
   user: User = {
     role: null,
     clinics: [],
@@ -34,8 +56,9 @@ export class CreateUserComponent implements OnInit {
       speciality: null,
       credential: null
     }
-
   }
+  details_visible = Object.create({});
+  scopes: string[] = []
   constructor(private clinicService: ClinicService
     , private cacheService: CacheService
     , private userService: UserService
@@ -52,7 +75,7 @@ export class CreateUserComponent implements OnInit {
       if (useruuid !== null) {
         this.isCreated = false;
         this.userService.getByUUID(useruuid).subscribe((result: any) => {
-          
+
           this.user = result;
           this.clinics.forEach(clinic => {
             if (result.clinics.includes(clinic.id.toString()))
@@ -67,33 +90,34 @@ export class CreateUserComponent implements OnInit {
     })
   }
   create() {
-    if (this.userCreateForm.valid) {
-      this.submitted = false;
-      if (this.user.role !== 'clinical_emr_role')
-        this.user.doctor = undefined;
-      if (this.isCreated) {
-        var encryptedPassword = this.encryptService.encrypt(this.user.password);
-        this.user.password = encryptedPassword
-        this.userService.create(this.user).subscribe(result => {
-          this.toastr.success('User created');
-          this.router.navigateByUrl('emr/administration/list/user')
-        }, (error) => {
-          console.log(error);
-          this.toastr.error(error.error.message, 'Error In Creation');
-        })
-      } else {
-        this, this.userService.update(this.user).subscribe((result) => {
-          this.toastr.success('User updated');
-          this.router.navigateByUrl('emr/administration/list/user')
-        }, (error) => {
-          console.log(error);
-          this.toastr.error(error.error.message, 'Error In update');
-        })
-      }
+    console.log(JSON.stringify(this.userRoles.items))
+    // if (this.userCreateForm.valid) {
+    //   this.submitted = false;
+    //   if (this.user.role !== 'clinical_emr_role')
+    //     this.user.doctor = undefined;
+    //   if (this.isCreated) {
+    //     var encryptedPassword = this.encryptService.encrypt(this.user.password);
+    //     this.user.password = encryptedPassword
+    //     this.userService.create(this.user).subscribe(result => {
+    //       this.toastr.success('User created');
+    //       this.router.navigateByUrl('emr/administration/list/user')
+    //     }, (error) => {
+    //       console.log(error);
+    //       this.toastr.error(error.error.message, 'Error In Creation');
+    //     })
+    //   } else {
+    //     this, this.userService.update(this.user).subscribe((result) => {
+    //       this.toastr.success('User updated');
+    //       this.router.navigateByUrl('emr/administration/list/user')
+    //     }, (error) => {
+    //       console.log(error);
+    //       this.toastr.error(error.error.message, 'Error In update');
+    //     })
+    //   }
 
-    } else {
-      this.submitted = true;
-    }
+    // } else {
+    //   this.submitted = true;
+    // }
   }
   resetError() {
     this.submitted = false;
@@ -112,4 +136,9 @@ export class CreateUserComponent implements OnInit {
       this.credentials = ['DMD', 'DDS', 'CDA']
     }
   }
+  toggleDetails(item: any) {
+    console.log(JSON.stringify(item))
+    this.details_visible[item] = !this.details_visible[item];
+  }
 }
+
