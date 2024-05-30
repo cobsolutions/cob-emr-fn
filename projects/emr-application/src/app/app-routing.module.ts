@@ -34,6 +34,10 @@ const routes: Routes = [
           import('./modules/patient/patient.module').then((m) => m.PatientModule)
       },
       {
+        data: {
+          title: 'Administration',
+          roles: [Role.USER_ROLE,Role.CLINIC_ROLE,Role.CLINIC_ROLE]
+        },
         path: 'administration',
         loadChildren: () =>
           import('./modules/administration/administration.module').then((m) => m.AdministrationModule)

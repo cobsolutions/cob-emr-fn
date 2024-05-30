@@ -47,9 +47,11 @@ export class DefaultHeaderComponent extends HeaderComponent {
               this.cacheService.setLoggedinUserName(userProfile.username!);
               this.userName = this.cacheService.getLoggedinUserName()?.charAt(0).toUpperCase()
               this.clinicService.getByUserId(this.cacheService.getLoggedinUserUUID()).subscribe(response => {
-                this.clinics = response;
-                localStorage.setItem('org', this.clinics[0].organizationId.toString())
-                this.emittingClinicService.selectedClinic$.next(Number(this.clinics[0].id))
+                if (response !== null && response.length !== 0) {
+                  this.clinics = response;
+                  localStorage.setItem('org', this.clinics[0].organizationId.toString())
+                  this.emittingClinicService.selectedClinic$.next(Number(this.clinics[0].id))
+                }
               })
             })
         }

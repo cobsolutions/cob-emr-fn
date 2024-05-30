@@ -11,4 +11,5 @@ export interface AdministratorDoctor{
     licence?:string
     speciality?:string
     credential?:string
+    roles?:string[]
 }

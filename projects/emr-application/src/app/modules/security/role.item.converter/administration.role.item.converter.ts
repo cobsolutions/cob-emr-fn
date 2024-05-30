@@ -3,6 +3,7 @@ import { Role } from "../model/role"
 
 export class AdministrationRoleItemConverter {
     public static convert(roles: string[], menuItems: MenuItem[]) {
+        
         var menuItem: MenuItem = {
             parent: "Administration",
             children: []
@@ -16,7 +17,7 @@ export class AdministrationRoleItemConverter {
                 menuItem.children.push('Insurance Company')
 
         }
-        if (menuItem !== undefined)
+        if (menuItem.children.length !== 0)
             menuItems.push(menuItem)
     }
 }

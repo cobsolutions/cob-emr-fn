@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../../../../administration/model/user/user';
 import { SingleAddressComponent } from '../../../../common/components/single.address/single-address.component';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
+import { Role } from '../../../../security/model/role';
 import { AdministratorDoctor } from '../../../models/administrator.doctor';
 import { DoctorUserService } from '../../../services/doctor.user.autocomplete/doctor-user.service';
 
@@ -14,6 +15,7 @@ import { DoctorUserService } from '../../../services/doctor.user.autocomplete/do
 export class CreateAdministratorDoctorComponent implements OnInit {
   public users: User[];
   administratorDoctor: AdministratorDoctor = {
+    roles:[]
   }
   errorMessage: string | null;
   isAssignDoctorFromDB: number = -1;;
@@ -48,7 +50,9 @@ export class CreateAdministratorDoctorComponent implements OnInit {
     //   this.errorMessage = 'Doctor is already exsists';
     // }
     if (this.doctorForm.valid) {
+      this.administratorDoctor.roles.push(Role.ADMIN_ROLE)
       this.administratorDoctor.password = this.encryptService.encrypt(this.administratorDoctor.password);
+      this.administratorDoctor
       this.isValidDoctor = true;
       this.doctorForm.reset;
       this.errorMessage = null;

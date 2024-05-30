@@ -1,5 +1,5 @@
 export class Role {
-    public static readonly PATIENT_ROLE = 'patient-role';
+    public static readonly PATIENT_ROLE = 'emr-patient-role';
     public static readonly USER_ROLE = 'user-role';
     public static readonly CLINIC_ROLE = 'clinic-role';
     public static readonly REFERRING_DOCTOR_ROLE = 'referring-provider-role';
