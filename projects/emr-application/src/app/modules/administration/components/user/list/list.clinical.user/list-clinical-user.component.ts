@@ -17,6 +17,7 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   public visible = false;
   selectedUser: string
+  editUserVisibility: boolean = false;
   constructor(private router: Router
     , private toastr: ToastrService
     , private clinicalUserService: ClinicalUserService) { super() }
@@ -62,6 +63,9 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
     })
   }
   edit(item: any) {
-    this.router.navigate(['emr/administration/edit/user', item.uuid]);
+    this.editUserVisibility = true
+  }
+  toggleEditUser(){
+    this.editUserVisibility = !this.editUserVisibility
   }
 }

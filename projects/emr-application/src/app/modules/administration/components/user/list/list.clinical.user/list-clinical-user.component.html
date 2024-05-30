@@ -13,7 +13,7 @@
               <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
-              <button cButton variant="outline" size="sm"  (click)="toggleLiveDemo(item)" >
+              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)">
                 <svg cIcon name="cilTrash"></svg>
               </button>
             </div>
@@ -41,4 +41,13 @@
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
+</c-modal>
+<c-modal id="editFacility" [visible]="editUserVisibility" size="xl">
+  <c-modal-header>
+    <h3 cModalTitle>Edit Facility</h3>
+    <button (click)="toggleEditUser()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <edit-user></edit-user>
+  </c-modal-body>
 </c-modal>

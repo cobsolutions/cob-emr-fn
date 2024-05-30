@@ -11,10 +11,15 @@ import { ClinicEmittingService } from '../../../../common/service/emitting/clini
 })
 export class ClinicalUserService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'clerical/user'
-  constructor(httpClient: HttpClient,clinicEmittingService :ClinicEmittingService) { super(httpClient,clinicEmittingService) }
+  constructor(httpClient: HttpClient, clinicEmittingService: ClinicEmittingService) { super(httpClient, clinicEmittingService) }
 
   getClinicalUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")
+  }
+  getClericalUser(clinicId: number, uuid: string) {
+    var url = this.baseUrl + '/find/clinicId/' + clinicId + '/uuid/' + uuid
+    return this.httpClient.get(url);
+
   }
   deleteUser(uuid: string) {
     console.log('Service')

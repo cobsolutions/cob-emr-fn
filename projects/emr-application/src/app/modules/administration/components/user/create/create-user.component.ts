@@ -3,14 +3,18 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import { result } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
+import { mergeMap, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
 import { CacheService } from '../../../../common/service/cahce/cache.service';
+import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../../patient/models/clinic';
 import { User } from '../../../model/user/user';
 import { UserRoleScope } from '../../../model/user/user.role.scope';
 import { ClinicService } from '../../../services/clinic/clinic.service';
+import { ClinicalUserService } from '../../../services/user/clinical.user/clinical-user.service';
 import { UserService } from '../../../services/user/user.service';
 
 @Component({
@@ -52,9 +56,9 @@ export class CreateUserComponent implements OnInit {
     role: null,
     clinicIds: [],
     roleScope: [],
-    speciality:null,
-    credential:null
-    
+    speciality: null,
+    credential: null
+
   }
   details_visible = Object.create({});
   scopes: string[] = []
@@ -64,7 +68,9 @@ export class CreateUserComponent implements OnInit {
     , private toastr: ToastrService
     , private router: Router
     , private encryptService: EncryptService
-    , private route: ActivatedRoute) { }
+    , private route: ActivatedRoute
+    , private clinicalUserService: ClinicalUserService
+    , private clinicEmittingService: ClinicEmittingService) { }
 
   ngOnInit(): void {
     var organizationId: number = Number(localStorage.getItem('org'));
@@ -73,17 +79,12 @@ export class CreateUserComponent implements OnInit {
       var useruuid = this.route.snapshot.paramMap.get('id');
       if (useruuid !== null) {
         this.isCreated = false;
-        this.userService.getByUUID(useruuid).subscribe((result: any) => {
-
-          this.user = result;
-          this.clinics.forEach(clinic => {
-            if (result.clinics.includes(clinic.id.toString()))
-              clinic.selected = true;
-            else
-              clinic.selected = false;
+        this.clinicEmittingService.selectedClinic$.pipe(
+          switchMap((clinicID: number) => {
+            return this.clinicalUserService.getClericalUser(clinicID, useruuid)
           })
-          if (result.doctor !== null)
-            this.getDoctorCredentials()
+        ).subscribe(result => {
+          this.user = result
         })
       }
     })
