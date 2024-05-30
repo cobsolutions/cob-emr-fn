@@ -44,10 +44,10 @@
 </c-modal>
 <c-modal id="editFacility" [visible]="editUserVisibility" size="xl">
   <c-modal-header>
-    <h3 cModalTitle>Edit Facility</h3>
+    <h3 cModalTitle>Edit User Account</h3>
     <button (click)="toggleEditUser()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <edit-user></edit-user>
+    <edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID"></edit-user>
   </c-modal-body>
 </c-modal>
