@@ -107,7 +107,7 @@
                             <option [value]="'clerical'" selected>Clerical</option>
                         </select>
                         <!--Doctor -->
-                        <span *ngIf="user.role === 'clinical_emr_role'">
+                        <span *ngIf="user.userType === 'clinical'">
                             <!--NPI-->
                             <small *ngIf="submitted   && (npi.errors) || (npi.invalid && (npi.dirty || npi.touched))"
                                 class="form-text text-danger">
