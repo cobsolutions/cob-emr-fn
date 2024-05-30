@@ -8,6 +8,7 @@ import { Role } from '../../../../security/model/role';
 import { User } from '../../../model/user/user';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { ClinicalUserService } from '../../../services/user/clinical.user/clinical-user.service';
+import { DotorUserService } from '../../../services/user/doctor.user/dotor-user.service';
 
 @Component({
   selector: 'edit-user',
@@ -16,6 +17,7 @@ import { ClinicalUserService } from '../../../services/user/clinical.user/clinic
 })
 export class EditUserComponent implements OnInit {
   @Input() uuid: string
+  @Input() userType: string
   @ViewChild('editUserRoles') userRoles: SmartTableComponent;
   user: User
   clinics: Clinic[];
@@ -38,27 +40,56 @@ export class EditUserComponent implements OnInit {
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
-  constructor(private clinicalUserService: ClinicalUserService
+  constructor(private clericalUSerService: ClinicalUserService
     , private clinicEmittingService: ClinicEmittingService
-    , private clinicService: ClinicService) { }
+    , private clinicService: ClinicService
+    , private clinicalUserService: DotorUserService) { }
 
   ngOnInit(): void {
     var organizationId: number = Number(localStorage.getItem('org'));
     this.clinicService.getByOrganizationId(organizationId).subscribe((response: any) => {
       this.clinics = response.records;
     })
+    switch (this.userType) {
+      case 'Clinical':
+        this.fetchClinicalUser();
+        break;
+      case 'Clerical':
+        this.fetchClericalUser();
+        break;
+    }
+  }
+
+  private fetchClericalUser() {
     this.clinicEmittingService.selectedClinic$.pipe(
       switchMap((clinicID: number) => {
-        return this.clinicalUserService.getClericalUser(clinicID, this.uuid)
+        return this.clericalUSerService.getClericalUser(clinicID, this.uuid)
       })
     ).subscribe(result => {
-      this.user = result
-      this.populateClinics(this.user)
-      this.user.firstName = this.user.fullName.split(',')[0]
-      this.user.middleName = this.user.fullName.split(',')[1]
-      this.user.lastName = this.user.fullName.split(',')[2]
-      this.populateRoles()
+      this.populateUser(result)
     })
+  }
+  private fetchClinicalUser() {
+    this.clinicEmittingService.selectedClinic$.pipe(
+      switchMap((clinicID: number) => {
+        return this.clinicalUserService.getClinicalUser(clinicID, this.uuid)
+      })
+    ).subscribe(result => {
+      console.log(JSON.stringify(result))
+      this.populateUser(result)
+    })
+  }
+  private populateUser(result: any) {
+    this.user = result;
+    this.populateUserName();
+    this.populateClinics(this.user)
+    this.populateRoles()
+  }
+  private populateUserName() {
+    
+    this.user.firstName = this.user.fullName.split(',')[0]
+    this.user.middleName = this.user.fullName.split(',')[1]
+    this.user.lastName = this.user.fullName.split(',')[2]
   }
   private populateRoles() {
     this.userRoles.items.forEach((item: any) => {

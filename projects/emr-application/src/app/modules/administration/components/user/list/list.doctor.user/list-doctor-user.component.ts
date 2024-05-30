@@ -16,6 +16,8 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   public visible = false;
   selectedDoctor:string;
+  selecteUserUUID: string
+  editUserVisibility: boolean = false;
   constructor(private router: Router
     , private dotorUserService: DotorUserService) { super() }
 
@@ -64,6 +66,10 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
     })
   }
   edit(item: any) {
-    this.router.navigate(['emr/administration/edit/user', item.uuid]);
+    this.selecteUserUUID = item.uuid
+    this.editUserVisibility = true
+  }
+  toggleEditUser() {
+    this.editUserVisibility = !this.editUserVisibility
   }
 }

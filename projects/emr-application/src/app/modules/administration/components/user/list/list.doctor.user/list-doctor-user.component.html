@@ -1,10 +1,8 @@
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(users$ | async) ?? []"
     [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-    [columnFilterValue]="props.columnFilterValue?? []"
-    [sorterValue]="props.sorterValue" 
-    [tableProps]="{ hover: true, striped: true, small:true }"
+    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true" [columnFilterValue]="props.columnFilterValue?? []"
+    [sorterValue]="props.sorterValue" [tableProps]="{ hover: true, striped: true, small:true }"
     [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
     <ng-template cTemplateId="tableDetails" let-item="item">
       <div [visible]="this.details_visible[item.id] === true" cCollapse>
@@ -61,4 +59,13 @@
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
+</c-modal>
+<c-modal id="editClerical" [visible]="editUserVisibility" size="xl">
+  <c-modal-header>
+    <h3 cModalTitle>Edit User Account</h3>
+    <button (click)="toggleEditUser()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'"></edit-user>
+  </c-modal-body>
 </c-modal>
