@@ -1,3 +1,104 @@
-<span *ngIf="user">
-    {{user | json}}
-</span>
+<c-container fluid>
+
+    <c-card class="mb-2">
+        <c-card-header>
+            <h5>Basic Information</h5>
+        </c-card-header>
+        <c-card-body>
+            <c-row *ngIf="user">
+                <c-col xs="12">
+                    <form cForm #userCreateForm="ngForm">
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText>First Middle Last</span>
+                            <input cFormControl id="firstName" name="firstName" sizing="sm" placeholder="First Name"
+                                required
+                                [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}"
+                                [(ngModel)]="user.firstName" #firstName="ngModel" />
+
+                            <input cFormControl id="middleName" name="middleName" sizing="sm" placeholder="Middle Name"
+                                [ngClass]="{'is-invalid': middleName.invalid && (middleName.dirty || middleName.touched)}"
+                                [(ngModel)]="user.middleName" #middleName="ngModel" />
+
+                            <input cFormControl id="lastName" name="lastName" sizing="sm" placeholder="Last Name"
+                                required
+                                [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
+                                [(ngModel)]="user.lastName" #lastName="ngModel" />
+                        </c-input-group>
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">&#64;</span>
+                            <input aria-describedby="basic-addon1" id="email" name="email" cFormControl required
+                                placeholder="email" #email="ngModel" [(ngModel)]="user.email" />
+                        </c-input-group>
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">
+                                <svg cIcon name="cilUser"></svg>
+                            </span>
+                            <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required
+                                disabled="true" placeholder="username" #username="ngModel"
+                                [(ngModel)]="user.accountName" />
+                        </c-input-group>
+                    </form>
+                </c-col>
+            </c-row>
+        </c-card-body>
+    </c-card>
+    <c-card>
+        <c-card-header>
+            <h5>Permissions</h5>
+        </c-card-header>
+        <c-card-body>
+            <c-row>
+                <c-col class="col">
+                    <c-smart-table [items]="roles" [columns]="columns" #editUserRoles
+                        [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
+                        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+                            let-tdContent="tdContent">
+                            <td>
+                                <ng-container [ngSwitch]="columnName">
+                                    <ng-container *ngSwitchDefault>
+                                        {{tdContent}}
+                                    </ng-container>
+                                    <!-- <ng-container *ngSwitchCase="'show'" class="py-2">
+                                                <button (click)="toggleDetails(item['_id'])" cButton color="primary"
+                                                    size="sm" variant="outline">
+                                                    Show
+                                                </button>
+                                            </ng-container> -->
+                                    <ng-container *ngSwitchCase="'scope'" class="py-2">
+                                        <c-form-check [inline]="true" [switch]="true">
+                                            <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                value="hidden" [(ngModel)]="item.scope" />
+                                            <label cFormCheckLabel>Hidden</label>
+                                        </c-form-check>
+                                        <c-form-check [inline]="true" [switch]="true">
+                                            <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                value="view" [(ngModel)]="item.scope" />
+                                            <label cFormCheckLabel>View</label>
+                                        </c-form-check>
+                                        <c-form-check [inline]="true" [switch]="true">
+                                            <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                value="edit" [(ngModel)]="item.scope" />
+                                            <label cFormCheckLabel>edit</label>
+                                        </c-form-check>
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                        </ng-template>
+                    </c-smart-table>
+                </c-col>
+            </c-row>
+        </c-card-body>
+    </c-card>
+    <c-card>
+        <c-card-header>
+            <h5>Clinics</h5>
+        </c-card-header>
+        <c-card-body>
+            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
+                *ngIf="clinics && user" [selectAll]="false" [(ngModel)]="user!.clinicIds" #selectedClinic="ngModel">
+                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+                    [value]="clinic.id">{{clinic.name}}</c-multi-select-option>
+            </c-multi-select>
+        </c-card-body>
+    </c-card>
+</c-container>

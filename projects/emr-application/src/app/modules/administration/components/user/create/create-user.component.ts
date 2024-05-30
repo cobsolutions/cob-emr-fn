@@ -76,17 +76,6 @@ export class CreateUserComponent implements OnInit {
     var organizationId: number = Number(localStorage.getItem('org'));
     this.clinicService.getByOrganizationId(organizationId).subscribe((response: any) => {
       this.clinics = response.records;
-      var useruuid = this.route.snapshot.paramMap.get('id');
-      if (useruuid !== null) {
-        this.isCreated = false;
-        this.clinicEmittingService.selectedClinic$.pipe(
-          switchMap((clinicID: number) => {
-            return this.clinicalUserService.getClericalUser(clinicID, useruuid)
-          })
-        ).subscribe(result => {
-          this.user = result
-        })
-      }
     })
   }
   create() {
