@@ -4,30 +4,11 @@
     [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true" [columnFilterValue]="props.columnFilterValue?? []"
     [sorterValue]="props.sorterValue" [tableProps]="{ hover: true, striped: true, small:true }"
     [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
-    <ng-template cTemplateId="tableDetails" let-item="item">
-      <div [visible]="this.details_visible[item.id] === true" cCollapse>
-        <c-card class="rounded-0">
-          <c-card-body>
-            <strong>Doctor Npi : </strong> {{item.npi}}
-            <br>
-            <strong>Doctor Licence : </strong> {{item.licence}}
-            <br>
-            <strong>Doctor Speciality : </strong> {{item.speciality}}
-            <br>
-            <strong>Doctor Credential : </strong> {{item.credential}}
-            <br>
-          </c-card-body>
-        </c-card>
-      </div>
-    </ng-template>
     <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
       <td>
         <ng-container [ngSwitch]="columnName">
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" size="sm" (click)="toggleDetails(item['id'])">
-                ShowDetails
-              </button>
               <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>

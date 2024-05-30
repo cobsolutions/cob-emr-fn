@@ -4,6 +4,7 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ListTemplate } from 'projects/emr-application/src/app/modules/common/template/list.template';
 import { map, Observable, retry, tap } from 'rxjs';
 import { DoctorUser } from '../../../../model/user/doctor';
+import { User } from '../../../../model/user/user';
 import { DotorUserService } from '../../../../services/user/doctor.user/dotor-user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { DotorUserService } from '../../../../services/user/doctor.user/dotor-us
   styleUrls: ['./list-doctor-user.component.css']
 })
 export class ListDoctorUserComponent extends ListTemplate implements OnInit {
-  users$!: Observable<DoctorUser[]>;
+  users$!: Observable<User[]>;
   columns: (string | IColumn)[];
   public visible = false;
   selectedDoctor:string;
@@ -22,7 +23,7 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
     , private dotorUserService: DotorUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['accountName', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName','npi','licence','speciality','credential', 'email', 'actions']);
     this.initListComponent();
     this.users$ = this.dotorUserService.getDoctorUser(this.apiParams$).pipe(
       retry({
@@ -45,10 +46,6 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
         return response.records;
       })
     );
-  }
-  details_visible = Object.create({});
-  toggleDetails(item: any) {
-    this.details_visible[item] = !this.details_visible[item];
   }
   toggleLiveDemo(item: any) {
     this.selectedDoctor = item.uuid;
