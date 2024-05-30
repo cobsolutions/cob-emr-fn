@@ -241,7 +241,7 @@
                             Clinics is required
                         </small>
                         <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
-                            [selectAll]="false" [(ngModel)]="user.clinics" #selectedClinic="ngModel">
+                            [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
                             <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
                                 [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
                         </c-multi-select>

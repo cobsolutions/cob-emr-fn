@@ -22,7 +22,7 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
     , private clinicalUserService: ClinicalUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['userName', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName', 'email', 'actions']);
     this.initListComponent();
     this.users$ = this.clinicalUserService.getClinicalUser(this.apiParams$).pipe(
       retry({

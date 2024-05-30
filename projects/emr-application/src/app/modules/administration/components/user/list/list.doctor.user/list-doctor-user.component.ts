@@ -20,7 +20,7 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
     , private dotorUserService: DotorUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['userName', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName', 'email', 'actions']);
     this.initListComponent();
     this.users$ = this.dotorUserService.getDoctorUser(this.apiParams$).pipe(
       retry({

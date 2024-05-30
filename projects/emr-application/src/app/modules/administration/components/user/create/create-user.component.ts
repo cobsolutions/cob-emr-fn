@@ -50,10 +50,11 @@ export class CreateUserComponent implements OnInit {
   user: User = {
     userType: null,
     role: null,
-    clinics: [],
+    clinicIds: [],
     roleScope: [],
     speciality:null,
     credential:null
+    
   }
   details_visible = Object.create({});
   scopes: string[] = []

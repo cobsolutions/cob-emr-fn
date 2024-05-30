@@ -12,7 +12,7 @@ export interface User {
     email?: string
     role?: string;
     password?: string
-    clinics?: Clinic[];
+    clinicIds?: number[];
     userType?:string
     roleScope?:UserRoleScope[]
     npi?:string
