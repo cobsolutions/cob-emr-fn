@@ -5,11 +5,7 @@ import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'emr/dashboard',
-    pathMatch: 'full',
-  },
+  
   {
     path: 'emr',
     component: DefaultLayoutComponent,
@@ -34,11 +30,12 @@ const routes: Routes = [
           import('./modules/patient/patient.module').then((m) => m.PatientModule)
       },
       {
+        path: 'administration',
         data: {
           title: 'Administration',
           roles: [Role.USER_ROLE,Role.CLINIC_ROLE,Role.CLINIC_ROLE]
         },
-        path: 'administration',
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/administration/administration.module').then((m) => m.AdministrationModule)
       },

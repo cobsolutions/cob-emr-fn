@@ -4,7 +4,7 @@ import { UserRoleScope } from "./user.role.scope";
 
 export interface User {
     id?: number;
-    userName?: string;
+    accountName?: string;
     firstName?: string;
     middleName?: string;
     lastName?: string;
@@ -13,8 +13,10 @@ export interface User {
     role?: string;
     password?: string
     clinics?: Clinic[];
-    doctor?: DoctorUser | undefined
     userType?:string
     roleScope?:UserRoleScope[]
-
+    npi?:string
+    licence?:string
+    speciality?:string
+    credential?:string
 }

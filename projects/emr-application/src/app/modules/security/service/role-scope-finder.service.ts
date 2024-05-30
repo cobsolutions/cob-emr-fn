@@ -13,6 +13,7 @@ export class RoleScopeFinderService {
   constructor(private userService: UserService, private keycloakAngular: KeycloakService) { }
   public find() {
     const cachedData = this.cache.get(this.uuid);
+    console.log(cachedData)
     if (cachedData) {
       return of(cachedData)
     } else {

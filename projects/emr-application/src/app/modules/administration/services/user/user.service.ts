@@ -9,23 +9,30 @@ import { User } from '../../model/user/user';
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = environment.baseURL + 'user'
+  private clinicalUserUrl = environment.baseURL + '/clinical/user'
+  private clericalUserUrl = environment.baseURL + '/clerical/user'
+  private userUrl = environment.baseURL + '/user'
   uuid: string
   accessToken: string;
   constructor(private httpClient: HttpClient
-    ,private keycloakAngular: KeycloakService) { }
-  create(user: User) {
+    , private keycloakAngular: KeycloakService) { }
+  createClinicalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
-    var createURL = this.userUrl + '/create'
+    var createURL = this.clinicalUserUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
-  update(user:User){
+  createClericalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
-    var createURL = this.userUrl + '/update'
+    var createURL =  this.clericalUserUrl + '/create'
+    return this.httpClient.post(`${createURL}`, JSON.stringify(user), { 'headers': headers })
+  }
+  update(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.clinicalUserUrl + '/update'
     return this.httpClient.put(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
   getByUUID(uuid: string) {
-    var url = this.userUrl + '/find/uuid/' + uuid;
+    var url = this.clinicalUserUrl + '/find/uuid/' + uuid;
     return this.httpClient.get(url);
   }
   public gteUUID() {

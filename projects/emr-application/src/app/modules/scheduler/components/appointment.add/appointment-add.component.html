@@ -87,7 +87,7 @@
                             [(ngModel)]="appointment.therapyUUID" #appTherapy="ngModel" required>
                             <option [ngValue]="null" disabled selected>Select Therapy</option>
                             <option *ngFor="let therapy of this.therapists$ | async" [value]="therapy.uuid">
-                                {{therapy.userName}}
+                                {{therapy.accountName}}
                             </option>
                         </select>
                     </c-card-body>

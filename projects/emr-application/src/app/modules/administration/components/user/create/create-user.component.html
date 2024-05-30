@@ -80,7 +80,7 @@
                             </span>
                             <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required
                                 [disabled]="!isCreated" placeholder="username" #username="ngModel"
-                                [(ngModel)]="user.userName" />
+                                [(ngModel)]="user.accountName" />
                         </c-input-group>
                     </c-card-body>
                 </c-card>
@@ -117,7 +117,7 @@
                                 <input autoComplete="name" cFormControl id="npi" name="npi" sizing="sm"
                                     placeholder="Enter Doctor npi" required
                                     [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}"
-                                    [(ngModel)]="user.doctor.npi" #npi="ngModel" />
+                                    [(ngModel)]="user.npi" #npi="ngModel" />
                             </c-input-group>
                             <!--licence-->
                             <small
@@ -129,7 +129,7 @@
                                 <input autoComplete="name" cFormControl id="licence" name="licence" sizing="sm"
                                     placeholder="Enter Doctor Licence" required
                                     [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
-                                    [(ngModel)]="user.doctor.licence" #licence="ngModel" />
+                                    [(ngModel)]="user.licence" #licence="ngModel" />
                             </c-input-group>
                             <!--speciality -->
                             <small
@@ -140,7 +140,7 @@
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality"
                                 required
                                 [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
-                                [(ngModel)]="user.doctor.speciality" #speciality="ngModel"
+                                [(ngModel)]="user.speciality" #speciality="ngModel"
                                 (change)="getDoctorCredentials()">
                                 <option [ngValue]="null" disabled selected>Select Doctor Speciality</option>
                                 <option *ngFor="let specialty of specialties | keyvalue" [value]="specialty.key">
@@ -156,7 +156,7 @@
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential"
                                 required
                                 [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
-                                [(ngModel)]="user.doctor.credential" #credential="ngModel">
+                                [(ngModel)]="user.credential" #credential="ngModel">
                                 <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
                                 <option *ngFor="let credential of credentials" [value]="credential">
                                     {{credential}}
