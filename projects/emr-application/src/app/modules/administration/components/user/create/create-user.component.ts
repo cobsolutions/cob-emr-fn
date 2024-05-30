@@ -4,14 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
-import { from, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
-import { Roles } from '../../../../common/models/enums/roles';
 import { CacheService } from '../../../../common/service/cahce/cache.service';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../../patient/models/clinic';
-import { DoctorUser } from '../../../model/user/doctor';
 import { User } from '../../../model/user/user';
+import { UserRoleScope } from '../../../model/user/user.role.scope';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -50,15 +48,18 @@ export class CreateUserComponent implements OnInit {
     { role: 'Medical Note-Finalization', scope: '' },
   ]
   user: User = {
+    userType: null,
     role: null,
     clinics: [],
     doctor: {
       speciality: null,
       credential: null
-    }
+    },
+    roleScope: []
   }
   details_visible = Object.create({});
   scopes: string[] = []
+  isValidRoles: boolean
   constructor(private clinicService: ClinicService
     , private cacheService: CacheService
     , private userService: UserService
@@ -90,34 +91,32 @@ export class CreateUserComponent implements OnInit {
     })
   }
   create() {
-    console.log(JSON.stringify(this.userRoles.items))
-    // if (this.userCreateForm.valid) {
-    //   this.submitted = false;
-    //   if (this.user.role !== 'clinical_emr_role')
-    //     this.user.doctor = undefined;
-    //   if (this.isCreated) {
-    //     var encryptedPassword = this.encryptService.encrypt(this.user.password);
-    //     this.user.password = encryptedPassword
-    //     this.userService.create(this.user).subscribe(result => {
-    //       this.toastr.success('User created');
-    //       this.router.navigateByUrl('emr/administration/list/user')
-    //     }, (error) => {
-    //       console.log(error);
-    //       this.toastr.error(error.error.message, 'Error In Creation');
-    //     })
-    //   } else {
-    //     this, this.userService.update(this.user).subscribe((result) => {
-    //       this.toastr.success('User updated');
-    //       this.router.navigateByUrl('emr/administration/list/user')
-    //     }, (error) => {
-    //       console.log(error);
-    //       this.toastr.error(error.error.message, 'Error In update');
-    //     })
-    //   }
+    this.fillPermissions()
+    if (this.userCreateForm.valid) {
+      this.submitted = false;
+      if (this.isCreated) {
+        var encryptedPassword = this.encryptService.encrypt(this.user.password);
+        this.user.password = encryptedPassword
+        this.userService.create(this.user).subscribe(result => {
+          this.toastr.success('User created');
+          this.router.navigateByUrl('emr/administration/list/user')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        })
+      } else {
+        this, this.userService.update(this.user).subscribe((result) => {
+          this.toastr.success('User updated');
+          this.router.navigateByUrl('emr/administration/list/user')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In update');
+        })
+      }
 
-    // } else {
-    //   this.submitted = true;
-    // }
+    } else {
+      this.submitted = true;
+    }
   }
   resetError() {
     this.submitted = false;
@@ -137,8 +136,27 @@ export class CreateUserComponent implements OnInit {
     }
   }
   toggleDetails(item: any) {
-    console.log(JSON.stringify(item))
     this.details_visible[item] = !this.details_visible[item];
+  }
+  private fillPermissions() {
+    this.isValidRoles = this.validateRoles();
+    if (this.isValidRoles)
+      this.userRoles.items.forEach((item: any) => {
+        var userRoleScope: UserRoleScope = {
+          role: item.role,
+          scope: item.scope
+        }
+        this.user.roleScope.push(userRoleScope);
+      })
+  }
+  private validateRoles(): boolean {
+    for (let i = 0; i < this.userRoles.items.length; i++) {
+      var item: any = this.userRoles.items[i];
+      if (item.scope === '') {
+        return false;
+      }
+    }
+    return true;
   }
 }
 

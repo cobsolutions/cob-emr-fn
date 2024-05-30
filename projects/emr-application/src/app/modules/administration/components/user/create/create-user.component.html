@@ -96,16 +96,15 @@
                     <c-card-body>
                         <small *ngIf="submitted   && (role.errors) || (role.invalid && (role.dirty || role.touched))"
                             class="form-text text-danger">
-                            Role is required
+                            User Type is required
                         </small>
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role"
                             [disabled]="!isCreated"
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
-                            [(ngModel)]="user.role" #role="ngModel">
-                            <option [ngValue]="null" disabled selected>Select User Type</option>
-                            <option *ngFor="let role of roles | keyvalue" [value]="role.key">
-                                {{role.value}}
-                            </option>
+                            [(ngModel)]="user.userType" #role="ngModel" required>
+                            <option [value]="null" disabled selected>Select User Type</option>
+                            <option [value]="'clinical'" selected>Clinical</option>
+                            <option [value]="'clerical'" selected>Clerical</option>
                         </select>
                         <!--Doctor -->
                         <span *ngIf="user.role === 'clinical_emr_role'">
@@ -176,6 +175,9 @@
                         <h5>Permissions</h5>
                     </c-card-header>
                     <c-card-body>
+                        <small *ngIf="submitted   && !isValidRoles" class="form-text text-danger">
+                            Permissions required
+                        </small>
                         <c-smart-table [items]="roles" [columns]="columns" #userRoles
                             [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
                             <ng-template cTemplateId="tableDetails" let-item="item">
