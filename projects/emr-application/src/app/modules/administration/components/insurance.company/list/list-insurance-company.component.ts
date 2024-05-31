@@ -19,6 +19,8 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
   columns: (string | IColumn)[];
 
   insuranceCompany$!: Observable<InsuranceCompany[]>;
+  editInsuranceCompanyVisibility: boolean = false;
+  selectedInsuranceCompany: InsuranceCompany;
   constructor(private router: Router, private insuranceCompanyService: InsuranceCompanyService,
     private toastr: ToastrService,) {
     super();
@@ -59,5 +61,12 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
       this.toastr.success('Insurance Company Deleted..!!');
       this.ngOnInit();
     })
+  }
+  edit(item: any) {
+    this.selectedInsuranceCompany = item;
+    this.editInsuranceCompanyVisibility = true
+  }
+  toggleEdiInsuranceCompany() {
+    this.editInsuranceCompanyVisibility = !this.editInsuranceCompanyVisibility
   }
 }
