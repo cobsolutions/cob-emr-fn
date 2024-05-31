@@ -18,6 +18,7 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 export class ListClinicComponent extends ListTemplate implements OnInit {
   clinics$!: Observable<Clinic[]>;
   columns: (string | IColumn)[];
+  editClinicVisibility: boolean = false;
   constructor(private router: Router
     , private clinicService: ClinicService
     , private toastr: ToastrService
@@ -26,7 +27,7 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.columns = this.constructColumns(['name', 'actions']);
     this.initListComponent();
-    
+
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
       retry({
         delay: (error) => {
@@ -53,7 +54,7 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
     this.router.navigateByUrl('emr/administration/create/clinic');
   }
   edit(item: any) {
-    this.router.navigate(['emr/administration/edit/clinic', item.id]);
+    this.editClinicVisibility = true;
   }
   remove(item: any) {
     this.clinicService.delete(item.id).subscribe(() => {
@@ -74,5 +75,8 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
         result = value;
     }
     return result;
+  }
+  toggleEditClinic() {
+    this.editClinicVisibility = !this.editClinicVisibility
   }
 }

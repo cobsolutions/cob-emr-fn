@@ -60,7 +60,7 @@ export class ClinicService {
     .get<IData>(this.userUrl + "/find/organization/" + localStorage.getItem('org'), options)
   }
   getById(clinicId: number) {
-    var createURL = this.userUrl + '/find/clinic/' + clinicId
+    var createURL = this.userUrl + '/find/' + clinicId
     return this.httpClient.get(`${createURL}`)
   }
   private handleHttpError(error: HttpErrorResponse) {
