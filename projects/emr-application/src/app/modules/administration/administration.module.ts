@@ -18,6 +18,7 @@ import { ListClinicalUserComponent } from './components/user/list/list.clinical.
 import { ListDoctorUserComponent } from './components/user/list/list.doctor.user/list-doctor-user.component';
 import { EditUserComponent } from './components/user/edit/edit-user.component';
 import { EditClinicComponent } from './components/clinic/edit/edit-clinic.component';
+import { EditInsuranceCompanyComponent } from './components/insurance.company/edit/edit-insurance-company.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EditClinicComponent } from './components/clinic/edit/edit-clinic.compon
     ListClinicalUserComponent,
     ListDoctorUserComponent,
     EditUserComponent,
-    EditClinicComponent
+    EditClinicComponent,
+    EditInsuranceCompanyComponent
   ],
   imports: [
     CommonModule,

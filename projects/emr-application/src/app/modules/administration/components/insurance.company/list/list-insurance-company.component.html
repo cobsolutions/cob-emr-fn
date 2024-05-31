@@ -48,5 +48,7 @@
     <button (click)="toggleEdiInsuranceCompany()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
+    <edit-insurance-company *ngIf="editInsuranceCompanyVisibility"
+      [insuranceCompany]="selectedInsuranceCompany"></edit-insurance-company>
   </c-modal-body>
 </c-modal>
