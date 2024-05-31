@@ -29,8 +29,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   constructor(private cancelNoShowService: CancelNoShowService) { super() }
 
   ngOnInit(): void {
+    console.log(JSON.stringify(this.case))
     this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate', 'Actions']);
     this.gettreatingDoctorFullName();
+    this.getReferringCaseData();
     this.getAppointments();
   }
   toggleReasonVisibility(data: any) {
