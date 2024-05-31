@@ -17,6 +17,7 @@ import { CreateClinicComponent } from './components/clinic/create/create-clinic.
 import { ListClinicalUserComponent } from './components/user/list/list.clinical.user/list-clinical-user.component';
 import { ListDoctorUserComponent } from './components/user/list/list.doctor.user/list-doctor-user.component';
 import { EditUserComponent } from './components/user/edit/edit-user.component';
+import { EditClinicComponent } from './components/clinic/edit/edit-clinic.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditUserComponent } from './components/user/edit/edit-user.component';
     CreateClinicComponent,
     ListClinicalUserComponent,
     ListDoctorUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    EditClinicComponent
   ],
   imports: [
     CommonModule,
