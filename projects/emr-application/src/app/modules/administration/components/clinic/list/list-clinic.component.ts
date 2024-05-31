@@ -19,6 +19,7 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
   clinics$!: Observable<Clinic[]>;
   columns: (string | IColumn)[];
   editClinicVisibility: boolean = false;
+  selectedClinic: Clinic;
   constructor(private router: Router
     , private clinicService: ClinicService
     , private toastr: ToastrService
@@ -54,6 +55,7 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
     this.router.navigateByUrl('emr/administration/create/clinic');
   }
   edit(item: any) {
+    this.selectedClinic = item;
     this.editClinicVisibility = true;
   }
   remove(item: any) {

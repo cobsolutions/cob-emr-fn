@@ -52,6 +52,6 @@
     <button (click)="toggleEditClinic()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <edit-clinic *ngIf="editClinicVisibility"></edit-clinic>
+    <edit-clinic *ngIf="editClinicVisibility" [clinic]="selectedClinic"></edit-clinic>
   </c-modal-body>
 </c-modal>

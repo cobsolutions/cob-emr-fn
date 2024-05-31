@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Clinic } from '../../../../patient/models/clinic';
 
 @Component({
   selector: 'edit-clinic',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-clinic.component.css']
 })
 export class EditClinicComponent implements OnInit {
+  @Input() clinic: Clinic
 
   constructor() { }
 
   ngOnInit(): void {
-  }
 
+  }
+  create() {
+
+  }
+  resetError() { }
 }
