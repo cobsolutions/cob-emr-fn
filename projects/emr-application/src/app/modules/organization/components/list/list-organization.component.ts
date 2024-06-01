@@ -13,6 +13,7 @@ import orgData from './data'
 })
 export class ListOrganizationComponent implements OnInit {
   editOrganizationVisibility: boolean = false
+  selectedOrganization:Organization;
   data: IItem[] = orgData;
   public clinicsVisible: boolean = false;
 
@@ -66,6 +67,7 @@ export class ListOrganizationComponent implements OnInit {
     this.clinicsVisible = !this.clinicsVisible;
   }
   edit(item: any) {
+    this.selectedOrganization = item
     this.editOrganizationVisibility = true
   }
   toggleEditOrganization() {

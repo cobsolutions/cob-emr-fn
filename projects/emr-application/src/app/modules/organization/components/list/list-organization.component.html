@@ -40,5 +40,6 @@
         <button (click)="toggleEditOrganization()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
+        <edit-organization [organization]="selectedOrganization" *ngIf="editOrganizationVisibility"></edit-organization>
     </c-modal-body>
 </c-modal>

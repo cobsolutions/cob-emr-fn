@@ -1,1 +1,85 @@
-<p>edit-organization works!</p>
+<c-container fluid>
+    <form cForm #organizationForm="ngForm">
+        <c-row class="justify-content-center">
+            <c-col class="col">
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header>
+                        <h3>Essential information</h3>
+                    </c-card-header>
+                    <c-card-body>
+                        <div class="form-group" class="mb-3">
+                            <small
+                                *ngIf="submitted   && (organizationname.errors) || organizationname.invalid && (organizationname.dirty || organizationname.touched)"
+                                class="form-text text-danger">
+                                Organization Name is required
+                            </small>
+                            <c-input-group>
+                                <input cFormControl id="organizationname" name="organization name" sizing="sm"
+                                    placeholder="Organization Name" required [(ngModel)]="organization!.name"
+                                    #organizationname="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group" class="mb-3">
+                            <small *ngIf="submitted   && (dba.errors) ||  dba.invalid && (dba.dirty || dba.touched)"
+                                class="form-text text-danger">
+                                Organization dba is required
+                            </small>
+                            <c-input-group>
+                                <input cFormControl id="dba" name="dba" placeholder="Organization dba" sizing="sm"
+                                    required [(ngModel)]="organization!.dba" #dba="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group" class="mb-3">
+                            <small
+                                *ngIf="submitted   && (groupNPI.errors) || groupNPI.invalid && (groupNPI.dirty || groupNPI.touched)"
+                                class="form-text text-danger">
+                                Organization Group-NPI is required
+                            </small>
+                            <c-input-group>
+                                <input cFormControl id="groupNPI" name="Group-NPI" placeholder="Organization Group-NPI"
+                                    sizing="sm" required [(ngModel)]="organization!.groupNPI" #groupNPI="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group" class="mb-3">
+                            <small
+                                *ngIf="submitted   && (taxID.errors) ||  taxID.invalid && (taxID.dirty || taxID.touched)"
+                                class="form-text text-danger">
+                                Organization tax-ID is required
+                            </small>
+                            <c-input-group>
+                                <input cFormControl id="taxID" name="tax-ID" placeholder="Organization tax-ID"
+                                    sizing="sm" required [(ngModel)]="organization!.taxID" #taxID="ngModel" />
+                            </c-input-group>
+                        </div>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+    </form>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <h3>Address information</h3>
+                </c-card-header>
+                <c-card-body>
+                    <app-single-address #organizationBillingAddress [address]="organization.billingAddress"
+                        [submitted]="submitted"></app-single-address>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <h3>Clinic information</h3>
+                </c-card-header>
+                <c-card-body>
+                    <app-organization-clinics-creation
+                        [selectedclinics]="organization.clinics"></app-organization-clinics-creation>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>

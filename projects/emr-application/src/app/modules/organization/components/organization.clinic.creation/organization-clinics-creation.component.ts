@@ -17,9 +17,10 @@ export interface Doctor {
   templateUrl: './organization-clinics-creation.component.html',
   styleUrls: ['./organization-clinics-creation.component.css']
 })
-export class OrganizationClinicsCreationComponent implements OnInit  {
+export class OrganizationClinicsCreationComponent implements OnInit {
   @ViewChild('clinicAddress') clinicAddress: SingleAddressComponent;
   @ViewChild('createAdministratorDoctorComponent') createAdministratorDoctorComponent: CreateAdministratorDoctorComponent;
+  @Input() selectedclinics: Clinic[]
   public users: User[];
   validAddress: boolean = true;
   submitted: boolean = false;
@@ -33,12 +34,22 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
   };
   @ViewChild('clinicForm') clinicForm: NgForm;
 
-  clinics: Clinic[] = new Array();
-  clinicDataHolders:ClinicDataHolder[] =[]
-  clinicDataHolder:ClinicDataHolder= {}
+  clinics: Clinic[];
+  clinicDataHolders: ClinicDataHolder[] = []
+  clinicDataHolder: ClinicDataHolder = {}
   constructor() { }
 
   ngOnInit(): void {
+    if (this.selectedclinics) {
+      this.selectedclinics.forEach((clinic: any) => {
+        var clinicDataHolder: ClinicDataHolder = {}
+        console.log(JSON.stringify(clinic))
+        clinicDataHolder.clinicModel = clinic.clinicModel
+        this.clinicDataHolders.push(clinicDataHolder)
+      })
+    }
+    else
+      this.clinics = []
   }
   add() {
     if (this.clinicForm.valid && this.createdClinic.administratorDoctor !== undefined) {
@@ -47,7 +58,7 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
       console.log(JSON.stringify(this.createAdministratorDoctorComponent.administratorDoctor))
       this.clinicDataHolder.administratorDoctor = this.createAdministratorDoctorComponent.administratorDoctor
       this.clinicDataHolders.push(this.clinicDataHolder);
-   //   this.clinics.push(this.createdClinic);
+      //   this.clinics.push(this.createdClinic);
       this.clearAll();
     } else {
       this.submitted = true;
@@ -78,7 +89,7 @@ export class OrganizationClinicsCreationComponent implements OnInit  {
     this.createDoctorVisible = !this.createDoctorVisible;
   }
   handleCloseDoctorModal(event: any) {
-    this.clinicDataHolder.administratorDoctor = this.createdClinic.administratorDoctor ;
+    this.clinicDataHolder.administratorDoctor = this.createdClinic.administratorDoctor;
     this.createdClinic.administratorDoctor = event
     this.closeCreateDoctorModal();
   }
