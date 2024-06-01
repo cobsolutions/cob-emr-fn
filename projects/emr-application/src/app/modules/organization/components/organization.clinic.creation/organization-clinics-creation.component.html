@@ -1,4 +1,4 @@
-<form cForm #clinicForm="ngForm" (ngSubmit)="add()">
+<form cForm #clinicForm="ngForm" (ngSubmit)="add()" *ngIf="!selectedclinics">
     <small
         *ngIf="submitted   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
         class="form-text text-danger">
@@ -13,7 +13,8 @@
         Administrator Doctor data is required
     </small>
     <c-input-group class="mb-3">
-        <button cButton color="primary" class="mx-2" variant="outline" size="sm" (click)="openCreateDoctorModal()">CreateClinic's Doctor</button>
+        <button cButton color="primary" class="mx-2" variant="outline" size="sm"
+            (click)="openCreateDoctorModal()">CreateClinic's Doctor</button>
     </c-input-group>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button cButton color="primary" variant="outline" (click)="add()" size="sm">Add</button>
@@ -25,16 +26,16 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
-            <th scope="col" style="width: 5%;">Actions</th>
+            <th scope="col" style="width: 5%;" *ngIf="!selectedclinics">Actions</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let clinic of clinicDataHolders;let i=index;" scope="row">
             <th scope="row">1</th>
             <td>{{clinic.clinicModel.name}}</td>
-            <td><app-view-address [address]="clinic.clinicModel.address"[addressView] ="'row'"></app-view-address></td>
-            
-            <td>
+            <td><app-view-address [address]="clinic.clinicModel.address" [addressView]="'row'"></app-view-address></td>
+
+            <td *ngIf="!selectedclinics">
                 <div class="btn-group " role="group" aria-label="Basic example">
                     <button cButton color="primary" size="sm" variant="outline" (click)="remove(i)">
                         <svg cIcon name="cilTrash"></svg>
@@ -50,6 +51,7 @@
         <button (click)="closeCreateDoctorModal()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <app-create-administrator-doctor #createAdministratorDoctorComponent (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
+        <app-create-administrator-doctor #createAdministratorDoctorComponent
+            (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
     </c-modal-body>
 </c-modal>

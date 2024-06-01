@@ -22,7 +22,7 @@
                     <ng-container *ngSwitchCase="'action'" class="py-2">
                         <div class="btn-group " role="group" aria-label="Basic example">
                             <button cButton color="primary" size="sm" variant="outline" (click)="edit(item)">
-                                <svg cIcon name="cilPen"></svg>
+                                <svg cIcon name="cilInfo"></svg>
                             </button>
                             <button cButton color="primary" size="sm" variant="outline">
                                 <svg cIcon name="cilTrash"></svg>
@@ -36,7 +36,7 @@
 </ng-container>
 <c-modal id="editOrg" [visible]="editOrganizationVisibility" size="xl">
     <c-modal-header>
-        <h3 cModalTitle>Edit Organization</h3>
+        <h3 cModalTitle>Organization</h3>
         <button (click)="toggleEditOrganization()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
