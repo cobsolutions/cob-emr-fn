@@ -12,9 +12,9 @@ export class OrganizationService {
   constructor(private httpClient: HttpClient) { }
 
   getAll() {
-    const historyFollowupURL = this.baseUrl + '/find'
-    return this.httpClient.get(historyFollowupURL).pipe(
-      map((response: any) => <Organization[]>response.records));
+    const url = this.baseUrl + '/find'
+    return this.httpClient.get(url).pipe(
+      map((response: any) => <Organization[]>response));
   }
 
   getById(organizationId:number){

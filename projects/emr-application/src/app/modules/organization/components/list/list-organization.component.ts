@@ -16,7 +16,7 @@ export class ListOrganizationComponent implements OnInit {
   public clinicsVisible: boolean = false;
 
   organiztions: IItem[]
-  clinics:Clinic[];
+  clinics: Clinic[];
   readonly columns: (string | IColumn)[] = [
     {
       key: 'name',
@@ -51,11 +51,12 @@ export class ListOrganizationComponent implements OnInit {
   toggleDetails(item: any) {
     this.details_visible[item] = !this.details_visible[item];
   }
-  constructor(private organizationService: OrganizationService , private router:Router ) { }
+  constructor(private organizationService: OrganizationService, private router: Router) { }
 
   ngOnInit(): void {
     this.organizationService.getAll()
       .subscribe((organizations) => {
+        console.log(JSON.stringify(organizations))
         this.organiztions = organizations
       }, error => {
         console.log(error);
@@ -70,16 +71,16 @@ export class ListOrganizationComponent implements OnInit {
   closeClinicModal() {
     this.clinicsVisible = !this.clinicsVisible;
   }
-  openClinicModal(clinics:Clinic[]) {
+  openClinicModal(clinics: Clinic[]) {
     this.clinics = clinics;
     this.clinicsVisible = !this.clinicsVisible;
   }
-  constructBillingAddress(billingAddress: Address) :string{
+  constructBillingAddress(billingAddress: Address): string {
     var result: string = '';
-    
+
     return result;
   }
-  edit(item: any){
+  edit(item: any) {
     this.router.navigate(['emr/organization/edit/', item.id]);
   }
 }

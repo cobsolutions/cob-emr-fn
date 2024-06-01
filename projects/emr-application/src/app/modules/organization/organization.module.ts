@@ -9,7 +9,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import {
   CreateOrganizationComponent,
   ListOrganizationComponent,
-  ListOrganizationClinicsComponent,
   OrganizationClinicsCreationComponent
 } from './index';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -18,7 +17,6 @@ import { CreateAdministratorDoctorComponent } from './components/organization.cl
   declarations: [
     CreateOrganizationComponent,
     ListOrganizationComponent,
-    ListOrganizationClinicsComponent,
     OrganizationClinicsCreationComponent,
     CreateAdministratorDoctorComponent
   ],
