@@ -13,12 +13,14 @@ import {
 } from './index';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { CreateAdministratorDoctorComponent } from './components/organization.clinic.creation/administrator.doctor.create/create-administrator-doctor.component';
+import { EditOrganizationComponent } from './components/edit/edit-organization.component';
 @NgModule({
   declarations: [
     CreateOrganizationComponent,
     ListOrganizationComponent,
     OrganizationClinicsCreationComponent,
-    CreateAdministratorDoctorComponent
+    CreateAdministratorDoctorComponent,
+    EditOrganizationComponent
   ],
   imports: [
     CommonModule,
