@@ -13,7 +13,7 @@ import orgData from './data'
 })
 export class ListOrganizationComponent implements OnInit {
   editOrganizationVisibility: boolean = false
-  selectedOrganization:Organization;
+  selectedOrganization: Organization;
   data: IItem[] = orgData;
   public clinicsVisible: boolean = false;
 
@@ -54,7 +54,6 @@ export class ListOrganizationComponent implements OnInit {
   ngOnInit(): void {
     this.organizationService.getAll()
       .subscribe((organizations) => {
-        console.log(JSON.stringify(organizations))
         this.organiztions = organizations
       }, error => {
         console.log(error);

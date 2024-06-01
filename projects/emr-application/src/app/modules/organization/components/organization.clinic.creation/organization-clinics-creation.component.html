@@ -51,7 +51,7 @@
         <button (click)="closeCreateDoctorModal()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <app-create-administrator-doctor #createAdministratorDoctorComponent
+        <app-create-administrator-doctor #createAdministratorDoctorComponent *ngIf="createDoctorVisible"
             (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
     </c-modal-body>
 </c-modal>

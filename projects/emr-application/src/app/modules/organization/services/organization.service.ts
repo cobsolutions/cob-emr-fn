@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { AdministratorDoctor } from '../models/administrator.doctor';
 import { Organization } from '../models/organiztion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizationService {
+  public adminDoctor$: BehaviorSubject<AdministratorDoctor | null> = new BehaviorSubject<AdministratorDoctor | null>(null);
   private baseUrl = environment.baseURL + 'organization'
   constructor(private httpClient: HttpClient) { }
 

@@ -2,11 +2,10 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../../../administration/model/user/user';
 import { SingleAddressComponent } from '../../../common/components/single.address/single-address.component';
-import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../patient/models/clinic';
 import { ClinicDataHolder } from '../../../patient/models/clinic.data.holder';
 import { AdministratorDoctor } from '../../models/administrator.doctor';
-import { DoctorUserService } from '../../services/doctor.user.autocomplete/doctor-user.service';
+import { OrganizationService } from '../../services/organization.service';
 import { CreateAdministratorDoctorComponent } from './administrator.doctor.create/create-administrator-doctor.component';
 export interface Doctor {
   name?: string,
@@ -19,7 +18,7 @@ export interface Doctor {
 })
 export class OrganizationClinicsCreationComponent implements OnInit {
   @ViewChild('clinicAddress') clinicAddress: SingleAddressComponent;
-  @ViewChild('createAdministratorDoctorComponent') createAdministratorDoctorComponent: CreateAdministratorDoctorComponent;
+  administratorDoctor: AdministratorDoctor
   @Input() selectedclinics: Clinic[]
   public users: User[];
   validAddress: boolean = true;
@@ -37,9 +36,12 @@ export class OrganizationClinicsCreationComponent implements OnInit {
   clinics: Clinic[];
   clinicDataHolders: ClinicDataHolder[] = []
   clinicDataHolder: ClinicDataHolder = {}
-  constructor() { }
+  constructor(private organizationService: OrganizationService) { }
 
   ngOnInit(): void {
+    this.organizationService.adminDoctor$.subscribe(result => {
+      this.administratorDoctor = result
+    })
     if (this.selectedclinics) {
       this.selectedclinics.forEach((clinic: any) => {
         var clinicDataHolder: ClinicDataHolder = {}
@@ -55,10 +57,8 @@ export class OrganizationClinicsCreationComponent implements OnInit {
     if (this.clinicForm.valid && this.createdClinic.administratorDoctor !== undefined) {
       this.createdClinic.address = this.clinicAddress.getAddress();
       this.clinicDataHolder.clinicModel = this.createdClinic;
-      console.log(JSON.stringify(this.createAdministratorDoctorComponent.administratorDoctor))
-      this.clinicDataHolder.administratorDoctor = this.createAdministratorDoctorComponent.administratorDoctor
+      this.clinicDataHolder.administratorDoctor = this.administratorDoctor
       this.clinicDataHolders.push(this.clinicDataHolder);
-      //   this.clinics.push(this.createdClinic);
       this.clearAll();
     } else {
       this.submitted = true;
