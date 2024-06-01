@@ -22,6 +22,14 @@ export class DotorUserService extends BasePaginationService {
     return this.httpClient.get(url);
 
   }
+  getAllClinicalsUsersByClinic(clinicId: number): Observable<any> {
+    var url = this.baseUrl + '/find-all/clinicId/' + clinicId
+    return this.httpClient.get(url);
+  }
+  getAllClinicalsUsers(): Observable<any> {
+    var url = this.baseUrl + '/find-all'
+    return this.httpClient.get(url);
+  }
   deleteDoctor(uuid: string) {
     var url = this.baseUrl + '/delete/doctor/' + uuid
     return this.httpClient.delete(url)

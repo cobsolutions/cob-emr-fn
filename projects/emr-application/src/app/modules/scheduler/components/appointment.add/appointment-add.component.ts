@@ -3,16 +3,16 @@ import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
 import { filter, map, Observable, switchMap, tap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
+import { ClinicalUserService } from '../../../administration/services/user/clinical.user/clinical-user.service';
+import { DotorUserService } from '../../../administration/services/user/doctor.user/dotor-user.service';
 import { SchedulerRepetition } from '../../../common/models/enums/scheduler/scheduler.repetition';
 import { SchedulerType } from '../../../common/models/enums/scheduler/scheduler.type';
 import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
-import { PatientCase } from '../../../patient/models/case/patient.case';
 import { Patient } from '../../../patient/models/patient';
 import { Appointment } from '../../models/appointment';
 import { AppointmentRepeat } from '../../models/appointment.repeat';
 import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
 import { AppointmentService } from '../../service/appointment.service';
-import { DoctorAppointmentService } from '../../service/doctor-appointment.service';
 import { PatientAppointmentService } from '../../service/patient-appointment.service';
 
 export interface TreatingDoctor {
@@ -69,8 +69,8 @@ export class AppointmentAddComponent implements OnInit {
   constructor(private appointmentService: AppointmentService
     , private patientAppointmentService: PatientAppointmentService
     , private clinicEmittingService: ClinicEmittingService
-    , private doctorAppointmentService: DoctorAppointmentService
-    , private appointmentEmittingService: AppointmentEmittingService) { }
+    , private appointmentEmittingService: AppointmentEmittingService
+    , private clinicalUserService: DotorUserService) { }
   ngOnInit() {
     this.initAppointmentDate();
     this.patient$ = this.clinicEmittingService.selectedClinic$.pipe(
@@ -82,7 +82,7 @@ export class AppointmentAddComponent implements OnInit {
       })
     )
     this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
-      switchMap(clinicId => this.doctorAppointmentService.getAllTherapistsByClinic(clinicId)),
+      switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
       filter(therapists => therapists !== null),
       map(response => {
         return response;
@@ -133,7 +133,7 @@ export class AppointmentAddComponent implements OnInit {
   }
   checkAllTherapists(event: any) {
     if (event.currentTarget.checked)
-      this.therapists$ = this.doctorAppointmentService.getAllTherapists().pipe(
+      this.therapists$ = this.clinicalUserService.getAllClinicalsUsers().pipe(
         filter(therapists => therapists !== null),
         map(response => {
           return response;
@@ -141,7 +141,7 @@ export class AppointmentAddComponent implements OnInit {
       )
     else
       this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
-        switchMap(clinicId => this.doctorAppointmentService.getAllTherapistsByClinic(clinicId)),
+        switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
         filter(therapists => therapists !== null),
         map(response => {
           return response;
