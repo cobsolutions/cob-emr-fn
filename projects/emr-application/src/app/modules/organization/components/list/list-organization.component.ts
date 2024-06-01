@@ -12,6 +12,7 @@ import orgData from './data'
   styleUrls: ['./list-organization.component.css']
 })
 export class ListOrganizationComponent implements OnInit {
+  editOrganizationVisibility: boolean = false
   data: IItem[] = orgData;
   public clinicsVisible: boolean = false;
 
@@ -47,10 +48,6 @@ export class ListOrganizationComponent implements OnInit {
       sorter: false,
     },
   ]
-  details_visible = Object.create({});
-  toggleDetails(item: any) {
-    this.details_visible[item] = !this.details_visible[item];
-  }
   constructor(private organizationService: OrganizationService, private router: Router) { }
 
   ngOnInit(): void {
@@ -65,22 +62,13 @@ export class ListOrganizationComponent implements OnInit {
   create() {
     this.router.navigate(['/emr/organization/create']);
   }
-  handleClinicChange(event: any) {
-    this.clinicsVisible = event;
-  }
   closeClinicModal() {
     this.clinicsVisible = !this.clinicsVisible;
   }
-  openClinicModal(clinics: Clinic[]) {
-    this.clinics = clinics;
-    this.clinicsVisible = !this.clinicsVisible;
-  }
-  constructBillingAddress(billingAddress: Address): string {
-    var result: string = '';
-
-    return result;
-  }
   edit(item: any) {
-    this.router.navigate(['emr/organization/edit/', item.id]);
+    this.editOrganizationVisibility = true
+  }
+  toggleEditOrganization() {
+    this.editOrganizationVisibility = !this.editOrganizationVisibility
   }
 }

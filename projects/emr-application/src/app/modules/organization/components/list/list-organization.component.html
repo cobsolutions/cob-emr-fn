@@ -34,3 +34,11 @@
         </ng-template>
     </c-smart-table>
 </ng-container>
+<c-modal id="editOrg" [visible]="editOrganizationVisibility" size="xl">
+    <c-modal-header>
+        <h3 cModalTitle>Edit Organization</h3>
+        <button (click)="toggleEditOrganization()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+    </c-modal-body>
+</c-modal>
