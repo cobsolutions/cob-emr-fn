@@ -7,8 +7,10 @@ import { DotorUserService } from '../../../../administration/services/user/docto
 import { SingleAddressComponent } from '../../../../common/components/single.address/single-address.component';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Role } from '../../../../security/model/role';
+import { Scope } from '../../../../security/model/scope';
 import { AdministratorDoctor } from '../../../models/administrator.doctor';
 import { OrganizationService } from '../../../services/organization.service';
+import { CreateAdministratorRoles } from './administrator.util';
 
 
 @Component({
@@ -55,11 +57,7 @@ export class CreateAdministratorDoctorComponent implements OnInit {
   }
   saveDoctor() {
     if (this.doctorForm.valid) {
-      var roleScope: UserRoleScope = {
-        role: Role.ADMIN_ROLE,
-        scope: ''
-      }
-      this.administratorDoctor.roleScope.push(roleScope);
+      CreateAdministratorRoles.create(this.administratorDoctor)
       this.administratorDoctor.password = this.encryptService.encrypt(this.administratorDoctor.password);
       this.isValidDoctor = true;
       this.doctorForm.reset;
@@ -72,11 +70,7 @@ export class CreateAdministratorDoctorComponent implements OnInit {
     }
   }
   selectDoctor() {
-    var roleScope: UserRoleScope = {
-      role: Role.ADMIN_ROLE,
-      scope: ''
-    }
-    this.administratorDoctor.roleScope.push(roleScope)
+    CreateAdministratorRoles.create(this.administratorDoctor)
     this.isValidDoctor = true;
     this.closeModal.emit(this.administratorDoctor);
     this.administratorDoctor = {}
