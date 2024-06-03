@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
-import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { Clinic } from '../../../../patient/models/clinic';
-import { Role } from '../../../../security/model/role';
+import { LoggedInUser } from '../../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { User } from '../../../model/user/user';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { ClinicalUserService } from '../../../services/user/clinical.user/clinical-user.service';
@@ -44,15 +44,22 @@ export class EditUserComponent implements OnInit {
   credentials: string[];
   specialties = Specialties;
   constructor(private clericalUSerService: ClinicalUserService
-    , private clinicEmittingService: ClinicEmittingService
+    , private loggedInService: LoggedInService
     , private clinicService: ClinicService
     , private clinicalUserService: DotorUserService) { }
 
   ngOnInit(): void {
-    var organizationId: number = Number(localStorage.getItem('org'));
-    this.clinicService.getByOrganizationId(organizationId).subscribe((response: any) => {
-      this.clinics = response.records;
-    })
+    this.loggedInService.load().pipe(
+      map((loggedInUser: LoggedInUser) => {
+        return loggedInUser.organizationId
+      })
+      , switchMap((organizationId: number) => {
+        return this.clinicService.getByOrganizationId(organizationId)
+      })
+    )
+      .subscribe((response: any) => {
+        this.clinics = response.records;
+      })
     switch (this.userType) {
       case 'Clinical':
         this.fetchClinicalUser();
@@ -64,7 +71,7 @@ export class EditUserComponent implements OnInit {
   }
 
   private fetchClericalUser() {
-    this.clinicEmittingService.selectedClinic$.pipe(
+    this.loggedInService.selectedClinic$.pipe(
       switchMap((clinicID: number) => {
         return this.clericalUSerService.getClericalUser(clinicID, this.uuid)
       })
@@ -73,7 +80,7 @@ export class EditUserComponent implements OnInit {
     })
   }
   private fetchClinicalUser() {
-    this.clinicEmittingService.selectedClinic$.pipe(
+    this.loggedInService.selectedClinic$.pipe(
       switchMap((clinicID: number) => {
         return this.clinicalUserService.getClinicalUser(clinicID, this.uuid)
       })

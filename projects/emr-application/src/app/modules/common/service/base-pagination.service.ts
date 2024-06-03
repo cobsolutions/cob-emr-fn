@@ -6,6 +6,7 @@ import { PaginationData } from '../interfaces/pagination.data';
 import { IApiParams } from '../interfaces/api.params';
 import { CacheService } from './cahce/cache.service';
 import { ClinicEmittingService } from './emitting/clinic-emitting.service';
+import { LoggedInService } from '../../security/service/loggedIn/logged-in.service';
 const httpOptions = {
   // headers: new HttpHeaders({
   //   'Content-Type': 'application/json',
@@ -18,7 +19,8 @@ const httpOptions = {
 })
 export class BasePaginationService {
   url: string;
-  constructor(public httpClient: HttpClient,private clinicEmittingService: ClinicEmittingService) { }
+  constructor(public httpClient: HttpClient
+    , private loggedInService: LoggedInService) { }
   get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
     this.url = url;
     return config$.pipe(
@@ -40,7 +42,7 @@ export class BasePaginationService {
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
 
-    return this.clinicEmittingService.selectedClinic$.pipe(
+    return this.loggedInService.selectedClinic$.pipe(
       switchMap(clinicId =>
         this.httpClient
           .get<PaginationData>(this.constructURL(this.url, clinicId), options)

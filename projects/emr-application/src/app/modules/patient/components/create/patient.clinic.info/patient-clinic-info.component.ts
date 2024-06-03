@@ -15,8 +15,7 @@ export class PatientClinicInfoComponent implements OnInit {
   constructor(private patientFinderService:PatientFinderService) { }
 
   ngOnInit(): void {
-    var organizationId:number = Number(localStorage.getItem('org'));
-    this.clinics = this.patientFinderService.getClinicsForPatientByOrganizationId(organizationId)
+    this.clinics = this.patientFinderService.getClinicsForPatient()
     .pipe(
       map((response:any)=>{
           return response.body.records;

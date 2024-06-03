@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { result } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { from, switchMap } from 'rxjs';
-import { CacheService } from '../../../../common/service/cahce/cache.service';
+import { switchMap, tap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
+import { LoggedInUser } from '../../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 
 @Component({
@@ -26,10 +27,10 @@ export class CreateClinicComponent implements OnInit {
     }
   };
   constructor(private clinicService: ClinicService
-    , private cacheService: CacheService
     , private toastr: ToastrService
     , private router: Router
-    , private route: ActivatedRoute) { }
+    , private route: ActivatedRoute
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     var clinicId = this.route.snapshot.paramMap.get('id');
@@ -45,15 +46,20 @@ export class CreateClinicComponent implements OnInit {
     this.validAddress = this.isAddressValid();
     if (this.clinicCreateForm.valid && this.validAddress) {
       this.submitted = false;
-      this.clinic.organizationId = Number(localStorage.getItem('org'))
-      this.clinicService.create(this.clinic)
-        .subscribe(dd => {
-          if (this.isCreated)
-            this.toastr.success('Clinic Created');
-          else
-            this.toastr.success('Clinic updated');
-          this.router.navigateByUrl('emr/administration/list/clinic')
+      this.loggedInService.load().pipe(
+        tap((loggedInUser: LoggedInUser) => {
+          this.clinic.organizationId = loggedInUser.organizationId
+        }),
+        switchMap((result: any) => {
+          return this.clinicService.create(this.clinic);
         })
+      ).subscribe(dd => {
+        if (this.isCreated)
+          this.toastr.success('Clinic Created');
+        else
+          this.toastr.success('Clinic updated');
+        this.router.navigateByUrl('emr/administration/list/clinic')
+      })
     } else {
       this.submitted = true;
     }

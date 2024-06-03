@@ -7,5 +7,5 @@ export interface InsuranceCompany {
   phone: string | null;
   fax: string | null;
   addresses: Address[];
-  clinicId: number | null;
+  organizationId?:number
 }

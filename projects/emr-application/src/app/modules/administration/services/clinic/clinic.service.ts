@@ -6,6 +6,8 @@ import { IApiParams } from '../../../common/interfaces/api.params';
 import { CacheService } from '../../../common/service/cahce/cache.service';
 import { IData } from '../../../patient/components/list/interfaces/i.data';
 import { Clinic } from '../../../patient/models/clinic';
+import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 const httpOptions = {
   // headers: new HttpHeaders({
   //   'Content-Type': 'application/json',
@@ -18,9 +20,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ClinicService {
-  
+
   private userUrl = environment.baseURL + 'clinic'
-  constructor(private httpClient: HttpClient, private cahceService: CacheService) { }
+  constructor(private httpClient: HttpClient, private loggedInService: LoggedInService) { }
 
   create(clinic: Clinic) {
     const headers = { 'content-type': 'application/json' }
@@ -56,8 +58,15 @@ export class ClinicService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.httpClient
-    .get<IData>(this.userUrl + "/find/organization/" + localStorage.getItem('org'), options)
+    return this.loggedInService.load().pipe(
+      map((loggedInUser: LoggedInUser) => {
+        return loggedInUser.organizationId
+      })
+      , switchMap((organiationId: number) => {
+        return this.httpClient
+          .get<IData>(this.userUrl + "/find/organization/" + organiationId, options)
+      })
+    )
   }
   getById(clinicId: number) {
     var createURL = this.userUrl + '/find/' + clinicId

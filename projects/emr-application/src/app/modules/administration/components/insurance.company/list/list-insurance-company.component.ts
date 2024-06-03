@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { InsuranceCompany } from '../../../model/insurance.company/insurance.company';
 import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
@@ -21,8 +22,9 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
   insuranceCompany$!: Observable<InsuranceCompany[]>;
   editInsuranceCompanyVisibility: boolean = false;
   selectedInsuranceCompany: InsuranceCompany;
-  constructor(private router: Router, private insuranceCompanyService: InsuranceCompanyService,
-    private toastr: ToastrService,) {
+  constructor(private router: Router
+    , private insuranceCompanyService: InsuranceCompanyService
+    , private toastr: ToastrService) {
     super();
   }
 

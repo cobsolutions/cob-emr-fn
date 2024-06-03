@@ -4,15 +4,14 @@ import { environment } from 'projects/emr-application/src/environments/environme
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../../common/service/base-pagination.service';
-import { CacheService } from '../../../../common/service/cahce/cache.service';
-import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DotorUserService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'clinical/user'
-  constructor(httpClient: HttpClient,clinicEmittingService :ClinicEmittingService) { super(httpClient,clinicEmittingService) }
+  constructor(httpClient: HttpClient,loggedInService: LoggedInService) { super(httpClient,loggedInService) }
 
   getDoctorUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")

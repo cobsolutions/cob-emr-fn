@@ -5,7 +5,7 @@ import { AddressUtil } from 'projects/emr-application/src/app/util/address.util'
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
 import { filter, switchMap, tap } from 'rxjs';
 import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
-import { ListTemplate } from '../../../common/template/list.template';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { PatientCase } from '../../models/case/patient.case';
 import { PatientChartInfo } from '../../models/chart/patient.chart.info';
 import { Patient } from '../../models/patient';
@@ -38,11 +38,11 @@ export class PatientChartComponent implements OnInit {
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
-    , private clinicEmittingService: ClinicEmittingService) { }
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
-    this.clinicEmittingService.selectedClinic$
+    this.loggedInService.selectedClinic$
       .pipe(
         filter(clinicId => clinicId != null),
         tap((clinicId) => this.clinicId = clinicId),

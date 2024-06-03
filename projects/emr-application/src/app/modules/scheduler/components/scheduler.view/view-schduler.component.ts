@@ -13,8 +13,9 @@ import {
 
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { ClinicEmittingService } from "../../../common/service/emitting/clinic-emitting.service";
+import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { Appointment } from "../../models/appointment";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentEmittingService } from "../../service/appointment-emitting.service";
@@ -73,7 +74,7 @@ export class ViewSchdulerComponent implements OnInit {
     private schedulerConfigurationService: SchedulerConfigurationService,
     private appointmentEventConverterService: AppointmentEventConverterService,
     private appointmentEmittingService: AppointmentEmittingService,
-    private clinicEmittingService: ClinicEmittingService) { }
+    private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.getSchedulerConfiguration()
@@ -196,7 +197,7 @@ export class ViewSchdulerComponent implements OnInit {
   getAppointments() {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
-    this.clinicEmittingService.selectedClinic$.pipe(
+    this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
       switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId)),
       map((response: any) => response.records)
@@ -233,7 +234,7 @@ export class ViewSchdulerComponent implements OnInit {
       this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
   }
   getSchedulerConfiguration() {
-    this.schedulerConfiguration$ = this.clinicEmittingService.selectedClinic$.pipe(
+    this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
       switchMap(clinicId => this.schedulerConfigurationService.retrieveCliniSchedulerConfigurationById(clinicId))
     )

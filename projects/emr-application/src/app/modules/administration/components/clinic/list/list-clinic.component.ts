@@ -30,6 +30,9 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
     this.initListComponent();
 
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
+      tap((result => {
+        console.log(JSON.stringify(result))
+      })),
       retry({
         delay: (error) => {
           console.warn('Retry: ', error);

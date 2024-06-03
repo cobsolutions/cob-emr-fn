@@ -5,13 +5,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../../common/service/base-pagination.service';
 import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClinicalUserService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'clerical/user'
-  constructor(httpClient: HttpClient, clinicEmittingService: ClinicEmittingService) { super(httpClient, clinicEmittingService) }
+  constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
   getClinicalUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")

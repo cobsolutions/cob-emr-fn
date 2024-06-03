@@ -4,9 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
+import { map, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../../patient/models/clinic';
+import { LoggedInUser } from '../../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { User } from '../../../model/user/user';
 import { UserRoleScope } from '../../../model/user/user.role.scope';
 import { ClinicService } from '../../../services/clinic/clinic.service';
@@ -63,13 +66,20 @@ export class CreateUserComponent implements OnInit {
     , private toastr: ToastrService
     , private router: Router
     , private encryptService: EncryptService
-    , private route: ActivatedRoute) { }
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    var organizationId: number = Number(localStorage.getItem('org'));
-    this.clinicService.getByOrganizationId(organizationId).subscribe((response: any) => {
-      this.clinics = response.records;
-    })
+    this.loggedInService.load().pipe(
+      map((loggedInUser: LoggedInUser) => {
+        return loggedInUser.organizationId
+      })
+      , switchMap((organizationId: number) => {
+        return this.clinicService.getByOrganizationId(organizationId)
+      })
+    )
+      .subscribe((response: any) => {
+        this.clinics = response.records;
+      })
   }
   create() {
     this.fillPermissions()

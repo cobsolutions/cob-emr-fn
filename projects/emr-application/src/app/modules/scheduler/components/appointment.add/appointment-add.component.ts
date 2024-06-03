@@ -9,6 +9,7 @@ import { SchedulerRepetition } from '../../../common/models/enums/scheduler/sche
 import { SchedulerType } from '../../../common/models/enums/scheduler/scheduler.type';
 import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
 import { Patient } from '../../../patient/models/patient';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../models/appointment';
 import { AppointmentRepeat } from '../../models/appointment.repeat';
 import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
@@ -68,12 +69,12 @@ export class AppointmentAddComponent implements OnInit {
   endBoundary: Date;
   constructor(private appointmentService: AppointmentService
     , private patientAppointmentService: PatientAppointmentService
-    , private clinicEmittingService: ClinicEmittingService
+    , private loggedInService: LoggedInService
     , private appointmentEmittingService: AppointmentEmittingService
     , private clinicalUserService: DotorUserService) { }
   ngOnInit() {
     this.initAppointmentDate();
-    this.patient$ = this.clinicEmittingService.selectedClinic$.pipe(
+    this.patient$ = this.loggedInService.selectedClinic$.pipe(
       tap(clinicId => { this.appointment.clinicId = clinicId }),
       switchMap(clinicId => this.patientAppointmentService.getPateint(clinicId)),
       filter(patients => patients !== null),
@@ -81,7 +82,7 @@ export class AppointmentAddComponent implements OnInit {
         return response;
       })
     )
-    this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
+    this.therapists$ = this.loggedInService.selectedClinic$.pipe(
       switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
       filter(therapists => therapists !== null),
       map(response => {
@@ -140,7 +141,7 @@ export class AppointmentAddComponent implements OnInit {
         })
       )
     else
-      this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
+      this.therapists$ = this.loggedInService.selectedClinic$.pipe(
         switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
         filter(therapists => therapists !== null),
         map(response => {
