@@ -45,7 +45,6 @@ export class CreateOrganizationComponent extends BasicComponent implements OnIni
 
   ngOnInit(): void {
     var organizationId = this.route.snapshot.paramMap.get('id');
-    console.log(organizationId)
     if (organizationId !== null) {
       this.isCreated = false
       this.organizationService.getById(Number(organizationId))

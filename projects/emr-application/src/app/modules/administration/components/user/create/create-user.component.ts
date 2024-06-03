@@ -3,18 +3,13 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { result } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
-import { mergeMap, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
-import { CacheService } from '../../../../common/service/cahce/cache.service';
-import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../../patient/models/clinic';
 import { User } from '../../../model/user/user';
 import { UserRoleScope } from '../../../model/user/user.role.scope';
 import { ClinicService } from '../../../services/clinic/clinic.service';
-import { ClinicalUserService } from '../../../services/user/clinical.user/clinical-user.service';
 import { UserService } from '../../../services/user/user.service';
 
 @Component({

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../../../../administration/model/user/user';
+import { UserRoleScope } from '../../../../administration/model/user/user.role.scope';
 import { DotorUserService } from '../../../../administration/services/user/doctor.user/dotor-user.service';
 import { SingleAddressComponent } from '../../../../common/components/single.address/single-address.component';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
@@ -18,7 +19,7 @@ import { OrganizationService } from '../../../services/organization.service';
 export class CreateAdministratorDoctorComponent implements OnInit {
   public users: Observable<User[]>;
   administratorDoctor: AdministratorDoctor = {
-    roles: []
+    roleScope: []
   }
   errorMessage: string | null;
   isAssignDoctorFromDB: number = -1;;
@@ -54,7 +55,11 @@ export class CreateAdministratorDoctorComponent implements OnInit {
   }
   saveDoctor() {
     if (this.doctorForm.valid) {
-      this.administratorDoctor.roles.push(Role.ADMIN_ROLE)
+      var roleScope: UserRoleScope = {
+        role: Role.ADMIN_ROLE,
+        scope: ''
+      }
+      this.administratorDoctor.roleScope.push(roleScope);
       this.administratorDoctor.password = this.encryptService.encrypt(this.administratorDoctor.password);
       this.isValidDoctor = true;
       this.doctorForm.reset;
@@ -67,7 +72,11 @@ export class CreateAdministratorDoctorComponent implements OnInit {
     }
   }
   selectDoctor() {
-    this.administratorDoctor.roles.push(Role.ADMIN_ROLE)
+    var roleScope: UserRoleScope = {
+      role: Role.ADMIN_ROLE,
+      scope: ''
+    }
+    this.administratorDoctor.roleScope.push(roleScope)
     this.isValidDoctor = true;
     this.closeModal.emit(this.administratorDoctor);
     this.administratorDoctor = {}

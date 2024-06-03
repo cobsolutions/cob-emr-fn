@@ -1,3 +1,5 @@
+import { UserRoleScope } from "../../administration/model/user/user.role.scope";
+
 export interface AdministratorDoctor{
     id?: number;
     accountName?: string,
@@ -11,6 +13,6 @@ export interface AdministratorDoctor{
     licence?:string
     speciality?:string
     credential?:string
-    roles?:string[]
+    roleScope?:UserRoleScope[]
     fullName?:string
 }
