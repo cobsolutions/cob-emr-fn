@@ -42,7 +42,6 @@ export class PreviousAppointmentComponent extends ListTemplate implements OnInit
   }
 
   private getAllAppointments() {
-    console.log('getAllAppointments')
     this.appointments$ = this.previousAppointmentService.findAllPreviousAppointments(this.apiParams$, this.patientId).pipe(
       retry({
         delay: (error) => {
