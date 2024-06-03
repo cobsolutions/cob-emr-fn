@@ -45,19 +45,6 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.ksAuthService.isLoggedIn()
       .then((loggedIn) => {
         if (loggedIn) {
-          // this.ksAuthService.loadUserProfile()
-          //   .then((userProfile) => {
-          //     this.cacheService.setLoggedinUserUUID(userProfile.id!)
-          //     this.cacheService.setLoggedinUserName(userProfile.username!);
-          //     this.userName = this.cacheService.getLoggedinUserName()?.charAt(0).toUpperCase()
-          //     this.clinicService.getByUserId(this.cacheService.getLoggedinUserUUID()).subscribe(response => {
-          //       if (response !== null && response.length !== 0) {
-          //         this.clinics = response;
-          //         localStorage.setItem('org', this.clinics[0].organizationId.toString())
-          //         this.emittingClinicService.selectedClinic$.next(Number(this.clinics[0].id))
-          //       }
-          //     })
-          //   })
           this.loggedInService.load().subscribe((result: LoggedInUser) => {
             this.userName = result.userName
             this.clinics = result.clinics
@@ -74,6 +61,6 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.ksAuthService.logout()
   }
   setSelectedClinic(event: any) {
-    this.emittingClinicService.selectedClinic$.next(event.target.value)
+    this.loggedInService.selectedClinic$.next(event.target.value)
   }
 }

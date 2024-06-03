@@ -4,7 +4,6 @@ import { environment } from 'projects/emr-application/src/environments/environme
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../../common/service/base-pagination.service';
-import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 @Injectable({
@@ -23,8 +22,7 @@ export class ClinicalUserService extends BasePaginationService {
 
   }
   deleteUser(uuid: string) {
-    console.log('Service')
-    var url = this.baseUrl + '/delete/' + uuid
+    var url = this.baseUrl + '/delete/uuid/' + uuid
     return this.httpClient.delete(url)
   }
 }

@@ -11,13 +11,13 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 })
 export class DotorUserService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'clinical/user'
-  constructor(httpClient: HttpClient,loggedInService: LoggedInService) { super(httpClient,loggedInService) }
+  constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
   getDoctorUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")
   }
-  getClinicalUser(clinicId:number,uuid:string){
-    var url = this.baseUrl + '/find/clinicId/'+clinicId +'/uuid/' + uuid
+  getClinicalUser(clinicId: number, uuid: string) {
+    var url = this.baseUrl + '/find/clinicId/' + clinicId + '/uuid/' + uuid
     return this.httpClient.get(url);
 
   }
@@ -30,7 +30,7 @@ export class DotorUserService extends BasePaginationService {
     return this.httpClient.get(url);
   }
   deleteDoctor(uuid: string) {
-    var url = this.baseUrl + '/delete/doctor/' + uuid
+    var url = this.baseUrl + '/delete/uuid/' + uuid
     return this.httpClient.delete(url)
   }
 }
