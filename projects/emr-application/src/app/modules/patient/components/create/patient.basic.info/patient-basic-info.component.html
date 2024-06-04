@@ -48,7 +48,7 @@
     MaritalStatus is required
 </small>
 
-<select cFormControl cSelect class="mb-2" sizing="sm" id="gender" name="gender" required
+<select cFormControl cSelect class="mb-2" sizing="sm" id="MaritalStatus" name="MaritalStatus" required
     [ngClass]="{'is-invalid': maritalStatus.invalid && (maritalStatus.dirty || maritalStatus.touched)}"
     [(ngModel)]="patient.maritalStatus" #maritalStatus="ngModel">
     <option [ngValue]="null" disabled selected>Select MaritalStatus</option>

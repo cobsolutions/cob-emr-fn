@@ -34,7 +34,7 @@
                 Injury Case is required
             </small>
             <c-input-group class="mb-3">
-                <select cFormControl cSelect sizing="sm" id="casePlaceOfService" name="casePlaceOfService" required
+                <select cFormControl cSelect sizing="sm" id="Injurycase" name="Injurycase" required
                     [ngClass]="{'is-invalid': caseinjuryCase.invalid && (caseinjuryCase.dirty || caseinjuryCase.touched)}"
                     [(ngModel)]="case.injuryCase" #caseinjuryCase="ngModel">
                     <option [ngValue]="null" disabled selected>Select Injury Cause</option>
@@ -212,8 +212,8 @@
                 #caseaddtionalInfo="ngModel" [(ngModel)]="case.caseOtherInformation.addInfoForChart"></textarea>
 
             <c-input-group class="mb-3">
-                <select cFormControl cSelect sizing="sm" id="referringPartyType" name="referringPartyType"
-                    [(ngModel)]="case.caseOtherInformation.autoApplyModifier" #referringPartyType="ngModel">
+                <select cFormControl cSelect sizing="sm" id="autoApplyModifier" name="autoApplyModifier"
+                    [(ngModel)]="case.caseOtherInformation.autoApplyModifier" #autoApplyModifier="ngModel">
                     <option [ngValue]="null" disabled selected>Select Auto Apply Modifier</option>
                     <option *ngFor="let autoApplyModifierVal of autoApplyModifier | keyvalue"
                         [ngValue]="autoApplyModifierVal.key">

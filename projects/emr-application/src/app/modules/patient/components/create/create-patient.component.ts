@@ -19,12 +19,12 @@ import { PatientInsuranceInfoComponent } from './patient.insurance.info/patient-
   styleUrls: ['./create-patient.component.css']
 })
 export class CreatePatientComponent implements OnInit, AfterViewInit {
-  @ViewChild('basicInfoComponent') basicInfoComponent: PatientBasicInfoComponent;
-  @ViewChild('idInfoComponent') idInfoComponent: PatientIdInfoComponent;
-  @ViewChild('addressComp') addressComp: AddressComponent;
-  @ViewChild('contactComponent') contactComponent: ContactComponent;
-  @ViewChild('insuranceComponent') insuranceComponent: PatientInsuranceInfoComponent;
-  @ViewChild('caseComponent') caseComponent: PatientCaseInfoComponent;
+  // @ViewChild('basicInfoComponent') basicInfoComponent: PatientBasicInfoComponent;
+  // @ViewChild('idInfoComponent') idInfoComponent: PatientIdInfoComponent;
+  // @ViewChild('addressComp') addressComp: AddressComponent;
+  // @ViewChild('contactComponent') contactComponent: ContactComponent;
+  // @ViewChild('insuranceComponent') insuranceComponent: PatientInsuranceInfoComponent;
+  // @ViewChild('caseComponent') caseComponent: PatientCaseInfoComponent;
 
   @ViewChildren('component') components: QueryList<BasicComponent>;
   valid: boolean = true;

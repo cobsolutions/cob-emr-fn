@@ -64,17 +64,16 @@ export class InsuranceCompanyService {
           .get<PaginationData>(this.baseUrl + "/find/organization/" + organiationId, options)
       })
     )
-    return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId =>
-        this.httpClient
-          .get<PaginationData>(this.baseUrl + "/find/clinicId/" + clinicId, options)
-          .pipe(
-            retry({ count: 1, delay: 100000, resetOnSuccess: true }),
-            catchError(this.handleHttpError)
-          )
-      ));
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);
+  }
+  public findAll(): Observable<any> {
+    return this.loggedInService.load().pipe(
+      switchMap((loggedInUser: LoggedInUser) => {
+        var url = this.baseUrl + '/find/all/organization/' + loggedInUser.organizationId
+        return this.httpClient.get<InsuranceCompany[]>(`${url}`, { observe: 'response' });
+      })
+    )
   }
 }

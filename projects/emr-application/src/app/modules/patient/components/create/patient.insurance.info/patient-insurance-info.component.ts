@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { BasicComponent } from 'projects/emr-application/src/app/util/basic.component';
 import { filter, map, Observable, switchMap } from 'rxjs';
 import { InsuranceCompany } from '../../../../administration/model/insurance.company/insurance.company';
+import { InsuranceCompanyService } from '../../../../administration/services/insurance.company/insurance-company.service';
 import { PaymentType } from '../../../../common/models/enums/payment.type';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PatientInsurance } from '../../../models/insurance/patient.insurance';
@@ -31,20 +32,17 @@ export class PatientInsuranceInfoComponent extends BasicComponent implements OnI
     insuranceCompany: null
   }
   @ViewChild('insuranceForm') insuranceForm: NgForm;
-  constructor(private patientFinderService: PatientFinderService,
-    private loggedInService: LoggedInService
+  constructor(private patientFinderService: PatientFinderService
+    , private loggedInService: LoggedInService
+    , private insuranceCompanyService: InsuranceCompanyService
     ,) { super() }
   ngAfterViewInit(): void {
     this.setForm(this.insuranceForm)
   }
 
   ngOnInit(): void {
-    this.insuranceCompanies = this.loggedInService.selectedClinic$.pipe(
-      filter((clinicId) => clinicId != null),
-      switchMap((clinicId) => this.patientFinderService.getInsuranceCompaniesForPatient(clinicId)),
-      map((response: any) => {
-        return response.body;
-      })
+    this.insuranceCompanies = this.insuranceCompanyService.findAll().pipe(
+      map((result: any) => { return result.body })
     );
   }
 

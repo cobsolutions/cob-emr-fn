@@ -14,7 +14,8 @@ import { PateintResponse } from '../../models/response/patient.response';
 })
 export class PatientFinderService {
   private baseUrl = environment.baseURL + 'patient'
-  constructor(private httpClient: HttpClient, private loggedInService: LoggedInService) { }
+  constructor(private httpClient: HttpClient
+    , private loggedInService: LoggedInService) { }
 
   getPatient(patientId: number, clinicId: number) {
     const headers = { 'content-type': 'application/json' }
@@ -23,7 +24,7 @@ export class PatientFinderService {
   }
 
   getInsuranceCompaniesForPatient(clinicId: number): Observable<any> {
-    console.log('service ' + clinicId)
+
     var getPatientURL = environment.baseURL + 'insurance/company/find/all/clinicId/' + clinicId
     return this.httpClient.get<InsuranceCompany[]>(`${getPatientURL}`, { observe: 'response' });
   }
@@ -31,7 +32,7 @@ export class PatientFinderService {
   getClinicsForPatient(): Observable<any> {
     return this.loggedInService.load().pipe(
       switchMap((loggedInUser: LoggedInUser) => {
-        var getPatientURL = environment.baseURL + 'clinic//find/organization/' + loggedInUser.organizationId
+        var getPatientURL = environment.baseURL + 'clinic/find/organization/' + loggedInUser.organizationId
         return this.httpClient.get<Clinic[]>(`${getPatientURL}`, { observe: 'response' });
       })
     )

@@ -3,7 +3,6 @@
         class="form-text text-danger">
         Insurance Company is required
     </small>
-
     <select cFormControl cSelect class="mb-2" sizing="sm" id="insuranceCompany" name="insuranceCompany"
         [ngClass]="{'is-invalid': insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)}"
         [(ngModel)]="patientInsurance.insuranceCompany" #insuranceCompany="ngModel">
