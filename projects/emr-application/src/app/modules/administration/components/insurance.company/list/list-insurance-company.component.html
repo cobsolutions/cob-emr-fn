@@ -49,6 +49,6 @@
   </c-modal-header>
   <c-modal-body>
     <edit-insurance-company *ngIf="editInsuranceCompanyVisibility"
-      [insuranceCompany]="selectedInsuranceCompany"></edit-insurance-company>
+      [insuranceCompany]="selectedInsuranceCompany" (changeVisibility)="changeFacilityVisibility($event)"></edit-insurance-company>
   </c-modal-body>
 </c-modal>

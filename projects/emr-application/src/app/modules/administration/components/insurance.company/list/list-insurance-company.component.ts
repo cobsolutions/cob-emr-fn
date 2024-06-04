@@ -15,8 +15,6 @@ import { InsuranceCompanyService } from '../../../services/insurance.company/ins
   styleUrls: ['./list-insurance-company.component.css']
 })
 export class ListInsuranceCompanyComponent extends ListTemplate implements OnInit {
-
-
   columns: (string | IColumn)[];
 
   insuranceCompany$!: Observable<InsuranceCompany[]>;
@@ -70,5 +68,12 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
   }
   toggleEdiInsuranceCompany() {
     this.editInsuranceCompanyVisibility = !this.editInsuranceCompanyVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close') {
+      this.toggleEdiInsuranceCompany();
+      this.router.navigateByUrl('emr/administration/list/insurance/company')
+    }
+
   }
 }

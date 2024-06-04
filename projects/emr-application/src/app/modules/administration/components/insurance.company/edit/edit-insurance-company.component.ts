@@ -1,7 +1,14 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { switchMap, tap } from 'rxjs';
+import { AddressComponent } from '../../../../common/components/address/address.component';
 import { Address, InsuranceCompanyType } from '../../../../common/models';
+import { LoggedInUser } from '../../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { InsuranceCompany } from '../../../model/insurance.company/insurance.company';
+import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
 @Component({
   selector: 'edit-insurance-company',
@@ -10,25 +17,52 @@ import { InsuranceCompany } from '../../../model/insurance.company/insurance.com
 })
 export class EditInsuranceCompanyComponent implements OnInit {
   @Input() insuranceCompany: InsuranceCompany
-  @ViewChild('editInsuranceCompanyForm') clinicCreateForm: NgForm;
+  @ViewChild('editInsuranceCompanyForm') editInsuranceCompanyForm: NgForm;
+  @ViewChild('editAddresInsuranceCompany') editAddresInsuranceCompany: AddressComponent
+  @Output() changeVisibility = new EventEmitter<string>()
   insuranceCompanytypes = InsuranceCompanyType;
   addresses: Address[];
-  submitted: boolean = false;
-  constructor() { }
+  validForm: boolean = false;
+  validAddress: boolean = true;
+  constructor(private toastr: ToastrService
+    , private insuranceCompanyService: InsuranceCompanyService
+    , private loggedInService: LoggedInService
+    , private router: Router) { }
 
   ngOnInit(): void {
   }
   update() {
-    if(this.clinicCreateForm.valid){
-      this.submitted  = false
-    }else{
-      this.submitted  = true
+    if (this.editInsuranceCompanyForm.valid && this.isValidAddress()) {
+      this.changeVisibility.emit('close');
+      this.loggedInService.load().pipe(
+        tap((loggedInUser: LoggedInUser) => {
+          this.insuranceCompany.organizationId = loggedInUser.organizationId;
+        })
+        , switchMap((result: any) => {
+          return this.insuranceCompanyService.create(this.insuranceCompany)
+        })
+      )
+        .subscribe(() => {
+          this.editInsuranceCompanyForm.reset();
+          this.toastr.success('Insurance Company Update.');
+          this.editAddresInsuranceCompany.addresses = [];
+        })
+    } else {
+
+      this.validForm = true
     }
   }
   resetError() {
 
   }
   getInsuranceCompanyAddresses(addresses: any) {
-    this.addresses = addresses;
+    this.insuranceCompany.addresses = addresses;
+  }
+  private isValidAddress(): boolean {
+    if (this.insuranceCompany.addresses !== undefined && this.insuranceCompany.addresses.length > 0)
+      this.validAddress = true
+    else
+      this.validAddress = false;
+    return this.validAddress;
   }
 }

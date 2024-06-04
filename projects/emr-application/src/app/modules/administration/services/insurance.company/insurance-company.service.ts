@@ -29,6 +29,11 @@ export class InsuranceCompanyService {
     var createURL = environment.baseURL + 'insurance/company/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(insuranceCompany), { 'headers': headers })
   }
+  update(insuranceCompany: InsuranceCompany) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = environment.baseURL + 'insurance/company/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(insuranceCompany), { 'headers': headers })
+  }
 
   delete(id: number) {
     var createURL = environment.baseURL + 'insurance/company/delete/id/' + id

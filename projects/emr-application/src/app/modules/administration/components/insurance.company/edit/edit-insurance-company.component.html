@@ -9,7 +9,7 @@
                     </c-card-header>
                     <c-card-body>
 
-                        <small *ngIf="submitted   && name.invalid && (name.dirty || name.touched)"
+                        <small *ngIf="validForm   && name.invalid && (name.dirty || name.touched)"
                             class="form-text text-danger">
                             Insurance Company Name is required
                         </small>
@@ -19,7 +19,7 @@
                                 [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
                                 [(ngModel)]="insuranceCompany.name" #name="ngModel" />
                         </c-input-group>
-                        <small *ngIf="submitted   && type.invalid && (type.dirty || type.touched)"
+                        <small *ngIf="validForm   && type.invalid && (type.dirty || type.touched)"
                             class="form-text text-danger">
                             Insurance Company type is required
                         </small>
@@ -35,7 +35,7 @@
                                 </option>
                             </select>
                         </c-input-group>
-                        <small *ngIf="submitted   && phone.invalid && (phone.dirty || phone.touched)"
+                        <small *ngIf="validForm   && phone.invalid && (phone.dirty || phone.touched)"
                             class="form-text text-danger">
                             Insurance Company Phone is required
                         </small>
@@ -47,7 +47,7 @@
                                 #phone="ngModel" [ngModel]="insuranceCompany.phone| phone"
                                 (ngModelChange)="insuranceCompany.phone=$event" maxlength="15" />
                         </c-input-group>
-                        <small *ngIf="submitted   && fax.invalid && (fax.dirty || fax.touched)"
+                        <small *ngIf="validForm   && fax.invalid && (fax.dirty || fax.touched)"
                             class="form-text text-danger">
                             Insurance Company Fax is required
                         </small>
@@ -71,7 +71,10 @@
                         <h3>Address information</h3>
                     </c-card-header>
                     <c-card-body>
-                        <app-address #addressComp [addresses]="insuranceCompany.addresses"
+                        <small *ngIf="!validAddress" class="form-text text-danger">
+                            Add one address
+                        </small>
+                        <app-address #editAddresInsuranceCompany [addresses]="insuranceCompany.addresses"
                             (pushedAddresses)="getInsuranceCompanyAddresses($event)"></app-address>
                     </c-card-body>
                 </c-card>
