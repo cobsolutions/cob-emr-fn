@@ -20,6 +20,9 @@
         <ng-container [ngSwitch]="columnName">
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
+              <button cButton variant="outline" (click)="edit(item)" size="sm">
+                <svg cIcon name="cilPen"></svg>
+              </button>
               <button cButton variant="outline" (click)="remove(item)" size="sm">
                 <svg cIcon name="cilTrash"></svg>
               </button>
@@ -42,3 +45,12 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
+<c-modal id="editPateint" [visible]="editPatientVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header>
+    <h3 cModalTitle>Edit Patient</h3>
+    <button (click)="toggleEditPatient()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-create-patient [selectedPatient]="selectedPatient" *ngIf="editPatientVisibility"></app-create-patient>
+  </c-modal-body>
+</c-modal>

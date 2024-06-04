@@ -22,14 +22,12 @@
         [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
         [(ngModel)]="patient.lastName" #lastName="ngModel" />
 </c-input-group>
-<small *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="form-text text-danger">
-    BirthDate is required
-</small>
+
 <c-col xs="auto" class="mb-2">
     <c-date-picker cFormControl closeOnSelect size="sm" placeholder="Date Of Birth" FormControl id="birthDate"
         name="birthDate" required
-        [ngClass]="{'is-invalid': birthDate.invalid && (birthDate.dirty || birthDate.touched)}"
-        [(ngModel)]="patient.birthDate_date" #birthDate="ngModel"></c-date-picker>
+        
+        [(date)]="patient.birthDate_date" ></c-date-picker>
 </c-col>
 <small *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="form-text text-danger">
     Gender is required

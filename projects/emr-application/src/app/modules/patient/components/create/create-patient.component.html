@@ -1,5 +1,5 @@
 <ngx-spinner></ngx-spinner>
-<c-row>
+<c-row *ngIf="!selectedPatient">
     <c-col xs="12" class="mb-2">
         <h1>Patient Creation</h1>
     </c-col>
@@ -76,7 +76,7 @@
                     <h3>Essential information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-basic-info  [patient]="patient"></app-patient-basic-info>
+                    <app-patient-basic-info [patient]="patient"></app-patient-basic-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -102,7 +102,7 @@
                     <h3>Address Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-address  [addresses]="patient.addresses"></app-address>
+                    <app-address [addresses]="patient.addresses"></app-address>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -115,7 +115,7 @@
                     <h3>Contact Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-contact  [contacts]="patient.contacts"></app-contact>
+                    <app-contact [contacts]="patient.contacts"></app-contact>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -141,7 +141,7 @@
                     <h3>Insurance Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-insurance-info  [patient]="patient"></app-patient-insurance-info>
+                    <app-patient-insurance-info [patient]="patient"></app-patient-insurance-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -167,7 +167,7 @@
                     <h3>Case Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-case-info  [pateint]="patient"></app-patient-case-info>
+                    <app-patient-case-info [pateint]="patient"></app-patient-case-info>
                 </c-card-body>
             </c-card>
         </c-col>

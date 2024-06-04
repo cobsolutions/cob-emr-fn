@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from "lodash";
 import * as moment from 'moment';
@@ -19,14 +19,8 @@ import { PatientInsuranceInfoComponent } from './patient.insurance.info/patient-
   styleUrls: ['./create-patient.component.css']
 })
 export class CreatePatientComponent implements OnInit, AfterViewInit {
-  // @ViewChild('basicInfoComponent') basicInfoComponent: PatientBasicInfoComponent;
-  // @ViewChild('idInfoComponent') idInfoComponent: PatientIdInfoComponent;
-  // @ViewChild('addressComp') addressComp: AddressComponent;
-  // @ViewChild('contactComponent') contactComponent: ContactComponent;
-  // @ViewChild('insuranceComponent') insuranceComponent: PatientInsuranceInfoComponent;
-  // @ViewChild('caseComponent') caseComponent: PatientCaseInfoComponent;
-
   @ViewChildren('component') components: QueryList<BasicComponent>;
+  @Input() selectedPatient: Patient;
   valid: boolean = true;
 
   basicInvalidFields: string[] = [];
@@ -82,11 +76,13 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     private patientCreationService: PatientCreationService,
     private router: Router) { }
   ngAfterViewInit(): void {
-
   }
 
   ngOnInit(): void {
-
+    if (this.selectedPatient) {
+      this.patient = this.selectedPatient;
+      this.convertLongToDate()
+    }
   }
 
 
@@ -126,6 +122,11 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     _.map(this.patient.patientInsuranceModels, patientInsuranceModel => {
       return patientInsuranceModel.expirationDate = Number(moment(patientInsuranceModel.expirationDate_Date).format("x"))
     });
+  }
+  convertLongToDate() {
+    this.patient.birthDate_date = new Date(moment(this.patient.birthDate).format("MM-DD-YYYY"));
+    this.patient.effectiveFromDate_Date = new Date(moment(this.patient.effectiveFromDate).format("MM-DD-YYYY"));
+    this.patient.effectiveToDate_Date = new Date(moment(this.patient.effectiveToDate).format("MM-DD-YYYY"));
   }
   convertClinicIdsToNumbers() {
     this.patient.clinicsId = this.patient.clinicsId.map(i => Number(i))
