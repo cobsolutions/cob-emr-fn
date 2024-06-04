@@ -85,20 +85,19 @@ export class EditUserComponent implements OnInit {
         return this.clinicalUserService.getClinicalUser(clinicID, this.uuid)
       })
     ).subscribe(result => {
-      console.log(JSON.stringify(result))
       this.populateUser(result)
     })
   }
   private populateUser(result: any) {
     this.user = result;
-    
+
     this.populateClinics(this.user)
     this.populateRoles()
     this.getDoctorCredentials()
   }
 
   private populateRoles() {
-    
+
     this.editUserRoles.items.forEach((item: any) => {
       item.scope = this.user.roleScope.find(roleScope => roleScope.role === item.name).scope;
     })

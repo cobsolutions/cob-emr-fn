@@ -1,5 +1,5 @@
 <c-container fluid>
-    <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+    <form cForm #clinicEditForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -7,6 +7,11 @@
                         <h5>Clinic Name</h5>
                     </c-card-header>
                     <c-card-body>
+                        <small
+                            *ngIf="validateForm   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
+                            class="form-text text-danger">
+                            Clinic Name is required
+                        </small>
                         <c-input-group class="mb-3">
                             <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm"
                                 placeholder="Enter Clinic Name" required
@@ -18,7 +23,15 @@
             </c-col>
         </c-row>
         <c-row class="justify-content-center">
+            <small *ngIf="!validAddress" class="form-text text-danger">
+                Clinic Address is required
+            </small>
             <app-single-address [address]="clinic?.address"></app-single-address>
         </c-row>
+        <div class="d-grid gap-2 col-2 mx-auto mb-5">
+            <button cButton color="primary" variant="outline" type="submit">
+                Update
+            </button>
+        </div>
     </form>
 </c-container>

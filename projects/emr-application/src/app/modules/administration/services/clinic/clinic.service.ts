@@ -1,9 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, from, map, Observable, retry, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, switchMap, throwError } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
-import { CacheService } from '../../../common/service/cahce/cache.service';
 import { IData } from '../../../patient/components/list/interfaces/i.data';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
@@ -28,6 +27,11 @@ export class ClinicService {
     const headers = { 'content-type': 'application/json' }
     var createURL = this.userUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(clinic), { 'headers': headers })
+  }
+  update(clinic: Clinic) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.userUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(clinic), { 'headers': headers })
   }
   getByUserId(userId: string | undefined) {
     const url = this.userUrl + '/find' + '/user/' + userId;

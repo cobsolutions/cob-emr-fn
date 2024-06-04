@@ -33,14 +33,7 @@ export class CreateClinicComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    var clinicId = this.route.snapshot.paramMap.get('id');
-    if (clinicId !== null) {
-      this.isCreated = false
-      this.clinicService.getById(Number(clinicId))
-        .subscribe(selectedClinic => {
-          this.clinic = selectedClinic;
-        })
-    }
+   
   }
   create() {
     this.validAddress = this.isAddressValid();

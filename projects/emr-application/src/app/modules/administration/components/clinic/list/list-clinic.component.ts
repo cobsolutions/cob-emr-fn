@@ -31,7 +31,6 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
 
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
       tap((result => {
-        console.log(JSON.stringify(result))
       })),
       retry({
         delay: (error) => {
@@ -83,5 +82,9 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
   }
   toggleEditClinic() {
     this.editClinicVisibility = !this.editClinicVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close')
+      this.toggleEditClinic();
   }
 }
