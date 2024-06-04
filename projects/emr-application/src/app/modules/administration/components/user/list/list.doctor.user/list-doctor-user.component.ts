@@ -16,14 +16,14 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
   users$!: Observable<User[]>;
   columns: (string | IColumn)[];
   public visible = false;
-  selectedDoctor:string;
+  selectedDoctor: string;
   selecteUserUUID: string
   editUserVisibility: boolean = false;
   constructor(private router: Router
     , private dotorUserService: DotorUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['accountName','npi','licence','speciality','credential', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName', 'npi', 'licence', 'speciality', 'credential', 'email', 'actions']);
     this.initListComponent();
     this.users$ = this.dotorUserService.getDoctorUser(this.apiParams$).pipe(
       retry({
@@ -68,5 +68,9 @@ export class ListDoctorUserComponent extends ListTemplate implements OnInit {
   }
   toggleEditUser() {
     this.editUserVisibility = !this.editUserVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close')
+      this.toggleEditUser();
   }
 }

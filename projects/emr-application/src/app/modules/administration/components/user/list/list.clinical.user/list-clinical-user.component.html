@@ -42,12 +42,13 @@
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
 </c-modal>
-<c-modal id="editClerical" [visible]="editUserVisibility" size="xl">
+<c-modal id="editClerical" [visible]="editUserVisibility" size="xl" backdrop="static">
   <c-modal-header>
     <h3 cModalTitle>Edit User Account</h3>
     <button (click)="toggleEditUser()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clerical'"></edit-user>
+    <edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clerical'"
+      (changeVisibility)="changeFacilityVisibility($event)"></edit-user>
   </c-modal-body>
 </c-modal>

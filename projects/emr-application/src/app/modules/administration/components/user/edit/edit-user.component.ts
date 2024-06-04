@@ -1,15 +1,18 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import { ToastrService } from 'ngx-toastr';
 import { map, switchMap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
 import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInUser } from '../../../../security/model/loggedin.user';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { User } from '../../../model/user/user';
+import { UserRoleScope } from '../../../model/user/user.role.scope';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { ClinicalUserService } from '../../../services/user/clinical.user/clinical-user.service';
 import { DotorUserService } from '../../../services/user/doctor.user/dotor-user.service';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'edit-user',
@@ -20,6 +23,10 @@ export class EditUserComponent implements OnInit {
   @Input() uuid: string
   @Input() userType: string
   @ViewChild('editUserRoles') editUserRoles: SmartTableComponent;
+  @Output() changeVisibility = new EventEmitter<string>()
+  isValidRoles: boolean = true;
+  isValidClinic: boolean = true;
+  isClinicChanged: boolean = false
   user: User
   clinics: Clinic[];
   columns = [
@@ -46,7 +53,9 @@ export class EditUserComponent implements OnInit {
   constructor(private clericalUSerService: ClinicalUserService
     , private loggedInService: LoggedInService
     , private clinicService: ClinicService
-    , private clinicalUserService: DotorUserService) { }
+    , private clinicalUserService: DotorUserService
+    , private toastr: ToastrService
+    , private userService: UserService) { }
 
   ngOnInit(): void {
     this.loggedInService.load().pipe(
@@ -71,22 +80,16 @@ export class EditUserComponent implements OnInit {
   }
 
   private fetchClericalUser() {
-    this.loggedInService.selectedClinic$.pipe(
-      switchMap((clinicID: number) => {
-        return this.clericalUSerService.getClericalUser(clinicID, this.uuid)
+    this.clericalUSerService.getClericalUser(this.uuid)
+      .subscribe(result => {
+        this.populateUser(result)
       })
-    ).subscribe(result => {
-      this.populateUser(result)
-    })
   }
   private fetchClinicalUser() {
-    this.loggedInService.selectedClinic$.pipe(
-      switchMap((clinicID: number) => {
-        return this.clinicalUserService.getClinicalUser(clinicID, this.uuid)
+    this.clinicalUserService.getClinicalUser(this.uuid)
+      .subscribe(result => {
+        this.populateUser(result)
       })
-    ).subscribe(result => {
-      this.populateUser(result)
-    })
   }
   private populateUser(result: any) {
     this.user = result;
@@ -123,5 +126,51 @@ export class EditUserComponent implements OnInit {
     if (this.user.speciality === 'Dentistry') {
       this.credentials = ['DMD', 'DDS', 'CDA']
     }
+  }
+  update() {
+    this.isValidClinic = this.user.clinicIds.length > 0
+    this.fillPermissions()
+    this.user.isClinicChanged = this.isClinicChanged;
+    if (this.isValidRoles && this.isValidClinic) {
+      switch (this.userType) {
+        case 'Clinical':
+          this.updateClinicalUser();
+          break;
+        case 'Clerical':
+          this.updateClericalUser();
+          break;
+      }
+      this.changeVisibility.emit('close');
+    }
+  }
+
+  updateClinicalUser() {
+    this.userService.updateClinicalUser(this.user).subscribe(result => {
+      this.toastr.success('User Updated');
+    }, error => {
+      this.toastr.error('Error In Udpate');
+    })
+  }
+  updateClericalUser() {
+    this.userService.updateClericalUser(this.user).subscribe(result => {
+      this.toastr.success('User Updated');
+    }, error => {
+      this.toastr.error('Error In Udpate');
+    })
+  }
+  private fillPermissions() {
+    if (this.isValidRoles) {
+      this.user.roleScope = []
+      this.editUserRoles.items.forEach((item: any) => {
+        var userRoleScope: UserRoleScope = {
+          role: item.name,
+          scope: item.scope
+        }
+        this.user.roleScope.push(userRoleScope);
+      })
+    }
+  }
+  isClinicTouched(event: any) {
+    this.isClinicChanged = true;
   }
 }

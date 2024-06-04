@@ -21,10 +21,20 @@ export class UserService {
     var createURL = this.clinicalUserUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
+  updateClinicalUser(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.clinicalUserUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(user), { 'headers': headers })
+  }
   createClericalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
     var createURL =  this.clericalUserUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(user), { 'headers': headers })
+  }
+  updateClericalUser(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL =  this.clericalUserUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
   update(user: User) {
     const headers = { 'content-type': 'application/json' }

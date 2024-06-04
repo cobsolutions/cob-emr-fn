@@ -70,4 +70,8 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   toggleEditUser() {
     this.editUserVisibility = !this.editUserVisibility
   }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close')
+      this.toggleEditUser();
+  }
 }

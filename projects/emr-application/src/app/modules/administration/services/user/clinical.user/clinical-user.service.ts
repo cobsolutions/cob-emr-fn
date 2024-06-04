@@ -16,8 +16,8 @@ export class ClinicalUserService extends BasePaginationService {
   getClinicalUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")
   }
-  getClericalUser(clinicId: number, uuid: string) {
-    var url = this.baseUrl + '/find/clinicId/' + clinicId + '/uuid/' + uuid
+  getClericalUser(uuid: string) {
+    var url = this.baseUrl + '/find/uuid/' + uuid
     return this.httpClient.get(url);
 
   }
