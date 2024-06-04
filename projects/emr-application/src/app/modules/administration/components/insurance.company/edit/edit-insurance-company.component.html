@@ -1,5 +1,5 @@
 <c-container fluid>
-    <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+    <form cForm #editInsuranceCompanyForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -9,7 +9,8 @@
                     </c-card-header>
                     <c-card-body>
 
-                        <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
+                        <small *ngIf="submitted   && name.invalid && (name.dirty || name.touched)"
+                            class="form-text text-danger">
                             Insurance Company Name is required
                         </small>
                         <c-input-group class="mb-3">
@@ -18,7 +19,8 @@
                                 [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
                                 [(ngModel)]="insuranceCompany.name" #name="ngModel" />
                         </c-input-group>
-                        <small *ngIf="type.invalid && (type.dirty || type.touched)" class="form-text text-danger">
+                        <small *ngIf="submitted   && type.invalid && (type.dirty || type.touched)"
+                            class="form-text text-danger">
                             Insurance Company type is required
                         </small>
                         <c-input-group class="mb-3">
@@ -27,12 +29,14 @@
                                 [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
                                 [(ngModel)]="insuranceCompany.insuranceType" #type="ngModel">
                                 <option [ngValue]="null" disabled selected>Select insurance Company Type</option>
-                                <option *ngFor="let insuranceCompanytype of insuranceCompanytypes | keyvalue" [ngValue]="insuranceCompanytype.key">
+                                <option *ngFor="let insuranceCompanytype of insuranceCompanytypes | keyvalue"
+                                    [ngValue]="insuranceCompanytype.key">
                                     {{insuranceCompanytype.value}}
                                 </option>
                             </select>
                         </c-input-group>
-                        <small *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="form-text text-danger">
+                        <small *ngIf="submitted   && phone.invalid && (phone.dirty || phone.touched)"
+                            class="form-text text-danger">
                             Insurance Company Phone is required
                         </small>
                         <c-input-group class="mb-3" sizing="sm">
@@ -43,7 +47,8 @@
                                 #phone="ngModel" [ngModel]="insuranceCompany.phone| phone"
                                 (ngModelChange)="insuranceCompany.phone=$event" maxlength="15" />
                         </c-input-group>
-                        <small *ngIf="fax.invalid && (fax.dirty || fax.touched)" class="form-text text-danger">
+                        <small *ngIf="submitted   && fax.invalid && (fax.dirty || fax.touched)"
+                            class="form-text text-danger">
                             Insurance Company Fax is required
                         </small>
                         <c-input-group class="mb-3" sizing="sm">
@@ -66,11 +71,14 @@
                         <h3>Address information</h3>
                     </c-card-header>
                     <c-card-body>
-                        <app-address #addressComp  [addresses]="insuranceCompany.addresses"
+                        <app-address #addressComp [addresses]="insuranceCompany.addresses"
                             (pushedAddresses)="getInsuranceCompanyAddresses($event)"></app-address>
                     </c-card-body>
                 </c-card>
             </c-col>
         </c-row>
+        <div class="d-grid gap-2 col-2 mx-auto mb-5">
+            <button cButton color="primary" variant="outline" type="submit">Update</button>
+        </div>
     </form>
 </c-container>

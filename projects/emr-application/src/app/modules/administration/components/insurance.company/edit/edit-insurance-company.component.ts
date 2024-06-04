@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Address, InsuranceCompanyType } from '../../../../common/models';
 import { InsuranceCompany } from '../../../model/insurance.company/insurance.company';
 
@@ -9,14 +10,20 @@ import { InsuranceCompany } from '../../../model/insurance.company/insurance.com
 })
 export class EditInsuranceCompanyComponent implements OnInit {
   @Input() insuranceCompany: InsuranceCompany
+  @ViewChild('editInsuranceCompanyForm') clinicCreateForm: NgForm;
   insuranceCompanytypes = InsuranceCompanyType;
   addresses: Address[];
+  submitted: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-  create() {
-
+  update() {
+    if(this.clinicCreateForm.valid){
+      this.submitted  = false
+    }else{
+      this.submitted  = true
+    }
   }
   resetError() {
 
