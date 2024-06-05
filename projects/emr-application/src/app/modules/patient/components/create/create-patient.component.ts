@@ -88,7 +88,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.selectedPatient) {
       this.patient = this.selectedPatient;
-      this.convertLongToDate()
+      this.convertLongToDate();
     }
   }
 
