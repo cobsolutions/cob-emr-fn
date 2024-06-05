@@ -118,7 +118,6 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe(() => {
-        this.resetFormComponents();
         this.toastr.success('Pateint Created.');
         this.router.navigateByUrl('emr/patient/list')
       })
@@ -186,11 +185,6 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     this.contactInvalidFields = [];
     this.insuranceInvalidFields = [];
     this.caseInvalidFields = [];
-  }
-  resetFormComponents() {
-    this.components.forEach(component => {
-      component.resetForm();
-    });
   }
   scrollUp() {
     (function smoothscroll() {

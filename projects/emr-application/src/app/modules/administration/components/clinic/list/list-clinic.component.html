@@ -46,12 +46,13 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
-<c-modal id="editClinic" [visible]="editClinicVisibility" size="xl">
+<c-modal id="editClinic" [visible]="editClinicVisibility" size="xl" backdrop="static">
   <c-modal-header>
     <h3 cModalTitle>Edit Clinic</h3>
     <button (click)="toggleEditClinic()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <edit-clinic *ngIf="editClinicVisibility" [clinic]="selectedClinic" (changeVisibility)="changeFacilityVisibility($event)"></edit-clinic>
+    <edit-clinic *ngIf="editClinicVisibility" [clinic]="selectedClinic"
+      (changeVisibility)="changeFacilityVisibility($event)"></edit-clinic>
   </c-modal-body>
 </c-modal>
