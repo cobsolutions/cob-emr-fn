@@ -50,11 +50,11 @@
   </mwl-calendar-day-view>
 </div>
 
-<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
 
 <br /><br /><br />
 <span *ngIf="addAppointmentVisibility">
-  <c-modal id="addAppointment" [visible]="true" scrollable size="xl">
+  <c-modal id="addAppointment" [visible]="addAppointmentVisibility" scrollable size="xl" [backdrop]="'static'">
     <c-modal-header>
       <h5 cModalTitle>Add Appointment </h5>
       <button (click)="toggleAddAppointment()" cButtonClose></button>
@@ -72,7 +72,7 @@
 </span>
 
 <span *ngIf="appointmentActionsVisibility">
-  <c-modal id="AppointmentAction" [visible]="true">
+  <c-modal id="AppointmentAction" [visible]="true" [backdrop]="'static'">
     <c-modal-header>
       <h5 cModalTitle>Appointment Details</h5>
       <button (click)="toggleAppointmentActions()" cButtonClose></button>
@@ -84,7 +84,7 @@
   </c-modal>
 </span>
 <span *ngIf="appointmentStatusVisibility">
-  <c-modal id="AppointmentStatus" [visible]="true">
+  <c-modal id="AppointmentStatus" [visible]="true" [backdrop]="'static'">
     <c-modal-header>
       <h5 cModalTitle>Appointment Status</h5>
       <button (click)="toggleAppointmentStatus()" cButtonClose></button>
@@ -95,7 +95,7 @@
   </c-modal>
 </span>
 <span *ngIf="appointmentCancelNoShowVisibility">
-  <c-modal id="AppointmentStatus" [visible]="true">
+  <c-modal id="AppointmentStatus" [visible]="true" [backdrop]="'static'">
     <c-modal-header>
       <h5 cModalTitle *ngIf="cancelNoShow === 'cancel'">Cancel</h5>
       <h5 cModalTitle *ngIf="cancelNoShow === 'noshow'">NoShow</h5>
