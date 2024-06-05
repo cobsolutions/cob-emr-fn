@@ -51,6 +51,7 @@
     <button (click)="toggleEditPatient()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <app-create-patient [selectedPatient]="selectedPatient" *ngIf="editPatientVisibility"></app-create-patient>
+    <app-create-patient [selectedPatient]="selectedPatient" *ngIf="editPatientVisibility"
+      (changeVisibility)="changeFacilityVisibility($event)" [mode]="'update'"></app-create-patient>
   </c-modal-body>
 </c-modal>

@@ -66,4 +66,8 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
     this.selectedPatient = patient
     this.editPatientVisibility = true
   }
+  changeFacilityVisibility(event: any) {
+    if (event === 'close')
+      this.toggleEditPatient();
+  }
 }

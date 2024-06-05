@@ -21,7 +21,7 @@ import {
   PatientBasicInfoComponent, PatientCaseInfoComponent, PatientClinicInfoComponent, PatientContactInfoComponent,
   PatientEmergencyInfoComponent, PatientIdInfoComponent, PatientInsuranceInfoComponent
 } from './components/create';
-import { AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
@@ -61,6 +61,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DatePickerModule,
     ModalModule,
     AccordionModule,
+    PopoverModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]

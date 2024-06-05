@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from "lodash";
 import * as moment from 'moment';
@@ -21,8 +21,15 @@ import { PatientInsuranceInfoComponent } from './patient.insurance.info/patient-
 export class CreatePatientComponent implements OnInit, AfterViewInit {
   @ViewChildren('component') components: QueryList<BasicComponent>;
   @Input() selectedPatient: Patient;
+  @Input() mode: string;
+  @Output() changeVisibility = new EventEmitter<string>()
   valid: boolean = true;
-
+  isValidPatientCase: boolean = true;
+  isValidPatientInsurance: boolean = true;
+  isValidPatientAddress: boolean = true;
+  isValidPatientContact: boolean = true;
+  isValidPatientInformation: boolean = true;
+  isValidPatientIdentification: boolean = true;
   basicInvalidFields: string[] = [];
   idInvalidFields: string[] = [];
   addressInvalidFields: string[] = [];
@@ -87,29 +94,44 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
 
 
   create() {
-    this.valid = this.isPatientFeildsAreValid();
+    this.isPatientFeildsAreValid();
     if (this.valid) {
-      this.converPatientFields();
-      this.patientCreationService.create(this.patient)
-        .pipe(
-          catchError((error) => {
-            console.log(error)
-            this.toastr.error(error, 'Error In Creation');
-            return EMPTY;
+      switch (this.mode) {
+        case 'update':
+          this.updatePatient();
+          break;
+        default:
+          this.createPatient();
+      }
 
-          })
-        )
-        .subscribe(() => {
-          this.resetFormComponents();
-          this.toastr.success('Pateint Created.');
-          this.router.navigateByUrl('emr/patient/list')
-        })
-    } else {
-      this.toastr.error('Missing Fields', 'Error In Creation');
-      this.scrollUp();
     }
   }
+  private createPatient() {
+    this.converPatientFields();
+    this.patientCreationService.create(this.patient)
+      .pipe(
+        catchError((error) => {
+          console.log(error)
+          this.toastr.error(error, 'Error In Creation');
+          return EMPTY;
 
+        })
+      )
+      .subscribe(() => {
+        this.resetFormComponents();
+        this.toastr.success('Pateint Created.');
+        this.router.navigateByUrl('emr/patient/list')
+      })
+  }
+  private updatePatient() {
+    this.convertDateToLong()
+    this.patientCreationService.update(this.patient).subscribe(result => {
+      this.changeVisibility.emit('close');
+      this.toastr.success('Pateint update.');
+    }, error => {
+      this.toastr.error('Error during update patient.');
+    })
+  }
   converPatientFields() {
     this.convertDateToLong()
     this.convertClinicIdsToNumbers()
@@ -132,73 +154,30 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     this.patient.clinicsId = this.patient.clinicsId.map(i => Number(i))
   }
 
-  isPatientFeildsAreValid(): boolean {
-    var valid: boolean = true;
+  isPatientFeildsAreValid() {
     this.resetInvalidFields()
     this.components.forEach(component => {
       if (component instanceof PatientBasicInfoComponent) {
-        valid = valid && component.isValid();
-        if (!valid)
-          component.getInvalidControls().forEach(invalidControl => {
-            this.basicInvalidFields.push(invalidControl);
-          })
+        this.isValidPatientInformation = component.isValid();
       }
-
       if (component instanceof PatientIdInfoComponent) {
-        valid = valid && component.isValid();
-        if (!valid)
-          component.getInvalidControls().forEach(invalidControl => {
-            this.idInvalidFields.push(invalidControl);
-          })
+        this.isValidPatientIdentification = component.isValid();
       }
       if (component instanceof ContactComponent) {
-        if (this.patient.contacts.length === 0 && component.isValid()) {
-          valid = false;
-          this.contactInvalidFields.push("Push Contacts(s) Inputs")
-        } else if (this.patient.contacts.length === 0) {
-          valid = false;
-          component.getInvalidControls().forEach(invalidControl => {
-            this.contactInvalidFields.push(invalidControl);
-          })
-        }
+        this.isValidPatientContact = !(this.patient.contacts.length === 0)
       }
 
       if (component instanceof AddressComponent) {
-        if (this.patient.addresses.length === 0 && component.isValid()) {
-          valid = false;
-          this.addressInvalidFields.push("Push Address(s) Inputs")
-        } else if (this.patient.addresses.length === 0) {
-          valid = false;
-          component.getInvalidControls().forEach(invalidControl => {
-            this.addressInvalidFields.push(invalidControl);
-          })
-        }
+        this.isValidPatientAddress = !(this.patient.addresses.length === 0)
       }
       if (component instanceof PatientInsuranceInfoComponent) {
-        if (this.patient.patientInsuranceModels.length === 0 && component.isValid()) {
-          valid = false;
-          this.insuranceInvalidFields.push("Push Insurance(s) Inputs")
-        } else if (this.patient.patientInsuranceModels.length === 0) {
-          valid = false;
-          component.getInvalidControls().forEach(invalidControl => {
-            this.insuranceInvalidFields.push(invalidControl);
-          })
-        }
+        this.isValidPatientInsurance = !(this.patient.patientInsuranceModels.length === 0)
       }
-
       if (component instanceof PatientCaseInfoComponent) {
-        if (this.patient.cases.length === 0 && component.isValid()) {
-          this.caseInvalidFields.push("Push Case(s) Inputs")
-          valid = valid && false;
-        } else if (this.patient.cases.length === 0) {
-          valid = false;
-          component.getInvalidControls().forEach(invalidControl => {
-            this.caseInvalidFields.push(invalidControl);
-          })
-        }
+        this.isValidPatientCase = !(this.patient.cases.length === 0)
       }
     });
-    return valid;
+    this.valid = this.isValidPatientCase && this.isValidPatientInsurance && this.isValidPatientAddress && this.isValidPatientContact && this.isValidPatientInformation && this.isValidPatientIdentification
   }
   resetInvalidFields() {
     this.basicInvalidFields = [];
