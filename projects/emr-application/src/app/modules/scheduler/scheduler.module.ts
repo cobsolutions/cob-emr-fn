@@ -14,6 +14,11 @@ import { AppointmentConfirmComponent } from './components/appointment.confirm/ap
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { AppointmentActionsComponent } from './components/appointment.actions/appointment-actions.component';
 import { AppointmentStatusComponent } from './components/appointment.status/appointment-status.component';
+import { AddAppobntmentModalComponent } from './components/appointment.add/modal/add-appobntment-modal.component';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { AppointmentEditModalComponent } from './components/appintment.edit/modal/appointment-edit-modal.component';
+import { AppointmentEditComponent } from './components/appintment.edit/appointment-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -21,7 +26,10 @@ import { AppointmentStatusComponent } from './components/appointment.status/appo
         AppointmentCancelNoshowComponent,
         AppointmentConfirmComponent,
         AppointmentActionsComponent,
-        AppointmentStatusComponent
+        AppointmentStatusComponent,
+        AddAppobntmentModalComponent,
+        AppointmentEditModalComponent,
+        AppointmentEditComponent
     ],
     imports: [
         CommonModule,
@@ -31,12 +39,14 @@ import { AppointmentStatusComponent } from './components/appointment.status/appo
         DatePickerModule,
         TimePickerModule,
         AutocompleteLibModule,
+        MatDialogModule,
         CalloutModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
-        })
+        }),
+        NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
     ]
 })
 export class SchedulerModule { }

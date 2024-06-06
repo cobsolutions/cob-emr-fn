@@ -33,6 +33,7 @@
   </div>
 </div>
 <br />
+
 <div [ngSwitch]="view">
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
@@ -49,27 +50,6 @@
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
   </mwl-calendar-day-view>
 </div>
-
-
-
-<br /><br /><br />
-<span *ngIf="addAppointmentVisibility">
-  <c-modal id="addAppointment" [visible]="addAppointmentVisibility" scrollable size="xl" [backdrop]="'static'">
-    <c-modal-header>
-      <h5 cModalTitle>Add Appointment </h5>
-      <button (click)="toggleAddAppointment()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-      <app-appointment-add #appointmentAddComponent [startDate]="viewDate" [iscreate]="isCreate"></app-appointment-add>
-    </c-modal-body>
-    <c-modal-footer>
-      <button (click)="toggleAddAppointment()" cButton color="secondary">
-        Close
-      </button>
-      <button cButton color="primary" (click)="save()">Save changes</button>
-    </c-modal-footer>
-  </c-modal>
-</span>
 
 <span *ngIf="appointmentActionsVisibility">
   <c-modal id="AppointmentAction" [visible]="true" [backdrop]="'static'">

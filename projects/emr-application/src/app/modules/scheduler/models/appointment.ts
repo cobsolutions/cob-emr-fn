@@ -26,7 +26,7 @@ export class Appointment {
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-    public constructTitle(): string {
-        return this.patient.fullName + ':' + this.patientCase.title
+    public constructTitle() {
+        this.title = this.patient.fullName + ':' + this.patientCase.title
     }
 }

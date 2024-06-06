@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import * as moment from 'moment';
-import { SchedulerType } from '../../common/models/enums/scheduler/scheduler.type';
+import { SchedulerType } from '../../common/models/scheduler/scheduler.type';
 import { Appointment } from '../models/appointment';
 
 @Injectable({

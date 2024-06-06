@@ -1,5 +1,6 @@
+<ngx-spinner></ngx-spinner>
 <c-container fluid>
-    <form cForm #appontmentForm="ngForm">
+    <form cForm #createAppointmentForm="ngForm">
         <c-row class="justify-content-center">
             <c-col>
                 <c-card class="mb-3 ustify-content-center">
@@ -7,7 +8,7 @@
                     <c-card-body>
                         <div class="mb-1">
                             <small
-                                *ngIf="submitted   && (fullName.errors) || (fullName.invalid && (fullName.dirty || fullName.touched))"
+                                *ngIf="notValidForm   && (fullName.errors) || (fullName.invalid && (fullName.dirty || fullName.touched))"
                                 class="form-text text-danger">
                                 Patient name is required
                             </small>
@@ -26,7 +27,7 @@
                             </ng-template>
                         </div>
                         <small
-                            *ngIf="submitted   && (patientcase.errors) || (patientcase.invalid && (patientcase.dirty || patientcase.touched))"
+                            *ngIf="notValidForm   && (patientcase.errors) || (patientcase.invalid && (patientcase.dirty || patientcase.touched))"
                             class="form-text text-danger">
                             Patient Case is required
                         </small>
@@ -51,14 +52,16 @@
                     <c-card-body>
                         <div class="mb-1">
                             <c-row>
-                                <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate" name="startDate"
+                                <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate"
+                                        name="startDate"
                                         [(ngModel)]="appointment.appointmentDate.startDate"></c-date-picker></c-col>
                                 <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
                                         [(ngModel)]="appointment.appointmentDate.startTime"></c-time-picker></c-col>
                             </c-row>
                         </div>
                         <c-row>
-                            <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.endDate" name="endDate"
+                            <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.endDate"
+                                    name="endDate"
                                     [(ngModel)]="appointment.appointmentDate.endDate"></c-date-picker></c-col>
                             <c-col xs="4"><c-time-picker size="sm" id="endTime" name="endTime"
                                     [(ngModel)]="appointment.appointmentDate.endTime"></c-time-picker></c-col>
@@ -78,7 +81,7 @@
                             <label cFormCheckLabel>All Therapists</label>
                         </c-form-check>
                         <small
-                            *ngIf="submitted   && (appTherapy.errors) || (appTherapy.invalid && (appTherapy.dirty || appTherapy.touched))"
+                            *ngIf="notValidForm   && (appTherapy.errors) || (appTherapy.invalid && (appTherapy.dirty || appTherapy.touched))"
                             class="form-text text-danger">
                             Therapy is required
                         </small>
@@ -100,7 +103,7 @@
                     <c-card-header><strong>Appointment Type</strong></c-card-header>
                     <c-card-body>
                         <small
-                            *ngIf="submitted   && (apptype.errors) || (apptype.invalid && (apptype.dirty || apptype.touched))"
+                            *ngIf="notValidForm   && (apptype.errors) || (apptype.invalid && (apptype.dirty || apptype.touched))"
                             class="form-text text-danger">
                             Appointment Type is required
                         </small>
@@ -125,7 +128,7 @@
                     <c-card-header><strong>Appointment Repetition</strong></c-card-header>
                     <c-card-body>
                         <small
-                            *ngIf="submitted   && (repetition.errors) || (repetition.invalid && (repetition.dirty || repetition.touched))"
+                            *ngIf="notValidForm   && (repetition.errors) || (repetition.invalid && (repetition.dirty || repetition.touched))"
                             class="form-text text-danger">
                             Appointment Repetition is required
                         </small>

@@ -12,7 +12,7 @@ import { AppointmentType } from '../models/appointment.type';
 export class AppointmentService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
-  createAppointment(appointment: Appointment) {
+  createAppointment(appointment: Appointment){
     const createAppointmentURL = this.baseUrl + 'appointment/create';
     return this._http.post(createAppointmentURL, appointment);
   }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { filter, switchMap } from 'rxjs';
-import { CancelNoShowReasons } from '../../../common/models/enums/scheduler/cancel.noshow';
+import { CancelNoShowReasons } from '../../../common/models/scheduler/cancel.noshow';
 import { Appointment } from '../../models/appointment';
 import { AppointmentCancelNoShowReason } from '../../models/appointment.cancel.no.show.reason';
 import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
