@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Appointment } from '../../../../patient/models/appointments/appointment';
+import { filter, switchMap } from 'rxjs';
+import { Appointment } from '../../../models/appointment';
+import { AppointmentEmittingService } from '../../../service/appointment-emitting.service';
+import { AppointmentService } from '../../../service/appointment.service';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -8,13 +11,33 @@ import { Appointment } from '../../../../patient/models/appointments/appointment
   styleUrls: ['./appointment-edit-modal.component.css']
 })
 export class AppointmentEditModalComponent implements OnInit {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment }
-    , private dialogRef: MatDialogRef<AppointmentEditModalComponent>) { }
+  appointment: Appointment
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { action: string }
+    , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
+    , private appointmentEmittingService: AppointmentEmittingService
+    , private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
-    // console.log(JSON.stringify(this.data.appointment))
+    this.appointmentEmittingService.selectedAppointment$.pipe(
+      filter((appointmentId) => appointmentId !== null),
+      switchMap((appointmentId) => this.appointmentService.retrieveAppointment(appointmentId))
+    ).subscribe((result) => {
+      this.appointment = result;
+    })
+    this.dialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+        this.cancel();
+      }
+    });
+
+    this.dialogRef.backdropClick().subscribe(event => {
+      this.cancel();
+    });
+  }
+  public cancel() {
+    this.data.action = 'cancel';
     this.dialogRef.close(this.data);
   }
+  public update() { }
 
 }

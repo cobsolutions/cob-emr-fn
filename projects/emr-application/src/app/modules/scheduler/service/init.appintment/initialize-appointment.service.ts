@@ -43,10 +43,20 @@ export class InitializeAppointmentService {
       })
     )
   }
-  public InitializeAppointmentDate(appointment: Appointment, startDate: Date) {
-    appointment.appointmentDate.startDate = startDate;
-    appointment.appointmentDate.startTime = moment(startDate).set("hour", 8).set("minute", 0).toDate();;
-    appointment.appointmentDate.endDate = moment(appointment.appointmentDate.startDate).toDate();
-    appointment.appointmentDate.endTime = moment(appointment.appointmentDate.startTime).add(30, 'minutes').toDate()
+  public initializeAppointmentDate(appointment: Appointment, startDate?: Date) {
+    if (startDate) {
+      appointment.appointmentDate.startDate = startDate;
+      appointment.appointmentDate.startTime = moment(startDate).set("hour", 8).set("minute", 0).toDate();;
+      appointment.appointmentDate.endDate = moment(appointment.appointmentDate.startDate).toDate();
+      appointment.appointmentDate.endTime = moment(appointment.appointmentDate.startTime).add(30, 'minutes').toDate()
+    } else {
+      var start: Date = moment.unix(appointment.startDate / 1000).toDate();
+      var end: Date = moment.unix(appointment.endDate / 1000).toDate()
+      appointment.appointmentDate = {}
+      appointment.appointmentDate.startDate = start;
+      appointment.appointmentDate.startTime = start;
+      appointment.appointmentDate.endDate = end;
+      appointment.appointmentDate.endTime = end;;
+    }
   }
 }

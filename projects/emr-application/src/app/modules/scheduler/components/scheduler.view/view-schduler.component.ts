@@ -34,13 +34,11 @@ import { AddAppobntmentModalComponent } from "../appointment.add/modal/add-appob
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  addAppointmentVisibility = false;
   appointmentActionsVisibility = false;
   appointmentStatusVisibility = false;
   appointmentEditVisibility = false;
   appointmentDeleteVisibility = false
   appointmentCancelNoShowVisibility = false
-  isCreate: boolean;
   view: CalendarView = CalendarView.Month;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   CalendarView = CalendarView;
@@ -64,9 +62,7 @@ export class ViewSchdulerComponent implements OnInit {
     this.getSchedulerConfiguration()
     this.getAppointments();
   }
-  toggleAddAppointment() {
-    this.addAppointmentVisibility = !this.addAppointmentVisibility;
-  }
+
   toggleAppointmentActions() {
     this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
   }
@@ -85,9 +81,6 @@ export class ViewSchdulerComponent implements OnInit {
       }
       this.viewDate = date;
     }
-    this.isCreate = true;
-
-    // this.addAppointmentVisibility = !this.addAppointmentVisibility;
     const dialogRef = this.dialog.open(AddAppobntmentModalComponent, {
       width: '60%',
       data: { startDate: this.viewDate },
@@ -98,10 +91,11 @@ export class ViewSchdulerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(JSON.stringify(result))
-      this.events.push(result.event);
-      this.refresh.next();
-      this.toastr.success('Appointment created Successfully');
+      if (result.action !== 'cancel') {
+        this.events.push(result.event);
+        this.refresh.next();
+        this.toastr.success('Appointment created Successfully');
+      }
     });
   }
   eventTimesChanged({
@@ -168,25 +162,18 @@ export class ViewSchdulerComponent implements OnInit {
     if (event === 'status')
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
     if (event === 'edit') {
-      // this.addAppointmentVisibility = !this.addAppointmentVisibility;
-      // this.isCreate = false;
-      this.appointmentEmittingService.selectedAppointment$.pipe(
-        filter((appointmentId) => appointmentId !== null),
-        switchMap((appointmentId) => this.appointmentService.retrieveAppointment(appointmentId))
-      ).subscribe((result) => {
-        const dialogRef = this.dialog.open(AppointmentEditModalComponent, {
-          width: '60%',
-          data: { appointment: result },
-          position: {
-            top: '8%', // Adjust as needed
+      const dialogRef = this.dialog.open(AppointmentEditModalComponent, {
+        data: { action: undefined },
+        width: '60%',
+        position: {
+          top: '8%', // Adjust as needed
 
-          }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          console.log(JSON.stringify(result));
-        });
-      })
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result.action === 'cancel')
+          console.log('canceled')
+      });
     }
     this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
   }

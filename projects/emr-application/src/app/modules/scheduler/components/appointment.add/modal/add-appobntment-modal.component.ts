@@ -11,11 +11,20 @@ import { AppointmentAddComponent } from '../appointment-add.component';
 })
 export class AddAppobntmentModalComponent implements OnInit {
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, event: CalendarEvent }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, event: CalendarEvent, action: string }
     , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
+    this.dialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+        this.cancel();
+      }
+    });
+
+    this.dialogRef.backdropClick().subscribe(event => {
+      this.cancel();
+    });
   }
   create() {
     this.appointmentAddComponent.createAppointment().subscribe((createdAppointment: any) => {
@@ -23,5 +32,9 @@ export class AddAppobntmentModalComponent implements OnInit {
       this.data.event = event;
       this.dialogRef.close(this.data);
     })
+  }
+  public cancel() {
+    this.data.action = 'cancel';
+    this.dialogRef.close(this.data);
   }
 }

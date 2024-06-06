@@ -39,7 +39,7 @@ export class AppointmentAddComponent implements OnInit {
   ngOnInit() {
     this.patient$ = this.initializeAppointmentService.findPatients()
     this.therapists$ = this.initializeAppointmentService.findTherapists();
-    this.initializeAppointmentService.InitializeAppointmentDate(this.appointment, this.startDate)
+    this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate)
   }
   pick(selectedPatient: Patient) {
     this.appointment.patientId = selectedPatient.id;
