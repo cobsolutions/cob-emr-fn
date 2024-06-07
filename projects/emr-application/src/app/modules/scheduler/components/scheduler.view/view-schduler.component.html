@@ -58,8 +58,8 @@
       <button (click)="toggleAppointmentActions()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-      <app-appointment-actions
-        (changeVisibility)="changeAppointmentActionsVisibility($event)"></app-appointment-actions>
+      <app-appointment-actions (changeVisibility)="changeAppointmentActionsVisibility($event)"
+        *ngIf="appointmentActionsVisibility"></app-appointment-actions>
     </c-modal-body>
   </c-modal>
 </span>
@@ -82,7 +82,8 @@
       <button (click)="toggleAppointmentCancelNoShow()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-      <app-appointment-cancel-noshow [type]="cancelNoShow" (changeVisibility)="changeAppointmentCancelNoShowVisibility($event)"></app-appointment-cancel-noshow>
+      <app-appointment-cancel-noshow [type]="cancelNoShow"
+        (changeVisibility)="changeAppointmentCancelNoShowVisibility($event)"></app-appointment-cancel-noshow>
     </c-modal-body>
   </c-modal>
 </span>

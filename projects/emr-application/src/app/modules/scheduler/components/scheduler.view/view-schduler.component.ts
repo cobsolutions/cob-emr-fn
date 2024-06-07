@@ -19,6 +19,7 @@ import { AppointmentEventConverterService } from "../../service/appointment-even
 import { AppointmentService } from "../../service/appointment.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentEditModalComponent } from "../appintment.edit/modal/appointment-edit-modal.component";
+import { AppointmentActionModalComponent } from "../appointment.actions/modal/appointment-action-modal.component";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { AddAppobntmentModalComponent } from "../appointment.add/modal/add-appobntment-modal.component";
 
@@ -126,8 +127,17 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.appointmentEmittingService.event$.next(event);
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility
+    const dialogRef = this.dialog.open(AppointmentActionModalComponent, {
+      data: { event: event },
+      position: {
+        top: '8%', // Adjust as needed
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.action === 'edit') {
+        this.editAppointment(result.event)
+      }
+    });
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -158,22 +168,24 @@ export class ViewSchdulerComponent implements OnInit {
       this.refresh.next()
     })
   }
+  private editAppointment(event: CalendarEvent) {
+    const dialogRef = this.dialog.open(AppointmentEditModalComponent, {
+      data: { event: event, action: undefined },
+      width: '60%',
+      position: {
+        top: '8%', // Adjust as needed
+
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.action === 'cancel')
+        console.log('canceled')
+    });
+  }
   changeAppointmentActionsVisibility(event: any) {
     if (event === 'status')
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
     if (event === 'edit') {
-      const dialogRef = this.dialog.open(AppointmentEditModalComponent, {
-        data: { action: undefined },
-        width: '60%',
-        position: {
-          top: '8%', // Adjust as needed
-
-        }
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result.action === 'cancel')
-          console.log('canceled')
-      });
     }
     this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
   }

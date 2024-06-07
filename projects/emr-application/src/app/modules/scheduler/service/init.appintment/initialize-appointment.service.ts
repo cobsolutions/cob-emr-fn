@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { String } from 'lodash';
 import * as moment from 'moment';
-import { filter, map, Observable, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, switchMap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { DotorUserService } from '../../../administration/services/user/doctor.user/dotor-user.service';
 import { Patient } from '../../../patient/models/patient';
@@ -13,26 +12,43 @@ import { PatientAppointmentService } from '../patient-appointment.service';
   providedIn: 'root'
 })
 export class InitializeAppointmentService {
+  patient$: Observable<Patient[]>;
+  therapists$: Observable<User[]>;
   constructor(private loggedInService: LoggedInService
     , private patientAppointmentService: PatientAppointmentService
     , private clinicalUserService: DotorUserService) {
 
   }
   public findPatients() {
-    return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => this.patientAppointmentService.getPateint(clinicId)),
-      filter(patients => patients !== null),
-      map(response => {
-        return response;
-      }))
+    if (!this.patient$) {
+      this.patient$ = this.loggedInService.selectedClinic$.pipe(
+        switchMap(clinicId => this.patientAppointmentService.getPateint(clinicId)),
+        filter(patients => patients !== null),
+        map(response => {
+          return response;
+        }))
+      console.log('no cahced');
+      return this.patient$
+    }
+    else {
+      console.log('cahced');
+      return this.patient$;
+    }
   }
   public findAllTherapists() {
-    return this.clinicalUserService.getAllClinicalsUsers().pipe(
-      filter(therapists => therapists !== null),
-      map(response => {
-        return response;
-      })
-    )
+    if (this.therapists$ === undefined) {
+      this.therapists$ = this.clinicalUserService.getAllClinicalsUsers().pipe(
+        filter(therapists => therapists !== null),
+        map(response => {
+          return response;
+        })
+      )
+      console.log('not cached');
+      return this.therapists$;
+    } else {
+      console.log('not cached');
+      return this.therapists$
+    }
   }
   public findTherapists() {
     return this.loggedInService.selectedClinic$.pipe(

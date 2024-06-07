@@ -19,6 +19,7 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { AppointmentEditModalComponent } from './components/appintment.edit/modal/appointment-edit-modal.component';
 import { AppointmentEditComponent } from './components/appintment.edit/appointment-edit.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AppointmentActionModalComponent } from './components/appointment.actions/modal/appointment-action-modal.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -29,7 +30,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         AppointmentStatusComponent,
         AddAppobntmentModalComponent,
         AppointmentEditModalComponent,
-        AppointmentEditComponent
+        AppointmentEditComponent,
+        AppointmentActionModalComponent
     ],
     imports: [
         CommonModule,

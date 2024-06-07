@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Appointment Actions</h2>
+<mat-dialog-content class="mat-typography">
+    <app-appointment-actions [event]="data.event"></app-appointment-actions>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <c-row class="justify-content-center">
+        <c-button-group role="group">
+            <button id="btnSearch" class="btn btn-primary btn-sm " Style="width: 100px;"
+                (click)="editAppointment()">Edit</button>
+            <button id="btnClear" class="btn btn-info btn-sm " Style="width: 100px;">Status</button>
+            <button id="btnClear" class="btn btn-danger btn-sm " Style="width: 100px;">Delete</button>
+        </c-button-group>
+    </c-row>
+</mat-dialog-actions>
