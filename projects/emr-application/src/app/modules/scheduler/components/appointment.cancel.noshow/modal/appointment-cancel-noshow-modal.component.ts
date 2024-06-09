@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CalendarEvent } from 'calendar-utils';
 
 @Component({
   selector: 'app-appointment-cancel-noshow-modal',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentCancelNoshowModalComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }) { }
 
   ngOnInit(): void {
   }
 
+  update() {
+
+  }
 }

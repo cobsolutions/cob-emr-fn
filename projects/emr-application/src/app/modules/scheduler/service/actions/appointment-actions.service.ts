@@ -56,9 +56,19 @@ export class AppointmentActionsService {
     return dialogRef.afterClosed();
   }
 
-  public appointmnetStatusCancelNoShow(dialog: MatDialog, event: CalendarEvent) {
+  public appointmnetStatusNoShow(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
-      data: { event: event, action: undefined },
+      data: { event: event, action: 'noshow' },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public appointmnetStatusCancel(dialog: MatDialog, event: CalendarEvent) {
+    const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
+      data: { event: event, action: 'cancel' },
       width: '30%',
       position: {
         top: '8%',
