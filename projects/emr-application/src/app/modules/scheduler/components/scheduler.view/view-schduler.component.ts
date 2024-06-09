@@ -14,14 +14,12 @@ import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { SchedulerConfiguration } from "../../models/configuration";
-import { AppointmentEmittingService } from "../../service/appointment-emitting.service";
+import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
+import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
-import { AppointmentEditModalComponent } from "../appintment.edit/modal/appointment-edit-modal.component";
-import { AppointmentActionModalComponent } from "../appointment.actions/modal/appointment-action-modal.component";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
-import { AddAppobntmentModalComponent } from "../appointment.add/modal/add-appobntment-modal.component";
 
 @Component({
   selector: 'app-view-schduler',
@@ -35,7 +33,6 @@ import { AddAppobntmentModalComponent } from "../appointment.add/modal/add-appob
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  appointmentActionsVisibility = false;
   appointmentStatusVisibility = false;
   appointmentEditVisibility = false;
   appointmentDeleteVisibility = false
@@ -55,7 +52,7 @@ export class ViewSchdulerComponent implements OnInit {
     private toastr: ToastrService,
     private schedulerConfigurationService: SchedulerConfigurationService,
     private appointmentEventConverterService: AppointmentEventConverterService,
-    private appointmentEmittingService: AppointmentEmittingService,
+    private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService) { }
 
@@ -64,9 +61,6 @@ export class ViewSchdulerComponent implements OnInit {
     this.getAppointments();
   }
 
-  toggleAppointmentActions() {
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
-  }
   toggleAppointmentStatus() {
     this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
   }
@@ -82,22 +76,13 @@ export class ViewSchdulerComponent implements OnInit {
       }
       this.viewDate = date;
     }
-    const dialogRef = this.dialog.open(AddAppobntmentModalComponent, {
-      width: '60%',
-      data: { startDate: this.viewDate },
-      position: {
-        top: '8%', // Adjust as needed
-
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
       if (result.action !== 'cancel') {
-        this.events.push(result.event);
+        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
         this.refresh.next();
         this.toastr.success('Appointment created Successfully');
       }
-    });
+    })
   }
   eventTimesChanged({
     event,
@@ -127,16 +112,28 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    const dialogRef = this.dialog.open(AppointmentActionModalComponent, {
-      data: { event: event },
-      position: {
-        top: '8%', // Adjust as needed
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.action === 'edit') {
-        this.editAppointment(result.event)
-      }
+    this.appointmentActionsService.selectAppointmentActions(this.dialog, event).subscribe(result => {
+      if (result.action)
+        switch (result.action) {
+          case 'edit':
+            this.appointmentActionsService.editAppointment(this.dialog, result.event).subscribe(result => {
+              if (result.action === 'updated') {
+                RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                this.refresh.next();
+                this.toastr.success('Appointment updated Successfully');
+              }
+            });
+            break;
+          case 'status':
+            this.appointmentActionsService.appointmentStatus(this.dialog, result.event).subscribe(result => {
+              if (result.action === 'status-updated') {
+                RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                this.refresh.next();
+                this.toastr.success('Appointment updated Successfully');
+              }
+            });
+            break;
+        }
     });
   }
 
@@ -168,27 +165,7 @@ export class ViewSchdulerComponent implements OnInit {
       this.refresh.next()
     })
   }
-  private editAppointment(event: CalendarEvent) {
-    const dialogRef = this.dialog.open(AppointmentEditModalComponent, {
-      data: { event: event, action: undefined },
-      width: '60%',
-      position: {
-        top: '8%', // Adjust as needed
 
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.action === 'cancel')
-        console.log('canceled')
-    });
-  }
-  changeAppointmentActionsVisibility(event: any) {
-    if (event === 'status')
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-    if (event === 'edit') {
-    }
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
-  }
   changeAppointmentStatusVisibility(event: any) {
     if (event === 'close')
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
@@ -197,11 +174,6 @@ export class ViewSchdulerComponent implements OnInit {
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
       this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
     }
-    this.appointmentActionsVisibility = false;
-  }
-  changeAppointmentCancelNoShowVisibility(event: any) {
-    if (event === 'close')
-      this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
   }
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(

@@ -66,7 +66,6 @@ export class AppointmentAddComponent implements OnInit {
       this.notValidForm = false;
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       this.appointment.constructTitle();
-      console.log(JSON.stringify(this.appointment) + ' after constrcut ')
       return this.loggedInService.selectedClinic$.pipe(
         switchMap(clinicId => {
           this.appointment.clinicId = clinicId;

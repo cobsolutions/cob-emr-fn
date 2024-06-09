@@ -27,8 +27,9 @@ export class AddAppobntmentModalComponent implements OnInit {
     });
   }
   create() {
-    this.appointmentAddComponent.createAppointment().subscribe((createdAppointment: any) => {
+    this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
       var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentAddComponent.appointment)
+      event.id = createdAppointmentId
       this.data.event = event;
       this.dialogRef.close(this.data);
     })

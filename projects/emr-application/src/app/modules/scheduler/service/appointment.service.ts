@@ -12,7 +12,7 @@ import { AppointmentType } from '../models/appointment.type';
 export class AppointmentService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
-  createAppointment(appointment: Appointment){
+  createAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/create';
     return this._http.post(createAppointmentURL, appointment);
   }
@@ -26,8 +26,9 @@ export class AppointmentService {
     return this._http.post(listAppointmentURL, JSON.stringify(filters));
   }
   updateAppointment(appointment: Appointment) {
-    const updateAppointmentURL = this.baseUrl + 'appointment';
-    return this._http.put(updateAppointmentURL, JSON.stringify(appointment));
+    const headers = { 'content-type': 'application/json' }
+    const updateAppointmentURL = this.baseUrl + 'appointment/update';
+    return this._http.put(updateAppointmentURL, appointment);
   }
   updateAppointmentList(appointment: Appointment) {
     const updateAppointmentURL = this.baseUrl + 'appointment/list';

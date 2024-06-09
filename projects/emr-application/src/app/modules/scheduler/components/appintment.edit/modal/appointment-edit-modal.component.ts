@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
-import { filter, switchMap } from 'rxjs';
+import { result } from 'lodash';
 import { Appointment } from '../../../models/appointment';
-import { AppointmentEmittingService } from '../../../service/appointment-emitting.service';
+import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentService } from '../../../service/appointment.service';
+import { AppointmentEditComponent } from '../appointment-edit.component';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -13,21 +14,16 @@ import { AppointmentService } from '../../../service/appointment.service';
 })
 export class AppointmentEditModalComponent implements OnInit {
   appointment: Appointment
+  @ViewChild('appointmentEditComponent') appointmentEditComponent: AppointmentEditComponent;
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
-    , private appointmentEmittingService: AppointmentEmittingService
-    , private appointmentService: AppointmentService) { }
+    , private appointmentService: AppointmentService
+    , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
     this.appointmentService.retrieveAppointment(Number(this.data.event.id)).subscribe(result => {
       this.appointment = result;
     })
-    // this.appointmentEmittingService.selectedAppointment$.pipe(
-    //   filter((appointmentId) => appointmentId !== null),
-    //   switchMap((appointmentId) => this.appointmentService.retrieveAppointment(appointmentId))
-    // ).subscribe((result) => {
-    //   this.appointment = result;
-    // })
     this.dialogRef.keydownEvents().subscribe(event => {
       if (event.key === "Escape") {
         this.cancel();
@@ -42,6 +38,13 @@ export class AppointmentEditModalComponent implements OnInit {
     this.data.action = 'cancel';
     this.dialogRef.close(this.data);
   }
-  public update() { }
+  public update() {
+    this.appointmentService.updateAppointment(this.appointmentEditComponent.appointment).subscribe(result => {
+      var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentEditComponent.appointment)
+      this.data.action = 'updated'
+      this.data.event = event
+      this.dialogRef.close(this.data);
+    })
+  }
 
 }
