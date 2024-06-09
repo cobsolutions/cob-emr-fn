@@ -4,6 +4,7 @@ import { CalendarEvent } from 'calendar-utils';
 import { AppointmentEditModalComponent } from '../../components/appintment.edit/modal/appointment-edit-modal.component';
 import { AppointmentActionModalComponent } from '../../components/appointment.actions/modal/appointment-action-modal.component';
 import { AddAppobntmentModalComponent } from '../../components/appointment.add/modal/add-appobntment-modal.component';
+import { AppointmentCancelNoshowModalComponent } from '../../components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentStatusModalComponent } from '../../components/appointment.status/modal/appointment-status-modal.component';
 
 @Injectable({
@@ -53,6 +54,16 @@ export class AppointmentActionsService {
       }
     });
     return dialogRef.afterClosed();
+  }
 
+  public appointmnetStatusCancelNoShow(dialog: MatDialog, event: CalendarEvent) {
+    const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
+      data: { event: event, action: undefined },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
   }
 }

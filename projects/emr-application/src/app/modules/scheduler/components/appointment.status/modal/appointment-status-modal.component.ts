@@ -64,9 +64,11 @@ export class AppointmentStatusModalComponent implements OnInit {
     this.updateAppointmentStatus('Checkout')
   }
   onCancel() {
-    //this.changeVisibility.emit('cancel');
+    this.data.action = 'status-cancled'
+    this.dialogRef.close(this.data);
   }
   onNoShow() {
-    //this.changeVisibility.emit('noshow');
+    this.data.action = 'status-noshow'
+    this.dialogRef.close(this.data);
   }
 }

@@ -131,6 +131,8 @@ export class ViewSchdulerComponent implements OnInit {
                 this.refresh.next();
                 this.toastr.success('Appointment updated Successfully');
               }
+              if (result.action === 'status-cancled' || result.action === 'status-noshow')
+                this.appointmentActionsService.appointmnetStatusCancelNoShow(this.dialog, result.event)
             });
             break;
         }
