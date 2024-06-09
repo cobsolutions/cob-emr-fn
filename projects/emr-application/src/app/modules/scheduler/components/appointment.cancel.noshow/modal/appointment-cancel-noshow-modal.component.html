@@ -13,9 +13,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <div class="d-grid gap-2 col-2 mx-auto mb-1">
-        <button cButton color="primary" variant="outline" size="sm" (click)="update()">
-            <span *ngIf="data.action ==='cancel'">Cancel</span>
-            <span *ngIf="data.action ==='noshow'">Save</span>
-        </button>
+        <button cButton color="primary" variant="outline" size="sm" (click)="update()">Save</button>
     </div>
 </mat-dialog-actions>

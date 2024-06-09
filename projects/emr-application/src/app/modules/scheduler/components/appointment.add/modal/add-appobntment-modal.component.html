@@ -4,6 +4,6 @@
   <app-appointment-add #appointmentAddComponent [startDate]="data.startDate"></app-appointment-add>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button cButton (click)="create()">Create</button>
-  <button cButton (click)="cancel()">Cancel</button>
+  <button cButton (click)="create()" class="mx-3" variant="outline">Create</button>
+  <button cButton (click)="cancel()" variant="outline">Cancel</button>
 </mat-dialog-actions>
