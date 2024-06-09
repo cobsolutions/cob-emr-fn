@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>Appointment Status</h2>
-<mat-dialog-content class="mat-typography" *ngIf="appointment">
+<mat-dialog-content class="mat-typography">
     <c-callout color="danger" *ngIf="statusDisabled">
         <strong>Check-In</strong>,<strong>Check-out</strong>,<strong>No-Show</strong> statuses <br />
         are not available since appointment date in the future
     </c-callout>
-    <div class="d-grid gap-2">
+    <div class="d-grid gap-2" *ngIf="appointment">
         <button class="btn btn-outline-primary" type="button" (click)="onConfirmed()">Confirm</button>
         <button class="btn btn-outline-primary" type="button" (click)="onCheckin()" [disabled]="statusDisabled">Check
             In</button>
@@ -14,4 +14,5 @@
             Show</button>
         <button class="btn btn-outline-primary" type="button" (click)="onCancel()">Cancel</button>
     </div>
+    <c-spinner color="dark" variant="grow" *ngIf="!appointment"></c-spinner>
 </mat-dialog-content>

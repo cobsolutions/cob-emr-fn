@@ -132,9 +132,19 @@ export class ViewSchdulerComponent implements OnInit {
                 this.toastr.success('Appointment updated Successfully');
               }
               if (result.action === 'status-cancled')
-                this.appointmentActionsService.appointmnetStatusCancel(this.dialog, result.event)
+                this.appointmentActionsService.appointmnetStatusCancel(this.dialog, result.event).subscribe(result => {
+                  RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                  this.refresh.next();
+                  this.toastr.success('Appointment updated Successfully');
+                })
               if (result.action === 'status-noshow')
-                this.appointmentActionsService.appointmnetStatusNoShow(this.dialog, result.event)
+                this.appointmentActionsService.appointmnetStatusNoShow(this.dialog, result.event).subscribe(result => {
+                  if (result.action !== 'cancel') {
+                    RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                    this.refresh.next();
+                    this.toastr.success('Appointment updated Successfully');
+                  }
+                })
             });
             break;
         }
