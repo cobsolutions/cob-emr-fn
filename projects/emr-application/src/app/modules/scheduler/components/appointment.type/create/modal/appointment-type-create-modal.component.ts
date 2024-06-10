@@ -37,7 +37,6 @@ export class AppointmentTypeCreateModalComponent implements OnInit {
       filter(clinicId => clinicId !== null),
       switchMap(clinicId => {
         this.createAppointmentTypeComponent.appointmentType.clinicId = clinicId
-        this.createAppointmentTypeComponent.appointmentType.color = this.createAppointmentTypeComponent.selectedColor;
         return this.appointmentTypeService.create(this.createAppointmentTypeComponent.appointmentType)
       })
     ).subscribe(result => {

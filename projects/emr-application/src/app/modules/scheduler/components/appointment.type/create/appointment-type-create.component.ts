@@ -34,11 +34,11 @@ export class AppointmentTypeCreateComponent implements OnInit {
     , private cpService: ColorPickerService) { }
 
   ngOnInit(): void {
-    this.appointmentType.color = this.selectedColor;
+    this.appointmentType.color = this.color1;
   }
   public onEventLog(event: string, data: any): void {
     console.log(data.color);
-    this.selectedColor = data.color
+    this.appointmentType.color = data.color
   }
 
 }
