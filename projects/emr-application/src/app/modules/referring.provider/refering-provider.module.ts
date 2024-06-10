@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ReferingProviderRoutingModule } from './refering-provider-routing.module';
 import { ListReferringProviderComponent } from './components/list/list-referring-provider.component';
+import { CollapseModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { EmrCommonModule } from '../common/emr-common.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -11,7 +14,13 @@ import { ListReferringProviderComponent } from './components/list/list-referring
   ],
   imports: [
     CommonModule,
-    ReferingProviderRoutingModule
+    ReferingProviderRoutingModule,
+    SmartPaginationModule,
+    CollapseModule,
+    SmartTableModule,
+    EmrCommonModule,
+    ModalModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class ReferingProviderModule { }
