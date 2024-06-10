@@ -35,9 +35,6 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   constructor(private classToggler: ClassToggleService
     , private ksAuthService: KcAuthService
-    , private emittingClinicService: ClinicEmittingService
-    , private clinicService: ClinicService
-    , private cacheService: CacheService
     , private loggedInService: LoggedInService) {
     super();
   }
