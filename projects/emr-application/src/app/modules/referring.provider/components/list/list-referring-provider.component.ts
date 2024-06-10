@@ -54,8 +54,19 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
         this.loadingData$.next(false);
       }),
       map((response: any) => {
+        for (var i = 0; i < response.records.length; i++) {
+          var ss = response.records[i];
+          ss.name = ss.lastName + ',' + ss.firstName;
+        }
         return response.records;
       })
     );
+  }
+  changeVisibility(event: any) {
+    if (event === 'close') {
+      this.addReferringProviderVisibility = false
+      this.find();
+    }
+
   }
 }

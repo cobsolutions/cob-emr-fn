@@ -47,6 +47,6 @@
     <button (click)="toggleReferringProvider()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <create-referring-provider></create-referring-provider>
+    <create-referring-provider [mode]="'create'" (changeVisibility)="changeVisibility($event)"></create-referring-provider>
   </c-modal-body>
-</c-modal>|
+</c-modal>
