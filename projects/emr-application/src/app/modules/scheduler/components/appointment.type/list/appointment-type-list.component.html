@@ -6,7 +6,7 @@
 </c-row>
 <hr />
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="toggleAppointmentType()">Create Appointmet
+  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Appointmet
     Type</button>
 </div>
 <table class="table table-sm">
@@ -31,12 +31,3 @@
     </tr>
   </tbody>
 </table>
-<c-modal id="addAppointmetType" [visible]="addAppointmetTypeVisibility" size="xl">
-  <c-modal-header>
-    <h3 cModalTitle>Add Appointmet Type</h3>
-    <button (click)="toggleAppointmentType()" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>
-    <appointment-type-create></appointment-type-create>
-  </c-modal-body>
-</c-modal>

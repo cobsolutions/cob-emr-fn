@@ -1,1 +1,46 @@
-<p>appointment-type-create works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-icon card-header-rose">
+                <div class="card-icon">
+                    <i class="material-icons">view_agenda</i>
+                </div>
+                <h4 class="card-title">Appointment Type</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <input matInput id="companyname" name="appname" placeholder="Type Name" [(ngModel)]='type.name'>
+
+                    </div>
+                    <div class="col-md-12">
+
+                        <input matInput [ngxMatColorPicker]="picker" [(ngModel)]='type.colorObj' [disabled]="disabled"
+                            placeholder="Type Color">
+                        <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                        <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+
+                    </div>
+                    <div class="col-md-12">
+
+                        <input type="number" matInput id="durationstep" name="durationstep" step="30"
+                            placeholder="Appointment Duration">
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <button mat-raised-button type="submit" class="btn btn-outline-danger"
+                                (click)="create()">Create Appointment Type</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

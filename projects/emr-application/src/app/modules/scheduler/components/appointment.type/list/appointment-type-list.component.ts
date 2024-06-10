@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { filter, map, Observable, switchMap } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentType } from '../../../models/appointment.type';
 import { AppointmentTypeService } from '../../../service/appointment.type/appointment-type.service';
+import { AppointmentTypeCreateModalComponent } from '../create/modal/appointment-type-create-modal.component';
 
 @Component({
   selector: 'app-appointment-type-list',
@@ -11,17 +13,22 @@ import { AppointmentTypeService } from '../../../service/appointment.type/appoin
 })
 export class AppointmentTypeListComponent implements OnInit {
   appointmentTypes: Observable<AppointmentType[]>
-  addAppointmetTypeVisibility: boolean = false;
+  // addAppointmetTypeVisibility: boolean = false;
   constructor(private appointmentTypeService: AppointmentTypeService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.find();
   }
-  toggleAppointmentType(){
-    this.addAppointmetTypeVisibility  = !this.addAppointmetTypeVisibility
-  }
   create() {
+    const dialogRef = this.dialog.open(AppointmentTypeCreateModalComponent, {
+      width: '60%',
+      position: {
+        top: '8%', // Adjust as needed
+
+      }
+    });
   }
   edit() {
 
