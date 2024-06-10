@@ -23,8 +23,8 @@ import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { AppointmentCancelNoshowModalComponent } from './components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
 import { AppointmentTypeCreateComponent } from './components/appointment.type/create/appointment-type-create.component';
-import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { AppointmentTypeCreateModalComponent } from './components/appointment.type/create/modal/appointment-type-create-modal.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -59,13 +59,12 @@ import { AppointmentTypeCreateModalComponent } from './components/appointment.ty
             useFactory: adapterFactory,
         }),
         NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-        NgxMatColorPickerModule
+        ColorPickerModule
     ], providers: [
         {
             provide: MatDialogRef,
             useValue: {}
-        },
-        { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS }
+        }
     ],
 })
 export class SchedulerModule { }

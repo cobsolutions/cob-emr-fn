@@ -13,7 +13,7 @@ export class AppointmentTypeService {
   private baseUrl = environment.baseURL + 'appointment/type/';
   public create(appointmentType: AppointmentType) {
     const url = this.baseUrl + 'create';
-    return this._http.post(url, null);
+    return this._http.post(url, appointmentType);
   }
   retrieveAppointmentTypes(clinicId: number) {
     const url = this.baseUrl + 'find/clinic/' + clinicId;

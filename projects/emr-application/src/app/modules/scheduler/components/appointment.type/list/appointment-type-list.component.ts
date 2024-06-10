@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { filter, map, Observable, switchMap } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentType } from '../../../models/appointment.type';
@@ -16,19 +17,26 @@ export class AppointmentTypeListComponent implements OnInit {
   // addAppointmetTypeVisibility: boolean = false;
   constructor(private appointmentTypeService: AppointmentTypeService
     , private loggedInService: LoggedInService
-    , private dialog: MatDialog) { }
+    , private dialog: MatDialog
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.find();
   }
   create() {
     const dialogRef = this.dialog.open(AppointmentTypeCreateModalComponent, {
-      width: '60%',
+      width: '30%',
+      data: { action: undefined },
       position: {
         top: '8%', // Adjust as needed
-
       }
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.action === 'created') {
+        this.toastr.success("Appointmet Type Created")
+        this.find()
+      }
+    })
   }
   edit() {
 
