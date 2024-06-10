@@ -21,6 +21,7 @@ import { AppointmentStatusModalComponent } from './components/appointment.status
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { AppointmentCancelNoshowModalComponent } from './components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
+import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -33,7 +34,8 @@ import { AppointmentCancelNoshowModalComponent } from './components/appointment.
         AppointmentEditComponent,
         AppointmentActionModalComponent,
         AppointmentStatusModalComponent,
-        AppointmentCancelNoshowModalComponent
+        AppointmentCancelNoshowModalComponent,
+        AppointmentTypeListComponent
     ],
     imports: [
         CommonModule,
