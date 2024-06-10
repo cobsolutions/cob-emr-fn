@@ -1,0 +1,41 @@
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CalendarEvent } from 'calendar-utils';
+import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
+import { AppointmentAddComponent } from '../appointment-add.component';
+
+@Component({
+  selector: 'app-add-appobntment-modal',
+  templateUrl: './add-appobntment-modal.component.html',
+  styleUrls: ['./add-appobntment-modal.component.css']
+})
+export class AddAppobntmentModalComponent implements OnInit {
+  @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, event: CalendarEvent, action: string }
+    , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
+    , private appointmentEventConverterService: AppointmentEventConverterService) { }
+
+  ngOnInit(): void {
+    this.dialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+        this.cancel();
+      }
+    });
+
+    this.dialogRef.backdropClick().subscribe(event => {
+      this.cancel();
+    });
+  }
+  create() {
+    this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
+      var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentAddComponent.appointment)
+      event.id = createdAppointmentId
+      this.data.event = event;
+      this.dialogRef.close(this.data);
+    })
+  }
+  public cancel() {
+    this.data.action = 'cancel';
+    this.dialogRef.close(this.data);
+  }
+}

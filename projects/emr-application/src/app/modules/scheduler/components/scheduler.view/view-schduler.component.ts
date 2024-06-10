@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
+  CalendarEvent, CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
 import {
   isSameDay,
   isSameMonth
@@ -14,31 +12,15 @@ import {
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
-import { ClinicEmittingService } from "../../../common/service/emitting/clinic-emitting.service";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
-import { Appointment } from "../../models/appointment";
 import { SchedulerConfiguration } from "../../models/configuration";
-import { AppointmentEmittingService } from "../../service/appointment-emitting.service";
+import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
+import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
-import { AppointmentDateAdjustor } from "../../util/appointment.date.adjustor";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
 @Component({
   selector: 'app-view-schduler',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,13 +33,10 @@ const colors: Record<string, EventColor> = {
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  addAppointmentVisibility = false;
-  appointmentActionsVisibility = false;
   appointmentStatusVisibility = false;
   appointmentEditVisibility = false;
   appointmentDeleteVisibility = false
   appointmentCancelNoShowVisibility = false
-  isCreate: boolean;
   view: CalendarView = CalendarView.Month;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   CalendarView = CalendarView;
@@ -73,61 +52,37 @@ export class ViewSchdulerComponent implements OnInit {
     private toastr: ToastrService,
     private schedulerConfigurationService: SchedulerConfigurationService,
     private appointmentEventConverterService: AppointmentEventConverterService,
-    private appointmentEmittingService: AppointmentEmittingService,
+    private appointmentActionsService: AppointmentActionsService,
+    private dialog: MatDialog,
     private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.getSchedulerConfiguration()
     this.getAppointments();
   }
-  toggleAddAppointment() {
-    this.addAppointmentVisibility = !this.addAppointmentVisibility;
-  }
-  toggleAppointmentActions() {
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
-  }
+
   toggleAppointmentStatus() {
     this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
   }
   toggleAppointmentCancelNoShow() {
     this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
   }
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
-
-
-
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
         this.activeDayIsOpen = false;
       } else {
         this.activeDayIsOpen = true;
       }
       this.viewDate = date;
     }
-    this.isCreate = true;
-    this.addAppointmentVisibility = !this.addAppointmentVisibility;
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
+      if (result.action !== 'cancel') {
+        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
+        this.refresh.next();
+        this.toastr.success('Appointment created Successfully');
+      }
+    })
   }
   eventTimesChanged({
     event,
@@ -157,8 +112,43 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.appointmentEmittingService.event$.next(event);
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility
+    this.appointmentActionsService.selectAppointmentActions(this.dialog, event).subscribe(result => {
+      if (result.action)
+        switch (result.action) {
+          case 'edit':
+            this.appointmentActionsService.editAppointment(this.dialog, result.event).subscribe(result => {
+              if (result.action === 'updated') {
+                RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                this.refresh.next();
+                this.toastr.success('Appointment updated Successfully');
+              }
+            });
+            break;
+          case 'status':
+            this.appointmentActionsService.appointmentStatus(this.dialog, result.event).subscribe(result => {
+              if (result.action === 'status-updated') {
+                RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                this.refresh.next();
+                this.toastr.success('Appointment updated Successfully');
+              }
+              if (result.action === 'status-cancled')
+                this.appointmentActionsService.appointmnetStatusCancel(this.dialog, result.event).subscribe(result => {
+                  RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                  this.refresh.next();
+                  this.toastr.success('Appointment updated Successfully');
+                })
+              if (result.action === 'status-noshow')
+                this.appointmentActionsService.appointmnetStatusNoShow(this.dialog, result.event).subscribe(result => {
+                  if (result.action !== 'cancel') {
+                    RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.EDIT_APPOINTMENT);
+                    this.refresh.next();
+                    this.toastr.success('Appointment updated Successfully');
+                  }
+                })
+            });
+            break;
+        }
+    });
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -172,27 +162,6 @@ export class ViewSchdulerComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.getAppointments();
     this.activeDayIsOpen = false;
-  }
-  save() {
-    if (this.appointmentAddComponent.appontmentForm.valid) {
-      this.appointmentAddComponent.submitted = false
-      var appointment: Appointment = this.appointmentAddComponent.appointment
-      AppointmentDateAdjustor.adjust(appointment);
-      this.appointmentService.createAppointment(appointment)
-        .subscribe((result) => {
-          var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointment)
-          this.events.push(event);
-          this.refresh.next();
-          this.addAppointmentVisibility = !this.addAppointmentVisibility;
-          if (this.isCreate)
-            this.toastr.success('Appointment created Successfully');
-          else
-            this.toastr.success('Appointment updated Successfully');
-          this.getAppointments();
-        })
-    } else {
-      this.appointmentAddComponent.submitted = true
-    }
   }
   getAppointments() {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
@@ -210,15 +179,7 @@ export class ViewSchdulerComponent implements OnInit {
       this.refresh.next()
     })
   }
-  changeAppointmentActionsVisibility(event: any) {
-    if (event === 'status')
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-    if (event === 'edit') {
-      this.addAppointmentVisibility = !this.addAppointmentVisibility;
-      this.isCreate = false;
-    }
-    this.appointmentActionsVisibility = !this.appointmentActionsVisibility;
-  }
+
   changeAppointmentStatusVisibility(event: any) {
     if (event === 'close')
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
@@ -227,11 +188,6 @@ export class ViewSchdulerComponent implements OnInit {
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
       this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
     }
-    this.appointmentActionsVisibility = false;
-  }
-  changeAppointmentCancelNoShowVisibility(event: any) {
-    if (event === 'close')
-      this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
   }
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(

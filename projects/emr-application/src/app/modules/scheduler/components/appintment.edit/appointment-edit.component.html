@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <c-container fluid>
-    <form cForm #createAppointmentForm="ngForm">
+    <form cForm #editAppointmentForm="ngForm">
         <c-row class="justify-content-center">
             <c-col>
                 <c-card class="mb-3 ustify-content-center">
@@ -16,7 +16,7 @@
                                 name="patientname" placeholder="Enter Patient Name" [itemTemplate]="itemTemplate"
                                 [notFoundTemplate]="notFoundTemplate" [(ngModel)]="appointment.patient"
                                 [ngModelOptions]="{standalone: true}" (selected)='pick($event)'
-                                (inputCleared)="unpick($event)" #fullName="ngModel" required>
+                                (inputCleared)="unpick($event)" #fullName="ngModel" [disabled]="true">
                             </ng-autocomplete>
                             <ng-template #itemTemplate let-item>
                                 <a [innerHTML]="item.fullName"></a>
@@ -97,7 +97,6 @@
                 </c-card>
             </c-col>
         </c-row>
-        <!-- Appointment Type-->
         <c-row>
             <c-col>
                 <c-card class="mb-3 ustify-content-center">
@@ -112,8 +111,7 @@
                             [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
                             [(ngModel)]="appointment.appointmentType" #apptype="ngModel" required>
                             <option [ngValue]="null" disabled selected>Select Appointment Type</option>
-                            <option *ngFor="let type of appointmentType | keyvalue" [value]="type.key"
-                                [ngStyle]="{'background-color': type.value}">
+                            <option *ngFor="let type of appointmentType | keyvalue" [value]="type.key">
                                 {{type.key}}
                             </option>
                         </select>

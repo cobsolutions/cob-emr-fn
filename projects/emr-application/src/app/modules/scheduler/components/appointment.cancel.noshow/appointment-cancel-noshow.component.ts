@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CalendarEvent } from 'calendar-utils';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { filter, switchMap } from 'rxjs';
-import { CancelNoShowReasons } from '../../../common/models/enums/scheduler/cancel.noshow';
+import { CancelNoShowReasons } from '../../../common/models/scheduler/cancel.noshow';
 import { Appointment } from '../../models/appointment';
 import { AppointmentCancelNoShowReason } from '../../models/appointment.cancel.no.show.reason';
 import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
@@ -16,21 +18,16 @@ import { AppointmentService } from '../../service/appointment.service';
 export class AppointmentCancelNoshowComponent implements OnInit {
   @Output() changeVisibility = new EventEmitter<string>();
   @Input() type: string;
+  @Input() appointment: Appointment
   cancelNoShowReasons = CancelNoShowReasons;
   resonDate: Date;
-  appointment: Appointment
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason = {};
-  constructor(private appointmentEmittingService: AppointmentEmittingService
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }
     , private appointmentService: AppointmentService
     , private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.appointmentEmittingService.selectedAppointment$.pipe(
-      filter((appointmentId) => appointmentId !== null),
-      switchMap((appointmentId) => this.appointmentService.retrieveAppointment(appointmentId))
-    ).subscribe((result) => {
-      this.appointment = result
-    })
+    
   }
   onResonSelectionChange(event: any) {
     this.appointmentCancelNoShowReason.reason = event.target.value;
