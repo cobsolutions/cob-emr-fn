@@ -21,6 +21,10 @@ import { AppointmentStatusModalComponent } from './components/appointment.status
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { AppointmentCancelNoshowModalComponent } from './components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
+import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
+import { AppointmentTypeCreateComponent } from './components/appointment.type/create/appointment-type-create.component';
+import { AppointmentTypeCreateModalComponent } from './components/appointment.type/create/modal/appointment-type-create-modal.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -33,7 +37,10 @@ import { AppointmentCancelNoshowModalComponent } from './components/appointment.
         AppointmentEditComponent,
         AppointmentActionModalComponent,
         AppointmentStatusModalComponent,
-        AppointmentCancelNoshowModalComponent
+        AppointmentCancelNoshowModalComponent,
+        AppointmentTypeListComponent,
+        AppointmentTypeCreateComponent,
+        AppointmentTypeCreateModalComponent
     ],
     imports: [
         CommonModule,
@@ -51,12 +58,13 @@ import { AppointmentCancelNoshowModalComponent } from './components/appointment.
             provide: DateAdapter,
             useFactory: adapterFactory,
         }),
-        NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
-    ],  providers: [
+        NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+        ColorPickerModule
+    ], providers: [
         {
-          provide: MatDialogRef,
-          useValue: {}
+            provide: MatDialogRef,
+            useValue: {}
         }
-      ],
+    ],
 })
 export class SchedulerModule { }

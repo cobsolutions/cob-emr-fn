@@ -43,7 +43,7 @@ export const NavItems: INavData[] = [
       },
       {
         name: 'Appointment Type',
-        url: ''
+        url: 'scheduler/appointment-type'
       }
 
     ]
