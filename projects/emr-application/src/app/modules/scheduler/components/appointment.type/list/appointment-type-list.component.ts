@@ -11,11 +11,15 @@ import { AppointmentTypeService } from '../../../service/appointment.type/appoin
 })
 export class AppointmentTypeListComponent implements OnInit {
   appointmentTypes: Observable<AppointmentType[]>
+  addAppointmetTypeVisibility: boolean = false;
   constructor(private appointmentTypeService: AppointmentTypeService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.find();
+  }
+  toggleAppointmentType(){
+    this.addAppointmetTypeVisibility  = !this.addAppointmetTypeVisibility
   }
   create() {
   }
