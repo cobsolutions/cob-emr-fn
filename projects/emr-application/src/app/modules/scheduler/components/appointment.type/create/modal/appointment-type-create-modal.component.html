@@ -1,7 +1,11 @@
 <h2 mat-dialog-title>Add Appointment Type</h2>
 <mat-dialog-content class="mat-typography">
-    <appointment-type-create #createAppointmentTypeComponent></appointment-type-create>
+    <appointment-type-create #createAppointmentTypeComponent
+        [selectedAppointmentTypeId]="data.id"></appointment-type-create>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button cButton (click)="create()" class="mx-3" variant="outline">Create</button>
+    <button cButton (click)="create()" class="mx-3" variant="outline">
+        <span *ngIf="!data.id">Create</span>
+        <span *ngIf="data.id">Update</span>
+    </button>
 </mat-dialog-actions>

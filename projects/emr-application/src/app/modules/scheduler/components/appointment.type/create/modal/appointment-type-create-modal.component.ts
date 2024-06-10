@@ -13,7 +13,7 @@ import { AppointmentTypeCreateComponent } from '../appointment-type-create.compo
 export class AppointmentTypeCreateModalComponent implements OnInit {
   @ViewChild('createAppointmentTypeComponent') createAppointmentTypeComponent: AppointmentTypeCreateComponent;
   constructor(private appointmentTypeService: AppointmentTypeService
-    , @Inject(MAT_DIALOG_DATA) public data: { action: string }
+    , @Inject(MAT_DIALOG_DATA) public data: { action: string, id: number }
     , private dialogRef: MatDialogRef<AppointmentTypeCreateModalComponent>
     , private logineService: LoggedInService) { }
 

@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { Cmyk, ColorPickerService } from 'ngx-color-picker';
+import { filter, map, switchMap } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentType } from '../../../models/appointment.type';
 import { AppointmentTypeService } from '../../../service/appointment.type/appointment-type.service';
 
@@ -9,6 +11,7 @@ import { AppointmentTypeService } from '../../../service/appointment.type/appoin
   styleUrls: ['./appointment-type-create.component.css']
 })
 export class AppointmentTypeCreateComponent implements OnInit {
+  @Input() selectedAppointmentTypeId?: number
   public selectedColor: string;
 
   public color1: string = '#2889e9';
@@ -31,10 +34,21 @@ export class AppointmentTypeCreateComponent implements OnInit {
   public color18: string = '#ff0000';
   public appointmentType: AppointmentType = new AppointmentType();
   constructor(public vcRef: ViewContainerRef
-    , private cpService: ColorPickerService) { }
+    , private cpService: ColorPickerService
+    , private logineService: LoggedInService
+    , private appointmentTypeService: AppointmentTypeService) { }
 
   ngOnInit(): void {
     this.appointmentType.color = this.color1;
+    if (this.selectedAppointmentTypeId) {
+      this.logineService.selectedClinic$.pipe(
+        filter(clinicId => clinicId !== null)
+        , switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentType(this.selectedAppointmentTypeId, clinicId))
+        , map((response: any) => response.records)
+      ).subscribe((result: any) => {
+        this.appointmentType = result;
+      })
+    }
   }
   public onEventLog(event: string, data: any): void {
     console.log(data.color);

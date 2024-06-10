@@ -38,7 +38,20 @@ export class AppointmentTypeListComponent implements OnInit {
       }
     })
   }
-  edit() {
+  edit(appointmetTypeId: number) {
+    const dialogRef = this.dialog.open(AppointmentTypeCreateModalComponent, {
+      width: '30%',
+      data: { action: undefined, id: appointmetTypeId },
+      position: {
+        top: '8%', // Adjust as needed
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.action === 'created') {
+        this.toastr.success("Appointmet Type Updated")
+        this.find()
+      }
+    })
 
   }
   private find() {
