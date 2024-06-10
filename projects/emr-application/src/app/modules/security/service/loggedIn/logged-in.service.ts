@@ -37,8 +37,10 @@ export class LoggedInService {
           return this.getClinics(loggedInUser.uuid)
         })
         , tap((result: Clinic[]) => {
-          this.loggedInUser.organizationId = result[0].organizationId
-          this.selectedClinic$.next(Number(result[0].id))
+          if (result !== undefined && result.length > 0) {
+            this.loggedInUser.organizationId = result[0].organizationId
+            this.selectedClinic$.next(Number(result[0].id))
+          }
         })
         , map((response: any) => {
           this.loggedInUser.clinics = response;
