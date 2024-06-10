@@ -12,6 +12,7 @@ import { ReferringProviderService } from '../../service/referring-provider.servi
 })
 export class ListReferringProviderComponent extends ListTemplate implements OnInit {
   referringProvider$: Observable<ReferringProvider[]>;
+  addReferringProviderVisibility: boolean = false;
   columns: (string | IColumn)[];
   constructor(private referringProviderService: ReferringProviderService) { super(); }
 
@@ -20,8 +21,11 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
     this.columns = this.constructColumns(['name', 'npi', 'actions']);
     this.find();
   }
+  toggleReferringProvider() {
+    this.addReferringProviderVisibility = !this.addReferringProviderVisibility
+  }
   create() {
-
+    this.addReferringProviderVisibility = true;
   }
   remove(item: any) {
 

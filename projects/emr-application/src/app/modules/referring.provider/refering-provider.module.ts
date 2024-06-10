@@ -6,11 +6,13 @@ import { ListReferringProviderComponent } from './components/list/list-referring
 import { CollapseModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { EmrCommonModule } from '../common/emr-common.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CreateReferringProviderComponent } from './components/create/create-referring-provider.component';
 
 
 @NgModule({
   declarations: [
-    ListReferringProviderComponent
+    ListReferringProviderComponent,
+    CreateReferringProviderComponent
   ],
   imports: [
     CommonModule,
