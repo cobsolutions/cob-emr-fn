@@ -1,1 +1,32 @@
-<p>appointment-type-list works!</p>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<c-row>
+  <c-col xs="12" class="mb-2">
+    <h1>Appointment Types</h1>
+  </c-col>
+</c-row>
+<hr />
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Appointmet Type</button>
+</div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" style="width: 10%;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let type of appointmentTypes | async;let i=index;">
+      <td>{{type.id}}</td>
+      <td>{{type.name}}</td>
+      <td>
+        <c-button-group aria-label="First group" class="me-2" role="group">
+          <button cButton color="primary" variant="outline" size="sm" (click)="edit()">
+            <svg cIcon name="cilPen"></svg>
+          </button>
+        </c-button-group>
+      </td>
+    </tr>
+  </tbody>
+</table>

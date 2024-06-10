@@ -15,8 +15,8 @@ export class AppointmentTypeService {
     const url = this.baseUrl + 'create';
     return this._http.post(url, null);
   }
-  retrieveAppointmentTypes(clinicId: number): Observable<AppointmentType[]> {
-    const url = this.baseUrl + 'find/clinicId/' + clinicId;
-    return this._http.get<AppointmentType[]>(url);
+  retrieveAppointmentTypes(clinicId: number) {
+    const url = this.baseUrl + 'find/clinic/' + clinicId;
+    return this._http.get(url);
   }
 }

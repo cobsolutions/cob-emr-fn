@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { filter, map, Observable, switchMap } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { AppointmentType } from '../../../models/appointment.type';
+import { AppointmentTypeService } from '../../../service/appointment.type/appointment-type.service';
 
 @Component({
   selector: 'app-appointment-type-list',
@@ -6,10 +10,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./appointment-type-list.component.css']
 })
 export class AppointmentTypeListComponent implements OnInit {
-
-  constructor() { }
+  appointmentTypes: Observable<AppointmentType[]>
+  constructor(private appointmentTypeService: AppointmentTypeService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.find();
   }
+  create() {
+  }
+  edit() {
 
+  }
+  private find() {
+    this.appointmentTypes = this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypes(clinicId)),
+      map((response: any) => response.records)
+    )
+  }
 }
