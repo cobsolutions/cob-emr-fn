@@ -112,9 +112,9 @@
                             [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
                             [(ngModel)]="appointment.appointmentType" #apptype="ngModel" required>
                             <option [ngValue]="null" disabled selected>Select Appointment Type</option>
-                            <option *ngFor="let type of appointmentType | keyvalue" [value]="type.key"
-                                [ngStyle]="{'background-color': type.value}">
-                                {{type.key}}
+                            <option *ngFor="let type of appointmentTypes$ | async
+                            " [value]="type.name" [ngStyle]="{'color': type.color}">
+                                {{type.name}}
                             </option>
                         </select>
                         <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"

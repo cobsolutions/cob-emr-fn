@@ -7,6 +7,7 @@ import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
 import { Patient } from '../../../patient/models/patient';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../models/appointment';
+import { AppointmentType } from '../../models/appointment.type';
 import { AppointmentService } from '../../service/appointment.service';
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { InitializeAppointmentService } from '../../service/init.appintment/initialize-appointment.service';
@@ -27,6 +28,7 @@ export class AppointmentAddComponent implements OnInit {
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
+  appointmentTypes$: Observable<AppointmentType[]>;
   appointment: Appointment = new Appointment();
   appointmentType = SchedulerType;
   appointmentRepetition = SchedulerRepetition;
@@ -39,6 +41,7 @@ export class AppointmentAddComponent implements OnInit {
   ngOnInit() {
     this.patient$ = this.initializeAppointmentService.findPatients()
     this.therapists$ = this.initializeAppointmentService.findTherapists();
+    this.appointmentTypes$ = this.initializeAppointmentService.findAppointmnetType();
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate)
   }
   pick(selectedPatient: Patient) {

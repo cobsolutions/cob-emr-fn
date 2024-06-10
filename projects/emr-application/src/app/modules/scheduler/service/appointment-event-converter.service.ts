@@ -3,6 +3,7 @@ import { CalendarEvent } from 'calendar-utils';
 import * as moment from 'moment';
 import { SchedulerType } from '../../common/models/scheduler/scheduler.type';
 import { Appointment } from '../models/appointment';
+import { AppointmentTypeService } from './appointment.type/appointment-type.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class AppointmentEventConverterService {
         afterEnd: true
       },
       color: {
-        primary: SchedulerType[appointment.appointmentType],
-        secondary: SchedulerType[appointment.appointmentType]
+        primary: appointment.appointmentTypeColor,
+        secondary: appointment.appointmentTypeColor
       },
       meta: {
         'status': appointment.appointmentStatus,

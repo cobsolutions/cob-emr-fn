@@ -13,11 +13,13 @@ import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
+import { AppointmentType } from "../../models/appointment.type";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
+import { AppointmentTypeService } from "../../service/appointment.type/appointment-type.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 
@@ -54,7 +56,8 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentEventConverterService: AppointmentEventConverterService,
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
-    private loggedInService: LoggedInService) { }
+    private loggedInService: LoggedInService,
+    private appointmentTypeService: AppointmentTypeService) { }
 
   ngOnInit(): void {
     this.getSchedulerConfiguration()
@@ -179,7 +182,13 @@ export class ViewSchdulerComponent implements OnInit {
       this.refresh.next()
     })
   }
+  getAppointmnetType(name: string) {
+    return this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypeByName(name, clinicId))
+    )
 
+  }
   changeAppointmentStatusVisibility(event: any) {
     if (event === 'close')
       this.appointmentStatusVisibility = !this.appointmentStatusVisibility;

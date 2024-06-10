@@ -21,6 +21,7 @@ export class Appointment {
     note: string;
     repeatId: number;
     appointmentType: string | null = null;
+    appointmentTypeColor: string | null = null;
     appointmentRepetition: string | null = null;
     repeat: AppointmentRepeat;
     appointmentStatus: string;

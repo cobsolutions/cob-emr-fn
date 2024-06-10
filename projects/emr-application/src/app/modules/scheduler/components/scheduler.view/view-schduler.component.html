@@ -33,8 +33,7 @@
   </div>
 </div>
 <br />
-
-<div [ngSwitch]="view">
+<div [ngSwitch]="view" *ngIf="events">
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">

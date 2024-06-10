@@ -6,6 +6,8 @@ import { DotorUserService } from '../../../administration/services/user/doctor.u
 import { Patient } from '../../../patient/models/patient';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../models/appointment';
+import { AppointmentType } from '../../models/appointment.type';
+import { AppointmentTypeService } from '../appointment.type/appointment-type.service';
 import { PatientAppointmentService } from '../patient-appointment.service';
 
 @Injectable({
@@ -14,9 +16,11 @@ import { PatientAppointmentService } from '../patient-appointment.service';
 export class InitializeAppointmentService {
   patient$: Observable<Patient[]>;
   therapists$: Observable<User[]>;
+  appointmentTypes$: Observable<AppointmentType[]>;
   constructor(private loggedInService: LoggedInService
     , private patientAppointmentService: PatientAppointmentService
-    , private clinicalUserService: DotorUserService) {
+    , private clinicalUserService: DotorUserService
+    , private appointmnetTypeService: AppointmentTypeService) {
 
   }
   public findPatients() {
@@ -56,6 +60,15 @@ export class InitializeAppointmentService {
       filter(therapists => therapists !== null),
       map(response => {
         return response;
+      })
+    )
+  }
+  public findAppointmnetType() {
+    return this.loggedInService.selectedClinic$.pipe(
+      switchMap(clinicId => this.appointmnetTypeService.retrieveAppointmentTypes(clinicId)),
+      filter(therapists => therapists !== null),
+      map((response: any) => {
+        return response.records;
       })
     )
   }
