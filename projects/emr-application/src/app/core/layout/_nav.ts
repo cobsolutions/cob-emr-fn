@@ -68,12 +68,12 @@ export const NavItems: INavData[] = [
     ]
   }, {
     name: 'Referring-Provider',
-    url: '/emr/referring-provider',
+    url: '/emr/referring/provider',
     iconComponent: { name: 'cilUserPlus' },
     children: [
       {
         name: 'ReferringProviders',
-        url: ''
+        url: 'referring/provider/list'
       }
     ]
   },
