@@ -4,6 +4,7 @@ import { MenuItem } from "./model/nav.item";
 import { AdministrationRoleItemConverter } from "./role.item.converter/administration.role.item.converter";
 import { ClientRoleItemConverter } from "./role.item.converter/client.role.item.converter";
 import { OrganizationRoleItemConverter } from "./role.item.converter/organization.role.item.converter";
+import { ReferringProviderRoleItemConverter } from "./role.item.converter/referring.provider.role.item.converter";
 import { SchedulerRoleItemConverter } from "./role.item.converter/scheduler.role.item.converter";
 export class MenuItemsConstructor{
     public static construct(roles: string[]) {
@@ -12,6 +13,7 @@ export class MenuItemsConstructor{
         AdministrationRoleItemConverter.convert(roles, menuItems);
         SchedulerRoleItemConverter.convert(roles, menuItems)
         OrganizationRoleItemConverter.convert(roles, menuItems);
+        ReferringProviderRoleItemConverter.convert(roles, menuItems)
         return this.filterNavItems(menuItems)
     }
 

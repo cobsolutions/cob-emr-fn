@@ -66,5 +66,15 @@ export const NavItems: INavData[] = [
         url: 'administration/list/clinic'
       }
     ]
-  }
+  }, {
+    name: 'Referring Provider',
+    url: '/emr/referring/provider',
+    iconComponent: { name: 'cilUserPlus' },
+    children: [
+      {
+        name: 'ReferringProviders',
+        url: 'referring/provider/list'
+      }
+    ]
+  },
 ];

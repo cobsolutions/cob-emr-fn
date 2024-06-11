@@ -52,6 +52,11 @@ const routes: Routes = [
         path: 'scheduler',
         loadChildren: () =>
           import('./modules/scheduler/scheduler.module').then((m) => m.SchedulerModule)
+      },
+      {
+        path: 'referring/provider',
+        loadChildren: () =>
+          import('./modules/referring.provider/refering-provider.module').then((m) => m.ReferingProviderModule)
       }
     ]
 
