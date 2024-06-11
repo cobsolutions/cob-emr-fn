@@ -18,7 +18,7 @@
     <tbody>
         <tr *ngFor="let configuration of schedulerConfiguration$ | async;let i=index;">
             <td>{{i+1}}</td>
-            <td>{{configuration.clinicId}}</td> <!--Clinic-->
+            <td>{{configuration.clinicName}}</td> <!--Clinic-->
             <td>{{configuration.startHour}}</td><!--start hour-->
             <td>{{configuration.endHour}}</td><!--End hour-->
             <td>
