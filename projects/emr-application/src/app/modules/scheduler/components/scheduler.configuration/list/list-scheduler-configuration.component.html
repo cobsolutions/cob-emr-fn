@@ -24,8 +24,8 @@
         <tr *ngFor="let configuration of schedulerConfiguration$ | async;let i=index;">
             <td>{{i+1}}</td>
             <td>{{configuration.clinicName}}</td> <!--Clinic-->
-            <td>{{configuration.startHour}}</td><!--start hour-->
-            <td>{{configuration.endHour}}</td><!--End hour-->
+            <td>{{configuration.startHourStr}}</td><!--start hour-->
+            <td>{{configuration.endHourStr}}</td><!--End hour-->
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
                     <button cButton color="primary" variant="outline" size="sm"

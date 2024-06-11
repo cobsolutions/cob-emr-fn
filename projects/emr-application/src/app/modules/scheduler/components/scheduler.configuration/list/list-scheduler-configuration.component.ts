@@ -39,6 +39,15 @@ export class ListSchedulerConfigurationComponent implements OnInit {
       , switchMap((organizationId: number) => {
         return this.schedulerConfigurationService.retrieveCliniSchedulerConfigurations(organizationId)
       })
+      , map((configurations: SchedulerConfiguration[]) => {
+        for (var i = 0; i < configurations.length; i++) {
+          var startHour: number = moment(configurations[i].startHour).hour();
+          var endHour: number = moment(configurations[i].endHour).hour();
+          configurations[i].startHourStr = startHour > 12 ? (startHour - 12) + ' PM' : startHour + ' AM'
+          configurations[i].endHourStr = endHour > 12 ? (endHour - 12) + ' PM' : endHour + ' AM'
+        }
+        return configurations;
+      })
     )
   }
   public changeVisibility(event: any) {
@@ -47,5 +56,5 @@ export class ListSchedulerConfigurationComponent implements OnInit {
     if (event === 'close-update')
       this.editSchedulerConfigurationVisibility = false;
   }
-  
+
 }
