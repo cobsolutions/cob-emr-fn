@@ -39,7 +39,7 @@ export const NavItems: INavData[] = [
       },
       {
         name: 'Scheduler Configuration',
-        url: ''
+        url: 'scheduler/configuration'
       },
       {
         name: 'Appointment Type',

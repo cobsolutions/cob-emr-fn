@@ -25,6 +25,7 @@ import { AppointmentTypeListComponent } from './components/appointment.type/list
 import { AppointmentTypeCreateComponent } from './components/appointment.type/create/appointment-type-create.component';
 import { AppointmentTypeCreateModalComponent } from './components/appointment.type/create/modal/appointment-type-create-modal.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -40,7 +41,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
         AppointmentCancelNoshowModalComponent,
         AppointmentTypeListComponent,
         AppointmentTypeCreateComponent,
-        AppointmentTypeCreateModalComponent
+        AppointmentTypeCreateModalComponent,
+        ListSchedulerConfigurationComponent
     ],
     imports: [
         CommonModule,
