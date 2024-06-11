@@ -11,8 +11,9 @@ export class SchedulerConfigurationService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
   create(clinicSchedulerConfiguration: SchedulerConfiguration) {
-    const createClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration';
-    return this._http.post(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration));
+    const headers = { 'content-type': 'application/json' }
+    const createClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/create/configuration';
+    return this._http.post(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration), { 'headers': headers });
   }
 
   update(clinicSchedulerConfiguration: SchedulerConfiguration) {

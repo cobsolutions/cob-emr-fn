@@ -1,11 +1,12 @@
-import { Time } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
-import { Observable, switchMap, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, switchMap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInUser } from '../../../../security/model/loggedin.user';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { SchedulerConfiguration } from '../../../models/configuration';
 import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
 
 @Component({
@@ -26,12 +27,15 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
   notValidClinic?: boolean = false
   startDateNotAfterEndDate?: boolean = false;
   fourHoursDeff?: boolean = false
+  schedulerConfiguration: SchedulerConfiguration
   constructor(private schedulerConfigurationService: SchedulerConfigurationService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.clinics$ = this.loggedInService.load().pipe(
       switchMap((loggedInUser: LoggedInUser) => {
+
         return this.schedulerConfigurationService.findNotConfigurlableClinics(loggedInUser.organizationId)
       })
     )
@@ -43,7 +47,23 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
   }
   create() {
     if (this.isValidForm()) {
-      this.changeVisibility.emit('close-create');
+      this.prepareSchedulerConfiguration()
+      this.loggedInService.load().pipe(
+        switchMap((loggedInUser: LoggedInUser) => {
+          this.schedulerConfiguration.organizationId = loggedInUser.organizationId
+          return this.schedulerConfigurationService.create(this.schedulerConfiguration)
+        })
+      ).subscribe(result => {
+        this.toastr.success('Scheduler Configuration Created.');
+        this.changeVisibility.emit('close-create');
+      })
+    }
+  }
+  private prepareSchedulerConfiguration() {
+    this.schedulerConfiguration = {
+      startHour: moment(this.startDate).unix() * 1000,
+      endHour: moment(this.endDate).unix() * 1000,
+      clinicId: this.selectecClinic.id
     }
   }
   private isValidForm() {
