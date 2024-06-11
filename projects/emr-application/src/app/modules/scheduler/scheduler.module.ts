@@ -27,6 +27,7 @@ import { ListSchedulerConfigurationComponent } from './components/scheduler.conf
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { CreateSchedulerConfigurationComponent } from './components/scheduler.configuration/create/create-scheduler-configuration.component';
+import { RepeatAppointmentComponent } from './components/appointment.repeat/repeat-appointment.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -45,6 +46,7 @@ import { CreateSchedulerConfigurationComponent } from './components/scheduler.co
         AppointmentTypeCreateModalComponent,
         ListSchedulerConfigurationComponent,
         CreateSchedulerConfigurationComponent,
+        RepeatAppointmentComponent,
     ],
     imports: [
         CommonModule,
