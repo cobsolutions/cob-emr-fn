@@ -47,6 +47,19 @@
     <button (click)="toggleReferringProvider()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <create-referring-provider [mode]="'create'" (changeVisibility)="changeVisibility($event)"></create-referring-provider>
+    <create-referring-provider [mode]="'create'" (changeVisibility)="changeVisibility($event)"
+      *ngIf="addReferringProviderVisibility"></create-referring-provider>
+  </c-modal-body>
+</c-modal>
+
+<c-modal id="editReferringProvider" [visible]="editReferringProviderVisibility" size="xl">
+  <c-modal-header>
+    <h3 cModalTitle>Edit Referring Provider</h3>
+    <button (click)="toggleEditReferringProvvider()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <create-referring-provider [mode]="'update'" (changeVisibility)="changeVisibility($event)"
+      [selectedreferringProvider]="selectedreferringProvider"
+      *ngIf="editReferringProviderVisibility"></create-referring-provider>
   </c-modal-body>
 </c-modal>

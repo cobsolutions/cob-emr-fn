@@ -7,7 +7,7 @@ export class ReferringProviderRoleItemConverter{
         for (var i = 0; i < roles.length; i++) {
             if (roles[i] === Role.REFERRING_DOCTOR_ROLE)
                 menuItem = {
-                    parent: "Referring-Provider"
+                    parent: "Referring Provider"
                 }
         }
         if (menuItem !== undefined)

@@ -14,14 +14,25 @@ import { ReferringProviderService } from '../../service/referring-provider.servi
 export class CreateReferringProviderComponent implements OnInit {
   referringProvider: ReferringProvider = {}
   @Input() mode?: string
+  @Input() selectedreferringProvider: ReferringProvider
   @Output() changeVisibility = new EventEmitter<string>()
   constructor(private referringProviderService: ReferringProviderService
     , private toastr: ToastrService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    if (this.selectedreferringProvider)
+      this.referringProvider = this.selectedreferringProvider
   }
-  create() {
+  submit() {
+    if (this.mode === 'create')
+      this.create();
+    if (this.mode === 'update')
+      this.update()
+
+  }
+
+  private create() {
     this.loggedInService.load().pipe(
       map((loggedInUser: LoggedInUser) => {
         return loggedInUser.organizationId
@@ -32,8 +43,15 @@ export class CreateReferringProviderComponent implements OnInit {
       })
     )
       .subscribe(result => {
-        this.changeVisibility.emit('close')
+        this.changeVisibility.emit('create-close')
         this.toastr.success('Referring Provider Created.');
       })
+  }
+
+  private update() {
+    this.referringProviderService.update(this.referringProvider).subscribe(result => {
+      this.changeVisibility.emit('update-close')
+      this.toastr.success('Referring Provider updated.');
+    })
   }
 }

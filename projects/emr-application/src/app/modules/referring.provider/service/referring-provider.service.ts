@@ -29,6 +29,11 @@ export class ReferringProviderService {
     var createURL = this.baseURL + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(referringProvider), { 'headers': headers })
   }
+  update(referringProvider: ReferringProvider) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.baseURL + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(referringProvider), { 'headers': headers })
+  }
   get(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return config$.pipe(
       debounceTime(100),

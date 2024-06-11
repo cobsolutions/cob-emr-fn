@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
 import { ReferringProvider } from '../../model/referring.provider';
 import { ReferringProviderService } from '../../service/referring-provider.service';
+import { CreateReferringProviderComponent } from '../create/create-referring-provider.component';
 
 @Component({
   selector: 'app-list-referring-provider',
@@ -12,7 +13,9 @@ import { ReferringProviderService } from '../../service/referring-provider.servi
 })
 export class ListReferringProviderComponent extends ListTemplate implements OnInit {
   referringProvider$: Observable<ReferringProvider[]>;
+  selectedreferringProvider: ReferringProvider;
   addReferringProviderVisibility: boolean = false;
+  editReferringProviderVisibility: boolean = false;
   columns: (string | IColumn)[];
   constructor(private referringProviderService: ReferringProviderService) { super(); }
 
@@ -24,6 +27,9 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
   toggleReferringProvider() {
     this.addReferringProviderVisibility = !this.addReferringProviderVisibility
   }
+  toggleEditReferringProvvider() {
+    this.editReferringProviderVisibility = !this.editReferringProviderVisibility;
+  }
   create() {
     this.addReferringProviderVisibility = true;
   }
@@ -31,7 +37,8 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
 
   }
   edit(item: any) {
-
+    this.selectedreferringProvider = item;
+    this.editReferringProviderVisibility = true;
   }
   find() {
     this.referringProvider$ = this.referringProviderService.get(this.apiParams$).pipe(
@@ -63,10 +70,11 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
     );
   }
   changeVisibility(event: any) {
-    if (event === 'close') {
+    console.log(event)
+    if (event === 'create-close')
       this.addReferringProviderVisibility = false
-      this.find();
-    }
-
+    if (event === 'update-close')
+      this.editReferringProviderVisibility = false
+    this.find();
   }
 }
