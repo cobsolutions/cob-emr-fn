@@ -2,6 +2,6 @@ export enum SchedulerRepetition{
     Daily='Daily',
     Weekly='Weekly',
     Monthly='Monthly',
-    Yearly='Monthly',
+    Yearly='Yearly',
     Every_Week_Day='Every Week Day'
 }
