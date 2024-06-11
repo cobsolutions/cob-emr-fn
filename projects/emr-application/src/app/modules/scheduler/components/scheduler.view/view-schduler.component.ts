@@ -13,13 +13,11 @@ import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
-import { AppointmentType } from "../../models/appointment.type";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
-import { AppointmentTypeService } from "../../service/appointment.type/appointment-type.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 
@@ -35,10 +33,6 @@ import { AppointmentAddComponent } from "../appointment.add/appointment-add.comp
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  appointmentStatusVisibility = false;
-  appointmentEditVisibility = false;
-  appointmentDeleteVisibility = false
-  appointmentCancelNoShowVisibility = false
   view: CalendarView = CalendarView.Month;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   CalendarView = CalendarView;
@@ -57,35 +51,23 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
-    private appointmentTypeService: AppointmentTypeService) { }
+  ) { }
 
   ngOnInit(): void {
     this.getSchedulerConfiguration()
     this.getAppointments();
   }
-
-  toggleAppointmentStatus() {
-    this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
+  dayClicked(date: Date){
+    this.viewDate = date;
+    this.AddAppointment();
   }
-  toggleAppointmentCancelNoShow() {
-    this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
+  weekClicked(date: Date): void {
+    this.viewDate = date;
+    this.AddAppointment();
   }
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
-      if (result.action !== 'cancel') {
-        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
-        this.refresh.next();
-        this.toastr.success('Appointment created Successfully');
-      }
-    })
+  monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    this.checkOpenEvent(date, events);
+    this.AddAppointment();
   }
   eventTimesChanged({
     event,
@@ -153,7 +135,25 @@ export class ViewSchdulerComponent implements OnInit {
         }
     });
   }
-
+  private checkOpenEvent(date: Date, events: CalendarEvent[]) {
+    if (isSameMonth(date, this.viewDate)) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
+  }
+  private AddAppointment() {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
+      if (result.action !== 'cancel') {
+        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
+        this.refresh.next();
+        this.toastr.success('Appointment created Successfully');
+      }
+    })
+  }
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
@@ -181,22 +181,6 @@ export class ViewSchdulerComponent implements OnInit {
       }
       this.refresh.next()
     })
-  }
-  getAppointmnetType(name: string) {
-    return this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypeByName(name, clinicId))
-    )
-
-  }
-  changeAppointmentStatusVisibility(event: any) {
-    if (event === 'close')
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-    if (event === 'cancel' || event === 'noshow') {
-      this.cancelNoShow = event;
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-      this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
-    }
   }
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(

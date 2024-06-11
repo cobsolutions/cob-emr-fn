@@ -35,16 +35,18 @@
 <br />
 <div [ngSwitch]="view" *ngIf="events">
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-    [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+    [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
   <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+    (hourSegmentClicked)="weekClicked($event.date)"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
   </mwl-calendar-week-view>
   <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+    (hourSegmentClicked)="dayClicked($event.date)"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
   </mwl-calendar-day-view>
