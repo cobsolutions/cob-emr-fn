@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EMPTY, Observable, switchMap } from 'rxjs';
@@ -8,9 +9,11 @@ import { Patient } from '../../../patient/models/patient';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
+import { AppointmnetRepeat } from '../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../service/appointment.service';
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { InitializeAppointmentService } from '../../service/init.appintment/initialize-appointment.service';
+import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
 
 export interface TreatingDoctor {
   doctorName,
@@ -24,6 +27,7 @@ export interface TreatingDoctor {
 })
 export class AppointmentAddComponent implements OnInit {
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
+  @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() startDate: Date;
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
@@ -68,6 +72,7 @@ export class AppointmentAddComponent implements OnInit {
     if (this.createAppointmentForm.valid) {
       this.notValidForm = false;
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
+      this.fillAppointmnetRepeat();
       this.appointment.constructTitle();
       return this.loggedInService.selectedClinic$.pipe(
         switchMap(clinicId => {
@@ -79,5 +84,13 @@ export class AppointmentAddComponent implements OnInit {
       this.notValidForm = true;
       return EMPTY;
     }
+  }
+  private fillAppointmnetRepeat() {
+    console.log(JSON.stringify(this.repeatAppointmentComponent.dailyRepeatAppointment))
+    var dailyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetition,
+      daily: this.repeatAppointmentComponent.dailyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = dailyAppointmnetRepeat
   }
 }

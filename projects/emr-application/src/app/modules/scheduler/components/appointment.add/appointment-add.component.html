@@ -113,13 +113,11 @@
                             [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
                             [(ngModel)]="appointment.appointmentType" #apptype="ngModel" required>
                             <option [ngValue]="null" disabled selected>Selet Appointment Type</option>
-                            <option>Don't repeat</option>
                             <option *ngFor="let type of appointmentTypes$ | async
                             " [value]="type.name" [ngStyle]="{'color': type.color}">
                                 {{type.name}}
                             </option>
                         </select>
-                        {{appointment.appointmentType}}
                         <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
                             name="appointmentnote" [(ngModel)]="appointment.note"
                             placeholder="Appointment Note"></textarea>
@@ -142,7 +140,7 @@
                                 {{repetition.value}}
                             </option>
                         </select>
-                        <repeat-appointment *ngIf="appointment.appointmentRepetition"
+                        <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetition"
                             [repeatType]="appointment.appointmentRepetition"></repeat-appointment>
                     </c-card-body>
                 </c-card>

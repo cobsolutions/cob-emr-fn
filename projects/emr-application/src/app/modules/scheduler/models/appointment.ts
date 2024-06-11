@@ -3,6 +3,7 @@ import { Patient } from '../../patient/models/patient';
 import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reason';
 import { AppointmentDate } from './appointment.date';
 import { AppointementStatus } from './appointment.status';
+import { AppointmnetRepeat } from './repeat/appointment.repeat';
 
 export class Appointment {
     id: number;
@@ -24,6 +25,7 @@ export class Appointment {
     appointmentRepetition: string | null = null;
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
+    appointmentRepeat: AppointmnetRepeat;
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
     public constructTitle() {
         this.title = this.patient.fullName + ':' + this.patientCase.title
