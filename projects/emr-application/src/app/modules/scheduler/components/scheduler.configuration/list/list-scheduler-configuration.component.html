@@ -5,6 +5,11 @@
     </c-col>
 </c-row>
 <hr />
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button cButton color="primary" class="me-md-2" variant="outline"
+        (click)="openAddSchedulerConfigurationModal()">Create
+        Scheduler Configuration</button>
+</div>
 <table class="table table-sm">
     <thead>
         <tr>
@@ -23,11 +28,33 @@
             <td>{{configuration.endHour}}</td><!--End hour-->
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm">
-                        <svg cIcon name="cilTrash"></svg>
+                    <button cButton color="primary" variant="outline" size="sm"
+                        (click)="openEditSchedulerConfigurationModal(configuration)">
+                        <svg cIcon name="cilPen"></svg>
                     </button>
                 </c-button-group>
             </td>
         </tr>
     </tbody>
 </table>
+<c-modal id="addSchedulerConfiguration" [visible]="addSchedulerConfigurationVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Add Scheduler Configuration</h3>
+        <button (click)="toggleAddSchedulerConfiguration()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <create-scheduler-configuration *ngIf="addSchedulerConfigurationVisibility" [mode]="'create'"
+            (changeFacilityVisibility)="changeFacilityVisibility($event)"></create-scheduler-configuration>
+    </c-modal-body>
+</c-modal>
+
+<c-modal id="editSchedulerConfiguration" [visible]="editSchedulerConfigurationVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Edit Scheduler Configuration</h3>
+        <button (click)="toggleEditSchedulerConfiguration()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <create-scheduler-configuration *ngIf="editSchedulerConfigurationVisibility" [mode]="'update'"
+            (changeFacilityVisibility)="changeFacilityVisibility($event)"></create-scheduler-configuration>
+    </c-modal-body>
+</c-modal>

@@ -14,7 +14,22 @@ export class ListSchedulerConfigurationComponent implements OnInit {
   schedulerConfiguration$: Observable<SchedulerConfiguration[]>;
   constructor(private schedulerConfigurationService: SchedulerConfigurationService
     , private loggedInService: LoggedInService) { }
+  addSchedulerConfigurationVisibility: boolean = false;
+  editSchedulerConfigurationVisibility: boolean = false;
 
+  toggleAddSchedulerConfiguration() {
+    this.addSchedulerConfigurationVisibility = !this.addSchedulerConfigurationVisibility;
+  }
+  toggleEditSchedulerConfiguration() {
+    this.editSchedulerConfigurationVisibility = !this.editSchedulerConfigurationVisibility;
+  }
+
+  openAddSchedulerConfigurationModal() {
+    this.addSchedulerConfigurationVisibility = true;
+  }
+  openEditSchedulerConfigurationModal(item: any) {
+    this.editSchedulerConfigurationVisibility = true;
+  }
   ngOnInit(): void {
     this.schedulerConfiguration$ = this.loggedInService.load().pipe(
       map((loggedInUser: LoggedInUser) => {
@@ -25,5 +40,10 @@ export class ListSchedulerConfigurationComponent implements OnInit {
       })
     )
   }
-
+  public changeFacilityVisibility(event: any) {
+    if (event === 'close-create')
+      this.addSchedulerConfigurationVisibility = false;
+    if (event === 'close-update')
+      this.editSchedulerConfigurationVisibility = false;
+  }
 }
