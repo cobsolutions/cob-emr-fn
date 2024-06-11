@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, from, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, of, switchMap, tap } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../model/loggedin.user';
@@ -12,6 +12,7 @@ import { LoggedInUser } from '../../model/loggedin.user';
 })
 export class LoggedInService {
   loggedInUser: LoggedInUser
+  clinics: Observable<Clinic[]>;
   private userUrl = environment.baseURL
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   constructor(private keycloakService: KeycloakService, private httpClient: HttpClient) { }
@@ -52,8 +53,13 @@ export class LoggedInService {
     }
   }
   private getClinics(uuid: string) {
-    const url = this.userUrl + 'clinic/find' + '/user/' + uuid;
-    return this.httpClient.get(url).pipe(
-      map((response: any) => <Clinic[]>response));
+    if (!this.clinics) {
+      const url = this.userUrl + 'clinic/find' + '/user/' + uuid;
+      this.clinics = this.httpClient.get(url).pipe(
+        map((response: any) => <Clinic[]>response));
+      return this.clinics;
+    } else {
+      return this.clinics
+    }
   }
 }

@@ -57,7 +57,7 @@ export class ViewSchdulerComponent implements OnInit {
     this.getSchedulerConfiguration()
     this.getAppointments();
   }
-  dayClicked(date: Date){
+  dayClicked(date: Date) {
     this.viewDate = date;
     this.AddAppointment();
   }
@@ -185,7 +185,12 @@ export class ViewSchdulerComponent implements OnInit {
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.schedulerConfigurationService.retrieveCliniSchedulerConfigurationById(clinicId))
+      switchMap(clinicId => this.schedulerConfigurationService.retrieveCliniSchedulerConfigurationById(clinicId)),
+      map((configuration: SchedulerConfiguration) => {
+        configuration.startHour = moment(configuration.startHour).hour();
+        configuration.endHour = moment(configuration.endHour).hour();
+        return configuration;
+      })
     )
   }
 }

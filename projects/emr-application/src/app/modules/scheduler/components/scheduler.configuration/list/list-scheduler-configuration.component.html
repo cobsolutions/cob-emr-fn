@@ -1,0 +1,61 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <h1>Scheduler Configuration</h1>
+    </c-col>
+</c-row>
+<hr />
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button cButton color="primary" class="me-md-2" variant="outline"
+        (click)="openAddSchedulerConfigurationModal()">Create
+        Scheduler Configuration</button>
+</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Clinic</th>
+            <th scope="col">Start Hour</th>
+            <th scope="col">End Hour</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let configuration of schedulerConfiguration$ | async;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{configuration.clinicName}}</td> <!--Clinic-->
+            <td>{{configuration.startHourStr}}</td><!--start hour-->
+            <td>{{configuration.endHourStr}}</td><!--End hour-->
+            <td>
+                <c-button-group aria-label="First group" class="me-2" role="group">
+                    <button cButton color="primary" variant="outline" size="sm"
+                        (click)="openEditSchedulerConfigurationModal(configuration)">
+                        <svg cIcon name="cilPen"></svg>
+                    </button>
+                </c-button-group>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<c-modal id="addSchedulerConfiguration" [visible]="addSchedulerConfigurationVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Add Scheduler Configuration</h3>
+        <button (click)="toggleAddSchedulerConfiguration()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <create-scheduler-configuration *ngIf="addSchedulerConfigurationVisibility" [mode]="'create'"
+            (changeVisibility)="changeVisibility($event)"></create-scheduler-configuration>
+    </c-modal-body>
+</c-modal>
+
+<c-modal id="editSchedulerConfiguration" [visible]="editSchedulerConfigurationVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Edit Scheduler Configuration</h3>
+        <button (click)="toggleEditSchedulerConfiguration()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <create-scheduler-configuration *ngIf="editSchedulerConfigurationVisibility" [mode]="'update'"
+            (changeVisibility)="changeVisibility($event)"
+            [selectedSchedulerConfiguration]="selectedSchedulerConfiguration"></create-scheduler-configuration>
+    </c-modal-body>
+</c-modal>

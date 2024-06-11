@@ -11,8 +11,9 @@ export class SchedulerConfigurationService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
   create(clinicSchedulerConfiguration: SchedulerConfiguration) {
-    const createClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration';
-    return this._http.post(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration));
+    const headers = { 'content-type': 'application/json' }
+    const createClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/create/configuration';
+    return this._http.post(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration), { 'headers': headers });
   }
 
   update(clinicSchedulerConfiguration: SchedulerConfiguration) {
@@ -20,17 +21,18 @@ export class SchedulerConfigurationService {
     return this._http.put(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration));
   }
 
-  retrieveCliniSchedulerConfigurationById(id: number) :Observable<any>{
+  retrieveCliniSchedulerConfigurationById(id: number): Observable<any> {
     const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/find/clinicId/' + id;
     return this._http.get<SchedulerConfiguration>(listClinicSchedulerConfigurationURL);
   }
 
-  retrieveClinicSchedulerConfigurations(uuid: string) {
-    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration/find/uuid/' + uuid;
+  retrieveCliniSchedulerConfigurations(organizationId: number): Observable<any> {
+    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/find/organizationId/' + organizationId;
     return this._http.get(listClinicSchedulerConfigurationURL);
   }
-  retrieveCliniSchedulerConfigurationByClinicId(clinicId: number, organizationId: number) {
-    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration/find/clinicId/' + clinicId + '/organization/' + organizationId;
-    return this._http.get<SchedulerConfiguration>(listClinicSchedulerConfigurationURL);
+
+  findNotConfigurlableClinics(organizationId: number): Observable<any> {
+    const listClinicSchedulerConfigurationURL = this.baseUrl + 'clinic/find-not-configurable/organization/' + organizationId;
+    return this._http.get(listClinicSchedulerConfigurationURL);
   }
 }

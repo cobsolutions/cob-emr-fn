@@ -7,6 +7,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EmrCommonModule } from '../common/emr-common.module';
 import { AppointmentEditComponent } from './components/appintment.edit/appointment-edit.component';
@@ -16,15 +17,16 @@ import { AppointmentActionModalComponent } from './components/appointment.action
 import { AppointmentAddComponent } from './components/appointment.add/appointment-add.component';
 import { AddAppobntmentModalComponent } from './components/appointment.add/modal/add-appobntment-modal.component';
 import { AppointmentCancelNoshowComponent } from './components/appointment.cancel.noshow/appointment-cancel-noshow.component';
+import { AppointmentCancelNoshowModalComponent } from './components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentConfirmComponent } from './components/appointment.confirm/appointment-confirm.component';
 import { AppointmentStatusModalComponent } from './components/appointment.status/modal/appointment-status-modal.component';
-import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
-import { SchedulerRoutingModule } from './scheduler-routing.module';
-import { AppointmentCancelNoshowModalComponent } from './components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
-import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
 import { AppointmentTypeCreateComponent } from './components/appointment.type/create/appointment-type-create.component';
 import { AppointmentTypeCreateModalComponent } from './components/appointment.type/create/modal/appointment-type-create-modal.component';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
+import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
+import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
+import { SchedulerRoutingModule } from './scheduler-routing.module';
+import { CreateSchedulerConfigurationComponent } from './components/scheduler.configuration/create/create-scheduler-configuration.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -40,7 +42,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
         AppointmentCancelNoshowModalComponent,
         AppointmentTypeListComponent,
         AppointmentTypeCreateComponent,
-        AppointmentTypeCreateModalComponent
+        AppointmentTypeCreateModalComponent,
+        ListSchedulerConfigurationComponent,
+        CreateSchedulerConfigurationComponent,
     ],
     imports: [
         CommonModule,
