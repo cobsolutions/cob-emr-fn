@@ -5,6 +5,6 @@ export class SchedulerConfiguration {
     endHour?: number;
     startHourStr?: string;
     endHourStr?: string;
-    clinicId?: string;
+    clinicId?: number;
     organizationId?: number
 }

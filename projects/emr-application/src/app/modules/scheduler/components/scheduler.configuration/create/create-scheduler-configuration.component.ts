@@ -44,8 +44,15 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
     }
   }
   update() {
+    this.selectedSchedulerConfiguration.startHour = moment(this.startDate).unix() * 1000
+    this.selectedSchedulerConfiguration.endHour = moment(this.endDate).unix() * 1000
+    console.log(this.isValidForm())
     if (this.isValidForm()) {
-      this.changeVisibility.emit('close-update');
+      this.schedulerConfigurationService.create(this.selectedSchedulerConfiguration)
+        .subscribe(result => {
+          this.changeVisibility.emit('close-update');
+        });
+
     }
   }
   private fillModel() {
@@ -68,15 +75,15 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
       })
     }
   }
-  private prepareSchedulerConfiguration() {
+  private prepareSchedulerConfiguration(clinicId?: number) {
     this.schedulerConfiguration = {
       startHour: moment(this.startDate).unix() * 1000,
       endHour: moment(this.endDate).unix() * 1000,
-      clinicId: this.selectecClinic.id
+      clinicId: clinicId !== undefined ? clinicId : Number(this.selectecClinic.id)
     }
   }
   private isValidForm() {
-    var notValidClinic = this.validateClinic();
+    var notValidClinic = this.mode === 'create' ? this.validateClinic() : false;;
     var notValidStartDate = this.validateStartDate();
     var notValidEndDate = this.validateEndDate()
     var startDateNotAfterEndDate = this.checkstartDateNotAfterEndDate();

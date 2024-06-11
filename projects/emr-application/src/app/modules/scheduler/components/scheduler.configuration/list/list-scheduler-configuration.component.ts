@@ -58,6 +58,7 @@ export class ListSchedulerConfigurationComponent implements OnInit {
       this.addSchedulerConfigurationVisibility = false;
     if (event === 'close-update')
       this.editSchedulerConfigurationVisibility = false;
+    this.ngOnInit();
   }
 
 }
