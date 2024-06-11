@@ -23,8 +23,4 @@ export class AppointmentTypeService {
     const url = this.baseUrl + '/find/clinic/' + clinicId + '/id/' + id
     return this._http.get(url);
   }
-  retrieveAppointmentTypeByName(name: string, clinicId: number) {
-    const url = this.baseUrl + '/find/clinic/' + clinicId + '/name/' + name
-    return this._http.get(url);
-  }
 }

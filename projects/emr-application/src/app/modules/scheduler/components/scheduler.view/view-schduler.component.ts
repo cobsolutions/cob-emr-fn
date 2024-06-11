@@ -35,10 +35,6 @@ import { AppointmentAddComponent } from "../appointment.add/appointment-add.comp
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  appointmentStatusVisibility = false;
-  appointmentEditVisibility = false;
-  appointmentDeleteVisibility = false
-  appointmentCancelNoShowVisibility = false
   view: CalendarView = CalendarView.Month;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   CalendarView = CalendarView;
@@ -64,12 +60,6 @@ export class ViewSchdulerComponent implements OnInit {
     this.getAppointments();
   }
 
-  toggleAppointmentStatus() {
-    this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-  }
-  toggleAppointmentCancelNoShow() {
-    this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
-  }
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
@@ -181,22 +171,6 @@ export class ViewSchdulerComponent implements OnInit {
       }
       this.refresh.next()
     })
-  }
-  getAppointmnetType(name: string) {
-    return this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypeByName(name, clinicId))
-    )
-
-  }
-  changeAppointmentStatusVisibility(event: any) {
-    if (event === 'close')
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-    if (event === 'cancel' || event === 'noshow') {
-      this.cancelNoShow = event;
-      this.appointmentStatusVisibility = !this.appointmentStatusVisibility;
-      this.appointmentCancelNoShowVisibility = !this.appointmentCancelNoShowVisibility;
-    }
   }
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
