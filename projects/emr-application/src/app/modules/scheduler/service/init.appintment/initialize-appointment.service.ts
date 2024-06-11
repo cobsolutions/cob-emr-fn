@@ -74,8 +74,9 @@ export class InitializeAppointmentService {
   }
   public initializeAppointmentDate(appointment: Appointment, startDate?: Date) {
     if (startDate) {
+      var startHour = moment(startDate).hour() === 0 ? 8 : moment(startDate).hour();
       appointment.appointmentDate.startDate = startDate;
-      appointment.appointmentDate.startTime = moment(startDate).set("hour", 8).set("minute", 0).toDate();;
+      appointment.appointmentDate.startTime = moment(startDate).set("hour", startHour).set("minute", 0).toDate();;
       appointment.appointmentDate.endDate = moment(appointment.appointmentDate.startDate).toDate();
       appointment.appointmentDate.endTime = moment(appointment.appointmentDate.startTime).add(30, 'minutes').toDate()
     } else {

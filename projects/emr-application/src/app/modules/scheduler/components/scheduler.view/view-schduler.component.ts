@@ -13,13 +13,11 @@ import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
-import { AppointmentType } from "../../models/appointment.type";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
-import { AppointmentTypeService } from "../../service/appointment.type/appointment-type.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 
@@ -53,29 +51,23 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
-    private appointmentTypeService: AppointmentTypeService) { }
+  ) { }
 
   ngOnInit(): void {
     this.getSchedulerConfiguration()
     this.getAppointments();
   }
-
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
-      if (result.action !== 'cancel') {
-        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
-        this.refresh.next();
-        this.toastr.success('Appointment created Successfully');
-      }
-    })
+  dayClicked(date: Date){
+    this.viewDate = date;
+    this.AddAppointment();
+  }
+  weekClicked(date: Date): void {
+    this.viewDate = date;
+    this.AddAppointment();
+  }
+  monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    this.checkOpenEvent(date, events);
+    this.AddAppointment();
   }
   eventTimesChanged({
     event,
@@ -143,7 +135,25 @@ export class ViewSchdulerComponent implements OnInit {
         }
     });
   }
-
+  private checkOpenEvent(date: Date, events: CalendarEvent[]) {
+    if (isSameMonth(date, this.viewDate)) {
+      if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
+  }
+  private AddAppointment() {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
+      if (result.action !== 'cancel') {
+        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
+        this.refresh.next();
+        this.toastr.success('Appointment created Successfully');
+      }
+    })
+  }
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
