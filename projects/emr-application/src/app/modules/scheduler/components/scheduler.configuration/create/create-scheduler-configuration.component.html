@@ -19,20 +19,25 @@
         <label for="endtime">End Time</label>
         <c-time-picker size="sm" id="endtime" [(time)]="endDate"></c-time-picker>
     </div>
-    <small *ngIf="notValidClinic" class="form-text text-danger">
-        Clinic is required
-    </small>
-    <div class="form-group mb-3">
-        <label for="clinic">Clinic</label>
-        <select cSelect sizing="sm" id="clinic" [(ngModel)]="selectecClinic" name="configClinics"
-            #configClinics="ngModel"
-            [ngClass]="{'is-invalid': configClinics.invalid && (configClinics.dirty || configClinics.touched)}">
-            <option disabled [ngValue]=undefined>Select Clinic</option>
-            <option *ngFor="let clinic of clinics$ | async" [ngValue]="clinic">
-                {{clinic.name}}
-            </option>
-        </select>
-    </div>
+    <span *ngIf="mode ==='create'">
+        <small *ngIf="notValidClinic" class="form-text text-danger">
+            Clinic is required
+        </small>
+        <div class="form-group mb-3">
+            <label for="clinic">Clinic</label>
+            <select cSelect sizing="sm" id="clinic" [(ngModel)]="selectecClinic" name="configClinics"
+                #configClinics="ngModel"
+                [ngClass]="{'is-invalid': configClinics.invalid && (configClinics.dirty || configClinics.touched)}">
+                <option disabled [ngValue]=undefined>Select Clinic</option>
+                <option *ngFor="let clinic of clinics$ | async" [ngValue]="clinic">
+                    {{clinic.name}}
+                </option>
+            </select>
+        </div>
+    </span>
+    <span *ngIf="mode ==='update'">
+        <strong>Clinic : </strong> {{selectedSchedulerConfiguration.clinicName}}
+    </span>
     <div class="d-grid gap-2 col-2 mx-auto mb-1">
         <button *ngIf="mode==='create'" cButton color="primary" variant="outline" type="button"
             (click)="create()">Create</button>

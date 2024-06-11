@@ -55,6 +55,7 @@
     </c-modal-header>
     <c-modal-body>
         <create-scheduler-configuration *ngIf="editSchedulerConfigurationVisibility" [mode]="'update'"
-            (changeVisibility)="changeVisibility($event)"></create-scheduler-configuration>
+            (changeVisibility)="changeVisibility($event)"
+            [selectedSchedulerConfiguration]="selectedSchedulerConfiguration"></create-scheduler-configuration>
     </c-modal-body>
 </c-modal>

@@ -15,9 +15,11 @@ export class ListSchedulerConfigurationComponent implements OnInit {
   schedulerConfiguration$: Observable<SchedulerConfiguration[]>;
   constructor(private schedulerConfigurationService: SchedulerConfigurationService
     , private loggedInService: LoggedInService) { }
+
   addSchedulerConfigurationVisibility: boolean = false;
   editSchedulerConfigurationVisibility: boolean = false;
 
+  selectedSchedulerConfiguration: SchedulerConfiguration;
   toggleAddSchedulerConfiguration() {
     this.addSchedulerConfigurationVisibility = !this.addSchedulerConfigurationVisibility;
   }
@@ -29,6 +31,7 @@ export class ListSchedulerConfigurationComponent implements OnInit {
     this.addSchedulerConfigurationVisibility = true;
   }
   openEditSchedulerConfigurationModal(item: any) {
+    this.selectedSchedulerConfiguration = item;
     this.editSchedulerConfigurationVisibility = true;
   }
   ngOnInit(): void {

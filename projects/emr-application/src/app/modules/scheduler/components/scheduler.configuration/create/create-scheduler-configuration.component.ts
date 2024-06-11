@@ -28,6 +28,7 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
   startDateNotAfterEndDate?: boolean = false;
   fourHoursDeff?: boolean = false
   schedulerConfiguration: SchedulerConfiguration
+  @Input() selectedSchedulerConfiguration: SchedulerConfiguration;
   constructor(private schedulerConfigurationService: SchedulerConfigurationService
     , private loggedInService: LoggedInService
     , private toastr: ToastrService) { }
@@ -35,14 +36,22 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
   ngOnInit(): void {
     this.clinics$ = this.loggedInService.load().pipe(
       switchMap((loggedInUser: LoggedInUser) => {
-
         return this.schedulerConfigurationService.findNotConfigurlableClinics(loggedInUser.organizationId)
       })
     )
+    if (this.mode === 'update') {
+      this.fillModel();
+    }
   }
   update() {
     if (this.isValidForm()) {
       this.changeVisibility.emit('close-update');
+    }
+  }
+  private fillModel() {
+    if (this.selectedSchedulerConfiguration) {
+      this.startDate = moment.unix(this.selectedSchedulerConfiguration.startHour / 1000).toDate()
+      this.endDate = moment.unix(this.selectedSchedulerConfiguration.endHour / 1000).toDate()
     }
   }
   create() {
