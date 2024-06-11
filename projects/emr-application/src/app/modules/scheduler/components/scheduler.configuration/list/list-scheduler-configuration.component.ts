@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { map, Observable, switchMap } from 'rxjs';
 import { LoggedInUser } from '../../../../security/model/loggedin.user';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
@@ -40,10 +41,11 @@ export class ListSchedulerConfigurationComponent implements OnInit {
       })
     )
   }
-  public changeFacilityVisibility(event: any) {
+  public changeVisibility(event: any) {
     if (event === 'close-create')
       this.addSchedulerConfigurationVisibility = false;
     if (event === 'close-update')
       this.editSchedulerConfigurationVisibility = false;
   }
+  
 }

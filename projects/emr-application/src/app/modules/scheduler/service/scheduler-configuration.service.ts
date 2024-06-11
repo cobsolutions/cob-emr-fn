@@ -25,8 +25,13 @@ export class SchedulerConfigurationService {
     return this._http.get<SchedulerConfiguration>(listClinicSchedulerConfigurationURL);
   }
 
-  retrieveCliniSchedulerConfigurations(organizationId: number) : Observable<any>{
+  retrieveCliniSchedulerConfigurations(organizationId: number): Observable<any> {
     const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/find/organizationId/' + organizationId;
+    return this._http.get(listClinicSchedulerConfigurationURL);
+  }
+
+  findNotConfigurlableClinics(organizationId: number): Observable<any> {
+    const listClinicSchedulerConfigurationURL = this.baseUrl + 'clinic/find-not-configurable/organization/' + organizationId;
     return this._http.get(listClinicSchedulerConfigurationURL);
   }
 }

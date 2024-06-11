@@ -1,1 +1,42 @@
-<p>create-scheduler-configuration works!</p>
+<small *ngIf="startDateNotAfterEndDate" class="form-text text-danger">
+    Start date exceeds end date.
+</small>
+<small *ngIf="fourHoursDeff" class="form-text text-danger">
+    The difference between the dates is less than 4 hours.
+</small>
+<c-container fluid>
+    <small *ngIf="notValidStartDate" class="form-text text-danger">
+        start Date is required
+    </small>
+    <div class="form-group mb-3">
+        <label for="starttime">Start Time</label>
+        <c-time-picker size="sm" id="starttime" [(time)]="startDate"></c-time-picker>
+    </div>
+    <small *ngIf="notValidEndDate" class="form-text text-danger">
+        end Date is required
+    </small>
+    <div class="form-group mb-3">
+        <label for="endtime">End Time</label>
+        <c-time-picker size="sm" id="endtime" [(time)]="endDate"></c-time-picker>
+    </div>
+    <small *ngIf="notValidClinic" class="form-text text-danger">
+        Clinic is required
+    </small>
+    <div class="form-group mb-3">
+        <label for="clinic">Clinic</label>
+        <select cSelect sizing="sm" id="clinic" [(ngModel)]="selectecClinic" name="configClinics"
+            #configClinics="ngModel"
+            [ngClass]="{'is-invalid': configClinics.invalid && (configClinics.dirty || configClinics.touched)}">
+            <option disabled [ngValue]=undefined>Select Clinic</option>
+            <option *ngFor="let clinic of clinics$ | async" [ngValue]="clinic">
+                {{clinic.name}}
+            </option>
+        </select>
+    </div>
+    <div class="d-grid gap-2 col-2 mx-auto mb-1">
+        <button *ngIf="mode==='create'" cButton color="primary" variant="outline" type="button"
+            (click)="create()">Create</button>
+        <button *ngIf="mode==='update'" cButton color="primary" variant="outline" type="button"
+            (click)="update()">Update</button>
+    </div>
+</c-container>

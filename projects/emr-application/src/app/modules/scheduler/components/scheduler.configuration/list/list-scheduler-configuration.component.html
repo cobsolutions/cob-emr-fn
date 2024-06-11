@@ -44,7 +44,7 @@
     </c-modal-header>
     <c-modal-body>
         <create-scheduler-configuration *ngIf="addSchedulerConfigurationVisibility" [mode]="'create'"
-            (changeFacilityVisibility)="changeFacilityVisibility($event)"></create-scheduler-configuration>
+            (changeVisibility)="changeVisibility($event)"></create-scheduler-configuration>
     </c-modal-body>
 </c-modal>
 
@@ -55,6 +55,6 @@
     </c-modal-header>
     <c-modal-body>
         <create-scheduler-configuration *ngIf="editSchedulerConfigurationVisibility" [mode]="'update'"
-            (changeFacilityVisibility)="changeFacilityVisibility($event)"></create-scheduler-configuration>
+            (changeVisibility)="changeVisibility($event)"></create-scheduler-configuration>
     </c-modal-body>
 </c-modal>
