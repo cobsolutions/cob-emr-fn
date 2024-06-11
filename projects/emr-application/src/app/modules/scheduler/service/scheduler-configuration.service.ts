@@ -20,17 +20,13 @@ export class SchedulerConfigurationService {
     return this._http.put(createClinicSchedulerConfigurationURL, JSON.stringify(clinicSchedulerConfiguration));
   }
 
-  retrieveCliniSchedulerConfigurationById(id: number) :Observable<any>{
+  retrieveCliniSchedulerConfigurationById(id: number): Observable<any> {
     const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/find/clinicId/' + id;
     return this._http.get<SchedulerConfiguration>(listClinicSchedulerConfigurationURL);
   }
 
-  retrieveClinicSchedulerConfigurations(uuid: string) {
-    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration/find/uuid/' + uuid;
+  retrieveCliniSchedulerConfigurations(organizationId: number) : Observable<any>{
+    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/find/organizationId/' + organizationId;
     return this._http.get(listClinicSchedulerConfigurationURL);
-  }
-  retrieveCliniSchedulerConfigurationByClinicId(clinicId: number, organizationId: number) {
-    const listClinicSchedulerConfigurationURL = this.baseUrl + 'scheduler/configuration/find/clinicId/' + clinicId + '/organization/' + organizationId;
-    return this._http.get<SchedulerConfiguration>(listClinicSchedulerConfigurationURL);
   }
 }

@@ -1,1 +1,33 @@
-<p>list-scheduler-configuration works!</p>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <h1>Scheduler Configuration</h1>
+    </c-col>
+</c-row>
+<hr />
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Clinic</th>
+            <th scope="col">Start Hour</th>
+            <th scope="col">End Hour</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let configuration of schedulerConfiguration$ | async;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{configuration.clinicId}}</td> <!--Clinic-->
+            <td>{{configuration.startHour}}</td><!--start hour-->
+            <td>{{configuration.endHour}}</td><!--End hour-->
+            <td>
+                <c-button-group aria-label="First group" class="me-2" role="group">
+                    <button cButton color="primary" variant="outline" size="sm">
+                        <svg cIcon name="cilTrash"></svg>
+                    </button>
+                </c-button-group>
+            </td>
+        </tr>
+    </tbody>
+</table>
