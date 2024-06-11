@@ -2,7 +2,6 @@ import { PatientCase } from '../../patient/models/case/patient.case';
 import { Patient } from '../../patient/models/patient';
 import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reason';
 import { AppointmentDate } from './appointment.date';
-import { AppointmentRepeat } from './appointment.repeat';
 import { AppointementStatus } from './appointment.status';
 
 export class Appointment {
@@ -23,7 +22,6 @@ export class Appointment {
     appointmentType: string | null = null;
     appointmentTypeColor: string | null = null;
     appointmentRepetition: string | null = null;
-    repeat: AppointmentRepeat;
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
