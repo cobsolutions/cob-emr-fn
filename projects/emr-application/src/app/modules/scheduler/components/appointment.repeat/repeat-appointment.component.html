@@ -1,1 +1,14 @@
-<p>repeat-appointment works!</p>
+<!--Daily-->
+<c-container fluid *ngIf="repeatType ==='Daily'"></c-container>
+
+<!--Weekly-->
+<c-container fluid *ngIf="repeatType ==='Weekly'"></c-container>
+
+<!--Monthly-->
+<c-container fluid *ngIf="repeatType ==='Monthly'"></c-container>
+
+<!--Yearly-->
+<c-container fluid *ngIf="repeatType ==='Yearly'"></c-container>
+
+<!--Every Week Day-->
+<c-container fluid *ngIf="repeatType ==='Every_Week_Day'"></c-container>

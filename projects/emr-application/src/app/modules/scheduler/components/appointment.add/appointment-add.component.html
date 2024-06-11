@@ -142,7 +142,8 @@
                                 {{repetition.value}}
                             </option>
                         </select>
-                        {{appointment.appointmentRepetition}}
+                        <repeat-appointment *ngIf="appointment.appointmentRepetition"
+                            [repeatType]="appointment.appointmentRepetition"></repeat-appointment>
                     </c-card-body>
                 </c-card>
             </c-col>
