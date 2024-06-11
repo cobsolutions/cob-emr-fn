@@ -1,5 +1,15 @@
 <!--Daily-->
-<c-container fluid *ngIf="repeatType ==='Daily'"></c-container>
+<c-container fluid *ngIf="repeatType ==='Daily'">
+    <div class="form-group" class="mb-3">
+        <input cFormControl sizing="sm" type="number" placeholder="Every" />
+    </div>
+    <div class="form-group" class="mb-3">
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"></c-date-picker>
+    </div>
+    <div class="form-group" class="mb-3">
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"></c-date-picker>
+    </div>
+</c-container>
 
 <!--Weekly-->
 <c-container fluid *ngIf="repeatType ==='Weekly'"></c-container>
