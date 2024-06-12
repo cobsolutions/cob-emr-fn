@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { Day, WeekDays } from '../../models/constant/week.days';
 import { DailyRepeatAppointment } from '../../models/repeat/daily.repeat.appointment';
+import { WeeklyRepeatAppointment } from '../../models/repeat/weekly.repeat.appointment';
 
 @Component({
   selector: 'repeat-appointment',
@@ -9,7 +11,9 @@ import { DailyRepeatAppointment } from '../../models/repeat/daily.repeat.appoint
 })
 export class RepeatAppointmentComponent implements OnInit {
   @Input() repeatType: string
+  days: Day[] = WeekDays;
   dailyRepeatAppointment: DailyRepeatAppointment = {}
+  weeklyRepeatAppointment: WeeklyRepeatAppointment = {}
   constructor() { }
 
   ngOnInit(): void {
@@ -20,5 +24,11 @@ export class RepeatAppointmentComponent implements OnInit {
   }
   changeDailyEndDate(endDate: Date) {
     this.dailyRepeatAppointment.end = moment(endDate).unix() * 1000
+  }
+  changeWeeklyStartDate(startDate: Date) {
+    this.weeklyRepeatAppointment.start = moment(startDate).unix() * 1000
+  }
+  changeWeeklyEndDate(endDate: Date) {
+    this.weeklyRepeatAppointment.end = moment(endDate).unix() * 1000
   }
 }
