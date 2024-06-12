@@ -19,7 +19,8 @@
         <input cFormControl sizing="sm" type="number" placeholder="Every" [(ngModel)]="weeklyRepeatAppointment.every" />
     </div>
     <div class="form-group" class="mb-3">
-        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="weeklyRepeatAppointment.day">
+        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="weeklyRepeatAppointment.days"
+            multiple>
             <c-multi-select-option *ngFor="let day of days"
                 [value]="day.dayNumber.toString()">{{day.dayName}}</c-multi-select-option>
         </c-multi-select>

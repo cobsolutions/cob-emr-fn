@@ -90,7 +90,7 @@ export class AppointmentAddComponent implements OnInit {
       case 'Daily':
         this.createDailyRepetitionAppointment();
         break
-      case 'weekly':
+      case 'Weekly':
         this.createWeeklyRepetitionAppointment()
         break;
     }

@@ -1,6 +1,6 @@
 export interface WeeklyRepeatAppointment {
   every?: number
-  day?: string
+  days?: number[]
   start?: number
   end?: number
 }
