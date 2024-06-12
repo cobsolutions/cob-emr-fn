@@ -133,15 +133,15 @@
                     <c-card-body>
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
                             [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
-                            [(ngModel)]="appointment.appointmentRepetition" #repetition="ngModel">
-                            <option [ngValue]="null" selected>Don't Repeat</option>
+                            [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel">
+                            <option [ngValue]="'Single'" selected>Don't Repeat</option>
                             <option *ngFor="let repetition of appointmentRepetition | keyvalue"
                                 [value]="repetition.key">
                                 {{repetition.value}}
                             </option>
                         </select>
-                        <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetition"
-                            [repeatType]="appointment.appointmentRepetition"></repeat-appointment>
+                        <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
+                            [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>
                     </c-card-body>
                 </c-card>
             </c-col>

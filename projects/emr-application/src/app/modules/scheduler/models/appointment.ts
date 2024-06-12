@@ -22,11 +22,11 @@ export class Appointment {
     repeatId: number;
     appointmentType: string | null = null;
     appointmentTypeColor: string | null = null;
-    appointmentRepetition: string | null = null;
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
     appointmentRepeat: AppointmnetRepeat;
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
+    appointmentRepetitionType?:string
     public constructTitle() {
         this.title = this.patient.fullName + ':' + this.patientCase.title
     }

@@ -86,9 +86,15 @@ export class AppointmentAddComponent implements OnInit {
     }
   }
   private fillAppointmnetRepeat() {
-    console.log(JSON.stringify(this.repeatAppointmentComponent.dailyRepeatAppointment))
+    switch (this.appointment.appointmentRepetitionType) {
+      case 'Daily':
+        this.createDailyRepetitionAppointment();
+        break
+    }
+  }
+  private createDailyRepetitionAppointment() {
     var dailyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetition,
+      type: this.appointment.appointmentRepetitionType,
       daily: this.repeatAppointmentComponent.dailyRepeatAppointment
     }
     this.appointment.appointmentRepeat = dailyAppointmnetRepeat

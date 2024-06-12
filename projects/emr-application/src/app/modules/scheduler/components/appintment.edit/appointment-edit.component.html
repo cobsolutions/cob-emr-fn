@@ -134,7 +134,7 @@
                         </small>
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
                             [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
-                            [(ngModel)]="appointment.appointmentRepetition" #repetition="ngModel" required>
+                            [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel" required>
                             <option [ngValue]="null" disabled selected>Select Appointment Repetition</option>
                             <option *ngFor="let repetition of appointmentRepetition | keyvalue"
                                 [value]="repetition.key">
