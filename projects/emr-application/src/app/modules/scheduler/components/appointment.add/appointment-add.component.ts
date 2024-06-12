@@ -97,6 +97,9 @@ export class AppointmentAddComponent implements OnInit {
       case 'Weekly':
         this.createWeeklyRepetitionAppointment()
         break;
+      case 'Monthly':
+        this.createMonthlyRepetitionAppointment()
+        break;
     }
   }
   private createDailyRepetitionAppointment() {
@@ -112,5 +115,12 @@ export class AppointmentAddComponent implements OnInit {
       weekly: this.repeatAppointmentComponent.weeklyRepeatAppointment
     }
     this.appointment.appointmentRepeat = weeklyAppointmnetRepeat
+  }
+  private createMonthlyRepetitionAppointment() {
+    var monthlyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      monthly: this.repeatAppointmentComponent.monthlyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = monthlyAppointmnetRepeat
   }
 }

@@ -16,6 +16,7 @@ export class AppointmentActionsService {
 
   public addAppointment(dialog: MatDialog, viewDate: Date) {
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
+      disableClose: true,
       width: '60%',
       data: { startDate: viewDate },
       position: {
@@ -27,6 +28,7 @@ export class AppointmentActionsService {
   }
   public selectAppointmentActions(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentActionModalComponent, {
+      disableClose: true,
       data: { event: event },
       position: {
         top: '8%', // Adjust as needed
@@ -36,6 +38,7 @@ export class AppointmentActionsService {
   }
   public editAppointment(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentEditModalComponent, {
+      disableClose: true,
       data: { event: event, action: undefined },
       width: '60%',
       position: {
@@ -47,6 +50,7 @@ export class AppointmentActionsService {
 
   public appointmentStatus(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentStatusModalComponent, {
+      disableClose: true,
       data: { event: event, action: undefined },
       width: '30%',
       position: {
@@ -58,6 +62,7 @@ export class AppointmentActionsService {
 
   public appointmnetStatusNoShow(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
+      disableClose: true,
       data: { event: event, action: 'noshow' },
       width: '30%',
       position: {
@@ -68,6 +73,7 @@ export class AppointmentActionsService {
   }
   public appointmnetStatusCancel(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
+      disableClose: true,
       data: { event: event, action: 'cancel' },
       width: '30%',
       position: {

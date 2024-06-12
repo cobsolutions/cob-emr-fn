@@ -24,12 +24,6 @@ export class AppointmentEditModalComponent implements OnInit {
     this.appointmentService.retrieveAppointment(Number(this.data.event.id)).subscribe(result => {
       this.appointment = result;
     })
-    this.dialogRef.keydownEvents().subscribe(event => {
-      if (event.key === "Escape") {
-        this.cancel();
-      }
-    });
-
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
     });

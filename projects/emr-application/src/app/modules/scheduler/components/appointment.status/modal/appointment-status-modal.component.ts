@@ -23,12 +23,6 @@ export class AppointmentStatusModalComponent implements OnInit {
       this.appointment = result;
       this.checkValidityToChangeStatus();
     })
-    this.dialogRef.keydownEvents().subscribe(event => {
-      if (event.key === "Escape") {
-        this.cancel();
-      }
-    });
-
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
     });

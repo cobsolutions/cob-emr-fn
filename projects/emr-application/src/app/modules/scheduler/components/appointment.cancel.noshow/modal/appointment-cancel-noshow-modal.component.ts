@@ -22,12 +22,6 @@ export class AppointmentCancelNoshowModalComponent implements OnInit {
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
-    this.dialogRef.keydownEvents().subscribe(event => {
-      if (event.key === "Escape") {
-        this.cancel();
-      }
-    });
-
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
     });
