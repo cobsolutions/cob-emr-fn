@@ -54,8 +54,8 @@
                         <div class="mb-1">
                             <c-row>
                                 <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate"
-                                        name="startDate"
-                                        [(ngModel)]="appointment.appointmentDate.startDate"></c-date-picker></c-col>
+                                        name="startDate" [(ngModel)]="appointment.appointmentDate.startDate"
+                                        (dateChange)="changestartDate($event)"></c-date-picker></c-col>
                                 <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
                                         [(ngModel)]="appointment.appointmentDate.startTime"></c-time-picker></c-col>
                             </c-row>
@@ -135,10 +135,11 @@
                             [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
                             [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel">
                             <option [ngValue]="'Single'" selected>Don't Repeat</option>
-                            <option *ngFor="let repetition of appointmentRepetition | keyvalue"
-                                [value]="repetition.key">
-                                {{repetition.value}}
-                            </option>
+                            <option [ngValue]="'Daily'" selected>Daily</option>
+                            <option [ngValue]="'Weekly'" selected>Weekly</option>
+                            <option [ngValue]="'Monthly'" selected>Monthly</option>
+                            <option [ngValue]="'Yearly'" selected>Yearly</option>
+                            <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option>
                         </select>
                         <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
                             [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>

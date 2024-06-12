@@ -47,6 +47,10 @@ export class AppointmentAddComponent implements OnInit {
     this.therapists$ = this.initializeAppointmentService.findTherapists();
     this.appointmentTypes$ = this.initializeAppointmentService.findAppointmnetType();
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate)
+    this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+  }
+  changestartDate(startDate: Date) {
+    this.appointmentService.appointmnetStartDate$.next(startDate)
   }
   pick(selectedPatient: Patient) {
     this.appointment.patientId = selectedPatient.id;

@@ -26,7 +26,7 @@ export class Appointment {
     statusHistory: AppointementStatus[]
     appointmentRepeat: AppointmnetRepeat;
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-    appointmentRepetitionType?:string
+    appointmentRepetitionType?: string = "Single"
     public constructTitle() {
         this.title = this.patient.fullName + ':' + this.patientCase.title
     }

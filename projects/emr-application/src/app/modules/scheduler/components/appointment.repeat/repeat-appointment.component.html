@@ -36,10 +36,30 @@
 </c-container>
 
 <!--Monthly-->
-<c-container fluid *ngIf="repeatType ==='Monthly'"></c-container>
-
+<c-container fluid *ngIf="repeatType ==='Monthly'">
+    <div class="form-group" class="mb-3">
+        <input cFormControl sizing="sm" type="number" placeholder="Every"
+            [(ngModel)]="monthlyRepeatAppointment.every" />
+    </div>
+    <div class="form-group" class="mb-3">
+        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="monthlyRepeatAppointment.dayInMonth">
+            <c-multi-select-option *ngFor="let day of dayMonth"
+                [value]="day.dayNumber.toString()">{{day.dayName}}</c-multi-select-option>
+        </c-multi-select>
+        <div class="form-group" class="mb-3">
+            <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
+                (dateChange)="changeMonthlyStartDate($event)"></c-date-picker>
+        </div>
+        <div class="form-group" class="mb-3">
+            <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
+                (dateChange)="changeMonthlyEndDate($event)"></c-date-picker>
+        </div>
+    </div>
+</c-container>
 <!--Yearly-->
-<c-container fluid *ngIf="repeatType ==='Yearly'"></c-container>
+<c-container fluid *ngIf="repeatType ==='Yearly'">
+
+</c-container>
 
 <!--Every Week Day-->
 <c-container fluid *ngIf="repeatType ==='Every_Week_Day'"></c-container>

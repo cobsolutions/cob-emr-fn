@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
 import { AppointmentFilter } from '../models/appointment.filter';
 import { AppointmentType } from '../models/appointment.type';
@@ -12,6 +12,7 @@ import { AppointmentType } from '../models/appointment.type';
 export class AppointmentService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
+  public appointmnetStartDate$: BehaviorSubject<Date | null> = new BehaviorSubject<Date | null>(null);
   createAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/create';
     return this._http.post(createAppointmentURL, appointment);
