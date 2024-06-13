@@ -7,24 +7,23 @@ export interface days {
 export class MonthlyRepetitionbuilder {
     public static build(startDate: Date) {
         var dayMonth: days[] = [];
-        var formmatedDayName = moment(startDate).format('ddd');
         var formmatedDayNumber = moment(startDate).format('DD');
         if (formmatedDayNumber === '01') {
             dayMonth.push({
                 dayName: Number(formmatedDayNumber) + 'st day',
-                dayNumber: 1
+                dayNumber: 32
             })
         }
         else if (formmatedDayNumber === '02') {
             dayMonth.push({
                 dayName: Number(formmatedDayNumber) + 'nd day',
-                dayNumber: 2
+                dayNumber: 33
             })
         }
         else if (formmatedDayNumber === '03') {
             dayMonth.push({
                 dayName: Number(formmatedDayNumber) + 'rd day',
-                dayNumber: 3
+                dayNumber: 34
             })
         }
         else {
@@ -33,7 +32,7 @@ export class MonthlyRepetitionbuilder {
                 dayNumber: Number(formmatedDayNumber)
             })
         }
-
+        var formmatedDayName = moment(startDate).format('ddd');
         if (formmatedDayName === 'Sun')
             dayMonth.push({
                 dayName: moment(startDate).format('dddd'),
@@ -69,6 +68,6 @@ export class MonthlyRepetitionbuilder {
                 dayName: moment(startDate).format('dddd'),
                 dayNumber: 7
             })
-            return dayMonth;
+        return dayMonth;
     }
 }
