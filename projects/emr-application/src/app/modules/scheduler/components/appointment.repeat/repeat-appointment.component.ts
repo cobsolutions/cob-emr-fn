@@ -4,6 +4,7 @@ import { Day, WeekDays } from '../../models/constant/week.days';
 import { DailyRepeatAppointment } from '../../models/repeat/daily.repeat.appointment';
 import { MonthlyRepeatAppointment } from '../../models/repeat/monthly.repeat.appointment';
 import { WeeklyRepeatAppointment } from '../../models/repeat/weekly.repeat.appointment';
+import { YearlyRepeatAppointment } from '../../models/repeat/yearly.repeat.appointment';
 import { AppointmentService } from '../../service/appointment.service';
 import { days, MonthlyRepetitionbuilder } from './util/monthly.day.repetition';
 
@@ -19,6 +20,7 @@ export class RepeatAppointmentComponent implements OnInit {
   dailyRepeatAppointment: DailyRepeatAppointment = {}
   weeklyRepeatAppointment: WeeklyRepeatAppointment = {}
   monthlyRepeatAppointment: MonthlyRepeatAppointment = {}
+  yearlyRepeatAppointment: YearlyRepeatAppointment = {}
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
@@ -45,5 +47,11 @@ export class RepeatAppointmentComponent implements OnInit {
   }
   changeMonthlyEndDate(endDate: Date) {
     this.monthlyRepeatAppointment.end = moment(endDate).unix() * 1000
+  }
+  changeYearlyStartDate(startDate: Date) {
+    this.yearlyRepeatAppointment.start = moment(startDate).unix() * 1000
+  }
+  changeYearlEndDate(endDate: Date) {
+    this.yearlyRepeatAppointment.end = moment(endDate).unix() * 1000
   }
 }

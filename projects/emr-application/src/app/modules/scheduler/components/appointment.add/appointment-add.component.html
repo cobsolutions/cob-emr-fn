@@ -139,7 +139,7 @@
                             <option [ngValue]="'Weekly'" selected>Weekly</option>
                             <option [ngValue]="'Monthly'" selected>Monthly</option>
                             <option [ngValue]="'Yearly'" selected>Yearly</option>
-                            <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option>
+                            <!-- <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option> -->
                         </select>
                         <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
                             [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>
