@@ -75,4 +75,12 @@ export class UserService {
       return of(this.accessToken);
     }
   }
+  checkUserName(userName:string){
+    var url = this.userUrl +'/check/username/' + userName
+    return this.httpClient.get(url);
+  }
+  checkEmail(email:string){
+    var url = this.userUrl +'/check/email/' + email
+    return this.httpClient.get(url);
+  }
 }

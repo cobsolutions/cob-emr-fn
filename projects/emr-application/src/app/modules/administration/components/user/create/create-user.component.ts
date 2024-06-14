@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap } from 'rxjs';
+import { debounceTime, filter, finalize, map, switchMap, tap } from 'rxjs';
 import { Specialties } from '../../../../common/models/enums/doctor/specialties';
 import { EncryptService } from '../../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../../patient/models/clinic';
@@ -61,6 +61,12 @@ export class CreateUserComponent implements OnInit {
   details_visible = Object.create({});
   scopes: string[] = []
   isValidRoles: boolean
+  usernameCtrl = new FormControl();
+  emailCtrl = new FormControl();
+  validUserName: boolean = undefined;
+  validEmail: boolean = undefined;
+  validUserNameMessage: string = undefined
+  validEmailMessage: string = undefined
   constructor(private clinicService: ClinicService
     , private userService: UserService
     , private toastr: ToastrService
@@ -69,6 +75,8 @@ export class CreateUserComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.checkUserName()
+    this.checkEmail();
     this.loggedInService.load().pipe(
       map((loggedInUser: LoggedInUser) => {
         return loggedInUser.organizationId
@@ -159,6 +167,80 @@ export class CreateUserComponent implements OnInit {
       }
     }
     return true;
+  }
+  checkUserName() {
+    this.usernameCtrl.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validUserName = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value) => {
+          return this.userService.checkUserName(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((check: any) => {
+        this.validUserName = check;
+        if (!check) {
+          this.validUserNameMessage = 'username is already exists';
+        }
+      },
+        error => {
+        });
+  }
+  checkEmail() {
+    this.emailCtrl.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validEmail = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value) => {
+          return this.userService.checkEmail(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((check: any) => {
+        this.validEmail = check;
+        if (!check) {
+          this.validEmailMessage = 'Email is already exists';
+        }
+      },
+        error => {
+        });
   }
 }
 

@@ -46,15 +46,22 @@
                                 [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
                                 [(ngModel)]="user.lastName" #lastName="ngModel" />
                         </c-input-group>
-                        <small
-                            *ngIf="submitted   && (email.errors) || (email.invalid && (email.dirty || email.touched))"
-                            class="form-text text-danger">
-                            Email is required
-                        </small>
                         <c-input-group class="mb-3" sizing="sm">
                             <span cInputGroupText id="basic-addon1">&#64;</span>
                             <input aria-describedby="basic-addon1" id="email" name="email" cFormControl required
-                                [disabled]="!isCreated" placeholder="email" #email="ngModel" [(ngModel)]="user.email" />
+                                [disabled]="!isCreated" placeholder="email" [(ngModel)]="user.email"
+                                [formControl]="emailCtrl" style="margin-right: 20px" />
+                            <span *ngIf="validEmail">
+                                <label>
+                                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                                </label>
+                            </span>
+                            <span *ngIf="validEmail === false">
+                                <label>
+                                    {{validEmailMessage}}
+                                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                                </label>
+                            </span>
                         </c-input-group>
                         <small
                             *ngIf="submitted   && (password.errors) || (password.invalid && (password.dirty || password.touched))"
@@ -69,18 +76,23 @@
                                 [disabled]="!isCreated" placeholder="password" #password="ngModel"
                                 [(ngModel)]="user.password" type="password" />
                         </c-input-group>
-                        <small
-                            *ngIf="submitted   && (username.errors) || (username.invalid && (username.dirty || username.touched))"
-                            class="form-text text-danger">
-                            Username is required
-                        </small>
                         <c-input-group class="mb-3" sizing="sm">
                             <span cInputGroupText id="basic-addon1">
                                 <svg cIcon name="cilUser"></svg>
                             </span>
-                            <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required
-                                [disabled]="!isCreated" placeholder="username" #username="ngModel"
-                                [(ngModel)]="user.accountName" />
+                            <input id="username" cFormControl required [disabled]="!isCreated" placeholder="username"
+                                [formControl]="usernameCtrl" style="margin-right: 20px" />
+                            <span *ngIf="validUserName">
+                                <label>
+                                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                                </label>
+                            </span>
+                            <span *ngIf="validUserName === false">
+                                <label>
+                                    {{validUserNameMessage}}
+                                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                                </label>
+                            </span>
                         </c-input-group>
                     </c-card-body>
                 </c-card>
@@ -140,8 +152,7 @@
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality"
                                 required
                                 [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
-                                [(ngModel)]="user.speciality" #speciality="ngModel"
-                                (change)="getDoctorCredentials()">
+                                [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
                                 <option [ngValue]="null" disabled selected>Select Doctor Speciality</option>
                                 <option *ngFor="let specialty of specialties | keyvalue" [value]="specialty.key">
                                     {{specialty.value}}
@@ -235,7 +246,7 @@
             </c-col>
         </c-row>
         <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit">
+            <button cButton color="primary" variant="outline" type="submit" [disabled]="(!validUserName )|| (!validEmail )">
                 <span *ngIf="isCreated">Create</span>
                 <span *ngIf="!isCreated">Update</span>
             </button>

@@ -126,10 +126,12 @@ import {
   cibKeybase,
   cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cibMailRu
   ,cilChevronCircleDownAlt
-  ,cilHistory,cilViewQuilt,cilUserPlus
+  ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation
 } from '@coreui/icons';
 
 export const iconSubset = {
+  cilBellExclamation,
+  cilMinus,
   cilUserPlus,
   cilViewQuilt,
   cilHistory,
