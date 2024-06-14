@@ -49,21 +49,35 @@ export const NavItems: INavData[] = [
     ]
   },
   {
-    name: 'Administration',
-    url: '/emr/administration',
-    iconComponent: { name: 'cilChart' },
+    name: 'Users',
+    url: '/emr/users',
+    iconComponent: { name: 'cilUser' },
     children: [
       {
-        name: 'Insurance Company',
-        url: 'administration/list/insurance/company'
-      },
-      {
-        name: 'Users',
+        name: 'View Users',
         url: 'administration/list/user'
-      },
+      }
+    ]
+  },
+  {
+    name: 'Clinics',
+    url: '/emr/clinics',
+    iconComponent: { name: 'cilMedicalCross' },
+    children: [
       {
-        name: 'Clinics',
+        name: 'View Clinics',
         url: 'administration/list/clinic'
+      }
+    ]
+  },
+  {
+    name: 'Insurance Company',
+    url: '/emr/insurance-company',
+    iconComponent: { name: 'cilHouse' },
+    children: [
+      {
+        name: 'View Companies',
+        url: 'administration/list/insurance/company'
       }
     ]
   }, {

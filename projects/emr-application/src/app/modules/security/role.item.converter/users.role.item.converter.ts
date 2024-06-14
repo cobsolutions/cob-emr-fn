@@ -1,16 +1,19 @@
 import { MenuItem } from "../model/nav.item"
 import { Role } from "../model/role"
 
-export class AdministrationRoleItemConverter {
+export class UsersRoleItemConverter {
     public static convert(roles: string[], menuItems: MenuItem[]) {
 
         var menuItem: MenuItem = {
-            parent: "Administration",
+            parent: "Users",
             children: []
         }
         for (var i = 0; i < roles.length; i++) {
+            if (roles[i] === Role.USER_ROLE)
+                menuItem.children.push('View Users')
         }
         if (menuItem.children.length !== 0)
             menuItems.push(menuItem)
     }
+
 }

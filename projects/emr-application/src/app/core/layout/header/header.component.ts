@@ -2,11 +2,6 @@ import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
-import { result } from 'lodash';
-import { switchMap } from 'rxjs';
-import { ClinicService } from '../../../modules/administration/services/clinic/clinic.service';
-import { CacheService } from '../../../modules/common/service/cahce/cache.service';
-import { ClinicEmittingService } from '../../../modules/common/service/emitting/clinic-emitting.service';
 import { Clinic } from '../../../modules/patient/models/clinic';
 import { LoggedInUser } from '../../../modules/security/model/loggedin.user';
 
