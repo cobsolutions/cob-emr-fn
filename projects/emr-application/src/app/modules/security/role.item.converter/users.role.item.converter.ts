@@ -9,8 +9,9 @@ export class UsersRoleItemConverter {
             children: []
         }
         for (var i = 0; i < roles.length; i++) {
-            if (roles[i] === Role.USER_ROLE)
-                menuItem.children.push('View Users')
+            if (roles[i] === Role.USER_ROLE){
+                menuItem.children.push('Clinical Users')
+            }
         }
         if (menuItem.children.length !== 0)
             menuItems.push(menuItem)

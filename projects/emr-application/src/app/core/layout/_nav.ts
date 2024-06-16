@@ -54,8 +54,8 @@ export const NavItems: INavData[] = [
     iconComponent: { name: 'cilUser' },
     children: [
       {
-        name: 'View Users',
-        url: 'administration/list/user'
+        name: 'Clinical Users',
+        url: 'users/list/clinical/users'
       }
     ]
   },

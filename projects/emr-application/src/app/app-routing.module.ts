@@ -44,6 +44,15 @@ const routes: Routes = [
           import('./modules/administration/administration.module').then((m) => m.AdministrationModule)
       },
       {
+        path: 'users',
+        data: {
+          title: 'Users',
+          roles: [Role.USER_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule)
+      },
+      {
         path: 'organization',
         loadChildren: () =>
           import('./modules/organization/organization.module').then((m) => m.OrganizationModule)
