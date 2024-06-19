@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../common/service/base-pagination.service';
@@ -9,10 +10,10 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
   providedIn: 'root'
 })
 export class ClericlaUserService extends BasePaginationService {
-  baseUrl: string;
+  private baseUrl = environment.baseURL + 'clerical/user'
 
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
-  getClinicalUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
+  findClercialUsers(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")
   }
   getClericalUser(uuid: string) {

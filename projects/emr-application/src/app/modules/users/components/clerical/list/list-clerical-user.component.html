@@ -1,1 +1,52 @@
-<p>list-clerical-user works!</p>
+<ng-container *ngIf="props$ | async as props" fluid="true">
+    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(users$ | async) ?? []"
+      [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
+      [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true" [columnFilterValue]="props.columnFilterValue?? []"
+      [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle'}"
+      [tableProps]="{small:true ,hover:true , responsive:true ,striped:true}"
+      (sorterValueChange)="handleSorterValueChange($event)" header>
+      <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+        <td>
+          <ng-container [ngSwitch]="columnName">
+            <ng-container *ngSwitchCase="'actions'" class="py-2">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button cButton variant="outline" size="sm">
+                  <svg cIcon name="cilPen"></svg>
+                </button>
+                <button cButton variant="outline" size="sm" >
+                  <svg cIcon name="cilTrash"></svg>
+                </button>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{tdContent}}
+            </ng-container>
+          </ng-container>
+        </td>
+      </ng-template>
+    </c-smart-table>
+    <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
+      (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+  </ng-container>
+  <ng-container *ngIf="errorMessage$ | async as errorMessage">
+    <hr>
+    <c-alert>{{errorMessage}}</c-alert>
+  </ng-container>
+  <c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+      <h5 cModalTitle>Delete Confirmation</h5>
+      <button (click)="close()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>Are you sure to delete user.?</c-modal-body>
+    <c-modal-footer>
+      <button cButton color="primary" (click)="delete()">Delete</button>
+    </c-modal-footer>
+  </c-modal>
+  <c-modal id="editClerical" [visible]="editUserVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+      <h3 cModalTitle>Edit User Account</h3>
+      <button (click)="toggleEditUser()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+    </c-modal-body>
+  </c-modal>
