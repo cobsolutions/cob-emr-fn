@@ -56,6 +56,9 @@ export const NavItems: INavData[] = [
       {
         name: 'Clinical Users',
         url: 'users/list/clinical/users'
+      }, {
+        name: 'Clerical Users',
+        url: 'users/list/clerical/users'
       }
     ]
   },
