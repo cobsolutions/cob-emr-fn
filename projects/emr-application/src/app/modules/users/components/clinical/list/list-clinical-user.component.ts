@@ -11,15 +11,16 @@ import { ClinicalUserService } from '../../../services/clinical/clinical-user.se
   templateUrl: './list-clinical-user.component.html',
   styleUrls: ['./list-clinical-user.component.css']
 })
-export class ListClinicalUserComponent extends ListTemplate implements OnInit  {
+export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   users$!: Observable<User[]>;
   columns: (string | IColumn)[];
   public visible = false;
   selectedDoctor: string;
   selecteUserUUID: string
   editUserVisibility: boolean = false;
+  addUserVisibility: boolean = false;
   constructor(private router: Router
-    , private clinicalService:ClinicalUserService) { super() }
+    , private clinicalService: ClinicalUserService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['accountName', 'npi', 'licence', 'speciality', 'credential', 'email', 'actions']);
@@ -65,11 +66,7 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit  {
     this.selecteUserUUID = item.uuid
     this.editUserVisibility = true
   }
-  toggleEditUser() {
-    this.editUserVisibility = !this.editUserVisibility
-  }
-  changeFacilityVisibility(event: string) {
-    if (event === 'close')
-      this.toggleEditUser();
+  openCreateCleincalUser() {
+    this.router.navigateByUrl('emr/users/create');
   }
 }
