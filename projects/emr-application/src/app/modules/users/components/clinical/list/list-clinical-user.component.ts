@@ -25,6 +25,9 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.columns = this.constructColumns(['accountName', 'npi', 'licence', 'speciality', 'credential', 'email', 'actions']);
     this.initListComponent();
+    this.fill();
+  }
+  private fill(){
     this.users$ = this.clinicalService.getDoctorUser(this.apiParams$).pipe(
       retry({
         delay: (error) => {
@@ -66,7 +69,13 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
     this.selecteUserUUID = item.uuid
     this.editUserVisibility = true
   }
-  openCreateCleincalUser() {
-    this.router.navigateByUrl('emr/users/create');
+  toggleEditUser() {
+    this.editUserVisibility = !this.editUserVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close'){
+      this.editUserVisibility = false; 
+      this.fill()     
+    }
   }
 }

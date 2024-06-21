@@ -1,14 +1,10 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 <c-row>
   <c-col xs="auto" class="mb-2">
-    <h1>Users</h1>
+    <h1>Clinical Users</h1>
   </c-col>
 </c-row>
 <hr />
-<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="openCreateCleincalUser()">Create
-    User</button>
-</div>
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(users$ | async) ?? []"
     [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
@@ -51,4 +47,14 @@
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
+</c-modal>
+<c-modal id="editClerical" [visible]="editUserVisibility" size="xl" backdrop="static">
+  <c-modal-header>
+    <h3 cModalTitle>Edit User Account</h3>
+    <button (click)="toggleEditUser()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'"
+      (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
+  </c-modal-body>
 </c-modal>

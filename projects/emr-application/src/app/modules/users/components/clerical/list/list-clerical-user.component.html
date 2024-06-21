@@ -1,3 +1,10 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<c-row>
+  <c-col xs="auto" class="mb-2">
+    <h1>Clerical Users</h1>
+  </c-col>
+</c-row>
+<hr />
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(users$ | async) ?? []"
     [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"

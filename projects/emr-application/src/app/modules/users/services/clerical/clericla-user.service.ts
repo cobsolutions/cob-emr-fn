@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../../../administration/model/user/user';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../common/service/base-pagination.service';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
@@ -19,7 +20,11 @@ export class ClericlaUserService extends BasePaginationService {
   getClericalUser(uuid: string) {
     var url = this.baseUrl + '/find/uuid/' + uuid
     return this.httpClient.get(url);
-
+  }
+  updateClericalUser(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL =  this.baseUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
   deleteUser(uuid: string) {
     var url = this.baseUrl + '/delete/uuid/' + uuid
