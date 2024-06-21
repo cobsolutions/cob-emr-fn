@@ -10,6 +10,7 @@ export class UsersRoleItemConverter {
         }
         for (var i = 0; i < roles.length; i++) {
             if (roles[i] === Role.USER_ROLE){
+                menuItem.children.push('Create User')
                 menuItem.children.push('Clinical Users')
                 menuItem.children.push('Clerical Users')
             }
