@@ -81,7 +81,7 @@
                                 <svg cIcon name="cilUser"></svg>
                             </span>
                             <input id="username" cFormControl required [disabled]="!isCreated" placeholder="username"
-                                [formControl]="usernameCtrl" style="margin-right: 20px" />
+                                [formControl]="usernameCtrl" style="margin-right: 20px"  [(ngModel)]="user.accountName"/>
                             <span *ngIf="validUserName">
                                 <label>
                                     <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
