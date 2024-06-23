@@ -6,11 +6,15 @@ import { CollapseModule, ModalModule, SmartPaginationModule, SmartTableModule } 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EmrCommonModule } from '../common/emr-common.module';
 import { ListClinicsComponent } from './components/list/list-clinics.component';
+import { CreateClinicComponent } from './components/create/create-clinic.component';
+import { EditClinicComponent } from './components/edit/edit-clinic.component';
 
 
 @NgModule({
   declarations: [
-    ListClinicsComponent
+    ListClinicsComponent,
+    CreateClinicComponent,
+    EditClinicComponent
   ],
   imports: [
     CommonModule,
