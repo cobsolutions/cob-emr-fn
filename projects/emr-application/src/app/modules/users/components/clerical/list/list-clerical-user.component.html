@@ -17,7 +17,7 @@
         <ng-container [ngSwitch]="columnName">
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" size="sm">
+              <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
               <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)">
@@ -48,4 +48,14 @@
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
+</c-modal>
+<c-modal id="editClericalUser" [visible]="editUserVisibility" size="xl" backdrop="static">
+  <c-modal-header>
+    <h3 cModalTitle>Edit User Account</h3>
+    <button (click)="toggleEditUser()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clerical'"
+      (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
+  </c-modal-body>
 </c-modal>

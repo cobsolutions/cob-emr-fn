@@ -22,6 +22,9 @@ export class ListClericalUserComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.columns = this.constructColumns(['accountName', 'email', 'actions']);
     this.initListComponent();
+    this.fill();
+  }
+  private fill(){
     this.users$ = this.clericalUserService.findClercialUsers(this.apiParams$).pipe(
       retry({
         delay: (error) => {
@@ -61,5 +64,15 @@ export class ListClericalUserComponent extends ListTemplate implements OnInit {
     this.clericalUserService.deleteUser(this.selectedUser).subscribe((result) => {
       document.location.reload();
     })
+  }
+  edit(item: any) {
+    this.selecteUserUUID = item.uuid
+    this.editUserVisibility = true
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close'){
+      this.editUserVisibility = false; 
+      this.fill()     
+    }
   }
 }
