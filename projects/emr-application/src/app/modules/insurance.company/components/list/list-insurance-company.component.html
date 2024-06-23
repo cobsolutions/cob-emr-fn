@@ -48,7 +48,7 @@
     <button (click)="toggleEdiInsuranceCompany()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <!-- <edit-insurance-company *ngIf="editInsuranceCompanyVisibility"
-      [insuranceCompany]="selectedInsuranceCompany" (changeVisibility)="changeFacilityVisibility($event)"></edit-insurance-company> -->
+    <app-edit-insurance-company *ngIf="editInsuranceCompanyVisibility"
+      [insuranceCompany]="selectedInsuranceCompany" (changeVisibility)="changeFacilityVisibility($event)"></app-edit-insurance-company>
   </c-modal-body>
 </c-modal>
