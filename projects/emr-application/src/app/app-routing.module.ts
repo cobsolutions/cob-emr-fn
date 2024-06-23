@@ -62,6 +62,15 @@ const routes: Routes = [
         loadChildren: () => import('./modules/clinic/clinic.module').then((m) => m.ClinicModule)
       },
       {
+        path: 'insurance/company',
+        data: {
+          title: 'Insurance Company',
+          roles: [Role.INSURANCE_COMPANY_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/insurance.company/insurance-company.module').then((m) => m.InsuranceCompanyModule)
+      },
+      {
         path: 'organization',
         loadChildren: () =>
           import('./modules/organization/organization.module').then((m) => m.OrganizationModule)
