@@ -7,12 +7,14 @@ import { CreateInsuranceCompanyComponent } from './components/create/create-insu
 import { CollapseModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { EmrCommonModule } from '../common/emr-common.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { EditInsuranceCompanyComponent } from './components/edit/edit-insurance-company.component';
 
 
 @NgModule({
   declarations: [
     ListInsuranceCompanyComponent,
-    CreateInsuranceCompanyComponent
+    CreateInsuranceCompanyComponent,
+    EditInsuranceCompanyComponent
   ],
   imports: [
     CommonModule,

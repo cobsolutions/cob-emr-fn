@@ -60,7 +60,7 @@ export class CreateInsuranceCompanyComponent implements OnInit {
           this.insuranceCompanyCreateForm.reset();
           this.toastr.success('Insurance Company Created.');
           this.addpressComp.addresses = [];
-          this.router.navigateByUrl('emr/administration/list/insurance/company')
+          this.router.navigateByUrl('emr/insurance/company/list')
         })
     } else {
       this.toastr.error('Please Check Your Inputs', 'Error In Creation');
