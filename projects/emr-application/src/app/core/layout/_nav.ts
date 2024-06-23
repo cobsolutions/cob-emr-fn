@@ -84,7 +84,7 @@ export const NavItems: INavData[] = [
     children: [
       {
         name: 'View Companies',
-        url: 'administration/list/insurance/company'
+        url: 'insurance/company/list'
       }
     ]
   }, {
