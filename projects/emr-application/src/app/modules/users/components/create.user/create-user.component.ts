@@ -98,7 +98,7 @@ export class CreateUserComponent implements OnInit {
         if (this.user.userType === 'clinical') {
           this.userService.createClinicalUser(this.user).subscribe(result => {
             this.toastr.success('User created');
-            this.router.navigateByUrl('emr/administration/list/user')
+            this.router.navigateByUrl('emr/users/list/clinical/users')
           }, (error) => {
             console.log(error);
             this.toastr.error(error.error.message, 'Error In Creation');
@@ -107,7 +107,7 @@ export class CreateUserComponent implements OnInit {
         if (this.user.userType === 'clerical') {
           this.userService.createClericalUser(this.user).subscribe(result => {
             this.toastr.success('User created');
-            this.router.navigateByUrl('emr/administration/list/user')
+            this.router.navigateByUrl('emr/users/list/clerical/users')
           }, (error) => {
             console.log(error);
             this.toastr.error(error.error.message, 'Error In Creation');
@@ -116,7 +116,7 @@ export class CreateUserComponent implements OnInit {
       } else {
         this, this.userService.update(this.user).subscribe((result) => {
           this.toastr.success('User updated');
-          this.router.navigateByUrl('emr/administration/list/user')
+          this.router.navigateByUrl('emr/users/list/clerical/users')
         }, (error) => {
           console.log(error);
           this.toastr.error(error.error.message, 'Error In update');
