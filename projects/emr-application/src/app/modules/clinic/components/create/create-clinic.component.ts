@@ -48,7 +48,7 @@ export class CreateClinicComponent implements OnInit {
           this.toastr.success('Clinic Created');
         else
           this.toastr.success('Clinic updated');
-        this.router.navigateByUrl('emr/administration/list/clinic')
+        this.router.navigateByUrl('emr/clinics/list')
       })
     } else {
       this.submitted = true;
