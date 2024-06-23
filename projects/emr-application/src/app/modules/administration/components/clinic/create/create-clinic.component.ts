@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { result } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap, tap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';

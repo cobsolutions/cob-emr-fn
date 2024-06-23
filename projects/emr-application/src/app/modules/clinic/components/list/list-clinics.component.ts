@@ -53,7 +53,7 @@ export class ListClinicsComponent extends ListTemplate implements OnInit {
     );
   }
   create() {
-    this.router.navigateByUrl('emr/administration/create/clinic');
+    this.router.navigateByUrl('emr/clinics/create/clinic');
   }
   edit(item: any) {
     this.selectedClinic = item;
