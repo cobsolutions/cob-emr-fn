@@ -1,33 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, tap } from 'rxjs';
-import { Address } from '../../../../common/models';
-import { ListTemplate } from '../../../../common/template/list.template';
-import { Clinic } from '../../../../patient/models/clinic';
-import { ClinicService } from '../../../services/clinic/clinic.service';
+import { ClinicService } from '../../../administration/services/clinic/clinic.service';
+import { Address } from '../../../common/models/address';
+import { ListTemplate } from '../../../common/template/list.template';
+import { Clinic } from '../../../patient/models/clinic';
 
 @Component({
-  selector: 'app-list-clinic',
-  templateUrl: './list-clinic.component.html',
-  styleUrls: ['./list-clinic.component.css']
+  selector: 'app-list-clinics',
+  templateUrl: './list-clinics.component.html',
+  styleUrls: ['./list-clinics.component.css']
 })
-export class ListClinicComponent extends ListTemplate implements OnInit {
+export class ListClinicsComponent extends ListTemplate implements OnInit {
   clinics$!: Observable<Clinic[]>;
   columns: (string | IColumn)[];
   editClinicVisibility: boolean = false;
   selectedClinic: Clinic;
   constructor(private router: Router
     , private clinicService: ClinicService
-    , private toastr: ToastrService
-    , private sanitizer: DomSanitizer) { super(); }
+    , private toastr: ToastrService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['name', 'actions']);
     this.initListComponent();
-
+    this.fill();
+  }
+  private fill(){
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
       tap((result => {
       })),

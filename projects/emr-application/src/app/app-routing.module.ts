@@ -53,6 +53,15 @@ const routes: Routes = [
         loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule)
       },
       {
+        path: 'clinics',
+        data: {
+          title: 'Clinics',
+          roles: [Role.CLINIC_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/clinic/clinic.module').then((m) => m.ClinicModule)
+      },
+      {
         path: 'organization',
         loadChildren: () =>
           import('./modules/organization/organization.module').then((m) => m.OrganizationModule)
