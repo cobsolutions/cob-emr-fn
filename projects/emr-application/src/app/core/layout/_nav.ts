@@ -79,7 +79,7 @@ export const NavItems: INavData[] = [
   },
   {
     name: 'Insurance Company',
-    url: '/emr/insurance-company',
+    url: '/emr/insurance/company',
     iconComponent: { name: 'cilHouse' },
     children: [
       {
