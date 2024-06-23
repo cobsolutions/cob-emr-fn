@@ -4,7 +4,6 @@ import { map, Observable, retry, tap } from 'rxjs';
 import { User } from '../../../../administration/model/user/user';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { ClericlaUserService } from '../../../services/clerical/clericla-user.service';
-import { ClinicalUserService } from '../../../services/clinical/clinical-user.service';
 
 @Component({
   selector: 'app-list-clerical-user',
@@ -54,7 +53,13 @@ export class ListClericalUserComponent extends ListTemplate implements OnInit {
   toggleEditUser() {
     this.editUserVisibility = !this.editUserVisibility
   }
-  delete() {
-
+  toggleLiveDemo(item: any) {
+    this.selectedUser = item.uuid;
+    this.visible = !this.visible;
+  }
+  delete(){
+    this.clericalUserService.deleteUser(this.selectedUser).subscribe((result) => {
+      document.location.reload();
+    })
   }
 }
