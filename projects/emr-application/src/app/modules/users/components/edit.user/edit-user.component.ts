@@ -43,7 +43,7 @@ export class EditUserComponent implements OnInit {
     { role: 'Clinic', scope: '', name: 'clinic-role' },
     { role: 'User', scope: '', name: 'user-role' },
     { role: 'Insurance Company', scope: '', name: 'insurance-company-role' },
-    { role: 'Referring Provider', scope: '', name: 'referring-provider-role' },
+    { role: 'Referring Provider', scope: '', name: 'emr-referring-provider-role' },
     { role: 'Patient Payment', scope: '', name: 'patient-payment-role' },
     { role: 'Calendar', scope: '', name: 'calendar-role' },
     { role: 'Medical Note-Initialization', scope: '', name: 'initialize-medical-note-role' },

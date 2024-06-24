@@ -20,12 +20,11 @@ export class DefaultLayoutComponent implements OnInit {
 
     combineLatest([this.loggedInService.load(), this.renderNavItemsService.renderItems$])
       .pipe(
-        // tap((result: any) => console.log(JSON.stringify(result[1])))
         map((result: any) => {
           var userRoleScope: UserRoleScope[] = result[0].userRoleScope;
           var renderItems: INavData[] = result[1];
-          var hasViewUserPermissions = userRoleScope.some(item => item.scope === 'view' && item.role === 'user-role');
-          console.log(hasViewUserPermissions)
+          if (userRoleScope !== undefined)
+            var hasViewUserPermissions = userRoleScope.some(item => item.scope === 'view' && item.role === 'user-role');
           if (hasViewUserPermissions) {
             return renderItems.map(renderItem => {
               if (renderItem.name === 'Users') {
@@ -42,12 +41,9 @@ export class DefaultLayoutComponent implements OnInit {
             return result[1];
           }
         })
-      ).subscribe((result: any) => {        
+      ).subscribe((result: any) => {
         this.navItems = result;
       })
-    // this.renderNavItemsService.renderItems$.subscribe((renderItems: INavData[]) => {
-    //   this.navItems = renderItems;
-    // })
   }
 
 }
