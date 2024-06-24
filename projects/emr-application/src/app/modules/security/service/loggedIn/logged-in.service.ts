@@ -27,11 +27,15 @@ export class LoggedInService {
   public load() {
     if (this.loggedInUser === undefined) {
       return from(this.keycloakService.getKeycloakInstance().loadUserInfo()).pipe(
-        map((userProfile: any) => {
+        switchMap((userProfile :any)=>{
+          return this.findUser(userProfile.sub)
+        }),
+        map((user: any) => {
           return this.loggedInUser = {
-            uuid: userProfile.sub,
-            userName: userProfile.given_name,
-            email: userProfile.email
+            uuid: user.uuid,
+            userName: user.accountName,
+            email: user.email,
+            userRoleScope:user.roleScope
           }
         }),
         switchMap((loggedInUser: LoggedInUser) => {
@@ -61,5 +65,9 @@ export class LoggedInService {
     } else {
       return this.clinics
     }
+  }
+  private findUser(uuid: string){
+    const url = this.userUrl + 'user/find/uuid/'+uuid
+    return this.httpClient.get(url)
   }
 }

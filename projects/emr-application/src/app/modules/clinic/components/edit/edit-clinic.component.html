@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <c-container fluid>
-    <form cForm #clinicEditForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
+    <form cForm #clinicEditForm="ngForm" (ngSubmit)="update()" (change)="resetError()" readonly-form [componentRole]="componentRole">
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -27,10 +27,10 @@
             <small *ngIf="!validAddress" class="form-text text-danger">
                 Clinic Address is required
             </small>
-            <app-single-address [address]="clinic?.address"></app-single-address>
+            <app-single-address [address]="clinic?.address" [componentRole]="componentRole"></app-single-address>
         </c-row>
         <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit">
+            <button cButton color="primary" variant="outline" type="submit" dispaly-input [componentRole]="componentRole">
                 Update
             </button>
         </div>

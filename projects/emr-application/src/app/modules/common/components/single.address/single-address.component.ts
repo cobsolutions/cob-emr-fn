@@ -14,7 +14,7 @@ export class SingleAddressComponent implements OnInit {
   addressTypes = AddressType;
   @Input() address: Address;
   @Input() submitted: boolean = false;
-
+  @Input() componentRole: string[]
   constructor() { }
 
   ngOnInit(): void {

@@ -35,6 +35,8 @@ import { SingleAddressComponent } from './components/single.address/single-addre
 import { ContactComponent } from './components/contact/contact.component';
 import { ViewAddressComponent } from './components/view.address/view-address.component';
 import { DispalyInputDirective } from './directives/permissions/dispaly-input.directive';
+import { FormScopeDirective } from './directives/permissions/form.scope.directive';
+import { ReadonlyFormDirective } from './directives/permissions/readonly-form.directive';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
@@ -51,6 +53,8 @@ const APP_COMMON_DIRECTIVES = [
   ZipcodeDirective,
   NumberonlyDirective,
   DispalyInputDirective,
+  FormScopeDirective,
+  ReadonlyFormDirective
 ]
 const COREUI_MODULES = [
   AvatarModule,
