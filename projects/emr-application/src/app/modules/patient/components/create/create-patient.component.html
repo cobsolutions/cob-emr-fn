@@ -21,7 +21,7 @@
                     <!-- <small *ngIf="!isValidPatientInformation" class="form-text text-danger">
                         Patient Basic Info is required is required
                     </small> -->
-                    <app-patient-basic-info #component [patient]="patient"></app-patient-basic-info>
+                    <app-patient-basic-info #component [patient]="patient"[componentRole]="componentRole"></app-patient-basic-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -37,7 +37,7 @@
                     </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-id-info #component [patient]="patient"></app-patient-id-info>
+                    <app-patient-id-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-id-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -53,7 +53,7 @@
                     </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-address #component [addresses]="patient.addresses"></app-address>
+                    <app-address #component [addresses]="patient.addresses" [componentRole]="componentRole"></app-address>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -69,7 +69,7 @@
                     </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-contact #component [contacts]="patient.contacts"></app-contact>
+                    <app-contact #component [contacts]="patient.contacts" [componentRole]="componentRole"></app-contact>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -82,7 +82,7 @@
                     <h3>Emergency Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-emergency-info [patient]="patient"></app-patient-emergency-info>
+                    <app-patient-emergency-info [patient]="patient" [componentRole]="componentRole"></app-patient-emergency-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -98,7 +98,7 @@
                     </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-insurance-info #component [patient]="patient"></app-patient-insurance-info>
+                    <app-patient-insurance-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-insurance-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -111,7 +111,7 @@
                     <h3>Clinics</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-clinic-info #component [patient]="patient"></app-patient-clinic-info>
+                    <app-patient-clinic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-clinic-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -127,14 +127,14 @@
                     </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-case-info #component [pateint]="patient"></app-patient-case-info>
+                    <app-patient-case-info #component [pateint]="patient" [componentRole]="componentRole"></app-patient-case-info>
                 </c-card-body>
             </c-card>
         </c-col>
     </c-row>
     <!--Create Patient Button-->
     <div class="d-grid gap-2 col-2 mx-auto mb-5">
-        <button cButton color="primary" variant="outline" type="button" (click)="create()" [cPopover]="popoverHtml"
+        <button cButton color="primary" variant="outline" type="button" (click)="create()" [cPopover]="popoverHtml" dispaly-input [componentRole]="componentRole"
             cPopoverPlacement="right" [cPopoverTrigger]="'click'">Create</button>
     </div>
     <ng-template #popoverHtml>

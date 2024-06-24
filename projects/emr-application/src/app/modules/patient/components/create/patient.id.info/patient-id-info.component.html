@@ -1,4 +1,4 @@
-<form cForm #patientIdForm="ngForm">
+<form cForm #patientIdForm="ngForm" readonly-form [componentRole]="componentRole">
     <small *ngIf="idType.invalid && (idType.dirty || idType.touched)" class="form-text text-danger">
         Id Type is required
     </small>
@@ -23,6 +23,6 @@
         <c-date-range-picker cFormControl [(startDate)]="patient.effectiveFromDate_Date" size="sm"
             name="Effective From-Effective To"
             [(endDate)]="patient.effectiveToDate_Date" 
-            [placeholder]="['Effective From', 'Effective To']"></c-date-range-picker>
+            [placeholder]="['Effective From', 'Effective To']" disable-date-range-picker [componentRole]="componentRole"></c-date-range-picker>
     </c-col>
 </form>

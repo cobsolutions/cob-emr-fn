@@ -21,7 +21,7 @@ export class PatientBasicInfoComponent extends BasicComponent implements OnInit,
   maritalStatuses = MaritalStatus;
   suffixes = Suffix;
   titles = Title;
-
+  @Input() componentRole: string[]
   constructor() {
     super();
   }

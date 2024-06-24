@@ -17,6 +17,7 @@ import { CaseDiagnosisService } from '../../../services/case-diagnosis.service';
   styleUrls: ['./patient-case-info.component.css']
 })
 export class PatientCaseInfoComponent extends BasicComponent implements OnInit, AfterViewInit {
+  @Input() componentRole: string[]
   @Input() pateint: Patient;
   @ViewChild('caseForm') caseForm: NgForm;
   case: PatientCase = {

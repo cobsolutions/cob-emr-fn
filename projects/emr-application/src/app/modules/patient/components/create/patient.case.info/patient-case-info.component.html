@@ -1,5 +1,5 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<form cForm #caseForm="ngForm" (ngSubmit)="add()">
+<form cForm #caseForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -53,7 +53,7 @@
             </h6>
             <c-form-check [switch]="true" class="mb-2">
                 <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseInsuranceInformation.isSelfPay"
-                    #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" />
+                    #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" disable-input [componentRole]="componentRole"/>
                 <label cFormCheckLabel>SefPayed</label>
             </c-form-check>
             <span *ngIf="case.caseInsuranceInformation.isSelfPay">
@@ -202,7 +202,7 @@
             </h6>
             <c-form-check [switch]="true" class="mb-2">
                 <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseOtherInformation.isAuthorized"
-                    #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" />
+                    #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" disable-input [componentRole]="componentRole" />
                 <label cFormCheckLabel>Authorization Required</label>
             </c-form-check>
 
@@ -224,7 +224,7 @@
         </c-card-body>
     </c-card>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" cButton color="primary" variant="outline" (click)="add()">Add</button>
+        <button type="submit" cButton color="primary" variant="outline" (click)="add()" dispaly-input [componentRole]="componentRole">Add</button>
     </div>
 </form>
 <table class="table table-sm">
@@ -245,7 +245,7 @@
             <td>{{emergenctContact.injuryCase}}</td>
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)">
+                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
                         <svg cIcon name="cilTrash"></svg>
                     </button>
                 </c-button-group>

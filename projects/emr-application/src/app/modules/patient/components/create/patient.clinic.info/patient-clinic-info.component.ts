@@ -10,6 +10,7 @@ import { PatientFinderService } from '../../../services/patient/patient-finder.s
   styleUrls: ['./patient-clinic-info.component.css']
 })
 export class PatientClinicInfoComponent implements OnInit {
+  @Input() componentRole: string[]
   @Input() patient: Patient;
   clinics: Clinic[];
   constructor(private patientFinderService: PatientFinderService) { }

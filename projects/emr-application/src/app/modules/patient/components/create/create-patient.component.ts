@@ -7,6 +7,7 @@ import { BasicComponent } from 'projects/emr-application/src/app/util/basic.comp
 import { catchError, EMPTY } from 'rxjs';
 import { AddressComponent } from '../../../common/components/address/address.component';
 import { ContactComponent } from '../../../common/components/contact/contact.component';
+import { Role } from '../../../security/model/role';
 import { Patient } from '../../models/patient';
 import { PatientCreationService } from '../../services/patient/patient-creation.service';
 import { PatientBasicInfoComponent } from './patient.basic.info/patient-basic-info.component';
@@ -79,6 +80,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     cases: [],
     patientInsuranceModels: []
   };
+  componentRole: string[] = [Role.PATIENT_ROLE ];
   constructor(private toastr: ToastrService,
     private patientCreationService: PatientCreationService,
     private router: Router) { }
