@@ -6,7 +6,8 @@
 </c-row>
 <hr />
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Clinic</button>
+  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()" dispaly-input
+    [componentRole]="componentRole">Create Clinic</button>
 </div>
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(clinics$ | async) ?? []"

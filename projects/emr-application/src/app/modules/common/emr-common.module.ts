@@ -34,6 +34,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { SingleAddressComponent } from './components/single.address/single-address.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ViewAddressComponent } from './components/view.address/view-address.component';
+import { DispalyInputDirective } from './directives/permissions/dispaly-input.directive';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
@@ -49,6 +50,7 @@ const APP_COMMON_PIPES = [
 const APP_COMMON_DIRECTIVES = [
   ZipcodeDirective,
   NumberonlyDirective,
+  DispalyInputDirective,
 ]
 const COREUI_MODULES = [
   AvatarModule,
