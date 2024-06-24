@@ -6,6 +6,7 @@ import { map, Observable, retry, tap } from 'rxjs';
 import { InsuranceCompany } from '../../../administration/model/insurance.company/insurance.company';
 import { InsuranceCompanyService } from '../../../administration/services/insurance.company/insurance-company.service';
 import { ListTemplate } from '../../../common/template/list.template';
+import { Role } from '../../../security/model/role';
 
 @Component({
   selector: 'app-list-insurance-company',
@@ -17,6 +18,7 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
   insuranceCompany$!: Observable<InsuranceCompany[]>;
   editInsuranceCompanyVisibility: boolean = false;
   selectedInsuranceCompany: InsuranceCompany;
+  componentRole: string[] = [Role.INSURANCE_COMPANY_ROLE ];
   constructor(private router: Router
     , private insuranceCompanyService: InsuranceCompanyService
     , private toastr: ToastrService) { super() }

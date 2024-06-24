@@ -6,7 +6,7 @@
 </c-row>
 <hr />
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Insurance Company</button>
+  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()" dispaly-input [componentRole]="componentRole">Create Insurance Company</button>
 </div>
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(insuranceCompany$ | async) ?? []"
@@ -20,7 +20,7 @@
         <ng-container [ngSwitch]="columnName">
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" (click)="remove(item)" size="sm">
+              <button cButton variant="outline" (click)="remove(item)" size="sm" dispaly-input [componentRole]="componentRole">
                 <svg cIcon name="cilTrash"></svg>
               </button>
               <button cButton variant="outline" size="sm" (click)="edit(item)">
