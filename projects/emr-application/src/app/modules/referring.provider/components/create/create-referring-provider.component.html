@@ -1,6 +1,7 @@
 <ngx-spinner></ngx-spinner>
 <c-container fluid>
-    <form cForm #referringProviderCreateForm="ngForm" (ngSubmit)="submit()">
+    <form cForm #referringProviderCreateForm="ngForm" (ngSubmit)="submit()" readonly-form
+        [componentRole]="componentRole">
 
         <c-row class="justify-content-center">
             <c-col class="col">
@@ -41,10 +42,10 @@
             </c-col>
         </c-row>
         <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-center">
-            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid"
-                *ngIf="mode ==='create'">Create</button>
-            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid"
-                *ngIf="mode ==='update'">Update</button>
+            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid" *ngIf="mode ==='create'"
+                dispaly-input [componentRole]="componentRole">Create</button>
+            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid" *ngIf="mode ==='update'"
+                dispaly-input [componentRole]="componentRole">Update</button>
         </div>
     </form>
 </c-container>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
+import { Role } from '../../../security/model/role';
 import { ReferringProvider } from '../../model/referring.provider';
 import { ReferringProviderService } from '../../service/referring-provider.service';
 import { CreateReferringProviderComponent } from '../create/create-referring-provider.component';
@@ -17,6 +18,7 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
   addReferringProviderVisibility: boolean = false;
   editReferringProviderVisibility: boolean = false;
   columns: (string | IColumn)[];
+  componentRole: string[] = [Role.REFERRING_DOCTOR_ROLE ];
   constructor(private referringProviderService: ReferringProviderService) { super(); }
 
   ngOnInit(): void {
