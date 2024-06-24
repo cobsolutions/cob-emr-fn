@@ -27,7 +27,7 @@ export class AddressComponent extends BasicComponent implements OnInit, AfterVie
   @Input() addresses: Address[] = []
   @ViewChild('addressForm') addressForm: NgForm;
   @Output() pushedAddresses = new EventEmitter<Address[]>();
-
+  @Input() componentRole: string[] 
   constructor() { super() }
   ngAfterViewInit(): void {
     this.setForm(this.addressForm);

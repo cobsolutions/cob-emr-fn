@@ -7,6 +7,7 @@ import { ClinicService } from '../../../administration/services/clinic/clinic.se
 import { Address } from '../../../common/models/address';
 import { ListTemplate } from '../../../common/template/list.template';
 import { Clinic } from '../../../patient/models/clinic';
+import { Role } from '../../../security/model/role';
 
 @Component({
   selector: 'app-list-clinics',
@@ -21,13 +22,13 @@ export class ListClinicsComponent extends ListTemplate implements OnInit {
   constructor(private router: Router
     , private clinicService: ClinicService
     , private toastr: ToastrService) { super() }
-
+  componentRole: string[] = [Role.CLINIC_ROLE];
   ngOnInit(): void {
     this.columns = this.constructColumns(['name', 'actions']);
     this.initListComponent();
     this.fill();
   }
-  private fill(){
+  private fill() {
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
       tap((result => {
       })),

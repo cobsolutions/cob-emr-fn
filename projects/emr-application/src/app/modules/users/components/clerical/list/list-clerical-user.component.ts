@@ -3,6 +3,7 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { User } from '../../../../administration/model/user/user';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { Role } from '../../../../security/model/role';
 import { ClericlaUserService } from '../../../services/clerical/clericla-user.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class ListClericalUserComponent extends ListTemplate implements OnInit {
   selectedUser: string
   selecteUserUUID: string
   editUserVisibility: boolean = false;
+  componentRole: string[] = [Role.USER_ROLE ];
   constructor(private clericalUserService: ClericlaUserService) { super() }
 
   ngOnInit(): void {

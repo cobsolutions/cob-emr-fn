@@ -1,5 +1,5 @@
 <c-container fluid>
-    <form cForm #editInsuranceCompanyForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
+    <form cForm #editInsuranceCompanyForm="ngForm" (ngSubmit)="update()" (change)="resetError()" readonly-form [componentRole]="componentRole">
         <c-row class="justify-content-center">
             <c-col class="col">
                 <c-card class="mb-3 ustify-content-center">
@@ -75,13 +75,13 @@
                             Add one address
                         </small>
                         <app-address #editAddresInsuranceCompany [addresses]="insuranceCompany.addresses"
-                            (pushedAddresses)="getInsuranceCompanyAddresses($event)"></app-address>
+                            (pushedAddresses)="getInsuranceCompanyAddresses($event)" [componentRole]="componentRole"></app-address>
                     </c-card-body>
                 </c-card>
             </c-col>
         </c-row>
         <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit">Update</button>
+            <button cButton color="primary" variant="outline" type="submit" dispaly-input [componentRole]="componentRole">Update</button>
         </div>
     </form>
 </c-container>

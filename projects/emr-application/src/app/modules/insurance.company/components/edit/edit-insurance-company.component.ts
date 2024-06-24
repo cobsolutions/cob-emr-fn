@@ -8,6 +8,7 @@ import { InsuranceCompanyService } from '../../../administration/services/insura
 import { AddressComponent } from '../../../common/components/address/address.component';
 import { Address, InsuranceCompanyType } from '../../../common/models';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { Role } from '../../../security/model/role';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class EditInsuranceCompanyComponent implements OnInit {
   addresses: Address[];
   validForm: boolean = false;
   validAddress: boolean = true;
+  componentRole: string[] = [Role.INSURANCE_COMPANY_ROLE ];
   constructor(private toastr: ToastrService
     , private insuranceCompanyService: InsuranceCompanyService
     , private loggedInService: LoggedInService

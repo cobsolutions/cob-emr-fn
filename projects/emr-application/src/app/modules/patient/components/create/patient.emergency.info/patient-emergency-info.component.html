@@ -1,4 +1,4 @@
-<form cForm #emergencyContactForm="ngForm" (ngSubmit)="add()">
+<form cForm #emergencyContactForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
     <small *ngIf="emergencyName.invalid && (emergencyName.dirty || emergencyName.touched)"
         class="form-text text-danger">
         Emergenct Name is required
@@ -41,7 +41,7 @@
         sizing="sm" #contactAddInfo="ngModel" [(ngModel)]="emergency.additionalInfo"> </textarea>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="submit"  cButton color="primary" variant="outline"
-            (click)="add()">Add</button>
+            (click)="add()" dispaly-input [componentRole]="componentRole" size="sm">Add</button>
     </div>
 </form>
 <table class="table table-sm">
@@ -62,7 +62,7 @@
             <td>{{emergenctContact.phoneNumber}}</td>
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)">
+                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
                         <svg cIcon name="cilTrash"></svg>
                     </button>
                 </c-button-group>

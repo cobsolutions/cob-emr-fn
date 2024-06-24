@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ClinicService } from '../../../administration/services/clinic/clinic.service';
 import { Clinic } from '../../../patient/models/clinic';
+import { Role } from '../../../security/model/role';
 
 @Component({
   selector: 'app-edit-clinic',
@@ -15,6 +16,7 @@ export class EditClinicComponent implements OnInit {
   @Output() changeVisibility = new EventEmitter<string>()
   validateForm: boolean = false;
   validAddress: boolean = true;
+  componentRole: string[] = [Role.CLINIC_ROLE];
   constructor(private clinicService: ClinicService
     , private toastr: ToastrService) { }
 

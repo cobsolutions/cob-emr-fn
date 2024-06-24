@@ -18,6 +18,7 @@ import { PatientFinderService } from '../../../services/patient/patient-finder.s
 export class PatientInsuranceInfoComponent extends BasicComponent implements OnInit, AfterViewInit {
   PaymentTypes = PaymentType;
   @Input() patient: Patient;
+  @Input() componentRole: string[]
   insuranceCompanies: Observable<InsuranceCompany[]>;
   patientInsurance: PatientInsurance = {
     id: null,

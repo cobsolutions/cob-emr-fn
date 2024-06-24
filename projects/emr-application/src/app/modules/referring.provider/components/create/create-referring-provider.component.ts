@@ -14,6 +14,7 @@ import { ReferringProviderService } from '../../service/referring-provider.servi
 export class CreateReferringProviderComponent implements OnInit {
   referringProvider: ReferringProvider = {}
   @Input() mode?: string
+  @Input() componentRole: string[]
   @Input() selectedreferringProvider: ReferringProvider
   @Output() changeVisibility = new EventEmitter<string>()
   constructor(private referringProviderService: ReferringProviderService

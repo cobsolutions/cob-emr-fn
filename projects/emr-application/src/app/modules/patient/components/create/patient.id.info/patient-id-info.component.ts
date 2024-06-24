@@ -13,6 +13,7 @@ export class PatientIdInfoComponent extends BasicComponent implements OnInit, Af
   @ViewChild('patientIdForm') patientIdForm: NgForm;
   @Input() patient: Patient;
   idTypes = IdType;
+  @Input() componentRole: string[]
   constructor() { super() }
   ngAfterViewInit(): void {
     this.setForm(this.patientIdForm)

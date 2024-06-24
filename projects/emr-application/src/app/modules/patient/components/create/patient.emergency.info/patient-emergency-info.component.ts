@@ -20,6 +20,7 @@ export class PatientEmergencyInfoComponent implements OnInit {
     additionalInfo: ''
   }
   @ViewChild('emergencyContactForm') emergencyContactForm: NgForm;
+  @Input() componentRole: string[]
   constructor() { }
 
   ngOnInit(): void {

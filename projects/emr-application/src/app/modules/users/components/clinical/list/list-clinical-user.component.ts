@@ -4,6 +4,7 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { User } from '../../../../administration/model/user/user';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { Role } from '../../../../security/model/role';
 import { ClinicalUserService } from '../../../services/clinical/clinical-user.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   selecteUserUUID: string
   editUserVisibility: boolean = false;
   addUserVisibility: boolean = false;
+  componentRole: string[] = [Role.USER_ROLE ];
   constructor(private router: Router
     , private clinicalService: ClinicalUserService) { super() }
 

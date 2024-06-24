@@ -6,6 +6,7 @@ import { INavData } from '@coreui/angular-pro';
 import { MenuItemsConstructor } from '../menu.items.constructor';
 import { RenderNavItemsService } from './render-nav-items.service';
 import { RoleScopeFinderService } from './role-scope-finder.service';
+import { Role } from '../model/role';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class KcAuthGuard extends KeycloakAuthGuard {
       await this.keycloakAngular.login({
         redirectUri: window.location.origin + state.url,
       });
+    }
+    if(!(this.roles.some(role => Role.roles.includes(role)))){
+      this.keycloakAngular.logout();
     }
     var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles)
     this.renderNavItemsService.renderItems$.next(filteredList)

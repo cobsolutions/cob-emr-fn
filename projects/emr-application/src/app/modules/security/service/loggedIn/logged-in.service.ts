@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, from, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, from, map, Observable, of, switchMap, tap } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../model/loggedin.user';
@@ -27,18 +27,31 @@ export class LoggedInService {
   public load() {
     if (this.loggedInUser === undefined) {
       return from(this.keycloakService.getKeycloakInstance().loadUserInfo()).pipe(
-        map((userProfile: any) => {
-          return this.loggedInUser = {
-            uuid: userProfile.sub,
-            userName: userProfile.given_name,
-            email: userProfile.email
+        switchMap((userProfile: any) => {
+          return this.findUser(userProfile.sub)
+        }),
+        map((user: any) => {
+          if (user !== null) {
+            return this.loggedInUser = {
+              uuid: user.uuid,
+              userName: user.accountName,
+              email: user.email,
+              userRoleScope: user.roleScope
+            }
+          }
+          else {
+            return this.loggedInUser = {
+              uuid: '2dbc0870-4d4e-45f7-a079-2243c792719e',
+              userName: 'madel',
+              email: 'madel@mail.com'
+            }
           }
         }),
         switchMap((loggedInUser: LoggedInUser) => {
           return this.getClinics(loggedInUser.uuid)
         })
         , tap((result: Clinic[]) => {
-          if (result !== undefined && result.length > 0) {
+          if (result !== null && result.length > 0) {
             this.loggedInUser.organizationId = result[0].organizationId
             this.selectedClinic$.next(Number(result[0].id))
           }
@@ -61,5 +74,9 @@ export class LoggedInService {
     } else {
       return this.clinics
     }
+  }
+  private findUser(uuid: string) {
+    const url = this.userUrl + 'user/find/uuid/' + uuid
+    return this.httpClient.get(url)
   }
 }

@@ -19,7 +19,7 @@
               <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
-              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)">
+              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)" dispaly-input [componentRole]="componentRole">
                 <svg cIcon name="cilTrash"></svg>
               </button>
             </div>
@@ -54,7 +54,7 @@
     <button (click)="toggleEditUser()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'"
+    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'" [componentRole]="componentRole"
       (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
   </c-modal-body>
 </c-modal>

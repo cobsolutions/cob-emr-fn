@@ -20,6 +20,7 @@ export class ContactComponent extends BasicComponent implements OnInit, AfterVie
   @Input() contacts: Contact[] = []
   @ViewChild('contactForm') contactForm: NgForm;
   @Output() pushedContacts = new EventEmitter<Contact[]>();
+  @Input() componentRole: string[]
   constructor() { super() }
   ngAfterViewInit(): void {
     this.setForm(this.contactForm);
