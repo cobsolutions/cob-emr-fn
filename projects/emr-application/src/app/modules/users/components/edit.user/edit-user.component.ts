@@ -40,6 +40,7 @@ export class EditUserComponent implements OnInit {
   roles: IItem[] = [
     { role: 'Patient', scope: '', name: 'emr-patient-role' },
     { role: 'Clinic', scope: '', name: 'clinic-role' },
+    { role: 'User', scope: '', name: 'user-role' },
     { role: 'Insurance Company', scope: '', name: 'insurance-company-role' },
     { role: 'Referring Provider', scope: '', name: 'referring-provider-role' },
     { role: 'Patient Payment', scope: '', name: 'patient-payment-role' },
