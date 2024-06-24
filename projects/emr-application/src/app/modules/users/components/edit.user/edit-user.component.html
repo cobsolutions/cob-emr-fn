@@ -7,7 +7,7 @@
         <c-card-body>
             <c-row *ngIf="user">
                 <c-col xs="12">
-                    <form cForm #userUpdateForm="ngForm">
+                    <form cForm #userUpdateForm="ngForm"  readonly-form [componentRole]="componentRole">
                         <c-input-group class="mb-3" sizing="sm">
                             <span cInputGroupText>First Middle Last</span>
                             <input readonly cFormControl id="firstName" name="firstName" sizing="sm"
@@ -64,17 +64,17 @@
                                     <ng-container *ngSwitchCase="'scope'" class="py-2">
                                         <c-form-check [inline]="true" [switch]="true">
                                             <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                value="hidden" [(ngModel)]="item.scope" />
+                                                value="hidden" [(ngModel)]="item.scope" disable-input [componentRole]="componentRole"/>
                                             <label cFormCheckLabel>Hidden</label>
                                         </c-form-check>
                                         <c-form-check [inline]="true" [switch]="true">
                                             <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                value="view" [(ngModel)]="item.scope" />
+                                                value="view" [(ngModel)]="item.scope" disable-input [componentRole]="componentRole"/>
                                             <label cFormCheckLabel>View</label>
                                         </c-form-check>
                                         <c-form-check [inline]="true" [switch]="true">
                                             <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                value="modify" [(ngModel)]="item.scope" />
+                                                value="modify" [(ngModel)]="item.scope" disable-input [componentRole]="componentRole"/>
                                             <label cFormCheckLabel>edit</label>
                                         </c-form-check>
                                     </ng-container>
@@ -92,17 +92,17 @@
         </c-card-header>
         <c-card-body>
             <c-input-group class="mb-3">
-                <input autoComplete="name" cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter Doctor npi"
+                <input autoComplete="name" cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter Doctor npi" readonly-input [componentRole]="componentRole"
                     required [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}"
                     [(ngModel)]="user.npi" #npi="ngModel" />
             </c-input-group>
             <c-input-group class="mb-3">
                 <input autoComplete="name" cFormControl id="licence" name="licence" sizing="sm"
-                    placeholder="Enter Doctor Licence" required
+                    placeholder="Enter Doctor Licence" required readonly-input [componentRole]="componentRole"
                     [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
                     [(ngModel)]="user.licence" #licence="ngModel" />
             </c-input-group>
-            <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality" required
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality" required disable-input [componentRole]="componentRole"
                 [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
                 [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
                 <option [ngValue]="null" disabled selected>Select Doctor Speciality</option>
@@ -110,7 +110,7 @@
                     {{specialty.value}}
                 </option>
             </select>
-            <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential" required
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential" required disable-input [componentRole]="componentRole"
                 [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
                 [(ngModel)]="user.credential" #credential="ngModel">
                 <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
@@ -128,7 +128,7 @@
             <small *ngIf="!isValidClinic" class="form-text text-danger">
                 Clinics is required
             </small>
-            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
+            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required disable-multi-select [componentRole]="componentRole"
                 *ngIf="clinics && user" [selectAll]="false" [(ngModel)]="user!.clinicIds" #selectedClinic="ngModel" (valueChange)="isClinicTouched($event)">
                 <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
                     [value]="clinic.id">{{clinic.name}}</c-multi-select-option>
@@ -136,7 +136,7 @@
         </c-card-body>
     </c-card>
     <div class="d-grid gap-2 col-2 mx-auto mt-2">
-        <button cButton color="primary" variant="outline" type="button" (click)="update()">
+        <button cButton color="primary" variant="outline" type="button" (click)="update()" dispaly-input [componentRole]="componentRole">
             Update
         </button>
     </div>

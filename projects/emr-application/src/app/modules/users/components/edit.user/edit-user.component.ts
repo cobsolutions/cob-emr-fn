@@ -22,6 +22,7 @@ import { ClinicalUserService } from '../../services/clinical/clinical-user.servi
 export class EditUserComponent implements OnInit {
   @Input() uuid: string
   @Input() userType: string
+  @Input()componentRole: string[]
   @ViewChild('editUserRoles') editUserRoles: SmartTableComponent;
   @Output() changeVisibility = new EventEmitter<string>()
   isValidRoles: boolean = true;
