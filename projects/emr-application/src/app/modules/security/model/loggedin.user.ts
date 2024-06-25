@@ -7,6 +7,8 @@ export interface LoggedInUser {
     userName?: string,
     clinics?: Clinic[]
     email?: string
+    firstName?: string
+    lastName?: string
     organizationId?: number
     params?: IApiParams
     userRoleScope?: UserRoleScope[]

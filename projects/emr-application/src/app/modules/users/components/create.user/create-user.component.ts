@@ -43,7 +43,7 @@ export class CreateUserComponent implements OnInit {
     { role: 'Clinic', scope: '', name: 'clinic-role' },
     { role: 'User', scope: '', name: 'user-role' },
     { role: 'Insurance Company', scope: '', name: 'insurance-company-role' },
-    { role: 'Referring Provider', scope: '', name: 'referring-provider-role' },
+    { role: 'Referring Provider', scope: '', name: 'emr-referring-provider-role' },
     { role: 'Patient Payment', scope: '', name: 'patient-payment-role' },
     { role: 'Calendar', scope: '', name: 'calendar-role' },
     { role: 'Medical Note-Initialization', scope: '', name: 'initialize-medical-note-role' },
@@ -96,7 +96,7 @@ export class CreateUserComponent implements OnInit {
       if (this.isCreated) {
         var encryptedPassword = this.encryptService.encrypt(this.user.password);
         this.user.password = encryptedPassword
-        if (this.user.userType === 'clinical') {
+        if (this.user.userType === 'Clinical') {
           this.userService.createClinicalUser(this.user).subscribe(result => {
             this.toastr.success('User created');
             this.router.navigateByUrl('emr/users/list/clinical/users')
@@ -105,7 +105,7 @@ export class CreateUserComponent implements OnInit {
             this.toastr.error(error.error.message, 'Error In Creation');
           })
         }
-        if (this.user.userType === 'clerical') {
+        if (this.user.userType === 'Clerical') {
           this.userService.createClericalUser(this.user).subscribe(result => {
             this.toastr.success('User created');
             this.router.navigateByUrl('emr/users/list/clerical/users')

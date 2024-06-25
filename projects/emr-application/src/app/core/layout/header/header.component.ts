@@ -18,6 +18,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
   userName: string | undefined;
+  loggedIn: string
   @Input() sidebarId: string = "sidebar1";
 
   public newMessages = new Array(4)
@@ -40,11 +41,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
           this.loggedInService.load().subscribe((result: LoggedInUser) => {
             this.userName = result.userName
             this.clinics = result.clinics
+            this.loggedIn = this.capitalizeFirstLetter(result.lastName) + '' + this.capitalizeFirstLetter(result.firstName)
           })
         }
       })
   }
-
+  private capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase();
+  }
   setTheme(value: string): void {
     this.themeSwitch.setValue({ themeSwitchRadio: value });
     this.classToggler.toggle('body', 'dark-theme');

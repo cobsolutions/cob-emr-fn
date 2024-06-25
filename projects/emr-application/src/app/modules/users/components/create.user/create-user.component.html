@@ -115,8 +115,8 @@
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
                             [(ngModel)]="user.userType" #role="ngModel" required>
                             <option [value]="null" disabled selected>Select User Type</option>
-                            <option [value]="'clinical'" selected>Clinical</option>
-                            <option [value]="'clerical'" selected>Clerical</option>
+                            <option [value]="'Clinical'" selected>Clinical</option>
+                            <option [value]="'Clerical'" selected>Clerical</option>
                         </select>
                         <!--Doctor -->
                         <span *ngIf="user.userType === 'clinical'">

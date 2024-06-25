@@ -36,6 +36,8 @@ export class LoggedInService {
               uuid: user.uuid,
               userName: user.accountName,
               email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
               userRoleScope: user.roleScope
             }
           }
@@ -43,7 +45,9 @@ export class LoggedInService {
             return this.loggedInUser = {
               uuid: '2dbc0870-4d4e-45f7-a079-2243c792719e',
               userName: 'madel',
-              email: 'madel@mail.com'
+              email: 'madel@mail.com',
+              firstName: 'mohamed',
+              lastName: 'adel'
             }
           }
         }),
