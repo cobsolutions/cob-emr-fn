@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core';
+import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
 import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 
@@ -11,11 +12,21 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'organization',
+    component: OrganizationLayoutComponent,
+    canActivate: [KcAuthGuard],
+    data: {
+      title: 'organization',
+      type: 'requester'
+    }
+  },
+  {
     path: 'emr',
     component: DefaultLayoutComponent,
     canActivate: [KcAuthGuard],
     data: {
-      title: 'Home'
+      title: 'Home',
+      type: 'user'
     },
     children: [
       {

@@ -41,6 +41,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SecurityModule } from './modules/security/security.module';
 import { AuthInterceptor } from './modules/security/service/auth.interceptor';
+import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -50,7 +51,7 @@ const APP_CONTAINERS = [
 
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS],
+  declarations: [AppComponent, ...APP_CONTAINERS, OrganizationLayoutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
