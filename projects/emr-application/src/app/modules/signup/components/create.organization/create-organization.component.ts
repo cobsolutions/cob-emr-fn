@@ -34,7 +34,7 @@ export class CreateOrganizationComponent implements OnInit {
         'npi': new FormControl(null),
         'license': new FormControl(null),
       }),
-      'Users': new FormGroup({})
+      'Users': new FormArray([], [Validators.required]),
     })
   }
   nextEssential() {

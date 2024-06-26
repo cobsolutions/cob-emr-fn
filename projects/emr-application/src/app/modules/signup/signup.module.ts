@@ -14,6 +14,7 @@ import { EssentialInformationComponent } from './components/essential.informatio
 import { ClinicInformationComponent } from './components/clinic.info/clinic-information.component';
 import { AdministratorInfoComponent } from './components/administrator.info/administrator-info.component';
 import { UserInfoComponent } from './components/user.info/user-info.component';
+import { UsersModule } from '../users/users.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { UserInfoComponent } from './components/user.info/user-info.component';
     FormsModule,
     ReactiveFormsModule,
     EmrCommonModule,
+    UsersModule
   ]
 })
 export class SignupModule { }

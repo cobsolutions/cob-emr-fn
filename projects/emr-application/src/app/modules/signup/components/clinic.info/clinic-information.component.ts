@@ -28,7 +28,6 @@ export class ClinicInformationComponent implements OnInit {
       const clinic = structuredClone(this.createdClinic)
       this.clinics.push(clinic);
       this.pushClinicToForm(clinic);
-      console.log(this.form.value)
       this.clinicForm.reset();
     } else {
       this.submitted = true;
@@ -42,13 +41,13 @@ export class ClinicInformationComponent implements OnInit {
       name: [clinic.name],
       address: [this.getClinicAddress(clinic)],
     });
-    this.orgClinics.push(addedClinic);
+    this.organizationClinics.push(addedClinic);
 
   }
-  get orgClinics(): FormArray {
+  get organizationClinics(): FormArray {
     return this.form.get('Clinics') as FormArray;
   }
-  public remove(index: number){
+  public remove(index: number) {
 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
@@ -27,7 +27,7 @@ export class CreateUserComponent implements OnInit {
   validAddress: boolean = true;
   specialties = Specialties;
   credentials: string[];
-  clinics: Clinic[];
+  @Input() clinics: Clinic[];
   isCreated: boolean = true;
   readonly selectedItemsCount = []
   columns = [
@@ -77,17 +77,18 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     this.checkUserName()
     this.checkEmail();
-    this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organizationId: number) => {
-        return this.clinicService.getByOrganizationId(organizationId)
-      })
-    )
-      .subscribe((response: any) => {
-        this.clinics = response.records;
-      })
+    if (this.clinics !== null)
+      this.loggedInService.load().pipe(
+        map((loggedInUser: LoggedInUser) => {
+          return loggedInUser.organizationId
+        })
+        , switchMap((organizationId: number) => {
+          return this.clinicService.getByOrganizationId(organizationId)
+        })
+      )
+        .subscribe((response: any) => {
+          this.clinics = response.records;
+        })
   }
   create() {
     this.fillPermissions()
