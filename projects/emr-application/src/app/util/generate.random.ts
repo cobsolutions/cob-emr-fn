@@ -10,4 +10,8 @@ export class GenerateRandomValue {
         }
         return result;
     }
+    public static generateNumber(min:number, max:number){
+        var num = Math.floor(Math.random() * (max - min + 1)) + min;
+        return (num === 8 || num === 15) ? GenerateRandomValue.generateNumber(min, max) : num;
+    }
 }

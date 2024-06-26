@@ -3,7 +3,7 @@
        
         <c-card-body>
             <form [formGroup]="organizationForm">
-                <mat-stepper linear="false" #stepper>
+                <mat-stepper linear="false"  #stepper>
                     <mat-step [stepControl]="organizationForm.get('Essential')!" formGroupName="Essential"
                         completed="false">
                         <ng-template matStepLabel>Essential Information</ng-template>

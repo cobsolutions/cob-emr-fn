@@ -95,6 +95,7 @@ export class CreateUserComponent implements OnInit {
   }
   create() {
     this.fillPermissions()
+    console.log(JSON.stringify(this.user))
     if (this.userCreateForm.valid) {
       this.submitted = false;
       if (this.isOrganizationInit)
@@ -220,11 +221,12 @@ export class CreateUserComponent implements OnInit {
     return true;
   }
   private createOrganizationInitUser() {
+    
     this.user.password = GenerateRandomValue.generate(20);
+    this.pushUser.emit(this.user)
     this.userCreateForm.reset();
     this.usernameCtrl.setValue(null)
     this.emailCtrl.setValue(null)
-    this.pushUser.emit(this.user)
   }
   private createUser() {
     if (this.isCreated) {

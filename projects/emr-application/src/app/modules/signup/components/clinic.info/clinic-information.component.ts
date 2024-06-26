@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { GenerateRandomValue } from 'projects/emr-application/src/app/util/generate.random';
 import { Clinic } from '../../../patient/models/clinic';
 
 @Component({
@@ -40,6 +41,7 @@ export class ClinicInformationComponent implements OnInit {
     const addedClinic = this.fb.group({
       name: [clinic.name],
       address: [this.getClinicAddress(clinic)],
+      generatedId: [GenerateRandomValue.generateNumber(1,20)]
     });
     this.organizationClinics.push(addedClinic);
 

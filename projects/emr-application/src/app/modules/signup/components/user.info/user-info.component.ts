@@ -24,8 +24,9 @@ export class UserInfoComponent implements OnInit {
   }
 
   handleCreatedUser(user: User) {
-    this.users.push(user)
-    this.pushUserToForm(user)
+    const copy = structuredClone(user)
+    this.users.push(copy)
+    this.pushUserToForm(copy)
   }
   pushUserToForm(user: User) {
     const addedUser = this.fb.group({

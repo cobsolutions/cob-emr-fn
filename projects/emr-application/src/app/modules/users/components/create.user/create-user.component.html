@@ -234,16 +234,30 @@
                         <h3>Clinics</h3>
                     </c-card-header>
                     <c-card-body>
-                        <small
-                            *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
-                            class="form-text text-danger">
-                            Clinics is required
-                        </small>
-                        <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
-                            [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
-                            <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
-                                [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
-                        </c-multi-select>
+                        <span *ngIf="!isOrganizationInit">
+                            <small
+                                *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
+                                class="form-text text-danger">
+                                Clinics is required
+                            </small>
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                                required [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
+                                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+                                    [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
+                            </c-multi-select>
+                        </span>
+                        <span *ngIf="isOrganizationInit">
+                            <small
+                                *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
+                                class="form-text text-danger">
+                                Clinics is required
+                            </small>
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                                required [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
+                                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+                                    [value]="clinic.generatedId">{{clinic.name}}</c-multi-select-option>
+                            </c-multi-select>
+                        </span>
                     </c-card-body>
                 </c-card>
             </c-col>
