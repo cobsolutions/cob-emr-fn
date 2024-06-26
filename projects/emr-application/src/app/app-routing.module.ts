@@ -12,13 +12,20 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'organization',
+    path: 'emr-request',
     component: OrganizationLayoutComponent,
     canActivate: [KcAuthGuard],
     data: {
       title: 'organization',
       type: 'requester'
-    }
+    },
+    children:[
+      {
+        path:'signup',
+        loadChildren: () =>
+          import('./modules/signup/signup.module').then((m) => m.SignupModule)
+      }
+    ]
   },
   {
     path: 'emr',

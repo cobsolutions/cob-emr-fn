@@ -1,0 +1,162 @@
+<div [formGroup]="form">
+
+    <div formGroupName="Essential">
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input class="form-control" placeholder formControlName="orgname">
+                    <label for="orgname">Organization Name*</label>
+                </div>
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('orgname')?.valid && 
+                    (this.form.get('Essential').get('orgname')?.dirty ||this.form.get('Essential').get('orgname')?.touched)"
+                    class="text-danger">
+                    Organization Name is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="dba" name="dba" placeholder formControlName="dba"
+                        class="form-control" />
+                    <label for="dba">
+                        Organization dba*
+                    </label>
+                </div>
+
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('dba')?.valid && 
+                (this.form.get('Essential').get('dba')?.dirty ||this.form.get('Essential').get('dba')?.touched)"
+                    class="text-danger">
+                    Organization dba is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="groupNPI" name="groupNPI" placeholder formControlName="groupNPI" sizing="sm"
+                        class="form-control" />
+                    <label for="groupNPI">
+                        Organization Group NPI*
+                    </label>
+                </div>
+
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('groupNPI')?.valid && 
+                (this.form.get('Essential').get('groupNPI')?.dirty ||this.form.get('Essential').get('groupNPI')?.touched)"
+                    class="text-danger">
+                    group NPI is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="taxID" name="taxID" placeholder formControlName="taxID" class="form-control" />
+                    <label for="taxID">
+                        Tax ID*
+                    </label>
+                </div>
+
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('taxID')?.valid && 
+                (this.form.get('Essential').get('taxID')?.dirty ||this.form.get('Essential').get('taxID')?.touched)"
+                    class="text-danger">
+                    tax ID is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="fAddress" name="fAddress" placeholder formControlName="firstAddress"
+                        class="form-control" />
+                    <label for="fAddress">
+                        First Address*
+                    </label>
+                </div>
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('firstAddress')?.valid && 
+                (this.form.get('Essential').get('firstAddress')?.dirty ||this.form.get('Essential').get('firstAddress')?.touched)"
+                    class="text-danger">
+                    First Address is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="sAddress" name="sAddress" placeholder formControlName="secondAddress"
+                        class="form-control" />
+                    <label for="sAddress">
+                        Second Address
+                    </label>
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="state" name="state" placeholder formControlName="state" class="form-control" />
+                    <label [sm]="1" cCol cLabel="col" for="state">
+                        State*
+                    </label>
+                </div>
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('state')?.valid && 
+                (this.form.get('Essential').get('state')?.dirty ||this.form.get('Essential').get('state')?.touched)"
+                    class="text-danger">
+                    state is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row>
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input id="city" name="city" placeholder formControlName="city" class="form-control" />
+                    <label for="city">
+                        City*
+                    </label>
+                </div>
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('city')?.valid && 
+                (this.form.get('Essential').get('city')?.dirty ||this.form.get('Essential').get('city')?.touched)"
+                    class="text-danger">
+                    city is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row class="mb-3">
+            <c-col [sm]="10">
+                <div class="form-floating mb-3">
+                    <input zipcode id="zipcode" name="zipcode" placeholder formControlName="zipCode"
+                        class="form-control" />
+                    <label for="zipcode">
+                        ZipCode*
+                    </label>
+                </div>
+            </c-col>
+            <c-col [sm]="2">
+                <div *ngIf="!this.form.get('Essential').get('zipCode')?.valid && 
+                (this.form.get('Essential').get('zipCode')?.dirty ||this.form.get('Essential').get('zipCode')?.touched)"
+                    class="text-danger">
+
+                </div>
+            </c-col>
+        </c-row>
+    </div>
+    <div>
+        <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="submit"
+            [disabled]="!form.valid">Next</button>
+    </div>
+</div>
