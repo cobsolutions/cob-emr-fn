@@ -37,6 +37,8 @@
         <!--taxID-->
         <c-input-group class="mb-1" sizing="sm">
             <span cInputGroupText style="width: 120px;">Tax ID*</span>
+            <input id="taxID" name="taxID" placeholder formControlName="taxID" sizing="sm"
+                class="form-control" />
             <div *ngIf="!this.form.get('Essential').get('taxID')?.valid && 
                 (this.form.get('Essential').get('taxID')?.dirty ||this.form.get('Essential').get('taxID')?.touched)"
                 class="text-danger">
