@@ -1,10 +1,12 @@
 <ngx-spinner></ngx-spinner>
-<c-row *ngIf="this.clinics">
-    <c-col xs="12" class="mb-2">
-        <h1>User Creation</h1>
-    </c-col>
-</c-row>
-<hr />
+<span *ngIf="!isOrganizationInit">
+    <c-row>
+        <c-col xs="12" class="mb-2">
+            <h1>User Creation</h1>
+        </c-col>
+    </c-row>
+    <hr />
+</span>
 <c-container fluid>
     <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
         <!--Basic Information-->
