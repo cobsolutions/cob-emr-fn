@@ -1,7 +1,49 @@
-<p>clinic-information works!</p>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm" placeholder="Clinic Name"
+        required [(ngModel)]="createdClinic.name" #clinicname="ngModel" />
+</c-input-group>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="clinicfaddress" name="clinicfaddress" sizing="sm"
+        placeholder="First Address" required [(ngModel)]="createdClinic.address.firstAddress"
+        #clinicfaddress="ngModel" />
+</c-input-group>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="clinicsaddress" name="clinicsaddress" sizing="sm"
+        placeholder="Second Address" required [(ngModel)]="createdClinic.address.secondAddress"
+        #clinicsaddress="ngModel" />
+</c-input-group>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="state" name="state" sizing="sm" placeholder="State" required
+        [(ngModel)]="createdClinic.address.state" #state="ngModel" />
+</c-input-group>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="city" name="city" sizing="sm" placeholder="City" required
+        [(ngModel)]="createdClinic.address.city" #city="ngModel" />
+</c-input-group>
+<c-input-group class="mb-3">
+    <input autoComplete="name" cFormControl id="zipCode" name="zipCode" sizing="sm" placeholder="Zip Code" required
+        [(ngModel)]="createdClinic.address.zipCode" #zipCode="ngModel" />
+</c-input-group>
+<!--Add Clinic Button-->
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button cButton color="primary" variant="outline" (click)="add()" size="sm">Add</button>
+</div>
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 100px;">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col" style="width: 5%;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
 <div [formGroup]="form">
     <div>
-        <button cButton matStepperPrevious size="sm"  variant="outline" style="width: 5%;" class="mx-2">Back</button>
+        <button cButton matStepperPrevious size="sm" variant="outline" style="width: 5%;" class="mx-2">Back</button>
         <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="submit">Next</button>
     </div>
 </div>
