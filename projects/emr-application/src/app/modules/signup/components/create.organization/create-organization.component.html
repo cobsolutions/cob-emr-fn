@@ -5,12 +5,15 @@
         </c-card-header>
         <c-card-body>
             <form [formGroup]="organizationForm">
-                <mat-stepper linear="true" #stepper>
-                    <mat-step [stepControl]="organizationForm.get('Essential')!" formGroupName="Essential">
+                <mat-stepper linear="false" #stepper>
+                    <mat-step [stepControl]="organizationForm.get('Essential')!" formGroupName="Essential"
+                        completed="false">
                         <ng-template matStepLabel>Essential Information</ng-template>
                         <essential-information [form]="organizationForm"></essential-information>
                     </mat-step>
-                    <mat-step [stepControl]="" label="Fill out your address">
+                    <mat-step [stepControl]="organizationForm.get('Clinics')!" label="Clinics Information"
+                        formGroupName="Clinics" completed="false">
+                        <clinic-information [form]="organizationForm"></clinic-information>
                     </mat-step>
                 </mat-stepper>
             </form>

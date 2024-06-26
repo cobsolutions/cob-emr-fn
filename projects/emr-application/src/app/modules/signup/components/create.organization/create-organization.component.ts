@@ -22,7 +22,8 @@ export class CreateOrganizationComponent implements OnInit {
         'state': new FormControl(null, [Validators.required]),
         'city': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required])
-      })
+      }),
+      'Clinics':new FormGroup({})
     })
   }
   nextEssential() {
