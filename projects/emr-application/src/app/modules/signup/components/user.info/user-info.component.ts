@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { Clinic } from '../../../patient/models/clinic';
@@ -11,19 +11,42 @@ import { Clinic } from '../../../patient/models/clinic';
 })
 export class UserInfoComponent implements OnInit {
   @Input() form: FormGroup;
-
+  users: User[] = []
   clinics: Observable<Clinic[]>
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     var formClinics = this.form.get('Clinics') as FormArray
     this.clinics = formClinics.valueChanges
   }
-  get organizationusers(): FormArray {
+  get organizationUsers(): FormArray {
     return this.form.get('Users') as FormArray;
   }
 
   handleCreatedUser(user: User) {
-    console.log(JSON.stringify(user))
+    this.users.push(user)
+    this.pushUserToForm(user)
+  }
+  pushUserToForm(user: User) {
+    const addedUser = this.fb.group({
+      firstName: [user.firstName],
+      middleName: [user.middleName],
+      lastName: [user.lastName],
+      accountName: [user.accountName],
+      email: [user.email],
+      role: [user.role],
+      password: [user.password],
+      clinicIds: [user.clinicIds],
+      userType: [user.userType],
+      roleScope: [user.roleScope],
+      npi: [user.npi],
+      licence: [user.licence],
+      speciality: [user.speciality],
+      credential: [user.credential]
+    })
+    this.organizationUsers.push(addedUser);
+  }
+  remove(item) {
+
   }
 }
