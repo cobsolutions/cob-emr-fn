@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Clinic } from '../../../patient/models/clinic';
 
 @Component({
@@ -19,7 +19,7 @@ export class ClinicInformationComponent implements OnInit {
       country: null
     }
   };
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +27,8 @@ export class ClinicInformationComponent implements OnInit {
     if (this.clinicForm.valid) {
       const clinic = structuredClone(this.createdClinic)
       this.clinics.push(clinic);
+      this.pushClinicToForm(clinic);
+      console.log(this.form.value)
       this.clinicForm.reset();
     } else {
       this.submitted = true;
@@ -34,5 +36,19 @@ export class ClinicInformationComponent implements OnInit {
   }
   public getClinicAddress(clinic: Clinic): string {
     return clinic.address.firstAddress + ',' + clinic.address.state + ',' + clinic.address.country + ',' + clinic.address.zipCode;
+  }
+  private pushClinicToForm(clinic: Clinic) {
+    const addedClinic = this.fb.group({
+      name: [clinic.name],
+      address: [this.getClinicAddress(clinic)],
+    });
+    this.orgClinics.push(addedClinic);
+
+  }
+  get orgClinics(): FormArray {
+    return this.form.get('Clinics') as FormArray;
+  }
+  public remove(index: number){
+
   }
 }

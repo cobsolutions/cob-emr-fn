@@ -11,7 +11,7 @@
                         <ng-template matStepLabel>Essential Information</ng-template>
                         <essential-information [form]="organizationForm"></essential-information>
                     </mat-step>
-                    <mat-step [stepControl]="organizationForm.get('Clinics')!" formGroupName="Clinics"
+                    <mat-step [stepControl]="organizationForm.get('Clinics')!" 
                         completed="false">
                         <ng-template matStepLabel>Clinics Information</ng-template>
                         <clinic-information [form]="organizationForm"></clinic-information>

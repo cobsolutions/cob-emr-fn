@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-create-organization',
   templateUrl: './create-organization.component.html',
@@ -23,7 +23,7 @@ export class CreateOrganizationComponent implements OnInit {
         'city': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required])
       }),
-      'Clinics': new FormGroup({}),
+      'Clinics': new FormArray([] , [Validators.required]),
       'Administrator': new FormGroup({}),
       'Users': new FormGroup({})
     })
