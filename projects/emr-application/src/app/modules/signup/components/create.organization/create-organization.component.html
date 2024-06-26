@@ -21,6 +21,10 @@
                         <ng-template matStepLabel>Administrator Information</ng-template>
                         <administrator-info [form]="organizationForm"></administrator-info>
                     </mat-step>
+                    <mat-step [stepControl]="organizationForm.get('Users')!" formGroupName="Users" completed="false">
+                        <ng-template matStepLabel>Users Information</ng-template>
+                        <user-info [form]="organizationForm"></user-info>
+                    </mat-step>
                 </mat-stepper>
             </form>
         </c-card-body>
