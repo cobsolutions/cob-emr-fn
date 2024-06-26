@@ -1,4 +1,4 @@
-<app-create-user [clinics]="clinics |async" ></app-create-user>
+<app-create-user [clinics]="clinics |async" [isOrganizationInit]="true" (pushUser)="handleCreatedUser($event)"></app-create-user>
 <div [formGroup]="form">
     <div>
         <button cButton matStepperPrevious size="sm" variant="outline" style="width: 5%;" class="mx-2">Back</button>

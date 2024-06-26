@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { User } from '../../../administration/model/user/user';
 import { Clinic } from '../../../patient/models/clinic';
 
 @Component({
@@ -22,4 +23,7 @@ export class UserInfoComponent implements OnInit {
     return this.form.get('Users') as FormArray;
   }
 
+  handleCreatedUser(user: User) {
+    console.log(JSON.stringify(user))
+  }
 }

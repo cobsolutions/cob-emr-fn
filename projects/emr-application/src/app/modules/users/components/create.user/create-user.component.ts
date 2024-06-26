@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
+import { GenerateRandomValue } from 'projects/emr-application/src/app/util/generate.random';
 import { debounceTime, filter, finalize, map, switchMap, tap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { UserRoleScope } from '../../../administration/model/user/user.role.scope';
@@ -28,6 +29,8 @@ export class CreateUserComponent implements OnInit {
   specialties = Specialties;
   credentials: string[];
   @Input() clinics: Clinic[];
+  @Input() isOrganizationInit?: boolean = false;
+  @Output() pushUser = new EventEmitter<User>()
   isCreated: boolean = true;
   readonly selectedItemsCount = []
   columns = [
@@ -77,7 +80,7 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     this.checkUserName()
     this.checkEmail();
-    if (this.clinics !== null)
+    if (!this.isOrganizationInit)
       this.loggedInService.load().pipe(
         map((loggedInUser: LoggedInUser) => {
           return loggedInUser.organizationId
@@ -91,40 +94,14 @@ export class CreateUserComponent implements OnInit {
         })
   }
   create() {
+    this.createOrganizationInitUser()
     this.fillPermissions()
     if (this.userCreateForm.valid) {
       this.submitted = false;
-      if (this.isCreated) {
-        var encryptedPassword = this.encryptService.encrypt(this.user.password);
-        this.user.password = encryptedPassword
-        if (this.user.userType === 'Clinical') {
-          this.userService.createClinicalUser(this.user).subscribe(result => {
-            this.toastr.success('User created');
-            this.router.navigateByUrl('emr/users/list/clinical/users')
-          }, (error) => {
-            console.log(error);
-            this.toastr.error(error.error.message, 'Error In Creation');
-          })
-        }
-        if (this.user.userType === 'Clerical') {
-          this.userService.createClericalUser(this.user).subscribe(result => {
-            this.toastr.success('User created');
-            this.router.navigateByUrl('emr/users/list/clerical/users')
-          }, (error) => {
-            console.log(error);
-            this.toastr.error(error.error.message, 'Error In Creation');
-          })
-        }
-      } else {
-        this, this.userService.update(this.user).subscribe((result) => {
-          this.toastr.success('User updated');
-          this.router.navigateByUrl('emr/users/list/clerical/users')
-        }, (error) => {
-          console.log(error);
-          this.toastr.error(error.error.message, 'Error In update');
-        })
-      }
-
+      if (this.isOrganizationInit)
+        this.createOrganizationInitUser()
+      else
+        this.createUser();
     } else {
       this.submitted = true;
     }
@@ -242,5 +219,41 @@ export class CreateUserComponent implements OnInit {
       }
     }
     return true;
+  }
+  private createOrganizationInitUser() {
+    this.user.password = GenerateRandomValue.generate(20);
+    this.pushUser.emit(this.user)
+  }
+  private createUser() {
+    if (this.isCreated) {
+      var encryptedPassword = this.encryptService.encrypt(this.user.password);
+      this.user.password = encryptedPassword
+      if (this.user.userType === 'Clinical') {
+        this.userService.createClinicalUser(this.user).subscribe(result => {
+          this.toastr.success('User created');
+          this.router.navigateByUrl('emr/users/list/clinical/users')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        })
+      }
+      if (this.user.userType === 'Clerical') {
+        this.userService.createClericalUser(this.user).subscribe(result => {
+          this.toastr.success('User created');
+          this.router.navigateByUrl('emr/users/list/clerical/users')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        })
+      }
+    } else {
+      this, this.userService.update(this.user).subscribe((result) => {
+        this.toastr.success('User updated');
+        this.router.navigateByUrl('emr/users/list/clerical/users')
+      }, (error) => {
+        console.log(error);
+        this.toastr.error(error.error.message, 'Error In update');
+      })
+    }
   }
 }
