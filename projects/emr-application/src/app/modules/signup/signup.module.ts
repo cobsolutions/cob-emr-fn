@@ -12,13 +12,15 @@ import { EmrCommonModule } from '../common/emr-common.module';
 import { MatIconModule } from '@angular/material/icon';
 import { EssentialInformationComponent } from './components/essential.information/essential-information.component';
 import { ClinicInformationComponent } from './components/clinic.info/clinic-information.component';
+import { AdministratorInfoComponent } from './components/administrator.info/administrator-info.component';
 
 
 @NgModule({
   declarations: [
     CreateOrganizationComponent,
     EssentialInformationComponent,
-    ClinicInformationComponent
+    ClinicInformationComponent,
+    AdministratorInfoComponent
   ],
   imports: [
     CommonModule,
