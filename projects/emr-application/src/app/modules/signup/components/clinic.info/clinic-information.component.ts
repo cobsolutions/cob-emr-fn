@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Clinic } from '../../../patient/models/clinic';
 
 @Component({
@@ -8,7 +8,9 @@ import { Clinic } from '../../../patient/models/clinic';
   styleUrls: ['./clinic-information.component.css']
 })
 export class ClinicInformationComponent implements OnInit {
+  @ViewChild('clinicForm') clinicForm: NgForm;
   @Input() form: FormGroup;
+  submitted: boolean = false;
   createdClinic: Clinic = {
     name: '',
     address: {
@@ -21,6 +23,11 @@ export class ClinicInformationComponent implements OnInit {
   ngOnInit(): void {
   }
   add() {
+    if (this.clinicForm.valid) {
+      this.clinicForm.reset();
+    } else {
+      this.submitted = true;
+    }
 
   }
 }

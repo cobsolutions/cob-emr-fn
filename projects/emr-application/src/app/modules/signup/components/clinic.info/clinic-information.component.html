@@ -1,33 +1,73 @@
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm" placeholder="Clinic Name"
-        required [(ngModel)]="createdClinic.name" #clinicname="ngModel" />
-</c-input-group>
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="clinicfaddress" name="clinicfaddress" sizing="sm"
-        placeholder="First Address" required [(ngModel)]="createdClinic.address.firstAddress"
-        #clinicfaddress="ngModel" />
-</c-input-group>
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="clinicsaddress" name="clinicsaddress" sizing="sm"
-        placeholder="Second Address" required [(ngModel)]="createdClinic.address.secondAddress"
-        #clinicsaddress="ngModel" />
-</c-input-group>
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="state" name="state" sizing="sm" placeholder="State" required
-        [(ngModel)]="createdClinic.address.state" #state="ngModel" />
-</c-input-group>
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="city" name="city" sizing="sm" placeholder="City" required
-        [(ngModel)]="createdClinic.address.city" #city="ngModel" />
-</c-input-group>
-<c-input-group class="mb-3">
-    <input autoComplete="name" cFormControl id="zipCode" name="zipCode" sizing="sm" placeholder="Zip Code" required
-        [(ngModel)]="createdClinic.address.zipCode" #zipCode="ngModel" />
-</c-input-group>
-<!--Add Clinic Button-->
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button cButton color="primary" variant="outline" (click)="add()" size="sm">Add</button>
-</div>
+<form cForm #clinicForm="ngForm">
+    <!--Clinic Name-->
+    <div>
+        <small
+            *ngIf="submitted   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
+            class="form-text text-danger">
+            Clinic Name is required
+        </small>
+        <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm"
+                placeholder="Clinic Name" required [(ngModel)]="createdClinic.name" #clinicname="ngModel" />
+        </c-input-group>
+    </div>
+    <!--First Address Name-->
+    <div>
+        <small
+            *ngIf="submitted   && (clinicfaddress.errors) || (clinicfaddress.invalid && (clinicfaddress.dirty || clinicfaddress.touched))"
+            class="form-text text-danger">
+            First Address is required
+        </small>
+        <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="clinicfaddress" name="clinicfaddress" sizing="sm"
+                placeholder="First Address" required [(ngModel)]="createdClinic.address.firstAddress"
+                #clinicfaddress="ngModel" />
+        </c-input-group>
+    </div>
+    <!--Second Address Name-->
+    <c-input-group class="mb-3">
+        <input autoComplete="name" cFormControl id="clinicsaddress" name="clinicsaddress" sizing="sm"
+            placeholder="Second Address" required [(ngModel)]="createdClinic.address.secondAddress"
+            #clinicsaddress="ngModel" />
+    </c-input-group>
+    <!--State -->
+    <div>
+        <small *ngIf="submitted   && (state.errors) || (state.invalid && (state.dirty || state.touched))"
+            class="form-text text-danger">
+            State is required
+        </small>
+        <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="state" name="state" sizing="sm" placeholder="State" required
+                [(ngModel)]="createdClinic.address.state" #state="ngModel" />
+        </c-input-group>
+    </div>
+    <!--City  -->
+    <div>
+        <small *ngIf="submitted   && (city.errors) || (city.invalid && (city.dirty || city.touched))"
+            class="form-text text-danger">
+            City is required
+        </small>
+        <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="city" name="city" sizing="sm" placeholder="City" required
+                [(ngModel)]="createdClinic.address.city" #city="ngModel" />
+        </c-input-group>
+    </div>
+    <!--Zip Code-->
+    <div>
+        <small *ngIf="submitted   && (zipCode.errors) || (zipCode.invalid && (zipCode.dirty || zipCode.touched))"
+            class="form-text text-danger">
+            Zip Code is required
+        </small>
+        <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="zipCode" name="zipCode" sizing="sm" placeholder="Zip Code"
+                required [(ngModel)]="createdClinic.address.zipCode" #zipCode="ngModel" />
+        </c-input-group>
+    </div>
+    <!--Add Clinic Button-->
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button cButton color="primary" variant="outline" type="button" (click)="add()" size="sm">Add</button>
+    </div>
+</form>
 <table class="table table-sm table-striped table-hover">
     <thead>
         <tr>
