@@ -10,6 +10,7 @@ import { Clinic } from '../../../patient/models/clinic';
 export class ClinicInformationComponent implements OnInit {
   @ViewChild('clinicForm') clinicForm: NgForm;
   @Input() form: FormGroup;
+  clinics: Clinic[] = []
   submitted: boolean = false;
   createdClinic: Clinic = {
     name: '',
@@ -24,10 +25,14 @@ export class ClinicInformationComponent implements OnInit {
   }
   add() {
     if (this.clinicForm.valid) {
+      const clinic = structuredClone(this.createdClinic)
+      this.clinics.push(clinic);
       this.clinicForm.reset();
     } else {
       this.submitted = true;
     }
-
+  }
+  public getClinicAddress(clinic: Clinic): string {
+    return clinic.address.firstAddress + ',' + clinic.address.state + ',' + clinic.address.country + ',' + clinic.address.zipCode;
   }
 }
