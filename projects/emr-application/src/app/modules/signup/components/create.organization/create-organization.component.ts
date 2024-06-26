@@ -23,8 +23,17 @@ export class CreateOrganizationComponent implements OnInit {
         'city': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required])
       }),
-      'Clinics': new FormArray([] , [Validators.required]),
-      'Administrator': new FormGroup({}),
+      'Clinics': new FormArray([], [Validators.required]),
+      'Administrator': new FormGroup({
+        'firstName': new FormControl(null, [Validators.required]),
+        'middleName': new FormControl(null, [Validators.required]),
+        'lastName': new FormControl(null, [Validators.required]),
+        'email': new FormControl(null, [Validators.required]),
+        'userName': new FormControl(null, [Validators.required]),
+        'type': new FormControl('', [Validators.required]),
+        'npi': new FormControl(null),
+        'license': new FormControl(null),
+      }),
       'Users': new FormGroup({})
     })
   }

@@ -1,7 +1,69 @@
-<p>administrator-info works!</p>
 <div [formGroup]="form">
-    <div>
-        <button cButton matStepperPrevious size="sm"  variant="outline" style="width: 5%;" class="mx-2">Back</button>
-        <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="submit">Next</button>
+    <div formGroupName="Administrator">
+        <c-input-group class="mb-1 mt-3" sizing="sm">
+            <span cInputGroupText style="width: 100px;">Name</span>
+            <input cFormControl id="firstName" name="firstName" sizing="sm" placeholder="First Name"
+                formControlName="firstName" />
+            <input cFormControl id="middleName" name="middleName" sizing="sm" placeholder="Middle Name"
+                formControlName="middleName" />
+            <input cFormControl id="lastName" name="lastName" sizing="sm" placeholder="Last Name"
+                formControlName="lastName" />
+            <div *ngIf="!this.form.get('Administrator').get('firstName')?.valid && 
+                    (this.form.get('Administrator').get('firstName')?.dirty ||this.form.get('Administrator').get('firstName')?.touched)"
+                class="text-danger ">
+                First Name is required
+            </div>
+            <div *ngIf="!this.form.get('Administrator').get('lastName')?.valid && 
+                    (this.form.get('Administrator').get('lastName')?.dirty ||this.form.get('Administrator').get('lastName')?.touched)"
+                class="text-danger mx-1">
+                Last Name is required
+            </div>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <span cInputGroupText style="width: 100px;">Email</span>
+            <input cFormControl id="email" name="email" sizing="sm" formControlName="email" />
+            <div *ngIf="!this.form.get('Administrator').get('email')?.valid && 
+                    (this.form.get('Administrator').get('email')?.dirty ||this.form.get('Administrator').get('email')?.touched)"
+                class="text-danger mx-1">
+                Email is required
+            </div>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <span cInputGroupText style="width: 100px;">User Name</span>
+            <input cFormControl id="userName" name="userName" sizing="sm" formControlName="userName" />
+            <div *ngIf="!this.form.get('Administrator').get('userName')?.valid && 
+                    (this.form.get('Administrator').get('userName')?.dirty ||this.form.get('Administrator').get('userName')?.touched)"
+                class="text-danger mx-1">
+                User Name is required
+            </div>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <span cInputGroupText style="width: 100px;">User Type</span>
+            <select cSelect cFormControl id="type" name="type" formControlName="type">
+                <option value=''>Select User Type</option>
+                <option value="Clinical">Clinical</option>
+                <option value="Clerical">Clerical</option>
+            </select>
+            <div *ngIf="!this.form.get('Administrator').get('type')?.valid && 
+                    (this.form.get('Administrator').get('type')?.dirty ||this.form.get('Administrator').get('type')?.touched)"
+                class="text-danger mx-1">
+                User Type is required
+            </div>
+        </c-input-group>
+        <span *ngIf="this.form.get('Administrator').get('type').value === 'Clinical'">
+            <c-input-group class="mb-1" sizing="sm">
+                <span cInputGroupText style="width: 100px;">NPI</span>
+                <input cFormControl id="npi" name="npi" sizing="sm" formControlName="npi" />
+            </c-input-group>
+            <c-input-group class="mb-1" sizing="sm">
+                <span cInputGroupText style="width: 100px;">License</span>
+                <input cFormControl id="license" name="license" sizing="sm" formControlName="license" />
+            </c-input-group>
+        </span>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" style="width: 5%;" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="submit"
+            [disabled]="!form.get('Administrator').valid">Next</button>
     </div>
 </div>

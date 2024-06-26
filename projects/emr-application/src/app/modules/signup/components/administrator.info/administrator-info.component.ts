@@ -12,5 +12,4 @@ export class AdministratorInfoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
