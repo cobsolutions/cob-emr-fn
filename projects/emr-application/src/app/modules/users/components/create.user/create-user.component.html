@@ -122,7 +122,7 @@
                             <option [value]="'Clerical'" selected>Clerical</option>
                         </select>
                         <!--Doctor -->
-                        <span *ngIf="user.userType === 'clinical'">
+                        <span *ngIf="user.userType === 'Clinical'">
                             <!--NPI-->
                             <small *ngIf="submitted   && (npi.errors) || (npi.invalid && (npi.dirty || npi.touched))"
                                 class="form-text text-danger">
@@ -252,7 +252,7 @@
                                 class="form-text text-danger">
                                 Clinics is required
                             </small>
-                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" #mutliselectClinics clearSearchOnSelect
                                 required [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
                                 <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
                                     [value]="clinic.generatedId">{{clinic.name}}</c-multi-select-option>

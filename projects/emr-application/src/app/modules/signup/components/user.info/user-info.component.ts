@@ -16,11 +16,11 @@ export class UserInfoComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    var formClinics = this.form.get('Clinics') as FormArray
+    var formClinics = this.form.get('clinics') as FormArray
     this.clinics = formClinics.valueChanges
   }
   get organizationUsers(): FormArray {
-    return this.form.get('Users') as FormArray;
+    return this.form.get('users') as FormArray;
   }
 
   handleCreatedUser(user: User) {

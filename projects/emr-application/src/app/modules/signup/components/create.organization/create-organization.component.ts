@@ -12,7 +12,7 @@ export class CreateOrganizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationForm = new FormGroup({
-      'Essential': new FormGroup({
+      'essential': new FormGroup({
         'orgname': new FormControl(null, [Validators.required]),
         'dba': new FormControl(null, [Validators.required]),
         'groupNPI': new FormControl(null, [Validators.required]),
@@ -23,8 +23,8 @@ export class CreateOrganizationComponent implements OnInit {
         'city': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required])
       }),
-      'Clinics': new FormArray([], [Validators.required]),
-      'Administrator': new FormGroup({
+      'clinics': new FormArray([], [Validators.required]),
+      'administrator': new FormGroup({
         'firstName': new FormControl(null, [Validators.required]),
         'middleName': new FormControl(null, [Validators.required]),
         'lastName': new FormControl(null, [Validators.required]),
@@ -34,7 +34,7 @@ export class CreateOrganizationComponent implements OnInit {
         'npi': new FormControl(null),
         'license': new FormControl(null),
       }),
-      'Users': new FormArray([], [Validators.required]),
+      'users': new FormArray([], [Validators.required]),
     })
   }
   nextEssential() {

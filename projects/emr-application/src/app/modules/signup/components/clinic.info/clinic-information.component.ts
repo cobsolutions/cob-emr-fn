@@ -47,7 +47,7 @@ export class ClinicInformationComponent implements OnInit {
 
   }
   get organizationClinics(): FormArray {
-    return this.form.get('Clinics') as FormArray;
+    return this.form.get('clinics') as FormArray;
   }
   public remove(index: number) {
 

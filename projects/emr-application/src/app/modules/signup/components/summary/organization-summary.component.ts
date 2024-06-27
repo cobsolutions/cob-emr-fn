@@ -24,7 +24,7 @@ export class OrganizationSummaryComponent implements OnInit {
     console.log(JSON.stringify(this.form.value))
   }
   private fillEsstenialInfo() {
-    this.form.get('Essential').valueChanges.forEach(selected => {
+    this.form.get('essential').valueChanges.forEach(selected => {
       this.organization.orgname = selected?.orgname
       this.organization.dba = selected?.dba
       this.organization.groupNPI = selected?.groupNPI
@@ -37,17 +37,18 @@ export class OrganizationSummaryComponent implements OnInit {
     })
   }
   private fillClinics() {
-    this.form.get('Clinics').valueChanges.forEach(selected => {
+    this.form.get('clinics').valueChanges.forEach(selected => {
       this.organization.clinics = selected;
     })
   }
   private fillAdministratorUser() {
-    this.form.get('Administrator').valueChanges.forEach(selected => {
+    this.form.get('administrator').valueChanges.forEach(selected => {
       this.organization.administrator = selected;
     })
   }
   private fillUsers() {
-    this.form.get('Users').valueChanges.forEach(selected => {
+    this.form.get('users').valueChanges.forEach(selected => {
+      console.log(JSON.stringify(selected))
       this.organization.users = selected;
     })
   }

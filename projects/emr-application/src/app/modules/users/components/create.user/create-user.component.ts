@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SmartTableComponent } from '@coreui/angular-pro';
+import { MultiSelectComponent, SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { GenerateRandomValue } from 'projects/emr-application/src/app/util/generate.random';
@@ -24,6 +24,7 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
 export class CreateUserComponent implements OnInit {
   @ViewChild('userCreateForm') userCreateForm: NgForm;
   @ViewChild('userRoles') userRoles: SmartTableComponent;
+  @ViewChild('mutliselectClinics') multiSelectComponent: MultiSelectComponent
   submitted: boolean = false;
   validAddress: boolean = true;
   specialties = Specialties;
@@ -31,8 +32,7 @@ export class CreateUserComponent implements OnInit {
   @Input() clinics: Clinic[];
   @Input() isOrganizationInit?: boolean = false;
   @Output() pushUser = new EventEmitter<User>()
-  isCreated: boolean = true;
-  readonly selectedItemsCount = []
+  isCreated: boolean = true;  
   columns = [
     {
       key: 'role',
@@ -95,7 +95,6 @@ export class CreateUserComponent implements OnInit {
   }
   create() {
     this.fillPermissions()
-    console.log(JSON.stringify(this.user))
     if (this.userCreateForm.valid) {
       this.submitted = false;
       if (this.isOrganizationInit)
@@ -221,12 +220,16 @@ export class CreateUserComponent implements OnInit {
     return true;
   }
   private createOrganizationInitUser() {
-    
-    this.user.password = GenerateRandomValue.generate(20);
+
+    this.user.password = this.encryptService.encrypt(this.user.password);
     this.pushUser.emit(this.user)
     this.userCreateForm.reset();
-    this.usernameCtrl.setValue(null)
-    this.emailCtrl.setValue(null)
+    this.usernameCtrl.setValue('')
+    this.emailCtrl.setValue('')
+    this.validUserName = undefined;
+    this.validEmail = undefined;
+    this.user.roleScope = []
+    this.user.clinicIds= undefined;
   }
   private createUser() {
     if (this.isCreated) {
