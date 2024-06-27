@@ -14,4 +14,5 @@ export interface Organization {
     clinics?: Clinic[]
     administrator?: User,
     users?: User[]
+    loggedInUUID?:string
 }

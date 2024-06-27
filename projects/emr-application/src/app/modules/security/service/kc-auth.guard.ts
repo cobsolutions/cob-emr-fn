@@ -29,7 +29,8 @@ export class KcAuthGuard extends KeycloakAuthGuard {
       this.keycloakAngular.logout();
     }
     var type = route.data['type'];
-    if (type === 'requester' && !this.roles.includes(Role.ADMIN_ROLE)) {
+    console.log(JSON.stringify(this.roles))
+    if (type === 'requester' && !this.roles.includes(Role.ORGANIZATION_REQUEST_ROLE)) {
       this.keycloakAngular.logout();
     }
     var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles)

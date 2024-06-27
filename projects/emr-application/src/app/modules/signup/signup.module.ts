@@ -17,6 +17,7 @@ import { UserInfoComponent } from './components/user.info/user-info.component';
 import { UsersModule } from '../users/users.module';
 import { OrganizationSummaryComponent } from './components/summary/organization-summary.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { OrganizationConfirmationComponent } from './components/confirmation/organization-confirmation.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ClinicInformationComponent,
     AdministratorInfoComponent,
     UserInfoComponent,
-    OrganizationSummaryComponent
+    OrganizationSummaryComponent,
+    OrganizationConfirmationComponent
   ],
   imports: [
     CommonModule,

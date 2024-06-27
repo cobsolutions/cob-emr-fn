@@ -25,7 +25,7 @@
 
         <c-input-group class="mb-1" sizing="sm">
             <span cInputGroupText style="width: 120px;">Group NPI*</span>
-            <input id="groupNPI" name="groupNPI" placeholder formControlName="groupNPI" sizing="sm"
+            <input id="groupNPI" name="groupNPI" placeholder formControlName="groupNPI" sizing="sm" maxlength="10"
                 class="form-control" />
             <div *ngIf="!this.form.get('essential').get('groupNPI')?.valid && 
                             (this.form.get('essential').get('groupNPI')?.dirty ||this.form.get('essential').get('groupNPI')?.touched)"
@@ -37,7 +37,7 @@
         <!--taxID-->
         <c-input-group class="mb-1" sizing="sm">
             <span cInputGroupText style="width: 120px;">Tax ID*</span>
-            <input id="taxID" name="taxID" placeholder formControlName="taxID" sizing="sm"
+            <input id="taxID" name="taxID" placeholder formControlName="taxID" sizing="sm"  maxlength="9"
                 class="form-control" />
             <div *ngIf="!this.form.get('essential').get('taxID')?.valid && 
                 (this.form.get('essential').get('taxID')?.dirty ||this.form.get('essential').get('taxID')?.touched)"

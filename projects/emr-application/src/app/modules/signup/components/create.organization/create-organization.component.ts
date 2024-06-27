@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { KcAuthService } from '../../../security/service/kc-auth.service';
-import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-organization',
   templateUrl: './create-organization.component.html',
@@ -10,9 +9,10 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
 export class CreateOrganizationComponent implements OnInit {
 
   organizationForm: FormGroup
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(	private router: Router) { }
 
   ngOnInit(): void {
+    
     this.organizationForm = new FormGroup({
       'essential': new FormGroup({
         'orgname': new FormControl(null, [Validators.required]),

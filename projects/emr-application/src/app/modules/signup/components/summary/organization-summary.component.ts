@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Clinic } from '../../../patient/models/clinic';
+import { KcAuthService } from '../../../security/service/kc-auth.service';
 import { Organization } from '../../model/organization';
 import { SignupService } from '../../services/signup.service';
 
@@ -13,7 +15,7 @@ export class OrganizationSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   organization: Organization = {}
 
-  constructor(private signupService: SignupService) { }
+  constructor(private signupService: SignupService,private router: Router,private kcAuthService: KcAuthService) { }
 
   ngOnInit(): void {
     this.fillEsstenialInfo();
@@ -22,12 +24,12 @@ export class OrganizationSummaryComponent implements OnInit {
     this.fillUsers();
   }
   submit() {
-    this.signupService.signup(this.form.value).subscribe(result=>{
-      console.log('SSSS');
+    this.organization.loggedInUUID = this.kcAuthService.getLoggedUser().sub;    
+    this.signupService.signup(this.organization).subscribe(result=>{
+      this.router.navigateByUrl('/emr-request/signup/confiramtion');
     },error=>{
-      console.log('EEEEE');
+        console.error(error)
     })
-    console.log(JSON.stringify(this.form.value))
   }
   private fillEsstenialInfo() {
     this.form.get('essential').valueChanges.forEach(selected => {
