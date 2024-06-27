@@ -30,7 +30,7 @@
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <span cInputGroupText style="width: 100px;">User Name</span>
-            <input cFormControl id="userName" name="userName" sizing="sm" formControlName="userName" />
+            <input cFormControl id="userName" name="userName" sizing="sm" formControlName="accountName" />
             <div *ngIf="!this.form.get('Administrator').get('userName')?.valid && 
                     (this.form.get('Administrator').get('userName')?.dirty ||this.form.get('Administrator').get('userName')?.touched)"
                 class="text-danger mx-1">
@@ -39,7 +39,7 @@
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <span cInputGroupText style="width: 100px;">User Type</span>
-            <select cSelect cFormControl id="type" name="type" formControlName="type">
+            <select cSelect cFormControl id="type" name="type" formControlName="userType">
                 <option value=''>Select User Type</option>
                 <option value="Clinical">Clinical</option>
                 <option value="Clerical">Clerical</option>
@@ -50,7 +50,7 @@
                 User Type is required
             </div>
         </c-input-group>
-        <span *ngIf="this.form.get('Administrator').get('type').value === 'Clinical'">
+        <span *ngIf="this.form.get('Administrator').get('userType').value === 'Clinical'">
             <c-input-group class="mb-1" sizing="sm">
                 <span cInputGroupText style="width: 100px;">NPI</span>
                 <input cFormControl id="npi" name="npi" sizing="sm" formControlName="npi" />

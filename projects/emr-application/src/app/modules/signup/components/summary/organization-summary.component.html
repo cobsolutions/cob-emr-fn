@@ -1,6 +1,78 @@
+<c-card class="mb-3 mt-3">
+    <c-card-body>
+        <h4 cCardTitle>Essential Information</h4>
+        <p cCardText>
+            <strong>Name : </strong> {{organization.orgname}}<br />
+            <strong>DBA : </strong> {{organization.dba}}<br />
+            <strong>Group NPI : </strong> {{organization.groupNPI}}<br />
+            <strong>Tax ID : </strong> {{organization.taxID}}<br />
+            <strong>Address : </strong> {{organizationAddress}}
+
+        </p>
+    </c-card-body>
+</c-card>
+<c-card class="mb-3">
+    <c-card-body>
+        <h4 cCardTitle>Clinics Information</h4>
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 100px;">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clinic of organization.clinics;let i=index;" scope="row">
+                    <th scope="row">{{i+1}}</th>
+                    <th scope="row">{{clinic.name}}</th>
+                    <th scope="row">{{clinic.address}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </c-card-body>
+</c-card>
+<c-card class="mb-3">
+    <c-card-body>
+        <h4 cCardTitle>Administrator</h4>
+        <p cCardText>
+            <strong>Name : </strong> {{organization.administrator?.lastName +','
+            +organization.administrator?.firstName}} <br />
+            <strong>Account Name : </strong> {{organization.administrator?.accountName}} <br />
+            <strong>Email : </strong> {{organization.administrator?.email}} <br />
+            <strong>Type : </strong> {{organization.administrator?.userType}} <br />
+        </p>
+    </c-card-body>
+</c-card>
+<c-card class="mb-3">
+    <c-card-body>
+        <h4 cCardTitle>Users</h4>
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 100px;">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">AccountName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of organization.users;let i=index;" scope="row">
+                    <th scope="row">{{i+1}}</th>
+                    <th scope="row">{{user.lastName +',' + user.firstName}}</th>
+                    <th scope="row">{{user.accountName}}</th>
+                    <th scope="row">{{user.email}}</th>
+                    <th scope="row">{{user.userType}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </c-card-body>
+</c-card>
 <div [formGroup]="form">
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" style="width: 5%;" class="mx-2">Back</button>
-        <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="button" (click)="submit()">Submit</button>
+        <button cButton matStepperNext variant="outline" size="sm" style="width: 5%;" type="button"
+            (click)="submit()">Submit</button>
     </div>
 </div>
