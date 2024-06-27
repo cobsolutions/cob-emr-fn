@@ -15,6 +15,7 @@ import { ClinicInformationComponent } from './components/clinic.info/clinic-info
 import { AdministratorInfoComponent } from './components/administrator.info/administrator-info.component';
 import { UserInfoComponent } from './components/user.info/user-info.component';
 import { UsersModule } from '../users/users.module';
+import { OrganizationSummaryComponent } from './components/summary/organization-summary.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { UsersModule } from '../users/users.module';
     EssentialInformationComponent,
     ClinicInformationComponent,
     AdministratorInfoComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    OrganizationSummaryComponent
   ],
   imports: [
     CommonModule,

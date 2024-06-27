@@ -23,6 +23,10 @@
                         <ng-template matStepLabel>Users Information</ng-template>
                         <user-info [form]="organizationForm"></user-info>
                     </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Organization Summary</ng-template>
+                        <organization-summary [form]="organizationForm"></organization-summary>
+                    </mat-step>
                 </mat-stepper>
             </form>
         </c-card-body>
