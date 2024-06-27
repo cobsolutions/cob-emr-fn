@@ -16,6 +16,7 @@ import { AdministratorInfoComponent } from './components/administrator.info/admi
 import { UserInfoComponent } from './components/user.info/user-info.component';
 import { UsersModule } from '../users/users.module';
 import { OrganizationSummaryComponent } from './components/summary/organization-summary.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { OrganizationSummaryComponent } from './components/summary/organization-
     FormsModule,
     ReactiveFormsModule,
     EmrCommonModule,
-    UsersModule
+    UsersModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class SignupModule { }

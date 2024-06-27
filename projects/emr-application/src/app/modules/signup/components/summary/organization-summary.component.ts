@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Clinic } from '../../../patient/models/clinic';
 import { Organization } from '../../model/organization';
+import { SignupService } from '../../services/signup.service';
 
 @Component({
   selector: 'organization-summary',
@@ -12,7 +13,7 @@ export class OrganizationSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   organization: Organization = {}
 
-  constructor() { }
+  constructor(private signupService: SignupService) { }
 
   ngOnInit(): void {
     this.fillEsstenialInfo();
@@ -21,6 +22,11 @@ export class OrganizationSummaryComponent implements OnInit {
     this.fillUsers();
   }
   submit() {
+    this.signupService.signup(this.form.value).subscribe(result=>{
+      console.log('SSSS');
+    },error=>{
+      console.log('EEEEE');
+    })
     console.log(JSON.stringify(this.form.value))
   }
   private fillEsstenialInfo() {

@@ -31,24 +31,13 @@ export class LoggedInService {
           return this.findUser(userProfile.sub)
         }),
         map((user: any) => {
-          if (user !== null) {
-            return this.loggedInUser = {
-              uuid: user.uuid,
-              userName: user.accountName,
-              email: user.email,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              userRoleScope: user.roleScope
-            }
-          }
-          else {
-            return this.loggedInUser = {
-              uuid: '2dbc0870-4d4e-45f7-a079-2243c792719e',
-              userName: 'madel',
-              email: 'madel@mail.com',
-              firstName: 'mohamed',
-              lastName: 'adel'
-            }
+          return this.loggedInUser = {
+            uuid: user.uuid,
+            userName: user.accountName,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            userRoleScope: user.roleScope
           }
         }),
         switchMap((loggedInUser: LoggedInUser) => {
