@@ -133,16 +133,13 @@ export class CreateUserComponent implements OnInit {
   }
   getDoctorCredentials() {
     if (this.user.speciality === 'Physical_Therapy') {
-      this.credentials = ['DPT', 'PTA']
+      this.credentials = ['PT', 'SPT', 'PTA']
     }
     if (this.user.speciality === 'Occupational_Therapy') {
-      this.credentials = ['OTD', 'COTA']
+      this.credentials = ['OT', 'SOT', 'COTA']
     }
     if (this.user.speciality === 'Speech_Language_Pathology') {
-      this.credentials = ['SLP', 'SLPA']
-    }
-    if (this.user.speciality === 'Dentistry') {
-      this.credentials = ['DMD', 'DDS', 'CDA']
+      this.credentials = ['SLP', 'SSLP', 'SLPA']
     }
   }
   toggleDetails(item: any) {
