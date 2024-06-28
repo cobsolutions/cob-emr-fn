@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
+import { KeycloakLoginOptions } from 'keycloak-js';
 
 @Component({
   selector: 'app-organization-confirmation',
@@ -12,10 +13,13 @@ export class OrganizationConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.keycloakAngular.logout();
+      this.keycloakAngular.logout('http://localhost:4300/emr/dashboard');
     }, 1100)
   }
   goHome(){
-    this.keycloakAngular.login();
+    var keycloakLoginOptions:KeycloakLoginOptions={
+      'redirectUri' :'http://localhost:4300/emr/dashboard'
+    }
+    this.keycloakAngular.login(keycloakLoginOptions);
   }
 }
