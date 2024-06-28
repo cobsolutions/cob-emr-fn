@@ -116,7 +116,7 @@
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role"
                             [disabled]="!isCreated"
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
-                            [(ngModel)]="user.userType" #role="ngModel" required>
+                            [(ngModel)]="user.userType" #role="ngModel" required (ngModelChange)="changeUSerType($event)">
                             <option [value]="null" disabled selected>Select User Type</option>
                             <option [value]="'Clinical'" selected>Clinical</option>
                             <option [value]="'Clerical'" selected>Clerical</option>
@@ -168,7 +168,7 @@
                                 Doctor Credential is required
                             </small>
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential"
-                                required
+                                required (ngModelChange)="changeCredential($event)"
                                 [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
                                 [(ngModel)]="user.credential" #credential="ngModel">
                                 <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
@@ -192,7 +192,7 @@
                         <small *ngIf="submitted   && !isValidRoles" class="form-text text-danger">
                             Permissions required
                         </small>
-                        <c-smart-table [items]="roles" [columns]="columns" #userRoles
+                        <c-smart-table [items]="roles$ | async" [columns]="columns" #userRoles
                             [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
                             <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
                                 let-tdContent="tdContent">

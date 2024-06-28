@@ -5,7 +5,7 @@ import { MultiSelectComponent, SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { GenerateRandomValue } from 'projects/emr-application/src/app/util/generate.random';
-import { debounceTime, filter, finalize, map, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, finalize, map, Observable, of, switchMap, tap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { UserRoleScope } from '../../../administration/model/user/user.role.scope';
 import { ClinicService } from '../../../administration/services/clinic/clinic.service';
@@ -14,6 +14,7 @@ import { Specialties } from '../../../common/models/enums/doctor/specialties';
 import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { Role } from '../../../security/model/role';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 
 @Component({
@@ -53,6 +54,8 @@ export class CreateUserComponent implements OnInit {
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
+  filteredRoles: IItem[] = [];
+  roles$: Observable<IItem[]>
   user: User = {
     userType: null,
     role: null,
@@ -78,6 +81,8 @@ export class CreateUserComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.filteredRoles = [...this.roles];
+    this.roles$ = of(this.filteredRoles)
     this.checkUserName()
     this.checkEmail();
     if (!this.isOrganizationInit)
@@ -259,5 +264,30 @@ export class CreateUserComponent implements OnInit {
         this.toastr.error(error.error.message, 'Error In update');
       })
     }
+  }
+  changeCredential(value: any) {
+
+    if (value === 'SPT' || value === 'SOT' || value === 'SSLP') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
+  }
+  changeUSerType(value: any) {
+    if (value === 'Clerical') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FORWARD_MEDICAL_NOTE_ROLE && item.name !== Role.INITIALIZE_MEDICAL_NOTE_ROLE && item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
   }
 }

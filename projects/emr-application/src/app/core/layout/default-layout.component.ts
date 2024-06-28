@@ -21,7 +21,6 @@ export class DefaultLayoutComponent implements OnInit {
     combineLatest([this.loggedInService.load(), this.renderNavItemsService.renderItems$])
       .pipe(
         map((result: any) => {
-          console.log(JSON.stringify(result[0]))
           var userRoleScope: UserRoleScope[] = result[0].userRoleScope;
           var renderItems: INavData[] = result[1];
           if (userRoleScope !== undefined)
