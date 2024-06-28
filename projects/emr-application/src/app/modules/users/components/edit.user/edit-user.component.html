@@ -52,7 +52,7 @@
             </small> -->
             <c-row>
                 <c-col class="col">
-                    <c-smart-table [items]="roles" [columns]="columns" #editUserRoles
+                    <c-smart-table [items]="roles$ | async" [columns]="columns" #editUserRoles
                         [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
                         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
                             let-tdContent="tdContent">
@@ -112,7 +112,7 @@
             </select>
             <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential" required disable-input [componentRole]="componentRole"
                 [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
-                [(ngModel)]="user.credential" #credential="ngModel">
+                [(ngModel)]="user.credential" #credential="ngModel" (ngModelChange)="changeCredential($event)">
                 <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
                 <option *ngFor="let credential of credentials" [value]="credential">
                     {{credential}}

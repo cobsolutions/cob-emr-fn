@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { UserRoleScope } from '../../../administration/model/user/user.role.scope';
 import { ClinicService } from '../../../administration/services/clinic/clinic.service';
@@ -10,6 +10,7 @@ import { UserService } from '../../../administration/services/user/user.service'
 import { Specialties } from '../../../common/models/enums/doctor/specialties';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { Role } from '../../../security/model/role';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { ClericlaUserService } from '../../services/clerical/clericla-user.service';
 import { ClinicalUserService } from '../../services/clinical/clinical-user.service';
@@ -50,6 +51,8 @@ export class EditUserComponent implements OnInit {
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
+  filteredRoles: IItem[] = [];
+  roles$: Observable<IItem[]>
   credentials: string[];
   specialties = Specialties;
   constructor(
@@ -61,6 +64,8 @@ export class EditUserComponent implements OnInit {
     , private clericlaUserService: ClericlaUserService) { }
 
   ngOnInit(): void {
+    this.filteredRoles = [...this.roles];
+    this.roles$ = of(this.filteredRoles)
     this.loggedInService.load().pipe(
       map((loggedInUser: LoggedInUser) => {
         return loggedInUser.organizationId
@@ -117,16 +122,13 @@ export class EditUserComponent implements OnInit {
   }
   getDoctorCredentials() {
     if (this.user.speciality === 'Physical_Therapy') {
-      this.credentials = ['DPT', 'PTA']
+      this.credentials = ['PT', 'SPT', 'PTA']
     }
     if (this.user.speciality === 'Occupational_Therapy') {
-      this.credentials = ['OTD', 'COTA']
+      this.credentials = ['OT', 'SOT', 'COTA']
     }
     if (this.user.speciality === 'Speech_Language_Pathology') {
-      this.credentials = ['SLP', 'SLPA']
-    }
-    if (this.user.speciality === 'Dentistry') {
-      this.credentials = ['DMD', 'DDS', 'CDA']
+      this.credentials = ['SLP', 'SSLP', 'SLPA']
     }
   }
   update() {
@@ -173,5 +175,30 @@ export class EditUserComponent implements OnInit {
   }
   isClinicTouched(event: any) {
     this.isClinicChanged = true;
+  }
+  changeCredential(value: any) {
+
+    if (value === 'SPT' || value === 'SOT' || value === 'SSLP') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
+  }
+  changeUSerType(value: any) {
+    if (value === 'Clerical') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FORWARD_MEDICAL_NOTE_ROLE && item.name !== Role.INITIALIZE_MEDICAL_NOTE_ROLE && item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
   }
 }
