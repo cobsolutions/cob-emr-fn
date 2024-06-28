@@ -205,9 +205,18 @@ export class CreateUserComponent implements OnInit {
     this.isValidRoles = this.validateRoles();
     if (this.isValidRoles)
       this.userRoles.items.forEach((item: any) => {
-        var userRoleScope: UserRoleScope = {
-          role: item.name,
-          scope: item.scope
+        var userRoleScope: UserRoleScope;
+        if (item.name === Role.INITIALIZE_MEDICAL_NOTE_ROLE || item.name === Role.FORWARD_MEDICAL_NOTE_ROLE
+          || item.name === Role.FINALIZE_MEDICAL_NOTE_ROLE) {
+          userRoleScope = {
+            role: item.name,
+            scope: item.scope? 'modify' : 'hidden'
+          }
+        }else{
+          userRoleScope = {
+            role: item.name,
+            scope: item.scope
+          }
         }
         this.user.roleScope.push(userRoleScope);
       })
@@ -289,5 +298,13 @@ export class CreateUserComponent implements OnInit {
       this.filteredRoles = [...this.roles];
     }
     this.roles$ = of(this.filteredRoles)
+  }
+  checkNonMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return !medicalList.includes(value)
+  }
+  checkMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return medicalList.includes(value)
   }
 }

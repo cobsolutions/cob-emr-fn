@@ -116,7 +116,8 @@
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role"
                             [disabled]="!isCreated"
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
-                            [(ngModel)]="user.userType" #role="ngModel" required (ngModelChange)="changeUSerType($event)">
+                            [(ngModel)]="user.userType" #role="ngModel" required
+                            (ngModelChange)="changeUSerType($event)">
                             <option [value]="null" disabled selected>Select User Type</option>
                             <option [value]="'Clinical'" selected>Clinical</option>
                             <option [value]="'Clerical'" selected>Clerical</option>
@@ -201,22 +202,32 @@
                                         <ng-container *ngSwitchDefault>
                                             {{tdContent}}
                                         </ng-container>
+
                                         <ng-container *ngSwitchCase="'scope'" class="py-2">
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="hidden" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>Hidden</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="view" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>View</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="modify" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>edit</label>
-                                            </c-form-check>
+                                            <span *ngIf="checkNonMedical(item.name)">
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="hidden" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>Hidden</label>
+                                                </c-form-check>
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="view" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>View</label>
+                                                </c-form-check>
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="modify" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>edit</label>
+                                                </c-form-check>
+                                            </span>
+                                            <span *ngIf="checkMedical(item.name)">
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput [name]="'rolescope_'+item.role" type="checkbox"
+                                                        [(ngModel)]="item.scope" value="modify"/>
+                                                    <label cFormCheckLabel>edit</label>
+                                                </c-form-check>
+                                            </span>
                                         </ng-container>
                                     </ng-container>
                                 </td>
@@ -252,8 +263,9 @@
                                 class="form-text text-danger">
                                 Clinics is required
                             </small>
-                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" #mutliselectClinics clearSearchOnSelect
-                                required [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                                #mutliselectClinics clearSearchOnSelect required [selectAll]="false"
+                                [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
                                 <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
                                     [value]="clinic.generatedId">{{clinic.name}}</c-multi-select-option>
                             </c-multi-select>
