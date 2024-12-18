@@ -28,6 +28,8 @@ import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler
 import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { CreateSchedulerConfigurationComponent } from './components/scheduler.configuration/create/create-scheduler-configuration.component';
 import { RepeatAppointmentComponent } from './components/appointment.repeat/repeat-appointment.component';
+import { DayViewSchedulerComponent } from './components/scheduler.view/custom.day/day-view-scheduler.component';
+import { CustomWeekViewComponent } from './components/scheduler.view/custom.week/custom-week-view.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -47,6 +49,8 @@ import { RepeatAppointmentComponent } from './components/appointment.repeat/repe
         ListSchedulerConfigurationComponent,
         CreateSchedulerConfigurationComponent,
         RepeatAppointmentComponent,
+        DayViewSchedulerComponent,
+        CustomWeekViewComponent,
     ],
     imports: [
         CommonModule,

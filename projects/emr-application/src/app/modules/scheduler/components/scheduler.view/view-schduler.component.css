@@ -1,0 +1,33 @@
+/* Parent container should have scrolling */
+.parent-container {
+  position: relative; /* Context for child sticky elements */
+  overflow-y: scroll;
+  max-height: 100vh; /* Ensure the content doesn't exceed viewport height */
+  background-color: white;
+}
+
+
+::ng-deep .cal-day-headers {
+  position: sticky;
+  top: 0px; /* Stick below the navbar's height */
+  background-color: white;
+  z-index: 150; /* Ensure it appears above content */
+}
+
+.horizontal-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Space between items */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.resource-item {
+  flex: 0 0 auto; /* Prevent items from shrinking or growing */
+}
+.resource-header {
+  text-align: center; /* Center-align the resource name */
+  font-weight: bold; /* Make the name bold */
+  background-color: #f8f8f8; /* Light background for distinction */
+  padding: 5px; /* Padding for better visual appearance */
+  border-bottom: 1px solid #ddd; /* Optional separator line */
+}

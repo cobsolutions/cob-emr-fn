@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } fr
 import { MatDialog } from "@angular/material/dialog";
 import {
   CalendarEvent, CalendarEventTimesChangedEvent,
+  CalendarUtils,
   CalendarView
 } from 'angular-calendar';
 import {
@@ -20,27 +21,51 @@ import { AppointmentEventConverterService } from "../../service/appointment-even
 import { AppointmentService } from "../../service/appointment.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
+import { colors } from "./util/color";
+import { addHours, startOfDay } from 'date-fns';
+import { User } from "./custom.day/day-view-scheduler.component";
+import { WeekDay } from "calendar-utils";
 
 @Component({
   selector: 'app-view-schduler',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-    `,
-  ],
+  styleUrls: ['./view-schduler.component.css'],
   templateUrl: './view-schduler.component.html',
 })
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  view: CalendarView = CalendarView.Month;
+  resources = [
+    { id: 1, name: 'Bay Ridge' },
+    { id: 2, name: 'Mahmoud Shalaby' },
+    { id: 3, name: 'Shrif ahmed' },
+    { id: 4, name: 'Moamen Hassanen' },
+    { id: 5, name: 'Sakshi Mahajan' },
+  ];
+  days: WeekDay[];
+  users: User[] = [
+    {
+      id: 0,
+      name: 'John smith',
+      color: colors.yellow,
+    },
+    {
+      id: 1,
+      name: 'Jane Doe',
+      color: colors.blue,
+    },
+  ];
+  
+  view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
+  events: CalendarEvent[] = [];
+
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [];
+  // events: CalendarEvent[] = [];
   cancelNoShow: string;
   activeDayIsOpen: boolean = false;
   constructor(
@@ -51,11 +76,20 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
+    protected utils: CalendarUtils,
   ) { }
-
+  debugConsole(event:any){
+    console.log(JSON.stringify(event))
+  }
   ngOnInit(): void {
     this.getSchedulerConfiguration()
     this.getAppointments();
+    this.days = this.utils.getWeekViewHeader({
+      viewDate: this.viewDate,
+      weekStartsOn: undefined,
+      excluded: undefined,
+      weekendDays: undefined,
+    });
   }
   dayClicked(date: Date) {
     this.viewDate = date;
@@ -192,5 +226,10 @@ export class ViewSchdulerComponent implements OnInit {
         return configuration;
       })
     )
+  }
+  userChanged({ event, newUser }) {
+    event.color = newUser.color;
+    event.meta.user = newUser;
+    this.events = [...this.events];
   }
 }

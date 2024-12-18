@@ -34,21 +34,55 @@
   </div>
 </div>
 <br />
+
 <div [ngSwitch]="view" *ngIf="events">
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
-  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-    (hourSegmentClicked)="weekClicked($event.date)"
-    [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
-    [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+  <!-- <div class="horizontal-container">
+    <div *ngFor="let resource of resources;let i = index" class="resource-item">
+      <div class="resource-header">
+        {{ resource.name }}
+      </div>
+      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+        [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)" (hourSegmentClicked)="weekClicked($event.date)"
+        [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
+        [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
+      </mwl-calendar-week-view>
+    </div>
+  </div> -->
+  <!-- <div class="parent-container" *ngSwitchCase="CalendarView.Week">
+    <div class="cal-week-view" role="grid" style="position: sticky;top: 0px;background-color: white;z-index: 150;">
+      <mwl-calendar-week-view-header [days]="days">
+      </mwl-calendar-week-view-header>
+    </div>
+  </div> -->
+  <div *ngSwitchCase="CalendarView.Week">
+    <div class="horizontal-container">
+      <div *ngFor="let resource of resources" class="resource-item">
+        <div class="resource-header">
+          {{ resource.name }}
+        </div>
+        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
+          (hourSegmentClicked)="weekClicked($event.date)" [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
+          [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
+        </mwl-calendar-week-view>
+      </div>
+    </div>
+  </div>
+  <!-- <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
     (hourSegmentClicked)="dayClicked($event.date)"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
-  </mwl-calendar-day-view>
+  </mwl-calendar-day-view> -->
+  <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+    (eventTimesChanged)="eventTimesChanged($event)" (userChanged)="userChanged($event)"
+    (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event.date)"
+    [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
+    [dayEndHour]="(schedulerConfiguration$ | async)?.endHour" [users]="resources">
+  </mwl-day-view-scheduler>
 </div>

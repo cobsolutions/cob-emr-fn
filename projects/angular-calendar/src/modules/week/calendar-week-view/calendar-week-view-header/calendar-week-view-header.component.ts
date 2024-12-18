@@ -20,7 +20,7 @@ import { trackByWeekDayHeaderDate } from '../../../common/util/util';
       let-trackByWeekDayHeaderDate="trackByWeekDayHeaderDate"
       let-dragEnter="dragEnter"
     >
-      <div class="cal-day-headers" role="row">
+      <div class="cal-day-headers" role="row" style="position: sticky;top: 0px;background-color: white;z-index: 150;">
         <div
           class="cal-header"
           *ngFor="let day of days; trackBy: trackByWeekDayHeaderDate"
