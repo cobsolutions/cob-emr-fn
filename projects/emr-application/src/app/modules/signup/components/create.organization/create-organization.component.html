@@ -1,0 +1,31 @@
+<c-container fluid="true">
+    <c-card>
+        <c-card-body>
+            <form [formGroup]="organizationForm">
+                <mat-stepper linear="true" #stepper>
+                    <mat-step [stepControl]="organizationForm.get('essential')!" formGroupName="essential" completed="false">
+                        <ng-template matStepLabel>essential Information</ng-template>
+                        <essential-information [form]="organizationForm"></essential-information>
+                    </mat-step>
+                    <mat-step [stepControl]="organizationForm.get('clinics')!" completed="false">
+                        <ng-template matStepLabel>Clinics Information</ng-template>
+                        <clinic-information [form]="organizationForm"></clinic-information>
+                    </mat-step>
+                    <mat-step [stepControl]="organizationForm.get('administrator')!" formGroupName="administrator"
+                        completed="false">
+                        <ng-template matStepLabel>Administrator Information</ng-template>
+                        <administrator-info [form]="organizationForm"></administrator-info>
+                    </mat-step>
+                    <mat-step [stepControl]="organizationForm.get('users')!" formGroupName="users" completed="false">
+                        <ng-template matStepLabel>Users Information</ng-template>
+                        <user-info [form]="organizationForm"></user-info>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Organization Summary</ng-template>
+                        <organization-summary [form]="organizationForm"></organization-summary>
+                    </mat-step>
+                </mat-stepper>
+            </form>
+        </c-card-body>
+    </c-card>
+</c-container>

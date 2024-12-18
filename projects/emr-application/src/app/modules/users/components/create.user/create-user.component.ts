@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SmartTableComponent } from '@coreui/angular-pro';
+import { MultiSelectComponent, SmartTableComponent } from '@coreui/angular-pro';
 import { IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, filter, finalize, map, switchMap, tap } from 'rxjs';
+import { GenerateRandomValue } from 'projects/emr-application/src/app/util/generate.random';
+import { debounceTime, filter, finalize, map, Observable, of, switchMap, tap } from 'rxjs';
 import { User } from '../../../administration/model/user/user';
 import { UserRoleScope } from '../../../administration/model/user/user.role.scope';
 import { ClinicService } from '../../../administration/services/clinic/clinic.service';
@@ -13,6 +14,7 @@ import { Specialties } from '../../../common/models/enums/doctor/specialties';
 import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { Clinic } from '../../../patient/models/clinic';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { Role } from '../../../security/model/role';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 
 @Component({
@@ -23,13 +25,15 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
 export class CreateUserComponent implements OnInit {
   @ViewChild('userCreateForm') userCreateForm: NgForm;
   @ViewChild('userRoles') userRoles: SmartTableComponent;
+  @ViewChild('mutliselectClinics') multiSelectComponent: MultiSelectComponent
   submitted: boolean = false;
   validAddress: boolean = true;
   specialties = Specialties;
   credentials: string[];
-  clinics: Clinic[];
+  @Input() clinics: Clinic[];
+  @Input() isOrganizationInit?: boolean = false;
+  @Output() pushUser = new EventEmitter<User>()
   isCreated: boolean = true;
-  readonly selectedItemsCount = []
   columns = [
     {
       key: 'role',
@@ -50,6 +54,8 @@ export class CreateUserComponent implements OnInit {
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
+  filteredRoles: IItem[] = [];
+  roles$: Observable<IItem[]>
   user: User = {
     userType: null,
     role: null,
@@ -75,55 +81,31 @@ export class CreateUserComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.filteredRoles = [...this.roles];
+    this.roles$ = of(this.filteredRoles)
     this.checkUserName()
     this.checkEmail();
-    this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organizationId: number) => {
-        return this.clinicService.getByOrganizationId(organizationId)
-      })
-    )
-      .subscribe((response: any) => {
-        this.clinics = response.records;
-      })
+    if (!this.isOrganizationInit)
+      this.loggedInService.load().pipe(
+        map((loggedInUser: LoggedInUser) => {
+          return loggedInUser.organizationId
+        })
+        , switchMap((organizationId: number) => {
+          return this.clinicService.getByOrganizationId(organizationId)
+        })
+      )
+        .subscribe((response: any) => {
+          this.clinics = response.records;
+        })
   }
   create() {
     this.fillPermissions()
     if (this.userCreateForm.valid) {
       this.submitted = false;
-      if (this.isCreated) {
-        var encryptedPassword = this.encryptService.encrypt(this.user.password);
-        this.user.password = encryptedPassword
-        if (this.user.userType === 'Clinical') {
-          this.userService.createClinicalUser(this.user).subscribe(result => {
-            this.toastr.success('User created');
-            this.router.navigateByUrl('emr/users/list/clinical/users')
-          }, (error) => {
-            console.log(error);
-            this.toastr.error(error.error.message, 'Error In Creation');
-          })
-        }
-        if (this.user.userType === 'Clerical') {
-          this.userService.createClericalUser(this.user).subscribe(result => {
-            this.toastr.success('User created');
-            this.router.navigateByUrl('emr/users/list/clerical/users')
-          }, (error) => {
-            console.log(error);
-            this.toastr.error(error.error.message, 'Error In Creation');
-          })
-        }
-      } else {
-        this, this.userService.update(this.user).subscribe((result) => {
-          this.toastr.success('User updated');
-          this.router.navigateByUrl('emr/users/list/clerical/users')
-        }, (error) => {
-          console.log(error);
-          this.toastr.error(error.error.message, 'Error In update');
-        })
-      }
-
+      if (this.isOrganizationInit)
+        this.createOrganizationInitUser()
+      else
+        this.createUser();
     } else {
       this.submitted = true;
     }
@@ -207,16 +189,13 @@ export class CreateUserComponent implements OnInit {
   }
   getDoctorCredentials() {
     if (this.user.speciality === 'Physical_Therapy') {
-      this.credentials = ['DPT', 'PTA']
+      this.credentials = ['PT', 'SPT', 'PTA']
     }
     if (this.user.speciality === 'Occupational_Therapy') {
-      this.credentials = ['OTD', 'COTA']
+      this.credentials = ['OT', 'SOT', 'COTA']
     }
     if (this.user.speciality === 'Speech_Language_Pathology') {
-      this.credentials = ['SLP', 'SLPA']
-    }
-    if (this.user.speciality === 'Dentistry') {
-      this.credentials = ['DMD', 'DDS', 'CDA']
+      this.credentials = ['SLP', 'SSLP', 'SLPA']
     }
   }
   toggleDetails(item: any) {
@@ -226,9 +205,18 @@ export class CreateUserComponent implements OnInit {
     this.isValidRoles = this.validateRoles();
     if (this.isValidRoles)
       this.userRoles.items.forEach((item: any) => {
-        var userRoleScope: UserRoleScope = {
-          role: item.name,
-          scope: item.scope
+        var userRoleScope: UserRoleScope;
+        if (item.name === Role.INITIALIZE_MEDICAL_NOTE_ROLE || item.name === Role.FORWARD_MEDICAL_NOTE_ROLE
+          || item.name === Role.FINALIZE_MEDICAL_NOTE_ROLE) {
+          userRoleScope = {
+            role: item.name,
+            scope: item.scope? 'modify' : 'hidden'
+          }
+        }else{
+          userRoleScope = {
+            role: item.name,
+            scope: item.scope
+          }
         }
         this.user.roleScope.push(userRoleScope);
       })
@@ -241,5 +229,82 @@ export class CreateUserComponent implements OnInit {
       }
     }
     return true;
+  }
+  private createOrganizationInitUser() {
+
+    this.user.password = this.encryptService.encrypt(this.user.password);
+    this.pushUser.emit(this.user)
+    this.userCreateForm.reset();
+    this.usernameCtrl.setValue('')
+    this.emailCtrl.setValue('')
+    this.validUserName = undefined;
+    this.validEmail = undefined;
+    this.user.roleScope = []
+    this.user.clinicIds = undefined;
+  }
+  private createUser() {
+    if (this.isCreated) {
+      var encryptedPassword = this.encryptService.encrypt(this.user.password);
+      this.user.password = encryptedPassword
+      if (this.user.userType === 'Clinical') {
+        this.userService.createClinicalUser(this.user).subscribe(result => {
+          this.toastr.success('User created');
+          this.router.navigateByUrl('emr/users/list/clinical/users')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        })
+      }
+      if (this.user.userType === 'Clerical') {
+        this.userService.createClericalUser(this.user).subscribe(result => {
+          this.toastr.success('User created');
+          this.router.navigateByUrl('emr/users/list/clerical/users')
+        }, (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        })
+      }
+    } else {
+      this, this.userService.update(this.user).subscribe((result) => {
+        this.toastr.success('User updated');
+        this.router.navigateByUrl('emr/users/list/clerical/users')
+      }, (error) => {
+        console.log(error);
+        this.toastr.error(error.error.message, 'Error In update');
+      })
+    }
+  }
+  changeCredential(value: any) {
+
+    if (value === 'SPT' || value === 'SOT' || value === 'SSLP') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
+  }
+  changeUSerType(value: any) {
+    if (value === 'Clerical') {
+      this.filteredRoles = this.roles.filter(
+        (item: any) => {
+          return item.name !== Role.FORWARD_MEDICAL_NOTE_ROLE && item.name !== Role.INITIALIZE_MEDICAL_NOTE_ROLE && item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
+        }
+      );
+    } else {
+      this.filteredRoles = [...this.roles];
+    }
+    this.roles$ = of(this.filteredRoles)
+  }
+  checkNonMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return !medicalList.includes(value)
+  }
+  checkMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return medicalList.includes(value)
   }
 }

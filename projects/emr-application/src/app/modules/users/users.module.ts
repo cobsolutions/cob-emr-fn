@@ -27,6 +27,9 @@ import { EditUserComponent } from './components/edit.user/edit-user.component';
     EmrCommonModule,
     ModalModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+  ],
+  exports: [
+    CreateUserComponent
   ]
 })
 export class UsersModule { }

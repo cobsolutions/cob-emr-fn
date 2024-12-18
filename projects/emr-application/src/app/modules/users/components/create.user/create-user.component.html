@@ -1,10 +1,12 @@
 <ngx-spinner></ngx-spinner>
-<c-row>
-    <c-col xs="12" class="mb-2">
-        <h1>User Creation</h1>
-    </c-col>
-</c-row>
-<hr />
+<span *ngIf="!isOrganizationInit">
+    <c-row>
+        <c-col xs="12" class="mb-2">
+            <h1>User Creation</h1>
+        </c-col>
+    </c-row>
+    <hr />
+</span>
 <c-container fluid>
     <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
         <!--Basic Information-->
@@ -81,7 +83,8 @@
                                 <svg cIcon name="cilUser"></svg>
                             </span>
                             <input id="username" cFormControl required [disabled]="!isCreated" placeholder="username"
-                                [formControl]="usernameCtrl" style="margin-right: 20px"  [(ngModel)]="user.accountName"/>
+                                [formControl]="usernameCtrl" style="margin-right: 20px"
+                                [(ngModel)]="user.accountName" />
                             <span *ngIf="validUserName">
                                 <label>
                                     <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
@@ -113,13 +116,14 @@
                         <select cFormControl cSelect class="mb-2" sizing="sm" id="role" name="role"
                             [disabled]="!isCreated"
                             [ngClass]="{'is-invalid': role.invalid && (role.dirty || role.touched)}"
-                            [(ngModel)]="user.userType" #role="ngModel" required>
+                            [(ngModel)]="user.userType" #role="ngModel" required
+                            (ngModelChange)="changeUSerType($event)">
                             <option [value]="null" disabled selected>Select User Type</option>
                             <option [value]="'Clinical'" selected>Clinical</option>
                             <option [value]="'Clerical'" selected>Clerical</option>
                         </select>
                         <!--Doctor -->
-                        <span *ngIf="user.userType === 'clinical'">
+                        <span *ngIf="user.userType === 'Clinical'">
                             <!--NPI-->
                             <small *ngIf="submitted   && (npi.errors) || (npi.invalid && (npi.dirty || npi.touched))"
                                 class="form-text text-danger">
@@ -165,7 +169,7 @@
                                 Doctor Credential is required
                             </small>
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential"
-                                required
+                                required (ngModelChange)="changeCredential($event)"
                                 [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
                                 [(ngModel)]="user.credential" #credential="ngModel">
                                 <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
@@ -189,7 +193,7 @@
                         <small *ngIf="submitted   && !isValidRoles" class="form-text text-danger">
                             Permissions required
                         </small>
-                        <c-smart-table [items]="roles" [columns]="columns" #userRoles
+                        <c-smart-table [items]="roles$ | async" [columns]="columns" #userRoles
                             [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
                             <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
                                 let-tdContent="tdContent">
@@ -198,22 +202,32 @@
                                         <ng-container *ngSwitchDefault>
                                             {{tdContent}}
                                         </ng-container>
+
                                         <ng-container *ngSwitchCase="'scope'" class="py-2">
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="hidden" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>Hidden</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="view" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>View</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="modify" [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>edit</label>
-                                            </c-form-check>
+                                            <span *ngIf="checkNonMedical(item.name)">
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="hidden" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>Hidden</label>
+                                                </c-form-check>
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="view" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>View</label>
+                                                </c-form-check>
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
+                                                        value="modify" [(ngModel)]="item.scope" />
+                                                    <label cFormCheckLabel>edit</label>
+                                                </c-form-check>
+                                            </span>
+                                            <span *ngIf="checkMedical(item.name)">
+                                                <c-form-check [inline]="true" [switch]="true">
+                                                    <input cFormCheckInput [name]="'rolescope_'+item.role" type="checkbox"
+                                                        [(ngModel)]="item.scope" value="modify"/>
+                                                    <label cFormCheckLabel>edit</label>
+                                                </c-form-check>
+                                            </span>
                                         </ng-container>
                                     </ng-container>
                                 </td>
@@ -231,25 +245,43 @@
                         <h3>Clinics</h3>
                     </c-card-header>
                     <c-card-body>
-                        <small
-                            *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
-                            class="form-text text-danger">
-                            Clinics is required
-                        </small>
-                        <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
-                            [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
-                            <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
-                                [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
-                        </c-multi-select>
+                        <span *ngIf="!isOrganizationInit">
+                            <small
+                                *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
+                                class="form-text text-danger">
+                                Clinics is required
+                            </small>
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                                required [selectAll]="false" [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
+                                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+                                    [value]="clinic.id?.toString()">{{clinic.name}}</c-multi-select-option>
+                            </c-multi-select>
+                        </span>
+                        <span *ngIf="isOrganizationInit">
+                            <small
+                                *ngIf="submitted   && (selectedClinic.errors) || (selectedClinic.invalid && (selectedClinic.dirty || selectedClinic.touched))"
+                                class="form-text text-danger">
+                                Clinics is required
+                            </small>
+                            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic"
+                                #mutliselectClinics clearSearchOnSelect required [selectAll]="false"
+                                [(ngModel)]="user.clinicIds" #selectedClinic="ngModel">
+                                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+                                    [value]="clinic.generatedId">{{clinic.name}}</c-multi-select-option>
+                            </c-multi-select>
+                        </span>
                     </c-card-body>
                 </c-card>
             </c-col>
         </c-row>
-        <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit" [disabled]="(!validUserName )|| (!validEmail )">
+        <div class="d-grid gap-2 col-2 mx-auto mb-5" *ngIf="!isOrganizationInit">
+            <button cButton color="primary" variant="outline" type="button" (click)="create()">
                 <span *ngIf="isCreated">Create</span>
                 <span *ngIf="!isCreated">Update</span>
             </button>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="isOrganizationInit">
+            <button cButton color="primary" variant="outline" type="button" (click)="create()" size="sm">Add</button>
         </div>
     </form>
 </c-container>

@@ -13,8 +13,9 @@ export class Role {
     public static readonly FINALIZE_MEDICAL_NOTE_ROLE = 'finalize-medical-note-role';
 
     public static readonly ADMIN_ROLE = 'admin-role';
+    public static readonly ORGANIZATION_REQUEST_ROLE = 'organization-request-role';
 
     static readonly roles: string[] = [Role.PATIENT_ROLE, Role.USER_ROLE, Role.CLINIC_ROLE, Role.REFERRING_DOCTOR_ROLE
         , Role.PATIENT_PAYMENT_ROLE, Role.INSURANCE_COMPANY_ROLE, Role.CALENDAR_ROLE, Role.MEDICAL_NOTE_ROLE
-        , Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE,Role.ADMIN_ROLE];
+        , Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE,Role.ADMIN_ROLE,Role.ORGANIZATION_REQUEST_ROLE];
 }
