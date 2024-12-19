@@ -1,5 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <c-row>
+    <!--Search Panel-->
     <c-col xs="12">
         <c-card class="mb-4">
             <c-card-header ngPreserveWhitespaces>
@@ -9,12 +10,6 @@
                 <p class="text-medium-emphasis small">
                     The Abiltiy to filter the Calendar list
                 </p>
-
-                <!--
-              <div style="float: left;margin-top: 4%;">
-              <svg cIcon name="cilFindInPage" title="cilFindInPage" size="7xl"></svg>
-            </div>
-          -->
                 <form cForm>
                     <c-row>
                         <c-col class="mb-2" xs="12">
@@ -52,5 +47,19 @@
                 </form>
             </c-card-body>
         </c-card>
+    </c-col>
+    <c-col xs="12">
+        <c-button-group aria-label="Button outlined group with nested dropdown" role="group">
+            <button cButton color="primary" variant="outline" (click)="add()">Add Calendar</button>
+            <c-dropdown variant="btn-group">
+                <button cButton cDropdownToggle>
+                    Actions
+                </button>
+                <ul cDropdownMenu variant="outline">
+                    <!-- <li><a cDropdownItem [routerLink]="[]" (click)="viewActive()">Show Active</a></li>
+                    <li><a cDropdownItem [routerLink]="[]" (click)="viewInActive()">Show Inactive</a></li> -->
+                </ul>
+            </c-dropdown>
+        </c-button-group>
     </c-col>
 </c-row>

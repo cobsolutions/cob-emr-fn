@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 interface SearchCriteria {
-  name?: string, 
+  name?: string,
   searchStartDate?: Date;
   searchEndDate?: Date
   startDate?: number,
@@ -13,7 +13,7 @@ interface SearchCriteria {
   styleUrls: ['./calendar-list.component.css']
 })
 export class CalendarListComponent implements OnInit {
-  searchCriteria: SearchCriteria={};
+  searchCriteria: SearchCriteria = {};
   constructor() { }
 
   ngOnInit(): void {
@@ -27,6 +27,9 @@ export class CalendarListComponent implements OnInit {
     }
   }
   search() {
+
+  }
+  add() {
 
   }
 }
