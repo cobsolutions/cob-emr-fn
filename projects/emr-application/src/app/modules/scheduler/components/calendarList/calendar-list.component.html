@@ -50,7 +50,7 @@
     </c-col>
     <c-col xs="12">
         <c-button-group aria-label="Button outlined group with nested dropdown" role="group">
-            <button cButton color="primary" variant="outline" (click)="add()">Add Calendar</button>
+            <button cButton color="primary" variant="outline" (click)="openAddCalendarModal()">Add Calendar</button>
             <c-dropdown variant="btn-group">
                 <button cButton cDropdownToggle>
                     Actions
@@ -93,3 +93,13 @@
     <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
         (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
 </ng-container>
+
+<c-modal id="createCalendar" [visible]="createCalendarVisibility" size="lg" backdrop="static" scrollable>
+    <c-modal-header>
+        <h2>Create Calendar</h2>
+        <button (click)="toggle()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <create-calendar *ngIf="createCalendarVisibility"></create-calendar>
+    </c-modal-body>
+</c-modal>
