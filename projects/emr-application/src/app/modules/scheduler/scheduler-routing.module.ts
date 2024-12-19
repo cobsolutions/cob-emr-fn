@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
+import { CalendarListComponent } from './components/calendarList/calendar-list.component';
 import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 
@@ -29,6 +30,13 @@ const routes: Routes = [{
       component: AppointmentTypeListComponent,
       data: {
         title: 'appointment-type',
+      },
+    },
+    {
+      path: 'calendar',
+      component: CalendarListComponent,
+      data: {
+        title: 'calendars',
       },
     }
   ]
