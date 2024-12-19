@@ -71,7 +71,9 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
     this.createCalendarVisibility = !this.createCalendarVisibility
   }
   changeVisibility(event: string) {
-    if (event === 'close')
+    if (event === 'close') {
       this.createCalendarVisibility = false;
+      this.find()
+    }
   }
 }
