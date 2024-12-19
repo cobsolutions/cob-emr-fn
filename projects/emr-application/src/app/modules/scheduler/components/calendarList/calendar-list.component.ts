@@ -18,11 +18,12 @@ interface SearchCriteria {
   styleUrls: ['./calendar-list.component.css']
 })
 export class CalendarListComponent extends ListTemplate implements OnInit {
+
   searchCriteria: SearchCriteria = {};
   calendars$!: Observable<Calendar[]>;
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
-  constructor(private calendarServiceService:CalendarServiceService) { super();}
+  constructor(private calendarServiceService: CalendarServiceService) { super(); }
 
   ngOnInit(): void {
     this.initListComponent();
@@ -43,7 +44,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   openAddCalendarModal() {
     this.createCalendarVisibility = true
   }
-  private find(){
+  private find() {
     this.calendars$ = this.calendarServiceService.findAll(this.apiParams$).pipe(
       retry({
         delay: (error) => {
@@ -68,5 +69,9 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   }
   toggle() {
     this.createCalendarVisibility = !this.createCalendarVisibility
+  }
+  changeVisibility(event: string) {
+    if (event === 'close')
+      this.createCalendarVisibility = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class CreateCalendarComponent implements OnInit {
 
   calendarForm: FormGroup
   isValidForm: boolean = false;
+  @Output() changeVisibility = new EventEmitter<string>()
   constructor() { }
 
   ngOnInit(): void {
@@ -22,6 +23,11 @@ export class CreateCalendarComponent implements OnInit {
     })
   }
   create() {
-
+    if (this.calendarForm?.valid) {
+      this.isValidForm = false;
+      this.changeVisibility.emit('close');
+    } else {
+      this.isValidForm = true;
+    }
   }
 }

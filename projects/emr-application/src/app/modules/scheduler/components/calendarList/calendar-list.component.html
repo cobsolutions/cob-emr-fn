@@ -100,6 +100,6 @@
         <button (click)="toggle()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <create-calendar *ngIf="createCalendarVisibility"></create-calendar>
+        <create-calendar *ngIf="createCalendarVisibility" (changeVisibility)="changeVisibility($event)"></create-calendar>
     </c-modal-body>
 </c-modal>
