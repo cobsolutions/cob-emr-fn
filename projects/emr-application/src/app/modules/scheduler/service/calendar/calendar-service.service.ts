@@ -19,7 +19,7 @@ export class CalendarServiceService extends BasePaginationService {
   public findAll(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.loggedInService.load().pipe(
       switchMap(user => {
-        return this.get(config$, this.baseUrl + "/get/uuid/" + user.uuid)
+        return this._get(config$, this.baseUrl + "/get/uuid/" + user.uuid)
       })
     )
   }

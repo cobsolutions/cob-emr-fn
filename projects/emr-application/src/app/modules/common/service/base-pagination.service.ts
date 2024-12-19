@@ -30,6 +30,18 @@ export class BasePaginationService {
           return JSON.stringify(previous) === JSON.stringify(current);
         }
       ),
+      switchMap((config) => this.fetchData(config))
+    );
+  }
+  _get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
+    this.url = url;
+    return config$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(
+        (previous, current) => {
+          return JSON.stringify(previous) === JSON.stringify(current);
+        }
+      ),
       switchMap((config) => this.fetchDataWithoutClinic(config,url))
     );
   }
