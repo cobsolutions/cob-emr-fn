@@ -1,1 +1,56 @@
-<p>calendar-list works!</p>
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12">
+        <c-card class="mb-4">
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Patient Search</strong> <small>From patient list</small>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Abiltiy to filter the Calendar list
+                </p>
+
+                <!--
+              <div style="float: left;margin-top: 4%;">
+              <svg cIcon name="cilFindInPage" title="cilFindInPage" size="7xl"></svg>
+            </div>
+          -->
+                <form cForm>
+                    <c-row>
+                        <c-col class="mb-2" xs="12">
+                            <c-input-group sizing="sm">
+                                <span cInputGroupText id="basic-addon1">Name</span>
+                                <input aria-describedby="basic-addon1" aria-label="Username" cFormControl
+                                    placeholder="Name" sizing="sm" [(ngModel)]="searchCriteria.name" name="sc_pname" />
+                                <button cButton size="sm" variant="outline" (click)="clearFilter('name')">
+                                    <svg cIcon name="cilFilter" title="cilFilterX"></svg>
+                                </button>
+                            </c-input-group>
+                        </c-col>
+                        <c-col xs="12">
+                            <c-input-group class="mb-3" sizing="sm">
+                                <span cInputGroupText id="basic-addon1">Create</span>
+                                <input type="date" cFormControl sizing="sm"
+                                    [ngModel]="searchCriteria.searchStartDate | date:'yyyy-MM-dd'"
+                                    (ngModelChange)="searchCriteria.searchStartDate = $event" name="dosStart_Date"
+                                    id="dosStart_Date" #dosEnd_Date>
+                                <input type="date" cFormControl
+                                    [ngModel]="searchCriteria.searchEndDate | date:'yyyy-MM-dd'" sizing="sm"
+                                    (ngModelChange)="searchCriteria.searchEndDate = $event" name="dosEnd_Date"
+                                    #dosEnd_Date>
+                                <button cButton size="sm" variant="outline" (click)="clearFilter('createdAt')">
+                                    <svg cIcon name="cilFilter" title="cilFilterX"></svg>
+                                </button>
+                            </c-input-group>
+                        </c-col>
+                        <c-col xs="12" class="text-center">
+                            <button cButton class="me-1" color="primary" style="width: 15%;" (click)="search()">
+                                Search
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
