@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CalloutModule, DatePickerModule, ModalModule, SpinnerModule, TimePickerModule } from '@coreui/angular-pro';
+import { CalloutModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, SpinnerModule, TimePickerModule } from '@coreui/angular-pro';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -66,6 +66,8 @@ import { CalendarListComponent } from './components/calendarList/calendar-list.c
         CalloutModule,
         FlatpickrModule.forRoot(),
         SpinnerModule,
+        SmartTableModule,
+        SmartPaginationModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,

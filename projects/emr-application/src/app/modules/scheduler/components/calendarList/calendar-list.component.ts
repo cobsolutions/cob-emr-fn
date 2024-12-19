@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import { map, Observable, retry, tap } from 'rxjs';
+import { Calendar } from '../../../administration/model/calendar/calendar';
 import { ListTemplate } from '../../../common/template/list.template';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
 
@@ -16,12 +19,14 @@ interface SearchCriteria {
 })
 export class CalendarListComponent extends ListTemplate implements OnInit {
   searchCriteria: SearchCriteria = {};
+  calendars$!: Observable<Calendar[]>;
+  columns: (string | IColumn)[];
   constructor(private calendarServiceService:CalendarServiceService) { super();}
 
   ngOnInit(): void {
-    this.calendarServiceService.findAll(this.apiParams$).subscribe(result=>{
-      console.log(JSON.stringify(result))
-    })
+    this.initListComponent();
+    this.columns = this.constructColumns(['name', 'isPublic', 'actions']);
+    this.find();
   }
   clearFilter(filter: string) {
     if (filter === 'name')
@@ -36,5 +41,28 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   }
   add() {
 
+  }
+  private find(){
+    this.calendars$ = this.calendarServiceService.findAll(this.apiParams$).pipe(
+      retry({
+        delay: (error) => {
+          console.warn('Retry: ', error);
+          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
+          this.loadingData$.next(false);
+          return this.retry$;
+        }
+      }),
+      tap((response: any) => {
+        this.totalItems$.next(response.number_of_matching_records);
+        if (response.number_of_records) {
+          this.errorMessage$.next('');
+        }
+        this.retry$.next(false);
+        this.loadingData$.next(false);
+      }),
+      map((response: any) => {
+        return response.records;
+      })
+    );
   }
 }
