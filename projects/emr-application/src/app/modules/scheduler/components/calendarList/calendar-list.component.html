@@ -65,28 +65,31 @@
 </c-row>
 <ng-container *ngIf="props$ | async as props" fluid="true">
     <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
-      [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-      [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-      [tableProps]="{ hover: true, striped: true, small:true }" [columnFilterValue]="props.columnFilterValue?? []"
-      [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle' }"
-      (sorterValueChange)="handleSorterValueChange($event)" header>
-      <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-        <td>
-          <ng-container [ngSwitch]="columnName">
-            <ng-container *ngSwitchCase="'actions'" class="py-2">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button cButton variant="outline"  size="sm" >
-                  <svg cIcon name="cilPen"></svg>
-                </button>
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              {{tdContent}}
-            </ng-container>
-          </ng-container>
-        </td>
-      </ng-template>
+        [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: true, small:true }" [columnFilterValue]="props.columnFilterValue?? []"
+        [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)" header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+            <td>
+                <ng-container [ngSwitch]="columnName">
+                    <ng-container *ngSwitchCase="'isPublic'" class="py-2">
+                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox">
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'actions'" class="py-2">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button cButton variant="outline" size="sm">
+                                <svg cIcon name="cilPen"></svg>
+                            </button>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        {{tdContent}}
+                    </ng-container>
+                </ng-container>
+            </td>
+        </ng-template>
     </c-smart-table>
     <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
-      (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
-  </ng-container>
+        (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+</ng-container>
