@@ -28,4 +28,11 @@ export class CalendarServiceService extends BasePaginationService {
     const url = this.baseUrl + "/create"
     return this.httpClient.post(`${url}`, JSON.stringify(model), { 'headers': headers })
   }
+  public getAttachedCalendars(clinicId:string):Observable<any>{
+    return this.loggedInService.load().pipe(
+      switchMap(user => {
+        return this.httpClient.get(this.baseUrl + "/get-attached/clinicId/"+clinicId +"/uuid/" + user.uuid)
+      })
+    )
+  }
 }

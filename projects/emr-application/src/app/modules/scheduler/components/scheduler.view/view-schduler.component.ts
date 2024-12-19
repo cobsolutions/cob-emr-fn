@@ -10,6 +10,7 @@ import {
   isSameMonth
 } from 'date-fns';
 
+import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
@@ -19,12 +20,12 @@ import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.schedul
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
+import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
-import { colors } from "./util/color";
-import { addHours, startOfDay } from 'date-fns';
 import { User } from "./custom.day/day-view-scheduler.component";
-import { WeekDay } from "calendar-utils";
+import { colors } from "./util/color";
+import { Calendar } from "../../../administration/model/calendar/calendar";
 
 @Component({
   selector: 'app-view-schduler',
@@ -35,6 +36,8 @@ import { WeekDay } from "calendar-utils";
 export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
+  calendars$!: Observable<Calendar[]>;
+
   resources = [
     { id: 1, name: 'Bay Ridge' },
     { id: 2, name: 'Mahmoud Shalaby' },
@@ -55,7 +58,7 @@ export class ViewSchdulerComponent implements OnInit {
       color: colors.blue,
     },
   ];
-  
+
   view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   events: CalendarEvent[] = [];
@@ -76,14 +79,16 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
+    private calendarServiceService: CalendarServiceService,
     protected utils: CalendarUtils,
   ) { }
-  debugConsole(event:any){
+  debugConsole(event: any) {
     console.log(JSON.stringify(event))
   }
   ngOnInit(): void {
     this.getSchedulerConfiguration()
-    this.getAppointments();
+    // this.getAppointments();
+    this.getCalendars()
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
       weekStartsOn: undefined,
@@ -200,6 +205,12 @@ export class ViewSchdulerComponent implements OnInit {
     this.getAppointments();
     this.activeDayIsOpen = false;
   }
+  getCalendars() {
+    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap((clinicId: any) => {return  this.calendarServiceService.getAttachedCalendars(clinicId)})
+    )
+  }
   getAppointments() {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
@@ -217,7 +228,7 @@ export class ViewSchdulerComponent implements OnInit {
     })
   }
   getSchedulerConfiguration() {
-    this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
+     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
       switchMap(clinicId => this.schedulerConfigurationService.retrieveCliniSchedulerConfigurationById(clinicId)),
       map((configuration: SchedulerConfiguration) => {
