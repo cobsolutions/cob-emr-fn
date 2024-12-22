@@ -3,4 +3,5 @@ export interface Calendar{
     name?:string,
     isPublic?:boolean,
     createdBy?:string
+    attached?:boolean
 }

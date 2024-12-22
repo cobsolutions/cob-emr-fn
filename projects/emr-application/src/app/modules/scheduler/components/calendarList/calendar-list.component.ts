@@ -27,7 +27,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
 
   ngOnInit(): void {
     this.initListComponent();
-    this.columns = this.constructColumns(['name', 'isPublic', 'actions']);
+    this.columns = this.constructColumns(['name', 'attached', 'actions']);
     this.find();
   }
   clearFilter(filter: string) {
