@@ -5,7 +5,7 @@
       <label cListGroupItem style="cursor: pointer;" class="bg-primary text-white p-2">Calendars</label>
       <li cListGroupItem *ngFor='let calendar of calendars$ |async'>
         <c-form-check>
-          <input cFormCheckInput type="checkbox" name="d" />
+          <input cFormCheckInput type="checkbox" name="d" (change)="onCheckboxChange($event, calendar)" [checked]="isSelected(calendar)"/>
           <label cFormCheckLabel>{{calendar.name}}</label>
         </c-form-check>
       </li>
@@ -74,10 +74,13 @@
     </div>
   </div> -->
   <div *ngSwitchCase="CalendarView.Week">
-    <div class="horizontal-container">
-      <div *ngFor="let resource of resources" class="resource-item">
+    <div class="horizontal-container" *ngIf="selectedCalendars.length > 0 ">
+      <div *ngFor="let calendar of selectedCalendars" class="resource-item" [ngClass]="{
+        'full-width': selectedCalendars.length === 1 && isSelected(calendar),
+        'even-width': selectedCalendars.length !== 1
+      }">
         <div class="resource-header">
-          {{ resource.name }}
+          {{ calendar.name }}
         </div>
         <mwl-calendar-week-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
           (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
@@ -85,6 +88,11 @@
           [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
         </mwl-calendar-week-view>
       </div>
+    </div>
+    <div *ngIf="selectedCalendars.length ===0 ">
+      <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh"
+        [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
+      </mwl-calendar-week-view>
     </div>
   </div>
   <!-- <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"

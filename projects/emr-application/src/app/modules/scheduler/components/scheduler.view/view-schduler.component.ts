@@ -14,6 +14,7 @@ import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
 import { filter, map, Observable, Subject, switchMap } from 'rxjs';
+import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
@@ -23,9 +24,6 @@ import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
-import { User } from "./custom.day/day-view-scheduler.component";
-import { colors } from "./util/color";
-import { Calendar } from "../../../administration/model/calendar/calendar";
 
 @Component({
   selector: 'app-view-schduler',
@@ -45,20 +43,8 @@ export class ViewSchdulerComponent implements OnInit {
     { id: 4, name: 'Moamen Hassanen' },
     { id: 5, name: 'Sakshi Mahajan' },
   ];
+  selectedCalendars: any[] = []; 
   days: WeekDay[];
-  users: User[] = [
-    {
-      id: 0,
-      name: 'John smith',
-      color: colors.yellow,
-    },
-    {
-      id: 1,
-      name: 'Jane Doe',
-      color: colors.blue,
-    },
-  ];
-
   view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   events: CalendarEvent[] = [];
@@ -208,7 +194,7 @@ export class ViewSchdulerComponent implements OnInit {
   getCalendars() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap((clinicId: any) => {return  this.calendarServiceService.getAttachedCalendars(clinicId)})
+      switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
     )
   }
   getAppointments() {
@@ -228,7 +214,7 @@ export class ViewSchdulerComponent implements OnInit {
     })
   }
   getSchedulerConfiguration() {
-     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
+    this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
       switchMap(clinicId => this.schedulerConfigurationService.retrieveCliniSchedulerConfigurationById(clinicId)),
       map((configuration: SchedulerConfiguration) => {
@@ -242,5 +228,18 @@ export class ViewSchdulerComponent implements OnInit {
     event.color = newUser.color;
     event.meta.user = newUser;
     this.events = [...this.events];
+  }
+  onCheckboxChange(event: any, calendar: any): void {
+    if (event.target.checked) {
+      this.selectedCalendars.push(calendar);
+    } else {
+      this.selectedCalendars = this.selectedCalendars.filter(
+        (item) => item.id !== calendar.id
+      );
+    }
+    console.log(JSON.stringify(this.selectedCalendars))
+  }
+  isSelected(calendar: any): boolean {
+    return this.selectedCalendars.some((item) => item.id === calendar.id);
   }
 }
