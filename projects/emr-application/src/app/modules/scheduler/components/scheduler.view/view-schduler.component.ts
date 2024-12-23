@@ -80,15 +80,15 @@ export class ViewSchdulerComponent implements OnInit {
   }
   dayClicked(date: Date) {
     this.viewDate = date;
-    this.AddAppointment();
+    this.AddAppointment(null);
   }
-  weekClicked(date: Date): void {
+  weekClicked(date: Date , calendar:any): void {
     this.viewDate = date;
-    this.AddAppointment();
+    this.AddAppointment(calendar);
   }
   monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     this.checkOpenEvent(date, events);
-    this.AddAppointment();
+    this.AddAppointment(null);
   }
   eventTimesChanged({
     event,
@@ -166,10 +166,10 @@ export class ViewSchdulerComponent implements OnInit {
       this.viewDate = date;
     }
   }
-  private AddAppointment() {
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate).subscribe(result => {
+  private AddAppointment(calendar:any) {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate,calendar.id).subscribe(result => {
       if (result.action !== 'cancel') {
-        RefreshSchedulerEvents.refresh(this.events, result.event, AppointmentAction.ADD_APPOINTMENT);
+        RefreshSchedulerEvents.refresh(calendar.events, result.event, AppointmentAction.ADD_APPOINTMENT);
         this.refresh.next();
         this.toastr.success('Appointment created Successfully');
       }

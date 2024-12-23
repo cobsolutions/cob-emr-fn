@@ -14,11 +14,11 @@ export class AppointmentActionsService {
 
   constructor() { }
 
-  public addAppointment(dialog: MatDialog, viewDate: Date) {
+  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number) {
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
       disableClose: true,
       width: '60%',
-      data: { startDate: viewDate },
+      data: { startDate: viewDate, calendarId: calendarId },
       position: {
         top: '8%', // Adjust as needed
 

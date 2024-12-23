@@ -84,7 +84,7 @@
         </div>
         <mwl-calendar-week-view [viewDate]="viewDate" [events]="calendar.events" [refresh]="refresh"
           (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-          (hourSegmentClicked)="weekClicked($event.date)" [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
+          (hourSegmentClicked)="weekClicked($event.date , calendar)" [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
           [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
         </mwl-calendar-week-view>
       </div>

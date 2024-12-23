@@ -29,6 +29,7 @@ export class AppointmentAddComponent implements OnInit {
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() startDate: Date;
+  @Input() calendarId:number;
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
@@ -78,6 +79,7 @@ export class AppointmentAddComponent implements OnInit {
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       this.fillAppointmnetRepeat();
       this.appointment.constructTitle();
+      this.appointment.calendarId = this.calendarId;
       return this.loggedInService.selectedClinic$.pipe(
         switchMap(clinicId => {
           this.appointment.clinicId = clinicId;

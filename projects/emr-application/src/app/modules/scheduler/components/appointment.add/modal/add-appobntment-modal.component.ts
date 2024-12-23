@@ -11,7 +11,7 @@ import { AppointmentAddComponent } from '../appointment-add.component';
 })
 export class AddAppobntmentModalComponent implements OnInit {
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, event: CalendarEvent, action: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent, action: string }
     , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 

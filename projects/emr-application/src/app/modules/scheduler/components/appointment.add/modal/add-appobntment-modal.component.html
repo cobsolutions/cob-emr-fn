@@ -1,7 +1,8 @@
 <h2 mat-dialog-title>Add Appointment</h2>
 <mat-dialog-content class="mat-typography">
 
-  <app-appointment-add #appointmentAddComponent [startDate]="data.startDate"></app-appointment-add>
+  <app-appointment-add #appointmentAddComponent [startDate]="data.startDate"
+    [calendarId]="data.calendarId"></app-appointment-add>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button cButton (click)="create()" class="mx-3" variant="outline">Create</button>

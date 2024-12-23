@@ -11,6 +11,7 @@ export class Appointment {
     isAllUsers: boolean;
     patient: Patient;
     patientId: number;
+    calendarId:number
     patientCase: PatientCase = null;
     patientCaseId: number;
     therapyUUID: string = null;
