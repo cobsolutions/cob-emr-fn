@@ -27,6 +27,7 @@ import {
   WeekViewAllDayEvent,
 } from 'calendar-utils';
 import { DragEndEvent, DragMoveEvent } from 'angular-draggable-droppable';
+import { Calendar } from '../../../../administration/model/calendar/calendar';
 
 export interface User {
   id: number;
@@ -35,11 +36,11 @@ export interface User {
 }
 
 interface DayViewScheduler extends WeekView {
-  users: User[];
+  calendars: Calendar[];
 }
 
 interface GetWeekViewArgsWithUsers extends GetWeekViewArgs {
-  users: User[];
+  calendars: Calendar[];
 }
 
 @Injectable()
@@ -50,13 +51,26 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
       period,
       allDayEventRows: [],
       hourColumns: [],
-      users: [...args.users],
+      calendars: [...args.calendars],
     };
-
-    view.users.forEach((user, columnIndex) => {
-      const events = args.events.filter(
-        (event) => event.id === user.id
-      );
+    if (view.calendars.length === 0) {
+      const columnView = super.getWeekView({
+        ...args,
+      });
+      view.hourColumns.push(columnView.hourColumns[0]);
+      columnView.allDayEventRows.forEach(({ row }, rowIndex) => {
+        view.allDayEventRows[rowIndex] = view.allDayEventRows[rowIndex] || {
+          row: [],
+        };
+        view.allDayEventRows[rowIndex].row.push({
+          ...row[0],
+          offset: 0,
+          span: 1,
+        });
+      });
+    }
+    view.calendars.forEach((calendar, columnIndex) => {
+      const events = calendar.events
       const columnView = super.getWeekView({
         ...args,
         events,
@@ -85,9 +99,8 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
 })
 export class DayViewSchedulerComponent
   extends CalendarWeekViewComponent
-  implements OnChanges
-{
-  @Input() users: any[] = [];
+  implements OnChanges {
+  @Input() calendars: Calendar[] = [];
 
   @Output() userChanged = new EventEmitter();
 
@@ -105,19 +118,18 @@ export class DayViewSchedulerComponent
     super(cdr, utils, locale, dateAdapter, element);
   }
 
-  trackByUserId = (index: number, row: User) => row.id;
+  trackByCalendarId = (index: number, row: Calendar) => row.id;
 
   override ngOnChanges(changes: SimpleChanges): void {
     super.ngOnChanges(changes);
-
-    if (changes['users']) {
+    if (changes['calendars']) {
       this.refreshBody();
       this.emitBeforeViewRender();
     }
   }
 
   override getDayColumnWidth(eventRowContainer: HTMLElement): number {
-    return Math.floor(eventRowContainer.offsetWidth / this.users.length);
+    return Math.floor(eventRowContainer.offsetWidth / this.calendars.length);
   }
 
   override dragMove(dayEvent: WeekViewTimeEvent, dragEvent: DragMoveEvent) {
@@ -173,7 +185,7 @@ export class DayViewSchedulerComponent
   protected override getWeekView(events: CalendarEvent[]) {
     return this.utils.getWeekView({
       events,
-      users: this.users,
+      calendars: this.calendars,
       viewDate: this.viewDate,
       weekStartsOn: this.weekStartsOn,
       excluded: this.excludeDays,
@@ -205,10 +217,10 @@ export class DayViewSchedulerComponent
     xPixels: number
   ) {
     const columnsMoved = Math.round(xPixels / this.dayColumnWidth);
-    const currentColumnIndex = this.view.users.findIndex(
+    const currentColumnIndex = this.view.calendars.findIndex(
       (user) => user === dayEvent.event.meta.user
     );
     const newIndex = currentColumnIndex + columnsMoved;
-    return this.view.users[newIndex];
+    return this.view.calendars[newIndex];
   }
 }

@@ -2,11 +2,11 @@
     <div class="cal-day-headers" role="row">
       <div
         class="cal-header"
-        *ngFor="let user of users; trackBy: trackByUserId"
+        *ngFor="let calendar of calendars; trackBy: trackByCalendarId"
         tabindex="0"
         role="columnheader"
       >
-        <b>{{ user.name }}</b>
+        <b>{{ calendar.name }}</b>
       </div>
     </div>
     <div
@@ -49,8 +49,8 @@
           [class.cal-starts-within-week]="!allDayEvent.startsBeforeWeek"
           [class.cal-ends-within-week]="!allDayEvent.endsAfterWeek"
           [ngClass]="allDayEvent.event?.cssClass"
-          [style.width.%]="(100 / users.length) * allDayEvent.span"
-          [style.marginLeft.%]="(100 / users.length) * allDayEvent.offset"
+          [style.width.%]="(100 / calendars.length) * allDayEvent.span"
+          [style.marginLeft.%]="(100 / calendars.length) * allDayEvent.offset"
           mwlDraggable
           dragActiveClass="cal-drag-active"
           [dropData]="{ event: allDayEvent.event, calendarId: calendarId }"

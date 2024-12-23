@@ -22,8 +22,6 @@ import {
   ViewPeriod,
   WeekViewHourColumn,
   WeekViewTimeEvent,
-  WeekViewHourSegment,
-  WeekViewHour,
   WeekViewAllDayEventRow,
 } from 'calendar-utils';
 import { ResizeEvent } from 'angular-resizable-element';
