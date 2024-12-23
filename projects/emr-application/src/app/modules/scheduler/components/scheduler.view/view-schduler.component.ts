@@ -43,7 +43,7 @@ export class ViewSchdulerComponent implements OnInit {
     { id: 4, name: 'Moamen Hassanen' },
     { id: 5, name: 'Sakshi Mahajan' },
   ];
-  selectedCalendars: any[] = []; 
+  selectedCalendars: any[] = [];
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
@@ -54,7 +54,6 @@ export class ViewSchdulerComponent implements OnInit {
   viewDate: Date = new Date();
   refresh = new Subject<void>();
 
-  // events: CalendarEvent[] = [];
   cancelNoShow: string;
   activeDayIsOpen: boolean = false;
   constructor(
@@ -68,12 +67,9 @@ export class ViewSchdulerComponent implements OnInit {
     private calendarServiceService: CalendarServiceService,
     protected utils: CalendarUtils,
   ) { }
-  debugConsole(event: any) {
-    console.log(JSON.stringify(event))
-  }
+
   ngOnInit(): void {
     this.getSchedulerConfiguration()
-    // this.getAppointments();
     this.getCalendars()
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
@@ -197,12 +193,21 @@ export class ViewSchdulerComponent implements OnInit {
       switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
     )
   }
-  getAppointments() {
+  private getCalendarAppointments(calendarId:number): Observable<any> {
+    var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
+    var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
+    return this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId,calendarId)),
+      map((response: any) => response.records)
+    )
+  }
+  private getAppointments() {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
     this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId)),
+      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId,null)),
       map((response: any) => response.records)
     ).subscribe((appointments: any[]) => {
       this.events = [];
@@ -231,13 +236,21 @@ export class ViewSchdulerComponent implements OnInit {
   }
   onCheckboxChange(event: any, calendar: any): void {
     if (event.target.checked) {
-      this.selectedCalendars.push(calendar);
+      this.getCalendarAppointments(calendar.id)
+        .subscribe((appointments: any[]) => {
+          calendar.events = [];
+          for (var i = 0; i < appointments.length; i++) {
+            var varevent: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointments[i])
+            calendar.events.push(varevent);
+          }
+          this.selectedCalendars.push(calendar);
+          this.refresh.next()
+        })
     } else {
       this.selectedCalendars = this.selectedCalendars.filter(
         (item) => item.id !== calendar.id
       );
     }
-    console.log(JSON.stringify(this.selectedCalendars))
   }
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);

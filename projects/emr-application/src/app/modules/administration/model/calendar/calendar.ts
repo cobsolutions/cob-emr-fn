@@ -1,7 +1,10 @@
+import { CalendarEvent } from "calendar-utils";
+
 export interface Calendar{
     id?:number,
     name?:string,
     isPublic?:boolean,
     createdBy?:string
     attached?:boolean
+    events?: CalendarEvent[];
 }

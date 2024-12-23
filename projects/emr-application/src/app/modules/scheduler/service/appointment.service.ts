@@ -18,8 +18,8 @@ export class AppointmentService {
     return this._http.post(createAppointmentURL, appointment);
   }
 
-  retrieveAppointments(startDate: number, endDate: number, clinicId: number) {
-    const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId;
+  retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number) {
+    const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId + '/calendarId/' + calendarId;
     return this._http.get(listAppointmentURL);
   }
   retrieveAppointmentsByFilter(startDate: number, endDate: number, clinicId: number, filters: AppointmentFilter) {
