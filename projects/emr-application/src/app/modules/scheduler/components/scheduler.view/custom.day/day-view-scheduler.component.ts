@@ -25,15 +25,11 @@ import {
   CalendarEvent,
   WeekViewAllDayEventRow,
   WeekViewAllDayEvent,
+  WeekViewHourColumn,
+  WeekViewHour,
 } from 'calendar-utils';
 import { DragEndEvent, DragMoveEvent } from 'angular-draggable-droppable';
 import { Calendar } from '../../../../administration/model/calendar/calendar';
-
-export interface User {
-  id: number;
-  name: string;
-  color: EventColor;
-}
 
 interface DayViewScheduler extends WeekView {
   calendars: Calendar[];
@@ -42,9 +38,26 @@ interface DayViewScheduler extends WeekView {
 interface GetWeekViewArgsWithUsers extends GetWeekViewArgs {
   calendars: Calendar[];
 }
-
+interface WeekViewHourSegment {
+  isStart: boolean;
+  date: Date;
+  displayDate: Date;
+  cssClass?: string;
+  calendar?: Calendar
+}
 @Injectable()
 export class DayViewSchedulerCalendarUtils extends CalendarUtils {
+  private enrichSegment(hourColumns:WeekViewHourColumn,calendar:Calendar){
+    hourColumns.hours.forEach((hour:WeekViewHour) => {
+      var segments: WeekViewHourSegment[] = [];
+      hour.segments.forEach(segment => {
+        var _msegment : WeekViewHourSegment=segment;
+        _msegment.calendar=calendar
+        segments.push(_msegment)
+      });
+      hour.segments = segments;
+    });
+  }
   override getWeekView(args: GetWeekViewArgsWithUsers): DayViewScheduler {
     const { period } = super.getWeekView(args);
     const view: DayViewScheduler = {
@@ -75,6 +88,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
         ...args,
         events,
       });
+      this.enrichSegment(columnView.hourColumns[0],calendar)
       view.hourColumns.push(columnView.hourColumns[0]);
       columnView.allDayEventRows.forEach(({ row }, rowIndex) => {
         view.allDayEventRows[rowIndex] = view.allDayEventRows[rowIndex] || {
@@ -87,7 +101,6 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
         });
       });
     });
-
     return view;
   }
 }
@@ -104,6 +117,10 @@ export class DayViewSchedulerComponent
 
   @Output() userChanged = new EventEmitter();
 
+  @Output()  override hourSegmentClicked = new EventEmitter<{
+    date: any;
+    sourceEvent: MouseEvent;
+  }>();
   override view: DayViewScheduler;
 
   override daysInWeek = 1;
@@ -223,4 +240,5 @@ export class DayViewSchedulerComponent
     const newIndex = currentColumnIndex + columnsMoved;
     return this.view.calendars[newIndex];
   }
+  
 }

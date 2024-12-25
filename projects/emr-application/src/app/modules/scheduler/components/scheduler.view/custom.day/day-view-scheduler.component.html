@@ -1,5 +1,6 @@
 <div class="cal-week-view" role="grid">
     <div class="cal-day-headers" role="row">
+      <!-- Calendar Header Name-->
       <div
         class="cal-header"
         *ngFor="let calendar of calendars; trackBy: trackByCalendarId"
@@ -89,6 +90,7 @@
         </div>
       </div>
     </div>
+    <!-- Render Day Scheduler-->
     <div
       class="cal-time-events"
       mwlDroppable
@@ -105,6 +107,7 @@
           class="cal-hour"
           [class.cal-hour-odd]="odd"
         >
+          <!-- Redner Hours in the lfet of the scheduler-->
           <mwl-calendar-week-view-hour-segment
             *ngFor="let segment of hour.segments; trackBy: trackByHourSegment"
             [style.height.px]="hourSegmentHeight"
@@ -240,7 +243,7 @@
               [customTemplate]="hourSegmentTemplate"
               (mwlClick)="
                 hourSegmentClicked.emit({
-                  date: segment.date,
+                  date: segment,
                   sourceEvent: $event
                 })
               "

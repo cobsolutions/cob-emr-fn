@@ -78,11 +78,13 @@ export class ViewSchdulerComponent implements OnInit {
       weekendDays: undefined,
     });
   }
-  dayClicked(date: Date) {
-    this.viewDate = date;
-    this.AddAppointment(null);
+  dayClicked(segment: any) {
+    if (this.selectedCalendars.length === 0)
+      return
+    this.viewDate = segment.date.date;
+    this.AddAppointment(segment.date.calendar);
   }
-  weekClicked(date: Date , calendar:any): void {
+  weekClicked(date: Date, calendar: any): void {
     this.viewDate = date;
     this.AddAppointment(calendar);
   }
@@ -166,8 +168,8 @@ export class ViewSchdulerComponent implements OnInit {
       this.viewDate = date;
     }
   }
-  private AddAppointment(calendar:any) {
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate,calendar.id).subscribe(result => {
+  private AddAppointment(calendar: any) {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendar.id).subscribe(result => {
       if (result.action !== 'cancel') {
         RefreshSchedulerEvents.refresh(calendar.events, result.event, AppointmentAction.ADD_APPOINTMENT);
         this.refresh.next();
@@ -193,12 +195,12 @@ export class ViewSchdulerComponent implements OnInit {
       switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
     )
   }
-  private getCalendarAppointments(calendarId:number): Observable<any> {
+  private getCalendarAppointments(calendarId: number): Observable<any> {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
     return this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId,calendarId)),
+      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, calendarId)),
       map((response: any) => response.records)
     )
   }
@@ -207,7 +209,7 @@ export class ViewSchdulerComponent implements OnInit {
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
     this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId,null)),
+      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, null)),
       map((response: any) => response.records)
     ).subscribe((appointments: any[]) => {
       this.events = [];

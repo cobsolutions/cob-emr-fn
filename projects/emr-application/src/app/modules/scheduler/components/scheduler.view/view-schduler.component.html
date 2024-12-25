@@ -82,7 +82,7 @@
 
   <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"  [refresh]="refresh"
     (eventTimesChanged)="eventTimesChanged($event)" (userChanged)="userChanged($event)"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event.date)"
+    (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event)"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour" [calendars]="selectedCalendars">
   </mwl-day-view-scheduler>
