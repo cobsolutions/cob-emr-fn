@@ -49,13 +49,13 @@
 </div>
 
 <br />
-
 <div [ngSwitch]="view" *ngIf="events">
-  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+  <!--Month Module-->
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="monthEvents"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
-
+  <!--Week Module-->
   <div *ngSwitchCase="CalendarView.Week">
     <div class="horizontal-container" *ngIf="selectedCalendars.length > 0 ">
       <div *ngFor="let calendar of selectedCalendars" class="resource-item" [ngClass]="{
@@ -79,8 +79,8 @@
       </mwl-calendar-week-view>
     </div>
   </div>
-
-  <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"  [refresh]="refresh"
+  <!--Day Module-->
+  <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
     (eventTimesChanged)="eventTimesChanged($event)" (userChanged)="userChanged($event)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event)"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"

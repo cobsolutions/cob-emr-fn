@@ -35,19 +35,12 @@ export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
   calendars$!: Observable<Calendar[]>;
-
-  resources = [
-    { id: 1, name: 'Bay Ridge' },
-    { id: 2, name: 'Mahmoud Shalaby' },
-    { id: 3, name: 'Shrif ahmed' },
-    { id: 4, name: 'Moamen Hassanen' },
-    { id: 5, name: 'Sakshi Mahajan' },
-  ];
   selectedCalendars: any[] = [];
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
   events: CalendarEvent[] = [];
+  monthEvents: CalendarEvent[] = [];
 
   CalendarView = CalendarView;
 
@@ -209,7 +202,7 @@ export class ViewSchdulerComponent implements OnInit {
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
     this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, null)),
+      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, 152)),
       map((response: any) => response.records)
     ).subscribe((appointments: any[]) => {
       this.events = [];
@@ -244,11 +237,16 @@ export class ViewSchdulerComponent implements OnInit {
           for (var i = 0; i < appointments.length; i++) {
             var varevent: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointments[i])
             calendar.events.push(varevent);
+            this.monthEvents.push(varevent);
           }
           this.selectedCalendars.push(calendar);
-          this.refresh.next()
+          this.refresh.next();
         })
     } else {
+      this.monthEvents = this.monthEvents.filter(
+        event => !calendar.events.some(uncheckedEvent => uncheckedEvent.id === event.id)
+      );
+      this.refresh.next();
       this.selectedCalendars = this.selectedCalendars.filter(
         (item) => item.id !== calendar.id
       );
@@ -256,5 +254,8 @@ export class ViewSchdulerComponent implements OnInit {
   }
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
+  }
+  private filterUncheckCalendarAppointments(calendar:Calendar){
+    
   }
 }
