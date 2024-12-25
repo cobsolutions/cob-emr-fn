@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppointmentTypeListComponent } from './components/appointment.type/list/appointment-type-list.component';
 import { CalendarListComponent } from './components/calendarList/calendar-list.component';
 import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
+import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 
 const routes: Routes = [{
@@ -19,10 +20,10 @@ const routes: Routes = [{
       },
     },
     {
-      path: 'configuration',
-      component: ListSchedulerConfigurationComponent,
+      path: 'settings',
+      component: SchedulerSettingsComponent,
       data: {
-        title: 'configuration',
+        title: 'settings',
       },
     },
     {

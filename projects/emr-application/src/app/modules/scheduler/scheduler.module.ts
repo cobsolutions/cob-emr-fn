@@ -32,6 +32,9 @@ import { DayViewSchedulerComponent } from './components/scheduler.view/custom.da
 import { CustomWeekViewComponent } from './components/scheduler.view/custom.week/custom-week-view.component';
 import { CalendarListComponent } from './components/calendarList/calendar-list.component';
 import { CreateCalendarComponent } from './components/calendar.create/create-calendar.component';
+import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
+import { SchedulerDateSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/scheduler.date.settings.component';
+import { SchedulerAppointmentSettingsComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/scheduler.appointment.settings.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -55,6 +58,9 @@ import { CreateCalendarComponent } from './components/calendar.create/create-cal
         CustomWeekViewComponent,
         CalendarListComponent,
         CreateCalendarComponent,
+        SchedulerSettingsComponent,
+        SchedulerDateSettingsComponent,
+        SchedulerAppointmentSettingsComponent,
     ],
     imports: [
         CommonModule,

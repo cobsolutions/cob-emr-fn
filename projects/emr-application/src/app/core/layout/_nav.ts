@@ -38,12 +38,12 @@ export const NavItems: INavData[] = [
         url: 'scheduler/view'
       },
       {
-        name: 'View Calendars',
-        url: 'scheduler/calendar'
+        name: 'Scheduler Settings',
+        url: 'scheduler/settings'
       },
       {
-        name: 'Scheduler Configuration',
-        url: 'scheduler/configuration'
+        name: 'View Calendars',
+        url: 'scheduler/calendar'
       },
       {
         name: 'Appointment Type',
