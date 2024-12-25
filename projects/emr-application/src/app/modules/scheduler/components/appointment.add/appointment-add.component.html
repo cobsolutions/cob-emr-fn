@@ -71,6 +71,7 @@
                 </c-card>
             </c-col>
         </c-row>
+        <!--Therapists-->
         <c-row>
             <c-col>
                 <c-card class="mb-3 ustify-content-center">
@@ -121,6 +122,17 @@
                         <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
                             name="appointmentnote" [(ngModel)]="appointment.note"
                             placeholder="Appointment Note"></textarea>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <!--Scheduler-->
+        <c-row *ngIf="calendarId ===null">
+            <c-col>
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header><strong>Schedule</strong></c-card-header>
+                    <c-card-body>
+                        Select from calendar
                     </c-card-body>
                 </c-card>
             </c-col>

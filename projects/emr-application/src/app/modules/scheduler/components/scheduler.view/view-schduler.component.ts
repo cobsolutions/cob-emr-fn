@@ -162,7 +162,8 @@ export class ViewSchdulerComponent implements OnInit {
     }
   }
   private AddAppointment(calendar: any) {
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendar.id).subscribe(result => {
+    var calendarId: number = calendar !== null ? calendar.id : null;
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId).subscribe(result => {
       if (result.action !== 'cancel') {
         RefreshSchedulerEvents.refresh(calendar.events, result.event, AppointmentAction.ADD_APPOINTMENT);
         this.refresh.next();
@@ -255,7 +256,7 @@ export class ViewSchdulerComponent implements OnInit {
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
   }
-  private filterUncheckCalendarAppointments(calendar:Calendar){
-    
+  private filterUncheckCalendarAppointments(calendar: Calendar) {
+
   }
 }
