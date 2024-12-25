@@ -1,7 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { EMPTY, Observable, switchMap } from 'rxjs';
+import { EMPTY, filter, Observable, switchMap } from 'rxjs';
+import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
 import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.repetition';
 import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
@@ -11,6 +12,7 @@ import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
 import { AppointmnetRepeat } from '../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../service/appointment.service';
+import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { InitializeAppointmentService } from '../../service/init.appintment/initialize-appointment.service';
 import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
@@ -29,7 +31,7 @@ export class AppointmentAddComponent implements OnInit {
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() startDate: Date;
-  @Input() calendarId:number;
+  @Input() calendarId: number;
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
@@ -39,16 +41,19 @@ export class AppointmentAddComponent implements OnInit {
   appointmentRepetition = SchedulerRepetition;
   startBoundary: Date;
   endBoundary: Date;
+  calendars$!: Observable<Calendar[]>;
   constructor(private initializeAppointmentService: InitializeAppointmentService
     , private constructAppointmentService: ConstructAppointmentService
     , private appointmentService: AppointmentService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private calendarServiceService: CalendarServiceService) { }
   ngOnInit() {
     this.patient$ = this.initializeAppointmentService.findPatients()
     this.therapists$ = this.initializeAppointmentService.findTherapists();
     this.appointmentTypes$ = this.initializeAppointmentService.findAppointmnetType();
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate)
     this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+    this.getCalendars();
   }
   changestartDate(startDate: Date) {
     this.appointmentService.appointmnetStartDate$.next(startDate)
@@ -79,7 +84,8 @@ export class AppointmentAddComponent implements OnInit {
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       this.fillAppointmnetRepeat();
       this.appointment.constructTitle();
-      this.appointment.calendarId = this.calendarId;
+      if (this.calendarId !== null)
+        this.appointment.calendarId = this.calendarId;
       return this.loggedInService.selectedClinic$.pipe(
         switchMap(clinicId => {
           this.appointment.clinicId = clinicId;
@@ -134,5 +140,11 @@ export class AppointmentAddComponent implements OnInit {
       yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
     }
     this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
+  }
+  getCalendars() {
+    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
+    )
   }
 }

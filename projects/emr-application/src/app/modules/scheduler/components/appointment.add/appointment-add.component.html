@@ -132,7 +132,18 @@
                 <c-card class="mb-3 ustify-content-center">
                     <c-card-header><strong>Schedule</strong></c-card-header>
                     <c-card-body>
-                        Select from calendar
+                        <small
+                            *ngIf="notValidForm   && (schedule.errors) || (schedule.invalid && (schedule.dirty || schedule.touched))"
+                            class="form-text text-danger">
+                            Schedule is required
+                        </small>
+                        <select cFormControl cSelect class="mb-2" sizing="sm" id="schedule" name="schedule"
+                            [(ngModel)]="appointment.calendarId" required #schedule="ngModel"
+                            [ngClass]="{'is-invalid': schedule.invalid && (schedule.dirty || schedule.touched)}">
+                            <option value="undefined" disabled selected>Select schedule</option>
+                            <option *ngFor="let calendar of (calendars$ | async )" [ngValue]="calendar.id">
+                                {{calendar.name}}</option>
+                        </select>
                     </c-card-body>
                 </c-card>
             </c-col>

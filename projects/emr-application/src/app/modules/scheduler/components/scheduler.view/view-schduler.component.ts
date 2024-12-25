@@ -83,7 +83,7 @@ export class ViewSchdulerComponent implements OnInit {
   }
   monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     this.checkOpenEvent(date, events);
-    this.AddAppointment(null);
+    this.AddAppointment(null, 'month');
   }
   eventTimesChanged({
     event,
@@ -161,12 +161,19 @@ export class ViewSchdulerComponent implements OnInit {
       this.viewDate = date;
     }
   }
-  private AddAppointment(calendar: any) {
+  private AddAppointment(calendar: any, module?: string) {
     var calendarId: number = calendar !== null ? calendar.id : null;
     this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId).subscribe(result => {
       if (result.action !== 'cancel') {
-        RefreshSchedulerEvents.refresh(calendar.events, result.event, AppointmentAction.ADD_APPOINTMENT);
-        this.refresh.next();
+        console.log(module)
+        if (module === 'month') {
+          RefreshSchedulerEvents.refresh(this.monthEvents, result.event, AppointmentAction.ADD_APPOINTMENT);
+          this.refresh.next();
+        }
+        if (module !== 'month') {
+          RefreshSchedulerEvents.refresh(calendar.events, result.event, AppointmentAction.ADD_APPOINTMENT);
+          this.refresh.next();
+        }
         this.toastr.success('Appointment created Successfully');
       }
     })
