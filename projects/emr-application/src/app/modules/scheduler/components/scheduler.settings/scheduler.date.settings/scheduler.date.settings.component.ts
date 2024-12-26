@@ -5,6 +5,7 @@ import { DayHours } from '../../../lookups/day.hours';
 
 import { StartWeek } from '../../../lookups/start.week';
 import { TimeInterval } from '../../../lookups/time.interval';
+import { SchedulerSettings } from '../../../model/shceduler.date.settings';
 
 @Component({
   selector: 'SchedulerDateSettings',
@@ -18,6 +19,7 @@ export class SchedulerDateSettingsComponent implements OnInit {
   dayHours: string[] = DayHours;
   appointmentDuration: string[] = AppointmentDuration
   isValidForm:boolean = false;
+  model:SchedulerSettings;
   constructor() { }
 
   ngOnInit(): void {
@@ -37,8 +39,19 @@ export class SchedulerDateSettingsComponent implements OnInit {
     if (this.settingsForm?.valid) {
       console.log('valid')
       this.isValidForm = false;
+      this.fillModel();
+      console.log(JSON.stringify(this.model))
     }else{
       this.isValidForm = true;
+    }
+  }
+  private fillModel(){
+    this.model={
+      timeInterval : this.settingsForm.controls['time-interval'].value,
+      startWeek : this.settingsForm.controls['start-week'].value,
+      startDay :  this.settingsForm.controls['start-of-day'].value,
+      endDay :  this.settingsForm.controls['end-of-day'].value,
+      appointmentDuration : this.settingsForm.controls['appointment-duration'].value,
     }
   }
 }
