@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { filter, switchMap } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentDuration } from '../../../lookups/appointment.duration';
 import { DayHours } from '../../../lookups/day.hours';
 
 import { StartWeek } from '../../../lookups/start.week';
 import { TimeInterval } from '../../../lookups/time.interval';
 import { SchedulerSettings } from '../../../model/shceduler.date.settings';
+import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
 
 @Component({
   selector: 'SchedulerDateSettings',
@@ -18,9 +22,11 @@ export class SchedulerDateSettingsComponent implements OnInit {
   timeInterval: string[] = TimeInterval;
   dayHours: string[] = DayHours;
   appointmentDuration: string[] = AppointmentDuration
-  isValidForm:boolean = false;
-  model:SchedulerSettings;
-  constructor() { }
+  isValidForm: boolean = false;
+  model: SchedulerSettings;
+  constructor(private loggedInService: LoggedInService
+    , private schedulerConfigurationService: SchedulerConfigurationService
+    , private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createSettingsForm()
@@ -35,23 +41,31 @@ export class SchedulerDateSettingsComponent implements OnInit {
       'appointment-duration': new FormControl(null, [Validators.required]),
     })
   }
-  save(){
+  save() {
     if (this.settingsForm?.valid) {
       console.log('valid')
       this.isValidForm = false;
       this.fillModel();
-      console.log(JSON.stringify(this.model))
-    }else{
+      this.loggedInService.selectedClinic$.pipe(
+        filter(result => result != null),
+        switchMap(clinicId => {
+          this.model.clinicId = clinicId
+          return this.schedulerConfigurationService.createSettings(this.model);
+        })
+      ).subscribe(result => {
+        this.toastrService.success("Scheduler Settings is saved successfully");
+      })
+    } else {
       this.isValidForm = true;
     }
   }
-  private fillModel(){
-    this.model={
-      timeInterval : this.settingsForm.controls['time-interval'].value,
-      startWeek : this.settingsForm.controls['start-week'].value,
-      startDay :  this.settingsForm.controls['start-of-day'].value,
-      endDay :  this.settingsForm.controls['end-of-day'].value,
-      appointmentDuration : this.settingsForm.controls['appointment-duration'].value,
+  private fillModel() {
+    this.model = {
+      timeInterval: this.settingsForm.controls['time-interval'].value,
+      startWeek: this.settingsForm.controls['start-week'].value,
+      startDay: this.settingsForm.controls['start-of-day'].value,
+      endDay: this.settingsForm.controls['end-of-day'].value,
+      appointmentDuration: this.settingsForm.controls['appointment-duration'].value,
     }
   }
 }

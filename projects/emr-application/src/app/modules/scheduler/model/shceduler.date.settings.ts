@@ -4,4 +4,5 @@ export interface SchedulerSettings {
     startDay?: string
     endDay?: string
     appointmentDuration?: string
+    clinicId?:number
 }
