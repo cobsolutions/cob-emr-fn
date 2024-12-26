@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { map, Observable, retry, tap } from 'rxjs';
+import { map, Observable, retry, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { ListTemplate } from '../../../common/template/list.template';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
 
 interface SearchCriteria {
@@ -23,7 +24,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   calendars$!: Observable<Calendar[]>;
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
-  constructor(private calendarServiceService: CalendarServiceService) { super(); }
+  constructor(private calendarServiceService: CalendarServiceService,private loggedInService:LoggedInService) { super(); }
 
   ngOnInit(): void {
     this.initListComponent();
@@ -45,27 +46,25 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
     this.createCalendarVisibility = true
   }
   private find() {
-    this.calendars$ = this.calendarServiceService.findAll(this.apiParams$).pipe(
-      retry({
-        delay: (error) => {
-          console.warn('Retry: ', error);
-          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
-          this.loadingData$.next(false);
-          return this.retry$;
-        }
-      }),
-      tap((response: any) => {
-        this.totalItems$.next(response.number_of_matching_records);
-        if (response.number_of_records) {
-          this.errorMessage$.next('');
-        }
-        this.retry$.next(false);
-        this.loadingData$.next(false);
-      }),
-      map((response: any) => {
-        return response.records;
+    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
+      switchMap(clinicId=>{
+        return this.calendarServiceService.findAll(this.apiParams$,clinicId).pipe(
+      
+          tap((response: any) => {
+            this.totalItems$.next(response.number_of_matching_records);
+            if (response.number_of_records) {
+              this.errorMessage$.next('');
+            }
+            this.retry$.next(false);
+            this.loadingData$.next(false);
+          }),
+          map((response: any) => {
+            return response.records;
+          })
+        );
       })
-    );
+    )
+    
   }
   toggle() {
     this.createCalendarVisibility = !this.createCalendarVisibility
