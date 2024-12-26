@@ -10,10 +10,10 @@ import {
   isSameMonth
 } from 'date-fns';
 
-import { WeekDay } from "calendar-utils";
+import { DAYS_OF_WEEK, WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, map, Observable, Subject, switchMap } from 'rxjs';
+import { filter, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { SchedulerConfiguration } from "../../models/configuration";
@@ -24,6 +24,11 @@ import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
+import * as dayjs from "dayjs";
+import * as en from 'dayjs/locale/en';
+import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
+import { ActivatedRoute } from "@angular/router";
+import { SchedulerSettings } from "../../model/shceduler.date.settings";
 
 @Component({
   selector: 'app-view-schduler',
@@ -39,6 +44,7 @@ export class ViewSchdulerComponent implements OnInit {
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
   schedulerConfiguration$!: Observable<SchedulerConfiguration>;
+  schedulerSettings$!: Observable<SchedulerSettings>
   events: CalendarEvent[] = [];
   monthEvents: CalendarEvent[] = [];
 
@@ -49,6 +55,8 @@ export class ViewSchdulerComponent implements OnInit {
 
   cancelNoShow: string;
   activeDayIsOpen: boolean = false;
+  isSchedulerSetting: boolean = false;
+  schedulerSettings: Observable<Settings>;
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -58,11 +66,12 @@ export class ViewSchdulerComponent implements OnInit {
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
     private calendarServiceService: CalendarServiceService,
+    private route: ActivatedRoute,
     protected utils: CalendarUtils,
   ) { }
 
   ngOnInit(): void {
-    this.getSchedulerConfiguration()
+    this.schedulerSettings = this.getSchedulerSettings();
     this.getCalendars()
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
@@ -71,6 +80,7 @@ export class ViewSchdulerComponent implements OnInit {
       weekendDays: undefined,
     });
   }
+
   dayClicked(segment: any) {
     if (this.selectedCalendars.length === 0)
       return
@@ -263,7 +273,15 @@ export class ViewSchdulerComponent implements OnInit {
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
   }
-  private filterUncheckCalendarAppointments(calendar: Calendar) {
-
+  private getSchedulerSettings(): Observable<any> {
+    return this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => {
+        return this.schedulerConfigurationService.findSettings(clinicId)
+      }),
+      map(schedulerSetting => {
+        return FetchSchedulerSettings.setup(schedulerSetting);
+      })
+    )
   }
 }

@@ -13,6 +13,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs",
+              "base64-js",
+              "js-sha256",
+              "crypto-js",
+              "lodash",
+              "dayjs",
+              "~"
+           ],
             "outputPath": "dist/emr-application",
             "index": "projects/emr-application/src/index.html",
             "main": "projects/emr-application/src/main.ts",

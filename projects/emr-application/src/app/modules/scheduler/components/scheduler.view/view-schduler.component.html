@@ -49,10 +49,11 @@
 </div>
 
 <br />
-<div [ngSwitch]="view" *ngIf="events">
+<div [ngSwitch]="view">
   <!--Month Module-->
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="monthEvents"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
+    [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek"
     (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
   <!--Week Module-->
@@ -67,7 +68,8 @@
         </div>
         <mwl-calendar-week-view [viewDate]="viewDate" [events]="calendar.events" [refresh]="refresh"
           (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-          (hourSegmentClicked)="weekClicked($event.date , calendar)"
+          (hourSegmentClicked)="weekClicked($event.date , calendar)" [weekStartsOn]="1"
+          [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek"
           [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
           [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
         </mwl-calendar-week-view>
@@ -75,7 +77,7 @@
     </div>
     <div *ngIf="selectedCalendars.length ===0 ">
       <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh"
-        [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
+        [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek">
       </mwl-calendar-week-view>
     </div>
   </div>
@@ -83,6 +85,7 @@
   <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
     (eventTimesChanged)="eventTimesChanged($event)" (userChanged)="userChanged($event)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event)"
+    [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek"
     [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
     [dayEndHour]="(schedulerConfiguration$ | async)?.endHour" [calendars]="selectedCalendars">
   </mwl-day-view-scheduler>

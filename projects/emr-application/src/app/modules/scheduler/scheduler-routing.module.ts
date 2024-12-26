@@ -5,6 +5,7 @@ import { CalendarListComponent } from './components/calendarList/calendar-list.c
 import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
 import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
+import { SchedulerSetupResolverService } from './service/scheduler/scheduler-setup-resolver.service';
 
 const routes: Routes = [{
   path: '',

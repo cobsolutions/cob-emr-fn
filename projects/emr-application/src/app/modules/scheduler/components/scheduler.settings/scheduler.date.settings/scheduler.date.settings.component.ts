@@ -24,11 +24,13 @@ export class SchedulerDateSettingsComponent implements OnInit {
   appointmentDuration: string[] = AppointmentDuration
   isValidForm: boolean = false;
   model: SchedulerSettings;
+  clinicId: number;
   constructor(private loggedInService: LoggedInService
     , private schedulerConfigurationService: SchedulerConfigurationService
     , private toastrService: ToastrService) { }
 
   ngOnInit(): void {
+    this.getClinicId();
     this.createSettingsForm()
     this.getSettings();
   }
@@ -42,34 +44,34 @@ export class SchedulerDateSettingsComponent implements OnInit {
       'appointment-duration': new FormControl(null, [Validators.required]),
     })
   }
+  private getClinicId() {
+    this.loggedInService.selectedClinic$.subscribe(clinicId => {
+      this.clinicId = clinicId;
+    })
+  }
   save() {
     if (this.settingsForm?.valid) {
-      console.log('valid')
       this.isValidForm = false;
       this.fillModel();
-      this.loggedInService.selectedClinic$.pipe(
-        filter(result => result != null),
-        switchMap(clinicId => {
-          this.model.clinicId = clinicId
-          return this.schedulerConfigurationService.createSettings(this.model);
-        })
-      ).subscribe(result => {
+      this.schedulerConfigurationService.createSettings(this.model).subscribe(rr=>{
         this.toastrService.success("Scheduler Settings is saved successfully");
-      })
+      });
     } else {
       this.isValidForm = true;
     }
   }
   private fillModel() {
     this.model = {
+      id: this.model.id,
       timeInterval: this.settingsForm.controls['time-interval'].value,
       startWeek: this.settingsForm.controls['start-week'].value,
       startDay: this.settingsForm.controls['start-of-day'].value,
       endDay: this.settingsForm.controls['end-of-day'].value,
       appointmentDuration: this.settingsForm.controls['appointment-duration'].value,
+      clinicId:this.clinicId
     }
   }
-  private fillForm(){
+  private fillForm() {
     this.settingsForm.controls['time-interval'].setValue(this.model.timeInterval)
     this.settingsForm.controls['start-week'].setValue(this.model.startWeek)
     this.settingsForm.controls['start-of-day'].setValue(this.model.startDay)
@@ -83,8 +85,8 @@ export class SchedulerDateSettingsComponent implements OnInit {
         return this.schedulerConfigurationService.findSettings(clinicId)
       })
     ).subscribe(result => {
-        this.model = result;
-        this.fillForm();
+      this.model = result;
+      this.fillForm();
     })
   }
 }
