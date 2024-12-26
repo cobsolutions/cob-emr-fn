@@ -35,6 +35,9 @@ import { CreateCalendarComponent } from './components/calendar.create/create-cal
 import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
 import { SchedulerDateSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/scheduler.date.settings.component';
 import { SchedulerAppointmentSettingsComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/scheduler.appointment.settings.component';
+import { TimeIntervalSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/time.interval/time-interval-settings.component';
+import { WeekSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/week.settings/week-settings.component';
+import { AppointmentDurationSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/appointment.duration.settings/appointment-duration-settings.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -61,6 +64,9 @@ import { SchedulerAppointmentSettingsComponent } from './components/scheduler.se
         SchedulerSettingsComponent,
         SchedulerDateSettingsComponent,
         SchedulerAppointmentSettingsComponent,
+        TimeIntervalSettingsComponent,
+        WeekSettingsComponent,
+        AppointmentDurationSettingsComponent,
     ],
     imports: [
         CommonModule,
