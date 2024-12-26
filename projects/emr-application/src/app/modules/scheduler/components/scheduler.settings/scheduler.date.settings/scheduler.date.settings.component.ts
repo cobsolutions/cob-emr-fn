@@ -30,6 +30,7 @@ export class SchedulerDateSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createSettingsForm()
+    this.getSettings();
   }
 
   private createSettingsForm() {
@@ -67,5 +68,23 @@ export class SchedulerDateSettingsComponent implements OnInit {
       endDay: this.settingsForm.controls['end-of-day'].value,
       appointmentDuration: this.settingsForm.controls['appointment-duration'].value,
     }
+  }
+  private fillForm(){
+    this.settingsForm.controls['time-interval'].setValue(this.model.timeInterval)
+    this.settingsForm.controls['start-week'].setValue(this.model.startWeek)
+    this.settingsForm.controls['start-of-day'].setValue(this.model.startDay)
+    this.settingsForm.controls['end-of-day'].setValue(this.model.endDay)
+    this.settingsForm.controls['appointment-duration'].setValue(this.model.appointmentDuration)
+  }
+  private getSettings() {
+    this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => {
+        return this.schedulerConfigurationService.findSettings(clinicId)
+      })
+    ).subscribe(result => {
+        this.model = result;
+        this.fillForm();
+    })
   }
 }

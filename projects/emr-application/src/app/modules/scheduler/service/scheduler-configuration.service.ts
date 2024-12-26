@@ -42,4 +42,8 @@ export class SchedulerConfigurationService {
     const url = this.baseUrl + 'scheduler/create/settings';
     return this._http.post(url, JSON.stringify(settings), { 'headers': headers });
   }
+  findSettings(clinicId:number){
+    const url = this.baseUrl + 'scheduler/find/settings/clinicId/' + clinicId;
+    return this._http.get(url);
+  }
 }
