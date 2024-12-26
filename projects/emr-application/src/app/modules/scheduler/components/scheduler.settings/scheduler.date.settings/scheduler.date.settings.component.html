@@ -1,7 +1,103 @@
 <c-container fluid="true" class="my-3">
     <c-card>
         <c-card-body>
-            
+            <c-callout color="danger" *ngIf="isValidForm">
+                <span class="text-danger fw-bold">Please fill in all the required fields save</span>
+            </c-callout>
+            <form [formGroup]="settingsForm">
+                <c-row class="mb-2">
+                    <c-col xl="12">
+                        <label style="width: 150px;">Week start on <span class="text-danger">*</span></label>
+                    </c-col>
+                    <div *ngIf="this.settingsForm.get('start-week')?.errors?.['required'] === true && 
+                    (this.settingsForm.get('start-week')?.dirty ||this.settingsForm.get('start-week')?.touched)"
+                        class="text-danger mx-1">
+                        Start week is required
+                    </div>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" formControlName="start-week" [ngClass]="{'is-invalid': this.settingsForm.get('start-week')?.invalid
+                        && this.settingsForm.get('start-week').touched}">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let day of startweek" [value]="day">
+                                {{day}}
+                            </option>
+                        </select>
+                    </c-col>
+                    <c-col xl="12">
+                        <label style="width: 150px;">Time Interval<span class="text-danger">*</span></label>
+                    </c-col>
+                    <div *ngIf="this.settingsForm.get('time-interval')?.errors?.['required'] === true && 
+                    (this.settingsForm.get('time-interval')?.dirty ||this.settingsForm.get('time-interval')?.touched)"
+                        class="text-danger mx-1">
+                        Time interval is required
+                    </div>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" formControlName="time-interval" [ngClass]="{'is-invalid': this.settingsForm.get('time-interval')?.invalid
+                        && this.settingsForm.get('time-interval').touched}">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let interval of timeInterval" [value]="interval">
+                                {{interval}}
+                            </option>
+                        </select>
+                    </c-col>
+                    <c-col xl="12">
+                        <label style="width: 150px;">Start of day<span class="text-danger">*</span></label>
+                    </c-col>
+                    <div *ngIf="this.settingsForm.get('start-of-day')?.errors?.['required'] === true && 
+                    (this.settingsForm.get('start-of-day')?.dirty ||this.settingsForm.get('start-of-day')?.touched)"
+                        class="text-danger mx-1">
+                        Start of day is required
+                    </div>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" formControlName="start-of-day" [ngClass]="{'is-invalid': this.settingsForm.get('start-of-day')?.invalid
+                        && this.settingsForm.get('start-of-day').touched}">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let hour of dayHours" [value]="hour">
+                                {{hour}}
+                            </option>
+                        </select>
+                    </c-col>
+                    <c-col xl="12">
+                        <label style="width: 150px;">End of day<span class="text-danger">*</span></label>
+                    </c-col>
+                    <div *ngIf="this.settingsForm.get('end-of-day')?.errors?.['required'] === true && 
+                    (this.settingsForm.get('end-of-day')?.dirty ||this.settingsForm.get('end-of-day')?.touched)"
+                        class="text-danger mx-1">
+                        End of day is required
+                    </div>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" formControlName="end-of-day" [ngClass]="{'is-invalid': this.settingsForm.get('end-of-day')?.invalid
+                        && this.settingsForm.get('end-of-day').touched}">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let hour of dayHours" [value]="hour">
+                                {{hour}}
+                            </option>
+                        </select>
+                    </c-col>
+                    <c-col xl="12">
+                        <label>Appointment Duration<span class="text-danger">*</span></label>
+                    </c-col>
+                    <div *ngIf="this.settingsForm.get('appointment-duration')?.errors?.['required'] === true && 
+                    (this.settingsForm.get('appointment-duration')?.dirty ||this.settingsForm.get('appointment-duration')?.touched)"
+                        class="text-danger mx-1">
+                        Appointment duration is required
+                    </div>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" formControlName="appointment-duration" [ngClass]="{'is-invalid': this.settingsForm.get('appointment-duration')?.invalid
+                        && this.settingsForm.get('appointment-duration').touched}">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let duration of appointmentDuration" [value]="duration">
+                                {{duration}}
+                            </option>
+                        </select>
+                    </c-col>
+                </c-row>
+                <div class="mt-3 text-center">
+                    <button cButton size="sm" variant="outline" class="mx-2" (click)="save()">
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
         </c-card-body>
     </c-card>
 </c-container>
