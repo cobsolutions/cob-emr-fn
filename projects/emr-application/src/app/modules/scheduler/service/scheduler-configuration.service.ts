@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { Observable } from 'rxjs';
+import { SchedulerSettings } from '../model/shceduler.date.settings';
 import { SchedulerConfiguration } from '../models/configuration';
 
 @Injectable({
@@ -34,5 +35,11 @@ export class SchedulerConfigurationService {
   findNotConfigurlableClinics(organizationId: number): Observable<any> {
     const listClinicSchedulerConfigurationURL = this.baseUrl + 'clinic/find-not-configurable/organization/' + organizationId;
     return this._http.get(listClinicSchedulerConfigurationURL);
+  }
+
+  createSettings(settings: SchedulerSettings) {
+    const headers = { 'content-type': 'application/json' }
+    const url = this.baseUrl + 'scheduler/create/settings';
+    return this._http.post(url, JSON.stringify(settings), { 'headers': headers });
   }
 }
