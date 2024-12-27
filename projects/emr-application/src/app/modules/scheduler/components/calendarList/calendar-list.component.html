@@ -56,15 +56,14 @@
                     Actions
                 </button>
                 <ul cDropdownMenu variant="outline">
-                    <!-- <li><a cDropdownItem [routerLink]="[]" (click)="viewActive()">Show Active</a></li>
-                    <li><a cDropdownItem [routerLink]="[]" (click)="viewInActive()">Show Inactive</a></li> -->
+                    <li><a cDropdownItem [routerLink]="[]" (click)="updateCalendar()">Save</a></li>
                 </ul>
             </c-dropdown>
         </c-button-group>
     </c-col>
 </c-row>
 <ng-container *ngIf="props$ | async as props" fluid="true">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
+    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []" #calendarsItems
         [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
         [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
         [tableProps]="{ hover: true, striped: true, small:true }" [columnFilterValue]="props.columnFilterValue?? []"

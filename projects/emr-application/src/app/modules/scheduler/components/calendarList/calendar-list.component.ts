@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SmartTableComponent } from '@coreui/angular-pro';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
+import { CalendarsUpdateModel } from '../../../administration/model/calendar/calendar.update.model';
 import { ListTemplate } from '../../../common/template/list.template';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
@@ -24,9 +27,14 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   calendars$!: Observable<Calendar[]>;
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
-  constructor(private calendarServiceService: CalendarServiceService,private loggedInService:LoggedInService) { super(); }
+  clinicId: number;
+  @ViewChild('calendarsItems') calendarsItems: SmartTableComponent;
+  constructor(private calendarServiceService: CalendarServiceService
+    , private loggedInService: LoggedInService
+    ,private toastrService: ToastrService) { super(); }
 
   ngOnInit(): void {
+    this.catchSelectedClinic();
     this.initListComponent();
     this.columns = this.constructColumns(['name', 'attached', 'actions']);
     this.find();
@@ -45,11 +53,16 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   openAddCalendarModal() {
     this.createCalendarVisibility = true
   }
+  private catchSelectedClinic() {
+    this.loggedInService.selectedClinic$.subscribe(clinicId => {
+      this.clinicId = clinicId;
+    })
+  }
   private find() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId=>{
-        return this.calendarServiceService.findAll(this.apiParams$,clinicId).pipe(
-      
+      switchMap(clinicId => {
+        return this.calendarServiceService.findAll(this.apiParams$, clinicId).pipe(
+
           tap((response: any) => {
             this.totalItems$.next(response.number_of_matching_records);
             if (response.number_of_records) {
@@ -64,7 +77,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
         );
       })
     )
-    
+
   }
   toggle() {
     this.createCalendarVisibility = !this.createCalendarVisibility
@@ -74,5 +87,41 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
       this.createCalendarVisibility = false;
       this.find()
     }
+  }
+  updateCalendar() {
+    var model: CalendarsUpdateModel = {}
+    this.loggedInService.load().pipe(
+      tap(user => {
+        model.uuid = user.uuid
+        model.clinicId = this.clinicId
+        model.markAsAttached = this.calendarsItems.items.filter((item: any) => item.attached)
+          .map((item: any) => {
+            var calendar: Calendar = {
+              id: item.id,
+              name: item.name,
+              createdBy: item.createdBy,
+              isPublic: item.isPublic,
+              attached: item.attached
+            }
+            return calendar;
+          });
+        model.markAsUnAttached = this.calendarsItems.items.filter((item: any) => !item.attached)
+          .map((item: any) => {
+            var calendar: Calendar = {
+              id: item.id,
+              name: item.name,
+              createdBy: item.createdBy,
+              isPublic: item.isPublic,
+              attached: item.attached
+            }
+            return calendar;
+          });
+      }),
+      switchMap(r=>
+        {return this.calendarServiceService.update( model);}
+      )
+    ).subscribe(d=>{
+      this.toastrService.success('Calender is saved successfully');
+    });
   }
 }

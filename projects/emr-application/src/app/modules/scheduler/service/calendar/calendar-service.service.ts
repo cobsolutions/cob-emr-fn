@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
+import { CalendarsUpdateModel } from '../../../administration/model/calendar/calendar.update.model';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../common/service/base-pagination.service';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
@@ -34,5 +35,10 @@ export class CalendarServiceService extends BasePaginationService {
         return this.httpClient.get(this.baseUrl + "/get-attached/clinicId/" + clinicId + "/uuid/" + user.uuid)
       })
     )
+  }
+  public update(model:CalendarsUpdateModel){
+    const headers = { 'content-type': 'application/json' }
+    const url = this.baseUrl + "/update"
+    return this.httpClient.put(`${url}`, JSON.stringify(model), { 'headers': headers })
   }
 }
