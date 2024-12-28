@@ -15,8 +15,10 @@
         <tbody>
             <tr *ngFor=" let type of(appointmentTypes |async) ">
                 <td>{{type.name}}</td>
-                <td>{{type.color}}</td>
-                <td>{{type.fontColor}}</td>
+                <td><Label [style.background]="type.color"
+                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
+                <td><Label [style.background]="type.fontColor"
+                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
             </tr>
         </tbody>
     </table>
@@ -27,6 +29,7 @@
         <button (click)="toggleAdd()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <apd-appointment-type *ngIf="addVisibility" (changeVisibility)="changeFacilityVisibility($event)"></apd-appointment-type>
+        <apd-appointment-type *ngIf="addVisibility"
+            (changeVisibility)="changeFacilityVisibility($event)"></apd-appointment-type>
     </c-modal-body>
 </c-modal>
