@@ -31,11 +31,12 @@
         </tbody>
     </table>
 </c-container>
-<c-modal id="addAppoitmentType" [visible]="addVisibility" size="sm" backdrop="static">
+<c-modal id="addAppoitmentType" [visible]="addVisibility" size="lg" backdrop="static">
     <c-modal-header>
         <h3 cModalTitle>Add Appointment Type</h3>
         <button (click)="toggleAdd()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
+        <apd-appointment-type *ngIf="addVisibility"></apd-appointment-type>
     </c-modal-body>
 </c-modal>

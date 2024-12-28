@@ -7,6 +7,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./scheduler.appointment.settings.component.css']
 })
 export class SchedulerAppointmentSettingsComponent implements OnInit {
-  ngOnInit(): void {
+   ngOnInit(): void {
   }
 }
