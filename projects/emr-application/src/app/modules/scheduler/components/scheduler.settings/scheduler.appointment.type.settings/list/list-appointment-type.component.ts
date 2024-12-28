@@ -11,5 +11,7 @@ export class ListAppointmentTypeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  create() {
 
+  }
 }
