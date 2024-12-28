@@ -1,0 +1,7 @@
+.wrapper{
+    background: white;
+    border:1px solid silver;
+    display:flex;
+    flex-wrap: wrap;
+    border-radius:.25rem;
+  }
