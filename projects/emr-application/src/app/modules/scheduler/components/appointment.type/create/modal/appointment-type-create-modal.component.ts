@@ -36,7 +36,6 @@ export class AppointmentTypeCreateModalComponent implements OnInit {
     this.logineService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null),
       switchMap(clinicId => {
-        this.createAppointmentTypeComponent.appointmentType.clinicId = clinicId
         return this.appointmentTypeService.create(this.createAppointmentTypeComponent.appointmentType)
       })
     ).subscribe(result => {
