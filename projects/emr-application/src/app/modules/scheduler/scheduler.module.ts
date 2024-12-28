@@ -36,6 +36,7 @@ import { SchedulerSettingsComponent } from './components/scheduler.settings/sche
 import { SchedulerDateSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/scheduler.date.settings.component';
 import { SchedulerAppointmentSettingsComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/scheduler.appointment.settings.component';
 import { ListAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/list/list-appointment-type.component';
+import { ApdAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/create/apd-appointment-type.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -63,6 +64,7 @@ import { ListAppointmentTypeComponent } from './components/scheduler.settings/sc
         SchedulerDateSettingsComponent,
         SchedulerAppointmentSettingsComponent,
         ListAppointmentTypeComponent,
+        ApdAppointmentTypeComponent,
     ],
     imports: [
         CommonModule,
