@@ -1,9 +1,9 @@
 <c-container fluid="true" class="my-2">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-        <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()" dispaly-input>
-            <svg cIcon  name="cilPlus"></svg>
+        <button cButton color="primary" class="me-md-2" variant="outline" (click)="openCreateModal()" dispaly-input>
+            <svg cIcon name="cilPlus"></svg>
             Create</button>
-      </div>
+    </div>
     <table cTable>
         <thead cTableColor="light">
             <tr>
@@ -31,3 +31,11 @@
         </tbody>
     </table>
 </c-container>
+<c-modal id="addAppoitmentType" [visible]="addVisibility" size="sm" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Add Appointment Type</h3>
+        <button (click)="toggleAdd()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+    </c-modal-body>
+</c-modal>

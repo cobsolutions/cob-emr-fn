@@ -6,12 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-appointment-type.component.css']
 })
 export class ListAppointmentTypeComponent implements OnInit {
-
+  addVisibility: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-  create() {
-
+  openCreateModal() {
+    this.addVisibility = true
+  }
+  toggleAdd() {
+    this.addVisibility = false;
   }
 }
