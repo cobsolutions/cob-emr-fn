@@ -27,6 +27,6 @@
         <button (click)="toggleAdd()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <apd-appointment-type *ngIf="addVisibility"></apd-appointment-type>
+        <apd-appointment-type *ngIf="addVisibility" (changeVisibility)="changeFacilityVisibility($event)"></apd-appointment-type>
     </c-modal-body>
 </c-modal>

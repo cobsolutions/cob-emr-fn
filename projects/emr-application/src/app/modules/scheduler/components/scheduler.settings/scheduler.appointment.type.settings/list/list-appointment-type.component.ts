@@ -29,4 +29,11 @@ export class ListAppointmentTypeComponent implements OnInit {
       })
     )
   }
+  changeFacilityVisibility(event) {
+    if (event === 'close') {
+      this.addVisibility = false;
+      this.find();
+    }
+
+  }
 }

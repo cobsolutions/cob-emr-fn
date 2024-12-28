@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AppointmentType } from '../../../../models/appointment.type';
@@ -14,6 +14,7 @@ export class ApdAppointmentTypeComponent implements OnInit {
   isValidForm: boolean = false;
   public appointmentType: AppointmentType = new AppointmentType();
   public color: string = '#2889e9';
+  @Output() changeVisibility = new EventEmitter<string>()
   constructor(private appointmentTypeService: AppointmentTypeService
     , private toastrService: ToastrService) { }
 
@@ -47,6 +48,7 @@ export class ApdAppointmentTypeComponent implements OnInit {
       this.appointmentTypeService.create(this.appointmentType).subscribe(result => {
         this.toastrService.success('Successfully added AppointmentType');
         this.isValidForm = false;
+        this.changeVisibility.emit('close');
       }, error => {
         this.toastrService.error('Error during creating AppointmentType');
       })
