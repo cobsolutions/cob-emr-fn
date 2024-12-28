@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AppointmentType } from '../../../../models/appointment.type';
+import { AppointmentTypeService } from '../../../../service/appointment.type/appointment-type.service';
 
 @Component({
   selector: 'apd-appointment-type',
@@ -12,7 +14,8 @@ export class ApdAppointmentTypeComponent implements OnInit {
   isValidForm: boolean = false;
   public appointmentType: AppointmentType = new AppointmentType();
   public color: string = '#2889e9';
-  constructor() { }
+  constructor(private appointmentTypeService: AppointmentTypeService
+    , private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -41,7 +44,12 @@ export class ApdAppointmentTypeComponent implements OnInit {
     if (this.appointmentTypeForm.valid) {
       this.fillModel()
       console.log(JSON.stringify(this.appointmentType))
-      this.isValidForm = false;
+      this.appointmentTypeService.create(this.appointmentType).subscribe(result => {
+        this.toastrService.success('Successfully added AppointmentType');
+        this.isValidForm = false;
+      }, error => {
+        this.toastrService.error('Error during creating AppointmentType');
+      })
     } else {
       this.isValidForm = true;
     }

@@ -57,7 +57,7 @@ export class AppointmentTypeListComponent implements OnInit {
   private find() {
     this.appointmentTypes = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypes(clinicId)),
+      switchMap(clinicId => this.appointmentTypeService.retrieveAppointmentTypes()),
       map((response: any) => response.records)
     )
   }

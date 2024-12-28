@@ -65,7 +65,7 @@ export class InitializeAppointmentService {
   }
   public findAppointmnetType() {
     return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => this.appointmnetTypeService.retrieveAppointmentTypes(clinicId)),
+      switchMap(clinicId => this.appointmnetTypeService.retrieveAppointmentTypes()),
       filter(therapists => therapists !== null),
       map((response: any) => {
         return response.records;

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { AppointmentType } from '../../../../models/appointment.type';
+import { AppointmentTypeService } from '../../../../service/appointment.type/appointment-type.service';
 
 @Component({
   selector: 'list-appointment-type',
@@ -7,14 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAppointmentTypeComponent implements OnInit {
   addVisibility: boolean = false;
-  constructor() { }
+  appointmentTypes: Observable<AppointmentType[]>
+  constructor(private appointmentTypeService: AppointmentTypeService) { }
 
   ngOnInit(): void {
+    this.find();
   }
   openCreateModal() {
     this.addVisibility = true
   }
   toggleAdd() {
     this.addVisibility = false;
+  }
+  private find() {
+    this.appointmentTypes = this.appointmentTypeService.retrieveAppointmentTypes().pipe(
+      map(result => {
+        return result.records;
+      })
+    )
   }
 }
