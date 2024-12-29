@@ -64,13 +64,10 @@ export class InitializeAppointmentService {
     )
   }
   public findAppointmnetType() {
-    return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => this.appointmnetTypeService.retrieveAppointmentTypes()),
-      filter(therapists => therapists !== null),
+    return this.appointmnetTypeService.retrieveAppointmentTypes().pipe(
       map((response: any) => {
         return response.records;
-      })
-    )
+      }));
   }
   public initializeAppointmentDate(appointment: Appointment, startDate?: Date) {
     if (startDate) {

@@ -115,8 +115,7 @@
                             [(ngModel)]="appointment.appointmentType" #apptype="ngModel" required>
                             <option [ngValue]="null" disabled selected>Selet Appointment Type</option>
                             <option *ngFor="let type of appointmentTypes$ | async
-                            " [value]="type.name" [ngStyle]="{'color': type.color}">
-                                {{type.name}}
+                            " [value]="type.name">
                             </option>
                         </select>
                         <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
