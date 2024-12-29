@@ -24,7 +24,8 @@ export class AppointmentEventConverterService {
       },
       color: {
         primary: appointment.appointmentTypeColor,
-        secondary: appointment.appointmentTypeColor
+        secondary: appointment.appointmentTypeColor,
+        secondaryText:appointment.appointmentFontTypeColor
       },
       meta: {
         'status': appointment.appointmentStatus,

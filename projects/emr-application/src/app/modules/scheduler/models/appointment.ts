@@ -11,7 +11,7 @@ export class Appointment {
     isAllUsers: boolean;
     patient: Patient;
     patientId: number;
-    calendarId:number
+    calendarId: number
     patientCase: PatientCase = null;
     patientCaseId: number;
     therapyUUID: string = null;
@@ -21,8 +21,10 @@ export class Appointment {
     title: string;
     note: string;
     repeatId: number;
+    appointmentTypeId?: number
     appointmentType: string | null = null;
     appointmentTypeColor: string | null = null;
+    appointmentFontTypeColor: string | null = null;
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
     appointmentRepeat: AppointmnetRepeat;

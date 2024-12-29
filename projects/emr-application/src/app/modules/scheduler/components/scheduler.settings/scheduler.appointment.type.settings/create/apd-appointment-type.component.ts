@@ -26,13 +26,14 @@ export class ApdAppointmentTypeComponent implements OnInit {
     this.appointmentTypeForm = new FormGroup({
       'appointment-name': new FormControl(null, [Validators.required]),
       'appointment-color': new FormControl(null, [Validators.required]),
-      'appointment-font-color': new FormControl(null, [Validators.required]),
+      'appointment-font-color': new FormControl(null),
     })
   }
   private fillModel() {
     this.appointmentType.name = this.appointmentTypeForm.controls['appointment-name'].value;
     this.appointmentType.color = this.appointmentTypeForm.controls['appointment-color'].value;
-    this.appointmentType.fontColor = this.appointmentTypeForm.controls['appointment-font-color'].value;
+    this.appointmentType.fontColor = this.appointmentTypeForm.controls['appointment-font-color'].value === null ? '#000000' :
+      this.appointmentTypeForm.controls['appointment-font-color'].value;
 
   }
   public onCahngeColor(event: string, data: any): void {
