@@ -8,6 +8,7 @@ import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.
 import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
 import { Patient } from '../../../patient/models/patient';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
+import { SchedulerSettings } from '../../model/shceduler.date.settings';
 import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
 import { AppointmnetRepeat } from '../../models/repeat/appointment.repeat';
@@ -16,6 +17,7 @@ import { CalendarServiceService } from '../../service/calendar/calendar-service.
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { InitializeAppointmentService } from '../../service/init.appintment/initialize-appointment.service';
 import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
+import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 
 export interface TreatingDoctor {
   doctorName,
@@ -32,6 +34,7 @@ export class AppointmentAddComponent implements OnInit {
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() startDate: Date;
   @Input() calendarId: number;
+  @Input() schedulerSettings: Observable<Settings>
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
@@ -51,9 +54,11 @@ export class AppointmentAddComponent implements OnInit {
     this.patient$ = this.initializeAppointmentService.findPatients()
     this.therapists$ = this.initializeAppointmentService.findTherapists();
     this.appointmentTypes$ = this.initializeAppointmentService.findAppointmnetType();
-    this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate)
-    this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-    this.getCalendars();
+    this.schedulerSettings.subscribe((result:any) => {
+      this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate , result.appointmentInterval)
+      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+      this.getCalendars();
+    })
   }
   changestartDate(startDate: Date) {
     this.appointmentService.appointmnetStartDate$.next(startDate)

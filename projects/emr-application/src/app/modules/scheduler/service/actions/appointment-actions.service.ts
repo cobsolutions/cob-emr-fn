@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
+import { Observable } from 'rxjs';
 import { AppointmentEditModalComponent } from '../../components/appintment.edit/modal/appointment-edit-modal.component';
 import { AppointmentActionModalComponent } from '../../components/appointment.actions/modal/appointment-action-modal.component';
 import { AddAppobntmentModalComponent } from '../../components/appointment.add/modal/add-appobntment-modal.component';
 import { AppointmentCancelNoshowModalComponent } from '../../components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentStatusModalComponent } from '../../components/appointment.status/modal/appointment-status-modal.component';
+import { Settings } from '../../components/scheduler.view/util/fetch.scheduler.settings';
+import { SchedulerSettings } from '../../model/shceduler.date.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +17,12 @@ export class AppointmentActionsService {
 
   constructor() { }
 
-  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number) {
+  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Observable<Settings>) {
+    console.log(schedulerSettings)
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
       disableClose: true,
       width: '60%',
-      data: { startDate: viewDate, calendarId: calendarId },
+      data: { startDate: viewDate, calendarId: calendarId, schedulerSettings: schedulerSettings },
       position: {
         top: '8%', // Adjust as needed
 

@@ -1,8 +1,11 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
+import { Observable } from 'rxjs';
+import { SchedulerSettings } from '../../../model/shceduler.date.settings';
 import { Appointment } from '../../../models/appointment';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
+import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 import { AppointmentAddComponent } from '../appointment-add.component';
 
 @Component({
@@ -12,7 +15,7 @@ import { AppointmentAddComponent } from '../appointment-add.component';
 })
 export class AddAppobntmentModalComponent implements OnInit {
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent, action: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent, schedulerSettings: Observable<Settings>, action: string }
     , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
@@ -23,10 +26,9 @@ export class AddAppobntmentModalComponent implements OnInit {
   }
   create() {
     this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
-      console.log(createdAppointmentId)
-      var appointmet :Appointment= this.appointmentAddComponent.appointment;
+      var appointmet: Appointment = this.appointmentAddComponent.appointment;
       appointmet.appointmentTypeColor = createdAppointmentId[0].appointmentTypeColor
-      appointmet.appointmentFontTypeColor=createdAppointmentId[0].appointmentFontTypeColor
+      appointmet.appointmentFontTypeColor = createdAppointmentId[0].appointmentFontTypeColor
       var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentAddComponent.appointment)
       event.id = createdAppointmentId
       this.data.event = event;
