@@ -82,16 +82,11 @@ export class AppointmentAddComponent implements OnInit {
     if (this.createAppointmentForm.valid) {
       this.notValidForm = false;
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
-      this.fillAppointmnetRepeat();
-      this.appointment.constructTitle();
       if (this.calendarId !== null)
         this.appointment.calendarId = this.calendarId;
-      return this.loggedInService.selectedClinic$.pipe(
-        switchMap(clinicId => {
-          this.appointment.clinicId = clinicId;
-          return this.appointmentService.createAppointment(this.appointment)
-        }),
-      )
+      this.fillAppointmnetRepeat();
+      this.appointment.constructTitle();
+      return this.appointmentService.createAppointment(this.appointment)
     } else {
       this.notValidForm = true;
       return EMPTY;

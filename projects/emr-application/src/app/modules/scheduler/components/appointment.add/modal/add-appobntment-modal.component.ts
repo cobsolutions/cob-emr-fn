@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
+import { Appointment } from '../../../models/appointment';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentAddComponent } from '../appointment-add.component';
 
@@ -22,6 +23,10 @@ export class AddAppobntmentModalComponent implements OnInit {
   }
   create() {
     this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
+      console.log(createdAppointmentId)
+      var appointmet :Appointment= this.appointmentAddComponent.appointment;
+      appointmet.appointmentTypeColor = createdAppointmentId[0].appointmentTypeColor
+      appointmet.appointmentFontTypeColor=createdAppointmentId[0].appointmentFontTypeColor
       var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentAddComponent.appointment)
       event.id = createdAppointmentId
       this.data.event = event;
