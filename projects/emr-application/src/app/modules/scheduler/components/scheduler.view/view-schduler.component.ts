@@ -10,12 +10,14 @@ import {
   isSameMonth
 } from 'date-fns';
 
-import { DAYS_OF_WEEK, WeekDay } from "calendar-utils";
+import { ActivatedRoute } from "@angular/router";
+import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { filter, map, Observable, Subject, switchMap } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
+import { SchedulerSettings } from "../../model/shceduler.date.settings";
 import { SchedulerConfiguration } from "../../models/configuration";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
@@ -24,11 +26,7 @@ import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
-import * as dayjs from "dayjs";
-import * as en from 'dayjs/locale/en';
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
-import { ActivatedRoute } from "@angular/router";
-import { SchedulerSettings } from "../../model/shceduler.date.settings";
 
 @Component({
   selector: 'app-view-schduler',
@@ -47,16 +45,14 @@ export class ViewSchdulerComponent implements OnInit {
   schedulerSettings$!: Observable<SchedulerSettings>
   events: CalendarEvent[] = [];
   monthEvents: CalendarEvent[] = [];
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
   refresh = new Subject<void>();
-
   cancelNoShow: string;
   activeDayIsOpen: boolean = false;
   isSchedulerSetting: boolean = false;
   schedulerSettings: Observable<Settings>;
+  selectedClinic: number;
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -73,6 +69,7 @@ export class ViewSchdulerComponent implements OnInit {
   ngOnInit(): void {
     this.schedulerSettings = this.getSchedulerSettings();
     this.getCalendars()
+    this.getSelectedClinic();
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
       weekStartsOn: undefined,
@@ -174,7 +171,7 @@ export class ViewSchdulerComponent implements OnInit {
   private AddAppointment(calendar: any, module?: string) {
     var calendarId: number = calendar !== null ? calendar.id : null;
     console.log(this.schedulerSettings$)
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId , this.schedulerSettings).subscribe(result => {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettings).subscribe(result => {
       if (result.action !== 'cancel') {
         if (module === 'month') {
           RefreshSchedulerEvents.refresh(this.monthEvents, result.event, AppointmentAction.ADD_APPOINTMENT);
@@ -197,7 +194,7 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   closeOpenMonthViewDay() {
-    this.getAppointments();
+    // this.getAppointments();
     this.activeDayIsOpen = false;
   }
   getCalendars() {
@@ -209,27 +206,14 @@ export class ViewSchdulerComponent implements OnInit {
   private getCalendarAppointments(calendarId: number): Observable<any> {
     var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
     var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
-    return this.loggedInService.selectedClinic$.pipe(
-      filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, calendarId)),
+    // return this.loggedInService.selectedClinic$.pipe(
+    //   filter((clinicId) => clinicId != null),
+    //   switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, calendarId)),
+    //   map((response: any) => response.records)
+    // )
+    return this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, this.selectedClinic, calendarId).pipe(
       map((response: any) => response.records)
     )
-  }
-  private getAppointments() {
-    var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
-    var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
-    this.loggedInService.selectedClinic$.pipe(
-      filter((clinicId) => clinicId != null),
-      switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, 152)),
-      map((response: any) => response.records)
-    ).subscribe((appointments: any[]) => {
-      this.events = [];
-      for (var i = 0; i < appointments.length; i++) {
-        var varevent: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointments[i])
-        this.events.push(varevent);
-      }
-      this.refresh.next()
-    })
   }
   getSchedulerConfiguration() {
     this.schedulerConfiguration$ = this.loggedInService.selectedClinic$.pipe(
@@ -242,11 +226,6 @@ export class ViewSchdulerComponent implements OnInit {
       })
     )
   }
-  userChanged({ event, newUser }) {
-    event.color = newUser.color;
-    event.meta.user = newUser;
-    this.events = [...this.events];
-  }
   onCheckboxChange(event: any, calendar: any): void {
     if (event.target.checked) {
       this.getCalendarAppointments(calendar.id)
@@ -257,6 +236,7 @@ export class ViewSchdulerComponent implements OnInit {
             calendar.events.push(varevent);
             this.monthEvents.push(varevent);
           }
+          console.log('##############')
           this.selectedCalendars.push(calendar);
           this.refresh.next();
         })
@@ -283,5 +263,13 @@ export class ViewSchdulerComponent implements OnInit {
         return FetchSchedulerSettings.setup(schedulerSetting);
       })
     )
+  }
+  private getSelectedClinic() {
+    this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null)
+    )
+      .subscribe(clinicId => {
+        this.selectedClinic = clinicId;
+      })
   }
 }

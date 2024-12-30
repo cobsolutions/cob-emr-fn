@@ -15,7 +15,6 @@ export class FetchSchedulerSettings {
         this.setDayHours(schedulerDateSettings.startDay, schedulerDateSettings.endDay);
         this.setTimeInterval(schedulerDateSettings.timeInterval)
         this.setAppointmentDuration(schedulerDateSettings.appointmentDuration)
-        console.log(JSON.stringify(this.schedulerSetting))
         return this.schedulerSetting;
     }
     private static setStartWeek(startWeek: string) {
