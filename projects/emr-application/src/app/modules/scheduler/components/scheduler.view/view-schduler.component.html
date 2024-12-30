@@ -54,7 +54,7 @@
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="monthEvents"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
     [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)" >
+    (eventTimesChanged)="eventTimesChanged($event)">
   </mwl-calendar-month-view>
   <!--Week Module-->
   <div *ngSwitchCase="CalendarView.Week">
@@ -70,14 +70,14 @@
           (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
           (hourSegmentClicked)="weekClicked($event.date , calendar)"
           [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" [dayStartHour]="(schedulerSettings| async)?.startOfDay"
-          [dayEndHour]="(schedulerSettings| async)?.endOfDay">
+          [dayEndHour]="(schedulerSettings| async)?.endOfDay" [hourSegments]='(schedulerSettings| async)?.timeInterval'>
         </mwl-calendar-week-view>
       </div>
     </div>
     <div *ngIf="selectedCalendars.length ===0 ">
       <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh"
         [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" [dayStartHour]="(schedulerSettings| async)?.startOfDay"
-        [dayEndHour]="(schedulerSettings| async)?.endOfDay">
+        [dayEndHour]="(schedulerSettings| async)?.endOfDay" [hourSegments]='(schedulerSettings| async)?.timeInterval'>
       </mwl-calendar-week-view>
     </div>
   </div>
@@ -86,6 +86,6 @@
     (eventTimesChanged)="eventTimesChanged($event)" (userChanged)="userChanged($event)"
     (eventClicked)="handleEvent('Clicked', $event.event)" (hourSegmentClicked)="dayClicked($event)"
     [calendars]="selectedCalendars" [dayStartHour]="(schedulerSettings| async)?.startOfDay"
-    [dayEndHour]="(schedulerSettings| async)?.endOfDay">
+    [dayEndHour]="(schedulerSettings| async)?.endOfDay" [hourSegments]='(schedulerSettings| async)?.timeInterval'>
   </mwl-day-view-scheduler>
 </div>
