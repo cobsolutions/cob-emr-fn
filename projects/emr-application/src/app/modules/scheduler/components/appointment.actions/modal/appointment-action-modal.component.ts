@@ -10,6 +10,7 @@ import { AppointmentEditModalComponent } from '../../appintment.edit/modal/appoi
 })
 export class AppointmentActionModalComponent implements OnInit {
   patientName: string
+  patientId: number;
   pateintCase: string
   appointmentStartDate: Date;
   appointmentEndDate: Date;
@@ -35,9 +36,14 @@ export class AppointmentActionModalComponent implements OnInit {
   private initAppointmentPatientInfo() {
     this.patientName = this.data.event.title.split(':')[0]
     this.pateintCase = this.data.event.title.split(':')[1]
+    this.patientId = this.data.event.meta.patient_id;
     this.appointmentStartDate = this.data.event.start
     this.appointmentEndDate = this.data.event.end;
     this.appointmentStatus = this.data.event.meta.status
     this.appointmentType = this.data.event.meta.type
+  }
+  open() {
+    console.log(this.data.event)
+    this.dialogRef.close(null);
   }
 }

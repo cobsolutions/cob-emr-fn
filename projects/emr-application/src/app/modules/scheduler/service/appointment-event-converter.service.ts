@@ -25,9 +25,10 @@ export class AppointmentEventConverterService {
       color: {
         primary: appointment.appointmentTypeColor,
         secondary: appointment.appointmentTypeColor,
-        secondaryText:appointment.appointmentFontTypeColor
+        secondaryText: appointment.appointmentFontTypeColor
       },
       meta: {
+        'patient_id': appointment.patientId,
         'status': appointment.appointmentStatus,
         'type': appointment.appointmentType,
       }
