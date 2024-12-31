@@ -206,13 +206,8 @@ export class ViewSchdulerComponent implements OnInit {
     )
   }
   private getCalendarAppointments(calendarId: number): Observable<any> {
-    var startOfMonth = moment(this.viewDate).startOf('month').unix() * 1000
-    var endOfMonth = moment(this.viewDate).endOf('month').unix() * 1000;
-    // return this.loggedInService.selectedClinic$.pipe(
-    //   filter((clinicId) => clinicId != null),
-    //   switchMap(clinicId => this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, clinicId, calendarId)),
-    //   map((response: any) => response.records)
-    // )
+    var startOfMonth = moment(this.viewDate).startOf(this.view).unix() * 1000
+    var endOfMonth = moment(this.viewDate).endOf(this.view).unix() * 1000;
     return this.appointmentService.retrieveAppointments(startOfMonth, endOfMonth, this.selectedClinic, calendarId).pipe(
       map((response: any) => response.records)
     )
