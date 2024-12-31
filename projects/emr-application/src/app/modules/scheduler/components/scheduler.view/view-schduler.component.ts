@@ -96,8 +96,10 @@ export class ViewSchdulerComponent implements OnInit {
     event,
     newStart,
     newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
+  }: CalendarEventTimesChangedEvent, calendarId: number): void {
+    console.log(calendarId)
+    var selectedCalendar: any = this.selectedCalendars.find(calendar => calendar.id === calendarId);
+    selectedCalendar.events = selectedCalendar.events.map((iEvent) => {
       if (iEvent === event) {
         return {
           ...event,
@@ -115,7 +117,7 @@ export class ViewSchdulerComponent implements OnInit {
       }),
       switchMap(appointmet => this.appointmentService.createAppointment(appointmet))
     ).subscribe(() => {
-      this.toastr.success('Appointment Dates updated Successfully');
+      this.toastr.success('Appointment  updated Successfully');
     })
   }
 
@@ -236,7 +238,6 @@ export class ViewSchdulerComponent implements OnInit {
             calendar.events.push(varevent);
             this.monthEvents.push(varevent);
           }
-          console.log('##############')
           this.selectedCalendars.push(calendar);
           this.refresh.next();
         })
