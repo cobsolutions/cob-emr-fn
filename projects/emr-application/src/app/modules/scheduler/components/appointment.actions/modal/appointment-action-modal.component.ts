@@ -23,4 +23,7 @@ export class AppointmentActionModalComponent implements OnInit {
     this.data.action = 'status'
     this.dialogRef.close(this.data);
   }
+  public close(){
+    this.dialogRef.close(null);
+  }
 }

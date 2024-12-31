@@ -123,6 +123,8 @@ export class ViewSchdulerComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.appointmentActionsService.selectAppointmentActions(this.dialog, event).subscribe(result => {
+      if (result === null)
+        return;
       if (result.action)
         switch (result.action) {
           case 'edit':
