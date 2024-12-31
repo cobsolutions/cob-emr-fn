@@ -1,13 +1,27 @@
 <h2 mat-dialog-title>Appointment Actions</h2>
 <mat-dialog-content class="mat-typography">
-    <app-appointment-actions [event]="data.event"></app-appointment-actions>
+    <c-container fluid>
+        <div class="mb-2">
+            <c-row>
+                <ul cListGroup flush>
+                    <li cListGroupItem><strong>Patient-Name</strong> : {{patientName}} - <button cButton>Open</button></li>
+                    <li cListGroupItem><strong>Patient-Case</strong> : {{pateintCase}} </li>
+                    <li cListGroupItem><strong>StartDate</strong> : {{appointmentStartDate | date: 'MM/dd/yyyy hh:mm'}}</li>
+                    <li cListGroupItem><strong>EndDate</strong> : {{appointmentEndDate | date: 'MM/dd/yyyy hh:mm'}} </li>
+                    <li cListGroupItem><strong>Appointmet Status</strong> : {{appointmentStatus}}</li>
+                    <li cListGroupItem><strong>Appointmet Type</strong> : {{appointmentType}}</li>
+                </ul>
+            </c-row>
+        </div>
+    
+    </c-container>
 </mat-dialog-content>
 <c-row class="text-center">
     <c-button-group role="group">
         <button id="btnSearch" class="btn btn-primary btn-sm " Style="width: 100px;"
             (click)="editAppointment()">Edit</button>
         <button id="btnClear" class="btn btn-info btn-sm " Style="width: 100px;"
-            (click)="appointmentStatus()">Status</button>
+            (click)="openAppointmentStatus()">Status</button>
         <button id="btnClear" class="btn btn-danger btn-sm " Style="width: 100px;">Delete</button>
         <button id="btnClear" class="btn btn-warning btn-sm " Style="width: 100px;"(click)="close()">Close</button>
     </c-button-group>

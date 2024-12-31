@@ -12,7 +12,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EmrCommonModule } from '../common/emr-common.module';
 import { AppointmentEditComponent } from './components/appintment.edit/appointment-edit.component';
 import { AppointmentEditModalComponent } from './components/appintment.edit/modal/appointment-edit-modal.component';
-import { AppointmentActionsComponent } from './components/appointment.actions/appointment-actions.component';
 import { AppointmentActionModalComponent } from './components/appointment.actions/modal/appointment-action-modal.component';
 import { AppointmentAddComponent } from './components/appointment.add/appointment-add.component';
 import { AddAppobntmentModalComponent } from './components/appointment.add/modal/add-appobntment-modal.component';
@@ -37,13 +36,14 @@ import { SchedulerDateSettingsComponent } from './components/scheduler.settings/
 import { SchedulerAppointmentSettingsComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/scheduler.appointment.settings.component';
 import { ListAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/list/list-appointment-type.component';
 import { ApdAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/create/apd-appointment-type.component';
+import { PatientChartModalComponent } from './components/patient.chart.modal/patient-chart-modal.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
         AppointmentAddComponent,
         AppointmentCancelNoshowComponent,
         AppointmentConfirmComponent,
-        AppointmentActionsComponent,
+
         AddAppobntmentModalComponent,
         AppointmentEditModalComponent,
         AppointmentEditComponent,
@@ -65,6 +65,7 @@ import { ApdAppointmentTypeComponent } from './components/scheduler.settings/sch
         SchedulerAppointmentSettingsComponent,
         ListAppointmentTypeComponent,
         ApdAppointmentTypeComponent,
+        PatientChartModalComponent,
     ],
     imports: [
         CommonModule,
