@@ -4,9 +4,19 @@
         <div class="mb-2">
             <c-row>
                 <ul cListGroup flush>
-                    <li cListGroupItem><strong>Patient-Name</strong> : <a
-                            routerLink="emr/patient/chart/patientId/{{patientId}}" class="link-primary">{{patientName}}
-                        </a></li>
+                    <li cListGroupItem><strong>Patient-Name</strong> :
+                        <div [ngSwitch]="(patientChartAccessibilityModelResponse | async)?.patientChartAccessibility" class="inline-div">
+                            <a *ngSwitchCase="'AccessWithoutPrompt'" class="link-primary"
+                                (mwlClick)="redirectToPatientChart()">{{patientName}}
+                            </a>
+                            <a *ngSwitchCase="'AccessWithPrompt'" class="link-primary"
+                                (mwlClick)="redirectWithPrompting()">{{patientName}}
+                            </a>
+                            <span *ngSwitchCase="'NoAccess'">
+                                {{patientName}}
+                            </span>
+                        </div>
+                    </li>
                     <li cListGroupItem><strong>Patient-Case</strong> : {{pateintCase}} </li>
                     <li cListGroupItem><strong>StartDate</strong> : {{appointmentStartDate | date: 'MM/dd/yyyy hh:mm'}}
                     </li>

@@ -1,0 +1,9 @@
+li {
+    display: flex;
+    align-items: center; /* Align items vertically if needed */
+  }
+  
+  .inline-div {
+    display: inline-block; /* Makes the div render on the same line */
+    margin-left: 8px; /* Add some spacing if needed */
+  }
