@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { filter } from 'rxjs';
 import { Clinic } from '../../../modules/patient/models/clinic';
 import { LoggedInUser } from '../../../modules/security/model/loggedin.user';
 
@@ -20,7 +21,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   userName: string | undefined;
   loggedIn: string
   @Input() sidebarId: string = "sidebar1";
-
+  selectedValue: string | null = null;
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
@@ -35,12 +36,18 @@ export class DefaultHeaderComponent extends HeaderComponent {
     super();
   }
   ngOnInit(): void {
+    this.loggedInService.changeSelectedClinic$.pipe(
+      filter(id => id !== null)
+    ).subscribe((id: any) => {
+      this.selectedValue = id;
+    })
     this.ksAuthService.isLoggedIn()
       .then((loggedIn) => {
         if (loggedIn) {
           this.loggedInService.load().subscribe((result: LoggedInUser) => {
             this.userName = result.userName
             this.clinics = result.clinics
+            this.selectedValue = result.clinics[0].id
             this.loggedIn = this.capitalizeFirstLetter(result.lastName) + '' + this.capitalizeFirstLetter(result.firstName)
           })
         }

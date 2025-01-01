@@ -87,10 +87,10 @@ export class AppointmentActionsService {
     });
     return dialogRef.afterClosed();
   }
-  public promptPatientClinics(dialog: MatDialog, clinics: Clinic[]) {
+  public promptPatientClinics(dialog: MatDialog, clinics: Clinic[], patientId: number) {
     const dialogRef = dialog.open(PropmtPatientClinicsComponent, {
       disableClose: true,
-      data: { clinics: clinics },
+      data: { clinics: clinics, patient: patientId },
       width: '30%',
       position: {
         top: '8%',

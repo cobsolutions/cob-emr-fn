@@ -62,7 +62,7 @@ export class AppointmentActionModalComponent implements OnInit {
   }
   redirectWithPrompting(clinics: Clinic[]) {
     this.dialogRef.close(null);
-    this.appointmentActionsService.promptPatientClinics(this.dialog,clinics)
+    this.appointmentActionsService.promptPatientClinics(this.dialog,clinics,this.patientId)
   }
   private checkPatientChartAccessibility() {
     var sources: any = [

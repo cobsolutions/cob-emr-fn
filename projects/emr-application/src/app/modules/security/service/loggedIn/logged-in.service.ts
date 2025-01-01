@@ -15,6 +15,7 @@ export class LoggedInService {
   clinics: Observable<Clinic[]>;
   private userUrl = environment.baseURL
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public changeSelectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   constructor(private keycloakService: KeycloakService, private httpClient: HttpClient) { }
   public loadWithConfiguration(params: IApiParams) {
     return this.load().pipe(
