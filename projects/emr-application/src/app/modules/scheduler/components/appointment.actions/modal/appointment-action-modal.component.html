@@ -11,6 +11,7 @@
                             </a>
                             <a *ngSwitchCase="'AccessWithPrompt'" class="link-primary"
                                 (mwlClick)="redirectWithPrompting()">{{patientName}}
+                                <propmt-patient-clinics [clinics]="(patientChartAccessibilityModelResponse | async)?.promptedClinics"></propmt-patient-clinics>
                             </a>
                             <span *ngSwitchCase="'NoAccess'">
                                 {{patientName}}

@@ -37,6 +37,7 @@ import { SchedulerAppointmentSettingsComponent } from './components/scheduler.se
 import { ListAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/list/list-appointment-type.component';
 import { ApdAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/create/apd-appointment-type.component';
 import { PatientChartModalComponent } from './components/patient.chart.modal/patient-chart-modal.component';
+import { PropmtPatientClinicsComponent } from './components/appointment.actions/modal/prompting.patient.clinic/propmt-patient-clinics.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -66,6 +67,7 @@ import { PatientChartModalComponent } from './components/patient.chart.modal/pat
         ListAppointmentTypeComponent,
         ApdAppointmentTypeComponent,
         PatientChartModalComponent,
+        PropmtPatientClinicsComponent,
     ],
     imports: [
         CommonModule,

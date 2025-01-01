@@ -1,0 +1,6 @@
+<div *ngFor="let clinic of clinics" class="clinic-item">
+    <span (click)="handleClinicSelection(clinic.id)" class="clinic-name">
+      {{ clinic.name }}
+    </span>
+  </div>
+  
