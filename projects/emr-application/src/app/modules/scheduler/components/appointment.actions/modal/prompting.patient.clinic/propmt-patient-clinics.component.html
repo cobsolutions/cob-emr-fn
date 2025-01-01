@@ -1,6 +1,15 @@
-<div *ngFor="let clinic of clinics" class="clinic-item">
+<h2 mat-dialog-title>Select clinic</h2>
+<hr/>
+<mat-dialog-content class="mat-typography">
+  <h3>Please switch for the following clinics as patient assign to :</h3>
+  <div *ngFor="let clinic of clinics" class="clinic-item">
     <span (click)="handleClinicSelection(clinic.id)" class="clinic-name">
       {{ clinic.name }}
     </span>
   </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button cButton (click)="cancel()" size="sm" variant="outline">Cancel</button>
+</mat-dialog-actions>
+
   

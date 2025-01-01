@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CalendarEvent } from 'calendar-utils';
-import { combineLatest, forkJoin, map, Observable, switchMap } from 'rxjs';
+import { combineLatest, map, Observable, switchMap } from 'rxjs';
+import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
-import { PatientChartAccessibilityModelRequest } from '../../../model/patient.chart.accessibility.model.request';
 import { PatientChartAccessibilityModelResponse } from '../../../model/patient.chart.accessibility.model.response';
+import { AppointmentActionsService } from '../../../service/actions/appointment-actions.service';
 import { PatientChartCheckerService } from '../../../service/patient.chart.checker/patient-chart-checker.service';
 import { AppointmentEditModalComponent } from '../../appintment.edit/modal/appointment-edit-modal.component';
 
@@ -22,12 +23,14 @@ export class AppointmentActionModalComponent implements OnInit {
   appointmentEndDate: Date;
   appointmentType: string;
   appointmentStatus: any;
-  patientChartAccessibilityModelResponse: Observable<PatientChartAccessibilityModelResponse>
+  patientChartAccessibilityModelResponse: PatientChartAccessibilityModelResponse
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private loggedInService: LoggedInService
     , private patientChartCheckerService: PatientChartCheckerService
-    , private router: Router) { }
+    , private router: Router
+    , private dialog: MatDialog
+    , private appointmentActionsService: AppointmentActionsService) { }
 
   ngOnInit(): void {
     this.initAppointmentPatientInfo();
@@ -57,15 +60,16 @@ export class AppointmentActionModalComponent implements OnInit {
     this.router.navigate(['emr/patient/chart/patientId/' + this.patientId]);
     this.dialogRef.close(null);
   }
-  redirectWithPrompting() {
+  redirectWithPrompting(clinics: Clinic[]) {
     this.dialogRef.close(null);
+    this.appointmentActionsService.promptPatientClinics(this.dialog,clinics)
   }
   private checkPatientChartAccessibility() {
     var sources: any = [
       this.loggedInService.selectedClinic$,
       this.loggedInService.load()
     ]
-    this.patientChartAccessibilityModelResponse = combineLatest(sources).pipe(
+    combineLatest(sources).pipe(
       map(result => {
         {
           return {
@@ -81,6 +85,8 @@ export class AppointmentActionModalComponent implements OnInit {
         return this.patientChartCheckerService.check(model)
       }
       )
-    )
+    ).subscribe((result:any)=>{
+      this.patientChartAccessibilityModelResponse = result
+    })
   }
 }

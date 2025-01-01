@@ -5,13 +5,13 @@
             <c-row>
                 <ul cListGroup flush>
                     <li cListGroupItem><strong>Patient-Name</strong> :
-                        <div [ngSwitch]="(patientChartAccessibilityModelResponse | async)?.patientChartAccessibility" class="inline-div">
+                        <div [ngSwitch]="patientChartAccessibilityModelResponse?.patientChartAccessibility"
+                            class="inline-div" *ngIf="patientChartAccessibilityModelResponse">
                             <a *ngSwitchCase="'AccessWithoutPrompt'" class="link-primary"
                                 (mwlClick)="redirectToPatientChart()">{{patientName}}
                             </a>
                             <a *ngSwitchCase="'AccessWithPrompt'" class="link-primary"
-                                (mwlClick)="redirectWithPrompting()">{{patientName}}
-                                <propmt-patient-clinics [clinics]="(patientChartAccessibilityModelResponse | async)?.promptedClinics"></propmt-patient-clinics>
+                                (mwlClick)="redirectWithPrompting(patientChartAccessibilityModelResponse.promptedClinics)">{{patientName}}
                             </a>
                             <span *ngSwitchCase="'NoAccess'">
                                 {{patientName}}

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
 import { Observable } from 'rxjs';
+import { Clinic } from '../../../patient/models/clinic';
 import { AppointmentEditModalComponent } from '../../components/appintment.edit/modal/appointment-edit-modal.component';
 import { AppointmentActionModalComponent } from '../../components/appointment.actions/modal/appointment-action-modal.component';
+import { PropmtPatientClinicsComponent } from '../../components/appointment.actions/modal/prompting.patient.clinic/propmt-patient-clinics.component';
 import { AddAppobntmentModalComponent } from '../../components/appointment.add/modal/add-appobntment-modal.component';
 import { AppointmentCancelNoshowModalComponent } from '../../components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentStatusModalComponent } from '../../components/appointment.status/modal/appointment-status-modal.component';
 import { Settings } from '../../components/scheduler.view/util/fetch.scheduler.settings';
-import { SchedulerSettings } from '../../model/shceduler.date.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,17 @@ export class AppointmentActionsService {
     const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
       disableClose: true,
       data: { event: event, action: 'cancel' },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptPatientClinics(dialog: MatDialog, clinics: Clinic[]) {
+    const dialogRef = dialog.open(PropmtPatientClinicsComponent, {
+      disableClose: true,
+      data: { clinics: clinics },
       width: '30%',
       position: {
         top: '8%',
