@@ -6,6 +6,7 @@ import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
 import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.repetition';
 import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
+import { Clinic } from '../../../patient/models/clinic';
 import { Patient } from '../../../patient/models/patient';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { SchedulerSettings } from '../../model/shceduler.date.settings';
@@ -38,6 +39,7 @@ export class AppointmentAddComponent implements OnInit {
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
+  patientClinics$!: Observable<Clinic[]>;
   appointmentTypes$: Observable<AppointmentType[]>;
   appointment: Appointment = new Appointment();
   appointmentType = SchedulerType;
@@ -54,8 +56,8 @@ export class AppointmentAddComponent implements OnInit {
     this.patient$ = this.initializeAppointmentService.findPatients()
     this.therapists$ = this.initializeAppointmentService.findTherapists();
     this.appointmentTypes$ = this.initializeAppointmentService.findAppointmnetType();
-    this.schedulerSettings.subscribe((result:any) => {
-      this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate , result.appointmentInterval)
+    this.schedulerSettings.subscribe((result: any) => {
+      this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, result.appointmentInterval)
       this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
       this.getCalendars();
     })

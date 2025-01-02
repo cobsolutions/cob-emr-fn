@@ -31,11 +31,9 @@ export class InitializeAppointmentService {
         map(response => {
           return response;
         }))
-      console.log('no cahced');
       return this.patient$
     }
     else {
-      console.log('cahced');
       return this.patient$;
     }
   }
