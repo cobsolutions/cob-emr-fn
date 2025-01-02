@@ -17,7 +17,15 @@
                                 {{tdContent| date:'MMM d, y, h:mm a'}}
                             </ng-container>
                             <ng-container *ngSwitchCase="'endDate'">
-                                {{tdContent| date:'MMM d, y, h:mm a'}}
+                                <c-row>
+                                    <c-col xs="10">{{tdContent| date:'MMM d, y, h:mm a'}}</c-col>
+                                    <c-col xs="2">
+                                        <div *ngIf="(selectedClinic | async) !== item.clinicModel.id">
+                                            <c-badge color="info">{{item.clinicModel.name}}</c-badge>
+                                        </div>
+                                    </c-col>
+                                </c-row>
+
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 {{tdContent}}

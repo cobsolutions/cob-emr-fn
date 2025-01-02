@@ -1,4 +1,5 @@
 import { PatientCase } from '../../patient/models/case/patient.case';
+import { Clinic } from '../../patient/models/clinic';
 import { Patient } from '../../patient/models/patient';
 import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reason';
 import { AppointmentDate } from './appointment.date';
@@ -30,6 +31,7 @@ export class Appointment {
     appointmentRepeat: AppointmnetRepeat;
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
     appointmentRepetitionType?: string = "Single"
+    clinicModel: Clinic;
     public constructTitle() {
         this.title = this.patient.fullName + ':' + this.patientCase.title
     }

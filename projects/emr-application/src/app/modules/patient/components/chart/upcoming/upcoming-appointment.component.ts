@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { filter, map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointments/appointment';
 import { UpcomingAppointmentService } from '../../../services/appointment/upcoming-appointment.service';
 import { PateintCaseService } from '../../../services/patient/cases/pateint-case.service';
@@ -17,14 +18,16 @@ export class UpcomingAppointmentComponent extends ListTemplate implements OnInit
   @Input() caseId: number = 0
   appointments$!: Observable<Appointment[]>;
   columns: (string | IColumn)[];
-
+  selectedClinic: Observable<number>
   constructor(
     private upcomingAppointmentService: UpcomingAppointmentService
     , private pateintCaseService: PateintCaseService
+    ,private loggedInService: LoggedInService
   ) { super(); }
 
   ngOnInit(): void {
     this.initListComponent();
+    this.getSelectedClinic();
     this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate']);
     this.getAllAppointments();
     this.pateintCaseService.selectedCase$.pipe(
@@ -90,5 +93,10 @@ export class UpcomingAppointmentComponent extends ListTemplate implements OnInit
         return response.records;
       })
     );
+  }
+  private getSelectedClinic() {
+    this.selectedClinic = this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null)
+    )
   }
 }
