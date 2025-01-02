@@ -22,7 +22,10 @@ export class PropmtPatientClinicsComponent implements OnInit {
   handleClinicSelection(clinicId: string): void {
     this.loggedInService.selectedClinic$.next(Number(clinicId))
     this.loggedInService.changeSelectedClinic$.next(Number(clinicId))
-    this.router.navigate(['emr/patient/chart/patientId/' + this.data.patient]);
+    this.router.navigate([]).then((result) => {
+      window.open('emr/patient/chart/patientId/' + this.data.patient, '_blank');
+    });
+    
     this.dialogRef.close(null);
   }
   cancel() {
