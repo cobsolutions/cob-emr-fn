@@ -26,7 +26,7 @@
                                 <div [innerHTML]="notFound"></div>
                             </ng-template>
                         </div>
-                        
+
                         <small
                             *ngIf="notValidForm   && (patientcase.errors) || (patientcase.invalid && (patientcase.dirty || patientcase.touched))"
                             class="form-text text-danger">
@@ -62,7 +62,8 @@
                                 [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
                                 [(ngModel)]="appointment.clinicId" #patientclinic="ngModel" required>
                                 <option [ngValue]="null" disabled selected>Select Clinic</option>
-                                <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id">
+                                <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id"
+                                    [selected]="appointment.clinicId">
                                     {{clinic.name}}
                                 </option>
                             </select>
