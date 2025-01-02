@@ -60,7 +60,7 @@
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
                                 name="patientclinic"
                                 [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
-                                [(ngModel)]="appointment.therapyUUID" #patientclinic="ngModel" required>
+                                [(ngModel)]="appointment.clinicId" #patientclinic="ngModel" required>
                                 <option [ngValue]="null" disabled selected>Select Clinic</option>
                                 <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id">
                                     {{clinic.name}}
