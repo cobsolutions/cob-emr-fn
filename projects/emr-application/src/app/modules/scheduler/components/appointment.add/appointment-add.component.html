@@ -52,21 +52,27 @@
                     <c-card-header><strong>Clinics</strong></c-card-header>
                     <c-card-body>
                         <div class="mb-1">
-                            <small
-                                *ngIf="notValidForm   && (patientclinic.errors) || (patientclinic.invalid && (patientclinic.dirty || patientclinic.touched))"
-                                class="form-text text-danger">
-                                Clinic is required
-                            </small>
-                            <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
-                                name="patientclinic"
-                                [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
-                                [(ngModel)]="appointment.clinicId" #patientclinic="ngModel" required>
-                                <option [ngValue]="null" disabled selected>Select Clinic</option>
-                                <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id"
-                                    [selected]="appointment.clinicId">
-                                    {{clinic.name}}
-                                </option>
-                            </select>
+                            <div *ngIf="appointment.patient?.clinicModels?.length ===1">
+                                <input cFormControl [value]="appointment.patient?.clinicModels[0].name"
+                                    [(ngModel)]="appointment.clinicId" sizing="sm" disabled="true">
+                            </div>
+                            <div *ngIf="appointment.patient?.clinicModels?.length >1">
+                                <small
+                                    *ngIf="notValidForm   && (patientclinic.errors) || (patientclinic.invalid && (patientclinic.dirty || patientclinic.touched))"
+                                    class="form-text text-danger">
+                                    Clinic is required
+                                </small>
+                                <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
+                                    name="patientclinic"
+                                    [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
+                                    [(ngModel)]="appointment.clinicId" #patientclinic="ngModel" required>
+                                    <option [ngValue]="null" disabled selected>Select Clinic</option>
+                                    <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id"
+                                        [selected]="appointment.clinicId">
+                                        {{clinic.name}}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </c-card-body>
                 </c-card>
