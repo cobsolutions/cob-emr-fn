@@ -57,12 +57,14 @@ export class AppointmentActionModalComponent implements OnInit {
     this.appointmentType = this.data.event.meta.type
   }
   redirectToPatientChart() {
-    this.router.navigate(['emr/patient/chart/patientId/' + this.patientId]);
+    this.router.navigate([]).then((result) => {
+      window.open('emr/patient/chart/patientId/' + this.patientId, '_blank');
+    });
     this.dialogRef.close(null);
   }
   redirectWithPrompting(clinics: Clinic[]) {
     this.dialogRef.close(null);
-    this.appointmentActionsService.promptPatientClinics(this.dialog,clinics,this.patientId)
+    this.appointmentActionsService.promptPatientClinics(this.dialog, clinics, this.patientId)
   }
   private checkPatientChartAccessibility() {
     var sources: any = [
@@ -85,7 +87,7 @@ export class AppointmentActionModalComponent implements OnInit {
         return this.patientChartCheckerService.check(model)
       }
       )
-    ).subscribe((result:any)=>{
+    ).subscribe((result: any) => {
       this.patientChartAccessibilityModelResponse = result
     })
   }
