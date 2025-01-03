@@ -96,7 +96,8 @@ export class UpcomingAppointmentComponent extends ListTemplate implements OnInit
   }
   private getSelectedClinic() {
     this.selectedClinic = this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null)
+      filter(clinicId => clinicId !== null),
+      map(id => { return Number(id) })
     )
   }
 }
