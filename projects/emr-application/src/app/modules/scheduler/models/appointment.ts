@@ -34,5 +34,6 @@ export class Appointment {
     clinicModel: Clinic;
     public constructTitle() {
         this.title = this.patient.fullName + ':' + this.patientCase.title
+            + (this.note !== null ? "<br/>" + this.note : "")
     }
 }
