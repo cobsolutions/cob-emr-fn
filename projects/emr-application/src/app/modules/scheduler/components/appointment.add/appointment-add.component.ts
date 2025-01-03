@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 import { EMPTY, filter, Observable, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
@@ -37,6 +38,7 @@ export class AppointmentAddComponent implements OnInit {
   @Input() calendarId: number;
   @Input() schedulerSettings: Observable<Settings>
   notValidForm: boolean = false;
+  validDate: boolean = true
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
   patientClinics$!: Observable<Clinic[]>;
@@ -88,7 +90,8 @@ export class AppointmentAddComponent implements OnInit {
     return a?.id === b?.id;
   }
   public createAppointment() {
-    if (this.createAppointmentForm.valid) {
+    this.isValidateAppointmentDate()
+    if (this.createAppointmentForm.valid && this.validDate) {
       this.notValidForm = false;
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       if (this.calendarId !== null)
@@ -151,11 +154,18 @@ export class AppointmentAddComponent implements OnInit {
       switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
     )
   }
-  private getSelectedClinic(){
+  private getSelectedClinic() {
     this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
-    ).subscribe(clinicId=>{
+    ).subscribe(clinicId => {
       this.appointment.clinicId = clinicId
     })
+  }
+  private isValidateAppointmentDate() {
+    console.log(this.appointment.appointmentDate.startDate)
+    console.log(this.appointment.appointmentDate.endDate)
+    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
+      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
+        moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
   }
 }

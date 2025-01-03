@@ -1,4 +1,5 @@
 <ngx-spinner></ngx-spinner>
+
 <c-container fluid>
     <form cForm #createAppointmentForm="ngForm">
         <c-row class="justify-content-center">
@@ -84,6 +85,11 @@
                 <c-card class="mb-3 ustify-content-center">
                     <c-card-header><strong>Appointment Date</strong></c-card-header>
                     <c-card-body>
+                        <div *ngIf="!validDate">
+                            <small class="form-text text-danger">
+                                Appointment start time cant greater than appointment end time
+                            </small>
+                        </div>
                         <div class="mb-1">
                             <c-row>
                                 <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate"
