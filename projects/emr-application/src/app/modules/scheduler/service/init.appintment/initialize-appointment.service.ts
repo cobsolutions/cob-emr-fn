@@ -45,10 +45,8 @@ export class InitializeAppointmentService {
           return response;
         })
       )
-      console.log('not cached');
       return this.therapists$;
     } else {
-      console.log('not cached');
       return this.therapists$
     }
   }

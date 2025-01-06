@@ -19,7 +19,7 @@ export class FullAppointmentComponent implements OnInit {
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
-  therapists$: Observable<any>
+  therapists: any
   calendars$: Observable<any>
   validDate: boolean = true
   @Input() startDate: Date;
@@ -32,11 +32,15 @@ export class FullAppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.initModel()
     this.getSelectedClinic();
-    this.therapists$ = this.initializeAppointmentService.findAllTherapists();
     this.schedulerSettings.subscribe((result: any) => {
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, result.appointmentInterval)
       this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
       this.getCalendars();
+    })
+    this.appointmentService.createAppointmentEvent$.pipe(
+      filter(event => event !== null && event === 'full')
+    ).subscribe(() => {
+      console.log('############# - block')
     })
   }
   onCaseSelected(selectedPatient: any) {
@@ -45,6 +49,11 @@ export class FullAppointmentComponent implements OnInit {
   private initModel() {
     this.appointment.patient = this.patientsList[0]
     this.appointment.patientCase = this.appointment.patient.cases[0]
+    this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
+      console.log(JSON.stringify(therapists))
+      this.therapists = therapists;
+      this.appointment.therapyUUID = this.therapists[0].uuid;
+    })
   }
   compareFn = this._compareFn.bind(this);
   _compareFn(a, b) {

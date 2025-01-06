@@ -10,6 +10,7 @@ import { AppointmentType } from '../models/appointment.type';
   providedIn: 'root'
 })
 export class AppointmentService {
+  public createAppointmentEvent$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
   public appointmnetStartDate$: BehaviorSubject<Date | null> = new BehaviorSubject<Date | null>(null);

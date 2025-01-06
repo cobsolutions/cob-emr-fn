@@ -1,8 +1,6 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
-import * as moment from 'moment';
-import { debounceTime, EMPTY, filter, finalize, Observable, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, Observable, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
 import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.repetition';
@@ -10,22 +8,12 @@ import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
 import { Clinic } from '../../../patient/models/clinic';
 import { Patient } from '../../../patient/models/patient';
 import { PatientFinderService } from '../../../patient/services/patient/patient-finder.service';
-import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
-import { SchedulerSettings } from '../../model/shceduler.date.settings';
 import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
-import { AppointmnetRepeat } from '../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../service/appointment.service';
-import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
-import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
-import { InitializeAppointmentService } from '../../service/init.appintment/initialize-appointment.service';
 import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 
-export interface TreatingDoctor {
-  doctorName,
-  uuid: string;
-}
 
 @Component({
   selector: 'app-appointment-add',
@@ -54,7 +42,8 @@ export class AppointmentAddComponent implements OnInit {
   endBoundary: Date;
   calendars$!: Observable<Calendar[]>;
   selectedClinic?: number;
-  constructor(private patientFinderService: PatientFinderService) { }
+  constructor(private patientFinderService: PatientFinderService
+    , private appointmentService: AppointmentService) { }
   ngOnInit() {
     this.findPatientByNameAutoComplete();
 
@@ -96,8 +85,13 @@ export class AppointmentAddComponent implements OnInit {
           this.isLoading = false
         });
   }
-  public createAppointment():Observable<any> {
-    return EMPTY;
+  // public createAppointment(): Observable<any> {
+  //   return EMPTY;
+  // }
+  public createAppointment() {
+    if (this.filteredPatients.length > 0)
+      this.appointmentService.createAppointmentEvent$.next('full')
+    if (this.filteredPatients.length === 0)
+      this.appointmentService.createAppointmentEvent$.next('block')
   }
-  
 }

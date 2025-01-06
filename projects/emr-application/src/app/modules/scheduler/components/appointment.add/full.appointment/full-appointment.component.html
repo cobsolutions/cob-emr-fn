@@ -90,7 +90,7 @@
         </c-col>
     </c-row>
     <!--Therapists-->
-    <c-row>
+    <c-row *ngIf="therapists">
         <c-col>
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Therapist</strong></c-card-header>
@@ -99,8 +99,8 @@
                         [ngClass]="{'is-invalid': appTherapy.invalid && (appTherapy.dirty || appTherapy.touched)}"
                         [(ngModel)]="appointment.therapyUUID" #appTherapy="ngModel" required>
                         <option [ngValue]="null" disabled selected>Select Therapy</option>
-                        <option *ngFor="let therapy of this.therapists$ | async" [value]="therapy.uuid">
-                            {{therapy.accountName}}
+                        <option *ngFor="let therapy of this.therapists" [value]="therapy.uuid">
+                            {{therapy.lastName +', ' + therapy.firstName}}
                         </option>
                     </select>
                 </c-card-body>
