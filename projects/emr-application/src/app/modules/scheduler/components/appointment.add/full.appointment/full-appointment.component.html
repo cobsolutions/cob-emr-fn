@@ -107,4 +107,26 @@
             </c-card>
         </c-col>
     </c-row>
+    <!--Appointment Repetition-->
+    <c-row>
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Appointment Repetition</strong></c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
+                        [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
+                        [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel">
+                        <option [ngValue]="'Single'" selected>Don't Repeat</option>
+                        <option [ngValue]="'Daily'" selected>Daily</option>
+                        <option [ngValue]="'Weekly'" selected>Weekly</option>
+                        <option [ngValue]="'Monthly'" selected>Monthly</option>
+                        <option [ngValue]="'Yearly'" selected>Yearly</option>
+                        <!-- <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option> -->
+                    </select>
+                    <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
+                        [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
 </c-container>

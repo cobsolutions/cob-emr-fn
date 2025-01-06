@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { filter, Observable, switchMap } from 'rxjs';
 import { Patient } from '../../../../patient/models/patient';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
+import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
+import { RepeatAppointmentComponent } from '../../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 
 @Component({
@@ -14,6 +16,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./full-appointment.component.css']
 })
 export class FullAppointmentComponent implements OnInit {
+  @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
   therapists$: Observable<any>
@@ -62,5 +65,49 @@ export class FullAppointmentComponent implements OnInit {
       filter((clinicId) => clinicId != null),
       switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
     )
+  }
+  private fillAppointmnetRepeat() {
+    switch (this.appointment.appointmentRepetitionType) {
+      case 'Daily':
+        this.createDailyRepetitionAppointment();
+        break
+      case 'Weekly':
+        this.createWeeklyRepetitionAppointment()
+        break;
+      case 'Monthly':
+        this.createMonthlyRepetitionAppointment()
+        break;
+      case 'Yearly':
+        this.createYearlyRepetitionAppointment();
+        break;
+    }
+  }
+  private createDailyRepetitionAppointment() {
+    var dailyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      daily: this.repeatAppointmentComponent.dailyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = dailyAppointmnetRepeat
+  }
+  private createWeeklyRepetitionAppointment() {
+    var weeklyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      weekly: this.repeatAppointmentComponent.weeklyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = weeklyAppointmnetRepeat
+  }
+  private createMonthlyRepetitionAppointment() {
+    var monthlyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      monthly: this.repeatAppointmentComponent.monthlyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = monthlyAppointmnetRepeat
+  }
+  private createYearlyRepetitionAppointment() {
+    var yearlyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
   }
 }
