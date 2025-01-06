@@ -4,6 +4,7 @@ import { filter, Observable, switchMap } from 'rxjs';
 import { Patient } from '../../../../patient/models/patient';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
+import { AppointmentType } from '../../../models/appointment.type';
 import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
@@ -23,6 +24,7 @@ export class FullAppointmentComponent implements OnInit {
   appointment: Appointment = new Appointment();
   therapists: any
   calendars$: Observable<any>
+  appointmentTypes:AppointmentType[]
   validDate: boolean = true
   @Input() startDate: Date;
   @Input() schedulerSettings: Observable<Settings>
@@ -55,6 +57,10 @@ export class FullAppointmentComponent implements OnInit {
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
       this.therapists = therapists;
       this.appointment.therapyUUID = this.therapists[0].uuid;
+    })
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types=>{
+      this.appointmentTypes = types;
+      this.appointment.appointmentTypeId = types[0].id
     })
   }
   compareFn = this._compareFn.bind(this);
