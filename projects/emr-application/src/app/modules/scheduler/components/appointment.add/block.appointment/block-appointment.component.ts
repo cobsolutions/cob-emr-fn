@@ -39,7 +39,6 @@ export class BlockAppointmentComponent implements OnInit {
       this.getCalendars();
     })
     this.appointmentService.createAppointmentEvent$.pipe(
-      tap(rr=> console.log(rr)),
       filter(event => event !== null && event === 'block')
     ).subscribe(() => {
       this.validation.emit(this.validate());
@@ -52,10 +51,13 @@ export class BlockAppointmentComponent implements OnInit {
     })
   }
   private validate(): boolean {
-    if (this.appointment.title === undefined || this.appointment.title === null || this.appointment.title === ''){
+
+    if (this.appointment.title === undefined || this.appointment.title === null || this.appointment.title === '') {
       this.isValidTitle = false;
+    } else {
+      this.isValidTitle = true;
     }
-      
+
     this.isValidateAppointmentDate();
     return this.isValidTitle && this.isValidDate;
   }

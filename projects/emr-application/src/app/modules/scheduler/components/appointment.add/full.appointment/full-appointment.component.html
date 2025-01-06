@@ -30,12 +30,15 @@
     <c-row>
         <c-col>
             <c-card class="mb-3 ustify-content-center">
-                <c-card-header><strong>Appointment at</strong></c-card-header>
+                <c-card-header>
+                    <strong *ngIf="validDate">Appointment at</strong>
+                    <strong *ngIf="!validDate" class="text-danger">Appointment at</strong>
+                </c-card-header>
                 <c-card-body>
                     <div *ngIf="!validDate">
-                        <small class="form-text text-danger">
+                        <div class="text-danger">
                             Appointment start time cant greater than appointment end time
-                        </small>
+                        </div>
                     </div>
                     <div class="mb-1">
                         <c-row>
