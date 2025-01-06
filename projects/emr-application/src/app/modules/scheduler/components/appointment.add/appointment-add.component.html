@@ -33,5 +33,7 @@
         (dataValidation)="checkFullAppointmentValidity($event)"></full-appointment>
 
 
-    <block-appointment *ngIf="filteredPatients?.length ===0"></block-appointment>
+    <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate"
+        [schedulerSettings]="schedulerSettings"
+        (dataValidation)="checkFullAppointmentValidity($event)"></block-appointment>
 </c-container>
