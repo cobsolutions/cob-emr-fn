@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { Patient } from '../../../../patient/models/patient';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
+import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
 
 @Component({
   selector: 'full-appointment',
@@ -12,11 +13,14 @@ import { Appointment } from '../../../models/appointment';
 export class FullAppointmentComponent implements OnInit {
   @Input() patientsList:Patient[];
   appointment:Appointment= new Appointment();
-  constructor(private loggedInService: LoggedInService) { }
+  therapists$: Observable<any>
+  constructor(private loggedInService: LoggedInService
+    ,private initializeAppointmentService: InitializeAppointmentService) { }
 
   ngOnInit(): void {
     this.initModel()
     this.getSelectedClinic();
+    this.therapists$ = this.initializeAppointmentService.findAllTherapists();
   }
   onCaseSelected(selectedPatient:any){
     this.appointment.patient = selectedPatient;
