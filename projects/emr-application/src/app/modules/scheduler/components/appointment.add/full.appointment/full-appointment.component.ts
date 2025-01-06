@@ -18,7 +18,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./full-appointment.component.css']
 })
 export class FullAppointmentComponent implements OnInit {
-  @Output() dataValidation = new EventEmitter<boolean>()
+  @Output() validation = new EventEmitter<boolean>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
@@ -45,7 +45,7 @@ export class FullAppointmentComponent implements OnInit {
       filter(event => event !== null && event === 'full')
     ).subscribe(() => {
       this.isValidateAppointmentDate();
-      this.dataValidation.emit(!this.validDate);
+      this.validation.emit(!this.validDate);
     })
   }
   onCaseSelected(selectedPatient: any) {

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { filter, Observable, switchMap } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import * as moment from 'moment';
+import { filter, Observable, switchMap, tap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
@@ -15,12 +16,14 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./block-appointment.component.css']
 })
 export class BlockAppointmentComponent implements OnInit {
+  @Output() validation = new EventEmitter<boolean>()
   appointment: Appointment = new Appointment();
   calendars$: Observable<any>
   @Input() startDate: Date;
   @Input() schedulerSettings: Observable<Settings>
-  appointmentTypes:AppointmentType[]
-  validDate: boolean = true
+  appointmentTypes: AppointmentType[]
+  isValidDate: boolean = true
+  isValidTitle: boolean = true;
   selectedClinic: Clinic
   constructor(private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
@@ -35,12 +38,26 @@ export class BlockAppointmentComponent implements OnInit {
       this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
       this.getCalendars();
     })
+    this.appointmentService.createAppointmentEvent$.pipe(
+      tap(rr=> console.log(rr)),
+      filter(event => event !== null && event === 'block')
+    ).subscribe(() => {
+      this.validation.emit(this.validate());
+    })
   }
-  private initModel(){
-    this.initializeAppointmentService.findAppointmnetType().subscribe(types=>{
+  private initModel() {
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
       this.appointmentTypes = types;
       this.appointment.appointmentTypeId = types[0].id
     })
+  }
+  private validate(): boolean {
+    if (this.appointment.title === undefined || this.appointment.title === null || this.appointment.title === ''){
+      this.isValidTitle = false;
+    }
+      
+    this.isValidateAppointmentDate();
+    return this.isValidTitle && this.isValidDate;
   }
   getCalendars() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
@@ -59,5 +76,10 @@ export class BlockAppointmentComponent implements OnInit {
         .filter(clinic => Number(clinic.id) === Number(clinicId))[0];
       this.appointment.clinicId = clinicId
     })
+  }
+  private isValidateAppointmentDate() {
+    this.isValidDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
+      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
+        moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
   }
 }

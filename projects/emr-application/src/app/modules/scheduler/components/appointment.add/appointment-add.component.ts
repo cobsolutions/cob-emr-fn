@@ -26,7 +26,6 @@ export class AppointmentAddComponent implements OnInit {
   patientClient = new FormControl();
   filteredPatients: any;
   isLoading = false;
-  emptyAppointmentField: boolean = false;
   @Input() startDate: Date;
   @Input() calendarId: number;
   @Input() schedulerSettings: Observable<Settings>
@@ -74,7 +73,6 @@ export class AppointmentAddComponent implements OnInit {
       )
       .subscribe(data => {
         this.isLoading = false
-        this.emptyAppointmentField = false
         if (data == undefined) {
           this.filteredPatients = [];
         } else {
@@ -89,16 +87,14 @@ export class AppointmentAddComponent implements OnInit {
   //   return EMPTY;
   // }
   public createAppointment() {
-    console.log(this.patientClient.value)
-    if (this.patientClient.value === null)
-      this.emptyAppointmentField = true
+
     if (this.filteredPatients?.length > 0) {
+      console.log('this.filteredPatients?.length > 0')
       this.appointmentService.createAppointmentEvent$.next('full')
-      this.emptyAppointmentField = false
     }
-    if (this.filteredPatients?.length === 0) {
+    if (this.filteredPatients?.length === 0 || this.filteredPatients === undefined) {
+      console.log('this.filteredPatients?.length === 0')
       this.appointmentService.createAppointmentEvent$.next('block')
-      this.emptyAppointmentField = false
     }
   }
   public checkFullAppointmentValidity(isValid: any) {

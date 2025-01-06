@@ -4,9 +4,14 @@
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Appointment for</strong></c-card-header>
                 <c-card-body>
+                    <div *ngIf="!isValidTitle">
+                        <small class="form-text text-danger">
+                            Field is required;
+                        </small>
+                    </div>
                     <div class="mb-3">
-                        <label cLabel for="appointmentWhat">What</label>
-                        <input cFormControl id="appointmentWhat" sizing="sm" />
+                        <label cLabel for="appointmentWhat">What <strong class="text-danger">*</strong></label>
+                        <input cFormControl id="appointmentWhat" sizing="sm" [(ngModel)]="appointment.title" />
                     </div>
                 </c-card-body>
             </c-card>
@@ -17,7 +22,7 @@
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Appointment at</strong></c-card-header>
                 <c-card-body>
-                    <div *ngIf="!validDate">
+                    <div *ngIf="!isValidDate">
                         <small class="form-text text-danger">
                             Appointment start time cant greater than appointment end time
                         </small>

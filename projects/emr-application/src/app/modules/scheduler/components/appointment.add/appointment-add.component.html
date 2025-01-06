@@ -7,11 +7,6 @@
                     <div class="mb-1">
                         <c-row>
                             <c-col xs="11">
-                                <div *ngIf="emptyAppointmentField">
-                                    <small class="form-text text-danger">
-                                        Select Patient or type an appointment title
-                                    </small>
-                                </div>
                                 <c-input-group class="mb-3" sizing="sm">
                                     <input cFormControl name="patientname" [formControl]="patientClient"
                                         placeholder="Patient" class="mb-2" />
@@ -34,6 +29,5 @@
 
 
     <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate"
-        [schedulerSettings]="schedulerSettings"
-        (dataValidation)="checkFullAppointmentValidity($event)"></block-appointment>
+        [schedulerSettings]="schedulerSettings" (validation)="checkFullAppointmentValidity($event)"></block-appointment>
 </c-container>
