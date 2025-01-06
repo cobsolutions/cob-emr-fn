@@ -38,12 +38,14 @@ export class PatientFinderService {
     )
   }
   getPatientsByName(name: string) {
-    return this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap((clinicId: any) => {
-        var url = this.baseUrl + '/find/name/' + name + '/clinic-id/' + clinicId
-        return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
-      })
-    )
+    // return this.loggedInService.selectedClinic$.pipe(
+    //   filter(clinicId => clinicId !== null),
+    //   switchMap((clinicId: any) => {
+    //     var url = this.baseUrl + '/find/name/' + name + '/clinic-id/' + clinicId
+    //     return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
+    //   })
+    // )
+    var url = this.baseUrl + '/find/name/' + name ;
+    return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
   }
 }
