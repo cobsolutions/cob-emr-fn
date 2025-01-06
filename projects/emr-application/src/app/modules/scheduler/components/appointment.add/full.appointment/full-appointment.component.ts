@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import * as moment from 'moment';
 import { filter, Observable, switchMap } from 'rxjs';
 import { Patient } from '../../../../patient/models/patient';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
@@ -16,6 +17,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./full-appointment.component.css']
 })
 export class FullAppointmentComponent implements OnInit {
+  @Output() dataValidation = new EventEmitter<boolean>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
@@ -40,7 +42,8 @@ export class FullAppointmentComponent implements OnInit {
     this.appointmentService.createAppointmentEvent$.pipe(
       filter(event => event !== null && event === 'full')
     ).subscribe(() => {
-      console.log('############# - block')
+      this.isValidateAppointmentDate();
+      this.dataValidation.emit(!this.validDate);
     })
   }
   onCaseSelected(selectedPatient: any) {
@@ -50,7 +53,6 @@ export class FullAppointmentComponent implements OnInit {
     this.appointment.patient = this.patientsList[0]
     this.appointment.patientCase = this.appointment.patient.cases[0]
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
-      console.log(JSON.stringify(therapists))
       this.therapists = therapists;
       this.appointment.therapyUUID = this.therapists[0].uuid;
     })
@@ -118,5 +120,10 @@ export class FullAppointmentComponent implements OnInit {
       yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
     }
     this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
+  }
+  private isValidateAppointmentDate() {
+    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
+      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
+        moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
   }
 }

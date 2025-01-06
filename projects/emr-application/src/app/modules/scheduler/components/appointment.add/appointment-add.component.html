@@ -7,6 +7,11 @@
                     <div class="mb-1">
                         <c-row>
                             <c-col xs="11">
+                                <div *ngIf="emptyAppointmentField">
+                                    <small class="form-text text-danger">
+                                        Select Patient or type an appointment title
+                                    </small>
+                                </div>
                                 <c-input-group class="mb-3" sizing="sm">
                                     <input cFormControl name="patientname" [formControl]="patientClient"
                                         placeholder="Patient" class="mb-2" />
@@ -22,11 +27,11 @@
             </c-card>
         </c-col>
     </c-row>
-    <div *ngIf="filteredPatients?.length > 0">
-        <full-appointment [patientsList]="filteredPatients" [startDate]="startDate"
-            [schedulerSettings]="schedulerSettings"></full-appointment>
-    </div>
-    <div *ngIf="filteredPatients?.length ===0">
-        <block-appointment></block-appointment>
-    </div>
+
+    <full-appointment *ngIf="filteredPatients?.length > 0" [patientsList]="filteredPatients" [startDate]="startDate"
+        [schedulerSettings]="schedulerSettings"
+        (dataValidation)="checkFullAppointmentValidity($event)"></full-appointment>
+
+
+    <block-appointment *ngIf="filteredPatients?.length ===0"></block-appointment>
 </c-container>

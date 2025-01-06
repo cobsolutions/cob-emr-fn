@@ -26,11 +26,11 @@ export class AppointmentAddComponent implements OnInit {
   patientClient = new FormControl();
   filteredPatients: any;
   isLoading = false;
+  emptyAppointmentField: boolean = false;
   @Input() startDate: Date;
   @Input() calendarId: number;
   @Input() schedulerSettings: Observable<Settings>
   notValidForm: boolean = false;
-  validDate: boolean = true
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
   patientClinics$!: Observable<Clinic[]>;
@@ -54,7 +54,7 @@ export class AppointmentAddComponent implements OnInit {
         filter(text => {
           if (text === undefined)
             return false;
-          if (text.length > 0) {
+          if (text.length > 3) {
             return true
           } else {
             this.filteredPatients = [];
@@ -62,7 +62,7 @@ export class AppointmentAddComponent implements OnInit {
             return false;
           }
         }),
-        debounceTime(500),
+        debounceTime(1000),
         tap((value) => {
           this.filteredPatients = [];
           this.isLoading = true;
@@ -74,8 +74,8 @@ export class AppointmentAddComponent implements OnInit {
       )
       .subscribe(data => {
         this.isLoading = false
+        this.emptyAppointmentField = false
         if (data == undefined) {
-          console.log('No Data')
           this.filteredPatients = [];
         } else {
           this.filteredPatients = data.body;
@@ -89,9 +89,19 @@ export class AppointmentAddComponent implements OnInit {
   //   return EMPTY;
   // }
   public createAppointment() {
-    if (this.filteredPatients.length > 0)
+    console.log(this.patientClient.value)
+    if (this.patientClient.value === null)
+      this.emptyAppointmentField = true
+    if (this.filteredPatients?.length > 0) {
       this.appointmentService.createAppointmentEvent$.next('full')
-    if (this.filteredPatients.length === 0)
+      this.emptyAppointmentField = false
+    }
+    if (this.filteredPatients?.length === 0) {
       this.appointmentService.createAppointmentEvent$.next('block')
+      this.emptyAppointmentField = false
+    }
+  }
+  public checkFullAppointmentValidity(isValid: any) {
+    this.notValidForm = isValid;
   }
 }
