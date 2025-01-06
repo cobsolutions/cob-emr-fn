@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'lodash';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { Observable, switchMap } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import { InsuranceCompany } from '../../../administration/model/insurance.company/insurance.company';
 import { LoggedInUser } from '../../../security/model/loggedin.user';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
@@ -34,6 +34,15 @@ export class PatientFinderService {
       switchMap((loggedInUser: LoggedInUser) => {
         var getPatientURL = environment.baseURL + 'clinic/find/organization/' + loggedInUser.organizationId
         return this.httpClient.get<Clinic[]>(`${getPatientURL}`, { observe: 'response' });
+      })
+    )
+  }
+  getPatientsByName(name: string) {
+    return this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap((clinicId: any) => {
+        var url = this.baseUrl + '/find/name/' + name + '/clinic-id/' + clinicId
+        return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
       })
     )
   }
