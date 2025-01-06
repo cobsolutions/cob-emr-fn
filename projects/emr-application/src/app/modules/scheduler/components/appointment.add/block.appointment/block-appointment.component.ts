@@ -3,6 +3,7 @@ import { filter, Observable, switchMap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
+import { AppointmentType } from '../../../models/appointment.type';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
@@ -18,6 +19,7 @@ export class BlockAppointmentComponent implements OnInit {
   calendars$: Observable<any>
   @Input() startDate: Date;
   @Input() schedulerSettings: Observable<Settings>
+  appointmentTypes:AppointmentType[]
   validDate: boolean = true
   selectedClinic: Clinic
   constructor(private initializeAppointmentService: InitializeAppointmentService
@@ -26,11 +28,18 @@ export class BlockAppointmentComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.initModel()
     this.getSelectedClinic();
     this.schedulerSettings.subscribe((result: any) => {
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, result.appointmentInterval)
       this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
       this.getCalendars();
+    })
+  }
+  private initModel(){
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types=>{
+      this.appointmentTypes = types;
+      this.appointment.appointmentTypeId = types[0].id
     })
   }
   getCalendars() {
