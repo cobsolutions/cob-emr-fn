@@ -17,6 +17,7 @@ export interface Patient {
     firstName?: string;
     middleName?: string;
     lastName?: string;
+    displayName?: string;
     birthDate?: number;
     birthDate_date?: Date | null;
     gender?: Gender | null;
