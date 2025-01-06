@@ -1,4 +1,5 @@
 <c-container fluid>
+    <!-- Appointment For-->
     <c-row class="justify-content-center">
         <c-col>
             <c-card class="mb-3 ustify-content-center">
@@ -25,6 +26,37 @@
             </c-card>
         </c-col>
     </c-row>
+    <c-row>
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Appointment at</strong></c-card-header>
+                <c-card-body>
+                    <div *ngIf="!validDate">
+                        <small class="form-text text-danger">
+                            Appointment start time cant greater than appointment end time
+                        </small>
+                    </div>
+                    <div class="mb-1">
+                        <c-row>
+                            <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate"
+                                    name="startDate" [(ngModel)]="appointment.appointmentDate.startDate"
+                                    (dateChange)="changestartDate($event)"></c-date-picker></c-col>
+                            <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
+                                    [(ngModel)]="appointment.appointmentDate.startTime"></c-time-picker></c-col>
+                        </c-row>
+                    </div>
+                    <c-row>
+                        <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.endDate"
+                                name="endDate"
+                                [(ngModel)]="appointment.appointmentDate.endDate"></c-date-picker></c-col>
+                        <c-col xs="4"><c-time-picker size="sm" id="endTime" name="endTime"
+                                [(ngModel)]="appointment.appointmentDate.endTime"></c-time-picker></c-col>
+                    </c-row>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!-- Clinic-->
     <c-row class="justify-content-center">
         <c-col>
             <c-card class="mb-3 ustify-content-center">
@@ -32,8 +64,8 @@
                 <c-card-body>
                     <div class="mb-1">
                         <div *ngIf="appointment.patient?.clinicModels?.length ===1">
-                            <input cFormControl [value]="appointment.patient?.clinicModels[0].name"
-                                 sizing="sm" disabled="true">
+                            <input cFormControl [value]="appointment.patient?.clinicModels[0].name" sizing="sm"
+                                disabled="true">
                         </div>
                         <div *ngIf="appointment.patient?.clinicModels?.length >1">
                             <small
@@ -57,6 +89,7 @@
             </c-card>
         </c-col>
     </c-row>
+    <!--Therapists-->
     <c-row>
         <c-col>
             <c-card class="mb-3 ustify-content-center">

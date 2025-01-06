@@ -23,7 +23,7 @@
         </c-col>
     </c-row>
     <div *ngIf="filteredPatients?.length > 0">
-        <full-appointment [patientsList]="filteredPatients"></full-appointment>
+        <full-appointment [patientsList]="filteredPatients" [startDate]="startDate" [schedulerSettings]="schedulerSettings"></full-appointment>
     </div>
     <div *ngIf="filteredPatients?.length ===0">
         <block-appointment></block-appointment>
