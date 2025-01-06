@@ -19,12 +19,13 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 })
 export class FullAppointmentComponent implements OnInit {
   @Output() validation = new EventEmitter<boolean>()
+  @Output() createdAppointment = new EventEmitter<Appointment>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
   therapists: any
   calendars$: Observable<any>
-  appointmentTypes:AppointmentType[]
+  appointmentTypes: AppointmentType[]
   validDate: boolean = true
   @Input() startDate: Date;
   @Input() schedulerSettings: Observable<Settings>
@@ -46,6 +47,9 @@ export class FullAppointmentComponent implements OnInit {
     ).subscribe(() => {
       this.isValidateAppointmentDate();
       this.validation.emit(!this.validDate);
+      if (this.validDate) {
+        this.createdAppointment.emit(this.appointment)
+      }
     })
   }
   onCaseSelected(selectedPatient: any) {
@@ -58,7 +62,7 @@ export class FullAppointmentComponent implements OnInit {
       this.therapists = therapists;
       this.appointment.therapyUUID = this.therapists[0].uuid;
     })
-    this.initializeAppointmentService.findAppointmnetType().subscribe(types=>{
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
       this.appointmentTypes = types;
       this.appointment.appointmentTypeId = types[0].id
     })

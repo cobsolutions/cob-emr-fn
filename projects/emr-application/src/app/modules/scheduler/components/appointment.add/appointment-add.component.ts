@@ -87,17 +87,20 @@ export class AppointmentAddComponent implements OnInit {
   //   return EMPTY;
   // }
   public createAppointment() {
-
+    this.emitCreateEvent()
+  }
+  public checkAppointmentValidity(isValid: any) {
+    this.notValidForm = isValid;
+  }
+  private emitCreateEvent() {
     if (this.filteredPatients?.length > 0) {
-      console.log('this.filteredPatients?.length > 0')
       this.appointmentService.createAppointmentEvent$.next('full')
     }
     if (this.filteredPatients?.length === 0 || this.filteredPatients === undefined) {
-      console.log('this.filteredPatients?.length === 0')
       this.appointmentService.createAppointmentEvent$.next('block')
     }
   }
-  public checkFullAppointmentValidity(isValid: any) {
-    this.notValidForm = isValid;
+  createdAppointment(appintment: Appointment) {
+    console.log(JSON.stringify(appintment))
   }
 }

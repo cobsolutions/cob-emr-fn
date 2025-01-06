@@ -17,6 +17,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 })
 export class BlockAppointmentComponent implements OnInit {
   @Output() validation = new EventEmitter<boolean>()
+  @Output() createdAppointment = new EventEmitter<Appointment>()
   appointment: Appointment = new Appointment();
   calendars$: Observable<any>
   @Input() startDate: Date;
@@ -41,7 +42,12 @@ export class BlockAppointmentComponent implements OnInit {
     this.appointmentService.createAppointmentEvent$.pipe(
       filter(event => event !== null && event === 'block')
     ).subscribe(() => {
-      this.validation.emit(this.validate());
+      var isNotValid: boolean = this.validate()
+      if (!isNotValid)
+        this.validation.emit(isNotValid);
+      else {
+        this.createdAppointment.emit(this.appointment)
+      }
     })
   }
   private initModel() {
