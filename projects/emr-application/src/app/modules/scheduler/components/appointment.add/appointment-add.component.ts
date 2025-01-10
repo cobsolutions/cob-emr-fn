@@ -11,6 +11,7 @@ import { PatientFinderService } from '../../../patient/services/patient/patient-
 import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
 import { AppointmentService } from '../../service/appointment.service';
+import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 
@@ -28,7 +29,7 @@ export class AppointmentAddComponent implements OnInit {
   isLoading = false;
   @Input() startDate: Date;
   @Input() calendarId: number;
-  @Input() schedulerSettings: Observable<Settings>
+  @Input() schedulerSettings: Settings
   notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
@@ -42,7 +43,8 @@ export class AppointmentAddComponent implements OnInit {
   calendars$!: Observable<Calendar[]>;
   selectedClinic?: number;
   constructor(private patientFinderService: PatientFinderService
-    , private appointmentService: AppointmentService) { }
+    , private appointmentService: AppointmentService
+    , private constructAppointmentService: ConstructAppointmentService) { }
   ngOnInit() {
     this.findPatientByNameAutoComplete();
 
@@ -83,11 +85,12 @@ export class AppointmentAddComponent implements OnInit {
           this.isLoading = false
         });
   }
-  // public createAppointment(): Observable<any> {
-  //   return EMPTY;
-  // }
   public createAppointment() {
     this.emitCreateEvent()
+    this.constructAppointmentService.constructAppointmentDate(this.appointment)
+    if (this.calendarId !== null)
+      this.appointment.calendarId = this.calendarId;
+    return this.appointmentService.createAppointment(this.appointment)
   }
   public checkAppointmentValidity(isValid: any) {
     this.notValidForm = isValid;
@@ -100,7 +103,7 @@ export class AppointmentAddComponent implements OnInit {
       this.appointmentService.createAppointmentEvent$.next('block')
     }
   }
-  createdAppointment(appintment: Appointment) {
-    console.log(JSON.stringify(appintment))
+  emittedAppointment(appintment: Appointment) {
+    this.appointment = appintment;
   }
 }

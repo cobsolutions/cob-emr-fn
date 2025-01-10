@@ -22,21 +22,24 @@ import {
   GetWeekViewArgs,
   WeekViewTimeEvent,
   EventColor,
-  CalendarEvent,
   WeekViewAllDayEventRow,
-  WeekViewAllDayEvent,
   WeekViewHourColumn,
   WeekViewHour,
+  WeekViewAllDayEvent,
+  EventAction,
 } from 'calendar-utils';
 import { DragEndEvent, DragMoveEvent } from 'angular-draggable-droppable';
 import { Calendar } from '../../../../administration/model/calendar/calendar';
+import { CalendarEvents } from '../../../models/calendar/calendars';
 
 interface DayViewScheduler extends WeekView {
   calendars: Calendar[];
+  calendarEvents: CalendarEvents;
 }
 
 interface GetWeekViewArgsWithUsers extends GetWeekViewArgs {
   calendars: Calendar[];
+  calendarEvents: CalendarEvents;
 }
 interface WeekViewHourSegment {
   isStart: boolean;
@@ -45,18 +48,39 @@ interface WeekViewHourSegment {
   cssClass?: string;
   calendar?: Calendar
 }
+interface CalendarEvent<MetaType = any> {
+  id?: string | number;
+  start: Date;
+  end?: Date;
+  title: string;
+  color?: EventColor;
+  actions?: EventAction[];
+  allDay?: boolean;
+  cssClass?: string;
+  resizable?: {
+    beforeStart?: boolean;
+    afterEnd?: boolean;
+  };
+  draggable?: boolean;
+  meta?: MetaType;
+  calendarEvents?: CalendarEvent[]
+}
+
 @Injectable()
 export class DayViewSchedulerCalendarUtils extends CalendarUtils {
-  private enrichSegment(hourColumns:WeekViewHourColumn,calendar:Calendar){
-    hourColumns.hours.forEach((hour:WeekViewHour) => {
+  private enrichSegment(hourColumns: WeekViewHourColumn, calendar: Calendar) {
+    hourColumns.hours.forEach((hour: WeekViewHour) => {
       var segments: WeekViewHourSegment[] = [];
       hour.segments.forEach(segment => {
-        var _msegment : WeekViewHourSegment=segment;
-        _msegment.calendar=calendar
+        var _msegment: WeekViewHourSegment = segment;
+        _msegment.calendar = calendar
         segments.push(_msegment)
       });
       hour.segments = segments;
     });
+  }
+  private enrichAllOfDayEnevts(calendar: Calendar) {
+
   }
   override getWeekView(args: GetWeekViewArgsWithUsers): DayViewScheduler {
     const { period } = super.getWeekView(args);
@@ -65,6 +89,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
       allDayEventRows: [],
       hourColumns: [],
       calendars: [...args.calendars],
+      calendarEvents:args.calendarEvents
     };
     if (view.calendars.length === 0) {
       const columnView = super.getWeekView({
@@ -83,17 +108,18 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
       });
     }
     view.calendars.forEach((calendar, columnIndex) => {
-      const events = calendar.events
+      const events = view.calendarEvents.get(calendar.id)
       const columnView = super.getWeekView({
         ...args,
         events,
       });
-      this.enrichSegment(columnView.hourColumns[0],calendar)
+      this.enrichSegment(columnView.hourColumns[0], calendar)
       view.hourColumns.push(columnView.hourColumns[0]);
       columnView.allDayEventRows.forEach(({ row }, rowIndex) => {
         view.allDayEventRows[rowIndex] = view.allDayEventRows[rowIndex] || {
           row: [],
         };
+        this.enrichAllOfDayEnevts(calendar)
         view.allDayEventRows[rowIndex].row.push({
           ...row[0],
           offset: columnIndex,
@@ -114,12 +140,18 @@ export class DayViewSchedulerComponent
   extends CalendarWeekViewComponent
   implements OnChanges {
   @Input() calendars: Calendar[] = [];
+  @Input() calendarEvents: CalendarEvents;
 
   @Output() userChanged = new EventEmitter();
 
-  @Output()  override hourSegmentClicked = new EventEmitter<{
+  @Output() override hourSegmentClicked = new EventEmitter<{
     date: any;
     sourceEvent: MouseEvent;
+  }>();
+
+  @Output() override eventClicked = new EventEmitter<{
+    event: CalendarEvent;
+    sourceEvent: MouseEvent | KeyboardEvent;
   }>();
   override view: DayViewScheduler;
 
@@ -203,6 +235,7 @@ export class DayViewSchedulerComponent
     return this.utils.getWeekView({
       events,
       calendars: this.calendars,
+      calendarEvents : this.calendarEvents,
       viewDate: this.viewDate,
       weekStartsOn: this.weekStartsOn,
       excluded: this.excludeDays,
@@ -240,5 +273,5 @@ export class DayViewSchedulerComponent
     const newIndex = currentColumnIndex + columnsMoved;
     return this.view.calendars[newIndex];
   }
-  
+
 }

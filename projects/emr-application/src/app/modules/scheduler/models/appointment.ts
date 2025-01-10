@@ -10,10 +10,8 @@ export class Appointment {
     id: number;
     clinicId: number;
     isAllUsers: boolean;
-    patient: Patient;
     patientId: number;
     calendarId: number
-    patientCase: PatientCase = null;
     patientCaseId: number;
     therapyUUID: string = null;
     appointmentDate: AppointmentDate = {}
@@ -32,8 +30,6 @@ export class Appointment {
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
     appointmentRepetitionType?: string = "Single"
     clinicModel: Clinic;
-    public constructTitle() {
-        this.title = this.patient.fullName + ':' + this.patientCase.title
-            + (this.note !== null ? "<br/>" + this.note : "")
-    }
+    appointmentStructure?:string
+   
 }

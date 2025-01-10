@@ -9,6 +9,7 @@ import { PatientChartAccessibilityModelResponse } from '../../../model/patient.c
 import { AppointmentActionsService } from '../../../service/actions/appointment-actions.service';
 import { PatientChartCheckerService } from '../../../service/patient.chart.checker/patient-chart-checker.service';
 import { AppointmentEditModalComponent } from '../../appintment.edit/modal/appointment-edit-modal.component';
+import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 
 @Component({
   selector: 'app-appointment-action-modal',
@@ -23,8 +24,9 @@ export class AppointmentActionModalComponent implements OnInit {
   appointmentEndDate: Date;
   appointmentType: string;
   appointmentStatus: any;
+  appointmentStructure: string;
   patientChartAccessibilityModelResponse: PatientChartAccessibilityModelResponse
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Observable<Settings> }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private loggedInService: LoggedInService
     , private patientChartCheckerService: PatientChartCheckerService
@@ -34,7 +36,8 @@ export class AppointmentActionModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initAppointmentPatientInfo();
-    this.checkPatientChartAccessibility();
+    if (this.data.event.meta.structure !== 'Block')
+      this.checkPatientChartAccessibility();
   }
   public editAppointment() {
     this.data.action = 'edit'
@@ -55,6 +58,7 @@ export class AppointmentActionModalComponent implements OnInit {
     this.appointmentEndDate = this.data.event.end;
     this.appointmentStatus = this.data.event.meta.status
     this.appointmentType = this.data.event.meta.type
+    this.appointmentStructure = this.data.event.meta.structure
   }
   redirectToPatientChart() {
     this.router.navigate([]).then((result) => {

@@ -24,11 +24,11 @@
     </c-row>
 
     <full-appointment *ngIf="filteredPatients?.length > 0" [patientsList]="filteredPatients" [startDate]="startDate"
-        [schedulerSettings]="schedulerSettings" (dataValidation)="checkAppointmentValidity($event)"
-        (createdAppointment)="createdAppointment($event)"></full-appointment>
+        [mode]="'create'" [schedulerSettings]="schedulerSettings" (dataValidation)="checkAppointmentValidity($event)"
+        (createdAppointment)="emittedAppointment($event)"></full-appointment>
 
 
-    <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate"
+    <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate" [mode]="'create'"
         [schedulerSettings]="schedulerSettings" (validation)="checkAppointmentValidity($event)"
-        (createdAppointment)="createdAppointment($event)"></block-appointment>
+        (createdAppointment)="emittedAppointment($event)"></block-appointment>
 </c-container>

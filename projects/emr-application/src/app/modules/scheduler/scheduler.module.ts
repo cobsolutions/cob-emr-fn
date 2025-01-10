@@ -10,7 +10,6 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EmrCommonModule } from '../common/emr-common.module';
-import { AppointmentEditComponent } from './components/appintment.edit/appointment-edit.component';
 import { AppointmentEditModalComponent } from './components/appintment.edit/modal/appointment-edit-modal.component';
 import { AppointmentActionModalComponent } from './components/appointment.actions/modal/appointment-action-modal.component';
 import { PropmtPatientClinicsComponent } from './components/appointment.actions/modal/prompting.patient.clinic/propmt-patient-clinics.component';
@@ -49,7 +48,6 @@ import { BlockAppointmentComponent } from './components/appointment.add/block.ap
 
         AddAppobntmentModalComponent,
         AppointmentEditModalComponent,
-        AppointmentEditComponent,
         AppointmentActionModalComponent,
         AppointmentStatusModalComponent,
         AppointmentCancelNoshowModalComponent,

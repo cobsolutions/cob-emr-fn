@@ -16,7 +16,7 @@ export class AppointmentEventConverterService {
       id: appointment.id,
       start: moment.unix(appointment.startDate / 1000).toDate(),
       end: moment.unix(appointment.endDate / 1000).toDate(),
-      title: appointment.title,
+      title: appointment.title + "<br/>" + ((appointment.note === null || appointment.note === undefined) ? "" : appointment.note),
       draggable: true,
       resizable: {
         beforeStart: true,
@@ -30,7 +30,9 @@ export class AppointmentEventConverterService {
       meta: {
         'patient_id': appointment.patientId,
         'status': appointment.appointmentStatus,
-        'type': appointment.appointmentType,
+        'type': appointment.appointmentTypeId,
+        'structure': appointment.appointmentStructure,
+        'calendar_id': appointment.calendarId
       }
     }
     return event;

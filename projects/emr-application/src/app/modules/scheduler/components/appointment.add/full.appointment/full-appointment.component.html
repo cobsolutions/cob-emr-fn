@@ -1,14 +1,15 @@
-<c-container fluid>
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<c-container fluid *ngIf="!isLoading">
     <!-- Appointment For-->
     <c-row class="justify-content-center">
         <c-col>
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Appointment for</strong></c-card-header>
                 <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="patients" name="patients"
+                    <select cFormControl cSelect class="mb-2" sizing="sm" *ngIf="mode ==='create'" id="patients"
+                        name="patients"
                         [ngClass]="{'is-invalid': patients.invalid && (patients.dirty || patients.touched)}"
-                        [(ngModel)]="appointment.patient" #patients="ngModel" (ngModelChange)="onCaseSelected($event)"
-                        required>
+                        [(ngModel)]="selectedPateint" #patients="ngModel" required (change)="changePatient()">
                         <option *ngFor="let patient of patientsList" [ngValue]="patient">
                             {{patient.displayName}}
                         </option>
@@ -16,9 +17,8 @@
                     <select cFormControl cSelect class="mb-2" sizing="sm" id="patientcase" name="patientcase"
                         [compareWith]="compareFn"
                         [ngClass]="{'is-invalid': patientcase.invalid && (patientcase.dirty || patientcase.touched)}"
-                        [(ngModel)]="appointment.patientCase" #patientcase="ngModel"
-                        (ngModelChange)="onCaseSelected($event)" required>
-                        <option *ngFor="let case of appointment.patient?.cases" [ngValue]="case">
+                        [(ngModel)]="selectedPatientCase" #patientcase="ngModel" required>
+                        <option *ngFor="let case of selectedPateint?.cases" [ngValue]="case">
                             {{case.title}}
                         </option>
                     </select>
@@ -67,23 +67,15 @@
                 <c-card-header><strong>Clinic</strong></c-card-header>
                 <c-card-body>
                     <div class="mb-1">
-                        <div *ngIf="appointment.patient?.clinicModels?.length ===1">
-                            <input cFormControl [value]="appointment.patient?.clinicModels[0].name" sizing="sm"
-                                disabled="true">
+                        <div *ngIf="selectedPateint?.clinicModels?.length ===1">
+                            <label>{{selectedClinic.name}}</label>
                         </div>
-                        <div *ngIf="appointment.patient?.clinicModels?.length >1">
-                            <small
-                                *ngIf="(patientclinic.errors) || (patientclinic.invalid && (patientclinic.dirty || patientclinic.touched))"
-                                class="form-text text-danger">
-                                Clinic is required
-                            </small>
+                        <div *ngIf="selectedPateint?.clinicModels?.length >1">
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
                                 name="patientclinic"
                                 [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
-                                [(ngModel)]="appointment.clinicId" #patientclinic="ngModel" required>
-                                <option [ngValue]="null" disabled selected>Select Clinic</option>
-                                <option *ngFor="let clinic of appointment.patient?.clinicModels" [value]="clinic.id"
-                                    [selected]="appointment.clinicId">
+                                [(ngModel)]="selectedClinic" #patientclinic="ngModel" required>
+                                <option *ngFor="let clinic of selectedPateint?.clinicModels" [ngValue]="clinic">
                                     {{clinic.name}}
                                 </option>
                             </select>

@@ -16,15 +16,15 @@
   <div class="col-md-4">
     <div class="btn-group">
       <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
+        (viewDateChange)="clickNavigate()">
         Previous
       </div>
       <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
+        (viewDateChange)="clickNavigate()">
         Today
       </div>
       <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
+        (viewDateChange)="clickNavigate()">
         Next
       </div>
     </div>
@@ -48,11 +48,11 @@
 </div>
 
 <br />
-<div [ngSwitch]="view">
+<div [ngSwitch]="view" *ngIf="this.schedulerSettingsa">
   <!--Month Module-->
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="monthEvents"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
-    [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" (eventClicked)="handleEvent('Clicked', $event.event)"
+    [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event,null)">
   </mwl-calendar-month-view>
   <!--Week Module-->
@@ -65,26 +65,27 @@
         <div class="resource-header">
           {{ calendar.name }}
         </div>
-        <mwl-calendar-week-view [viewDate]="viewDate" [events]="calendar.events" [refresh]="refresh"
-          (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event,calendar.id)"
-          (hourSegmentClicked)="weekClicked($event.date , calendar)"
-          [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" [dayStartHour]="(schedulerSettings| async)?.startOfDay"
-          [dayEndHour]="(schedulerSettings| async)?.endOfDay" [hourSegments]='(schedulerSettings| async)?.timeInterval'>
+        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events.get(calendar.id)" [refresh]="refresh"
+          (eventClicked)="handleEvent('Clicked', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event,calendar.id)"
+          (hourSegmentClicked)="weekClicked($event.date , calendar)" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+          [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+          [hourSegments]='schedulerSettingsa.timeInterval'>
         </mwl-calendar-week-view>
       </div>
     </div>
     <div *ngIf="selectedCalendars.length ===0 ">
-      <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh"
-        [weekStartsOn]="(schedulerSettings| async)?.dayOfWeek" [dayStartHour]="(schedulerSettings| async)?.startOfDay"
-        [dayEndHour]="(schedulerSettings| async)?.endOfDay" [hourSegments]='(schedulerSettings| async)?.timeInterval'>
+      <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+        [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+        [hourSegments]='schedulerSettingsa.timeInterval'>
       </mwl-calendar-week-view>
     </div>
   </div>
   <!--Day Module-->
   <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
     (eventTimesChanged)="eventTimesChanged($event,null)" (eventClicked)="handleEvent('Clicked', $event.event)"
-    (hourSegmentClicked)="dayClicked($event)" [calendars]="selectedCalendars"
-    [dayStartHour]="(schedulerSettings| async)?.startOfDay" [dayEndHour]="(schedulerSettings| async)?.endOfDay"
-    [hourSegments]='(schedulerSettings| async)?.timeInterval'>
+    (hourSegmentClicked)="dayClicked($event)" [calendars]="selectedCalendars" [calendarEvents]="events"
+    [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+    [hourSegments]='schedulerSettingsa.timeInterval'>
   </mwl-day-view-scheduler>
 </div>

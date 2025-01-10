@@ -18,7 +18,7 @@ export class AppointmentActionsService {
 
   constructor() { }
 
-  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Observable<Settings>) {
+  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Settings) {
     console.log(schedulerSettings)
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
       disableClose: true,
@@ -34,17 +34,17 @@ export class AppointmentActionsService {
   public selectAppointmentActions(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentActionModalComponent, {
       disableClose: true,
-      data: { event: event },
+      data: { event: event},
       position: {
         top: '8%', // Adjust as needed
       }
     });
     return dialogRef.afterClosed()
   }
-  public editAppointment(dialog: MatDialog, event: CalendarEvent) {
+  public editAppointment(dialog: MatDialog, event: CalendarEvent,schedulerSettings: Settings) {
     const dialogRef = dialog.open(AppointmentEditModalComponent, {
       disableClose: true,
-      data: { event: event, action: undefined },
+      data: { event: event, action: undefined ,schedulerSettings:schedulerSettings},
       width: '60%',
       position: {
         top: '8%',

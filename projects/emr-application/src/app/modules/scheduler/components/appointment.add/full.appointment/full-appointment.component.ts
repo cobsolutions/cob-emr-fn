@@ -1,10 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
-import { filter, Observable, switchMap } from 'rxjs';
+import { filter, Observable, switchMap, tap } from 'rxjs';
+import { PatientCase } from '../../../../patient/models/case/patient.case';
+import { Clinic } from '../../../../patient/models/clinic';
 import { Patient } from '../../../../patient/models/patient';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
 import { AppointmentType } from '../../../models/appointment.type';
+import { FullAppointment } from '../../../models/full.appointment';
 import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
@@ -18,6 +21,8 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./full-appointment.component.css']
 })
 export class FullAppointmentComponent implements OnInit {
+  @Input() mode: string
+  @Input() appointmentId: string | number;
   @Output() validation = new EventEmitter<boolean>()
   @Output() createdAppointment = new EventEmitter<Appointment>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
@@ -26,38 +31,40 @@ export class FullAppointmentComponent implements OnInit {
   therapists: any
   calendars$: Observable<any>
   appointmentTypes: AppointmentType[]
-  validDate: boolean = true
+  validDate: boolean = true;
+  isLoading: boolean = true;
   @Input() startDate: Date;
-  @Input() schedulerSettings: Observable<Settings>
+  @Input() schedulerSettings: Settings
+  /*
+    NEW Objects
+  */
+  selectedPateint: Patient;
+  selectedPatientCase: PatientCase
+  selectedClinic: Clinic;
   constructor(private loggedInService: LoggedInService
     , private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
     , private calendarServiceService: CalendarServiceService) { }
 
   ngOnInit(): void {
-    this.initModel()
+    switch (this.mode) {
+      case 'create':
+        this.initModel()
+        this.catchAppointmentStructureType();
+        this.getScehdulerSettings();
+        break;
+      case 'edit':
+        this.getAppointmnet(this.appointmentId);
+        break;
+    }
     this.getSelectedClinic();
-    this.schedulerSettings.subscribe((result: any) => {
-      this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, result.appointmentInterval)
-      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-      this.getCalendars();
-    })
-    this.appointmentService.createAppointmentEvent$.pipe(
-      filter(event => event !== null && event === 'full')
-    ).subscribe(() => {
-      this.isValidateAppointmentDate();
-      this.validation.emit(!this.validDate);
-      if (this.validDate) {
-        this.createdAppointment.emit(this.appointment)
-      }
-    })
-  }
-  onCaseSelected(selectedPatient: any) {
-    this.appointment.patient = selectedPatient;
+
+
   }
   private initModel() {
-    this.appointment.patient = this.patientsList[0]
-    this.appointment.patientCase = this.appointment.patient.cases[0]
+    this.selectedPateint = this.patientsList[0]
+    this.selectedPatientCase = this.selectedPateint.cases[0]
+    this.selectPatientClinic();
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
       this.therapists = therapists;
       this.appointment.therapyUUID = this.therapists[0].uuid;
@@ -66,10 +73,50 @@ export class FullAppointmentComponent implements OnInit {
       this.appointmentTypes = types;
       this.appointment.appointmentTypeId = types[0].id
     })
+    this.isLoading = false;
+  }
+  private getScehdulerSettings() {
+    this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
+      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+      this.getCalendars();
+  }
+  private getAppointmnet(id: string | number) {
+    this.appointmentService.retrieveFullAppointment(Number(id)).pipe(
+      filter(appointmnet => appointmnet !== null),
+    ).subscribe((appointment: FullAppointment) => {
+      this.appointment = appointment
+      this.selectedPateint = appointment.patient;
+          this.selectedPatientCase = appointment.patientCase;
+          this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
+            this.therapists = therapists;
+            this.appointment.therapyUUID = appointment.therapyUUID;
+          })
+          this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
+            this.appointmentTypes = types;
+            this.appointment.appointmentTypeId = appointment.appointmentTypeId;
+          })
+          this.selectPatientClinic();
+          this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
+          this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+          this.getCalendars();
+          this.isLoading = false;
+    })
+  }
+  private catchAppointmentStructureType() {
+    this.appointmentService.createAppointmentEvent$.pipe(
+      filter(event => event !== null && event === 'full')
+    ).subscribe(() => {
+      this.isValidateAppointmentDate();
+      this.validation.emit(!this.validDate);
+      if (this.validDate) {
+        this.createAppointmentModel();
+        this.createdAppointment.emit(this.appointment)
+      }
+    })
   }
   compareFn = this._compareFn.bind(this);
   _compareFn(a, b) {
-    return a?.id === b?.id;
+    return Number(a?.id) === Number(a?.id);
   }
   private getSelectedClinic() {
     this.loggedInService.selectedClinic$.pipe(
@@ -135,5 +182,35 @@ export class FullAppointmentComponent implements OnInit {
     this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
       (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
         moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
+  }
+  private selectPatientClinic() {
+    if (this.selectedPateint.clinicModels.length > 1) {
+      this.loggedInService.selectedClinic$.pipe(
+        filter(clinicId => clinicId !== null),
+        tap(clinicid => console.log(clinicid))
+      ).subscribe(clinicId => {
+        this.selectedClinic = this.selectedPateint.clinicModels
+          .filter(clinic => {
+            return Number(clinic.id) === Number(clinicId)
+          })[0]
+      })
+    } else {
+      this.selectedClinic = this.selectedPateint.clinicModels[0]
+    }
+    if (this.mode === 'edit') {
+      this.selectedClinic = this.selectedPateint.clinicModels
+        .filter(clinic => Number(clinic.id) === this.appointment.clinicId)[0]
+    }
+  }
+  private createAppointmentModel() {
+    this.appointment.patientId = this.selectedPateint.id;
+    this.appointment.patientCaseId = this.selectedPatientCase.id
+    console.log(JSON.stringify(this.selectedClinic))
+    this.appointment.clinicId = Number(this.selectedClinic.id);
+    this.appointment.title = this.selectedPateint.lastName + "," + this.selectedPateint.firstName + ":" + this.selectedPatientCase.title
+  }
+  changePatient() {
+    this.selectedPatientCase = this.selectedPateint.cases[0]
+    this.selectedClinic = this.selectedPateint.clinicModels[0]
   }
 }

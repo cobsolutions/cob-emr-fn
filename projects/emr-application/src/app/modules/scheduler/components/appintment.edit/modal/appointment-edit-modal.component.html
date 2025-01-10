@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>Edit Appointment</h2>
 <mat-dialog-content class="mat-typography">
-  <app-appointment-edit  #appointmentEditComponent [appointment]="appointment" *ngIf="appointment"></app-appointment-edit>
-  <c-spinner color="dark" variant="grow" *ngIf="!appointment"></c-spinner>
+  <full-appointment *ngIf="data.event.meta.structure ==='Full'" [mode]="'edit'" [appointmentId]="data.event.id"
+    [schedulerSettings]="data.schedulerSettings" #fullAppointment></full-appointment>
+  <block-appointment *ngIf="data.event.meta.structure ==='Block'" [mode]="'edit'" [appointmentId]="data.event.id"
+    #blockAppointment></block-appointment>
 </mat-dialog-content>
-<mat-dialog-actions align="end" *ngIf="appointment">
-  <button cButton (click)="update()" class="mx-3" variant="outline">Create</button>
+<mat-dialog-actions align="end" *ngIf="data.event.id">
+  <button cButton (click)="update()" class="mx-3" variant="outline">Update</button>
   <button cButton (click)="cancel()" variant="outline">Cancel</button>
 </mat-dialog-actions>

@@ -20,8 +20,4 @@ export class ConstructAppointmentService {
     endDate.setMinutes(appointment.appointmentDate.endTime.getMinutes())
     appointment.endDate = moment(endDate).unix() * 1000;
   }
-  public constructAppointmentPatient(appointment: Appointment) {
-    appointment.patient.fullName = appointment.title.split(':')[0]
-    appointment.patientCase = { id: appointment.patientCaseId }
-  }
 }

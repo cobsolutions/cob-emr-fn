@@ -44,6 +44,10 @@ export class AppointmentService {
     const url = this.baseUrl + 'appointment/find/id/' + appointmentId;
     return this._http.get<Appointment>(url);
   }
+  retrieveFullAppointment(appointmentId: number): Observable<Appointment> {
+    const url = this.baseUrl + 'appointment/find/full/id/' + appointmentId;
+    return this._http.get<Appointment>(url);
+  }
 
   createAppointmentType(type: AppointmentType) {
     const createAppointmentTypURL = this.baseUrl + 'appointment/type';

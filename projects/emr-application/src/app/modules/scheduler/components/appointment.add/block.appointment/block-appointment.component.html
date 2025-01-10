@@ -1,4 +1,5 @@
-<c-container fluid>
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<c-container fluid *ngIf="!isLoading">
     <c-row class="justify-content-center">
         <c-col>
             <c-card class="mb-3 ustify-content-center">

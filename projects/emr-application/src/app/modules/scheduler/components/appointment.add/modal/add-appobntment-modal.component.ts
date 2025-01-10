@@ -15,7 +15,7 @@ import { AppointmentAddComponent } from '../appointment-add.component';
 })
 export class AddAppobntmentModalComponent implements OnInit {
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent, schedulerSettings: Observable<Settings>, action: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent, schedulerSettings: Settings, action: string }
     , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
@@ -25,17 +25,16 @@ export class AddAppobntmentModalComponent implements OnInit {
     });
   }
   create() {
-    this.appointmentAddComponent.createAppointment();
-    // this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
-    //   var appointmet: Appointment = this.appointmentAddComponent.appointment;
-    //   appointmet.appointmentTypeColor = createdAppointmentId[0].appointmentTypeColor
-    //   appointmet.appointmentFontTypeColor = createdAppointmentId[0].appointmentFontTypeColor
-    //   var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentAddComponent.appointment)
-    //   event.id = createdAppointmentId
-    //   this.data.event = event;
-    //   this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
-    //   this.dialogRef.close(this.data);
-    // })
+    this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
+      var appointmet: Appointment = this.appointmentAddComponent.appointment;
+      appointmet.appointmentTypeColor = createdAppointmentId[0].appointmentTypeColor
+      appointmet.appointmentFontTypeColor = createdAppointmentId[0].appointmentFontTypeColor
+      appointmet.appointmentStructure = createdAppointmentId[0].appointmentStructure
+      var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+      this.data.event = event;
+      this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
+      this.dialogRef.close(this.data);
+    })
   }
   public cancel() {
     this.data.action = 'cancel';
