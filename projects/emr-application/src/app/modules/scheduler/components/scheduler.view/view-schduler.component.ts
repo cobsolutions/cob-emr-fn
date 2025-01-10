@@ -53,6 +53,7 @@ export class ViewSchdulerComponent implements OnInit {
   schedulerSettings: Observable<Settings>;
   schedulerSettingsa: Settings
   selectedClinic: number;
+  isLoading: boolean = true;
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -66,11 +67,9 @@ export class ViewSchdulerComponent implements OnInit {
     protected utils: CalendarUtils,
     private eventsCalendarService: EventsCalendarService
   ) { }
-
   ngOnInit(): void {
-    this.getSchedulerSettings();
-    this.getCalendars()
     this.getSelectedClinic();
+    this.getCalendars()
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
       weekStartsOn: undefined,
@@ -237,26 +236,18 @@ export class ViewSchdulerComponent implements OnInit {
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
   }
-  private getSchedulerSettings() {
-    this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap(clinicId => {
-        return this.schedulerConfigurationService.findSettings(clinicId)
-      }),
-      map(schedulerSetting => {
-        return FetchSchedulerSettings.setup(schedulerSetting);
-      })
-    ).subscribe(settings => {
-      this.schedulerSettingsa = settings
-      this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa
-    })
-  }
   private getSelectedClinic() {
     this.loggedInService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null)
     )
       .subscribe(clinicId => {
         this.selectedClinic = clinicId;
+        this.schedulerConfigurationService.findSettings(clinicId)
+          .subscribe(schedulerSetting => {
+            this.isLoading = false
+            this.schedulerSettingsa = FetchSchedulerSettings.setup(schedulerSetting)
+            this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
+          })
       })
   }
 }

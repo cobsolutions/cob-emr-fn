@@ -48,7 +48,8 @@
 </div>
 
 <br />
-<div [ngSwitch]="view" *ngIf="this.schedulerSettingsa">
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<div [ngSwitch]="view" *ngIf="!isLoading">
   <!--Month Module-->
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="monthEvents"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
