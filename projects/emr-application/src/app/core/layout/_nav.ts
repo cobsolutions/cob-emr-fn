@@ -42,7 +42,7 @@ export const NavItems: INavData[] = [
         url: 'scheduler/settings'
       },
       {
-        name: 'View Calendars',
+        name: 'Manage Calendars',
         url: 'scheduler/calendar'
       }
     ]
