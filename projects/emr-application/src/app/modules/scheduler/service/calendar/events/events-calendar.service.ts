@@ -5,6 +5,7 @@ import { Settings } from '../../../components/scheduler.view/util/fetch.schedule
 import { AppointmentEventConverterService } from '../../appointment-event-converter.service';
 import { AppointmentService } from '../../appointment.service';
 import { DayBoundaries } from '../calendar.date.util/day.boundaries.util';
+import { MonthBoundaries } from '../calendar.date.util/month.boundaries.util';
 import { WeekDateBoundaries } from '../calendar.date.util/week.date.boundaries.util';
 
 type DateUnit = 'month' | 'week' | 'day';
@@ -19,7 +20,7 @@ export class EventsCalendarService {
   }
 
   public get(calendar_id: number, clinic_id: number, viewDate: string | Date, unit: DateUnit, navigation?: DateNavigation): Observable<CalendarEvent[]> {
-    var boundaries : any = this.getBoundreies(unit, navigation, viewDate, this.schedulerSettings)
+    var boundaries: any = this.getBoundreies(unit, navigation, viewDate, this.schedulerSettings)
     return this._callGetAppointmentService(calendar_id, clinic_id, boundaries)
   }
   private _callGetAppointmentService(calendar_id: number, clinic_id: number, boundaries: any) {
@@ -43,6 +44,9 @@ export class EventsCalendarService {
           break;
         case 'day':
           boundaries = DayBoundaries.current(viewDate, settings.startOfDay, settings.endOfDay);
+          break;
+        case 'month':
+          boundaries = MonthBoundaries.current(viewDate);
           break;
       }
     if (navigation === 'previous')
