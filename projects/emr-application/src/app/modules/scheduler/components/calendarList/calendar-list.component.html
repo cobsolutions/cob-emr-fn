@@ -51,14 +51,15 @@
     <c-col xs="12">
         <c-button-group aria-label="Button outlined group with nested dropdown" role="group">
             <button cButton color="primary" variant="outline" (click)="openAddCalendarModal()">Add Calendar</button>
-            <c-dropdown variant="btn-group">
+            <button cButton color="primary" variant="outline" (click)="updateCalendar()">Save</button>
+            <!-- <c-dropdown variant="btn-group">
                 <button cButton cDropdownToggle>
                     Actions
                 </button>
                 <ul cDropdownMenu variant="outline">
                     <li><a cDropdownItem [routerLink]="[]" (click)="updateCalendar()">Save</a></li>
                 </ul>
-            </c-dropdown>
+            </c-dropdown> -->
         </c-button-group>
     </c-col>
 </c-row>
