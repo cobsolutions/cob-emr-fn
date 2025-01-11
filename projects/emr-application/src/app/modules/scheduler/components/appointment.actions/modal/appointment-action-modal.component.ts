@@ -51,8 +51,12 @@ export class AppointmentActionModalComponent implements OnInit {
     this.dialogRef.close(null);
   }
   private initAppointmentPatientInfo() {
-    this.patientName = this.data.event.title.split(':')[0]
-    this.pateintCase = this.data.event.title.split(':')[1]
+    const [patientName, patientCase] = this.data.event.title.split(':');
+    const formattedPatientCase = patientCase !== undefined? (patientCase.includes('<br/>')
+      ? patientCase.split('<br/>')[0]
+      : patientCase) : "";
+    this.patientName = patientName
+    this.pateintCase = formattedPatientCase
     this.patientId = this.data.event.meta.patient_id;
     this.appointmentStartDate = this.data.event.start
     this.appointmentEndDate = this.data.event.end;
