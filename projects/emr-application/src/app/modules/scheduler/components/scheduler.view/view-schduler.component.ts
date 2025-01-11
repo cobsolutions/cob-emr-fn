@@ -10,7 +10,6 @@ import {
   isSameMonth
 } from 'date-fns';
 
-import { ActivatedRoute } from "@angular/router";
 import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
@@ -21,13 +20,13 @@ import { CalendarEvents } from "../../models/calendar/calendars";
 import { SchedulerCalendarEvents } from "../../models/calendar/scheduler.calendar.operation";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
-import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { EventsCalendarService } from "../../service/calendar/events/events-calendar.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
+import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 
 @Component({
   selector: 'app-view-schduler',
@@ -43,7 +42,6 @@ export class ViewSchdulerComponent implements OnInit {
   selectedCalendars: any[] = [];
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
-  monthEvents: CalendarEvent[] = [];
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   refresh = new Subject<void>();
@@ -63,7 +61,8 @@ export class ViewSchdulerComponent implements OnInit {
     private loggedInService: LoggedInService,
     private calendarServiceService: CalendarServiceService,
     protected utils: CalendarUtils,
-    private eventsCalendarService: EventsCalendarService
+    private eventsCalendarService: EventsCalendarService,
+    private appointmentEventConverterService: AppointmentEventConverterService
   ) { }
   ngOnInit(): void {
     this.getSelectedClinic();
@@ -95,17 +94,17 @@ export class ViewSchdulerComponent implements OnInit {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent, calendarId: number): void {
-    var selectedCalendar: any = this.selectedCalendars.find(calendar => calendar.id === calendarId);
-    selectedCalendar.events = selectedCalendar.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
+    // var selectedCalendar: any = this.selectedCalendars.find(calendar => calendar.id === calendarId);
+    // selectedCalendar.events = selectedCalendar.events.map((iEvent) => {
+    //   if (iEvent === event) {
+    //     return {
+    //       ...event,
+    //       start: newStart,
+    //       end: newEnd,
+    //     };
+    //   }
+    //   return iEvent;
+    // });
     this.appointmentService.retrieveAppointment(Number(event.id)).pipe(
       map(appintment => {
         appintment.startDate = moment(newStart).unix() * 1000;
@@ -113,7 +112,10 @@ export class ViewSchdulerComponent implements OnInit {
         return appintment;
       }),
       switchMap(appointmet => this.appointmentService.createAppointment(appointmet))
-    ).subscribe(() => {
+    ).subscribe((createdAppointment: any) => {
+      var newChangedEvent:CalendarEvent=this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
+      RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id),newChangedEvent, AppointmentAction.EDIT_APPOINTMENT);
+      this.refresh.next();
       this.toastr.success('Appointment  updated Successfully');
     })
   }
