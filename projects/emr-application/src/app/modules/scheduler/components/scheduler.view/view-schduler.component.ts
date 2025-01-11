@@ -94,17 +94,6 @@ export class ViewSchdulerComponent implements OnInit {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent, calendarId: number): void {
-    // var selectedCalendar: any = this.selectedCalendars.find(calendar => calendar.id === calendarId);
-    // selectedCalendar.events = selectedCalendar.events.map((iEvent) => {
-    //   if (iEvent === event) {
-    //     return {
-    //       ...event,
-    //       start: newStart,
-    //       end: newEnd,
-    //     };
-    //   }
-    //   return iEvent;
-    // });
     this.appointmentService.retrieveAppointment(Number(event.id)).pipe(
       map(appintment => {
         appintment.startDate = moment(newStart).unix() * 1000;
@@ -113,8 +102,8 @@ export class ViewSchdulerComponent implements OnInit {
       }),
       switchMap(appointmet => this.appointmentService.createAppointment(appointmet))
     ).subscribe((createdAppointment: any) => {
-      var newChangedEvent:CalendarEvent=this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
-      RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id),newChangedEvent, AppointmentAction.EDIT_APPOINTMENT);
+      var newChangedEvent: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
+      RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), newChangedEvent, AppointmentAction.EDIT_APPOINTMENT);
       this.refresh.next();
       this.toastr.success('Appointment  updated Successfully');
     })
