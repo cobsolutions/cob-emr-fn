@@ -58,12 +58,10 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
     private schedulerConfigurationService: SchedulerConfigurationService,
-    private appointmentEventConverterService: AppointmentEventConverterService,
     private appointmentActionsService: AppointmentActionsService,
     private dialog: MatDialog,
     private loggedInService: LoggedInService,
     private calendarServiceService: CalendarServiceService,
-    private route: ActivatedRoute,
     protected utils: CalendarUtils,
     private eventsCalendarService: EventsCalendarService
   ) { }
@@ -217,7 +215,7 @@ export class ViewSchdulerComponent implements OnInit {
     )
   }
 
-  onCheckboxChange(event: any, calendar: any): void {
+  onCalendarChange(event: any, calendar: any): void {
     if (event.target.checked) {
       this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
         this.events.push(calendar.id, events)
