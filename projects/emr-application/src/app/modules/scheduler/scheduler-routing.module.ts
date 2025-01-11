@@ -28,13 +28,6 @@ const routes: Routes = [{
       },
     },
     {
-      path: 'appointment-type',
-      component: AppointmentTypeListComponent,
-      data: {
-        title: 'appointment-type',
-      },
-    },
-    {
       path: 'calendar',
       component: CalendarListComponent,
       data: {
