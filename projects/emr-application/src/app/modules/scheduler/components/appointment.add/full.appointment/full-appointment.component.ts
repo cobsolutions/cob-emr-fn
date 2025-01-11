@@ -213,4 +213,7 @@ export class FullAppointmentComponent implements OnInit {
     this.selectedPatientCase = this.selectedPateint.cases[0]
     this.selectedClinic = this.selectedPateint.clinicModels[0]
   }
+  changeStartTime(event:Date){
+    this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval , 'minutes').toDate();
+  }
 }
