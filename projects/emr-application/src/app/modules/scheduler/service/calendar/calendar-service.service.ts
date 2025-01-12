@@ -36,9 +36,14 @@ export class CalendarServiceService extends BasePaginationService {
       })
     )
   }
-  public update(model:CalendarsUpdateModel){
+  public update(model: CalendarsUpdateModel) {
     const headers = { 'content-type': 'application/json' }
     const url = this.baseUrl + "/update"
+    return this.httpClient.put(`${url}`, JSON.stringify(model), { 'headers': headers })
+  }
+  public updateName(model: Calendar) {
+    const headers = { 'content-type': 'application/json' }
+    const url = this.baseUrl + "/update/calendar"
     return this.httpClient.put(`${url}`, JSON.stringify(model), { 'headers': headers })
   }
 }
