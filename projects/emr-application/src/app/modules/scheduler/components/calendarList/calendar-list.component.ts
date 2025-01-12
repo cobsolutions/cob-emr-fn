@@ -28,6 +28,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
   clinicId: number;
+  editCalendarVisibility: boolean = false;
   @ViewChild('calendarsItems') calendarsItems: SmartTableComponent;
   constructor(private calendarServiceService: CalendarServiceService
     , private loggedInService: LoggedInService
@@ -52,6 +53,10 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   }
   openAddCalendarModal() {
     this.createCalendarVisibility = true
+  }
+  openEditCalendarModal(calendarId:number) {
+    console.log(calendarId)
+    this.editCalendarVisibility = true
   }
   private catchSelectedClinic() {
     this.loggedInService.selectedClinic$.subscribe(clinicId => {
@@ -79,8 +84,11 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
     )
 
   }
-  toggle() {
+  toggleCreate() {
     this.createCalendarVisibility = !this.createCalendarVisibility
+  }
+  toggleEdit() {
+    this.editCalendarVisibility = !this.editCalendarVisibility
   }
   changeVisibility(event: string) {
     if (event === 'close') {
