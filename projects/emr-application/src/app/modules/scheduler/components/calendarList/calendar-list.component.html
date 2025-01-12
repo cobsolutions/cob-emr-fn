@@ -81,7 +81,7 @@
                     </ng-container>
                     <ng-container *ngSwitchCase="'actions'" class="py-2">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button cButton variant="outline" size="sm" (click)="openEditCalendarModal(item.id)">
+                            <button cButton variant="outline" size="sm" (click)="openEditCalendarModal(item)">
                                 <svg cIcon name="cilPen"></svg>
                             </button>
                         </div>
@@ -109,10 +109,10 @@
 </c-modal>
 <c-modal id="editClinic" [visible]="editCalendarVisibility" size="sm" backdrop="static">
     <c-modal-header>
-        <h3 cModalTitle>Create Calendar</h3>
+        <h3 cModalTitle>Edit Calendar</h3>
         <button (click)="toggleEdit()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-
+        <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar" (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
     </c-modal-body>
 </c-modal>
