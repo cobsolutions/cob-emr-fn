@@ -36,7 +36,13 @@ export class ListAppointmentTypeComponent implements OnInit {
       })
     )
   }
-  changeFacilityVisibility(event) {
+  changeAddModalVisibility(event) {
+    if (event === 'close') {
+      this.addVisibility = false;
+      this.find();
+    }
+  }
+  changeEditModalVisibility(event) {
     if (event === 'close') {
       this.addVisibility = false;
       this.find();

@@ -38,7 +38,7 @@
     </c-modal-header>
     <c-modal-body>
         <apd-appointment-type *ngIf="addVisibility"
-            (changeVisibility)="changeFacilityVisibility($event)"></apd-appointment-type>
+            (changeVisibility)="changeAddModalVisibility($event)"></apd-appointment-type>
     </c-modal-body>
 </c-modal>
 <c-modal id="editAppoitmentType" [visible]="editVisibility" size="lg" backdrop="static">
@@ -47,5 +47,7 @@
         <button (click)="toggleEdit()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
+        <edit-appointment-type *ngIf="editVisibility"
+            (changeVisibility)="changeEditModalVisibility($event)"></edit-appointment-type>
     </c-modal-body>
 </c-modal>
