@@ -10,6 +10,7 @@ import { AppointmentTypeService } from '../../../../service/appointment.type/app
 })
 export class ListAppointmentTypeComponent implements OnInit {
   addVisibility: boolean = false;
+  editVisibility: boolean = false;
   appointmentTypes: Observable<AppointmentType[]>
   constructor(private appointmentTypeService: AppointmentTypeService) { }
 
@@ -19,8 +20,14 @@ export class ListAppointmentTypeComponent implements OnInit {
   openCreateModal() {
     this.addVisibility = true
   }
+  openEditModal() {
+    this.editVisibility = true
+  }
   toggleAdd() {
     this.addVisibility = false;
+  }
+  toggleEdit() {
+    this.editVisibility = false;
   }
   private find() {
     this.appointmentTypes = this.appointmentTypeService.retrieveAppointmentTypes().pipe(
@@ -34,6 +41,6 @@ export class ListAppointmentTypeComponent implements OnInit {
       this.addVisibility = false;
       this.find();
     }
-
   }
+
 }

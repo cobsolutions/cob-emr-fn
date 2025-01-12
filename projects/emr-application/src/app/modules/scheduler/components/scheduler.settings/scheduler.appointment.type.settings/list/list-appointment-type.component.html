@@ -10,6 +10,7 @@
                 <th scope="col">Appointment Name</th>
                 <th scope="col">Appointment Color</th>
                 <th scope="col">Appointment Font Color</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,13 @@
                         style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
                 <td><Label [style.background]="type.fontColor"
                         style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button cButton variant="outline" size="sm" (click)="openEditModal()">
+                            <svg cIcon name="cilPen"></svg>
+                        </button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -31,5 +39,13 @@
     <c-modal-body>
         <apd-appointment-type *ngIf="addVisibility"
             (changeVisibility)="changeFacilityVisibility($event)"></apd-appointment-type>
+    </c-modal-body>
+</c-modal>
+<c-modal id="editAppoitmentType" [visible]="editVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Edit Appointment Type</h3>
+        <button (click)="toggleEdit()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
     </c-modal-body>
 </c-modal>
