@@ -73,6 +73,9 @@
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
             <td>
                 <ng-container [ngSwitch]="columnName">
+                    <ng-container *ngSwitchCase="'isPublic'" class="py-2">
+                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox">
+                    </ng-container>
                     <ng-container *ngSwitchCase="'attached'" class="py-2">
                         <input cFormCheckInput sizing="sm" [(ngModel)]="item.attached" type="checkbox">
                     </ng-container>

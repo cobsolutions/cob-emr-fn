@@ -31,12 +31,12 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   @ViewChild('calendarsItems') calendarsItems: SmartTableComponent;
   constructor(private calendarServiceService: CalendarServiceService
     , private loggedInService: LoggedInService
-    ,private toastrService: ToastrService) { super(); }
+    , private toastrService: ToastrService) { super(); }
 
   ngOnInit(): void {
     this.catchSelectedClinic();
     this.initListComponent();
-    this.columns = this.constructColumns(['name', 'attached', 'actions']);
+    this.columns = this.constructColumns(['name', 'attached', 'isPublic', 'actions']);
     this.find();
   }
   clearFilter(filter: string) {
@@ -94,34 +94,67 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
       tap(user => {
         model.uuid = user.uuid
         model.clinicId = this.clinicId
-        model.markAsAttached = this.calendarsItems.items.filter((item: any) => item.attached)
-          .map((item: any) => {
-            var calendar: Calendar = {
-              id: item.id,
-              name: item.name,
-              createdBy: item.createdBy,
-              isPublic: item.isPublic,
-              attached: item.attached
-            }
-            return calendar;
-          });
-        model.markAsUnAttached = this.calendarsItems.items.filter((item: any) => !item.attached)
-          .map((item: any) => {
-            var calendar: Calendar = {
-              id: item.id,
-              name: item.name,
-              createdBy: item.createdBy,
-              isPublic: item.isPublic,
-              attached: item.attached
-            }
-            return calendar;
-          });
+        model.markAsAttached = this.markCalendarAsAttached()
+        model.markAsUnAttached = this.markAlendarsAsUnAttached();
+        model.markAsPublic = this.markCalendarAsPublic();
+        model.markAsNotPublic = this.markCalendarAsNotPublic();
       }),
-      switchMap(r=>
-        {return this.calendarServiceService.update( model);}
+      switchMap(r => { return this.calendarServiceService.update(model); }
       )
-    ).subscribe(d=>{
+    ).subscribe(d => {
       this.toastrService.success('Calender is saved successfully');
     });
+  }
+  private markCalendarAsAttached() {
+    return this.calendarsItems.items.filter((item: any) => item.attached)
+      .map((item: any) => {
+        var calendar: Calendar = {
+          id: item.id,
+          name: item.name,
+          createdBy: item.createdBy,
+          isPublic: item.isPublic,
+          attached: item.attached
+        }
+        return calendar;
+      });
+  }
+  private markCalendarAsPublic() {
+    return this.calendarsItems.items.filter((item: any) => item.isPublic)
+      .map((item: any) => {
+        var calendar: Calendar = {
+          id: item.id,
+          name: item.name,
+          createdBy: item.createdBy,
+          isPublic: item.isPublic,
+          attached: item.attached
+        }
+        return calendar;
+      });
+  }
+  private markCalendarAsNotPublic() {
+    return this.calendarsItems.items.filter((item: any) => !item.isPublic)
+      .map((item: any) => {
+        var calendar: Calendar = {
+          id: item.id,
+          name: item.name,
+          createdBy: item.createdBy,
+          isPublic: item.isPublic,
+          attached: item.attached
+        }
+        return calendar;
+      });
+  }
+  private markAlendarsAsUnAttached() {
+    return this.calendarsItems.items.filter((item: any) => !item.attached)
+      .map((item: any) => {
+        var calendar: Calendar = {
+          id: item.id,
+          name: item.name,
+          createdBy: item.createdBy,
+          isPublic: item.isPublic,
+          attached: item.attached
+        }
+        return calendar;
+      });
   }
 }
