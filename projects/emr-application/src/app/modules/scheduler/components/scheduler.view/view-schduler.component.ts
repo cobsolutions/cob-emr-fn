@@ -13,24 +13,23 @@ import {
 import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, map, Observable, Subject, switchMap } from 'rxjs';
+import { filter, map, Observable, skip, Subject, switchMap, take, tap } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { CalendarEvents } from "../../models/calendar/calendars";
 import { SchedulerCalendarEvents } from "../../models/calendar/scheduler.calendar.operation";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
+import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { EventsCalendarService } from "../../service/calendar/events/events-calendar.service";
-import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
-import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
+import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 
 @Component({
   selector: 'app-view-schduler',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./view-schduler.component.css'],
   templateUrl: './view-schduler.component.html',
 })
@@ -39,6 +38,7 @@ export class ViewSchdulerComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
   calendars$!: Observable<Calendar[]>;
+  calendars: Calendar[];
   selectedCalendars: any[] = [];
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
@@ -51,6 +51,7 @@ export class ViewSchdulerComponent implements OnInit {
   schedulerSettings: Observable<Settings>;
   schedulerSettingsa: Settings
   selectedClinic: number;
+
   isLoading: boolean = true;
   constructor(
     private appointmentService: AppointmentService,
@@ -65,8 +66,18 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentEventConverterService: AppointmentEventConverterService
   ) { }
   ngOnInit(): void {
-    this.getSelectedClinic();
-    this.getCalendars()
+    // this.getSelectedClinic().subscribe(clinicId => {
+    //   // this.isLoading = false
+    //   // this.selectedClinic = clinicId;
+    //   c
+    // })
+    this.getSelectedClinic().pipe(
+      take(1),
+    ).subscribe(clinicId => {
+      this.selectedClinic = clinicId;
+      this.getSchedulerSettings(clinicId);
+      this.getCalendars(clinicId);
+    });
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
       weekStartsOn: undefined,
@@ -199,43 +210,83 @@ export class ViewSchdulerComponent implements OnInit {
       })
     })
   }
-  getCalendars() {
-    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
-      filter((clinicId) => clinicId != null),
-      switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
-    )
+  getCalendars(clinicId: any) {
+    this.calendarServiceService.getAttachedCalendars(clinicId).subscribe(calendars => {
+      this.calendars = calendars
+      this.initSelectedCalendar()
+    })
+  }
+  getSchedulerSettings(clinicId: any) {
+    this.schedulerConfigurationService.findSettings(clinicId).subscribe(schedulerSetting => {
+      this.isLoading = false;
+      this.schedulerSettingsa = FetchSchedulerSettings.setup(schedulerSetting)
+      this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
+    })
   }
 
-  onCalendarChange(event: any, calendar: any): void {
-    if (event.target.checked) {
-      this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
-        this.events.push(calendar.id, events)
-        this.selectedCalendars.push(calendar);
-        this.refresh.next();
-      })
-    } else {
-      this.selectedCalendars = this.selectedCalendars.filter(
-        (item) => item.id !== calendar.id
-      );
-      this.events.removeById(calendar.id)
-      this.refresh.next();
-    }
-  }
+
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
   }
   private getSelectedClinic() {
-    this.loggedInService.selectedClinic$.pipe(
+    return this.loggedInService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null)
     )
-      .subscribe(clinicId => {
-        this.selectedClinic = clinicId;
-        this.schedulerConfigurationService.findSettings(clinicId)
-          .subscribe(schedulerSetting => {
-            this.isLoading = false
-            this.schedulerSettingsa = FetchSchedulerSettings.setup(schedulerSetting)
-            this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
-          })
+  }
+  // onCalendarChange(event: any, calendar: any): void {
+  //   if (event.target.checked) {
+  //     this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+  //       this.events.push(calendar.id, events)
+  //       this.selectedCalendars.push(calendar);
+  //       this.refresh.next();
+  //     })
+  //   } else {
+  //     this.selectedCalendars = this.selectedCalendars.filter(
+  //       (item) => item.id !== calendar.id
+  //     );
+  //     this.events.removeById(calendar.id)
+  //     this.refresh.next();
+  //   }
+  // }
+  onChangeCalendars(event: any) {
+
+    this.synchronizeLists(event, this.selectedCalendars)
+  }
+  private pickCalender(calendarId: number): Calendar {
+    return this.calendars.find(calendar => calendar.id === calendarId);
+  }
+  private synchronizeLists(MS: string[], SC: Calendar[]): void {
+    // Create a Set from the ids in SC for quick lookup
+    const scIds = new Set(SC.map((item) => item.id));
+
+    // 1. Add missing ids from MS to SC
+    MS.forEach((id) => {
+      if (!scIds.has(Number(id))) {
+        this.eventsCalendarService.get(Number(id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+          SC.push(this.pickCalender(Number(id))); // Add the missing id as a new Calendar object
+          scIds.add(Number(id)); // Update the set to include the new id
+          this.events.push(Number(id), events)
+          this.refresh.next();
+        })
+      }
+    });
+
+    // 2. Remove ids in SC that are not in MS    
+    for (let i = SC.length - 1; i >= 0; i--) {
+      if (!MS.includes(SC[i].id.toString())) {
+        this.events.removeById(SC[i].id)
+        SC.splice(i, 1); // Remove the item from SC
+        this.refresh.next();
+      }
+    }
+  }
+  private initSelectedCalendar() {
+    this.calendars.forEach(calendar => {
+      this.selectedCalendars.push(calendar)
+      this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+        this.events.push(Number(calendar.id), events)
+        this.refresh.next();
       })
+    })
   }
 }
