@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppointmentType } from '../../../../models/appointment.type';
 
 @Component({
@@ -9,9 +10,28 @@ import { AppointmentType } from '../../../../models/appointment.type';
 export class EditAppointmentTypeComponent implements OnInit {
   @Input() selectedType: AppointmentType
   @Output() changeVisibility = new EventEmitter<string>()
+  appointmentTypeEditForm: FormGroup
+  isValidForm: boolean = false;
+  public color: string = '#2889e9';
   constructor() { }
 
   ngOnInit(): void {
+    this.createForm()
   }
+  private createForm() {
+    this.appointmentTypeEditForm = new FormGroup({
+      'appointment-name': new FormControl(null, [Validators.required]),
+      'appointment-color': new FormControl(null, [Validators.required]),
+      'appointment-font-color': new FormControl(null),
+    })
+  }
+  public onCahngeColor(event: string, data: any): void {
+    this.appointmentTypeEditForm.controls['appointment-color'].setValue(data.color);
+  }
+  public onCahngeFontColor(event: string, data: any): void {
+    this.appointmentTypeEditForm.controls['appointment-font-color'].setValue(data.color);
+  }
+  update() {
 
+  }
 }
