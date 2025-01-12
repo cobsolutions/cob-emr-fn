@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AppointmentType } from '../../../../models/appointment.type';
+import { AppointmentTypeService } from '../../../../service/appointment.type/appointment-type.service';
 
 @Component({
   selector: 'edit-appointment-type',
@@ -13,7 +15,9 @@ export class EditAppointmentTypeComponent implements OnInit {
   appointmentTypeEditForm: FormGroup
   isValidForm: boolean = false;
   public color: string = '#2889e9';
-  constructor() { }
+  public appointmentType: AppointmentType = new AppointmentType();
+  constructor(private appointmentTypeService: AppointmentTypeService
+    , private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -37,7 +41,26 @@ export class EditAppointmentTypeComponent implements OnInit {
     this.appointmentTypeEditForm.controls['appointment-color'].setValue(this.selectedType.color)
     this.appointmentTypeEditForm.controls['appointment-font-color'].setValue(this.selectedType.fontColor)
   }
-  update() {
+  private fillModel() {
+    this.appointmentType.id = this.selectedType.id;
+    this.appointmentType.name = this.appointmentTypeEditForm.controls['appointment-name'].value;
+    this.appointmentType.color = this.appointmentTypeEditForm.controls['appointment-color'].value;
+    this.appointmentType.fontColor = this.appointmentTypeEditForm.controls['appointment-font-color'].value === null ? '#000000' :
+      this.appointmentTypeEditForm.controls['appointment-font-color'].value;
 
+  }
+  update() {
+    if (this.appointmentTypeEditForm.valid) {
+      this.fillModel();
+      this.appointmentTypeService.create(this.appointmentType).subscribe(() => {
+        this.isValidForm = true;
+        this.changeVisibility.emit('close');
+        this.toastrService.success('Successfully updated AppointmentType');
+      }, error => {
+        this.toastrService.error('Error during creating AppointmentType');
+      })
+    } else {
+      this.isValidForm = true;
+    }
   }
 }
