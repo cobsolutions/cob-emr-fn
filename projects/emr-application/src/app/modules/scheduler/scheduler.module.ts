@@ -40,6 +40,7 @@ import { SchedulerRoutingModule } from './scheduler-routing.module';
 import { FullAppointmentComponent } from './components/appointment.add/full.appointment/full-appointment.component';
 import { BlockAppointmentComponent } from './components/appointment.add/block.appointment/block-appointment.component';
 import { EditCalendarComponent } from './components/calendar.edit/edit-calendar.component';
+import { EditAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/edit/edit-appointment-type.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -72,6 +73,7 @@ import { EditCalendarComponent } from './components/calendar.edit/edit-calendar.
         FullAppointmentComponent,
         BlockAppointmentComponent,
         EditCalendarComponent,
+        EditAppointmentTypeComponent,
     ],
     imports: [
         CommonModule,
