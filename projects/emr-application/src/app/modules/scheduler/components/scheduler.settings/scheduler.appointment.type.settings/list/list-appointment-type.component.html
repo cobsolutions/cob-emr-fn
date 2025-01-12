@@ -22,7 +22,7 @@
                         style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button cButton variant="outline" size="sm" (click)="openEditModal()">
+                        <button cButton variant="outline" size="sm" (click)="openEditModal(type)">
                             <svg cIcon name="cilPen"></svg>
                         </button>
                     </div>
@@ -47,7 +47,7 @@
         <button (click)="toggleEdit()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <edit-appointment-type *ngIf="editVisibility"
-            (changeVisibility)="changeEditModalVisibility($event)"></edit-appointment-type>
+        <edit-appointment-type *ngIf="editVisibility" (changeVisibility)="changeEditModalVisibility($event)"
+            [selectedType]="selectedtype"></edit-appointment-type>
     </c-modal-body>
 </c-modal>

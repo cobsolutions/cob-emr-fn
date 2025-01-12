@@ -16,7 +16,8 @@ export class EditAppointmentTypeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.createForm()
+    this.createForm();
+    this.fillForm();
   }
   private createForm() {
     this.appointmentTypeEditForm = new FormGroup({
@@ -30,6 +31,11 @@ export class EditAppointmentTypeComponent implements OnInit {
   }
   public onCahngeFontColor(event: string, data: any): void {
     this.appointmentTypeEditForm.controls['appointment-font-color'].setValue(data.color);
+  }
+  private fillForm() {
+    this.appointmentTypeEditForm.controls['appointment-name'].setValue(this.selectedType.name)
+    this.appointmentTypeEditForm.controls['appointment-color'].setValue(this.selectedType.color)
+    this.appointmentTypeEditForm.controls['appointment-font-color'].setValue(this.selectedType.fontColor)
   }
   update() {
 

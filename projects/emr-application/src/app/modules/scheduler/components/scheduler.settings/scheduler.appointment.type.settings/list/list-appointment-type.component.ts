@@ -12,6 +12,7 @@ export class ListAppointmentTypeComponent implements OnInit {
   addVisibility: boolean = false;
   editVisibility: boolean = false;
   appointmentTypes: Observable<AppointmentType[]>
+  selectedtype: AppointmentType;
   constructor(private appointmentTypeService: AppointmentTypeService) { }
 
   ngOnInit(): void {
@@ -20,7 +21,8 @@ export class ListAppointmentTypeComponent implements OnInit {
   openCreateModal() {
     this.addVisibility = true
   }
-  openEditModal() {
+  openEditModal(type: AppointmentType) {
+    this.selectedtype = type;
     this.editVisibility = true
   }
   toggleAdd() {
