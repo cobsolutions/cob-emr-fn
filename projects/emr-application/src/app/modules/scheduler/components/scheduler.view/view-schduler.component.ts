@@ -13,7 +13,7 @@ import {
 import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, map, Observable, skip, Subject, switchMap, take, tap } from 'rxjs';
+import { filter, forkJoin, map, Observable, skip, Subject, switchMap, take, tap } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { CalendarEvents } from "../../models/calendar/calendars";
@@ -75,8 +75,17 @@ export class ViewSchdulerComponent implements OnInit {
       take(1),
     ).subscribe(clinicId => {
       this.selectedClinic = clinicId;
-      this.getSchedulerSettings(clinicId);
-      this.getCalendars(clinicId);
+      const sources = [this.getCalendars(clinicId), this.getSchedulerSettings(clinicId)]
+      forkJoin(sources)
+        .subscribe(result => {
+          // result[] : [0] calendars , [1] scheduler settings
+          this.calendars = result[0];
+          this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
+          this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
+          this.isLoading = false;
+          this.initSelectedCalendar()
+        });
+
     });
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
@@ -210,18 +219,11 @@ export class ViewSchdulerComponent implements OnInit {
       })
     })
   }
-  getCalendars(clinicId: any) {
-    this.calendarServiceService.getAttachedCalendars(clinicId).subscribe(calendars => {
-      this.calendars = calendars
-      this.initSelectedCalendar()
-    })
+  getCalendars(clinicId: any): Observable<any> {
+    return this.calendarServiceService.getAttachedCalendars(clinicId)
   }
-  getSchedulerSettings(clinicId: any) {
-    this.schedulerConfigurationService.findSettings(clinicId).subscribe(schedulerSetting => {
-      this.isLoading = false;
-      this.schedulerSettingsa = FetchSchedulerSettings.setup(schedulerSetting)
-      this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
-    })
+  getSchedulerSettings(clinicId: any): Observable<any> {
+    return this.schedulerConfigurationService.findSettings(clinicId)
   }
 
 
