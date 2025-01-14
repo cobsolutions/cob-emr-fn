@@ -1,5 +1,6 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 <form cForm #caseForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
+    <!--Case essential Information-->
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -45,7 +46,7 @@
             </c-input-group>
         </c-card-body>
     </c-card>
-
+    <!--Case Insurance Information-->
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -53,7 +54,8 @@
             </h6>
             <c-form-check [switch]="true" class="mb-2">
                 <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseInsuranceInformation.isSelfPay"
-                    #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" disable-input [componentRole]="componentRole"/>
+                    #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" disable-input
+                    [componentRole]="componentRole" />
                 <label cFormCheckLabel>SefPayed</label>
             </c-form-check>
             <span *ngIf="case.caseInsuranceInformation.isSelfPay">
@@ -93,7 +95,7 @@
             </span>
         </c-card-body>
     </c-card>
-
+    <!--Case Diagnosis Information-->
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -113,6 +115,7 @@
 
         </c-card-body>
     </c-card>
+    <!--Case Referral Information-->
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -186,7 +189,7 @@
                 Referring Email is required
             </small>
             <c-input-group class="mb-3" sizing="sm">
-                <span cInputGroupText id="basic-addon1">@</span>
+                <span cInputGroupText id="basic-addon1">&#64;</span>
                 <input type="email" placeholder="Enter Contact Email" cFormControl id="referringemail"
                     name="referringemail" sizing="sm" required
                     [ngClass]="{'is-invalid': referringemail.invalid && (referringemail.dirty || referringemail.touched)}"
@@ -194,7 +197,20 @@
             </c-input-group>
         </c-card-body>
     </c-card>
-
+    <!--Therapist-->
+    <c-card cBorder="primary" class="mb-2">
+        <c-card-body>
+            <h6 cCardTitle>
+                <strong>Assigned Therapist</strong>
+            </h6>            
+            <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="case.therapist" name="therapist">
+                <option *ngFor="let therapist of therapists" [value]="therapist.id">
+                    {{therapist.accountName}}
+                </option>
+            </select>
+        </c-card-body>
+    </c-card>
+    <!--Other Information-->
     <c-card cBorder="primary" class="mb-2">
         <c-card-body>
             <h6 cCardTitle>
@@ -202,7 +218,8 @@
             </h6>
             <c-form-check [switch]="true" class="mb-2">
                 <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseOtherInformation.isAuthorized"
-                    #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" disable-input [componentRole]="componentRole" />
+                    #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" disable-input
+                    [componentRole]="componentRole" />
                 <label cFormCheckLabel>Authorization Required</label>
             </c-form-check>
 
@@ -224,7 +241,8 @@
         </c-card-body>
     </c-card>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" cButton color="primary" variant="outline" (click)="add()" dispaly-input [componentRole]="componentRole">Add</button>
+        <button type="submit" cButton color="primary" variant="outline" (click)="add()" dispaly-input
+            [componentRole]="componentRole">Add</button>
     </div>
 </form>
 <table class="table table-sm">
@@ -245,7 +263,8 @@
             <td>{{emergenctContact.injuryCase}}</td>
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
+                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input
+                        [componentRole]="componentRole">
                         <svg cIcon name="cilTrash"></svg>
                     </button>
                 </c-button-group>

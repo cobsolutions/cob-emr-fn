@@ -52,6 +52,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "ngx-color-picker": "^13.0.0",
+    "ngx-cookie-service": "^14.0.0",
     "ngx-spinner": "^14.0.0",
     "ngx-toastr": "^15.0.0",
     "positioning": "^2.0.1",

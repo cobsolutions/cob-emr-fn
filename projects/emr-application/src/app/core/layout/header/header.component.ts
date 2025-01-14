@@ -43,11 +43,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
     })
     this.ksAuthService.isLoggedIn()
       .then((loggedIn) => {
+        if (!localStorage.getItem('user-uuid'))
+          localStorage.setItem('user-uuid', this.ksAuthService.getLoggedUser().sub)
         if (loggedIn) {
           this.loggedInService.load().subscribe((result: LoggedInUser) => {
             this.userName = result.userName
             this.clinics = result.clinics
             this.selectedValue = result.clinics[0].id
+            this.loggedInService.selectedClinic$.next(Number(result.clinics[0].id))
             this.loggedIn = this.capitalizeFirstLetter(result.lastName) + '' + this.capitalizeFirstLetter(result.firstName)
           })
         }

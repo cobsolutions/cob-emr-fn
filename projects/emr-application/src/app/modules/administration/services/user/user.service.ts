@@ -11,7 +11,7 @@ import { User } from '../../model/user/user';
 export class UserService {
   private clinicalUserUrl = environment.baseURL + '/clinical/user'
   private clericalUserUrl = environment.baseURL + '/clerical/user'
-  private userUrl = environment.baseURL + '/user'
+  private userUrl = environment.baseURL + 'user'
   uuid: string
   accessToken: string;
   constructor(private httpClient: HttpClient
@@ -28,12 +28,12 @@ export class UserService {
   }
   createClericalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
-    var createURL =  this.clericalUserUrl + '/create'
+    var createURL = this.clericalUserUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
   updateClericalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
-    var createURL =  this.clericalUserUrl + '/update'
+    var createURL = this.clericalUserUrl + '/update'
     return this.httpClient.put(`${createURL}`, JSON.stringify(user), { 'headers': headers })
   }
   update(user: User) {
@@ -75,12 +75,17 @@ export class UserService {
       return of(this.accessToken);
     }
   }
-  checkUserName(userName:string){
-    var url = this.userUrl +'/check/username/' + userName
+  checkUserName(userName: string) {
+    var url = this.userUrl + '/check/username/' + userName
     return this.httpClient.get(url);
   }
-  checkEmail(email:string){
-    var url = this.userUrl +'/check/email/' + email
+  checkEmail(email: string) {
+    var url = this.userUrl + '/check/email/' + email
+    return this.httpClient.get(url);
+  }
+
+  getLoggedInUser(uuid: string) {
+    var url = environment.baseURL + 'loggedIn/user/cache/' + uuid
     return this.httpClient.get(url);
   }
 }
