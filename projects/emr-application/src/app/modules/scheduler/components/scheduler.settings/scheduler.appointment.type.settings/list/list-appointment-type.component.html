@@ -17,9 +17,9 @@
             <tr *ngFor=" let type of(appointmentTypes |async) ">
                 <td>{{type.name}}</td>
                 <td><Label [style.background]="type.color"
-                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
+                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;border-style: solid; border-width: 1px;"></Label></td>
                 <td><Label [style.background]="type.fontColor"
-                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;"></Label></td>
+                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;border-style: solid; border-width: 1px;"></Label></td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button cButton variant="outline" size="sm" (click)="openEditModal(type)">
