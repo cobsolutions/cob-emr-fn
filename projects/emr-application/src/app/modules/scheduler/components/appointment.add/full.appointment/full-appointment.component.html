@@ -46,7 +46,8 @@
                                     name="startDate" [(ngModel)]="appointment.appointmentDate.startDate"
                                     (dateChange)="changestartDate($event)"></c-date-picker></c-col>
                             <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
-                                    [(ngModel)]="appointment.appointmentDate.startTime" (timeChange)="changeStartTime($event)"></c-time-picker></c-col>
+                                    [(ngModel)]="appointment.appointmentDate.startTime"
+                                    (timeChange)="changeStartTime($event)"></c-time-picker></c-col>
                         </c-row>
                     </div>
                     <c-row>
@@ -94,9 +95,8 @@
                     <select cFormControl cSelect class="mb-2" sizing="sm" id="appTherapy" name="appTherapy"
                         [ngClass]="{'is-invalid': appTherapy.invalid && (appTherapy.dirty || appTherapy.touched)}"
                         [(ngModel)]="appointment.therapyUUID" #appTherapy="ngModel" required>
-                        <option [ngValue]="null" disabled selected>Select Therapy</option>
                         <option *ngFor="let therapy of this.therapists" [value]="therapy.uuid">
-                            {{therapy.lastName +', ' + therapy.firstName}}
+                            {{therapy.lastName +', ' + therapy.firstName }}
                         </option>
                     </select>
                 </c-card-body>

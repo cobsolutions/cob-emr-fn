@@ -67,7 +67,9 @@ export class FullAppointmentComponent implements OnInit {
     this.selectPatientClinic();
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
       this.therapists = therapists;
-      this.appointment.therapyUUID = this.therapists[0].uuid;
+      this.therapists[1].selected = true
+      //this.appointment.therapyUUID = this.therapists[0].uuid;
+      this.appointment.therapyUUID = this.selectedPateint.cases[0].therapistUUID
     })
     this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
       this.appointmentTypes = types;

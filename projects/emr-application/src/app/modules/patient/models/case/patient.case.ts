@@ -16,5 +16,6 @@ export interface PatientCase {
     caseDiagnosis?: CaseDiagnosis[] ;
     referralCase?: ReferralCase ;
     therapist?: number;
+    therapistUUID?:string;
     caseOtherInformation?: CaseOtherInformation;
 }
