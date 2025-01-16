@@ -12,17 +12,13 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
   providedIn: 'root'
 })
 export class CalendarServiceService extends BasePaginationService {
-  private baseUrl = environment.baseURL + 'calendar'
+  private baseUrl = environment.baseURL + 'calendarq'
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) {
     super(httpClient, loggedInService)
   }
 
-  public findAll(config$: BehaviorSubject<IApiParams>, clinicId: number): Observable<any> {
-    return this.loggedInService.load().pipe(
-      switchMap(user => {
-        return this._get(config$, this.baseUrl + "/get/uuid/" + user.uuid + '/clinicId/' + clinicId)
-      })
-    )
+  public findAll(config$: BehaviorSubject<IApiParams>, clinicId: number , uuid:string): Observable<any> {
+     return this._get(config$, this.baseUrl + "/list/clinic-id/" + clinicId + '/user/' + uuid)
   }
   public create(model: Calendar) {
     const headers = { 'content-type': 'application/json' }

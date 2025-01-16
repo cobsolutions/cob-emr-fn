@@ -52,14 +52,6 @@
         <c-button-group aria-label="Button outlined group with nested dropdown" role="group">
             <button cButton color="primary" variant="outline" (click)="openAddCalendarModal()">Add Calendar</button>
             <button cButton color="primary" variant="outline" (click)="updateCalendar()">Save</button>
-            <!-- <c-dropdown variant="btn-group">
-                <button cButton cDropdownToggle>
-                    Actions
-                </button>
-                <ul cDropdownMenu variant="outline">
-                    <li><a cDropdownItem [routerLink]="[]" (click)="updateCalendar()">Save</a></li>
-                </ul>
-            </c-dropdown> -->
         </c-button-group>
     </c-col>
 </c-row>
@@ -77,7 +69,7 @@
                         <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox">
                     </ng-container>
                     <ng-container *ngSwitchCase="'attached'" class="py-2">
-                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.attached" type="checkbox">
+                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isAttach" type="checkbox">
                     </ng-container>
                     <ng-container *ngSwitchCase="'actions'" class="py-2">
                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -113,6 +105,7 @@
         <button (click)="toggleEdit()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar" (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
+        <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar"
+            (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
     </c-modal-body>
 </c-modal>

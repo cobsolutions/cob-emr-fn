@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { CalendarsUpdateModel } from '../../../administration/model/calendar/calendar.update.model';
+import { CalendarsListModel } from '../../../administration/model/calendars.list.model';
 import { ListTemplate } from '../../../common/template/list.template';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
@@ -24,7 +25,7 @@ interface SearchCriteria {
 export class CalendarListComponent extends ListTemplate implements OnInit {
 
   searchCriteria: SearchCriteria = {};
-  calendars$!: Observable<Calendar[]>;
+  calendars$!: Observable<CalendarsListModel[]>;
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
   clinicId: number;
@@ -67,7 +68,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   private find() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
       switchMap(clinicId => {
-        return this.calendarServiceService.findAll(this.apiParams$, clinicId).pipe(
+        return this.calendarServiceService.findAll(this.apiParams$, clinicId,this.loggedInService.loggedInUser.uuid).pipe(
 
           tap((response: any) => {
             this.totalItems$.next(response.number_of_matching_records);
