@@ -39,7 +39,7 @@
                             </c-input-group>
                         </c-col>
                         <c-col xs="12" class="text-center">
-                            <button cButton class="me-1" color="primary" style="width: 15%;" (click)="search()">
+                            <button cButton class="me-1" color="primary" (click)="search()">
                                 Search
                             </button>
                         </c-col>
@@ -66,7 +66,8 @@
             <td>
                 <ng-container [ngSwitch]="columnName">
                     <ng-container *ngSwitchCase="'isPublic'" class="py-2">
-                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox">
+                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox"
+                            [disabled]="!(item.createdBy === loggedInUserUUID)">
                     </ng-container>
                     <ng-container *ngSwitchCase="'attached'" class="py-2">
                         <input cFormCheckInput sizing="sm" [(ngModel)]="item.isAttach" type="checkbox">

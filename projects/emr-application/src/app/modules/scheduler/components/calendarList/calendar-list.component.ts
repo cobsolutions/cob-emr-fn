@@ -4,6 +4,9 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
+import { CalendarAccessibilityAttributesModel } from '../../../administration/model/calendar/calendar.accessibility.attributes.model';
+import { CalendarAttachmentAttributesModel } from '../../../administration/model/calendar/calendar.attachment.attributes.model';
+import { CalendarUpdateAttributeModel } from '../../../administration/model/calendar/calendar.update.attribute.model';
 import { CalendarsUpdateModel } from '../../../administration/model/calendar/calendar.update.model';
 import { CalendarsListModel } from '../../../administration/model/calendars.list.model';
 import { ListTemplate } from '../../../common/template/list.template';
@@ -31,12 +34,14 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   clinicId: number;
   editCalendarVisibility: boolean = false;
   selectedCalednar: Calendar;
+  loggedInUserUUID: string
   @ViewChild('calendarsItems') calendarsItems: SmartTableComponent;
   constructor(private calendarServiceService: CalendarServiceService
     , private loggedInService: LoggedInService
     , private toastrService: ToastrService) { super(); }
 
   ngOnInit(): void {
+    this.loggedInUserUUID = this.loggedInService.getLoggedUser().uuid;
     this.catchSelectedClinic();
     this.initListComponent();
     this.columns = this.constructColumns(['name', 'attached', 'isPublic', 'actions']);
@@ -99,76 +104,39 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
     }
   }
   updateCalendar() {
-    var model: CalendarsUpdateModel = {}
-
-    this.calendarServiceService.update(model)
-    model.uuid = this.loggedInService.getLoggedUser().uuid;
-    model.clinicId = this.clinicId
-    model.markAsAttached = this.markCalendarAsAttached()
-    model.markAsUnAttached = this.markAlendarsAsUnAttached();
-    model.markAsPublic = this.markCalendarAsPublic();
-    model.markAsNotPublic = this.markCalendarAsNotPublic();
+    const model = this.fillModel();
     this.calendarServiceService.update(model)
       .subscribe(() => {
         this.toastrService.success('Calender is saved successfully');
       });
   }
-  private markCalendarAsAttached() {
-    return this.calendarsItems.items.filter((item: any) => item.attached)
-      .map((item: any) => {
-        var calendar: Calendar = {
-          id: item.id,
-          name: item.name,
-          createdBy: item.createdBy,
-          isPublic: item.isPublic,
-          attached: item.attached
-        }
-        return calendar;
-      });
-  }
-  private markCalendarAsPublic() {
-    return this.calendarsItems.items.filter((item: any) => item.isPublic)
-      .map((item: any) => {
-        var calendar: Calendar = {
-          id: item.id,
-          name: item.name,
-          createdBy: item.createdBy,
-          isPublic: item.isPublic,
-          attached: item.attached
-        }
-        return calendar;
-      });
-  }
-  private markCalendarAsNotPublic() {
-    return this.calendarsItems.items.filter((item: any) => !item.isPublic)
-      .map((item: any) => {
-        var calendar: Calendar = {
-          id: item.id,
-          name: item.name,
-          createdBy: item.createdBy,
-          isPublic: item.isPublic,
-          attached: item.attached
-        }
-        return calendar;
-      });
-  }
-  private markAlendarsAsUnAttached() {
-    return this.calendarsItems.items.filter((item: any) => !item.attached)
-      .map((item: any) => {
-        var calendar: Calendar = {
-          id: item.id,
-          name: item.name,
-          createdBy: item.createdBy,
-          isPublic: item.isPublic,
-          attached: item.attached
-        }
-        return calendar;
-      });
-  }
+
   changeEditVisibility(event: any) {
     if (event === 'close') {
       this.editCalendarVisibility = false;
       this.find()
+    }
+  }
+  private fillModel(): CalendarUpdateAttributeModel {
+    var calendarAttachmentAttributes: CalendarAttachmentAttributesModel[] = []
+    var calendarAccessibilityAttributes: CalendarAccessibilityAttributesModel[] = []
+    this.calendarsItems.items.forEach((item: any) => {
+      var calendarAttachmentAttributesModel: CalendarAttachmentAttributesModel = {
+        calendarId: item.calendarId,
+        userAttachmentId: item.userCalendarAttachmentId,
+        isAttach: item.isAttach
+      }
+      calendarAttachmentAttributes.push(calendarAttachmentAttributesModel);
+      var calendarAccessibilityAttributesModel: CalendarAccessibilityAttributesModel = {
+        calendarId: item.calendarId,
+        isPublic: item.isPublic
+      }
+      calendarAccessibilityAttributes.push(calendarAccessibilityAttributesModel)
+    })
+    return {
+      calendarAttachmentAttributes: calendarAttachmentAttributes,
+      calendarAccessibilityAttributes: calendarAccessibilityAttributes,
+      uuid: this.loggedInService.getLoggedUser().uuid
     }
   }
 }
