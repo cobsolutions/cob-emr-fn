@@ -54,14 +54,6 @@ export class ReferringProviderService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organiationId: number) => {
-        return this.httpClient
-          .get<IData>(this.baseURL + "/find/organizationId/" + organiationId, options)
-      })
-    )
+    return this.httpClient.get<IData>(this.baseURL + "/find/organizationId/" + this.loggedInService.getLoggedUser().organizationId, options)
   }
 }

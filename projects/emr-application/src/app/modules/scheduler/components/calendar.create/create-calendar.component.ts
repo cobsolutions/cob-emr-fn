@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { switchMap, tap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
@@ -31,15 +31,12 @@ export class CreateCalendarComponent implements OnInit {
     var model: Calendar;
     if (this.calendarForm?.valid) {
       this.isValidForm = false;
-      this.loggedInService.load().pipe(
-        switchMap(user => {
-          model = this.buildCalendarModel();
-          model.createdBy = user.uuid
-          return this.calendarServiceService.create(model)
+      model = this.buildCalendarModel();
+      model.createdBy = this.loggedInService.getLoggedUser().uuid;
+      this.calendarServiceService.create(model)
+        .subscribe(result => {
+          this.changeVisibility.emit('close');
         })
-      ).subscribe(result => {
-        this.changeVisibility.emit('close');
-      })
     } else {
       this.isValidForm = true;
     }

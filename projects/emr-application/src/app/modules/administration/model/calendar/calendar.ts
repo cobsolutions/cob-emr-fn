@@ -6,5 +6,6 @@ export interface Calendar{
     isPublic?:boolean,
     createdBy?:string
     attached?:boolean
+    clinicId?:number
     events?: CalendarEvent[];
 }

@@ -34,14 +34,8 @@ export class EditInsuranceCompanyComponent implements OnInit {
   update() {
     if (this.editInsuranceCompanyForm.valid && this.isValidAddress()) {
       this.changeVisibility.emit('close');
-      this.loggedInService.load().pipe(
-        tap((loggedInUser: LoggedInUser) => {
-          this.insuranceCompany.organizationId = loggedInUser.organizationId;
-        })
-        , switchMap((result: any) => {
-          return this.insuranceCompanyService.create(this.insuranceCompany)
-        })
-      )
+      this.insuranceCompany.organizationId = this.loggedInService.getLoggedUser().organizationId;
+      this.insuranceCompanyService.create(this.insuranceCompany)
         .subscribe(() => {
           this.editInsuranceCompanyForm.reset();
           this.toastr.success('Insurance Company Update.');

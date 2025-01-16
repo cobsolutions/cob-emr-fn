@@ -34,11 +34,7 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
     , private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.clinics$ = this.loggedInService.load().pipe(
-      switchMap((loggedInUser: LoggedInUser) => {
-        return this.schedulerConfigurationService.findNotConfigurlableClinics(loggedInUser.organizationId)
-      })
-    )
+    this.clinics$ = this.schedulerConfigurationService.findNotConfigurlableClinics(this.loggedInService.getLoggedUser().organizationId)
     if (this.mode === 'update') {
       this.fillModel();
     }
@@ -64,12 +60,8 @@ export class CreateSchedulerConfigurationComponent implements OnInit {
   create() {
     if (this.isValidForm()) {
       this.prepareSchedulerConfiguration()
-      this.loggedInService.load().pipe(
-        switchMap((loggedInUser: LoggedInUser) => {
-          this.schedulerConfiguration.organizationId = loggedInUser.organizationId
-          return this.schedulerConfigurationService.create(this.schedulerConfiguration)
-        })
-      ).subscribe(result => {
+      this.schedulerConfiguration.organizationId = this.loggedInService.getLoggedUser().organizationId;
+      this.schedulerConfigurationService.create(this.schedulerConfiguration).subscribe(result => {
         this.toastr.success('Scheduler Configuration Created.');
         this.changeVisibility.emit('close-create');
       })

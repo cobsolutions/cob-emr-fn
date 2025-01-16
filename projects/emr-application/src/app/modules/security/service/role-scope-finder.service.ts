@@ -17,21 +17,15 @@ export class RoleScopeFinderService {
     if (cachedData) {
       return of(cachedData)
     } else {
-      return this.loggedInService.load().pipe(
-        map((loggedInUser: any) => {
-          this.uuid = loggedInUser.uuid;
-          return loggedInUser.uuid;
-        }),
-        switchMap((uuid: string) => {
-          var userRole: string[] = this.keycloakAngular.getUserRoles();
-          console.log(userRole)
-          return this.userService.findUSerRoleScope(uuid, RoleScopeRequestBuilder.builder(userRole))
-        }),
+      var userRole: string[] = this.keycloakAngular.getUserRoles();
+      console.log(userRole)
+      return this.userService.findUSerRoleScope(this.loggedInService.getLoggedUser().uuid, RoleScopeRequestBuilder.builder(userRole)).pipe(
         map(data => {
           this.cache.set(this.uuid, data);
           return data;
         })
       )
+
     }
   }
 }

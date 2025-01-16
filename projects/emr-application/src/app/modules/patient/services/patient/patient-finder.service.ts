@@ -30,12 +30,9 @@ export class PatientFinderService {
   }
 
   getClinicsForPatient(): Observable<any> {
-    return this.loggedInService.load().pipe(
-      switchMap((loggedInUser: LoggedInUser) => {
-        var getPatientURL = environment.baseURL + 'clinic/find/organization/' + loggedInUser.organizationId
-        return this.httpClient.get<Clinic[]>(`${getPatientURL}`, { observe: 'response' });
-      })
-    )
+    var getPatientURL = environment.baseURL + 'clinic/find/organization/' + this.loggedInService.getLoggedUser().organizationId;
+    return this.httpClient.get<Clinic[]>(`${getPatientURL}`, { observe: 'response' });
+
   }
   getPatientsByName(name: string) {
     return this.loggedInService.selectedClinic$.pipe(

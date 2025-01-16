@@ -1,33 +1,37 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { CookieService } from 'ngx-cookie-service';
-import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, forkJoin, from, map, Observable, of, ReplaySubject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, of, switchMap, tap } from 'rxjs';
 import { UserService } from '../../../administration/services/user/user.service';
-import { IApiParams } from '../../../common/interfaces/api.params';
-import { Clinic } from '../../../patient/models/clinic';
+import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { LoggedInUser } from '../../model/loggedin.user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggedInService {
-  loggedInUser: LoggedInUser
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   public changeSelectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
-
   constructor(
-    private userService: UserService) { }
+    private userService: UserService
+    , private keycloakService: KeycloakService
+    , private encryptService: EncryptService) { }
 
-  public load(): Observable<any> {
-    const uuid = localStorage.getItem('user-uuid');
-    if (!this.loggedInUser)
-      return this.userService.getLoggedInUser(uuid).pipe(
-        tap(loggedInUser => {
-          this.loggedInUser = loggedInUser;
-        }))
-    else
-      return of(this.loggedInUser);
+  public getObservableLoggedUser() {
+    if (!localStorage.getItem('LOGGEDINUSR')) {
+      return from(this.keycloakService.getKeycloakInstance().loadUserInfo()).pipe(
+        switchMap((user: any) => {
+          return this.userService.getLoggedInUser(user.sub)
+        }), tap(loggedInUser => {
+          const _str: string = JSON.stringify(loggedInUser);
+          localStorage.setItem('LOGGEDINUSR', this.encryptService.encrypt(_str));
+        })
+      )
+    } else {
+      return of(this.getLoggedUser())
+    }
+  }
+  public getLoggedUser(): LoggedInUser {
+    const _decryptUser: string = this.encryptService.decrypt(localStorage.getItem('LOGGEDINUSR'));
+    return JSON.parse(_decryptUser);
   }
 }

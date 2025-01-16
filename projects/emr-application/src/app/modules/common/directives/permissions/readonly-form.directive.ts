@@ -8,13 +8,13 @@ import { MatchRole } from './match.role';
 @Directive({
   selector: '[readonly-form]'
 })
-export class ReadonlyFormDirective  implements OnInit{
+export class ReadonlyFormDirective implements OnInit {
   @Input() componentRole?: string[]
   constructor(private el: ElementRef, private form: NgForm, private loggedInService: LoggedInService) { }
   ngOnInit(): void {
-    this.loggedInService.load().subscribe((result: LoggedInUser) => {
-      var roleScope: UserRoleScope = MatchRole.match(result.userRoleScope,this.componentRole)
-      if (roleScope !== undefined && roleScope.scope === 'view')
+
+    var roleScope: UserRoleScope = MatchRole.match(this.loggedInService.getLoggedUser().userRoleScope, this.componentRole)
+    if (roleScope !== undefined && roleScope.scope === 'view')
       setTimeout(() => {
         Object.keys(this.form.controls).forEach(controlName => {
           // Setting readonly property to true
@@ -26,7 +26,7 @@ export class ReadonlyFormDirective  implements OnInit{
           inputElement.style = 'background-color:white'
         });
       }, 1)
-    })
+
   }
 
 }

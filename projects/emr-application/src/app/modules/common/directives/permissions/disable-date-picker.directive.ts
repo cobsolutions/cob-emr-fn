@@ -12,11 +12,11 @@ export class DisableDatePickerDirective implements OnInit {
   @Input() componentRole?: string[]
   constructor(private el: ElementRef, private datePickerComponent: DatePickerComponent, private loggedInService: LoggedInService) { }
   ngOnInit(): void {
-    this.loggedInService.load().subscribe((result: LoggedInUser) => {
-      var roleScope: UserRoleScope = MatchRole.match(result.userRoleScope, this.componentRole);
-      if (roleScope !== undefined && roleScope.scope === 'view')
-        this.datePickerComponent.setDisabledState(true)
-    });
+
+    var roleScope: UserRoleScope = MatchRole.match(this.loggedInService.getLoggedUser().userRoleScope, this.componentRole);
+    if (roleScope !== undefined && roleScope.scope === 'view')
+      this.datePickerComponent.setDisabledState(true)
+
   }
 
 }

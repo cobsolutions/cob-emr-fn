@@ -60,25 +60,14 @@ export class InsuranceCompanyService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organiationId: number) => {
-        return this.httpClient
-          .get<PaginationData>(this.baseUrl + "/find/organization/" + organiationId, options)
-      })
-    )
+    return this.httpClient
+      .get<PaginationData>(this.baseUrl + "/find/organization/" + this.loggedInService.getLoggedUser().organizationId, options)
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);
   }
   public findAll(): Observable<any> {
-    return this.loggedInService.load().pipe(
-      switchMap((loggedInUser: LoggedInUser) => {
-        var url = this.baseUrl + '/find/all/organization/' + loggedInUser.organizationId
-        return this.httpClient.get<InsuranceCompany[]>(`${url}`, { observe: 'response' });
-      })
-    )
+    var url = this.baseUrl + '/find/all/organization/' + this.loggedInService.getLoggedUser().organizationId;
+    return this.httpClient.get<InsuranceCompany[]>(`${url}`, { observe: 'response' });
   }
 }

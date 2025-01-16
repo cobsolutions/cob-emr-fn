@@ -68,7 +68,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   private find() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
       switchMap(clinicId => {
-        return this.calendarServiceService.findAll(this.apiParams$, clinicId,this.loggedInService.loggedInUser.uuid).pipe(
+        return this.calendarServiceService.findAll(this.apiParams$, clinicId).pipe(
 
           tap((response: any) => {
             this.totalItems$.next(response.number_of_matching_records);
@@ -100,20 +100,18 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   }
   updateCalendar() {
     var model: CalendarsUpdateModel = {}
-    this.loggedInService.load().pipe(
-      tap(user => {
-        model.uuid = user.uuid
-        model.clinicId = this.clinicId
-        model.markAsAttached = this.markCalendarAsAttached()
-        model.markAsUnAttached = this.markAlendarsAsUnAttached();
-        model.markAsPublic = this.markCalendarAsPublic();
-        model.markAsNotPublic = this.markCalendarAsNotPublic();
-      }),
-      switchMap(r => { return this.calendarServiceService.update(model); }
-      )
-    ).subscribe(d => {
-      this.toastrService.success('Calender is saved successfully');
-    });
+
+    this.calendarServiceService.update(model)
+    model.uuid = this.loggedInService.getLoggedUser().uuid;
+    model.clinicId = this.clinicId
+    model.markAsAttached = this.markCalendarAsAttached()
+    model.markAsUnAttached = this.markAlendarsAsUnAttached();
+    model.markAsPublic = this.markCalendarAsPublic();
+    model.markAsNotPublic = this.markCalendarAsNotPublic();
+    this.calendarServiceService.update(model)
+      .subscribe(() => {
+        this.toastrService.success('Calender is saved successfully');
+      });
   }
   private markCalendarAsAttached() {
     return this.calendarsItems.items.filter((item: any) => item.attached)
@@ -167,7 +165,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
         return calendar;
       });
   }
-  changeEditVisibility(event:any){
+  changeEditVisibility(event: any) {
     if (event === 'close') {
       this.editCalendarVisibility = false;
       this.find()

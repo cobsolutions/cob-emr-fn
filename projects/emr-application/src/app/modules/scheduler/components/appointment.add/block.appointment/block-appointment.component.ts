@@ -84,8 +84,8 @@ export class BlockAppointmentComponent implements OnInit {
   }
   private getScehdulerSettings() {
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
-      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-      this.getCalendars();
+    this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+    this.getCalendars();
   }
   private validate(): boolean {
 
@@ -111,7 +111,7 @@ export class BlockAppointmentComponent implements OnInit {
     this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
     ).subscribe(clinicId => {
-      this.selectedClinic = this.loggedInService.loggedInUser.clinics
+      this.selectedClinic = this.loggedInService.getLoggedUser().clinics
         .filter(clinic => Number(clinic.id) === Number(clinicId))[0];
       this.appointment.clinicId = clinicId
     })
@@ -121,7 +121,7 @@ export class BlockAppointmentComponent implements OnInit {
       (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
         moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
   }
-  changeStartTime(event:Date){
-    this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval , 'minutes').toDate();
+  changeStartTime(event: Date) {
+    this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();
   }
 }

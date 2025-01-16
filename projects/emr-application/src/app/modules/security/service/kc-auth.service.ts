@@ -33,6 +33,7 @@ export class KcAuthService {
   }
 
   public logout(): void {
+    localStorage.removeItem('LOGGEDINUSR')
     localStorage.removeItem('access-token')
     localStorage.removeItem('org');
     this.keycloakService.logout(window.location.origin);

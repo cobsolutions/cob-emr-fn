@@ -32,20 +32,14 @@ export class CreateClinicComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-   
+
   }
   create() {
     this.validAddress = this.isAddressValid();
     if (this.clinicCreateForm.valid && this.validAddress) {
       this.submitted = false;
-      this.loggedInService.load().pipe(
-        tap((loggedInUser: LoggedInUser) => {
-          this.clinic.organizationId = loggedInUser.organizationId
-        }),
-        switchMap((result: any) => {
-          return this.clinicService.create(this.clinic);
-        })
-      ).subscribe(dd => {
+      this.clinic.organizationId = this.loggedInService.getLoggedUser().organizationId
+      this.clinicService.create(this.clinic).subscribe(dd => {
         if (this.isCreated)
           this.toastr.success('Clinic Created');
         else

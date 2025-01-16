@@ -53,7 +53,7 @@ export class AppointmentActionModalComponent implements OnInit {
   private initAppointmentPatientInfo() {
     console.log(this.data.event.id)
     const [patientName, patientCase] = this.data.event.title.split(':');
-    const formattedPatientCase = patientCase !== undefined? (patientCase.includes('<br/>')
+    const formattedPatientCase = patientCase !== undefined ? (patientCase.includes('<br/>')
       ? patientCase.split('<br/>')[0]
       : patientCase) : "";
     this.patientName = patientName
@@ -76,26 +76,19 @@ export class AppointmentActionModalComponent implements OnInit {
     this.appointmentActionsService.promptPatientClinics(this.dialog, clinics, this.patientId)
   }
   private checkPatientChartAccessibility() {
-    var sources: any = [
-      this.loggedInService.selectedClinic$,
-      this.loggedInService.load()
-    ]
-    combineLatest(sources).pipe(
-      map(result => {
-        {
-          return {
-            patientId: this.patientId,
-            clinicId: result[0],
-            allowedClinics: result[1].clinics.map(clinic => {
-              return clinic.id
-            })
-          }
+    this.loggedInService.selectedClinic$.pipe(
+      map(clinicId => {
+        return {
+          patientId: this.patientId,
+          clinicId: clinicId[0],
+          allowedClinics: this.loggedInService.getLoggedUser().clinics.map(clinic => {
+            return clinic.id
+          })
         }
-      })
-      , switchMap(model => {
+      }),
+      switchMap((model: any) => {
         return this.patientChartCheckerService.check(model)
-      }
-      )
+      })
     ).subscribe((result: any) => {
       this.patientChartAccessibilityModelResponse = result
     })
