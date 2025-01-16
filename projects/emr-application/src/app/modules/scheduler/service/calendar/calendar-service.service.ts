@@ -19,21 +19,16 @@ export class CalendarServiceService extends BasePaginationService {
 
   public findAll(config$: BehaviorSubject<IApiParams>, clinicId: number): Observable<any> {
     return this._get(config$, this.baseUrl + "/list/clinic-id/" + clinicId + '/user/' + this.loggedInService.getLoggedUser().uuid)
-    
+
   }
   public create(model: Calendar) {
     const headers = { 'content-type': 'application/json' }
     const url = this.baseUrl + "/create"
-    return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => {
-        model.clinicId = clinicId;
-        return this.httpClient.post(`${url}`, JSON.stringify(model), { 'headers': headers })
-      })
-    )
+    return this.httpClient.post(`${url}`, JSON.stringify(model), { 'headers': headers })
   }
   public getAttachedCalendars(clinicId: string): Observable<any> {
     return this.httpClient.get(this.baseUrl + "/get-attached/clinicId/" + clinicId + "/uuid/" + this.loggedInService.getLoggedUser().uuid)
-    
+
   }
   public update(model: CalendarsUpdateModel) {
     const headers = { 'content-type': 'application/json' }

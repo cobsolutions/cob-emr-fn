@@ -97,7 +97,7 @@
     </c-modal-header>
     <c-modal-body>
         <create-calendar *ngIf="createCalendarVisibility"
-            (changeVisibility)="changeVisibility($event)"></create-calendar>
+            (changeCreateVisibility)="changeCreateVisibility($event)" [clinicId]="clinicId"></create-calendar>
     </c-modal-body>
 </c-modal>
 <c-modal id="editClinic" [visible]="editCalendarVisibility" size="sm" backdrop="static">

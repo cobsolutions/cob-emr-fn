@@ -68,28 +68,23 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   private catchSelectedClinic() {
     this.loggedInService.selectedClinic$.subscribe(clinicId => {
       this.clinicId = clinicId;
+      this.find()
     })
   }
   private find() {
-    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => {
-        return this.calendarServiceService.findAll(this.apiParams$, clinicId).pipe(
-
-          tap((response: any) => {
-            this.totalItems$.next(response.number_of_matching_records);
-            if (response.number_of_records) {
-              this.errorMessage$.next('');
-            }
-            this.retry$.next(false);
-            this.loadingData$.next(false);
-          }),
-          map((response: any) => {
-            return response.records;
-          })
-        );
+    this.calendars$ = this.calendarServiceService.findAll(this.apiParams$, this.clinicId).pipe(
+      tap((response: any) => {
+        this.totalItems$.next(response.number_of_matching_records);
+        if (response.number_of_records) {
+          this.errorMessage$.next('');
+        }
+        this.retry$.next(false);
+        this.loadingData$.next(false);
+      }),
+      map((response: any) => {
+        return response.records;
       })
-    )
-
+    );
   }
   toggleCreate() {
     this.createCalendarVisibility = !this.createCalendarVisibility
@@ -97,7 +92,7 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   toggleEdit() {
     this.editCalendarVisibility = !this.editCalendarVisibility
   }
-  changeVisibility(event: string) {
+  changeCreateVisibility(event: string) {
     if (event === 'close') {
       this.createCalendarVisibility = false;
       this.find()
