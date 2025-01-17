@@ -38,7 +38,6 @@ export class ViewSchdulerComponent implements OnInit {
   events: CalendarEvents = new SchedulerCalendarEvents();
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  calendars$!: Observable<Calendar[]>;
   calendars: Calendar[];
   selected: boolean = false
   selectedCalendars: any[] = [];
@@ -268,6 +267,32 @@ export class ViewSchdulerComponent implements OnInit {
     }
   }
   private initSelectedCalendar() {
+    this.schedulerConfigurationService
+      .findCalendarsBySchedulerUserSettings(this.selectedClinic
+        , this.loggedInService.getLoggedUser().uuid)
+      .subscribe((calendars: any) => {
+        if (calendars.length > 0) {
+          console.log('usr settings')
+          this.loadSchedulerUserSettingsCalendars(calendars);
+        }
+        else {
+          console.log('no usr settings')
+          this.loadDefaultCalendars();
+        }
+      })
+  }
+  private updateSchedulerUserSettings() {
+    const schedulerUserSettings: SchedulerUserSettings = {
+      clinicId: this.selectedClinic,
+      user: this.loggedInService.getLoggedUser().uuid,
+      selectedCalendars: this.selectedCalendars.map(calender => calender.id)
+    }
+    this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
+      .subscribe(() => {
+        console.log('save user settings')
+      });
+  };
+  private loadDefaultCalendars() {
     if (this.calendars.length > 1)
       this.calendars.forEach(calendar => {
         this.selectedCalendars.push(calendar)
@@ -279,16 +304,15 @@ export class ViewSchdulerComponent implements OnInit {
     else
       this.selectedCalendars = []
   }
-  private updateSchedulerUserSettings() {
-    console.log(JSON.stringify(this.selectedCalendars))
-    const schedulerUserSettings: SchedulerUserSettings = {
-      clinicId: this.selectedClinic,
-      user: this.loggedInService.getLoggedUser().uuid,
-      selectedCalendars: this.selectedCalendars.map(calender => calender.id)
-    }
-    this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
-      .subscribe(() => {
-        console.log('save user settings')
-      });
-  };
+  private loadSchedulerUserSettingsCalendars(calendar: Calendar[]) {
+    this.calendars = calendar;
+    this.selectedCalendars = []
+    calendar.forEach(calendar => {
+      this.selectedCalendars.push(calendar)
+      this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+        this.events.push(Number(calendar.id), events)
+        this.refresh.next();
+      })
+    })
+  }
 }

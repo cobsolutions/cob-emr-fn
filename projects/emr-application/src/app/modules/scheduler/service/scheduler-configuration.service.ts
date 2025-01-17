@@ -53,4 +53,8 @@ export class SchedulerConfigurationService {
     const url = this.baseUrl + 'scheduler/update/selected-calendars';
     return this._http.put(url, JSON.stringify(schedulerUserSettings), { 'headers': headers });
   }
+  findCalendarsBySchedulerUserSettings(clinicId:number , user:string){
+    const url = this.baseUrl + 'scheduler/find/saved-calendars/clinicId/'+clinicId+'/user/'+user;
+    return this._http.get(url);
+  }
 }
