@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { Observable } from 'rxjs';
+import { SchedulerUserSettings } from '../model/scheduler.user.settings';
 import { SchedulerSettings } from '../model/shceduler.date.settings';
 import { SchedulerConfiguration } from '../models/configuration';
 
@@ -42,8 +43,14 @@ export class SchedulerConfigurationService {
     const url = this.baseUrl + 'scheduler/create/settings';
     return this._http.post(url, JSON.stringify(settings), { 'headers': headers });
   }
-  findSettings(clinicId:number){
+  findSettings(clinicId: number) {
     const url = this.baseUrl + 'scheduler/find/settings/clinicId/' + clinicId;
     return this._http.get(url);
+  }
+
+  updateSchedulerUserSettings(schedulerUserSettings:SchedulerUserSettings) {
+    const headers = { 'content-type': 'application/json' }
+    const url = this.baseUrl + 'scheduler/update/selected-calendars';
+    return this._http.put(url, JSON.stringify(schedulerUserSettings), { 'headers': headers });
   }
 }

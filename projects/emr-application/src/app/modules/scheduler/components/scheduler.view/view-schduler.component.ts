@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import {
   CalendarEvent, CalendarEventTimesChangedEvent,
@@ -13,7 +13,7 @@ import {
 import { WeekDay } from "calendar-utils";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, forkJoin, map, Observable, skip, Subject, switchMap, take, tap } from 'rxjs';
+import { filter, forkJoin, map, Observable, Subject, switchMap } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
 import { CalendarEvents } from "../../models/calendar/calendars";
@@ -24,9 +24,10 @@ import { AppointmentEventConverterService } from "../../service/appointment-even
 import { AppointmentService } from "../../service/appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { EventsCalendarService } from "../../service/calendar/events/events-calendar.service";
+import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
-import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
+import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
 
 @Component({
   selector: 'app-view-schduler',
@@ -81,7 +82,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
           this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
-          this.initSelectedCalendar()
+          this.initSelectedCalendar();
         });
 
     });
@@ -233,23 +234,7 @@ export class ViewSchdulerComponent implements OnInit {
       filter(clinicId => clinicId !== null)
     )
   }
-  // onCalendarChange(event: any, calendar: any): void {
-  //   if (event.target.checked) {
-  //     this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
-  //       this.events.push(calendar.id, events)
-  //       this.selectedCalendars.push(calendar);
-  //       this.refresh.next();
-  //     })
-  //   } else {
-  //     this.selectedCalendars = this.selectedCalendars.filter(
-  //       (item) => item.id !== calendar.id
-  //     );
-  //     this.events.removeById(calendar.id)
-  //     this.refresh.next();
-  //   }
-  // }
   onChangeCalendars(event: any) {
-
     this.synchronizeLists(event, this.selectedCalendars)
   }
   private pickCalender(calendarId: number): Calendar {
@@ -266,6 +251,7 @@ export class ViewSchdulerComponent implements OnInit {
           SC.push(this.pickCalender(Number(id))); // Add the missing id as a new Calendar object
           scIds.add(Number(id)); // Update the set to include the new id
           this.events.push(Number(id), events)
+          this.updateSchedulerUserSettings()
           this.refresh.next();
         })
       }
@@ -276,6 +262,7 @@ export class ViewSchdulerComponent implements OnInit {
       if (!MS.includes(SC[i].id.toString())) {
         this.events.removeById(SC[i].id)
         SC.splice(i, 1); // Remove the item from SC
+        this.updateSchedulerUserSettings()
         this.refresh.next();
       }
     }
@@ -292,4 +279,16 @@ export class ViewSchdulerComponent implements OnInit {
     else
       this.selectedCalendars = []
   }
+  private updateSchedulerUserSettings() {
+    console.log(JSON.stringify(this.selectedCalendars))
+    const schedulerUserSettings: SchedulerUserSettings = {
+      clinicId: this.selectedClinic,
+      user: this.loggedInService.getLoggedUser().uuid,
+      selectedCalendars: this.selectedCalendars.map(calender => calender.id)
+    }
+    this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
+      .subscribe(() => {
+        console.log('save user settings')
+      });
+  };
 }
