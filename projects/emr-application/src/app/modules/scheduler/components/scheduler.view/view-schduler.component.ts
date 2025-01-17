@@ -39,6 +39,7 @@ export class ViewSchdulerComponent implements OnInit {
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
   calendars$!: Observable<Calendar[]>;
   calendars: Calendar[];
+  selected: boolean = false
   selectedCalendars: any[] = [];
   days: WeekDay[];
   view: CalendarView = CalendarView.Week;
@@ -66,16 +67,12 @@ export class ViewSchdulerComponent implements OnInit {
     private appointmentEventConverterService: AppointmentEventConverterService
   ) { }
   ngOnInit(): void {
-    // this.getSelectedClinic().subscribe(clinicId => {
-    //   // this.isLoading = false
-    //   // this.selectedClinic = clinicId;
-    //   c
-    // })
     this.getSelectedClinic().pipe(
-      take(1),
+
     ).subscribe(clinicId => {
       this.selectedClinic = clinicId;
       const sources = [this.getCalendars(clinicId), this.getSchedulerSettings(clinicId)]
+      this.isLoading = true;
       forkJoin(sources)
         .subscribe(result => {
           // result[] : [0] calendars , [1] scheduler settings
@@ -83,6 +80,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
           this.isLoading = false;
+          this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar()
         });
 
@@ -283,12 +281,15 @@ export class ViewSchdulerComponent implements OnInit {
     }
   }
   private initSelectedCalendar() {
-    this.calendars.forEach(calendar => {
-      this.selectedCalendars.push(calendar)
-      this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
-        this.events.push(Number(calendar.id), events)
-        this.refresh.next();
+    if (this.calendars.length > 1)
+      this.calendars.forEach(calendar => {
+        this.selectedCalendars.push(calendar)
+        this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+          this.events.push(Number(calendar.id), events)
+          this.refresh.next();
+        })
       })
-    })
+    else
+      this.selectedCalendars = []
   }
 }

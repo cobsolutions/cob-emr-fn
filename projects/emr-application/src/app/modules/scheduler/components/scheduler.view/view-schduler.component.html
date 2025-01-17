@@ -1,30 +1,21 @@
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
 <c-card class="mb-2">
   <c-card-header>
     <svg cIcon name="cilCalendar" title="cilCalendar" size="xl" class="mx-1"></svg>
     <strong>Calendar Selections</strong>
   </c-card-header>
   <c-card-body>
-    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars" [cleaner]="false"
-      (valueChange)="onChangeCalendars($event)" *ngIf="calendars">
-      <c-multi-select-option *ngFor="let calendar of calendars"
-        [value]="calendar.id.toString()" [selected]="true">{{calendar.name}}</c-multi-select-option>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
+      <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
+        [selected]="selected">{{calendar.name}}</c-multi-select-option>
+    </c-multi-select>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      *ngIf="!selected">
     </c-multi-select>
   </c-card-body>
 </c-card>
-<!-- <div class="my-2" style="width: 15%;max-height: 50vh; overflow-y: scroll;border: 1px solid #ccc;">
-  <form>
-    <ul [flush]="true" cListGroup>
-      <label cListGroupItem style="cursor: pointer;" class="bg-primary text-white p-2">Calendars</label>
-      <li cListGroupItem *ngFor='let calendar of calendars'>
-        <c-form-check>
-          <input cFormCheckInput type="checkbox" name="d" (change)="onCalendarChange($event, calendar)"
-            [checked]="isSelected(calendar)" />
-          <label cFormCheckLabel>{{calendar.name}}</label>
-        </c-form-check>
-      </li>
-    </ul>
-  </form>
-</div> -->
+
 <div class="row text-center mb-2">
   <div class="col-md-4">
     <div class="btn-group">
@@ -61,7 +52,6 @@
 </div>
 
 <br />
-<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
 <div [ngSwitch]="view" *ngIf="schedulerSettingsa">
   <!--Month Module-->
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events.getAll()"
