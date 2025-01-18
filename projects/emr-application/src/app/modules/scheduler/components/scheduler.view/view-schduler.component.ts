@@ -84,7 +84,8 @@ export class ViewSchdulerComponent implements OnInit {
           this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
-          this.setCalendarSelectedField();
+          if (this.userSelectedCalendars.length !== 0)
+            this.setCalendarSelectedField();
         });
 
     });
@@ -250,7 +251,7 @@ export class ViewSchdulerComponent implements OnInit {
       this.updateSchedulerUserSettings();
     } else {
       var pickedCalendars: number[] = event.map(calnederId => Number(calnederId));
-      var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);  
+      var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
       const isUserCalendarChanges: boolean = this.checkEquality(pickedCalendars, userSelectedCalendars)
       if (!isUserCalendarChanges)
         this.updateSchedulerUserSettings(pickedCalendars);
