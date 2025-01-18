@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { filter, Observable, switchMap, tap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
@@ -6,9 +6,11 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 import { Appointment } from '../../../models/appointment';
 import { AppointmentType } from '../../../models/appointment.type';
 import { FullAppointment } from '../../../models/full.appointment';
+import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
+import { RepeatAppointmentComponent } from '../../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 
 @Component({
@@ -21,6 +23,7 @@ export class BlockAppointmentComponent implements OnInit {
   @Input() appointmentId: string | number;
   @Output() validation = new EventEmitter<boolean>()
   @Output() createdAppointment = new EventEmitter<Appointment>()
+  @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   appointment: Appointment = new Appointment();
   calendars$: Observable<any>
   @Input() startDate: Date;
@@ -80,6 +83,7 @@ export class BlockAppointmentComponent implements OnInit {
       if (!isNotValid)
         this.validation.emit(isNotValid);
       else {
+        this.fillAppointmnetRepeat();
         this.createdAppointment.emit(this.appointment)
       }
     })
@@ -129,4 +133,49 @@ export class BlockAppointmentComponent implements OnInit {
   public checkValididityForEdit(): boolean {
     return this.validate();
   }
+  private fillAppointmnetRepeat() {
+    switch (this.appointment.appointmentRepetitionType) {
+      case 'Daily':
+        this.createDailyRepetitionAppointment();
+        break
+      case 'Weekly':
+        this.createWeeklyRepetitionAppointment()
+        break;
+      case 'Monthly':
+        this.createMonthlyRepetitionAppointment()
+        break;
+      case 'Yearly':
+        this.createYearlyRepetitionAppointment();
+        break;
+    }
+  }
+  private createDailyRepetitionAppointment() {
+    var dailyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      daily: this.repeatAppointmentComponent.dailyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = dailyAppointmnetRepeat
+  }
+  private createWeeklyRepetitionAppointment() {
+    var weeklyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      weekly: this.repeatAppointmentComponent.weeklyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = weeklyAppointmnetRepeat
+  }
+  private createMonthlyRepetitionAppointment() {
+    var monthlyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      monthly: this.repeatAppointmentComponent.monthlyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = monthlyAppointmnetRepeat
+  }
+  private createYearlyRepetitionAppointment() {
+    var yearlyAppointmnetRepeat: AppointmnetRepeat = {
+      type: this.appointment.appointmentRepetitionType,
+      yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
+    }
+    this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
+  }
 }
+

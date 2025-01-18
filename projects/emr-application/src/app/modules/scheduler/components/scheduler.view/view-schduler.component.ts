@@ -193,12 +193,16 @@ export class ViewSchdulerComponent implements OnInit {
     this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettingsa).subscribe(result => {
       if (result.action !== 'cancel') {
         if (module === 'month') {
-          RefreshSchedulerEvents.refresh(this.events.get(calendar.id), result.event, AppointmentAction.ADD_APPOINTMENT);
-          this.refresh.next();
+          result.event.forEach(event => {
+            RefreshSchedulerEvents.refresh(this.events.get(calendar.id), event, AppointmentAction.ADD_APPOINTMENT);
+            this.refresh.next();
+          })
         }
         if (module !== 'month') {
-          RefreshSchedulerEvents.refresh(this.events.get(calendar.id), result.event, AppointmentAction.ADD_APPOINTMENT);
-          this.refresh.next();
+          result.event.forEach(event => {
+            RefreshSchedulerEvents.refresh(this.events.get(calendar.id), event, AppointmentAction.ADD_APPOINTMENT);
+            this.refresh.next();
+          })
         }
         this.toastr.success('Appointment created Successfully');
       }

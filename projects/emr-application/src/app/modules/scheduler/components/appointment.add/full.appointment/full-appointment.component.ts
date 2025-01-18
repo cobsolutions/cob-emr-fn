@@ -106,12 +106,13 @@ export class FullAppointmentComponent implements OnInit {
   }
   private catchAppointmentStructureType() {
     this.appointmentService.createAppointmentEvent$.pipe(
-      filter(event => event !== null && event === 'full')
+      filter(event => event !== null && event === 'full'),  
     ).subscribe(() => {
       this.isValidateAppointmentDate();
       this.validation.emit(!this.validDate);
       if (this.validDate) {
         this.createAppointmentModel();
+        this.fillAppointmnetRepeat();
         this.createdAppointment.emit(this.appointment)
       }
     })
