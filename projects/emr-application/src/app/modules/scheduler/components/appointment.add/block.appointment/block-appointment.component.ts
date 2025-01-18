@@ -55,6 +55,8 @@ export class BlockAppointmentComponent implements OnInit {
       this.appointmentTypes = types;
       this.appointment.appointmentTypeId = types[0].id
       this.isLoading = false;
+      this.isValidTitle = true;
+      this.isValidDate = true;
     })
   }
   private getAppointmnet(id: string | number) {
@@ -118,8 +120,7 @@ export class BlockAppointmentComponent implements OnInit {
   }
   private isValidateAppointmentDate() {
     this.isValidDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
-      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
-        moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
+      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate))
   }
   changeStartTime(event: Date) {
     this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();

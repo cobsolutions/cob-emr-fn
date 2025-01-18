@@ -181,7 +181,7 @@ export class FullAppointmentComponent implements OnInit {
     this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
   }
   private isValidateAppointmentDate() {
-    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
+    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) ||
       (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
         moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
   }
