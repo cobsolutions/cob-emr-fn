@@ -85,7 +85,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
           if (this.userSelectedCalendars.length !== 0)
-            this.setCalendarSelectedField();
+            this.setSelectedCalendars();
         });
 
     });
@@ -96,7 +96,7 @@ export class ViewSchdulerComponent implements OnInit {
       weekendDays: undefined,
     });
   }
-  private setCalendarSelectedField() {
+  private setSelectedCalendars() {
     var userSelectedCalendarsId: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
     this.calendars = this.calendars.map(calendar => ({
       ...calendar,
