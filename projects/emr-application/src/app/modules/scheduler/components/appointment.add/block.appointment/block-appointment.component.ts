@@ -125,4 +125,8 @@ export class BlockAppointmentComponent implements OnInit {
   changeStartTime(event: Date) {
     this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();
   }
+
+  public checkValididityForEdit(): boolean {
+    return this.validate();
+  }
 }

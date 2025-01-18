@@ -35,14 +35,27 @@ export class AppointmentEditModalComponent implements OnInit {
     this.dialogRef.close(this.data);
   }
   public update() {
-    this.pickAppointment();
-    this.constructAppointmentService.constructAppointmentDate(this.appointment)
-    this.appointmentService.createAppointment(this.appointment).subscribe(createdAppointment => {
-      var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
-      this.data.action = 'updated'
-      this.data.event = event
-      this.dialogRef.close(this.data);
-    })
+    const valid = this.isValidAppointment()
+    console.log(valid);
+    if (valid) {
+      this.pickAppointment();
+      this.constructAppointmentService.constructAppointmentDate(this.appointment)
+      this.appointmentService.createAppointment(this.appointment).subscribe(createdAppointment => {
+        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
+        this.data.action = 'updated'
+        this.data.event = event
+        this.dialogRef.close(this.data);
+      })
+    }
+  }
+  private isValidAppointment() {
+    if (this.data.event.meta.structure === 'Full') {
+      return this.fullAppointment.checkValididityForEdit();
+    }
+    if (this.data.event.meta.structure === 'Block') {
+      return this.blockAppointment.checkValididityForEdit();
+    }
+    return true;
   }
   private pickAppointment() {
     if (this.data.event.meta.structure === 'Full') {
@@ -52,4 +65,5 @@ export class AppointmentEditModalComponent implements OnInit {
       this.appointment = this.blockAppointment.appointment;
     }
   }
+
 }

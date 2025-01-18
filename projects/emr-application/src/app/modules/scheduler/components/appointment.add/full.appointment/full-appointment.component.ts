@@ -79,8 +79,8 @@ export class FullAppointmentComponent implements OnInit {
   }
   private getScehdulerSettings() {
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
-      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-      this.getCalendars();
+    this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+    this.getCalendars();
   }
   private getAppointmnet(id: string | number) {
     this.appointmentService.retrieveFullAppointment(Number(id)).pipe(
@@ -88,20 +88,20 @@ export class FullAppointmentComponent implements OnInit {
     ).subscribe((appointment: FullAppointment) => {
       this.appointment = appointment
       this.selectedPateint = appointment.patient;
-          this.selectedPatientCase = appointment.patientCase;
-          this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
-            this.therapists = therapists;
-            this.appointment.therapyUUID = appointment.therapyUUID;
-          })
-          this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
-            this.appointmentTypes = types;
-            this.appointment.appointmentTypeId = appointment.appointmentTypeId;
-          })
-          this.selectPatientClinic();
-          this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
-          this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-          this.getCalendars();
-          this.isLoading = false;
+      this.selectedPatientCase = appointment.patientCase;
+      this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
+        this.therapists = therapists;
+        this.appointment.therapyUUID = appointment.therapyUUID;
+      })
+      this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
+        this.appointmentTypes = types;
+        this.appointment.appointmentTypeId = appointment.appointmentTypeId;
+      })
+      this.selectPatientClinic();
+      this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
+      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+      this.getCalendars();
+      this.isLoading = false;
     })
   }
   private catchAppointmentStructureType() {
@@ -181,9 +181,8 @@ export class FullAppointmentComponent implements OnInit {
     this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
   }
   private isValidateAppointmentDate() {
-    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) ||
-      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate) ||
-        moment(this.appointment.appointmentDate.startDate).startOf('day').isSame(this.appointment.appointmentDate.endDate))
+    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
+      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate))
   }
   private selectPatientClinic() {
     if (this.selectedPateint.clinicModels.length > 1) {
@@ -215,7 +214,11 @@ export class FullAppointmentComponent implements OnInit {
     this.selectedPatientCase = this.selectedPateint.cases[0]
     this.selectedClinic = this.selectedPateint.clinicModels[0]
   }
-  changeStartTime(event:Date){
-    this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval , 'minutes').toDate();
+  changeStartTime(event: Date) {
+    this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();
+  }
+  public checkValididityForEdit(): boolean {
+    this.isValidateAppointmentDate();
+    return this.validDate;
   }
 }
