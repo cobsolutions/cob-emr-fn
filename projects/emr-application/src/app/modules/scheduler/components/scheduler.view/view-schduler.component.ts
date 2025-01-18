@@ -76,7 +76,7 @@ export class ViewSchdulerComponent implements OnInit {
       this.isLoading = true;
       forkJoin(sources)
         .subscribe(result => {
-          // result[] : [0] calendars , [1] scheduler settings
+          // result[] : [0] calendars , [1] scheduler settings , [2] scheduler user setting for calendars selections
           this.userSelectedCalendars = result[2]
           this.calendars = result[0];
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
@@ -247,20 +247,39 @@ export class ViewSchdulerComponent implements OnInit {
     )
   }
   onChangeCalendars(event: any) {
+    this.updateSchedulerUserSettings(event);
+    this.synchronizeLists(event, this.selectedCalendars)
+  }
+  private updateSchedulerUserSettings(changedCalendars) {
+    console.log(this.userSelectedCalendars.length)
     if (this.userSelectedCalendars.length === 0) {
-      this.updateSchedulerUserSettings();
-    } else {
-      var pickedCalendars: number[] = event.map(calnederId => Number(calnederId));
+      this._callUpdateSchedulerUserSettings()
+      this.userSelectedCalendars = this.calendars;
+    }
+    else {
+      var pickedCalendars: number[] = changedCalendars.map(calnederId => Number(calnederId));
       var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
+      console.log(pickedCalendars + ' pickedCalendars')
+      console.log(userSelectedCalendars + ' userSelectedCalendars')
       const isUserCalendarChanges: boolean = this.checkEquality(pickedCalendars, userSelectedCalendars)
       if (!isUserCalendarChanges)
-        this.updateSchedulerUserSettings(pickedCalendars);
+        this._callUpdateSchedulerUserSettings(pickedCalendars);
     }
-    this.synchronizeLists(event, this.selectedCalendars)
+  }
+  private _callUpdateSchedulerUserSettings(selectedCalendars?: number[]) {
+    const schedulerUserSettings: SchedulerUserSettings = {
+      clinicId: this.selectedClinic,
+      user: this.loggedInService.getLoggedUser().uuid,
+      selectedCalendars: selectedCalendars === undefined ? (this.selectedCalendars.map(calender => calender.id)) : selectedCalendars
+    }
+    this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
+      .subscribe(() => {
+        console.log('save user settings')
+      });
   }
   private checkEquality(arr1: number[], arr2: number[]): boolean {
     if (arr1.length !== arr2.length) {
-      return false; // Arrays of different lengths are not equal
+      return false;
     }
     const sorted1 = [...arr1].sort((a, b) => a - b);
     const sorted2 = [...arr2].sort((a, b) => a - b);
@@ -297,17 +316,6 @@ export class ViewSchdulerComponent implements OnInit {
   private initSelectedCalendar() {
     this.loadDefaultCalendars();
   }
-  private updateSchedulerUserSettings(selectedCalendars?: number[]) {
-    const schedulerUserSettings: SchedulerUserSettings = {
-      clinicId: this.selectedClinic,
-      user: this.loggedInService.getLoggedUser().uuid,
-      selectedCalendars: selectedCalendars === undefined ? (this.selectedCalendars.map(calender => calender.id)) : selectedCalendars
-    }
-    this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
-      .subscribe(() => {
-        console.log('save user settings')
-      });
-  };
   private loadDefaultCalendars() {
     if (this.calendars.length > 1)
       this.calendars.forEach(calendar => {
