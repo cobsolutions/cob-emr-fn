@@ -51,6 +51,7 @@ export class ViewSchdulerComponent implements OnInit {
   isSchedulerSetting: boolean = false;
   schedulerSettings: Observable<Settings>;
   schedulerSettingsa: Settings
+  userSelectedCalendars: Calendar[]
   selectedClinic: number;
 
   isLoading: boolean = true;
@@ -71,17 +72,19 @@ export class ViewSchdulerComponent implements OnInit {
 
     ).subscribe(clinicId => {
       this.selectedClinic = clinicId;
-      const sources = [this.getCalendars(clinicId), this.getSchedulerSettings(clinicId)]
+      const sources = [this.getCalendars(clinicId), this.getSchedulerSettings(clinicId), this.getSchedulerUserSettings()]
       this.isLoading = true;
       forkJoin(sources)
         .subscribe(result => {
           // result[] : [0] calendars , [1] scheduler settings
+          this.userSelectedCalendars = result[2]
           this.calendars = result[0];
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
           this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
+          this.setCalendarSelectedField();
         });
 
     });
@@ -92,7 +95,13 @@ export class ViewSchdulerComponent implements OnInit {
       weekendDays: undefined,
     });
   }
-
+  private setCalendarSelectedField() {
+    var userSelectedCalendarsId: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
+    this.calendars = this.calendars.map(calendar => ({
+      ...calendar,
+      selected: userSelectedCalendarsId.includes(calendar.id),
+    }));
+  }
   dayClicked(segment: any) {
     if (this.selectedCalendars.length === 0)
       return
@@ -223,7 +232,10 @@ export class ViewSchdulerComponent implements OnInit {
   getSchedulerSettings(clinicId: any): Observable<any> {
     return this.schedulerConfigurationService.findSettings(clinicId)
   }
-
+  getSchedulerUserSettings(): Observable<any> {
+    return this.schedulerConfigurationService
+      .findCalendarsBySchedulerUserSettings(this.selectedClinic, this.loggedInService.getLoggedUser().uuid)
+  }
 
   isSelected(calendar: any): boolean {
     return this.selectedCalendars.some((item) => item.id === calendar.id);
@@ -234,7 +246,24 @@ export class ViewSchdulerComponent implements OnInit {
     )
   }
   onChangeCalendars(event: any) {
+    if (this.userSelectedCalendars.length === 0) {
+      this.updateSchedulerUserSettings();
+    } else {
+      var pickedCalendars: number[] = event.map(calnederId => Number(calnederId));
+      var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);  
+      const isUserCalendarChanges: boolean = this.checkEquality(pickedCalendars, userSelectedCalendars)
+      if (!isUserCalendarChanges)
+        this.updateSchedulerUserSettings(pickedCalendars);
+    }
     this.synchronizeLists(event, this.selectedCalendars)
+  }
+  private checkEquality(arr1: number[], arr2: number[]): boolean {
+    if (arr1.length !== arr2.length) {
+      return false; // Arrays of different lengths are not equal
+    }
+    const sorted1 = [...arr1].sort((a, b) => a - b);
+    const sorted2 = [...arr2].sort((a, b) => a - b);
+    return sorted1.every((value, index) => value === sorted2[index]);
   }
   private pickCalender(calendarId: number): Calendar {
     return this.calendars.find(calendar => calendar.id === calendarId);
@@ -250,7 +279,6 @@ export class ViewSchdulerComponent implements OnInit {
           SC.push(this.pickCalender(Number(id))); // Add the missing id as a new Calendar object
           scIds.add(Number(id)); // Update the set to include the new id
           this.events.push(Number(id), events)
-          this.updateSchedulerUserSettings()
           this.refresh.next();
         })
       }
@@ -261,31 +289,18 @@ export class ViewSchdulerComponent implements OnInit {
       if (!MS.includes(SC[i].id.toString())) {
         this.events.removeById(SC[i].id)
         SC.splice(i, 1); // Remove the item from SC
-        this.updateSchedulerUserSettings()
         this.refresh.next();
       }
     }
   }
   private initSelectedCalendar() {
-    this.schedulerConfigurationService
-      .findCalendarsBySchedulerUserSettings(this.selectedClinic
-        , this.loggedInService.getLoggedUser().uuid)
-      .subscribe((calendars: any) => {
-        if (calendars.length > 0) {
-          console.log('usr settings')
-          this.loadSchedulerUserSettingsCalendars(calendars);
-        }
-        else {
-          console.log('no usr settings')
-          this.loadDefaultCalendars();
-        }
-      })
+    this.loadDefaultCalendars();
   }
-  private updateSchedulerUserSettings() {
+  private updateSchedulerUserSettings(selectedCalendars?: number[]) {
     const schedulerUserSettings: SchedulerUserSettings = {
       clinicId: this.selectedClinic,
       user: this.loggedInService.getLoggedUser().uuid,
-      selectedCalendars: this.selectedCalendars.map(calender => calender.id)
+      selectedCalendars: selectedCalendars === undefined ? (this.selectedCalendars.map(calender => calender.id)) : selectedCalendars
     }
     this.schedulerConfigurationService.updateSchedulerUserSettings(schedulerUserSettings)
       .subscribe(() => {

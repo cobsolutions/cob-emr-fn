@@ -8,4 +8,5 @@ export interface Calendar{
     attached?:boolean
     clinicId?:number
     events?: CalendarEvent[];
+    selected?:boolean
 }

@@ -8,7 +8,7 @@
     <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
       [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
       <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
-        [selected]="selected">{{calendar.name}}</c-multi-select-option>
+        [selected]="calendar.selected">{{calendar.name}}</c-multi-select-option>
     </c-multi-select>
     <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
       *ngIf="!selected">
