@@ -207,7 +207,6 @@ export class FullAppointmentComponent implements OnInit {
   private createAppointmentModel() {
     this.appointment.patientId = this.selectedPateint.id;
     this.appointment.patientCaseId = this.selectedPatientCase.id
-    console.log(JSON.stringify(this.selectedClinic))
     this.appointment.clinicId = Number(this.selectedClinic.id);
     this.appointment.title = this.selectedPateint.lastName + "," + this.selectedPateint.firstName + ":" + this.selectedPatientCase.title
   }

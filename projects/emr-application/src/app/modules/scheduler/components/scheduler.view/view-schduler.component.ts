@@ -255,7 +255,6 @@ export class ViewSchdulerComponent implements OnInit {
     this.synchronizeLists(event, this.selectedCalendars)
   }
   private updateSchedulerUserSettings(changedCalendars) {
-    console.log(this.userSelectedCalendars.length)
     if (this.userSelectedCalendars.length === 0) {
       this._callUpdateSchedulerUserSettings()
       this.userSelectedCalendars = this.calendars;
@@ -263,8 +262,6 @@ export class ViewSchdulerComponent implements OnInit {
     else {
       var pickedCalendars: number[] = changedCalendars.map(calnederId => Number(calnederId));
       var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
-      console.log(pickedCalendars + ' pickedCalendars')
-      console.log(userSelectedCalendars + ' userSelectedCalendars')
       const isUserCalendarChanges: boolean = this.checkEquality(pickedCalendars, userSelectedCalendars)
       if (!isUserCalendarChanges)
         this._callUpdateSchedulerUserSettings(pickedCalendars);
