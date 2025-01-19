@@ -23,36 +23,23 @@ export class AddAppobntmentModalComponent implements OnInit {
     });
   }
   create() {
-    var events: CalendarEvent[] = []
     this.appointmentAddComponent.createAppointment();
-    this.appointmentAddComponent.createAppointment().subscribe((createdAppointmentId: any) => {
-      console.log(createdAppointmentId.length)
-      if (!(createdAppointmentId.length > 1)) {
-        console.log('one')
-        var appointmet: Appointment = this.appointmentAddComponent.appointment;
-        appointmet.appointmentTypeColor = createdAppointmentId[0].appointmentTypeColor
-        appointmet.appointmentFontTypeColor = createdAppointmentId[0].appointmentFontTypeColor
-        appointmet.appointmentStructure = createdAppointmentId[0].appointmentStructure
-        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
-        events.push(event);
-        this.data.event = events;
-        this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
-
-      } else {
-        console.log(' > one')
-        this.dd(createdAppointmentId, this.appointmentAddComponent.appointment)
-        this.dialogRef.close(this.data);
-      }
+    this.appointmentAddComponent.createAppointment().subscribe((createdAppointments: any) => {
+      if (!(createdAppointments.length > 1))
+        this.createSingleAppointment(createdAppointments)
+      else
+        this.createRepeatedAppointments(createdAppointments)
+      this.dialogRef.close(this.data);
     })
   }
   public cancel() {
     this.data.action = 'cancel';
     this.dialogRef.close(this.data);
   }
-  private dd(createdAppointmnet: any, createdAppointmet: Appointment) {
+  private createRepeatedAppointments(createdAppointmnet: any) {
     var events: CalendarEvent[] = []
     createdAppointmnet.forEach(element => {
-      var appointmet: Appointment = createdAppointmet;
+      var appointmet: Appointment = this.appointmentAddComponent.appointment;
       appointmet.startDate = element.startDate
       appointmet.endDate = element.endDate
       appointmet.appointmentTypeColor = element.appointmentTypeColor
@@ -64,5 +51,17 @@ export class AddAppobntmentModalComponent implements OnInit {
     });
     this.data.event = events;
     this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
+  }
+  private createSingleAppointment(createdAppointmnet: any) {
+    var events: CalendarEvent[] = []
+    var appointmet: Appointment = this.appointmentAddComponent.appointment;
+    appointmet.appointmentTypeColor = createdAppointmnet[0].appointmentTypeColor
+    appointmet.appointmentFontTypeColor = createdAppointmnet[0].appointmentFontTypeColor
+    appointmet.appointmentStructure = createdAppointmnet[0].appointmentStructure
+    var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+    events.push(event);
+    this.data.event = events;
+    this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
+    this.dialogRef.close(this.data);
   }
 }
