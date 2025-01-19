@@ -47,6 +47,9 @@ export class AddAppobntmentModalComponent implements OnInit {
       appointmet.appointmentStructure = element.appointmentStructure
       appointmet.appointmentRepeat = element.appointmentRepeat
       var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+      event.id = element.id
+      event.meta.type = element.appointmentType;
+      event.meta.status = element.appointmentStatus;
       events.push(event);
     });
     this.data.event = events;
@@ -59,6 +62,9 @@ export class AddAppobntmentModalComponent implements OnInit {
     appointmet.appointmentFontTypeColor = createdAppointmnet[0].appointmentFontTypeColor
     appointmet.appointmentStructure = createdAppointmnet[0].appointmentStructure
     var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+    event.id = createdAppointmnet[0].id
+    event.meta.type = createdAppointmnet[0].appointmentType;
+    event.meta.status = createdAppointmnet[0].appointmentStatus;
     events.push(event);
     this.data.event = events;
     this.data.calendarId = this.appointmentAddComponent.appointment.calendarId
