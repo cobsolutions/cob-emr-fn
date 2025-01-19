@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
+import { AppointmentCancelNoShowReason } from '../models/appointment.cancel.no.show.reason';
 import { AppointmentFilter } from '../models/appointment.filter';
 import { AppointmentType } from '../models/appointment.type';
 
@@ -64,5 +65,10 @@ export class AppointmentService {
   deleteAppointmentList(repeatId: number, clinicId: number) {
     const createAppointmentTypURL = this.baseUrl + 'appointment/list/repeatId/' + repeatId + '/clinicId/' + clinicId;
     return this._http.delete(createAppointmentTypURL)
+  }
+
+  updateAppointmentCancelNoShow(model: AppointmentCancelNoShowReason){
+    const url = this.baseUrl + 'appointment/update/cancel-noshow';
+    return this._http.put(url, model);
   }
 }

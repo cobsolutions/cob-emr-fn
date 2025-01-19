@@ -43,8 +43,9 @@ export class AppointmentCancelNoshowModalComponent implements OnInit {
   }
   private updateAppointmentStatus(status: string, appointmentCancelNoShowReason: AppointmentCancelNoShowReason) {
     this.appointment.appointmentStatus = status;
-    this.appointment.appointmentCancelNoShowReason = appointmentCancelNoShowReason;
-    this.appointmentService.createAppointment(this.appointment)
+    appointmentCancelNoShowReason.appointmentId = this.appointment.id
+    appointmentCancelNoShowReason.status = status
+    this.appointmentService.updateAppointmentCancelNoShow(appointmentCancelNoShowReason)
       .subscribe(() => {
         var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointmentCancelNoshowComponent.appointment)
         this.data.event = event
