@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { filter } from 'rxjs';
 import { Day, WeekDays } from '../../models/constant/week.days';
 import { DailyRepeatAppointment } from '../../models/repeat/daily.repeat.appointment';
 import { MonthlyRepeatAppointment } from '../../models/repeat/monthly.repeat.appointment';
@@ -24,10 +25,13 @@ export class RepeatAppointmentComponent implements OnInit {
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
-    this.appointmentService.appointmnetStartDate$.subscribe(startDate => {
-      this.dayMonth = MonthlyRepetitionbuilder.build(startDate);
+    this.appointmentService.appointmnetStartDate$.pipe(
+      filter(startDate => startDate !== null)
+    )
+      .subscribe(startDate => {
+        this.dayMonth = MonthlyRepetitionbuilder.build(startDate);
 
-    })
+      })
   }
 
   changeDailyStartDate(startDate: Date) {

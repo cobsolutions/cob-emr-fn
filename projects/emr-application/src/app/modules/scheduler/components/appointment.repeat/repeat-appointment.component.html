@@ -42,10 +42,10 @@
             [(ngModel)]="monthlyRepeatAppointment.every" />
     </div>
     <div class="form-group" class="mb-3">
-        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="monthlyRepeatAppointment.dayInMonth">
-            <c-multi-select-option *ngFor="let day of dayMonth"
-                [value]="day.dayNumber.toString()">{{day.dayName}}</c-multi-select-option>
-        </c-multi-select>
+        <select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="monthlyRepeatAppointment.days">
+            <option [value]="undefined">Select..</option>
+            <option *ngFor="let day of dayMonth " [ngValue]="day">{{day.dayName}}</option>
+        </select>
         <div class="form-group" class="mb-3">
             <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
                 (dateChange)="changeMonthlyStartDate($event)"></c-date-picker>
