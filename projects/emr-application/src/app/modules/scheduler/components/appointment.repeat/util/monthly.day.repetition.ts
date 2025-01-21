@@ -7,12 +7,12 @@ export interface days {
     day?: number;
 }
 export class MonthlyRepetitionbuilder {
+    static dayNumber: number = 0;
     public static build(startDate: Date) {
-        var dayNumber: number = 0
         const daysOfWeek = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
 
         // Get the day number (0 for Sat, 1 for Sun, ..., 6 for Fri)
-        dayNumber = startDate.getDay();
+        this.dayNumber = startDate.getDay() + 1;
 
         // Get the exact day of the month
         const day = startDate.getDate();
@@ -35,18 +35,18 @@ export class MonthlyRepetitionbuilder {
         // Format for the "3rd Monday" style name
         const ordinalIndex = ["1st", "2nd", "3rd", "4th", "5th"];
         const weekOrdinal = ordinalIndex[index - 1] || `${index}th`; // Safeguard against invalid index
-        const formattedDayName = `${weekOrdinal} ${daysOfWeek[dayNumber]}`;
+        const formattedDayName = `${weekOrdinal} ${daysOfWeek[this.dayNumber]}`;
 
         return [
             {
                 dayName: ordinalDayName,
-                dayNumber: dayNumber,
+                dayNumber: this.dayNumber,
                 index: index,
                 day: day, // Exact day for the first item
             },
             {
                 dayName: formattedDayName,
-                dayNumber: dayNumber,
+                dayNumber: this.dayNumber,
                 index: index,
                 day: -1, // -1 for the second item
             },
