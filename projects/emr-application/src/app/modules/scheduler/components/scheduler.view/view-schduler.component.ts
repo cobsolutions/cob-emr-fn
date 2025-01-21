@@ -192,7 +192,7 @@ export class ViewSchdulerComponent implements OnInit {
     var calendarId: number = calendar !== null ? calendar.id : null;
     this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettingsa).subscribe(result => {
       if (result.action !== 'cancel') {
-        console.log(JSON.stringify(result))
+        console.log(JSON.stringify(result.event))
         result.event.forEach(event => {
           RefreshSchedulerEvents.refresh(this.events.get(calendar.id), event, AppointmentAction.ADD_APPOINTMENT);
           this.refresh.next();

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
+import { tap } from 'rxjs';
 import { Appointment } from '../../../models/appointment';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
@@ -23,14 +24,19 @@ export class AddAppobntmentModalComponent implements OnInit {
     });
   }
   create() {
-    this.appointmentAddComponent.createAppointment();
-    this.appointmentAddComponent.createAppointment().subscribe((createdAppointments: any) => {
-      if (!(createdAppointments.length > 1))
-        this.createSingleAppointment(createdAppointments)
-      else
-        this.createRepeatedAppointments(createdAppointments)
-      this.dialogRef.close(this.data);
-    })
+    this.appointmentAddComponent.createAppointment()
+      .subscribe((createdAppointments: any) => {
+        if (!(createdAppointments.length > 1)) {
+          console.log('not repeated')
+          console.log(JSON.stringify(createdAppointments))
+          this.createSingleAppointment(createdAppointments)
+        }
+        else {
+          console.log('repeated')
+          this.createRepeatedAppointments(createdAppointments)
+        }
+        this.dialogRef.close(this.data);
+      })
   }
   public cancel() {
     this.data.action = 'cancel';

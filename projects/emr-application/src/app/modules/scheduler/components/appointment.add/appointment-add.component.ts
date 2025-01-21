@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
-import { debounceTime, filter, Observable, switchMap, tap } from 'rxjs';
+import { debounceTime, EMPTY, filter, Observable, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
 import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.repetition';
@@ -13,6 +13,8 @@ import { AppointmentType } from '../../models/appointment.type';
 import { AppointmentService } from '../../service/appointment.service';
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
 import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
+import { BlockAppointmentComponent } from './block.appointment/block-appointment.component';
+import { FullAppointmentComponent } from './full.appointment/full-appointment.component';
 
 
 @Component({
@@ -22,6 +24,8 @@ import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 })
 export class AppointmentAddComponent implements OnInit {
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
+  @ViewChild('fullAppointment') fullAppointmentComponent: FullAppointmentComponent;
+  @ViewChild('blockAppointment') blockAppointmentComponent: BlockAppointmentComponent;
   patientClient = new FormControl();
   filteredPatients: any;
   isLoading = false;
@@ -84,24 +88,27 @@ export class AppointmentAddComponent implements OnInit {
         });
   }
   public createAppointment() {
-    this.emitCreateEvent()
-    this.constructAppointmentService.constructAppointmentDate(this.appointment)
-    if (this.calendarId !== null)
-      this.appointment.calendarId = this.calendarId;
-    return this.appointmentService.createAppointment(this.appointment)
+    this.appointment = this.getAppointment();
+    if (this.appointment !== undefined) {
+      console.log('toBeCreatedAppointment !== undefined')
+      this.constructAppointmentService.constructAppointmentDate(this.appointment)
+      if (this.calendarId !== null)
+        this.appointment.calendarId = this.calendarId;
+      return this.appointmentService.createAppointment(this.appointment)
+    } else {
+      console.log('toBeCreatedAppointment === undefined')
+      return EMPTY;
+    }
   }
-  public checkAppointmentValidity(isValid: any) {
-    this.notValidForm = isValid;
-  }
-  private emitCreateEvent() {
+  private getAppointment(): Appointment {
     if (this.filteredPatients?.length > 0) {
-      this.appointmentService.createAppointmentEvent$.next('full')
+      console.log('full appointment')
+      return this.fullAppointmentComponent.returnAppointment();
     }
     if (this.filteredPatients?.length === 0 || this.filteredPatients === undefined) {
-      this.appointmentService.createAppointmentEvent$.next('block')
+      console.log('block appointment')
+      return this.blockAppointmentComponent.returnAppointment();
     }
-  }
-  emittedAppointment(appintment: Appointment) {
-    this.appointment = appintment;
+    return undefined;
   }
 }

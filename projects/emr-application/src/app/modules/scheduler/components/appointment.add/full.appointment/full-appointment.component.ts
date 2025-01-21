@@ -24,7 +24,6 @@ export class FullAppointmentComponent implements OnInit {
   @Input() mode: string
   @Input() appointmentId: string | number;
   @Output() validation = new EventEmitter<boolean>()
-  @Output() createdAppointment = new EventEmitter<Appointment>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];
   appointment: Appointment = new Appointment();
@@ -50,7 +49,6 @@ export class FullAppointmentComponent implements OnInit {
     switch (this.mode) {
       case 'create':
         this.initModel()
-        this.catchAppointmentStructureType();
         this.getScehdulerSettings();
         break;
       case 'edit':
@@ -104,19 +102,7 @@ export class FullAppointmentComponent implements OnInit {
       this.isLoading = false;
     })
   }
-  private catchAppointmentStructureType() {
-    this.appointmentService.createAppointmentEvent$.pipe(
-      filter(event => event !== null && event === 'full'),  
-    ).subscribe(() => {
-      this.isValidateAppointmentDate();
-      this.validation.emit(!this.validDate);
-      if (this.validDate) {
-        this.createAppointmentModel();
-        this.fillAppointmnetRepeat();
-        this.createdAppointment.emit(this.appointment)
-      }
-    })
-  }
+
   compareFn = this._compareFn.bind(this);
   _compareFn(a, b) {
     return Number(a?.id) === Number(a?.id);
@@ -204,12 +190,6 @@ export class FullAppointmentComponent implements OnInit {
         .filter(clinic => Number(clinic.id) === this.appointment.clinicId)[0]
     }
   }
-  private createAppointmentModel() {
-    this.appointment.patientId = this.selectedPateint.id;
-    this.appointment.patientCaseId = this.selectedPatientCase.id
-    this.appointment.clinicId = Number(this.selectedClinic.id);
-    this.appointment.title = this.selectedPateint.lastName + "," + this.selectedPateint.firstName + ":" + this.selectedPatientCase.title
-  }
   changePatient() {
     this.selectedPatientCase = this.selectedPateint.cases[0]
     this.selectedClinic = this.selectedPateint.clinicModels[0]
@@ -220,5 +200,14 @@ export class FullAppointmentComponent implements OnInit {
   public checkValididityForEdit(): boolean {
     this.isValidateAppointmentDate();
     return this.validDate;
+  }
+  public returnAppointment() {
+    this.isValidateAppointmentDate();
+    if (!this.validDate)
+      return undefined
+    else {
+      this.fillAppointmnetRepeat();
+      return this.appointment
+    }
   }
 }

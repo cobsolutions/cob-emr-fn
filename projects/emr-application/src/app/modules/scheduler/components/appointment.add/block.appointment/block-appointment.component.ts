@@ -21,8 +21,6 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 export class BlockAppointmentComponent implements OnInit {
   @Input() mode: string
   @Input() appointmentId: string | number;
-  @Output() validation = new EventEmitter<boolean>()
-  @Output() createdAppointment = new EventEmitter<Appointment>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   appointment: Appointment = new Appointment();
   calendars$: Observable<any>
@@ -42,7 +40,6 @@ export class BlockAppointmentComponent implements OnInit {
     switch (this.mode) {
       case 'create':
         this.initModel()
-        this.catchAppointmentStructureType();
         this.getScehdulerSettings();
         break;
       case 'edit':
@@ -75,18 +72,14 @@ export class BlockAppointmentComponent implements OnInit {
       })
     })
   }
-  private catchAppointmentStructureType() {
-    this.appointmentService.createAppointmentEvent$.pipe(
-      filter(event => event !== null && event === 'block')
-    ).subscribe(() => {
-      var isNotValid: boolean = this.validate()
-      if (!isNotValid)
-        this.validation.emit(isNotValid);
-      else {
-        this.fillAppointmnetRepeat();
-        this.createdAppointment.emit(this.appointment)
-      }
-    })
+  public returnAppointment(): Appointment {
+    var isNotValid: boolean = this.validate()
+    if (!isNotValid)
+      return undefined
+    else {
+      this.fillAppointmnetRepeat();
+      return this.appointment
+    }
   }
   private getScehdulerSettings() {
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
