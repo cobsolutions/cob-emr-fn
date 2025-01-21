@@ -12,7 +12,6 @@ import { Appointment } from '../../models/appointment';
 import { AppointmentType } from '../../models/appointment.type';
 import { AppointmentService } from '../../service/appointment.service';
 import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
-import { RepeatAppointmentComponent } from '../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 
 
@@ -23,7 +22,6 @@ import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
 })
 export class AppointmentAddComponent implements OnInit {
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
-  @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   patientClient = new FormControl();
   filteredPatients: any;
   isLoading = false;
