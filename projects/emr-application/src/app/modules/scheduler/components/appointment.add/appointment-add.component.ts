@@ -90,23 +90,19 @@ export class AppointmentAddComponent implements OnInit {
   public createAppointment() {
     this.appointment = this.getAppointment();
     if (this.appointment !== undefined) {
-      console.log('toBeCreatedAppointment !== undefined')
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       if (this.calendarId !== null)
         this.appointment.calendarId = this.calendarId;
       return this.appointmentService.createAppointment(this.appointment)
     } else {
-      console.log('toBeCreatedAppointment === undefined')
       return EMPTY;
     }
   }
   private getAppointment(): Appointment {
     if (this.filteredPatients?.length > 0) {
-      console.log('full appointment')
       return this.fullAppointmentComponent.returnAppointment();
     }
     if (this.filteredPatients?.length === 0 || this.filteredPatients === undefined) {
-      console.log('block appointment')
       return this.blockAppointmentComponent.returnAppointment();
     }
     return undefined;

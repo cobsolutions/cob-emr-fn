@@ -206,8 +206,15 @@ export class FullAppointmentComponent implements OnInit {
     if (!this.validDate)
       return undefined
     else {
+      this.createAppointmentModel();
       this.fillAppointmnetRepeat();
       return this.appointment
     }
+  }
+  private createAppointmentModel() {
+    this.appointment.patientId = this.selectedPateint.id;
+    this.appointment.patientCaseId = this.selectedPatientCase.id
+    this.appointment.clinicId = Number(this.selectedClinic.id);
+    this.appointment.title = this.selectedPateint.lastName + "," + this.selectedPateint.firstName + ":" + this.selectedPatientCase.title
   }
 }
