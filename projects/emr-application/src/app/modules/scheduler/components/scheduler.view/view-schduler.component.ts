@@ -55,6 +55,8 @@ export class ViewSchdulerComponent implements OnInit {
   selectedClinic: number;
   isLoading: boolean = true;
   appointmentSeriesAction?: boolean = false
+  editEvent: CalendarEvent
+  editResult: any
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -144,6 +146,8 @@ export class ViewSchdulerComponent implements OnInit {
       if (result.action)
         switch (result.action) {
           case 'edit':
+            this.editEvent = event;
+            this.editResult = result;
             if (result.event.meta.seriesId === undefined || result.event.meta.seriesId === null)
               this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
                 if (result.action === 'updated') {
@@ -338,5 +342,18 @@ export class ViewSchdulerComponent implements OnInit {
   }
   toggleAppointmentSeriesAction() {
     this.appointmentSeriesAction = !this.appointmentSeriesAction
+  }
+  closeAppointmentSeriesAction() {
+    this.appointmentSeriesAction = false;
+  }
+  editOneAppointmentSeriesAction() {
+    this.appointmentSeriesAction = false;
+    this.appointmentActionsService.editAppointment(this.dialog, this.editResult.event, this.schedulerSettingsa).subscribe(result => {
+      if (result.action === 'updated') {
+        RefreshSchedulerEvents.refresh(this.events.get(this.editEvent.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
+        this.refresh.next();
+        this.toastr.success('Appointment updated Successfully');
+      }
+    });
   }
 }
