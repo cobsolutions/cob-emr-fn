@@ -4,6 +4,7 @@ import { CalendarEvent } from 'calendar-utils';
 import { Observable } from 'rxjs';
 import { Clinic } from '../../../patient/models/clinic';
 import { AppointmentEditModalComponent } from '../../components/appintment.edit/modal/appointment-edit-modal.component';
+import { EditAppointmentSeriesModalComponent } from '../../components/appintment.edit/series.modal/edit-appointment-series-modal.component';
 import { AppointmentActionModalComponent } from '../../components/appointment.actions/modal/appointment-action-modal.component';
 import { PropmtPatientClinicsComponent } from '../../components/appointment.actions/modal/prompting.patient.clinic/propmt-patient-clinics.component';
 import { AddAppobntmentModalComponent } from '../../components/appointment.add/modal/add-appobntment-modal.component';
@@ -34,17 +35,17 @@ export class AppointmentActionsService {
   public selectAppointmentActions(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentActionModalComponent, {
       disableClose: true,
-      data: { event: event},
+      data: { event: event },
       position: {
         top: '8%', // Adjust as needed
       }
     });
     return dialogRef.afterClosed()
   }
-  public editAppointment(dialog: MatDialog, event: CalendarEvent,schedulerSettings: Settings) {
+  public editAppointment(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings) {
     const dialogRef = dialog.open(AppointmentEditModalComponent, {
       disableClose: true,
-      data: { event: event, action: undefined ,schedulerSettings:schedulerSettings},
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings },
       width: '60%',
       position: {
         top: '8%',
@@ -53,6 +54,17 @@ export class AppointmentActionsService {
     return dialogRef.afterClosed();
   }
 
+  public editAppointmentSeries(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings) {
+    const dialogRef = dialog.open(EditAppointmentSeriesModalComponent, {
+      disableClose: true,
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings },
+      width: '60%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
   public appointmentStatus(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentStatusModalComponent, {
       disableClose: true,

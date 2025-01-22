@@ -356,4 +356,10 @@ export class ViewSchdulerComponent implements OnInit {
       }
     });
   }
+  editAllAppointmentSeriesAction() {
+    this.appointmentSeriesAction = false;
+    this.appointmentActionsService.editAppointmentSeries(this.dialog, this.editResult.event, this.schedulerSettingsa).subscribe(result => {
+
+    });
+  }
 }
