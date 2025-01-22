@@ -31,5 +31,6 @@ export class Appointment {
     appointmentRepetitionType?: string = "Single"
     clinicModel: Clinic;
     appointmentStructure?:string
+    seriesId?:number
    
 }

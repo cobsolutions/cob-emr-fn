@@ -32,7 +32,8 @@ export class AppointmentEventConverterService {
         'status': appointment.appointmentStatus,
         'type': appointment.appointmentType,
         'structure': appointment.appointmentStructure,
-        'calendar_id': appointment.calendarId
+        'calendar_id': appointment.calendarId,
+        'seriesId' : appointment.seriesId
       }
     }
     return event;

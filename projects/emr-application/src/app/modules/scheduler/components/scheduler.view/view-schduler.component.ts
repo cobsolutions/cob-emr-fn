@@ -144,6 +144,7 @@ export class ViewSchdulerComponent implements OnInit {
       if (result.action)
         switch (result.action) {
           case 'edit':
+            console.log(JSON.stringify(result.event))
             this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
               if (result.action === 'updated') {
                 RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
