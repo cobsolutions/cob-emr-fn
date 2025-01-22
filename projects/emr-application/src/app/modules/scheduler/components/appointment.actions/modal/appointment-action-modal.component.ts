@@ -26,6 +26,7 @@ export class AppointmentActionModalComponent implements OnInit {
   appointmentStatus: any;
   appointmentStructure: string;
   patientChartAccessibilityModelResponse: PatientChartAccessibilityModelResponse
+  isAppointmetSeries: boolean;
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Observable<Settings> }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private loggedInService: LoggedInService
@@ -38,6 +39,10 @@ export class AppointmentActionModalComponent implements OnInit {
     this.initAppointmentPatientInfo();
     if (this.data.event.meta.structure !== 'Block')
       this.checkPatientChartAccessibility();
+    if (this.data.event.meta.seriesId === undefined || this.data.event.meta.seriesId === null)
+      this.isAppointmetSeries = false
+    else
+      this.isAppointmetSeries = true
   }
   public editAppointment() {
     this.data.action = 'edit'
