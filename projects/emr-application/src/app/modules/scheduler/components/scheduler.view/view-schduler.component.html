@@ -93,3 +93,19 @@
     [hourSegments]='schedulerSettingsa.timeInterval'>
   </mwl-day-view-scheduler>
 </div>
+<c-modal id="appointmentseriesaction" [visible]="appointmentSeriesAction" size="xl" backdrop="static">
+  <c-modal-header>
+    <h3 cModalTitle>Edit Appointment</h3>
+    <button (click)="toggleAppointmentSeriesAction()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    Do you want to edit all occurrences of the recurring event or only this one?
+  </c-modal-body>
+  <c-modal-footer>
+    <div class="d-flex text-center">
+      <button class="btn btn-primary me-2">All</button>
+      <button class="btn btn-secondary me-2">One</button>
+      <button class="btn btn-danger">Cancel</button>
+    </div>
+  </c-modal-footer>
+</c-modal>

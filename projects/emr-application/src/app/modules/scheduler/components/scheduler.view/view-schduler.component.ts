@@ -53,8 +53,8 @@ export class ViewSchdulerComponent implements OnInit {
   schedulerSettingsa: Settings
   userSelectedCalendars: Calendar[]
   selectedClinic: number;
-
   isLoading: boolean = true;
+  appointmentSeriesAction?: boolean = false
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -144,14 +144,16 @@ export class ViewSchdulerComponent implements OnInit {
       if (result.action)
         switch (result.action) {
           case 'edit':
-            console.log(JSON.stringify(result.event))
-            this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
-              if (result.action === 'updated') {
-                RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-                this.refresh.next();
-                this.toastr.success('Appointment updated Successfully');
-              }
-            });
+            if (result.event.meta.seriesId === undefined || result.event.meta.seriesId === null)
+              this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
+                if (result.action === 'updated') {
+                  RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
+                  this.refresh.next();
+                  this.toastr.success('Appointment updated Successfully');
+                }
+              });
+            else
+              this.appointmentSeriesAction = true
             break;
           case 'status':
             this.appointmentActionsService.appointmentStatus(this.dialog, result.event).subscribe(result => {
@@ -333,5 +335,8 @@ export class ViewSchdulerComponent implements OnInit {
         this.refresh.next();
       })
     })
+  }
+  toggleAppointmentSeriesAction() {
+    this.appointmentSeriesAction = !this.appointmentSeriesAction
   }
 }
