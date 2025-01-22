@@ -77,7 +77,7 @@ export class FullAppointmentComponent implements OnInit {
   }
   private getScehdulerSettings() {
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
-    this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+    //this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
     this.getCalendars();
   }
   private getAppointmnet(id: string | number) {
@@ -97,7 +97,7 @@ export class FullAppointmentComponent implements OnInit {
       })
       this.selectPatientClinic();
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
-      this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
+      // this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
       this.getCalendars();
       this.isLoading = false;
     })
@@ -114,9 +114,7 @@ export class FullAppointmentComponent implements OnInit {
       this.appointment.clinicId = clinicId
     })
   }
-  changestartDate(startDate: Date) {
-    this.appointmentService.appointmnetStartDate$.next(startDate)
-  }
+
   getCalendars() {
     this.calendars$ = this.loggedInService.selectedClinic$.pipe(
       filter((clinicId) => clinicId != null),
@@ -168,8 +166,9 @@ export class FullAppointmentComponent implements OnInit {
     this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
   }
   private isValidateAppointmentDate() {
-    this.validDate = moment(this.appointment.appointmentDate.startTime).isBefore(this.appointment.appointmentDate.endTime) &&
-      (moment(this.appointment.appointmentDate.startDate).startOf('day').isBefore(this.appointment.appointmentDate.endDate))
+    const start = moment(this.appointment.appointmentDate.startDate);
+    const end = moment(this.appointment.appointmentDate.endDate);
+    this.validDate = !start.isAfter(end);
   }
   private selectPatientClinic() {
     if (this.selectedPateint.clinicModels.length > 1) {
@@ -194,6 +193,9 @@ export class FullAppointmentComponent implements OnInit {
     this.selectedPatientCase = this.selectedPateint.cases[0]
     this.selectedClinic = this.selectedPateint.clinicModels[0]
   }
+  changestartDate(startDate: Date) {
+    this.appointmentService.appointmnetStartDate$.next(startDate)
+  }
   changeStartTime(event: Date) {
     this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();
   }
@@ -203,6 +205,7 @@ export class FullAppointmentComponent implements OnInit {
   }
   public returnAppointment() {
     this.isValidateAppointmentDate();
+    console.log(this.validDate)
     if (!this.validDate)
       return undefined
     else {

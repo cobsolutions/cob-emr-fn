@@ -67,7 +67,7 @@ export class AppointmentService {
     return this._http.delete(createAppointmentTypURL)
   }
 
-  updateAppointmentCancelNoShow(model: AppointmentCancelNoShowReason){
+  updateAppointmentCancelNoShow(model: AppointmentCancelNoShowReason) {
     const url = this.baseUrl + 'appointment/update/cancel-noshow';
     return this._http.put(url, model);
   }

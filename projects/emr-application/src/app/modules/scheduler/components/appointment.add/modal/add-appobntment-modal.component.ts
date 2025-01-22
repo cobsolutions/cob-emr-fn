@@ -28,7 +28,6 @@ export class AddAppobntmentModalComponent implements OnInit {
       .subscribe((createdAppointments: any) => {
         if (!(createdAppointments.length > 1)) {
           console.log('not repeated')
-          console.log(JSON.stringify(createdAppointments))
           this.createSingleAppointment(createdAppointments)
         }
         else {

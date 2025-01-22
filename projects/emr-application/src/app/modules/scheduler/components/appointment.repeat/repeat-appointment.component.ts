@@ -22,6 +22,7 @@ export class RepeatAppointmentComponent implements OnInit {
   weeklyRepeatAppointment: WeeklyRepeatAppointment = {}
   monthlyRepeatAppointment: MonthlyRepeatAppointment = {}
   yearlyRepeatAppointment: YearlyRepeatAppointment = {}
+  startDate:Date
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
@@ -29,8 +30,8 @@ export class RepeatAppointmentComponent implements OnInit {
       filter(startDate => startDate !== null)
     )
       .subscribe(startDate => {
+        this.startDate = startDate;
         this.dayMonth = MonthlyRepetitionbuilder.build(startDate);
-
       })
   }
 
@@ -54,6 +55,7 @@ export class RepeatAppointmentComponent implements OnInit {
   }
   changeYearlyStartDate(startDate: Date) {
     this.yearlyRepeatAppointment.start = moment(startDate).unix() * 1000
+    this.yearlyRepeatAppointment.initDate = this.yearlyRepeatAppointment.start;
   }
   changeYearlEndDate(endDate: Date) {
     this.yearlyRepeatAppointment.end = moment(endDate).unix() * 1000
