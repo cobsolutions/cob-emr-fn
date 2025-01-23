@@ -68,8 +68,7 @@ export class BlockAppointmentComponent implements OnInit {
         return this.schedulerConfigurationService
           .findCalendarsBySchedulerUserSettings(clinicId, this.loggedInService.getLoggedUser().uuid)
       })
-    ).subscribe(result => {
-      console.log(JSON.stringify(result))
+    ).subscribe(result => {      
       this.calendars = result
       this.appointment.calendarId = result[0].id
     })

@@ -53,6 +53,7 @@ export class AddAppobntmentModalComponent implements OnInit {
       appointmet.appointmentFontTypeColor = element.appointmentFontTypeColor
       appointmet.appointmentStructure = element.appointmentStructure
       appointmet.appointmentRepeat = element.appointmentRepeat
+      appointmet.seriesId = element.seriesId
       var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
       event.id = element.id
       event.meta.type = element.appointmentType;
@@ -68,6 +69,7 @@ export class AddAppobntmentModalComponent implements OnInit {
     appointmet.appointmentTypeColor = createdAppointmnet[0].appointmentTypeColor
     appointmet.appointmentFontTypeColor = createdAppointmnet[0].appointmentFontTypeColor
     appointmet.appointmentStructure = createdAppointmnet[0].appointmentStructure
+    appointmet.seriesId = createdAppointmnet[0].seriesId
     var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
     event.id = createdAppointmnet[0].id
     event.meta.type = createdAppointmnet[0].appointmentType;
