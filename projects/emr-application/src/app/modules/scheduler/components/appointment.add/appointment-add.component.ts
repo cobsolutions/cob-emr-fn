@@ -23,6 +23,7 @@ import { FullAppointmentComponent } from './full.appointment/full-appointment.co
   styleUrls: ['./appointment-add.component.css']
 })
 export class AppointmentAddComponent implements OnInit {
+  @Input() module: string
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
   @ViewChild('fullAppointment') fullAppointmentComponent: FullAppointmentComponent;
   @ViewChild('blockAppointment') blockAppointmentComponent: BlockAppointmentComponent;
@@ -49,7 +50,6 @@ export class AppointmentAddComponent implements OnInit {
     , private constructAppointmentService: ConstructAppointmentService) { }
   ngOnInit() {
     this.findPatientByNameAutoComplete();
-
   }
   private findPatientByNameAutoComplete() {
     this.patientClient.valueChanges

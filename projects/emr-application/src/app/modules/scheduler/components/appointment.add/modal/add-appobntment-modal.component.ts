@@ -13,12 +13,14 @@ import { AppointmentAddComponent } from '../appointment-add.component';
   styleUrls: ['./add-appobntment-modal.component.css']
 })
 export class AddAppobntmentModalComponent implements OnInit {
+  module: string
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent[], schedulerSettings: Settings, action: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { startDate: Date, calendarId: number, event: CalendarEvent[], schedulerSettings: Settings, action: string, module: string }
     , private dialogRef: MatDialogRef<AddAppobntmentModalComponent>
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
+    this.module = this.data.module
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
     });

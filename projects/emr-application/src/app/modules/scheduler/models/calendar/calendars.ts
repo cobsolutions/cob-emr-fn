@@ -1,5 +1,4 @@
 import { CalendarEvent } from "calendar-utils";
-import { Calendar } from "../../../administration/model/calendar/calendar";
 
 export type CalendarEvents = {
     events: Record<number, CalendarEvent[]>;

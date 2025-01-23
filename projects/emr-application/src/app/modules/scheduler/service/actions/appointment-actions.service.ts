@@ -19,12 +19,11 @@ export class AppointmentActionsService {
 
   constructor() { }
 
-  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Settings) {
-    console.log(schedulerSettings)
+  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Settings, module: string) {
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
       disableClose: true,
       width: '60%',
-      data: { startDate: viewDate, calendarId: calendarId, schedulerSettings: schedulerSettings },
+      data: { startDate: viewDate, calendarId: calendarId, schedulerSettings: schedulerSettings, module: module },
       position: {
         top: '8%', // Adjust as needed
 

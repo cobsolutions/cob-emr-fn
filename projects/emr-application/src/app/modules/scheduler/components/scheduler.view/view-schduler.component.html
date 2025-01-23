@@ -54,7 +54,7 @@
 <br />
 <div [ngSwitch]="view" *ngIf="schedulerSettingsa">
   <!--Month Module-->
-  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events.getAll()"
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="flatEvent"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
     [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event,null)">

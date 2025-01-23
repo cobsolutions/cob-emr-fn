@@ -8,7 +8,7 @@ export class SchedulerCalendarEvents implements CalendarEvents {
     get(id: number): CalendarEvent<any>[] {
         return this.events[id];
     }
-    getAll(){
+    getAll(): CalendarEvent[] {
         return Object.values(this.events).flat();
     }
     push(id: number, value: CalendarEvent[]): void {

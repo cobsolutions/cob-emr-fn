@@ -2,7 +2,7 @@
 <mat-dialog-content class="mat-typography">
 
   <app-appointment-add #appointmentAddComponent [startDate]="data.startDate" [calendarId]="data.calendarId"
-    [schedulerSettings]="data.schedulerSettings"></app-appointment-add>
+    [module]="module" [schedulerSettings]="data.schedulerSettings"></app-appointment-add>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button cButton (click)="create()" class="mx-3" variant="outline">Create</button>

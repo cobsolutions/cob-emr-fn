@@ -22,11 +22,10 @@
             </c-card>
         </c-col>
     </c-row>
-
     <full-appointment *ngIf="filteredPatients?.length > 0" [patientsList]="filteredPatients" [startDate]="startDate"
-        #fullAppointment [mode]="'create'" [schedulerSettings]="schedulerSettings"></full-appointment>
+        #fullAppointment [mode]="'create'" [schedulerSettings]="schedulerSettings" [module]="module"></full-appointment>
 
 
     <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate" [mode]="'create'"
-        #blockAppointment [schedulerSettings]="schedulerSettings"></block-appointment>
+        #blockAppointment [schedulerSettings]="schedulerSettings" [module]="module"></block-appointment>
 </c-container>

@@ -10,6 +10,7 @@ import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
+import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
 import { RepeatAppointmentComponent } from '../../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 
@@ -19,6 +20,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./block-appointment.component.css']
 })
 export class BlockAppointmentComponent implements OnInit {
+  @Input() module: string
   @Input() mode: string
   @Input() appointmentId: string | number;
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
@@ -31,10 +33,12 @@ export class BlockAppointmentComponent implements OnInit {
   isValidTitle: boolean = true;
   isLoading: boolean = true;
   selectedClinic: Clinic
+  calendars: any
   constructor(private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
     , private calendarServiceService: CalendarServiceService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private schedulerConfigurationService: SchedulerConfigurationService) { }
 
   ngOnInit(): void {
     switch (this.mode) {
@@ -57,6 +61,17 @@ export class BlockAppointmentComponent implements OnInit {
       this.isLoading = false;
       this.isValidTitle = true;
       this.isValidDate = true;
+    })
+    this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap((clinicId: any) => {
+        return this.schedulerConfigurationService
+          .findCalendarsBySchedulerUserSettings(clinicId, this.loggedInService.getLoggedUser().uuid)
+      })
+    ).subscribe(result => {
+      console.log(JSON.stringify(result))
+      this.calendars = result
+      this.appointment.calendarId = result[0].id
     })
   }
   private getAppointmnet(id: string | number) {

@@ -54,6 +54,25 @@
             </c-card>
         </c-col>
     </c-row>
+        <!-- Calendar-->
+        <c-row *ngIf="module ==='month' && calendars">
+            <c-col>
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header>
+                        <strong>Calendar</strong>
+                    </c-card-header>
+                    <c-card-body>
+                        <select cFormControl cSelect class="mb-2" sizing="sm" id="calendar" name="calendar" required
+                            [(ngModel)]="appointment.calendarId">
+                            <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
+                                {{calendar.name}}
+                            </option>
+                        </select>
+    
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
     <c-row class="justify-content-center" *ngIf="selectedClinic">
         <c-col>
             <c-card class="mb-3 ustify-content-center">

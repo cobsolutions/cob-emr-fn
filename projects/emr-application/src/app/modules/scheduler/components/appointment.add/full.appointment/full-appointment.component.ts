@@ -12,6 +12,7 @@ import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
+import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
 import { RepeatAppointmentComponent } from '../../appointment.repeat/repeat-appointment.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
 
@@ -21,6 +22,7 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./full-appointment.component.css']
 })
 export class FullAppointmentComponent implements OnInit {
+  @Input() module: string
   @Input() mode: string
   @Input() appointmentId: string | number;
   @Output() validation = new EventEmitter<boolean>()
@@ -29,6 +31,7 @@ export class FullAppointmentComponent implements OnInit {
   appointment: Appointment = new Appointment();
   therapists: any
   calendars$: Observable<any>
+  calendars: any
   appointmentTypes: AppointmentType[]
   validDate: boolean = true;
   isLoading: boolean = true;
@@ -43,7 +46,7 @@ export class FullAppointmentComponent implements OnInit {
   constructor(private loggedInService: LoggedInService
     , private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
-    , private calendarServiceService: CalendarServiceService) { }
+    , private schedulerConfigurationService: SchedulerConfigurationService) { }
 
   ngOnInit(): void {
     switch (this.mode) {
@@ -66,19 +69,28 @@ export class FullAppointmentComponent implements OnInit {
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
       this.therapists = therapists;
       this.therapists[1].selected = true
-      //this.appointment.therapyUUID = this.therapists[0].uuid;
       this.appointment.therapyUUID = this.selectedPateint.cases[0].therapistUUID
     })
     this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
       this.appointmentTypes = types;
       this.appointment.appointmentTypeId = types[0].id
     })
+    this.loggedInService.selectedClinic$.pipe(
+      filter((clinicId) => clinicId != null),
+      switchMap((clinicId: any) => {
+        return this.schedulerConfigurationService
+          .findCalendarsBySchedulerUserSettings(clinicId, this.loggedInService.getLoggedUser().uuid)
+      })
+    ).subscribe(result => {
+      console.log(JSON.stringify(result))
+      this.calendars = result
+      this.appointment.calendarId = result[0].id
+    })
+
     this.isLoading = false;
   }
   private getScehdulerSettings() {
     this.initializeAppointmentService.initializeAppointmentDate(this.appointment, this.startDate, this.schedulerSettings.appointmentInterval)
-    //this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-    this.getCalendars();
   }
   private getAppointmnet(id: string | number) {
     this.appointmentService.retrieveFullAppointment(Number(id)).pipe(
@@ -97,8 +109,6 @@ export class FullAppointmentComponent implements OnInit {
       })
       this.selectPatientClinic();
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
-      // this.appointmentService.appointmnetStartDate$.next(this.appointment.appointmentDate.startDate)
-      this.getCalendars();
       this.isLoading = false;
     })
   }
@@ -113,13 +123,6 @@ export class FullAppointmentComponent implements OnInit {
     ).subscribe(clinicId => {
       this.appointment.clinicId = clinicId
     })
-  }
-
-  getCalendars() {
-    this.calendars$ = this.loggedInService.selectedClinic$.pipe(
-      filter((clinicId) => clinicId != null),
-      switchMap((clinicId: any) => { return this.calendarServiceService.getAttachedCalendars(clinicId) })
-    )
   }
   private fillAppointmnetRepeat() {
     switch (this.appointment.appointmentRepetitionType) {

@@ -36,6 +36,7 @@ import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
 })
 export class ViewSchdulerComponent implements OnInit {
   events: CalendarEvents = new SchedulerCalendarEvents();
+  flatEvent: CalendarEvent[];
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('appointmentAddComponent') appointmentAddComponent: AppointmentAddComponent;
   calendars: Calendar[];
@@ -73,6 +74,7 @@ export class ViewSchdulerComponent implements OnInit {
     this.getSelectedClinic().pipe(
 
     ).subscribe(clinicId => {
+      this.flatEvent = this.events.getAll()
       this.selectedClinic = clinicId;
       const sources = [this.getCalendars(clinicId), this.getSchedulerSettings(clinicId), this.getSchedulerUserSettings()]
       this.isLoading = true;
@@ -197,13 +199,19 @@ export class ViewSchdulerComponent implements OnInit {
   }
   private AddAppointment(calendar: any, module?: string) {
     var calendarId: number = calendar !== null ? calendar.id : null;
-    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettingsa).subscribe(result => {
+    this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettingsa, module).subscribe(result => {
       if (result.action !== 'cancel') {
-        console.log(JSON.stringify(result.event))
-        result.event.forEach(event => {
-          RefreshSchedulerEvents.refresh(this.events.get(calendar.id), event, AppointmentAction.ADD_APPOINTMENT);
-          this.refresh.next();
-        })
+        var events: CalendarEvent[]
+        if (module === 'month') {
+          result.event.forEach(event => {
+            RefreshSchedulerEvents.refresh(this.flatEvent, event, AppointmentAction.ADD_APPOINTMENT);
+          })
+        }
+        else
+          result.event.forEach(event => {
+            RefreshSchedulerEvents.refresh(this.events.get(calendar.id), event, AppointmentAction.ADD_APPOINTMENT);
+          })
+        this.refresh.next();
         this.toastr.success('Appointment created Successfully');
       }
     })
@@ -217,7 +225,7 @@ export class ViewSchdulerComponent implements OnInit {
     this.selectedCalendars.forEach(calendars => {
       this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
         this.events.push(calendars.id, events)
-        this.events.display();
+        this.flatEvent = this.events.getAll();
         this.refresh.next();
       })
     })
@@ -227,6 +235,7 @@ export class ViewSchdulerComponent implements OnInit {
     this.selectedCalendars.forEach(calendars => {
       this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
         this.events.push(calendars.id, events)
+        this.flatEvent = this.events.getAll();
         this.refresh.next();
       })
     })
@@ -300,6 +309,7 @@ export class ViewSchdulerComponent implements OnInit {
           SC.push(this.pickCalender(Number(id))); // Add the missing id as a new Calendar object
           scIds.add(Number(id)); // Update the set to include the new id
           this.events.push(Number(id), events)
+          this.flatEvent = this.events.getAll();
           this.refresh.next();
         })
       }
@@ -312,6 +322,7 @@ export class ViewSchdulerComponent implements OnInit {
         SC.splice(i, 1); // Remove the item from SC
         this.refresh.next();
       }
+      this.flatEvent = this.events.getAll();
     }
   }
   private initSelectedCalendar() {
@@ -323,6 +334,7 @@ export class ViewSchdulerComponent implements OnInit {
         this.selectedCalendars.push(calendar)
         this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
           this.events.push(Number(calendar.id), events)
+          this.flatEvent = this.events.getAll();
           this.refresh.next();
         })
       })
