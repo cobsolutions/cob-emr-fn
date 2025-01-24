@@ -7,7 +7,14 @@
                 <c-card-header><strong>Appointment for</strong></c-card-header>
             </c-card>
             <c-card-body>
-
+                <select cFormControl cSelect class="mb-2" sizing="sm" id="patientcase" name="patientcase"
+                    [compareWith]="compareFn"
+                    [ngClass]="{'is-invalid': patientcase.invalid && (patientcase.dirty || patientcase.touched)}"
+                    [(ngModel)]="selectedPatientCase" #patientcase="ngModel" required>
+                    <option *ngFor="let case of selectedPateint?.cases" [ngValue]="case">
+                        {{case.title}}
+                    </option>
+                </select>
             </c-card-body>
         </c-col>
     </c-row>
