@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AppointmentBlockSeries } from '../../../models/appointment.block.series';
 
 @Component({
   selector: 'block-series-appointment',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./block-series-appointment.component.css']
 })
 export class BlockSeriesAppointmentComponent implements OnInit {
-
+  @Input() appointmentBlockSeries: AppointmentBlockSeries
   constructor() { }
 
   ngOnInit(): void {

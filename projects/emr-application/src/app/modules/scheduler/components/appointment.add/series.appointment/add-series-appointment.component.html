@@ -1,3 +1,5 @@
-<full-series-appointment *ngIf="appointmentStrucutreType ==='Full'"></full-series-appointment>
+<full-series-appointment *ngIf="appointmentStrucutreType ==='Full' && appointmentFullSeries"
+    [appointmentFullSeries]="appointmentFullSeries"></full-series-appointment>
 
-<block-series-appointment *ngIf="appointmentStrucutreType ==='Block'"></block-series-appointment>
+<block-series-appointment *ngIf="appointmentStrucutreType ==='Block' && appointmentBlockSeries"
+    [appointmentBlockSeries]="appointmentBlockSeries"></block-series-appointment>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AppointmentFullSeries } from '../../../models/appointment.full.series';
 
 @Component({
   selector: 'full-series-appointment',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./full-series-appointment.component.css']
 })
 export class FullSeriesAppointmentComponent implements OnInit {
-
+  @Input() appointmentFullSeries: AppointmentFullSeries
   constructor() { }
 
   ngOnInit(): void {
