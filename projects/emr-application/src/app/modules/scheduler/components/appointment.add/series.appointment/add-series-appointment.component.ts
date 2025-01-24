@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { AppointmentService } from '../../../service/appointment.service';
 
 @Component({
   selector: 'series-appointment',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddSeriesAppointmentComponent implements OnInit {
   isLoading: boolean = false;
-  constructor() { }
+  @Input() seriesId: number
+  @Input() appointmentStrucutreType:string
+  constructor(private loggedInService: LoggedInService
+    , private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
+    this.loggedInService.selectedClinic$.pipe(
+      switchMap(clinicId => this.appointmentService.getAppointmentSerires(clinicId, this.seriesId,this.appointmentStrucutreType))
+    ).subscribe(appointmentSeries => {
+      console.log(JSON.stringify(appointmentSeries))
+    })
   }
 
 }

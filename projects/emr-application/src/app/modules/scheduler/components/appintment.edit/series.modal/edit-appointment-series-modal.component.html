@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Edit Appointment</h2>
 <mat-dialog-content class="mat-typography">
-  <series-appointment></series-appointment>
+  <series-appointment [seriesId]="seriesId" [appointmentStrucutreType]="appointmentStrucutreType"></series-appointment>
 </mat-dialog-content>
 <mat-dialog-actions align="end" *ngIf="data.event.id">
   <button cButton (click)="update()" class="mx-3" variant="outline">Update</button>

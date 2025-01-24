@@ -71,4 +71,9 @@ export class AppointmentService {
     const url = this.baseUrl + 'appointment/update/cancel-noshow';
     return this._http.put(url, model);
   }
+
+  getAppointmentSerires(clinicId: number, seriesId: number, type:string) {
+    const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId  + '/type/'+ type;
+    return this._http.get(url)
+  }
 }
