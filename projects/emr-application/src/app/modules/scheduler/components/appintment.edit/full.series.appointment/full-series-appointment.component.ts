@@ -8,6 +8,7 @@ import { AppointmentFullSeries } from '../../../models/appointment.full.series';
 })
 export class FullSeriesAppointmentComponent implements OnInit {
   @Input() appointmentFullSeries: AppointmentFullSeries
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,5 +1,8 @@
-<full-series-appointment *ngIf="appointmentStrucutreType ==='Full' && appointmentFullSeries"
-    [appointmentFullSeries]="appointmentFullSeries"></full-series-appointment>
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<c-container fluid *ngIf="!isLoading">
+    <full-series-appointment *ngIf="appointmentStrucutreType ==='Full' && appointmentFullSeries"
+        [appointmentFullSeries]="appointmentFullSeries"></full-series-appointment>
 
-<block-series-appointment *ngIf="appointmentStrucutreType ==='Block' && appointmentBlockSeries"
-    [appointmentBlockSeries]="appointmentBlockSeries"></block-series-appointment>
+    <block-series-appointment *ngIf="appointmentStrucutreType ==='Block' && appointmentBlockSeries"
+        [appointmentBlockSeries]="appointmentBlockSeries"></block-series-appointment>
+</c-container>

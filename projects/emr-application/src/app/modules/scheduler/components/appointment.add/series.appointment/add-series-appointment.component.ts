@@ -11,7 +11,7 @@ import { AppointmentService } from '../../../service/appointment.service';
   styleUrls: ['./add-series-appointment.component.css']
 })
 export class AddSeriesAppointmentComponent implements OnInit {
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   @Input() seriesId: number
   @Input() appointmentStrucutreType: string
   appointmentFullSeries: AppointmentFullSeries
@@ -33,6 +33,7 @@ export class AddSeriesAppointmentComponent implements OnInit {
           this.appointmentBlockSeries  = undefined
           break;
       }
+      this.isLoading = false;
       console.log(JSON.stringify(appointmentSeries))
     })
   }
