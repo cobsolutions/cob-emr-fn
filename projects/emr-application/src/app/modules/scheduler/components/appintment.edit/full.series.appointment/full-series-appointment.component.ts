@@ -8,10 +8,17 @@ import { AppointmentFullSeries } from '../../../models/appointment.full.series';
 })
 export class FullSeriesAppointmentComponent implements OnInit {
   @Input() appointmentFullSeries: AppointmentFullSeries
-
+  toBeEdit: AppointmentFullSeries = {}
   constructor() { }
 
   ngOnInit(): void {
+    this.initModel();
   }
-
+  compareFn = this._compareFn.bind(this);
+  _compareFn(a, b) {
+    return Number(a?.id) === Number(a?.id);
+  }
+  private initModel() {
+    this.toBeEdit.selectedCase = this.appointmentFullSeries.patientCases[0]
+  }
 }

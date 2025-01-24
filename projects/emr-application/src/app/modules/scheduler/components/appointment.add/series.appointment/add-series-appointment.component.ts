@@ -37,9 +37,5 @@ export class AddSeriesAppointmentComponent implements OnInit {
       console.log(JSON.stringify(appointmentSeries))
     })
   }
-  compareFn = this._compareFn.bind(this);
-  _compareFn(a, b) {
-    return Number(a?.id) === Number(a?.id);
-  }
 
 }

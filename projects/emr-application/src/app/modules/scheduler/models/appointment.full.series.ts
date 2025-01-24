@@ -5,6 +5,7 @@ import { AppointmentType } from "./appointment.type";
 export interface AppointmentFullSeries{
     patientName?:string;
     patientCases?:PatientCase[]
+    selectedCase?:PatientCase
     startTime?:number;
     endTime?:number;
     appointmentType?:AppointmentType,

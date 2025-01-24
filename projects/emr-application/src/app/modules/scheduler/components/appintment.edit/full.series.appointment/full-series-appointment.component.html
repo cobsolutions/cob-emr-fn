@@ -1,0 +1,17 @@
+<c-row class="justify-content-center">
+    <c-col>
+        <c-card class="mb-3 ustify-content-center">
+            <c-card-header><strong>Appointment for</strong></c-card-header>
+            <c-card-body>
+                <select cFormControl cSelect class="mb-2" sizing="sm" id="patientcase" name="patientcase"
+                    [compareWith]="compareFn"
+                    [ngClass]="{'is-invalid': patientcase.invalid && (patientcase.dirty || patientcase.touched)}"
+                    [(ngModel)]="toBeEdit.selectedCase" #patientcase="ngModel" required>
+                    <option *ngFor="let case of appointmentFullSeries?.patientCases" [ngValue]="case">
+                        {{case.title}}
+                    </option>
+                </select>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>
