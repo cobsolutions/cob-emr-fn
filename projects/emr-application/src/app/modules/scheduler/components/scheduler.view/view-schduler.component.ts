@@ -150,7 +150,9 @@ export class ViewSchdulerComponent implements OnInit {
           case 'edit':
             this.editEvent = event;
             this.editResult = result;
-            if (result.event.meta.seriesId === undefined || result.event.meta.seriesId === null)
+            console.log(result.event.meta.seriesId)
+            if (result.event.meta.seriesId === result.event.id) {
+              this.appointmentSeriesAction = false
               this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
                 if (result.action === 'updated') {
                   RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
@@ -158,6 +160,7 @@ export class ViewSchdulerComponent implements OnInit {
                   this.toastr.success('Appointment updated Successfully');
                 }
               });
+            }
             else
               this.appointmentSeriesAction = true
             break;
