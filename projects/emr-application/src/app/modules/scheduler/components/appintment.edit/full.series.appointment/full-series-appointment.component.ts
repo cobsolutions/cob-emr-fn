@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { AppointmentFullSeries } from '../../../models/appointment.full.series';
+import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
 
 @Component({
   selector: 'full-series-appointment',
@@ -9,16 +11,27 @@ import { AppointmentFullSeries } from '../../../models/appointment.full.series';
 export class FullSeriesAppointmentComponent implements OnInit {
   @Input() appointmentFullSeries: AppointmentFullSeries
   toBeEdit: AppointmentFullSeries = {}
-  constructor() { }
+  startTime: Date;
+  endTime: Date
+  compareFn = this._compareFn.bind(this);
+  therapists: any
+  constructor(private initializeAppointmentService :InitializeAppointmentService) { }
 
   ngOnInit(): void {
     this.initModel();
   }
-  compareFn = this._compareFn.bind(this);
   _compareFn(a, b) {
-    return Number(a?.id) === Number(a?.id);
+    return Number(a?.id) === Number(b?.id);
   }
   private initModel() {
     this.toBeEdit.selectedCase = this.appointmentFullSeries.patientCases[0]
+    this.startTime = moment.unix(this.appointmentFullSeries.startTime / 1000).toDate();
+    this.endTime = moment.unix(this.appointmentFullSeries.endTime / 1000).toDate();
+    this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
+      this.therapists = therapists;
+      this.therapists[1].selected = true
+      this.toBeEdit.therapy = this.appointmentFullSeries?.patientCases[0].therapistUUID
+    })
   }
+
 }
