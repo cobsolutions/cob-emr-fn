@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { AppointmentFullSeries } from '../../../models/appointment.full.series';
+import { AppointmentType } from '../../../models/appointment.type';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class FullSeriesAppointmentComponent implements OnInit {
   endTime: Date
   compareFn = this._compareFn.bind(this);
   therapists: any
-  constructor(private initializeAppointmentService :InitializeAppointmentService) { }
+  appointmentTypes: AppointmentType[]
+  constructor(private initializeAppointmentService: InitializeAppointmentService) { }
 
   ngOnInit(): void {
     this.initModel();
@@ -31,6 +33,10 @@ export class FullSeriesAppointmentComponent implements OnInit {
       this.therapists = therapists;
       this.therapists[1].selected = true
       this.toBeEdit.therapy = this.appointmentFullSeries?.patientCases[0].therapistUUID
+    })
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
+      this.appointmentTypes = types;
+      this.toBeEdit.appointmentType.id = this.appointmentFullSeries.appointmentType.id
     })
   }
 
