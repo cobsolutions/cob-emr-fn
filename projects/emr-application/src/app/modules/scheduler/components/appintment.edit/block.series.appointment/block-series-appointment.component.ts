@@ -3,6 +3,8 @@ import * as moment from 'moment';
 import { filter } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentBlockSeries } from '../../../models/appointment.block.series';
+import { AppointmentType } from '../../../models/appointment.type';
+import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
 
 @Component({
   selector: 'block-series-appointment',
@@ -15,7 +17,8 @@ export class BlockSeriesAppointmentComponent implements OnInit {
   compareFn = this._compareFn.bind(this);
   startTime: Date;
   endTime: Date
-  constructor(private loggedInService: LoggedInService) { }
+  appointmentTypes: AppointmentType[]
+  constructor(private initializeAppointmentService: InitializeAppointmentService) { }
 
   ngOnInit(): void {
     this.initModel()
@@ -27,6 +30,10 @@ export class BlockSeriesAppointmentComponent implements OnInit {
   private initModel() {
     this.startTime = moment.unix(this.appointmentBlockSeries.startTime / 1000).toDate();
     this.endTime = moment.unix(this.appointmentBlockSeries.endTime / 1000).toDate();
+    this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
+      this.appointmentTypes = types;
+      this.toBeEdit.appointmentType.id = this.appointmentBlockSeries.appointmentType.id
+    })
   }
 
 }
