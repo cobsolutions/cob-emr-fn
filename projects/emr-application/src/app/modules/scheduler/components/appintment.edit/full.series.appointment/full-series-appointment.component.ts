@@ -11,7 +11,6 @@ import { InitializeAppointmentService } from '../../../service/init.appintment/i
 })
 export class FullSeriesAppointmentComponent implements OnInit {
   @Input() appointmentFullSeries: AppointmentFullSeries
-  toBeEdit: AppointmentFullSeries = {}
   startTime: Date;
   endTime: Date
   compareFn = this._compareFn.bind(this);
@@ -26,17 +25,16 @@ export class FullSeriesAppointmentComponent implements OnInit {
     return Number(a?.id) === Number(b?.id);
   }
   private initModel() {
-    this.toBeEdit.selectedCase = this.appointmentFullSeries.patientCases[0]
+    this.appointmentFullSeries.patientCase = this.appointmentFullSeries.patientCases[0]
     this.startTime = moment.unix(this.appointmentFullSeries.startTime / 1000).toDate();
     this.endTime = moment.unix(this.appointmentFullSeries.endTime / 1000).toDate();
     this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
       this.therapists = therapists;
       this.therapists[1].selected = true
-      this.toBeEdit.therapy = this.appointmentFullSeries?.patientCases[0].therapistUUID
+      this.appointmentFullSeries.therapy = this.appointmentFullSeries?.patientCases[0].therapistUUID
     })
     this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
       this.appointmentTypes = types;
-      this.toBeEdit.appointmentType.id = this.appointmentFullSeries.appointmentType.id
     })
   }
 

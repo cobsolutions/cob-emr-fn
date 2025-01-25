@@ -42,7 +42,6 @@ import { BlockAppointmentComponent } from './components/appointment.add/block.ap
 import { EditCalendarComponent } from './components/calendar.edit/edit-calendar.component';
 import { EditAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/edit/edit-appointment-type.component';
 import { EditAppointmentSeriesModalComponent } from './components/appintment.edit/series.modal/edit-appointment-series-modal.component';
-import { AddSeriesAppointmentComponent } from './components/appointment.add/series.appointment/add-series-appointment.component';
 import { BlockSeriesAppointmentComponent } from './components/appintment.edit/block.series.appointment/block-series-appointment.component';
 import { FullSeriesAppointmentComponent } from './components/appintment.edit/full.series.appointment/full-series-appointment.component';
 @NgModule({
@@ -79,7 +78,6 @@ import { FullSeriesAppointmentComponent } from './components/appintment.edit/ful
         EditCalendarComponent,
         EditAppointmentTypeComponent,
         EditAppointmentSeriesModalComponent,
-        AddSeriesAppointmentComponent,
         BlockSeriesAppointmentComponent,
         FullSeriesAppointmentComponent,
     ],

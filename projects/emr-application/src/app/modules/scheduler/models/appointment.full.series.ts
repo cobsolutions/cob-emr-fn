@@ -6,7 +6,7 @@ export interface AppointmentFullSeries {
     patientName?: string;
     patientClinics?: Clinic[]
     patientCases?: PatientCase[]
-    selectedCase?: PatientCase
+    patientCase?: PatientCase
     startTime?: number;
     endTime?: number;
     appointmentType?: AppointmentType,

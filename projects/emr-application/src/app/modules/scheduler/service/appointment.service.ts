@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
 import { AppointmentCancelNoShowReason } from '../models/appointment.cancel.no.show.reason';
 import { AppointmentFilter } from '../models/appointment.filter';
+import { AppointmentFullSeries } from '../models/appointment.full.series';
 import { AppointmentType } from '../models/appointment.type';
 
 @Injectable({
@@ -72,8 +73,13 @@ export class AppointmentService {
     return this._http.put(url, model);
   }
 
-  getAppointmentSerires(clinicId: number, seriesId: number, type:string) {
-    const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId  + '/type/'+ type;
+  getAppointmentSerires(clinicId: number, seriesId: number, type: string) {
+    const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId + '/type/' + type;
     return this._http.get(url)
+  }
+
+  editFullAppointmentSerires(model: AppointmentFullSeries, seriesId: number) {
+    const url = this.baseUrl + '/series/seriesId/' + seriesId;
+    return this._http.put(url, model);
   }
 }

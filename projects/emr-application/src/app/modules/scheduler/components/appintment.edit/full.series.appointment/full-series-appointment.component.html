@@ -1,3 +1,4 @@
+<!-- Appointment For -->
 <c-row class="justify-content-center">
     <c-col>
         <c-card class="mb-3 ustify-content-center">
@@ -6,7 +7,7 @@
                 <select cFormControl cSelect class="mb-2" sizing="sm" id="patientcase" name="patientcase"
                     [compareWith]="compareFn"
                     [ngClass]="{'is-invalid': patientcase.invalid && (patientcase.dirty || patientcase.touched)}"
-                    [(ngModel)]="toBeEdit.selectedCase" #patientcase="ngModel" required>
+                    [(ngModel)]="appointmentFullSeries.patientCase" #patientcase="ngModel" required>
                     <option *ngFor="let case of appointmentFullSeries?.patientCases" [ngValue]="case">
                         {{case.title}}
                     </option>
@@ -15,6 +16,7 @@
         </c-card>
     </c-col>
 </c-row>
+<!--Date-->
 <c-row>
     <c-col>
         <c-card class="mb-3 ustify-content-center">
@@ -84,8 +86,8 @@
         </c-card>
     </c-col>
 </c-row>
-  <!-- Appointment Type-->
-  <c-row>
+<!-- Appointment Type-->
+<c-row>
     <c-col>
         <c-card class="mb-3 ustify-content-center">
             <c-card-header><strong>Appointment Type</strong></c-card-header>
@@ -99,7 +101,8 @@
                     </option>
                 </select>
                 <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
-                    name="appointmentnote" [(ngModel)]="appointmentFullSeries.note" placeholder="Appointment Note"></textarea>
+                    name="appointmentnote" [(ngModel)]="appointmentFullSeries.note"
+                    placeholder="Appointment Note"></textarea>
             </c-card-body>
         </c-card>
     </c-col>
