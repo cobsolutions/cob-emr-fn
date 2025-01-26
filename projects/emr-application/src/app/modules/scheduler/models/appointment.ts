@@ -1,6 +1,4 @@
-import { PatientCase } from '../../patient/models/case/patient.case';
 import { Clinic } from '../../patient/models/clinic';
-import { Patient } from '../../patient/models/patient';
 import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reason';
 import { AppointmentDate } from './appointment.date';
 import { AppointementStatus } from './appointment.status';
@@ -19,7 +17,6 @@ export class Appointment {
     endDate: number
     title: string;
     note: string;
-    repeatId: number;
     appointmentTypeId?: number
     appointmentType: string | null = null;
     appointmentTypeColor: string | null = null;

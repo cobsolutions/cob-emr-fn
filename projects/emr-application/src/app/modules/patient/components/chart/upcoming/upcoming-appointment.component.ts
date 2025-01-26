@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { filter, map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { Appointment } from '../../../../scheduler/models/appointment';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
-import { Appointment } from '../../../models/appointments/appointment';
 import { UpcomingAppointmentService } from '../../../services/appointment/upcoming-appointment.service';
 import { PateintCaseService } from '../../../services/patient/cases/pateint-case.service';
 

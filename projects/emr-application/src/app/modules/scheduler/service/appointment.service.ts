@@ -78,8 +78,8 @@ export class AppointmentService {
     return this._http.get(url)
   }
 
-  editFullAppointmentSerires(model: AppointmentFullSeries, seriesId: number) {
-    const url = this.baseUrl + '/series/seriesId/' + seriesId;
+  updateFullAppointmentSerires(model: AppointmentFullSeries, seriesId: number) {
+    const url = this.baseUrl + 'appointment/series/seriesId/' + seriesId;
     return this._http.put(url, model);
   }
 }

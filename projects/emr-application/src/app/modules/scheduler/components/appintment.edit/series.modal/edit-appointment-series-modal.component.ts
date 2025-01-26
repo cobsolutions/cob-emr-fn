@@ -1,12 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
 import { switchMap } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { AppointmentBlockSeries } from '../../../models/appointment.block.series';
 import { AppointmentFullSeries } from '../../../models/appointment.full.series';
+import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentService } from '../../../service/appointment.service';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
+import { BlockSeriesAppointmentComponent } from '../block.series.appointment/block-series-appointment.component';
+import { FullSeriesAppointmentComponent } from '../full.series.appointment/full-series-appointment.component';
 
 @Component({
   selector: 'edit-appointment-series-modal',
@@ -14,15 +17,18 @@ import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
   styleUrls: ['./edit-appointment-series-modal.component.css']
 })
 export class EditAppointmentSeriesModalComponent implements OnInit {
+  @ViewChild('fullSeriesAppointmentComponent') fullSeriesAppointmentComponent: FullSeriesAppointmentComponent;
+  @ViewChild('BlockSeriesAppointmentComponent') BlockSeriesAppointmentComponent: BlockSeriesAppointmentComponent;
   isLoading: boolean = true;
   seriesId: number
   appointmentStrucutreType: string
   appointmentFullSeries: AppointmentFullSeries
   appointmentBlockSeries: AppointmentBlockSeries
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Settings }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { events: CalendarEvent[], event: CalendarEvent, action: string, schedulerSettings: Settings }
     , private dialogRef: MatDialogRef<EditAppointmentSeriesModalComponent>
     , private loggedInService: LoggedInService
-    , private appointmentService: AppointmentService) { }
+    , private appointmentService: AppointmentService
+    , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
     this.seriesId = this.data.event.meta.seriesId
@@ -30,7 +36,16 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
     this.renderAppointmentSeries();
   }
   public update() {
-
+    this.pickAppointment()
+    var events: CalendarEvent[] = []
+    this.appointmentService.updateFullAppointmentSerires(this.appointmentFullSeries, this.seriesId).subscribe((ereatedAppointmnets: any) => {
+      ereatedAppointmnets.forEach(appointmet => {
+        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+        events.push(event);
+      })
+      this.data.events = events;
+      this.dialogRef.close(this.data);
+    })
   }
   public cancel() {
     this.data.action = 'cancel';
@@ -51,7 +66,14 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
           break;
       }
       this.isLoading = false;
-      console.log(JSON.stringify(appointmentSeries))
     })
+  }
+  private pickAppointment() {
+    if (this.data.event.meta.structure === 'Full') {
+      this.appointmentFullSeries = this.fullSeriesAppointmentComponent.appointmentFullSeries;
+    }
+    if (this.data.event.meta.structure === 'Block') {
+      this.appointmentBlockSeries = this.BlockSeriesAppointmentComponent.appointmentBlockSeries;
+    }
   }
 }

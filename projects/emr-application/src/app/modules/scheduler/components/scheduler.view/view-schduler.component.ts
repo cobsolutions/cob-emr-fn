@@ -150,7 +150,6 @@ export class ViewSchdulerComponent implements OnInit {
           case 'edit':
             this.editEvent = event;
             this.editResult = result;
-            console.log(result.event.meta.seriesId)
             if (result.event.meta.seriesId === result.event.id) {
               this.appointmentSeriesAction = false
               this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
@@ -344,17 +343,7 @@ export class ViewSchdulerComponent implements OnInit {
     else
       this.selectedCalendars = []
   }
-  private loadSchedulerUserSettingsCalendars(calendar: Calendar[]) {
-    this.calendars = calendar;
-    this.selectedCalendars = []
-    calendar.forEach(calendar => {
-      this.selectedCalendars.push(calendar)
-      this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
-        this.events.push(Number(calendar.id), events)
-        this.refresh.next();
-      })
-    })
-  }
+
   toggleAppointmentSeriesAction() {
     this.appointmentSeriesAction = !this.appointmentSeriesAction
   }
@@ -374,7 +363,12 @@ export class ViewSchdulerComponent implements OnInit {
   editAllAppointmentSeriesAction() {
     this.appointmentSeriesAction = false;
     this.appointmentActionsService.editAppointmentSeries(this.dialog, this.editResult.event, this.schedulerSettingsa).subscribe(result => {
-
+      console.log(JSON.stringify(this.editResult))
+      result.events.forEach(event => {
+        RefreshSchedulerEvents.refresh(this.events.get(this.editResult.event.meta.calendar_id), event, AppointmentAction.EDIT_APPOINTMENT);
+        this.refresh.next();
+      })
+      this.toastr.success('Appointment updated Successfully');
     });
   }
 }
