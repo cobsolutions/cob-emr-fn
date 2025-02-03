@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
-import { filter, Observable, switchMap, tap } from 'rxjs';
+import { filter, forkJoin, map, Observable, switchMap } from 'rxjs';
 import { PatientCase } from '../../../../patient/models/case/patient.case';
 import { Clinic } from '../../../../patient/models/clinic';
 import { Patient } from '../../../../patient/models/patient';
+import { PatientFinderService } from '../../../../patient/services/patient/patient-finder.service';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
 import { AppointmentType } from '../../../models/appointment.type';
-import { FullAppointment } from '../../../models/full.appointment';
-import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
+import { AppointmentRepetitionConfiguration } from '../../../models/repeat/appointment.repetition.configuration';
 import { AppointmentService } from '../../../service/appointment.service';
-import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
 import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
 import { RepeatAppointmentComponent } from '../../appointment.repeat/repeat-appointment.component';
@@ -46,7 +45,8 @@ export class FullAppointmentComponent implements OnInit {
   constructor(private loggedInService: LoggedInService
     , private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
-    , private schedulerConfigurationService: SchedulerConfigurationService) { }
+    , private schedulerConfigurationService: SchedulerConfigurationService
+    , private patientService: PatientFinderService) { }
 
   ngOnInit(): void {
     switch (this.mode) {
@@ -82,7 +82,6 @@ export class FullAppointmentComponent implements OnInit {
           .findCalendarsBySchedulerUserSettings(clinicId, this.loggedInService.getLoggedUser().uuid)
       })
     ).subscribe(result => {
-      console.log(JSON.stringify(result))
       this.calendars = result
       this.appointment.calendarId = result[0].id
     })
@@ -94,18 +93,29 @@ export class FullAppointmentComponent implements OnInit {
   }
   private getAppointmnet(id: string | number) {
     this.appointmentService.retrieveFullAppointment(Number(id)).pipe(
-      filter(appointmnet => appointmnet !== null),
-    ).subscribe((appointment: FullAppointment) => {
-      this.appointment = appointment
-      this.selectedPateint = appointment.patient;
-      this.selectedPatientCase = appointment.patientCase;
+      switchMap((appointment) => {
+        return forkJoin({
+          patient: this.appointmentService.findAppointmentPatient(Number(id)),
+          patientCase: this.appointmentService.findAppointmentPatientCase(Number(id)),
+        }).pipe(
+          map((details) => ({
+            appointment,
+            details,
+          }))
+        );
+      })
+    ).subscribe(result => {
+      this.appointment = result.appointment
+      console.log(JSON.stringify(this.appointment))
+      this.selectedPateint = result.details.patient;
+      this.selectedPatientCase = result.details.patientCase
       this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
         this.therapists = therapists;
-        this.appointment.therapyUUID = appointment.therapyUUID;
+        this.appointment.therapyUUID = result.appointment.therapyUUID;
       })
       this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
         this.appointmentTypes = types;
-        this.appointment.appointmentTypeId = appointment.appointmentTypeId;
+        this.appointment.appointmentTypeId = result.appointment.appointmentTypeId;
       })
       this.selectPatientClinic();
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, this.schedulerSettings.appointmentInterval)
@@ -115,7 +125,7 @@ export class FullAppointmentComponent implements OnInit {
 
   compareFn = this._compareFn.bind(this);
   _compareFn(a, b) {
-    return Number(a?.id) === Number(a?.id);
+    return Number(a?.id) === Number(b?.id);
   }
   private getSelectedClinic() {
     this.loggedInService.selectedClinic$.pipe(
@@ -125,7 +135,7 @@ export class FullAppointmentComponent implements OnInit {
     })
   }
   private fillAppointmnetRepeat() {
-    switch (this.appointment.appointmentRepetitionType) {
+    switch (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType) {
       case 'Daily':
         this.createDailyRepetitionAppointment();
         break
@@ -138,35 +148,41 @@ export class FullAppointmentComponent implements OnInit {
       case 'Yearly':
         this.createYearlyRepetitionAppointment();
         break;
+      default:
+        this.appointment.appointmentRepetitionConfiguration = {
+          appointmentRepetitionType: null
+        }
+        break
+
     }
   }
   private createDailyRepetitionAppointment() {
-    var dailyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var dailyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       daily: this.repeatAppointmentComponent.dailyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = dailyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = dailyAppointmnetRepeat
   }
   private createWeeklyRepetitionAppointment() {
-    var weeklyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var weeklyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       weekly: this.repeatAppointmentComponent.weeklyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = weeklyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = weeklyAppointmnetRepeat
   }
   private createMonthlyRepetitionAppointment() {
-    var monthlyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var monthlyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       monthly: this.repeatAppointmentComponent.monthlyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = monthlyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = monthlyAppointmnetRepeat
   }
   private createYearlyRepetitionAppointment() {
-    var yearlyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var yearlyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = yearlyAppointmnetRepeat
   }
   private isValidateAppointmentDate() {
     const start = moment(this.appointment.appointmentDate.startDate);
@@ -177,7 +193,6 @@ export class FullAppointmentComponent implements OnInit {
     if (this.selectedPateint.clinicModels.length > 1) {
       this.loggedInService.selectedClinic$.pipe(
         filter(clinicId => clinicId !== null),
-        tap(clinicid => console.log(clinicid))
       ).subscribe(clinicId => {
         this.selectedClinic = this.selectedPateint.clinicModels
           .filter(clinic => {
@@ -208,7 +223,6 @@ export class FullAppointmentComponent implements OnInit {
   }
   public returnAppointment() {
     this.isValidateAppointmentDate();
-    console.log(this.validDate)
     if (!this.validDate)
       return undefined
     else {

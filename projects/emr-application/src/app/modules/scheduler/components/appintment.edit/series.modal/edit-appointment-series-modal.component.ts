@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
-import { switchMap } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
-import { AppointmentBlockSeries } from '../../../models/appointment.block.series';
-import { AppointmentFullSeries } from '../../../models/appointment.full.series';
+import { Appointment } from '../../../models/appointment';
+import { RenderEventsContainer } from '../../../models/render.events.container';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentService } from '../../../service/appointment.service';
+import { ConstructAppointmentService } from '../../../service/construct.appointment/construct-appointment.service';
+import { BlockAppointmentComponent } from '../../appointment.add/block.appointment/block-appointment.component';
+import { FullAppointmentComponent } from '../../appointment.add/full.appointment/full-appointment.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
-import { BlockSeriesAppointmentComponent } from '../block.series.appointment/block-series-appointment.component';
-import { FullSeriesAppointmentComponent } from '../full.series.appointment/full-series-appointment.component';
 
 @Component({
   selector: 'edit-appointment-series-modal',
@@ -17,33 +17,51 @@ import { FullSeriesAppointmentComponent } from '../full.series.appointment/full-
   styleUrls: ['./edit-appointment-series-modal.component.css']
 })
 export class EditAppointmentSeriesModalComponent implements OnInit {
-  @ViewChild('fullSeriesAppointmentComponent') fullSeriesAppointmentComponent: FullSeriesAppointmentComponent;
-  @ViewChild('BlockSeriesAppointmentComponent') BlockSeriesAppointmentComponent: BlockSeriesAppointmentComponent;
+  @ViewChild('fullAppointment') fullAppointment: FullAppointmentComponent;
+  @ViewChild('blockAppointment') blockAppointment: BlockAppointmentComponent;
   isLoading: boolean = true;
   seriesId: number
   appointmentStrucutreType: string
-  appointmentFullSeries: AppointmentFullSeries
-  appointmentBlockSeries: AppointmentBlockSeries
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { events: CalendarEvent[], event: CalendarEvent, action: string, schedulerSettings: Settings }
+  appointment: Appointment
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { renderEventsContainer: RenderEventsContainer, event: CalendarEvent, action: string, schedulerSettings: Settings }
     , private dialogRef: MatDialogRef<EditAppointmentSeriesModalComponent>
     , private loggedInService: LoggedInService
     , private appointmentService: AppointmentService
-    , private appointmentEventConverterService: AppointmentEventConverterService) { }
+    , private appointmentEventConverterService: AppointmentEventConverterService
+    , private constructAppointmentService: ConstructAppointmentService) { }
 
   ngOnInit(): void {
     this.seriesId = this.data.event.meta.seriesId
     this.appointmentStrucutreType = this.data.event.meta.structure
-    this.renderAppointmentSeries();
   }
   public update() {
     this.pickAppointment()
-    var events: CalendarEvent[] = []
-    this.appointmentService.updateFullAppointmentSerires(this.appointmentFullSeries, this.seriesId).subscribe((ereatedAppointmnets: any) => {
-      ereatedAppointmnets.forEach(appointmet => {
-        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
-        events.push(event);
-      })
-      this.data.events = events;
+    var addedEvents: CalendarEvent[] = []
+    var deletedEvents: CalendarEvent[] = []
+    this.constructAppointmentService.constructAppointmentDate(this.appointment)
+    this.appointmentService.updateSeriesAppointment(this.appointment).subscribe((appintmentsContainer: any) => {
+      if (appintmentsContainer.deletedRenderAppointment === null) {
+        appintmentsContainer.addedRenderAppointment.forEach(appointmet => {
+          var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+          addedEvents.push(event);
+        })
+      }
+      else {
+        appintmentsContainer.addedRenderAppointment.forEach(appointmet => {
+          var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+          addedEvents.push(event);
+        })
+        appintmentsContainer.deletedRenderAppointment.forEach(appointmet => {
+          var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
+          deletedEvents.push(event);
+        })
+      }
+      var renderEventsContainer: RenderEventsContainer={
+        addedRenderEvents : addedEvents,
+        deletedRenderEvents:deletedEvents
+      }
+      this.data.action = 'updated'
+      this.data.renderEventsContainer = renderEventsContainer;
       this.dialogRef.close(this.data);
     })
   }
@@ -51,29 +69,11 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
     this.data.action = 'cancel';
     this.dialogRef.close(this.data);
   }
-  private renderAppointmentSeries() {
-    this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => this.appointmentService.getAppointmentSerires(clinicId, this.seriesId, this.appointmentStrucutreType))
-    ).subscribe(appointmentSeries => {
-      switch (this.appointmentStrucutreType) {
-        case 'Block':
-          this.appointmentBlockSeries = appointmentSeries;
-          this.appointmentFullSeries = undefined
-          break;
-        case 'Full':
-          this.appointmentFullSeries = appointmentSeries
-          this.appointmentBlockSeries = undefined
-          break;
-      }
-      this.isLoading = false;
-    })
-  }
   private pickAppointment() {
-    if (this.data.event.meta.structure === 'Full') {
-      this.appointmentFullSeries = this.fullSeriesAppointmentComponent.appointmentFullSeries;
-    }
-    if (this.data.event.meta.structure === 'Block') {
-      this.appointmentBlockSeries = this.BlockSeriesAppointmentComponent.appointmentBlockSeries;
-    }
+    if (this.data.event.meta.structure === 'Full')
+      this.appointment = this.fullAppointment.returnAppointment();
+    if (this.data.event.meta.structure === 'Block')
+      this.appointment = this.blockAppointment.returnAppointment();
+    this.appointment.appointmentStructure = this.data.event.meta.structure
   }
 }

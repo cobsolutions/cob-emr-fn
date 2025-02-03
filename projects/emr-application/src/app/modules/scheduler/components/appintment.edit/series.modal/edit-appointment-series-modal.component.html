@@ -1,12 +1,10 @@
 <h2 mat-dialog-title>Edit Appointment</h2>
 <mat-dialog-content class="mat-typography">
-  <c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
-  <c-container fluid *ngIf="!isLoading">
-    <full-series-appointment *ngIf="appointmentStrucutreType ==='Full' && appointmentFullSeries"
-      [appointmentFullSeries]="appointmentFullSeries" #fullSeriesAppointmentComponent></full-series-appointment>
-
-    <block-series-appointment *ngIf="appointmentStrucutreType ==='Block' && appointmentBlockSeries"
-      [appointmentBlockSeries]="appointmentBlockSeries" #BlockSeriesAppointmentComponent></block-series-appointment>
+  <c-container fluid>
+    <full-appointment *ngIf="data.event.meta.structure ==='Full'" [mode]="'edit'" [appointmentId]="data.event.id"
+      [schedulerSettings]="data.schedulerSettings" #fullAppointment></full-appointment>
+    <block-appointment *ngIf="data.event.meta.structure ==='Block'" [mode]="'edit'" [appointmentId]="data.event.id"
+      [schedulerSettings]="data.schedulerSettings" #blockAppointment></block-appointment>
   </c-container>
 </mat-dialog-content>
 <mat-dialog-actions align="end" *ngIf="data.event.id">

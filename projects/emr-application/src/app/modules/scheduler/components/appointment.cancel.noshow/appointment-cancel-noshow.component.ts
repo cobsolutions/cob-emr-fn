@@ -43,11 +43,11 @@ export class AppointmentCancelNoshowComponent implements OnInit {
   private updateAppointmentStatus(status: string, appointmentCancelNoShowReason: AppointmentCancelNoShowReason) {
     this.appointment.appointmentStatus = status;
     this.appointment.appointmentCancelNoShowReason = appointmentCancelNoShowReason;
-    this.appointmentService.createAppointment(this.appointment)
-      .subscribe(() => {
-        this.toastr.success('Appointment Status updated to ' + status);
-        this.changeVisibility.emit('close');
-      })
+    // this.appointmentService.createAppointment(this.appointment)
+    //   .subscribe(() => {
+    //     this.toastr.success('Appointment Status updated to ' + status);
+    //     this.changeVisibility.emit('close');
+    //   })
 
   }
 }

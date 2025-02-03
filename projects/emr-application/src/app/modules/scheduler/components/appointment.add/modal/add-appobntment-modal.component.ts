@@ -28,7 +28,7 @@ export class AddAppobntmentModalComponent implements OnInit {
   create() {
     this.appointmentAddComponent.createAppointment()
       .subscribe((createdAppointments: any) => {
-        if (!(createdAppointments.length > 1)) {
+        if (!(Array.isArray(createdAppointments))) {
           console.log('not repeated')
           this.createSingleAppointment(createdAppointments)
         }
@@ -66,14 +66,14 @@ export class AddAppobntmentModalComponent implements OnInit {
   private createSingleAppointment(createdAppointmnet: any) {
     var events: CalendarEvent[] = []
     var appointmet: Appointment = this.appointmentAddComponent.appointment;
-    appointmet.appointmentTypeColor = createdAppointmnet[0].appointmentTypeColor
-    appointmet.appointmentFontTypeColor = createdAppointmnet[0].appointmentFontTypeColor
-    appointmet.appointmentStructure = createdAppointmnet[0].appointmentStructure
-    appointmet.seriesId = createdAppointmnet[0].seriesId
+    appointmet.appointmentTypeColor = createdAppointmnet.appointmentTypeColor
+    appointmet.appointmentFontTypeColor = createdAppointmnet.appointmentFontTypeColor
+    appointmet.appointmentStructure = createdAppointmnet.appointmentStructure
+    appointmet.seriesId = createdAppointmnet.seriesId
     var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
-    event.id = createdAppointmnet[0].id
-    event.meta.type = createdAppointmnet[0].appointmentType;
-    event.meta.status = createdAppointmnet[0].appointmentStatus;
+    event.id = createdAppointmnet.id
+    event.meta.type = createdAppointmnet.appointmentType;
+    event.meta.status = createdAppointmnet.appointmentStatus;
     events.push(event);
     this.data.event = events;
     this.data.calendarId = this.appointmentAddComponent.appointment.calendarId

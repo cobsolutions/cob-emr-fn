@@ -1,42 +1,41 @@
 <!--Daily-->
-<c-container fluid *ngIf="repeatType ==='Daily'">
+<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Daily'">
     <div class="form-group" class="mb-3">
         <input cFormControl sizing="sm" type="number" [(ngModel)]="dailyRepeatAppointment.every" placeholder="Every" />
     </div>
     <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" [ngModel]="dailyRepeatAppointment._dateStart"
             (dateChange)="changeDailyStartDate($event)"></c-date-picker>
     </div>
     <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'" [ngModel]="dailyRepeatAppointment._dateEnd"
             (dateChange)="changeDailyEndDate($event)"></c-date-picker>
     </div>
 </c-container>
 
 <!--Weekly-->
-<c-container fluid *ngIf="repeatType ==='Weekly'">
+<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Weekly'">
     <div class="form-group" class="mb-3">
         <input cFormControl sizing="sm" type="number" placeholder="Every" [(ngModel)]="weeklyRepeatAppointment.every" />
     </div>
     <div class="form-group" class="mb-3">
-        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="weeklyRepeatAppointment.days"
-            multiple>
-            <c-multi-select-option *ngFor="let day of days"
+        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" multiple [(ngModel)]="weeklyRepeatAppointment.days">
+            <c-multi-select-option *ngFor="let day of days" [selected]="day.selected" 
                 [value]="day.dayNumber.toString()">{{day.dayName}}</c-multi-select-option>
         </c-multi-select>
     </div>
     <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" [ngModel]="weeklyRepeatAppointment._dateStart"
             (dateChange)="changeWeeklyStartDate($event)"></c-date-picker>
     </div>
     <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'" [ngModel]="weeklyRepeatAppointment._dateEnd"
             (dateChange)="changeWeeklyEndDate($event)"></c-date-picker>
     </div>
 </c-container>
 
 <!--Monthly-->
-<c-container fluid *ngIf="repeatType ==='Monthly'">
+<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Monthly'">
     <div class="form-group" class="mb-3">
         <input cFormControl sizing="sm" type="number" placeholder="Every"
             [(ngModel)]="monthlyRepeatAppointment.every" />
@@ -44,26 +43,28 @@
     <div class="form-group" class="mb-3">
         <select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="monthlyRepeatAppointment.days">
             <option [value]="undefined">Select..</option>
-            <option *ngFor="let day of dayMonth " [ngValue]="day">{{day.dayName}}</option>
+            <option *ngFor="let day of dayMonth " [ngValue]="day" [selected]="day.selected">{{day.dayName}}</option>
         </select>
         <div class="form-group" class="mb-3">
             <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
+                [ngModel]="monthlyRepeatAppointment._dateStart"
                 (dateChange)="changeMonthlyStartDate($event)"></c-date-picker>
         </div>
         <div class="form-group" class="mb-3">
             <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
+                [ngModel]="monthlyRepeatAppointment._dateEnd"
                 (dateChange)="changeMonthlyEndDate($event)"></c-date-picker>
         </div>
     </div>
 </c-container>
 <!--Yearly-->
-<c-container fluid *ngIf="repeatType ==='Yearly'">
+<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Yearly'">
     <div class="form-group" class="mb-3">
         <input cFormControl sizing="sm" type="number" [(ngModel)]="yearlyRepeatAppointment.every" placeholder="Every" />
     </div>
     <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
-            (dateChange)="changeYearlyStartDate($event)" [(ngModel)]="startDate"></c-date-picker>
+        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" (dateChange)="changeYearlyStartDate($event)"
+            [(ngModel)]="startDate"></c-date-picker>
     </div>
     <div class="form-group" class="mb-3">
         <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
@@ -72,4 +73,4 @@
 </c-container>
 
 <!--Every Week Day-->
-<c-container fluid *ngIf="repeatType ==='Every_Week_Day'"></c-container>
+<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Every_Week_Day'"></c-container>

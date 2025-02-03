@@ -98,6 +98,7 @@
                             <label>{{selectedClinic.name}}</label>
                         </div>
                         <div *ngIf="selectedPateint?.clinicModels?.length >1">
+                            {{selectedClinic.id}}
                             <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
                                 name="patientclinic"
                                 [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
@@ -156,17 +157,16 @@
                 <c-card-header><strong>Appointment Repetition</strong></c-card-header>
                 <c-card-body>
                     <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
-                        [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
-                        [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel">
-                        <option [ngValue]="'Single'" selected>Don't Repeat</option>
+                        [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
+                        #repetition="ngModel">
+                        <option [ngValue]="null" selected>Don't Repeat</option>
                         <option [ngValue]="'Daily'" selected>Daily</option>
                         <option [ngValue]="'Weekly'" selected>Weekly</option>
                         <option [ngValue]="'Monthly'" selected>Monthly</option>
                         <option [ngValue]="'Yearly'" selected>Yearly</option>
-                        <!-- <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option> -->
                     </select>
-                    <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
-                        [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>
+                    <repeat-appointment #repeatAppointmentComponent
+                        [configuration]="appointment.appointmentRepetitionConfiguration"></repeat-appointment>
                 </c-card-body>
             </c-card>
         </c-col>

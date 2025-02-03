@@ -56,7 +56,6 @@ export class AppointmentActionModalComponent implements OnInit {
     this.dialogRef.close(null);
   }
   private initAppointmentPatientInfo() {
-    console.log(this.data.event.id)
     const [patientName, patientCase] = this.data.event.title.split(':');
     const formattedPatientCase = patientCase !== undefined ? (patientCase.includes('<br/>')
       ? patientCase.split('<br/>')[0]

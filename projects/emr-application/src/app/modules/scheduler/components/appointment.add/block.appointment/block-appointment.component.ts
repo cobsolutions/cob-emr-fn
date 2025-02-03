@@ -7,6 +7,7 @@ import { Appointment } from '../../../models/appointment';
 import { AppointmentType } from '../../../models/appointment.type';
 import { FullAppointment } from '../../../models/full.appointment';
 import { AppointmnetRepeat } from '../../../models/repeat/appointment.repeat';
+import { AppointmentRepetitionConfiguration } from '../../../models/repeat/appointment.repetition.configuration';
 import { AppointmentService } from '../../../service/appointment.service';
 import { CalendarServiceService } from '../../../service/calendar/calendar-service.service';
 import { InitializeAppointmentService } from '../../../service/init.appintment/initialize-appointment.service';
@@ -68,15 +69,16 @@ export class BlockAppointmentComponent implements OnInit {
         return this.schedulerConfigurationService
           .findCalendarsBySchedulerUserSettings(clinicId, this.loggedInService.getLoggedUser().uuid)
       })
-    ).subscribe(result => {      
+    ).subscribe(result => {
       this.calendars = result
       this.appointment.calendarId = result[0].id
     })
   }
   private getAppointmnet(id: string | number) {
-    this.appointmentService.retrieveAppointment(Number(id)).pipe(
+    this.appointmentService.retrieveFullAppointment(Number(id)).pipe(
       filter(appointmnet => appointmnet !== null),
     ).subscribe((appointment: FullAppointment) => {
+      console.log(JSON.stringify(appointment))
       this.appointment = appointment
       this.initializeAppointmentService.initializeAppointmentDate(this.appointment, undefined, undefined)
       this.initializeAppointmentService.findAppointmnetType().subscribe(types => {
@@ -142,7 +144,7 @@ export class BlockAppointmentComponent implements OnInit {
     return this.validate();
   }
   private fillAppointmnetRepeat() {
-    switch (this.appointment.appointmentRepetitionType) {
+    switch (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType) {
       case 'Daily':
         this.createDailyRepetitionAppointment();
         break
@@ -155,35 +157,39 @@ export class BlockAppointmentComponent implements OnInit {
       case 'Yearly':
         this.createYearlyRepetitionAppointment();
         break;
+      default:
+        this.appointment.appointmentRepetitionConfiguration = {
+          appointmentRepetitionType: null
+        }
     }
   }
   private createDailyRepetitionAppointment() {
-    var dailyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var dailyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       daily: this.repeatAppointmentComponent.dailyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = dailyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = dailyAppointmnetRepeat
   }
   private createWeeklyRepetitionAppointment() {
-    var weeklyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var weeklyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       weekly: this.repeatAppointmentComponent.weeklyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = weeklyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = weeklyAppointmnetRepeat
   }
   private createMonthlyRepetitionAppointment() {
-    var monthlyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var monthlyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       monthly: this.repeatAppointmentComponent.monthlyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = monthlyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = monthlyAppointmnetRepeat
   }
   private createYearlyRepetitionAppointment() {
-    var yearlyAppointmnetRepeat: AppointmnetRepeat = {
-      type: this.appointment.appointmentRepetitionType,
+    var yearlyAppointmnetRepeat: AppointmentRepetitionConfiguration = {
+      appointmentRepetitionType: this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType,
       yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
     }
-    this.appointment.appointmentRepeat = yearlyAppointmnetRepeat
+    this.appointment.appointmentRepetitionConfiguration = yearlyAppointmnetRepeat
   }
 }
 

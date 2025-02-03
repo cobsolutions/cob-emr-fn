@@ -89,7 +89,7 @@ export class DayViewSchedulerCalendarUtils extends CalendarUtils {
       allDayEventRows: [],
       hourColumns: [],
       calendars: [...args.calendars],
-      calendarEvents:args.calendarEvents
+      calendarEvents: args.calendarEvents
     };
     if (view.calendars.length === 0) {
       const columnView = super.getWeekView({
@@ -194,7 +194,7 @@ export class DayViewSchedulerComponent
       const adjustedEvent = {
         ...originalEvent,
         ...newEventTimes,
-        meta: { ...originalEvent.meta, user: newUser },
+        meta: { ...originalEvent.meta, calendar_id: newUser },
       };
       const tempEvents = this.events.map((event) => {
         if (event === originalEvent) {
@@ -225,17 +225,14 @@ export class DayViewSchedulerComponent
       dayWidth,
       useY
     );
-    const newUser = this.getDraggedUserColumn(weekEvent, dragEndEvent.x);
-    if (newUser && newUser !== weekEvent.event.meta.user) {
-      this.userChanged.emit({ event: weekEvent.event, newUser });
-    }
+
   }
 
   protected override getWeekView(events: CalendarEvent[]) {
     return this.utils.getWeekView({
       events,
       calendars: this.calendars,
-      calendarEvents : this.calendarEvents,
+      calendarEvents: this.calendarEvents,
       viewDate: this.viewDate,
       weekStartsOn: this.weekStartsOn,
       excluded: this.excludeDays,
@@ -268,7 +265,7 @@ export class DayViewSchedulerComponent
   ) {
     const columnsMoved = Math.round(xPixels / this.dayColumnWidth);
     const currentColumnIndex = this.view.calendars.findIndex(
-      (user) => user === dayEvent.event.meta.user
+      (calendar) => calendar.id === dayEvent.event.meta.calendar_id
     );
     const newIndex = currentColumnIndex + columnsMoved;
     return this.view.calendars[newIndex];

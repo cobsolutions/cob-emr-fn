@@ -5,6 +5,7 @@ export interface days {
     dayNumber: number,
     index?: number;
     day?: number;
+    selected: boolean
 }
 export class MonthlyRepetitionbuilder {
     static dayNumber: number = 0;
@@ -42,13 +43,15 @@ export class MonthlyRepetitionbuilder {
                 dayName: ordinalDayName,
                 dayNumber: this.dayNumber,
                 index: index,
-                day: day, // Exact day for the first item
+                day: day,
+                selected: false
             },
             {
                 dayName: formattedDayName,
                 dayNumber: this.dayNumber,
                 index: index,
                 day: -1, // -1 for the second item
+                selected: false
             },
         ];
     }

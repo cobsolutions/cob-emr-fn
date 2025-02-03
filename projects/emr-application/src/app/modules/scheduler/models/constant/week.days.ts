@@ -1,27 +1,28 @@
 export interface Day {
     dayName: string,
-    dayNumber: number
+    dayNumber: number,
+    selected: boolean
 }
-export var WeekDays : Day[]=[
+export var WeekDays: Day[] = [
     {
-        dayName: 'Mon', dayNumber: 2
+        dayName: 'Mon', dayNumber: 2, selected: false
     },
     {
-        dayName: 'Tue', dayNumber: 3
+        dayName: 'Tue', dayNumber: 3, selected: false
     },
     {
-        dayName: 'Wed', dayNumber: 4
+        dayName: 'Wed', dayNumber: 4, selected: false
     },
     {
-        dayName: 'Thu', dayNumber: 5
+        dayName: 'Thu', dayNumber: 5, selected: false
     },
     {
-        dayName: 'Fri', dayNumber: 6
+        dayName: 'Fri', dayNumber: 6, selected: false
     },
     {
-        dayName: 'Sat', dayNumber: 7
+        dayName: 'Sat', dayNumber: 7, selected: false
     },
     {
-        dayName: 'Sun', dayNumber: 1
+        dayName: 'Sun', dayNumber: 1, selected: false
     },
 ]

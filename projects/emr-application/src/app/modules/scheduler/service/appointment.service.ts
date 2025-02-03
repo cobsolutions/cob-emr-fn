@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
 import { AppointmentCancelNoShowReason } from '../models/appointment.cancel.no.show.reason';
 import { AppointmentFilter } from '../models/appointment.filter';
@@ -16,11 +16,23 @@ export class AppointmentService {
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
   public appointmnetStartDate$: BehaviorSubject<Date | null> = new BehaviorSubject<Date | null>(null);
-  createAppointment(appointment: Appointment) {
+
+  createRepetitionAppointment(appointment: Appointment) {
+    const createAppointmentURL = this.baseUrl + 'appointment/series/create';
+    return this._http.post(createAppointmentURL, appointment);
+  }
+  createSingleAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/create';
     return this._http.post(createAppointmentURL, appointment);
   }
-
+  updateSingleAppointment(appointment: Appointment) {
+    const createAppointmentURL = this.baseUrl + 'appointment/update';
+    return this._http.post(createAppointmentURL, appointment);
+  }
+  updateSeriesAppointment(appointment: Appointment) {
+    const createAppointmentURL = this.baseUrl + 'appointment/series/update';
+    return this._http.post(createAppointmentURL, appointment);
+  }
   retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number) {
     const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId + '/calendarId/' + calendarId;
     return this._http.get(listAppointmentURL);
@@ -77,9 +89,13 @@ export class AppointmentService {
     const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId + '/type/' + type;
     return this._http.get(url)
   }
-
-  updateFullAppointmentSerires(model: AppointmentFullSeries, seriesId: number) {
-    const url = this.baseUrl + 'appointment/series/seriesId/' + seriesId;
-    return this._http.put(url, model);
+  
+  findAppointmentPatient(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/patient/appointment-id/' + appointmentId
+    return this._http.get(url)
+  }
+  findAppointmentPatientCase(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/patient-case/appointment-id/' + appointmentId
+    return this._http.get(url)
   }
 }

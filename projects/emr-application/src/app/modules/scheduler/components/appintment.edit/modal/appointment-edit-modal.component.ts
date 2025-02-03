@@ -40,8 +40,8 @@ export class AppointmentEditModalComponent implements OnInit {
     if (valid) {
       this.pickAppointment();
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
-      this.appointmentService.createAppointment(this.appointment).subscribe(createdAppointment => {
-        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
+      this.appointmentService.updateSingleAppointment(this.appointment).subscribe((createdAppointment: any) => {
+        var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment)
         this.data.action = 'updated'
         this.data.event = event
         this.dialogRef.close(this.data);
@@ -59,10 +59,10 @@ export class AppointmentEditModalComponent implements OnInit {
   }
   private pickAppointment() {
     if (this.data.event.meta.structure === 'Full') {
-      this.appointment = this.fullAppointment.appointment;
+      this.appointment = this.fullAppointment.returnAppointment();
     }
     if (this.data.event.meta.structure === 'Block') {
-      this.appointment = this.blockAppointment.appointment;
+      this.appointment = this.blockAppointment.returnAppointment();
     }
   }
 

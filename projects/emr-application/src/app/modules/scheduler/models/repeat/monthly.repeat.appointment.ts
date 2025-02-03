@@ -2,8 +2,9 @@ import { days } from "../../components/appointment.repeat/util/monthly.day.repet
 
 export interface MonthlyRepeatAppointment {
     every?: number
-    start?: number
-    end?: number
-    dayInMonth?:number;
-    days?:days[]
+    startDate?: number
+    endDate?: number
+    days?: days[]
+    _dateStart?: Date
+    _dateEnd?: Date
 }

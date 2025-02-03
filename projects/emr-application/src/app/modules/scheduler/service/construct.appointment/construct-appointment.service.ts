@@ -10,6 +10,8 @@ export class ConstructAppointmentService {
   constructor() { }
 
   public constructAppointmentDate(appointment: Appointment) {
+    console.log(appointment.appointmentDate.startTime.getHours())
+    console.log(appointment.appointmentDate.startTime.getMinutes())
     var startDate: Date = moment(appointment.appointmentDate.startDate).toDate();
     startDate.setHours(appointment.appointmentDate.startTime.getHours())
     startDate.setMinutes(appointment.appointmentDate.startTime.getMinutes())

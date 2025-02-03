@@ -93,7 +93,11 @@ export class AppointmentAddComponent implements OnInit {
       this.constructAppointmentService.constructAppointmentDate(this.appointment)
       if (this.calendarId !== null)
         this.appointment.calendarId = this.calendarId;
-      return this.appointmentService.createAppointment(this.appointment)
+      if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType === null
+        || this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType === undefined)
+        return this.appointmentService.createSingleAppointment(this.appointment)
+      else
+        return this.appointmentService.createRepetitionAppointment(this.appointment)
     } else {
       return EMPTY;
     }

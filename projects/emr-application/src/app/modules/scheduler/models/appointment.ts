@@ -3,6 +3,7 @@ import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reas
 import { AppointmentDate } from './appointment.date';
 import { AppointementStatus } from './appointment.status';
 import { AppointmnetRepeat } from './repeat/appointment.repeat';
+import { AppointmentRepetitionConfiguration } from './repeat/appointment.repetition.configuration';
 
 export class Appointment {
     id: number;
@@ -24,10 +25,12 @@ export class Appointment {
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
     appointmentRepeat: AppointmnetRepeat;
+    appointmentRepetitionConfiguration: AppointmentRepetitionConfiguration = {
+        appointmentRepetitionType: null
+    }
     appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-    appointmentRepetitionType?: string = "Single"
     clinicModel: Clinic;
-    appointmentStructure?:string
-    seriesId?:number
-   
+    appointmentStructure?: string
+    seriesId?: number
+
 }

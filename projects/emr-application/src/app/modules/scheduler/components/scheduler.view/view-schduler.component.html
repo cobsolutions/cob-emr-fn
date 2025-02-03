@@ -56,8 +56,8 @@
   <!--Month Module-->
   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="flatEvent"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
-    [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event,null)">
+    [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('month', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event,'month')">
   </mwl-calendar-month-view>
   <!--Week Module-->
   <div *ngSwitchCase="CalendarView.Week">
@@ -70,8 +70,7 @@
           {{ calendar.name }}
         </div>
         <mwl-calendar-week-view [viewDate]="viewDate" [events]="events.get(calendar.id)" [refresh]="refresh"
-          (eventClicked)="handleEvent('Clicked', $event.event)"
-          (eventTimesChanged)="eventTimesChanged($event,calendar.id)"
+          (eventClicked)="handleEvent('week', $event.event)" (eventTimesChanged)="eventTimesChanged($event,'week')"
           (hourSegmentClicked)="weekClicked($event.date , calendar)" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
           [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
           [hourSegments]='schedulerSettingsa.timeInterval'>
@@ -87,25 +86,9 @@
   </div>
   <!--Day Module-->
   <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
-    (eventTimesChanged)="eventTimesChanged($event,null)" (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event,'day')" (eventClicked)="handleEvent('day', $event.event)"
     (hourSegmentClicked)="dayClicked($event)" [calendars]="selectedCalendars" [calendarEvents]="events"
     [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
     [hourSegments]='schedulerSettingsa.timeInterval'>
   </mwl-day-view-scheduler>
 </div>
-<c-modal id="appointmentseriesaction" [visible]="appointmentSeriesAction" size="xl" backdrop="static">
-  <c-modal-header>
-    <h3 cModalTitle>Edit Appointment</h3>
-    <button (click)="toggleAppointmentSeriesAction()" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>
-    Do you want to edit all occurrences of the recurring event or only this one?
-  </c-modal-body>
-  <c-modal-footer>
-    <div class="d-flex text-center">
-      <button class="btn btn-primary me-2" (click)="editAllAppointmentSeriesAction()">All</button>
-      <button class="btn btn-secondary me-2" (click)="editOneAppointmentSeriesAction()">One</button>
-      <button class="btn btn-danger" (click)="closeAppointmentSeriesAction()">Cancel</button>
-    </div>
-  </c-modal-footer>
-</c-modal>

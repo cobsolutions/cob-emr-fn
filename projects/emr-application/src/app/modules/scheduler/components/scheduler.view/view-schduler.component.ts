@@ -11,23 +11,27 @@ import {
 } from 'date-fns';
 
 import { WeekDay } from "calendar-utils";
-import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
-import { filter, forkJoin, map, Observable, Subject, switchMap } from 'rxjs';
+import { filter, forkJoin, Observable, Subject } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
+import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
+import { Appointment } from "../../models/appointment";
 import { CalendarEvents } from "../../models/calendar/calendars";
 import { SchedulerCalendarEvents } from "../../models/calendar/scheduler.calendar.operation";
+import { RenderEventsContainer } from "../../models/render.events.container";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
 import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
+import { HandleDragableAppointmentService } from "../../service/appointment/update.dragable.appointments/handle-dragable-appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { EventsCalendarService } from "../../service/calendar/events/events-calendar.service";
+import { CheckAppointmentRepetitionConfigurationService } from "../../service/check-appointment-repetition-configuration.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
-import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
+import { HandleEditableAppointmentService } from "../../service/appointment/update.editable.appointment/handle-editable-appointment.service";
 
 @Component({
   selector: 'app-view-schduler',
@@ -55,9 +59,9 @@ export class ViewSchdulerComponent implements OnInit {
   userSelectedCalendars: Calendar[]
   selectedClinic: number;
   isLoading: boolean = true;
-  appointmentSeriesAction?: boolean = false
   editEvent: CalendarEvent
   editResult: any
+  eventTimesChangedAppointment: Appointment
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -68,8 +72,15 @@ export class ViewSchdulerComponent implements OnInit {
     private calendarServiceService: CalendarServiceService,
     protected utils: CalendarUtils,
     private eventsCalendarService: EventsCalendarService,
-    private appointmentEventConverterService: AppointmentEventConverterService
-  ) { }
+    private handleDragableAppointmentService: HandleDragableAppointmentService,
+    private handleEditableAppointmentService: HandleEditableAppointmentService
+  ) {
+    this.handleDragableAppointmentService.refresh = this.refresh;
+    this.handleDragableAppointmentService.dialog = this.dialog
+
+    this.handleEditableAppointmentService.refresh = this.refresh;
+    this.handleEditableAppointmentService.dialog = this.dialog
+  }
   ngOnInit(): void {
     this.getSelectedClinic().pipe(
 
@@ -85,6 +96,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.calendars = result[0];
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
+          this.handleEditableAppointmentService.schedulerSettings = this.schedulerSettingsa;
           this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
@@ -125,43 +137,38 @@ export class ViewSchdulerComponent implements OnInit {
     event,
     newStart,
     newEnd,
-  }: CalendarEventTimesChangedEvent, calendarId: number): void {
+  }: CalendarEventTimesChangedEvent, module: string): void {
     this.appointmentService.retrieveAppointment(Number(event.id)).pipe(
-      map(appintment => {
-        appintment.startDate = moment(newStart).unix() * 1000;
-        appintment.endDate = moment(newEnd).unix() * 1000;
-        return appintment;
-      }),
-      switchMap(appointmet => this.appointmentService.createAppointment(appointmet))
-    ).subscribe((createdAppointment: any) => {
-      var newChangedEvent: CalendarEvent = this.appointmentEventConverterService.convertToEvent(createdAppointment[0])
-      RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), newChangedEvent, AppointmentAction.EDIT_APPOINTMENT);
-      this.refresh.next();
-      this.toastr.success('Appointment  updated Successfully');
+    ).subscribe((appointment: any) => {
+      switch (module) {
+        case 'month':
+          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd);
+          break;
+        case 'week':
+        case 'day':
+          this.handleDragableAppointmentService.handle(appointment, this.events.get(event.meta.calendar_id), newStart, newEnd, module);
+          break;
+
+      }
     })
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(module: string, event: CalendarEvent): void {
     this.appointmentActionsService.selectAppointmentActions(this.dialog, event).subscribe(result => {
       if (result === null)
         return;
       if (result.action)
         switch (result.action) {
           case 'edit':
-            this.editEvent = event;
-            this.editResult = result;
-            if (result.event.meta.seriesId === result.event.id) {
-              this.appointmentSeriesAction = false
-              this.appointmentActionsService.editAppointment(this.dialog, result.event, this.schedulerSettingsa).subscribe(result => {
-                if (result.action === 'updated') {
-                  RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-                  this.refresh.next();
-                  this.toastr.success('Appointment updated Successfully');
-                }
-              });
+            switch (module) {
+              case 'month':
+                this.handleEditableAppointmentService.handle(result.event, this.flatEvent);
+                break;
+              case 'week':
+              case 'day':
+                this.handleEditableAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id), module);
+                break;
             }
-            else
-              this.appointmentSeriesAction = true
             break;
           case 'status':
             this.appointmentActionsService.appointmentStatus(this.dialog, result.event).subscribe(result => {
@@ -343,32 +350,5 @@ export class ViewSchdulerComponent implements OnInit {
     else
       this.selectedCalendars = []
   }
-
-  toggleAppointmentSeriesAction() {
-    this.appointmentSeriesAction = !this.appointmentSeriesAction
-  }
-  closeAppointmentSeriesAction() {
-    this.appointmentSeriesAction = false;
-  }
-  editOneAppointmentSeriesAction() {
-    this.appointmentSeriesAction = false;
-    this.appointmentActionsService.editAppointment(this.dialog, this.editResult.event, this.schedulerSettingsa).subscribe(result => {
-      if (result.action === 'updated') {
-        RefreshSchedulerEvents.refresh(this.events.get(this.editEvent.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-        this.refresh.next();
-        this.toastr.success('Appointment updated Successfully');
-      }
-    });
-  }
-  editAllAppointmentSeriesAction() {
-    this.appointmentSeriesAction = false;
-    this.appointmentActionsService.editAppointmentSeries(this.dialog, this.editResult.event, this.schedulerSettingsa).subscribe(result => {
-      console.log(JSON.stringify(this.editResult))
-      result.events.forEach(event => {
-        RefreshSchedulerEvents.refresh(this.events.get(this.editResult.event.meta.calendar_id), event, AppointmentAction.EDIT_APPOINTMENT);
-        this.refresh.next();
-      })
-      this.toastr.success('Appointment updated Successfully');
-    });
-  }
 }
+

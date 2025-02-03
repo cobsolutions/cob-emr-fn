@@ -40,7 +40,8 @@
                                     name="startDate" [(ngModel)]="appointment.appointmentDate.startDate"
                                     (dateChange)="changestartDate($event)"></c-date-picker></c-col>
                             <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
-                                    [(ngModel)]="appointment.appointmentDate.startTime" (timeChange)="changeStartTime($event)"></c-time-picker></c-col>
+                                    [(ngModel)]="appointment.appointmentDate.startTime"
+                                    (timeChange)="changeStartTime($event)"></c-time-picker></c-col>
                         </c-row>
                     </div>
                     <c-row>
@@ -54,25 +55,25 @@
             </c-card>
         </c-col>
     </c-row>
-        <!-- Calendar-->
-        <c-row *ngIf="module ==='month' && calendars">
-            <c-col>
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <strong>Calendar</strong>
-                    </c-card-header>
-                    <c-card-body>
-                        <select cFormControl cSelect class="mb-2" sizing="sm" id="calendar" name="calendar" required
-                            [(ngModel)]="appointment.calendarId">
-                            <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
-                                {{calendar.name}}
-                            </option>
-                        </select>
-    
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
+    <!-- Calendar-->
+    <c-row *ngIf="module ==='month' && calendars">
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <strong>Calendar</strong>
+                </c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="calendar" name="calendar" required
+                        [(ngModel)]="appointment.calendarId">
+                        <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
+                            {{calendar.name}}
+                        </option>
+                    </select>
+
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
     <c-row class="justify-content-center" *ngIf="selectedClinic">
         <c-col>
             <c-card class="mb-3 ustify-content-center">
@@ -112,17 +113,16 @@
                 <c-card-header><strong>Appointment Repetition</strong></c-card-header>
                 <c-card-body>
                     <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
-                        [ngClass]="{'is-invalid': repetition.invalid && (repetition.dirty || repetition.touched)}"
-                        [(ngModel)]="appointment.appointmentRepetitionType" #repetition="ngModel">
-                        <option [ngValue]="'Single'" selected>Don't Repeat</option>
+                        [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
+                        #repetition="ngModel">
+                        <option [ngValue]="null" selected>Don't Repeat</option>
                         <option [ngValue]="'Daily'" selected>Daily</option>
                         <option [ngValue]="'Weekly'" selected>Weekly</option>
                         <option [ngValue]="'Monthly'" selected>Monthly</option>
                         <option [ngValue]="'Yearly'" selected>Yearly</option>
-                        <!-- <option [ngValue]="'Every_Week_Day'" selected>Every Week Day</option> -->
                     </select>
-                    <repeat-appointment #repeatAppointmentComponent *ngIf="appointment.appointmentRepetitionType"
-                        [repeatType]="appointment.appointmentRepetitionType"></repeat-appointment>
+                    <repeat-appointment #repeatAppointmentComponent
+                        [configuration]="appointment.appointmentRepetitionConfiguration"></repeat-appointment>
                 </c-card-body>
             </c-card>
         </c-col>

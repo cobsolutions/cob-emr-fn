@@ -11,6 +11,9 @@ import { AddAppobntmentModalComponent } from '../../components/appointment.add/m
 import { AppointmentCancelNoshowModalComponent } from '../../components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentStatusModalComponent } from '../../components/appointment.status/modal/appointment-status-modal.component';
 import { Settings } from '../../components/scheduler.view/util/fetch.scheduler.settings';
+import { DragableSeriesAppointmetModalComponent } from '../../components/series.appointment.dragable.modal/dragable-series-appointmet-modal.component';
+import { EditableSeriesAppointmentModalComponent } from '../../components/series.appointment.editable.modal/editable-series-appointment-modal.component';
+import { Appointment } from '../../models/appointment';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +105,28 @@ export class AppointmentActionsService {
     const dialogRef = dialog.open(PropmtPatientClinicsComponent, {
       disableClose: true,
       data: { clinics: clinics, patient: patientId },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptDragSeriesAppointments(dialog: MatDialog, appointment: Appointment) {
+    const dialogRef = dialog.open(DragableSeriesAppointmetModalComponent, {
+      disableClose: true,
+      data: { appointment: appointment },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptEditableSeriesAppointments(dialog: MatDialog) {
+    const dialogRef = dialog.open(EditableSeriesAppointmentModalComponent, {
+      disableClose: true,
+      data: {},
       width: '30%',
       position: {
         top: '8%',

@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Edit Appointment Date</h2>
+<mat-dialog-content class="mat-typography">
+    Do you want to edit all occurrences of the recurring event or only this one?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="btn btn-primary me-2" (click)="editAllAppointmentSeriesDateAction()">All</button>
+    <button class="btn btn-secondary me-2" (click)="editOneAppointmentSeriesDateAction()">One</button>
+    <button class="btn btn-danger" (click)="closeAppointmentSeriesDateAction()">Cancel</button>
+</mat-dialog-actions>
