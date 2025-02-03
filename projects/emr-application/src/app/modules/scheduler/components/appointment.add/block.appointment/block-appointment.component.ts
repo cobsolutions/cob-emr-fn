@@ -120,7 +120,13 @@ export class BlockAppointmentComponent implements OnInit {
     )
   }
   changestartDate(startDate: Date) {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.endDate = startDate;
     this.appointmentService.appointmnetStartDate$.next(startDate)
+  }
+  changeEndDate(endDate: Date) {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.startDate = endDate;
   }
   private getSelectedClinic() {
     this.loggedInService.selectedClinic$.pipe(
@@ -190,6 +196,10 @@ export class BlockAppointmentComponent implements OnInit {
       yearly: this.repeatAppointmentComponent.yearlyRepeatAppointment
     }
     this.appointment.appointmentRepetitionConfiguration = yearlyAppointmnetRepeat
+  }
+  changeAppointmentRepetition() {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.endDate = this.appointment.appointmentDate.startDate;
   }
 }
 

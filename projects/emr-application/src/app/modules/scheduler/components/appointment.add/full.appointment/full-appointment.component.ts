@@ -212,7 +212,13 @@ export class FullAppointmentComponent implements OnInit {
     this.selectedClinic = this.selectedPateint.clinicModels[0]
   }
   changestartDate(startDate: Date) {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.endDate = startDate;
     this.appointmentService.appointmnetStartDate$.next(startDate)
+  }
+  changeEndDate(endDate: Date) {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.startDate = endDate;
   }
   changeStartTime(event: Date) {
     this.appointment.appointmentDate.endTime = moment(event).add(this.schedulerSettings.appointmentInterval, 'minutes').toDate();
@@ -236,5 +242,9 @@ export class FullAppointmentComponent implements OnInit {
     this.appointment.patientCaseId = this.selectedPatientCase.id
     this.appointment.clinicId = Number(this.selectedClinic.id);
     this.appointment.title = this.selectedPateint.lastName + "," + this.selectedPateint.firstName + ":" + this.selectedPatientCase.title
+  }
+  changeAppointmentRepetition() {
+    if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType !== null)
+      this.appointment.appointmentDate.endDate = this.appointment.appointmentDate.startDate;
   }
 }

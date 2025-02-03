@@ -56,7 +56,7 @@
                     </div>
                     <c-row>
                         <c-col xs="8">
-                            <c-date-picker size="sm" name="endDate"
+                            <c-date-picker size="sm" name="endDate" (dateChange)="changeEndDate($event)"
                                 [(ngModel)]="appointment.appointmentDate.endDate"></c-date-picker>
                         </c-col>
                         <c-col xs="4">
@@ -156,9 +156,9 @@
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Appointment Repetition</strong></c-card-header>
                 <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition" (change)="changeAppointmentRepetition()"
                         [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
-                        #repetition="ngModel">
+                        #repetition="ngModel" >
                         <option [ngValue]="null" selected>Don't Repeat</option>
                         <option [ngValue]="'Daily'" selected>Daily</option>
                         <option [ngValue]="'Weekly'" selected>Weekly</option>
