@@ -46,6 +46,11 @@ export class AppointmentService {
     const updateAppointmentURL = this.baseUrl + 'appointment/update';
     return this._http.put(updateAppointmentURL, appointment);
   }
+  updateAppointmentStatus(appointment: Appointment) {
+    const headers = { 'content-type': 'application/json' }
+    const updateAppointmentURL = this.baseUrl + 'appointment/update/status';
+    return this._http.put(updateAppointmentURL, appointment);
+  }
   updateAppointmentList(appointment: Appointment) {
     const updateAppointmentURL = this.baseUrl + 'appointment/list';
     return this._http.put(updateAppointmentURL, JSON.stringify(appointment));

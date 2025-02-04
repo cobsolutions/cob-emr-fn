@@ -32,6 +32,7 @@ import { SchedulerConfigurationService } from "../../service/scheduler-configura
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
 import { HandleEditableAppointmentService } from "../../service/appointment/update.editable.appointment/handle-editable-appointment.service";
+import { HandleEditableStatusAppointmentService } from "../../service/appointment/update.editable.appointment.status/handle-editable-status-appointment.service";
 
 @Component({
   selector: 'app-view-schduler',
@@ -73,13 +74,17 @@ export class ViewSchdulerComponent implements OnInit {
     protected utils: CalendarUtils,
     private eventsCalendarService: EventsCalendarService,
     private handleDragableAppointmentService: HandleDragableAppointmentService,
-    private handleEditableAppointmentService: HandleEditableAppointmentService
+    private handleEditableAppointmentService: HandleEditableAppointmentService,
+    private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService
   ) {
     this.handleDragableAppointmentService.refresh = this.refresh;
     this.handleDragableAppointmentService.dialog = this.dialog
 
     this.handleEditableAppointmentService.refresh = this.refresh;
     this.handleEditableAppointmentService.dialog = this.dialog
+
+    this.handleEditableStatusAppointmentService.refresh = this.refresh;
+    this.handleEditableStatusAppointmentService.dialog = this.dialog
   }
   ngOnInit(): void {
     this.getSelectedClinic().pipe(
@@ -142,7 +147,7 @@ export class ViewSchdulerComponent implements OnInit {
     ).subscribe((appointment: any) => {
       switch (module) {
         case 'month':
-          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd,module);
+          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd, module);
           break;
         case 'week':
         case 'day':
@@ -158,42 +163,21 @@ export class ViewSchdulerComponent implements OnInit {
       if (result === null)
         return;
       if (result.action)
-        switch (result.action) {
-          case 'edit':
-            switch (module) {
-              case 'month':
-                this.handleEditableAppointmentService.handle(result.event, this.flatEvent);
-                break;
-              case 'week':
-              case 'day':
-                this.handleEditableAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id), module);
-                break;
-            }
+        switch (module) {
+          case 'month':
+            if (result.action === 'edit')
+              this.handleEditableAppointmentService.handle(result.event, this.flatEvent);
+            if (result.action === 'status')
+              this.handleEditableStatusAppointmentService.handle(result.event, this.flatEvent);
             break;
-          case 'status':
-            this.appointmentActionsService.appointmentStatus(this.dialog, result.event).subscribe(result => {
-              if (result.action === 'status-updated') {
-                RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-                this.refresh.next();
-                this.toastr.success('Appointment updated Successfully');
-              }
-              if (result.action === 'status-cancled')
-                this.appointmentActionsService.appointmnetStatusCancel(this.dialog, result.event).subscribe(result => {
-                  RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-                  this.refresh.next();
-                  this.toastr.success('Appointment updated Successfully');
-                })
-              if (result.action === 'status-noshow')
-                this.appointmentActionsService.appointmnetStatusNoShow(this.dialog, result.event).subscribe(result => {
-                  if (result.action !== 'cancel') {
-                    RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.EDIT_APPOINTMENT);
-                    this.refresh.next();
-                    this.toastr.success('Appointment updated Successfully');
-                  }
-                })
-            });
+          case 'week':
+          case 'day':
+            if (result.action === 'edit')
+              this.handleEditableAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id), module);
+            if (result.action === 'status')
+              this.handleEditableStatusAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id));
             break;
-        }
+        }    
     });
   }
   private checkOpenEvent(date: Date, events: CalendarEvent[]) {

@@ -106,7 +106,6 @@ export class FullAppointmentComponent implements OnInit {
       })
     ).subscribe(result => {
       this.appointment = result.appointment
-      console.log(JSON.stringify(this.appointment))
       this.selectedPateint = result.details.patient;
       this.selectedPatientCase = result.details.patientCase
       this.initializeAppointmentService.findAllTherapists().subscribe(therapists => {
