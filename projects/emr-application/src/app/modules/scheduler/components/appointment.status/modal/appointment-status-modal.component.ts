@@ -20,7 +20,6 @@ export class AppointmentStatusModalComponent implements OnInit {
     , private appointmentService: AppointmentService
     , private appointmentTypeService: AppointmentTypeService
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
-  statusDisabled: boolean = false;
   ngOnInit(): void {
     this.appointmentService.retrieveAppointment(Number(this.data.event.id)).pipe(
       switchMap((appointment) => {
@@ -39,7 +38,6 @@ export class AppointmentStatusModalComponent implements OnInit {
     )
       .subscribe((result: any) => {
         this.appointment = result;
-        this.checkValidityToChangeStatus();
       })
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
@@ -59,13 +57,6 @@ export class AppointmentStatusModalComponent implements OnInit {
         this.data.event = event
         this.dialogRef.close(this.data);
       })
-  }
-  checkValidityToChangeStatus() {
-    const currentDate = moment(new Date()).unix() * 1000;
-    const appointmentStartDate = this.appointment.startDate;
-    if (appointmentStartDate > currentDate) {
-      this.statusDisabled = true;
-    }
   }
   onConfirmed(): void {
     this.updateAppointmentStatus('Confirmed')

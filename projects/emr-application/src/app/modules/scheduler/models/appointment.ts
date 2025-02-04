@@ -32,5 +32,6 @@ export class Appointment {
     clinicModel: Clinic;
     appointmentStructure?: string
     seriesId?: number
+    isStatusChangeable?: boolean
 
 }
