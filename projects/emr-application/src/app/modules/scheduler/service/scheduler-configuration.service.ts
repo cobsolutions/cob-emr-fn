@@ -4,6 +4,7 @@ import { environment } from 'projects/emr-application/src/environments/environme
 import { Observable } from 'rxjs';
 import { SchedulerUserSettings } from '../model/scheduler.user.settings';
 import { SchedulerSettings } from '../model/shceduler.date.settings';
+import { PatientCancellationFee } from '../models/cancellation.fee/cancellation.fee';
 import { SchedulerConfiguration } from '../models/configuration';
 
 @Injectable({
@@ -56,5 +57,10 @@ export class SchedulerConfigurationService {
   findCalendarsBySchedulerUserSettings(clinicId:number , user:string){
     const url = this.baseUrl + 'scheduler/find/saved-calendars/clinicId/'+clinicId+'/user/'+user;
     return this._http.get(url);
+  }
+  createCancelFee(patientCancellationFee:PatientCancellationFee){
+    const headers = { 'content-type': 'application/json' }
+    const url = this.baseUrl + 'patient/cancellation/fee/create';
+    return this._http.post(url, JSON.stringify(patientCancellationFee), { 'headers': headers });
   }
 }

@@ -1,6 +1,6 @@
 <c-container fluid="true" class="my-2">
     <c-form-check [switch]="true">
-        <input cFormCheckInput type="checkbox" [(ngModel)]="enableFee" />
+        <input cFormCheckInput type="checkbox" [(ngModel)]="patientCancellationFee.isEnabled" />
         <label cFormCheckLabel>Apply cancellation fee</label>
     </c-form-check>
     <c-row class="my-2">
@@ -8,14 +8,16 @@
             fee amount
             <c-input-group class="mb-3">
                 <span cInputGroupText id="basic-addon1">$</span>
-                <input cFormControl type="number" [disabled]="!enableFee" />
+                <input cFormControl type="number" [disabled]="!patientCancellationFee.isEnabled" [(ngModel)]="patientCancellationFee.amount" />
             </c-input-group>
         </c-col>
         <c-col xs="12">
             fee duration
             <c-input-group class="mb-3">
-                <input cFormControl type="number" [disabled]="!enableFee" />
-                <select cSelect style="max-width: 5%;" [disabled]="!enableFee">
+                <input cFormControl type="number" [disabled]="!patientCancellationFee.isEnabled"
+                    [(ngModel)]="patientCancellationFee.duration" />
+                <select cSelect style="max-width: 5%;" [disabled]="!patientCancellationFee.isEnabled"
+                    [(ngModel)]="patientCancellationFee.feeDurationUnit">
                     <option>Day</option>
                     <option>Hour</option>
                 </select>
@@ -23,7 +25,7 @@
         </c-col>
     </c-row>
     <div class="mt-3 text-center">
-        <button cButton size="sm" variant="outline" class="mx-2" (click)="save()" [disabled]="!enableFee">
+        <button cButton size="sm" variant="outline" class="mx-2" (click)="save()">
             <span>Save</span>
         </button>
     </div>
