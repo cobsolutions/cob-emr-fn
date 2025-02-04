@@ -142,7 +142,7 @@ export class ViewSchdulerComponent implements OnInit {
     ).subscribe((appointment: any) => {
       switch (module) {
         case 'month':
-          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd);
+          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd,module);
           break;
         case 'week':
         case 'day':

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from '../models/appointment';
+import { AppointmentRepetitionConfiguration } from '../models/repeat/appointment.repetition.configuration';
 import { DailyRepeatAppointment } from '../models/repeat/daily.repeat.appointment';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class CheckAppointmentRepetitionConfigurationService {
 
   constructor() { }
 
-  check(appointment: Appointment, newDate: number) {
+  check(appointment: Appointment, newDate: number, module: string) {
     switch (appointment.appointmentRepetitionConfiguration.appointmentRepetitionType) {
       case 'Daily':
         var daily: DailyRepeatAppointment = appointment.appointmentRepetitionConfiguration.daily;
@@ -18,6 +19,8 @@ export class CheckAppointmentRepetitionConfigurationService {
           daily.startDate = this.removeTime(newDate);
           appointment.appointmentRepetitionConfiguration.daily = daily;
         }
+        if (newDate > appointment.appointmentRepetitionConfiguration.daily.endDate)
+          appointment.appointmentRepetitionConfiguration.ignore = true
         break;
       case 'Weekly':
         var weekly: DailyRepeatAppointment = appointment.appointmentRepetitionConfiguration.weekly;
@@ -25,13 +28,30 @@ export class CheckAppointmentRepetitionConfigurationService {
         if (!checkDay)
           weekly.startDate = newDate;
         appointment.appointmentRepetitionConfiguration.weekly = weekly;
+        if (newDate > appointment.appointmentRepetitionConfiguration.weekly.endDate)
+          appointment.appointmentRepetitionConfiguration.ignore = true
         break;
       case 'Monthly':
+        var monthly: DailyRepeatAppointment = appointment.appointmentRepetitionConfiguration.monthly;
+        var checkDay = this.isSameDay(monthly.startDate, newDate);
+        if (!checkDay)
+          monthly.startDate = newDate;
+        appointment.appointmentRepetitionConfiguration.monthly = monthly;
+        if (newDate > appointment.appointmentRepetitionConfiguration.monthly.endDate)
+          appointment.appointmentRepetitionConfiguration.ignore = true
         break;
       case 'Yearly':
+        var yearly: DailyRepeatAppointment = appointment.appointmentRepetitionConfiguration.yearly;
+        var checkDay = this.isSameDay(yearly.startDate, newDate);
+        if (!checkDay)
+          yearly.startDate = newDate;
+        appointment.appointmentRepetitionConfiguration.yearly = yearly;
+        if (newDate > appointment.appointmentRepetitionConfiguration.monthly.endDate)
+          appointment.appointmentRepetitionConfiguration.ignore = true
         break;
-
     }
+    if (module === 'day')
+      appointment.appointmentRepetitionConfiguration.ignore = true;
   }
   removeTime(timestamp: number): number {
     const date = new Date(timestamp);

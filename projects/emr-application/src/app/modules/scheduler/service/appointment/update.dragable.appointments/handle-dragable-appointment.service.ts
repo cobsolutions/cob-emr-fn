@@ -30,8 +30,9 @@ export class HandleDragableAppointmentService {
         this.handleSingle(events);
         break;
       case AppointmentSkeleton.Series:
-        this.checkAppointmentRepetitionConfigurationService.check(appointment, moment(newStart).unix() * 1000);
+        this.checkAppointmentRepetitionConfigurationService.check(appointment, moment(newStart).unix() * 1000, module);
         this.setDragableAppointmentDate(appointment, newStart, newEnd);
+        console.log(this.dragableAppointment)
         this.handleSeries(events, module);
         break;
     }
@@ -69,6 +70,7 @@ export class HandleDragableAppointmentService {
   private setDragableAppointmentDate(appointment, startDate: Date, endDate: Date) {
     appointment.startDate = moment(startDate).unix() * 1000;
     appointment.endDate = moment(endDate).unix() * 1000;
+
     this.dragableAppointment = appointment;
   }
   private updateAllAppointments(appintmentsContainer: any, events: CalendarEvent[], module: string) {
@@ -104,4 +106,5 @@ export class HandleDragableAppointmentService {
     RefreshSchedulerEvents.refresh(events, updatedEvent, AppointmentAction.EDIT_APPOINTMENT);
     this.refresh.next();
   }
+
 }

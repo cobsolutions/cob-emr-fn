@@ -19,6 +19,7 @@ export class DragableSeriesAppointmetModalComponent implements OnInit {
     this.appointment = this.data.appointment
   }
   editAllAppointmentSeriesDateAction() {
+    console.log(JSON.stringify(this.appointment))
     this.appointmentService.updateSeriesAppointment(this.appointment).subscribe(appintmentsContainer => {
       this.data.selection = 'all'
       this.data.appintmentsContainer = appintmentsContainer
