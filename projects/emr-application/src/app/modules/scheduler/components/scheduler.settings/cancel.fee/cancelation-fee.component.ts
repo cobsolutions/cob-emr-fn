@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cancelation-fee.component.css']
 })
 export class CancelationFeeComponent implements OnInit {
-
+  enableFee:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  save(){
+    
+  }
 }

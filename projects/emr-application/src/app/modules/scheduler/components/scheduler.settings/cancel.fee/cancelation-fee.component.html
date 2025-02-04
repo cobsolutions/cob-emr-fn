@@ -1,1 +1,30 @@
-<p>cancelation-fee works!</p>
+<c-container fluid="true" class="my-2">
+    <c-form-check [switch]="true">
+        <input cFormCheckInput type="checkbox" [(ngModel)]="enableFee" />
+        <label cFormCheckLabel>Apply cancellation fee</label>
+    </c-form-check>
+    <c-row class="my-2">
+        <c-col xs="12">
+            fee amount
+            <c-input-group class="mb-3">
+                <span cInputGroupText id="basic-addon1">$</span>
+                <input cFormControl type="number" [disabled]="!enableFee" />
+            </c-input-group>
+        </c-col>
+        <c-col xs="12">
+            fee duration
+            <c-input-group class="mb-3">
+                <input cFormControl type="number" [disabled]="!enableFee" />
+                <select cSelect style="max-width: 5%;" [disabled]="!enableFee">
+                    <option>Day</option>
+                    <option>Hour</option>
+                </select>
+            </c-input-group>
+        </c-col>
+    </c-row>
+    <div class="mt-3 text-center">
+        <button cButton size="sm" variant="outline" class="mx-2" (click)="save()" [disabled]="!enableFee">
+            <span>Save</span>
+        </button>
+    </div>
+</c-container>
