@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { filter, switchMap } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PatientCancellationFee } from '../../../models/cancellation.fee/cancellation.fee';
 import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
@@ -22,6 +23,7 @@ export class CancelationFeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClinicId();
+    this.getCancelFeeSettings();
   }
   private getClinicId() {
     this.loggedInService.selectedClinic$.subscribe(clinicId => {
@@ -32,6 +34,16 @@ export class CancelationFeeComponent implements OnInit {
     this.patientCancellationFee.clinicId = this.clinicId;
     this.schedulerConfigurationService.createCancelFee(this.patientCancellationFee).subscribe(result => {
       this.toastrService.success('Cancellation fee has been created')
-    })  
+    })
+  }
+  private getCancelFeeSettings() {
+    this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => {
+        return this.schedulerConfigurationService.findCancelFee(clinicId)
+      })
+    ).subscribe(result => {
+      this.patientCancellationFee = result;
+    })
   }
 }

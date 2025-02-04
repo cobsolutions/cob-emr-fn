@@ -49,18 +49,22 @@ export class SchedulerConfigurationService {
     return this._http.get(url);
   }
 
-  updateSchedulerUserSettings(schedulerUserSettings:SchedulerUserSettings) {
+  updateSchedulerUserSettings(schedulerUserSettings: SchedulerUserSettings) {
     const headers = { 'content-type': 'application/json' }
     const url = this.baseUrl + 'scheduler/update/selected-calendars';
     return this._http.put(url, JSON.stringify(schedulerUserSettings), { 'headers': headers });
   }
-  findCalendarsBySchedulerUserSettings(clinicId:number , user:string){
-    const url = this.baseUrl + 'scheduler/find/saved-calendars/clinicId/'+clinicId+'/user/'+user;
+  findCalendarsBySchedulerUserSettings(clinicId: number, user: string) {
+    const url = this.baseUrl + 'scheduler/find/saved-calendars/clinicId/' + clinicId + '/user/' + user;
     return this._http.get(url);
   }
-  createCancelFee(patientCancellationFee:PatientCancellationFee){
+  createCancelFee(patientCancellationFee: PatientCancellationFee) {
     const headers = { 'content-type': 'application/json' }
     const url = this.baseUrl + 'patient/cancellation/fee/create';
     return this._http.post(url, JSON.stringify(patientCancellationFee), { 'headers': headers });
+  }
+  findCancelFee(clinicId: number) {
+    const url = this.baseUrl + 'patient/cancellation/fee/find/clinicId/' + clinicId;
+    return this._http.get(url);
   }
 }
