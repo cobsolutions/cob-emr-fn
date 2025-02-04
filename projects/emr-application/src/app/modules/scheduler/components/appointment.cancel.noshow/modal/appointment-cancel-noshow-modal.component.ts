@@ -2,10 +2,12 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
 import * as moment from 'moment';
+import { map, switchMap } from 'rxjs';
 import { Appointment } from '../../../models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../models/appointment.cancel.no.show.reason';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentService } from '../../../service/appointment.service';
+import { AppointmentTypeService } from '../../../service/appointment.type/appointment-type.service';
 import { AppointmentCancelNoshowComponent } from '../appointment-cancel-noshow.component';
 
 @Component({
@@ -19,13 +21,28 @@ export class AppointmentCancelNoshowModalComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string }
     , private dialogRef: MatDialogRef<AppointmentCancelNoshowModalComponent>
     , private appointmentService: AppointmentService
+    , private appointmentTypeService: AppointmentTypeService
     , private appointmentEventConverterService: AppointmentEventConverterService) { }
 
   ngOnInit(): void {
     this.dialogRef.backdropClick().subscribe(event => {
       this.cancel();
     });
-    this.appointmentService.retrieveAppointment(Number(this.data.event.id)).subscribe(result => {
+    this.appointmentService.retrieveAppointment(Number(this.data.event.id)).pipe(
+      switchMap((appointment) => {
+        return this.appointmentTypeService.retrieveAppointmentTypeById(appointment.appointmentTypeId).pipe(
+          map((appointmentType: any) => {
+            const updatedAppointment = {
+              ...appointment,
+            };
+            updatedAppointment.appointmentType = appointmentType.name
+            updatedAppointment.appointmentTypeColor = appointmentType.color
+            updatedAppointment.appointmentFontTypeColor = appointmentType.fontColor
+            return updatedAppointment;
+          })
+        );
+      })
+    ).subscribe(result => {
       this.appointment = result;
     })
   }
