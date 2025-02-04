@@ -20,6 +20,11 @@
                             Clinic Appointment Type Settings
                         </a>
                     </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=2 cNavLink>
+                            Cancellation fee
+                        </a>
+                    </c-nav-item>
                 </c-nav>
                 <ng-container fluid="true">
                     <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
@@ -28,6 +33,9 @@
                         </c-tab-pane>
                         <c-tab-pane tabPaneIdx=1>
                             <SchedulerAppointmentSettings></SchedulerAppointmentSettings>
+                        </c-tab-pane>
+                        <c-tab-pane tabPaneIdx=2>
+                            <cancelation-fee></cancelation-fee>
                         </c-tab-pane>
                     </c-tab-content>
                 </ng-container>

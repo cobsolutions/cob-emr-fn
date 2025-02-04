@@ -44,6 +44,7 @@ import { EditAppointmentTypeComponent } from './components/scheduler.settings/sc
 import { EditAppointmentSeriesModalComponent } from './components/appintment.edit/series.modal/edit-appointment-series-modal.component';
 import { DragableSeriesAppointmetModalComponent } from './components/series.appointment.dragable.modal/dragable-series-appointmet-modal.component';
 import { EditableSeriesAppointmentModalComponent } from './components/series.appointment.editable.modal/editable-series-appointment-modal.component';
+import { CancelationFeeComponent } from './components/scheduler.settings/cancel.fee/cancelation-fee.component';
 @NgModule({
     declarations: [
         ViewSchdulerComponent,
@@ -79,7 +80,8 @@ import { EditableSeriesAppointmentModalComponent } from './components/series.app
         EditAppointmentTypeComponent,
         EditAppointmentSeriesModalComponent,
         DragableSeriesAppointmetModalComponent,
-        EditableSeriesAppointmentModalComponent        
+        EditableSeriesAppointmentModalComponent,
+        CancelationFeeComponent        
     ],
     imports: [
         CommonModule,
