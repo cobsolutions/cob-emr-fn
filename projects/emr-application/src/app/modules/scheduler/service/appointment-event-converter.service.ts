@@ -23,9 +23,9 @@ export class AppointmentEventConverterService {
         afterEnd: true
       },
       color: {
-        primary: appointment.appointmentTypeColor,
-        secondary: appointment.appointmentTypeColor,
-        secondaryText: appointment.appointmentFontTypeColor
+        primary: this.setAppointmentColor(appointment),
+        secondary: this.setAppointmentColor(appointment),
+        secondaryText: this.setAppointmentFontColor(appointment)
       },
       meta: {
         'patient_id': appointment.patientId,
@@ -33,13 +33,22 @@ export class AppointmentEventConverterService {
         'type': appointment.appointmentType,
         'structure': appointment.appointmentStructure,
         'calendar_id': appointment.calendarId,
-        'seriesId' : appointment.seriesId
+        'seriesId': appointment.seriesId
       }
     }
     return event;
   }
 
-  public converttoAppointment(event: CalendarEvent, optionalAppointment?: Appointment): Appointment {
-    return null;
+  private setAppointmentColor(appointment: Appointment): string {
+    if (appointment.appointmentStatus === 'Cancel' || appointment.appointmentStatus === 'NoShow')
+      return '#151617'
+    else
+      return appointment.appointmentTypeColor
+  }
+  private setAppointmentFontColor(appointment: Appointment): string {
+    if (appointment.appointmentStatus === 'Cancel' || appointment.appointmentStatus === 'NoShow')
+      return '#e9135b'
+    else
+      return appointment.appointmentFontTypeColor
   }
 }
