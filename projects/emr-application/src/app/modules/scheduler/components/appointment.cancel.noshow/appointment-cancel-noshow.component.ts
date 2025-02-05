@@ -3,11 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { filter, switchMap } from 'rxjs';
 import { CancelNoShowReasons } from '../../../common/models/scheduler/cancel.noshow';
 import { Appointment } from '../../models/appointment';
 import { AppointmentCancelNoShowReason } from '../../models/appointment.cancel.no.show.reason';
-import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
 import { AppointmentService } from '../../service/appointment.service';
 
 @Component({
@@ -34,6 +32,7 @@ export class AppointmentCancelNoshowComponent implements OnInit {
   }
   updateStatus() {
     if (this.type === 'cancel') {
+      console.log(this.resonDate)
       this.appointmentCancelNoShowReason.reasonDate = moment(this.resonDate).unix() * 1000;
       this.updateAppointmentStatus('Cancel', this.appointmentCancelNoShowReason)
     } else {
