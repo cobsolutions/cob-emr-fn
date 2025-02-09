@@ -7,6 +7,7 @@ import { Patient } from '../../../../patient/models/patient';
 import { PatientFinderService } from '../../../../patient/services/patient/patient-finder.service';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { Appointment } from '../../../models/appointment';
+import { AppointmentSkeleton } from '../../../models/appointment.skeleton';
 import { AppointmentType } from '../../../models/appointment.type';
 import { AppointmentRepetitionConfiguration } from '../../../models/repeat/appointment.repetition.configuration';
 import { AppointmentService } from '../../../service/appointment.service';
@@ -24,6 +25,7 @@ export class FullAppointmentComponent implements OnInit {
   @Input() module: string
   @Input() mode: string
   @Input() appointmentId: string | number;
+  @Input() appointmentSkeleton: AppointmentSkeleton
   @Output() validation = new EventEmitter<boolean>()
   @ViewChild('repeatAppointmentComponent') repeatAppointmentComponent: RepeatAppointmentComponent;
   @Input() patientsList: Patient[];

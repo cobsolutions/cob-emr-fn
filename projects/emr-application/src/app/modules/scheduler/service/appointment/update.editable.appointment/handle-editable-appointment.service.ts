@@ -29,7 +29,7 @@ export class HandleEditableAppointmentService {
   }
 
   private handleSingle(changedEvent: CalendarEvent, events: CalendarEvent[]) {
-    this.appointmentActionsService.editAppointment(this.dialog, changedEvent, this.schedulerSettings).subscribe(result => {
+    this.appointmentActionsService.editAppointment(this.dialog, changedEvent, this.schedulerSettings,AppointmentSkeleton.Single).subscribe(result => {
       if (result.action !== 'cancel') {
         RefreshSchedulerEvents.refresh(events, result.event, AppointmentAction.EDIT_APPOINTMENT);
         this.refresh.next();
@@ -83,7 +83,7 @@ export class HandleEditableAppointmentService {
   }
 
   private handleOneSeriesAppointment(event: CalendarEvent, events: CalendarEvent[]) {
-    this.appointmentActionsService.editAppointment(this.dialog, event, this.schedulerSettings).subscribe(result => {
+    this.appointmentActionsService.editAppointment(this.dialog, event, this.schedulerSettings, AppointmentSkeleton.Series).subscribe(result => {
       RefreshSchedulerEvents.refresh(events, result.event, AppointmentAction.EDIT_APPOINTMENT);
       this.refresh.next();
     })

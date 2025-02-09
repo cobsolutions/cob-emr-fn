@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { filter } from 'rxjs';
+import { AppointmentSkeleton } from '../../models/appointment.skeleton';
 import { Day, WeekDays } from '../../models/constant/week.days';
 import { AppointmentRepetitionConfiguration } from '../../models/repeat/appointment.repetition.configuration';
 import { DailyRepeatAppointment } from '../../models/repeat/daily.repeat.appointment';
@@ -17,6 +18,7 @@ import { days, MonthlyRepetitionbuilder } from './util/monthly.day.repetition';
 })
 export class RepeatAppointmentComponent implements OnInit {
   @Input() configuration: AppointmentRepetitionConfiguration
+  @Input() appointmentSkeleton: AppointmentSkeleton
   days: Day[] = WeekDays;
   dayMonth: days[]
   dailyRepeatAppointment: DailyRepeatAppointment = {}

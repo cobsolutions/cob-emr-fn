@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Edit Appointment</h2>
 <mat-dialog-content class="mat-typography">
   <full-appointment *ngIf="data.event.meta.structure ==='Full'" [mode]="'edit'" [appointmentId]="data.event.id"
-    [schedulerSettings]="data.schedulerSettings" #fullAppointment></full-appointment>
+    [schedulerSettings]="data.schedulerSettings" [appointmentSkeleton] ="data.appointmentSkeleton" #fullAppointment></full-appointment>
   <block-appointment *ngIf="data.event.meta.structure ==='Block'" [mode]="'edit'" [appointmentId]="data.event.id"
     [schedulerSettings]="data.schedulerSettings" #blockAppointment></block-appointment>
 </mat-dialog-content>

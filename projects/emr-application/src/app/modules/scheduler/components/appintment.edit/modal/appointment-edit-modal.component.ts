@@ -4,6 +4,7 @@ import { CalendarEvent } from 'calendar-utils';
 import { result } from 'lodash';
 import { Observable } from 'rxjs';
 import { Appointment } from '../../../models/appointment';
+import { AppointmentSkeleton } from '../../../models/appointment.skeleton';
 import { AppointmentEventConverterService } from '../../../service/appointment-event-converter.service';
 import { AppointmentService } from '../../../service/appointment.service';
 import { ConstructAppointmentService } from '../../../service/construct.appointment/construct-appointment.service';
@@ -19,7 +20,7 @@ export class AppointmentEditModalComponent implements OnInit {
   @ViewChild('fullAppointment') fullAppointment: FullAppointmentComponent;
   @ViewChild('blockAppointment') blockAppointment: BlockAppointmentComponent;
   appointment: Appointment
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Settings }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Settings, appointmentSkeleton: AppointmentSkeleton }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private appointmentService: AppointmentService
     , private appointmentEventConverterService: AppointmentEventConverterService

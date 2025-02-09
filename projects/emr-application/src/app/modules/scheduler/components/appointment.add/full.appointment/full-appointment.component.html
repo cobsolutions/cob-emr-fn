@@ -156,16 +156,17 @@
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header><strong>Appointment Repetition</strong></c-card-header>
                 <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition" (change)="changeAppointmentRepetition()"
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
+                        (change)="changeAppointmentRepetition()"
                         [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
-                        #repetition="ngModel" >
+                        #repetition="ngModel" [disabled]="appointmentSkeleton === 1">
                         <option [ngValue]="null" selected>Don't Repeat</option>
                         <option [ngValue]="'Daily'" selected>Daily</option>
                         <option [ngValue]="'Weekly'" selected>Weekly</option>
                         <option [ngValue]="'Monthly'" selected>Monthly</option>
                         <option [ngValue]="'Yearly'" selected>Yearly</option>
                     </select>
-                    <repeat-appointment #repeatAppointmentComponent
+                    <repeat-appointment #repeatAppointmentComponent [appointmentSkeleton]="appointmentSkeleton"
                         [configuration]="appointment.appointmentRepetitionConfiguration"></repeat-appointment>
                 </c-card-body>
             </c-card>

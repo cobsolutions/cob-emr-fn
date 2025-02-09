@@ -14,6 +14,7 @@ import { Settings } from '../../components/scheduler.view/util/fetch.scheduler.s
 import { DragableSeriesAppointmetModalComponent } from '../../components/series.appointment.dragable.modal/dragable-series-appointmet-modal.component';
 import { EditableSeriesAppointmentModalComponent } from '../../components/series.appointment.editable.modal/editable-series-appointment-modal.component';
 import { Appointment } from '../../models/appointment';
+import { AppointmentSkeleton } from '../../models/appointment.skeleton';
 
 @Injectable({
   providedIn: 'root'
@@ -44,10 +45,10 @@ export class AppointmentActionsService {
     });
     return dialogRef.afterClosed()
   }
-  public editAppointment(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings) {
+  public editAppointment(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings, appointmentSkeleton: AppointmentSkeleton) {
     const dialogRef = dialog.open(AppointmentEditModalComponent, {
       disableClose: true,
-      data: { event: event, action: undefined, schedulerSettings: schedulerSettings },
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings, appointmentSkeleton: appointmentSkeleton },
       width: '60%',
       position: {
         top: '8%',

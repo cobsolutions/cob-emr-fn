@@ -39,7 +39,6 @@ export class AppointmentActionModalComponent implements OnInit {
     this.initAppointmentPatientInfo();
     if (this.data.event.meta.structure !== 'Block')
       this.checkPatientChartAccessibility();
-    console.log(JSON.stringify(this.data.event))
     if (this.data.event.id !== this.data.event.meta.seriesId)
       this.isAppointmetSeries = true
     else

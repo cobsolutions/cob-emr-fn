@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
 import { AppointmentCancelNoShowReason } from '../models/appointment.cancel.no.show.reason';
 import { AppointmentFilter } from '../models/appointment.filter';
-import { AppointmentFullSeries } from '../models/appointment.full.series';
 import { AppointmentType } from '../models/appointment.type';
 
 @Injectable({
