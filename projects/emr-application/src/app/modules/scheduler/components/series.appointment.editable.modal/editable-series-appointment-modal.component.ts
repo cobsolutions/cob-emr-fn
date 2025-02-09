@@ -11,8 +11,7 @@ import { AppointmentService } from '../../service/appointment.service';
 export class EditableSeriesAppointmentModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment, action: string, appintmentsContainer: any, selection: string }
-    , private dialogRef: MatDialogRef<EditableSeriesAppointmentModalComponent>
-    , private appointmentService: AppointmentService) {
+    , private dialogRef: MatDialogRef<EditableSeriesAppointmentModalComponent>) {
   }
 
   ngOnInit(): void {

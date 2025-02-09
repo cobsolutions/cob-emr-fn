@@ -27,6 +27,7 @@ export class AppointmentEventConverterService {
         secondary: this.setAppointmentColor(appointment),
         secondaryText: this.setAppointmentFontColor(appointment)
       },
+
       meta: {
         'patient_id': appointment.patientId,
         'status': appointment.appointmentStatus,
@@ -40,14 +41,18 @@ export class AppointmentEventConverterService {
   }
 
   private setAppointmentColor(appointment: Appointment): string {
-    if (appointment.appointmentStatus === 'Cancel' || appointment.appointmentStatus === 'NoShow')
-      return '#151617'
+    if (appointment.appointmentStatus === 'Cancel')
+      return '#808080'
+    else if (appointment.appointmentStatus === 'NoShow')
+      return '#FFFFFF'
     else
       return appointment.appointmentTypeColor
   }
   private setAppointmentFontColor(appointment: Appointment): string {
-    if (appointment.appointmentStatus === 'Cancel' || appointment.appointmentStatus === 'NoShow')
-      return '#e9135b'
+    if (appointment.appointmentStatus === 'Cancel')
+      return '#000000'
+    else if (appointment.appointmentStatus === 'NoShow')
+      return '#000000'
     else
       return appointment.appointmentFontTypeColor
   }

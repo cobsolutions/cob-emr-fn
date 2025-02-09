@@ -19,20 +19,17 @@ import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
 import { Appointment } from "../../models/appointment";
 import { CalendarEvents } from "../../models/calendar/calendars";
 import { SchedulerCalendarEvents } from "../../models/calendar/scheduler.calendar.operation";
-import { RenderEventsContainer } from "../../models/render.events.container";
 import { AppointmentAction, RefreshSchedulerEvents } from "../../refresh.scheduler.event";
 import { AppointmentActionsService } from "../../service/actions/appointment-actions.service";
-import { AppointmentEventConverterService } from "../../service/appointment-event-converter.service";
 import { AppointmentService } from "../../service/appointment.service";
 import { HandleDragableAppointmentService } from "../../service/appointment/update.dragable.appointments/handle-dragable-appointment.service";
+import { HandleEditableStatusAppointmentService } from "../../service/appointment/update.editable.appointment.status/handle-editable-status-appointment.service";
+import { HandleEditableAppointmentService } from "../../service/appointment/update.editable.appointment/handle-editable-appointment.service";
 import { CalendarServiceService } from "../../service/calendar/calendar-service.service";
 import { EventsCalendarService } from "../../service/calendar/events/events-calendar.service";
-import { CheckAppointmentRepetitionConfigurationService } from "../../service/check-appointment-repetition-configuration.service";
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
-import { HandleEditableAppointmentService } from "../../service/appointment/update.editable.appointment/handle-editable-appointment.service";
-import { HandleEditableStatusAppointmentService } from "../../service/appointment/update.editable.appointment.status/handle-editable-status-appointment.service";
 
 @Component({
   selector: 'app-view-schduler',
@@ -194,7 +191,6 @@ export class ViewSchdulerComponent implements OnInit {
     var calendarId: number = calendar !== null ? calendar.id : null;
     this.appointmentActionsService.addAppointment(this.dialog, this.viewDate, calendarId, this.schedulerSettingsa, module).subscribe(result => {
       if (result.action !== 'cancel') {
-        var events: CalendarEvent[]
         if (module === 'month') {
           result.event.forEach(event => {
             RefreshSchedulerEvents.refresh(this.flatEvent, event, AppointmentAction.ADD_APPOINTMENT);
