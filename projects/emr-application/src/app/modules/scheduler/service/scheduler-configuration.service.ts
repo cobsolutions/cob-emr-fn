@@ -63,8 +63,8 @@ export class SchedulerConfigurationService {
     const url = this.baseUrl + 'patient/cancellation/fee/create';
     return this._http.post(url, JSON.stringify(patientCancellationFee), { 'headers': headers });
   }
-  findCancelFee(clinicId: number) {
-    const url = this.baseUrl + 'patient/cancellation/fee/find/clinicId/' + clinicId;
+  findCancelFee() {
+    const url = this.baseUrl + 'patient/cancellation/fee/find'
     return this._http.get(url);
   }
 }

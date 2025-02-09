@@ -12,38 +12,25 @@ import { SchedulerConfigurationService } from '../../../service/scheduler-config
 })
 export class CancelationFeeComponent implements OnInit {
   enableFee: boolean = false;
-  clinicId: number;
   patientCancellationFee: PatientCancellationFee = {
     feeDurationUnit: 'Day',
     isEnabled: false
   }
-  constructor(private loggedInService: LoggedInService
-    , private schedulerConfigurationService: SchedulerConfigurationService
+  constructor(private schedulerConfigurationService: SchedulerConfigurationService
     , private toastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.getClinicId();
     this.getCancelFeeSettings();
   }
-  private getClinicId() {
-    this.loggedInService.selectedClinic$.subscribe(clinicId => {
-      this.clinicId = clinicId;
-    })
-  }
   save() {
-    this.patientCancellationFee.clinicId = this.clinicId;
     this.schedulerConfigurationService.createCancelFee(this.patientCancellationFee).subscribe(result => {
       this.toastrService.success('Cancellation fee has been created')
     })
   }
   private getCancelFeeSettings() {
-    this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap(clinicId => {
-        return this.schedulerConfigurationService.findCancelFee(clinicId)
+    this.schedulerConfigurationService.findCancelFee()
+      .subscribe(result => {
+        this.patientCancellationFee = result;
       })
-    ).subscribe(result => {
-      this.patientCancellationFee = result;
-    })
   }
 }
