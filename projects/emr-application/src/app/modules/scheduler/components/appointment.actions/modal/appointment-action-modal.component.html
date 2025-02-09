@@ -37,8 +37,7 @@
     <c-button-group role="group">
         <button id="btnSearch" class="btn btn-primary btn-sm " Style="width: 100px;"
             (click)="editAppointment()">Edit</button>
-        <button id="btnClear" class="btn btn-info btn-sm " Style="width: 100px;"
-            *ngIf="appointmentStructure ==='Full' && !isAppointmetSeries"
+        <button id="btnClear" class="btn btn-info btn-sm " Style="width: 100px;" *ngIf="appointmentStructure ==='Full'"
             (click)="openAppointmentStatus()">Status</button>
         <button id="btnClear" class="btn btn-danger btn-sm " Style="width: 100px;">Delete</button>
         <button id="btnClear" class="btn btn-warning btn-sm " Style="width: 100px;" (click)="close()">Close</button>
