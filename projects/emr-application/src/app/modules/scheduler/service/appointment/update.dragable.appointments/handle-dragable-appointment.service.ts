@@ -9,7 +9,6 @@ import { AppointmentAction, RefreshSchedulerEvents } from '../../../refresh.sche
 import { AppointmentActionsService } from '../../actions/appointment-actions.service';
 import { AppointmentEventConverterService } from '../../appointment-event-converter.service';
 import { AppointmentService } from '../../appointment.service';
-import { CheckAppointmentRepetitionConfigurationService } from '../../check-appointment-repetition-configuration.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +19,7 @@ export class HandleDragableAppointmentService {
   dragableAppointment: Appointment;
   constructor(private appointmentService: AppointmentService,
     private appointmentEventConverterService: AppointmentEventConverterService,
-    private appointmentActionsService: AppointmentActionsService,
-    private checkAppointmentRepetitionConfigurationService: CheckAppointmentRepetitionConfigurationService) { }
+    private appointmentActionsService: AppointmentActionsService) { }
 
   public handle(appointment: Appointment, events: CalendarEvent[], newStart: Date, newEnd: Date, module?: string) {
     switch (this.appointmentSkeleton(appointment)) {
@@ -30,9 +28,7 @@ export class HandleDragableAppointmentService {
         this.handleSingle(events);
         break;
       case AppointmentSkeleton.Series:
-        this.checkAppointmentRepetitionConfigurationService.check(appointment, moment(newStart).unix() * 1000, module);
         this.setDragableAppointmentDate(appointment, newStart, newEnd);
-        console.log(this.dragableAppointment)
         this.handleSeries(events, module);
         break;
     }

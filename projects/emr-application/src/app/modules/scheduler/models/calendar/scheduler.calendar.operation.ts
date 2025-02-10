@@ -9,7 +9,13 @@ export class SchedulerCalendarEvents implements CalendarEvents {
         return this.events[id];
     }
     getAll(): CalendarEvent[] {
-        return Object.values(this.events).flat();
+        return Object.values(this.events).flat()
+            .map(event => ({
+                ...event,
+                resizable: { beforeStart: false, afterEnd: false },
+                draggable: false
+            }));
+
     }
     push(id: number, value: CalendarEvent[]): void {
         if (this.events[id] !== undefined)
