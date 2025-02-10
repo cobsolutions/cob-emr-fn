@@ -84,7 +84,8 @@ export class ViewSchdulerComponent implements OnInit {
     this.handleEditableStatusAppointmentService.dialog = this.dialog
   }
   visible = false;
-
+  showCancelAppointment: boolean = false;
+  showNoShowAppointment: boolean = false;
   toggleCollapse(): void {
     this.visible = !this.visible;
   }
@@ -179,7 +180,7 @@ export class ViewSchdulerComponent implements OnInit {
             if (result.action === 'status')
               this.handleEditableStatusAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id));
             break;
-        }    
+        }
     });
   }
   private checkOpenEvent(date: Date, events: CalendarEvent[]) {
@@ -334,8 +335,11 @@ export class ViewSchdulerComponent implements OnInit {
     else
       this.selectedCalendars = []
   }
-  dd(event){
-    console.log(event.target.value)
+  showCancel() {
+    this.showCancelAppointment = !this.showCancelAppointment
+  }
+  showNoShow() {
+    this.showNoShowAppointment = !this.showNoShowAppointment
   }
 }
 
