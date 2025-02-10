@@ -1,56 +1,31 @@
 <c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
-<c-card class="mb-2">
-  <c-card-header>
-    <svg cIcon name="cilCalendar" title="cilCalendar" size="xl" class="mx-1"></svg>
-    <strong>Calendar Selections</strong>
-  </c-card-header>
-  <c-card-body>
-    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
-      [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
-      <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
-        [selected]="calendar.selected">{{calendar.name}}</c-multi-select-option>
-    </c-multi-select>
-    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
-      *ngIf="!selected">
-    </c-multi-select>
-  </c-card-body>
-</c-card>
-
-<div class="row text-center mb-2">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="clickNavigate()">
-        Previous
-      </div>
-      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate"
-        (viewDateChange)="clickNavigate()">
-        Today
-      </div>
-      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="clickNavigate()">
-        Next
-      </div>
-    </div>
+<div class="d-flex align-items-center justify-content-between p-3 border-bottom">
+  <div class="d-flex align-items-center">
+    <c-input-group class="mb-3">
+      <c-date-picker class="me-2" [(date)]="viewDate" (dateChange)="setView()"></c-date-picker>
+      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarPreviousView [view]="view"
+        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretLeft"></svg></button>
+      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarNextView [view]="view"
+        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretRight"></svg></button>
+    </c-input-group>
   </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  <div class="d-flex align-items-center">
+    <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
   </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-        Month
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-        Week
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-        Day
-      </div>
-    </div>
+  <div class="d-flex align-items-center">
+    <select cSelect class="me-2" style="width: auto;" [(ngModel)]="view" (change)="setView()">
+      <option [value]="CalendarView.Month">Month</option>
+      <option [value]="CalendarView.Week">Week</option>
+      <option [value]="CalendarView.Day">Day</option>
+    </select>
+    <button cButton class="me-2" color="danger" style="width: auto;">No Show</button>
+    <button cButton class="me-2" color="warning" style="width: auto;">Cancelled</button>
+    <button cButton class="me-2" color="info" variant="outline" (click)="toggleCollapse()">
+      <svg cIcon name="cilCalendar"></svg>
+      
+    </button>
   </div>
 </div>
-
 <br />
 <div [ngSwitch]="view" *ngIf="schedulerSettingsa">
   <!--Month Module-->
@@ -92,3 +67,18 @@
     [hourSegments]='schedulerSettingsa.timeInterval'>
   </mwl-day-view-scheduler>
 </div>
+<c-modal id="editClinic" [visible]="visible" size="lg">
+  <c-modal-header>
+    <h3 cModalTitle><strong>Calendars</strong></h3>
+  </c-modal-header>
+  <c-modal-body>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
+      <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
+        [selected]="calendar.selected">{{calendar.name}}</c-multi-select-option>
+    </c-multi-select>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      *ngIf="!selected">
+    </c-multi-select>
+  </c-modal-body>
+</c-modal>

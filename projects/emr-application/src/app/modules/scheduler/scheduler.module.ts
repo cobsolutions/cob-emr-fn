@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CalloutModule, DatePickerModule, ListGroupModule, ModalModule, SmartPaginationModule, SmartTableModule, SpinnerModule, TableModule, TimePickerModule } from '@coreui/angular-pro';
+import { CalendarModule as CalendarModuleCore,CalloutModule, CollapseModule, DatePickerModule, ListGroupModule, ModalModule, SmartPaginationModule, SmartTableModule, SpinnerModule, TableModule, TimePickerModule } from '@coreui/angular-pro';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -99,6 +99,8 @@ import { CancelationFeeComponent } from './components/scheduler.settings/cancel.
         SmartPaginationModule,
         ListGroupModule,
         TableModule,
+        CalendarModuleCore,
+        CollapseModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,

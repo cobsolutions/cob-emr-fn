@@ -83,6 +83,11 @@ export class ViewSchdulerComponent implements OnInit {
     this.handleEditableStatusAppointmentService.refresh = this.refresh;
     this.handleEditableStatusAppointmentService.dialog = this.dialog
   }
+  visible = false;
+
+  toggleCollapse(): void {
+    this.visible = !this.visible;
+  }
   ngOnInit(): void {
     this.getSelectedClinic().pipe(
 
@@ -209,8 +214,7 @@ export class ViewSchdulerComponent implements OnInit {
     // this.events = this.events.filter((event) => event !== eventToDelete);
   }
 
-  setView(view: CalendarView) {
-    this.view = view;
+  setView() {
     this.selectedCalendars.forEach(calendars => {
       this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
         this.events.push(calendars.id, events)
@@ -329,6 +333,9 @@ export class ViewSchdulerComponent implements OnInit {
       })
     else
       this.selectedCalendars = []
+  }
+  dd(event){
+    console.log(event.target.value)
   }
 }
 
