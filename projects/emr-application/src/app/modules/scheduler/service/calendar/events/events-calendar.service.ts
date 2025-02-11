@@ -19,12 +19,12 @@ export class EventsCalendarService {
     private appointmentService: AppointmentService) {
   }
 
-  public get(calendar_id: number, clinic_id: number, viewDate: string | Date, unit: DateUnit, navigation?: DateNavigation): Observable<CalendarEvent[]> {
-    var boundaries: any = this.getBoundreies(unit, navigation, viewDate, this.schedulerSettings)
-    return this._callGetAppointmentService(calendar_id, clinic_id, boundaries)
+  public get(calendar_id: number, clinic_id: number, viewDate: string | Date, unit: DateUnit, statuses?: string[]): Observable<CalendarEvent[]> {
+    var boundaries: any = this.getBoundreies(unit, viewDate, this.schedulerSettings)
+    return this._callGetAppointmentService(calendar_id, clinic_id, boundaries, statuses)
   }
-  private _callGetAppointmentService(calendar_id: number, clinic_id: number, boundaries: any) {
-    return this.appointmentService.retrieveAppointments(boundaries.start, boundaries.end, clinic_id, calendar_id).pipe(
+  private _callGetAppointmentService(calendar_id: number, clinic_id: number, boundaries: any, statuses: string[]) {
+    return this.appointmentService.retrieveAppointments(boundaries.start, boundaries.end, clinic_id, calendar_id, statuses).pipe(
       map((response: any) => {
         var appointments: any = response.records;
         var events: CalendarEvent[] = []
@@ -35,38 +35,19 @@ export class EventsCalendarService {
       })
     )
   }
-  private getBoundreies(unit: DateUnit, navigation: DateNavigation, viewDate: string | Date, settings: Settings): any {
+  private getBoundreies(unit: DateUnit, viewDate: string | Date, settings: Settings): any {
     var boundaries: any;
-    if (navigation === undefined || navigation === 'current')
-      switch (unit) {
-        case 'week':
-          boundaries = WeekDateBoundaries.current(viewDate, settings.dayOfWeek)
-          break;
-        case 'day':
-          boundaries = DayBoundaries.current(viewDate, settings.startOfDay, settings.endOfDay);
-          break;
-        case 'month':
-          boundaries = MonthBoundaries.current(viewDate);
-          break;
-      }
-    if (navigation === 'previous')
-      switch (unit) {
-        case 'week':
-          boundaries = WeekDateBoundaries.previous(viewDate, settings.dayOfWeek)
-          break;
-        case 'day':
-          boundaries = DayBoundaries.previous(viewDate, settings.startOfDay, settings.endOfDay);
-          break;
-      }
-    if (navigation === 'next')
-      switch (unit) {
-        case 'week':
-          boundaries = WeekDateBoundaries.next(viewDate, settings.dayOfWeek)
-          break;
-        case 'day':
-          boundaries = DayBoundaries.next(viewDate, settings.startOfDay, settings.endOfDay);
-          break;
-      }
+    switch (unit) {
+      case 'week':
+        boundaries = WeekDateBoundaries.current(viewDate, settings.dayOfWeek)
+        break;
+      case 'day':
+        boundaries = DayBoundaries.current(viewDate, settings.startOfDay, settings.endOfDay);
+        break;
+      case 'month':
+        boundaries = MonthBoundaries.current(viewDate);
+        break;
+    }
     return boundaries;
   }
 }

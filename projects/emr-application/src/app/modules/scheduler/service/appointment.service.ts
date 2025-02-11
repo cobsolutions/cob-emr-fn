@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -32,9 +32,13 @@ export class AppointmentService {
     const createAppointmentURL = this.baseUrl + 'appointment/series/update';
     return this._http.post(createAppointmentURL, appointment);
   }
-  retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number) {
+  retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number, statuses: string[]) {
+    let params = new HttpParams()
+    statuses.forEach(status => {
+      params = params.append('statuses', status);
+    });
     const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId + '/calendarId/' + calendarId;
-    return this._http.get(listAppointmentURL);
+    return this._http.get(listAppointmentURL, { params });
   }
   retrieveAppointmentsByFilter(startDate: number, endDate: number, clinicId: number, filters: AppointmentFilter) {
     const listAppointmentURL = this.baseUrl + 'appointment/find/filter/' + startDate + '/' + endDate + '/' + clinicId;
@@ -93,7 +97,7 @@ export class AppointmentService {
     const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId + '/type/' + type;
     return this._http.get(url)
   }
-  
+
   findAppointmentPatient(appointmentId: number) {
     const url = this.baseUrl + 'appointment/patient/appointment-id/' + appointmentId
     return this._http.get(url)

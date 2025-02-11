@@ -60,6 +60,7 @@ export class ViewSchdulerComponent implements OnInit {
   editEvent: CalendarEvent
   editResult: any
   eventTimesChangedAppointment: Appointment
+  statuses: string[] = ['Confirmed', 'Created', 'CheckIn', 'Checkout']
   constructor(
     private appointmentService: AppointmentService,
     private toastr: ToastrService,
@@ -217,7 +218,10 @@ export class ViewSchdulerComponent implements OnInit {
 
   setView() {
     this.selectedCalendars.forEach(calendars => {
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+      this.enrichStatues()
+      this.isLoading = true;
+      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
+        this.isLoading = false;
         this.events.push(calendars.id, events)
         this.flatEvent = this.events.getAll();
         this.refresh.next();
@@ -227,7 +231,7 @@ export class ViewSchdulerComponent implements OnInit {
 
   clickNavigate() {
     this.selectedCalendars.forEach(calendars => {
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
         this.events.push(calendars.id, events)
         this.flatEvent = this.events.getAll();
         this.refresh.next();
@@ -299,7 +303,7 @@ export class ViewSchdulerComponent implements OnInit {
     // 1. Add missing ids from MS to SC
     MS.forEach((id) => {
       if (!scIds.has(Number(id))) {
-        this.eventsCalendarService.get(Number(id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+        this.eventsCalendarService.get(Number(id), this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
           SC.push(this.pickCalender(Number(id))); // Add the missing id as a new Calendar object
           scIds.add(Number(id)); // Update the set to include the new id
           this.events.push(Number(id), events)
@@ -326,7 +330,7 @@ export class ViewSchdulerComponent implements OnInit {
     if (this.calendars.length > 1)
       this.calendars.forEach(calendar => {
         this.selectedCalendars.push(calendar)
-        this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view).subscribe(events => {
+        this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
           this.events.push(Number(calendar.id), events)
           this.flatEvent = this.events.getAll();
           this.refresh.next();
@@ -337,9 +341,21 @@ export class ViewSchdulerComponent implements OnInit {
   }
   showCancel() {
     this.showCancelAppointment = !this.showCancelAppointment
+    this.setView()
   }
   showNoShow() {
     this.showNoShowAppointment = !this.showNoShowAppointment
+    this.setView();
+  }
+  private enrichStatues() {
+    if (this.showCancelAppointment)
+      this.statuses.push('Cancel');
+    else
+      this.statuses = this.statuses.filter(status => status !== 'Cancel');
+    if (this.showNoShowAppointment)
+      this.statuses.push('NoShow');
+    else
+      this.statuses = this.statuses.filter(status => status !== 'NoShow');
   }
 }
 
