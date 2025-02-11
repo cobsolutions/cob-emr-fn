@@ -51,7 +51,6 @@ export class AppointmentStatusModalComponent implements OnInit {
     this.appointment.appointmentStatus = status;
     this.appointmentService.updateAppointmentStatus(this.appointment)
       .subscribe(() => {
-        console.log(JSON.stringify(this.appointment))
         var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(this.appointment)
         this.data.action = status
         this.data.event = event

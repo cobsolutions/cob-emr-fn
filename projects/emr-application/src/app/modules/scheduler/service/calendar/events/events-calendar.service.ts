@@ -6,9 +6,10 @@ import { AppointmentEventConverterService } from '../../appointment-event-conver
 import { AppointmentService } from '../../appointment.service';
 import { DayBoundaries } from '../calendar.date.util/day.boundaries.util';
 import { MonthBoundaries } from '../calendar.date.util/month.boundaries.util';
+import { BoundreiesScheduler } from '../calendar.date.util/scheduler.doundreies';
 import { WeekDateBoundaries } from '../calendar.date.util/week.date.boundaries.util';
 
-type DateUnit = 'month' | 'week' | 'day';
+export type DateUnit = 'month' | 'week' | 'day';
 type DateNavigation = 'previous' | 'current' | 'next';
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class EventsCalendarService {
   }
 
   public get(calendar_id: number, clinic_id: number, viewDate: string | Date, unit: DateUnit, statuses?: string[]): Observable<CalendarEvent[]> {
-    var boundaries: any = this.getBoundreies(unit, viewDate, this.schedulerSettings)
+    var boundaries: any = BoundreiesScheduler.getBoundreies(unit, viewDate, this.schedulerSettings)
     return this._callGetAppointmentService(calendar_id, clinic_id, boundaries, statuses)
   }
   private _callGetAppointmentService(calendar_id: number, clinic_id: number, boundaries: any, statuses: string[]) {
@@ -34,20 +35,5 @@ export class EventsCalendarService {
         return events;
       })
     )
-  }
-  private getBoundreies(unit: DateUnit, viewDate: string | Date, settings: Settings): any {
-    var boundaries: any;
-    switch (unit) {
-      case 'week':
-        boundaries = WeekDateBoundaries.current(viewDate, settings.dayOfWeek)
-        break;
-      case 'day':
-        boundaries = DayBoundaries.current(viewDate, settings.startOfDay, settings.endOfDay);
-        break;
-      case 'month':
-        boundaries = MonthBoundaries.current(viewDate);
-        break;
-    }
-    return boundaries;
-  }
+  }  
 }

@@ -15,32 +15,36 @@ export class HandleEditableAppointmentService {
   refresh = new Subject<void>();
   dialog: MatDialog
   schedulerSettings: Settings
+  startDateBoundary: number;
+  endDateBoundary: number;
   constructor(private appointmentActionsService: AppointmentActionsService) { }
 
-  public handle(event: CalendarEvent, events: CalendarEvent[], module?: string) {
+  public handle(event: CalendarEvent, events: CalendarEvent[], start: number, end: number) {
+    this.startDateBoundary = start
+    this.endDateBoundary = end;
     switch (this.appointmentSkeleton(event)) {
       case AppointmentSkeleton.Single:
         this.handleSingle(event, events)
         break;
       case AppointmentSkeleton.Series:
-        this.handleSeries(event, events, module)
+        this.handleSeries(event, events)
         break;
     }
   }
 
   private handleSingle(changedEvent: CalendarEvent, events: CalendarEvent[]) {
-    this.appointmentActionsService.editAppointment(this.dialog, changedEvent, this.schedulerSettings,AppointmentSkeleton.Single).subscribe(result => {
+    this.appointmentActionsService.editAppointment(this.dialog, changedEvent, this.schedulerSettings, AppointmentSkeleton.Single).subscribe(result => {
       if (result.action !== 'cancel') {
         RefreshSchedulerEvents.refresh(events, result.event, AppointmentAction.EDIT_APPOINTMENT);
         this.refresh.next();
       }
     });
   }
-  private handleSeries(changedEvent: CalendarEvent, events: CalendarEvent[], module: string) {
+  private handleSeries(changedEvent: CalendarEvent, events: CalendarEvent[]) {
     this.appointmentActionsService.promptEditableSeriesAppointments(this.dialog).subscribe(result => {
       switch (result.selection) {
         case 'all':
-          this.handleAllSeriesAppointments(changedEvent, events, module);
+          this.handleAllSeriesAppointments(changedEvent, events);
           break;
         case 'one':
           this.handleOneSeriesAppointment(changedEvent, events);
@@ -54,29 +58,29 @@ export class HandleEditableAppointmentService {
     else
       return AppointmentSkeleton.Single;
   }
-  private handleAllSeriesAppointments(event: CalendarEvent, events: CalendarEvent[], module: string) {
-    this.appointmentActionsService.editAppointmentSeries(this.dialog, event, this.schedulerSettings).subscribe(result => {
+  private handleAllSeriesAppointments(event: CalendarEvent, events: CalendarEvent[]) {
+    this.appointmentActionsService.editAppointmentSeries(this.dialog, event, this.schedulerSettings , this.startDateBoundary, this.endDateBoundary).subscribe(result => {
       var renderEventsContainer: RenderEventsContainer = result.renderEventsContainer;
-      if (module === 'day') {
-        renderEventsContainer.addedRenderEvents.forEach(addedEvent => {
-          if (addedEvent.id === event.id) {
-            RefreshSchedulerEvents.refresh(events, addedEvent, AppointmentAction.EDIT_APPOINTMENT);
-          }
+      // if (module === 'day') {
+      //   renderEventsContainer.addedRenderEvents.forEach(addedEvent => {
+      //     if (addedEvent.id === event.id) {
+      //       RefreshSchedulerEvents.refresh(events, addedEvent, AppointmentAction.EDIT_APPOINTMENT);
+      //     }
+      //   })
+      // } else {
+      if (renderEventsContainer.deletedRenderEvents.length === 0) {
+        renderEventsContainer.addedRenderEvents.forEach((event: CalendarEvent) => {
+          RefreshSchedulerEvents.refresh(events, event, AppointmentAction.EDIT_APPOINTMENT);
         })
       } else {
-        if (renderEventsContainer.deletedRenderEvents.length === 0) {
-          renderEventsContainer.addedRenderEvents.forEach((event: CalendarEvent) => {
-            RefreshSchedulerEvents.refresh(events, event, AppointmentAction.EDIT_APPOINTMENT);
-          })
-        } else {
-          renderEventsContainer.deletedRenderEvents.forEach((event: CalendarEvent) => {
-            RefreshSchedulerEvents.refresh(events, event, AppointmentAction.REMVOE_APPOINTMENT);
-          })
-          renderEventsContainer.addedRenderEvents.forEach((event: CalendarEvent) => {
-            RefreshSchedulerEvents.refresh(events, event, AppointmentAction.ADD_APPOINTMENT);
-          })
-        }
+        renderEventsContainer.deletedRenderEvents.forEach((event: CalendarEvent) => {
+          RefreshSchedulerEvents.refresh(events, event, AppointmentAction.REMVOE_APPOINTMENT);
+        })
+        renderEventsContainer.addedRenderEvents.forEach((event: CalendarEvent) => {
+          RefreshSchedulerEvents.refresh(events, event, AppointmentAction.ADD_APPOINTMENT);
+        })
       }
+      // }
 
       this.refresh.next();
     })

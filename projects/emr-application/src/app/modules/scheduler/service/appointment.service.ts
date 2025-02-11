@@ -28,8 +28,8 @@ export class AppointmentService {
     const createAppointmentURL = this.baseUrl + 'appointment/update';
     return this._http.post(createAppointmentURL, appointment);
   }
-  updateSeriesAppointment(appointment: Appointment) {
-    const createAppointmentURL = this.baseUrl + 'appointment/series/update';
+  updateSeriesAppointment(appointment: Appointment, start: number, end: number) {
+    const createAppointmentURL = this.baseUrl + 'appointment/series/update/start/' + start + '/end/' + end;
     return this._http.post(createAppointmentURL, appointment);
   }
   retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number, statuses: string[]) {

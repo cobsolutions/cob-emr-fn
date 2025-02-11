@@ -23,7 +23,7 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
   seriesId: number
   appointmentStrucutreType: string
   appointment: Appointment
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { renderEventsContainer: RenderEventsContainer, event: CalendarEvent, action: string, schedulerSettings: Settings }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { renderEventsContainer: RenderEventsContainer, event: CalendarEvent, action: string, schedulerSettings: Settings, start: number, end: number }
     , private dialogRef: MatDialogRef<EditAppointmentSeriesModalComponent>
     , private loggedInService: LoggedInService
     , private appointmentService: AppointmentService
@@ -39,7 +39,7 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
     var addedEvents: CalendarEvent[] = []
     var deletedEvents: CalendarEvent[] = []
     this.constructAppointmentService.constructAppointmentDate(this.appointment)
-    this.appointmentService.updateSeriesAppointment(this.appointment).subscribe((appintmentsContainer: any) => {
+    this.appointmentService.updateSeriesAppointment(this.appointment, this.data.start, this.data.end).subscribe((appintmentsContainer: any) => {
       if (appintmentsContainer.deletedRenderAppointment === null) {
         appintmentsContainer.addedRenderAppointment.forEach(appointmet => {
           var event: CalendarEvent = this.appointmentEventConverterService.convertToEvent(appointmet)
@@ -56,9 +56,9 @@ export class EditAppointmentSeriesModalComponent implements OnInit {
           deletedEvents.push(event);
         })
       }
-      var renderEventsContainer: RenderEventsContainer={
-        addedRenderEvents : addedEvents,
-        deletedRenderEvents:deletedEvents
+      var renderEventsContainer: RenderEventsContainer = {
+        addedRenderEvents: addedEvents,
+        deletedRenderEvents: deletedEvents
       }
       this.data.action = 'updated'
       this.data.renderEventsContainer = renderEventsContainer;

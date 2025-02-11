@@ -10,7 +10,7 @@ import { AppointmentService } from '../../service/appointment.service';
 })
 export class DragableSeriesAppointmetModalComponent implements OnInit {
   appointment: Appointment
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment, action: string, appintmentsContainer: any, selection: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment, action: string, appintmentsContainer: any, selection: string, start: number, end: number }
     , private dialogRef: MatDialogRef<DragableSeriesAppointmetModalComponent>
     , private appointmentService: AppointmentService) {
   }
@@ -19,8 +19,7 @@ export class DragableSeriesAppointmetModalComponent implements OnInit {
     this.appointment = this.data.appointment
   }
   editAllAppointmentSeriesDateAction() {
-    console.log(JSON.stringify(this.appointment))
-    this.appointmentService.updateSeriesAppointment(this.appointment).subscribe(appintmentsContainer => {
+    this.appointmentService.updateSeriesAppointment(this.appointment , this.data.start , this.data.end).subscribe(appintmentsContainer => {
       this.data.selection = 'all'
       this.data.appintmentsContainer = appintmentsContainer
       this.dialogRef.close(this.data);

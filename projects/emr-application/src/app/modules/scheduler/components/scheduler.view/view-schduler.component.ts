@@ -30,6 +30,7 @@ import { EventsCalendarService } from "../../service/calendar/events/events-cale
 import { SchedulerConfigurationService } from "../../service/scheduler-configuration.service";
 import { AppointmentAddComponent } from "../appointment.add/appointment-add.component";
 import { FetchSchedulerSettings, Settings } from "./util/fetch.scheduler.settings";
+import { BoundreiesScheduler } from "../../service/calendar/calendar.date.util/scheduler.doundreies";
 
 @Component({
   selector: 'app-view-schduler',
@@ -151,11 +152,13 @@ export class ViewSchdulerComponent implements OnInit {
     ).subscribe((appointment: any) => {
       switch (module) {
         case 'month':
-          this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd, module);
+          //this.handleDragableAppointmentService.handle(appointment, this.flatEvent, newStart, newEnd, module);
           break;
         case 'week':
         case 'day':
-          this.handleDragableAppointmentService.handle(appointment, this.events.get(event.meta.calendar_id), newStart, newEnd, module);
+          var boundreiesScheduler: any = BoundreiesScheduler.getBoundreies(this.view, this.viewDate, this.schedulerSettingsa)
+          this.handleDragableAppointmentService.handle(appointment, this.events.get(event.meta.calendar_id),
+            newStart, newEnd, boundreiesScheduler.start, boundreiesScheduler.end);
           break;
 
       }
@@ -167,21 +170,23 @@ export class ViewSchdulerComponent implements OnInit {
       if (result === null)
         return;
       if (result.action)
-        switch (module) {
-          case 'month':
-            if (result.action === 'edit')
-              this.handleEditableAppointmentService.handle(result.event, this.flatEvent);
-            if (result.action === 'status')
-              this.handleEditableStatusAppointmentService.handle(result.event, this.flatEvent);
-            break;
-          case 'week':
-          case 'day':
-            if (result.action === 'edit')
-              this.handleEditableAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id), module);
-            if (result.action === 'status')
-              this.handleEditableStatusAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id));
-            break;
-        }
+        var boundreiesScheduler: any = BoundreiesScheduler.getBoundreies(this.view, this.viewDate, this.schedulerSettingsa)
+      switch (module) {
+        case 'month':
+          if (result.action === 'edit')
+            this.handleEditableAppointmentService.handle(result.event, this.flatEvent, boundreiesScheduler.start, boundreiesScheduler.end);
+          if (result.action === 'status')
+            this.handleEditableStatusAppointmentService.handle(result.event, this.flatEvent);
+          break;
+        case 'week':
+        case 'day':
+          if (result.action === 'edit')
+            this.handleEditableAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id)
+              , boundreiesScheduler.start, boundreiesScheduler.end);
+          if (result.action === 'status')
+            this.handleEditableStatusAppointmentService.handle(result.event, this.events.get(event.meta.calendar_id));
+          break;
+      }
     });
   }
   private checkOpenEvent(date: Date, events: CalendarEvent[]) {
@@ -219,7 +224,6 @@ export class ViewSchdulerComponent implements OnInit {
   setView() {
     this.selectedCalendars.forEach(calendars => {
       this.enrichStatues()
-      this.isLoading = true;
       this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
         this.isLoading = false;
         this.events.push(calendars.id, events)

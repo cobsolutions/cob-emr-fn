@@ -10,7 +10,7 @@ import { AppointmentService } from '../../service/appointment.service';
 })
 export class EditableSeriesAppointmentModalComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment, action: string, appintmentsContainer: any, selection: string }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { appointment: Appointment, action: string, appintmentsContainer: any, selection: string, start: number, end: number }
     , private dialogRef: MatDialogRef<EditableSeriesAppointmentModalComponent>) {
   }
 

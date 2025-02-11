@@ -57,10 +57,10 @@ export class AppointmentActionsService {
     return dialogRef.afterClosed();
   }
 
-  public editAppointmentSeries(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings) {
+  public editAppointmentSeries(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings, start: number, end: number) {
     const dialogRef = dialog.open(EditAppointmentSeriesModalComponent, {
       disableClose: true,
-      data: { event: event, action: undefined, schedulerSettings: schedulerSettings },
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings, start: start, end: end },
       width: '60%',
       position: {
         top: '8%',
@@ -113,10 +113,10 @@ export class AppointmentActionsService {
     });
     return dialogRef.afterClosed();
   }
-  public promptDragSeriesAppointments(dialog: MatDialog, appointment: Appointment) {
+  public promptDragSeriesAppointments(dialog: MatDialog, appointment: Appointment, start: number, end: number) {
     const dialogRef = dialog.open(DragableSeriesAppointmetModalComponent, {
       disableClose: true,
-      data: { appointment: appointment },
+      data: { appointment: appointment, start: start, end: end },
       width: '30%',
       position: {
         top: '8%',
