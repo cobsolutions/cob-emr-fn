@@ -115,7 +115,6 @@ export class ViewSchdulerComponent implements OnInit {
             .filter(cal => cal.selected)
             .map(cal => cal);
         });
-
     });
     this.days = this.utils.getWeekViewHeader({
       viewDate: this.viewDate,
@@ -267,7 +266,6 @@ export class ViewSchdulerComponent implements OnInit {
     var selectedCalendars: any[] = [];
     const isChecked = (event.target as HTMLInputElement).checked;
     calendar.selected = isChecked;
-
     selectedCalendars = this.calendars
       .filter(cal => cal.selected)
       .map(cal => cal.id + "");
@@ -281,10 +279,12 @@ export class ViewSchdulerComponent implements OnInit {
   }
   private updateSchedulerUserSettings(changedCalendars) {
     if (this.userSelectedCalendars.length === 0) {
-      this._callUpdateSchedulerUserSettings()
+      console.log('this.userSelectedCalendars.length ===0')
+      this._callUpdateSchedulerUserSettings(changedCalendars)
       this.userSelectedCalendars = this.calendars;
     }
     else {
+      console.log('this.userSelectedCalendars.length !==0')
       var pickedCalendars: number[] = changedCalendars.map(calnederId => Number(calnederId));
       var userSelectedCalendars: number[] = this.userSelectedCalendars.map(calendar => calendar.id);
       const isUserCalendarChanges: boolean = this.checkEquality(pickedCalendars, userSelectedCalendars)
@@ -293,6 +293,7 @@ export class ViewSchdulerComponent implements OnInit {
     }
   }
   private _callUpdateSchedulerUserSettings(selectedCalendars?: number[]) {
+    console.log(selectedCalendars)
     const schedulerUserSettings: SchedulerUserSettings = {
       clinicId: this.selectedClinic,
       user: this.loggedInService.getLoggedUser().uuid,
