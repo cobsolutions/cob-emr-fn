@@ -74,3 +74,12 @@
   border: 1px solid #ddd; /* Optional: Adds border for better visibility */
   padding: 0; /* Remove extra padding if needed */
 }
+.noshowclicked {
+  background-color: #c0392b; /* Darker red to indicate clicked state */
+  font-weight: bold;
+}
+.cancelclicked {
+  background-color: #d98e0c; /* Darker red to indicate clicked state */
+  font-weight: bold;
+}
+

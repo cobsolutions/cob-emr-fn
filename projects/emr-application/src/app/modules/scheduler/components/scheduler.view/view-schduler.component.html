@@ -18,11 +18,13 @@
       <option [value]="CalendarView.Week">Week</option>
       <option [value]="CalendarView.Day">Day</option>
     </select>
-    <button cButton class="me-2" color="danger" style="width: auto;" (click)="showNoShow()">No Show</button>
-    <button cButton class="me-2" color="warning" style="width: auto;" (click)="showCancel()">Cancelled</button>
+    <button cButton class="me-2"  color="light" style="width: auto;" (click)="showNoShow()"
+      [ngClass]="{'noshowclicked': showNoShowAppointment}">No Show</button>
+    <button cButton class="me-2" color="light"  style="width: auto;" (click)="showCancel()"
+      [ngClass]="{'cancelclicked': showCancelAppointment}">Cancelled</button>
     <button cButton class="me-2" color="info" variant="outline" (click)="toggleCollapse()">
       <svg cIcon name="cilCalendar"></svg>
-      
+
     </button>
   </div>
 </div>
