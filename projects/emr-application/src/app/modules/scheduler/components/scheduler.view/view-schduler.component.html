@@ -18,14 +18,26 @@
       <option [value]="CalendarView.Week">Week</option>
       <option [value]="CalendarView.Day">Day</option>
     </select>
-    <button cButton class="me-2"  color="light" style="width: auto;" (click)="showNoShow()"
+    <button cButton class="me-2" color="light" style="width: auto;" (click)="showNoShow()"
       [ngClass]="{'noshowclicked': showNoShowAppointment}">No Show</button>
-    <button cButton class="me-2" color="light"  style="width: auto;" (click)="showCancel()"
+    <button cButton class="me-2" color="light" style="width: auto;" (click)="showCancel()"
       [ngClass]="{'cancelclicked': showCancelAppointment}">Cancelled</button>
     <button cButton class="me-2" color="info" variant="outline" (click)="toggleCollapse()">
       <svg cIcon name="cilCalendar"></svg>
-
     </button>
+  </div>
+  <div style="min-height: 130px;" *ngIf="visible">
+    <c-card [visible]="visible" cCollapse horizontal class="shadow" style="max-width: 260px;">
+      <c-card-header>
+        <strong>Calendars</strong>
+      </c-card-header>
+      <c-card-body style="width: 260px;">
+        <c-form-check *ngFor="let calendar of calendars">
+          <input cFormCheckInput [id]="calendar.id" type="checkbox" [checked]="calendar.selected" (change)="onChangeCalendarsd(calendar, $event)"/>
+          <label cFormCheckLabel for="calendar.id">{{calendar.name}}</label>
+        </c-form-check>
+      </c-card-body>
+    </c-card>
   </div>
 </div>
 <br />
@@ -69,7 +81,7 @@
     [hourSegments]='schedulerSettingsa.timeInterval'>
   </mwl-day-view-scheduler>
 </div>
-<c-modal id="editClinic" [visible]="visible" size="lg">
+<!-- <c-modal id="editClinic" [visible]="visible" size="lg">
   <c-modal-header>
     <h3 cModalTitle><strong>Calendars</strong></h3>
   </c-modal-header>
@@ -83,4 +95,4 @@
       *ngIf="!selected">
     </c-multi-select>
   </c-modal-body>
-</c-modal>
+</c-modal> -->

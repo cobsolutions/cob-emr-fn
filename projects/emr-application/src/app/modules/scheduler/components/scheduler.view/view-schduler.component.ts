@@ -93,7 +93,6 @@ export class ViewSchdulerComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getSelectedClinic().pipe(
-
     ).subscribe(clinicId => {
       this.flatEvent = this.events.getAll()
       this.selectedClinic = clinicId;
@@ -112,6 +111,9 @@ export class ViewSchdulerComponent implements OnInit {
           this.initSelectedCalendar();
           if (this.userSelectedCalendars.length !== 0)
             this.setSelectedCalendars();
+          this.selectedCalendars = this.calendars
+            .filter(cal => cal.selected)
+            .map(cal => cal);
         });
 
     });
@@ -260,6 +262,18 @@ export class ViewSchdulerComponent implements OnInit {
     return this.loggedInService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null)
     )
+  }
+  onChangeCalendarsd(calendar: any, event: Event) {
+    var selectedCalendars: any[] = [];
+    const isChecked = (event.target as HTMLInputElement).checked;
+    calendar.selected = isChecked;
+
+    selectedCalendars = this.calendars
+      .filter(cal => cal.selected)
+      .map(cal => cal.id + "");
+    console.log(selectedCalendars)
+    this.updateSchedulerUserSettings(selectedCalendars);
+    this.synchronizeLists(selectedCalendars, this.selectedCalendars)
   }
   onChangeCalendars(event: any) {
     this.updateSchedulerUserSettings(event);
