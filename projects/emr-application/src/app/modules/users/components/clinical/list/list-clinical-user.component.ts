@@ -25,7 +25,7 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
     , private clinicalService: ClinicalUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['accountName', 'npi', 'licence', 'speciality', 'credential', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName','name', 'npi', 'licence', 'speciality', 'credential', 'email', 'actions']);
     this.initListComponent();
     this.fill();
   }

@@ -14,12 +14,16 @@
     <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
       <td>
         <ng-container [ngSwitch]="columnName">
+          <ng-container *ngSwitchCase="'name'" class="py-2">
+            {{item.lastName +"," + item.firstName}}
+          </ng-container>
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
-              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)" dispaly-input [componentRole]="componentRole">
+              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)" dispaly-input
+                [componentRole]="componentRole">
                 <svg cIcon name="cilTrash"></svg>
               </button>
             </div>
@@ -54,7 +58,7 @@
     <button (click)="toggleEditUser()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'" [componentRole]="componentRole"
-      (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
+    <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'"
+      [componentRole]="componentRole" (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
   </c-modal-body>
 </c-modal>
