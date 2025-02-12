@@ -39,7 +39,8 @@ export class InitializeAppointmentService {
   }
   public findAllTherapists() {
     if (this.therapists$ === undefined) {
-      this.therapists$ = this.clinicalUserService.getAllClinicalsUsers().pipe(
+      this.therapists$ = this.loggedInService.selectedClinic$.pipe(
+        switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
         filter(therapists => therapists !== null),
         map(response => {
           return response;
