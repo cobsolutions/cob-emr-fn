@@ -16,8 +16,9 @@ export class PatientPaymentService extends BasePaginationService {
 
   public findPatientPayments(config$: BehaviorSubject<IApiParams>,
     pateintId: number,
+    caseId: number,
   ): Observable<any> {
-    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId);
+    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/caseId/' + caseId);
   }
 
 }

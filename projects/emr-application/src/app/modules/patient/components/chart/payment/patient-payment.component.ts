@@ -14,6 +14,7 @@ export class PatientPaymentComponent extends ListTemplate implements OnInit {
   patientPaymentRecordResponse$!: Observable<PatientPaymentRecordResponse[]>;
   columns: (string | IColumn)[];
   @Input() patientId: number;
+  @Input() caseId: number;
   constructor(private patientPaymentService: PatientPaymentService) { super(); }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class PatientPaymentComponent extends ListTemplate implements OnInit {
   }
 
   private getPatientPayments() {
-    this.patientPaymentRecordResponse$ = this.patientPaymentService.findPatientPayments(this.apiParams$, this.patientId).pipe(
+    this.patientPaymentRecordResponse$ = this.patientPaymentService.findPatientPayments(this.apiParams$, this.patientId , this.caseId).pipe(
       retry({
         delay: (error) => {
           console.warn('Retry: ', error);
