@@ -202,10 +202,10 @@
         <c-card-body>
             <h6 cCardTitle>
                 <strong>Assigned Therapist</strong>
-            </h6>            
+            </h6>
             <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="case.therapist" name="therapist">
                 <option *ngFor="let therapist of therapists" [value]="therapist.id">
-                    {{therapist.accountName}}
+                    {{therapist.lastName +',' +therapist.firstName}}
                 </option>
             </select>
         </c-card-body>
