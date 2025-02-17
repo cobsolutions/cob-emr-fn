@@ -26,6 +26,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   tmp : Appointment;
   tmpReasonDate : Date
+  patientRecordAction:string= '0'
   constructor(private cancelNoShowService: CancelNoShowService) { super() }
 
   ngOnInit(): void {
