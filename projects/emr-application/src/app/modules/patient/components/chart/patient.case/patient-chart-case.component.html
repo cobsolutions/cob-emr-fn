@@ -56,6 +56,19 @@
                     </c-col>
                 </c-row>
             </c-col>
+            <c-col [sm]="12">
+                <div class="d-flex justify-content-end">
+                    <div class="p-2">
+                        <select cSelect sizing="sm">
+                            <option value="1">Patient Record Actions</option>
+                            <option value="1">Add Initial Examination</option>
+                            <option value="2">Quick Discharge</option>
+                            <option value="3">Case note</option>
+                            <option value="4">Cancel/No show</option>
+                        </select>
+                    </div>
+                </div>
+            </c-col>
         </c-row>
     </c-card-body>
 </c-card>
@@ -134,7 +147,7 @@
                 E-Documents component
             </c-tab-pane>
             <c-tab-pane tabPaneIdx=2>
-                
+
                 <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
             </c-tab-pane>
             <c-tab-pane tabPaneIdx=3>
