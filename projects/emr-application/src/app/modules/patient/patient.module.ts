@@ -23,6 +23,8 @@ import {
 } from './components/create';
 import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
 
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
@@ -53,6 +55,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ...APP_PATIENTS_DEPENDENCIES_COMPONENTS,
     ...APP_PATIENT_CHART_COMPONENTS,
     PatientPaymentComponent,
+    InitialExaminationComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ModalModule,
     AccordionModule,
     PopoverModule,
+    MatStepperModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]
