@@ -1,6 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'initial-examination',
@@ -11,16 +12,10 @@ export class InitialExaminationComponent implements OnInit {
   stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
   activeStepIndex: number;
   initialExaminationForm: FormGroup
+  @ViewChild(MatStepper, { static: true }) public initialExaminationStepper: MatStepper;
   constructor() { }
 
   ngOnInit(): void {
-    this.initialExaminationForm = new FormGroup({
-      'subjective': new FormGroup({}),
-      'objective': new FormGroup({}),
-      'assessment': new FormGroup({}),
-      'plan': new FormGroup({}),
-      'billing': new FormGroup({}),
-    });
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
