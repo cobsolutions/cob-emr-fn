@@ -14,11 +14,12 @@ import { NavItems } from './_nav';
 })
 export class DefaultLayoutComponent implements OnInit {
   navItems: INavData[] | null | undefined;
+  isLoading:boolean = true
   constructor(private renderNavItemsService: RenderNavItemsService, private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
 
-    combineLatest([this.loggedInService.load(), this.renderNavItemsService.renderItems$])
+    combineLatest([this.loggedInService.getObservableLoggedUser(), this.renderNavItemsService.renderItems$])
       .pipe(
         map((result: any) => {
           var userRoleScope: UserRoleScope[] = result[0].userRoleScope;
@@ -42,6 +43,7 @@ export class DefaultLayoutComponent implements OnInit {
           }
         })
       ).subscribe((result: any) => {
+        this.isLoading = false
         this.navItems = result;
       })
   }

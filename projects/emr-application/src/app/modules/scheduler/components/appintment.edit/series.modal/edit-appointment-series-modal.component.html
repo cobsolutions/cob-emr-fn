@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Edit Appointment</h2>
+<mat-dialog-content class="mat-typography">
+  <c-container fluid>
+    <full-appointment *ngIf="data.event.meta.structure ==='Full'" [mode]="'edit'" [appointmentId]="data.event.id"
+      [schedulerSettings]="data.schedulerSettings" #fullAppointment></full-appointment>
+    <block-appointment *ngIf="data.event.meta.structure ==='Block'" [mode]="'edit'" [appointmentId]="data.event.id"
+      [schedulerSettings]="data.schedulerSettings" #blockAppointment></block-appointment>
+  </c-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="data.event.id">
+  <button cButton (click)="update()" class="mx-3" variant="outline">Update</button>
+  <button cButton (click)="cancel()" variant="outline">Cancel</button>
+</mat-dialog-actions>

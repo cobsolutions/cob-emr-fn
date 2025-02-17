@@ -15,12 +15,16 @@ export class AppointmentTypeService {
     const url = this.baseUrl + 'create';
     return this._http.post(url, appointmentType);
   }
-  retrieveAppointmentTypes(clinicId: number) {
-    const url = this.baseUrl + 'find/clinic/' + clinicId;
+  retrieveAppointmentTypes(): Observable<any> {
+    const url = this.baseUrl + 'find/';
     return this._http.get(url);
   }
   retrieveAppointmentType(id: number, clinicId: number) {
     const url = this.baseUrl + '/find/clinic/' + clinicId + '/id/' + id
+    return this._http.get(url);
+  }
+  retrieveAppointmentTypeById(id: number) {
+    const url = this.baseUrl + '/find/id/' + id
     return this._http.get(url);
   }
 }

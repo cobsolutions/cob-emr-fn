@@ -16,13 +16,13 @@ export class UpcomingAppointmentService extends BasePaginationService {
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
   public findAllIncomingAppointments(config$: BehaviorSubject<IApiParams>, pateintId: number): Observable<any> {
-    return this.get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/clinicId/')
+    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId)
   }
 
   public findIncomingAppointmentsByCase(config$: BehaviorSubject<IApiParams>,
     pateintId: number,
     caseId: number,
   ): Observable<any> {
-    return this.get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/clinicId/' + '/patientCaseId/' + caseId);
+    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/patientCaseId/' + caseId);
   }
 }

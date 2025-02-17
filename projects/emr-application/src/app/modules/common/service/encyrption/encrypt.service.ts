@@ -14,4 +14,12 @@ export class EncryptService {
     });
     return encrypted.toString();
   }
+  public decrypt(encryptedTxt: string): string {
+    const hash = CryptoJS.SHA1('0123456789123456');
+    const key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
+    const decrypted = CryptoJS.AES.decrypt(encryptedTxt, key, {
+      mode: CryptoJS.mode.ECB,
+    });
+    return CryptoJS.enc.Utf8.stringify(decrypted); // Convert the decrypted data to a UTF-8 string
+  }
 }

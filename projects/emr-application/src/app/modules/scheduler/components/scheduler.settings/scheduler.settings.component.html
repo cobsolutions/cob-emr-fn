@@ -1,0 +1,45 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <h1>Scheduler Settings</h1>
+    </c-col>
+</c-row>
+<hr />
+<c-row>
+    <c-col xs="12">
+        <c-card>
+            <c-card-body>
+                <c-nav variant="tabs">
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink>
+                            Scheduler Dates Settings
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=1 cNavLink>
+                            Clinic Appointment Type Settings
+                        </a>
+                    </c-nav-item>
+                    <c-nav-item>
+                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=2 cNavLink>
+                            Cancellation fee
+                        </a>
+                    </c-nav-item>
+                </c-nav>
+                <ng-container fluid="true">
+                    <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
+                        <c-tab-pane tabPaneIdx=0>
+                            <SchedulerDateSettings></SchedulerDateSettings>
+                        </c-tab-pane>
+                        <c-tab-pane tabPaneIdx=1>
+                            <SchedulerAppointmentSettings></SchedulerAppointmentSettings>
+                        </c-tab-pane>
+                        <c-tab-pane tabPaneIdx=2>
+                            <cancelation-fee></cancelation-fee>
+                        </c-tab-pane>
+                    </c-tab-content>
+                </ng-container>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

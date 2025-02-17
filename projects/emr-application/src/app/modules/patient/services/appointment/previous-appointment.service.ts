@@ -17,13 +17,13 @@ export class PreviousAppointmentService extends BasePaginationService {
   }
 
   public findAllPreviousAppointments(config$: BehaviorSubject<IApiParams>, pateintId: number): Observable<any> {
-    return this.get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/clinicId/')
+    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId);
   }
 
   public findPreviousAppointmentsByCase(config$: BehaviorSubject<IApiParams>,
     pateintId: number,
     caseId: number,): Observable<any> {
-    return this.get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/clinicId/' + '/patientCaseId/' + caseId);
+    return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/patientCaseId/' + caseId);
 
   }
 }

@@ -1,0 +1,31 @@
+<ng-container *ngIf="props$ | async as props">
+    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
+        [items]="(patientPaymentRecordResponse$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+        (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+        [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small:true }"
+        [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+            <td>
+                <ng-container [ngSwitch]="columnName">
+                    <ng-container *ngSwitchCase="'appointmentStatus'">
+                        {{tdContent}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'amount'">
+                        {{tdContent| currency: 'USD'  }}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'createdAt'">
+                        {{tdContent| date:'MMM d, y, h:mm a'}}
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        {{tdContent}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Actions'">
+
+                    </ng-container>
+                </ng-container>
+            </td>
+        </ng-template>
+    </c-smart-table>
+    <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
+        (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+</ng-container>

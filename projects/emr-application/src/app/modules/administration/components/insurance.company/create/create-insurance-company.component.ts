@@ -47,14 +47,8 @@ export class CreateInsuranceCompanyComponent implements OnInit {
     if (this.insuranceCompanyCreateForm.valid && this.addresses !== undefined) {
       this.insuranceCompany.addresses = this.addresses;
       this.spinner.show();
-      this.loggedInService.load().pipe(
-        tap((loggedInUser: LoggedInUser) => {
-          this.insuranceCompany.organizationId = loggedInUser.organizationId;
-        })
-        , switchMap((result: any) => {
-          return this.insuranceCompanyService.create(this.insuranceCompany)
-        })
-      )
+      this.insuranceCompany.organizationId = this.loggedInService.getLoggedUser().organizationId;
+      this.insuranceCompanyService.create(this.insuranceCompany)
         .subscribe(() => {
           this.spinner.hide();
           this.insuranceCompanyCreateForm.reset();

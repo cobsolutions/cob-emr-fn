@@ -66,14 +66,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.filteredRoles = [...this.roles];
     this.roles$ = of(this.filteredRoles)
-    this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organizationId: number) => {
-        return this.clinicService.getByOrganizationId(organizationId)
-      })
-    )
+    this.clinicService.getByOrganizationId(this.loggedInService.getLoggedUser().organizationId)
       .subscribe((response: any) => {
         this.clinics = response.records;
       })

@@ -1,0 +1,14 @@
+img {
+    width: 250px;
+    height: 250px;
+  
+    @media screen and (min-device-width: 1200px) and (max-device-width: 1920px) and (-webkit-min-device-pixel-ratio: 1) {
+      width: 200px;
+      height: 200px;
+    }
+  
+    @media screen and (min-device-width: 1920px) and (-webkit-min-device-pixel-ratio: 1) {
+      width: 300px;
+      height: 300px;
+    }
+  }

@@ -1,0 +1,21 @@
+.cal-resource-row {
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .cal-resource-header {
+    font-weight: bold;
+    text-align: center;
+    background-color: #e6f7ff;
+    padding: 4px;
+  }
+  
+  .cal-event {
+    background-color: #d9f7be;
+    border: 1px solid #91d5ff;
+    margin: 2px 0;
+    padding: 3px;
+    text-align: center;
+  }
+  

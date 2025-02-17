@@ -10,6 +10,8 @@ export class ConstructAppointmentService {
   constructor() { }
 
   public constructAppointmentDate(appointment: Appointment) {
+    console.log(appointment.appointmentDate.startTime.getHours())
+    console.log(appointment.appointmentDate.startTime.getMinutes())
     var startDate: Date = moment(appointment.appointmentDate.startDate).toDate();
     startDate.setHours(appointment.appointmentDate.startTime.getHours())
     startDate.setMinutes(appointment.appointmentDate.startTime.getMinutes())
@@ -19,9 +21,5 @@ export class ConstructAppointmentService {
     endDate.setHours(appointment.appointmentDate.endTime.getHours())
     endDate.setMinutes(appointment.appointmentDate.endTime.getMinutes())
     appointment.endDate = moment(endDate).unix() * 1000;
-  }
-  public constructAppointmentPatient(appointment: Appointment) {
-    appointment.patient.fullName = appointment.title.split(':')[0]
-    appointment.patientCase = { id: appointment.patientCaseId }
   }
 }

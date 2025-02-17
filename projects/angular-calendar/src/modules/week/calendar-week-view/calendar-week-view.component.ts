@@ -22,8 +22,6 @@ import {
   ViewPeriod,
   WeekViewHourColumn,
   WeekViewTimeEvent,
-  WeekViewHourSegment,
-  WeekViewHour,
   WeekViewAllDayEventRow,
 } from 'calendar-utils';
 import { ResizeEvent } from 'angular-resizable-element';
@@ -81,7 +79,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
 @Component({
   selector: 'mwl-calendar-week-view',
   template: `
-    <div class="cal-week-view" role="grid">
+    <div class="cal-week-view" role="grid" style="position: relative;overflow-y: scroll;max-height: 100vh;background-color: white;">
       <mwl-calendar-week-view-header
         [days]="days"
         [locale]="locale"
@@ -93,6 +91,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
         (dragEnter)="dateDragEnter($event.date)"
       >
       </mwl-calendar-week-view-header>
+      <!-- div one -->
       <div
         class="cal-all-day-events"
         #allDayEventsContainer
@@ -209,16 +208,18 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
           </div>
         </div>
       </div>
+      <!-- div two this one -->
       <div
         class="cal-time-events"
         mwlDroppable
         (dragEnter)="dragEnter('time')"
         (dragLeave)="dragLeave('time')"
       >
+      <!-- start show hours margins-->
         <div
           class="cal-time-label-column"
-          *ngIf="view.hourColumns.length > 0 && daysInWeek !== 1"
-        >
+          *ngIf="view.hourColumns.length > 0 && daysInWeek !== 1">
+        <!-- start show hours -->
           <div
             *ngFor="
               let hour of view.hourColumns[0].hours;
@@ -240,7 +241,9 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
             >
             </mwl-calendar-week-view-hour-segment>
           </div>
+          <!-- end show hours -->
         </div>
+        <!-- end show hours margins-->
         <div
           class="cal-day-columns"
           [class.cal-resize-active]="timeEventResizes.size > 0"
@@ -417,8 +420,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
   `,
 })
 export class CalendarWeekViewComponent
-  implements OnChanges, OnInit, OnDestroy, AfterViewInit
-{
+  implements OnChanges, OnInit, OnDestroy, AfterViewInit {
   /**
    * The current view date
    */
@@ -595,7 +597,7 @@ export class CalendarWeekViewComponent
   /**
    * Customise the document cursor when dragging to resize an event
    */
- 
+
 
   /**
    * Called when a header week day is clicked. Adding a `cssClass` property on `$event.day` will add that class to the header element
@@ -1236,12 +1238,12 @@ export class CalendarWeekViewComponent
       (this.rtl ? -1 : 1);
     const minutesMoved = useY
       ? getMinutesMoved(
-          dragEndEvent.y,
-          this.hourSegments,
-          this.hourSegmentHeight,
-          this.eventSnapSize,
-          this.hourDuration
-        )
+        dragEndEvent.y,
+        this.hourSegments,
+        this.hourSegmentHeight,
+        this.eventSnapSize,
+        this.hourDuration
+      )
       : 0;
 
     const start = this.dateAdapter.addMinutes(

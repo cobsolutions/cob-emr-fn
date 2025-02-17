@@ -34,18 +34,17 @@ export const NavItems: INavData[] = [
     iconComponent: { name: 'cil-calendar' },
     children: [
       {
-        name: 'Scheduler',
+        name: 'View Scheduler',
         url: 'scheduler/view'
       },
       {
-        name: 'Scheduler Configuration',
-        url: 'scheduler/configuration'
+        name: 'Scheduler Settings',
+        url: 'scheduler/settings'
       },
       {
-        name: 'Appointment Type',
-        url: 'scheduler/appointment-type'
+        name: 'Manage Calendars',
+        url: 'scheduler/calendar'
       }
-
     ]
   },
   {

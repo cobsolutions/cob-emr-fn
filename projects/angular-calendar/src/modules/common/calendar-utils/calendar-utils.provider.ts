@@ -14,6 +14,9 @@ import { DateAdapter } from '../../../date-adapters/date-adapter';
 
 @Injectable()
 export class CalendarUtils {
+  static getWeekViewHeader(arg0: any): WeekDay[] {
+    throw new Error("Method not implemented.");
+  }
   constructor(protected dateAdapter: DateAdapter) {}
 
   getMonthView(args: GetMonthViewArgs): MonthView {

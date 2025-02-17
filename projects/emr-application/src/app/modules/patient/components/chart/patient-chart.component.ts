@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddressUtil } from 'projects/emr-application/src/app/util/address.util';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
@@ -34,11 +34,12 @@ export class PatientChartComponent implements OnInit {
   patientCases: PatientCase[];
   patientId: number;
   caseId: number = 0;
-  clinicId:number;
+  clinicId: number;
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private router: Router) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
@@ -60,10 +61,12 @@ export class PatientChartComponent implements OnInit {
           this.patientChartInfo.address.push(AddressUtil.formatAddress(patient.addresses[i]))
         }
         this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
+      }, error => {
+        this.router.navigate(['/emr/patient/list']);
       })
   }
   changeCase(event: any) {
-    var caseId: number = event.target.value;    
+    var caseId: number = event.target.value;
     if (caseId !== null)
       this.pateintCaseService.selectedCase$.next(caseId);
   }

@@ -1,0 +1,26 @@
+<ngx-spinner></ngx-spinner>
+<c-callout color="danger" *ngIf="isValidForm">
+    <span class="text-danger fw-bold">Please fill in all the required fields before submitting Calendar</span>
+</c-callout>
+<form [formGroup]="createCalendarForm">
+    <c-row class="mb-2">
+        <c-col xl="12">
+            <label style="width: 150px;">Name <span class="text-danger">*</span></label>
+        </c-col>
+        <c-col xl="12">
+            <input class="form-control" placeholder formControlName="calendar-name" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.createCalendarForm.get('calendar-name')?.invalid
+                && this.createCalendarForm.get('calendar-name')?.touched}" maxlength="60" input-trimmer required>
+        </c-col>
+        <c-col xl="12">
+            <c-col xl="12">
+                <label style="width: 150px;">Public</label>
+            </c-col>
+            <c-col xl="12">
+                <input class="form-control" formControlName="is-public" cFormCheckInput type="checkbox"  class="form-check-input">
+            </c-col>
+        </c-col>
+    </c-row>
+    <div class="mt-3 text-center">
+        <button cButton size="sm" variant="outline" class="mx-2" (click)="create()">Create</button>
+    </div>
+</form>

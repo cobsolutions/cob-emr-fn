@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarEvent } from 'calendar-utils';
+import { Observable } from 'rxjs';
+import { Clinic } from '../../../patient/models/clinic';
 import { AppointmentEditModalComponent } from '../../components/appintment.edit/modal/appointment-edit-modal.component';
+import { EditAppointmentSeriesModalComponent } from '../../components/appintment.edit/series.modal/edit-appointment-series-modal.component';
 import { AppointmentActionModalComponent } from '../../components/appointment.actions/modal/appointment-action-modal.component';
+import { PropmtPatientClinicsComponent } from '../../components/appointment.actions/modal/prompting.patient.clinic/propmt-patient-clinics.component';
 import { AddAppobntmentModalComponent } from '../../components/appointment.add/modal/add-appobntment-modal.component';
 import { AppointmentCancelNoshowModalComponent } from '../../components/appointment.cancel.noshow/modal/appointment-cancel-noshow-modal.component';
 import { AppointmentStatusModalComponent } from '../../components/appointment.status/modal/appointment-status-modal.component';
+import { Settings } from '../../components/scheduler.view/util/fetch.scheduler.settings';
+import { DragableSeriesAppointmetModalComponent } from '../../components/series.appointment.dragable.modal/dragable-series-appointmet-modal.component';
+import { EditableSeriesAppointmentModalComponent } from '../../components/series.appointment.editable.modal/editable-series-appointment-modal.component';
+import { Appointment } from '../../models/appointment';
+import { AppointmentSkeleton } from '../../models/appointment.skeleton';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +23,11 @@ export class AppointmentActionsService {
 
   constructor() { }
 
-  public addAppointment(dialog: MatDialog, viewDate: Date) {
+  public addAppointment(dialog: MatDialog, viewDate: Date, calendarId: number, schedulerSettings: Settings, module: string) {
     const dialogRef = dialog.open(AddAppobntmentModalComponent, {
       disableClose: true,
       width: '60%',
-      data: { startDate: viewDate },
+      data: { startDate: viewDate, calendarId: calendarId, schedulerSettings: schedulerSettings, module: module },
       position: {
         top: '8%', // Adjust as needed
 
@@ -36,10 +45,10 @@ export class AppointmentActionsService {
     });
     return dialogRef.afterClosed()
   }
-  public editAppointment(dialog: MatDialog, event: CalendarEvent) {
+  public editAppointment(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings, appointmentSkeleton: AppointmentSkeleton) {
     const dialogRef = dialog.open(AppointmentEditModalComponent, {
       disableClose: true,
-      data: { event: event, action: undefined },
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings, appointmentSkeleton: appointmentSkeleton },
       width: '60%',
       position: {
         top: '8%',
@@ -48,6 +57,17 @@ export class AppointmentActionsService {
     return dialogRef.afterClosed();
   }
 
+  public editAppointmentSeries(dialog: MatDialog, event: CalendarEvent, schedulerSettings: Settings, start: number, end: number) {
+    const dialogRef = dialog.open(EditAppointmentSeriesModalComponent, {
+      disableClose: true,
+      data: { event: event, action: undefined, schedulerSettings: schedulerSettings, start: start, end: end },
+      width: '60%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
   public appointmentStatus(dialog: MatDialog, event: CalendarEvent) {
     const dialogRef = dialog.open(AppointmentStatusModalComponent, {
       disableClose: true,
@@ -75,6 +95,39 @@ export class AppointmentActionsService {
     const dialogRef = dialog.open(AppointmentCancelNoshowModalComponent, {
       disableClose: true,
       data: { event: event, action: 'cancel' },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptPatientClinics(dialog: MatDialog, clinics: Clinic[], patientId: number) {
+    const dialogRef = dialog.open(PropmtPatientClinicsComponent, {
+      disableClose: true,
+      data: { clinics: clinics, patient: patientId },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptDragSeriesAppointments(dialog: MatDialog, appointment: Appointment, start: number, end: number) {
+    const dialogRef = dialog.open(DragableSeriesAppointmetModalComponent, {
+      disableClose: true,
+      data: { appointment: appointment, start: start, end: end },
+      width: '30%',
+      position: {
+        top: '8%',
+      }
+    });
+    return dialogRef.afterClosed();
+  }
+  public promptEditableSeriesAppointments(dialog: MatDialog) {
+    const dialogRef = dialog.open(EditableSeriesAppointmentModalComponent, {
+      disableClose: true,
+      data: {},
       width: '30%',
       position: {
         top: '8%',

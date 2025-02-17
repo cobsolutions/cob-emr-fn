@@ -32,7 +32,7 @@ import { PlacementArray } from 'positioning';
         [ngStyle]="{
           color: weekEvent.event.color?.secondaryText,
           backgroundColor: weekEvent.event.color?.secondary,
-          borderColor: weekEvent.event.color?.primary
+          borderColor: weekEvent.event.color?.primary ==='#FFFFFF'?'black':weekEvent.event.color?.primary
         }"
         [mwlCalendarTooltip]="
           !tooltipDisabled

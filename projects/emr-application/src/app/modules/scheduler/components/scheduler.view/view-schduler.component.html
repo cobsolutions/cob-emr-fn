@@ -1,54 +1,98 @@
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<div class="row text-center">
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        Previous
-      </div>
-      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        Today
-      </div>
-      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()">
-        Next
-      </div>
-    </div>
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<div class="d-flex align-items-center justify-content-between p-3 border-bottom">
+  <div class="d-flex align-items-center">
+    <c-input-group class="mb-3">
+      <c-date-picker class="me-2" [(date)]="viewDate" (dateChange)="setView()"></c-date-picker>
+      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarPreviousView [view]="view"
+        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretLeft"></svg></button>
+      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarNextView [view]="view"
+        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretRight"></svg></button>
+    </c-input-group>
   </div>
-  <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  <div class="d-flex align-items-center">
+    <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
   </div>
-  <div class="col-md-4">
-    <div class="btn-group">
-      <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-        Month
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-        Week
-      </div>
-      <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-        Day
-      </div>
-    </div>
+  <div class="d-flex align-items-center">
+    <select cSelect class="me-2" style="width: auto;" [(ngModel)]="view" (change)="setView()">
+      <option [value]="CalendarView.Month">Month</option>
+      <option [value]="CalendarView.Week">Week</option>
+      <option [value]="CalendarView.Day">Day</option>
+    </select>
+    <button cButton class="me-2" color="light" style="width: auto;" (click)="showNoShow()"
+      [ngClass]="{'noshowclicked': showNoShowAppointment}">No Show</button>
+    <button cButton class="me-2" color="light" style="width: auto;" (click)="showCancel()"
+      [ngClass]="{'cancelclicked': showCancelAppointment}">Cancelled</button>
+    <button cButton class="me-2" color="info" variant="outline" (click)="toggleCollapse()">
+      View/Hide Calendars
+    </button>
+  </div>
+  <div style="min-height: 130px;" *ngIf="visible">
+    <c-card [visible]="visible" cCollapse horizontal class="shadow" style="max-width: 260px;">
+      <c-card-header>
+        <strong>Calendars</strong>
+      </c-card-header>
+      <c-card-body style="width: 260px;">
+        <c-form-check *ngFor="let calendar of calendars">
+          <input cFormCheckInput [id]="calendar.id" type="checkbox" [checked]="calendar.selected" (change)="onChangeCalendarsd(calendar, $event)"/>
+          <label cFormCheckLabel for="calendar.id">{{calendar.name}}</label>
+        </c-form-check>
+      </c-card-body>
+    </c-card>
   </div>
 </div>
 <br />
-<div [ngSwitch]="view" *ngIf="events">
-  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+<div [ngSwitch]="view" *ngIf="schedulerSettingsa">
+  <!--Month Module-->
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="flatEvent"
     [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+    [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('month', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event,'month')">
   </mwl-calendar-month-view>
-  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-    (hourSegmentClicked)="weekClicked($event.date)"
-    [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
-    [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
-  </mwl-calendar-week-view>
-  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-    (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-    (hourSegmentClicked)="dayClicked($event.date)"
-    [dayStartHour]="(schedulerConfiguration$ | async)?.startHour"
-    [dayEndHour]="(schedulerConfiguration$ | async)?.endHour">
-  </mwl-calendar-day-view>
+  <!--Week Module-->
+  <div *ngSwitchCase="CalendarView.Week">
+    <div class="horizontal-container" *ngIf="selectedCalendars.length > 0 ">
+      <div *ngFor="let calendar of selectedCalendars" class="resource-item" [ngClass]="{
+        'full-width': selectedCalendars.length === 1 && isSelected(calendar),
+        'even-width': selectedCalendars.length !== 1
+      }">
+        <div class="resource-header">
+          {{ calendar.name }}
+        </div>
+        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events.get(calendar.id)" [refresh]="refresh"
+          (eventClicked)="handleEvent('week', $event.event)" (eventTimesChanged)="eventTimesChanged($event,'week')"
+          (hourSegmentClicked)="weekClicked($event.date , calendar)" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+          [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+          [hourSegments]='schedulerSettingsa.timeInterval'>
+        </mwl-calendar-week-view>
+      </div>
+    </div>
+    <div *ngIf="selectedCalendars.length ===0 ">
+      <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+        [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+        [hourSegments]='schedulerSettingsa.timeInterval'>
+      </mwl-calendar-week-view>
+    </div>
+  </div>
+  <!--Day Module-->
+  <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
+    (eventTimesChanged)="eventTimesChanged($event,'day')" (eventClicked)="handleEvent('day', $event.event)"
+    (hourSegmentClicked)="dayClicked($event)" [calendars]="selectedCalendars" [calendarEvents]="events"
+    [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
+    [hourSegments]='schedulerSettingsa.timeInterval'>
+  </mwl-day-view-scheduler>
 </div>
+<!-- <c-modal id="editClinic" [visible]="visible" size="lg">
+  <c-modal-header>
+    <h3 cModalTitle><strong>Calendars</strong></h3>
+  </c-modal-header>
+  <c-modal-body>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
+      <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
+        [selected]="calendar.selected">{{calendar.name}}</c-multi-select-option>
+    </c-multi-select>
+    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
+      *ngIf="!selected">
+    </c-multi-select>
+  </c-modal-body>
+</c-modal> -->

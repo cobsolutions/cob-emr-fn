@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { map, Observable, switchMap } from 'rxjs';
-import { LoggedInUser } from '../../../../security/model/loggedin.user';
+import { map, Observable } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { SchedulerConfiguration } from '../../../models/configuration';
 import { SchedulerConfigurationService } from '../../../service/scheduler-configuration.service';
@@ -35,13 +34,8 @@ export class ListSchedulerConfigurationComponent implements OnInit {
     this.editSchedulerConfigurationVisibility = true;
   }
   ngOnInit(): void {
-    this.schedulerConfiguration$ = this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organizationId: number) => {
-        return this.schedulerConfigurationService.retrieveCliniSchedulerConfigurations(organizationId)
-      })
+    this.schedulerConfiguration$ = this.schedulerConfigurationService
+      .retrieveCliniSchedulerConfigurations(this.loggedInService.getLoggedUser().organizationId)
       , map((configurations: SchedulerConfiguration[]) => {
         for (var i = 0; i < configurations.length; i++) {
           var startHour: number = moment(configurations[i].startHour).hour();
@@ -51,7 +45,6 @@ export class ListSchedulerConfigurationComponent implements OnInit {
         }
         return configurations;
       })
-    )
   }
   public changeVisibility(event: any) {
     if (event === 'close-create')

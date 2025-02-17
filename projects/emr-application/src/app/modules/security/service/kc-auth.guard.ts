@@ -7,6 +7,8 @@ import { MenuItemsConstructor } from '../menu.items.constructor';
 import { RenderNavItemsService } from './render-nav-items.service';
 import { RoleScopeFinderService } from './role-scope-finder.service';
 import { Role } from '../model/role';
+import { LoggedInService } from './loggedIn/logged-in.service';
+import { EncryptService } from '../../common/service/encyrption/encrypt.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class KcAuthGuard extends KeycloakAuthGuard {
   constructor(protected override router: Router
     , protected override keycloakAngular: KeycloakService
     , private renderNavItemsService: RenderNavItemsService
-    , private roleScopeFinderService: RoleScopeFinderService) {
+    , private roleScopeFinderService: RoleScopeFinderService
+    , private loggedInService: LoggedInService
+    , private encryptService: EncryptService) {
     super(router, keycloakAngular);
   }
   async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
@@ -23,19 +27,20 @@ export class KcAuthGuard extends KeycloakAuthGuard {
       await this.keycloakAngular.login({
         redirectUri: window.location.origin + state.url,
       });
-    }
+    } else
 
-    if (!(this.roles.some(role => Role.roles.includes(role)))) {
-      this.keycloakAngular.logout();
-    }
+      if (!(this.roles.some(role => Role.roles.includes(role)))) {
+        this.keycloakAngular.logout();
+      }
     var type = route.data['type'];
     if (type === 'requester' && !this.roles.includes(Role.ORGANIZATION_REQUEST_ROLE)) {
       this.keycloakAngular.logout();
     }
     var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles)
     this.renderNavItemsService.renderItems$.next(filteredList)
-    this.roleScopeFinderService.find();
-
+    this.loggedInService.getObservableLoggedUser().subscribe((loggedInUser: any) => {
+      this.roleScopeFinderService.find();
+    })
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
     // Allow the user to to proceed if no additional roles are required to access the route.

@@ -1,5 +1,7 @@
 export interface DailyRepeatAppointment {
     every?: number
-    start?: number
-    end?: number
+    startDate?: number
+    endDate?: number
+    _dateStart?: Date
+    _dateEnd?: Date
 }

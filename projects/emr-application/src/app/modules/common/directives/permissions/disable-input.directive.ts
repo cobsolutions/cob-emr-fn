@@ -7,18 +7,16 @@ import { MatchRole } from './match.role';
 @Directive({
   selector: '[disable-input]'
 })
-export class DisableInputDirective implements OnInit{
+export class DisableInputDirective implements OnInit {
   @Input() componentRole?: string[]
-  constructor(private el: ElementRef, private renderer: Renderer2,private loggedInService: LoggedInService) { }
+  constructor(private el: ElementRef, private renderer: Renderer2, private loggedInService: LoggedInService) { }
   ngOnInit(): void {
-    this.loggedInService.load().subscribe((result: LoggedInUser) => {
-      var roleScope: UserRoleScope = MatchRole.match(result.userRoleScope, this.componentRole);
-      if (roleScope !== undefined && roleScope.scope === 'view') {
-        this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'true');
-        if (!(this.el.nativeElement.type === 'checkbox' || this.el.nativeElement.type === 'radio'))
-          this.renderer.setStyle(this.el.nativeElement, 'background-color', 'white')
-      }
-    });
+    var roleScope: UserRoleScope = MatchRole.match(this.loggedInService.getLoggedUser().userRoleScope, this.componentRole);
+    if (roleScope !== undefined && roleScope.scope === 'view') {
+      this.renderer.setAttribute(this.el.nativeElement, 'disabled', 'true');
+      if (!(this.el.nativeElement.type === 'checkbox' || this.el.nativeElement.type === 'radio'))
+        this.renderer.setStyle(this.el.nativeElement, 'background-color', 'white')
+    }
   }
 
 }

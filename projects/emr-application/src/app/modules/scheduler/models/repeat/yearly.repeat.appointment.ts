@@ -1,5 +1,8 @@
 export interface YearlyRepeatAppointment {
     every?: number
-    start?: number
-    end?: number
+    startDate?: number
+    endDate?: number
+    initDate?: number;
+    _dateStart?: Date
+    _dateEnd?: Date
 }

@@ -86,14 +86,7 @@ export class CreateUserComponent implements OnInit {
     this.checkUserName()
     this.checkEmail();
     if (!this.isOrganizationInit)
-      this.loggedInService.load().pipe(
-        map((loggedInUser: LoggedInUser) => {
-          return loggedInUser.organizationId
-        })
-        , switchMap((organizationId: number) => {
-          return this.clinicService.getByOrganizationId(organizationId)
-        })
-      )
+      this.clinicService.getByOrganizationId(this.loggedInService.getLoggedUser().organizationId)
         .subscribe((response: any) => {
           this.clinics = response.records;
         })
@@ -210,9 +203,9 @@ export class CreateUserComponent implements OnInit {
           || item.name === Role.FINALIZE_MEDICAL_NOTE_ROLE) {
           userRoleScope = {
             role: item.name,
-            scope: item.scope? 'modify' : 'hidden'
+            scope: item.scope ? 'modify' : 'hidden'
           }
-        }else{
+        } else {
           userRoleScope = {
             role: item.name,
             scope: item.scope

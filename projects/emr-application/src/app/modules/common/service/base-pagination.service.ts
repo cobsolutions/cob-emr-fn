@@ -20,7 +20,7 @@ const httpOptions = {
 export class BasePaginationService {
   url: string;
   constructor(public httpClient: HttpClient
-    , private loggedInService: LoggedInService) { }
+    , public loggedInService: LoggedInService) { }
   get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
     this.url = url;
     return config$.pipe(
@@ -31,6 +31,18 @@ export class BasePaginationService {
         }
       ),
       switchMap((config) => this.fetchData(config))
+    );
+  }
+  _get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
+    this.url = url;
+    return config$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(
+        (previous, current) => {
+          return JSON.stringify(previous) === JSON.stringify(current);
+        }
+      ),
+      switchMap((config) => this.fetchDataWithoutClinic(config,url))
     );
   }
   private fetchData(params: IApiParams): Observable<PaginationData> {
@@ -51,6 +63,21 @@ export class BasePaginationService {
             catchError(this.handleHttpError)
           )
       ))
+  }
+  private fetchDataWithoutClinic(params: IApiParams, url: string): Observable<PaginationData> {
+    const apiParams = {
+      ...params
+    };
+    const httpParams: HttpParams = new HttpParams({ fromObject: apiParams });
+    const options = Object.keys(httpParams).length
+      ? { params: httpParams, ...httpOptions }
+      : { params: {}, ...httpOptions };
+    return this.httpClient
+      .get<PaginationData>(url, options)
+      .pipe(
+        retry({ count: 1, delay: 100000, resetOnSuccess: true }),
+        catchError(this.handleHttpError)
+      )
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);

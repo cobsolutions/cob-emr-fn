@@ -31,26 +31,23 @@ export class InitializeAppointmentService {
         map(response => {
           return response;
         }))
-      console.log('no cahced');
       return this.patient$
     }
     else {
-      console.log('cahced');
       return this.patient$;
     }
   }
   public findAllTherapists() {
     if (this.therapists$ === undefined) {
-      this.therapists$ = this.clinicalUserService.getAllClinicalsUsers().pipe(
+      this.therapists$ = this.loggedInService.selectedClinic$.pipe(
+        switchMap(clinicId => this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)),
         filter(therapists => therapists !== null),
         map(response => {
           return response;
         })
       )
-      console.log('not cached');
       return this.therapists$;
     } else {
-      console.log('not cached');
       return this.therapists$
     }
   }
@@ -64,21 +61,18 @@ export class InitializeAppointmentService {
     )
   }
   public findAppointmnetType() {
-    return this.loggedInService.selectedClinic$.pipe(
-      switchMap(clinicId => this.appointmnetTypeService.retrieveAppointmentTypes(clinicId)),
-      filter(therapists => therapists !== null),
+    return this.appointmnetTypeService.retrieveAppointmentTypes().pipe(
       map((response: any) => {
         return response.records;
-      })
-    )
+      }));
   }
-  public initializeAppointmentDate(appointment: Appointment, startDate?: Date) {
+  public initializeAppointmentDate(appointment: Appointment, startDate?: Date, appointmentInterval?: number) {
     if (startDate) {
       var startHour = moment(startDate).hour() === 0 ? 8 : moment(startDate).hour();
       appointment.appointmentDate.startDate = startDate;
       appointment.appointmentDate.startTime = moment(startDate).set("hour", startHour).set("minute", 0).toDate();;
       appointment.appointmentDate.endDate = moment(appointment.appointmentDate.startDate).toDate();
-      appointment.appointmentDate.endTime = moment(appointment.appointmentDate.startTime).add(30, 'minutes').toDate()
+      appointment.appointmentDate.endTime = moment(appointment.appointmentDate.startTime).add(appointmentInterval, 'minutes').toDate()
     } else {
       var start: Date = moment.unix(appointment.startDate / 1000).toDate();
       var end: Date = moment.unix(appointment.endDate / 1000).toDate()

@@ -62,15 +62,9 @@ export class ClinicService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organiationId: number) => {
-        return this.httpClient
-          .get<IData>(this.userUrl + "/find/organization/" + organiationId, options)
-      })
-    )
+    return this.httpClient
+      .get<IData>(this.userUrl + "/find/organization/" + this.loggedInService.getLoggedUser().organizationId, options)
+
   }
   getById(clinicId: number) {
     var createURL = this.userUrl + '/find/' + clinicId

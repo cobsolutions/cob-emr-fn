@@ -1,0 +1,14 @@
+.clinic-item {
+    margin-bottom: 10px;
+  }
+  
+  .clinic-name {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .clinic-name:hover {
+    text-decoration: none;
+  }
+  

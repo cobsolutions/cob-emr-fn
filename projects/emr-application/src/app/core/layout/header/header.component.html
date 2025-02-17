@@ -7,7 +7,7 @@
     <c-header-nav class="me-auto">
       
       <select *ngIf="clinics && clinics.length !==0" #userClinics cSelect sizing="sm" style="line-height: 15px;"
-        (change)="setSelectedClinic($event)">
+        (change)="setSelectedClinic($event)" [(ngModel)]="selectedValue">
         <option *ngFor="let clinic of clinics" [value]="clinic.id">
           {{clinic.name}}
         </option>

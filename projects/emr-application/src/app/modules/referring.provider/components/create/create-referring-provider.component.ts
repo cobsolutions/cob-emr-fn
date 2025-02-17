@@ -34,15 +34,8 @@ export class CreateReferringProviderComponent implements OnInit {
   }
 
   private create() {
-    this.loggedInService.load().pipe(
-      map((loggedInUser: LoggedInUser) => {
-        return loggedInUser.organizationId
-      })
-      , switchMap((organizationId: number) => {
-        this.referringProvider.organizationId = organizationId
-        return this.referringProviderService.create(this.referringProvider)
-      })
-    )
+    this.referringProvider.organizationId = this.loggedInService.getLoggedUser().organizationId
+    this.referringProviderService.create(this.referringProvider)
       .subscribe(result => {
         this.changeVisibility.emit('create-close')
         this.toastr.success('Referring Provider Created.');
