@@ -25,6 +25,10 @@ import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPag
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
+import { SubjectiveComponent } from './components/medical.note/initial.examination/subjective/subjective.component';
+import { BasicInformationComponent } from './components/medical.note/initial.examination/subjective/basic/basic-information.component';
+import { PriorLevelFunctionComponent } from './components/medical.note/initial.examination/subjective/prior.level.function/prior-level-function.component';
+import { CurrentFunvtionlimitComponent } from './components/medical.note/initial.examination/subjective/current.function.limit/current-funvtionlimit.component';
 
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
@@ -56,6 +60,10 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ...APP_PATIENT_CHART_COMPONENTS,
     PatientPaymentComponent,
     InitialExaminationComponent,
+    SubjectiveComponent,
+    BasicInformationComponent,
+    PriorLevelFunctionComponent,
+    CurrentFunvtionlimitComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,5 @@
+.label-right {
+    text-align: right;
+    display: inline-block;
+    width: 190px; /* Ensure consistent alignment */
+}

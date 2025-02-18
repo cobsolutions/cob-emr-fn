@@ -1,19 +1,23 @@
 <c-container fluid="true">
-    <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
-        <mat-step completed="false">
-            <ng-template matStepLabel>Subjective</ng-template>
-        </mat-step>
-        <mat-step completed="false">
-            <ng-template matStepLabel>Objective</ng-template>
-        </mat-step>
-        <mat-step completed="false">
-            <ng-template matStepLabel>Assessment</ng-template>
-        </mat-step>
-        <mat-step completed="false">
-            <ng-template matStepLabel>Plan</ng-template>
-        </mat-step>
-        <mat-step completed="false">
-            <ng-template matStepLabel>Billing</ng-template>
-        </mat-step>
-    </mat-stepper>
+    <form [formGroup]="initialExaminationForm">
+        <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
+            <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="false">
+                <ng-template matStepLabel>Subjective</ng-template>
+                <subjective  [stepper]="stepper">
+                </subjective>
+            </mat-step>
+            <mat-step completed="false" [stepControl]="initialExaminationForm.get('objective')!">
+                <ng-template matStepLabel>Objective</ng-template>
+            </mat-step>
+            <mat-step completed="false">
+                <ng-template matStepLabel>Assessment</ng-template>
+            </mat-step>
+            <mat-step completed="false">
+                <ng-template matStepLabel>Plan</ng-template>
+            </mat-step>
+            <mat-step completed="false">
+                <ng-template matStepLabel>Billing</ng-template>
+            </mat-step>
+        </mat-stepper>
+    </form>
 </c-container>

@@ -1,0 +1,41 @@
+<div [formGroup]="basicForm">
+    <div [formGroup]="basicForm">
+        <!-- Date of Initial Examination: -->
+        <div class="d-flex align-items-center mb-3">
+            <label for="init_date" class="me-2 text-end" 
+                style="white-space: nowrap; min-width: 190px;">
+                Date of Initial Examination:
+            </label>
+            <input type="date" id="init_date" cFormControl sizing="sm" formControlName="init_date"
+                style="max-width: 190px;">
+        </div>
+
+        <!-- Time In/Time Out: -->
+        <div class="d-flex align-items-center mb-3">
+            <label for="time_in_out" class="me-2 text-end" 
+                style="white-space: nowrap; min-width: 185px;">
+                Time In/Time Out:
+            </label>
+            <div class="d-flex">
+                <c-form-check class="me-3 d-flex align-items-center">
+                    <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'yes'" />
+                    <label cFormCheckLabel class="ms-1">Yes</label>
+                </c-form-check>
+                <c-form-check class="d-flex align-items-center">
+                    <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'no'" />
+                    <label cFormCheckLabel class="ms-1">No</label>
+                </c-form-check>
+            </div>
+        </div>
+
+        <!-- Visit Number: -->
+        <div class="d-flex align-items-center mb-3">
+            <label for="number_of_visit" class="me-2 text-end" 
+                style="white-space: nowrap; min-width: 185px;">
+                Visit Number:
+            </label>
+            <input id="number_of_visit" cFormControl sizing="sm" formControlName="number_of_visit"
+                style="max-width: 190px;">
+        </div>
+    </div>
+</div>
