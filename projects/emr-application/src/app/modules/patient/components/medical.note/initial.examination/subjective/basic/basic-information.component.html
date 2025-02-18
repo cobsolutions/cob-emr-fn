@@ -2,8 +2,7 @@
     <div [formGroup]="basicForm">
         <!-- Date of Initial Examination: -->
         <div class="d-flex align-items-center mb-3">
-            <label for="init_date" class="me-2 text-end" 
-                style="white-space: nowrap; min-width: 190px;">
+            <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
                 Date of Initial Examination:
             </label>
             <input type="date" id="init_date" cFormControl sizing="sm" formControlName="init_date"
@@ -12,8 +11,7 @@
 
         <!-- Time In/Time Out: -->
         <div class="d-flex align-items-center mb-3">
-            <label for="time_in_out" class="me-2 text-end" 
-                style="white-space: nowrap; min-width: 185px;">
+            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
                 Time In/Time Out:
             </label>
             <div class="d-flex">
@@ -30,12 +28,29 @@
 
         <!-- Visit Number: -->
         <div class="d-flex align-items-center mb-3">
-            <label for="number_of_visit" class="me-2 text-end" 
-                style="white-space: nowrap; min-width: 185px;">
+            <label for="number_of_visit" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
                 Visit Number:
             </label>
             <input id="number_of_visit" cFormControl sizing="sm" formControlName="number_of_visit"
                 style="max-width: 190px;">
+        </div>
+        <!--Diagnosis:-->
+        <div class="d-flex align-items-center mb-3">
+            <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+                Diagnosis:
+            </label>
+            <div style="width: 60%;">
+                <icdten></icdten>
+            </div>
+        </div>
+        <!--Treatment Diagnosis:-->
+        <div class="d-flex align-items-center mb-3">
+            <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+                Treatment Diagnosis:
+            </label>
+            <div style="width: 60%;">
+                <icdten></icdten>
+            </div>
         </div>
     </div>
 </div>

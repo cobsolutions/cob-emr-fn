@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'basic-information',
@@ -17,7 +17,9 @@ export class BasicInformationComponent implements OnInit {
     this.basicForm = this.fb.group({
       'init_date': new FormControl(null, [Validators.required]),
       'time_in_out': new FormControl(null, [Validators.required]),
-      'number_of_visit': new FormControl(null, [Validators.required])
+      'number_of_visit': new FormControl(null, [Validators.required]),
+      'diagnosis': new FormArray([]),
+      'treatment_diagnosis': new FormArray([])
 
     });
     this.formReady.emit(this.basicForm);
