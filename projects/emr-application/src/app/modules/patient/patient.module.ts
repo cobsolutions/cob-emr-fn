@@ -30,6 +30,7 @@ import { BasicInformationComponent } from './components/medical.note/initial.exa
 import { PriorLevelFunctionComponent } from './components/medical.note/initial.examination/subjective/prior.level.function/prior-level-function.component';
 import { CurrentFunvtionlimitComponent } from './components/medical.note/initial.examination/subjective/current.function.limit/current-funvtionlimit.component';
 import { IcdtenComponent } from './components/medical.note/initial.examination/subjective/basic/icd10/icdten.component';
+import { PainComponent } from './components/medical.note/initial.examination/subjective/pain/pain.component';
 
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
@@ -66,6 +67,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PriorLevelFunctionComponent,
     CurrentFunvtionlimitComponent,
     IcdtenComponent,
+    PainComponent,
   ],
   imports: [
     CommonModule,
