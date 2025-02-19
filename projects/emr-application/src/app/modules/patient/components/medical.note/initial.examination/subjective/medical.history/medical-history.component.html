@@ -1,1 +1,231 @@
-<p>medical-history works!</p>
+<div [formGroup]="medicalHistoryForm">
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Previous History of Similar Symptoms:
+        </label>
+        <!--history_similars_symptoms-->
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="history_similars_symptoms" size="sm"
+                    [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="history_similars_symptoms" size="sm"
+                    [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--history_similars_symptoms-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            General Health:
+        </label>
+        <!--history_similars_symptoms-->
+        <div class="d-flex">
+            <select cSelect formControlName="general_health" sizing="sm">
+                <option value="null">N/A</option>
+                <option>Good</option>
+                <option>Fair</option>
+                <option>Poor</option>
+                <option>Custom</option>
+            </select>
+        </div>
+    </div>
+    <!--occupation_social_history-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Occupation/Social History:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" size="sm"
+                    [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" size="sm"
+                    [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--Home Health Care-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Home Health Care:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="home_health_care" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="home_health_care" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--History of Falls:-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            History of Falls:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--Medical History-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Medical History:
+        </label>
+
+        <div class="checkbox-column">
+            <div *ngFor="let option of leftMedicalHistoryOptions">
+                <input type="checkbox" [value]="option" />
+                <label>{{ option }}</label>
+            </div>
+        </div>
+        <div class="checkbox-column">
+            <div *ngFor="let option of rightMedicalHistoryOptions">
+                <input type="checkbox" [value]="option" />
+                <label>{{ option }}</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Diagnostic Testing/Imaging-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Diagnostic Testing/Imaging:
+        </label>
+        <div class="d-flex" style="width: 60%;">
+            <textarea class="form-control" formControlName="testing_imaging" rows="3"></textarea>
+        </div>
+    </div>
+    <!--Complicating/Personal Factors-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Complicating/Personal Factors:
+        </label>
+        <div class="checkbox-column">
+            <div *ngFor="let option of lefPersonalFactorOptions">
+                <input type="checkbox" [value]="option" />
+                <label>{{ option }}</label>
+            </div>
+        </div>
+        <div class="checkbox-column">
+            <div *ngFor="let option of rightPersonalFactorOptions">
+                <input type="checkbox" [value]="option" />
+                <label>{{ option }}</label>
+            </div>
+        </div>
+    </div>
+    <!--History of Falls:-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Medical History Review :
+        </label>
+        <div>
+            <c-form-check class="me-3  align-items-center">
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" size="sm" />
+                <label cFormCheckLabel class="ms-1">
+                    <strong>Low Complexity - </strong>The patient has a history of present problem without any personal
+                    factors
+                    and/or comorbidities that impact the plan of care.
+                </label>
+            </c-form-check>
+            <c-form-check class=" align-items-center">
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" size="sm" />
+                <label cFormCheckLabel class="ms-1">
+                    <strong>Moderate Complexity -</strong> The patient has a history of present problem with a history
+                    of 1-2 personal factors and/or comorbidities that impact the plan of care.
+                </label>
+            </c-form-check>
+            <c-form-check class=" align-items-center">
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" size="sm" />
+                <label cFormCheckLabel class="ms-1">
+                    <strong>High Complexity - </strong>The patient has a history of present problem with a history of 3
+                    or more factors and/or comorbidities that impact the plan of care.
+                </label>
+            </c-form-check>
+            <c-form-check class=" align-items-center">
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" size="sm" />
+                <label cFormCheckLabel class="ms-1">Other</label>
+            </c-form-check>
+        </div>
+    </div>
+
+    <!--Mental Status/Cognitive Function Appears Impaired-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Mental Status/Cognitive Function Appears Impaired:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 align-items-center">
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function" size="sm"
+                    [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="align-items-center">
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function" size="sm"
+                    [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+
+    <!--Unexplained Weight Loss:-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Unexplained Weight Loss:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 align-items-center">
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" size="sm"
+                    [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class=" align-items-center">
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" size="sm"
+                    [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+
+    <!--Current Medications-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Current Medications:
+        </label>
+        <div class="d-fex">
+            <div class="checkbox-column">
+                <div *ngFor="let option of currentMedications">
+                    <input type="checkbox" [value]="option" />
+                    <label>{{ option }}</label>
+                </div>
+            </div>
+            <textarea class="form-control" formControlName="testing_imaging" rows="3" style="width: 100%;"></textarea>
+        </div>
+    </div>
+
+    <!--Patient Goals:-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Patient Goals:
+        </label>
+        <div class="d-flex" style="width: 60%;">
+            <textarea class="form-control" formControlName="patient_goals" rows="3"></textarea>
+        </div>
+    </div>
+</div>
