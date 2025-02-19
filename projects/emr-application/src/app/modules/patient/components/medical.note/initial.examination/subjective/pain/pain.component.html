@@ -15,5 +15,35 @@
             </c-form-check>
         </div>
     </div>
-    <pain-evaluation></pain-evaluation>
+    <!-- Aggravating Factors -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Aggravating Factors:
+        </label>
+        <div class="d-flex">
+            <select  cSelect multiple formControlName="aggravating">
+                <option *ngFor="let aggravatingFactor of aggravatingFactors">
+                    {{aggravatingFactor}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <!-- Pain Scale: -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Restrictions and Pain Alleviators:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" size="sm"
+                    [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" size="sm"
+                    [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
 </div>

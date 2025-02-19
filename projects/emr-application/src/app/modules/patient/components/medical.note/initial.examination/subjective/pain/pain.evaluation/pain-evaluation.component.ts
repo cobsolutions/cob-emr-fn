@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { PainDescription } from './lookups/pain.description';
+import { PainDescription } from '../../../../lookups/pain.description';
 
 @Component({
   selector: 'pain-evaluation',
