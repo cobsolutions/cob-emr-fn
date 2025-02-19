@@ -36,7 +36,7 @@ export class BasicInformationComponent implements OnInit {
       'chief_complaint': new FormControl(null, [Validators.required]),
 
     });
-  
+    this.formReady.emit(this.basicForm);
   }
 
 }

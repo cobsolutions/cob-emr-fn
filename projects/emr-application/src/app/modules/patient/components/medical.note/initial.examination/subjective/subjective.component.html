@@ -1,5 +1,16 @@
 <div [formGroup]="subjectiveForm">
-    <basic-information (formReady)="setChildForm('basic', $event)"></basic-information>
+    <c-card class="mb-2">
+        <c-card-header>Basic Information</c-card-header>
+        <c-card-body>
+            <basic-information (formReady)="setChildForm('basic', $event)"></basic-information>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-2">
+        <c-card-header>Prior Level Of Function</c-card-header>
+        <c-card-body>
+            
+        </c-card-body>
+    </c-card>
     <div class="mt-3">
         <button cButton variant="outline" size="sm" (click)="next()">Next</button>
     </div>
