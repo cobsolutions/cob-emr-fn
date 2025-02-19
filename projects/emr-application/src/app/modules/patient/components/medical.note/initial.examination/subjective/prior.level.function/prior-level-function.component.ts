@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-prior-level-function',
+  selector: 'prior-level-function',
   templateUrl: './prior-level-function.component.html',
   styleUrls: ['./prior-level-function.component.css']
 })
