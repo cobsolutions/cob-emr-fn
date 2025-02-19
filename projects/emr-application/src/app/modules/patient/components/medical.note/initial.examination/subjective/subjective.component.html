@@ -11,6 +11,14 @@
             <prior-level-function (formReady)="setChildForm('priorFunction', $event)"></prior-level-function>
         </c-card-body>
     </c-card>
+    <c-card class="mb-2">
+        <c-card-header>Current Functional Limitations</c-card-header>
+        <c-card-body>
+            <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"></current-functionlimit>
+        </c-card-body>
+    </c-card>
+
+
     <div class="mt-3">
         <button cButton variant="outline" size="sm" (click)="next()">Next</button>
     </div>
