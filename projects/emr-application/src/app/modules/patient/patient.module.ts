@@ -32,7 +32,7 @@ import { CurrentFunvtionlimitComponent } from './components/medical.note/initial
 import { IcdtenComponent } from './components/medical.note/initial.examination/subjective/basic/icd10/icdten.component';
 import { PainComponent } from './components/medical.note/initial.examination/subjective/pain/pain.component';
 import { PainEvaluationComponent } from './components/medical.note/initial.examination/subjective/pain/pain.evaluation/pain-evaluation.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -82,6 +82,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     AccordionModule,
     PopoverModule,
     MatStepperModule,
+    MatRadioModule,
     TableModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 

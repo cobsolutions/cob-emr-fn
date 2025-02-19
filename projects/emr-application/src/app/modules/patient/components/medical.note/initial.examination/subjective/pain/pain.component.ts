@@ -14,6 +14,9 @@ export class PainComponent implements OnInit {
   ngOnInit(): void {
     this.painForm = this.fb.group({
       'pain_scale': new FormControl(null, [Validators.required]),
+      atWorst: [''],
+      current: [''],
+      atBest: ['']
     });
     this.formReady.emit(this.painForm);
   }

@@ -1,1 +1,37 @@
-<p>pain-evaluation works!</p>
+<table class="table borderless small-table">
+  <thead>
+    <tr>
+      <th class="text-end gray-text" colspan="100%">0 = None &nbsp;&nbsp; 5 = Moderate &nbsp;&nbsp; 10 = Extreme</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th *ngFor="let number of numbers" class="text-center small-text">{{ number }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="small-text">At worst</td>
+      <td *ngFor="let number of numbers" class="radio-cell">
+        <c-form-check class="d-flex justify-content-center">
+          <input cFormCheckInput type="radio" [value]="number" name="atWorst" />
+        </c-form-check>
+      </td>
+    </tr>
+    <tr>
+      <td class="small-text">Current</td>
+      <td *ngFor="let number of numbers" class="radio-cell">
+        <c-form-check class="d-flex justify-content-center">
+          <input cFormCheckInput type="radio" [value]="number" name="current" />
+        </c-form-check>
+      </td>
+    </tr>
+    <tr>
+      <td class="small-text">At best</td>
+      <td *ngFor="let number of numbers" class="radio-cell">
+        <c-form-check class="d-flex justify-content-center">
+          <input cFormCheckInput type="radio" [value]="number" name="atBest" />
+        </c-form-check>
+      </td>
+    </tr>
+  </tbody>
+</table>

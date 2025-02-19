@@ -1,0 +1,40 @@
+.borderless td, .borderless th {
+    border: none;
+}
+.small-table {
+    width: auto;
+    border-collapse: collapse;
+  }
+  
+  .small-text {
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 2px 5px;
+  }
+  
+  .radio-cell {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  input[type="radio"] {
+    transform: scale(0.8); /* Reduce radio button size */
+    margin: 0;
+  }
+  
+  th,
+  td {
+    padding: 2px 5px; /* Reduce padding */
+  }
+  
+  th {
+    font-size: 12px;
+  }
+  
+  .gray-text {
+    color: gray;
+    font-size: 12px;
+    font-weight: normal;
+    padding-right: 10px; /* Adds spacing from the right edge */
+  }
+  
