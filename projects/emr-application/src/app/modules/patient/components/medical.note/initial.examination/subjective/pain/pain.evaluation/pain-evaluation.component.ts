@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { PainDescription } from './lookups/pain.description';
 
 @Component({
   selector: 'pain-evaluation',
@@ -13,6 +14,7 @@ export class PainEvaluationComponent implements OnInit {
     { label: 'Current:', control: 'current' },
     { label: 'At best:', control: 'atBest' }
   ];
+  descriptions: string[] = PainDescription;
   constructor() { }
   ngOnInit(): void {
   }
