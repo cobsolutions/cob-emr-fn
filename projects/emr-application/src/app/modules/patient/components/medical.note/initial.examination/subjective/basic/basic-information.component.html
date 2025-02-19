@@ -1,184 +1,180 @@
 <div [formGroup]="basicForm">
-    <div [formGroup]="basicForm">
-        <!-- Date of Initial Examination: -->
-        <div class="d-flex align-items-center mb-3">
-            <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
-                Date of Initial Examination:
-            </label>
-            <input type="date" id="init_date" cFormControl sizing="sm" formControlName="init_date"
-                style="max-width: 190px;">
-        </div>
+    <!-- Date of Initial Examination: -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+            Date of Initial Examination:
+        </label>
+        <input type="date" id="init_date" cFormControl sizing="sm" formControlName="init_date"
+            style="max-width: 190px;">
+    </div>
 
-        <!-- Time In/Time Out: -->
-        <div class="d-flex align-items-center mb-3">
-            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Time In/Time Out:
-            </label>
-            <div class="d-flex">
-                <c-form-check class="me-3 d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'yes'" />
-                    <label cFormCheckLabel class="ms-1">Yes</label>
-                </c-form-check>
-                <c-form-check class="d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'no'" />
-                    <label cFormCheckLabel class="ms-1">No</label>
-                </c-form-check>
-            </div>
+    <!-- Time In/Time Out: -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Time In/Time Out:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="time_in_out" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
         </div>
+    </div>
 
-        <!-- Visit Number: -->
-        <div class="d-flex align-items-center mb-3">
-            <label for="number_of_visit" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Visit Number:
-            </label>
-            <input id="number_of_visit" cFormControl sizing="sm" formControlName="number_of_visit"
-                style="max-width: 190px;">
+    <!-- Visit Number: -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="number_of_visit" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Visit Number:
+        </label>
+        <input id="number_of_visit" cFormControl sizing="sm" formControlName="number_of_visit"
+            style="max-width: 190px;">
+    </div>
+    <!--Diagnosis:-->
+    <div class="d-flex align-items-center">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Diagnosis:
+        </label>
+        <div style="width: 60%;">
+            <icdten></icdten>
         </div>
-        <!--Diagnosis:-->
-        <div class="d-flex align-items-center">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Diagnosis:
-            </label>
-            <div style="width: 60%;">
-                <icdten></icdten>
-            </div>
+    </div>
+    <!--Treatment Diagnosis:-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Treatment Diagnosis:
+        </label>
+        <div style="width: 60%;">
+            <icdten></icdten>
         </div>
-        <!--Treatment Diagnosis:-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Treatment Diagnosis:
-            </label>
-            <div style="width: 60%;">
-                <icdten></icdten>
-            </div>
-        </div>
-        <!--Treatment Side-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Treatment Side:
-            </label>
-            <c-form-check [inline]="true">
-                <input cFormCheckInput id="na" type="checkbox" formControlName="treatment_side" />
-                <label cFormCheckLabel for="na">N/A</label>
+    </div>
+    <!--Treatment Side-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Treatment Side:
+        </label>
+        <c-form-check [inline]="true">
+            <input cFormCheckInput id="na" type="checkbox" formControlName="treatment_side" />
+            <label cFormCheckLabel for="na">N/A</label>
+        </c-form-check>
+        <c-form-check inline>
+            <input cFormCheckInput id="left" type="checkbox" formControlName="treatment_side" />
+            <label cFormCheckLabel for="left">Left</label>
+        </c-form-check>
+        <c-form-check inline>
+            <input cFormCheckInput id="right" type="checkbox" formControlName="treatment_side" />
+            <label cFormCheckLabel for="rgiht">Right</label>
+        </c-form-check>
+    </div>
+    <!--physician order-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Physician Order:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="physician_order" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
             </c-form-check>
-            <c-form-check inline>
-                <input cFormCheckInput id="left" type="checkbox" formControlName="treatment_side" />
-                <label cFormCheckLabel for="left">Left</label>
-            </c-form-check>
-            <c-form-check inline>
-                <input cFormCheckInput id="right" type="checkbox" formControlName="treatment_side" />
-                <label cFormCheckLabel for="rgiht">Right</label>
-            </c-form-check>
-        </div>
-        <!--physician order-->
-        <div class="d-flex align-items-center mb-3">
-            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Physician Order:
-            </label>
-            <div class="d-flex">
-                <c-form-check class="me-3 d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="physician_order" size="sm" [value]="'yes'" />
-                    <label cFormCheckLabel class="ms-1">Yes</label>
-                </c-form-check>
-                <c-form-check class="d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="physician_order" size="sm" [value]="'no'" />
-                    <label cFormCheckLabel class="ms-1">No</label>
-                </c-form-check>
-            </div>
-        </div>
-        <!--change Of Status Date-->
-        <div class="d-flex align-items-center mb-3">
-            <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
-                Injury/Onset Date/Change os status Date:
-            </label>
-            <input type="date" id="init_date" cFormControl sizing="sm" formControlName="change_status_date"
-                style="max-width: 190px;">
-        </div>
-        <!--Chronic-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
-            <c-form-check>
-                <input cFormCheckInput id="na" type="checkbox" formControlName="chronic" />
-                <label cFormCheckLabel for="na">Chronic</label>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="physician_order" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
             </c-form-check>
         </div>
-        <!--Insidious-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
-            <c-form-check>
-                <input cFormCheckInput id="left" type="checkbox" formControlName="insidious" />
-                <label cFormCheckLabel for="left">Insidious</label>
+    </div>
+    <!--change Of Status Date-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+            Injury/Onset Date/Change os status Date:
+        </label>
+        <input type="date" id="init_date" cFormControl sizing="sm" formControlName="change_status_date"
+            style="max-width: 190px;">
+    </div>
+    <!--Chronic-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+        <c-form-check>
+            <input cFormCheckInput id="na" type="checkbox" formControlName="chronic" />
+            <label cFormCheckLabel for="na">Chronic</label>
+        </c-form-check>
+    </div>
+    <!--Insidious-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+        <c-form-check>
+            <input cFormCheckInput id="left" type="checkbox" formControlName="insidious" />
+            <label cFormCheckLabel for="left">Insidious</label>
+        </c-form-check>
+    </div>
+    <!--New injury-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+        <c-form-check>
+            <input cFormCheckInput id="right" type="checkbox" formControlName="new_injury" />
+            <label cFormCheckLabel for="rgiht">New injury</label>
+        </c-form-check>
+    </div>
+    <!--No New Aggravation/injury-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+        <c-form-check>
+            <input cFormCheckInput id="right" type="checkbox" formControlName="no_new_injury" />
+            <label cFormCheckLabel for="rgiht">No New Aggravation/injury</label>
+        </c-form-check>
+    </div>
+    <!--Surgery Performed-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Surgery Performed:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="surgery_performed" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="surgery_performed" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
             </c-form-check>
         </div>
-        <!--New injury-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
-            <c-form-check>
-                <input cFormCheckInput id="right" type="checkbox" formControlName="new_injury" />
-                <label cFormCheckLabel for="rgiht">New injury</label>
+    </div>
+    <!--prior_hospitalization-->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+            Prior Hospitalization:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="prior_hospitalization" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="prior_hospitalization" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
             </c-form-check>
         </div>
-        <!--No New Aggravation/injury-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
-            <c-form-check>
-                <input cFormCheckInput id="right" type="checkbox" formControlName="no_new_injury" />
-                <label cFormCheckLabel for="rgiht">No New Aggravation/injury</label>
-            </c-form-check>
-        </div>
-        <!--Surgery Performed-->
-        <div class="d-flex align-items-center mb-3">
-            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Surgery Performed:
-            </label>
-            <div class="d-flex">
-                <c-form-check class="me-3 d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="surgery_performed" size="sm" [value]="'yes'" />
-                    <label cFormCheckLabel class="ms-1">Yes</label>
-                </c-form-check>
-                <c-form-check class="d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="surgery_performed" size="sm" [value]="'no'" />
-                    <label cFormCheckLabel class="ms-1">No</label>
-                </c-form-check>
-            </div>
-        </div>
-        <!--prior_hospitalization-->
-        <div class="d-flex align-items-center mb-3">
-            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-                Prior Hospitalization:
-            </label>
-            <div class="d-flex">
-                <c-form-check class="me-3 d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="prior_hospitalization" size="sm"
-                        [value]="'yes'" />
-                    <label cFormCheckLabel class="ms-1">Yes</label>
-                </c-form-check>
-                <c-form-check class="d-flex align-items-center">
-                    <input cFormCheckInput type="radio" formControlName="prior_hospitalization" size="sm"
-                        [value]="'no'" />
-                    <label cFormCheckLabel class="ms-1">No</label>
-                </c-form-check>
-            </div>
-        </div>
+    </div>
 
-        <!--mechanism_injury-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; width: 350px;">
-                History of Present Condition/Mechanism Of Injury:
-            </label>
-            <div class="flex-grow-1">
-                <textarea class="form-control" formControlName="mechanism_injury" rows="3"></textarea>
-            </div>
+    <!--mechanism_injury-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; width: 350px;">
+            History of Present Condition/Mechanism Of Injury:
+        </label>
+        <div class="flex-grow-1">
+            <textarea class="form-control" formControlName="mechanism_injury" rows="3"></textarea>
         </div>
+    </div>
 
-        <!--chief_complaint-->
-        <div class="d-flex align-items-center mb-3">
-            <label class="me-2 text-end" style="white-space: nowrap; width: 350px;">
-                Primary Concern/Chief Complaint:
-            </label>
-            <div class="flex-grow-1">
-                <textarea class="form-control" formControlName="chief_complaint" rows="3"></textarea>
-            </div>
+    <!--chief_complaint-->
+    <div class="d-flex align-items-center mb-3">
+        <label class="me-2 text-end" style="white-space: nowrap; width: 350px;">
+            Primary Concern/Chief Complaint:
+        </label>
+        <div class="flex-grow-1">
+            <textarea class="form-control" formControlName="chief_complaint" rows="3"></textarea>
         </div>
     </div>
 </div>

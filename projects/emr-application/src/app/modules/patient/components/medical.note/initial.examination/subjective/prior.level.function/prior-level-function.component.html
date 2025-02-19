@@ -1,1 +1,54 @@
-<p>prior-level-function works!</p>
+<div [formGroup]="priorLevelFunctionForm">
+    <label for="init_date" class="me-2 mb-2 text-end" style="white-space: nowrap; min-width: 190px;">
+        Baseline Functional Level Included all of the Following:
+    </label>
+    <c-row>
+        <c-col xs="6">
+            <!-- Self Care-->
+            <div class="d-flex align-items-center mb-1">
+                <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                <c-form-check>
+                    <input cFormCheckInput id="na" type="checkbox" formControlName="self_care" />
+                    <label cFormCheckLabel for="na">Self Care</label>
+                </c-form-check>
+            </div>
+            <!-- mobility-->
+            <div class="d-flex align-items-center mb-1">
+                <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                <c-form-check>
+                    <input cFormCheckInput id="na" type="checkbox" formControlName="mobility" />
+                    <label cFormCheckLabel for="na">Mobility:Walking & Moving Around</label>
+                </c-form-check>
+            </div>
+            <!-- other-->
+            <div class="d-flex align-items-center mb-1">
+                <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                <c-form-check>
+                    <input cFormCheckInput id="na" type="checkbox" formControlName="other" />
+                    <label cFormCheckLabel for="na">Other</label>
+                </c-form-check>
+            </div>
+        </c-col>
+
+        <c-col xs="6">
+            <!-- body_position-->
+            <div class="d-flex align-items-center mb-1">
+                <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                <c-form-check>
+                    <input cFormCheckInput id="na" type="checkbox" formControlName="body_position" />
+                    <label cFormCheckLabel for="na">Changeing & Maintaining Body Position</label>
+                </c-form-check>
+            </div>
+
+            <!-- handling_objects-->
+            <div class="d-flex align-items-center mb-1">
+                <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                <c-form-check>
+                    <input cFormCheckInput id="na" type="checkbox" formControlName="handling_object" />
+                    <label cFormCheckLabel for="na">Carrying, Moving & Handling Objects</label>
+                </c-form-check>
+            </div>
+        </c-col>
+    </c-row>
+
+</div>
