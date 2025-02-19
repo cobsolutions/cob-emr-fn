@@ -33,6 +33,7 @@ import { IcdtenComponent } from './components/medical.note/initial.examination/s
 import { PainComponent } from './components/medical.note/initial.examination/subjective/pain/pain.component';
 import { PainEvaluationComponent } from './components/medical.note/initial.examination/subjective/pain/pain.evaluation/pain-evaluation.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { MedicalHistoryComponent } from './components/medical.note/initial.examination/subjective/medical.history/medical-history.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -70,6 +71,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     IcdtenComponent,
     PainComponent,
     PainEvaluationComponent,
+    MedicalHistoryComponent,
   ],
   imports: [
     CommonModule,
