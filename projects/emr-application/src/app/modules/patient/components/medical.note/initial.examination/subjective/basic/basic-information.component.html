@@ -24,7 +24,7 @@
             </c-form-check>
         </div>
     </div>
-
+    <dependency-field [form]="basicForm" [fieldName]="'time_in_out'"></dependency-field>
     <!-- Visit Number: -->
     <div class="d-flex align-items-center mb-3">
         <label for="number_of_visit" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
@@ -57,15 +57,15 @@
             Treatment Side:
         </label>
         <c-form-check [inline]="true">
-            <input cFormCheckInput id="na" type="checkbox" formControlName="treatment_side" />
+            <input cFormCheckInput id="na" type="checkbox" formControlName="treatment_side_na" />
             <label cFormCheckLabel for="na">N/A</label>
         </c-form-check>
         <c-form-check inline>
-            <input cFormCheckInput id="left" type="checkbox" formControlName="treatment_side" />
+            <input cFormCheckInput id="left" type="checkbox" formControlName="treatment_side_left" />
             <label cFormCheckLabel for="left">Left</label>
         </c-form-check>
         <c-form-check inline>
-            <input cFormCheckInput id="right" type="checkbox" formControlName="treatment_side" />
+            <input cFormCheckInput id="right" type="checkbox" formControlName="treatment_side_right" />
             <label cFormCheckLabel for="rgiht">Right</label>
         </c-form-check>
     </div>
@@ -85,6 +85,7 @@
             </c-form-check>
         </div>
     </div>
+    <dependency-field [form]="basicForm" [fieldName]="'physician_order'"></dependency-field>
     <!--change Of Status Date-->
     <div class="d-flex align-items-center mb-3">
         <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
@@ -117,6 +118,7 @@
             <label cFormCheckLabel for="rgiht">New injury</label>
         </c-form-check>
     </div>
+    <dependency-field [form]="basicForm" [fieldName]="'new_injury'"></dependency-field>
     <!--No New Aggravation/injury-->
     <div class="d-flex align-items-center mb-3">
         <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -141,6 +143,7 @@
             </c-form-check>
         </div>
     </div>
+    <dependency-field [form]="basicForm" [fieldName]="'surgery_performed'"></dependency-field>
     <!--prior_hospitalization-->
     <div class="d-flex align-items-center mb-3">
         <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
@@ -157,7 +160,7 @@
             </c-form-check>
         </div>
     </div>
-
+    <dependency-field [form]="basicForm" [fieldName]="'prior_hospitalization'"></dependency-field>
     <!--mechanism_injury-->
     <div class="d-flex align-items-center mb-3">
         <label class="me-2 text-end" style="white-space: nowrap; width: 350px;">

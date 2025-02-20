@@ -34,6 +34,7 @@ import { PainComponent } from './components/medical.note/initial.examination/sub
 import { PainEvaluationComponent } from './components/medical.note/initial.examination/subjective/pain/pain.evaluation/pain-evaluation.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { MedicalHistoryComponent } from './components/medical.note/initial.examination/subjective/medical.history/medical-history.component';
+import { DependencyFieldComponent } from './components/medical.note/dependency.field/dependency-field.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -72,6 +73,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PainComponent,
     PainEvaluationComponent,
     MedicalHistoryComponent,
+    DependencyFieldComponent,
   ],
   imports: [
     CommonModule,
