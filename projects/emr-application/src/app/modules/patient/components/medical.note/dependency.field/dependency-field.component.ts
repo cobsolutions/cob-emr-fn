@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActiveDependents } from './dependency.fucntions/active.dependents';
 import { Dependent } from './model/dependent';
 import { Field } from './model/field';
 import { Section } from './model/section';
@@ -13,14 +14,12 @@ import { Section } from './model/section';
 export class DependencyFieldComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() fieldName: string
-  // @Input() type: string
   dependent: Dependent[];
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {
 
   }
 
   ngOnInit(): void {
-    //this.checkParentValueField();
     var url: string = 'assets/soap/subjective/basic.section.json'
     this.httpClient.get(url)
       .subscribe((section: any) => {

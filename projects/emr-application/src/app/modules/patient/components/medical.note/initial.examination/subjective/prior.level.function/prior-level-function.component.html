@@ -12,6 +12,8 @@
                     <label cFormCheckLabel for="na">Self Care</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="priorLevelFunctionForm"
+                [fieldName]="'self_care'"></multiple-dependency-field>
             <!-- mobility-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -20,6 +22,8 @@
                     <label cFormCheckLabel for="na">Mobility:Walking & Moving Around</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="priorLevelFunctionForm"
+                [fieldName]="'mobility'"></multiple-dependency-field>
             <!-- other-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -28,6 +32,8 @@
                     <label cFormCheckLabel for="na">Other</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="priorLevelFunctionForm"
+                [fieldName]="'other'"></multiple-dependency-field>
         </c-col>
 
         <c-col xs="6">
