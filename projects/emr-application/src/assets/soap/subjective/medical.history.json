@@ -286,7 +286,37 @@
                     "name": "durable_medical_equipment",
                     "type": "radio",
                     "style": "padding-left: 20px;max-width : 500px",
-                    "label_style": "white-space: nowrap; min-width: 300px;"
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "durable_medical_equipment_list",
+                            "name": "durable_medical_equipment_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "None",
+                                "Tub Bench",
+                                "Shower Chair",
+                                "Grab Bars",
+                                "Bedside Commode",
+                                "Raised Toilet Seat",
+                                "Standard Walker",
+                                "Rolling Walker",
+                                "Hemi-walker",
+                                "Quad Cane",
+                                "Straight Cane",
+                                "Wheelchair"
+                            ]
+                        },
+                        {
+                            "id": "durable_medical_equipment_text",
+                            "name": "durable_medical_equipment_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
                 },
                 {
                     "display": "Is Patient A Tobacco User?",
