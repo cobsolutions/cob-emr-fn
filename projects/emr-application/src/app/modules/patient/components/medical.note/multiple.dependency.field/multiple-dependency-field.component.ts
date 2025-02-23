@@ -57,10 +57,18 @@ export class MultipleDependencyFieldComponent implements OnInit {
       } else {
         this.removeFields(this.levelOnedependent);
         this.levelOnedependent = []
+        if (field.secondValue) {
+          if (value === field.secondValue) {
+            this.levelOnedependent = field.secondDependents
+            this.addField(this.levelOnedependent)
+          } else {
+            this.removeFields(this.levelOnedependent);
+            this.levelOnedependent = []
+          }
+        }
       }
       for (let i = 0; i < this.levelOnedependent.length; i++) {
         if (this.levelOnedependent[i].dependents) {
-          console.log('3333')
           var dependent: Dependent = this.levelOnedependent[i];
           var dd: DepMap = {
             value: dependent.value,
@@ -78,7 +86,6 @@ export class MultipleDependencyFieldComponent implements OnInit {
   private checkValueLevelTwo() {
     for (let i = 0; i < this.depMap.length; i++) {
       this.form?.get(this.depMap[i].name)?.valueChanges.subscribe(value => {
-        console.log(value)
         if (this.depMap[i].value === value) {
           this.depMap[i].render = true;
           this.addField(this.depMap[i].dependents)

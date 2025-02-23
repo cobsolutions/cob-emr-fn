@@ -7,6 +7,8 @@ export interface Dependent {
     label_style?: string
     display: string
     value?: any,
+    secondValue?: any,
     extra?: any,
     dependents?: Dependent[]
+    secondDependents?: Dependent[]
 }

@@ -352,6 +352,45 @@
                     "label_style": "white-space: nowrap; min-width: 210px;"
                 }
             ]
+        },
+        {
+            "name": "history_of_falls",
+            "value": "yes",
+            "secondValue": "no",
+            "dependents": [
+                {
+                    "display": "Falls Documented",
+                    "id": "history_of_falls_falls_documented",
+                    "name": "history_of_falls_falls_documented",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                },
+                {
+                    "display": "Risk Assessment:",
+                    "id": "history_of_falls_risk_assessment",
+                    "name": "history_of_falls_risk_assessment",
+                    "type": "inline-checkbox",
+                    "select_values": [
+                        "Documentation on whether medications are a contributing factor or not to falls",
+                        "Home fall hazards",
+                        "Postural blood pressur",
+                        "Vision"
+                    ],
+                    "style": "padding-left: 20px",
+                    "label_style": "white-space: nowrap; padding-left:150px"
+                }
+            ],
+            "secondDependents": [
+                {
+                    "display": "Falls Documented",
+                    "id": "history_of_falls_falls_documented",
+                    "name": "history_of_falls_falls_documented",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                }
+            ]
         }
     ]
 }
