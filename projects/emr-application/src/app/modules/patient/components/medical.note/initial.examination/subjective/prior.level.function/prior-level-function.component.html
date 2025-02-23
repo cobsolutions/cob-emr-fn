@@ -45,7 +45,8 @@
                     <label cFormCheckLabel for="na">Changeing & Maintaining Body Position</label>
                 </c-form-check>
             </div>
-
+            <multiple-dependency-field [form]="priorLevelFunctionForm"
+                [fieldName]="'body_position'"></multiple-dependency-field>
             <!-- handling_objects-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -54,6 +55,8 @@
                     <label cFormCheckLabel for="na">Carrying, Moving & Handling Objects</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="priorLevelFunctionForm"
+                [fieldName]="'handling_object'"></multiple-dependency-field>
         </c-col>
     </c-row>
 
