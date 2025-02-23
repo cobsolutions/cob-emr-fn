@@ -22,14 +22,26 @@ export class MultipleDependencyFieldComponent implements OnInit {
   depMap: DepMap[] = []
   @Input() form: FormGroup;
   @Input() fieldName: string
+  @Input() section: string
   constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    var url: string = 'assets/soap/subjective/prior.fucntion.json'
+    var file: string = this.getSectionFile();
+    var url: string = 'assets/soap/subjective/' + file
     this.httpClient.get(url)
       .subscribe((section: any) => {
         this.checkValue(section);
       });
+  }
+  private getSectionFile(): string {
+    switch (this.section) {
+      case 'prior.fucntion':
+        return 'prior.fucntion.json'
+      case 'current.fucntion':
+        return 'current.function.json'
+      default:
+        return '';
+    }
   }
   private checkValue(section: Section) {
     var field: Field = section.fields

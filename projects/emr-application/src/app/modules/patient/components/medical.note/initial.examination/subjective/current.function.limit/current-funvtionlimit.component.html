@@ -12,6 +12,8 @@
                     <label cFormCheckLabel for="na">Self Care</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="currentFunctionForm" [fieldName]="'self_care'"
+                [section]="'current.fucntion'"></multiple-dependency-field>
             <!-- mobility-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -20,6 +22,8 @@
                     <label cFormCheckLabel for="na">Mobility:Walking & Moving Around</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="currentFunctionForm" [fieldName]="'mobility'"
+                [section]="'current.fucntion'"></multiple-dependency-field>
             <!-- other-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -28,6 +32,8 @@
                     <label cFormCheckLabel for="na">Other</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="currentFunctionForm" [fieldName]="'other'"
+                [section]="'current.fucntion'"></multiple-dependency-field>
         </c-col>
 
         <c-col xs="6">
@@ -39,7 +45,8 @@
                     <label cFormCheckLabel for="na">Changeing & Maintaining Body Position</label>
                 </c-form-check>
             </div>
-
+            <multiple-dependency-field [form]="currentFunctionForm" [fieldName]="'body_position'"
+                [section]="'current.fucntion'"></multiple-dependency-field>
             <!-- handling_objects-->
             <div class="d-flex align-items-center mb-1">
                 <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
@@ -48,6 +55,8 @@
                     <label cFormCheckLabel for="na">Carrying, Moving & Handling Objects</label>
                 </c-form-check>
             </div>
+            <multiple-dependency-field [form]="currentFunctionForm" [fieldName]="'handling_object'"
+                [section]="'current.fucntion'"></multiple-dependency-field>
         </c-col>
     </c-row>
 
