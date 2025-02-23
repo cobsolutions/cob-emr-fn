@@ -116,6 +116,78 @@
                     "label_style": "white-space: nowrap; min-width: 210px;"
                 }
             ]
+        },
+        {
+            "name": "occupation_social_history",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Social History",
+                    "id": "social_Hhistory",
+                    "name": "social_Hhistory",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "social_Hhistory_list",
+                            "name": "social_Hhistory_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "Lives at Assisted Living Facility",
+                                "Lives with Family",
+                                "Lives with Caregiver",
+                                "Married",
+                                "Single",
+                                "Divorced",
+                                "Widowed"
+                            ]
+                        },
+                        {
+                            "id": "social_Hhistory_text",
+                            "name": "social_Hhistory_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Occupation and Work Status",
+                    "id": "occupation_and_work_status",
+                    "name": "occupation_and_work_status",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                },
+                {
+                    "display": "Home Layout",
+                    "id": "home_layout",
+                    "name": "home_layout",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                },
+                {
+                    "display": "Durable Medical Equipment",
+                    "id": "durable_medical_equipment",
+                    "name": "durable_medical_equipment",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                },
+                {
+                    "display": "Is Patient A Tobacco User?",
+                    "id": "patient_tobacco_user",
+                    "name": "patient_tobacco_user",
+                    "type": "radio",
+                    "extra": "na",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                }
+            ]
         }
     ]
 }
