@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { outputAst } from '@angular/compiler';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PainDescription } from '../../../../lookups/pain.description';
 
@@ -8,7 +9,9 @@ import { PainDescription } from '../../../../lookups/pain.description';
   styleUrls: ['./pain-evaluation.component.css']
 })
 export class PainEvaluationComponent implements OnInit {
-  numbers = [ 'NT', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  numbers = ['NT', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  @Input() painScale: string
+  @Output() removePainScale = new EventEmitter<string>()
   painLevels = [
     { label: 'At worst:', control: 'atWorst' },
     { label: 'Current:', control: 'current' },
@@ -18,5 +21,7 @@ export class PainEvaluationComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
   }
-
+  remove() {
+    this.removePainScale.emit(this.painScale);
+  }
 }
