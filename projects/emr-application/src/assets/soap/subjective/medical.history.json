@@ -160,7 +160,93 @@
                     "name": "occupation_and_work_status",
                     "type": "radio",
                     "style": "padding-left: 20px;max-width : 500px",
-                    "label_style": "white-space: nowrap; min-width: 300px;"
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "display": "Name of Occupation",
+                            "id": "occupation_name",
+                            "name": "occupation_name",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Status",
+                            "id": "occupation_status",
+                            "name": "occupation_status",
+                            "type": "select",
+                            "select_values": [
+                                "Full Time",
+                                "Part Time",
+                                "Light Duty",
+                                "Transitional Duty",
+                                "Out of wrok",
+                                "Retired",
+                                "Not Working",
+                                "Homemaker"
+                            ],
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Duty Level",
+                            "id": "occupation_duty_level",
+                            "name": "occupation_duty_level",
+                            "type": "select",
+                            "select_values": [
+                                "Sedentary",
+                                "Light",
+                                "Medium",
+                                "Heavy",
+                                "Very Heavy"
+                            ],
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Description",
+                            "id": "occupation_description",
+                            "name": "occupation_descriptionl",
+                            "type": "textArea",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Out of Work Since",
+                            "id": "occupation_out_of_work_since",
+                            "name": "occupation_out_of_work_since",
+                            "type": "date",
+                            "style": "max-width: 190px;",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Return to Work Date",
+                            "id": "occupation_return_to_work_date",
+                            "name": "occupation_return_to_work_date",
+                            "type": "date",
+                            "style": "max-width: 190px;",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Workers Compensation",
+                            "id": "occupation_workers_compensation",
+                            "name": "occupation_workers_compensation",
+                            "type": "radio",
+                            "extra": "na",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;"
+                        },
+                        {
+                            "display": "Litigation",
+                            "id": "occupation_litigation",
+                            "name": "occupation_litigation",
+                            "type": "radio",
+                            "extra": "na",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;"
+                        }
+                    ]
                 },
                 {
                     "display": "Home Layout",

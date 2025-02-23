@@ -79,12 +79,32 @@
                             </option>
                         </select>
                     </div>
+                    <!--select-->
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'select'" [style]="field.style">
                         <select cSelect multiple="false" [formControlName]="field.name" [id]="field.id" size="sm">
                             <option *ngFor="let val of field.select_values">
                                 {{val}}
                             </option>
                         </select>
+                    </div>
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'radio'">
+                        <label for="time_in_out" class="me-2 text-end" [style]="field.label_style">
+                            {{field.display}}
+                        </label>
+                        <div class="d-flex" [style]="field.style">
+                            <c-form-check class="me-3 d-flex align-items-center" *ngIf="field.extra==='na'">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'na'" />
+                                <label cFormCheckLabel class="ms-1">N/A</label>
+                            </c-form-check>
+                            <c-form-check class="me-3 d-flex align-items-center">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'yes'" />
+                                <label cFormCheckLabel class="ms-1">Yes</label>
+                            </c-form-check>
+                            <c-form-check class="d-flex align-items-center">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'no'" />
+                                <label cFormCheckLabel class="ms-1">No</label>
+                            </c-form-check>
+                        </div>
                     </div>
                 </div>
             </div>
