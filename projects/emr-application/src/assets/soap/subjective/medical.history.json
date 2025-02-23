@@ -325,7 +325,18 @@
                     "type": "radio",
                     "extra": "na",
                     "style": "padding-left: 20px;max-width : 500px",
-                    "label_style": "white-space: nowrap; min-width: 300px;"
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "display": "Does patient smoke cigarettes and/or use other forms of tobacco?",
+                            "id": "patient_tobacco_user_user_other",
+                            "name": "patient_tobacco_user_user_other",
+                            "type": "radio",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;padding-left: 110px;"
+                        }
+                    ]
                 }
             ]
         }
