@@ -40,6 +40,14 @@
         <span *ngFor="let dep of depMap; index as i; first as isFirst">
             <div *ngIf="dep.name === field.name && dep.render === true">
                 <div *ngFor="let field of dep.dependents;">
+                    <div class="d-flex align-items-center mb-1"
+                        *ngIf="field.type !== 'checkbox' && field.type !== 'radio' && field.type !== 'textArea' && field.type !== 'multiple_select'">
+                        <label class="me-2 text-end" [style]="field.label_style">
+                            {{field.display}}
+                        </label>
+                        <input cFormControl [id]="field.id" [type]="field.type" [formControlName]="field.name"
+                            sizing="sm" [style]="field.style" />
+                    </div>
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'checkbox'" [style]="field.style">
                         <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
                         <c-form-check>
@@ -47,20 +55,19 @@
                             <label cFormCheckLabel for="na">{{field.display}}</label>
                         </c-form-check>
                     </div>
-                    <div class="d-flex align-items-center mb-1"
-                        *ngIf="field.type !== 'checkbox' && field.type !== 'radio' && field.type !== 'textArea' ">
-                        <label class="me-2 text-end" [style]="field.label_style">
-                            {{field.display}}
-                        </label>
-                        <input cFormControl [id]="field.id" [type]="field.type" [formControlName]="field.name"
-                            sizing="sm" [style]="field.style" />
-                    </div>
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'textArea'">
                         <label class="me-2 text-end" [style]="field.label_style">
                             {{field.display}}
                         </label>
                         <textarea cFormControl [id]="field.id" [formControlName]="field.name" rows="3" sizing="sm"
                             [style]="field.style"></textarea>
+                    </div>
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_select'" [style]="field.style">
+                        <select cSelect multiple [formControlName]="field.name" [id]="field.id" >
+                            <option *ngFor="let val of field.select_values">
+                                {{val}}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@ export interface Dependent {
     id: number,
     name: string,
     type: string,
+    select_values?: string[]
     style: string
     label_style?: string
     display: string
