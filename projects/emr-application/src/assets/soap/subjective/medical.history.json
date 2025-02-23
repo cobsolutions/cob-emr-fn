@@ -339,6 +339,19 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "home_health_care",
+            "value": "yes",
+            "dependents": [
+                {
+                    "id": "home_health_care_text",
+                    "name": "home_health_care_text",
+                    "type": "textArea",
+                    "style": "padding-left: 20px;max-width : 300px",
+                    "label_style": "white-space: nowrap; min-width: 210px;"
+                }
+            ]
         }
     ]
 }
