@@ -41,6 +41,8 @@ export class MultipleDependencyFieldComponent implements OnInit {
         return 'current.function.json'
       case 'pain':
         return 'pain.json'
+      case 'medical.history':
+        return 'medical.history.json'
       default:
         return '';
     }

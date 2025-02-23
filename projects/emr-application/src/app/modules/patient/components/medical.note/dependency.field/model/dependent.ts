@@ -6,7 +6,7 @@ export interface Dependent {
     style: string
     label_style?: string
     display: string
-    value?: any
-    parent?: string
+    value?: any,
+    extra?: any,
     dependents?: Dependent[]
 }
