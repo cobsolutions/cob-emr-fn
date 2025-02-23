@@ -254,7 +254,31 @@
                     "name": "home_layout",
                     "type": "radio",
                     "style": "padding-left: 20px;max-width : 500px",
-                    "label_style": "white-space: nowrap; min-width: 300px;"
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "home_layout_list",
+                            "name": "home_layout_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "1-story",
+                                "2-story",
+                                "Condo/Apt",
+                                "Stairs/Steps",
+                                "Shower Stall",
+                                "Combo Bathtub Shower"
+                            ]
+                        },
+                        {
+                            "id": "home_layout_text",
+                            "name": "home_layout_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
                 },
                 {
                     "display": "Durable Medical Equipment",
