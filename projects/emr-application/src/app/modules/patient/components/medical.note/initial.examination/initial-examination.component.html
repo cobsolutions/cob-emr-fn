@@ -3,11 +3,11 @@
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
             <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="false">
                 <ng-template matStepLabel>Subjective</ng-template>
-                <subjective  [stepper]="stepper">
-                </subjective>
+                <subjective [stepper]="stepper"></subjective>
             </mat-step>
             <mat-step completed="false" [stepControl]="initialExaminationForm.get('objective')!">
                 <ng-template matStepLabel>Objective</ng-template>
+                <objective [stepper]="stepper"></objective>
             </mat-step>
             <mat-step completed="false">
                 <ng-template matStepLabel>Assessment</ng-template>
