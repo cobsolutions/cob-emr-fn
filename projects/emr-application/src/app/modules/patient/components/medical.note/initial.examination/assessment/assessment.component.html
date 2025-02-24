@@ -1,1 +1,84 @@
-<p>assessment works!</p>
+<form [formGroup]="assessmentForm">
+  <!-- Assessment/Diagnosis -->
+  <div class="form-group">
+    <label for="assessment">Assessment/Diagnosis:</label>
+    <textarea id="assessment" formControlName="assessment_diagnosis" rows="4"></textarea>
+  </div>
+
+  <!-- Patient Clinical Presentation -->
+  <div class="form-group">
+    <label>Patient Clinical Presentation:</label>
+    <div class="radio-group">
+      <label>
+        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="low" size="sm" />
+        <b style="padding-left: 10px;">Low Complexity</b> - The clinical presentation is stable and/or uncomplicated.
+      </label>
+      <label>
+        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="moderate"
+          size="sm" />
+        <b style="padding-left: 10px;">Moderate Complexity</b> - The clinical presentation is evolving with changing
+        characteristics.
+      </label>
+      <label>
+        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="high" size="sm" />
+        <b style="padding-left: 10px;">High Complexity</b> - The clinical presentation is unstable with unpredictable
+        characteristics.
+      </label>
+      <label>
+        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="other" size="sm" />
+        Other
+      </label>
+    </div>
+  </div>
+
+  <!-- Parent/Patient Education -->
+  <div class="form-group">
+    <label for="education">Parent/Patient Education:</label>
+    <textarea id="education" formControlName="parent_patient_education" rows="4"></textarea>
+  </div>
+
+  <!--hep-->
+  <div class="form-group">
+    <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+    <c-form-check>
+      <input cFormCheckInput id="hep" type="checkbox" formControlName="hep" />
+      <label cFormCheckLabel for="hep">Patient Demonstrates Compliance with Prescribed HEP</label>
+    </c-form-check>
+  </div>
+
+  <!-- Rehab Potential -->
+  <div class="form-group">
+    <label for="rehabPotential">Rehab Potential:</label>
+    <select cSelect id="rehabPotential" formControlName="rehab_potential" sizing="sm">
+      <option value="excellent">Excellent</option>
+      <option value="good">Good</option>
+      <option value="fair">Fair</option>
+      <option value="poor">Poor</option>
+    </select>
+  </div>
+  <!-- Contraindications to Therapy -->
+  <div class="form-group">
+    <label>Contraindications to Therapy:</label>
+    <label>
+      <input type="radio" formControlName="contraindications_to_therapy" value="no" /> No
+    </label>
+    <label>
+      <input type="radio" formControlName="contraindications_to_therapy" value="yes" /> Yes
+    </label>
+  </div>
+  <!-- Checkbox Statement -->
+  <div class="form-group">
+    <label>
+      <input type="checkbox" formControlName="patientAgreement" />
+      Following the evaluation and extensive patient education regarding diagnosis, prognosis, and treatment goals, the
+      patient (parent/guardian, power of attorney holder) actively participated in the creation of the current goals and
+      agrees to the current treatment plan.
+    </label>
+  </div>
+
+  <!-- Consent to care: -->
+  <div class="form-group">
+    <label for="assessment">Consent to care:</label>
+    <textarea id="assessment" formControlName="consent_to_care" rows="4"></textarea>
+  </div>
+</form>
