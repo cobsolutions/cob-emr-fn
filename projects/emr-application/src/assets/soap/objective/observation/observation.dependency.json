@@ -8,8 +8,44 @@
                 {
                     "id": "indicate_body_type_radios",
                     "name": "indicate_body_type_radios",
+                    "type": "multiple_radio",
+                    "select_values": [
+                        "Mesomorph",
+                        "Endomorph",
+                        "Ectomorph "
+                    ],
+                    "class": "d-flex",
+                    "style": "padding-left: 300px;"
+                }
+            ]
+        },
+        {
+            "name": "vitals",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Blood Pressure",
+                    "id": "blood_pressure",
+                    "name": "blood_pressure",
                     "type": "radio",
-                    "style": "padding-left: 10px;"
+                    "class": "d-flex",
+                    "style": "padding-left: 300px;"
+                },
+                {
+                    "display": "Temperature",
+                    "id": "temperature",
+                    "name": "temperature",
+                    "type": "radio",
+                    "class": "d-flex",
+                    "style": "padding-left: 300px;"
+                },
+                {
+                    "display": "Pulse",
+                    "id": "pulse",
+                    "name": "pulse",
+                    "type": "radio",
+                    "class": "d-flex",
+                    "style": "padding-left: 300px;"
                 }
             ]
         }

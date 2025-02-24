@@ -6,6 +6,12 @@
         </c-card-body>
     </c-card>
     <c-card class="mb-2">
+        <c-card-header>Pain</c-card-header>
+        <c-card-body>
+            <pain (formReady)="setChildForm('pain', $event)"></pain>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-2">
         <c-card-header>Prior Level Of Function</c-card-header>
         <c-card-body>
             <prior-level-function (formReady)="setChildForm('priorFunction', $event)"></prior-level-function>
@@ -17,12 +23,7 @@
             <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"></current-functionlimit>
         </c-card-body>
     </c-card>
-    <c-card class="mb-2">
-        <c-card-header>Pain</c-card-header>
-        <c-card-body>
-            <pain (formReady)="setChildForm('pain', $event)"></pain>
-        </c-card-body>
-    </c-card>
+    
     <c-card class="mb-2">
         <c-card-header>Medical History</c-card-header>
         <c-card-body>

@@ -11,4 +11,5 @@ export interface Dependent {
     extra?: any,
     dependents?: Dependent[]
     secondDependents?: Dependent[]
+    class?: string
 }

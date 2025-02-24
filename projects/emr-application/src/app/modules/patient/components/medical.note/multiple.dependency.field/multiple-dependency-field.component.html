@@ -3,7 +3,8 @@
         <!--input-->
         <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
             && field.type !== 'textArea' 
-            && field.type !== 'inline-checkbox'">
+            && field.type !== 'inline-checkbox'
+            && field.type !== 'multiple_radio'">
             <label class="me-2 text-end" [style]="field.label_style">
                 {{field.display}}
             </label>
@@ -43,6 +44,18 @@
                 <c-form-check class="d-flex align-items-center">
                     <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'no'" />
                     <label cFormCheckLabel class="ms-1">No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <!--multiple radio -->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_radio'">
+            <label for="time_in_out" class="me-2 text-end" [style]="field.label_style">
+                {{field.display}}
+            </label>
+            <div [class]="field.class" [style]="field.style">
+                <c-form-check class="me-3 d-flex align-items-center" *ngFor="let value of field.select_values;">
+                    <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="value" />
+                    <label cFormCheckLabel class="ms-1">{{value}}</label>
                 </c-form-check>
             </div>
         </div>
