@@ -96,17 +96,35 @@
         <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Medical History:
         </label>
+        <div class="checkbox-container">
+            <!-- First Column -->
+            <div class="column">
+                <div *ngFor="let option of firstColumn; let i = index" [formGroup]="getMedicalHistoryFormGroup(i)">
+                    <label>
+                        <input type="checkbox" formControlName="selected" class="checkbox-item" />
+                        {{ option }}
+                    </label>
 
-        <div class="checkbox-column">
-            <div *ngFor="let option of leftMedicalHistoryOptions">
-                <input type="checkbox" [value]="option" />
-                <label>{{ option }}</label>
+                    <!-- Show input field only if checkbox is checked -->
+                    <div *ngIf="getMedicalHistoryFormGroup(i).get('selected')?.value">
+                        <input type="text" formControlName="details" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="checkbox-column">
-            <div *ngFor="let option of rightMedicalHistoryOptions">
-                <input type="checkbox" [value]="option" />
-                <label>{{ option }}</label>
+            <!-- Second Column -->
+            <div class="column">
+                <div *ngFor="let option of secondColumn; let j = index"
+                    [formGroup]="getMedicalHistoryFormGroup(j + firstColumn.length)">
+                    <label>
+                        <input type="checkbox" formControlName="selected" class="checkbox-item" />
+                        {{ option }}
+                    </label>
+
+                    <!-- Show input field only if checkbox is checked -->
+                    <div *ngIf="getMedicalHistoryFormGroup(j + firstColumn.length).get('selected')?.value">
+                        <input type="text" formControlName="details" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

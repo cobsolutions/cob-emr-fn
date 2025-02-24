@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+interface MedicalHistory{
+  name?:string,
+  value?:string
+}
 @Component({
   selector: 'medical-history',
   templateUrl: './medical-history.component.html',
@@ -63,12 +66,12 @@ export class MedicalHistoryComponent implements OnInit {
     "Other",
     "Not currently taking any medications"
   ]
-  leftMedicalHistoryOptions: string[] = [];
-  rightMedicalHistoryOptions: string[] = [];
+  firstColumn: string[] = [];
+  secondColumn: string[] = [];
 
   lefPersonalFactorOptions: string[] = [];
   rightPersonalFactorOptions: string[] = [];
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { this.splitColumns()}
 
   ngOnInit(): void {
     this.medicalHistoryForm = this.fb.group({
@@ -86,19 +89,34 @@ export class MedicalHistoryComponent implements OnInit {
       "current_medications": this.fb.array([]),
       "patient_goals": new FormControl(null, [Validators.required]),
     });
-    this.splitMedicalHistoryIntoColumns();
     this.splitPersonalFactorIntoColumns();
+    this.addCheckboxes();
     this.formReady.emit(this.medicalHistoryForm);
   }
-  private splitMedicalHistoryIntoColumns() {
-    const midIndex = Math.ceil(this.medicalHistoryOptions.length / 2);
-    this.leftMedicalHistoryOptions = this.medicalHistoryOptions.slice(0, midIndex);
-    this.rightMedicalHistoryOptions = this.medicalHistoryOptions.slice(midIndex);
+  splitColumns() {
+    const mid = Math.ceil(this.medicalHistoryOptions.length / 2);
+    this.firstColumn = this.medicalHistoryOptions.slice(0, mid);
+    this.secondColumn = this.medicalHistoryOptions.slice(mid);
   }
-
   private splitPersonalFactorIntoColumns() {
     const midIndex = Math.ceil(this.personalFactor.length / 2);
     this.lefPersonalFactorOptions = this.medicalHistoryOptions.slice(0, midIndex);
     this.rightPersonalFactorOptions = this.medicalHistoryOptions.slice(midIndex);
+  }
+  get medicalHistoryArray(): FormArray {
+    return this.medicalHistoryForm.get('medical_history') as FormArray;
+  }
+  private addCheckboxes(): void {
+    this.medicalHistoryOptions.forEach(() => {
+      this.medicalHistoryArray.push(
+        this.fb.group({
+          selected: new FormControl(false), // Checkbox state
+          details: new FormControl('') // Input text (hidden unless selected)
+        })
+      );
+    });
+  }
+  getMedicalHistoryFormGroup(index: number): FormGroup {
+    return this.medicalHistoryArray.at(index) as FormGroup;
   }
 }
