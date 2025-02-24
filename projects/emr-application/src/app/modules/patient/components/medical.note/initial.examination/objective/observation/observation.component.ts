@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-observation',
+  selector: 'observation',
   templateUrl: './observation.component.html',
   styleUrls: ['./observation.component.css']
 })
 export class ObservationComponent implements OnInit {
-
+  @Output() formReady = new EventEmitter<FormGroup>();
   constructor() { }
 
   ngOnInit(): void {
