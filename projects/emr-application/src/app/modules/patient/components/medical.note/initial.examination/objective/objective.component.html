@@ -1,1 +1,51 @@
-<p>objective works!</p>
+<div [formGroup]="objectiveForm">
+    <!--Observation-->
+    <c-card class="mb-2">
+        <c-card-header>Observation</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+    <!--Range of Motion-->
+    <c-card class="mb-2">
+        <c-card-header>Range of Motion</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+    <!--Strength-->
+    <c-card class="mb-2">
+        <c-card-header>Strength</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+
+    <!--Neuro-Vascular-->
+    <c-card class="mb-2">
+        <c-card-header>Neuro-Vascular</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+
+    <!--Special Tests-->
+    <c-card class="mb-2">
+        <c-card-header>Special Tests</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+
+    <!--Palpation-->
+    <c-card class="mb-2">
+        <c-card-header>Palpation</c-card-header>
+        <c-card-body>
+
+        </c-card-body>
+    </c-card>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</div>

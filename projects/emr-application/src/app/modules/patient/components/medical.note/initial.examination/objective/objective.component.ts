@@ -26,4 +26,7 @@ export class ObjectiveComponent implements OnInit {
   setChildForm(section: string, formGroup: FormGroup) {
     this.objectiveForm.setControl(section, formGroup);
   }
+  next() {
+    this.stepper.next();
+  }
 }
