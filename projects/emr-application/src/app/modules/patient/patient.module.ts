@@ -36,6 +36,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MedicalHistoryComponent } from './components/medical.note/initial.examination/subjective/medical.history/medical-history.component';
 import { DependencyFieldComponent } from './components/medical.note/dependency.field/dependency-field.component';
 import { MultipleDependencyFieldComponent } from './components/medical.note/multiple.dependency.field/multiple-dependency-field.component';
+import { ObjectiveComponent } from './components/medical.note/initial.examination/objective/objective.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -76,6 +77,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MedicalHistoryComponent,
     DependencyFieldComponent,
     MultipleDependencyFieldComponent,
+    ObjectiveComponent,
   ],
   imports: [
     CommonModule,
