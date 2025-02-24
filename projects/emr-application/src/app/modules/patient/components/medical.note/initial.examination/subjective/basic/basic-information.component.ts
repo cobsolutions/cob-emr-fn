@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'basic-information',
   templateUrl: './basic-information.component.html',
@@ -11,7 +10,7 @@ export class BasicInformationComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   treatmentSide: string
   constructor(private fb: FormBuilder) {
-
+    
   }
 
   ngOnInit(): void {

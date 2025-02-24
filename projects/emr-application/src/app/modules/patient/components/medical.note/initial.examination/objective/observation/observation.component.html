@@ -1,1 +1,20 @@
-<p>observation works!</p>
+<div [formGroup]="ObservationForm">
+    <div class="mb-3" *ngIf="fields && fields.length">
+        <div *ngFor="let field of fields" class="d-flex align-items-center mb-2">
+            <label class="me-3 text-end"
+                style="width: 250px; text-align: right; white-space: normal; word-break: break-word;">
+                {{ field.name }}
+            </label>
+            <div class="d-flex">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" [formControlName]="field.value" size="sm" [value]="'no'" />
+                    <label cFormCheckLabel class="ms-1">No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" [formControlName]="field.value" size="sm" [value]="'yes'" />
+                    <label cFormCheckLabel class="ms-1">Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+    </div>
+</div>

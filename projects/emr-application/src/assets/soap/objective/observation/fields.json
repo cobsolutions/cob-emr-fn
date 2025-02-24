@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Indicate Body Type",
+        "value": "indicate_body_type"
+    },
+    {
+        "name": "Vitals",
+        "value": "vitals"
+    },
+    {
+        "name": "ADL Management",
+        "value": "adl_management"
+    },
+    {
+        "name": "Breathing at Rest",
+        "value": "breathing_at_rest"
+    },
+    {
+        "name": "Standing Posture",
+        "value": "standing_posture"
+    },
+    {
+        "name": "Tongue Scalloping",
+        "value": "tongue_scalloping"
+    },
+    {
+        "name": "Mouth Splint",
+        "value": "mouth_splint"
+    },
+    {
+        "name": "Abnormal Dental Wear Patterns",
+        "value": "abnormal_dental_wear_patterns"
+    },
+    {
+        "name": "Facial Asymmetry",
+        "value": "facial_asymmetry"
+    },
+    {
+        "name": "Protracted Scapulas",
+        "value": "protracted_scapulas"
+    },
+    {
+        "name": "Scoliosis",
+        "value": "scoliosis"
+    },
+    {
+        "name": "6 Minute Walk Test",
+        "value": "six_minute_walk_test"
+    },
+    {
+        "name": "Muscular Asymmetries",
+        "value": "muscular_asymmetries"
+    },
+    {
+        "name": "Muscle Atrophy",
+        "value": "muscle_atrophy"
+    },
+    {
+        "name": "Additional Comments",
+        "value": "additional_comments"
+    }
+]
