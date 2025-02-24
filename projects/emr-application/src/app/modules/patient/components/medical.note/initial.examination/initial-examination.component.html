@@ -1,21 +1,23 @@
 <c-container fluid="true">
     <form [formGroup]="initialExaminationForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
-            <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="false">
+            <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="true">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper"></subjective>
             </mat-step>
-            <mat-step completed="false" [stepControl]="initialExaminationForm.get('objective')!">
+            <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!">
                 <ng-template matStepLabel>Objective</ng-template>
-                <objective [stepper]="stepper"></objective>
+                <!-- <objective [stepper]="stepper"></objective> -->
             </mat-step>
-            <mat-step completed="false">
+            <mat-step completed="true">
                 <ng-template matStepLabel>Assessment</ng-template>
+                <assessment [stepper]="stepper"></assessment>
             </mat-step>
-            <mat-step completed="false">
+            <mat-step completed="true">
                 <ng-template matStepLabel>Plan</ng-template>
+                <assessment ></assessment>
             </mat-step>
-            <mat-step completed="false">
+            <mat-step completed="true">
                 <ng-template matStepLabel>Billing</ng-template>
             </mat-step>
         </mat-stepper>
