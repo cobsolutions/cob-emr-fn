@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-interface MedicalHistory{
-  name?:string,
-  value?:string
+interface MedicalHistory {
+  name?: string,
+  value?: string
 }
 @Component({
   selector: 'medical-history',
@@ -71,7 +71,9 @@ export class MedicalHistoryComponent implements OnInit {
 
   lefPersonalFactorOptions: string[] = [];
   rightPersonalFactorOptions: string[] = [];
-  constructor(private fb: FormBuilder) { this.splitColumns()}
+  constructor(private fb: FormBuilder) {
+    this.splitmedicalHistoryColumns()
+  }
 
   ngOnInit(): void {
     this.medicalHistoryForm = this.fb.group({
@@ -90,23 +92,28 @@ export class MedicalHistoryComponent implements OnInit {
       "patient_goals": new FormControl(null, [Validators.required]),
     });
     this.splitPersonalFactorIntoColumns();
-    this.addCheckboxes();
+    this.addMedicalHistoryCheckboxes();
+    this.addPersonalFactorsCheckboxes();
     this.formReady.emit(this.medicalHistoryForm);
   }
-  splitColumns() {
+  private splitmedicalHistoryColumns() {
     const mid = Math.ceil(this.medicalHistoryOptions.length / 2);
     this.firstColumn = this.medicalHistoryOptions.slice(0, mid);
     this.secondColumn = this.medicalHistoryOptions.slice(mid);
   }
   private splitPersonalFactorIntoColumns() {
     const midIndex = Math.ceil(this.personalFactor.length / 2);
-    this.lefPersonalFactorOptions = this.medicalHistoryOptions.slice(0, midIndex);
-    this.rightPersonalFactorOptions = this.medicalHistoryOptions.slice(midIndex);
+    this.lefPersonalFactorOptions = this.personalFactor.slice(0, midIndex);
+    this.rightPersonalFactorOptions = this.personalFactor.slice(midIndex);
   }
+
   get medicalHistoryArray(): FormArray {
     return this.medicalHistoryForm.get('medical_history') as FormArray;
   }
-  private addCheckboxes(): void {
+  get personalFactorsArray(): FormArray {
+    return this.medicalHistoryForm.get('personal_factors') as FormArray;
+  }
+  private addMedicalHistoryCheckboxes(): void {
     this.medicalHistoryOptions.forEach(() => {
       this.medicalHistoryArray.push(
         this.fb.group({
@@ -116,7 +123,20 @@ export class MedicalHistoryComponent implements OnInit {
       );
     });
   }
+  private addPersonalFactorsCheckboxes(): void {
+    this.personalFactor.forEach(() => {
+      this.personalFactorsArray.push(
+        this.fb.group({
+          selected: new FormControl(false), // Checkbox state
+          details: new FormControl('') // Input text (hidden unless selected)
+        })
+      );
+    });
+  }
   getMedicalHistoryFormGroup(index: number): FormGroup {
     return this.medicalHistoryArray.at(index) as FormGroup;
+  }
+  getPersonalFactorsFormGroup(index: number): FormGroup {
+    return this.personalFactorsArray.at(index) as FormGroup;
   }
 }

@@ -92,7 +92,7 @@
     <multiple-dependency-field [form]="medicalHistoryForm" [fieldName]="'history_of_falls'"
         [section]="'medical.history'"></multiple-dependency-field>
     <!--Medical History-->
-    <div class="d-flex align-items-center mb-3">
+    <div class="d-flex align-items-start mb-2">
         <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Medical History:
         </label>
@@ -130,7 +130,7 @@
     </div>
 
     <!--Diagnostic Testing/Imaging-->
-    <div class="d-flex align-items-center mb-3">
+    <div class="d-flex align-items-start mb-2">
         <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Diagnostic Testing/Imaging:
         </label>
@@ -139,23 +139,49 @@
         </div>
     </div>
     <!--Complicating/Personal Factors-->
-    <div class="d-flex align-items-center mb-3">
+    <div class="d-flex align-items-start mb-2">
+        <!-- Label -->
         <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Complicating/Personal Factors:
         </label>
-        <div class="checkbox-column">
-            <div *ngFor="let option of lefPersonalFactorOptions">
-                <input type="checkbox" [value]="option" />
-                <label>{{ option }}</label>
+
+        <!-- Checkbox Container -->
+        <div class="checkbox-container d-flex flex-wrap">
+            <!-- First Column -->
+            <div class="column">
+                <div *ngFor="let option of lefPersonalFactorOptions; let i = index"
+                    [formGroup]="getPersonalFactorsFormGroup(i)">
+                    <label class="checkbox-item">
+                        <input type="checkbox" formControlName="selected" />
+                        {{ option }}
+                    </label>
+
+                    <!-- Show input field only if checkbox is checked -->
+                    <div *ngIf="getPersonalFactorsFormGroup(i).get('selected')?.value">
+                        <textarea rows="3" formControlName="details"></textarea>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="checkbox-column">
-            <div *ngFor="let option of rightPersonalFactorOptions">
-                <input type="checkbox" [value]="option" />
-                <label>{{ option }}</label>
+
+            <!-- Second Column -->
+            <div class="column">
+                <div *ngFor="let option of rightPersonalFactorOptions; let j = index"
+                    [formGroup]="getPersonalFactorsFormGroup(j + lefPersonalFactorOptions.length)">
+                    <label class="checkbox-item">
+                        <input type="checkbox" formControlName="selected" />
+                        {{ option }}
+                    </label>
+
+                    <!-- Show input field only if checkbox is checked -->
+                    <div
+                        *ngIf="getPersonalFactorsFormGroup(j + lefPersonalFactorOptions.length).get('selected')?.value">
+                        <textarea rows="3" formControlName="details"></textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <!--History of Falls:-->
     <div class="d-flex align-items-center mb-3">
         <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
