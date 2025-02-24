@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -11,9 +11,19 @@ export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.objectiveForm = this.fb.group({
+      observation: this.fb.group({}),
+      rangeOfMotion: this.fb.group({}),
+      strength: this.fb.group({}),
+      neuroVascular: this.fb.group({}),
+      specialTest: this.fb.group({}),
+      palpation: this.fb.group({})
+    });
   }
-
+  setChildForm(section: string, formGroup: FormGroup) {
+    this.objectiveForm.setControl(section, formGroup);
+  }
 }
