@@ -72,7 +72,6 @@ export class MedicalHistoryComponent implements OnInit {
   lefPersonalFactorOptions: string[] = [];
   rightPersonalFactorOptions: string[] = [];
   constructor(private fb: FormBuilder) {
-    this.splitmedicalHistoryColumns()
   }
 
   ngOnInit(): void {
@@ -91,9 +90,11 @@ export class MedicalHistoryComponent implements OnInit {
       "current_medications": this.fb.array([]),
       "patient_goals": new FormControl(null, [Validators.required]),
     });
+    this.splitmedicalHistoryColumns()
     this.splitPersonalFactorIntoColumns();
     this.addMedicalHistoryCheckboxes();
     this.addPersonalFactorsCheckboxes();
+    this.addCurrentMedications();
     this.formReady.emit(this.medicalHistoryForm);
   }
   private splitmedicalHistoryColumns() {
@@ -112,6 +113,9 @@ export class MedicalHistoryComponent implements OnInit {
   }
   get personalFactorsArray(): FormArray {
     return this.medicalHistoryForm.get('personal_factors') as FormArray;
+  }
+  get personalCurrentMedications(): FormArray {
+    return this.medicalHistoryForm.get('current_medications') as FormArray;
   }
   private addMedicalHistoryCheckboxes(): void {
     this.medicalHistoryOptions.forEach(() => {
@@ -133,10 +137,23 @@ export class MedicalHistoryComponent implements OnInit {
       );
     });
   }
+  private addCurrentMedications(): void {
+    this.currentMedications.forEach(() => {
+      this.personalCurrentMedications.push(
+        this.fb.group({
+          selected: new FormControl(false), // Checkbox state
+          details: new FormControl('') // Input text (hidden unless selected)
+        })
+      );
+    });
+  }
   getMedicalHistoryFormGroup(index: number): FormGroup {
     return this.medicalHistoryArray.at(index) as FormGroup;
   }
   getPersonalFactorsFormGroup(index: number): FormGroup {
     return this.personalFactorsArray.at(index) as FormGroup;
+  }
+  getCurrentMedicationsFormGroup(index: number): FormGroup {
+    return this.personalCurrentMedications.at(index) as FormGroup;
   }
 }

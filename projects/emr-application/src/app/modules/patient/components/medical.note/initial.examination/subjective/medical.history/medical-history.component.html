@@ -182,8 +182,8 @@
         </div>
     </div>
 
-    <!--History of Falls:-->
-    <div class="d-flex align-items-center mb-3">
+    <!--Medical History Review:-->
+    <div class="d-flex align-items-start mb-2">
         <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Medical History Review :
         </label>
@@ -256,18 +256,23 @@
     </div>
 
     <!--Current Medications-->
-    <div class="d-flex align-items-center mb-3">
+    <div class="d-flex align-items-start mb-2">
         <label for="medical_history" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
             Current Medications:
         </label>
-        <div class="d-fex">
-            <div class="checkbox-column">
-                <div *ngFor="let option of currentMedications">
-                    <input type="checkbox" [value]="option" />
-                    <label>{{ option }}</label>
+        <div class="column">
+            <div *ngFor="let option of currentMedications; let i = index"
+                [formGroup]="getCurrentMedicationsFormGroup(i)">
+                <label class="checkbox-item">
+                    <input type="checkbox" formControlName="selected" />
+                    {{ option }}
+                </label>
+
+                <!-- Show input field only if checkbox is checked -->
+                <div *ngIf="getCurrentMedicationsFormGroup(i).get('selected')?.value">
+                    <input type="text" formControlName="details" />
                 </div>
             </div>
-            <textarea class="form-control" formControlName="testing_imaging" rows="3" style="width: 100%;"></textarea>
         </div>
     </div>
 
