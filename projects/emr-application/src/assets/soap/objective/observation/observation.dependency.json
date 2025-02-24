@@ -1,0 +1,17 @@
+{
+    "name": "observation",
+    "fields": [
+        {
+            "name": "indicate_body_type",
+            "value": "yes",
+            "dependents": [
+                {
+                    "id": "indicate_body_type_radios",
+                    "name": "indicate_body_type_radios",
+                    "type": "radio",
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        }
+    ]
+}

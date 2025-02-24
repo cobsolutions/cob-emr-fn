@@ -17,7 +17,7 @@
             </c-form-check>
         </div>
     </div>
-    <multiple-dependency-field [form]="medicalHistoryForm" [fieldName]="'history_similars_symptoms'"
+    <multiple-dependency-field [soap]="'subjective'" [form]="medicalHistoryForm" [fieldName]="'history_similars_symptoms'"
         [section]="'medical.history'"></multiple-dependency-field>
     <!--history_similars_symptoms-->
     <div class="d-flex align-items-center mb-3">
@@ -53,7 +53,7 @@
             </c-form-check>
         </div>
     </div>
-    <multiple-dependency-field [form]="medicalHistoryForm" [fieldName]="'occupation_social_history'"
+    <multiple-dependency-field [soap]="'subjective'"  [form]="medicalHistoryForm" [fieldName]="'occupation_social_history'"
         [section]="'medical.history'"></multiple-dependency-field>
     <!--Home Health Care-->
     <div class="d-flex align-items-center mb-3">
@@ -71,7 +71,7 @@
             </c-form-check>
         </div>
     </div>
-    <multiple-dependency-field [form]="medicalHistoryForm" [fieldName]="'home_health_care'"
+    <multiple-dependency-field [soap]="'subjective'"  [form]="medicalHistoryForm" [fieldName]="'home_health_care'"
         [section]="'medical.history'"></multiple-dependency-field>
     <!--History of Falls:-->
     <div class="d-flex align-items-center mb-3">
@@ -89,7 +89,7 @@
             </c-form-check>
         </div>
     </div>
-    <multiple-dependency-field [form]="medicalHistoryForm" [fieldName]="'history_of_falls'"
+    <multiple-dependency-field [soap]="'subjective'"  [form]="medicalHistoryForm" [fieldName]="'history_of_falls'"
         [section]="'medical.history'"></multiple-dependency-field>
     <!--Medical History-->
     <div class="d-flex align-items-start mb-2">

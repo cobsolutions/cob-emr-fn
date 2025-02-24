@@ -23,11 +23,12 @@ export class MultipleDependencyFieldComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() fieldName: string
   @Input() section: string
+  @Input() soap: string
   constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     var file: string = this.getSectionFile();
-    var url: string = 'assets/soap/subjective/' + file
+    var url: string = 'assets/soap/' + this.soap + '/' + file
     this.httpClient.get(url)
       .subscribe((section: any) => {
         this.checkValue(section);
@@ -43,6 +44,8 @@ export class MultipleDependencyFieldComponent implements OnInit {
         return 'pain.json'
       case 'medical.history':
         return 'medical.history.json'
+      case 'observation':
+        return 'observation.json'
       default:
         return '';
     }
