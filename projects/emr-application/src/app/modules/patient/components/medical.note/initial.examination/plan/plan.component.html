@@ -1,5 +1,84 @@
-<p>plan works!</p>
 <form [formGroup]="planForm">
+    <!-- Frequency, Duration, Plan (Styled Inline) -->
+    <div class="form-inline mb-3 mt-3">
+        <c-row>
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Frequency:
+                    <select>
+                        <option>Custom</option>
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                    </select>
+                </label>
+
+                <label style="margin-left: 3px;">Duration:
+                    <select>
+                        <option>Custom</option>
+                        <option>Short Term</option>
+                        <option>Long Term</option>
+                    </select>
+                </label>
+
+                <label style="margin-left: 3px;">Plan:
+                    <select>
+                        <option>Custom</option>
+                        <option>Standard</option>
+                        <option>Personalized</option>
+                    </select>
+                </label>
+            </c-col>
+            <c-col xs="12">
+                <div class="mt-3">
+                    <label>
+                        <input type="checkbox"> Create Plan of Care Document
+                    </label>
+                </div>
+            </c-col>
+        </c-row>
+    </div>
+    <h3>Treatment to be Provided:</h3>
+    <hr />
+    <!-- Procedures -->
+    <c-row>
+        <c-col xs="6">
+            <div class="section">
+                <h4>Procedures</h4>
+                <hr />
+                <div *ngFor="let procedure of procedures">
+                    <label>
+                        <input type="checkbox" [formControlName]="procedure.value" />
+                        {{ procedure.label }}
+                    </label>
+                </div>
+            </div>
+        </c-col>
+        <c-col xs="6">
+            <!-- Modalities -->
+            <div class="section">
+                <h4>Modalities</h4>
+                <hr />
+                <div *ngFor="let modality of modalities">
+                    <label>
+                        <input type="checkbox" [formControlName]="modality.value" />
+                        {{ modality.label }}
+                    </label>
+                </div>
+            </div>
+
+            <!-- Specialties -->
+            <div class="section">
+                <h4>Specialties</h4>
+                <hr />
+                <div *ngFor="let specialty of specialties">
+                    <label>
+                        <input type="checkbox" [formControlName]="specialty.value" />
+                        {{ specialty.label }}
+                    </label>
+                </div>
+            </div>
+        </c-col>
+    </c-row>
+
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" (click)="next()">Next</button>
