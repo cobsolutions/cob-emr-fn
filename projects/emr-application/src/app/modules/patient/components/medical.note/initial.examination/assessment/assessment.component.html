@@ -111,7 +111,9 @@
       <tr *ngFor="let problem of problems.controls; let i = index">
         <td>{{ problem.value }}</td>
         <td class="text-center">
-          <button class="btn btn-link" size="sm" (click)="removeProblem(i)">remove</button>
+          <button cButton color="danger" variant="outline" size="sm" (click)="removeProblem(i)">
+            <svg cIcon name="cilTrash"></svg>
+          </button>
         </td>
       </tr>
     </tbody>
@@ -188,7 +190,8 @@
         <td>{{ goal.value.period }}</td>
         <td>{{ goal.value.met }}</td>
         <td class="text-center">
-          <button class="btn btn-link" (click)="removeGoal(i)">Remove</button>
+          <button (click)="removeGoal(i)" cButton color="danger" variant="outline" size="sm">
+            <svg cIcon name="cilTrash"></svg></button>
         </td>
       </tr>
     </tbody>
