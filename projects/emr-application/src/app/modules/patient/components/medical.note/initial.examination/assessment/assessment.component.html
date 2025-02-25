@@ -45,7 +45,8 @@
       <label cFormCheckLabel for="hep">Patient Demonstrates Compliance with Prescribed HEP</label>
     </c-form-check>
   </div>
-
+  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'hep'"
+  [section]="'assessment'"></multiple-dependency-field>
   <!-- Rehab Potential -->
   <div class="form-group">
     <label for="rehabPotential">Rehab Potential:</label>

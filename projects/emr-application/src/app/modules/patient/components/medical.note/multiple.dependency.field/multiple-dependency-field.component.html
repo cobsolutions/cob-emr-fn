@@ -21,7 +21,8 @@
         </div>
         <!--checkbox-->
         <div class="d-flex align-items-center mb-1" *ngIf="field.type == 'checkbox'" [style]="field.style">
-            <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+            <label class="me-2 text-end"
+                [style]="field.label_style===undefined ||field.label_style===''?field.label_style:'white-space: nowrap; min-width: 190px;'"></label>
             <c-form-check>
                 <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" />
                 <label cFormCheckLabel for="na">{{field.display}}</label>
