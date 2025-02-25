@@ -24,7 +24,7 @@
             <label class="me-2 text-end"
                 [style]="field.label_style===undefined ||field.label_style===''?field.label_style:'white-space: nowrap; min-width: 190px;'"></label>
             <c-form-check>
-                <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" />
+                <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm"/>
                 <label cFormCheckLabel for="na">{{field.display}}</label>
             </c-form-check>
         </div>
@@ -92,7 +92,7 @@
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'checkbox'" [style]="field.style">
                         <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
                         <c-form-check>
-                            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" />
+                            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm"  />
                             <label cFormCheckLabel for="na">{{field.display}}</label>
                         </c-form-check>
                     </div>

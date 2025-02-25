@@ -49,6 +49,8 @@
                         <input type="checkbox" [formControlName]="procedure.value" />
                         {{ procedure.label }}
                     </label>
+                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="procedure.value"
+                        [section]="'plan'"></multiple-dependency-field>
                 </div>
             </div>
         </c-col>

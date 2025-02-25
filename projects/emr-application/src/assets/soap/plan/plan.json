@@ -1,0 +1,221 @@
+{
+    "name": "plan",
+    "fields": [
+        {
+            "name": "therapeuticExercises",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "ROM",
+                    "id": "rom",
+                    "name": "rom",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Strength",
+                    "id": "strength",
+                    "name": "strength",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Endurance",
+                    "id": "endurance",
+                    "name": "endurance",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Stability",
+                    "id": "stability",
+                    "name": "stability",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "therapeuticExercises_text",
+                    "name": "therapeuticExercises_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "therapeuticActivity",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Work Specific",
+                    "id": "work_specific",
+                    "name": "work_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Sport Specific",
+                    "id": "sport_specific",
+                    "name": "sport_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Transfers",
+                    "id": "transfers",
+                    "name": "transfers",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Bed Mobility",
+                    "id": "bed_mobility",
+                    "name": "stability",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "ADL Specific",
+                    "id": "adl_specific",
+                    "name": "adl_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "therapeuticActivity_text",
+                    "name": "therapeuticActivity_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "gaitTraining",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "4 Point Walker",
+                    "id": "point_walker",
+                    "name": "point_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Front Wheel Walker",
+                    "id": "front_wheel_walker",
+                    "name": "front_wheel_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "4 Wheel Walker",
+                    "id": "wheel_walker",
+                    "name": "wheel_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Hemi Walker",
+                    "id": "hemi_walker",
+                    "name": "hemi_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Quad Cane",
+                    "id": "quad_cane",
+                    "name": "quad_cane",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Point Cane",
+                    "id": "point_cane",
+                    "name": "point_cane",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "2 Axillary Crutches",
+                    "id": "axillary_crutches",
+                    "name": "axillary_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Axillary Crutch",
+                    "id": "axillary_crutch",
+                    "name": "axillary_crutch",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "2 Forearm Crutches",
+                    "id": "forearm_crutches",
+                    "name": "forearm_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Forearm Crutches",
+                    "id": "forearm_crutches",
+                    "name": "forearm_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Even Surfaces",
+                    "id": "even_surfaces",
+                    "name": "even_surfaces",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Uneven Surfaces",
+                    "id": "uneven_surfaces",
+                    "name": "uneven_surfaces",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Stairs",
+                    "id": "stairs",
+                    "name": "stairs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Curbs",
+                    "id": "curbs",
+                    "name": "curbs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "gaitTraining_text",
+                    "name": "therapeuticExercises_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "neuromuscularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Stability",
+                    "id": "stability",
+                    "name": "stability",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "neuromuscularRehabilitation_text",
+                    "name": "neuromuscularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        }
+    ]
+}

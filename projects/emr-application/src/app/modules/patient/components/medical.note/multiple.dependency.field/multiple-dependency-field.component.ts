@@ -48,6 +48,8 @@ export class MultipleDependencyFieldComponent implements OnInit {
         return 'observation.dependency.json'
       case 'assessment':
         return 'assessment.json'
+      case 'plan':
+        return 'plan.json'
       default:
         return '';
     }
