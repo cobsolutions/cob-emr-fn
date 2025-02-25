@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -11,6 +11,22 @@ export class AssessmentComponent implements OnInit {
   assessmentForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  problemsArray: FormArray;
+
+  get problems(): FormArray {
+    return this.assessmentForm.get('problems') as FormArray;
+  }
+  addProblem(input: HTMLInputElement) {
+    const problemValue = input.value.trim();
+    if (problemValue) {
+      this.problems.push(new FormControl(problemValue)); // Add value to FormArray
+      input.value = ''; // Clear input after adding
+    }
+  }
+
+  removeProblem(index: number) {
+    this.problems.removeAt(index); // Remove value from FormArray
+  }
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -25,8 +41,11 @@ export class AssessmentComponent implements OnInit {
       'rehab_potential': new FormControl("excellent"),
       'contraindications_to_therapy': new FormControl(null),
       'patientAgreement': new FormControl(null),
-      'consent_to_care': new FormControl(null)
+      'consent_to_care': new FormControl(null),
+      problems: this.fb.array([])
     })
+    this.problemsArray = this.assessmentForm.get('problems') as FormArray;
+
   }
 
 }

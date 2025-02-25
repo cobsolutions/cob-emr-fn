@@ -81,4 +81,36 @@
     <label for="assessment">Consent to care:</label>
     <textarea id="assessment" formControlName="consent_to_care" rows="4"></textarea>
   </div>
+
+  <!-- Problem List -->
+  <div class="form-group">
+    <label for="problemInput">Problem List:</label>
+    <c-input-group>
+      <input #problemInput aria-describedby="button-addon2" aria-label="Recipient's username"
+        cFormControl placeholder="Enter problem description" />
+      <button cButton color="secondary" id="button-addon2" type="button" variant="outline"
+        (click)="addProblem(problemInput)">
+        add problem
+      </button>
+    </c-input-group>
+  </div>
+  
+  <!-- Table -->
+  <table class="table table-sm p-1">
+    <thead>
+      <tr>
+        <th>Problems Description</th>
+        <th style="width: 50px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let problem of problems.controls; let i = index">
+        <td>{{ problem.value }}</td>
+        <td class="text-center">
+          <button class="btn btn-link" size="sm" (click)="removeProblem(i)">remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
 </form>
