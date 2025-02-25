@@ -40,6 +40,7 @@ import { ObjectiveComponent } from './components/medical.note/initial.examinatio
 import { ObservationComponent } from './components/medical.note/initial.examination/objective/observation/observation.component';
 import { AssessmentComponent } from './components/medical.note/initial.examination/assessment/assessment.component';
 import { PlanComponent } from './components/medical.note/initial.examination/plan/plan.component';
+import { BillingComponent } from './components/medical.note/initial.examination/billing/billing.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -84,6 +85,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ObservationComponent,
     AssessmentComponent,
     PlanComponent,
+    BillingComponent,
   ],
   imports: [
     CommonModule,
