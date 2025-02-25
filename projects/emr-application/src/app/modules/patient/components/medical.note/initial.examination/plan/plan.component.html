@@ -64,6 +64,8 @@
                         <input type="checkbox" [formControlName]="modality.value" />
                         {{ modality.label }}
                     </label>
+                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="modality.value"
+                        [section]="'plan'"></multiple-dependency-field>
                 </div>
             </div>
 
@@ -76,6 +78,8 @@
                         <input type="checkbox" [formControlName]="specialty.value" />
                         {{ specialty.label }}
                     </label>
+                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="specialty.value"
+                        [section]="'plan'"></multiple-dependency-field>
                 </div>
             </div>
         </c-col>

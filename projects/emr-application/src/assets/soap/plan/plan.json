@@ -618,6 +618,105 @@
                     "style": "padding-left: 10px; width:400px"
                 }
             ]
+        },
+        {
+            "name": "electricalStimulation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Pre-Modulated",
+                    "id": "pre_Modulated",
+                    "name": "pre_Modulated",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "High Volt",
+                    "id": "high_Volt",
+                    "name": "high_Volt",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Interferential",
+                    "id": "interferential",
+                    "name": "interferential",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Russian",
+                    "id": "russian",
+                    "name": "russian",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Other",
+                    "id": "other",
+                    "name": "other",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "stimulation_text",
+                    "name": "stimulation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+
+
+
+        
+        {
+            "name": "orthoticFabrication",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "orthoticFabrication_text",
+                    "name": "orthoticFabrication_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "tensFitting",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "tensFitting_text",
+                    "name": "tensFitting_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "acupuncture",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "acupuncture_text",
+                    "name": "acupuncture_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "otherSpecialty",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "otherSpecialty_text",
+                    "name": "otherSpecialty_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
         }
     ]
 }
