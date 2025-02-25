@@ -203,9 +203,44 @@
             "value": true,
             "dependents": [
                 {
-                    "display": "Stability",
-                    "id": "stability",
-                    "name": "stability",
+                    "display": "Balance/Proprioception Training",
+                    "id": "balance_proprioception_training",
+                    "name": "balance_proprioception_training",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Muscle Re-Education",
+                    "id": "muscle_re_education",
+                    "name": "muscle_re_education",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Sequencing",
+                    "id": "sequencing",
+                    "name": "sequencing",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Coordination",
+                    "id": "coordination",
+                    "name": "coordination",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "PNF",
+                    "id": "pnf",
+                    "name": "pnf",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Redcord Neurac (Neuromuscular-Activation)",
+                    "id": "redcord_Nneurac_Neuromuscular_Activation",
+                    "name": "redcord_Nneurac_Neuromuscular_Activation",
                     "type": "checkbox",
                     "style": "padding-left: 10px;"
                 },
