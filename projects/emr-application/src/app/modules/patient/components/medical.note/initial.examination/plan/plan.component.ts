@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-plan',
+  selector: 'plan',
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.css']
 })
 export class PlanComponent implements OnInit {
-
-  constructor() { }
+  planForm: FormGroup;
+  @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() stepper!: MatStepper
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.planForm = this.fb.group({});
   }
-
+  next() {
+    this.stepper.next();
+  }
 }

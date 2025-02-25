@@ -34,10 +34,10 @@ export class AssessmentComponent implements OnInit {
   }
   createGoal(description = '', term = 'Short Term', period = '1 Visit', met = 'N/A'): FormGroup {
     return this.fb.group({
-      description: new FormControl(description),  
-      term: new FormControl(term), 
-      period: new FormControl(period),  
-      met: new FormControl(met)        
+      description: new FormControl(description),
+      term: new FormControl(term),
+      period: new FormControl(period),
+      met: new FormControl(met)
     });
   }
   addGoal(descriptionInput: HTMLTextAreaElement, termInput: HTMLSelectElement, periodInput: HTMLSelectElement, metInput: HTMLSelectElement) {
@@ -78,7 +78,8 @@ export class AssessmentComponent implements OnInit {
     })
     this.problemsArray = this.assessmentForm.get('problems') as FormArray;
     this.goalsArray = this.assessmentForm.get('goals') as FormArray;
-
   }
-
+  next() {
+    this.stepper.next();
+  }
 }
