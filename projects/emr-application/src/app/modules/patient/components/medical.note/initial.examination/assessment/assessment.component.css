@@ -1,34 +1,146 @@
 .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+    resize: vertical;
+  }
+  
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .smart-text {
+    color: blue;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 4px;
+    text-decoration: underline;
+  }
+  .table {
+    width: 100%;
+    margin-top: 10px;
+  }  
+  .goal-form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goal-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .goal-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .goal-input label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .goal-input select,
+  .goal-input textarea {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .goal-input textarea {
+    resize: none;
+    height: 60px;
+  }
+  
+  .add-btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .add-goal-btn {
+    background-color: #f8f9fa; /* Light gray for a subtle look */
+    color: #333; /* Dark text for better readability */
+    border: 1px solid #ccc; /* Soft border for a clean look */
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .add-goal-btn:hover {
+    background-color: #e2e6ea; /* Slightly darker gray on hover */
+  }
+  
+  .goal-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+  }
+  
+  .goal-table th,
+  .goal-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: red;
+    transition: 0.3s;
+  }
+  
+  .btn-remove:hover {
+    color: darkred;
+  }
+  .goal-row {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
+  gap: 10px;
 }
 
-textarea {
+.goal-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 100%; /* Makes all inputs take full available width */
+}
+
+/* Increase width for Goal Term & Goal Period */
+.goal-row .goal-input select {
   width: 100%;
-  border: 1px solid #ccc;
+  min-width: 180px; /* Ensures it's wider */
+}
+
+.goal-input select,
+.goal-input textarea {
   padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   font-size: 14px;
-  resize: vertical;
 }
 
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+/* Ensure Goal Description remains full width */
+.goal-input textarea {
+  resize: none;
+  height: 60px;
 }
-
-.smart-text {
-  color: blue;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 4px;
-  text-decoration: underline;
-}
-
-.table {
-  width: 100%;
-  margin-top: 10px;
-}
-
