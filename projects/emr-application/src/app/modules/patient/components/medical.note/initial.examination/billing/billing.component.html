@@ -1,1 +1,9 @@
 <p>billing works!</p>
+
+<form [formGroup]="billingForm">
+
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</form>
