@@ -46,7 +46,7 @@
     </c-form-check>
   </div>
   <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'hep'"
-  [section]="'assessment'"></multiple-dependency-field>
+    [section]="'assessment'"></multiple-dependency-field>
   <!-- Rehab Potential -->
   <div class="form-group">
     <label for="rehabPotential">Rehab Potential:</label>
@@ -57,16 +57,20 @@
       <option value="poor">Poor</option>
     </select>
   </div>
+  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'rehab_potential'"
+    [section]="'assessment'"></multiple-dependency-field>
   <!-- Contraindications to Therapy -->
   <div class="form-group">
     <label>Contraindications to Therapy:</label>
     <label>
-      <input type="radio" formControlName="contraindications_to_therapy" value="no" /> No
-    </label>
-    <label>
       <input type="radio" formControlName="contraindications_to_therapy" value="yes" /> Yes
     </label>
+    <label>
+      <input type="radio" formControlName="contraindications_to_therapy" value="no" /> No
+    </label>
   </div>
+  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'contraindications_to_therapy'"
+    [section]="'assessment'"></multiple-dependency-field>
   <!-- Checkbox Statement -->
   <div class="form-group">
     <label>

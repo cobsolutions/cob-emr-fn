@@ -42,6 +42,30 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "rehab_potential",
+            "value": "fair",
+            "dependents": [
+                {
+                    "id": "rehab_potential_fair_text",
+                    "name": "rehab_potential_fair_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "contraindications_to_therapy",
+            "value": "yes",
+            "dependents": [
+                {
+                    "id": "contraindications_to_therapy_text",
+                    "name": "contraindications_to_therapy_text",
+                    "type": "text",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
         }
     ]
 }
