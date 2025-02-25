@@ -251,6 +251,373 @@
                     "style": "padding-left: 10px; width:400px"
                 }
             ]
+        },
+        {
+            "name": "manualTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Soft Tissue Mobilization",
+                    "id": "soft_Tissue_Mobilization",
+                    "name": "soft_Tissue_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Joint Mobilization",
+                    "id": "joint_Mobilization",
+                    "name": "joint_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Spinal Mobilization",
+                    "id": "spinal_Mobilization",
+                    "name": "spinal_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Manual Traction",
+                    "id": "manual_Traction",
+                    "name": "manual_Traction",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Myofascial Release",
+                    "id": "myofascial_Release",
+                    "name": "myofascial_Release",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Muscle Energy Techniques",
+                    "id": "muscle_Energy_Techniques",
+                    "name": "muscle_Energy_Techniques",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Manual Resistive Exercise",
+                    "id": "manual_Resistive_Exercise",
+                    "name": "manual_Resistive_Exercise",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Patellar Mobs",
+                    "id": "patellar_Mobs",
+                    "name": "patellar_Mobs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Cranio-Sacral",
+                    "id": "cranio_Sacral",
+                    "name": "cranio_Sacral",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Visceral Manipulation",
+                    "id": "visceral_Manipulation",
+                    "name": "visceral_Manipulation",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Dry Needling/Intramuscular Manual Therapy",
+                    "id": "dry_Needling_Intramuscular_Manual_Therapy",
+                    "name": "dry_Needling_Intramuscular_Manual_Therapy",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Graston or ASTYM Techniques",
+                    "id": "graston_ASTYM_Techniques",
+                    "name": "graston_ASTYM_Techniques",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Strain-Counterstrain",
+                    "id": "strain_Counterstrain",
+                    "name": "strain_Counterstrain",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "manualTherapy_text",
+                    "name": "manualTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "massage",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "massage_text",
+                    "name": "massage_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "aquaticTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "aquaticTherapy_text",
+                    "name": "aquaticTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "splintingTaping",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "splintingTaping_text",
+                    "name": "splintingTaping_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "canalithRepositioning",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "canalithRepositioning_text",
+                    "name": "canalithRepositioning_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "woundCareDebridement",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "woundCareDebridement_text",
+                    "name": "woundCareDebridement_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "woundCareDebridement",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "woundCareDebridement_text",
+                    "name": "woundCareDebridement_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "iontophoresis",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Dexamethasone",
+                    "id": "dexamethasone",
+                    "name": "dexamethasone",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lidocaine",
+                    "id": "lidocaine",
+                    "name": "lidocaine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Marcaine",
+                    "id": "marcaine",
+                    "name": "marcaine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Acetic Acid",
+                    "id": "acetic_Acid",
+                    "name": "acetic_Acid",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Iodine",
+                    "id": "iodine",
+                    "name": "iodine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "medication_text",
+                    "name": "medication_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "groupTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "groupTherapy_text",
+                    "name": "groupTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "cardiacRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "cardiacRehabilitation_text",
+                    "name": "cardiacRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "vestibularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "vestibularRehabilitation_text",
+                    "name": "vestibularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "vestibularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "vestibularRehabilitation_text",
+                    "name": "vestibularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "patientEducation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Home Exercise Program",
+                    "id": "home_Exercise_Program",
+                    "name": "home_Exercise_Program",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Postural Training",
+                    "id": "postural_Training",
+                    "name": "postural_Training",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Ergonomics",
+                    "id": "ergonomics",
+                    "name": "ergonomics",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lifting Mechanics",
+                    "id": "lifting_Mechanics",
+                    "name": "lifting_Mechanics",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "TENS Use",
+                    "id": "tens_Use",
+                    "name": "tens_Use",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Activity Modification",
+                    "id": "activity_Modification",
+                    "name": "activity_Modification",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Home Safety",
+                    "id": "home_Safety",
+                    "name": "home_Safety",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "education_text",
+                    "name": "education_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "selfCare",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "selfCare_text",
+                    "name": "selfCare_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "cognition",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "cognition_text",
+                    "name": "cognition_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "remoteTherapeuticMonitoring",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "remoteTherapeuticMonitoring_text",
+                    "name": "remoteTherapeuticMonitoring_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
         }
     ]
 }
