@@ -666,10 +666,210 @@
                 }
             ]
         },
-
-
-
-        
+        {
+            "name": "ultrasoundPhonophoresis",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Depth",
+                    "id": "tensFitting_text",
+                    "name": "tensFitting_text",
+                    "type": "inline-checkbox",
+                    "select_values": [
+                        "1MHz",
+                        "2MHz",
+                        "3MHz"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "laser",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Cold Laser",
+                    "id": "cold_laser",
+                    "name": "tensFitting_text",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": " Class 4 Laser",
+                    "id": " class_Laser",
+                    "name": "tensFitting_text",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "infraredLight",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "infraredLight_Duration",
+                    "name": "infraredLight_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "diathermy",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "diathermy_Duration",
+                    "name": "diathermy_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "hotPacks",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "hotPacks_Duration",
+                    "name": "hotPacks_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "mechanicalTraction",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Cervical",
+                    "id": "cervical",
+                    "name": "cervical",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lumbar",
+                    "id": " lumbar",
+                    "name": "lumbar",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "vasopneumatic",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "vasopneumatic_Duration",
+                    "name": "vasopneumatic_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "biofeedbackTraining",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "biofeedbackTraining_Duration",
+                    "name": "biofeedbackTraining_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "biofeedbackTraining_text",
+                    "name": "biofeedbackTraining_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
         {
             "name": "orthoticFabrication",
             "value": true,

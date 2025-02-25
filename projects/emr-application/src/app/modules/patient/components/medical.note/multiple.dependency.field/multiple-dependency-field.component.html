@@ -4,7 +4,8 @@
         <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
             && field.type !== 'textArea' 
             && field.type !== 'inline-checkbox'
-            && field.type !== 'multiple_radio'">
+            && field.type !== 'multiple_radio'
+            && field.type !== 'select'">
             <label class="me-2 text-end" [style]="field.label_style">
                 {{field.display}}
             </label>
@@ -24,7 +25,7 @@
             <label class="me-2 text-end"
                 [style]="field.label_style===undefined ||field.label_style===''?field.label_style:'white-space: nowrap; min-width: 190px;'"></label>
             <c-form-check>
-                <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm"/>
+                <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
                 <label cFormCheckLabel for="na">{{field.display}}</label>
             </c-form-check>
         </div>
@@ -73,7 +74,14 @@
                 </div>
             </div>
         </div>
-
+        <!--select-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'select'" [style]="field.style">
+            <select [formControlName]="field.name" [id]="field.id" size="sm">
+                <option *ngFor="let val of field.select_values">
+                    {{val}}
+                </option>
+            </select>
+        </div>
         <span *ngFor="let dep of depMap; index as i; first as isFirst">
             <div *ngIf="dep.name === field.name && dep.render === true">
                 <div *ngFor="let field of dep.dependents;">
@@ -81,7 +89,7 @@
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
                         && field.type !== 'textArea' && field.type !== 'multiple_select'
                         && field.type !== 'select'
-                        && field.type !== 'inlinecheckbox'">
+                        && field.type !== 'inline-checkbox'">
                         <label class="me-2 text-end" [style]="field.label_style">
                             {{field.display}}
                         </label>
@@ -92,7 +100,8 @@
                     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'checkbox'" [style]="field.style">
                         <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
                         <c-form-check>
-                            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm"  />
+                            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name"
+                                size="sm" />
                             <label cFormCheckLabel for="na">{{field.display}}</label>
                         </c-form-check>
                     </div>
@@ -142,6 +151,19 @@
                                     [value]="'no'" />
                                 <label cFormCheckLabel class="ms-1">No</label>
                             </c-form-check>
+                        </div>
+                    </div>
+                    <!--inline check-->
+                    <div class="d-flex" *ngIf="field.type === 'inline-checkbox'" [style]="field.style">
+                        <label class="me-3" [style]="field.label_style">{{field.display}}</label>
+                        <div>
+                            <div class="form-check" *ngFor="let checkField of field.select_values">
+                                <input class="form-check-input" type="checkbox" value="" [id]="field.name"
+                                    [formControlName]="field.name">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{checkField}}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
