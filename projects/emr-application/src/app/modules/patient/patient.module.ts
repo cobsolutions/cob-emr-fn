@@ -39,6 +39,7 @@ import { MultipleDependencyFieldComponent } from './components/medical.note/mult
 import { ObjectiveComponent } from './components/medical.note/initial.examination/objective/objective.component';
 import { ObservationComponent } from './components/medical.note/initial.examination/objective/observation/observation.component';
 import { AssessmentComponent } from './components/medical.note/initial.examination/assessment/assessment.component';
+import { PlanComponent } from './components/medical.note/initial.examination/plan/plan.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -82,6 +83,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ObjectiveComponent,
     ObservationComponent,
     AssessmentComponent,
+    PlanComponent,
   ],
   imports: [
     CommonModule,
