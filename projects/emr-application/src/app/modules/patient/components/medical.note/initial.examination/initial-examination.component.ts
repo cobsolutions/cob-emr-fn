@@ -1,5 +1,5 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
@@ -13,6 +13,7 @@ export class InitialExaminationComponent implements OnInit {
   activeStepIndex: number;
   initialExaminationForm: FormGroup
   @ViewChild('stepper') stepper!: MatStepper; // Get MatStepper reference
+  @Output() formReady = new EventEmitter<FormGroup>();
   constructor(private fb: FormBuilder) {
    
   }
@@ -27,5 +28,8 @@ export class InitialExaminationComponent implements OnInit {
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
+  }
+  setChildForm(section: string, formGroup: FormGroup) {
+    this.initialExaminationForm.setControl(section, formGroup);
   }
 }

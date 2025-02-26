@@ -1,25 +1,29 @@
 <c-container fluid="true">
     <form [formGroup]="initialExaminationForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
-            <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="true">
+            <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="true"
+                formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
-                <subjective [stepper]="stepper"></subjective>
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"></subjective>
             </mat-step>
-            <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!">
+            <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
+                formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
                 <!-- <objective [stepper]="stepper"></objective> -->
             </mat-step>
-            <mat-step completed="true">
+            <mat-step completed="true" formGroupName="objective"
+                [stepControl]="initialExaminationForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
-                <assessment [stepper]="stepper"></assessment>
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)"></assessment>
             </mat-step>
-            <mat-step completed="true">
+            <mat-step completed="true" [stepControl]="initialExaminationForm.get('planOfCare')!"
+                formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <plan [stepper]="stepper"></plan>
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)"></plan>
             </mat-step>
-            <mat-step completed="true">
+            <mat-step completed="true" [stepControl]="initialExaminationForm.get('billing')!" formGroupName="billing">
                 <ng-template matStepLabel>Billing</ng-template>
-                <billing [stepper]="stepper"></billing>
+                <billing [stepper]="stepper" [parentForm]="initialExaminationForm" (formReady)="setChildForm('billing', $event)"></billing>
             </mat-step>
         </mat-stepper>
     </form>

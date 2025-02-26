@@ -71,6 +71,7 @@ export class PlanComponent implements OnInit {
     this.procedures.forEach(proc => this.planForm.addControl(proc.value, this.fb.control(false)));
     this.modalities.forEach(mod => this.planForm.addControl(mod.value, this.fb.control(false)));
     this.specialties.forEach(spec => this.planForm.addControl(spec.value, this.fb.control(false)));
+    this.formReady.emit(this.planForm);
   }
   next() {
     this.stepper.next();

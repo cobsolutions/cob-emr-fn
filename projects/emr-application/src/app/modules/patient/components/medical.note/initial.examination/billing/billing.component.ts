@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
 @Component({
@@ -8,6 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
+  @Input() parentForm: FormGroup
   billingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
@@ -300,8 +301,29 @@ export class BillingComponent implements OnInit {
     this.splintsOrthotics.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
     this.casts.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
     this.braces.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+
+    this.formReady.emit(this.billingForm);
   }
   next() {
+    var dd: any = this.getAllFormValues(this.parentForm)
     this.stepper.next();
   }
+
+  getAllFormValues(formGroup: FormGroup): any {
+    const values: any = {};
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      if (control instanceof FormControl) {
+        values[key] = control.value;
+      } else if (control instanceof FormGroup) {
+        values[key] = this.getAllFormValues(control); // Recursively get values from nested FormGroup
+      } else if (control instanceof FormArray) {
+        values[key] = control.controls.map(ctrl =>
+          ctrl instanceof FormGroup ? this.getAllFormValues(ctrl) : ctrl.value
+        );
+      }
+    });
+    return values;
+  }
+
 }

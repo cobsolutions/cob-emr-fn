@@ -62,6 +62,7 @@ export class AssessmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm()
+    this.formReady.emit(this.assessmentForm);
   }
   private buildForm() {
     this.assessmentForm = this.fb.group({
