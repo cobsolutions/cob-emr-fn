@@ -1,6 +1,140 @@
-<p>billing works!</p>
-
 <form [formGroup]="billingForm">
+    <h4>Billing:</h4>
+    <hr />
+    <c-form-check class="mb-4">
+        <input cFormCheckInput id="dailyNoteIncluded" type="checkbox" formControlName="dailyNoteIncluded" size="sm" />
+        <label cFormCheckLabel for="na"> Include Daily Note with this Initial Examination
+        </label>
+    </c-form-check>
+    <h4>Daily Note Plan (Additional Information Needed):</h4>
+    <hr />
+    <div class="mb-3 mt-3">
+        <c-row>
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Instructions:
+                    <select cSelect formControlName="dn_nstructions" sizing="sm" class="mb-2">
+                        <option *ngFor="let instruction of instructions" [value]="instruction.value">
+                            {{instruction.label}}
+                        </option>
+                    </select>
+                </label>
+            </c-col>
+            <c-col xs="12">
+                <textarea cFormControl id="precautions" formControlName="precautions" rows="3"></textarea>
+            </c-col>
+        </c-row>
+    </div>
+    <h4>Billing Sheet</h4>
+    <hr />
+    <c-row>
+        <c-col xs="8">
+            <div class="form-container">
+                <div class="column">
+                    <label for="precautions">Precautions</label>
+                    <textarea id="precautions" formControlName="precautions"></textarea>
+                </div>
+            </div>
+            <div class="section">
+                <h6><strong>Untimed Codes</strong></h6>
+                <hr />
+                <div *ngFor="let untimedCode of untimedCodes" class="mb-1">
+                    <label>
+                        <input type="checkbox" [formControlName]="untimedCode.value" />
+                        {{ untimedCode.label }}
+                    </label>
+                </div>
+                <div *ngFor="let untimedCodetxt of untimedCodesText; let i = index" class="procedure-item">
+                    <input type="number" cFormControl [formControlName]="untimedCodetxt.code" class="procedure-input"
+                        min="0" sizing="sm" />
+                    <label class="procedure-label" class="mx-2">{{ untimedCodetxt.name }}</label>
+                </div>
+                <strong style="margin-left: 20px;">Strapping</strong>
+                <div *ngFor="let strapp of strapping; let i = index" class="procedure-item">
+                    <input type="number" cFormControl [formControlName]="strapp.cpt" class="procedure-input" min="0"
+                        sizing="sm" />
+                    <label class="procedure-label" class="mx-2">{{ strapp.name }}</label>
+                </div>
+                <strong>Direct Timed Codes</strong>
+                <div *ngFor="let directTimedCode of directTimedCodes; let i = index" class="procedure-item">
+                    <input type="number" cFormControl [formControlName]="directTimedCode.code" class="procedure-input"
+                        min="0" sizing="sm" />
+                    <label class="procedure-label" class="mx-2">{{ directTimedCode.name }}</label>
+                </div>
+                <strong>Calendar Month</strong>
+                <div *ngFor="let calendarMo of calendarMonth; let i = index" class="procedure-item">
+                    <input type="number" cFormControl [formControlName]="calendarMo.code" class="procedure-input"
+                        min="0" sizing="sm" />
+                    <label class="procedure-label" class="mx-2">{{ calendarMo.name }}</label>
+                </div>
+                <strong>Nerve Conduction Studies</strong>
+                <div *ngFor="let nerveConductionStudy of nerveConductionStudies" class="mb-1">
+                    <label>
+                        <input type="checkbox" [formControlName]="nerveConductionStudy.code" />
+                        {{ nerveConductionStudy.name }}
+                    </label>
+                </div>
+                <strong>Respiratory</strong>
+                <div *ngFor="let resp of respiratory; let i = index" class="procedure-item">
+                    <input type="number" cFormControl [formControlName]="resp.code" class="procedure-input" min="0"
+                        sizing="sm" />
+                    <label class="procedure-label" class="mx-2">{{ resp.name }}</label>
+                </div>
+            </div>
+        </c-col>
+        <c-col xs="4">
+            <div class="form-container">
+                <div class="column">
+                    <label for="objective_findings"><strong>Objective Findings</strong></label>
+                    <textarea id="objective_findings" formControlName="objective_findings"></textarea>
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="column">
+                    <label for="pre_Treatment">Pre-Treatment</label>
+                    <textarea id="pre_Treatment" formControlName="pre_Treatment"></textarea>
+                </div>
+            </div>
+            <div class="form-container mb-1">
+                <div class="column">
+                    <label for="post_Treatment">Post-Treatment</label>
+                    <textarea id="post_Treatment" formControlName="post_Treatment"></textarea>
+                </div>
+            </div>
+            <strong>Other Treatment Procedures</strong>
+            <div *ngFor="let procedure of otherTreatmentProcedures; let i = index" class="procedure-item">
+                <input type="number" cFormControl [formControlName]="procedure.code" class="procedure-input" min="0"
+                    sizing="sm" />
+                <label class="procedure-label" class="mx-2">{{ procedure.name }}</label>
+            </div>
+            <strong>Supplies</strong>
+            <div *ngFor="let supplie of supplies; let i = index" class="procedure-item">
+                <input type="number" cFormControl [formControlName]="supplie.code" class="procedure-input" min="0"
+                    sizing="sm" />
+                <label class="procedure-label" class="mx-2">{{ supplie.name }}</label>
+            </div>
+
+            <strong>Splints/Orthotics</strong>
+            <div *ngFor="let splintsOrthotic of splintsOrthotics; let i = index" class="procedure-item">
+                <input type="number" cFormControl [formControlName]="splintsOrthotic.code" class="procedure-input"
+                    min="0" sizing="sm" />
+                <label class="procedure-label" class="mx-2">{{ splintsOrthotic.name }}</label>
+            </div>
+
+            <strong>Casts</strong>
+            <div *ngFor="let cast of casts; let i = index" class="procedure-item">
+                <input type="number" cFormControl [formControlName]="cast.code" class="procedure-input" min="0"
+                    sizing="sm" />
+                <label class="procedure-label" class="mx-2">{{ cast.name }}</label>
+            </div>
+
+            <strong>Braces</strong>
+            <div *ngFor="let brace of braces; let i = index" class="procedure-item">
+                <input type="number" cFormControl [formControlName]="brace.code" class="procedure-input" min="0"
+                    sizing="sm" />
+                <label class="procedure-label" class="mx-2">{{ brace.name }}</label>
+            </div>
+        </c-col>
+    </c-row>
 
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
