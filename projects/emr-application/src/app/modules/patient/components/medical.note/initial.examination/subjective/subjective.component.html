@@ -1,8 +1,10 @@
-<div [formGroup]="subjectiveForm">
+<div [formGroup]="subjectiveForm" *ngIf="subjectiveFormFields">
     <c-card class="mb-2">
         <c-card-header>Basic Information</c-card-header>
         <c-card-body>
-            <basic-information (formReady)="setChildForm('basic', $event)"></basic-information>
+            <basic-information
+                (formReady)="setChildForm('basic', $event)"
+                [fields]="subjectiveFormFields['Basic Information']"></basic-information>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">
@@ -23,7 +25,7 @@
             <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"></current-functionlimit>
         </c-card-body>
     </c-card>
-    
+
     <c-card class="mb-2">
         <c-card-header>Medical History</c-card-header>
         <c-card-body>

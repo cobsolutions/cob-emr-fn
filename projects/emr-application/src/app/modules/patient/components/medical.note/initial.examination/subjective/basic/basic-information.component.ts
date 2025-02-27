@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'basic-information',
@@ -8,9 +8,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 export class BasicInformationComponent implements OnInit {
   basicForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() fields: any
   treatmentSide: string
   constructor(private fb: FormBuilder) {
-    
+
   }
 
   ngOnInit(): void {
