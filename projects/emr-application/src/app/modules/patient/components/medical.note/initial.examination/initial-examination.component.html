@@ -4,7 +4,8 @@
             <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="true"
                 formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
-                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"></subjective>
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
+                    *ngIf="visitedSteps[0]"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">
@@ -14,16 +15,19 @@
             <mat-step completed="true" formGroupName="objective"
                 [stepControl]="initialExaminationForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
-                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)"></assessment>
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)"
+                    *ngIf="visitedSteps[2]"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('planOfCare')!"
                 formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)"></plan>
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]">
+                </plan>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('billing')!" formGroupName="billing">
                 <ng-template matStepLabel>Billing</ng-template>
-                <billing [stepper]="stepper" [parentForm]="initialExaminationForm" (formReady)="setChildForm('billing', $event)"></billing>
+                <billing [stepper]="stepper" [parentForm]="initialExaminationForm"
+                    (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"></billing>
             </mat-step>
         </mat-stepper>
     </form>

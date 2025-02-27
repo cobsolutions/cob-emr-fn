@@ -306,6 +306,7 @@ export class BillingComponent implements OnInit {
   }
   next() {
     var dd: any = this.getAllFormValues(this.parentForm)
+    console.log(JSON.stringify(dd))
     this.stepper.next();
   }
 

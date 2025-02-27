@@ -118,9 +118,10 @@ export class MedicalHistoryComponent implements OnInit {
     return this.medicalHistoryForm.get('current_medications') as FormArray;
   }
   private addMedicalHistoryCheckboxes(): void {
-    this.medicalHistoryOptions.forEach(() => {
+    this.medicalHistoryOptions.forEach((item: any) => {
       this.medicalHistoryArray.push(
         this.fb.group({
+          item: new FormControl(item),
           selected: new FormControl(false), // Checkbox state
           details: new FormControl('') // Input text (hidden unless selected)
         })
@@ -128,9 +129,10 @@ export class MedicalHistoryComponent implements OnInit {
     });
   }
   private addPersonalFactorsCheckboxes(): void {
-    this.personalFactor.forEach(() => {
+    this.personalFactor.forEach((item: any) => {
       this.personalFactorsArray.push(
         this.fb.group({
+          item: new FormControl(item),
           selected: new FormControl(false), // Checkbox state
           details: new FormControl('') // Input text (hidden unless selected)
         })
@@ -138,9 +140,10 @@ export class MedicalHistoryComponent implements OnInit {
     });
   }
   private addCurrentMedications(): void {
-    this.currentMedications.forEach(() => {
+    this.currentMedications.forEach((item: any) => {
       this.personalCurrentMedications.push(
         this.fb.group({
+          item: new FormControl(item),
           selected: new FormControl(false), // Checkbox state
           details: new FormControl('') // Input text (hidden unless selected)
         })
