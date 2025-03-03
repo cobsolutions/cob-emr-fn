@@ -41,6 +41,7 @@ import { ObservationComponent } from './components/medical.note/initial.examinat
 import { AssessmentComponent } from './components/medical.note/initial.examination/assessment/assessment.component';
 import { PlanComponent } from './components/medical.note/initial.examination/plan/plan.component';
 import { BillingComponent } from './components/medical.note/initial.examination/billing/billing.component';
+import { SoapFieldBuilderComponent } from './components/medical.note/field.control.builder/soap-field-builder.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -86,6 +87,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     AssessmentComponent,
     PlanComponent,
     BillingComponent,
+    SoapFieldBuilderComponent,
   ],
   imports: [
     CommonModule,
