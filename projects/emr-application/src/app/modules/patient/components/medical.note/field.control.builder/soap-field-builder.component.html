@@ -82,12 +82,6 @@
             </option>
         </select>
     </div>
-    <div *ngIf="field.dependents.length > 0">
-        <span *ngFor="let dependent of field.dependents;">
-            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
-                [filedStyle]="getstyleFieldControl(dependent.name)"></soap-field-builder>
-        </span>
-    </div>
     <!--multiple_select-->
     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
@@ -102,5 +96,12 @@
             <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
         </div>
     </div>
+    <div *ngIf="field.dependents.length > 0">
+        <span *ngFor="let dependent of field.dependents;">            
+            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
+                [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
+        </span>
+    </div>
+    
     
 </div>

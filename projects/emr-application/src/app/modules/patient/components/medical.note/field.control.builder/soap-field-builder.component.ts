@@ -12,7 +12,7 @@ export class SoapFieldBuilderComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() field: any
   @Input() filedStyle: FieldControlStyles
-  styles: FieldControlStyles[] = BasicFormStyles;
+  @Input() styles: FieldControlStyles[]
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {

@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
 import { AggravatingFactors } from '../../../lookups/aggravating.factors';
+import { PainFormStyles } from './pain.fields.styles';
 
 @Component({
   selector: 'pain',
@@ -14,13 +17,15 @@ export class PainComponent implements OnInit {
   showPainEval: boolean = false
   painScaleList: string[] = []
   painScaleCounter: number = 0;
-  constructor(private fb: FormBuilder) { }
+  @Input() fields: any
+  styles: FieldControlStyles[] = PainFormStyles;
+  constructor(private fb: FormBuilder
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
+    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.painForm = this.fb.group({
       'pain_scale': new FormControl(null, [Validators.required]),
-      'aggravating': new FormControl(null, [Validators.required]),
-      "restrictions_pain_alleviators": new FormControl(null, [Validators.required]),
     });
     this.handlePainScale();
     this.formReady.emit(this.painForm);
@@ -40,6 +45,9 @@ export class PainComponent implements OnInit {
     this.painScaleList.push('pscal_' + this.painScaleCounter++);
   }
   remove(event: any) {
-    this.painScaleList= this.painScaleList.filter(item => item !== event);
+    this.painScaleList = this.painScaleList.filter(item => item !== event);
+  }
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
   }
 }
