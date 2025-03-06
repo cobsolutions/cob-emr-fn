@@ -54,10 +54,10 @@
         <label for="time_in_out" class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
-        <div [class]="field.class" [style]="filedStyle!.style">
-            <c-form-check class="me-3 d-flex align-items-center" *ngFor="let value of field.select_values;">
-                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="value" />
-                <label cFormCheckLabel class="ms-1">{{value}}</label>
+        <div class="d-flex" [style]="filedStyle!.style">
+            <c-form-check class="me-3 d-flex align-items-center" *ngFor="let fVal of field.value;">
+                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="fVal" />
+                <label cFormCheckLabel class="ms-1">{{fVal}}</label>
             </c-form-check>
         </div>
     </div>
