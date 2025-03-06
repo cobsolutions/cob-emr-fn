@@ -1,153 +1,153 @@
 import { FieldControlStyles } from "../../../../filed.control.style.selector/field.control.style";
 
 export const CarryingMovingANDHandlingObjectsStyles: FieldControlStyles[] = [
-    {
+	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "65_carryingMovingAndHandlingObjects"
+		"name": "218_carryingMovingAndHandlingObjects",
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "66_iADLs",
+		"name": "219_iADLs",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "75_handAndArmUse",
+		"name": "228_handAndArmUse",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "83_fineHandUse",
+		"name": "236_fineHandUse",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "88_movingObjectsWithLowerExtremities",
+		"name": "241_movingObjectsWithLowerExtremities",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "91_communityIntegrationAccess",
+		"name": "244_communityIntegrationAccess",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "92_workVocationOccupation",
+		"name": "245_workVocationOccupation",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "93_recreation",
+		"name": "246_recreation",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "67_abilityToUseTelephone",
+		"name": "220_abilityToUseTelephone",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "68_shopping",
+		"name": "221_shopping",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "69_foodPreparation",
+		"name": "222_foodPreparation",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "70_housekeeping",
+		"name": "223_housekeeping",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "71_laundry",
+		"name": "224_laundry",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "72_modeOfTransportation",
+		"name": "225_modeOfTransportation",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "73_responsibilityForOwnMedications",
+		"name": "226_responsibilityForOwnMedications",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "74_abilityToHandleFinances",
+		"name": "227_abilityToHandleFinances",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "76_pullingObjects",
+		"name": "229_pullingObjects",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "77_pushingObjects",
+		"name": "230_pushingObjects",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "78_reaching",
+		"name": "231_reaching",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "79_turningHandsOrArms",
+		"name": "232_turningHandsOrArms",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "80_twistingHandsOrArms",
+		"name": "233_twistingHandsOrArms",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "81_throwing",
+		"name": "234_throwing",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "82_catching",
+		"name": "235_catching",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "84_pickingUp",
+		"name": "237_pickingUp",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "85_grasping",
+		"name": "238_grasping",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "86_manipulating",
+		"name": "239_manipulating",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "87_releasing",
+		"name": "240_releasing",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "89_kicking",
+		"name": "242_kicking",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "90_pushingWithLowerExtremities",
+		"name": "243_pushingWithLowerExtremities",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "94_sports",
+		"name": "247_sports",
 		"style": "margin-left: 20px;"
 	}
 ]

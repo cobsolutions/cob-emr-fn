@@ -3,221 +3,221 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const MobilityWalkingMovingAroundStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "0_mobilityWalkingAndMovingAround",
+        "name": "153_mobilityWalkingAndMovingAround",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "1_iADLs",
+        "name": "154_iADLs",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "10_useOfAnAssistiveDevice",
+        "name": "163_useOfAnAssistiveDevice",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "11_walking",
+        "name": "164_walking",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "18_movingAround",
+        "name": "171_movingAround",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "25_movingAroundInDifferentLocations",
+        "name": "178_movingAroundInDifferentLocations",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "41_negotiateObstacles",
+        "name": "194_negotiateObstacles",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "2_abilityToUseTelephone",
+        "name": "155_abilityToUseTelephone",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "3_shopping",
+        "name": "156_shopping",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "4_foodPreparation",
+        "name": "157_foodPreparation",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "5_housekeeping",
+        "name": "158_housekeeping",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "6_laundry",
+        "name": "159_laundry",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "7_modeOfTransportation",
+        "name": "160_modeOfTransportation",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "8_responsibilityForOwnMedications",
+        "name": "161_responsibilityForOwnMedications",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "9_abilityToHandleFinances",
+        "name": "162_abilityToHandleFinances",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "12_forward",
+        "name": "165_forward",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "13_backward",
+        "name": "166_backward",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "14_sideways",
+        "name": "167_sideways",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "15_strolling",
+        "name": "168_strolling",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "16_walkingOnDifferentSurfaces",
+        "name": "169_walkingOnDifferentSurfaces",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "17_walkingAroundObstacles",
+        "name": "170_walkingAroundObstacles",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "19_climbing",
+        "name": "172_climbing",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "20_running",
+        "name": "173_running",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "21_jogging",
+        "name": "174_jogging",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "22_skipping",
+        "name": "175_skipping",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "23_jumping",
+        "name": "176_jumping",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "24_swimming",
+        "name": "177_swimming",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "26_walkingBetweenRooms",
+        "name": "179_walkingBetweenRooms",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "29_walkingDownTheStreet",
+        "name": "182_walkingDownTheStreet",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "31_walkingWithinABuilding",
+        "name": "184_walkingWithinABuilding",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "32_movingAroundUsingEquipment",
+        "name": "185_movingAroundUsingEquipment",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "37_movingAroundUsingTransportation",
+        "name": "190_movingAroundUsingTransportation",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "42_bumpedInCrowdedStreets",
+        "name": "195_bumpedInCrowdedStreets",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "43_terrain",
+        "name": "196_terrain",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "27_stairs",
+        "name": "180_stairs",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "28_inHome",
+        "name": "181_inHome",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "30_communityDistances",
+        "name": "183_communityDistances",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "33_walker",
+        "name": "186_walker",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "34_wheelchair",
+        "name": "187_wheelchair",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "35_skates",
+        "name": "188_skates",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "36_skis",
+        "name": "189_skis",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "38_onOffBus",
+        "name": "191_onOffBus",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "39_subway",
+        "name": "192_subway",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "40_publicTransportation",
+        "name": "193_publicTransportation",
         "style": "margin-left: 30px;"
     }
 ]

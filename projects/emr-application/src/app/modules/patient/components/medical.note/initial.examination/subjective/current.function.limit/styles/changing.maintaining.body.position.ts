@@ -1,103 +1,103 @@
 import { FieldControlStyles } from "../../../../filed.control.style.selector/field.control.style";
 
 export const ChangingMaintainingBodyPositionStyles: FieldControlStyles[] = [
-    {
+	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "44_changingMaintainingBodyPosition"
+		"name": "197_changingMaintainingBodyPosition",
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "45_maintainingABodyPosition",
+		"name": "198_maintainingABodyPosition",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "52_transfers",
+		"name": "205_transfers",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "55_iADLs",
+		"name": "208_iADLs",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "46_remainingSeated",
+		"name": "199_remainingSeated",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "47_remainingStanding",
+		"name": "200_remainingStanding",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "48_squatting",
+		"name": "201_squatting",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "49_kneeling",
+		"name": "202_kneeling",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "50_sitting",
+		"name": "203_sitting",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "51_standing",
+		"name": "204_standing",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "53_movingFromBedToChair",
+		"name": "206_movingFromBedToChair",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "54_slidingAlongABench",
+		"name": "207_slidingAlongABench",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "56_abilityToUseTelephone",
+		"name": "209_abilityToUseTelephone",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "57_shopping",
+		"name": "210_shopping",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "58_foodPreparation",
+		"name": "211_foodPreparation",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "59_housekeeping",
+		"name": "212_housekeeping",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "60_laundry",
+		"name": "213_laundry",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "61_modeOfTransportation",
+		"name": "214_modeOfTransportation",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "62_responsibilityForOwnMedications",
+		"name": "215_responsibilityForOwnMedications",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "63_abilityToHandleFinances",
+		"name": "216_abilityToHandleFinances",
 		"style": "margin-left: 20px;"
 	}
 ]

@@ -3,6 +3,6 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const OtherStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "65_other"
+        "name": "248_other"
     }
 ]
