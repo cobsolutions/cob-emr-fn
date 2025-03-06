@@ -16,7 +16,7 @@
     <c-card class="mb-2">
         <c-card-header>Prior Level Of Function</c-card-header>
         <c-card-body>
-            <prior-level-function (formReady)="setChildForm('priorFunction', $event)"></prior-level-function>
+            <prior-level-function (formReady)="setChildForm('priorFunction', $event)" [fields]="subjectiveFormFields['Prior Level Of Function']"></prior-level-function>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">

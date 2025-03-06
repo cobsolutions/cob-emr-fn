@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
+import { PriorFunctionStyles } from './styles/prior.function.fields.styles';
 
 @Component({
   selector: 'prior-level-function',
@@ -9,20 +12,17 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class PriorLevelFunctionComponent implements OnInit {
   priorLevelFunctionForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  constructor(private fb: FormBuilder) { }
+  @Input() fields: any
+  styles: FieldControlStyles[] = PriorFunctionStyles;
+  constructor(private fb: FormBuilder
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
-    this.priorLevelFunctionForm = this.fb.group({
-      'self_care': new FormControl(null, [Validators.required]),
-      'mobility': new FormControl(null, [Validators.required]),
-      'other': new FormControl(null, [Validators.required]),
-
-      'body_position': new FormControl(null, [Validators.required]),
-      'handling_object': new FormControl(null, [Validators.required]),
-      
-
-    })
+    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+    this.priorLevelFunctionForm = this.fb.group({})
     this.formReady.emit(this.priorLevelFunctionForm);
   }
-
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
+  }
 }
