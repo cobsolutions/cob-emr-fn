@@ -62,14 +62,16 @@
         </div>
     </div>
     <!--inline check-->
-    <div class="d-flex align-items-center mb-3" *ngIf="field.type === 'inline-checkbox'">
-        <label class="me-2 text-end" [style]="filedStyle!.label_style">
-            {{field.display}}
-        </label>
-        <c-form-check [inline]="true" *ngFor="let checkField of field.value">
-            <input cFormCheckInput id="na" type="checkbox" [formControlName]="field.name" />
-            <label cFormCheckLabel for="na">{{checkField}}</label>
-        </c-form-check>
+    <div class="mb-3" *ngIf="field.type === 'inline-checkbox'">
+        <div class="d-flex flex-column" [style]="filedStyle!.style">
+            <label class="me-2">
+                {{ field.display }}
+            </label>
+            <c-form-check *ngFor="let checkField of field.value; let first = first">
+                <input cFormCheckInput id="{{ checkField.view }}" type="checkbox" [formControlName]="field.name" />
+                <label cFormCheckLabel for="{{ checkField.view }}">{{ checkField.view }}</label>
+            </c-form-check>
+        </div>
     </div>
     <!--select-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">
@@ -97,11 +99,11 @@
         </div>
     </div>
     <div *ngIf="field.dependents.length > 0">
-        <span *ngFor="let dependent of field.dependents;">            
+        <span *ngFor="let dependent of field.dependents;">
             <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
                 [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
         </span>
     </div>
-    
-    
+
+
 </div>
