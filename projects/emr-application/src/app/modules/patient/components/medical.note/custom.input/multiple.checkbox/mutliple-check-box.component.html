@@ -12,7 +12,13 @@
       <!-- Show input if checkbox is checked -->
       <div *ngIf="form.get(value.val)?.value" class="input-container">
         <div *ngFor="let dependency of value.dependencies">
-          <input [type]="dependency.type" [formControlName]="dependency.fieldFormName" />
+          <div *ngIf="dependency.fieldType !=='textArea'">
+            <input [type]="dependency.fieldType" [formControlName]="dependency.fieldFormName">
+            <label class="mx-1">{{dependency.displayName}}</label>
+          </div>
+          <div *ngIf="dependency.fieldType ==='textArea'">
+            <textarea [formControlName]="dependency.fieldFormName" rows="3"></textarea>
+          </div>
         </div>
       </div>
     </div>
