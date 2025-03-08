@@ -6,7 +6,8 @@
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
-     && field.type !== 'multiple_select'">
+     && field.type !== 'multiple_select'
+     && field.type !== 'custom-mutliple-radio'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -63,7 +64,14 @@
     </div>
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
-        <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display" [splitColumn]="field.checkBoxCol"></mutliple-check-box>
+        <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display"
+            [splitColumn]="field.checkBoxCol"></mutliple-check-box>
+    </div>
+
+    <!--custom multiple-radio-->
+    <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">
+        <multiple-radio [form]="form"  [formControl]="field.name" [values]="field.value" [label]="field.display"
+            [splitColumn]="1"></multiple-radio>
     </div>
     <!--select-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">

@@ -2,15 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-multiple-radio',
+  selector: 'multiple-radio',
   templateUrl: './multiple-radio.component.html',
   styleUrls: ['./multiple-radio.component.css']
 })
 export class MultipleRadioComponent implements OnInit {
   @Input() form: FormGroup;
-  @Input() values:any
-  @Input() label:string
-  @Input() splitColumn:number
+  @Input() values: any
+  @Input() label: string
+  @Input() splitColumn: number
+  @Input() formControl: string
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
