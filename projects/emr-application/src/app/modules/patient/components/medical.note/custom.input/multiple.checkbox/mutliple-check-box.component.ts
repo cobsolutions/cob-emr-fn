@@ -11,14 +11,12 @@ export class MutlipleCheckBoxComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() values:any
   @Input() label:string
-  @Input() splitColumn:boolean
+  @Input() splitColumn:number
   constructor(private fb: FormBuilder) {
   }
   
 
   ngOnInit() {
-
-
     // Initialize checkboxes with FormControls
     this.values.forEach(value => {
       this.form.addControl(value.val, this.fb.control(false));
