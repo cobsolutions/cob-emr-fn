@@ -1,1 +1,26 @@
-<p>multiple-radio works!</p>
+<form [formGroup]="form">
+    <div class="medical-history-container">
+      <label>{{label}}:</label>
+    </div>
+    <div [ngClass]="{'checkbox-group': splitColumn === 1, 'checkbox-group-columns' : splitColumn ===2}">
+      <div *ngFor="let value of values; let i = index" class="checkbox-item">
+        <div class="checkbox-label">
+          <input type="checkbox" [formControlName]="value.val" (change)="toggleAdditionalControl(value.val)" />
+          <label>{{ value.view }}</label>
+        </div>
+  
+        <!-- Show input if checkbox is checked -->
+        <div *ngIf="form.get(value.val)?.value" class="input-container">
+          <div *ngFor="let dependency of value.dependencies">
+            <div *ngIf="dependency.fieldType !=='textArea'">
+              <input [type]="dependency.fieldType" [formControlName]="dependency.fieldFormName">
+              <label class="mx-1">{{dependency.displayName}}</label>
+            </div>
+            <div *ngIf="dependency.fieldType ==='textArea'">
+              <textarea [formControlName]="dependency.fieldFormName" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
