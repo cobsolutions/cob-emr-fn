@@ -1,4 +1,5 @@
 import { FieldControlStyles } from "../../../../filed.control.style.selector/field.control.style";
+import { DiagnosticTestingImagingStyles } from "./diagnostic.testing.imaging";
 import { GeneralHealthStyles } from "./general.health";
 import { HomeHealthCareStyles } from "./home.health.care";
 import { OccupationSocialHistoryStyles } from "./occupation.social.history";
@@ -10,5 +11,6 @@ export var MedicalHistoryStyles: FieldControlStyles[] = [
     ...GeneralHealthStyles,
     ...OccupationSocialHistoryStyles,
     ...HomeHealthCareStyles,
-    ...HistoryOfFallsStyles
+    ...HistoryOfFallsStyles,
+    ...DiagnosticTestingImagingStyles
 ]
