@@ -5,6 +5,7 @@ import { HomeHealthCareStyles } from "./home.health.care";
 import { MentalStatusCognitiveFunctionAppearsImpairedStyles } from "./mental.status.cognitive.function.appears.impaired";
 import { OccupationSocialHistoryStyles } from "./occupation.social.history";
 import { PreviousHistoryOfSimilarSymptomsStyles } from "./previous.history.of.similar.symptoms";
+import { UnexplainedWeightLossStyles } from "./unexplained.weight.loss";
 import { HistoryOfFallsStyles } from "./اistory.of.falls";
 
 export var MedicalHistoryStyles: FieldControlStyles[] = [
@@ -14,5 +15,6 @@ export var MedicalHistoryStyles: FieldControlStyles[] = [
     ...HomeHealthCareStyles,
     ...HistoryOfFallsStyles,
     ...DiagnosticTestingImagingStyles,
-    ...MentalStatusCognitiveFunctionAppearsImpairedStyles
+    ...MentalStatusCognitiveFunctionAppearsImpairedStyles,
+    ...UnexplainedWeightLossStyles
 ]
