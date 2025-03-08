@@ -2,7 +2,7 @@
     <!--input-->
     <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
      && field.type !== 'textArea' 
-     && field.type !== 'inline-checkbox'
+     && field.type !== 'mutliple-checkBox'
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
@@ -61,17 +61,9 @@
             </c-form-check>
         </div>
     </div>
-    <!--inline check-->
-    <div class="mb-3" *ngIf="field.type === 'inline-checkbox'">
-        <div class="d-flex flex-column" [style]="filedStyle!.style">
-            <label class="me-2">
-                {{ field.display }}
-            </label>
-            <c-form-check *ngFor="let checkField of field.value; let first = first">
-                <input cFormCheckInput id="{{ checkField.view }}" type="checkbox" [formControlName]="field.name" />
-                <label cFormCheckLabel for="{{ checkField.view }}">{{ checkField.view }}</label>
-            </c-form-check>
-        </div>
+    <!--mutliple-checkBox-->
+    <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
+        <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display"></mutliple-check-box>
     </div>
     <!--select-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">

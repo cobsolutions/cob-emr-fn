@@ -1,0 +1,39 @@
+.medical-history-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1px;
+  margin-left: 400px;
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Two columns */
+  gap: 1px 20px; /* Adjust spacing between items */
+  max-width: 780px;
+  margin-left: 510px;
+}
+.checkbox-group-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 1px 20px; /* Adjust spacing between items */
+  max-width: 780px;
+  margin-left: 510px;
+}
+
+.checkbox-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-container {
+  margin-left: 24px;
+  margin-top: 5px;
+}

@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <div class="medical-history-container">
+    <label>{{label}}:</label>
+  </div>
+  <div [ngClass]="{'checkbox-group': !splitColumn, 'checkbox-group-columns' : splitColumn}">
+    <div *ngFor="let value of values; let i = index" class="checkbox-item">
+      <div class="checkbox-label">
+        <input type="checkbox" [formControlName]="value.val" (change)="toggleAdditionalControl(value.val)" />
+        <label>{{ value.view }}</label>
+      </div>
+
+      <!-- Show input if checkbox is checked -->
+      <div *ngIf="form.get(value.val)?.value" class="input-container">
+        <div *ngFor="let dependency of value.dependencies">
+          <input [type]="dependency.type" [formControlName]="dependency.fieldFormName" />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

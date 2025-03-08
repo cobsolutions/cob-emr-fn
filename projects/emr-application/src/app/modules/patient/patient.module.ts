@@ -42,6 +42,7 @@ import { AssessmentComponent } from './components/medical.note/initial.examinati
 import { PlanComponent } from './components/medical.note/initial.examination/plan/plan.component';
 import { BillingComponent } from './components/medical.note/initial.examination/billing/billing.component';
 import { SoapFieldBuilderComponent } from './components/medical.note/field.control.builder/soap-field-builder.component';
+import { MutlipleCheckBoxComponent } from './components/medical.note/custom.input/multiple.checkbox/mutliple-check-box.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -88,6 +89,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PlanComponent,
     BillingComponent,
     SoapFieldBuilderComponent,
+    MutlipleCheckBoxComponent,
   ],
   imports: [
     CommonModule,
