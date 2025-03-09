@@ -44,6 +44,9 @@ import { BillingComponent } from './components/medical.note/initial.examination/
 import { SoapFieldBuilderComponent } from './components/medical.note/field.control.builder/soap-field-builder.component';
 import { MutlipleCheckBoxComponent } from './components/medical.note/custom.input/multiple.checkbox/mutliple-check-box.component';
 import { MultipleRadioComponent } from './components/medical.note/custom.input/mutliple.radio/multiple-radio.component';
+import { ProceduresComponent } from './components/medical.note/initial.examination/plan/components/procedures/procedures.component';
+import { ModalitiesComponent } from './components/medical.note/initial.examination/plan/components/modalities/modalities.component';
+import { SpecialtiesComponent } from './components/medical.note/initial.examination/plan/components/specialties/specialties.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -92,6 +95,9 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SoapFieldBuilderComponent,
     MutlipleCheckBoxComponent,
     MultipleRadioComponent,
+    ProceduresComponent,
+    ModalitiesComponent,
+    SpecialtiesComponent,
   ],
   imports: [
     CommonModule,

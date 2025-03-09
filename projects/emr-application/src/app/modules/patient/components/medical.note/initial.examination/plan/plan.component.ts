@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
+import { PlanStyles } from './styles/plan';
 
 @Component({
   selector: 'plan',
@@ -9,6 +13,8 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class PlanComponent implements OnInit {
   planForm: FormGroup;
+  fields: any
+  styles: FieldControlStyles[] = PlanStyles;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   frequencyOptions = ['Custom', 'Daily', 'Weekly'];
@@ -58,19 +64,22 @@ export class PlanComponent implements OnInit {
     { label: 'Acupuncture', value: 'acupuncture' },
     { label: 'Other', value: 'otherSpecialty' }
   ];
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
+    this.medialNoteService.find('plan').subscribe(fields => {
+      console.log(JSON.stringify(fields))
+      this.fields = fields['plan']
+      console.log(JSON.stringify(this.fields))
+    })
     this.planForm = this.fb.group({
-      createPlanOfCare: [false],
-      frequency: ['Custom'],
-      duration: ['Custom'],
-      plan: ['Custom'],
-      physicianSignature: [false]
+      createPlanOfCare: [''],
+      frequency: ['F00'],
+      duration: ['D00'],
+      plan: ['PL01'],
+      physicianSignature: ['']
     });
-    this.procedures.forEach(proc => this.planForm.addControl(proc.value, this.fb.control(false)));
-    this.modalities.forEach(mod => this.planForm.addControl(mod.value, this.fb.control(false)));
-    this.specialties.forEach(spec => this.planForm.addControl(spec.value, this.fb.control(false)));
     this.formReady.emit(this.planForm);
   }
   next() {
