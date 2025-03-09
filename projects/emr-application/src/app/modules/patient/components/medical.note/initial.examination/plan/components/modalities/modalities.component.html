@@ -1,1 +1,4 @@
-<p>modalities works!</p>
+<span *ngFor="let field of fields;">
+    <soap-field-builder [field]="field " [form]="modalitiesForm" [filedStyle]="getstyleFieldControl(field.name)"
+        [styles]="styles"></soap-field-builder>
+</span>

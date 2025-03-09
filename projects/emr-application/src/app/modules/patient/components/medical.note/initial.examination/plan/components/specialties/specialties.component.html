@@ -1,1 +1,4 @@
-<p>specialties works!</p>
+<span *ngFor="let field of fields;">
+    <soap-field-builder [field]="field " [form]="specialtiesForm" [filedStyle]="getstyleFieldControl(field.name)"
+        [styles]="styles"></soap-field-builder>
+</span>
