@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-specialties',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./specialties.component.css']
 })
 export class SpecialtiesComponent implements OnInit {
-
+  specialtiesForm: FormGroup;
+  @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() fields: any
   constructor() { }
 
   ngOnInit(): void {
