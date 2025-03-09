@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-modalities',
+  selector: 'modalities',
   templateUrl: './modalities.component.html',
   styleUrls: ['./modalities.component.css']
 })

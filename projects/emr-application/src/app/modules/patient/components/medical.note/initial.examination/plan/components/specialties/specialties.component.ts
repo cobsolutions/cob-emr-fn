@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-specialties',
+  selector: 'specialties',
   templateUrl: './specialties.component.html',
   styleUrls: ['./specialties.component.css']
 })

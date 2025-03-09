@@ -1,4 +1,4 @@
-<form [formGroup]="planForm">
+<form [formGroup]="planForm" *ngIf="fields">
     <!-- Frequency, Duration, Plan (Styled Inline) -->
     <div class="form-inline mb-3 mt-3">
         <c-row>
@@ -72,7 +72,8 @@
             <div class="section">
                 <h4>Procedures</h4>
                 <hr />
-
+                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']">
+                </procedures>
             </div>
         </c-col>
         <c-col xs="6">
@@ -80,14 +81,16 @@
             <div class="section">
                 <h4>Modalities</h4>
                 <hr />
-
+                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']">
+                </modalities>
             </div>
 
             <!-- Specialties -->
             <div class="section">
                 <h4>Specialties</h4>
                 <hr />
-
+                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']">
+                </specialties>
             </div>
         </c-col>
     </c-row>
