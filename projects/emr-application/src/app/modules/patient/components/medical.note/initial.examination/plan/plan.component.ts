@@ -65,24 +65,24 @@ export class PlanComponent implements OnInit {
     { label: 'Other', value: 'otherSpecialty' }
   ];
   constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService
-    , private fieldDependentsService: FieldDependentsService) { }
+  ) { }
 
   ngOnInit(): void {
     this.medialNoteService.find('plan').subscribe(fields => {
-      console.log(JSON.stringify(fields))
       this.fields = fields
+      this.planForm = this.fb.group({
+        createPlanOfCare: [''],
+        frequency: ['F00'],
+        duration: ['D00'],
+        plan: ['PL01'],
+        physicianSignature: [''],
+        procedures: this.fb.group({}),
+        modalities: this.fb.group({}),
+        specialties: this.fb.group({}),
+      });
+      this.formReady.emit(this.planForm);
     })
-    this.planForm = this.fb.group({
-      createPlanOfCare: [''],
-      frequency: ['F00'],
-      duration: ['D00'],
-      plan: ['PL01'],
-      physicianSignature: [''],
-      procedures: this.fb.group({}),
-      modalities: this.fb.group({}),
-      specialties: this.fb.group({}),
-    });
-    this.formReady.emit(this.planForm);
+
   }
   next() {
     this.stepper.next();
