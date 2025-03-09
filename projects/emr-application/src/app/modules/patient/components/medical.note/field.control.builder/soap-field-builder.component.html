@@ -70,8 +70,8 @@
 
     <!--custom multiple-radio-->
     <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">
-        <multiple-radio [form]="form"  [formControl]="field.name" [values]="field.value" [label]="field.display"
-            [splitColumn]="1"></multiple-radio>
+        <multiple-radio [form]="form" [formControl]="field.name" [values]="field.value" [label]="field.display"
+            [splitColumn]="1" [style]="getstyleFieldControl(field.name)"></multiple-radio>
     </div>
     <!--select-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">

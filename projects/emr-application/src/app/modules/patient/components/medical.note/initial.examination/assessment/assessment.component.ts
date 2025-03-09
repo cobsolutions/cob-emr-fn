@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
+import { AssessmentStyles } from './styles/assessment';
 
 @Component({
   selector: 'assessment',
@@ -9,11 +13,23 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class AssessmentComponent implements OnInit {
   assessmentForm: FormGroup;
+  fields: any
+  styles: FieldControlStyles[] = AssessmentStyles;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   problemsArray: FormArray;
   goalsArray: FormArray;
-
+  constructor(private fb: FormBuilder
+    , private medialNoteService: MedialNoteService
+    ,private fieldDependentsService:FieldDependentsService) { }
+  ngOnInit(): void {
+    this.medialNoteService.find('assessment').subscribe(fields => {
+      this.fields = fields['assessment']
+      this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+    })
+    this.buildForm()
+    this.formReady.emit(this.assessmentForm);
+  }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
   }
@@ -58,12 +74,8 @@ export class AssessmentComponent implements OnInit {
   getGoalFormGroup(index: number): FormGroup {
     return this.goals.at(index) as FormGroup; // Ensure each item is treated as FormGroup
   }
-  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.buildForm()
-    this.formReady.emit(this.assessmentForm);
-  }
+
   private buildForm() {
     this.assessmentForm = this.fb.group({
       'assessment_diagnosis': new FormControl(null),
@@ -83,4 +95,8 @@ export class AssessmentComponent implements OnInit {
   next() {
     this.stepper.next();
   }
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
+  }
+  
 }

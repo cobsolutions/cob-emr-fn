@@ -41,7 +41,7 @@ export class SoapFieldBuilderComponent implements OnInit {
     if (value + '' === field.idField.valueChange) {
       field.dependents.forEach(dependent => {
         dependent.render = true;
-        this.form.addControl(dependent.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null))
+        this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
       });
     } else {
       field.dependents.forEach(dependent => {
@@ -54,7 +54,7 @@ export class SoapFieldBuilderComponent implements OnInit {
     const matchSelectDependents = field.dependents.filter(item => item.changeValueSelect === value);
     matchSelectDependents.forEach(dependent => {
       dependent.render = true;
-      this.form.addControl(dependent.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null))
+      this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
     });
     const notMatchSelect = field.dependents.filter(item => item.changeValueSelect !== value);
     notMatchSelect.forEach(dependent => {

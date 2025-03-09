@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 
 @Component({
   selector: 'multiple-radio',
@@ -12,6 +13,7 @@ export class MultipleRadioComponent implements OnInit {
   @Input() label: string
   @Input() splitColumn: number
   @Input() formControl: string
+  @Input() style: FieldControlStyles
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
