@@ -65,7 +65,7 @@
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
         <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display"
-            [splitColumn]="field.checkBoxCol"></mutliple-check-box>
+            [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle" [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
     </div>
 
     <!--custom multiple-radio-->
