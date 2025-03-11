@@ -65,7 +65,8 @@
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
         <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display"
-            [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle" [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
+            [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
+            [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
     </div>
 
     <!--custom multiple-radio-->
@@ -98,7 +99,7 @@
             <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
         </div>
     </div>
-    <div *ngIf="field.dependents.length > 0">
+    <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
             <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
                 [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>

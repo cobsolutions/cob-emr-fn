@@ -1,4 +1,4 @@
-<form [formGroup]="billingForm">
+<form [formGroup]="billingForm" *ngIf="fields">
     <h4>Billing:</h4>
     <hr />
     <c-form-check class="mb-4">
@@ -20,7 +20,7 @@
                 </label>
             </c-col>
             <c-col xs="12">
-                <textarea cFormControl id="precautions" formControlName="precautions" rows="3"></textarea>
+                <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt" rows="3"></textarea>
             </c-col>
         </c-row>
     </div>
@@ -39,30 +39,7 @@
                     <c-col xs="12">
                         <h6><strong>Untimed Codes</strong></h6>
                         <hr />
-                        <div *ngFor="let untimedCode of untimedCodes" class="mb-1">
-                            <label>
-                                <input type="checkbox" [formControlName]="untimedCode.value" />
-                                {{ untimedCode.label }}
-                            </label>
-                        </div>
-                        <div *ngFor="let untimedCodetxt of untimedCodesText; let i = index" class="procedure-item">
-                            <input type="number" cFormControl [formControlName]="untimedCodetxt.code"
-                                class="procedure-input" min="0" sizing="sm" />
-                            <label class="procedure-label" class="mx-2">{{ untimedCodetxt.name }}</label>
-                        </div>
-                        <strong style="margin-left: 20px;">Strapping</strong>
-                        <div *ngFor="let strapp of strapping; let i = index" class="procedure-item">
-                            <input type="number" cFormControl [formControlName]="strapp.cpt" class="procedure-input"
-                                min="0" sizing="sm" />
-                            <label class="procedure-label" class="mx-2">{{ strapp.name }}</label>
-                        </div>
-                        <strong>Direct Timed Codes</strong>
-                        <hr />
-                        <div *ngFor="let directTimedCode of directTimedCodes; let i = index" class="procedure-item">
-                            <input type="number" cFormControl [formControlName]="directTimedCode.code"
-                                class="procedure-input" min="0" sizing="sm" />
-                            <label class="procedure-label" class="mx-2">{{ directTimedCode.name }}</label>
-                        </div>
+                        <untimed-codes (formReady)="setChildForm('untimedCodes', $event)" [fields]="fields['Untimed Codes']"></untimed-codes>
                     </c-col>
                     <c-col xs="4">
                         <strong>Calendar Month</strong>

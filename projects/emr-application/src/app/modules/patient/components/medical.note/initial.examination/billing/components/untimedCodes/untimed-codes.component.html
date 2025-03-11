@@ -1,0 +1,6 @@
+<div [formGroup]="UntimedCodesForm">
+    <span *ngFor="let field of fields;">
+        <soap-field-builder [field]="field " [form]="UntimedCodesForm" [filedStyle]="getstyleFieldControl(field.name)"
+            [styles]="styles"></soap-field-builder>
+    </span>
+</div>

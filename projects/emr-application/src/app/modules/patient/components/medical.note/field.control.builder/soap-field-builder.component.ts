@@ -20,7 +20,7 @@ export class SoapFieldBuilderComponent implements OnInit {
 
   private buildField(field: any) {
     this.form.addControl(field.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null));
-    if (field.dependents.length > 0) {
+    if (field.dependents !== undefined && field.dependents.length > 0) {
       this.form?.get(field.name)?.valueChanges.subscribe(value => {
         if (Array.isArray(field.idField.valueChange)) {
           this.renderDependentsPerChangeValue(field, value)

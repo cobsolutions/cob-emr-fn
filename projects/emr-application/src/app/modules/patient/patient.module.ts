@@ -47,6 +47,7 @@ import { MultipleRadioComponent } from './components/medical.note/custom.input/m
 import { ProceduresComponent } from './components/medical.note/initial.examination/plan/components/procedures/procedures.component';
 import { ModalitiesComponent } from './components/medical.note/initial.examination/plan/components/modalities/modalities.component';
 import { SpecialtiesComponent } from './components/medical.note/initial.examination/plan/components/specialties/specialties.component';
+import { UntimedCodesComponent } from './components/medical.note/initial.examination/billing/components/untimedCodes/untimed-codes.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -98,6 +99,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ProceduresComponent,
     ModalitiesComponent,
     SpecialtiesComponent,
+    UntimedCodesComponent,
   ],
   imports: [
     CommonModule,

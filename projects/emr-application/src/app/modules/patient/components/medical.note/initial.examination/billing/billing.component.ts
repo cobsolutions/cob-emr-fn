@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
   selector: 'billing',
@@ -12,6 +13,7 @@ export class BillingComponent implements OnInit {
   billingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  fields: any
   untimedCodes = [
     { label: "PT Evaluation: Low Complexity", value: "97161" },
     { label: "PT Evaluation: Moderate Complexity", value: "97162" },
@@ -274,34 +276,38 @@ export class BillingComponent implements OnInit {
     { label: '(Type Below)', value: 'DNTB' },
   ]
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
-    this.billingForm = this.fb.group({
-      'dailyNoteIncluded': this.fb.control(null),
-      'dn_nstructions': this.fb.control("DN1"),
-      'objective_findings': this.fb.control(null),
-      'pre_Treatment': this.fb.control(null),
-      'post_Treatment': this.fb.control(null),
-      'precautions': this.fb.control(null),
-    });
-    this.untimedCodes.forEach(obj => this.billingForm.addControl(obj.value, this.fb.control(false)));
-    this.untimedCodesText.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+    this.medialNoteService.find('billing').subscribe(fields => {
+      this.fields = fields
+      this.billingForm = this.fb.group({
+        'dailyNoteIncluded': this.fb.control(null),
+        'dn_nstructions': this.fb.control("DN1"),
+        'precautions': this.fb.control(null),
+        'instructionsTxt': this.fb.control(null),
+        'objective_findings': this.fb.control(null),
+        'pre_Treatment': this.fb.control(null),
+        'post_Treatment': this.fb.control(null),
+        untimedCodes: this.fb.group({}),
+      });
+      this.untimedCodes.forEach(obj => this.billingForm.addControl(obj.value, this.fb.control(false)));
+      this.untimedCodesText.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
 
-    this.otherTreatmentProcedures.forEach(proc => this.billingForm.addControl(proc.code, this.fb.control(false)));
+      this.otherTreatmentProcedures.forEach(proc => this.billingForm.addControl(proc.code, this.fb.control(false)));
 
-    this.strapping.forEach(obj => this.billingForm.addControl(obj.cpt, this.fb.control(false)));
+      this.strapping.forEach(obj => this.billingForm.addControl(obj.cpt, this.fb.control(false)));
 
-    this.directTimedCodes.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-    this.calendarMonth.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-    this.nerveConductionStudies.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-    this.respiratory.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.directTimedCodes.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.calendarMonth.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.nerveConductionStudies.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.respiratory.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
 
-    this.supplies.forEach(supply => this.billingForm.addControl(supply.code, this.fb.control(false)));
-    this.splintsOrthotics.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-    this.casts.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-    this.braces.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
-
+      this.supplies.forEach(supply => this.billingForm.addControl(supply.code, this.fb.control(false)));
+      this.splintsOrthotics.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.casts.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+      this.braces.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
+    })
     this.formReady.emit(this.billingForm);
   }
   next() {
@@ -326,5 +332,7 @@ export class BillingComponent implements OnInit {
     });
     return values;
   }
-
+  setChildForm(section: string, formGroup: FormGroup) {
+    this.billingForm.setControl(section, formGroup);
+  }
 }
