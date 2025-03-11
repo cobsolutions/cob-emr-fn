@@ -7,7 +7,8 @@
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
      && field.type !== 'multiple_select'
-     && field.type !== 'custom-mutliple-radio'">
+     && field.type !== 'custom-mutliple-radio'
+     && field.type !== 'billing-code-number'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -73,6 +74,9 @@
     <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">
         <multiple-radio [form]="form" [inputControlName]="field.name" [values]="field.value" [label]="field.display"
             [splitColumn]="1" [style]="getstyleFieldControl(field.name)"></multiple-radio>
+    </div>
+    <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
+        <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
     </div>
     <!--select-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">

@@ -49,6 +49,7 @@ import { ModalitiesComponent } from './components/medical.note/initial.examinati
 import { SpecialtiesComponent } from './components/medical.note/initial.examination/plan/components/specialties/specialties.component';
 import { UntimedCodesComponent } from './components/medical.note/initial.examination/billing/components/untimedCodes/untimed-codes.component';
 import { CalendarMonthComponent } from './components/medical.note/initial.examination/billing/components/calendar.month/calendar-month.component';
+import { BillingCodeNumberComponent } from './components/medical.note/custom.input/billing.code/billing-code-number.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -102,6 +103,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SpecialtiesComponent,
     UntimedCodesComponent,
     CalendarMonthComponent,
+    BillingCodeNumberComponent,
   ],
   imports: [
     CommonModule,
