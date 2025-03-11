@@ -5,7 +5,7 @@
   <div [ngClass]="{'checkbox-group': splitColumn === 1, 'checkbox-group-columns' : splitColumn ===2}">
     <div *ngFor="let value of values; let i = index" class="checkbox-item">
       <div class="checkbox-label">
-        <input type="radio" [formControlName]="formControl" [value]="value.val" />
+        <input type="radio" [formControlName]="inputControlName" [value]="value.val" />
         <!-- <label>{{ value.view }}</label> -->
         <div [innerHTML]="value.view"></div>
       </div>

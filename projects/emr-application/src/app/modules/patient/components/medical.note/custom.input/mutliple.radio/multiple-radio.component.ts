@@ -12,7 +12,7 @@ export class MultipleRadioComponent implements OnInit {
   @Input() values: any
   @Input() label: string
   @Input() splitColumn: number
-  @Input() formControl: string
+  @Input() inputControlName: string
   @Input() style: FieldControlStyles
   constructor(private fb: FormBuilder) { }
 
