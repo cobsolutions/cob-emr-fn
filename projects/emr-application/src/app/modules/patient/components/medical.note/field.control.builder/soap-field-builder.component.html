@@ -24,8 +24,8 @@
             [style]="filedStyle!.style"></textarea>
     </div>
     <!--checkbox-->
-    <div class="d-flex align-items-center mb-1" *ngIf="field.type == 'checkbox'" [style]="filedStyle!.style">
-        <label class="me-2 text-end" [style]="filedStyle!.label_style"></label>
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type == 'checkbox'" [style]="filedStyle?.style">
+        <label class="me-2 text-end" [style]="filedStyle?.label_style"></label>
         <c-form-check>
             <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
             <label cFormCheckLabel for="na">{{field.display}}</label>

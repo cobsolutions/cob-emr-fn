@@ -45,24 +45,20 @@
                     <c-col xs="4">
                         <strong>Calendar Month</strong>
                         <hr />
-                        <calendar-month (formReady)="setChildForm('untimedCodes', $event)"
+                        <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
                             [fields]="fields['calendar month']"></calendar-month>
                     </c-col>
                     <c-col xs="4">
                         <strong>Nerve Conduction Studies</strong>
                         <hr />
-                        <div *ngFor="let nerveConductionStudy of nerveConductionStudies" class="mb-1">
-                            <label>
-                                <input type="checkbox" [formControlName]="nerveConductionStudy.code" />
-                                {{ nerveConductionStudy.name }}
-                            </label>
-                        </div>
+                        <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
+                            [fields]="fields['Nerve Conduction Studies']"></nerve-conduction-studies>
                     </c-col>
                     <c-col xs="4">
                         <strong>Respiratory</strong>
                         <hr />
-                        <respiratory (formReady)="setChildForm('untimedCodes', $event)"
-                            [fields]="fields['Respiratory']"></respiratory>
+                        <respiratory (formReady)="setChildForm('respiratory', $event)" [fields]="fields['Respiratory']">
+                        </respiratory>
                     </c-col>
                 </c-row>
             </div>
