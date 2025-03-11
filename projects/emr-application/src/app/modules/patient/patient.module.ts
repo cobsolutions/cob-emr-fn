@@ -51,6 +51,7 @@ import { UntimedCodesComponent } from './components/medical.note/initial.examina
 import { CalendarMonthComponent } from './components/medical.note/initial.examination/billing/components/calendar.month/calendar-month.component';
 import { BillingCodeNumberComponent } from './components/medical.note/custom.input/billing.code/billing-code-number.component';
 import { RespiratoryComponent } from './components/medical.note/initial.examination/billing/components/respiratory/respiratory.component';
+import { NerveConductionStudiesComponent } from './components/medical.note/initial.examination/billing/components/nerve.conduction.studies/nerve-conduction-studies.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -106,6 +107,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CalendarMonthComponent,
     BillingCodeNumberComponent,
     RespiratoryComponent,
+    NerveConductionStudiesComponent,
   ],
   imports: [
     CommonModule,
