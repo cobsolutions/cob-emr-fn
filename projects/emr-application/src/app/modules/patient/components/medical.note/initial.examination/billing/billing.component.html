@@ -45,7 +45,6 @@
                     <c-col xs="4">
                         <strong>Calendar Month</strong>
                         <hr />
-                        
                         <calendar-month (formReady)="setChildForm('untimedCodes', $event)"
                             [fields]="fields['calendar month']"></calendar-month>
                     </c-col>
@@ -62,11 +61,8 @@
                     <c-col xs="4">
                         <strong>Respiratory</strong>
                         <hr />
-                        <div *ngFor="let resp of respiratory; let i = index" class="procedure-item">
-                            <input type="number" cFormControl [formControlName]="resp.code" class="procedure-input"
-                                min="0" sizing="sm" />
-                            <label class="procedure-label" class="mx-2">{{ resp.name }}</label>
-                        </div>
+                        <respiratory (formReady)="setChildForm('untimedCodes', $event)"
+                            [fields]="fields['Respiratory']"></respiratory>
                     </c-col>
                 </c-row>
             </div>
