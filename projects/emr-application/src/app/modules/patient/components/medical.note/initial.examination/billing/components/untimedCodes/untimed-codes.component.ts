@@ -13,6 +13,7 @@ export class UntimedCodesComponent implements OnInit {
   UntimedCodesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() strappingfields : any
   styles: FieldControlStyles[] = UntimedCodesStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 

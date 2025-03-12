@@ -1,6 +1,13 @@
 <div [formGroup]="UntimedCodesForm">
     <span *ngFor="let field of fields;">
-        <soap-field-builder [field]="field " [form]="UntimedCodesForm" [filedStyle]="getstyleFieldControl(field.name)"
+        <soap-field-builder [field]="field" [form]="UntimedCodesForm" [filedStyle]="getstyleFieldControl(field.name)"
             [styles]="styles"></soap-field-builder>
     </span>
+    <strong style="margin-left: 10px;"><i>Strapping</i></strong>
+    <div style="margin-left: 20px;">
+        <span *ngFor="let strappingfield of strappingfields;">
+            <soap-field-builder [field]="strappingfield" [form]="UntimedCodesForm"
+                [filedStyle]="getstyleFieldControl(strappingfield.name)" [styles]="styles"></soap-field-builder>
+        </span>
+    </div>
 </div>
