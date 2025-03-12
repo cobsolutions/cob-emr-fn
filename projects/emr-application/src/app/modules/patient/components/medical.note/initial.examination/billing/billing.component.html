@@ -60,6 +60,12 @@
                         <respiratory (formReady)="setChildForm('respiratory', $event)" [fields]="fields['Respiratory']">
                         </respiratory>
                     </c-col>
+                    <c-col xs="12">
+                        <strong>Direct Timed Codes</strong>
+                        <hr />
+                        <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
+                            [fields]="fields['Direct Timed Codes']"></direct-timed-codes>
+                    </c-col>
                 </c-row>
             </div>
         </c-col>

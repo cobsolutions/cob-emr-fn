@@ -104,7 +104,8 @@ export class BillingComponent implements OnInit {
         supplies: this.fb.group({}),
         splintsorthotics: this.fb.group({}),
         casts:this.fb.group({}),
-        braces:this.fb.group({})
+        braces:this.fb.group({}),
+        directTimedCodes:this.fb.group({})
       });
       
       this.untimedCodesText.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)))
