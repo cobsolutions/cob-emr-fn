@@ -52,6 +52,7 @@ import { CalendarMonthComponent } from './components/medical.note/initial.examin
 import { BillingCodeNumberComponent } from './components/medical.note/custom.input/billing.code/billing-code-number.component';
 import { RespiratoryComponent } from './components/medical.note/initial.examination/billing/components/respiratory/respiratory.component';
 import { NerveConductionStudiesComponent } from './components/medical.note/initial.examination/billing/components/nerve.conduction.studies/nerve-conduction-studies.component';
+import { OtherTreatmentProceduresComponent } from './components/medical.note/initial.examination/billing/components/other.treatment.procedures/other-treatment-procedures.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -108,6 +109,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     BillingCodeNumberComponent,
     RespiratoryComponent,
     NerveConductionStudiesComponent,
+    OtherTreatmentProceduresComponent,
   ],
   imports: [
     CommonModule,
