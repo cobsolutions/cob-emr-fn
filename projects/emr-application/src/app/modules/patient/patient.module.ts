@@ -53,6 +53,7 @@ import { BillingCodeNumberComponent } from './components/medical.note/custom.inp
 import { RespiratoryComponent } from './components/medical.note/initial.examination/billing/components/respiratory/respiratory.component';
 import { NerveConductionStudiesComponent } from './components/medical.note/initial.examination/billing/components/nerve.conduction.studies/nerve-conduction-studies.component';
 import { OtherTreatmentProceduresComponent } from './components/medical.note/initial.examination/billing/components/other.treatment.procedures/other-treatment-procedures.component';
+import { SuppliesComponent } from './components/medical.note/initial.examination/billing/components/supplies/supplies.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -110,6 +111,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     RespiratoryComponent,
     NerveConductionStudiesComponent,
     OtherTreatmentProceduresComponent,
+    SuppliesComponent,
   ],
   imports: [
     CommonModule,
