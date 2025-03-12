@@ -99,11 +99,8 @@
                 <c-col xs="4">
                     <strong>Splints/Orthotics</strong>
                     <hr />
-                    <div *ngFor="let splintsOrthotic of splintsOrthotics; let i = index" class="procedure-item">
-                        <input type="number" cFormControl [formControlName]="splintsOrthotic.code"
-                            class="procedure-input" min="0" sizing="sm" />
-                        <label class="procedure-label" class="mx-2">{{ splintsOrthotic.name }}</label>
-                    </div>
+                    <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
+                        [fields]="fields['Splints Orthotics']"></splints-orthotics>
                 </c-col>
                 <c-col xs="4">
                     <strong>Casts</strong>

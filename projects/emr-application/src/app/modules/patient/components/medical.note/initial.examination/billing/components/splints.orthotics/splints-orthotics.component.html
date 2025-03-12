@@ -1,1 +1,5 @@
-<p>splints-orthotics works!</p>
+<div [formGroup]="SplintsOrthoticsForm">
+    <span *ngFor="let field of fields;">
+        <soap-field-builder [field]="field " [form]="SplintsOrthoticsForm"></soap-field-builder>
+    </span>
+</div>
