@@ -56,6 +56,7 @@ import { OtherTreatmentProceduresComponent } from './components/medical.note/ini
 import { SuppliesComponent } from './components/medical.note/initial.examination/billing/components/supplies/supplies.component';
 import { SplintsOrthoticsComponent } from './components/medical.note/initial.examination/billing/components/splints.orthotics/splints-orthotics.component';
 import { CastsComponent } from './components/medical.note/initial.examination/billing/components/Casts/casts.component';
+import { BracesComponent } from './components/medical.note/initial.examination/billing/components/Braces/braces.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -116,6 +117,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SuppliesComponent,
     SplintsOrthoticsComponent,
     CastsComponent,
+    BracesComponent,
   ],
   imports: [
     CommonModule,
