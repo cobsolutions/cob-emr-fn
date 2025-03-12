@@ -55,6 +55,7 @@ import { NerveConductionStudiesComponent } from './components/medical.note/initi
 import { OtherTreatmentProceduresComponent } from './components/medical.note/initial.examination/billing/components/other.treatment.procedures/other-treatment-procedures.component';
 import { SuppliesComponent } from './components/medical.note/initial.examination/billing/components/supplies/supplies.component';
 import { SplintsOrthoticsComponent } from './components/medical.note/initial.examination/billing/components/splints.orthotics/splints-orthotics.component';
+import { CastsComponent } from './components/medical.note/initial.examination/billing/components/Casts/casts.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -114,6 +115,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     OtherTreatmentProceduresComponent,
     SuppliesComponent,
     SplintsOrthoticsComponent,
+    CastsComponent,
   ],
   imports: [
     CommonModule,

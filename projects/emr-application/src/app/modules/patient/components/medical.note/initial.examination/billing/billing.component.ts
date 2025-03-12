@@ -295,7 +295,8 @@ export class BillingComponent implements OnInit {
         nerveConduction: this.fb.group({}),
         otherTreatmentProcedures: this.fb.group({}),
         supplies: this.fb.group({}),
-        splintsorthotics: this.fb.group({})
+        splintsorthotics: this.fb.group({}),
+        casts:this.fb.group({})
       });
       this.untimedCodes.forEach(obj => this.billingForm.addControl(obj.value, this.fb.control(false)));
       this.untimedCodesText.forEach(obj => this.billingForm.addControl(obj.code, this.fb.control(false)));
