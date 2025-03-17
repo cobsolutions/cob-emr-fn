@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class BillingComponent implements OnInit {
     { label: '(Type Below)', value: 'DNTB' },
   ]
 
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
+  constructor(private fb: FormBuilder
+    , private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
     this.medialNoteService.find('billing').subscribe(fields => {
@@ -46,15 +48,29 @@ export class BillingComponent implements OnInit {
         braces: this.fb.group({}),
         directTimedCodes: this.fb.group({})
       });
+      this.formReady.emit(this.billingForm);
     })
-    this.formReady.emit(this.billingForm);
   }
   next() {
-    var dd: any = this.getAllFormValues(this.parentForm)
-    console.log(JSON.stringify(dd))
+    var createdNote: any = this.getAllFormValues(this.parentForm)
+    this.create(createdNote)
     this.stepper.next();
   }
 
+  create(createdNote:any ){
+    var medicalNoteRequest: MedicalNoteRequest={
+      caseId:58,
+      noteType:"INITIAL_EVALUATION",
+      createdBy:"Mahmoud shalaby",
+      subjective:createdNote.subjective,
+      assessment:createdNote.assessment,
+      planOfCare:createdNote.planOfCare,
+      billing:createdNote.billing
+    }
+    this.medialNoteService.create(medicalNoteRequest).subscribe(result=>{
+      console.log('created')
+    })
+  }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
     Object.keys(formGroup.controls).forEach((key) => {
