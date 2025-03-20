@@ -7,7 +7,9 @@ import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 
 import { PatientCase } from '../../../models/case/patient.case';
+import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { CancelNoShowService } from '../../../services/appointment/cancel-no-show.service';
+import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -27,13 +29,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   tmp: Appointment;
   tmpReasonDate: Date
   patientRecordAction: string = '0'
-  constructor(private cancelNoShowService: CancelNoShowService) { super() }
+  constructor(private cancelNoShowService: CancelNoShowService,private patientRecordService:PatientRecordService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate', 'Actions']);
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();
     this.getAppointments();
+    this.ddd();
   }
   
   toggleReasonVisibility(data: any) {
@@ -52,6 +55,35 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.referringDoctor = this.case.referralCase.referringPartyName === null ? '' : this.case.referralCase.referringPartyName;
     this.referringNPI = this.case.referralCase.referringPartyNPI === null ? '' : this.case.referralCase.referringPartyNPI;
 
+  }
+  private ddd(){
+    const patientRecordRequest:PatientRecordRequest={      
+      patientId : this.patientId,
+      caseId:this.case.id
+    }
+    this.patientRecordService.find(this.apiParams$,patientRecordRequest).pipe(
+      retry({
+        delay: (error) => {
+          console.warn('Retry: ', error);
+          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
+          this.loadingData$.next(false);
+          return this.retry$;
+        }
+      }),
+      tap((response: any) => {
+        this.totalItems$.next(response.number_of_matching_records);
+        if (response.number_of_records) {
+          this.errorMessage$.next('');
+        }
+        this.retry$.next(false);
+        this.loadingData$.next(false);
+      }),
+      map((response: any) => {
+        return response.records;
+      })
+    ).subscribe(result=>{
+      console.log(JSON.stringify(result))
+    })
   }
   getAppointments() {
     console.log(this.case.id)
