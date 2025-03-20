@@ -58,14 +58,18 @@
             </c-col>
             <c-col [sm]="12">
                 <div class="d-flex justify-content-end">
-                    <div class="p-2">
-                        <select cSelect sizing="sm" [(ngModel)]="patientRecordAction">
-                            <option [value]="0">Patient Record Actions</option>
-                            <option [value]="1">Add Initial Examination</option>
-                            <option [value]="2">Quick Discharge</option>
-                            <option [value]="3">Case note</option>
-                            <option [value]="4">Cancel/No show</option>
-                        </select>
+                    <div class="p-2 d-flex align-items-center gap-2">
+                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;">Patient Record Actions:</label>
+                        <c-input-group class="mb-3">
+                            <select id="patientRecordAction" cSelect sizing="sm" [(ngModel)]="patientRecordAction">
+                                <option [value]="i" *ngFor="let action of case.patientRecordActions; let i = index">
+                                    {{ action }}
+                                </option>
+                            </select>
+                            <button cButton color="primary" variant="outline" size="sm">
+                                <svg cIcon name="cilArrowCircleRight"></svg>
+                            </button>
+                        </c-input-group>
                     </div>
                 </div>
             </c-col>
@@ -73,8 +77,7 @@
     </c-card-body>
 </c-card>
 <!--Patient Case Records,E-document,Payment and Exercise Program-->
-{{case.patientRecordActions | json}}
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecordAction === '0'">
+<c-card class="mb-3 ustify-content-center">
     <c-card-body>
         <c-nav variant="tabs">
             <c-nav-item>
