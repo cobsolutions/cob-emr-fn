@@ -134,13 +134,12 @@
                     <c-nav variant="tabs">
                         <c-nav-item *ngFor="let case of patientCases; let i = index">
                             <a [active]="i===0" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i"
-                                cNavLink>{{case.title}}</a>
+                                cNavLink (click)="selectTab(i)" >{{case.title}}</a>
                         </c-nav-item>
                     </c-nav>
                     <c-tab-content #caseContent="cTabContent">
                         <c-tab-pane class="p-3" *ngFor="let case of patientCases; let i = index">
-                            <app-patient-chart-case [case]="case" [patientId]="patientId"
-                                [clinicId]="2"></app-patient-chart-case>
+                            <app-patient-chart-case [case]="case" [patientId]="patientId" *ngIf="selectedIndex === i"></app-patient-chart-case>
                         </c-tab-pane>
                     </c-tab-content>
                 </c-card-body>

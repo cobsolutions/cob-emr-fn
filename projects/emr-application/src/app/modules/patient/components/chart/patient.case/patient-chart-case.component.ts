@@ -24,9 +24,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   appointments$!: Observable<Appointment[]>;
   reasonVisibility = false;
   columns: (string | IColumn)[];
-  tmp : Appointment;
-  tmpReasonDate : Date
-  patientRecordAction:string= '1'
+  tmp: Appointment;
+  tmpReasonDate: Date
+  patientRecordAction: string = '0'
   constructor(private cancelNoShowService: CancelNoShowService) { super() }
 
   ngOnInit(): void {
@@ -35,6 +35,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.getReferringCaseData();
     this.getAppointments();
   }
+  
   toggleReasonVisibility(data: any) {
     this.tmp = data;
     this.tmpReasonDate = moment.unix(this.tmp?.appointmentCancelNoShowReason?.reasonDate / 1000).toDate();
@@ -53,6 +54,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
 
   }
   getAppointments() {
+    console.log(this.case.id)
     if (this.case.id !== null)
       this.appointments$ = this.cancelNoShowService.findCancelNoShowAppointments(this.apiParams$, this.patientId, this.case.id).pipe(
         retry({
