@@ -18,4 +18,5 @@ export interface PatientCase {
     therapist?: number;
     therapistUUID?:string;
     caseOtherInformation?: CaseOtherInformation;
+    patientRecordActions?:string[]
 }
