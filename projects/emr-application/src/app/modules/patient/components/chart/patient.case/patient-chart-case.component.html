@@ -107,7 +107,7 @@
                     <c-card-body>
                         <ng-container *ngIf="props$ | async as props">
                             <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-                                [items]="(appointments$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+                                [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
                                 (itemsPerPageChange)="handleItemsPerPageChange($event)"
                                 [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
                                 [tableProps]="{ hover: true, striped: false, small:true }"
@@ -117,19 +117,16 @@
                                     let-tdContent="tdContent">
                                     <td>
                                         <ng-container [ngSwitch]="columnName">
-                                            <ng-container *ngSwitchCase="'appointmentStatus'">
-                                                {{tdContent}}
+                                            <ng-container *ngSwitchCase="'record'">
+                                                {{item.status}}
                                             </ng-container>
-                                            <ng-container *ngSwitchCase="'startDate'">
-                                                {{tdContent| date:'MMM d, y, h:mm a'}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'endDate'">
-                                                {{tdContent| date:'MMM d, y, h:mm a'}}
+                                            <ng-container *ngSwitchCase="'date'">
+                                                {{item.date| date:'MMM d, y, h:mm a'}}
                                             </ng-container>
                                             <ng-container *ngSwitchDefault>
                                                 {{tdContent}}
                                             </ng-container>
-                                            <ng-container *ngSwitchCase="'Actions'">
+                                            <ng-container *ngSwitchCase="'actions'">
                                                 <button class="btn btn-outline-primary btn-sm"
                                                     (click)="toggleReasonVisibility(item)">View Reasons</button>
                                             </ng-container>

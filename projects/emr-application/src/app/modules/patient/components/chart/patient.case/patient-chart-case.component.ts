@@ -7,6 +7,7 @@ import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 
 import { PatientCase } from '../../../models/case/patient.case';
+import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { CancelNoShowService } from '../../../services/appointment/cancel-no-show.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
@@ -24,21 +25,22 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   @Input() patientId: number;
   @Input() clinicId: number;
   appointments$!: Observable<Appointment[]>;
+  patientRecords$!: Observable<PatientRecord[]>
   reasonVisibility = false;
   columns: (string | IColumn)[];
   tmp: Appointment;
   tmpReasonDate: Date
   patientRecordAction: string = '0'
-  constructor(private cancelNoShowService: CancelNoShowService,private patientRecordService:PatientRecordService) { super() }
+  constructor(private cancelNoShowService: CancelNoShowService, private patientRecordService: PatientRecordService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate', 'Actions']);
+    this.columns = this.constructColumns(['record', 'date', 'actions'],true);
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();
     this.getAppointments();
     this.ddd();
   }
-  
+
   toggleReasonVisibility(data: any) {
     this.tmp = data;
     this.tmpReasonDate = moment.unix(this.tmp?.appointmentCancelNoShowReason?.reasonDate / 1000).toDate();
@@ -56,12 +58,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.referringNPI = this.case.referralCase.referringPartyNPI === null ? '' : this.case.referralCase.referringPartyNPI;
 
   }
-  private ddd(){
-    const patientRecordRequest:PatientRecordRequest={      
-      patientId : this.patientId,
-      caseId:this.case.id
+  private ddd() {
+    const patientRecordRequest: PatientRecordRequest = {
+      patientId: this.patientId,
+      caseId: this.case.id
     }
-    this.patientRecordService.find(this.apiParams$,patientRecordRequest).pipe(
+    this.patientRecords$ = this.patientRecordService.find(this.apiParams$, patientRecordRequest).pipe(
       retry({
         delay: (error) => {
           console.warn('Retry: ', error);
@@ -81,12 +83,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       map((response: any) => {
         return response.records;
       })
-    ).subscribe(result=>{
-      console.log(JSON.stringify(result))
-    })
+    )
   }
   getAppointments() {
-    console.log(this.case.id)
     if (this.case.id !== null)
       this.appointments$ = this.cancelNoShowService.findCancelNoShowAppointments(this.apiParams$, this.patientId, this.case.id).pipe(
         retry({

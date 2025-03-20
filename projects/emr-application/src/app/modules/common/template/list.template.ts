@@ -79,21 +79,21 @@ export class ListTemplate {
         this.activePage$.next(page);
     }
 
-    constructColumns(cloumnsNames: string[]) {
+    constructColumns(cloumnsNames: string[],noLabel?:boolean) {
         var columns: (string | IColumn)[] = []
         cloumnsNames.forEach(element => {
             if (element === 'actions')
                 columns.push({
                     key: element,
-                    _style: { width: '10%' },
-                    label: element.charAt(0).toUpperCase() + element.slice(1),
+                    _style: { width: '9%' },
+                    label: noLabel?"":element.charAt(0).toUpperCase() + element.slice(1),
                     filter: false,
                     sorter: false
                 })
             else {
                 columns.push({
                     key: element,
-                    label: element.charAt(0).toUpperCase() + element.slice(1)
+                    label: noLabel?"":element.charAt(0).toUpperCase() + element.slice(1)
                 })
             }
         });
