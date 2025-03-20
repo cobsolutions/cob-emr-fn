@@ -59,14 +59,15 @@
             <c-col [sm]="12">
                 <div class="d-flex justify-content-end">
                     <div class="p-2 d-flex align-items-center gap-2">
-                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;">Patient Record Actions:</label>
+                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;">Patient
+                            Record Actions:</label>
                         <c-input-group class="mb-3">
-                            <select id="patientRecordAction" cSelect sizing="sm" [(ngModel)]="patientRecordAction">
-                                <option [value]="i" *ngFor="let action of case.patientRecordActions; let i = index">
+                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" >
+                                <option [value]="action" *ngFor="let action of case.patientRecordActions; let i = index">
                                     {{ action }}
                                 </option>
                             </select>
-                            <button cButton color="primary" variant="outline" size="sm">
+                            <button cButton color="primary" variant="outline" size="sm" (click)="executeAction(patientActionSelect.value)">
                                 <svg cIcon name="cilArrowCircleRight"></svg>
                             </button>
                         </c-input-group>
@@ -76,8 +77,8 @@
         </c-row>
     </c-card-body>
 </c-card>
-<!--Patient Case Records,E-document,Payment and Exercise Program-->
-<c-card class="mb-3 ustify-content-center">
+<!--Patient Record-->
+<c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
     <c-card-body>
         <c-nav variant="tabs">
             <c-nav-item>
@@ -159,10 +160,11 @@
     </c-card-body>
 </c-card>
 <!-- Initial Examination -->
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecordAction === '1'">
-    <initial-examination></initial-examination>
-</c-card>
-
+<span *ngIf="patientRecord ===false">
+    <c-card class="mb-3 ustify-content-center">
+        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'"></initial-examination>
+    </c-card>
+</span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
         <h5 cModalTitle>Appointment {{tmp?.appointmentStatus}} Reason</h5>

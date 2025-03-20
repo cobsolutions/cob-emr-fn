@@ -30,11 +30,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   tmp: Appointment;
   tmpReasonDate: Date
-  patientRecordAction: string = '0'
+  patientRecordAction: string;
+  patientRecord: boolean = true;
   constructor(private cancelNoShowService: CancelNoShowService, private patientRecordService: PatientRecordService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['record', 'date', 'actions'],true);
+    this.columns = this.constructColumns(['record', 'date', 'actions'], true);
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();
     this.getAppointments();
@@ -108,5 +109,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
           return response.records;
         })
       );
+  }
+  executeAction(val: string) {
+    this.patientRecord = false;
+    this.patientRecordAction = val;
+    console.log(val)
   }
 }
