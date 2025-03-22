@@ -7,9 +7,11 @@ import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 
 import { PatientCase } from '../../../models/case/patient.case';
+import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { CancelNoShowService } from '../../../services/appointment/cancel-no-show.service';
+import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 
 @Component({
@@ -32,12 +34,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   tmpReasonDate: Date
   patientRecordAction: string;
   patientRecord: boolean = true;
-  constructor(private cancelNoShowService: CancelNoShowService, private patientRecordService: PatientRecordService) { super() }
+  constructor(private cancelNoShowService: CancelNoShowService,
+    private patientRecordService: PatientRecordService,
+    private medialNoteService: MedialNoteService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
     this.gettreatingDoctorFullName();
-    this.getReferringCaseData();    
+    this.getReferringCaseData();
     this.getRecords();
   }
 
@@ -84,11 +88,26 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
         return response.records;
       })
     )
-  } 
+  }
   executeAction(val: string) {
     this.patientRecord = false;
     this.patientRecordAction = val;
-    console.log(val)
+    let medicalNoteType: string;
+    let caseId = this.case.id
+    if (val === 'Add Initial Examination')
+      medicalNoteType = "INITIAL_EVALUATION"
+    var medicalNoteRequest: MedicalNoteRequest = {
+      caseId: caseId,
+      noteType: medicalNoteType,
+      createdBy: "Mahmoud shalaby",
+      subjective: {},
+      assessment: {},
+      planOfCare: {},
+      billing: {}
+    }
+    this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
+      console.log('created')
+    })
   }
   handleBackAction() {
     this.patientRecord = true;
