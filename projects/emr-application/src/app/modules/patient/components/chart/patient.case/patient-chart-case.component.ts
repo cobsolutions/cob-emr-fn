@@ -5,6 +5,8 @@ import { PatientName } from 'projects/emr-application/src/app/util/name.util';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
+import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
+import { AppointmentService } from '../../../../scheduler/service/appointment.service';
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
@@ -30,13 +32,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecords$!: Observable<PatientRecord[]>
   reasonVisibility = false;
   columns: (string | IColumn)[];
-  tmp: Appointment;
-  tmpReasonDate: Date
   patientRecordAction: string;
   patientRecord: boolean = true;
+  appointmentCancelNoShowReason:AppointmentCancelNoShowReason
   constructor(private cancelNoShowService: CancelNoShowService,
     private patientRecordService: PatientRecordService,
-    private medialNoteService: MedialNoteService) { super() }
+    private medialNoteService: MedialNoteService,
+    private appointmentService: AppointmentService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
@@ -46,8 +48,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
 
   toggleReasonVisibility(data: any) {
-    this.tmp = data;
-    this.tmpReasonDate = moment.unix(this.tmp?.appointmentCancelNoShowReason?.reasonDate / 1000).toDate();
     this.reasonVisibility = !this.reasonVisibility;
   }
   gettreatingDoctorFullName() {
@@ -109,10 +109,17 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       console.log('created')
     })
   }
-  executeRecordLineAction(val: string) {
-    console.log(val)
+  executeRecordLineAction(val: string, entityId: number) {
+    if (val === 'View Reason')
+      this.getAppointment(entityId)
   }
   handleBackAction() {
     this.patientRecord = true;
+  }
+  private getAppointment(id: number) {
+    this.appointmentService.getAppointmentCancelNoShow(id).subscribe((appointmentCancelNoShowReason: any) => {
+      this.appointmentCancelNoShowReason=appointmentCancelNoShowReason
+      this.reasonVisibility = true;
+    })
   }
 }

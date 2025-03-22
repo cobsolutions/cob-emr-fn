@@ -143,7 +143,7 @@
                                                         </option>
                                                     </select>
                                                     <button cButton color="primary" variant="outline" size="sm"
-                                                        (click)="executeRecordLineAction(patientRecordLineAction.value)">
+                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId)">
                                                         <svg cIcon name="cilArrowCircleRight"></svg>
                                                     </button>
                                                 </c-input-group>
@@ -179,9 +179,9 @@
             (back)="handleBackAction()"></initial-examination>
     </c-card>
 </span>
-<c-modal id="AppointmentAction" [visible]="reasonVisibility">
+<c-modal id="AppointmentAction" [visible]="reasonVisibility"    >
     <c-modal-header>
-        <h5 cModalTitle>Appointment {{tmp?.appointmentStatus}} Reason</h5>
+        <h5 cModalTitle>Appointment {{appointmentCancelNoShowReason?.status}} Reason</h5>
         <button (click)="toggleReasonVisibility('')" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
@@ -190,16 +190,16 @@
                 <svg cIcon name="cilReportSlash" title="cilReportSlash"></svg>
             </span>
             <input aria-describedby="basic-addon1" readonly cFormControl
-                [value]="tmp?.appointmentCancelNoShowReason?.reason" />
+                [value]="appointmentCancelNoShowReason?.reason" />
         </c-input-group>
-        <c-input-group class="mb-3" sizing="sm" *ngIf="tmp?.appointmentStatus === 'Cancel'">
+        <c-input-group class="mb-3" sizing="sm" *ngIf="appointmentCancelNoShowReason?.status === 'Cancel'">
             <span cInputGroupText id="basic-addon1">
                 <svg cIcon name="cilCalendar" title="cilCalendar"></svg>
             </span>
             <input aria-describedby="basic-addon1" readonly cFormControl
-                [value]="this.tmpReasonDate | date: 'MM/dd/yyyy hh:mm a'" />
+                [value]="this.appointmentCancelNoShowReason.reasonDate| date: 'MM/dd/yyyy hh:mm a'" />
         </c-input-group>
         <textarea cFormControl id="exampleFormControlTextarea1" rows="3"
-            [value]="tmp?.appointmentCancelNoShowReason?.comment"></textarea>
+            [value]="appointmentCancelNoShowReason?.comment"></textarea>
     </c-modal-body>
 </c-modal>
