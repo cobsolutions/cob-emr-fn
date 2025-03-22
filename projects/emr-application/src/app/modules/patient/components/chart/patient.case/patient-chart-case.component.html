@@ -162,7 +162,7 @@
 <!-- Initial Examination -->
 <span *ngIf="patientRecord ===false">
     <c-card class="mb-3 ustify-content-center">
-        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'"></initial-examination>
+        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'" (back)="handleBackAction()"></initial-examination>
     </c-card>
 </span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">

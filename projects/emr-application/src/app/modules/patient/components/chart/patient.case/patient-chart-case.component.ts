@@ -115,4 +115,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.patientRecordAction = val;
     console.log(val)
   }
+  handleBackAction() {
+    this.patientRecord = true;
+  }
 }

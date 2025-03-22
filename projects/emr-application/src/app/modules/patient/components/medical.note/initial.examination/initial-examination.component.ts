@@ -2,6 +2,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'initial-examination',
@@ -15,7 +16,8 @@ export class InitialExaminationComponent implements OnInit {
   @ViewChild('stepper') stepper!: MatStepper; // Get MatStepper reference
   @Output() formReady = new EventEmitter<FormGroup>();
   visitedSteps: boolean[] = [];
-  constructor(private fb: FormBuilder) {
+  @Output() back = new EventEmitter<void>();
+  constructor(private fb: FormBuilder,private router: Router) {
 
   }
   ngOnInit(): void {
@@ -35,5 +37,8 @@ export class InitialExaminationComponent implements OnInit {
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.initialExaminationForm.setControl(section, formGroup);
+  }
+  backtoPatientRecordActions(){
+    this.back.emit();
   }
 }
