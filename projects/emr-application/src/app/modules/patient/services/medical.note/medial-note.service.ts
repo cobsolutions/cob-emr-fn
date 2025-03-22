@@ -19,4 +19,8 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/create'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
+  remove(id:number){
+    var url = this.baseUrl + '/action/delete/id/'+id
+    return this.httpClient.delete(`${url}`)
+  }
 }

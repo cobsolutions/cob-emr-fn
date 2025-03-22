@@ -34,7 +34,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   patientRecordAction: string;
   patientRecord: boolean = true;
-  appointmentCancelNoShowReason:AppointmentCancelNoShowReason
+  appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   constructor(private cancelNoShowService: CancelNoShowService,
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -112,14 +112,22 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   executeRecordLineAction(val: string, entityId: number) {
     if (val === 'View Reason')
       this.getAppointment(entityId)
+    if (val === 'Remove')
+      this.removeMedicalNote(entityId);
   }
   handleBackAction() {
     this.patientRecord = true;
   }
   private getAppointment(id: number) {
     this.appointmentService.getAppointmentCancelNoShow(id).subscribe((appointmentCancelNoShowReason: any) => {
-      this.appointmentCancelNoShowReason=appointmentCancelNoShowReason
+      this.appointmentCancelNoShowReason = appointmentCancelNoShowReason
       this.reasonVisibility = true;
+    })
+  }
+  private removeMedicalNote(id: number) {
+    this.medialNoteService.remove(id).subscribe((updatedCase: any) => {
+      this.case = updatedCase;
+      this.getRecords();
     })
   }
 }
