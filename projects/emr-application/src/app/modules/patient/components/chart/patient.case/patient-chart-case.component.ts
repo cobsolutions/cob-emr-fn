@@ -37,9 +37,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
     this.gettreatingDoctorFullName();
-    this.getReferringCaseData();
-    this.getAppointments();
-    this.ddd();
+    this.getReferringCaseData();    
+    this.getRecords();
   }
 
   toggleReasonVisibility(data: any) {
@@ -59,7 +58,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.referringNPI = this.case.referralCase.referringPartyNPI === null ? '' : this.case.referralCase.referringPartyNPI;
 
   }
-  private ddd() {
+  private getRecords() {
     const patientRecordRequest: PatientRecordRequest = {
       patientId: this.patientId,
       caseId: this.case.id
@@ -85,31 +84,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
         return response.records;
       })
     )
-  }
-  getAppointments() {
-    if (this.case.id !== null)
-      this.appointments$ = this.cancelNoShowService.findCancelNoShowAppointments(this.apiParams$, this.patientId, this.case.id).pipe(
-        retry({
-          delay: (error) => {
-            console.warn('Retry: ', error);
-            this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
-            this.loadingData$.next(false);
-            return this.retry$;
-          }
-        }),
-        tap((response: any) => {
-          this.totalItems$.next(response.number_of_matching_records);
-          if (response.number_of_records) {
-            this.errorMessage$.next('');
-          }
-          this.retry$.next(false);
-          this.loadingData$.next(false);
-        }),
-        map((response: any) => {
-          return response.records;
-        })
-      );
-  }
+  } 
   executeAction(val: string) {
     this.patientRecord = false;
     this.patientRecordAction = val;
