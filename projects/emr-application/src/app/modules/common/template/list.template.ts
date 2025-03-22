@@ -85,7 +85,7 @@ export class ListTemplate {
             if (element === 'actions')
                 columns.push({
                     key: element,
-                    _style: { width: '9%' },
+                    _style: { width: '10%' },
                     label: noLabel?"":element.charAt(0).toUpperCase() + element.slice(1),
                     filter: false,
                     sorter: false
