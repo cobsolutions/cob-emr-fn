@@ -109,11 +109,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       console.log('created')
     })
   }
-  executeRecordLineAction(val: string, entityId: number) {
+  executeRecordLineAction(val: string, entityId: number, status?: string) {
     if (val === 'View Reason')
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
+    if (val === 'Complete')
+      this.completeMedicalNote(entityId, status)
   }
   handleBackAction() {
     this.patientRecord = true;
@@ -129,5 +131,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.case = updatedCase;
       this.getRecords();
     })
+  }
+  private completeMedicalNote(id: number, status: string) {
+    this.patientRecord = false
+    if (status === 'Initial Evaluation')
+      this.patientRecordAction = 'Add Initial Examination';
   }
 }

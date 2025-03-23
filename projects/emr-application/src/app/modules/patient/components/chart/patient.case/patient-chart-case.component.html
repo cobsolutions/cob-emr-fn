@@ -143,7 +143,7 @@
                                                         </option>
                                                     </select>
                                                     <button cButton color="primary" variant="outline" size="sm"
-                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId)">
+                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status)">
                                                         <svg cIcon name="cilArrowCircleRight"></svg>
                                                     </button>
                                                 </c-input-group>
@@ -179,7 +179,7 @@
             (back)="handleBackAction()"></initial-examination>
     </c-card>
 </span>
-<c-modal id="AppointmentAction" [visible]="reasonVisibility"    >
+<c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
         <h5 cModalTitle>Appointment {{appointmentCancelNoShowReason?.status}} Reason</h5>
         <button (click)="toggleReasonVisibility('')" cButtonClose></button>
