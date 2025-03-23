@@ -114,8 +114,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
-    if (val === 'Complete')
+    if (val === 'Complete') {
+      console.log(status)
       this.completeMedicalNote(entityId, status)
+    }
   }
   handleBackAction() {
     this.patientRecord = true;

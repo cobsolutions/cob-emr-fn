@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 
 @Component({
   selector: 'initial-examination',
@@ -17,11 +18,11 @@ export class InitialExaminationComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
-  constructor(private fb: FormBuilder,private router: Router) {
+  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) {
 
   }
   ngOnInit(): void {
-    this.visitedSteps = [true,false,false,false,false]
+    this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),
       objective: this.fb.group({}),
@@ -29,6 +30,9 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
+    this.medialNoteService.findMedicalNoteType(3, 'Initial Evaluation').subscribe(data => {
+      this.initialExaminationForm.patchValue(data);
+    })
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
@@ -38,7 +42,11 @@ export class InitialExaminationComponent implements OnInit {
   setChildForm(section: string, formGroup: FormGroup) {
     this.initialExaminationForm.setControl(section, formGroup);
   }
-  backtoPatientRecordActions(){
+  backtoPatientRecordActions() {
     this.back.emit();
+  }
+  soapActions(action: string) {
+    if (action === 'back')
+      this.backtoPatientRecordActions()
   }
 }

@@ -1,6 +1,15 @@
 <c-container fluid="true">
     <div class="button-container m-2">
-        <button (click)="backtoPatientRecordActions()" class="btn btn-link">Back to patient records</button>
+        <!-- <button (click)="backtoPatientRecordActions()" class="btn btn-link">Back to patient records</button> -->
+        <c-input-group class="mb-3" style="max-width: 225px;">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm">
+                <option value="back">Back to patient records</option>
+                <option value="draft">Save as draft</option>
+            </select>
+            <button cButton color="primary" variant="outline" size="sm" (click)="soapActions(soapActionList.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+            </button>
+        </c-input-group>
     </div>
     <form [formGroup]="initialExaminationForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">

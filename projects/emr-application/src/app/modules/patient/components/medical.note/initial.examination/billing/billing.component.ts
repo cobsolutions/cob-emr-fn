@@ -53,21 +53,22 @@ export class BillingComponent implements OnInit {
   }
   next() {
     var createdNote: any = this.getAllFormValues(this.parentForm)
+    console.log(JSON.stringify(createdNote))
     this.create(createdNote)
     this.stepper.next();
   }
 
-  create(createdNote:any ){
-    var medicalNoteRequest: MedicalNoteRequest={
-      caseId:58,
-      noteType:"INITIAL_EVALUATION",
-      createdBy:"Mahmoud shalaby",
-      subjective:createdNote.subjective,
-      assessment:createdNote.assessment,
-      planOfCare:createdNote.planOfCare,
-      billing:createdNote.billing
+  create(createdNote: any) {
+    var medicalNoteRequest: MedicalNoteRequest = {
+      caseId: 58,
+      noteType: "INITIAL_EVALUATION",
+      createdBy: "Mahmoud shalaby",
+      subjective: createdNote.subjective,
+      assessment: createdNote.assessment,
+      planOfCare: createdNote.planOfCare,
+      billing: createdNote.billing
     }
-    this.medialNoteService.create(medicalNoteRequest).subscribe(result=>{
+    this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
       console.log('created')
     })
   }
