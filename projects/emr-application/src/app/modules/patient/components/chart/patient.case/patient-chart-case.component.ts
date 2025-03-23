@@ -35,7 +35,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecordAction: string;
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-  constructor(private cancelNoShowService: CancelNoShowService,
+  toBeCompeleteMedicalNoteId:number
+  constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
     private appointmentService: AppointmentService) { super() }
@@ -136,6 +137,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   private completeMedicalNote(id: number, status: string) {
     this.patientRecord = false
+    this.toBeCompeleteMedicalNoteId = id;
     if (status === 'Initial Evaluation')
       this.patientRecordAction = 'Add Initial Examination';
   }

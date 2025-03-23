@@ -27,4 +27,9 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/find/id/' + id + '/type/' + type
     return this.httpClient.get(`${url}`)
   }
+  draft(request: MedicalNoteRequest){
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/action/draft'
+    return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
+  }
 }

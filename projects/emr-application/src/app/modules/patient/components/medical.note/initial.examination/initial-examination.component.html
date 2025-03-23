@@ -11,13 +11,13 @@
             </button>
         </c-input-group>
     </div>
-    <form [formGroup]="initialExaminationForm">
+    <form [formGroup]="initialExaminationForm" *ngIf="initialExaminationForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
             <mat-step [stepControl]="initialExaminationForm.get('subjective')!" completed="true"
                 formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
-                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
-                    *ngIf="visitedSteps[0]"></subjective>
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)" [subjectiveData]="medicalNoteSOAP.subjective"
+                    *ngIf="visitedSteps[0] && medicalNoteSOAP"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">
