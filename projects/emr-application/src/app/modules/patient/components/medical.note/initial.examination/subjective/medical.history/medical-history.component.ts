@@ -17,12 +17,18 @@ export class MedicalHistoryComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
   styles: FieldControlStyles[] = MedicalHistoryStyles;
+  @Input() medicalHistoryFormData: any
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.medicalHistoryForm = this.fb.group({})
+    if (this.medicalHistoryFormData) {
+      setTimeout(() => {
+        this.medicalHistoryForm.patchValue(this.medicalHistoryFormData);
+      }, 10);
+    }
     this.formReady.emit(this.medicalHistoryForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

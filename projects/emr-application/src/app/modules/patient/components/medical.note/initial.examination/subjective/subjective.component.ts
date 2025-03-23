@@ -21,7 +21,7 @@ export class SubjectiveComponent implements OnInit {
       this.subjectiveFormFields = fields;
       if (this.subjectiveData === undefined)
         this.subjectiveForm = this.fb.group({
-          basic: this.fb.group(this.subjectiveData.basic),
+          basic: this.fb.group({}),
           priorFunction: this.fb.group({}),
           currentFunction: this.fb.group({}),
           pain: this.fb.group({}),
@@ -29,14 +29,14 @@ export class SubjectiveComponent implements OnInit {
 
         });
       else
-      this.subjectiveForm = this.fb.group({
-        basic: this.createFormGroup(this.subjectiveData.basic),
-        priorFunction: this.fb.group({}),
-        currentFunction: this.fb.group({}),
-        pain: this.fb.group({}),
-        medicalHistory: this.fb.group({})
+        this.subjectiveForm = this.fb.group({
+          basic: this.fb.group({}),
+          priorFunction: this.fb.group({}),
+          currentFunction: this.fb.group({}),
+          pain: this.fb.group({}),
+          medicalHistory: this.fb.group({})
 
-      });
+        });
       this.formReady.emit(this.subjectiveForm);
     })
   }

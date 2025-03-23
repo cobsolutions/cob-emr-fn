@@ -68,9 +68,9 @@ export class BillingComponent implements OnInit {
       planOfCare: createdNote.planOfCare,
       billing: createdNote.billing
     }
-    this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
-      console.log('created')
-    })
+    // this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
+    //   console.log('created')
+    // })
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};

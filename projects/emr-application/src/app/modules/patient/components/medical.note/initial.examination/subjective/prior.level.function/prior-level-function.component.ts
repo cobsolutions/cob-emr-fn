@@ -14,12 +14,18 @@ export class PriorLevelFunctionComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
   styles: FieldControlStyles[] = PriorFunctionStyles;
+  @Input() priorLevelFunctionFormData: any
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.priorLevelFunctionForm = this.fb.group({})
+    if (this.priorLevelFunctionFormData) {
+      setTimeout(() => {
+        this.priorLevelFunctionForm.patchValue(this.priorLevelFunctionFormData);
+      }, 10);
+    }
     this.formReady.emit(this.priorLevelFunctionForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

@@ -14,30 +14,23 @@ export class BasicInformationComponent implements OnInit {
   @Input() fields: any
   treatmentSide: string
   styles: FieldControlStyles[] = BasicFormStyles;
+  @Input() basicFormData: any
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-    this.basicForm = this.fb.group({});
-    //this.handleChanges()
+    if (this.basicFormData) {
+      // this.basicForm = this.fb.group(this.basicFormData);
+      this.basicForm = this.fb.group({});
+      setTimeout(() => {
+        this.basicForm.patchValue(this.basicFormData);
+      }, 10);
+    }
+    else
+      this.basicForm = this.fb.group({});
     this.formReady.emit(this.basicForm);
   }
-  // handleChanges() {
-  //   this.basicForm.get('treatment_side_left').valueChanges.subscribe(val => {
-  //     if (val)
-  //       this.basicForm.get('treatment_side_na').setValue(false)
-  //     if (!val && !this.basicForm.get('treatment_side_right').value)
-  //       this.basicForm.get('treatment_side_na').setValue(true)
-
-  //   })
-  //   this.basicForm.get('treatment_side_right').valueChanges.subscribe(val => {
-  //     if (val)
-  //       this.basicForm.get('treatment_side_na').setValue(false)
-  //     if (!val && !this.basicForm.get('treatment_side_left').value)
-  //       this.basicForm.get('treatment_side_na').setValue(true)
-  //   })
-  // }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
   }

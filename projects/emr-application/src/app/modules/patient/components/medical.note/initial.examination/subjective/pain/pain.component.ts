@@ -19,6 +19,7 @@ export class PainComponent implements OnInit {
   painScaleCounter: number = 0;
   @Input() fields: any
   styles: FieldControlStyles[] = PainFormStyles;
+  @Input() painFormData: any
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService) { }
 
@@ -27,6 +28,11 @@ export class PainComponent implements OnInit {
     this.painForm = this.fb.group({
       'pain_scale': new FormControl(null, [Validators.required]),
     });
+    if(this.painFormData){
+      setTimeout(() => {
+        this.painForm.patchValue(this.painFormData);
+      }, 10);
+    }
     this.handlePainScale();
     this.formReady.emit(this.painForm);
   }

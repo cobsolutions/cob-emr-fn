@@ -14,12 +14,18 @@ export class CurrentFunvtionlimitComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
   styles: FieldControlStyles[] = CurrentFunctionStyles;
+  @Input() currentFunvtionlimitFormData: any
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.currentFunctionForm = this.fb.group({})
+    if (this.currentFunvtionlimitFormData) {
+      setTimeout(() => {
+        this.currentFunctionForm.patchValue(this.currentFunvtionlimitFormData);
+      }, 10);
+    }
     this.formReady.emit(this.currentFunctionForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

@@ -38,7 +38,7 @@ export class SoapFieldBuilderComponent implements OnInit {
   }
 
   private renderDependents(field: any, value: any) {
-    if (value + '' === field.idField.valueChange) {
+    if (value === this.parseBoolean(field.idField.valueChange)) {
       field.dependents.forEach(dependent => {
         dependent.render = true;
         this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
@@ -49,6 +49,11 @@ export class SoapFieldBuilderComponent implements OnInit {
         this.form.removeControl(dependent.name)
       });
     }
+  }
+  parseBoolean(value: string): boolean | string {
+    if (value === "true") return true;
+    if (value === "false") return false;
+    return value; // Return the original string if it's not "true" or "false"
   }
   private renderDependentsPerChangeValue(field: any, value: any) {
     const matchSelectDependents = field.dependents.filter(item => item.changeValueSelect === value);

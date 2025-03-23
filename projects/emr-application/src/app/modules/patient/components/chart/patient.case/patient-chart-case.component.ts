@@ -35,7 +35,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecordAction: string;
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-  toBeCompeleteMedicalNoteId:number
+  toBeCompeleteMedicalNoteId: number
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -101,7 +101,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       caseId: caseId,
       noteType: medicalNoteType,
       createdBy: "Mahmoud shalaby",
-      subjective: {},
+      subjective: {
+        basic: {},
+        pain: {},
+        priorFunction: {},
+        currentFunction: {},
+        medicalHistory: {}
+      },
       assessment: {},
       planOfCare: {},
       billing: {}
