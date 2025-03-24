@@ -15,7 +15,6 @@ export class PainComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   aggravatingFactors: string[] = AggravatingFactors;
   showPainEval: boolean = false
-  painScaleList: string[] = []
   painScaleCounter: number = 0;
   @Input() fields: any
   styles: FieldControlStyles[] = PainFormStyles;
@@ -27,31 +26,41 @@ export class PainComponent implements OnInit {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.painForm = this.fb.group({
       'pain_scale': new FormControl(null, [Validators.required]),
+      evals: this.fb.array([])
     });
-    if(this.painFormData){
+    if (this.painFormData) {
       setTimeout(() => {
         this.painForm.patchValue(this.painFormData);
       }, 10);
     }
     this.handlePainScale();
+    if (this.painFormData)
+      this.fillEvals();
     this.formReady.emit(this.painForm);
   }
 
+  get evals(): FormArray {
+    return this.painForm.get('evals') as FormArray;
+  }
+  private fillEvals() {
+    for (let i = 0; i < this.painFormData?.evals.length; i++) {
+      this.evals.push(new FormControl(this.painFormData?.evals))
+    }
+  }
   private handlePainScale() {
     this.painForm.get('pain_scale').valueChanges.subscribe(value => {
       if (value === 'yes') {
-        this.painScaleList.push('pscal_' + this.painScaleCounter);
         this.showPainEval = true
       }
       else
         this.showPainEval = false
     })
   }
-  addPainScale() {
-    this.painScaleList.push('pscal_' + this.painScaleCounter++);
+  save(event: any) {
+    this.evals.push(new FormControl(event))
   }
-  remove(event: any) {
-    this.painScaleList = this.painScaleList.filter(item => item !== event);
+  remove(index: any) {
+    this.evals.removeAt(index);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
