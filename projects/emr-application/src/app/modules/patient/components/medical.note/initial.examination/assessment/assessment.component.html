@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let problem of problems.controls; let i = index">
+                    <tr *ngFor="let problem of problems?.controls; let i = index">
                         <td>{{ problem.value }}</td>
                         <td class="text-center">
                             <button cButton color="danger" variant="outline" size="sm" (click)="removeProblem(i)">
@@ -117,7 +117,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let goal of goals.controls; let i = index" [formGroup]="getGoalFormGroup(i)">
+                    <tr *ngFor="let goal of goals?.controls; let i = index" [formGroup]="getGoalFormGroup(i)">
                         <td>{{ goal.value.description }}</td>
                         <td>{{ goal.value.term }}</td>
                         <td>{{ goal.value.period }}</td>

@@ -17,12 +17,14 @@ export class AssessmentComponent implements OnInit {
   styles: FieldControlStyles[] = AssessmentStyles;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  @Input() assessmentData: any
   problemsArray: FormArray;
   goalsArray: FormArray;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
-    ,private fieldDependentsService:FieldDependentsService) { }
+    , private fieldDependentsService: FieldDependentsService) { }
   ngOnInit(): void {
+    console.log(JSON.stringify(this.assessmentData))
     this.medialNoteService.find('assessment').subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
@@ -81,6 +83,11 @@ export class AssessmentComponent implements OnInit {
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })
+    if (this.assessmentForm) {
+      setTimeout(() => {
+        this.assessmentForm.patchValue(this.assessmentData);
+      }, 10);
+    }
     this.problemsArray = this.assessmentForm.get('problems') as FormArray;
     this.goalsArray = this.assessmentForm.get('goals') as FormArray;
   }
@@ -90,5 +97,5 @@ export class AssessmentComponent implements OnInit {
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
   }
-  
+
 }
