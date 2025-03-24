@@ -28,9 +28,9 @@ export class AssessmentComponent implements OnInit {
     this.medialNoteService.find('assessment').subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+      this.buildForm();
+      this.formReady.emit(this.assessmentForm);
     })
-    this.buildForm()
-    this.formReady.emit(this.assessmentForm);
   }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
@@ -64,10 +64,11 @@ export class AssessmentComponent implements OnInit {
     const period = periodInput.value;
     const met = metInput.value;
 
-    if (description) {
-      this.goals.push(this.createGoal(description, term, period, met));
-      descriptionInput.value = ''; // Clear description field
-    }
+    this.goals.push(this.createGoal(description, term, period, met));
+    descriptionInput.value = ''; // Clear description field
+    termInput.value = 'Short Term';
+    periodInput.value = '1-visit';
+    metInput.value = 'N/A'
   }
 
   removeGoal(index: number) {
@@ -83,11 +84,13 @@ export class AssessmentComponent implements OnInit {
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })
-    if (this.assessmentForm) {
-      setTimeout(() => {
-        this.assessmentForm.patchValue(this.assessmentData);
-      }, 10);
-    }
+
+    setTimeout(() => {
+      this.assessmentForm.patchValue(this.assessmentData);
+      this.fillGoals();
+      this.fillProblems();
+    }, 10);
+
     this.problemsArray = this.assessmentForm.get('problems') as FormArray;
     this.goalsArray = this.assessmentForm.get('goals') as FormArray;
   }
@@ -96,6 +99,19 @@ export class AssessmentComponent implements OnInit {
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
+  }
+  fillProblems() {
+    if (this.assessmentData?.problems) {
+      for (let i = 0; i < this.assessmentData?.problems.length; i++) {
+        this.problems.push(new FormControl(this.assessmentData?.problems[i]))
+      }
+    }
+  }
+  fillGoals() {
+    if (this.assessmentData?.goals)
+      for (let i = 0; i < this.assessmentData?.goals.length; i++) {
+        this.goals.push(new FormControl(this.assessmentData?.goals[i]))
+      }
   }
 
 }

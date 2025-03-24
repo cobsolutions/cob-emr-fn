@@ -44,7 +44,7 @@ export class PainComponent implements OnInit {
   }
   private fillEvals() {
     for (let i = 0; i < this.painFormData?.evals.length; i++) {
-      this.evals.push(new FormControl(this.painFormData?.evals))
+      this.evals.push(new FormControl(this.painFormData?.evals[i]))
     }
   }
   private handlePainScale() {
