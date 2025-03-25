@@ -58,6 +58,8 @@ import { SplintsOrthoticsComponent } from './components/medical.note/initial.exa
 import { CastsComponent } from './components/medical.note/initial.examination/billing/components/Casts/casts.component';
 import { BracesComponent } from './components/medical.note/initial.examination/billing/components/Braces/braces.component';
 import { DirectTimedCodesComponent } from './components/medical.note/initial.examination/billing/components/direct.timed.codes/direct-timed-codes.component';
+import { InspectionComponent } from './components/medical.note/initial.examination/objective/inspection/inspection.component';
+import { OmtComponent } from './components/medical.note/initial.examination/objective/omt/omt.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -120,6 +122,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CastsComponent,
     BracesComponent,
     DirectTimedCodesComponent,
+    InspectionComponent,
+    OmtComponent,
   ],
   imports: [
     CommonModule,
