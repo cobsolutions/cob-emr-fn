@@ -14,6 +14,7 @@ export class BillingComponent implements OnInit {
   billingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  @Input() billingData: any
   fields: any
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
@@ -48,6 +49,10 @@ export class BillingComponent implements OnInit {
         braces: this.fb.group({}),
         directTimedCodes: this.fb.group({})
       });
+      if (this.billingData)
+        setTimeout(() => {
+          this.billingForm.patchValue(this.billingData);
+        }, 10);
       this.formReady.emit(this.billingForm);
     })
   }
