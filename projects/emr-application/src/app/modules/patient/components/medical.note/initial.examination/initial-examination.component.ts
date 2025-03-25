@@ -84,10 +84,11 @@ export class InitialExaminationComponent implements OnInit {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
-      assessment: createdNote.assessment,
-      planOfCare: createdNote.planOfCare,
-      billing: createdNote.billing
+      assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
+      planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
+      billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
     }
+    console.log(JSON.stringify(medicalNoteRequest))
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
     })

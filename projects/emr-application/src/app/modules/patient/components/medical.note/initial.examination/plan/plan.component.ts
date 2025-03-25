@@ -20,7 +20,7 @@ export class PlanComponent implements OnInit {
   frequencyOptions = ['Custom', 'Daily', 'Weekly'];
   durationOptions = ['Custom', '2 Weeks', '1 Month'];
   planOptions = ['Custom', 'Standard', 'Advanced'];
-
+  @Input() planData: any
   procedures = [
     { label: 'Therapeutic Exercises', value: 'therapeuticExercises' },
     { label: 'Therapeutic Activity', value: 'therapeuticActivity' },
@@ -80,6 +80,10 @@ export class PlanComponent implements OnInit {
         modalities: this.fb.group({}),
         specialties: this.fb.group({}),
       });
+      if (this.planData)
+        setTimeout(() => {
+          this.planForm.patchValue(this.planData);
+        }, 10);
       this.formReady.emit(this.planForm);
     })
 
