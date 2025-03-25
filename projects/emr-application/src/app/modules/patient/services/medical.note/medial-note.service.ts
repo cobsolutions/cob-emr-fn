@@ -14,6 +14,10 @@ export class MedialNoteService {
     var url: string = this.baseUrl + "/find/section/" + section;
     return this.httpClient.get(url);
   }
+  findObjectivePrfile(name: string) {
+    var url: string = this.baseUrl + "/find/objective/profile/name/" + name
+    return this.httpClient.get(url);
+  }
 
   create(request: MedicalNoteRequest) {
     const headers = { 'content-type': 'application/json' }
@@ -28,12 +32,12 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/find/id/' + id + '/type/' + type
     return this.httpClient.get(`${url}`)
   }
-  draft(request: MedicalNoteRequest){
+  draft(request: MedicalNoteRequest) {
     const headers = { 'content-type': 'application/json' }
     var url = this.baseUrl + '/action/draft'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
-  findObjectiveProfiles():Observable<any> {
+  findObjectiveProfiles(): Observable<any> {
     var url: string = this.baseUrl + "/find/objective/profile"
     return this.httpClient.get(url);
   }

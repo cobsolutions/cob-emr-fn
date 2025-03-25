@@ -15,6 +15,7 @@ export class ObjectiveComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   profiles: Observable<ObjectiveProfile[]>
+  selectedProfile: string = null
   constructor(private fb: FormBuilder
     , private medicalService: MedialNoteService) { }
 
@@ -37,5 +38,15 @@ export class ObjectiveComponent implements OnInit {
   }
   next() {
     this.stepper.next();
+  }
+  selectProfile() {
+    this.medicalService.findObjectivePrfile(this.selectedProfile.toLowerCase()).subscribe(dd => {
+      const searchKey = "inspection";
+      const foundKey = Object.keys(dd).find(key => key.includes(searchKey));
+
+      // Get the corresponding value
+      const value = foundKey ? dd[foundKey] : null;
+      console.log(JSON.stringify(value))
+    })
   }
 }
