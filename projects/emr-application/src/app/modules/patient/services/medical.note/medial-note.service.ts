@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
+import { Observable } from 'rxjs';
 import { MedicalNoteRequest } from '../../models/medical.note/medical.note.request';
 
 @Injectable({
@@ -32,7 +33,7 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/draft'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
-  findObjectiveProfiles() {
+  findObjectiveProfiles():Observable<any> {
     var url: string = this.baseUrl + "/find/objective/profile"
     return this.httpClient.get(url);
   }

@@ -1,3 +1,18 @@
+<div class="d-flex justify-content-center">
+    <c-card class="mb-2 card-center">
+        <c-card-header>
+            <strong>Examination Profile</strong>
+        </c-card-header>
+        <c-card-body>
+            <select id="profile-select" cSelect>
+                <option disabled selected>Select Examination Profile</option>
+                <option *ngFor="let profile of profiles | async" [value]="profile.id">
+                    {{ profile.name }}
+                </option>
+            </select>
+        </c-card-body>
+    </c-card>
+</div>
 <div [formGroup]="objectiveForm">
     <!--Inspection-->
     <c-card class="mb-2">

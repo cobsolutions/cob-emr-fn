@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { Observable } from 'rxjs';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { ObjectiveProfile } from './models/objective.profile';
 
 @Component({
   selector: 'objective',
@@ -12,6 +14,7 @@ export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  profiles: Observable<ObjectiveProfile[]>
   constructor(private fb: FormBuilder
     , private medicalService: MedialNoteService) { }
 
@@ -24,9 +27,10 @@ export class ObjectiveComponent implements OnInit {
       specialTest: this.fb.group({}),
       palpation: this.fb.group({})
     });
-    this.medicalService.findObjectiveProfiles().subscribe(dd => {
-      console.log(JSON.stringify(dd))
-    })
+    this.loadProfiles()
+  }
+  private loadProfiles() {
+    this.profiles = this.medicalService.findObjectiveProfiles()
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.objectiveForm.setControl(section, formGroup);
