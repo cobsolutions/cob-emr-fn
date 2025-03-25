@@ -14,21 +14,7 @@ export class ObservationComponent implements OnInit {
   constructor(private httpClient: HttpClient, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.buildObservationfields();
-  }
 
-  private buildObservationfields() {
-    this.ObservationForm = this.fb.group({});
-    var url: string = 'assets/soap/objective/observation/fields.json'
-    this.httpClient.get(url)
-      .subscribe((fields: any) => {
-        this.fields = fields
-        let formControls = this.fields.reduce((acc, field) => {
-          acc[field.value] = new FormControl(field.value);
-          return acc;
-        }, {} as { [key: string]: FormControl });
-        this.ObservationForm = this.fb.group(formControls);
-      });
   }
 
 }
