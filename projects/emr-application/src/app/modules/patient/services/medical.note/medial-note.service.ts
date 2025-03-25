@@ -32,4 +32,8 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/draft'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
+  findObjectiveProfiles() {
+    var url: string = this.baseUrl + "/find/objective/profile"
+    return this.httpClient.get(url);
+  }
 }
