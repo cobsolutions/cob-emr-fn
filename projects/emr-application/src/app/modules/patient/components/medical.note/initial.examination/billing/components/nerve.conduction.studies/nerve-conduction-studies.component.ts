@@ -11,11 +11,16 @@ export class NerveConductionStudiesComponent implements OnInit {
   NerveConductionStudiesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() nerveConductionStudiesData: any
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.NerveConductionStudiesForm = this.fb.group({})
+    if (this.nerveConductionStudiesData)
+    setTimeout(() => {
+      this.NerveConductionStudiesForm.patchValue(this.nerveConductionStudiesData);
+    }, 10);
     this.formReady.emit(this.NerveConductionStudiesForm);
   }
 

@@ -34,9 +34,10 @@
                     <textarea id="precautions" formControlName="precautions"></textarea>
                 </div>
             </div>
-            <!--Untimed Codes-->
+            
             <div class="section">
                 <c-row>
+                    <!--Untimed Codes-->
                     <c-col xs="12">
                         <h6><strong>Untimed Codes</strong></h6>
                         <hr />
@@ -44,17 +45,19 @@
                             [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
                             [untimedCodesData]="billingData.untimedCodes"></untimed-codes>
                     </c-col>
+                    <!--Calendar Month-->
                     <c-col xs="4">
                         <strong>Calendar Month</strong>
                         <hr />
                         <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
-                            [fields]="fields['calendar month']"></calendar-month>
+                            [fields]="fields['calendar month']" [calendarMonthData]="billingData.calendarMonth"></calendar-month>
                     </c-col>
+                    <!--Nerve Conduction Studies-->
                     <c-col xs="4">
                         <strong>Nerve Conduction Studies</strong>
                         <hr />
                         <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
-                            [fields]="fields['Nerve Conduction Studies']"></nerve-conduction-studies>
+                            [fields]="fields['Nerve Conduction Studies']" [nerveConductionStudiesData]="billingData.nerveConduction"></nerve-conduction-studies>
                     </c-col>
                     <c-col xs="4">
                         <strong>Respiratory</strong>

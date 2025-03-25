@@ -13,12 +13,17 @@ export class CalendarMonthComponent implements OnInit {
   CalendarMonthForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() calendarMonthData: any
   styles: FieldControlStyles[] = CalendarMonthStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.CalendarMonthForm = this.fb.group({})
+    if (this.calendarMonthData)
+    setTimeout(() => {
+      this.CalendarMonthForm.patchValue(this.calendarMonthData);
+    }, 10);
     this.formReady.emit(this.CalendarMonthForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
