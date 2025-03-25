@@ -34,13 +34,15 @@
                     <textarea id="precautions" formControlName="precautions"></textarea>
                 </div>
             </div>
+            <!--Untimed Codes-->
             <div class="section">
                 <c-row>
                     <c-col xs="12">
                         <h6><strong>Untimed Codes</strong></h6>
                         <hr />
                         <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
-                            [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"></untimed-codes>
+                            [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
+                            [untimedCodesData]="billingData.untimedCodes"></untimed-codes>
                     </c-col>
                     <c-col xs="4">
                         <strong>Calendar Month</strong>
