@@ -11,11 +11,16 @@ export class OtherTreatmentProceduresComponent implements OnInit {
   OtherTreatmentProceduresForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() otherTreatmentProceduresData: any
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.OtherTreatmentProceduresForm = this.fb.group({})
+    if (this.otherTreatmentProceduresData)
+    setTimeout(() => {
+      this.OtherTreatmentProceduresForm.patchValue(this.otherTreatmentProceduresData);
+    }, 10);
     this.formReady.emit(this.OtherTreatmentProceduresForm);
   }
 

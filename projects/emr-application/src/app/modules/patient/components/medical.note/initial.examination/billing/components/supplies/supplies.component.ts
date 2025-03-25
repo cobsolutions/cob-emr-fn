@@ -12,11 +12,16 @@ export class SuppliesComponent implements OnInit {
   SuppliesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() SuppliesData: any
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.SuppliesForm = this.fb.group({})
+    if (this.SuppliesData)
+    setTimeout(() => {
+      this.SuppliesForm.patchValue(this.SuppliesData);
+    }, 10);
     this.formReady.emit(this.SuppliesForm);
   }
 

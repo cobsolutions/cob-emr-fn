@@ -11,11 +11,16 @@ export class RespiratoryComponent implements OnInit {
   RespiratoryForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() respiratoryData: any
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.RespiratoryForm = this.fb.group({})
+    if (this.respiratoryData)
+    setTimeout(() => {
+      this.RespiratoryForm.patchValue(this.respiratoryData);
+    }, 10);
     this.formReady.emit(this.RespiratoryForm);
   }
 

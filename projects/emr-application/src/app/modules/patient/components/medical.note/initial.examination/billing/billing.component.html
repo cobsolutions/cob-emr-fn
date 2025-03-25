@@ -34,7 +34,7 @@
                     <textarea id="precautions" formControlName="precautions"></textarea>
                 </div>
             </div>
-            
+
             <div class="section">
                 <c-row>
                     <!--Untimed Codes-->
@@ -43,33 +43,39 @@
                         <hr />
                         <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
                             [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
-                            [untimedCodesData]="billingData.untimedCodes"></untimed-codes>
+                            [untimedCodesData]="billingData?.untimedCodes"></untimed-codes>
                     </c-col>
                     <!--Calendar Month-->
                     <c-col xs="4">
                         <strong>Calendar Month</strong>
                         <hr />
                         <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
-                            [fields]="fields['calendar month']" [calendarMonthData]="billingData.calendarMonth"></calendar-month>
+                            [fields]="fields['calendar month']"
+                            [calendarMonthData]="billingData?.calendarMonth"></calendar-month>
                     </c-col>
                     <!--Nerve Conduction Studies-->
                     <c-col xs="4">
                         <strong>Nerve Conduction Studies</strong>
                         <hr />
                         <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
-                            [fields]="fields['Nerve Conduction Studies']" [nerveConductionStudiesData]="billingData.nerveConduction"></nerve-conduction-studies>
+                            [fields]="fields['Nerve Conduction Studies']"
+                            [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies>
                     </c-col>
+                    <!--Respiratory-->
                     <c-col xs="4">
                         <strong>Respiratory</strong>
                         <hr />
-                        <respiratory (formReady)="setChildForm('respiratory', $event)" [fields]="fields['Respiratory']">
+                        <respiratory (formReady)="setChildForm('respiratory', $event)" [fields]="fields['Respiratory']"
+                            [respiratoryData]="billingData?.respiratory">
                         </respiratory>
                     </c-col>
+                    <!--Direct Timed Codes-->
                     <c-col xs="12">
                         <strong>Direct Timed Codes</strong>
                         <hr />
                         <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
-                            [fields]="fields['Direct Timed Codes']"></direct-timed-codes>
+                            [fields]="fields['Direct Timed Codes']"
+                            [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes>
                     </c-col>
                 </c-row>
             </div>
@@ -95,33 +101,39 @@
                 </div>
             </div>
             <c-row>
+                <!--Other Treatment Procedures-->
                 <c-col xs="4">
                     <strong>Other Treatment Procedures</strong>
                     <hr />
                     <other-treatment-procedures (formReady)="setChildForm('otherTreatmentProcedures', $event)"
-                        [fields]="fields['Other Treatment Procedures']"></other-treatment-procedures>
+                        [fields]="fields['Other Treatment Procedures']"
+                        [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></other-treatment-procedures>
                 </c-col>
+                <!--Supplies-->
                 <c-col xs="8">
                     <strong>Supplies</strong>
                     <hr />
-                    <supplies (formReady)="setChildForm('otherTreatmentProcedures', $event)"
-                        [fields]="fields['Supplies']"></supplies>
+                    <supplies (formReady)="setChildForm('supplies', $event)"
+                        [fields]="fields['Supplies']" [SuppliesData]="billingData?.supplies"></supplies>
                 </c-col>
                 <c-col xs="4">
                     <strong>Splints/Orthotics</strong>
                     <hr />
                     <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
-                        [fields]="fields['Splints Orthotics']"></splints-orthotics>
+                        [fields]="fields['Splints Orthotics']"
+                        [SplintsOrthoticsData]="billingData?.splintsorthotics"></splints-orthotics>
                 </c-col>
                 <c-col xs="4">
                     <strong>Casts</strong>
                     <hr />
-                    <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"></casts>
+                    <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"
+                        [castsData]="billingData?.casts"></casts>
                 </c-col>
                 <c-col xs="4">
                     <strong>Braces</strong>
                     <hr />
-                    <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"></braces>
+                    <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"
+                        [bracesData]="billingData?.braces"></braces>
                 </c-col>
             </c-row>
         </c-col>

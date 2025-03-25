@@ -11,12 +11,17 @@ export class DirectTimedCodesComponent implements OnInit {
   DirectTimedCodesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() directTimedCodesData: any
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-    this.DirectTimedCodesForm= this.fb.group({})
+    this.DirectTimedCodesForm = this.fb.group({})
     this.formReady.emit(this.DirectTimedCodesForm);
+    if (this.directTimedCodesData)
+    setTimeout(() => {
+      this.DirectTimedCodesForm.patchValue(this.directTimedCodesData);
+    }, 10);
   }
 
 
