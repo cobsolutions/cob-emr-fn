@@ -22,7 +22,7 @@
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
-                <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('subjective', $event)"></objective>
+                <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"></objective>
             </mat-step>
             <mat-step completed="true" formGroupName="objective"
                 [stepControl]="initialExaminationForm.get('assessment')!" formGroupName="assessment">

@@ -21,6 +21,7 @@ export class InspectionComponent implements OnInit {
     console.log(JSON.stringify(this.fields))
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.inspectionForm = this.fb.group({});
+    this.formReady.emit(this.inspectionForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
