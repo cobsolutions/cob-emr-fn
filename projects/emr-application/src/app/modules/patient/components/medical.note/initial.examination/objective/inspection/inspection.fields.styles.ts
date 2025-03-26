@@ -40,6 +40,16 @@ export var InspectionFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "1_girthMeasurementUpperMultipleText",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "2_postOperativeWoundHealing",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "3_incisionSites",
+        "style": "margin-left: 10px;"
     }
 
 ]
