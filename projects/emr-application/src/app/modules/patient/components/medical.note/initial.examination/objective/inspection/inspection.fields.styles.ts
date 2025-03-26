@@ -113,6 +113,105 @@ export var InspectionFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "22_width",
         "style": "margin-left: 20px;max-width:50px"
-    }
+    },
 
+
+
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "23_woundCare",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "24_surfaceCultureUsedToExudate",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "25_techniqueUtilized",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "26_levine",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "28_deepSwab",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "30_semiquantitativeSwab",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "32_quantitativeSwab",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "34_provideMedicalReasoningForUseOfWoundSurfaceTechniqueExMRSAScreenSurfaceCulture",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "27_levinetext",
+        "style": "margin-left: 30px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "29_deepSwabtext",
+        "style": "margin-left: 30px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "31_semiquantitativeSwabtext",
+        "style": "margin-left: 30px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "33_quantitativeSwabtext",
+        "style": "margin-left: 30px;"
+    },
+
+
+
+
+
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "35_bodyMassIndex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "36_weight",
+        "style": "margin-left: 10px;max-width: 150px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "37_height",
+        "style": "margin-left: 10px;max-width: 150px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "38_unites",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "39_index",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "40_followupPlan",
+        "style": "margin-left: 10px;"
+    }
 ]
