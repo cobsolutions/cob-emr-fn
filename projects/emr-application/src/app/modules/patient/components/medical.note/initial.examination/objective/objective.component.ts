@@ -26,6 +26,7 @@ export class ObjectiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.objectiveForm = this.fb.group({
+      inspection: this.fb.group({}),
       observation: this.fb.group({}),
       rangeOfMotion: this.fb.group({}),
       strength: this.fb.group({}),
