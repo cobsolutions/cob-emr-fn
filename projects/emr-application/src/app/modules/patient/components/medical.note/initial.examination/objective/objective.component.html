@@ -13,7 +13,7 @@
         </c-card-body>
     </c-card>
 </div>
-<div [formGroup]="objectiveForm">
+<div [formGroup]="objectiveForm" *ngIf="objectiveCategoriesfields">
     <!--Inspection-->
     <c-card class="mb-2">
         <c-card-header>Inspection</c-card-header>
