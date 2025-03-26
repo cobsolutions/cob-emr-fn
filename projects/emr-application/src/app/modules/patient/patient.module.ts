@@ -60,6 +60,7 @@ import { BracesComponent } from './components/medical.note/initial.examination/b
 import { DirectTimedCodesComponent } from './components/medical.note/initial.examination/billing/components/direct.timed.codes/direct-timed-codes.component';
 import { InspectionComponent } from './components/medical.note/initial.examination/objective/inspection/inspection.component';
 import { OmtComponent } from './components/medical.note/initial.examination/objective/omt/omt.component';
+import { MultipleTextInputComponent } from './components/medical.note/custom.input/profile/multiple.input/multiple-text-input.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -124,6 +125,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DirectTimedCodesComponent,
     InspectionComponent,
     OmtComponent,
+    MultipleTextInputComponent,
   ],
   imports: [
     CommonModule,

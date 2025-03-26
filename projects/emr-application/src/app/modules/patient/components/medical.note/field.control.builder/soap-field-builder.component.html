@@ -8,7 +8,8 @@
      && field.type !== 'select'
      && field.type !== 'multiple_select'
      && field.type !== 'custom-mutliple-radio'
-     && field.type !== 'billing-code-number'">
+     && field.type !== 'billing-code-number'
+     && field.type !== 'multiple-profile-text'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -69,7 +70,10 @@
             [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
             [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
     </div>
-
+    <!--multiple_profile_text-->
+    <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
+        <multiple-text-input [form]="form"></multiple-text-input>
+    </div>
     <!--custom multiple-radio-->
     <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">
         <multiple-radio [form]="form" [inputControlName]="field.name" [values]="field.value" [label]="field.display"
