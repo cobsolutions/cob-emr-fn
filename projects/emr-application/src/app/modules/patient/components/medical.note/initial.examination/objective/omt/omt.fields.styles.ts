@@ -29,27 +29,27 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "7_shoulderPainAndDisabilityIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "8_upperExtremityFunctionalIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "9_dASHDisabilitiesOfArmShoulderHand",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "10_upperExtremityQuickDASH",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "11_pennShoulderScore",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -59,22 +59,22 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "13_neckDiabilityIndexQuestionnaire",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "14_oswestryLowBackPain",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "15_modifiedOswestryLowBackPain",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "16_theQuebecBackPainDisabilityBackPain",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
