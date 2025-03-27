@@ -9,7 +9,8 @@
      && field.type !== 'multiple_select'
      && field.type !== 'custom-mutliple-radio'
      && field.type !== 'billing-code-number'
-     && field.type !== 'multiple-profile-text'">
+     && field.type !== 'multiple-profile-text'
+     && field.type !== 'omt_test'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -106,6 +107,10 @@
             </select>
             <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
         </div>
+    </div>
+    <div *ngIf="field.type === 'omt_test'">
+        <app-objective-omttest [layout]="field.omtFieldRequest.layout" [form]="form"
+            [controls]="field.omtFieldRequest.list" [testStyle]="filedStyle!.style" [parentFieldName]="field.name"></app-objective-omttest>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

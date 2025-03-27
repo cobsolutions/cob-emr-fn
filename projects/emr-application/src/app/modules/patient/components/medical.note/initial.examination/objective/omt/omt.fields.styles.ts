@@ -225,6 +225,10 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "47_fOTOPatientInquiry",
         "style": "margin-left: 40px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "0_shoulderPainAndDisabilityIndexTest",
+        "style": "margin-left: 400px;"
     }
-
 ]

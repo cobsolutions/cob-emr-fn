@@ -1,5 +1,5 @@
-<form [formGroup]="form" class="form-group">
-  <div [ngClass]="layout">
+<form [formGroup]="omtTestform" class="form-group">
+  <div [ngClass]="layout" [style]="testStyle">
     <div *ngFor="let control of controls;" class="form-control-container">
       <span *ngIf="control.type === 'input'" class="control-wrapper">
         <input cFormControl [type]="'text'" [formControlName]="control.id" sizing="sm" [style]="control.style" />
