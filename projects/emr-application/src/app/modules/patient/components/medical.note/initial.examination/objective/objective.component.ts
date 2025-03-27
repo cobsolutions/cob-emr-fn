@@ -18,7 +18,7 @@ export class ObjectiveComponent implements OnInit {
   selectedProfile: string = null
   inspectionFields: any;
   objectiveCategories: string[] = [
-    'inspection', 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
+    'inspection', "omt",'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
@@ -27,6 +27,7 @@ export class ObjectiveComponent implements OnInit {
   ngOnInit(): void {
     this.objectiveForm = this.fb.group({
       inspection: this.fb.group({}),
+      omt: this.fb.group({}),
       observation: this.fb.group({}),
       rangeOfMotion: this.fb.group({}),
       strength: this.fb.group({}),
@@ -48,7 +49,6 @@ export class ObjectiveComponent implements OnInit {
   selectProfile() {
     this.medicalService.findObjectivePrfile(this.selectedProfile.toLowerCase()).subscribe(data => {
       this.fillFieldsMap(data)
-      console.log(JSON.stringify(this.objectiveCategoriesfields['inspection']))
       this.formReady.emit(this.objectiveForm);
     })
   }
