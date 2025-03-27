@@ -1,0 +1,30 @@
+.vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-control-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and label */
+  }
+  
+  .control-wrapper {
+    display: flex;
+    flex-direction: row-reverse; /* Places label on the right */
+    align-items: center;
+    gap: 5px; /* Space between label and input */
+  }
+  
+  .form-label {
+    white-space: nowrap; /* Prevents label from wrapping */
+  }
+  
