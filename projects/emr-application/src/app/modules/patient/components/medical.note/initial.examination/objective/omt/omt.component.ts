@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
 import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
-import { InspectionFormStyles } from '../inspection/inspection.fields.styles';
 import { OMTFormStyles } from './omt.fields.styles';
 
 @Component({
