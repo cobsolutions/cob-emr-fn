@@ -164,67 +164,67 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "35_timedUpAndGo",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "36_timedUpAndGoAlone",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "37_timedUpAndGoCognitive",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "38_timedUpAndGoManual",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "39_auditc",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "40_barthelIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "41_fallsEfficacyScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "42_dynamicGaitIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "43_functionalReachTest",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "44_sLUMS",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "45_geriatricDepressionScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "46_elderAbuseSuspicionIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "47_fOTOPatientInquiry",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 40px;"
     }
 
 ]
