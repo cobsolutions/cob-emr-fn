@@ -124,37 +124,37 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "27_mcGillPainQuestionnaire",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "28_wongbakerFacesPainRatingScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "29_painDisabilityIndex",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "30_fullertonAdvanceBalanceFABScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "31_croftDisabilityQuestionnaire",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "32_theFearAvoidanceBeliefesQuestionnaireFABQ",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "33_theFearAvoidanceBeliefesQuestionnaireFABQ",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -290,5 +290,55 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "7_fullertonAdvanceBalanceFABScale",
         "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "8_mcGillPainQuestionnaire",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "9_painFollowupPlan",
+        "style": "margin-left: -7px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "10_wongbakerFacesPainRatingScale",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "11_painFollowup",
+        "style": "margin-left: -7px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "12_painDisabilityIndex",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "13_painFollowup",
+        "style": "margin-left: -7px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "14_croftDisabilityQuestionnaire",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "15_painFollowup",
+        "style": "margin-left: -7px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "16_theFearAvoidanceBeliefesQuestionnaireFABQ",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "17_painFollowup",
+        "style": "margin-left: -7px;"
     }
 ]
