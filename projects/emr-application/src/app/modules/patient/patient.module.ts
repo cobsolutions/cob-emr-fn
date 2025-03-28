@@ -62,6 +62,7 @@ import { InspectionComponent } from './components/medical.note/initial.examinati
 import { OmtComponent } from './components/medical.note/initial.examination/objective/omt/omt.component';
 import { MultipleTextInputComponent } from './components/medical.note/custom.input/profile/multiple.input/multiple-text-input.component';
 import { ObjectiveOMTTestComponent } from './components/medical.note/initial.examination/objective/omt.test/test.control/objective-omttest.component';
+import { WalkTestComponent } from './components/medical.note/custom.input/profile/observation/walk.test/walk-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -128,6 +129,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     OmtComponent,
     MultipleTextInputComponent,
     ObjectiveOMTTestComponent,
+    WalkTestComponent,
   ],
   imports: [
     CommonModule,
