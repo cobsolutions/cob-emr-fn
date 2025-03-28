@@ -84,7 +84,7 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "19_lowerExtremityFunctionalScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -94,27 +94,27 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "21_aBCScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "22_tinetti",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "23_berg",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "24_fullertonAdvanceBalanceFABScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "25_fullertonAdvanceBalanceFABScale",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -230,5 +230,65 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "0_shoulderPainAndDisabilityIndexTest",
         "style": "margin-left: 400px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "1_upperExtremityFunctionalIndexTest",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "2_dASHDisabilitiesOfArmShoulderHandTest",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "3_pennShoulderScoreTest",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "5_upperExtremityQuickDASHTest",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "6_neckDiabilityIndexQuestionnaire",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "0_oswestryLowBackPain",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "1_modifiedOswestryLowBackPain",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "0_theQuebecBackPainDisabilityBackPain",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "4_aBCScale",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "5_tinetti",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "6_berg",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "7_fullertonAdvanceBalanceFABScale",
+        "style": "margin-left: 500px;"
     }
 ]
