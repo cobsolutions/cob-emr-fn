@@ -14,7 +14,7 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     { "label_style": "white-space: nowrap; min-width: 500px;", "name": "58_edema", "style": "margin-left: 10px;" },
     { "label_style": "white-space: nowrap; min-width: 500px;", "name": "59_scapulaPosition", "style": "margin-left: 10px;" },
     { "label_style": "white-space: nowrap; min-width: 500px;", "name": "60_additionalComments", "style": "margin-left: 10px;" },
-    { "label_style": "white-space: nowrap; min-width: 500px;", "name": "61_rangeOfMotionShoulder", "style": "margin-left: 10px;" },
+    { "label_style": "white-space: nowrap; min-width: 500px;", "name": "61_additional_comments", "style": "margin-left: 10px;" },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "63_48indicateBodyTyperadio",
@@ -95,5 +95,50 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
         "name": "78_left",
         "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "0_54sixMinuteWalkTesttest",
+        "style": "margin-left: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "1_type",
+        "style": "margin-left: 10px; width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "2_56muscularAsymmetriestextarea",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "3_description",
+        "style": "margin-left: 10px;width:180px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "4_edemaDescription",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "5_pitting",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "6_59scapulaPositionselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "7_59scapulaPositiontextarea",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 10px;",
+        "name": "8_42additionalCommentstextarea",
+        "style": "margin-left: 10px;"
     }
 ]

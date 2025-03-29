@@ -2,17 +2,27 @@
 
 /* exercise-tracker.component.css */
 table {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 10px;
+    font-size: 12px;
   }
   
   th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 4px;
     text-align: center;
+    min-width: 50px;
   }
   
   th {
     background-color: #f4f4f4;
   }
+  
+  input {
+    width: 40px;
+    font-size: 10px;
+    padding: 2px;
+    text-align: center;
+  }
+  

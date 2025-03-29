@@ -1,23 +1,22 @@
-<table>
-    <thead>
-      <tr>
-        <th>Time</th>
-        <th>SpO2%</th>
-        <th>Heart Rate</th>
-        <th>Respiratory Rate</th>
-        <th>BORG Scale</th>
-        <th>Distance (feet)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let record of records.controls; let i = index">
-        <td>{{ timeIntervals[i] }}</td>
-        <td><input type="text" formControlName="spo2"></td>
-        <td><input type="text" formControlName="heartRate"></td>
-        <td><input type="text" formControlName="respiratoryRate"></td>
-        <td><input type="text" formControlName="borgScale"></td>
-        <td><input type="text" formControlName="distance"></td>
-      </tr>
-    </tbody>
-  </table>
-  
+<table [style]="testStyle">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>SpO2%</th>
+      <th>Heart Rate</th>
+      <th>Respiratory Rate</th>
+      <th>BORG Scale</th>
+      <th>Distance (feet)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of records.controls; let i = index" [formGroup]="record">
+      <td>{{ record.get('timeInterval')?.value }}</td>
+      <td><input type="text" formControlName="spo2"></td>
+      <td><input type="text" formControlName="heartRate"></td>
+      <td><input type="text" formControlName="respiratoryRate"></td>
+      <td><input type="text" formControlName="borgScale"></td>
+      <td><input type="text" formControlName="distance"></td>
+    </tr>
+  </tbody>
+</table>
