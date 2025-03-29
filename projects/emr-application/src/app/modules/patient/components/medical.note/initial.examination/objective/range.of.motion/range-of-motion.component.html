@@ -1,1 +1,4 @@
-<p>range-of-motion works!</p>
+<span *ngFor="let field of fields;">
+    <soap-field-builder [field]="field " [form]="ROMForm" [filedStyle]="getstyleFieldControl(field.name)"
+        [styles]="styles"></soap-field-builder>
+</span>

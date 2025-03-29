@@ -34,14 +34,18 @@
     <c-card class="mb-2">
         <c-card-header>Observation</c-card-header>
         <c-card-body>
-            <observation (formReady)="setChildForm('observation', $event)" *ngIf="objectiveCategoriesfields['observation']"
-                [fields]="objectiveCategoriesfields['observation']"></observation>
+            <observation (formReady)="setChildForm('observation', $event)"
+                *ngIf="objectiveCategoriesfields['observation']" [fields]="objectiveCategoriesfields['observation']">
+            </observation>
         </c-card-body>
     </c-card>
     <!--Range of Motion-->
     <c-card class="mb-2">
         <c-card-header>Range of Motion</c-card-header>
         <c-card-body>
+            <range-of-motion (formReady)="setChildForm('rangeOfMotion', $event)"
+                *ngIf="objectiveCategoriesfields['range_of_motion']"
+                [fields]="objectiveCategoriesfields['range_of_motion']"></range-of-motion>
         </c-card-body>
     </c-card>
     <!--Strength-->
