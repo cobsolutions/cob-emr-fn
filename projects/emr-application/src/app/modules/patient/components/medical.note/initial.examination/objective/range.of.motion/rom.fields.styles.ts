@@ -184,6 +184,11 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 20px;",
         "name": "20_cervicalAROMComments",
         "style": "margin-left: 10px;width:250px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 20px;",
+        "name": "1_11shoulderAROMtest",
+        "style": "margin-left: 200px;"
     }
 
 
