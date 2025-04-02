@@ -1,1 +1,27 @@
-<p>rom works!</p>
+<form [formGroup]="movementForm" *ngIf="movementOptions">
+    <div class="grid-container">
+        <!-- Header Row -->
+        <div></div> <!-- Empty space for labels -->
+        <div class="header">Right</div>
+        <div class="header">Left</div>
+
+        <!-- Dynamic Rows -->
+        <ng-container *ngFor="let movement of movementOptions">
+            <div class="label">{{ movement.name }}</div>
+
+            <!-- Right Dropdown -->
+            <select [formControlName]="'right_' + movement.name" class="dropdown">
+                <option *ngFor="let option of movement.values.right" [value]="option">
+                    {{ option }}
+                </option>
+            </select>
+
+            <!-- Left Dropdown -->
+            <select [formControlName]="'left_' + movement.name" class="dropdown">
+                <option *ngFor="let option of movement.values.left" [value]="option">
+                    {{ option }}
+                </option>
+            </select>
+        </ng-container>
+    </div>
+</form>

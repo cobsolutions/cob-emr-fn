@@ -18,7 +18,6 @@ export class InspectionComponent implements OnInit {
     , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
-    console.log(JSON.stringify(this.fields))
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.inspectionForm = this.fb.group({});
     this.formReady.emit(this.inspectionForm);

@@ -41,4 +41,9 @@ export class MedialNoteService {
     var url: string = this.baseUrl + "/find/objective/profile"
     return this.httpClient.get(url);
   }
+
+  findROMTests(name:string): Observable<any> {
+    var url: string = this.baseUrl + "/action/find/rom/name/"+name
+    return this.httpClient.get(url);
+  }
 }
