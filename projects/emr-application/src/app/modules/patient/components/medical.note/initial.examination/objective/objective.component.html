@@ -52,7 +52,8 @@
     <c-card class="mb-2">
         <c-card-header>Strength</c-card-header>
         <c-card-body>
-
+            <strength (formReady)="setChildForm('strength', $event)" *ngIf="objectiveCategoriesfields['strength']"
+                [fields]="objectiveCategoriesfields['strength']"></strength>
         </c-card-body>
     </c-card>
 
