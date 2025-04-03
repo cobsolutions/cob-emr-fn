@@ -10,7 +10,8 @@ import { StrengthFormStyles } from './strength.fields.styles';
   styleUrls: ['./strength.component.css']
 })
 export class StrengthComponent implements OnInit {
-
+  test: string[] = ['Cervical Side Bending', 'Cervical Rotation']
+  topTest: string[] = ['Cervical Flexion', 'Cervical Extension']
   strengthForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
