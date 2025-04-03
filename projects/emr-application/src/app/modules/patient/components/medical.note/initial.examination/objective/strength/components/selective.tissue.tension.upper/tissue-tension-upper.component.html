@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" [style]="testStyle">
     <span *ngIf="topSelect">
         <ng-container *ngFor="let selectControl of topSelect">
             <div class="form-group">
@@ -11,7 +11,7 @@
             </div>
         </ng-container>
     </span>
-    <div class="grid-container">
+    <div class="grid-container" *ngIf="bodySelect">
 
         <!-- Header Row -->
         <div></div> <!-- Empty space for labels -->

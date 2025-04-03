@@ -12,6 +12,9 @@ interface SelectValue {
 })
 export class TissueTensionUpperComponent implements OnInit {
   form: FormGroup
+  @Input() parentForm: FormGroup;
+  @Input() parentFieldName: string;
+  @Input() testStyle: string
   selectValues: SelectValue[] = [
     { "view": "Strong and Painless", "val": "T01" },
     { "view": "Weak and Painless", "val": "T02" },
@@ -29,11 +32,22 @@ export class TissueTensionUpperComponent implements OnInit {
     if (this.topSelect)
       this.topSelect.forEach(field => {
         this.form.addControl(`${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
+        this.form.get(`${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+        })
       })
-    this.bodySelect.forEach(field => {
-      this.form.addControl(`right_${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
-      this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
-    });
+    if (this.bodySelect)
+      this.bodySelect.forEach(field => {
+        this.form.addControl(`right_${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
+        this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
+
+        this.form.get(`right_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+        })
+        this.form.get(`left_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+        })
+      });
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());

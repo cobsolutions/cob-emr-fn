@@ -12,7 +12,8 @@
      && field.type !== 'multiple-profile-text'
      && field.type !== 'omt_test'
      && field.type !== 'walk_test'
-     && field.type !== 'rom_test'">
+     && field.type !== 'rom_test'
+     && field.type !== 'tissue-tension-upper'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -121,6 +122,11 @@
     <div *ngIf="field.type === 'rom_test'">
         <rom-test [testName]="field.display" [form]="form" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style"></rom-test>
+    </div>
+    <div *ngIf="field.type === 'tissue-tension-upper'">
+        <tissue-tension-upper [parentForm]="form" [topSelect]="field.value.selectTop"
+            [bodySelect]="field.value.selectBody" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></tissue-tension-upper>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
