@@ -189,6 +189,56 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 20px;",
         "name": "1_11shoulderAROMtest",
         "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 20px;",
+        "name": "3_12shoulderPROMtest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "4_13elbowAROMtest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "5_14wristAROMtest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "5_14wristAROMtest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "6_anteriorTip",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "7_posteriorTip",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "8_upwardRotation",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "9_downwardRotation",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "10_adduction",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "0_16additionalCommentstextarea",
+        "style": "margin-left: 10px;width:400px"
     }
 
 
