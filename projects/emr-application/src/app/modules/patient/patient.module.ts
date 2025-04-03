@@ -67,6 +67,7 @@ import { RangeOfMotionComponent } from './components/medical.note/initial.examin
 import { RomComponent } from './components/medical.note/initial.examination/objective/arom.prom/rom.component';
 import { StrengthComponent } from './components/medical.note/initial.examination/objective/strength/strength.component';
 import { TissueTensionUpperComponent } from './components/medical.note/initial.examination/objective/strength/components/selective.tissue.tension.upper/tissue-tension-upper.component';
+import { GripComponent } from './components/medical.note/initial.examination/objective/strength/components/grip/grip.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -138,6 +139,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     RomComponent,
     StrengthComponent,
     TissueTensionUpperComponent,
+    GripComponent,
   ],
   imports: [
     CommonModule,
