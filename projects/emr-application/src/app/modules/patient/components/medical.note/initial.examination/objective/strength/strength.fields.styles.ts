@@ -15,5 +15,40 @@ export var StrengthFormStyles: FieldControlStyles[] = [
       "label_style": "white-space: nowrap; min-width: 500px;",
       "name": "34_23noLimitationsNotedcheckbox",
       "style": "margin-left: 10px;"
+   },
+   {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "35_cervical",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "36_trunk",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "37_backRibs",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "38_shoulder",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "39_elbow",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "40_wrist",
+      "style": "margin-left: 20px;"
+  },
+  {
+      "label_style": "white-space: nowrap; min-width: 500px;",
+      "name": "41_hand",
+      "style": "margin-left: 20px;"
   }
 ]
