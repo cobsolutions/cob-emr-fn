@@ -105,5 +105,20 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "11_fiveLevelGrip",
         "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "12_9rapidExchangechildgrip",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "13_10repeatedGripchildgrip",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "14_11fiveLevelGripchildgrip",
+        "style": "margin-left: 200px;"
     }
 ]
