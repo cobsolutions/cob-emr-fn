@@ -120,5 +120,25 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "14_11fiveLevelGripchildgrip",
         "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "15_cervical",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "16_shoulder",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "17_elbow",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "18_wrist",
+        "style": "margin-left: 20px;"
     }
 ]
