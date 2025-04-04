@@ -85,5 +85,25 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "7_45handtissuetensionupper",
         "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "8_25gripPinchgrip",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "9_rapidExchange",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "10_repeatedGrip",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "11_fiveLevelGrip",
+        "style": "margin-left: 20px;"
     }
 ]

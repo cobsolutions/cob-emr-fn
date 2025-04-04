@@ -13,7 +13,8 @@
      && field.type !== 'omt_test'
      && field.type !== 'walk_test'
      && field.type !== 'rom_test'
-     && field.type !== 'tissue-tension-upper'">
+     && field.type !== 'tissue-tension-upper'
+     && field.type !== 'grip'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -127,6 +128,10 @@
         <tissue-tension-upper [parentForm]="form" [topSelect]="field.value.selectTop"
             [bodySelect]="field.value.selectBody" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style"></tissue-tension-upper>
+    </div>
+    <div *ngIf="field.type === 'grip'">
+        <grip [parentForm]="form"  [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></grip>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
