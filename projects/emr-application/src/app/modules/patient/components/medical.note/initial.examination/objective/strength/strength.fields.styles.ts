@@ -186,5 +186,11 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "27_lumbarMotorControlTests",
         "style": "margin-left: 20px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "28_23upperBodyMyofascialTestsupperbodymyofascialtest",
+        "style": "margin-left: 200px;"
     }
 ]

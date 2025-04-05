@@ -15,7 +15,8 @@
      && field.type !== 'rom_test'
      && field.type !== 'tissue-tension-upper'
      && field.type !== 'grip'
-     && field.type !== 'child-grip'">
+     && field.type !== 'child-grip'
+     && field.type !== 'upper-body-myofascial-test'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -135,6 +136,10 @@
     </div>
     <div *ngIf="field.type === 'child-grip'">
         <child-grip [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></child-grip>
+    </div>
+    <div *ngIf="field.type ==='upper-body-myofascial-test'">
+        <upper-body-myofascial-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></upper-body-myofascial-test>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
