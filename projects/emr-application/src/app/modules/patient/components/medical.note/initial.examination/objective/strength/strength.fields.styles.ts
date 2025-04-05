@@ -197,5 +197,20 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "29_24lowerBodyMyofascialTestsupperbodymyofascialtest",
         "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "30_25cervicalMovementsmovementstest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "31_26cervicalMotorControlTestsmovementstest",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "32_27lumbarMotorControlTestsmovementstest",
+        "style": "margin-left: 10px;"
     }
 ]
