@@ -233,5 +233,20 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "37_ankle",
         "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "38_35hipgrossmuscletest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "39_36kneegrossmuscletest",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "40_37anklegrossmuscletest",
+        "style": "margin-left: 200px;"
     }
 ]
