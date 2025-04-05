@@ -212,5 +212,26 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "32_27lumbarMotorControlTestsmovementstest",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "34_28grossMuscleTestsTrunkgrossmuscletest",
+        "style": "margin-left: 200px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "35_hip",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "36_knee",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "37_ankle",
+        "style": "margin-left: 20px;"
     }
 ]

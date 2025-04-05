@@ -5,7 +5,7 @@ interface SelectValue {
   val: string
 }
 @Component({
-  selector: 'app-gross-muscle-test',
+  selector: 'gross-muscle-test',
   templateUrl: './gross-muscle-test.component.html',
   styleUrls: ['./gross-muscle-test.component.css']
 })
@@ -15,7 +15,7 @@ export class GrossMuscleTestComponent implements OnInit {
   @Input() parentFieldName: string;
   @Input() testStyle: string
   selectValues: SelectValue[] = [
-    { "view": "Good", "val": "good" }, { "view": "Fair", "val": "fair" }, { "view": "Poor", "val": "poor" }]
+    { "view": "Not Tested", "val": "NT" }, { "view": "Good", "val": "good" }, { "view": "Fair", "val": "fair" }, { "view": "Poor", "val": "poor" }]
   @Input() topSelect: string[];
   @Input() bodySelect: string[]
   constructor(private fb: FormBuilder) { }
