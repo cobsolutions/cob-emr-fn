@@ -248,5 +248,79 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "40_37anklegrossmuscletest",
         "style": "margin-left: 200px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "41_proneExtension",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "42_supineFlexion",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "43_situps",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "44_pushup",
+        "style": "margin-left: 20px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "45_seconds",
+        "style": "margin-left: 30px; width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "46_41proneExtensiontext",
+        "style": "margin-left: 30px; width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "47_seconds",
+        "style": "margin-left: 30px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "48_42supineFlexiontext",
+        "style": "margin-left: 30px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "49_situpsCompleted",
+        "style": "margin-left: 30px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "50_43situpstext",
+        "style": "margin-left: 30px;width:300px"
+    },
+
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "51_pushupsCompleted",
+        "style": "margin-left: 30px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "52_44pushuptext",
+        "style": "margin-left: 30px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "53_kneePushupsCompleted",
+        "style": "margin-left: 30px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "54_44pushuptext1",
+        "style": "margin-left: 30px;width:300px"
     }
 ]
