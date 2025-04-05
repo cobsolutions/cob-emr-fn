@@ -16,7 +16,9 @@ export class MovementsTestComponent implements OnInit {
     'Left Lateral Flexion',
     'Extension'
   ];
-
+  @Input() parentForm: FormGroup;
+  @Input() parentFieldName: string;
+  @Input() testStyle: string
   form: FormGroup;
 
   options = [
@@ -37,6 +39,16 @@ export class MovementsTestComponent implements OnInit {
         const inputControl = this.getInputControlName(row, col);
         this.form.addControl(selectControl, this.fb.control(this.options[0].val));
         this.form.addControl(inputControl, this.fb.control(''));
+        // Subscribe to select control changes
+        this.form.get(selectControl)?.valueChanges.subscribe(value => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+        });
+
+        // Subscribe to input control changes
+        this.form.get(inputControl)?.valueChanges.subscribe(value => {
+          console.log(`Changed: ${inputControl} = ${value}`);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+        });
       }
     }
   }

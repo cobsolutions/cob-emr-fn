@@ -17,7 +17,8 @@
      && field.type !== 'grip'
      && field.type !== 'child-grip'
      && field.type !== 'upper-body-myofascial-test'
-     && field.type !== 'lower-body-myofascial-test'">
+     && field.type !== 'lower-body-myofascial-test'
+     && field.type !== 'movements-test'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -145,6 +146,10 @@
     <div *ngIf="field.type ==='lower-body-myofascial-test'">
         <lower-body-myofascial-test [parentForm]="form" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style"></lower-body-myofascial-test>
+    </div>
+    <div *ngIf="field.type ==='movements-test'">
+        <movements-test [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
+            [rows]="field.value.rows" [testStyle]="filedStyle!.style"></movements-test>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
