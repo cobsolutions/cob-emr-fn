@@ -1,1 +1,35 @@
-<p>lower-body-myofascial-test works!</p>
+<form [formGroup]="lowerBodyMyofascialForm" [style]="testStyle">
+    <div class="container" [formGroup]="lowerBodyMyofascialForm">
+      <!-- Right Hand -->
+      <div class="column">
+        <div class="header">Right</div>
+        <div formGroupName="right">
+          <div class="form-group" *ngFor="let type of lowerBodyMyofascialTypes">
+            <label>{{ type }}</label>
+            <div class="input-group">
+              <select [formControlName]="toCamelCase(type)">
+                <option *ngFor="let option of selectValues" [value]="option.val">{{ option.view }}</option>
+              </select>
+              <textarea class="comment" formControlName="comment"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Left Hand -->
+      <div class="column">
+        <div class="header">Left</div>
+        <div formGroupName="left">
+          <div class="form-group" *ngFor="let type of lowerBodyMyofascialTypes">
+            <label>{{ type }}</label>
+            <div class="input-group">
+              <select [formControlName]="toCamelCase(type)">
+                <option *ngFor="let option of selectValues" [value]="option.val">{{ option.view }}</option>
+              </select>
+              <textarea class="comment" formControlName="comment"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

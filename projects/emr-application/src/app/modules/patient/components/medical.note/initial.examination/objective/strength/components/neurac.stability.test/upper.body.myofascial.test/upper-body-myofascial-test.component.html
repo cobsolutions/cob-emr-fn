@@ -7,6 +7,7 @@
           <div class="form-group" *ngFor="let type of upperBodyMyofascialTypes">
             <label>{{ type }}</label>
             <div class="input-group">
+              {{toCamelCase(type)}}
               <select [formControlName]="toCamelCase(type)">
                 <option *ngFor="let option of selectValues" [value]="option.val">{{ option.view }}</option>
               </select>
