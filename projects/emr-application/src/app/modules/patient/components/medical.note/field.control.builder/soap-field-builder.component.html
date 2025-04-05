@@ -127,7 +127,7 @@
     </div>
     <div *ngIf="field.type === 'tissue-tension-upper'">
         <tissue-tension-upper [parentForm]="form" [topSelect]="field.value.selectTop"
-            [bodySelect]="field.value.selectBody" [parentFieldName]="field.name"
+            [bodySelect]="field.value.selectBody" [parentFieldName]="field.name" [isMMT]="field.value.isMMT"
             [testStyle]="filedStyle!.style"></tissue-tension-upper>
     </div>
     <div *ngIf="field.type === 'grip'">

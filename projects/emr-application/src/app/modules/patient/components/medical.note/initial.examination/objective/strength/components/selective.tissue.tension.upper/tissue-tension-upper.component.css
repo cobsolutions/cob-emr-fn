@@ -34,7 +34,7 @@
 }
 
 .top-label {
-    flex: 1;
+    flex: 0.40;
     margin-right: 10px;
     font-size: 14px;
     font-weight: bold;

@@ -3,11 +3,20 @@
         <ng-container *ngFor="let selectControl of topSelect">
             <div class="form-group">
                 <label for="cervicalFlexion" class="top-label">{{selectControl}}</label>
-                <select id="cervicalFlexion" class="dropdown" [formControlName]="toCamelCase(selectControl)">
-                    <option *ngFor="let option of selectValues" [value]="option.val">
-                        {{ option.view }}
-                    </option>
-                </select>
+                <span *ngIf="!isMMT">
+                    <select id="cervicalFlexion" class="dropdown" [formControlName]="toCamelCase(selectControl)">
+                        <option *ngFor="let option of selectValues" [value]="option.val">
+                            {{ option.view }}
+                        </option>
+                    </select>
+                </span>
+                <span *ngIf="isMMT">
+                    <select id="cervicalFlexion" class="dropdown" [formControlName]="toCamelCase(selectControl)">
+                        <option *ngFor="let option of MMTSelectValues" [value]="option.val">
+                            {{ option.view }}
+                        </option>
+                    </select>
+                </span>
             </div>
         </ng-container>
     </span>
@@ -24,16 +33,30 @@
 
             <!-- Right Dropdown -->
             <select [formControlName]="'right_' + toCamelCase(selectControl)" class="dropdown">
-                <option *ngFor="let option of selectValues" [value]="option.val">
-                    {{ option.view }}
-                </option>
+                <span *ngIf="!isMMT">
+                    <option *ngFor="let option of selectValues" [value]="option.val">
+                        {{ option.view }}
+                    </option>
+                </span>
+                <span *ngIf="isMMT">
+                    <option *ngFor="let option of MMTSelectValues" [value]="option.val">
+                        {{ option.view }}
+                    </option>
+                </span>
             </select>
 
             <!-- Left Dropdown -->
             <select [formControlName]="'left_' + toCamelCase(selectControl)" class="dropdown">
-                <option *ngFor="let option of selectValues" [value]="option.val">
-                    {{ option.view }}
-                </option>
+                <span *ngIf="!isMMT">
+                    <option *ngFor="let option of selectValues" [value]="option.val">
+                        {{ option.view }}
+                    </option>
+                </span>
+                <span *ngIf="isMMT">
+                    <option *ngFor="let option of MMTSelectValues" [value]="option.val">
+                        {{ option.view }}
+                    </option>
+                </span>
             </select>
         </ng-container>
     </div>
