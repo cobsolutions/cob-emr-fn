@@ -1,1 +1,22 @@
-<p>movements-test works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let col of columns">{{ col }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td class="label-cell">{{ row }}</td>
+        <td *ngFor="let col of columns">
+          <select [formControlName]="getControlName(row, col)">
+            <option *ngFor="let option of options" [value]="option.val">{{ option.view }}</option>
+          </select>
+          <input type="text" [formControlName]="getInputControlName(row, col)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit">Submit</button>
+</form>
