@@ -70,6 +70,7 @@ import { TissueTensionUpperComponent } from './components/medical.note/initial.e
 import { GripComponent } from './components/medical.note/initial.examination/objective/strength/components/grip/grip.component';
 import { ChildGripComponent } from './components/medical.note/initial.examination/objective/strength/components/sub.grip/child-grip.component';
 import { UpperBodyMyofascialTestComponent } from './components/medical.note/initial.examination/objective/strength/components/neurac.stability.test/upper.body.myofascial.test/upper-body-myofascial-test.component';
+import { LowerBodyMyofascialTestComponent } from './components/medical.note/initial.examination/objective/strength/components/neurac.stability.test/lower.body.myofascial.tests/lower-body-myofascial-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -144,6 +145,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     GripComponent,
     ChildGripComponent,
     UpperBodyMyofascialTestComponent,
+    LowerBodyMyofascialTestComponent,
   ],
   imports: [
     CommonModule,
