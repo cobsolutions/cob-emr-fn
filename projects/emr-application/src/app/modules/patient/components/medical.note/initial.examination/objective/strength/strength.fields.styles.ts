@@ -327,5 +327,10 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "55_31manualMuscleTestsmanualmuscletest",
         "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "56_32additionalCommentstextArea",
+        "style": "margin-left: 20px;"
     }
 ]
