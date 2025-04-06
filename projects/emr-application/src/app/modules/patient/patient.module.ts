@@ -75,6 +75,7 @@ import { MovementsTestComponent } from './components/medical.note/initial.examin
 import { GrossMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/gross.muscle.test/gross-muscle-test.component';
 import { ManualMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/manual.muscle.test/manual-muscle-test.component';
 import { NeuroVascularComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/neuro-vascular.component';
+import { CranialNerveScreenComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/cranial.nerve.screen/cranial-nerve-screen.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -154,6 +155,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     GrossMuscleTestComponent,
     ManualMuscleTestComponent,
     NeuroVascularComponent,
+    CranialNerveScreenComponent,
   ],
   imports: [
     CommonModule,
