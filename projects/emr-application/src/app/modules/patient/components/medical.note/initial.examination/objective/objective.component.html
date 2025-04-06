@@ -61,7 +61,9 @@
     <c-card class="mb-2">
         <c-card-header>Neuro-Vascular</c-card-header>
         <c-card-body>
-
+            <neuro-vascular (formReady)="setChildForm('neuroVascular', $event)"
+                *ngIf="objectiveCategoriesfields['neuro_vascular']"
+                [fields]="objectiveCategoriesfields['neuro_vascular']"></neuro-vascular>
         </c-card-body>
     </c-card>
 

@@ -33,7 +33,7 @@ export class ObjectiveComponent implements OnInit {
       strength: this.fb.group({}),
       neuroVascular: this.fb.group({}),
       specialTest: this.fb.group({}),
-      palpation: this.fb.group({})
+      palpation: this.fb.group({}),
     });
     this.loadProfiles()
   }

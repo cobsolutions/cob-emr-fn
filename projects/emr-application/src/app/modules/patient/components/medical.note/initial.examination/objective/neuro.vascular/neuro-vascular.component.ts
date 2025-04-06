@@ -5,7 +5,7 @@ import { FieldControlStyles } from '../../../filed.control.style.selector/field.
 import { NeuroVascularStyles } from './neuro.vascular.styles';
 
 @Component({
-  selector: 'app-neuro-vascular',
+  selector: 'neuro-vascular',
   templateUrl: './neuro-vascular.component.html',
   styleUrls: ['./neuro-vascular.component.css']
 })
