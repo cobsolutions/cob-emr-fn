@@ -71,7 +71,9 @@
     <c-card class="mb-2">
         <c-card-header>Special Tests</c-card-header>
         <c-card-body>
-
+            <special-tests (formReady)="setChildForm('specialTest', $event)"
+                *ngIf="objectiveCategoriesfields['special_tests']"
+                [fields]="objectiveCategoriesfields['special_tests']"></special-tests>
         </c-card-body>
     </c-card>
 
