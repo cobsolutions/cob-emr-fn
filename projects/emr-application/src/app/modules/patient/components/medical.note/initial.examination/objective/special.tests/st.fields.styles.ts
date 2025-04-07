@@ -95,6 +95,81 @@ export var SpecialTestStyles: FieldControlStyles[] =[
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "200_additionalComments",
         "style": "margin-left: 30px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "201_182passiveJointMobilityShoulderspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "202_183cervicalQuadrantspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "margin-left: 30px;white-space: nowrap; min-width: 500px;",
+        "name": "203_compression",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "margin-left: 30px;white-space: nowrap; min-width: 500px;",
+        "name": "204_distraction",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "205_187capsularPatternspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "206_188impingementspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "207_189gHJStabilityspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "209_191rotatorCuffspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "210_190labrumspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "211_192speedsTestspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "213_193yergasonsTestspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "214_193yergasonsTestspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "215_195spurlingsManeuverspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "216_196alarLigamentTestspecialtestsrightleftselect",
+        "style": "margin-left: 200px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "217_197alarLigamentStresstextArea",
+        "style": "margin-left: 30px; width:400px"
     }
 ]
 

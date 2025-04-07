@@ -23,7 +23,8 @@
      && field.type !== 'manual-muscle-test'
      && field.type !== 'neuro-vascular-right-left'
      && field.type !== 'vertebral-artery'
-     && field.type !== 'semmes-weinstein-upper'">
+     && field.type !== 'semmes-weinstein-upper'
+     && field.type !== 'special-tests-right-left-select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -178,6 +179,12 @@
     <div *ngIf="field.type === 'semmes-weinstein-upper'">
         <semmes-weinstein-upper [parentForm]="form" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style"></semmes-weinstein-upper>
+    </div>
+    <div *ngIf="field.type === 'special-tests-right-left-select'">
+        <special-tests-right-left-select [parentForm]="form" [topSelect]="field.value.topSelect"
+            [bodySelect]="field.value.bodySelect" [parentFieldName]="field.name"
+            [selectValues]="field.value.selectValues" [testStyle]="filedStyle!.style">
+        </special-tests-right-left-select>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
