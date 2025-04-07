@@ -310,5 +310,36 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
 		"label_style": "white-space: nowrap; min-width: 500px;",
 		"name": "167_62neuralTissueTensionUppervascularrightleft",
 		"style": "margin-left: 200px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "168_63vertebralArteryvascularrightleft",
+		"style": "margin-left: 200px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "169_64thoracicOutletvascularrightleft",
+		"style": "margin-left: 200px;"
+	},
+
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;margin-left: 30px;",
+		"name": "170_thumb",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;margin-left: 30px;",
+		"name": "171_indexFinger",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;margin-left: 30px;",
+		"name": "172_middleFinger",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;margin-left: 30px;",
+		"name": "173_ringFinger",
+		"style": "margin-left: 10px;"
 	}
 ]

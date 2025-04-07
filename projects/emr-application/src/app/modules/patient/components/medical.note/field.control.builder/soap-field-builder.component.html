@@ -21,8 +21,8 @@
      && field.type !== 'movements-test'
      && field.type !== 'gross-muscle-test'
      && field.type !== 'manual-muscle-test'
-     && field.type !== 'neuro-vascular-right-left'">
-
+     && field.type !== 'neuro-vascular-right-left'
+     && field.type !== 'vertebral-artery'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -168,6 +168,11 @@
             [bodySelect]="field.value.bodySelect" [parentFieldName]="field.name"
             [selectValues]="field.value.selectValues" [testStyle]="filedStyle!.style">
         </neuro-vascular-right-left>
+    </div>
+    <div *ngIf="field.type ==='vertebral-artery'">
+        <vertebral-artery [parentForm]="form" [topSelect]="field.value.topSelect" [bodySelect]="field.value.bodySelect"
+            [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </vertebral-artery>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
