@@ -75,9 +75,9 @@ import { MovementsTestComponent } from './components/medical.note/initial.examin
 import { GrossMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/gross.muscle.test/gross-muscle-test.component';
 import { ManualMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/manual.muscle.test/manual-muscle-test.component';
 import { NeuroVascularComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/neuro-vascular.component';
-import { NeuroVascularRightLeftComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left/neuro-vascular-right-left.component';
-import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper/semmes-weinstein-upper.component';
 import { VertebralArteryComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
+import { NeuroVascularRightLeftComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
+import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -157,9 +157,9 @@ const APP_PATIENT_CHART_COMPONENTS = [
     GrossMuscleTestComponent,
     ManualMuscleTestComponent,
     NeuroVascularComponent,
+    VertebralArteryComponent,
     NeuroVascularRightLeftComponent,
     SemmesWeinsteinUpperComponent,
-    VertebralArteryComponent,
   ],
   imports: [
     CommonModule,
