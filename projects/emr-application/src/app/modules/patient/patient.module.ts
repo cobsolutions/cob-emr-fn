@@ -79,6 +79,8 @@ import { VertebralArteryComponent } from './components/medical.note/initial.exam
 import { NeuroVascularRightLeftComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
 import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
 import { SpecialTestsComponent } from './components/medical.note/initial.examination/objective/special.tests/special-tests.component';
+import { SpecialTestsRightLeftSelectComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.select/special-tests-right-left-select.component';
+import { SpecialTestsRightLeftCheckComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.check/special-tests-right-left-check.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -162,6 +164,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     NeuroVascularRightLeftComponent,
     SemmesWeinsteinUpperComponent,
     SpecialTestsComponent,
+    SpecialTestsRightLeftSelectComponent,
+    SpecialTestsRightLeftCheckComponent,
   ],
   imports: [
     CommonModule,
