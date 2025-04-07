@@ -32,7 +32,7 @@ import { CurrentFunvtionlimitComponent } from './components/medical.note/initial
 import { IcdtenComponent } from './components/medical.note/initial.examination/subjective/basic/icd10/icdten.component';
 import { PainComponent } from './components/medical.note/initial.examination/subjective/pain/pain.component';
 import { PainEvaluationComponent } from './components/medical.note/initial.examination/subjective/pain/pain.evaluation/pain-evaluation.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MedicalHistoryComponent } from './components/medical.note/initial.examination/subjective/medical.history/medical-history.component';
 import { DependencyFieldComponent } from './components/medical.note/dependency.field/dependency-field.component';
 import { MultipleDependencyFieldComponent } from './components/medical.note/multiple.dependency.field/multiple-dependency-field.component';
@@ -75,7 +75,9 @@ import { MovementsTestComponent } from './components/medical.note/initial.examin
 import { GrossMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/gross.muscle.test/gross-muscle-test.component';
 import { ManualMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/manual.muscle.test/manual-muscle-test.component';
 import { NeuroVascularComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/neuro-vascular.component';
-import { CranialNerveScreenComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/cranial.nerve.screen/cranial-nerve-screen.component';
+import { NeuroVascularRightLeftComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left/neuro-vascular-right-left.component';
+import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper/semmes-weinstein-upper.component';
+import { VertebralArteryComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -155,7 +157,9 @@ const APP_PATIENT_CHART_COMPONENTS = [
     GrossMuscleTestComponent,
     ManualMuscleTestComponent,
     NeuroVascularComponent,
-    CranialNerveScreenComponent,
+    NeuroVascularRightLeftComponent,
+    SemmesWeinsteinUpperComponent,
+    VertebralArteryComponent,
   ],
   imports: [
     CommonModule,
