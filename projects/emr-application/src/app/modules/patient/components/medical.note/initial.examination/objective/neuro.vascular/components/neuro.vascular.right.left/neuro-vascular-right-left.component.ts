@@ -6,7 +6,7 @@ interface SelectValue {
   val: string
 }
 @Component({
-  selector: 'app-neuro-vascular-right-left',
+  selector: 'neuro-vascular-right-left',
   templateUrl: './neuro-vascular-right-left.component.html',
   styleUrls: ['./neuro-vascular-right-left.component.css']
 })
@@ -14,10 +14,10 @@ export class NeuroVascularRightLeftComponent implements OnInit {
   form: FormGroup
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
-  @Input() testStyle: string
-  selectValues: SelectValue[]
+  @Input() testStyle: string;
   @Input() topSelect: string[];
-  @Input() bodySelect: string[]
+  @Input() bodySelect: string[];
+  @Input() selectValues: SelectValue[]
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {

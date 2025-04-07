@@ -20,7 +20,9 @@
      && field.type !== 'lower-body-myofascial-test'
      && field.type !== 'movements-test'
      && field.type !== 'gross-muscle-test'
-     && field.type !== 'manual-muscle-test'">
+     && field.type !== 'manual-muscle-test'
+     && field.type !== 'neuro-vascular-right-left'">
+
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -160,6 +162,12 @@
     <div *ngIf="field.type ==='manual-muscle-test'">
         <manual-muscle-test [parentForm]="form" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style"></manual-muscle-test>
+    </div>
+    <div *ngIf="field.type ==='neuro-vascular-right-left'">
+        <neuro-vascular-right-left [parentForm]="form" [topSelect]="field.value.topSelect"
+            [bodySelect]="field.value.bodySelect" [parentFieldName]="field.name"
+            [selectValues]="field.value.selectValues" [testStyle]="filedStyle!.style">
+        </neuro-vascular-right-left>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

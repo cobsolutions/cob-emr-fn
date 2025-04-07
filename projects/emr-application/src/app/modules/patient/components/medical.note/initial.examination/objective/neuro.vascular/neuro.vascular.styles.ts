@@ -167,123 +167,148 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
 		"style": "margin-left: 50px;width:150px"
 	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "138_facialSensationCN5positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "139_facialSensationCN5positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "138_facialSensationCN5positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "140_jawJerkClonusCN5positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "141_jawJerkClonusCN5positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "139_facialSensationCN5positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "142_smileCN7positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "143_smileCN7positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "140_jawJerkClonusCN5positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "144_frownCN7positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "145_frownCN7positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "141_jawJerkClonusCN5positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "146_bodyTiltCN8Vestpositiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "147_bodyTiltCN8Vestpositivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "142_smileCN7positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "148_hallPikeCN8Cochpositiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "149_hallPikeCN8Cochpositivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "143_smileCN7positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "150_fingerRustleCN8Cochpositiveselection",
-        "style": "margin-left: 50px;height:70px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "151_fingerRustleCN8Cochpositivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "144_frownCN7positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "152_boneConductionCN8Cochpositiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "153_boneConductionCN8Cochpositivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "145_frownCN7positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "154_swallowingCN9positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "155_swallowingCN9positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "146_bodyTiltCN8Vestpositiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "156_uvulaTestCN10positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "157_uvulaTestCN10positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "147_bodyTiltCN8Vestpositivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "158_trapeziusSCMCN11positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "159_trapeziusSCMCN11positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    },
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "148_hallPikeCN8Cochpositiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
 	{
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "160_tongueProtrusionCN12positiveselection",
-        "style": "margin-left: 50px;height:50px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "161_tongueProtrusionCN12positivecomment",
-        "style": "margin-left: 50px;width:150px"
-    }
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "149_hallPikeCN8Cochpositivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "150_fingerRustleCN8Cochpositiveselection",
+		"style": "margin-left: 50px;height:70px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "151_fingerRustleCN8Cochpositivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "152_boneConductionCN8Cochpositiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "153_boneConductionCN8Cochpositivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "154_swallowingCN9positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "155_swallowingCN9positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "156_uvulaTestCN10positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "157_uvulaTestCN10positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "158_trapeziusSCMCN11positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "159_trapeziusSCMCN11positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "160_tongueProtrusionCN12positiveselection",
+		"style": "margin-left: 50px;height:50px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "161_tongueProtrusionCN12positivecomment",
+		"style": "margin-left: 50px;width:150px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "162_59myotomesUpperneurovascularrightleft",
+		"style": "margin-left: 200px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "164_60dermatomesUppervascularrightleft",
+		"style": "margin-left: 200px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "165_60dermatomesUppertextArea",
+		"style": "margin-left:64px;margin-top:10px;width:700px"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "166_61upperReflexesvascularrightleft",
+		"style": "margin-left: 200px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "167_62neuralTissueTensionUppervascularrightleft",
+		"style": "margin-left: 200px;"
+	}
 ]
