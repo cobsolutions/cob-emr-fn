@@ -341,5 +341,40 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
 		"label_style": "white-space: nowrap; min-width: 500px;margin-left: 30px;",
 		"name": "173_ringFinger",
 		"style": "margin-left: 10px;"
-	}
+	},
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "175_170thumbsemmesweinsteinupper",
+        "style": "margin-left: 460px;"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "176_171indexFingersemmesweinsteinupper",
+        "style": "margin-left: 460px;"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "177_172middleFingersemmesweinsteinupper",
+        "style": "margin-left: 460px;"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "178_173ringFingersemmesweinsteinupper",
+        "style": "margin-left: 460px;"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "179_66tinelsUppersemmesweinsteinupper",
+        "style": "margin-left: 200px;"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "180_67transverseLigamentStabilityselect",
+        "style": "margin-left: 30px;width:140px"
+    },
+	{
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "181_68additionalCommentstextArea",
+        "style": "margin-left: 10px;width:300px"
+    }
 ]
