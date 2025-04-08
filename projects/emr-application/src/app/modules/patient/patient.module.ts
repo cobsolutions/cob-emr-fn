@@ -81,6 +81,8 @@ import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial
 import { SpecialTestsComponent } from './components/medical.note/initial.examination/objective/special.tests/special-tests.component';
 import { SpecialTestsRightLeftSelectComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.select/special-tests-right-left-select.component';
 import { SpecialTestsRightLeftCheckComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.check/special-tests-right-left-check.component';
+import { MaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/material.handling/material-handling.component';
+import { NonMaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/non.material.handling/non-material-handling.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -166,6 +168,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SpecialTestsComponent,
     SpecialTestsRightLeftSelectComponent,
     SpecialTestsRightLeftCheckComponent,
+    MaterialHandlingComponent,
+    NonMaterialHandlingComponent,
   ],
   imports: [
     CommonModule,
