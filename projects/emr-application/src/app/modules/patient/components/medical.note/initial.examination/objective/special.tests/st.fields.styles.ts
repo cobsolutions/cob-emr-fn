@@ -170,6 +170,16 @@ export var SpecialTestStyles: FieldControlStyles[] =[
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "217_197alarLigamentStresstextArea",
         "style": "margin-left: 30px; width:400px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "218_185sCJointspecialtestsrightleftcheck",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "219_186aCJointspecialtestsrightleftcheck",
+        "style": "margin-left: 100px;"
     }
 ]
 

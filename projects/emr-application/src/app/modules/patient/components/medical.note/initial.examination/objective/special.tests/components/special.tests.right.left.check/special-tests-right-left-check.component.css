@@ -1,0 +1,22 @@
+.mobility-form {
+  display: flex;
+  justify-content: center; /* keeps the form centered */
+  gap: 5rem; /* reduce this to bring columns closer */
+  padding: 0rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2.5rem; /* optional: add small side margin */
+}
+
+.option {
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  margin-right: 8px;
+}
