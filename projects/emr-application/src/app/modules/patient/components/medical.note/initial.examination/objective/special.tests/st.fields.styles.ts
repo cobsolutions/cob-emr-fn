@@ -200,6 +200,16 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "225_220materialHandlingBilateralLiftingmaterialhandling",
         "style": "margin-left: 400px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "226_199tMRFAB4WorksheettextArea",
+        "style": "margin-left: 10px;width: 500px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "227_200additionalCommentstextArea",
+        "style": "margin-left: 10px;width: 600px;"
     }
 ]
 
