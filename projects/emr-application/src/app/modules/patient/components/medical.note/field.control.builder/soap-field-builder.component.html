@@ -25,7 +25,8 @@
      && field.type !== 'vertebral-artery'
      && field.type !== 'semmes-weinstein-upper'
      && field.type !== 'special-tests-right-left-select'
-     && field.type !== 'special-tests-right-left-check'">
+     && field.type !== 'special-tests-right-left-check'
+     && field.type !== 'material-handling'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -188,9 +189,13 @@
         </special-tests-right-left-select>
     </div>
     <div *ngIf="field.type === 'special-tests-right-left-check'">
-        <special-tests-right-left-check [parentForm]="form" 
-            [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        <special-tests-right-left-check [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style">
         </special-tests-right-left-check>
+    </div>
+    <div *ngIf="field.type === 'material-handling'">
+        <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </material-handling>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

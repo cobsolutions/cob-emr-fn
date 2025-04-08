@@ -190,6 +190,11 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 50px;",
         "name": "221_nonMaterialHandling",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "222_220materialHandlingBilateralLiftingmaterialhandling",
+        "style": "margin-left: 400px;"
     }
 ]
 
