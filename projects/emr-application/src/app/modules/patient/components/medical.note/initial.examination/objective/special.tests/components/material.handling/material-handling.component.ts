@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'material-handling',
@@ -7,44 +7,53 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./material-handling.component.css']
 })
 export class MaterialHandlingComponent implements OnInit {
-
-  form: FormGroup;
-  adequacyOptions = ['N/A', 'Yes', 'No'];
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
   @Input() testStyle: string;
+  form: FormGroup;
   tasks = [
-    { key: 'sitting', label: 'Sitting', unit: 'minutes' },
-    { key: 'standing', label: 'Standing', unit: 'minutes' },
-    { key: 'walking', label: 'Walking', unit: 'minutes' },
-    { key: 'stairClimbing', label: 'Stair Climbing', unit: 'flights' },
-    { key: 'trunkBending', label: 'Trunk Bending' },
-    { key: 'overheadReach', label: 'Overhead Reach' },
-    { key: 'crawl', label: 'Crawl' },
-    { key: 'squatting', label: 'Squatting' },
-    { key: 'kneeling', label: 'Kneeling' },
-    { key: 'stooping', label: 'Stooping' },
-    { key: 'crouching', label: 'Crouching' },
-    { key: 'ladderClimbing', label: 'Ladder Climbing' },
-    { key: 'forwardReach', label: 'Forward Reach', unit: 'textarea' }
+    'Floor To Knuckle',
+    'Knuckle To Shoulder',
+    'Shoulder To Overhead',
+    '100 FT. Carry And Pivot'
   ];
+  adequacyOptions = ['N/A', 'Yes', 'No'];
 
   constructor(private fb: FormBuilder){}
 
   ngOnInit(): void {
-    const group: any = {};
-    this.tasks.forEach(task => {
-      group[`${task.key}_value`] = [''];
-      group[`${task.key}_occasional`] = [false];
-      group[`${task.key}_frequent`] = [false];
-      group[`${task.key}_constant`] = [false];
-      group[`${task.key}_adequate`] = ['N/A'];
+    this.form = this.fb.group({
+      lifting: this.fb.group({
+        floorToKnuckle: this.fb.group({
+          occasional: [''],
+          frequent: [''],
+          adequate: ['N/A']
+        }),
+        knuckleToShoulder: this.fb.group({
+          occasional: [''],
+          frequent: [''],
+          adequate: ['N/A']
+        }),
+        shoulderToOverhead: this.fb.group({
+          occasional: [''],
+          frequent: [''],
+          adequate: ['N/A']
+        }),
+        carryAndPivot: this.fb.group({
+          occasional: [''],
+          frequent: [''],
+          adequate: ['N/A']
+        })
+      })
     });
-
-    this.form = this.fb.group(group);
     this.form.valueChanges.subscribe(values => {
       this.parentForm.get(this.parentFieldName).setValue(values);
     });
   }
-
+  get liftingControls() {
+    return (this.form.get('lifting') as FormArray).controls;
+  }
+  get liftingGroup(): FormGroup {
+    return this.form.get('lifting') as FormGroup;
+  }
 }

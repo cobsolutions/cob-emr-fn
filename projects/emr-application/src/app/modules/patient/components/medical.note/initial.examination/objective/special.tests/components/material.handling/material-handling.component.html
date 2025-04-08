@@ -1,44 +1,54 @@
 <form [formGroup]="form" [style]="testStyle">
-    <table class="task-table">
-      <thead>
-        <tr>
-          <th>Demonstrated</th>
-          <th>Occasional</th>
-          <th>Frequent</th>
-          <th>Constant</th>
-          <th>Adequate For Job</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let task of tasks">
-          <!-- Task Name -->
-          <td>
-            <div class="label-input-wrapper">
-              <label class="task-label">{{ task.label }}</label>
-              <ng-container [ngSwitch]="task.unit">
-                <input *ngSwitchCase="'minutes'" type="number" formControlName="{{ task.key }}_value" placeholder="Minutes" />
-                <input *ngSwitchCase="'flights'" type="number" formControlName="{{ task.key }}_value" placeholder="Flights" />
-              </ng-container>
-            </div>
-          </td>
-  
-          <!-- Occasional -->
-          <td><input type="checkbox" formControlName="{{ task.key }}_occasional" /></td>
-  
-          <!-- Frequent -->
-          <td><input type="checkbox" formControlName="{{ task.key }}_frequent" /></td>
-  
-          <!-- Constant -->
-          <td><input type="checkbox" formControlName="{{ task.key }}_constant" /></td>
-  
-          <!-- Adequate For Job -->
-          <td>
-            <select formControlName="{{ task.key }}_adequate">
-              <option *ngFor="let opt of adequacyOptions" [value]="opt">{{ opt }}</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
-  
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Occasional (Lbs.)</th>
+        <th>Frequent (Lbs.)</th>
+        <th>Adequate For Job</th>
+      </tr>
+    </thead>
+    <tbody [formGroup]="liftingGroup">
+      <tr [formGroupName]="'floorToKnuckle'">
+        <td>Floor To Knuckle</td>
+        <td><input type="number" formControlName="occasional" class="form-control slim-input"></td>
+        <td><input type="number" formControlName="frequent" class="form-control slim-input"></td>
+        <td>
+          <select formControlName="adequate" >
+            <option *ngFor="let option of adequacyOptions" [value]="option">{{ option }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr [formGroupName]="'knuckleToShoulder'">
+        <td>Knuckle To Shoulder</td>
+        <td><input type="number" formControlName="occasional" class="form-control slim-input"></td>
+        <td><input type="number" formControlName="frequent" class="form-control slim-input"></td>
+        <td>
+          <select formControlName="adequate" >
+            <option *ngFor="let option of adequacyOptions" [value]="option">{{ option }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr [formGroupName]="'shoulderToOverhead'">
+        <td>Shoulder To Overhead</td>
+        <td><input type="number" formControlName="occasional" class="form-control slim-input"></td>
+        <td><input type="number" formControlName="frequent" class="form-control slim-input"></td>
+        <td>
+          <select formControlName="adequate" >
+            <option *ngFor="let option of adequacyOptions" [value]="option">{{ option }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr [formGroupName]="'carryAndPivot'">
+        <td>100 FT. Carry And Pivot</td>
+        <td><input type="number" formControlName="occasional" class="form-control slim-input"></td>
+        <td><input type="number" formControlName="frequent" class="form-control slim-input"></td>
+        <td>
+          <select formControlName="adequate" >
+            <option *ngFor="let option of adequacyOptions" [value]="option">{{ option }}</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

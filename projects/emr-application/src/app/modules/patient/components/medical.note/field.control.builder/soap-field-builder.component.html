@@ -26,6 +26,7 @@
      && field.type !== 'semmes-weinstein-upper'
      && field.type !== 'special-tests-right-left-select'
      && field.type !== 'special-tests-right-left-check'
+     && field.type !== 'non-material-handling'
      && field.type !== 'material-handling'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
@@ -192,6 +193,10 @@
         <special-tests-right-left-check [parentForm]="form" [parentFieldName]="field.name"
             [testStyle]="filedStyle!.style">
         </special-tests-right-left-check>
+    </div>
+    <div *ngIf="field.type === 'non-material-handling'">
+        <non-material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </non-material-handling>
     </div>
     <div *ngIf="field.type === 'material-handling'">
         <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
