@@ -14,7 +14,7 @@ export class MedialNoteService {
     var url: string = this.baseUrl + "/find/section/" + section;
     return this.httpClient.get(url);
   }
-  findObjectivePrfile(name: string) {
+  findObjectiveProfile(name: string) {
     var url: string = this.baseUrl + "/find/objective/profile/name/" + name
     return this.httpClient.get(url);
   }
