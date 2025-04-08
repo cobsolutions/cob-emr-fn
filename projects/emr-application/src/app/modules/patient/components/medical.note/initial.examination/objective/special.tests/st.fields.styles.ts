@@ -1,6 +1,6 @@
 import { FieldControlStyles } from "../../../filed.control.style.selector/field.control.style";
 
-export var SpecialTestStyles: FieldControlStyles[] =[
+export var SpecialTestStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "182_passiveJointMobilityShoulder",
@@ -180,6 +180,16 @@ export var SpecialTestStyles: FieldControlStyles[] =[
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "219_186aCJointspecialtestsrightleftcheck",
         "style": "margin-left: 100px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 50px;",
+        "name": "220_materialHandlingBilateralLifting",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 50px;",
+        "name": "221_nonMaterialHandling",
+        "style": "margin-left: 10px;"
     }
 ]
 
