@@ -81,7 +81,9 @@
     <c-card class="mb-2">
         <c-card-header>Palpation</c-card-header>
         <c-card-body>
-
+            <palpation (formReady)="setChildForm('palpation', $event)"
+                *ngIf="objectiveCategoriesfields['palpation']"
+                [fields]="objectiveCategoriesfields['palpation']"></palpation>
         </c-card-body>
     </c-card>
     <div class="mt-3">

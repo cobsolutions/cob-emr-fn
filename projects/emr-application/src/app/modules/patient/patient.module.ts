@@ -83,6 +83,7 @@ import { SpecialTestsRightLeftSelectComponent } from './components/medical.note/
 import { SpecialTestsRightLeftCheckComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.check/special-tests-right-left-check.component';
 import { MaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/material.handling/material-handling.component';
 import { NonMaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/non.material.handling/non-material-handling.component';
+import { PalpationComponent } from './components/medical.note/initial.examination/objective/palpation/palpation.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -170,6 +171,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SpecialTestsRightLeftCheckComponent,
     MaterialHandlingComponent,
     NonMaterialHandlingComponent,
+    PalpationComponent,
   ],
   imports: [
     CommonModule,
