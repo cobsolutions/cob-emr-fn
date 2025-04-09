@@ -9,6 +9,7 @@ import { MedicalNoteRequest } from '../../models/medical.note/medical.note.reque
 })
 export class MedialNoteService {
   private baseUrl = environment.baseURL + 'medical/note'
+  private soapBaseUrl = environment.baseURL + 'soap'
   constructor(private httpClient: HttpClient) { }
   find(section: string) {
     var url: string = this.baseUrl + "/find/section/" + section;
@@ -16,6 +17,10 @@ export class MedialNoteService {
   }
   findObjectiveProfile(name: string) {
     var url: string = this.baseUrl + "/find/objective/profile/name/" + name
+    return this.httpClient.get(url);
+  }
+  findSOAPFieldsByProfile(name: string) {
+    var url: string = this.soapBaseUrl + "/find/field-name/profile/name/" + name
     return this.httpClient.get(url);
   }
 
@@ -42,8 +47,8 @@ export class MedialNoteService {
     return this.httpClient.get(url);
   }
 
-  findROMTests(name:string): Observable<any> {
-    var url: string = this.baseUrl + "/action/find/rom/name/"+name
+  findROMTests(name: string): Observable<any> {
+    var url: string = this.baseUrl + "/action/find/rom/name/" + name
     return this.httpClient.get(url);
   }
 }

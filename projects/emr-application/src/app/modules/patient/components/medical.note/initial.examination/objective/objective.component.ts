@@ -47,7 +47,7 @@ export class ObjectiveComponent implements OnInit {
     this.stepper.next();
   }
   selectProfile() {
-    this.medicalService.findObjectiveProfile(this.selectedProfile.toLowerCase()).subscribe(data => {
+    this.medicalService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe(data => {
       this.fillFieldsMap(data)
       this.formReady.emit(this.objectiveForm);
     })

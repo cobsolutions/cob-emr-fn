@@ -3,148 +3,148 @@ import { FieldControlStyles } from "../../../filed.control.style.selector/field.
 export var PalpationStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "256_palpation",
+        "name": "palpation_palpation",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "257_additionalComments",
+        "name": "palpation_additionalComments",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "284_rightSCM",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightScm",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "285_leftSCM",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftScm",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "286_rightScalenes",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightScalenes",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "287_leftScalenes",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftScalenes",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "288_rightSuboccipitalMyofascia",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightSuboccipitalMyofascia",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "289_leftSuboccipitalMyofascia",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftSuboccipitalMyofascia",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "290_rightCervicalParaspinals",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightCervicalParaspinals",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "291_leftCervicalParaspinals",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftCervicalParaspinals",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "292_rightLevatorScapula",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightLevatorScapula",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "293_leftLevatorScapula",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftLevatorScapula",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "294_rightUpperTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightUpperTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "295_leftUpperTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftUpperTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "296_rightMiddleTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightMiddleTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "297_leftMiddleTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftMiddleTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "298_rightLowerTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightLowerTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "299_leftLowerTrapezius",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftLowerTrapezius",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "300_rightRotatorCuffInsertionAtGreaterTubercle",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightRotatorCuffInsertionAtGreaterTubercle",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "301_leftRotatorCuffInsertionAtGreaterTubercle",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftRotatorCuffInsertionAtGreaterTubercle",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "302_rightRotatorCuffInsertionAtLesserTubercle",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightRotatorCuffInsertionAtLesserTubercle",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "303_leftRotatorCuffInsertionAtLesserTubercle",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftRotatorCuffInsertionAtLesserTubercle",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "304_rightPosteriorCuff",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightPosteriorCuff",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "305_leftPosteriorCuff",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftPosteriorCuff",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "306_rightBicepsShortHead",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightBicepsShortHead",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "307_leftBicepsShortHead",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftBicepsShortHead",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "308_rightBicepsLongHead",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_rightBicepsLongHead",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "309_leftBicepsLongHead",
-        "style": "margin-left: 30px;"
+        "name": "palpation_43d79f65-92e2-4f2a-8212-3bbaa7da21ea_leftBicepsLongHead",
+        "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "310_257additionalCommentstextArea",
-        "style": "margin-left: 10px;width: 300px;"
+        "name": "palpation_a95fa842-a04b-428f-b26b-1b22070c9526",
+        "style": "margin-left: 10px;"
     }
 ]
 
