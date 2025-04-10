@@ -5,6 +5,7 @@ export interface MedicalNoteRequest{
     createdBy?:string
     noteDate?:number
     subjective?:any
+    objective?:any
     assessment?:any
     planOfCare?:any
     billing?:any
