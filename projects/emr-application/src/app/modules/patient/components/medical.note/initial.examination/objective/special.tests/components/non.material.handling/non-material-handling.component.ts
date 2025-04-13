@@ -28,7 +28,7 @@ export class NonMaterialHandlingComponent implements OnInit {
     { key: 'forwardReach', label: 'Forward Reach', unit: 'textarea' }
   ];
 
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     const group: any = {};
@@ -44,6 +44,9 @@ export class NonMaterialHandlingComponent implements OnInit {
     this.form.valueChanges.subscribe(values => {
       this.parentForm.get(this.parentFieldName).setValue(values);
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
 
 

@@ -24,7 +24,6 @@ export class AssessmentComponent implements OnInit {
     , private medialNoteService: MedialNoteService
     , private fieldDependentsService: FieldDependentsService) { }
   ngOnInit(): void {
-    console.log(JSON.stringify(this.assessmentData))
     this.medialNoteService.find('assessment').subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);

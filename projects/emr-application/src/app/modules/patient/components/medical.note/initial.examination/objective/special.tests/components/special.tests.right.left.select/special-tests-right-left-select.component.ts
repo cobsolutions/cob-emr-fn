@@ -25,7 +25,7 @@ export class SpecialTestsRightLeftSelectComponent implements OnInit {
       this.topSelect.forEach(field => {
         this.form.addControl(`${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
         this.form.get(`${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
-          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
         })
       })
 
@@ -35,12 +35,15 @@ export class SpecialTestsRightLeftSelectComponent implements OnInit {
         this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(this.selectValues[0].val));
 
         this.form.get(`right_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
-          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
         })
         this.form.get(`left_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
-          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
         })
       });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());

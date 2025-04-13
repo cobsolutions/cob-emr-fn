@@ -39,9 +39,11 @@ export class SpecialTestsRightLeftCheckComponent implements OnInit {
     this.form.valueChanges.subscribe(values => {
       this.parentForm.get(this.parentFieldName).setValue(values);
     });
-    
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
-   formatKey(label: string): string {
+  formatKey(label: string): string {
     return label.toLowerCase().replace(/\s+/g, '_');
   }
 }

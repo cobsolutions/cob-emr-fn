@@ -7,19 +7,34 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./multiple-text-input.component.css']
 })
 export class MultipleTextInputComponent implements OnInit {
-  @Input() form: FormGroup;
+  form: FormGroup;
+  @Input() parentForm: FormGroup;
+  @Input() parentFieldName: string;
   measurementFields = ['Upper Arm', 'Mid Biceps', 'Elbow Flexion Crease', 'Forearm', 'Wrist'];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    if (this.form) {
-      this.measurementFields.forEach(field => {
-        this.form.addControl(`right_${this.toCamelCase(field)}`, new FormControl(''));
-        this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(''));
-      });
-    }
+    this.form = this.fb.group({});
+    this.measurementFields.forEach(field => {
+      this.form.addControl(`right_${this.toCamelCase(field)}`, new FormControl(''));
+      this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(''));
+    });
+    this.ddd();
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
-   toCamelCase(value: string): string {
+  private ddd() {
+    this.measurementFields.forEach(field => {
+      this.form.get(`right_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
+        this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+      })
+      this.form.get(`left_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
+        this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+      })
+    })
+  }
+  toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
   }
 

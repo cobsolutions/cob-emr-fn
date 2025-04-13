@@ -36,77 +36,128 @@ export class LowerBodyMyofascialTestComponent implements OnInit {
     this.lowerBodyMyofascialForm = this.fb.group({
       right: this.fb.group({
         SupinePelvicLift: [this.selectValues[0].val],
+        comment_SupinePelvicLift: [''],
         SupineBridge: [this.selectValues[0].val],
+        comment_SupineBridge: [''],
         SupineKneeFlexion: [this.selectValues[0].val],
+        comment_SupineKneeFlexion: [''],
         SideLyingHipAbduction: [this.selectValues[0].val],
+        comment_SideLyingHipAbduction: [''],
         ProneBridge: [this.selectValues[0].val],
+        comment_ProneBridge: [''],
         ProneHipFlexion: [this.selectValues[0].val],
+        comment_ProneHipFlexion: [''],
         ProneKneeExtension: [this.selectValues[0].val],
-        comment: [''],
+        comment_ProneKneeExtension: [''],
       }),
       left: this.fb.group({
         SupinePelvicLift: [this.selectValues[0].val],
+        comment_SupinePelvicLift: [''],
         SupineBridge: [this.selectValues[0].val],
+        comment_SupineBridge: [''],
         SupineKneeFlexion: [this.selectValues[0].val],
+        comment_SupineKneeFlexion: [''],
         SideLyingHipAbduction: [this.selectValues[0].val],
+        comment_SideLyingHipAbduction: [''],
         ProneBridge: [this.selectValues[0].val],
+        comment_ProneBridge: [''],
         ProneHipFlexion: [this.selectValues[0].val],
+        comment_ProneHipFlexion: [''],
         ProneKneeExtension: [this.selectValues[0].val],
-        comment: [''],
+        comment_ProneKneeExtension: [''],
       }),
     });
     this.onChangeRight();
     this.onChangeLeft();
+    setTimeout(() => {
+      this.lowerBodyMyofascialForm.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   onChangeLeft() {
     this.lowerBodyMyofascialForm.get('left').get('SupinePelvicLift').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_SupinePelvicLift').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('SupineBridge').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_SupineBridge').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('SupineKneeFlexion').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_SupineKneeFlexion').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('SideLyingHipAbduction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_SideLyingHipAbduction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('ProneBridge').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_ProneBridge').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('ProneHipFlexion').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('left').get('comment_ProneHipFlexion').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('left').get('ProneKneeExtension').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
-    this.lowerBodyMyofascialForm.get('left').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+    this.lowerBodyMyofascialForm.get('left').get('comment_ProneKneeExtension').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
   }
   onChangeRight() {
     this.lowerBodyMyofascialForm.get('right').get('SupinePelvicLift').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_SupinePelvicLift').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('SupineBridge').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_SupineBridge').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('SupineKneeFlexion').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_SupineKneeFlexion').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('SideLyingHipAbduction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_SideLyingHipAbduction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('ProneBridge').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_ProneBridge').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('ProneHipFlexion').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
+    })
+    this.lowerBodyMyofascialForm.get('right').get('comment_ProneHipFlexion').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
     this.lowerBodyMyofascialForm.get('right').get('ProneKneeExtension').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.getRawValue());
     })
-    this.lowerBodyMyofascialForm.get('right').get('comment').valueChanges.subscribe(dd => {
+    this.lowerBodyMyofascialForm.get('right').get('comment_ProneKneeExtension').valueChanges.subscribe(dd => {
       this.parentForm.get(this.parentFieldName).setValue(this.lowerBodyMyofascialForm.value);
     })
   }

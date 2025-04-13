@@ -232,54 +232,83 @@ export class GripComponent implements OnInit {
     this.gripStrengthForm = this.fb.group({
       right: this.fb.group({
         powerGrip: [this.testOptionsMap['Power Grip'][0].val],
+        comment_powerGrip: [''],
         lateralPinch: [this.testOptionsMap['Lateral Pinch'][0].val],
+        comment_lateralPinch: [''],
         tipPinch: [this.testOptionsMap['Tip Pinch/Pincer'][0].val],
+        comment_tipPinch: [''],
         tripodPinch: [this.testOptionsMap['Tripod Pinch'][0].val],
-        comment: [''],
+        comment_tripodPinch: [''],
+
       }),
       left: this.fb.group({
         powerGrip: [this.testOptionsMap['Power Grip'][0].val],
+        comment_powerGrip: [''],
         lateralPinch: [this.testOptionsMap['Lateral Pinch'][0].val],
+        comment_lateralPinch: [''],
         tipPinch: [this.testOptionsMap['Tip Pinch/Pincer'][0].val],
+        comment_tipPinch: [''],
         tripodPinch: [this.testOptionsMap['Tripod Pinch'][0].val],
-        comment: [''],
+        comment_tripodPinch: [''],
       }),
     });
     this.onChangeRight();
     this.onChangeLeft();
+    setTimeout(() => {
+      this.gripStrengthForm.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   onChangeRight() {
     this.gripStrengthForm.get('right').get('powerGrip').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('right').get('lateralPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('right').get('tipPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('right').get('tripodPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
-    this.gripStrengthForm.get('right').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+    this.gripStrengthForm.get('right').get('comment_powerGrip').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
+    this.gripStrengthForm.get('right').get('comment_lateralPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+    this.gripStrengthForm.get('right').get('comment_tipPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+    this.gripStrengthForm.get('right').get('comment_tripodPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+
   }
   onChangeLeft() {
     this.gripStrengthForm.get('left').get('powerGrip').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('left').get('lateralPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('left').get('tipPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
     this.gripStrengthForm.get('left').get('tripodPinch').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
-    this.gripStrengthForm.get('left').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.value);
+    this.gripStrengthForm.get('left').get('comment_powerGrip').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+    this.gripStrengthForm.get('left').get('comment_lateralPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+    this.gripStrengthForm.get('left').get('comment_tipPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
+    })
+    this.gripStrengthForm.get('left').get('comment_tripodPinch').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.gripStrengthForm.getRawValue());
     })
   }
 }

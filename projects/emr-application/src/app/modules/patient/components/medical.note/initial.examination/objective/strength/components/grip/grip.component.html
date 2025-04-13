@@ -10,7 +10,7 @@
             <select [formControlName]="gripControlMap[type]">
               <option *ngFor="let option of testOptionsMap[type]" [value]="option.val">{{ option.view }}</option>
             </select>
-            <textarea class="comment" formControlName="comment"></textarea>
+            <textarea class="comment" [formControlName]="'comment_'+gripControlMap[type]"></textarea>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
             <select [formControlName]="gripControlMap[type]">
               <option *ngFor="let option of testOptionsMap[type]" [value]="option.val">{{ option.view }}</option>
             </select>
-            <textarea class="comment" formControlName="comment"></textarea>
+            <textarea class="comment" [formControlName]="'comment_'+gripControlMap[type]"></textarea>
           </div>
         </div>
       </div>

@@ -32,7 +32,11 @@ export class ChildGripComponent implements OnInit {
         comments: ['']
       })
     });
+    
     this.subscribeToValueChanges();
+    setTimeout(() => {
+      this.childGripForm.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   get rightValues(): FormArray {
     return this.childGripForm.get('right.values') as FormArray;
@@ -44,38 +48,38 @@ export class ChildGripComponent implements OnInit {
   private subscribeToValueChanges() {
     this.rightValues.controls.forEach((control, index) => {
       control.valueChanges.subscribe(value => {
-        this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+        this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
       });
     });
 
     this.leftValues.controls.forEach((control, index) => {
       control.valueChanges.subscribe(value => {
-        this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+        this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
       });
     });
 
     this.childGripForm.get('right.cov')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
 
     this.childGripForm.get('right.avg')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
 
     this.childGripForm.get('right.comments')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
 
     this.childGripForm.get('left.cov')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
 
     this.childGripForm.get('left.avg')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
 
     this.childGripForm.get('left.comments')?.valueChanges.subscribe(value => {
-      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.childGripForm.getRawValue());
     });
   }
 }

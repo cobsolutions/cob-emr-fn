@@ -41,16 +41,18 @@ export class MovementsTestComponent implements OnInit {
         this.form.addControl(inputControl, this.fb.control(''));
         // Subscribe to select control changes
         this.form.get(selectControl)?.valueChanges.subscribe(value => {
-          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
         });
 
         // Subscribe to input control changes
         this.form.get(inputControl)?.valueChanges.subscribe(value => {
-          console.log(`Changed: ${inputControl} = ${value}`);
-          this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
         });
       }
     }
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
 
   getControlName(row: string, col: string): string {

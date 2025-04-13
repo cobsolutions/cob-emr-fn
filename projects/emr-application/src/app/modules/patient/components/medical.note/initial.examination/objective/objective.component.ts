@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
@@ -14,11 +14,11 @@ export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  selectedProfile: any
   profiles: Observable<ObjectiveProfile[]>
-  selectedProfile: string = null
-  inspectionFields: any;
+  @Input() objectiveData: any
   objectiveCategories: string[] = [
-    'inspection', "omt",'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
+    'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
@@ -34,8 +34,13 @@ export class ObjectiveComponent implements OnInit {
       neuroVascular: this.fb.group({}),
       specialTest: this.fb.group({}),
       palpation: this.fb.group({}),
+      profile: new FormControl(null),
     });
-    this.loadProfiles()
+    this.loadProfiles();
+    if (this.objectiveData) {
+      this.selectedProfile = this.objectiveData.profile;
+      this.selectProfile();
+    }
   }
   private loadProfiles() {
     this.profiles = this.medicalService.findObjectiveProfiles()
@@ -47,8 +52,13 @@ export class ObjectiveComponent implements OnInit {
     this.stepper.next();
   }
   selectProfile() {
+    this.objectiveForm.get('profile').setValue(this.selectedProfile);
     this.medicalService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe(data => {
       this.fillFieldsMap(data)
+      if (this.objectiveData)
+        setTimeout(() => {
+          this.objectiveForm.patchValue(this.objectiveData);
+        }, 10);
       this.formReady.emit(this.objectiveForm);
     })
   }

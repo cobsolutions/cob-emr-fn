@@ -44,7 +44,7 @@ export var InspectionFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "inspection_girthMeasurementUpper",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 60px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",

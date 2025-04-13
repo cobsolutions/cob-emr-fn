@@ -4,7 +4,8 @@
             <strong>Examination Profile</strong>
         </c-card-header>
         <c-card-body>
-            <select id="profile-select" cSelect (change)="selectProfile()" [(ngModel)]="selectedProfile">
+            <select id="profile-select" cSelect (change)="selectProfile()" 
+            [(ngModel)]="selectedProfile">
                 <option disabled selected value="null">Select Examination Profile</option>
                 <option *ngFor="let profile of profiles | async" [value]="profile.name">
                     {{ profile.name }}

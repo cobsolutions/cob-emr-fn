@@ -84,13 +84,13 @@
     </div>
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
-        <mutliple-check-box [form]="form" [values]="field.value" [label]="field.display"
-            [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
+        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
             [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
-        <multiple-text-input [form]="form"></multiple-text-input>
+        <multiple-text-input [parentForm]="form" [parentFieldName]="field.name"></multiple-text-input>
     </div>
     <!--custom multiple-radio-->
     <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">

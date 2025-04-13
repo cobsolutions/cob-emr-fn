@@ -37,39 +37,49 @@ export class SemmesWeinsteinUpperComponent implements OnInit {
     this.form = this.fb.group({
       right: this.fb.group({
         radial: [this.mapTypes['Radial'][0].val],
+        comment_radial: [''],
         ulnar: [this.mapTypes['Ulnar'][0].val],
-        comment: [''],
+        comment_ulnar: [''],
       }),
       left: this.fb.group({
         radial: [this.mapTypes['Radial'][0].val],
+        comment_radial: [''],
         ulnar: [this.mapTypes['Ulnar'][0].val],
-        comment: [''],
+        comment_ulnar: [''],
       }),
     });
     this.onChangeRight();
     this.onChangeLeft();
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   onChangeRight() {
     this.form.get('right').get('radial').valueChanges.subscribe(dd => {
-      this.form.get(this.parentFieldName).setValue(this.form.value);
+      this.form.get(this.parentFieldName).setValue(this.form.getRawValue());
+    })
+    this.form.get('right').get('comment_radial').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
     this.form.get('right').get('ulnar').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
-    this.form.get('right').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+    this.form.get('right').get('comment_ulnar').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
-
   }
   onChangeLeft() {
     this.form.get('left').get('radial').valueChanges.subscribe(dd => {
-      this.form.get(this.parentFieldName).setValue(this.form.value);
+      this.form.get(this.parentFieldName).setValue(this.form.getRawValue());
+    })
+    this.form.get('left').get('comment_radial').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
     this.form.get('left').get('ulnar').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
-    this.form.get('left').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+    this.form.get('left').get('comment_ulnar').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     })
   }
 }

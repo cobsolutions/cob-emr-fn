@@ -31,62 +31,97 @@ export class UpperBodyMyofascialTestComponent implements OnInit {
     this.upperBodyMyofascialForm = this.fb.group({
       right: this.fb.group({
         KneelingScapularProtraction: [this.selectValues[0].val],
+        comment_KneelingScapularProtraction: [''],
         KneelingPushUp: [this.selectValues[0].val],
+        comment_KneelingPushUp: [''],
         KneelingShoulderExtension: [this.selectValues[0].val],
+        comment_KneelingShoulderExtension: [''],
         SupineScapularRetraction: [this.selectValues[0].val],
+        comment_SupineScapularRetraction: [''],
         SupinePullUp: [this.selectValues[0].val],
-        comment: [''],
+        comment_SupinePullUp: [''],
       }),
       left: this.fb.group({
         KneelingScapularProtraction: [this.selectValues[0].val],
+        comment_KneelingScapularProtraction: [''],
         KneelingPushUp: [this.selectValues[0].val],
+        comment_KneelingPushUp: [''],
         KneelingShoulderExtension: [this.selectValues[0].val],
+        comment_KneelingShoulderExtension: [''],
         SupineScapularRetraction: [this.selectValues[0].val],
+        comment_SupineScapularRetraction: [''],
         SupinePullUp: [this.selectValues[0].val],
-        comment: [''],
+        comment_SupinePullUp: [''],
       }),
     });
     this.onChangeRight();
     this.onChangeLeft();
+    setTimeout(() => {
+      this.upperBodyMyofascialForm.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   onChangeRight() {
     this.upperBodyMyofascialForm.get('right').get('KneelingScapularProtraction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('right').get('comment_KneelingScapularProtraction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('right').get('KneelingPushUp').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('right').get('comment_KneelingPushUp').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('right').get('KneelingShoulderExtension').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('right').get('comment_KneelingShoulderExtension').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('right').get('SupineScapularRetraction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('right').get('comment_SupineScapularRetraction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('right').get('SupinePullUp').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
-    this.upperBodyMyofascialForm.get('right').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+    this.upperBodyMyofascialForm.get('right').get('comment_SupinePullUp').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
   }
   onChangeLeft() {
-    this.upperBodyMyofascialForm.get('left').get('KneelingScapularProtraction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+    this.upperBodyMyofascialForm.get('right').get('KneelingScapularProtraction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('right').get('comment_KneelingScapularProtraction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('left').get('KneelingPushUp').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('left').get('comment_KneelingPushUp').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('left').get('KneelingShoulderExtension').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('left').get('comment_KneelingShoulderExtension').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('left').get('SupineScapularRetraction').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
+    })
+    this.upperBodyMyofascialForm.get('left').get('comment_SupineScapularRetraction').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
     this.upperBodyMyofascialForm.get('left').get('SupinePullUp').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
-    this.upperBodyMyofascialForm.get('left').get('comment').valueChanges.subscribe(dd => {
-      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.value);
+    this.upperBodyMyofascialForm.get('left').get('comment_SupinePullUp').valueChanges.subscribe(dd => {
+      this.parentForm.get(this.parentFieldName).setValue(this.upperBodyMyofascialForm.getRawValue());
     })
 
   }

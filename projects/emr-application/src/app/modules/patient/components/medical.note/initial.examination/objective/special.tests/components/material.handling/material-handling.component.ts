@@ -49,6 +49,9 @@ export class MaterialHandlingComponent implements OnInit {
     this.form.valueChanges.subscribe(values => {
       this.parentForm.get(this.parentFieldName).setValue(values);
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   get liftingControls() {
     return (this.form.get('lifting') as FormArray).controls;
