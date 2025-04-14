@@ -1,7 +1,7 @@
 <div [formGroup]="painForm">
     <!-- Pain Scale: -->
     <div class="d-flex align-items-center mb-3">
-        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 500px;">
             Pain Scale:
         </label>
         <div class="d-flex">
@@ -15,49 +15,13 @@
             </c-form-check>
         </div>
     </div>
-    <div *ngIf="showPainEval" class=" mb-3" style="padding-left: 200px;">
+    <div *ngIf="showPainEval" class=" mb-3" >
         <div class="container">
-            <div class="row align-items-center mb-2" *ngFor="let painScale of painScaleList">
-                <pain-evaluation [id]="painScale" [painScale]="painScale"
-                    (removePainScale)="remove($event)"></pain-evaluation>
-            </div>
-        </div>
-        <div style="padding-left: 500px;" class="mt-2">
-            <p><a class="link-opacity-100" (click)="addPainScale()" style="cursor: pointer;">Add Additional Pain
-                    Scale</a></p>
+            <pain-evaluation (removePainScale)="remove($event)" (saveEval)="save($event)" [painEvals]="painFormData?.evals"></pain-evaluation>
         </div>
     </div>
-    <!-- Aggravating Factors -->
-    <div class="d-flex align-items-center mb-3">
-        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-            Aggravating Factors:
-        </label>
-        <div class="d-flex">
-            <select cSelect multiple formControlName="aggravating">
-                <option *ngFor="let aggravatingFactor of aggravatingFactors">
-                    {{aggravatingFactor}}
-                </option>
-            </select>
-        </div>
-    </div>
-    <!-- Pain Scale: -->
-    <div class="d-flex align-items-center mb-3">
-        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
-            Restrictions and Pain Alleviators:
-        </label>
-        <div class="d-flex">
-            <c-form-check class="me-3 d-flex align-items-center">
-                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" size="sm"
-                    [value]="'yes'" />
-                <label cFormCheckLabel class="ms-1">Yes</label>
-            </c-form-check>
-            <c-form-check class="d-flex align-items-center">
-                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" size="sm"
-                    [value]="'no'" />
-                <label cFormCheckLabel class="ms-1">No</label>
-            </c-form-check>
-        </div>
-    </div>
-    <multiple-dependency-field [soap]="'subjective'" [form]="painForm" [fieldName]="'restrictions_pain_alleviators'"
-        [section]="'pain'"></multiple-dependency-field>
+    <span *ngFor="let field of fields;">
+        <soap-field-builder [field]="field" [form]="painForm" [filedStyle]="getstyleFieldControl(field.name)"
+            [styles]="styles"></soap-field-builder>
+    </span>
 </div>

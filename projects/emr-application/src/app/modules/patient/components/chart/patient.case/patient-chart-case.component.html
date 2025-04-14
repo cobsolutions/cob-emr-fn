@@ -58,22 +58,29 @@
             </c-col>
             <c-col [sm]="12">
                 <div class="d-flex justify-content-end">
-                    <div class="p-2">
-                        <select cSelect sizing="sm" [(ngModel)]="patientRecordAction">
-                            <option [value]="0">Patient Record Actions</option>
-                            <option [value]="1">Add Initial Examination</option>
-                            <option [value]="2">Quick Discharge</option>
-                            <option [value]="3">Case note</option>
-                            <option [value]="4">Cancel/No show</option>
-                        </select>
+                    <div class="p-2 d-flex align-items-center gap-2">
+                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;">Patient
+                            Record Actions:</label>
+                        <c-input-group class="mb-3">
+                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm">
+                                <option [value]="action"
+                                    *ngFor="let action of case.patientRecordActions; let i = index">
+                                    {{ action }}
+                                </option>
+                            </select>
+                            <button cButton color="primary" variant="outline" size="sm"
+                                (click)="executeAction(patientActionSelect.value)">
+                                <svg cIcon name="cilArrowCircleRight"></svg>
+                            </button>
+                        </c-input-group>
                     </div>
                 </div>
             </c-col>
         </c-row>
     </c-card-body>
 </c-card>
-<!--Patient Case Records,E-document,Payment and Exercise Program-->
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecordAction === '0'">
+<!--Patient Record-->
+<c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
     <c-card-body>
         <c-nav variant="tabs">
             <c-nav-item>
@@ -107,7 +114,7 @@
                     <c-card-body>
                         <ng-container *ngIf="props$ | async as props">
                             <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-                                [items]="(appointments$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+                                [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
                                 (itemsPerPageChange)="handleItemsPerPageChange($event)"
                                 [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
                                 [tableProps]="{ hover: true, striped: false, small:true }"
@@ -117,21 +124,29 @@
                                     let-tdContent="tdContent">
                                     <td>
                                         <ng-container [ngSwitch]="columnName">
-                                            <ng-container *ngSwitchCase="'appointmentStatus'">
-                                                {{tdContent}}
+                                            <ng-container *ngSwitchCase="'record'">
+                                                {{item.status}}
                                             </ng-container>
-                                            <ng-container *ngSwitchCase="'startDate'">
-                                                {{tdContent| date:'MMM d, y, h:mm a'}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'endDate'">
-                                                {{tdContent| date:'MMM d, y, h:mm a'}}
+                                            <ng-container *ngSwitchCase="'date'">
+                                                {{item.date| date:'MMM d, y, h:mm a'}}
                                             </ng-container>
                                             <ng-container *ngSwitchDefault>
                                                 {{tdContent}}
                                             </ng-container>
-                                            <ng-container *ngSwitchCase="'Actions'">
-                                                <button class="btn btn-outline-primary btn-sm"
-                                                    (click)="toggleReasonVisibility(item)">View Reasons</button>
+                                            <ng-container *ngSwitchCase="'actions'">
+                                                <c-input-group>
+                                                    <select id="patientRecordLineAction" #patientRecordLineAction
+                                                        cSelect sizing="sm">
+                                                        <option [value]="action"
+                                                            *ngFor="let action of item.actions; let i = index">
+                                                            {{ action }}
+                                                        </option>
+                                                    </select>
+                                                    <button cButton color="primary" variant="outline" size="sm"
+                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status)">
+                                                        <svg cIcon name="cilArrowCircleRight"></svg>
+                                                    </button>
+                                                </c-input-group>
                                             </ng-container>
                                         </ng-container>
                                     </td>
@@ -158,13 +173,15 @@
     </c-card-body>
 </c-card>
 <!-- Initial Examination -->
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecordAction === '1'">
-    <initial-examination></initial-examination>
-</c-card>
-
+<span *ngIf="patientRecord ===false">
+    <c-card class="mb-3 ustify-content-center">
+        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'" (back)="handleBackAction()"
+            [medicalNoteId]="toBeCompeleteMedicalNoteId" [caseId]="case.id"></initial-examination>
+    </c-card>
+</span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
-        <h5 cModalTitle>Appointment {{tmp?.appointmentStatus}} Reason</h5>
+        <h5 cModalTitle>Appointment {{appointmentCancelNoShowReason?.status}} Reason</h5>
         <button (click)="toggleReasonVisibility('')" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
@@ -173,16 +190,16 @@
                 <svg cIcon name="cilReportSlash" title="cilReportSlash"></svg>
             </span>
             <input aria-describedby="basic-addon1" readonly cFormControl
-                [value]="tmp?.appointmentCancelNoShowReason?.reason" />
+                [value]="appointmentCancelNoShowReason?.reason" />
         </c-input-group>
-        <c-input-group class="mb-3" sizing="sm" *ngIf="tmp?.appointmentStatus === 'Cancel'">
+        <c-input-group class="mb-3" sizing="sm" *ngIf="appointmentCancelNoShowReason?.status === 'Cancel'">
             <span cInputGroupText id="basic-addon1">
                 <svg cIcon name="cilCalendar" title="cilCalendar"></svg>
             </span>
             <input aria-describedby="basic-addon1" readonly cFormControl
-                [value]="this.tmpReasonDate | date: 'MM/dd/yyyy hh:mm a'" />
+                [value]="this.appointmentCancelNoShowReason.reasonDate| date: 'MM/dd/yyyy hh:mm a'" />
         </c-input-group>
         <textarea cFormControl id="exampleFormControlTextarea1" rows="3"
-            [value]="tmp?.appointmentCancelNoShowReason?.comment"></textarea>
+            [value]="appointmentCancelNoShowReason?.comment"></textarea>
     </c-modal-body>
 </c-modal>

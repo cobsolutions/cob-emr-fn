@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
+import { AssessmentStyles } from './styles/assessment';
 
 @Component({
   selector: 'assessment',
@@ -9,11 +13,24 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class AssessmentComponent implements OnInit {
   assessmentForm: FormGroup;
+  fields: any
+  styles: FieldControlStyles[] = AssessmentStyles;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  @Input() assessmentData: any
   problemsArray: FormArray;
   goalsArray: FormArray;
-
+  constructor(private fb: FormBuilder
+    , private medialNoteService: MedialNoteService
+    , private fieldDependentsService: FieldDependentsService) { }
+  ngOnInit(): void {
+    this.medialNoteService.find('assessment').subscribe(fields => {
+      this.fields = fields['assessment']
+      this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+      this.buildForm();
+      this.formReady.emit(this.assessmentForm);
+    })
+  }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
   }
@@ -46,10 +63,11 @@ export class AssessmentComponent implements OnInit {
     const period = periodInput.value;
     const met = metInput.value;
 
-    if (description) {
-      this.goals.push(this.createGoal(description, term, period, met));
-      descriptionInput.value = ''; // Clear description field
-    }
+    this.goals.push(this.createGoal(description, term, period, met));
+    descriptionInput.value = ''; // Clear description field
+    termInput.value = 'Short Term';
+    periodInput.value = '1-visit';
+    metInput.value = 'N/A'
   }
 
   removeGoal(index: number) {
@@ -58,29 +76,41 @@ export class AssessmentComponent implements OnInit {
   getGoalFormGroup(index: number): FormGroup {
     return this.goals.at(index) as FormGroup; // Ensure each item is treated as FormGroup
   }
-  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.buildForm()
-    this.formReady.emit(this.assessmentForm);
-  }
+
   private buildForm() {
     this.assessmentForm = this.fb.group({
-      'assessment_diagnosis': new FormControl(null),
-      'patient_clinical_presentation': new FormControl(null),
-      'parent_patient_education': new FormControl(null),
-      'hep': new FormControl(null),
-      'rehab_potential': new FormControl("excellent"),
-      'contraindications_to_therapy': new FormControl(null),
-      'patientAgreement': new FormControl(null),
-      'consent_to_care': new FormControl(null),
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })
+
+    setTimeout(() => {
+      this.assessmentForm.patchValue(this.assessmentData);
+      this.fillGoals();
+      this.fillProblems();
+    }, 10);
+
     this.problemsArray = this.assessmentForm.get('problems') as FormArray;
     this.goalsArray = this.assessmentForm.get('goals') as FormArray;
   }
   next() {
     this.stepper.next();
   }
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
+  }
+  fillProblems() {
+    if (this.assessmentData?.problems) {
+      for (let i = 0; i < this.assessmentData?.problems.length; i++) {
+        this.problems.push(new FormControl(this.assessmentData?.problems[i]))
+      }
+    }
+  }
+  fillGoals() {
+    if (this.assessmentData?.goals)
+      for (let i = 0; i < this.assessmentData?.goals.length; i++) {
+        this.goals.push(new FormControl(this.assessmentData?.goals[i]))
+      }
+  }
+
 }

@@ -97,6 +97,10 @@ export class AppointmentService {
     const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId + '/type/' + type;
     return this._http.get(url)
   }
+  getAppointmentCancelNoShow(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/chart/cno/find/cancel/noshow/appointmentId/' + appointmentId
+    return this._http.get(url)
+  }
 
   findAppointmentPatient(appointmentId: number) {
     const url = this.baseUrl + 'appointment/patient/appointment-id/' + appointmentId

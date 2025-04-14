@@ -1,22 +1,60 @@
-<div [formGroup]="objectiveForm">
+<div class="d-flex justify-content-center">
+    <c-card class="mb-2 card-center">
+        <c-card-header>
+            <strong>Examination Profile</strong>
+        </c-card-header>
+        <c-card-body>
+            <select id="profile-select" cSelect (change)="selectProfile()" 
+            [(ngModel)]="selectedProfile">
+                <option disabled selected value="null">Select Examination Profile</option>
+                <option *ngFor="let profile of profiles | async" [value]="profile.name">
+                    {{ profile.name }}
+                </option>
+            </select>
+        </c-card-body>
+    </c-card>
+</div>
+<div [formGroup]="objectiveForm" *ngIf="objectiveCategoriesfields">
+    <!--Inspection-->
+    <c-card class="mb-2">
+        <c-card-header>Inspection</c-card-header>
+        <c-card-body>
+            <inspection (formReady)="setChildForm('inspection', $event)" *ngIf="objectiveCategoriesfields['inspection']"
+                [fields]="objectiveCategoriesfields['inspection']"></inspection>
+        </c-card-body>
+    </c-card>
+    <!--Outcome Measurement Tools-->
+    <c-card class="mb-2">
+        <c-card-header>Outcome Measurement Tools</c-card-header>
+        <c-card-body>
+            <omt (formReady)="setChildForm('omt', $event)" *ngIf="objectiveCategoriesfields['omt']"
+                [fields]="objectiveCategoriesfields['omt']"></omt>
+        </c-card-body>
+    </c-card>
     <!--Observation-->
     <c-card class="mb-2">
         <c-card-header>Observation</c-card-header>
         <c-card-body>
-            <observation (formReady)="setChildForm('observation', $event)"></observation>
+            <observation (formReady)="setChildForm('observation', $event)"
+                *ngIf="objectiveCategoriesfields['observation']" [fields]="objectiveCategoriesfields['observation']">
+            </observation>
         </c-card-body>
     </c-card>
     <!--Range of Motion-->
     <c-card class="mb-2">
         <c-card-header>Range of Motion</c-card-header>
         <c-card-body>
+            <range-of-motion (formReady)="setChildForm('rangeOfMotion', $event)"
+                *ngIf="objectiveCategoriesfields['range_of_motion']"
+                [fields]="objectiveCategoriesfields['range_of_motion']"></range-of-motion>
         </c-card-body>
     </c-card>
     <!--Strength-->
     <c-card class="mb-2">
         <c-card-header>Strength</c-card-header>
         <c-card-body>
-
+            <strength (formReady)="setChildForm('strength', $event)" *ngIf="objectiveCategoriesfields['strength']"
+                [fields]="objectiveCategoriesfields['strength']"></strength>
         </c-card-body>
     </c-card>
 
@@ -24,7 +62,9 @@
     <c-card class="mb-2">
         <c-card-header>Neuro-Vascular</c-card-header>
         <c-card-body>
-
+            <neuro-vascular (formReady)="setChildForm('neuroVascular', $event)"
+                *ngIf="objectiveCategoriesfields['neuro_vascular']"
+                [fields]="objectiveCategoriesfields['neuro_vascular']"></neuro-vascular>
         </c-card-body>
     </c-card>
 
@@ -32,7 +72,9 @@
     <c-card class="mb-2">
         <c-card-header>Special Tests</c-card-header>
         <c-card-body>
-
+            <special-tests (formReady)="setChildForm('specialTest', $event)"
+                *ngIf="objectiveCategoriesfields['special_tests']"
+                [fields]="objectiveCategoriesfields['special_tests']"></special-tests>
         </c-card-body>
     </c-card>
 
@@ -40,7 +82,9 @@
     <c-card class="mb-2">
         <c-card-header>Palpation</c-card-header>
         <c-card-body>
-
+            <palpation (formReady)="setChildForm('palpation', $event)"
+                *ngIf="objectiveCategoriesfields['palpation']"
+                [fields]="objectiveCategoriesfields['palpation']"></palpation>
         </c-card-body>
     </c-card>
     <div class="mt-3">

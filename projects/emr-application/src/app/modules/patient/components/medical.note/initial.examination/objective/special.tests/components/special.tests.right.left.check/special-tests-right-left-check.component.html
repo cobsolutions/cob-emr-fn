@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="mobility-form" style="margin-right: 200px;">
+    <!-- Right Column -->
+    <div class="column">
+      <label>Right</label>
+      <div *ngFor="let option of mobilityOptions" class="option">
+        <input
+          type="checkbox"
+          [formControlName]="'right_' + formatKey(option)"
+          [id]="'right_' + formatKey(option)"
+        />
+        <label [for]="'right_' + formatKey(option)">{{ option }}</label>
+      </div>
+    </div>
+  
+    <!-- Left Column -->
+    <div class="column">
+      <label>Left</label>
+      <div *ngFor="let option of mobilityOptions" class="option">
+        <input
+          type="checkbox"
+          [formControlName]="'left_' + formatKey(option)"
+          [id]="'left_' + formatKey(option)"
+        />
+        <label [for]="'left_' + formatKey(option)">{{ option }}</label>
+      </div>
+    </div>
+  </form>
+  

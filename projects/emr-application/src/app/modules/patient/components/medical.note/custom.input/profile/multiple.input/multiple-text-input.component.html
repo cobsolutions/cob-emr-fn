@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+    <div style="margin-left: 400px;">
+        <div class="d-flex mb-2">
+            <label style="width: 190px;" class="mx-2"></label> <!-- Empty space for alignment -->
+            <label class="mx-5 fw-bold">Right</label>
+            <label class="fw-bold">Left</label>
+        </div>
+
+        <div *ngFor="let field of measurementFields">
+            <c-input-group class="mb-3" sizing="sm">
+                <label style="width: 180px;" class="mx-2">{{ field }}</label>
+                <input type="text" [formControlName]="'right_' + toCamelCase(field)" class="mx-5" cFormControl
+                    style="max-width: 180px;">
+                <input type="text" [formControlName]="'left_' + toCamelCase(field)" cFormControl
+                    style="max-width: 180px;">
+            </c-input-group>
+        </div>
+    </div>
+</form>

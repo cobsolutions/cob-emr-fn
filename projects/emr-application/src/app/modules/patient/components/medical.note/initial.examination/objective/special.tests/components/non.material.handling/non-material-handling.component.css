@@ -1,0 +1,49 @@
+.task-table {
+    width: 75%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  
+  .task-table th,
+  .task-table td {
+    padding: 4px 6px;
+    text-align: center;
+    vertical-align: middle;
+    border: none; /* Removed border */
+  }
+  
+  .task-table input[type="number"],
+  .task-table input[type="text"],
+  .task-table select,
+  .task-table textarea {
+    width: 50%;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .label-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px; /* Reduce spacing */
+  }
+  
+  .label-input-wrapper .task-label {
+    white-space: nowrap;
+    font-weight: 500;
+    min-width: 100px;
+    text-align: left;
+  }
+  
+  .label-input-wrapper input,
+  .label-input-wrapper textarea {
+    flex: 1;
+  }
+  
+  .task-table textarea {
+    resize: vertical;
+    height: 50px;
+  }
+  

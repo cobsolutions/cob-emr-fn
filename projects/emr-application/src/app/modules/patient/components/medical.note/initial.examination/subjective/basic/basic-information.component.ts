@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
+import { BasicFormStyles } from './fields.styles';
 @Component({
   selector: 'basic-information',
   templateUrl: './basic-information.component.html',
@@ -8,52 +11,27 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 export class BasicInformationComponent implements OnInit {
   basicForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() fields: any
   treatmentSide: string
-  constructor(private fb: FormBuilder) {
-    
-  }
+  styles: FieldControlStyles[] = BasicFormStyles;
+  @Input() basicFormData: any
+  constructor(private fb: FormBuilder
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
-    this.basicForm = this.fb.group({
-      'init_date': new FormControl(null, [Validators.required]),
-      'time_in_out': new FormControl(null, [Validators.required]),
-      'number_of_visit': new FormControl(null, [Validators.required]),
-      'diagnosis': new FormArray([]),
-      'treatment_diagnosis': new FormArray([]),
-      'treatment_side_na': new FormControl(true),
-      'treatment_side_left': new FormControl(false),
-      'treatment_side_right': new FormControl(false),
-      'physician_order': new FormControl(null, [Validators.required]),
-      'change_status_date': new FormControl(null, [Validators.required]),
-
-      'chronic': new FormControl(null, [Validators.required]),
-      'insidious': new FormControl(null, [Validators.required]),
-      'new_injury': new FormControl(null, [Validators.required]),
-      'no_new_injury': new FormControl(null, [Validators.required]),
-
-      'surgery_performed': new FormControl(null, [Validators.required]),
-      'prior_hospitalization': new FormControl(null, [Validators.required]),
-
-      'mechanism_injury': new FormControl(null, [Validators.required]),
-      'chief_complaint': new FormControl(null, [Validators.required]),
-
-    });
-    this.handleChanges()
+    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+    if (this.basicFormData) {
+      // this.basicForm = this.fb.group(this.basicFormData);
+      this.basicForm = this.fb.group({});
+      setTimeout(() => {
+        this.basicForm.patchValue(this.basicFormData);
+      }, 10);
+    }
+    else
+      this.basicForm = this.fb.group({});
     this.formReady.emit(this.basicForm);
   }
-  handleChanges() {
-    this.basicForm.get('treatment_side_left').valueChanges.subscribe(val => {
-      if (val)
-        this.basicForm.get('treatment_side_na').setValue(false)
-      if (!val && !this.basicForm.get('treatment_side_right').value)
-        this.basicForm.get('treatment_side_na').setValue(true)
-
-    })
-    this.basicForm.get('treatment_side_right').valueChanges.subscribe(val => {
-      if (val)
-        this.basicForm.get('treatment_side_na').setValue(false)
-      if (!val && !this.basicForm.get('treatment_side_left').value)
-        this.basicForm.get('treatment_side_na').setValue(true)
-    })
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
   }
 }

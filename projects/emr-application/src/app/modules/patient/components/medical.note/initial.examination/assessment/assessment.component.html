@@ -1,208 +1,140 @@
-<form [formGroup]="assessmentForm">
-  <!-- Assessment/Diagnosis -->
-  <div class="form-group">
-    <label for="assessment">Assessment/Diagnosis:</label>
-    <textarea id="assessment" formControlName="assessment_diagnosis" rows="4"></textarea>
-  </div>
-
-  <!-- Patient Clinical Presentation -->
-  <div class="form-group">
-    <label>Patient Clinical Presentation:</label>
-    <div class="radio-group">
-      <label>
-        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="low" size="sm" />
-        <b style="padding-left: 10px;">Low Complexity</b> - The clinical presentation is stable and/or uncomplicated.
-      </label>
-      <label>
-        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="moderate"
-          size="sm" />
-        <b style="padding-left: 10px;">Moderate Complexity</b> - The clinical presentation is evolving with changing
-        characteristics.
-      </label>
-      <label>
-        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="high" size="sm" />
-        <b style="padding-left: 10px;">High Complexity</b> - The clinical presentation is unstable with unpredictable
-        characteristics.
-      </label>
-      <label>
-        <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="other" size="sm" />
-        Other
-      </label>
-    </div>
-  </div>
-
-  <!-- Parent/Patient Education -->
-  <div class="form-group">
-    <label for="education">Parent/Patient Education:</label>
-    <textarea id="education" formControlName="parent_patient_education" rows="4"></textarea>
-  </div>
-
-  <!--hep-->
-  <div class="form-group">
-    <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
-    <c-form-check>
-      <input cFormCheckInput id="hep" type="checkbox" formControlName="hep" />
-      <label cFormCheckLabel for="hep">Patient Demonstrates Compliance with Prescribed HEP</label>
-    </c-form-check>
-  </div>
-  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'hep'"
-    [section]="'assessment'"></multiple-dependency-field>
-  <!-- Rehab Potential -->
-  <div class="form-group">
-    <label for="rehabPotential">Rehab Potential:</label>
-    <select cSelect id="rehabPotential" formControlName="rehab_potential" sizing="sm">
-      <option value="excellent">Excellent</option>
-      <option value="good">Good</option>
-      <option value="fair">Fair</option>
-      <option value="poor">Poor</option>
-    </select>
-  </div>
-  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'rehab_potential'"
-    [section]="'assessment'"></multiple-dependency-field>
-  <!-- Contraindications to Therapy -->
-  <div class="form-group">
-    <label>Contraindications to Therapy:</label>
-    <label>
-      <input type="radio" formControlName="contraindications_to_therapy" value="yes" /> Yes
-    </label>
-    <label>
-      <input type="radio" formControlName="contraindications_to_therapy" value="no" /> No
-    </label>
-  </div>
-  <multiple-dependency-field [soap]="'assessment'" [form]="assessmentForm" [fieldName]="'contraindications_to_therapy'"
-    [section]="'assessment'"></multiple-dependency-field>
-  <!-- Checkbox Statement -->
-  <div class="form-group">
-    <label>
-      <input type="checkbox" formControlName="patientAgreement" />
-      Following the evaluation and extensive patient education regarding diagnosis, prognosis, and treatment goals, the
-      patient (parent/guardian, power of attorney holder) actively participated in the creation of the current goals and
-      agrees to the current treatment plan.
-    </label>
-  </div>
-
-  <!-- Consent to care: -->
-  <div class="form-group">
-    <label for="assessment">Consent to care:</label>
-    <textarea id="assessment" formControlName="consent_to_care" rows="4"></textarea>
-  </div>
-
-  <!-- Problem List -->
-  <div class="form-group">
-    <label for="problemInput">Problem List:</label>
-    <div class="goal-form-container">
-      <div class="goal-input">
-        <label>Problem Description</label>
-        <input #problemInput aria-describedby="button-addon2" aria-label="Recipient's username" cFormControl
-          placeholder="Enter problem description" />
-      </div>
-      <div class="add-btn-container">
-        <button type="button" (click)="addProblem(problemInput)" class="add-goal-btn">
-          ➕ Add Problem
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Table -->
-  <table class="table table-sm p-1 mb-3">
-    <thead>
-      <tr>
-        <th>Problems Description</th>
-        <th style="width: 50px;"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let problem of problems.controls; let i = index">
-        <td>{{ problem.value }}</td>
-        <td class="text-center">
-          <button cButton color="danger" variant="outline" size="sm" (click)="removeProblem(i)">
-            <svg cIcon name="cilTrash"></svg>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="form-group">
-    <label>Goal List:</label>
-
-    <div class="goal-form-container">
-      <!-- Goal Term & Period in one line -->
-      <div class="goal-row">
-        <div class="goal-input">
-          <label>Goal Term</label>
-          <select cSelect #goalTerm>
-            <option value="Short Term">Short Term</option>
-            <option value="Long Term">Long Term</option>
-          </select>
+<form [formGroup]="assessmentForm" *ngIf="fields">
+    <div class="fields-container">
+        <div class="field-item" *ngFor="let field of fields;">
+            <soap-field-builder [field]="field" [form]="assessmentForm" [filedStyle]="getstyleFieldControl(field.name)"
+                [styles]="styles">
+            </soap-field-builder>
         </div>
-        <div class="goal-input">
-          <label>Goal Period</label>
-          <select cSelect #goalPeriod>
-            <option value="1-visit">1 Visit</option>
-            <option value="1-week">1 Week</option>
-            <option value="2-weeks">2 Weeks</option>
-            <option value="3-weeks">3 Weeks</option>
-            <option value="4-weeks">4 Weeks</option>
-            <option value="5-weeks">5 Weeks</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Goal Met on a separate line -->
-      <div class="goal-input">
-        <label>Goal Met</label>
-        <select cSelect #goalMet>
-          <option value="N/A">N/A</option>
-          <option value="50%">50%</option>
-          <option value="75%">75%</option>
-          <option value="90%">90%</option>
-          <option value="100%">100%</option>
-        </select>
-      </div>
-
-      <!-- Goal Description (Full Width) -->
-      <div class="goal-input">
-        <label>Goal Description</label>
-        <textarea #goalDescription placeholder="Enter goal description"></textarea>
-      </div>
-
-      <div class="add-btn-container">
-        <button type="button" (click)="addGoal(goalDescription, goalTerm, goalPeriod, goalMet)" class="add-goal-btn">
-          ➕ Add Goal
-        </button>
-      </div>
     </div>
+    <!-- Problem List -->
+    <c-card class="mb-2">
+        <c-card-header>Problem List</c-card-header>
+        <c-card-body>
+            <div class="form-group">
+                <div class="goal-form-container">
+                    <div class="goal-input">
+                        <label>Problem Description</label>
+                        <input #problemInput aria-describedby="button-addon2" aria-label="Recipient's username"
+                            cFormControl placeholder="Enter problem description" />
+                    </div>
+                    <div class="add-btn-container">
+                        <button type="button" (click)="addProblem(problemInput)" class="add-goal-btn">
+                            ➕ Add Problem
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-  </div>
+            <!-- Table -->
+            <table class="table table-sm p-1 mb-3">
+                <thead>
+                    <tr>
+                        <th>Problems Description</th>
+                        <th style="width: 50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let problem of problems?.controls; let i = index">
+                        <td>{{ problem.value }}</td>
+                        <td class="text-center">
+                            <button cButton color="danger" variant="outline" size="sm" (click)="removeProblem(i)">
+                                <svg cIcon name="cilTrash"></svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </c-card-body>
+    </c-card>
 
-  <!-- Goals Table -->
-  <table class="table table-sm p-1">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Term</th>
-        <th>Period</th>
-        <th>Goal Met</th>
-        <th style="width: 50px;"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let goal of goals.controls; let i = index" [formGroup]="getGoalFormGroup(i)">
-        <td>{{ goal.value.description }}</td>
-        <td>{{ goal.value.term }}</td>
-        <td>{{ goal.value.period }}</td>
-        <td>{{ goal.value.met }}</td>
-        <td class="text-center">
-          <button (click)="removeGoal(i)" cButton color="danger" variant="outline" size="sm">
-            <svg cIcon name="cilTrash"></svg></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="mt-3">
-    <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-    <button cButton variant="outline" size="sm" (click)="next()">Next</button>
-</div>
+    <!-- Goal List -->
+    <c-card>
+        <c-card-header>
+            <label>Goal List:</label>
+        </c-card-header>
+        <c-card-body>
+            <div class="form-group">
+                <div class="goal-form-container">
+                    <!-- Goal Term & Period in one line -->
+                    <div class="goal-row">
+                        <div class="goal-input">
+                            <label>Goal Term</label>
+                            <select cSelect #goalTerm>
+                                <option value="Short Term">Short Term</option>
+                                <option value="Long Term">Long Term</option>
+                            </select>
+                        </div>
+                        <div class="goal-input">
+                            <label>Goal Period</label>
+                            <select cSelect #goalPeriod>
+                                <option value="1-visit">1 Visit</option>
+                                <option value="1-week">1 Week</option>
+                                <option value="2-weeks">2 Weeks</option>
+                                <option value="3-weeks">3 Weeks</option>
+                                <option value="4-weeks">4 Weeks</option>
+                                <option value="5-weeks">5 Weeks</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Goal Met on a separate line -->
+                    <div class="goal-input">
+                        <label>Goal Met</label>
+                        <select cSelect #goalMet>
+                            <option value="N/A">N/A</option>
+                            <option value="50%">50%</option>
+                            <option value="75%">75%</option>
+                            <option value="90%">90%</option>
+                            <option value="100%">100%</option>
+                        </select>
+                    </div>
+
+                    <!-- Goal Description (Full Width) -->
+                    <div class="goal-input">
+                        <label>Goal Description</label>
+                        <textarea #goalDescription placeholder="Enter goal description"></textarea>
+                    </div>
+
+                    <div class="add-btn-container">
+                        <button type="button" (click)="addGoal(goalDescription, goalTerm, goalPeriod, goalMet)"
+                            class="add-goal-btn">
+                            ➕ Add Goal
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Goals Table -->
+            <table class="table table-sm p-1">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Term</th>
+                        <th>Period</th>
+                        <th>Goal Met</th>
+                        <th style="width: 50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let goal of goals?.controls; let i = index" [formGroup]="getGoalFormGroup(i)">
+                        <td>{{ goal.value.description }}</td>
+                        <td>{{ goal.value.term }}</td>
+                        <td>{{ goal.value.period }}</td>
+                        <td>{{ goal.value.met }}</td>
+                        <td class="text-center">
+                            <button (click)="removeGoal(i)" cButton color="danger" variant="outline" size="sm">
+                                <svg cIcon name="cilTrash"></svg></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </c-card-body>
+    </c-card>
+
+
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
 </form>

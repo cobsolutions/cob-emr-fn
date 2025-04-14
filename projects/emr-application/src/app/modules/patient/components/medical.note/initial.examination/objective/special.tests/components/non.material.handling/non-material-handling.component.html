@@ -1,0 +1,44 @@
+<form [formGroup]="form" [style]="testStyle">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Demonstrated</th>
+          <th>Occasional</th>
+          <th>Frequent</th>
+          <th>Constant</th>
+          <th>Adequate For Job</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <!-- Task Name -->
+          <td>
+            <div class="label-input-wrapper">
+              <label class="task-label">{{ task.label }}</label>
+              <ng-container [ngSwitch]="task.unit">
+                <input *ngSwitchCase="'minutes'" type="number" formControlName="{{ task.key }}_value" placeholder="Minutes" />
+                <input *ngSwitchCase="'flights'" type="number" formControlName="{{ task.key }}_value" placeholder="Flights" />
+              </ng-container>
+            </div>
+          </td>
+  
+          <!-- Occasional -->
+          <td><input type="checkbox" formControlName="{{ task.key }}_occasional" /></td>
+  
+          <!-- Frequent -->
+          <td><input type="checkbox" formControlName="{{ task.key }}_frequent" /></td>
+  
+          <!-- Constant -->
+          <td><input type="checkbox" formControlName="{{ task.key }}_constant" /></td>
+  
+          <!-- Adequate For Job -->
+          <td>
+            <select formControlName="{{ task.key }}_adequate">
+              <option *ngFor="let opt of adequacyOptions" [value]="opt">{{ opt }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  

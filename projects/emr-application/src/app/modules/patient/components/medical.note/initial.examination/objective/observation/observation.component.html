@@ -1,27 +1,4 @@
-<div [formGroup]="ObservationForm">
-    <div class="mb-3" *ngIf="fields && fields.length">
-        <div *ngFor="let field of fields" class="d-flex align-items-center mb-2 flex-wrap">
-            <label class="me-3 text-end"
-                style="width: 250px; text-align: right; white-space: normal; word-break: break-word;">
-                {{ field.name }}
-            </label>
-            <div class="d-flex">
-                <c-form-check class="me-3">
-                    <input cFormCheckInput type="radio" [formControlName]="field.value" size="sm" [value]="'no'" />
-                    <label cFormCheckLabel class="ms-1">No</label>
-                </c-form-check>
-                <c-form-check>
-                    <input cFormCheckInput type="radio" [formControlName]="field.value" size="sm" [value]="'yes'" />
-                    <label cFormCheckLabel class="ms-1">Yes</label>
-                </c-form-check>
-            </div>
-
-            <!-- Wrap this in a full-width div to move to a new line -->
-            <div class="w-100 mt-2">
-                <multiple-dependency-field [form]="ObservationForm" [fieldName]="field.value" [section]="'observation'"
-                    [soap]="'objective/observation'">
-                </multiple-dependency-field>
-            </div>
-        </div>
-    </div>
-</div>
+<span *ngFor="let field of fields;">
+    <soap-field-builder [field]="field " [form]="ObservationForm" [filedStyle]="getstyleFieldControl(field.name)"
+        [styles]="styles"></soap-field-builder>
+</span>

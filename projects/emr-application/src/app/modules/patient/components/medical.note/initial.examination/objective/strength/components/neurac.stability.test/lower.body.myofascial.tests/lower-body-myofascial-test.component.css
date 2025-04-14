@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .column {
+    width: 45%;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: flex-start; /* Align label with input group */
+    margin-bottom: 15px;
+  }
+  
+  label {
+    width: 390px;  /* Adjust label width */
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+    padding-top: 8px; /* Align with select */
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column; /* Stack select and textarea */
+    width: 100%;
+  }
+  
+  select {
+    padding: 5px;
+    width: 40%;
+    margin-bottom: 5px; /* Space between select and textarea */
+  }
+  
+  .comment {
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    resize: vertical;
+  }
+  .header {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  

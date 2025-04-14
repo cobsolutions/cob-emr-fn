@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px; /* Adjust width as needed */
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group label {
+  width: 80px; /* Ensure all labels are aligned */
+  text-align: right;
+}
+
+.form-group .values {
+  display: flex;
+  gap: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 80px; /* Adjust input field width */
+  height: 25px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+
+.form-group textarea {
+  width: 180px; /* Wider for comments */
+  height: 40px;
+  resize: none;
+}
+.header {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
+import { PlanStyles } from './styles/plan';
 
 @Component({
   selector: 'plan',
@@ -9,12 +13,14 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class PlanComponent implements OnInit {
   planForm: FormGroup;
+  fields: any
+  styles: FieldControlStyles[] = PlanStyles;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   frequencyOptions = ['Custom', 'Daily', 'Weekly'];
   durationOptions = ['Custom', '2 Weeks', '1 Month'];
   planOptions = ['Custom', 'Standard', 'Advanced'];
-
+  @Input() planData: any
   procedures = [
     { label: 'Therapeutic Exercises', value: 'therapeuticExercises' },
     { label: 'Therapeutic Activity', value: 'therapeuticActivity' },
@@ -58,22 +64,34 @@ export class PlanComponent implements OnInit {
     { label: 'Acupuncture', value: 'acupuncture' },
     { label: 'Other', value: 'otherSpecialty' }
   ];
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService
+  ) { }
 
   ngOnInit(): void {
-    this.planForm = this.fb.group({
-      createPlanOfCare: [false],
-      frequency: ['Custom'],
-      duration: ['Custom'],
-      plan: ['Custom'],
-      physicianSignature: [false]
-    });
-    this.procedures.forEach(proc => this.planForm.addControl(proc.value, this.fb.control(false)));
-    this.modalities.forEach(mod => this.planForm.addControl(mod.value, this.fb.control(false)));
-    this.specialties.forEach(spec => this.planForm.addControl(spec.value, this.fb.control(false)));
-    this.formReady.emit(this.planForm);
+    this.medialNoteService.find('plan').subscribe(fields => {
+      this.fields = fields
+      this.planForm = this.fb.group({
+        createPlanOfCare: [''],
+        frequency: ['F00'],
+        duration: ['D00'],
+        plan: ['PL01'],
+        physicianSignature: [''],
+        procedures: this.fb.group({}),
+        modalities: this.fb.group({}),
+        specialties: this.fb.group({}),
+      });
+      if (this.planData)
+        setTimeout(() => {
+          this.planForm.patchValue(this.planData);
+        }, 10);
+      this.formReady.emit(this.planForm);
+    })
+
   }
   next() {
     this.stepper.next();
+  }
+  setChildForm(section: string, formGroup: FormGroup) {
+    this.planForm.setControl(section, formGroup);
   }
 }

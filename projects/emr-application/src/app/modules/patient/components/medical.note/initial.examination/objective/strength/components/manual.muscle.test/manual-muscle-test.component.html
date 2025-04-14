@@ -1,0 +1,28 @@
+<form [formGroup]="form" [style]="testStyle">
+    <ng-container *ngFor="let group of selectGroups">
+      <div class="grid-container">
+        <div></div>
+        <div class="header">Right</div>
+        <div class="header">Left</div>
+  
+        <ng-container *ngFor="let field of group.fields">
+          <div class="label">{{ field }}</div>
+  
+          <!-- Right Dropdown -->
+          <select [formControlName]="'right_' + toCamelCase(field)" class="dropdown">
+            <option *ngFor="let option of selectValues" [value]="option.val">
+              {{ option.view }}
+            </option>
+          </select>
+  
+          <!-- Left Dropdown -->
+          <select [formControlName]="'left_' + toCamelCase(field)" class="dropdown">
+            <option *ngFor="let option of selectValues" [value]="option.val">
+              {{ option.view }}
+            </option>
+          </select>
+        </ng-container>
+      </div>
+    </ng-container>
+  </form>
+  

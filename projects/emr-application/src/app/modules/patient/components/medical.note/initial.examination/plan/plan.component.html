@@ -1,57 +1,79 @@
-<form [formGroup]="planForm">
+<form [formGroup]="planForm" *ngIf="fields">
     <!-- Frequency, Duration, Plan (Styled Inline) -->
     <div class="form-inline mb-3 mt-3">
         <c-row>
             <c-col xs="12">
                 <label style="margin-left: 3px;">Frequency:
-                    <select>
-                        <option>Custom</option>
-                        <option>Daily</option>
-                        <option>Weekly</option>
+                    <select formControlName="frequency">
+                        <option selected="" value="F00">N/A</option>
+                        <option value="F01">1 time visit only</option>
+                        <option value="F02">1 time a week</option>
+                        <option value="F03">1-2 times a week</option>
+                        <option value="F04">2 times a week</option>
+                        <option value="F05">2-3 times a week</option>
+                        <option value="F06">3 times a week</option>
+                        <option value="F07">3-4 times a week</option>
+                        <option value="F08">4 times a week</option>
+                        <option value="F09">BID</option>
+                        <option value="F10">QD</option>
+                        <option value="F11">PRN</option>
+                        <option value="Custom">Custom</option>
                     </select>
                 </label>
 
                 <label style="margin-left: 3px;">Duration:
-                    <select>
-                        <option>Custom</option>
-                        <option>Short Term</option>
-                        <option>Long Term</option>
+                    <select formControlName="duration">
+                        <option selected="" value="D00">N/A</option>
+                        <option value="D05">1 week</option>
+                        <option value="D06">2 weeks</option>
+                        <option value="D07">3 weeks</option>
+                        <option value="D08">4 weeks</option>
+                        <option value="D09">5 weeks</option>
+                        <option value="D10">6 weeks</option>
+                        <option value="D11">8 weeks</option>
+                        <option value="D12">10 weeks</option>
+                        <option value="D13">12 weeks</option>
+                        <option value="Custom">Custom</option>
                     </select>
                 </label>
 
                 <label style="margin-left: 3px;">Plan:
-                    <select>
-                        <option>Custom</option>
-                        <option>Standard</option>
-                        <option>Personalized</option>
+                    <select formControlName="plan">
+                        <option selected="" value="PL00">Begin Plan as Outlined</option>
+                        <option value="PL01">Begin Plan per Flowsheet</option>
+                        <option value="PL02">Begin Plan per Protocol</option>
+                        <option value="Custom">Custom</option>
                     </select>
                 </label>
             </c-col>
             <c-col xs="12">
                 <div class="mt-3">
                     <label>
-                        <input type="checkbox"> Create Plan of Care Document
+                        <input type="checkbox" formControlName="createPlanOfCare"> Create Plan of Care Document
+                    </label>
+                </div>
+            </c-col>
+            <c-col xs="12">
+                <div class="mt-3">
+                    <label>
+                        <input type="checkbox" formControlName="physicianSignature"> Add Physician Signature Request to
+                        this Note
                     </label>
                 </div>
             </c-col>
         </c-row>
     </div>
+
     <h3>Treatment to be Provided:</h3>
-    <hr />
+
     <!-- Procedures -->
     <c-row>
         <c-col xs="6">
             <div class="section">
                 <h4>Procedures</h4>
                 <hr />
-                <div *ngFor="let procedure of procedures">
-                    <label>
-                        <input type="checkbox" [formControlName]="procedure.value" />
-                        {{ procedure.label }}
-                    </label>
-                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="procedure.value"
-                        [section]="'plan'"></multiple-dependency-field>
-                </div>
+                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']">
+                </procedures>
             </div>
         </c-col>
         <c-col xs="6">
@@ -59,32 +81,19 @@
             <div class="section">
                 <h4>Modalities</h4>
                 <hr />
-                <div *ngFor="let modality of modalities">
-                    <label>
-                        <input type="checkbox" [formControlName]="modality.value" />
-                        {{ modality.label }}
-                    </label>
-                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="modality.value"
-                        [section]="'plan'"></multiple-dependency-field>
-                </div>
+                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']">
+                </modalities>
             </div>
 
             <!-- Specialties -->
             <div class="section">
                 <h4>Specialties</h4>
                 <hr />
-                <div *ngFor="let specialty of specialties">
-                    <label>
-                        <input type="checkbox" [formControlName]="specialty.value" />
-                        {{ specialty.label }}
-                    </label>
-                    <multiple-dependency-field [soap]="'plan'" [form]="planForm" [fieldName]="specialty.value"
-                        [section]="'plan'"></multiple-dependency-field>
-                </div>
+                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']">
+                </specialties>
             </div>
         </c-col>
     </c-row>
-
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" (click)="next()">Next</button>

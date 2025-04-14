@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
 import { ObjectiveField } from '../models/objective.field';
+import { ObservationFormStyles } from './observation.fields.styles';
 @Component({
   selector: 'observation',
   templateUrl: './observation.component.html',
@@ -10,25 +13,18 @@ import { ObjectiveField } from '../models/objective.field';
 export class ObservationComponent implements OnInit {
   ObservationForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  fields: ObjectiveField[];
-  constructor(private httpClient: HttpClient, private fb: FormBuilder) { }
+  @Input() fields: any
+  styles: FieldControlStyles[] = ObservationFormStyles;
+  constructor(private fb: FormBuilder
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
-    this.buildObservationfields();
-  }
-
-  private buildObservationfields() {
+    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.ObservationForm = this.fb.group({});
-    var url: string = 'assets/soap/objective/observation/fields.json'
-    this.httpClient.get(url)
-      .subscribe((fields: any) => {
-        this.fields = fields
-        let formControls = this.fields.reduce((acc, field) => {
-          acc[field.value] = new FormControl(field.value);
-          return acc;
-        }, {} as { [key: string]: FormControl });
-        this.ObservationForm = this.fb.group(formControls);
-      });
+    this.formReady.emit(this.ObservationForm);
+  }
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
   }
 
 }

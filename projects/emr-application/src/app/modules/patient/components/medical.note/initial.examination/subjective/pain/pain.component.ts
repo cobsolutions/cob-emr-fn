@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FieldDependentsService } from '../../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { FieldControlStyles } from '../../../filed.control.style.selector/field.control.style';
 import { AggravatingFactors } from '../../../lookups/aggravating.factors';
+import { PainFormStyles } from './pain.fields.styles';
 
 @Component({
   selector: 'pain',
@@ -12,34 +15,54 @@ export class PainComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   aggravatingFactors: string[] = AggravatingFactors;
   showPainEval: boolean = false
-  painScaleList: string[] = []
   painScaleCounter: number = 0;
-  constructor(private fb: FormBuilder) { }
+  @Input() fields: any
+  styles: FieldControlStyles[] = PainFormStyles;
+  @Input() painFormData: any
+  constructor(private fb: FormBuilder
+    , private fieldDependentsService: FieldDependentsService) { }
 
   ngOnInit(): void {
+    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.painForm = this.fb.group({
       'pain_scale': new FormControl(null, [Validators.required]),
-      'aggravating': new FormControl(null, [Validators.required]),
-      "restrictions_pain_alleviators": new FormControl(null, [Validators.required]),
+      evals: this.fb.array([])
     });
+    if (this.painFormData) {
+      setTimeout(() => {
+        this.painForm.patchValue(this.painFormData);
+      }, 10);
+    }
     this.handlePainScale();
+    if (this.painFormData)
+      this.fillEvals();
     this.formReady.emit(this.painForm);
   }
 
+  get evals(): FormArray {
+    return this.painForm.get('evals') as FormArray;
+  }
+  private fillEvals() {
+    for (let i = 0; i < this.painFormData?.evals.length; i++) {
+      this.evals.push(new FormControl(this.painFormData?.evals[i]))
+    }
+  }
   private handlePainScale() {
     this.painForm.get('pain_scale').valueChanges.subscribe(value => {
       if (value === 'yes') {
-        this.painScaleList.push('pscal_' + this.painScaleCounter);
         this.showPainEval = true
       }
       else
         this.showPainEval = false
     })
   }
-  addPainScale() {
-    this.painScaleList.push('pscal_' + this.painScaleCounter++);
+  save(event: any) {
+    this.evals.push(new FormControl(event))
   }
-  remove(event: any) {
-    this.painScaleList= this.painScaleList.filter(item => item !== event);
+  remove(index: any) {
+    this.evals.removeAt(index);
+  }
+  getstyleFieldControl(fieldName: string): FieldControlStyles {
+    return this.styles.find(obj => obj.name === fieldName);
   }
 }
