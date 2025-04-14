@@ -1,1 +1,34 @@
-<p>daily-note works!</p>
+<c-container fluid="true">
+    <div class="button-container m-2">
+        <!-- <button (click)="backtoPatientRecordActions()" class="btn btn-link">Back to patient records</button> -->
+        <c-input-group class="mb-3" style="max-width: 225px;">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm">
+                <option value="back">Back to patient records</option>
+                <option value="draft">Save as draft</option>
+            </select>
+            <button cButton color="primary" variant="outline" size="sm" (click)="soapActions(soapActionList.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+            </button>
+        </c-input-group>
+    </div>
+    <form [formGroup]="dailyNoteForm" *ngIf="dailyNoteForm">
+        <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
+            <mat-step [stepControl]="dailyNoteForm.get('subjective')!" completed="true" formGroupName="subjective">
+                <ng-template matStepLabel>Subjective</ng-template>
+                Subjective
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dailyNoteForm.get('objective')!" formGroupName="objective">
+                <ng-template matStepLabel>Objective</ng-template>
+                Objective
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
+                <ng-template matStepLabel>Assessment</ng-template>
+                Assessment
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!" formGroupName="planOfCare">
+                <ng-template matStepLabel>Plan</ng-template>
+                Plan
+            </mat-step>
+        </mat-stepper>
+    </form>
+</c-container>

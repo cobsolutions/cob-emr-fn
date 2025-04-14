@@ -177,7 +177,8 @@
     <c-card class="mb-3 ustify-content-center">
         <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'" (back)="handleBackAction()"
             [medicalNoteId]="toBeCompeleteMedicalNoteId" [caseId]="case.id"></initial-examination>
-        <daily-note *ngIf="patientRecordAction ==='Add Daily Note'"></daily-note>
+        <daily-note *ngIf="patientRecordAction ==='Add Daily Note'" (back)="handleBackAction()"
+            [caseId]="case.id"></daily-note>
     </c-card>
 </span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
