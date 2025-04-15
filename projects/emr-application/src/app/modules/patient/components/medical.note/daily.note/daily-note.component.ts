@@ -55,7 +55,6 @@ export class DailyNoteComponent implements OnInit {
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
 
     }
-    console.log(JSON.stringify(medicalNoteRequest))
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
     })

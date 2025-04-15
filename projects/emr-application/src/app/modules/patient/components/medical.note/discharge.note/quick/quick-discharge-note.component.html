@@ -1,3 +1,14 @@
+<div class="button-container m-2">
+    <c-input-group class="mb-3" style="max-width: 225px;">
+        <select id="soapActionList" #soapActionList cSelect sizing="sm">
+            <option value="back">Back to patient records</option>
+            <option value="draft">Save as draft</option>
+        </select>
+        <button cButton color="primary" variant="outline" size="sm" (click)="soapActions(soapActionList.value)">
+            <svg cIcon name="cilArrowCircleRight"></svg>
+        </button>
+    </c-input-group>
+</div>
 <form [formGroup]="dischargeForm" class="form-container">
     <div class="form-group">
         <label for="discharge-date">Date of Discharge:</label>

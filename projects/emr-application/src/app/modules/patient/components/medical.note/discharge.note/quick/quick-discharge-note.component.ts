@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,27 +8,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class QuickDischargeNoteComponent implements OnInit {
   dischargeForm!: FormGroup;
-  months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-  years: number[] = [];
+  @Output() back = new EventEmitter<void>();
+  @Input() medicalNoteId: number
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.years = this.generateYears(2020, 2030);
-
     this.dischargeForm = this.fb.group({
       dischargeDate: [Validators.required],
       numberOfVisits: [0, [Validators.required, Validators.min(0)]],
       reason: ['', Validators.required]
     });
   }
-  private generateYears(start: number, end: number): number[] {
-    const years = [];
-    for (let y = start; y <= end; y++) {
-      years.push(y);
-    }
-    return years;
+  soapActions(action: string) {
+    if (action === 'back')
+      this.backtoPatientRecordActions()
+    if (action === 'draft')
+      this.draft();
+  }
+  backtoPatientRecordActions() {
+    this.back.emit();
+  }
+  private draft() {
+
   }
 }
