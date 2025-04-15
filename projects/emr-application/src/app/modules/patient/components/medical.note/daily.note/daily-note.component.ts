@@ -1,7 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 @Component({
   selector: 'daily-note',
   templateUrl: './daily-note.component.html',
@@ -13,11 +13,13 @@ export class DailyNoteComponent implements OnInit {
   activeStepIndex: number;
   dailyNoteForm: FormGroup
   visitedSteps: boolean[] = [];
-  @Input() caseId: number
+  @Input() medicalNoteId: number
+  medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
+    this.medialNoteService.noteType$.next('daily')
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -25,6 +27,11 @@ export class DailyNoteComponent implements OnInit {
       assessment: this.fb.group({}),
       planOfCare: this.fb.group({}),
     });
+    console.log(this.medicalNoteId)
+    if (this.medicalNoteId !== undefined)
+      this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.medicalNoteSOAP = data
+      })
   }
   soapActions(action: string) {
     if (action === 'back')

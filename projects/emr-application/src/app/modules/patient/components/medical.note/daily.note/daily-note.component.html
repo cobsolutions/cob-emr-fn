@@ -15,7 +15,8 @@
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
             <mat-step [stepControl]="dailyNoteForm.get('subjective')!" completed="true" formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
-                Subjective
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)" *ngIf="visitedSteps[0]"
+                    [subjectiveData]="medicalNoteSOAP?.subjective"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('objective')!" formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>

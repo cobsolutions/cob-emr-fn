@@ -26,7 +26,6 @@ export class InitialExaminationComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    console.log(this.medicalNoteId)
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -35,8 +34,10 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
+    this.medialNoteService.noteType$.next('init_exam')
+    console.log(this.medicalNoteId)
     if (this.medicalNoteId !== undefined)
-      this.medialNoteService.findMedicalNoteType(this.medicalNoteId, 'Initial Evaluation').subscribe((data: any) => {
+      this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.medicalNoteSOAP = data
       })
     else {

@@ -35,7 +35,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecordAction: string;
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-  toBeCompeleteMedicalNoteId: number
+  medicalNoteId: number
+  errorMessage: string;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -114,8 +115,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       planOfCare: {},
       billing: {}
     }
-    this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
-      console.log('created')
+    this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
+      this.medicalNoteId = medicalNoteId;
+      this.errorMessage = undefined
+    }, error => {
+      this.patientRecordAction = 'ERROR_FINALIZE';
+      this.errorMessage = error.error.message;
     })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string) {
@@ -124,7 +129,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
     if (val === 'Complete') {
-      console.log(status)
       this.completeMedicalNote(entityId, status)
     }
   }
@@ -145,8 +149,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   private completeMedicalNote(id: number, status: string) {
     this.patientRecord = false
-    this.toBeCompeleteMedicalNoteId = id;
+    this.medicalNoteId = id;
     if (status === 'Initial Evaluation')
       this.patientRecordAction = 'Add Initial Examination';
+    if (status === 'Daily Note')
+      this.patientRecordAction = 'Add Daily Note';
   }
 }

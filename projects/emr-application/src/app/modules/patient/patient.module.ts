@@ -21,70 +21,72 @@ import {
   PatientBasicInfoComponent, PatientCaseInfoComponent, PatientClinicInfoComponent, PatientContactInfoComponent,
   PatientEmergencyInfoComponent, PatientIdInfoComponent, PatientInsuranceInfoComponent
 } from './components/create';
-import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule } from '@coreui/angular-pro';
+import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
-import { SubjectiveComponent } from './components/medical.note/initial.examination/subjective/subjective.component';
-import { BasicInformationComponent } from './components/medical.note/initial.examination/subjective/basic/basic-information.component';
-import { PriorLevelFunctionComponent } from './components/medical.note/initial.examination/subjective/prior.level.function/prior-level-function.component';
-import { CurrentFunvtionlimitComponent } from './components/medical.note/initial.examination/subjective/current.function.limit/current-funvtionlimit.component';
-import { IcdtenComponent } from './components/medical.note/initial.examination/subjective/basic/icd10/icdten.component';
-import { PainComponent } from './components/medical.note/initial.examination/subjective/pain/pain.component';
-import { PainEvaluationComponent } from './components/medical.note/initial.examination/subjective/pain/pain.evaluation/pain-evaluation.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { MedicalHistoryComponent } from './components/medical.note/initial.examination/subjective/medical.history/medical-history.component';
 import { DependencyFieldComponent } from './components/medical.note/dependency.field/dependency-field.component';
 import { MultipleDependencyFieldComponent } from './components/medical.note/multiple.dependency.field/multiple-dependency-field.component';
-import { ObjectiveComponent } from './components/medical.note/initial.examination/objective/objective.component';
-import { ObservationComponent } from './components/medical.note/initial.examination/objective/observation/observation.component';
-import { AssessmentComponent } from './components/medical.note/initial.examination/assessment/assessment.component';
-import { PlanComponent } from './components/medical.note/initial.examination/plan/plan.component';
-import { BillingComponent } from './components/medical.note/initial.examination/billing/billing.component';
+
 import { SoapFieldBuilderComponent } from './components/medical.note/field.control.builder/soap-field-builder.component';
 import { MutlipleCheckBoxComponent } from './components/medical.note/custom.input/multiple.checkbox/mutliple-check-box.component';
 import { MultipleRadioComponent } from './components/medical.note/custom.input/mutliple.radio/multiple-radio.component';
-import { ProceduresComponent } from './components/medical.note/initial.examination/plan/components/procedures/procedures.component';
-import { ModalitiesComponent } from './components/medical.note/initial.examination/plan/components/modalities/modalities.component';
-import { SpecialtiesComponent } from './components/medical.note/initial.examination/plan/components/specialties/specialties.component';
-import { UntimedCodesComponent } from './components/medical.note/initial.examination/billing/components/untimedCodes/untimed-codes.component';
-import { CalendarMonthComponent } from './components/medical.note/initial.examination/billing/components/calendar.month/calendar-month.component';
 import { BillingCodeNumberComponent } from './components/medical.note/custom.input/billing.code/billing-code-number.component';
-import { RespiratoryComponent } from './components/medical.note/initial.examination/billing/components/respiratory/respiratory.component';
-import { NerveConductionStudiesComponent } from './components/medical.note/initial.examination/billing/components/nerve.conduction.studies/nerve-conduction-studies.component';
-import { OtherTreatmentProceduresComponent } from './components/medical.note/initial.examination/billing/components/other.treatment.procedures/other-treatment-procedures.component';
-import { SuppliesComponent } from './components/medical.note/initial.examination/billing/components/supplies/supplies.component';
-import { SplintsOrthoticsComponent } from './components/medical.note/initial.examination/billing/components/splints.orthotics/splints-orthotics.component';
-import { CastsComponent } from './components/medical.note/initial.examination/billing/components/Casts/casts.component';
-import { BracesComponent } from './components/medical.note/initial.examination/billing/components/Braces/braces.component';
-import { DirectTimedCodesComponent } from './components/medical.note/initial.examination/billing/components/direct.timed.codes/direct-timed-codes.component';
-import { InspectionComponent } from './components/medical.note/initial.examination/objective/inspection/inspection.component';
-import { OmtComponent } from './components/medical.note/initial.examination/objective/omt/omt.component';
 import { MultipleTextInputComponent } from './components/medical.note/custom.input/profile/multiple.input/multiple-text-input.component';
-import { ObjectiveOMTTestComponent } from './components/medical.note/initial.examination/objective/omt.test/test.control/objective-omttest.component';
 import { WalkTestComponent } from './components/medical.note/custom.input/profile/observation/walk.test/walk-test.component';
-import { RangeOfMotionComponent } from './components/medical.note/initial.examination/objective/range.of.motion/range-of-motion.component';
-import { RomComponent } from './components/medical.note/initial.examination/objective/arom.prom/rom.component';
-import { StrengthComponent } from './components/medical.note/initial.examination/objective/strength/strength.component';
-import { TissueTensionUpperComponent } from './components/medical.note/initial.examination/objective/strength/components/selective.tissue.tension.upper/tissue-tension-upper.component';
-import { GripComponent } from './components/medical.note/initial.examination/objective/strength/components/grip/grip.component';
-import { ChildGripComponent } from './components/medical.note/initial.examination/objective/strength/components/sub.grip/child-grip.component';
-import { UpperBodyMyofascialTestComponent } from './components/medical.note/initial.examination/objective/strength/components/neurac.stability.test/upper.body.myofascial.test/upper-body-myofascial-test.component';
-import { LowerBodyMyofascialTestComponent } from './components/medical.note/initial.examination/objective/strength/components/neurac.stability.test/lower.body.myofascial.tests/lower-body-myofascial-test.component';
-import { MovementsTestComponent } from './components/medical.note/initial.examination/objective/strength/components/movements.test/movements-test.component';
-import { GrossMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/gross.muscle.test/gross-muscle-test.component';
-import { ManualMuscleTestComponent } from './components/medical.note/initial.examination/objective/strength/components/manual.muscle.test/manual-muscle-test.component';
-import { NeuroVascularComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/neuro-vascular.component';
-import { VertebralArteryComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
-import { NeuroVascularRightLeftComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
-import { SemmesWeinsteinUpperComponent } from './components/medical.note/initial.examination/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
-import { SpecialTestsComponent } from './components/medical.note/initial.examination/objective/special.tests/special-tests.component';
-import { SpecialTestsRightLeftSelectComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.select/special-tests-right-left-select.component';
-import { SpecialTestsRightLeftCheckComponent } from './components/medical.note/initial.examination/objective/special.tests/components/special.tests.right.left.check/special-tests-right-left-check.component';
-import { MaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/material.handling/material-handling.component';
-import { NonMaterialHandlingComponent } from './components/medical.note/initial.examination/objective/special.tests/components/non.material.handling/non-material-handling.component';
-import { PalpationComponent } from './components/medical.note/initial.examination/objective/palpation/palpation.component';
+
 import { DailyNoteComponent } from './components/medical.note/daily.note/daily-note.component';
+import { BasicInformationComponent } from './components/medical.note/components/subjective/basic/basic-information.component';
+import { IcdtenComponent } from './components/medical.note/components/subjective/basic/icd10/icdten.component';
+import { CurrentFunvtionlimitComponent } from './components/medical.note/components/subjective/current.function.limit/current-funvtionlimit.component';
+import { MedicalHistoryComponent } from './components/medical.note/components/subjective/medical.history/medical-history.component';
+import { PainComponent } from './components/medical.note/components/subjective/pain/pain.component';
+import { PainEvaluationComponent } from './components/medical.note/components/subjective/pain/pain.evaluation/pain-evaluation.component';
+import { PriorLevelFunctionComponent } from './components/medical.note/components/subjective/prior.level.function/prior-level-function.component';
+import { SubjectiveComponent } from './components/medical.note/components/subjective/subjective.component';
+import { AssessmentComponent } from './components/medical.note/components/assessment/assessment.component';
+import { RomComponent } from './components/medical.note/components/objective/arom.prom/rom.component';
+import { InspectionComponent } from './components/medical.note/components/objective/inspection/inspection.component';
+import { NeuroVascularRightLeftComponent } from './components/medical.note/components/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
+import { SemmesWeinsteinUpperComponent } from './components/medical.note/components/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
+import { VertebralArteryComponent } from './components/medical.note/components/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
+import { NeuroVascularComponent } from './components/medical.note/components/objective/neuro.vascular/neuro-vascular.component';
+import { ObjectiveComponent } from './components/medical.note/components/objective/objective.component';
+import { ObservationComponent } from './components/medical.note/components/objective/observation/observation.component';
+import { ObjectiveOMTTestComponent } from './components/medical.note/components/objective/omt.test/test.control/objective-omttest.component';
+import { OmtComponent } from './components/medical.note/components/objective/omt/omt.component';
+import { PalpationComponent } from './components/medical.note/components/objective/palpation/palpation.component';
+import { RangeOfMotionComponent } from './components/medical.note/components/objective/range.of.motion/range-of-motion.component';
+import { MaterialHandlingComponent } from './components/medical.note/components/objective/special.tests/components/material.handling/material-handling.component';
+import { NonMaterialHandlingComponent } from './components/medical.note/components/objective/special.tests/components/non.material.handling/non-material-handling.component';
+import { SpecialTestsRightLeftCheckComponent } from './components/medical.note/components/objective/special.tests/components/special.tests.right.left.check/special-tests-right-left-check.component';
+import { SpecialTestsRightLeftSelectComponent } from './components/medical.note/components/objective/special.tests/components/special.tests.right.left.select/special-tests-right-left-select.component';
+import { SpecialTestsComponent } from './components/medical.note/components/objective/special.tests/special-tests.component';
+import { GripComponent } from './components/medical.note/components/objective/strength/components/grip/grip.component';
+import { GrossMuscleTestComponent } from './components/medical.note/components/objective/strength/components/gross.muscle.test/gross-muscle-test.component';
+import { ManualMuscleTestComponent } from './components/medical.note/components/objective/strength/components/manual.muscle.test/manual-muscle-test.component';
+import { MovementsTestComponent } from './components/medical.note/components/objective/strength/components/movements.test/movements-test.component';
+import { LowerBodyMyofascialTestComponent } from './components/medical.note/components/objective/strength/components/neurac.stability.test/lower.body.myofascial.tests/lower-body-myofascial-test.component';
+import { UpperBodyMyofascialTestComponent } from './components/medical.note/components/objective/strength/components/neurac.stability.test/upper.body.myofascial.test/upper-body-myofascial-test.component';
+import { TissueTensionUpperComponent } from './components/medical.note/components/objective/strength/components/selective.tissue.tension.upper/tissue-tension-upper.component';
+import { ChildGripComponent } from './components/medical.note/components/objective/strength/components/sub.grip/child-grip.component';
+import { StrengthComponent } from './components/medical.note/components/objective/strength/strength.component';
+import { BillingComponent } from './components/medical.note/components/billing/billing.component';
+import { BracesComponent } from './components/medical.note/components/billing/components/Braces/braces.component';
+import { CastsComponent } from './components/medical.note/components/billing/components/Casts/casts.component';
+import { DirectTimedCodesComponent } from './components/medical.note/components/billing/components/direct.timed.codes/direct-timed-codes.component';
+import { NerveConductionStudiesComponent } from './components/medical.note/components/billing/components/nerve.conduction.studies/nerve-conduction-studies.component';
+import { OtherTreatmentProceduresComponent } from './components/medical.note/components/billing/components/other.treatment.procedures/other-treatment-procedures.component';
+import { RespiratoryComponent } from './components/medical.note/components/billing/components/respiratory/respiratory.component';
+import { SplintsOrthoticsComponent } from './components/medical.note/components/billing/components/splints.orthotics/splints-orthotics.component';
+import { SuppliesComponent } from './components/medical.note/components/billing/components/supplies/supplies.component';
+import { UntimedCodesComponent } from './components/medical.note/components/billing/components/untimedCodes/untimed-codes.component';
+import { CalendarMonthComponent } from './components/medical.note/components/billing/components/calendar.month/calendar-month.component';
+import { ModalitiesComponent } from './components/medical.note/components/plan/components/modalities/modalities.component';
+import { ProceduresComponent } from './components/medical.note/components/plan/components/procedures/procedures.component';
+import { SpecialtiesComponent } from './components/medical.note/components/plan/components/specialties/specialties.component';
+import { PlanComponent } from './components/medical.note/components/plan/plan.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -188,6 +190,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MatStepperModule,
     MatRadioModule,
     TableModule,
+    CalloutModule ,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]

@@ -172,14 +172,26 @@
         </c-tab-content>
     </c-card-body>
 </c-card>
-<!-- Initial Examination -->
+
 <span *ngIf="patientRecord ===false">
     <c-card class="mb-3 ustify-content-center">
-        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination'" (back)="handleBackAction()"
-            [medicalNoteId]="toBeCompeleteMedicalNoteId" [caseId]="case.id"></initial-examination>
-        <daily-note *ngIf="patientRecordAction ==='Add Daily Note'" (back)="handleBackAction()"
-            [caseId]="case.id"></daily-note>
+        <!-- Initial Examination -->
+        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination' && medicalNoteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"></initial-examination>
+        <!-- Daily Note -->
+        <daily-note *ngIf="patientRecordAction ==='Add Daily Note' && medicalNoteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId"></daily-note>
     </c-card>
+    <span *ngIf="patientRecordAction ==='ERROR_FINALIZE'">
+        <c-callout color="danger">
+            {{errorMessage}}
+        </c-callout>
+        <div class="button-container m-2">
+            <button cButton color="primary" variant="outline" size="sm" (click)="handleBackAction()">
+                Back to patient records
+            </button>
+        </div>
+    </span>
 </span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
