@@ -184,17 +184,18 @@
         <!--Progress Note-->
         <progress-note *ngIf="patientRecordAction ==='Progress Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
+        <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge'"></quick-discharge-note>
     </c-card>
-    <span *ngIf="patientRecordAction ==='ERROR_FINALIZE'">
-        <c-callout color="danger">
+    <span *ngIf=" patientRecordAction==='ERROR_FINALIZE'">
+        <c-callout color=" danger">
             {{errorMessage}}
-        </c-callout>
-        <div class="button-container m-2">
-            <button cButton color="primary" variant="outline" size="sm" (click)="handleBackAction()">
-                Back to patient records
-            </button>
-        </div>
-    </span>
+            </c-callout>
+            <div class="button-container m-2">
+                <button cButton color="primary" variant="outline" size="sm" (click)="handleBackAction()">
+                    Back to patient records
+                </button>
+            </div>
+</span>
 </span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>

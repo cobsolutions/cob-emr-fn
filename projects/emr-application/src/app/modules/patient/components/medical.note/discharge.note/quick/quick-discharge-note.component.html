@@ -1,1 +1,17 @@
-<p>quick-discharge-note works!</p>
+<form [formGroup]="dischargeForm" class="form-container">
+    <div class="form-group">
+        <label for="discharge-date">Date of Discharge:</label>
+        <input cFormControl  type="date" formControlName="dischargeDate" sizing="sm"style="max-width:193px;"/>
+    </div>
+
+    <div class="form-group">
+        <label for="visits">Number of Visits:</label>
+        <input type="number" formControlName="numberOfVisits" />
+    </div>
+
+    <div class="form-group">
+        <label>aaa, eric has been discharged from our care for the following reasons:</label>
+        <textarea formControlName="reason" rows="8"></textarea>
+        <span class="required">Required</span>
+    </div>
+</form>
