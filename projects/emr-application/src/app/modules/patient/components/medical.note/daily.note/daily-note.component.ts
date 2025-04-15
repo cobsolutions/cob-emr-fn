@@ -29,7 +29,6 @@ export class DailyNoteComponent implements OnInit {
       assessment: this.fb.group({}),
       planOfCare: this.fb.group({}),
     });
-    console.log(this.medicalNoteId)
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.medicalNoteSOAP = data
