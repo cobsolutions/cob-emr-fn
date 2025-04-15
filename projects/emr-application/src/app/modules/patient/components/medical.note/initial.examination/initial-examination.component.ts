@@ -91,7 +91,6 @@ export class InitialExaminationComponent implements OnInit {
       billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
       
     }
-    console.log(JSON.stringify(medicalNoteRequest))
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
     })
