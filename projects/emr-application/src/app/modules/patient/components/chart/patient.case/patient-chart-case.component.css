@@ -3,3 +3,8 @@ label {
     align-items: center;
     height: 100%;
 }
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+  }

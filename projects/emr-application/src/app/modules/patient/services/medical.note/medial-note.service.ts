@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MedicalNoteRequest } from '../../models/medical.note/medical.note.request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedialNoteService {
+  
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'
+  public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   constructor(private httpClient: HttpClient) { }
   find(section: string) {
     var url: string = this.baseUrl + "/find/section/" + section;
@@ -33,8 +35,8 @@ export class MedialNoteService {
     var url = this.baseUrl + '/action/delete/id/' + id
     return this.httpClient.delete(`${url}`)
   }
-  findMedicalNoteType(id: number, type: string) {
-    var url = this.baseUrl + '/action/find/id/' + id + '/type/' + type
+  findMedicalNoteType(id: number) {
+    var url = this.baseUrl + '/action/find/id/' + id;
     return this.httpClient.get(`${url}`)
   }
   draft(request: MedicalNoteRequest) {
