@@ -17,6 +17,7 @@ export class ObjectiveComponent implements OnInit {
   selectedProfile: any
   profiles: Observable<ObjectiveProfile[]>
   @Input() objectiveData: any
+  @Input() isNotInitialExaminationNote: boolean = false
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]

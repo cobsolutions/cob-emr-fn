@@ -4,8 +4,8 @@
             <strong>Examination Profile</strong>
         </c-card-header>
         <c-card-body>
-            <select id="profile-select" cSelect (change)="selectProfile()" 
-            [(ngModel)]="selectedProfile">
+            <select id="profile-select" cSelect (change)="selectProfile()" [(ngModel)]="selectedProfile"
+                [disabled]="isNotInitialExaminationNote">
                 <option disabled selected value="null">Select Examination Profile</option>
                 <option *ngFor="let profile of profiles | async" [value]="profile.name">
                     {{ profile.name }}
@@ -82,8 +82,7 @@
     <c-card class="mb-2">
         <c-card-header>Palpation</c-card-header>
         <c-card-body>
-            <palpation (formReady)="setChildForm('palpation', $event)"
-                *ngIf="objectiveCategoriesfields['palpation']"
+            <palpation (formReady)="setChildForm('palpation', $event)" *ngIf="objectiveCategoriesfields['palpation']"
                 [fields]="objectiveCategoriesfields['palpation']"></palpation>
         </c-card-body>
     </c-card>
