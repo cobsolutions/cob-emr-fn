@@ -87,6 +87,7 @@ import { ModalitiesComponent } from './components/medical.note/components/plan/c
 import { ProceduresComponent } from './components/medical.note/components/plan/components/procedures/procedures.component';
 import { SpecialtiesComponent } from './components/medical.note/components/plan/components/specialties/specialties.component';
 import { PlanComponent } from './components/medical.note/components/plan/plan.component';
+import { ProgressNoteComponent } from './components/medical.note/progress.note/progress-note.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -176,6 +177,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     NonMaterialHandlingComponent,
     PalpationComponent,
     DailyNoteComponent,
+    ProgressNoteComponent,
   ],
   imports: [
     CommonModule,
