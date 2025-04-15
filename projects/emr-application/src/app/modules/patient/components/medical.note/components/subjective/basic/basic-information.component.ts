@@ -34,6 +34,9 @@ export class BasicInformationComponent implements OnInit {
         case 'init_exam':
           this.prepareFields();
           break;
+        case 'progress':
+          this.prepareFields();
+          break;
       }
     })
 
