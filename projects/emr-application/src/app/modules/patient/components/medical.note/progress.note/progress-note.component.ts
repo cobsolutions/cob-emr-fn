@@ -1,6 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -44,7 +45,22 @@ export class ProgressNoteComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-  private draft() { }
+  private draft() {
+    var createdNote: any = this.getAllFormValues(this.progressNoteForm)
+    var medicalNoteRequest: MedicalNoteRequest = {
+      caseId: this.caseId,
+      id: this.medicalNoteId,
+      subjective: createdNote.subjective,
+      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
+      assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
+      planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
+      billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
+
+    }
+    this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
+      this.backtoPatientRecordActions();
+    })
+  }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
     event.selectedIndex
