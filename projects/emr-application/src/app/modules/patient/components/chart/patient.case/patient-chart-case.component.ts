@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import * as moment from 'moment';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -12,7 +11,6 @@ import { PatientCase } from '../../../models/case/patient.case';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
-import { CancelNoShowService } from '../../../services/appointment/cancel-no-show.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 

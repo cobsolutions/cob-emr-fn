@@ -182,7 +182,7 @@
         <daily-note *ngIf="patientRecordAction ==='Add Daily Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></daily-note>
         <!--Progress Note-->
-        <progress-note *ngIf="patientRecordAction ==='Progress Note'" (back)="handleBackAction()"
+        <progress-note *ngIf="patientRecordAction ==='Progress Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
     </c-card>
     <span *ngIf="patientRecordAction ==='ERROR_FINALIZE'">

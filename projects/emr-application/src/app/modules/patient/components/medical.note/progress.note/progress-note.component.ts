@@ -22,7 +22,7 @@ export class ProgressNoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.medialNoteService.noteType$.next('progress')
-    this.visitedSteps = [true, false, false, false,false]
+    this.visitedSteps = [true, false, false, false, false]
     this.progressNoteForm = this.fb.group({
       subjective: this.fb.group({}),
       objective: this.fb.group({}),
@@ -30,6 +30,11 @@ export class ProgressNoteComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
+    if (this.medicalNoteId !== undefined)
+      this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.medicalNoteSOAP = data
+        console.log(JSON.stringify(this.medicalNoteSOAP))
+      })
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -40,7 +45,7 @@ export class ProgressNoteComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-  private draft() {}
+  private draft() { }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
     event.selectedIndex
