@@ -25,23 +25,22 @@
             </mat-step>
             <mat-step completed="true" [stepControl]="progressNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
-                <strong>Assessment</strong>
-                <!-- <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
-                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment> -->
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
+                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="progressNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
                 <strong>Plan Of Care</strong>
-                <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare">
-                </plan> -->
+                </plan>
             </mat-step>
             <mat-step completed="true" [stepControl]="progressNoteForm.get('billing')!" formGroupName="billing">
                 <ng-template matStepLabel>Billing</ng-template>
                 <strong>Billing</strong>
-                <!-- <billing [stepper]="stepper" [parentForm]="progressNoteForm"
-                    (formReady)="setChildForm('objective', $event)" *ngIf="visitedSteps[1]"
-                    [billingData]="medicalNoteSOAP?.objective"></billing> -->
+                <billing [stepper]="stepper" [parentForm]="progressNoteForm"
+                    (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"
+                    [billingData]="medicalNoteSOAP?.billing"></billing>
             </mat-step>
         </mat-stepper>
     </form>

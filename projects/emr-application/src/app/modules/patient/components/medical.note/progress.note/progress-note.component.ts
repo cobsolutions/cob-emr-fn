@@ -33,7 +33,6 @@ export class ProgressNoteComponent implements OnInit {
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.medicalNoteSOAP = data
-        console.log(JSON.stringify(this.medicalNoteSOAP))
       })
   }
   soapActions(action: string) {
