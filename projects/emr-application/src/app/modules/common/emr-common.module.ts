@@ -42,6 +42,8 @@ import { DisableInputDirective } from './directives/permissions/disable-input.di
 import { DisableDateRangePickerDirective } from './directives/permissions/disable.date.range.picker.directive';
 import { ReadonlyInputDirective } from './directives/permissions/readonly-input.directive';
 import { MultiSelectDisableDirective } from './directives/permissions/multi-select-disable.directive';
+import { HideControlDirective } from './directives/permissions/hide.input/hide-control.directive';
+import { HideDivDirective } from './directives/permissions/hide.div/hide-div.directive';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
@@ -64,7 +66,9 @@ const APP_COMMON_DIRECTIVES = [
   DisableInputDirective,
   DisableDateRangePickerDirective,
   ReadonlyInputDirective,
-  MultiSelectDisableDirective
+  MultiSelectDisableDirective,
+  HideControlDirective,
+  HideDivDirective
 ]
 const COREUI_MODULES = [
   AvatarModule,
@@ -96,6 +100,8 @@ const COREUI_MODULES = [
     ...APP_COMMON_PIPES,
     ...APP_COMMON_DIRECTIVES,
     ViewAddressComponent,
+    HideControlDirective,
+    HideDivDirective,
   ],
 
   imports: [

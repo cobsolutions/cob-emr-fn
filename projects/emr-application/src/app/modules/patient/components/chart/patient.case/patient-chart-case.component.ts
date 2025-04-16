@@ -6,10 +6,12 @@ import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
 import { AppointmentService } from '../../../../scheduler/service/appointment.service';
+import { Role } from '../../../../security/model/role';
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { QuickDischargeRequest } from '../../../models/medical.note/quick.discharge.request';
+
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
@@ -36,6 +38,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
   errorMessage: string;
+  componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE ];
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,

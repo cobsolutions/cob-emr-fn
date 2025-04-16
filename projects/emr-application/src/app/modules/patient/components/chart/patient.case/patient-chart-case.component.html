@@ -59,17 +59,20 @@
             <c-col [sm]="12">
                 <div class="d-flex justify-content-end">
                     <div class="p-2 d-flex align-items-center gap-2">
-                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;">Patient
+                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;"
+                            hide-control [componentRole]="componentRole">Patient
                             Record Actions:</label>
                         <c-input-group class="mb-3">
-                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm">
+                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
+                                [componentRole]="componentRole">
                                 <option [value]="action"
                                     *ngFor="let action of case.patientRecordActions; let i = index">
                                     {{ action }}
                                 </option>
                             </select>
                             <button cButton color="primary" variant="outline" size="sm"
-                                (click)="executeAction(patientActionSelect.value)">
+                                (click)="executeAction(patientActionSelect.value)" hide-control
+                                [componentRole]="componentRole">
                                 <svg cIcon name="cilArrowCircleRight"></svg>
                             </button>
                         </c-input-group>
