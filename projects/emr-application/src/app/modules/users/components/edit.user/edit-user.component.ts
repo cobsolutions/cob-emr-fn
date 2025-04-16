@@ -23,7 +23,7 @@ import { ClinicalUserService } from '../../services/clinical/clinical-user.servi
 export class EditUserComponent implements OnInit {
   @Input() uuid: string
   @Input() userType: string
-  @Input()componentRole: string[]
+  @Input() componentRole: string[]
   @ViewChild('editUserRoles') editUserRoles: SmartTableComponent;
   @Output() changeVisibility = new EventEmitter<string>()
   isValidRoles: boolean = true;
@@ -101,8 +101,13 @@ export class EditUserComponent implements OnInit {
   }
   private populateRoles() {
     this.editUserRoles.items.forEach((item: any) => {
-      var scope:string = this.user.roleScope.find(roleScope => roleScope.role === item.name).scope
-      item.scope = scope
+      var scope: any = this.user.roleScope.find(roleScope => roleScope.role === item.name).scope
+      if (scope === 'true')
+        item.scope = true
+      else if (scope === 'false')
+        item.scope = false
+      else
+        item.scope = scope
     })
   }
   private populateClinics(user: User) {
@@ -193,5 +198,13 @@ export class EditUserComponent implements OnInit {
       this.filteredRoles = [...this.roles];
     }
     this.roles$ = of(this.filteredRoles)
+  }
+  checkNonMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return !medicalList.includes(value)
+  }
+  checkMedical(value: string) {
+    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
+    return medicalList.includes(value)
   }
 }
