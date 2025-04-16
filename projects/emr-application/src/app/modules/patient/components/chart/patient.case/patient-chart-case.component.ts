@@ -129,13 +129,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
 
-    // this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
-    //   this.medicalNoteId = medicalNoteId;
-    //   this.errorMessage = undefined
-    // }, error => {
-    //   this.patientRecordAction = 'ERROR_FINALIZE';
-    //   this.errorMessage = error.error.message;
-    // })
+    this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
+      this.medicalNoteId = medicalNoteId;
+      this.errorMessage = undefined
+    }, error => {
+      this.patientRecordAction = 'ERROR_FINALIZE';
+      this.errorMessage = error.error.message;
+    })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string) {
     if (val === 'View Reason')

@@ -1,1 +1,47 @@
-<p>full-discharge-note works!</p>
+<c-container fluid="true">
+    <div class="button-container m-2">
+        <!-- <button (click)="backtoPatientRecordActions()" class="btn btn-link">Back to patient records</button> -->
+        <c-input-group class="mb-3" style="max-width: 225px;">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm">
+                <option value="back">Back to patient records</option>
+                <option value="draft">Save as draft</option>
+            </select>
+            <button cButton color="primary" variant="outline" size="sm" (click)="soapActions(soapActionList.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+            </button>
+        </c-input-group>
+    </div>
+    <form [formGroup]="dischargeNoteForm" *ngIf="dischargeNoteForm">
+        <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
+            <mat-step [stepControl]="dischargeNoteForm.get('subjective')!" completed="true" formGroupName="subjective">
+                <ng-template matStepLabel>Subjective</ng-template>
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)" *ngIf="visitedSteps[0]"
+                    [subjectiveData]="medicalNoteSOAP?.subjective"></subjective>
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dischargeNoteForm.get('objective')!" formGroupName="objective">
+                <ng-template matStepLabel>Objective</ng-template>
+                <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"
+                    [objectiveData]="medicalNoteSOAP?.objective" [isNotInitialExaminationNote]="true"></objective>
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dischargeNoteForm.get('assessment')!" formGroupName="assessment">
+                <ng-template matStepLabel>Assessment</ng-template>
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
+                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment>
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dischargeNoteForm.get('planOfCare')!" formGroupName="planOfCare">
+                <ng-template matStepLabel>Plan</ng-template>
+                <strong>Plan Of Care</strong>
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                    [planData]="medicalNoteSOAP?.planOfCare">
+                </plan>
+            </mat-step>
+            <mat-step completed="true" [stepControl]="dischargeNoteForm.get('billing')!" formGroupName="billing">
+                <ng-template matStepLabel>Billing</ng-template>
+                <strong>Billing</strong>
+                <billing [stepper]="stepper" [parentForm]="dischargeNoteForm"
+                    (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"
+                    [billingData]="medicalNoteSOAP?.billing"></billing>
+            </mat-step>
+        </mat-stepper>
+    </form>
+</c-container>
