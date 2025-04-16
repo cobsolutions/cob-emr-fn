@@ -88,6 +88,8 @@ import { ProceduresComponent } from './components/medical.note/components/plan/c
 import { SpecialtiesComponent } from './components/medical.note/components/plan/components/specialties/specialties.component';
 import { PlanComponent } from './components/medical.note/components/plan/plan.component';
 import { ProgressNoteComponent } from './components/medical.note/progress.note/progress-note.component';
+import { QuickDischargeNoteComponent } from './components/medical.note/discharge.note/quick/quick-discharge-note.component';
+import { FullDischargeNoteComponent } from './components/medical.note/discharge.note/full/full-discharge-note.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -178,6 +180,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PalpationComponent,
     DailyNoteComponent,
     ProgressNoteComponent,
+    QuickDischargeNoteComponent,
+    FullDischargeNoteComponent,
   ],
   imports: [
     CommonModule,

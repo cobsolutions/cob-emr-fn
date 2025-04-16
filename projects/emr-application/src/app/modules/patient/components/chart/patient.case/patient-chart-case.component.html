@@ -184,9 +184,14 @@
         <!--Progress Note-->
         <progress-note *ngIf="patientRecordAction ==='Progress Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
+        <!--Quick Discharge Note-->
+        <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"></quick-discharge-note>
+        <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.id"></full-discharge-note>
     </c-card>
-    <span *ngIf="patientRecordAction ==='ERROR_FINALIZE'">
-        <c-callout color="danger">
+    <span *ngIf=" patientRecordAction==='ERROR_FINALIZE'">
+        <c-callout color=" danger">
             {{errorMessage}}
         </c-callout>
         <div class="button-container m-2">

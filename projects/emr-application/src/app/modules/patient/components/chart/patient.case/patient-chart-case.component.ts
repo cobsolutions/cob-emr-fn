@@ -9,6 +9,7 @@ import { AppointmentService } from '../../../../scheduler/service/appointment.se
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
+import { QuickDischargeRequest } from '../../../models/medical.note/quick.discharge.request';
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
@@ -101,6 +102,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       medicalNoteType = "DAILY_NOTE"
     if (val === 'Progress Note')
       medicalNoteType = "PROGRESS_NOTE"
+    if (val === 'Quick Discharge')
+      medicalNoteType = "QUICK_DISCHARGE_NOTE"
+    if (val === 'Discharge')
+      medicalNoteType = "DISCHARGE_NOTE"
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: caseId,
       noteType: medicalNoteType,
@@ -116,6 +121,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       planOfCare: {},
       billing: {}
     }
+    if (val === 'Quick Discharge') {
+      var quickDischargeRequest: QuickDischargeRequest = {
+        dischargeDate: 0,
+        numberOfVisits: 0
+      }
+      medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
+    }
+
     this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
       this.medicalNoteId = medicalNoteId;
       this.errorMessage = undefined
@@ -149,11 +162,18 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     })
   }
   private completeMedicalNote(id: number, status: string) {
+    console.log(status)
     this.patientRecord = false
     this.medicalNoteId = id;
     if (status === 'Initial Evaluation')
       this.patientRecordAction = 'Add Initial Examination';
     if (status === 'Daily Note')
       this.patientRecordAction = 'Add Daily Note';
+    if (status === 'Progress Note')
+      this.patientRecordAction = 'Progress Note';
+    if (status === 'Quick Discharge')
+      this.patientRecordAction = 'Quick Discharge';
+    if (status === 'Discharge Note')
+      this.patientRecordAction = 'Discharge';
   }
 }
