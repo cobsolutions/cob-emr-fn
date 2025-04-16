@@ -7,6 +7,7 @@ import { Appointment } from '../../../../scheduler/models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
 import { AppointmentService } from '../../../../scheduler/service/appointment.service';
 import { Role } from '../../../../security/model/role';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
@@ -38,11 +39,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
   errorMessage: string;
-  componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE ];
+  componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
-    private appointmentService: AppointmentService) { super() }
+    private appointmentService: AppointmentService,
+    private loggedInService: LoggedInService) { super() }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
@@ -93,6 +95,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       })
     )
   }
+  private getLoggedDoctor(): string {
+    return this.loggedInService.getLoggedUser().lastName + ' ' + this.loggedInService.getLoggedUser().firstName
+  }
   executeAction(val: string) {
     this.patientRecord = false;
     this.patientRecordAction = val;
@@ -112,7 +117,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: caseId,
       noteType: medicalNoteType,
-      createdBy: "Mahmoud shalaby",
+      createdBy: this.getLoggedDoctor(),
       subjective: {
         basic: {},
         pain: {},
