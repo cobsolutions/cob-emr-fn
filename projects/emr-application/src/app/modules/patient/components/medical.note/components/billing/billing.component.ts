@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
+import { filter, switchMap } from 'rxjs';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
@@ -29,10 +31,19 @@ export class BillingComponent implements OnInit {
 
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private dotorUserService:DotorUserService) { }
 
   ngOnInit(): void {
-    console.log(this.creator)
+    this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => {
+        const logged: string = this.loggedInService.getLoggedUser().uuid;
+        return this.dotorUserService.findAuthProviderToFinalize(clinicId,logged)
+      })
+    ).subscribe(doc=>{
+      console.log(JSON.stringify(doc))
+    })
     this.medialNoteService.find('billing').subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
