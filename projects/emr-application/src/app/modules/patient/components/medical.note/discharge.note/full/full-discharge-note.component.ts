@@ -1,6 +1,8 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
+import { filter } from 'rxjs';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
@@ -22,7 +24,9 @@ export class FullDischargeNoteComponent implements OnInit {
   noteCreator: string
   noteFinalizr: string
   type: MedicalNoteType = MedicalNoteType.Discharge_Note;
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
+  constructor(private fb: FormBuilder
+    , private medialNoteService: MedialNoteService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.medialNoteService.noteType$.next('discharge')
@@ -36,8 +40,11 @@ export class FullDischargeNoteComponent implements OnInit {
     });
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.noteCreator = data.createdBy;
+        this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
+    this.handleNoteFinalization()
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -48,7 +55,7 @@ export class FullDischargeNoteComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-  private draft() {
+  private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.dischargeNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
@@ -58,8 +65,11 @@ export class FullDischargeNoteComponent implements OnInit {
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
       billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
-
     }
+    return medicalNoteRequest;
+  }
+  private draft() {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel()
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
     })
@@ -87,5 +97,17 @@ export class FullDischargeNoteComponent implements OnInit {
       }
     });
     return values;
+  }
+  private handleNoteFinalization() {
+    this.medialNoteService.medicalNoteType.pipe(
+      filter(type => type !== null && type === MedicalNoteType.Discharge_Note),
+    ).subscribe(result => {
+      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
+      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
+        console.log('Note is finalized')
+        this.backtoPatientRecordActions();
+      })
+    })
   }
 }
