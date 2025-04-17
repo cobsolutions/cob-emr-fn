@@ -47,6 +47,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     private loggedInService: LoggedInService) { super() }
 
   ngOnInit(): void {
+    this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();

@@ -1,7 +1,10 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { filter } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
+import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -18,8 +21,12 @@ export class ProgressNoteComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
+  noteCreator: string
+  noteFinalizr: string
+  type: MedicalNoteType = MedicalNoteType.Progress_Note;
   constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService) { }
+    , private medialNoteService: MedialNoteService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.medialNoteService.noteType$.next('progress')
@@ -33,8 +40,11 @@ export class ProgressNoteComponent implements OnInit {
     });
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.noteCreator = data.createdBy;
+        this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
+    this.handleNoteFinalization()
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -45,7 +55,7 @@ export class ProgressNoteComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-  private draft() {
+  private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.progressNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
@@ -55,10 +65,25 @@ export class ProgressNoteComponent implements OnInit {
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
       billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
-
     }
+    return medicalNoteRequest;
+  }
+  private draft() {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
+    })
+  }
+  private handleNoteFinalization() {
+    this.medialNoteService.medicalNoteType.pipe(
+      filter(type => type !== null && type === MedicalNoteType.Progress_Note),
+    ).subscribe(result => {
+      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
+      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
+        console.log('Note is finalized')
+        this.backtoPatientRecordActions();
+      })
     })
   }
   onStepChange(event: StepperSelectionEvent): void {
