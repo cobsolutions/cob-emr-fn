@@ -142,8 +142,18 @@
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
-            [componentRole]="['forward-medical-note-role']">Forward</button>
+            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
             [componentRole]="['finalize-medical-note-role']" *ngIf="isAuthorizthedToFinalize()">Finalize</button>
     </div>
 </form>
+
+<c-modal id="foMN" [visible]="forwardVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Forward Medical Note To :</h3>
+        <button (click)="toggleFrowardModal()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        
+    </c-modal-body>
+</c-modal>

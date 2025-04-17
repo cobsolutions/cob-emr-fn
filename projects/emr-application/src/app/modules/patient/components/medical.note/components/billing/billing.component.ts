@@ -21,6 +21,7 @@ export class BillingComponent implements OnInit {
   @Input() creator: string
   @Input() noteFinalizr: string
   fields: any
+  forwardVisibility: boolean = false;
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
     { label: 'Progress Therapeutic Exercises', value: 'DN2' },
@@ -32,16 +33,16 @@ export class BillingComponent implements OnInit {
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
-    , private dotorUserService:DotorUserService) { }
+    , private dotorUserService: DotorUserService) { }
 
   ngOnInit(): void {
     this.loggedInService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null),
       switchMap(clinicId => {
         const logged: string = this.loggedInService.getLoggedUser().uuid;
-        return this.dotorUserService.findAuthProviderToFinalize(clinicId,logged)
+        return this.dotorUserService.findAuthProviderToFinalize(clinicId, logged)
       })
-    ).subscribe(doc=>{
+    ).subscribe(doc => {
       console.log(JSON.stringify(doc))
     })
     this.medialNoteService.find('billing').subscribe(fields => {
@@ -120,4 +121,8 @@ export class BillingComponent implements OnInit {
       return true;
     return false
   }
+  toggleFrowardModal() {
+    this.forwardVisibility = !this.forwardVisibility
+  }
+
 }
