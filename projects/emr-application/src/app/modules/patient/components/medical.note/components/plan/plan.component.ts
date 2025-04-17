@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
+import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
+import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 import { PlanStyles } from './styles/plan';
@@ -20,7 +21,13 @@ export class PlanComponent implements OnInit {
   frequencyOptions = ['Custom', 'Daily', 'Weekly'];
   durationOptions = ['Custom', '2 Weeks', '1 Month'];
   planOptions = ['Custom', 'Standard', 'Advanced'];
+  @Input() creator: string
+  @Input() noteFinalizr: string
+  @Input() noteType: MedicalNoteType
   @Input() planData: any
+  @Input() noteId: number
+  authorizthedToFinalize: boolean = false
+  forwardVisibility: boolean = false;
   procedures = [
     { label: 'Therapeutic Exercises', value: 'therapeuticExercises' },
     { label: 'Therapeutic Activity', value: 'therapeuticActivity' },
@@ -64,10 +71,13 @@ export class PlanComponent implements OnInit {
     { label: 'Acupuncture', value: 'acupuncture' },
     { label: 'Other', value: 'otherSpecialty' }
   ];
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService
+  constructor(private fb: FormBuilder,
+    private medialNoteService: MedialNoteService,
+    private loggedInService: LoggedInService
   ) { }
 
   ngOnInit(): void {
+    this.isAuthorizthedToFinalize()
     this.medialNoteService.find('plan').subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
@@ -93,5 +103,24 @@ export class PlanComponent implements OnInit {
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.planForm.setControl(section, formGroup);
+  }
+  finalize() {
+    this.medialNoteService.medicalNoteType.next(this.noteType)
+  }
+  isAuthorizthedToFinalize() {
+    const logged: string = this.loggedInService.getLoggedUser().uuid;
+    if (this.creator === logged && this.noteFinalizr === null)
+      this.authorizthedToFinalize = true;
+    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
+      this.authorizthedToFinalize = true;
+  }
+  toggleFrowardModal() {
+    this.forwardVisibility = !this.forwardVisibility
+  }
+  changeVisibility(event: string) {
+    if (event === 'close') {
+      this.forwardVisibility = false;
+      this.authorizthedToFinalize = false
+    }
   }
 }

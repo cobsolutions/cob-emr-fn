@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
@@ -105,10 +103,6 @@ export class BillingComponent implements OnInit {
     }
   }
   finalize() {
-    switch (this.noteType) {
-      case MedicalNoteType.Initial_Examination:
-        this.medialNoteService.medicalNoteType.next(MedicalNoteType.Initial_Examination)
-        break;
-    }
+    this.medialNoteService.medicalNoteType.next(this.noteType)
   }
 }

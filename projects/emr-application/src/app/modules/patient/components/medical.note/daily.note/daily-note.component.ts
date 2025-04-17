@@ -1,7 +1,10 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { filter } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
+import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 @Component({
   selector: 'daily-note',
@@ -18,7 +21,12 @@ export class DailyNoteComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
+  type: MedicalNoteType = MedicalNoteType.Daily_Note;
+  noteCreator: string
+  noteFinalizr: string
+  constructor(private fb: FormBuilder
+    , private medialNoteService: MedialNoteService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
     this.medialNoteService.noteType$.next('daily')
@@ -31,8 +39,11 @@ export class DailyNoteComponent implements OnInit {
     });
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.noteCreator = data.createdBy;
+        this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
+    this.handleNoteFinalization()
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -43,8 +54,7 @@ export class DailyNoteComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-
-  private draft() {
+  private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.dailyNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
@@ -53,9 +63,12 @@ export class DailyNoteComponent implements OnInit {
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
-
     }
-    this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
+    return medicalNoteRequest;
+  }
+  private draft() {
+    var medicalNote: MedicalNoteRequest = this.buildMedicalNoteModel()
+    this.medialNoteService.draft(medicalNote).subscribe(data => {
       this.backtoPatientRecordActions();
     })
   }
@@ -82,5 +95,17 @@ export class DailyNoteComponent implements OnInit {
       }
     });
     return values;
+  }
+  private handleNoteFinalization() {
+    this.medialNoteService.medicalNoteType.pipe(
+      filter(type => type !== null && type === MedicalNoteType.Daily_Note),
+    ).subscribe(result => {
+      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
+      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
+        console.log('Note is finalized')
+        this.backtoPatientRecordActions();
+      })
+    })
   }
 }
