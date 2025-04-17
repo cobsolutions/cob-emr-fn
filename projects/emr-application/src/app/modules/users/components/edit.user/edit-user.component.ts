@@ -68,6 +68,7 @@ export class EditUserComponent implements OnInit {
     this.roles$ = of(this.filteredRoles)
     this.clinicService.getByOrganizationId(this.loggedInService.getLoggedUser().organizationId)
       .subscribe((response: any) => {
+        console.log(response.records)
         this.clinics = response.records;
       })
     switch (this.userType) {
@@ -111,6 +112,7 @@ export class EditUserComponent implements OnInit {
     })
   }
   private populateClinics(user: User) {
+    console.log(this.clinics)
     this.clinics.forEach(clinic => {
       if (user.clinicIds.includes(Number(clinic.id)))
         clinic.selected = true;

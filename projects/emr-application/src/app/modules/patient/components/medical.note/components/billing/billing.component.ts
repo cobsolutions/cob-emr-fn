@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
+import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -21,8 +22,10 @@ export class BillingComponent implements OnInit {
   @Input() creator: string
   @Input() noteFinalizr: string
   @Input() noteId: number
+  @Input() noteType: MedicalNoteType
   fields: any
   forwardVisibility: boolean = false;
+
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
     { label: 'Progress Therapeutic Exercises', value: 'DN2' },
@@ -65,7 +68,7 @@ export class BillingComponent implements OnInit {
       this.formReady.emit(this.billingForm);
     })
   }
-  
+
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
     Object.keys(formGroup.controls).forEach((key) => {
@@ -99,6 +102,13 @@ export class BillingComponent implements OnInit {
     if (event === 'close') {
       this.forwardVisibility = false;
       this.authorizthedToFinalize = false
+    }
+  }
+  finalize() {
+    switch (this.noteType) {
+      case MedicalNoteType.Initial_Examination:
+        this.medialNoteService.medicalNoteType.next(MedicalNoteType.Initial_Examination)
+        break;
     }
   }
 }

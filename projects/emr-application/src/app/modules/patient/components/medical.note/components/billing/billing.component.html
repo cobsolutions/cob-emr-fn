@@ -143,7 +143,7 @@
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
             [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()"
             [componentRole]="['finalize-medical-note-role']" *ngIf="authorizthedToFinalize">Finalize</button>
     </div>
 </form>
