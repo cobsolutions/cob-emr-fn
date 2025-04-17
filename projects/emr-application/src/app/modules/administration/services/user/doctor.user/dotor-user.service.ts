@@ -33,4 +33,8 @@ export class DotorUserService extends BasePaginationService {
     var url = this.baseUrl + '/delete/uuid/' + uuid
     return this.httpClient.delete(url)
   }
+  findAuthProviderToFinalize(clinicId: number, uuid: string) {
+    var url = this.baseUrl + '/find/finalize/note/clinic/' + clinicId + '/user/' + uuid
+    return this.httpClient.delete(url)
+  }
 }
