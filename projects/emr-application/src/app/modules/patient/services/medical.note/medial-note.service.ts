@@ -8,7 +8,7 @@ import { MedicalNoteRequest } from '../../models/medical.note/medical.note.reque
   providedIn: 'root'
 })
 export class MedialNoteService {
-  
+
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'
   public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
@@ -52,5 +52,10 @@ export class MedialNoteService {
   findROMTests(name: string): Observable<any> {
     var url: string = this.baseUrl + "/action/find/rom/name/" + name
     return this.httpClient.get(url);
+  }
+  forward(note: number, uuid: string) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/action/forward/note/' + note + '/uuid/' + uuid;
+    return this.httpClient.put(`${url}`, { 'headers': headers })
   }
 }

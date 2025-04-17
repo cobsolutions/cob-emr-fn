@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'projects/emr-application/src/app/modules/administration/model/user/user';
 import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { filter, switchMap } from 'rxjs';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
   selector: 'forward-modal',
@@ -10,19 +11,22 @@ import { filter, switchMap } from 'rxjs';
   styleUrls: ['./forward-modal.component.css']
 })
 export class ForwardModalComponent implements OnInit {
-  onUserSelect() {
-    throw new Error('Method not implemented.');
-  }
+
   clinicalUsers: User[]
   selectedUserUuid: string;
   errorMessage: string = undefined
+  @Output() changeVisibility = new EventEmitter<string>()
+  @Input() noteId: number
+  clinicId: number;
   constructor(private loggedInService: LoggedInService
-    , private dotorUserService: DotorUserService) { }
+    , private dotorUserService: DotorUserService
+    , private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
     this.loggedInService.selectedClinic$.pipe(
       filter(clinicId => clinicId !== null),
       switchMap(clinicId => {
+        this.clinicId = clinicId;
         const logged: string = this.loggedInService.getLoggedUser().uuid;
         return this.dotorUserService.findAuthProviderToFinalize(clinicId, logged)
       })
@@ -36,5 +40,10 @@ export class ForwardModalComponent implements OnInit {
       }
     })
   }
-
+  onUserSelect() {
+    const logged: string = this.loggedInService.getLoggedUser().uuid;
+    this.medialNoteService.forward(this.noteId, this.selectedUserUuid).subscribe(() => {
+      this.changeVisibility.emit('close')
+    })
+  }
 }
