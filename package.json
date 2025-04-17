@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy-local.config.json --port 4300 --host=127.0.0.1",
+    "start": "ng serve",
+    "startlocal": "ng serve --proxy-config proxy-local.config.json --port 4300 --host=127.0.0.1",
     "build": "ng build",
     "build:copy-package-json": "copyfiles package.json projects/angular-calendar & copyfiles package.json projects/angular-calendar/schematics/ng-add",
     "build:lib": "ng build angular-calendar --configuration production",
