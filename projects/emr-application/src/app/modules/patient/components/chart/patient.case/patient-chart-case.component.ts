@@ -96,7 +96,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     )
   }
   private getLoggedDoctor(): string {
-    return this.loggedInService.getLoggedUser().lastName + ' ' + this.loggedInService.getLoggedUser().firstName
+    return this.loggedInService.getLoggedUser().uuid
   }
   executeAction(val: string) {
     this.patientRecord = false;

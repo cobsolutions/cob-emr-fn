@@ -144,6 +144,6 @@
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
             [componentRole]="['forward-medical-note-role']">Forward</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
-            [componentRole]="['finalize-medical-note-role']">Finalize</button>
+            [componentRole]="['finalize-medical-note-role']" *ngIf="isAuthorizthedToFinalize()">Finalize</button>
     </div>
 </form>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
@@ -15,6 +16,8 @@ export class BillingComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() billingData: any
+  @Input() creator: string
+  @Input() noteFinalizr: string
   fields: any
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
@@ -25,9 +28,11 @@ export class BillingComponent implements OnInit {
   ]
 
   constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService) { }
+    , private medialNoteService: MedialNoteService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    console.log(this.creator)
     this.medialNoteService.find('billing').subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
@@ -95,5 +100,13 @@ export class BillingComponent implements OnInit {
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.billingForm.setControl(section, formGroup);
+  }
+  isAuthorizthedToFinalize() {
+    const logged: string = this.loggedInService.getLoggedUser().uuid;
+    if (this.creator === logged && this.noteFinalizr === null)
+      return true;
+    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
+      return true;
+    return false
   }
 }

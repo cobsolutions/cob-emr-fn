@@ -20,6 +20,8 @@ export class InitialExaminationComponent implements OnInit {
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
   @Input() medicalNoteId: number
+  noteCreator: string
+  noteFinalizr: string
   @Input() caseId: number
   medicalNoteSOAP: any
   constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) {
@@ -35,9 +37,10 @@ export class InitialExaminationComponent implements OnInit {
       billing: this.fb.group({})
     });
     this.medialNoteService.noteType$.next('init_exam')
-    console.log(this.medicalNoteId)
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.noteCreator = data.createdBy;
+        this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
     else {
@@ -85,11 +88,11 @@ export class InitialExaminationComponent implements OnInit {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
-      objective:Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
+      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
       billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
-      
+
     }
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
