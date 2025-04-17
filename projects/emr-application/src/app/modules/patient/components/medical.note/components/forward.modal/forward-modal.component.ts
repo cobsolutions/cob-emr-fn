@@ -41,7 +41,6 @@ export class ForwardModalComponent implements OnInit {
     })
   }
   onUserSelect() {
-    const logged: string = this.loggedInService.getLoggedUser().uuid;
     this.medialNoteService.forward(this.noteId, this.selectedUserUuid).subscribe(() => {
       this.changeVisibility.emit('close')
     })
