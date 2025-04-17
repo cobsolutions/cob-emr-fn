@@ -2,6 +2,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
+import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -18,6 +19,9 @@ export class FullDischargeNoteComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
+  noteCreator: string
+  noteFinalizr: string
+  type: MedicalNoteType = MedicalNoteType.Discharge_Note;
   constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
