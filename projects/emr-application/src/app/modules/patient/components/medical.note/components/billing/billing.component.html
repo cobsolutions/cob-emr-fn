@@ -148,12 +148,12 @@
     </div>
 </form>
 
-<c-modal id="foMN" [visible]="forwardVisibility" size="xl" backdrop="static">
+<c-modal id="foMN" [visible]="forwardVisibility"  backdrop="static">
     <c-modal-header>
-        <h3 cModalTitle>Forward Medical Note To :</h3>
+        <strong>Forward Medical Note To :</strong>
         <button (click)="toggleFrowardModal()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        
+        <forward-modal *ngIf="forwardVisibility"></forward-modal>
     </c-modal-body>
 </c-modal>
