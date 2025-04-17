@@ -90,6 +90,7 @@ import { PlanComponent } from './components/medical.note/components/plan/plan.co
 import { ProgressNoteComponent } from './components/medical.note/progress.note/progress-note.component';
 import { QuickDischargeNoteComponent } from './components/medical.note/discharge.note/quick/quick-discharge-note.component';
 import { FullDischargeNoteComponent } from './components/medical.note/discharge.note/full/full-discharge-note.component';
+import { ForwardModalComponent } from './components/medical.note/components/forward.modal/forward-modal.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -182,6 +183,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ProgressNoteComponent,
     QuickDischargeNoteComponent,
     FullDischargeNoteComponent,
+    ForwardModalComponent,
   ],
   imports: [
     CommonModule,

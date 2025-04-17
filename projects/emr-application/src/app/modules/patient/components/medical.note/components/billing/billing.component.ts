@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
+import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
+import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -10,12 +11,19 @@ import { MedialNoteService } from '../../../../services/medical.note/medial-note
   styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
+
   @Input() parentForm: FormGroup
   billingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() billingData: any
+  @Input() creator: string
+  @Input() noteFinalizr: string
+  @Input() noteId: number
+  @Input() noteType: MedicalNoteType
   fields: any
+  forwardVisibility: boolean = false;
+
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
     { label: 'Progress Therapeutic Exercises', value: 'DN2' },
@@ -23,11 +31,13 @@ export class BillingComponent implements OnInit {
     { label: 'Anticipate Discharging Patient Next Visit', value: 'DN4' },
     { label: '(Type Below)', value: 'DNTB' },
   ]
-
+  authorizthedToFinalize: boolean = false
   constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService) { }
+    , private medialNoteService: MedialNoteService
+    , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.isAuthorizthedToFinalize()
     this.medialNoteService.find('billing').subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
@@ -56,27 +66,7 @@ export class BillingComponent implements OnInit {
       this.formReady.emit(this.billingForm);
     })
   }
-  next() {
-    var createdNote: any = this.getAllFormValues(this.parentForm)
-    console.log(JSON.stringify(createdNote))
-    this.create(createdNote)
-    this.stepper.next();
-  }
 
-  create(createdNote: any) {
-    var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: 58,
-      noteType: "INITIAL_EVALUATION",
-      createdBy: "Mahmoud shalaby",
-      subjective: createdNote.subjective,
-      assessment: createdNote.assessment,
-      planOfCare: createdNote.planOfCare,
-      billing: createdNote.billing
-    }
-    // this.medialNoteService.create(medicalNoteRequest).subscribe(result => {
-    //   console.log('created')
-    // })
-  }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
     Object.keys(formGroup.controls).forEach((key) => {
@@ -95,5 +85,24 @@ export class BillingComponent implements OnInit {
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.billingForm.setControl(section, formGroup);
+  }
+  isAuthorizthedToFinalize() {
+    const logged: string = this.loggedInService.getLoggedUser().uuid;
+    if (this.creator === logged && this.noteFinalizr === null)
+      this.authorizthedToFinalize = true;
+    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
+      this.authorizthedToFinalize = true;
+  }
+  toggleFrowardModal() {
+    this.forwardVisibility = !this.forwardVisibility
+  }
+  changeVisibility(event: string) {
+    if (event === 'close') {
+      this.forwardVisibility = false;
+      this.authorizthedToFinalize = false
+    }
+  }
+  finalize() {
+    this.medialNoteService.medicalNoteType.next(this.noteType)
   }
 }

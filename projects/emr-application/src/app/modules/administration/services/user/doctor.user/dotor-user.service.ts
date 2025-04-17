@@ -11,7 +11,8 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 })
 export class DotorUserService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'clinical/user'
-  constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
+  constructor(httpClient: HttpClient
+    , loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
   getDoctorUser(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return this.get(config$, this.baseUrl + "/find/clinicId/")
@@ -32,5 +33,9 @@ export class DotorUserService extends BasePaginationService {
   deleteDoctor(uuid: string) {
     var url = this.baseUrl + '/delete/uuid/' + uuid
     return this.httpClient.delete(url)
+  }
+  findAuthProviderToFinalize(clinicId: number, uuid: string) {
+    var url = this.baseUrl + '/find/finalize/note/clinic/' + clinicId + '/user/' + uuid
+    return this.httpClient.get(url)
   }
 }

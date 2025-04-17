@@ -47,6 +47,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     private loggedInService: LoggedInService) { super() }
 
   ngOnInit(): void {
+    this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();
@@ -96,7 +97,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     )
   }
   private getLoggedDoctor(): string {
-    return this.loggedInService.getLoggedUser().lastName + ' ' + this.loggedInService.getLoggedUser().firstName
+    return this.loggedInService.getLoggedUser().uuid
   }
   executeAction(val: string) {
     this.patientRecord = false;

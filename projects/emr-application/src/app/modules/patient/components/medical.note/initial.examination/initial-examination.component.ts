@@ -3,7 +3,10 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
+import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 
 @Component({
@@ -20,9 +23,14 @@ export class InitialExaminationComponent implements OnInit {
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
   @Input() medicalNoteId: number
+  noteCreator: string
+  noteFinalizr: string
   @Input() caseId: number
   medicalNoteSOAP: any
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) {
+  type: MedicalNoteType = MedicalNoteType.Initial_Examination;
+  constructor(private fb: FormBuilder,
+    private medialNoteService: MedialNoteService,
+    private loggedInService: LoggedInService) {
 
   }
   ngOnInit(): void {
@@ -35,13 +43,14 @@ export class InitialExaminationComponent implements OnInit {
       billing: this.fb.group({})
     });
     this.medialNoteService.noteType$.next('init_exam')
-    console.log(this.medicalNoteId)
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.noteCreator = data.createdBy;
+        this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
-    else {
-    }
+    this.handleNoteFinalization()
+
   }
   setFormValues(formGroup: FormGroup, data: any) {
     Object.keys(formGroup.controls).forEach(key => {
@@ -79,18 +88,21 @@ export class InitialExaminationComponent implements OnInit {
   backtoPatientRecordActions() {
     this.back.emit();
   }
-  draft() {
+  private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
-      objective:Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
+      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
       billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
-      
     }
+    return medicalNoteRequest;
+  }
+  draft() {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
     this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
       this.backtoPatientRecordActions();
     })
@@ -110,5 +122,18 @@ export class InitialExaminationComponent implements OnInit {
       }
     });
     return values;
+  }
+  private handleNoteFinalization() {
+    this.medialNoteService.medicalNoteType.pipe(
+      filter(type => type !== null && type === MedicalNoteType.Initial_Examination),
+    ).subscribe(result => {
+      console.log('handleNoteFinalization')
+      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
+      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
+        console.log('Not is finalized')
+        this.backtoPatientRecordActions();
+      })
+    })
   }
 }

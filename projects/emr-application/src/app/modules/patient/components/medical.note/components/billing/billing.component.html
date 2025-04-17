@@ -113,8 +113,8 @@
                 <c-col xs="8">
                     <strong>Supplies</strong>
                     <hr />
-                    <supplies (formReady)="setChildForm('supplies', $event)"
-                        [fields]="fields['Supplies']" [SuppliesData]="billingData?.supplies"></supplies>
+                    <supplies (formReady)="setChildForm('supplies', $event)" [fields]="fields['Supplies']"
+                        [SuppliesData]="billingData?.supplies"></supplies>
                 </c-col>
                 <c-col xs="4">
                     <strong>Splints/Orthotics</strong>
@@ -141,6 +141,20 @@
 
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control
+            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()"
+            [componentRole]="['finalize-medical-note-role']" *ngIf="authorizthedToFinalize">Finalize</button>
     </div>
 </form>
+
+<c-modal id="foMN" [visible]="forwardVisibility" backdrop="static">
+    <c-modal-header>
+        <strong>Forward Medical Note To :</strong>
+        <button (click)="toggleFrowardModal()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
+            [noteId]="noteId"></forward-modal>
+    </c-modal-body>
+</c-modal>
