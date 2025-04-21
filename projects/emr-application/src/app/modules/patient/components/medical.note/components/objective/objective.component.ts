@@ -14,7 +14,7 @@ export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
-  selectedProfile: any
+  selectedProfile: any = null
   profiles: Observable<ObjectiveProfile[]>
   @Input() objectiveData: any
   @Input() isNotInitialExaminationNote: boolean = false

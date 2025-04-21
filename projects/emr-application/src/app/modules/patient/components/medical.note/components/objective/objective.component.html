@@ -16,73 +16,69 @@
 </div>
 <div [formGroup]="objectiveForm" *ngIf="objectiveCategoriesfields">
     <!--Inspection-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['inspection']">
         <c-card-header>Inspection</c-card-header>
         <c-card-body>
-            <inspection (formReady)="setChildForm('inspection', $event)" *ngIf="objectiveCategoriesfields['inspection']"
+            <inspection (formReady)="setChildForm('inspection', $event)"
                 [fields]="objectiveCategoriesfields['inspection']"></inspection>
         </c-card-body>
     </c-card>
     <!--Outcome Measurement Tools-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['omt']">
         <c-card-header>Outcome Measurement Tools</c-card-header>
         <c-card-body>
-            <omt (formReady)="setChildForm('omt', $event)" *ngIf="objectiveCategoriesfields['omt']"
-                [fields]="objectiveCategoriesfields['omt']"></omt>
+            <omt (formReady)="setChildForm('omt', $event)" [fields]="objectiveCategoriesfields['omt']"></omt>
         </c-card-body>
     </c-card>
     <!--Observation-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['observation']">
         <c-card-header>Observation</c-card-header>
         <c-card-body>
             <observation (formReady)="setChildForm('observation', $event)"
-                *ngIf="objectiveCategoriesfields['observation']" [fields]="objectiveCategoriesfields['observation']">
+                [fields]="objectiveCategoriesfields['observation']">
             </observation>
         </c-card-body>
     </c-card>
     <!--Range of Motion-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['range_of_motion']">
         <c-card-header>Range of Motion</c-card-header>
         <c-card-body>
             <range-of-motion (formReady)="setChildForm('rangeOfMotion', $event)"
-                *ngIf="objectiveCategoriesfields['range_of_motion']"
                 [fields]="objectiveCategoriesfields['range_of_motion']"></range-of-motion>
         </c-card-body>
     </c-card>
     <!--Strength-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['strength']">
         <c-card-header>Strength</c-card-header>
         <c-card-body>
-            <strength (formReady)="setChildForm('strength', $event)" *ngIf="objectiveCategoriesfields['strength']"
-                [fields]="objectiveCategoriesfields['strength']"></strength>
+            <strength (formReady)="setChildForm('strength', $event)" [fields]="objectiveCategoriesfields['strength']">
+            </strength>
         </c-card-body>
     </c-card>
 
     <!--Neuro-Vascular-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['neuro_vascular']">
         <c-card-header>Neuro-Vascular</c-card-header>
         <c-card-body>
             <neuro-vascular (formReady)="setChildForm('neuroVascular', $event)"
-                *ngIf="objectiveCategoriesfields['neuro_vascular']"
                 [fields]="objectiveCategoriesfields['neuro_vascular']"></neuro-vascular>
         </c-card-body>
     </c-card>
 
     <!--Special Tests-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['special_tests']">
         <c-card-header>Special Tests</c-card-header>
         <c-card-body>
             <special-tests (formReady)="setChildForm('specialTest', $event)"
-                *ngIf="objectiveCategoriesfields['special_tests']"
                 [fields]="objectiveCategoriesfields['special_tests']"></special-tests>
         </c-card-body>
     </c-card>
 
     <!--Palpation-->
-    <c-card class="mb-2">
+    <c-card class="mb-2" *ngIf="objectiveCategoriesfields['palpation']">
         <c-card-header>Palpation</c-card-header>
         <c-card-body>
-            <palpation (formReady)="setChildForm('palpation', $event)" *ngIf="objectiveCategoriesfields['palpation']"
+            <palpation (formReady)="setChildForm('palpation', $event)"
                 [fields]="objectiveCategoriesfields['palpation']"></palpation>
         </c-card-body>
     </c-card>
