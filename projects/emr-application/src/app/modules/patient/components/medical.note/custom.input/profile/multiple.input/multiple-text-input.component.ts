@@ -21,6 +21,7 @@ export class MultipleTextInputComponent implements OnInit {
     });
     this.ddd();
     setTimeout(() => {
+      console.log(this.parentFieldName)
       this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
     }, 10);
   }

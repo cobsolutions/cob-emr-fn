@@ -54,9 +54,9 @@ export class ObjectiveComponent implements OnInit {
   }
   selectProfile() {
     this.objectiveForm.get('profile').setValue(this.selectedProfile);
-    this.medicalService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe(data => {
+    this.medicalService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe((data: any) => {
       this.fillFieldsMap(data)
-      if (this.objectiveData)
+      if (this.objectiveData !== null && (this.objectiveData.profile === this.selectedProfile))
         setTimeout(() => {
           this.objectiveForm.patchValue(this.objectiveData);
         }, 10);
