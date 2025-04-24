@@ -67,13 +67,48 @@ export var InspectionFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_bd471778-6055-4366-9895-4ac73c15f3c7",
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_b323421f-3c72-4a95-994a-27853eb97e32",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_incisionSites",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_surgicalPrecautions",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarMobility",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarType",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundDescription",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements",
         "style": "margin-left: 10px;"
     }
 ]
