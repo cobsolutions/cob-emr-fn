@@ -90,7 +90,8 @@
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
-        <multiple-text-input [parentForm]="form" [parentFieldName]="field.name"></multiple-text-input>
+        <multiple-text-input [parentForm]="form" [parentFieldName]="field.name"
+            [values]="field.value"></multiple-text-input>
     </div>
     <!--custom multiple-radio-->
     <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">

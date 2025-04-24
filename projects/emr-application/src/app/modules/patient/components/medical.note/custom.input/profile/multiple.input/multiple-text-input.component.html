@@ -6,7 +6,7 @@
             <label class="fw-bold">Left</label>
         </div>
 
-        <div *ngFor="let field of measurementFields">
+        <div *ngFor="let field of values">
             <c-input-group class="mb-3" sizing="sm">
                 <label style="width: 180px;" class="mx-2">{{ field }}</label>
                 <input type="text" [formControlName]="'right_' + toCamelCase(field)" class="mx-5" cFormControl

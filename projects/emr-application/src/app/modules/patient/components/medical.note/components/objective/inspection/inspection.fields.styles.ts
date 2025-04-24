@@ -70,5 +70,10 @@ export var InspectionFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "inspection_bd471778-6055-4366-9895-4ac73c15f3c7",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "inspection_b323421f-3c72-4a95-994a-27853eb97e32",
+        "style": "margin-left: 10px;"
     }
 ]

@@ -10,12 +10,12 @@ export class MultipleTextInputComponent implements OnInit {
   form: FormGroup;
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
-  measurementFields = ['Upper Arm', 'Mid Biceps', 'Elbow Flexion Crease', 'Forearm', 'Wrist'];
+  @Input() values: any
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({});
-    this.measurementFields.forEach(field => {
+    this.values.forEach(field => {
       this.form.addControl(`right_${this.toCamelCase(field)}`, new FormControl(''));
       this.form.addControl(`left_${this.toCamelCase(field)}`, new FormControl(''));
     });
@@ -26,7 +26,7 @@ export class MultipleTextInputComponent implements OnInit {
     }, 10);
   }
   private ddd() {
-    this.measurementFields.forEach(field => {
+    this.values.forEach(field => {
       this.form.get(`right_${this.toCamelCase(field)}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
