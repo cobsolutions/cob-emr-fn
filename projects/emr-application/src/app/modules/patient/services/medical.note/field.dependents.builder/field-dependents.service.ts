@@ -8,11 +8,11 @@ export class FieldDependentsService {
   constructor() { }
   private mapById(objects: any): Map<string, any> {
   const map = new Map<string, any>();
-  objects.forEach(obj => map.set(obj.idField.id, { ...obj, dependents: [] })); // Ensure dependents exists
+  objects.forEach(obj => map.set(obj.idField.id, { ...obj, dependents: [] })); 
   return map;
 }
 
-// **Recursive function to build hierarchy**
+//Recursive function to build hierarchy
  buildHierarchyRecursive(objects: any[]): any[] {
   const objectMap = this.mapById(objects);
   const rootObjects: any[] = [];
@@ -21,10 +21,10 @@ export class FieldDependentsService {
     if (obj.parentField) {
       const parent = objectMap.get(obj.parentField);
       if (parent) {
-        parent.dependents!.push(objectMap.get(obj.idField.id)!); // Assign child to parent
+        parent.dependents!.push(objectMap.get(obj.idField.id)!); 
       }
     } else {
-      rootObjects.push(objectMap.get(obj.idField.id)!); // Root elements
+      rootObjects.push(objectMap.get(obj.idField.id)!); 
     }
   });
 

@@ -205,8 +205,10 @@
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
-            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
-                [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
+            <!-- <div [ngClass]="{'border': dependent.render}"></div> -->
+                <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
+                    [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
+            
         </span>
     </div>
 
