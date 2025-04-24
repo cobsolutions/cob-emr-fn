@@ -110,5 +110,10 @@ export var InspectionFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_91f3ce13-b570-43d8-9d88-42d3f624992a_surfaceCultureUsedToExudate",
+        "style": "margin-left: 10px;"
     }
 ]
