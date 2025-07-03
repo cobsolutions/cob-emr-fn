@@ -1,0 +1,94 @@
+{
+    "name": "prior_function",
+    "fields": [
+        {
+            "name": "restrictions_pain_alleviators",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Worse with",
+                    "id": "worse_with",
+                    "name": "worse_with",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "worse_with_list",
+                            "name": "worse_with_list",
+                            "type": "multiple_select",
+                            "select_values": [
+                                "Bending",
+                                "Sitting",
+                                "Turning",
+                                "Rising",
+                                "Standing",
+                                "Walking",
+                                "Lying",
+                                "AM",
+                                "As The Day Progress",
+                                "PM",
+                                "When Still",
+                                "On the Move"
+                            ],
+                            "style": "padding-left: 220px;max-width : 500px"
+                        },
+                        {
+                            "id": "worse_with_text",
+                            "name": "worse_with_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Better with",
+                    "id": "better_with",
+                    "name": "better_with",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "better_with_list",
+                            "name": "better_with_list",
+                            "type": "multiple_select",
+                            "select_values": [
+                                "Bending",
+                                "Sitting",
+                                "Turning",
+                                "Rising",
+                                "Standing",
+                                "Walking",
+                                "Lying",
+                                "AM",
+                                "As The Day Progress",
+                                "PM",
+                                "When Still",
+                                "On the Move"
+                            ],
+                            "style": "padding-left: 220px;max-width : 500px"
+                        },
+                        {
+                            "id": "better_with_text",
+                            "name": "better_with_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        },
+                        {
+                            "id": "better_with_comments",
+                            "name": "better_with_comments",
+                            "type": "textArea",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

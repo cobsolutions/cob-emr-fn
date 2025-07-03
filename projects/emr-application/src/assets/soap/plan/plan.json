@@ -1,0 +1,922 @@
+{
+    "name": "plan",
+    "fields": [
+        {
+            "name": "therapeuticExercises",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "ROM",
+                    "id": "rom",
+                    "name": "rom",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Strength",
+                    "id": "strength",
+                    "name": "strength",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Endurance",
+                    "id": "endurance",
+                    "name": "endurance",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Stability",
+                    "id": "stability",
+                    "name": "stability",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "therapeuticExercises_text",
+                    "name": "therapeuticExercises_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "therapeuticActivity",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Work Specific",
+                    "id": "work_specific",
+                    "name": "work_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Sport Specific",
+                    "id": "sport_specific",
+                    "name": "sport_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Transfers",
+                    "id": "transfers",
+                    "name": "transfers",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Bed Mobility",
+                    "id": "bed_mobility",
+                    "name": "stability",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "ADL Specific",
+                    "id": "adl_specific",
+                    "name": "adl_specific",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "therapeuticActivity_text",
+                    "name": "therapeuticActivity_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "gaitTraining",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "4 Point Walker",
+                    "id": "point_walker",
+                    "name": "point_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Front Wheel Walker",
+                    "id": "front_wheel_walker",
+                    "name": "front_wheel_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "4 Wheel Walker",
+                    "id": "wheel_walker",
+                    "name": "wheel_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Hemi Walker",
+                    "id": "hemi_walker",
+                    "name": "hemi_walker",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Quad Cane",
+                    "id": "quad_cane",
+                    "name": "quad_cane",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Point Cane",
+                    "id": "point_cane",
+                    "name": "point_cane",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "2 Axillary Crutches",
+                    "id": "axillary_crutches",
+                    "name": "axillary_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Axillary Crutch",
+                    "id": "axillary_crutch",
+                    "name": "axillary_crutch",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "2 Forearm Crutches",
+                    "id": "forearm_crutches",
+                    "name": "forearm_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "1 Forearm Crutches",
+                    "id": "forearm_crutches",
+                    "name": "forearm_crutches",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Even Surfaces",
+                    "id": "even_surfaces",
+                    "name": "even_surfaces",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Uneven Surfaces",
+                    "id": "uneven_surfaces",
+                    "name": "uneven_surfaces",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Stairs",
+                    "id": "stairs",
+                    "name": "stairs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Curbs",
+                    "id": "curbs",
+                    "name": "curbs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "gaitTraining_text",
+                    "name": "therapeuticExercises_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "neuromuscularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Balance/Proprioception Training",
+                    "id": "balance_proprioception_training",
+                    "name": "balance_proprioception_training",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Muscle Re-Education",
+                    "id": "muscle_re_education",
+                    "name": "muscle_re_education",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Sequencing",
+                    "id": "sequencing",
+                    "name": "sequencing",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Coordination",
+                    "id": "coordination",
+                    "name": "coordination",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "PNF",
+                    "id": "pnf",
+                    "name": "pnf",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Redcord Neurac (Neuromuscular-Activation)",
+                    "id": "redcord_Nneurac_Neuromuscular_Activation",
+                    "name": "redcord_Nneurac_Neuromuscular_Activation",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "neuromuscularRehabilitation_text",
+                    "name": "neuromuscularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "manualTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Soft Tissue Mobilization",
+                    "id": "soft_Tissue_Mobilization",
+                    "name": "soft_Tissue_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Joint Mobilization",
+                    "id": "joint_Mobilization",
+                    "name": "joint_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Spinal Mobilization",
+                    "id": "spinal_Mobilization",
+                    "name": "spinal_Mobilization",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Manual Traction",
+                    "id": "manual_Traction",
+                    "name": "manual_Traction",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Myofascial Release",
+                    "id": "myofascial_Release",
+                    "name": "myofascial_Release",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Muscle Energy Techniques",
+                    "id": "muscle_Energy_Techniques",
+                    "name": "muscle_Energy_Techniques",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Manual Resistive Exercise",
+                    "id": "manual_Resistive_Exercise",
+                    "name": "manual_Resistive_Exercise",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Patellar Mobs",
+                    "id": "patellar_Mobs",
+                    "name": "patellar_Mobs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Cranio-Sacral",
+                    "id": "cranio_Sacral",
+                    "name": "cranio_Sacral",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Visceral Manipulation",
+                    "id": "visceral_Manipulation",
+                    "name": "visceral_Manipulation",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Dry Needling/Intramuscular Manual Therapy",
+                    "id": "dry_Needling_Intramuscular_Manual_Therapy",
+                    "name": "dry_Needling_Intramuscular_Manual_Therapy",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Graston or ASTYM Techniques",
+                    "id": "graston_ASTYM_Techniques",
+                    "name": "graston_ASTYM_Techniques",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Strain-Counterstrain",
+                    "id": "strain_Counterstrain",
+                    "name": "strain_Counterstrain",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "manualTherapy_text",
+                    "name": "manualTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "massage",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "massage_text",
+                    "name": "massage_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "aquaticTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "aquaticTherapy_text",
+                    "name": "aquaticTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "splintingTaping",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "splintingTaping_text",
+                    "name": "splintingTaping_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "canalithRepositioning",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "canalithRepositioning_text",
+                    "name": "canalithRepositioning_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "woundCareDebridement",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "woundCareDebridement_text",
+                    "name": "woundCareDebridement_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "woundCareDebridement",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "woundCareDebridement_text",
+                    "name": "woundCareDebridement_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "iontophoresis",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Dexamethasone",
+                    "id": "dexamethasone",
+                    "name": "dexamethasone",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lidocaine",
+                    "id": "lidocaine",
+                    "name": "lidocaine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Marcaine",
+                    "id": "marcaine",
+                    "name": "marcaine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Acetic Acid",
+                    "id": "acetic_Acid",
+                    "name": "acetic_Acid",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Iodine",
+                    "id": "iodine",
+                    "name": "iodine",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "medication_text",
+                    "name": "medication_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "groupTherapy",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "groupTherapy_text",
+                    "name": "groupTherapy_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "cardiacRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "cardiacRehabilitation_text",
+                    "name": "cardiacRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "vestibularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "vestibularRehabilitation_text",
+                    "name": "vestibularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "vestibularRehabilitation",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "vestibularRehabilitation_text",
+                    "name": "vestibularRehabilitation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "patientEducation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Home Exercise Program",
+                    "id": "home_Exercise_Program",
+                    "name": "home_Exercise_Program",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Postural Training",
+                    "id": "postural_Training",
+                    "name": "postural_Training",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Ergonomics",
+                    "id": "ergonomics",
+                    "name": "ergonomics",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lifting Mechanics",
+                    "id": "lifting_Mechanics",
+                    "name": "lifting_Mechanics",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "TENS Use",
+                    "id": "tens_Use",
+                    "name": "tens_Use",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Activity Modification",
+                    "id": "activity_Modification",
+                    "name": "activity_Modification",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Home Safety",
+                    "id": "home_Safety",
+                    "name": "home_Safety",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "education_text",
+                    "name": "education_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "selfCare",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "selfCare_text",
+                    "name": "selfCare_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "cognition",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "cognition_text",
+                    "name": "cognition_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "remoteTherapeuticMonitoring",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "remoteTherapeuticMonitoring_text",
+                    "name": "remoteTherapeuticMonitoring_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "electricalStimulation",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Pre-Modulated",
+                    "id": "pre_Modulated",
+                    "name": "pre_Modulated",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "High Volt",
+                    "id": "high_Volt",
+                    "name": "high_Volt",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Interferential",
+                    "id": "interferential",
+                    "name": "interferential",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Russian",
+                    "id": "russian",
+                    "name": "russian",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Other",
+                    "id": "other",
+                    "name": "other",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "stimulation_text",
+                    "name": "stimulation_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "ultrasoundPhonophoresis",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Depth",
+                    "id": "tensFitting_text",
+                    "name": "tensFitting_text",
+                    "type": "inline-checkbox",
+                    "select_values": [
+                        "1MHz",
+                        "2MHz",
+                        "3MHz"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "laser",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Cold Laser",
+                    "id": "cold_laser",
+                    "name": "tensFitting_text",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": " Class 4 Laser",
+                    "id": " class_Laser",
+                    "name": "tensFitting_text",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "infraredLight",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "infraredLight_Duration",
+                    "name": "infraredLight_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "diathermy",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "diathermy_Duration",
+                    "name": "diathermy_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "hotPacks",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "hotPacks_Duration",
+                    "name": "hotPacks_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "mechanicalTraction",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Cervical",
+                    "id": "cervical",
+                    "name": "cervical",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "display": "Lumbar",
+                    "id": " lumbar",
+                    "name": "lumbar",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "vasopneumatic",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "vasopneumatic_Duration",
+                    "name": "vasopneumatic_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                }
+            ]
+        },
+        {
+            "name": "biofeedbackTraining",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Duration",
+                    "id": "biofeedbackTraining_Duration",
+                    "name": "biofeedbackTraining_Duration",
+                    "type": "select",
+                    "select_values": [
+                        "3 Minutes",
+                        "4 Minutes",
+                        "5 Minutes",
+                        "6 Minutes",
+                        "7 Minutes",
+                        "8 Minutes",
+                        "9 Minutes",
+                        "10 Minutes",
+                        "11 Minutes",
+                        "12 Minutes",
+                        "13 Minutes",
+                        "14 Minutes",
+                        "15 Minutes"
+                    ],
+                    "style": "padding-left: 10px;"
+                },
+                {
+                    "id": "biofeedbackTraining_text",
+                    "name": "biofeedbackTraining_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "orthoticFabrication",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "orthoticFabrication_text",
+                    "name": "orthoticFabrication_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "tensFitting",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "tensFitting_text",
+                    "name": "tensFitting_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "acupuncture",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "acupuncture_text",
+                    "name": "acupuncture_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "otherSpecialty",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "otherSpecialty_text",
+                    "name": "otherSpecialty_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+.d-flex.align-items-center {
+    align-items: center !important;
+    /* Ensure vertical alignment */
+}
+
+.checkbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    column-gap: 165px;
+    /* Space between columns */
+}
+
+.checkbox-item {
+    flex: 1 1 calc(50% - 16px);
+    /* Two columns with spacing */
+    min-width: 20px;
+    /* Ensures a minimum width */
+}
+.parent-label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+    align-items: start;
+  }

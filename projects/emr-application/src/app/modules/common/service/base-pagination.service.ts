@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, from, Observable, retry, switchMap, throwError } from 'rxjs';
 import { PaginationData } from '../interfaces/pagination.data';
@@ -21,7 +21,7 @@ export class BasePaginationService {
   url: string;
   constructor(public httpClient: HttpClient
     , public loggedInService: LoggedInService) { }
-  get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
+  get(config$: BehaviorSubject<IApiParams>, url: string, body?: any): Observable<any> {
     this.url = url;
     return config$.pipe(
       debounceTime(100),
@@ -30,7 +30,18 @@ export class BasePaginationService {
           return JSON.stringify(previous) === JSON.stringify(current);
         }
       ),
-      switchMap((config) => this.fetchData(config))
+      switchMap((config) => this.fetchData(config, body))
+    );
+  }
+  post(config$: BehaviorSubject<IApiParams>, url: string, body: string): Observable<any> {
+    return config$.pipe(
+      debounceTime(100),
+      distinctUntilChanged(
+        (previous, current) => {
+          return JSON.stringify(previous) === JSON.stringify(current);
+        }
+      ),
+      switchMap((config) => this.fetchPostData(config,url, body))
     );
   }
   _get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
@@ -42,10 +53,28 @@ export class BasePaginationService {
           return JSON.stringify(previous) === JSON.stringify(current);
         }
       ),
-      switchMap((config) => this.fetchDataWithoutClinic(config,url))
+      switchMap((config) => this.fetchDataWithoutClinic(config, url))
     );
   }
-  private fetchData(params: IApiParams): Observable<PaginationData> {
+  private fetchPostData(params: IApiParams, url: string, body: string): Observable<PaginationData> {
+    const apiParams = {
+      ...params
+    };
+    const httpParams: HttpParams = new HttpParams({ fromObject: apiParams });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+    const options = Object.keys(httpParams).length
+      ? { params: httpParams, ...httpOptions, headers: headers }
+      : { params: {}, ...httpOptions };
+    return this.httpClient
+      .post<PaginationData>(url, body, options)
+      .pipe(
+        retry({ count: 1, delay: 100000, resetOnSuccess: true }),
+        catchError(this.handleHttpError)
+      )
+  }
+  private fetchData(params: IApiParams, body?: any): Observable<PaginationData> {
     const apiParams = {
       ...params
     };

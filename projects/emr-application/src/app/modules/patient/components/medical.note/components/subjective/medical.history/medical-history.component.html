@@ -1,0 +1,9 @@
+<div [formGroup]="medicalHistoryForm">
+    <div class="fields-container">
+        <div class="field-item" *ngFor="let field of fields;">
+            <soap-field-builder [field]="field" [form]="medicalHistoryForm"
+                [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles">
+            </soap-field-builder>
+        </div>
+    </div>
+</div>

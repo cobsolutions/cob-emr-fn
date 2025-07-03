@@ -1,0 +1,10 @@
+.fields-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -400px; /* Moves the entire layout to the left */
+  }
+  
+  .field-item {
+    width: calc(50% - 10px); /* Adjust width to fit two columns */
+  }
+  

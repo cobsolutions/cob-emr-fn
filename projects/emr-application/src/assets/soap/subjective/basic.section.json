@@ -1,0 +1,90 @@
+{
+    "name": "basic",
+    "fields": [
+        {
+            "name": "time_in_out",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Time In",
+                    "id": "time_in",
+                    "name": "time_in",
+                    "type": "time",
+                    "style": "max-width: 190px;"
+                },
+                {
+                    "display": "Time Out",
+                    "id": "time_out",
+                    "name": "time_out",
+                    "type": "time",
+                    "style": "max-width: 190px;"
+                }
+            ]
+        },
+        {
+            "name": "physician_order",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "",
+                    "id": "physician_order_text",
+                    "name": "physician_order_text",
+                    "type": "text",
+                    "style": "width: 300px;"
+                }
+            ]
+        },
+        {
+            "name": "new_injury",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "new_injury_text",
+                    "name": "new_injury_text",
+                    "type": "text",
+                    "style": "width: 300px;"
+                }
+            ]
+        },
+        {
+            "name": "surgery_performed",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Date of Surgery",
+                    "id": "date_of_surgery",
+                    "name": "date_of_surgery",
+                    "type": "date",
+                    "style": "max-width: 190px;"
+                },
+                {
+                    "display": "Type of Surgery",
+                    "id": "type_of_surgery",
+                    "name": "type_of_surgery",
+                    "type": "text",
+                    "style": "width: 300px;"
+                }
+            ]
+        },
+        {
+            "name": "prior_hospitalization",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "From",
+                    "id": "from_prior_hospitalization",
+                    "name": "from_prior_hospitalization",
+                    "type": "date",
+                    "style": "max-width: 190px;"
+                },
+                {
+                    "display": "To",
+                    "id": "to_prior_hospitalization",
+                    "name": "to_prior_hospitalization",
+                    "type": "date",
+                    "style": "max-width: 190px;"
+                }
+            ]
+        }
+    ]
+}

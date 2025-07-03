@@ -1,0 +1,46 @@
+<form [formGroup]="form" [style]="testStyle">
+    <span *ngIf="topSelect">
+        <ng-container *ngFor="let selectControl of topSelect">
+            <div class="form-group">
+                <label for="mselect_00" class="top-label">{{selectControl}}</label>
+
+                <select id="mselect_00" cSelect multiple class="dropdown"
+                    [formControlName]="toCamelCase(selectControl)">
+                    <option *ngFor="let option of selectValues" [value]="option.val">
+                        {{ option.view }}
+                    </option>
+                </select>
+            </div>
+            <span class="small mt-1 fst-italic" style="margin-left:400px">Hold CTRL for Multiple Select</span>
+        </ng-container>
+    </span>
+    <div class="grid-container" *ngIf="bodySelect">
+
+        <!-- Header Row -->
+        <div></div> <!-- Empty space for labels -->
+        <div class="header">Right</div>
+        <div class="header">Left</div>
+
+        <!-- Dynamic Rows -->
+        <ng-container *ngFor="let selectControl of bodySelect">
+            <div class="label">{{ selectControl }}</div>
+
+            <!-- Right Dropdown -->
+            <select id="mselect_right" cSelect multiple [formControlName]="'right_' + toCamelCase(selectControl)"
+                class="dropdown">
+                <option *ngFor="let option of selectValues" [value]="option.val">
+                    {{ option.view }}
+                </option>
+            </select>
+            <!-- Left Dropdown -->
+            <select id="mselect_left" cSelect multiple [formControlName]="'left_' + toCamelCase(selectControl)"
+                class="dropdown">
+
+                <option *ngFor="let option of selectValues" [value]="option.val">
+                    {{ option.view }}
+                </option>
+            </select>
+            
+        </ng-container>
+    </div>
+</form>

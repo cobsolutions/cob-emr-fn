@@ -1,0 +1,71 @@
+{
+    "name": "assessment",
+    "fields": [
+        {
+            "name": "hep",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Patient consulted during this visit to maintain or resume normal activities.",
+                    "id": "patient_visit_to_maintain_activities",
+                    "name": "patient_visit_to_maintain_activities",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "label_style": "",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "patient_visit_to_maintain_activities_text",
+                            "name": "patient_visit_to_maintain_activities_text",
+                            "type": "text",
+                            "style": "padding-left: 20px; width:400px",
+                            "label_style": ""
+                        }
+                    ]
+                },
+                {
+                    "display": "Patient consulted during this visit against bed rest lasting 4 days or longer.",
+                    "id": "patient_visit_against_bed_activities",
+                    "name": "patient_visit_against_bed_activities",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "label_style": "",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "patient_visit_against_bed_activities_text",
+                            "name": "patient_visit_against_bed_activities_text",
+                            "type": "text",
+                            "style": "padding-left: 20px; width:400px",
+                            "label_style": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "rehab_potential",
+            "value": "fair",
+            "dependents": [
+                {
+                    "id": "rehab_potential_fair_text",
+                    "name": "rehab_potential_fair_text",
+                    "type": "textArea",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        },
+        {
+            "name": "contraindications_to_therapy",
+            "value": "yes",
+            "dependents": [
+                {
+                    "id": "contraindications_to_therapy_text",
+                    "name": "contraindications_to_therapy_text",
+                    "type": "text",
+                    "style": "padding-left: 10px; width:400px"
+                }
+            ]
+        }
+    ]
+}

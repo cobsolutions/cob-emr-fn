@@ -1,0 +1,15 @@
+export var PainDescription: string[] = [
+    "Not Tested",
+    "Burning",
+    "Sharp",
+    "Dull/Achy",
+    "Throbbing",
+    "Shooting",
+    "Numbness/Tingling",
+    "Constant",
+    "Intermittent",
+    "Worse in AM",
+    "Worse in PM",
+    "Worse in Night",
+    "Custom",
+]

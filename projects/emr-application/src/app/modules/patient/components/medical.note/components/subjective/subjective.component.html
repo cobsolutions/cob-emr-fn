@@ -1,0 +1,48 @@
+<div [formGroup]="subjectiveForm" *ngIf="subjectiveFormFields">
+    <c-card class="mb-2">
+        <c-card-header>Basic Information</c-card-header>
+        <c-card-body>
+            <basic-information (formReady)="setChildForm('basic', $event)"
+                [fields]="subjectiveFormFields['Basic Information']"
+                [basicFormData]="subjectiveData?.basic"></basic-information>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-2">
+        <c-card-header>Pain</c-card-header>
+        <c-card-body>
+            <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
+                [painFormData]="subjectiveData?.pain">
+            </pain>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-2">
+        <c-card-header>Prior Level Of Function</c-card-header>
+        <c-card-body>
+            <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
+                [fields]="subjectiveFormFields['Prior Level Of Function']"
+                [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function>
+        </c-card-body>
+    </c-card>
+    <c-card class="mb-2">
+        <c-card-header>Current Functional Limitations</c-card-header>
+        <c-card-body>
+            <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
+                [fields]="subjectiveFormFields['Current Functional Limitations']"
+                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit>
+        </c-card-body>
+    </c-card>
+
+    <c-card class="mb-2">
+        <c-card-header>Medical History</c-card-header>
+        <c-card-body>
+            <medical-history (formReady)="setChildForm('medicalHistory', $event)"
+                [fields]="subjectiveFormFields['Medical History']"
+                [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history>
+        </c-card-body>
+    </c-card>
+
+
+    <div class="mt-3">
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</div>

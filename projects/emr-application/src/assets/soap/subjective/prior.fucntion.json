@@ -1,0 +1,1030 @@
+{
+    "name": "prior_function",
+    "fields": [
+        {
+            "name": "self_care",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Hygiene",
+                    "id": "hygiene",
+                    "name": "hygiene",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Grooming",
+                            "id": "grooming",
+                            "name": "grooming",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Looking After One's Health",
+                            "id": "looking_after_one_Hhealth",
+                            "name": "looking_after_one_Hhealth",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Dressing",
+                            "id": "dressing",
+                            "name": "Dressing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Bathing",
+                            "id": "bathing",
+                            "name": "bathing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Toileting",
+                            "id": "toileting",
+                            "name": "Toileting",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "hygiene_text",
+                            "name": "hygiene_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Sleep",
+                    "id": "sleep",
+                    "name": "sleep",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Disturbed Sleep",
+                            "id": "disturbed_sleep",
+                            "name": "disturbed_sleep",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Sleeping Postures",
+                            "id": "sleeping_postures",
+                            "name": "sleeping_postures",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Pillows",
+                            "id": "pillows",
+                            "name": "pillows",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Surface",
+                            "id": "surface",
+                            "name": "surface",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "sleep_text",
+                            "name": "sleep_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "IADLs",
+                    "id": "iadls",
+                    "name": "iadls",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Ability to Use Telephone",
+                            "id": "ability_use_telephone",
+                            "name": "ability_use_telephone",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Shopping",
+                            "id": "shopping",
+                            "name": "shopping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Food Preparation",
+                            "id": "food_preparation",
+                            "name": "food_preparation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Housekeeping",
+                            "id": "house_keeping",
+                            "name": "house_keeping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Laundry",
+                            "id": "laundry",
+                            "name": "laundry",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Mode of Transportation",
+                            "id": "mode_of_transportation",
+                            "name": "mode_of_transportation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Responsibility for Own Medications",
+                            "id": "responsibility_for_own_medications",
+                            "name": "responsibility_for_own_medications",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Ability to Handle Finances",
+                            "id": "ability_to_handle_finances",
+                            "name": "ability_to_handle_finances",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "IADLs_text",
+                            "name": "IADLs_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Household Chores",
+                    "id": "household_chores",
+                    "name": "household_chores",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Cook a Meal",
+                            "id": "cook_Mmeal",
+                            "name": "cook_Mmeal",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Laundry",
+                            "id": "laundry",
+                            "name": "laundry",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "household_chores_text",
+                            "name": "household_chores_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Drive Community Distance",
+                    "id": "drive_community_Distance",
+                    "name": "drive_community_Distance",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "drive_community_Distance_text",
+                            "name": "drive_community_Distance_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Volunteering",
+                    "id": "volunteering",
+                    "name": "volunteering",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "volunteering_text",
+                            "name": "volunteering_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Caregiving",
+                    "id": "caregiving",
+                    "name": "caregiving",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "caregiving_text",
+                            "name": "caregiving_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "mobility",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "IADLs",
+                    "id": "IADLs",
+                    "name": "IADLs",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Ability to Use Telephone",
+                            "id": "ability_to_use_telephone",
+                            "name": "ability_to_use_telephone",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Shopping",
+                            "id": "shopping",
+                            "name": "Shopping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Food Preparation",
+                            "id": "Food Preparation",
+                            "name": "food_preparation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Housekeeping",
+                            "id": "housekeeping",
+                            "name": "housekeeping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Laundry",
+                            "id": "laundry",
+                            "name": "laundry",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Mode of Transportation",
+                            "id": "mode_of_transportation",
+                            "name": "mode_of_transportation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Responsibility for Own Medications",
+                            "id": "responsibility_for_own_medications",
+                            "name": "responsibility_for_own_medications",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Ability to Handle Finances",
+                            "id": "ability_to_handle_finances",
+                            "name": "ability_to_handle_finances",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "IADLs_text",
+                            "name": "IADLs_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Use of an Assistive Device",
+                    "id": "use_an_assistive_device",
+                    "name": "use_an_assistive_device",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "use_an_assistive_device_text",
+                            "name": "use_an_assistive_device_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Walking",
+                    "id": "walking",
+                    "name": "walking",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Forward",
+                            "id": "forward",
+                            "name": "forward",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Backward",
+                            "id": "backward",
+                            "name": "backward",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Sideways",
+                            "id": "sideways",
+                            "name": "sideways",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Strolling",
+                            "id": "strolling",
+                            "name": "strolling",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Walking on Different Surfaces",
+                            "id": "walking_on_different_surfaces",
+                            "name": "walking_on_different_surfaces",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Walking Around Obstacles",
+                            "id": "walking_around_obstacles",
+                            "name": "walking_around_obstacles",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "walking_text",
+                            "name": "walking_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Moving Around",
+                    "id": "moving_around",
+                    "name": "moving_around",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Climbing",
+                            "id": "climbing",
+                            "name": "climbing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Running",
+                            "id": "running",
+                            "name": "running",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Jogging",
+                            "id": "jogging",
+                            "name": "jogging",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Skipping",
+                            "id": "skipping",
+                            "name": "skipping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Jumping",
+                            "id": "jumping",
+                            "name": "jumping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Swimming",
+                            "id": "swimming",
+                            "name": "swimming",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "moving_around_text",
+                            "name": "moving_around_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Moving Around in Different Locations",
+                    "id": "moving_aroundin_different_locations",
+                    "name": "moving_aroundin_different_locations",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Walking Between Rooms",
+                            "id": "walking_Bbetween_rooms",
+                            "name": "walking_Bbetween_rooms",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Walking Down the Street",
+                            "id": "walking_down_the_street",
+                            "name": "walking_down_the_street",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Walking Within a Building",
+                            "id": "walking_within_a_building",
+                            "name": "walking_within_a_building",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Moving Around Using Equipment",
+                            "id": "moving_around_using_equipment",
+                            "name": "moving_around_using_equipment",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Moving Around Using Transportation",
+                            "id": "moving_around_using_transportation",
+                            "name": "moving_around_using_transportation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "moving_aroundin_different_locations_text",
+                            "name": "moving_aroundin_different_locations_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Negotiate Obstacles",
+                    "id": "negotiate_obstacles",
+                    "name": "negotiate_obstacles",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Bumped in Crowded Streets",
+                            "id": "bumped_in_crowded_streets",
+                            "name": "bumped_in_crowded_streets",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Terrain",
+                            "id": "terrain",
+                            "name": "terrain",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Comments",
+                            "id": "comments",
+                            "name": "comments",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 300px;"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "other",
+            "value": true,
+            "dependents": [
+                {
+                    "id": "other_text",
+                    "name": "other_text",
+                    "type": "input",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 190px;"
+                }
+            ]
+        },
+        {
+            "name": "body_position",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "Maintaining a Body Position",
+                    "id": "maintaining_body_position",
+                    "name": "maintaining_body_position",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Remaining Seated",
+                            "id": "remaining_seated",
+                            "name": "remaining_seated",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Remaining Standing",
+                            "id": "remaining_standing",
+                            "name": "remaining_standing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Squatting",
+                            "id": "squatting",
+                            "name": "squatting",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Kneeling",
+                            "id": "kneeling",
+                            "name": "kneeling",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Sitting",
+                            "id": "sitting",
+                            "name": "sitting",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Standing",
+                            "id": "standing",
+                            "name": "standing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "maintaining_body_position_text",
+                            "name": "maintaining_body_position_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Transfers",
+                    "id": "transfers",
+                    "name": "transfers",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Moving From Bed to Chair",
+                            "id": "moving_from_bed_to_chair",
+                            "name": "moving_from_bed_to_chair",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Sliding Along a Bench",
+                            "id": "sliding_along_Bench",
+                            "name": "sliding_along_Bench",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "transfers_text",
+                            "name": "transfers_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "IADLs",
+                    "id": "iadls",
+                    "name": "iadls",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Ability to Use Telephone",
+                            "id": "maintaining_body_position_ability_use_telephone",
+                            "name": "maintaining_body_position_ability_use_telephone",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Shopping",
+                            "id": "maintaining_body_position_shopping",
+                            "name": "maintaining_body_position_shopping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Food Preparation",
+                            "id": "maintaining_body_position_food_preparation",
+                            "name": "maintaining_body_position_food_preparation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Housekeeping",
+                            "id": "maintaining_body_position_house_keeping",
+                            "name": "maintaining_body_position_house_keeping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Laundry",
+                            "id": "maintaining_body_position_laundry",
+                            "name": "maintaining_body_position_laundry",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Mode of Transportation",
+                            "id": "maintaining_body_position_mode_of_transportation",
+                            "name": "maintaining_body_position_mode_of_transportation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Responsibility for Own Medications",
+                            "id": "maintaining_body_position_responsibility_for_own_medications",
+                            "name": "maintaining_body_position_responsibility_for_own_medications",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Ability to Handle Finances",
+                            "id": "maintaining_body_position_ability_to_handle_finances",
+                            "name": "maintaining_body_position_ability_to_handle_finances",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "maintaining_body_position_IADLs_text",
+                            "name": "maintaining_body_position_IADLs_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "handling_object",
+            "value": true,
+            "dependents": [
+                {
+                    "display": "IADLs",
+                    "id": "iadls",
+                    "name": "iadls",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Ability to Use Telephone",
+                            "id": "handling_object_ability_use_telephone",
+                            "name": "handling_object_ability_use_telephone",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Shopping",
+                            "id": "handling_object_position_shopping",
+                            "name": "handling_object_position_shopping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Food Preparation",
+                            "id": "handling_object_food_preparation",
+                            "name": "handling_object_food_preparation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Housekeeping",
+                            "id": "handling_object_house_keeping",
+                            "name": "handling_object_house_keeping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Laundry",
+                            "id": "handling_object__laundry",
+                            "name": "handling_object__laundry",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Mode of Transportation",
+                            "id": "handling_object_mode_of_transportation",
+                            "name": "handling_object_mode_of_transportation",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Responsibility for Own Medications",
+                            "id": "handling_object__own_medications",
+                            "name": "handling_object__own_medications",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Ability to Handle Finances",
+                            "id": "handling_object_handle_finances",
+                            "name": "handling_object_handle_finances",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "handling_object_IADLs_text",
+                            "name": "handling_object_IADLs_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Hand & Arm Use",
+                    "id": "hand_arm_use",
+                    "name": "hand_arm_use",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Pulling Objects",
+                            "id": "pulling_objects",
+                            "name": "pulling_objects",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Pushing Objects",
+                            "id": "pushing_objects",
+                            "name": "pushing_objects",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Reaching",
+                            "id": "reaching",
+                            "name": "reaching",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Turning Hands or Arms",
+                            "id": "turning_hands_or_arms",
+                            "name": "reaching",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Twisting Hands or Arms",
+                            "id": "twisting_hands_or_Arms",
+                            "name": "twisting_hands_or_Arms",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Throwing",
+                            "id": "throwing",
+                            "name": "throwing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Catching",
+                            "id": "catching",
+                            "name": "catching",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "hand_arm_usetext",
+                            "name": "hand_arm_use_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Fine Hand Use",
+                    "id": "fine_hand_use",
+                    "name": "fine_hand_use",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Picking Up",
+                            "id": "picking_up",
+                            "name": "picking_up",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Grasping",
+                            "id": "grasping",
+                            "name": "grasping",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Manipulating",
+                            "id": "manipulating",
+                            "name": "manipulating",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Releasing",
+                            "id": "releasing",
+                            "name": "releasing",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "fine_hand_use_text",
+                            "name": "fine_hand_use_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Moving Objects with Lower Extremities",
+                    "id": "moving_objects_with_lower_extremities",
+                    "name": "moving_objects_with_lower_extremities",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Kicking",
+                            "id": "kicking",
+                            "name": "kicking",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "display": "Pushing with Lower Extremities",
+                            "id": "pushing_with_lower_extremities",
+                            "name": "pushing_with_lower_extremities",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "moving_objects_with_lower_extremities_text",
+                            "name": "moving_objects_with_lower_extremities_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Community Integration/Access",
+                    "id": "community_integration_access",
+                    "name": "community_integration_access",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "community_integration_access_text",
+                            "name": "community_integration_access_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Work/Vocation/Occupation",
+                    "id": "work_vocation_occupation",
+                    "name": "work_vocation_occupation",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "id": "work_vocation_occupation_text",
+                            "name": "work_vocation_occupation_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Recreation",
+                    "id": "recreation",
+                    "name": "recreation",
+                    "type": "checkbox",
+                    "style": "padding-left: 10px;",
+                    "value": true,
+                    "dependents": [
+                        {
+                            "display": "Sports",
+                            "id": "sports",
+                            "name": "sports",
+                            "type": "checkbox",
+                            "style": "padding-left: 20px;"
+                        },
+                        {
+                            "id": "recreation_text",
+                            "name": "recreation_text",
+                            "type": "input",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Comments",
+                    "id": "comments",
+                    "name": "comments",
+                    "type": "textArea",
+                    "style": "padding-left: 10px;max-width : 300px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                }
+            ]
+        }
+    ]
+}

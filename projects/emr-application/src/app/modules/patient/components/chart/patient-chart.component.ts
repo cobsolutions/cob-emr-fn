@@ -35,6 +35,7 @@ export class PatientChartComponent implements OnInit {
   patientId: number;
   caseId: number = 0;
   clinicId: number;
+  selectedIndex = 0;  // Default to first tab
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
@@ -64,6 +65,9 @@ export class PatientChartComponent implements OnInit {
       }, error => {
         this.router.navigate(['/emr/patient/list']);
       })
+  }
+  selectTab(index: number) {
+    this.selectedIndex = index;
   }
   changeCase(event: any) {
     var caseId: number = event.target.value;
