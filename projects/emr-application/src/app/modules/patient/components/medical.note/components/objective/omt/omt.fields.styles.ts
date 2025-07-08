@@ -78,4 +78,46 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "name": "omt_f0d0ab87-f378-4c66-857f-64c393a963d9_postcerebralConcussionScale",
         "style": "margin-left: 10px;"
     }
+    ,
+    {
+        "label_style": "white-space: nowrap; min-width: 680px;",
+        "name": "omt_115080dc-b8b0-4e4f-af09-134482263425_lossOfConsciousness",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 680px",
+        "name": "omt_115080dc-b8b0-4e4f-af09-134482263425",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 680px;",
+        "name": "omt_bb0feab8-becb-4c56-885e-f45db7e28854_lossOfConsciousness",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 680px;",
+        "name": "omt_bb0feab8-becb-4c56-885e-f45db7e28854",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "name": "omt_3ee802f9-1fef-45ba-a2da-26a2efe9af47_omttestrawscore",
+        "style": "margin-left: 500px"
+    },
+
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 566px;",
+        "name": "omt_3ee802f9-1fef-45ba-a2da-26a2efe9af47_classification",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 566px;",
+        "name": "omt_3ee802f9-1fef-45ba-a2da-26a2efe9af47_Rank",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 566px;",
+        "name": "omt_3ee802f9-1fef-45ba-a2da-26a2efe9af47_",
+        "style": "margin-left: 10px;width:300px"
+    }
 ]
