@@ -119,5 +119,45 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 566px;",
         "name": "omt_3ee802f9-1fef-45ba-a2da-26a2efe9af47_",
         "style": "margin-left: 10px;width:300px"
+    },
+
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "omt_0f73d08a-544a-4a1e-a281-c36b3fce4f5d_shoulderPainAndDisabilityIndex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "omt_0f73d08a-544a-4a1e-a281-c36b3fce4f5d_upperExtremityFunctionalIndex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "omt_0f73d08a-544a-4a1e-a281-c36b3fce4f5d_dashDisabilitiesOfArmShoulderHand",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "omt_0f73d08a-544a-4a1e-a281-c36b3fce4f5d_handProfile",
+        "style": "margin-left: 10px;"
+    }
+    ,
+    //
+    {
+        "name": "omt_be4fddbd-3a85-4e79-8dda-45f71966d82c_shoulderpainanddisabilityindexomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_12a2b65b-a42e-4910-a4ac-1f25395abc78_upperextremityfunctionalindexomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_7778bd22-acff-4b46-9f64-a8307ca1cefc_dashdisabilitiesofarmshoulderhandomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_ac606944-438f-465f-abee-ec3495452b9e_handprofiletextarea",
+        "style": "margin-left: 500px"
     }
 ]
