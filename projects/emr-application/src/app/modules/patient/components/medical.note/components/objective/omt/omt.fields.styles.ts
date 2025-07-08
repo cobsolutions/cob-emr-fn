@@ -159,5 +159,42 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "name": "omt_ac606944-438f-465f-abee-ec3495452b9e_handprofiletextarea",
         "style": "margin-left: 500px"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_97144c5f-68c0-44a5-bd3e-c543ae40e871_neckDisabilityIndexQuestionnaire",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_97144c5f-68c0-44a5-bd3e-c543ae40e871_oswestryLowBackPain",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_97144c5f-68c0-44a5-bd3e-c543ae40e871_modifiedOswestryLowBackPain",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_97144c5f-68c0-44a5-bd3e-c543ae40e871_theQuebecBackPainDisabilityScale",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "name": "omt_7ee3e1d9-d4e3-4f8c-bf46-b4b5a704aa35_neckdisabilityindexquestionnaireomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_79ce6931-c74f-4f93-8061-01d818c00f72_oswestrylowbackpainomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_b49708e8-d421-4913-a805-c6b8ff43409f_modifiedoswestrylowbackpainomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_210f9e35-50dc-42d2-a63a-58163d17baf8_thequebecbackpaindisabilityscaleomttest",
+        "style": "margin-left: 500px"
     }
 ]
