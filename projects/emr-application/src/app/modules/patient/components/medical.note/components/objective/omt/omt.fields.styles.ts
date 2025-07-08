@@ -196,5 +196,70 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "name": "omt_210f9e35-50dc-42d2-a63a-58163d17baf8_thequebecbackpaindisabilityscaleomttest",
         "style": "margin-left: 500px"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_ec1c6bdf-4520-416d-b7f9-b2795fc935c9_lowerExtremityFunctionalScale",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "name": "omt_2159391a-61fd-4538-b360-4b522f20d5c5_lowerextremityfunctionalscaleomttest",
+        "style": "margin-left: 500px"
+    },
+
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_mctsib",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_abcScale",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_abcScale",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_tinetti",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_berg",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_fullertonAdvancedBalanceFabScale",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "name": "omt_37c1c7bc-44a1-4c74-b82e-800db450931f_mctsibomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_53d327fd-8c16-438a-9b2e-adae3336155d_abcscaleomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "omt_91374832-9e28-4e36-a106-45ce1f89f622_tinettiomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "omt_aa308a9c-3048-42d3-a114-5fd8845f8b80_bergomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "omt_20f42bc5-ee10-4f6a-b25a-a19b66859cbf_fullertonadvancedbalancescaleomttest",
+        "style": "margin-left: 500px"
     }
 ]
