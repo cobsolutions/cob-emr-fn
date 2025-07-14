@@ -2,18 +2,18 @@
   <div [ngClass]="layout" [style]="testStyle">
     <div *ngFor="let control of controls; let last = last" class="form-control-container">
       <span *ngIf="control.type === 'input'" class="control-wrapper">
-        <label *ngIf="control.name" class="form-label"
-          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
+        <label *ngIf="control.name" class="form-label" [style] ="testLabelStyle"
+          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }" >
           {{ control.name[0] }}
         </label>
         <input cFormControl [type]="'text'" [formControlName]="control.id" sizing="sm" [style]="'width:100px'" />
         <label *ngIf="control.name"
-          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
+          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }" [style]="'width:10px'">
           {{ control.name[1] }}
         </label>
       </span>
       <span *ngIf="control.type === 'textarea'" class="control-wrapper">
-        <label *ngIf="control.name" class="form-label"
+        <label *ngIf="control.name" class="form-label" [style] ="testLabelStyle"
           [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
           {{ control.name[0] }}
         </label>

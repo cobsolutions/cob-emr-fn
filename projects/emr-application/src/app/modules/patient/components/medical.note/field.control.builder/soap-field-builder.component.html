@@ -128,7 +128,7 @@
     </div>
     <div *ngIf="field.type === 'omt_test'">
         <app-objective-omttest [layout]="field.omtFieldRequest.layout" [form]="form"
-            [controls]="field.omtFieldRequest.list" [testStyle]="filedStyle!.style"
+            [controls]="field.omtFieldRequest.list" [testStyle]="filedStyle!.style" [testLabelStyle]="filedStyle!.label_style"
             [parentFieldName]="field.name"></app-objective-omttest>
     </div>
     <div *ngIf="field.type === 'walk_test'">

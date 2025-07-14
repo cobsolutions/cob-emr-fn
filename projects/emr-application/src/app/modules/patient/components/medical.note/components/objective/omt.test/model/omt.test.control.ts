@@ -4,4 +4,5 @@ export interface OMTTestControl {
     style?: string
     type?: string
     value?:any
+    selectValue?:string
 }

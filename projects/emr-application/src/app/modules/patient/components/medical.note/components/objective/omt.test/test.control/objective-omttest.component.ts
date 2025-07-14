@@ -14,6 +14,7 @@ export class ObjectiveOMTTestComponent implements OnInit {
   @Input() layout: 'horizontal' | 'vertical' = 'vertical';
   @Input() controls: OMTTestControl[]
   @Input() testStyle:string
+  @Input() testLabelStyle:string
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
