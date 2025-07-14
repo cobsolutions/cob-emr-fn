@@ -175,5 +175,37 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_f206c00d-5b1f-4107-ae8c-42d1d575efdf_temperatureradio",
         "style": "margin-left: 10px;"
+    },
+
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_e93a47f6-c7db-442f-a388-f07a1d780ea4_",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_e93a47f6-c7db-442f-a388-f07a1d780ea4_pulsemultipleradio",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_e93a47f6-c7db-442f-a388-f07a1d780ea4_right",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_e93a47f6-c7db-442f-a388-f07a1d780ea4_left",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_bf9172a9-5d6f-4182-b17b-d32e578b09b6_respirationmultipleselect",
+        "style": "margin-left: 10px;height:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_bf9172a9-5d6f-4182-b17b-d32e578b09b6_respirationemptytext",
+        "style": "margin-left: 10px;width:200px"
     }
 ]
