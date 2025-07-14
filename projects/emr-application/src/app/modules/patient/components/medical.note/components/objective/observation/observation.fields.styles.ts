@@ -107,5 +107,31 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "observation_f0b7d503-f447-43dc-82eb-dc66d376af71_indicatebodytypeselection",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_bloodPressure",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_temperature",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_pulse",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_respiration",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_weight",
+        "style": "margin-left: 10px;"
     }
 ]
