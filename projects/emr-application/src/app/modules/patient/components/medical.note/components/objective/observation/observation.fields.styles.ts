@@ -332,5 +332,36 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_28e6b72e-07cf-4019-8986-81f51f172a9a_toilettransferscomment",
         "style": "margin-left: 10px;width:200px"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_type",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_complaintsWithUse",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 100px;margin-left: 505px; m",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_dateApplied",
+        "style": "margin-left: 10px;margin-bottom:10px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 100px;margin-left: 498px;",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_dateRemoved",
+        "style": "margin-left: 10px;margin-bottom:10px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_castsplinttextarea",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_type",
+        "style": "margin-left: 10px;"
     }
 ]

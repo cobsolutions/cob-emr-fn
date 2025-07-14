@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <div class="date-picker mb-1">
+        <label for="monthSelect" class="date-label" [style]="labelStyle">{{label}}</label>
+
+        <select id="monthSelect" [formControlName]="'month'" cSelect style="width:100px">
+            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+        </select>
+
+        <select [formControlName]="'day'" cSelect style="width:100px">
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+        </select>
+
+        <select [formControlName]="'year'" cSelect style="width:100px">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+    </div>
+</form>
