@@ -207,5 +207,16 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "observation_bf9172a9-5d6f-4182-b17b-d32e578b09b6_respirationemptytext",
         "style": "margin-left: 10px;width:200px"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_a25a050d-cc5f-44ab-ac42-3a41c4b610d9_weightemptytext",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_a25a050d-cc5f-44ab-ac42-3a41c4b610d9_weightmultipleradio",
+        "style": "margin-left: 10px;"
     }
 ]
