@@ -274,5 +274,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_83648bb2-3620-40a0-acd1-0a1d3c08a1b3_eatingselect",
         "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_5f37fed1-3204-418d-8ae6-244697dba583_breathingrestmultiplecheckbox",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_5f37fed1-3204-418d-8ae6-244697dba583_BreathingComments",
+        "style": "margin-left: 10px;"
     }
 ]

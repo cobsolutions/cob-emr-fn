@@ -1,5 +1,5 @@
 <form [formGroup]="form">
-  <div [style]="labelStyle">
+  <div [style]="labelStyle" *ngIf="label">
     <label>{{label}}:</label>
   </div>
   <div [ngClass]="{'checkbox-group': splitColumn === 1, 'checkbox-group-columns' : splitColumn ===2}" [style]="checkBoxStyle">
