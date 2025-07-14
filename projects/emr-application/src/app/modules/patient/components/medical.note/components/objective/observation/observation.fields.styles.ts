@@ -363,5 +363,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_9962f561-91b4-449a-b8df-c712bd4bf982_type",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_1a735539-b585-42c3-ac33-4d9710880a80_standingposturemselect",
+        "style": "margin-left: 10px;height:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_1a735539-b585-42c3-ac33-4d9710880a80_",
+        "style": "margin-left: 10px;"
     }
 ]
