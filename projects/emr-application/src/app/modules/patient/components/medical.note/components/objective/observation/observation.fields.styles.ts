@@ -133,5 +133,37 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "observation_20f757bf-83dd-4c32-956b-fa7290d6e53c_weight",
         "style": "margin-left: 10px;"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_orthostaticRisk",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_arm",
+        "style": "margin-left: 10px;width:100px"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_systolic",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_diastolic",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_location",
+        "style": "margin-left: 10px;width:120px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_position",
+        "style": "margin-left: 10px;width:100px"
     }
 ]
