@@ -284,5 +284,22 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_5f37fed1-3204-418d-8ae6-244697dba583_BreathingComments",
         "style": "margin-left: 10px;"
+    },
+
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_34c59c5a-2e79-4779-a72f-57df31c2333a_supineToSit",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_34c59c5a-2e79-4779-a72f-57df31c2333a_sitToStand",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_34c59c5a-2e79-4779-a72f-57df31c2333a_toiletTransfers",
+        "style": "margin-left: 10px;"
     }
 ]
