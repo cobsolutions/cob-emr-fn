@@ -165,5 +165,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_3d612020-1b6e-4920-8c52-b0d9fb29d204_position",
         "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_f206c00d-5b1f-4107-ae8c-42d1d575efdf_degrees",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_f206c00d-5b1f-4107-ae8c-42d1d575efdf_temperatureradio",
+        "style": "margin-left: 10px;"
     }
 ]
