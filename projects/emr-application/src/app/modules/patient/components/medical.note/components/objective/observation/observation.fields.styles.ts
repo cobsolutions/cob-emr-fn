@@ -100,5 +100,12 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "observation_additionalComments",
         "style": "margin-left: 10px;"
+    },
+    //
+
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "observation_f0b7d503-f447-43dc-82eb-dc66d376af71_indicatebodytypeselection",
+        "style": "margin-left: 10px;"
     }
 ]
