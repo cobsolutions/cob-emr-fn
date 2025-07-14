@@ -301,5 +301,36 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_34c59c5a-2e79-4779-a72f-57df31c2333a_toiletTransfers",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_982d4ce4-cc89-407b-8b09-9d5071441206_",
+        "style": "margin-left: 10px; width:250px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_982d4ce4-cc89-407b-8b09-9d5071441206_supinetositcomment",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_78277c0e-2c39-4cf4-b4ae-244063b8e3d1_",
+        "style": "margin-left: 10px; width:250px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_78277c0e-2c39-4cf4-b4ae-244063b8e3d1_sittostandcomment",
+        "style": "margin-left: 10px;width:200px"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_28e6b72e-07cf-4019-8986-81f51f172a9a_",
+        "style": "margin-left: 10px; width:250px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_28e6b72e-07cf-4019-8986-81f51f172a9a_toilettransferscomment",
+        "style": "margin-left: 10px;width:200px"
     }
 ]
