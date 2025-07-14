@@ -218,5 +218,31 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_a25a050d-cc5f-44ab-ac42-3a41c4b610d9_weightmultipleradio",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_db1679a1-4466-4235-b879-f795f1f16390_Bathing",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_db1679a1-4466-4235-b879-f795f1f16390_toileting",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_db1679a1-4466-4235-b879-f795f1f16390_dressing",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_db1679a1-4466-4235-b879-f795f1f16390_grooming",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_db1679a1-4466-4235-b879-f795f1f16390_eating",
+        "style": "margin-left: 10px;"
     }
 ]
