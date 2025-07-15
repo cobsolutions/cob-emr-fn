@@ -202,18 +202,6 @@
         <non-material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
         </non-material-handling>
     </div>
-    <div *ngIf="field.type === 'material-handling'">
-        <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
-        </material-handling>
-    </div>
-    <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
-        <span *ngFor="let dependent of field.dependents;">
-            <!-- <div [ngClass]="{'border': dependent.render}"></div> -->
-            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
-                [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
-
-        </span>
-    </div>
     <div *ngIf="field.type ==='custom-date'">
         <custom-date [parentForm]="form" [parentFieldName]="field.name" [label]="field.display"
             [labelStyle]="filedStyle!.label_style"></custom-date>
@@ -223,6 +211,19 @@
             [content]="field.value.content" [testStyle]="filedStyle!.style"></right-left-select>
     </div>
     <div *ngIf="field.type ==='six-min-walk-test'">
-        <six-min-walk-test [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></six-min-walk-test>
+        <six-min-walk-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></six-min-walk-test>
     </div>
+    <div *ngIf="field.type === 'material-handling'">
+        <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </material-handling>
+    </div>
+    <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
+        <span *ngFor="let dependent of field.dependents;">
+            <!-- <div [ngClass]="{'border': dependent.render}"></div> -->
+            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
+                [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
+        </span>
+    </div>
+
 </div>

@@ -136,8 +136,12 @@ export var ROMFormStyles: FieldControlStyles[] = [
 
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "range_of_motion_702a459a-c9c3-4a13-afeb-7f35aa0b088a_nollimitationsnotedmultiplecheckbox",
-        "style": "margin-left: 10px;background-color:#f9f9f9",
-        "contorl_style":"margin-left:500px"
+        "name": "range_of_motion_702a459a-c9c3-4a13-afeb-7f35aa0b088a_arom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_702a459a-c9c3-4a13-afeb-7f35aa0b088a_Prom",
+        "style": "margin-left: 10px;"
     }
 ]
