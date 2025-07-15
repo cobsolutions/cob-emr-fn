@@ -143,5 +143,26 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_702a459a-c9c3-4a13-afeb-7f35aa0b088a_Prom",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_f509b4e9-7c91-4b73-9d8b-863229928181_arommultiplecheckbox",
+        "style": "margin-left: 550px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_f509b4e9-7c91-4b73-9d8b-863229928181_aromcomment",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_150c7e6b-af3f-4c4c-bbaf-e4324ebc6cc2_arommultiplecheckbox",
+        "style": "margin-left: 550px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_150c7e6b-af3f-4c4c-bbaf-e4324ebc6cc2_aromcomment",
+        "style": "margin-left: 10px;"
     }
 ]

@@ -24,6 +24,7 @@ export class MutlipleCheckBoxComponent implements OnInit {
     // Initialize checkboxes with FormControls
     this.form = this.fb.group({});
     this.values.forEach(value => {
+      console.log(JSON.stringify(value))
       this.form.addControl(value.val, this.fb.control(false));
       this.form.get(`${this.toCamelCase(value.val)}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.value);
