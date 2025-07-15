@@ -89,7 +89,7 @@
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
         <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
             [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
-            [checkBoxStyle]="field.checkBoxStyle"></mutliple-check-box>
+            [checkBoxStyle]="filedStyle?.style" [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">

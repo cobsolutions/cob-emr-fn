@@ -15,6 +15,7 @@ export class MutlipleCheckBoxComponent implements OnInit {
   @Input() splitColumn: number
   @Input() labelStyle: string;
   @Input() checkBoxStyle: string;
+  @Input() contorl_style:string
   constructor(private fb: FormBuilder) {
   }
 

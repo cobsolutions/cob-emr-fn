@@ -4,7 +4,7 @@
   </div>
   <div [ngClass]="{'checkbox-group': splitColumn === 1, 'checkbox-group-columns' : splitColumn ===2}" [style]="checkBoxStyle">
     <div *ngFor="let value of values; let i = index" class="checkbox-item">
-      <div class="checkbox-label">
+      <div class="checkbox-label" [style]="contorl_style">
         <input type="checkbox" [formControlName]="value.val" (change)="toggleAdditionalControl(value.val)" />
         <label>{{ value.view }}</label>
       </div>
