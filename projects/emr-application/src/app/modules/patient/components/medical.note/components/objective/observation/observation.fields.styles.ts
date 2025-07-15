@@ -389,7 +389,7 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;"
     },
     {
-        
+
         "name": "observation_50f931e6-9684-4a9d-8939-ddfb40505330_scoliosisrightleftselect",
         "style": "margin-left:400px;width:1200px"
     },
@@ -406,6 +406,32 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "observation_891c5572-c6b9-43b7-8e7b-65ad3b0475fd_sixminutewalktest",
+        "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_d2340984-3fb9-451a-8955-828ab31e8af7_type",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_d2340984-3fb9-451a-8955-828ab31e8af7_handUsed",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_d2340984-3fb9-451a-8955-828ab31e8af7_comment",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_21a5ac05-8872-4cea-a483-5bdada2d1700_type",
+        "style": "margin-left: 10px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_21a5ac05-8872-4cea-a483-5bdada2d1700_compliantWithUse",
         "style": "margin-left: 10px;"
     }
 ]
