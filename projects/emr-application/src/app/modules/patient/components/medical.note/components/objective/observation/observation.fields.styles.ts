@@ -448,5 +448,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_844a06ee-615a-456f-a77d-ae465150701a_description",
         "style": "margin-left: 10px;width:260px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_6f0dd3d6-fdd1-4fb2-aad9-f41e34cd1b9d_edemaDescription",
+        "style": "margin-left: 10px;width: 400px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_6f0dd3d6-fdd1-4fb2-aad9-f41e34cd1b9d_pitting",
+        "style": "margin-left: 10px;"
     }
 ]
