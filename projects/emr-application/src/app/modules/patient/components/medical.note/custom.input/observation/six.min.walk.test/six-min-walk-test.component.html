@@ -1,0 +1,28 @@
+<form [formGroup]="form" [style]="testStyle">
+    <div class="grid-container">
+      <!-- Header Row -->
+      <div class="label-cell"></div>
+      <div *ngFor="let time of times" class="time-header">{{ time }}</div>
+  
+      <!-- Data Rows -->
+      <ng-container *ngFor="let metric of metrics">
+        <div class="metric-label">{{ metric }}</div>
+        <ng-container *ngFor="let time of times">
+          <input
+            type="text"
+            [formControlName]="getControlName(time, metric)"
+            class="input-box"
+          />
+        </ng-container>
+      </ng-container>
+  
+      <!-- Comments -->
+      <div class="metric-label">Comments</div>
+      <textarea
+        formControlName="comments"
+        class="comments-box"
+        rows="3"
+      ></textarea>
+    </div>
+  </form>
+  

@@ -402,5 +402,10 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "observation_2f1e414a-cfc8-4a23-91d6-4095252ebfce_gaittext",
         "style": "margin-left: 10px; width:150px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_891c5572-c6b9-43b7-8e7b-65ad3b0475fd_sixminutewalktest",
+        "style": "margin-left: 10px;"
     }
 ]

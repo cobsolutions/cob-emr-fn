@@ -93,6 +93,7 @@ import { FullDischargeNoteComponent } from './components/medical.note/discharge.
 import { ForwardModalComponent } from './components/medical.note/components/forward.modal/forward-modal.component';
 import { CustomDateComponent } from './components/medical.note/custom.input/date/custom-date.component';
 import { RightLeftSelectComponent } from './components/medical.note/custom.input/rightLeftSelect/right-left-select.component';
+import { SixMinWalkTestComponent } from './components/medical.note/custom.input/observation/six.min.walk.test/six-min-walk-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -188,6 +189,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ForwardModalComponent,
     CustomDateComponent,
     RightLeftSelectComponent,
+    SixMinWalkTestComponent,
   ],
   imports: [
     CommonModule,

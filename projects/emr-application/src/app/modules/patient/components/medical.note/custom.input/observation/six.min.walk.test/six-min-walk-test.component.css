@@ -1,0 +1,39 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(7, 1fr); /* Metric | Rest to 6 min */
+    gap: 8px;
+    width: 95%;
+    margin: 0 auto;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+  }
+  
+  .time-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 4px;
+  }
+  
+  .metric-label {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: 500;
+  }
+  
+  .input-box {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #0077aa;
+    border-radius: 3px;
+  }
+  
+  .comments-box {
+    grid-column: span 7;
+    padding: 6px;
+    border: 1px solid #0077aa;
+    border-radius: 3px;
+    resize: vertical;
+  }
+  
