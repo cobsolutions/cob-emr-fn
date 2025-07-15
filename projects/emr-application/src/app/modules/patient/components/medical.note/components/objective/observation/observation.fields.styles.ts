@@ -433,5 +433,10 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_21a5ac05-8872-4cea-a483-5bdada2d1700_compliantWithUse",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_46927d6e-8539-47c1-9fd3-186c4868a74d_muscularasymmetriestextarea",
+        "style": "margin-left: 10px;"
     }
 ]
