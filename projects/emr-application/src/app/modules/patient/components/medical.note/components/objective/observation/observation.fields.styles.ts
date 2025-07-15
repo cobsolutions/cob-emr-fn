@@ -438,5 +438,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_46927d6e-8539-47c1-9fd3-186c4868a74d_muscularasymmetriestextarea",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_cbef17f9-03fc-47bf-b7a8-3f83e86da0a7_muscleguardingselect",
+        "style": "margin-left: 10px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_844a06ee-615a-456f-a77d-ae465150701a_description",
+        "style": "margin-left: 10px;width:260px"
     }
 ]
