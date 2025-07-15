@@ -377,5 +377,15 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     {
         "name": "observation_822a8130-d1aa-4343-a6a3-e43091e6be06_protractedscapulasrightleftselect",
         "style": "margin-left:400px;width:1200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_6a5a33c8-d325-498d-8414-ec9b9ef89408_type",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_6a5a33c8-d325-498d-8414-ec9b9ef89408_curvature",
+        "style": "margin-left: 10px;"
     }
 ]
