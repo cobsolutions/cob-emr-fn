@@ -28,7 +28,8 @@
      && field.type !== 'special-tests-right-left-check'
      && field.type !== 'non-material-handling'
      && field.type !== 'material-handling'
-     && field.type !== 'custom-date'">
+     && field.type !== 'custom-date'
+     && field.type !== 'right-left-select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -215,5 +216,9 @@
     <div *ngIf="field.type ==='custom-date'">
         <custom-date [parentForm]="form" [parentFieldName]="field.name" [label]="field.display"
             [labelStyle]="filedStyle!.label_style"></custom-date>
+    </div>
+    <div *ngIf="field.type ==='right-left-select'">
+        <right-left-select [parentForm]="form" [parentFieldName]="field.name" [labels]="field.value.labels"
+            [content]="field.value.content" [testStyle]="filedStyle!.style"></right-left-select>
     </div>
 </div>

@@ -373,5 +373,9 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "observation_1a735539-b585-42c3-ac33-4d9710880a80_",
         "style": "margin-left: 10px;"
+    },
+    {
+        "name": "observation_822a8130-d1aa-4343-a6a3-e43091e6be06_protractedscapulasrightleftselect",
+        "style": "margin-left:400px;width:1200px"
     }
 ]

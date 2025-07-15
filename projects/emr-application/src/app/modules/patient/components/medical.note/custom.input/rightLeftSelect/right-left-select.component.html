@@ -1,0 +1,22 @@
+<form [formGroup]="form" [style]="testStyle">
+    <div class="grid-container">
+      <!-- Plain Text Headers -->
+      <div></div> <!-- Empty cell above labels -->
+      <div class="side-label">Right</div>
+      <div class="side-label">Left</div>
+  
+      <!-- Dynamic Rows -->
+      <ng-container *ngFor="let label of labels">
+        <div class="label">{{ label }}</div>
+  
+        <select [formControlName]="'right_' + toCamelCase(label)" class="dropdown">
+          <option *ngFor="let option of content" [value]="option.val">{{ option.view }}</option>
+        </select>
+  
+        <select [formControlName]="'left_' + toCamelCase(label)" class="dropdown">
+          <option *ngFor="let option of content" [value]="option.val">{{ option.view }}</option>
+        </select>
+      </ng-container>
+    </div>
+  </form>
+  
