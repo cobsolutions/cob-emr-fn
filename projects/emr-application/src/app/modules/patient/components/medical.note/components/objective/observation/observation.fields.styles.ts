@@ -387,5 +387,20 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_6a5a33c8-d325-498d-8414-ec9b9ef89408_curvature",
         "style": "margin-left: 10px;"
+    },
+    {
+        
+        "name": "observation_50f931e6-9684-4a9d-8939-ddfb40505330_scoliosisrightleftselect",
+        "style": "margin-left:400px;width:1200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_2f1e414a-cfc8-4a23-91d6-4095252ebfce_gaitmselect",
+        "style": "margin-left: 10px;height:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "observation_2f1e414a-cfc8-4a23-91d6-4095252ebfce_gaittext",
+        "style": "margin-left: 10px; width:150px"
     }
 ]
