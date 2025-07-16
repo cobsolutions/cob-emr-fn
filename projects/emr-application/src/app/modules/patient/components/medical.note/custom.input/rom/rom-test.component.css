@@ -53,3 +53,7 @@
   font-weight: bold;
   padding-right: 10px;
 }
+.rom-container.apply-all-row {
+  background-color: #e9f7ef;
+  font-weight: bold;
+}

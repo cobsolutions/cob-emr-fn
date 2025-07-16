@@ -52,5 +52,17 @@ export class RomTestComponent implements OnInit {
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
   }
-
+  applyToAll(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    if (!value) return;
+  
+    const updatedValues = { ...this.form.getRawValue() };
+  
+    Object.keys(updatedValues).forEach((key) => {
+      this.form.get(key).setValue(value, { emitEvent: false });
+    });
+  
+    // Update parent form after all changes
+    this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+  }
 }
