@@ -28,6 +28,8 @@ export class RomTestComponent implements OnInit {
   @Input() controlR: any[]
   @Input() controlL: any[]
   @Input() columns: number;
+  @Input() rightLabel:string
+  @Input() leftLabel:string
   @Input() testStyle: string;
   constructor(private fb: FormBuilder) { }
 
