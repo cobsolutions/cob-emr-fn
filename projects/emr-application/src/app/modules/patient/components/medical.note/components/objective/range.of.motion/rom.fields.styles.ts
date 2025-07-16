@@ -179,5 +179,10 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_bf79b1f8-3824-491c-b96d-79a28b4a2ea8_cervicalaromromtestrightleft",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_91343269-0121-4f43-b7d1-aab33d62413d_shoulderaromromtestrightleft",
+        "style": "margin-left: 10px;"
     }
 ]

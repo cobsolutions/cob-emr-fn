@@ -221,7 +221,7 @@
     </div>
     <div *ngIf="field.type === 'rom-test-right-left'">
         <rom-test-right-left [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
-            [controlR]="field.value.controlR"></rom-test-right-left>
+            [controlR]="field.value.controlR" [controlL]="field.value.controlL"></rom-test-right-left>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

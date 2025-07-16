@@ -32,22 +32,29 @@ export class RomTestComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({});
-    const controls = this.columns === 1 ? this.controlR : this.controlL;
-  
-    controls.forEach(control => {
-      const side = this.columns === 1 ? 'right' : 'left';
-      const controlName = `${side}_${this.toCamelCase(control.label)}_${this.parentFieldName}`;
-      const defaultVal = control.value?.[0]?.val ?? ''; // fallback to empty if not present
-      this.form.addControl(controlName, new FormControl(defaultVal));
-  
-      this.form.get(controlName).valueChanges.subscribe(val => {
-        this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
+    this.form = this.fb.group({});    
+    if (this.columns === 1) {
+      this.controlR.forEach(control => {
+        this.form.addControl(`right_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`, new FormControl(this.controlR[0].value[0].val));
+        this.form.get(`right_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+        })
       });
-    });
-  
-    // Sync form initially
-    this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
+    }
+    if (this.columns === 2) {
+      this.controlR.forEach(control => {
+        this.form.addControl(`right_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`, new FormControl(this.controlR[0].value[0].val));
+        this.form.get(`right_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+        })
+      });
+      this.controlL.forEach(control => {
+        this.form.addControl(`left_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`, new FormControl(this.controlL[0].value[0].val));
+        this.form.get(`left_${this.toCamelCase(control.label)+"_"+this.parentFieldName}`).valueChanges.subscribe(v => {
+          this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
+        })
+      });
+    }
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
