@@ -164,5 +164,15 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_150c7e6b-af3f-4c4c-bbaf-e4324ebc6cc2_aromcomment",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_ab938628-b9bb-4f35-83b0-9cd7f40585ec_cervicalaromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 160px;",
+        "name": "range_of_motion_ab938628-b9bb-4f35-83b0-9cd7f40585ec_cervicalaromcomment",
+        "style": "margin-left: 10px;width:80%"
     }
 ]

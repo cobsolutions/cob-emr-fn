@@ -1,0 +1,50 @@
+<div [formGroup]="form">
+    <!-- Two-column layout: Left & Right (like second image) -->
+    <ng-container *ngIf="columns === 2">
+      <!-- Header Row: Empty + Right + Left -->
+      <div class="rom-container side-label">
+        <div></div>
+        <div>Right</div>
+        <div>Left</div>
+      </div>
+  
+      <!-- Data Rows -->
+      <div *ngFor="let control of controlL" class="rom-container">
+        <!-- Label -->
+        <div class="test-label">{{ control.label }}</div>
+  
+        <!-- Right Dropdown -->
+        <select
+          class="dropdown"
+          [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName"
+        >
+          <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+        </select>
+  
+        <!-- Left Dropdown -->
+        <select
+          class="dropdown"
+          [formControlName]="'left_' + toCamelCase(control.label) + '_' + parentFieldName"
+        >
+          <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+        </select>
+      </div>
+    </ng-container>
+  
+    <!-- One-column layout (like first image) -->
+    <ng-container *ngIf="columns === 1">
+      <div *ngFor="let control of controlR" class="single-column-container">
+        <!-- Label -->
+        <div class="single-label">{{ control.label }}</div>
+  
+        <!-- Dropdown -->
+        <select
+          class="dropdown"
+          [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName"
+        >
+          <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+        </select>
+      </div>
+    </ng-container>
+  </div>
+  

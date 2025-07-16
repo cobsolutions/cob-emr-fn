@@ -94,6 +94,7 @@ import { ForwardModalComponent } from './components/medical.note/components/forw
 import { CustomDateComponent } from './components/medical.note/custom.input/date/custom-date.component';
 import { RightLeftSelectComponent } from './components/medical.note/custom.input/rightLeftSelect/right-left-select.component';
 import { SixMinWalkTestComponent } from './components/medical.note/custom.input/observation/six.min.walk.test/six-min-walk-test.component';
+import { RomTestComponent } from './components/medical.note/custom.input/rom/rom-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -190,6 +191,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CustomDateComponent,
     RightLeftSelectComponent,
     SixMinWalkTestComponent,
+    RomTestComponent,
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,8 @@
      && field.type !== 'material-handling'
      && field.type !== 'custom-date'
      && field.type !== 'right-left-select'
-     && field.type !== 'six-min-walk-test'">
+     && field.type !== 'six-min-walk-test'
+     && field.type !== 'rom-test-right-left'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -217,6 +218,10 @@
     <div *ngIf="field.type === 'material-handling'">
         <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
         </material-handling>
+    </div>
+    <div *ngIf="field.type === 'rom-test-right-left'">
+        <rom-test-right-left [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
+            [controlR]="field.value.controlR"></rom-test-right-left>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
