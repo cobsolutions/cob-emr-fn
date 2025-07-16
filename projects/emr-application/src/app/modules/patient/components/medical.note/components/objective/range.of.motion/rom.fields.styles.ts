@@ -173,7 +173,7 @@ export var ROMFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 160px;",
         "name": "range_of_motion_ab938628-b9bb-4f35-83b0-9cd7f40585ec_cervicalaromcomment",
-        "style": "margin-left: 10px;width:80%"
+        "style": "margin-left: 100px;width:70%"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -183,6 +183,11 @@ export var ROMFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_91343269-0121-4f43-b7d1-aab33d62413d_shoulderaromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_6d20b01e-005a-4236-a460-ebdaf39513fa_shoulderpromromtestrightleft",
         "style": "margin-left: 10px;"
     }
 ]
