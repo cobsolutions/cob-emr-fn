@@ -189,5 +189,51 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_6d20b01e-005a-4236-a460-ebdaf39513fa_shoulderpromromtestrightleft",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_a993e06f-0dee-4aea-8758-e5c2905a421c_elbowaromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_ae53675e-b13b-42f3-b057-131d464cccff_shoulderaromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_e933baf7-11d0-4e0a-99d9-4a195752c63d_wristpromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_CalculateTotalRom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_thumbAromprom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_indexFingerAromprom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_middleFingerAromprom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_ringFingerAromprom",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_smallFingerAromprom",
+        "style": "margin-left: 10px;"
     }
 ]
