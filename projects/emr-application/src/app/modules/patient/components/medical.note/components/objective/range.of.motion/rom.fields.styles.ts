@@ -280,5 +280,10 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 450px;",
         "name": "range_of_motion_2b15549c-e91a-47f4-a43b-b38c10e5e09d_lumbarAromComments",
         "style": "margin-left: 10px;margin-top:10px;width:1026px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_ac16bfc8-6a13-4543-801a-acce2d588f2e_hiparomromtestrightleft",
+        "style": "margin-left: 10px;"
     }
 ]
