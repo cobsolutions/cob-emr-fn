@@ -240,5 +240,25 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_5ed41620-66ed-4117-9358-872ad28c396e_thumbhandromtestrightleft",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_8138cb56-6e88-4953-bfdf-e4fbe422c33a_indexfingerhandromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_82cffa0c-cf64-4757-9fda-6f2aa3dba85b_indexfingerhandromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_f740f83b-da38-4dcd-9e69-fbdd68927829_ringfingerhandromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_b4b4760d-3e91-4fca-9d25-96143b224a2a_smallfingerhandromtestrightleft",
+        "style": "margin-left: 10px;"
     }
 ]
