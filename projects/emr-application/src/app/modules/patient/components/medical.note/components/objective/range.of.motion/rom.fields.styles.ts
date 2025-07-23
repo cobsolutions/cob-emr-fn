@@ -235,5 +235,10 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "range_of_motion_2818dc8c-d080-4eb5-ba83-98d6c610dd5e_smallFingerAromprom",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_5ed41620-66ed-4117-9358-872ad28c396e_thumbhandromtestrightleft",
+        "style": "margin-left: 10px;"
     }
 ]

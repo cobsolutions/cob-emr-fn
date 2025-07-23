@@ -95,6 +95,7 @@ import { CustomDateComponent } from './components/medical.note/custom.input/date
 import { RightLeftSelectComponent } from './components/medical.note/custom.input/rightLeftSelect/right-left-select.component';
 import { SixMinWalkTestComponent } from './components/medical.note/custom.input/observation/six.min.walk.test/six-min-walk-test.component';
 import { RomTestComponent } from './components/medical.note/custom.input/rom/rom-test.component';
+import { HandROMComponent } from './components/hand.rom/hand-rom.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -192,6 +193,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     RightLeftSelectComponent,
     SixMinWalkTestComponent,
     RomTestComponent,
+    HandROMComponent,
   ],
   imports: [
     CommonModule,

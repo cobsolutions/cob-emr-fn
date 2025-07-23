@@ -1,0 +1,50 @@
+.range-grid {
+    display: grid;
+    grid-template-columns: 200px repeat(4, 1fr);
+    gap: 4px;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+  }
+  
+  .header-row {
+    display: contents;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .sub-header {
+    background: #f0f0f0;
+  }
+  
+  .sub-header-cell,
+  .header,
+  .label,
+  select,
+  input {
+    padding: 4px;
+    font-size: 14px;
+  }
+  
+  .row {
+    display: contents;
+  }
+  
+  .empty-cell {
+    grid-column: 1;
+  }
+  
+  .label {
+    text-align: right;
+    padding-right: 10px;
+  }
+  
+  select,
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 32px;
+  }
+  
