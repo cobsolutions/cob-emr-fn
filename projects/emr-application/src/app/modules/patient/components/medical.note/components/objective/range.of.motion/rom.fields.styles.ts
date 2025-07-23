@@ -265,5 +265,20 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_0beb8308-54dc-4c4a-9374-4c08c5624eaa_thoracicaromromtestrightleft",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_01950192-5423-4d34-b9af-40c684a8ed18_thoracicaromstandingromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_2b15549c-e91a-47f4-a43b-b38c10e5e09d_lumbararomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 450px;",
+        "name": "range_of_motion_2b15549c-e91a-47f4-a43b-b38c10e5e09d_lumbarAromComments",
+        "style": "margin-left: 10px;margin-top:10px;width:1026px"
     }
 ]
