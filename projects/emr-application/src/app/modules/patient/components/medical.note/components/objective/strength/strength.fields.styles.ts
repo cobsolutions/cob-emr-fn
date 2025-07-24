@@ -55,5 +55,15 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_additionalComments",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_a2ea714a-7521-429e-ba0a-46b51da47dd8_upperExtremity",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_a2ea714a-7521-429e-ba0a-46b51da47dd8_lowerExtremity",
+        "style": "margin-left: 10px;"
     }
 ]
