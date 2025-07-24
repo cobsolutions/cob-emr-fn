@@ -220,5 +220,20 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_eb50842f-809e-4e30-8bba-e6c278ee9738_strengthcervicaltoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_31209007-1f38-4547-ae86-72a1e84795c4_strengthtrunktoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 650px;",
+        "name": "strength_f872da47-13a1-4faf-9dec-007da5874ebd_ribElevationInhalation",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 650px;",
+        "name": "strength_f872da47-13a1-4faf-9dec-007da5874ebd_ribDepressionExhalation",
+        "style": "margin-left: 10px;"
     }
 ]
