@@ -275,5 +275,25 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_87458611-6f17-4126-ba11-dc1aac8b6359_strengthfootselectivetissuetensionlowertoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_1658f860-29e7-4884-9953-4776cf9a933f_strengthgrippinchtoprightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "strength_1658f860-29e7-4884-9953-4776cf9a933f_rapidExchange",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "strength_1658f860-29e7-4884-9953-4776cf9a933f_repeatedGrip",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "strength_1658f860-29e7-4884-9953-4776cf9a933f_fiveLevelGrip",
+        "style": "margin-left: 10px;"
     }
 ]
