@@ -1,5 +1,5 @@
 .form-container {
-    width: 600px;
+    width: 700px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 0 5px;
-    padding-left: 172px;
+    padding-left: 290px;
     font-weight: bold;
     color: #333;
   }
