@@ -169,5 +169,46 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "strength_95f43f69-809e-4551-afbd-fef664f100d1_wrist",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_2592f045-bb00-4f4f-b85d-f37e0f21eee4_hip",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_2592f045-bb00-4f4f-b85d-f37e0f21eee4_knee",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_2592f045-bb00-4f4f-b85d-f37e0f21eee4_ankle",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_4dcab3e3-5c72-44c5-ba98-a5ac0f92d62f_proneExtension",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_4dcab3e3-5c72-44c5-ba98-a5ac0f92d62f_supineFlexion",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_4dcab3e3-5c72-44c5-ba98-a5ac0f92d62f_situps",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_4dcab3e3-5c72-44c5-ba98-a5ac0f92d62f_pushup",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_b28b9912-1f99-460e-b6fe-b335397de456_strengthaddcomment",
+        "style": "margin-left: 10px;"
     }
 ]
