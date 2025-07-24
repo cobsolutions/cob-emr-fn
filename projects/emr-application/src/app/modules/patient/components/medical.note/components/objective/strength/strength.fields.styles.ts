@@ -148,5 +148,26 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "strength_8a3c5251-1268-43b7-881a-4f03fbb246d7_lumbarMotorControlTests",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_95f43f69-809e-4551-afbd-fef664f100d1_cervical",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_95f43f69-809e-4551-afbd-fef664f100d1_shoulder",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_95f43f69-809e-4551-afbd-fef664f100d1_elbow",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "strength_95f43f69-809e-4551-afbd-fef664f100d1_wrist",
+        "style": "margin-left: 10px;"
     }
 ]
