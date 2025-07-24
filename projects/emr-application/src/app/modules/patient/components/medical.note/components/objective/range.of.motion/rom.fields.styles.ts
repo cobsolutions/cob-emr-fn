@@ -285,5 +285,65 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_ac16bfc8-6a13-4543-801a-acce2d588f2e_hiparomromtestrightleft",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_cbc17eb4-9ec4-49b5-b383-216a4317d9d8_hippromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_3e3cb129-48ad-46d1-a748-120bd3aab28e_kneearomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_00029b3c-8f28-4e00-bf1f-6dd218d4aa18_kneepromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_d30e493d-1a5c-4195-85ba-80325a863b2f_anklearomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_f7a88c30-29a2-4be9-815e-d409a7a8956f_anklepromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_c9976d43-4101-4672-b4b6-41959be9582f_fmtparomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_a4f95638-e6be-41ef-a310-9a4bf6712a92_fmtppromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_5bbd513b-7df4-463d-a770-be8ed0b9d661_fiparomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_ddd9cba2-1cb9-464d-8899-54f459ead925_fippromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_d2f6958c-9842-4002-b5fb-88dd350615de_toearomromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_db7c769a-c646-4b21-bb94-709f543872ef_toepromromtestrightleft",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_fb4745a3-6740-4781-b68a-ba22b869c073_romaddcomment",
+        "style": "margin-left: 10px;"
     }
 ]
