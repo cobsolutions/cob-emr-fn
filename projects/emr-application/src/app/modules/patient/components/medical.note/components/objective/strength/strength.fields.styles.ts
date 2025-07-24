@@ -255,5 +255,25 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_0c4e5bd4-e534-46fd-9cf7-f1298ffd6f55_strengthhandtoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_2bea2535-a9f4-4528-8058-3db98ba90aa6_strengthhipselectivetissuetensionlowertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_20a6e483-ba03-4de3-97ed-98a97810c3ab_strengthkneeselectivetissuetensionlowertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_5ab455d0-1c3f-4e65-9de4-a1c98b1bdca4_strengthankleselectivetissuetensionlowertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_87458611-6f17-4126-ba11-dc1aac8b6359_strengthfootselectivetissuetensionlowertoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]
