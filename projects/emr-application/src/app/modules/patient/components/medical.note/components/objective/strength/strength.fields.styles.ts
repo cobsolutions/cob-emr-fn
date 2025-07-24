@@ -210,5 +210,15 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "strength_b28b9912-1f99-460e-b6fe-b335397de456_strengthaddcomment",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_eb50842f-809e-4e30-8bba-e6c278ee9738_ddd",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_eb50842f-809e-4e30-8bba-e6c278ee9738_strengthcervicaltoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]

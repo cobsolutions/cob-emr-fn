@@ -1,0 +1,42 @@
+.form-container {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: Arial, sans-serif;
+    margin-left:  550px;
+    background-color: #f9f9f9;
+    padding: auto;
+  }
+  
+  .form-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .field-label {
+    padding: 4px 8px;
+    width: 300px;
+    font-weight: bold;
+  }
+  
+  select {
+    padding: 4px 8px;
+    width: 180px;
+  }
+  
+  .side-labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 5px;
+    padding-left: 172px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .side-label {
+    width: 180px;
+    text-align: center;
+  }
+  

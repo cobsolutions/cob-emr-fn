@@ -96,6 +96,7 @@ import { RightLeftSelectComponent } from './components/medical.note/custom.input
 import { SixMinWalkTestComponent } from './components/medical.note/custom.input/observation/six.min.walk.test/six-min-walk-test.component';
 import { RomTestComponent } from './components/medical.note/custom.input/rom/rom-test.component';
 import { HandROMComponent } from './components/hand.rom/hand-rom.component';
+import { TopRightLeftSelectsComponent } from './components/medical.note/custom.input/strength/top.right.left.selects/top-right-left-selects.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -194,6 +195,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SixMinWalkTestComponent,
     RomTestComponent,
     HandROMComponent,
+    TopRightLeftSelectsComponent,
   ],
   imports: [
     CommonModule,
