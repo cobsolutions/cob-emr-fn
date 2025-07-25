@@ -295,5 +295,10 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "strength_1658f860-29e7-4884-9953-4776cf9a933f_fiveLevelGrip",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_64b7f46c-52e2-4adc-b171-2de65c85d9c6_strengthgrippinchrapidexchangecovavg",
+        "style": "margin-left: 10px;"
     }
 ]
