@@ -300,5 +300,15 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_64b7f46c-52e2-4adc-b171-2de65c85d9c6_strengthgrippinchrapidexchangecovavg",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_0e14306e-18d9-4f94-8a82-accbdef8a9bf_strengthgrippinchrepeatedgripcovavg",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_44828a7d-f3b2-4dec-aaa5-09b4baf9274f_strengthgrippinchfivelevelgripcovavg",
+        "style": "margin-left: 10px;"
     }
 ]
