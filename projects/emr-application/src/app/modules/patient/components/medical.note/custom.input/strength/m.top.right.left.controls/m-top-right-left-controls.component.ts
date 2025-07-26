@@ -10,29 +10,7 @@ export class MTopRightLeftControlsComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
   form: FormGroup;
-  @Input() columns: any[] = [
-    {
-      name: 'ROM',
-      controls: [
-        { label: 'Retraction', type: 'select', value: [{ val: 'Not Tested', view: 'Not Tested' }, { val: 'Normal', view: 'Normal' }] },
-        { label: 'Retraction', type: 'input' }
-      ]
-    },
-    {
-      name: 'Movement Quality',
-      controls: [
-        { label: 'Retraction', type: 'select', value: [{ val: 'Not Tested', view: 'Not Tested' }, { val: 'Smooth', view: 'Smooth' }] },
-        { label: 'Retraction', type: 'input' }
-      ]
-    },
-    {
-      name: 'Pain Free Movement',
-      controls: [
-        { label: 'Retraction', type: 'select', value: [{ val: 'Not Tested', view: 'Not Tested' }, { val: 'Yes', view: 'Yes' }] },
-        { label: 'Retraction', type: 'input' }
-      ]
-    }
-  ]
+  @Input() columns: any[] = []
 
   movementLabels: string[] = [];
   constructor(private fb: FormBuilder) {

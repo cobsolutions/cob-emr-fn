@@ -323,7 +323,7 @@ export var StrengthFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "strength_b4eac2ae-155f-4257-9334-a3a5668cb64d_kokotest",
+        "name": "strength_b4eac2ae-155f-4257-9334-a3a5668cb64d_strengthcervicalmovementsmtoprightleftcontrols",
         "style": "margin-left: 10px;"
     }
 ]
