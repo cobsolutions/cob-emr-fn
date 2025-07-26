@@ -1,0 +1,46 @@
+<div class="assessment-table" [formGroup]="form">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th *ngFor="let column of columns">{{ column.name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let controlLabel of movementLabels">
+          <td>{{ controlLabel }}</td>
+          <td *ngFor="let column of columns">
+            <ng-container *ngFor="let ctrl of getControls(column.name, controlLabel)">
+              <ng-container [ngSwitch]="ctrl.type">
+                
+                <!-- SELECT -->
+                <select
+                  *ngSwitchCase="'select'"
+                  class="input-select"
+                  [formControlName]="
+                    column.name + '_' + toCamelCase(ctrl.label) + '_select_' + parentFieldName
+                  "
+                >
+                  <option *ngFor="let opt of ctrl.value" [value]="opt.val">{{ opt.view }}</option>
+                </select>
+  
+                <!-- INPUT -->
+                <input
+                  *ngSwitchCase="'input'"
+                  class="input-field"
+                  type="text"
+                  [formControlName]="
+                    column.name + '_' + toCamelCase(ctrl.label) + '_input_' + parentFieldName
+                  "
+                />
+  
+                <!-- Fallback -->
+                <span *ngSwitchDefault>Unsupported</span>
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

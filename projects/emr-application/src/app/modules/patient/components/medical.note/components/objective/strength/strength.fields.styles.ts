@@ -320,5 +320,10 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_45300d19-3c1a-4108-a7a8-c6c2a6f5be4d_strengthlowerbodymyofascialtestslowertoprightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b4eac2ae-155f-4257-9334-a3a5668cb64d_kokotest",
+        "style": "margin-left: 10px;"
     }
 ]

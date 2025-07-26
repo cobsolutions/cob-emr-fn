@@ -99,6 +99,7 @@ import { HandROMComponent } from './components/hand.rom/hand-rom.component';
 import { TopRightLeftSelectsComponent } from './components/medical.note/custom.input/strength/top.right.left.selects/top-right-left-selects.component';
 import { TopRightLeftControlsComponent } from './components/medical.note/custom.input/strength/top.right.left.controls/top-right-left-controls.component';
 import { CovavgComponent } from './components/medical.note/custom.input/strength/cov.avg/covavg.component';
+import { MTopRightLeftControlsComponent } from './components/medical.note/custom.input/strength/m.top.right.left.controls/m-top-right-left-controls.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -200,6 +201,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TopRightLeftSelectsComponent,
     TopRightLeftControlsComponent,
     CovavgComponent,
+    MTopRightLeftControlsComponent,
   ],
   imports: [
     CommonModule,

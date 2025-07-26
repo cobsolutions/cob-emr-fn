@@ -35,7 +35,9 @@
      && field.type !== 'hand-rom'
      && field.type !== 'top-right-left-selects'
      && field.type !== 'top-right-left-controls'
-     && field.type !== 'covavg'">
+     && field.type !== 'covavg'
+     && field.type !== 'm-top-right-left-controls'">
+     
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -245,6 +247,9 @@
     </div>
     <div *ngIf="field.type === 'covavg'">
         <covavg [parentForm]="form" [parentFieldName]="field.name"></covavg>
+    </div>
+    <div *ngIf="field.type === 'm-top-right-left-controls'">
+        <m-top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"></m-top-right-left-controls>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
