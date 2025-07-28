@@ -340,5 +340,20 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_4740057d-7e19-4b88-b7e3-4d54cbd3e374_strengthgrossmuscletestsuppercervicaltoprightleftselect",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_23c726b8-443f-41c9-aede-fa2c9549bdb7_strengthgrossmuscletestsuppershouldertoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_fa64e8cd-db14-4c6c-8dcb-1081d4052016_strengthgrossmuscletestsupperelbowtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_e6177807-2a42-41a3-a2cd-b5966818259a_strengthgrossmuscletestsupperwristtoprightleftselect",
+        "style": "margin-left: 10px;"
     }
 ]
