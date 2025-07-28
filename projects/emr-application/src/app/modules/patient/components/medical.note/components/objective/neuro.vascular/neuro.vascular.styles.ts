@@ -150,5 +150,60 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "neuro_vascular_bcf6e294-b57f-4d56-b77f-c23311e1bd1b_neurovascularcranialnervescreentoprightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_c802ebdd-f04c-4115-95e0-20e334975f11_neurovascularmyotomesuppertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_069f71d2-5854-4447-8e5d-99ce7cde3f89_neurovascularmyotomesuppertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_66ec7d8c-6b08-4785-b5e9-5600e10756be_neurovascularmyotomesuppertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_bd21d274-6334-4ae3-896a-416e09a40ad6_neurovascularmyotomesuppertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_23263c7f-82ed-4920-8375-07871a4e40fa_neurovascularupperreflexestoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_e5c7ce9b-b3e3-4bff-bab6-e3d9728bf3ce_neurovascularlowerreflexestoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_087d0ac7-6409-47c9-b233-179a75d0088e_neurovascularlowerreflexestoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_20d6c7d1-7178-4188-8290-379a5f4b3aeb_neurovascularneuraltissuetensionlowertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_9f82a521-05e0-4a52-b31e-f86f81604665_neurovascularvasculartoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 640px;",
+        "name": "neuro_vascular_afc0cc21-5775-4a34-91a9-03a9239c4264_extension",
+        "style": "margin-left: 10px;height:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_afc0cc21-5775-4a34-91a9-03a9239c4264_neurovascularvertebralarteryrightleftmselect",
+        "style": "margin-left: 10px;"
     }
 ]
