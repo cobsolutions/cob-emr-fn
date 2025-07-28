@@ -355,5 +355,230 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_e6177807-2a42-41a3-a2cd-b5966818259a_strengthgrossmuscletestsupperwristtoprightleftselect",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_277daaea-ce99-4889-adf4-a39ad77efd82_strengthgrossmuscleteststrunktoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_4eb68972-9e22-4f96-9d7f-f90569bfc79e_strengthgrossmuscletestslowerhiptoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_d329947f-9dd3-47b9-b2e4-a22ad10f11db_strengthgrossmuscletestslowerkneetoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_eeb910b5-5eb2-4420-a18d-8e3988156a3e_strengthgrossmuscletestslowerkneetoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_4c162265-28a3-45fb-aba9-0e8b6162cbc3_seconds",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_4c162265-28a3-45fb-aba9-0e8b6162cbc3_proneExtensionempty",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_a49066b2-60de-4bde-b55e-b1b6738fea62_seconds",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_a49066b2-60de-4bde-b55e-b1b6738fea62_proneExtensionempty",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_2f3a5936-879e-4827-a858-10f322a22c5e_seconds",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_2f3a5936-879e-4827-a858-10f322a22c5e_proneExtensionempty",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b0b3ff8d-4a4e-41af-a403-e43052f105fb_seconds",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b0b3ff8d-4a4e-41af-a403-e43052f105fb_proneExtensionempty",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_deepNeckFlexors",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_strengthmanualmuscleteststtoprightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b28b9912-1f99-460e-b6fe-b335397de456_strengthadditionalcomments",
+        "style": "margin-left: 10px;"
     }
 ]
