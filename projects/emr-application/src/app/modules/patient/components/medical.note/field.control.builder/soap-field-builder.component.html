@@ -237,8 +237,8 @@
     </div>
     <div *ngIf="field.type === 'top-right-left-selects'">
         <top-right-left-selects [parentForm]="form" [parentFieldName]="field.name"
-            [topControls]="field.value.topControls" [controlR]="field.value.controlR"
-            [controlL]="field.value.controlL"></top-right-left-selects>
+            [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+            [showLabel]="field.value.showLabel"></top-right-left-selects>
     </div>
     <div *ngIf="field.type === 'top-right-left-controls'">
         <top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"

@@ -145,5 +145,10 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "neuro_vascular_additionalComments",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_bcf6e294-b57f-4d56-b77f-c23311e1bd1b_neurovascularcranialnervescreentoprightleftcontrols",
+        "style": "margin-left: 10px;"
     }
 ]

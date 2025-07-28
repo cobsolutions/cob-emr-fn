@@ -23,7 +23,7 @@ export class TopRightLeftControlsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.topControls !== undefined )
+    if (this.topControls !== undefined)
       this.topControls.forEach(control => {
         const key = `top_${this.toCamelCase(control.label)}_${this.parentFieldName}`;
         this.form.addControl(key, new FormControl(control.value[0].val));
@@ -31,19 +31,20 @@ export class TopRightLeftControlsComponent implements OnInit {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
       });
-    
+    if (this.controlR !== undefined)
       this.controlR.forEach(control => {
         const key = `right_${this.toCamelCase(control.label)}_${this.parentFieldName}`;
-        this.form.addControl(key, new FormControl(control.type === 'select' ? this.controlR[0].value[0].val: null));
+        this.form.addControl(key, new FormControl(control.type === 'select' ? this.controlR[0].value[0].val : null));
         this.form.get(key)?.valueChanges.subscribe(() => {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
       });
-  
-      // Left controls
+
+    // Left controls
+    if (this.controlL !== undefined)
       this.controlL.forEach(control => {
         const key = `left_${this.toCamelCase(control.label)}_${this.parentFieldName}`;
-        this.form.addControl(key, new FormControl(control.type === 'select' ? this.controlR[0].value[0].val: null));
+        this.form.addControl(key, new FormControl(control.type === 'select' ? this.controlR[0].value[0].val : null));
         this.form.get(key)?.valueChanges.subscribe(() => {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
