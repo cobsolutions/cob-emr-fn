@@ -296,5 +296,40 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "neuro_vascular_c311de11-6fa8-4f3a-b9f5-a94b38e864a4_dorsalSurface",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_390b037a-7442-4040-aba0-39c3eea7758e_neurovascularsemmesweinsteinlowertoetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_ae3c01a7-022e-419e-9cf9-22cdfdb4faf2_neurovascularsemmesweinsteinlowertoetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_e2535345-ccae-4659-9d88-55409491fc29_neurovascularsemmesweinsteinlowertoetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_f41e5bb0-da46-486a-8349-0bd18e3505cf_neurovascularsemmesweinsteinlowertoetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_2ae95a15-22a9-449a-bfcd-1c6c39243b8e_neurovascularsemmesweinsteinlowertoetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_74c73f0b-ce78-48a5-bcc2-859a0cb0a86a_neurovascularsemmesweinsteinlowerplantarsurfacetoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_1f8b795a-6fb8-48da-a549-dd339daf4dce_neurovascularsemmesweinsteinlowerdorsalsurfacetoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]

@@ -15,7 +15,8 @@
 
     <!-- Right/Left paired controls -->
     <div class="form-row" *ngFor="let rCtrl of controlR; let i = index">
-        <label class="field-label">{{ rCtrl.label }}</label>
+        <label class="field-label" *ngIf="!rCtrl.ignoreLabel">{{ rCtrl.label }}</label>
+        <label class="field-label" *ngIf="rCtrl.ignoreLabel"></label>
 
         <select [formControlName]="getControlName('right', rCtrl.label)" *ngIf="rCtrl.type ==='select'">
             <option *ngFor="let opt of rCtrl.value" [value]="opt.val">{{ opt.view }}</option>
