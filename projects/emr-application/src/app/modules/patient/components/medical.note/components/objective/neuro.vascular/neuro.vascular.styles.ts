@@ -205,5 +205,30 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "neuro_vascular_afc0cc21-5775-4a34-91a9-03a9239c4264_neurovascularvertebralarteryrightleftmselect",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_06d33c4e-1963-4f8d-80b3-53c7ae7982d0_neurovascularallenstestcirculationtoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_bb7ab265-9804-40ba-8b6a-d797fe8ed687_neurovascularcapillaryrefilltoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_3b3883b0-fc3e-4443-bf4c-7bb4b416b530_neurovascularhomansigntoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_00684c00-fad4-492b-936e-1c48691c0712_neurovascularthoracicoutlettoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_0ef0923a-84cb-4079-af4c-28873a3adf95_neurovascularlasegueslrtoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]

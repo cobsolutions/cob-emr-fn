@@ -18,6 +18,7 @@ export class TopRightLeftSelectsComponent implements OnInit {
   @Input() rightLabel: string = 'Right';
   @Input() leftLabel: string = 'Left';
   @Input() showLabel: boolean = true;
+  @Input() hasComment: boolean = false;
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
   }
@@ -25,6 +26,8 @@ export class TopRightLeftSelectsComponent implements OnInit {
   ngOnInit(): void {
     if (this.showLabel === undefined)
       this.showLabel = true
+    if (this.hasComment === undefined)
+      this.hasComment = false
     if (this.topControls !== undefined)
       this.topControls.forEach(control => {
         const key = `top_${this.toCamelCase(control.label)}_${this.parentFieldName}`;
@@ -53,11 +56,19 @@ export class TopRightLeftSelectsComponent implements OnInit {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
       });
+    if (this.hasComment){
+      const key = `comment_${this.parentFieldName}`;
+      this.form.addControl(key, new FormControl(null));
+    }
+      
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
   }
   getControlName(side: 'right' | 'left' | 'top', label: string): string {
     return `${side}_${this.toCamelCase(label)}_${this.parentFieldName}`;
+  }
+  getCommentName(): string {
+    return `comment_${this.parentFieldName}`;
   }
 }

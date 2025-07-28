@@ -25,4 +25,7 @@
       <option *ngFor="let opt of controlL[i]?.value" [value]="opt.val">{{ opt.view }}</option>
     </select>
   </div>
+  <div *ngIf="hasComment">
+    <textarea [formControlName]="getCommentName()" style="margin-left:311px;width:311px"></textarea>
+  </div>
 </div>
