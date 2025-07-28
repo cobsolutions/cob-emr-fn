@@ -330,5 +330,10 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "strength_016026ce-ae3c-4194-a410-49b8cd253d62_strengthlumbarmotorcontroltestsmtoprightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_0da8f80b-44a2-4b4d-9055-61e0c7bef9a3_strengthlumbarmotorcontroltestsdemtoprightleftcontrols",
+        "style": "margin-left: 10px;"
     }
 ]
