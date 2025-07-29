@@ -106,12 +106,12 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStressAtKneeFlex",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStress0AtKneeFlex",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStressAtKneeFlex",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStress30AtKneeFlex",
         "style": "margin-left: 10px;"
     },
     {
@@ -267,6 +267,41 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_e76515fe-918f-407e-9a2a-c1300f72601e_specialteststibialtorsiontoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_5380fcc1-99e6-480d-9446-6c5073eb563f_specialtestsvalgusstressatkneeflextoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_4a4e7b34-9420-48bb-9cc3-31cc94e78d2b_specialtestsvalgusstressatkneeflextoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_86b6e311-1763-4549-99fc-c1a1958003de_specialtestsanteriordrawertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_d38ec1ab-5f8a-45f9-82b2-7502eb699b73_specialtestsposteriordrawertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_2b57861f-4e13-4c5c-806b-d62a70fe38bf_specialtestslachmanstoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_7d97bedc-9e43-4949-9f2d-ee4562f2cc01_specialtestspivotshifttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_8a037b7a-b54d-47a2-be24-a5268a274788_specialtestssagsigntoprightleftselects",
         "style": "margin-left: 10px;"
     }
 ]
