@@ -200,12 +200,12 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "special_tests_83b52154-2cee-40fd-a6a2-92350f56862a_LegSquatWithOverheadReach",
+        "name": "special_tests_83b52154-2cee-40fd-a6a2-92350f56862a_2LegSquatWithOverheadReach",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "special_tests_83b52154-2cee-40fd-a6a2-92350f56862a_LegSquatWithOverheadReach",
+        "name": "special_tests_83b52154-2cee-40fd-a6a2-92350f56862a_1LegSquatWithOverheadReach",
         "style": "margin-left: 10px;"
     },
     {
@@ -322,6 +322,56 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_6c2cc5f2-0b6c-42f8-821e-6ee101e86d9d_specialteststorkstandsimobilitytesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_2ae3a4a8-7e17-4b27-8152-c8ef378650d4_specialtestssorestabilizationrightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_c20ad3be-85e2-43e3-8a4b-4bee42a955d1_specialtestsselectivefunctionalmovementassessmentrightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_e995591c-7764-4ae2-b83b-89f825a8cfba_specialtestssidebridgeplankrightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_5e9e6b13-1c41-440a-95e4-e874fe11240c_specialtestsproneplankrightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_9a9a76d5-68d7-4148-8bf4-2edf178db42e_specialtestsdinglelegbridgeholdrightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_d441a620-e568-44ba-b812-0cf92af3f813_specialtestssingleleghoptestrightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_1a556c0a-c2e7-46b5-980f-9a5c1003ac5f_specialtestslegsquatwithoverheadreachrightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_cff4c7e5-8515-4122-b519-c1214afa7b64_specialtestslegsquatwithoverheadreachrightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_310028b2-0187-4f5c-ad7e-0efd60687d4f_",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_c31c9437-3c68-4f2d-9937-d5fe89bf7fac_specialtestssingleleghoptestrightleftcontrols",
         "style": "margin-left: 10px;"
     }
 ]

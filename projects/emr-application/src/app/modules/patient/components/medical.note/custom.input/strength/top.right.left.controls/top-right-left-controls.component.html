@@ -27,6 +27,7 @@
         <input type="checkbox" [formControlName]="'right_' + toCamelCase(rCtrl.label) + '_' + parentFieldName"
             *ngIf="rCtrl.type ==='checkbox'" />
 
+        <span *ngIf="controlL.length > 0">
         <select [formControlName]="getControlName('left', controlL[i]?.label)" *ngIf="rCtrl.type ==='select'">
             <option *ngFor="let opt of controlL[i]?.value" [value]="opt.val">{{ opt.view }}</option>
         </select>
@@ -35,5 +36,6 @@
 
         <input type="checkbox" [formControlName]="'left_' + toCamelCase(rCtrl.label) + '_' + parentFieldName"
             *ngIf="rCtrl.type ==='checkbox'" />
+        </span>
     </div>
 </div>
