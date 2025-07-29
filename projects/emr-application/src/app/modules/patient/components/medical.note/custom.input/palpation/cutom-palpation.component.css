@@ -1,0 +1,14 @@
+.section {
+    margin-bottom: 20px;
+    margin-left:600px;
+  }
+  
+  table {
+    width: auto;
+    border-collapse: collapse;
+  }
+  
+  td, th {
+    padding: 6px 12px;
+  }
+  

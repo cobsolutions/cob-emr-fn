@@ -37,8 +37,8 @@
      && field.type !== 'top-right-left-controls'
      && field.type !== 'covavg'
      && field.type !== 'm-top-right-left-controls'
-     && field.type !== 'right-left-mselect'">
-
+     && field.type !== 'right-left-mselect'
+     && field.type !== 'cutom-palpation'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -257,6 +257,13 @@
     <div *ngIf="field.type === 'm-top-right-left-controls'">
         <m-top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"
             [columns]="field.value.columns"></m-top-right-left-controls>
+    </div>
+    <div *ngIf="field.type === 'cutom-palpation'">
+        <cutom-palpation 
+        [parentForm]="form" 
+        [parentFieldName]="field.name"
+        [singleSections]="field.value.singleSections"
+        [dualSections]="field.value.singleSections"></cutom-palpation>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

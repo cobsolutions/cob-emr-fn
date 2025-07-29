@@ -1,0 +1,44 @@
+<form [formGroup]="form" style="background-color:#f8f8f8">
+<!-- SINGLE SECTIONS -->
+<div *ngFor="let section of singleSections" class="section">
+  <h4>{{ section.title }}</h4>
+  <div *ngFor="let option of section.options">
+    <label>
+      <input
+        type="checkbox"
+        [formControlName]="toCamelCase(section.title + '_' + option)" />
+      {{ option }}
+    </label>
+  </div>
+</div>
+
+<!-- DUAL SECTIONS -->
+<div *ngFor="let section of dualSections" class="section">
+  <h4>{{ section.title }}</h4>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Right</th>
+        <th>Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let option of section.options">
+        <td>{{ option }}</td>
+        <td>
+          <input
+            type="checkbox"
+            [formControlName]="'right_' + toCamelCase(section.title + '_' + option)" />
+        </td>
+        <td>
+          <input
+            type="checkbox"
+            [formControlName]="'left_' + toCamelCase(section.title + '_' + option)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</form>

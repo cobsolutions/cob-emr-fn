@@ -101,6 +101,7 @@ import { TopRightLeftControlsComponent } from './components/medical.note/custom.
 import { CovavgComponent } from './components/medical.note/custom.input/strength/cov.avg/covavg.component';
 import { MTopRightLeftControlsComponent } from './components/medical.note/custom.input/strength/m.top.right.left.controls/m-top-right-left-controls.component';
 import { RightLeftMSelectComponent } from './components/medical.note/custom.input/Neuro.vascular/right.left.m.select/right-left-mselect.component';
+import { CutomPalpationComponent } from './components/medical.note/custom.input/palpation/cutom-palpation.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -204,6 +205,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CovavgComponent,
     MTopRightLeftControlsComponent,
     RightLeftMSelectComponent,
+    CutomPalpationComponent,
   ],
   imports: [
     CommonModule,
