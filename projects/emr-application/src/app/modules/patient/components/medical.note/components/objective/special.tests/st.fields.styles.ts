@@ -258,6 +258,16 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_61555a6e-45f4-4632-b298-836b093f43ab_specialtestssoleusmusclelengthtoprightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_1461e9a9-4994-4ef2-8051-0eb80eb0612f_specialtestscraigstesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_e76515fe-918f-407e-9a2a-c1300f72601e_specialteststibialtorsiontoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]
 
