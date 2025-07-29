@@ -303,6 +303,26 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_8a037b7a-b54d-47a2-be24-a5268a274788_specialtestssagsigntoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_5dcf6a04-c79e-4e2e-adc4-770a04ee80f0_specialtestsstorkstandsimobilitytesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_ecb7a8b0-3b5e-4e21-b49a-f38dbd71d29c_specialtestsfsigntesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_da4d89bc-906b-49ff-8eaa-8b93b388bbb4_specialtestspatellarballottementtesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_6c2cc5f2-0b6c-42f8-821e-6ee101e86d9d_specialteststorkstandsimobilitytesttoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]
 
