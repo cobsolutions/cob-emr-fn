@@ -17,12 +17,15 @@ export class TopRightLeftControlsComponent implements OnInit {
   @Input() columns: number = 2;
   @Input() rightLabel: string = 'Right';
   @Input() leftLabel: string = 'Left';
+  @Input() showLabel: boolean = true;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
   }
 
   ngOnInit(): void {
+    if (this.showLabel === undefined)
+      this.showLabel = true
     if (this.topControls !== undefined)
       this.topControls.forEach(control => {
         const key = `top_${this.toCamelCase(control.label)}_${this.parentFieldName}`;

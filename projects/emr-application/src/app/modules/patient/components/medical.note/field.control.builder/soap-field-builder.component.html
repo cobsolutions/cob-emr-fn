@@ -237,20 +237,19 @@
             [rightLabel]="field.value.rightLabel" [leftLabel]="field.value.leftLabel"></hand-rom>
     </div>
     <div *ngIf="field.type === 'right-left-mselect'">
-        <right-left-mselect [parentForm]="form" [parentFieldName]="field.name"
-            [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+        <right-left-mselect [parentForm]="form" [parentFieldName]="field.name" [topControls]="field.value.topControls"
+            [controlR]="field.value.controlR" [controlL]="field.value.controlL"
             [showLabel]="field.value.showLabel"></right-left-mselect>
     </div>
     <div *ngIf="field.type === 'top-right-left-selects'">
         <top-right-left-selects [parentForm]="form" [parentFieldName]="field.name"
             [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
-            [showLabel]="field.value.showLabel" 
-            [hasComment]="field.value.hasComment"></top-right-left-selects>
+            [showLabel]="field.value.showLabel" [hasComment]="field.value.hasComment"></top-right-left-selects>
     </div>
     <div *ngIf="field.type === 'top-right-left-controls'">
         <top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"
-            [topControls]="field.value.topControls" [controlR]="field.value.controlR"
-            [controlL]="field.value.controlL"></top-right-left-controls>
+            [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+            [showLabel]="field.value.showLabel"></top-right-left-controls>
     </div>
     <div *ngIf="field.type === 'covavg'">
         <covavg [parentForm]="form" [parentFieldName]="field.name"></covavg>

@@ -243,6 +243,21 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_1201eb56-cb2c-4b8b-9f36-d4a258b63913_specialtestsobertoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_03d37471-41a2-4140-a5ac-7c220372b027_specialtestshamstringflexibilitytoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_0ea68fe3-09c5-4b63-8831-e66dc58f6a4c_specialtestsgastrocnemiuslengthtoprightleftcontrols",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_61555a6e-45f4-4632-b298-836b093f43ab_specialtestssoleusmusclelengthtoprightleftcontrols",
+        "style": "margin-left: 10px;"
     }
 ]
 
