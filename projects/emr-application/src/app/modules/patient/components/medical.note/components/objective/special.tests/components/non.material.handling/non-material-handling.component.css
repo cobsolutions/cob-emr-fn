@@ -1,7 +1,8 @@
 .task-table {
-    width: 75%;
+    width: 90%;
     border-collapse: collapse;
     table-layout: fixed;
+    background-color: #f9f9f9;
   }
   
   .task-table th,

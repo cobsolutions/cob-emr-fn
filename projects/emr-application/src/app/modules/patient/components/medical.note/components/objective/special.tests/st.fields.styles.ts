@@ -388,6 +388,11 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_81a873d4-0360-44cd-8f95-61dd8bb7c5dd_specialtestsmaterialhandlingbilaterallifting",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_8b3d61b7-22b6-433b-b5e0-2eaf496b4ff3_specialtestsnonmaterialhandlingnonmaterialhandling",
+        "style": "margin-left: 500px;"
     }
 ]
 
