@@ -373,6 +373,21 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_c31c9437-3c68-4f2d-9937-d5fe89bf7fac_specialtestssingleleghoptestrightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_89e1fc60-e2a6-4f8c-853b-d56f4c528e9b_specialtestsalarligamenttestrightleftselect",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_51e51e89-4913-4a23-85da-8e42ca007f5a_specialtestsalarsigamentstressarea",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_81a873d4-0360-44cd-8f95-61dd8bb7c5dd_specialtestsmaterialhandlingbilaterallifting",
+        "style": "margin-left: 10px;"
     }
 ]
 
