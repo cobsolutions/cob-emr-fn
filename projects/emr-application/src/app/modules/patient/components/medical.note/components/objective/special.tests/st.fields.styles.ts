@@ -238,6 +238,11 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "special_tests_43a7fb9d-6c04-4b37-8c6f-a8f1f47f8752_specialteststhomastesttoprightleftcontrols",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "special_tests_1201eb56-cb2c-4b8b-9f36-d4a258b63913_specialtestsobertoprightleftselects",
+        "style": "margin-left: 10px;"
     }
 ]
 
