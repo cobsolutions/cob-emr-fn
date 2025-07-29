@@ -382,5 +382,25 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "neuro_vascular_56308517-b0eb-4aa2-b58f-25c876715eb2_neurovascularsemmesweinsteinuppersmallfingertoprightleftselects",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_e831505c-98e5-47b5-af1f-de982c3ca557_neurovasculartinellowertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_97cbe5c8-fd2d-430a-9e0a-c04381b51268_neurovasculartineluppertoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_11c030cb-17b7-48c5-8b64-86cd462e9b4c_neurovasculartransverseligamentstabilitytoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_8b8ddd6f-071d-45d8-bde5-5837621bc43a_",
+        "style": "margin-left: 10px;width:800px"
     }
 ]
