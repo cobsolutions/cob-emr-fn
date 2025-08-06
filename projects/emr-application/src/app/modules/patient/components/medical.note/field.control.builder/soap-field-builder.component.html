@@ -263,7 +263,7 @@
         [parentForm]="form" 
         [parentFieldName]="field.name"
         [singleSections]="field.value.singleSections"
-        [dualSections]="field.value.singleSections"></cutom-palpation>
+        [dualSections]="field.value.dualSections"></cutom-palpation>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

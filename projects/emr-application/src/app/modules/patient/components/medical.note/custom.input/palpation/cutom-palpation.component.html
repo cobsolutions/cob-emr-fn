@@ -1,44 +1,65 @@
-<form [formGroup]="form" style="background-color:#f8f8f8">
+<form [formGroup]="form" style="background-color:#f8f8f8;">
+
 <!-- SINGLE SECTIONS -->
-<div *ngFor="let section of singleSections" class="section">
-  <h4>{{ section.title }}</h4>
-  <div *ngFor="let option of section.options">
-    <label>
-      <input
-        type="checkbox"
-        [formControlName]="toCamelCase(section.title + '_' + option)" />
-      {{ option }}
-    </label>
-  </div>
-</div>
+<table *ngFor="let section of singleSections" style="margin-bottom: 1rem; margin-left: 500px">
+  <tr>
+    <!-- Title Column -->
+    <td style="vertical-align: top; padding-right: 1rem; white-space: nowrap;">
+      <strong>{{ section.title }}</strong>
+    </td>
+
+    <!-- Checkbox Column -->
+    <td>
+      <div *ngFor="let option of section.options" style="margin-bottom: 0.25rem;">
+        <label>
+          <input
+            type="checkbox"
+            [formControlName]="toCamelCase(section.title + '_' + option)" />
+          {{ option }}
+        </label>
+      </div>
+    </td>
+  </tr>
+</table>
+
 
 <!-- DUAL SECTIONS -->
-<div *ngFor="let section of dualSections" class="section">
-  <h4>{{ section.title }}</h4>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Right</th>
-        <th>Left</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let option of section.options">
-        <td>{{ option }}</td>
-        <td>
-          <input
-            type="checkbox"
-            [formControlName]="'right_' + toCamelCase(section.title + '_' + option)" />
-        </td>
-        <td>
-          <input
-            type="checkbox"
-            [formControlName]="'left_' + toCamelCase(section.title + '_' + option)" />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div *ngFor="let section of dualSections" class="dual-section" style="margin-bottom: 1.5rem;margin-left: 500px">
+  <div style="display: flex; align-items: flex-start; gap: 1rem;">
+    <!-- Title aligned with table -->
+    <label style="min-width: 150px; font-weight: bold; padding-top: 4px;">
+      {{ section.title }}
+    </label>
 
+    <!-- Table aligned beside title -->
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 200px;">Right</th>
+          <th style="width: 200px;">Left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let option of section.options">
+          <td>
+            <label style="display: flex; align-items: center; white-space: nowrap; gap: 0.25rem;">
+              <input
+                type="checkbox"
+                [formControlName]="'right_' + toCamelCase(section.title + '_' + option)" />
+              {{ option }}
+            </label>
+          </td>
+          <td>
+            <label style="display: flex; align-items: center; white-space: nowrap; gap: 0.25rem;">
+              <input
+                type="checkbox"
+                [formControlName]="'left_' + toCamelCase(section.title + '_' + option)" />
+              {{ option }}
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 </form>
