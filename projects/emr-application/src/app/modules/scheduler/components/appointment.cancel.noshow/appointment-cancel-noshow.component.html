@@ -23,7 +23,7 @@
                 <c-col>
                     <c-card>
                         <c-card-body>
-                            <c-date-picker size="sm" [date]="resonDate"
+                            <c-date-picker size="sm" [(date)]="resonDate"
                                 placeholder="Appointment Cancelation Date"></c-date-picker>
                         </c-card-body>
                     </c-card>
@@ -43,10 +43,4 @@
             </c-row>
         </div>
     </form>
-    <div class="d-grid gap-2 col-2 mx-auto mb-1">
-        <button cButton color="primary" variant="outline" size="sm" (click)="updateStatus()">
-            <span *ngIf="type === 'cancel'">Cancel</span>
-            <span *ngIf="type === 'noshow'">Save</span>
-        </button>
-    </div>
 </c-container>

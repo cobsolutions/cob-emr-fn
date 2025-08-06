@@ -1,0 +1,5 @@
+<div [formGroup]="BracesForm">
+    <span *ngFor="let field of fields;">
+        <soap-field-builder [field]="field " [form]="BracesForm"></soap-field-builder>
+    </span>
+</div>

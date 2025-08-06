@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, from, map, Observable, retry, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, switchMap, throwError } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
-import { CacheService } from '../../../common/service/cahce/cache.service';
 import { IData } from '../../../patient/components/list/interfaces/i.data';
 import { Clinic } from '../../../patient/models/clinic';
+import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 const httpOptions = {
   // headers: new HttpHeaders({
   //   'Content-Type': 'application/json',
@@ -18,22 +19,27 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ClinicService {
-  
+
   private userUrl = environment.baseURL + 'clinic'
-  constructor(private httpClient: HttpClient, private cahceService: CacheService) { }
+  constructor(private httpClient: HttpClient, private loggedInService: LoggedInService) { }
 
   create(clinic: Clinic) {
     const headers = { 'content-type': 'application/json' }
     var createURL = this.userUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(clinic), { 'headers': headers })
   }
+  update(clinic: Clinic) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.userUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(clinic), { 'headers': headers })
+  }
   getByUserId(userId: string | undefined) {
-    const url = this.userUrl + '/find' + '/clinics/userUUID/' + userId;
+    const url = this.userUrl + '/find' + '/user/' + userId;
     return this.httpClient.get(url).pipe(
       map((response: any) => <Clinic[]>response));
   }
   delete(id: number) {
-    var createURL = this.userUrl + '/delete/clinic/' + id
+    var createURL = this.userUrl + '/delete/' + id
     return this.httpClient.delete(`${createURL}`)
   }
   get(config$: BehaviorSubject<IApiParams>): Observable<any> {
@@ -57,10 +63,11 @@ export class ClinicService {
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
     return this.httpClient
-    .get<IData>(this.userUrl + "/find/organization/" + localStorage.getItem('org'), options)
+      .get<IData>(this.userUrl + "/find/organization/" + this.loggedInService.getLoggedUser().organizationId, options)
+
   }
   getById(clinicId: number) {
-    var createURL = this.userUrl + '/find/clinic/' + clinicId
+    var createURL = this.userUrl + '/find/' + clinicId
     return this.httpClient.get(`${createURL}`)
   }
   private handleHttpError(error: HttpErrorResponse) {

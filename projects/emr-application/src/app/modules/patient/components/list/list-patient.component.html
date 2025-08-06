@@ -6,7 +6,8 @@
 </c-row>
 <hr />
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Patient</button>
+  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()" dispaly-input
+    [componentRole]="componentRole">Create Patient</button>
 </div>
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(patient$ | async) ?? []"
@@ -20,7 +21,10 @@
         <ng-container [ngSwitch]="columnName">
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" (click)="remove(item)" size="sm">
+              <button cButton variant="outline" (click)="edit(item)" size="sm" >
+                <svg cIcon name="cilPen"></svg>
+              </button>
+              <button cButton variant="outline" (click)="remove(item)" size="sm" dispaly-input [componentRole]="componentRole">
                 <svg cIcon name="cilTrash"></svg>
               </button>
               <button cButton variant="outline" (click)="chart(item.id)" size="sm">
@@ -42,3 +46,13 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
+<c-modal id="editPateint" [visible]="editPatientVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header>
+    <h3 cModalTitle>Edit Patient</h3>
+    <button (click)="toggleEditPatient()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-create-patient [selectedPatient]="selectedPatient" *ngIf="editPatientVisibility"
+      (changeVisibility)="changeFacilityVisibility($event)" [mode]="'update'"></app-create-patient>
+  </c-modal-body>
+</c-modal>

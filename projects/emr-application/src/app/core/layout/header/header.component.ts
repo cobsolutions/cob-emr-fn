@@ -2,15 +2,14 @@ import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
-import { switchMap } from 'rxjs';
-import { ClinicService } from '../../../modules/administration/services/clinic/clinic.service';
-import { CacheService } from '../../../modules/common/service/cahce/cache.service';
-import { ClinicEmittingService } from '../../../modules/common/service/emitting/clinic-emitting.service';
+import { filter } from 'rxjs';
 import { Clinic } from '../../../modules/patient/models/clinic';
+import { LoggedInUser } from '../../../modules/security/model/loggedin.user';
 
 
 
 import { KcAuthService } from '../../../modules/security/service/kc-auth.service';
+import { LoggedInService } from '../../../modules/security/service/loggedIn/logged-in.service';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +19,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
   userName: string | undefined;
+  loggedIn: string
   @Input() sidebarId: string = "sidebar1";
-
+  selectedValue: string | null = null;
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
@@ -32,30 +32,32 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   constructor(private classToggler: ClassToggleService
     , private ksAuthService: KcAuthService
-    , private emittingClinicService: ClinicEmittingService
-    , private clinicService: ClinicService
-    , private cacheService: CacheService) {
+    , private loggedInService: LoggedInService) {
     super();
   }
   ngOnInit(): void {
+    this.loggedInService.changeSelectedClinic$.pipe(
+      filter(id => id !== null)
+    ).subscribe((id: any) => {
+      this.selectedValue = id;
+    })
     this.ksAuthService.isLoggedIn()
       .then((loggedIn) => {
         if (loggedIn) {
-          this.ksAuthService.loadUserProfile()
-            .then((userProfile) => {
-              this.cacheService.setLoggedinUserUUID(userProfile.id!)
-              this.cacheService.setLoggedinUserName(userProfile.username!);
-              this.userName = this.cacheService.getLoggedinUserName()?.charAt(0).toUpperCase()
-              this.clinicService.getByUserId(this.cacheService.getLoggedinUserUUID()).subscribe(response => {
-                this.clinics = response;
-                localStorage.setItem('org',this.clinics[0].organizationId.toString())
-                this.emittingClinicService.selectedClinic$.next(Number(this.clinics[0].id))
-              })
-            })
+          // this.loggedInService.getObservableLoggedUser().subscribe(loggedInUser => {
+            var result: LoggedInUser = this.loggedInService.getLoggedUser();
+            this.userName = result.userName
+            this.clinics = result.clinics
+            this.selectedValue = result.clinics[0].id
+            this.loggedInService.selectedClinic$.next(Number(result.clinics[0].id))
+            this.loggedIn = this.capitalizeFirstLetter(result.lastName) + '' + this.capitalizeFirstLetter(result.firstName)
+          // })
         }
-      })
+      });
   }
-
+  private capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase();
+  }
   setTheme(value: string): void {
     this.themeSwitch.setValue({ themeSwitchRadio: value });
     this.classToggler.toggle('body', 'dark-theme');
@@ -64,6 +66,6 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.ksAuthService.logout()
   }
   setSelectedClinic(event: any) {
-    this.emittingClinicService.selectedClinic$.next(event.target.value)
+    this.loggedInService.selectedClinic$.next(event.target.value)
   }
 }

@@ -1,0 +1,35 @@
+<form [formGroup]="form" [style]="testStyle">
+  <div class="container" [formGroup]="form">
+    <!-- Right Hand -->
+    <div class="column">
+      <div class="header">Right</div>
+      <div formGroupName="right">
+        <div class="form-group" *ngFor="let type of types">
+          <label>{{ type }}</label>
+          <div class="input-group">
+            <select [formControlName]="map[type]">
+              <option *ngFor="let option of mapTypes[type]" [value]="option.val">{{ option.view }}</option>
+            </select>
+            <textarea class="comment" [formControlName]="'comment_' +map[type]"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left Hand -->
+    <div class="column">
+      <div class="header">Left</div>
+      <div formGroupName="left">
+        <div class="form-group" *ngFor="let type of types">
+          <label>{{ type }}</label>
+          <div class="input-group">
+            <select [formControlName]="map[type]">
+              <option *ngFor="let option of mapTypes[type]" [value]="option.val">{{ option.view }}</option>
+            </select>
+            <textarea class="comment" [formControlName]="'comment_' +map[type]"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>
+    <span *ngIf="data.action ==='noshow'">
+        No show Reason
+    </span>
+    <span *ngIf="data.action ==='cancel'">
+        Cancel Reason
+    </span>
+</h2>
+<mat-dialog-content class="mat-typography">
+    <app-appointment-cancel-noshow [type]="data.action" [appointment]="appointment" #appointmentCancelNoshowComponent
+        *ngIf="appointment"></app-appointment-cancel-noshow>
+    <c-spinner color="dark" variant="grow" *ngIf="!appointment"></c-spinner>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <div class="d-grid gap-2 col-2 mx-auto mb-1">
+        <button cButton color="primary" variant="outline" size="sm" (click)="update()">Save</button>
+    </div>
+</mat-dialog-actions>

@@ -1,159 +1,114 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import * as moment from 'moment';
-import { filter, map, Observable, switchMap, tap } from 'rxjs';
+import { FormControl, NgForm } from '@angular/forms';
+import { debounceTime, EMPTY, filter, Observable, switchMap, tap } from 'rxjs';
+import { Calendar } from '../../../administration/model/calendar/calendar';
 import { User } from '../../../administration/model/user/user';
-import { SchedulerRepetition } from '../../../common/models/enums/scheduler/scheduler.repetition';
-import { SchedulerType } from '../../../common/models/enums/scheduler/scheduler.type';
-import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
-import { PatientCase } from '../../../patient/models/case/patient.case';
+import { SchedulerRepetition } from '../../../common/models/scheduler/scheduler.repetition';
+import { SchedulerType } from '../../../common/models/scheduler/scheduler.type';
+import { Clinic } from '../../../patient/models/clinic';
 import { Patient } from '../../../patient/models/patient';
+import { PatientFinderService } from '../../../patient/services/patient/patient-finder.service';
 import { Appointment } from '../../models/appointment';
-import { AppointmentRepeat } from '../../models/appointment.repeat';
-import { AppointmentEmittingService } from '../../service/appointment-emitting.service';
+import { AppointmentType } from '../../models/appointment.type';
 import { AppointmentService } from '../../service/appointment.service';
-import { DoctorAppointmentService } from '../../service/doctor-appointment.service';
-import { PatientAppointmentService } from '../../service/patient-appointment.service';
+import { ConstructAppointmentService } from '../../service/construct.appointment/construct-appointment.service';
+import { Settings } from '../scheduler.view/util/fetch.scheduler.settings';
+import { BlockAppointmentComponent } from './block.appointment/block-appointment.component';
+import { FullAppointmentComponent } from './full.appointment/full-appointment.component';
 
-export interface TreatingDoctor {
-  doctorName,
-  uuid: string;
-}
-export interface days {
-  dayName: string,
-  dayNumber: number
-}
+
 @Component({
   selector: 'app-appointment-add',
   templateUrl: './appointment-add.component.html',
   styleUrls: ['./appointment-add.component.css']
 })
 export class AppointmentAddComponent implements OnInit {
-  @ViewChild('appontmentForm') appontmentForm: NgForm;
+  @Input() module: string
+  @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
+  @ViewChild('fullAppointment') fullAppointmentComponent: FullAppointmentComponent;
+  @ViewChild('blockAppointment') blockAppointmentComponent: BlockAppointmentComponent;
+  patientClient = new FormControl();
+  filteredPatients: any;
+  isLoading = false;
   @Input() startDate: Date;
-  @Input() iscreate: boolean;
-  submitted: boolean = false;
+  @Input() calendarId: number;
+  @Input() schedulerSettings: Settings
+  notValidForm: boolean = false;
   patient$!: Observable<Patient[]>;
   therapists$!: Observable<User[]>;
+  patientClinics$!: Observable<Clinic[]>;
+  appointmentTypes$: Observable<AppointmentType[]>;
   appointment: Appointment = new Appointment();
-  isAllTherapists: boolean = false;
   appointmentType = SchedulerType;
   appointmentRepetition = SchedulerRepetition;
-  addAppointmentVisibility = false;
-  weekDays: days[] = [
-    {
-      dayName: 'Mon', dayNumber: 2
-    },
-    {
-      dayName: 'Tue', dayNumber: 3
-    },
-    {
-      dayName: 'Wed', dayNumber: 4
-    },
-    {
-      dayName: 'Thu', dayNumber: 5
-    },
-    {
-      dayName: 'Fri', dayNumber: 6
-    },
-    {
-      dayName: 'Sat', dayNumber: 7
-    },
-    {
-      dayName: 'Sun', dayNumber: 1
-    },
-  ]
-  appointmentRepeat: AppointmentRepeat = new AppointmentRepeat();
   startBoundary: Date;
   endBoundary: Date;
-  constructor(private appointmentService: AppointmentService
-    , private patientAppointmentService: PatientAppointmentService
-    , private clinicEmittingService: ClinicEmittingService
-    , private doctorAppointmentService: DoctorAppointmentService
-    , private appointmentEmittingService: AppointmentEmittingService) { }
+  calendars$!: Observable<Calendar[]>;
+  selectedClinic?: number;
+  constructor(private patientFinderService: PatientFinderService
+    , private appointmentService: AppointmentService
+    , private constructAppointmentService: ConstructAppointmentService) { }
   ngOnInit() {
-    this.initAppointmentDate();
-    this.patient$ = this.clinicEmittingService.selectedClinic$.pipe(
-      tap(clinicId => { this.appointment.clinicId = clinicId }),
-      switchMap(clinicId => this.patientAppointmentService.getPateint(clinicId)),
-      filter(patients => patients !== null),
-      map(response => {
-        return response;
-      })
-    )
-    this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
-      switchMap(clinicId => this.doctorAppointmentService.getAllTherapistsByClinic(clinicId)),
-      filter(therapists => therapists !== null),
-      map(response => {
-        return response;
-      })
-    )
-    if (!this.iscreate)
-      this.appointmentEmittingService.selectedAppointment$.pipe(
-        filter((appointmentId) => appointmentId !== null),
-        switchMap((appointmentId) => this.appointmentService.retrieveAppointment(appointmentId))
-      ).subscribe((result) => {
-        this.populateAppointment(result)
-      })
+    this.findPatientByNameAutoComplete();
   }
-  populateAppointment(appointment: Appointment) {
-    var start: Date = moment.unix(appointment.startDate / 1000).toDate();
-    var end: Date = moment.unix(appointment.endDate / 1000).toDate()
-    this.appointment.id = appointment.id
-    this.appointment.appointmentDate.startDate = start;
-    this.appointment.appointmentDate.startTime = start;
-    this.appointment.appointmentDate.endDate = end;
-    this.appointment.appointmentDate.endTime = end;;
-    this.appointment.appointmentType = appointment.appointmentType;
-    this.appointment.patient = appointment.patient
-    this.appointment.patient.fullName = appointment.title.split(':')[0]
-    this.appointment.patientId = appointment.patientId;
-    this.appointment.patientCase = { id: appointment.patientCaseId }
-    this.appointment.patientCaseId = appointment.patientCaseId;
-    this.appointment.note = appointment.note;
-    this.appointment.appointmentStatus = appointment.appointmentStatus;
-    this.appointment.therapyUUID = appointment.therapyUUID
-    this.appointment.appointmentRepetition = appointment.appointmentRepetition;
-  }
-  initAppointmentDate() {
-    this.appointment.appointmentDate.startDate = this.startDate;
-    this.appointment.appointmentDate.startTime = moment(this.startDate).set("hour", 8).set("minute", 0).toDate();;
-    this.appointment.appointmentDate.endDate = moment(this.appointment.appointmentDate.startDate).toDate();
-    this.appointment.appointmentDate.endTime = moment(this.appointment.appointmentDate.startTime).add(30, 'minutes').toDate()
-  }
-  pick(selectedPatient: Patient) {
-    console.log(selectedPatient)
-    this.appointment.patientId = selectedPatient.id;
-  }
-  unpick(event: any) {
-    this.appointment.patientId = null;
-  }
-  onCaseSelected(selectedCase: any) {
-    this.appointment.patientCaseId = selectedCase.id;
-  }
-  checkAllTherapists(event: any) {
-    if (event.currentTarget.checked)
-      this.therapists$ = this.doctorAppointmentService.getAllTherapists().pipe(
-        filter(therapists => therapists !== null),
-        map(response => {
-          return response;
-        })
+  private findPatientByNameAutoComplete() {
+    this.patientClient.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === undefined)
+            return false;
+          if (text.length > 3) {
+            return true
+          } else {
+            this.filteredPatients = [];
+            this.filteredPatients.length
+            return false;
+          }
+        }),
+        debounceTime(1000),
+        tap((value) => {
+          this.filteredPatients = [];
+          this.isLoading = true;
+        }),
+        switchMap((value) => {
+          return this.patientFinderService.getPatientsByName(value)
+        }
+        )
       )
-    else
-      this.therapists$ = this.clinicEmittingService.selectedClinic$.pipe(
-        switchMap(clinicId => this.doctorAppointmentService.getAllTherapistsByClinic(clinicId)),
-        filter(therapists => therapists !== null),
-        map(response => {
-          return response;
-        })
-      )
+      .subscribe(data => {
+        this.isLoading = false
+        if (data == undefined) {
+          this.filteredPatients = [];
+        } else {
+          this.filteredPatients = data.body;
+        }
+      },
+        error => {
+          this.isLoading = false
+        });
   }
-  toggleAddAppointment() {
-    this.addAppointmentVisibility = !this.addAppointmentVisibility;
+  public createAppointment() {
+    this.appointment = this.getAppointment();
+    if (this.appointment !== undefined) {
+      this.constructAppointmentService.constructAppointmentDate(this.appointment)
+      if (this.calendarId !== null)
+        this.appointment.calendarId = this.calendarId;
+      if (this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType === null
+        || this.appointment.appointmentRepetitionConfiguration.appointmentRepetitionType === undefined)
+        return this.appointmentService.createSingleAppointment(this.appointment)
+      else
+        return this.appointmentService.createRepetitionAppointment(this.appointment)
+    } else {
+      return EMPTY;
+    }
   }
-
-  compareFn = this._compareFn.bind(this);
-  _compareFn(a, b) {
-    return a?.id === b?.id;
+  private getAppointment(): Appointment {
+    if (this.filteredPatients?.length > 0) {
+      return this.fullAppointmentComponent.returnAppointment();
+    }
+    if (this.filteredPatients?.length === 0 || this.filteredPatients === undefined) {
+      return this.blockAppointmentComponent.returnAppointment();
+    }
+    return undefined;
   }
 }

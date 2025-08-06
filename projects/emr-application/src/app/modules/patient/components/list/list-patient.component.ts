@@ -4,6 +4,7 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
+import { Role } from '../../../security/model/role';
 import { Patient } from '../../models/patient';
 import { PatientFinderPaginationService } from '../../services/patient/patient-finder-pagination.service';
 
@@ -13,7 +14,8 @@ import { PatientFinderPaginationService } from '../../services/patient/patient-f
   styleUrls: ['./list-patient.component.css']
 })
 export class ListPatientComponent extends ListTemplate implements OnInit {
-
+  editPatientVisibility: boolean = false;
+  selectedPatient: Patient;
   constructor(
     private router: Router,
     private patientFinderPaginationService: PatientFinderPaginationService,
@@ -22,9 +24,9 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
   }
   columns: (string | IColumn)[];
   patient$!: Observable<Patient[]>;
-
+  componentRole: string[] = [Role.PATIENT_ROLE ];
   ngOnInit(): void {
-    this.columns = this.constructColumns(['id','firstName', 'middleName', 'lastName', 'patientId', 'actions']);
+    this.columns = this.constructColumns(['id', 'firstName', 'middleName', 'lastName', 'patientId', 'actions']);
     this.initListComponent();
     this.patient$ = this.patientFinderPaginationService.getPateints(this.apiParams$).pipe(
       retry({
@@ -57,5 +59,16 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
   }
   chart(patientId: number) {
     this.router.navigateByUrl('emr/patient/chart/patientId/' + patientId);
+  }
+  toggleEditPatient() {
+    this.editPatientVisibility = !this.editPatientVisibility
+  }
+  edit(patient: Patient) {
+    this.selectedPatient = patient
+    this.editPatientVisibility = true
+  }
+  changeFacilityVisibility(event: any) {
+    if (event === 'close')
+      this.toggleEditPatient();
   }
 }

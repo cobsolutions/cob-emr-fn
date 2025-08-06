@@ -1,0 +1,76 @@
+/* Shared container for rows */
+.rom-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr; /* Adjust widths here */
+  gap: 10px;
+  align-items: center;
+  justify-items: start; /* Aligns content to the left */
+  width: 100%;
+  max-width: 70%; /* Optional: limit max width */
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* Label on the left column */
+.test-label {
+  text-align: left;
+  font-weight: 600;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+/* Left & Right column headers */
+.side-label {
+  font-weight: bold;
+  text-align: left;
+  padding: 5px 0;
+}
+
+/* Dropdown styling */
+.dropdown {
+  width: 100%;
+  max-width: 200px;   /* Controls dropdown width */
+  min-width: 120px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 14px;
+  text-align: left;
+  justify-self: start;
+  margin-left:30px;
+}
+
+/* For single column layout (if needed) */
+.single-column-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-items: start;
+  width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.single-label {
+  text-align: left;
+  font-weight: bold;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+/* Optional: Apply to All styling */
+.apply-all-row {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+.apply-label {
+  text-align: center !important;
+  font-weight: bold;
+}

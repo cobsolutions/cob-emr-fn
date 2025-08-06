@@ -8,10 +8,11 @@ import { EncryptService } from '../../common/service/encyrption/encrypt.service'
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private encryptService:EncryptService) { }
+  constructor(private encryptService: EncryptService) { }
 
   ngOnInit(): void {
-    console.log(this.encryptService.encrypt('Khaled@123'))
+    const enc = this.encryptService.encrypt('Khaled@123');
+    console.log(this.encryptService.decrypt(enc))
   }
 
 }

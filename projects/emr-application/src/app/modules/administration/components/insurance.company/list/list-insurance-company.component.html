@@ -9,14 +9,12 @@
   <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Insurance Company</button>
 </div>
 <ng-container *ngIf="props$ | async as props" fluid="true">
-  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" 
-    [items]="(insuranceCompany$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-    (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-    [itemsPerPageSelect]="true" 
+  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(insuranceCompany$ | async) ?? []"
+    [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
+    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
     [tableProps]="{ hover: true, striped: true, responsive: true , small:true }"
     [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
-    [tableBodyProps]="{ align: 'middle' }"
-    (sorterValueChange)="handleSorterValueChange($event)"  header>
+    [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
     <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
       <td>
         <ng-container [ngSwitch]="columnName">
@@ -25,7 +23,7 @@
               <button cButton variant="outline" (click)="remove(item)" size="sm">
                 <svg cIcon name="cilTrash"></svg>
               </button>
-              <button cButton variant="outline" size="sm">
+              <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
             </div>
@@ -44,3 +42,13 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
+<c-modal id="editInsuranceCompany" [visible]="editInsuranceCompanyVisibility" size="xl">
+  <c-modal-header>
+    <h3 cModalTitle>Edit InsuranceCompany</h3>
+    <button (click)="toggleEdiInsuranceCompany()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <edit-insurance-company *ngIf="editInsuranceCompanyVisibility"
+      [insuranceCompany]="selectedInsuranceCompany" (changeVisibility)="changeFacilityVisibility($event)"></edit-insurance-company>
+  </c-modal-body>
+</c-modal>

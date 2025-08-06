@@ -1,0 +1,30 @@
+<!-- Standard Week Header -->
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div class="cal-week-view">
+    <div class="cal-header">
+      <div *ngFor="let day of days" class="cal-day-header">
+        {{ day.date | date: 'EEE, MMM d' }}
+      </div>
+    </div>
+  
+    <!-- Week Body with Resource Rows -->
+    <div class="cal-body">
+      <div *ngFor="let day of groupEventsByDayAndResource(events, days, resources)">
+        <!-- Header for Day -->
+        <div class="cal-day-column">
+          <div *ngFor="let resourceGroup of day.resources" class="cal-resource-row">
+            <!-- Resource Header -->
+            <div class="cal-resource-header">
+              {{ resourceGroup.resource.name }}
+            </div>
+  
+            <!-- Events -->
+            <div *ngFor="let event of resourceGroup.events" class="cal-event">
+              <span>{{ event.title }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

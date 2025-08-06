@@ -13,7 +13,7 @@
               <button cButton variant="outline" size="sm" (click)="edit(item)">
                 <svg cIcon name="cilPen"></svg>
               </button>
-              <button cButton variant="outline" size="sm"  (click)="toggleLiveDemo(item)" >
+              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)">
                 <svg cIcon name="cilTrash"></svg>
               </button>
             </div>
@@ -34,11 +34,21 @@
 </ng-container>
 <c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
   <c-modal-header>
-    <h5 cModalTitle>Modal title</h5>
+    <h5 cModalTitle>Delete Confirmation</h5>
     <button (click)="close()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>Are you sure to delete user.?</c-modal-body>
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
+</c-modal>
+<c-modal id="editClerical" [visible]="editUserVisibility" size="xl" backdrop="static">
+  <c-modal-header>
+    <h3 cModalTitle>Edit User Account</h3>
+    <button (click)="toggleEditUser()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clerical'"
+      (changeVisibility)="changeFacilityVisibility($event)"></edit-user>
+  </c-modal-body>
 </c-modal>

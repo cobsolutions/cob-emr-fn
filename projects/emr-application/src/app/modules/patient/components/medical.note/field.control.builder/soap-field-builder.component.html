@@ -1,0 +1,276 @@
+<div [formGroup]="form">
+    <!--input-->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+     && field.type !== 'textArea' 
+     && field.type !== 'mutliple-checkBox'
+     && field.type !== 'checkbox'
+     && field.type !== 'multiple_radio'
+     && field.type !== 'select'
+     && field.type !== 'multiple_select'
+     && field.type !== 'custom-mutliple-radio'
+     && field.type !== 'billing-code-number'
+     && field.type !== 'multiple-profile-text'
+     && field.type !== 'omt_test'
+     && field.type !== 'walk_test'
+     && field.type !== 'rom_test'
+     && field.type !== 'tissue-tension-upper'
+     && field.type !== 'grip'
+     && field.type !== 'child-grip'
+     && field.type !== 'upper-body-myofascial-test'
+     && field.type !== 'lower-body-myofascial-test'
+     && field.type !== 'movements-test'
+     && field.type !== 'gross-muscle-test'
+     && field.type !== 'manual-muscle-test'
+     && field.type !== 'neuro-vascular-right-left'
+     && field.type !== 'vertebral-artery'
+     && field.type !== 'semmes-weinstein-upper'
+     && field.type !== 'special-tests-right-left-select'
+     && field.type !== 'special-tests-right-left-check'
+     && field.type !== 'non-material-handling'
+     && field.type !== 'material-handling'
+     && field.type !== 'custom-date'
+     && field.type !== 'right-left-select'
+     && field.type !== 'six-min-walk-test'
+     && field.type !== 'rom-test-right-left'
+     && field.type !== 'hand-rom'
+     && field.type !== 'top-right-left-selects'
+     && field.type !== 'top-right-left-controls'
+     && field.type !== 'covavg'
+     && field.type !== 'm-top-right-left-controls'
+     && field.type !== 'right-left-mselect'
+     && field.type !== 'cutom-palpation'">
+        <label class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <input cFormControl [id]="field.id" [type]="field.type" [formControlName]="field.name" sizing="sm"
+            [style]="filedStyle!.style" />
+    </div>
+    <!--textArea-->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'textArea'">
+        <label class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <textarea cFormControl [id]="field.id" [formControlName]="field.name" rows="3" sizing="sm"
+            [style]="filedStyle!.style"></textarea>
+    </div>
+    <!--checkbox-->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type == 'checkbox'" [style]="filedStyle?.style">
+        <label class="me-2 text-end" [style]="filedStyle?.label_style"></label>
+        <c-form-check>
+            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
+            <label cFormCheckLabel for="na">{{field.display}}</label>
+        </c-form-check>
+    </div>
+    <!--radio-->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'radio'">
+        <label for="time_in_out" class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <div class="d-flex" [style]="filedStyle!.style">
+            <c-form-check class="me-3 d-flex align-items-center" *ngIf="field.extra==='na'">
+                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'na'" />
+                <label cFormCheckLabel class="ms-1">N/A</label>
+            </c-form-check>
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--multiple radio -->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_radio'">
+        <label for="time_in_out" class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <div class="d-flex" [style]="filedStyle!.style">
+            <c-form-check class="me-3 d-flex align-items-center" *ngFor="let fVal of field.value;">
+                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="fVal" />
+                <label cFormCheckLabel class="ms-1">{{fVal}}</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!--mutliple-checkBox-->
+    <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
+        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
+            [checkBoxStyle]="filedStyle?.style" [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
+    </div>
+    <!--multiple_profile_text-->
+    <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
+        <multiple-text-input [parentForm]="form" [parentFieldName]="field.name"
+            [values]="field.value"></multiple-text-input>
+    </div>
+    <!--custom multiple-radio-->
+    <div class="mb-3" *ngIf="field.type === 'custom-mutliple-radio'">
+        <multiple-radio [form]="form" [inputControlName]="field.name" [values]="field.value" [label]="field.display"
+            [splitColumn]="1" [style]="getstyleFieldControl(field.name)"></multiple-radio>
+    </div>
+    <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
+        <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
+    </div>
+    <!--select-->
+    <div class="d-flex mb-1" *ngIf="field.type === 'select'">
+        <label class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <select [formControlName]="field.name" [id]="field.id" [style]="filedStyle!.style" sizing="sm" cSelect>
+            <option *ngFor="let fVal of field.value" [value]="fVal.val">
+                {{fVal.view}}
+            </option>
+        </select>
+    </div>
+    <!--multiple_select-->
+    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_select'">
+        <label class="me-2 text-end" [style]="filedStyle!.label_style">
+            {{field.display}}
+        </label>
+        <div class="d-flex flex-column">
+            <select cSelect multiple [formControlName]="field.name" [id]="field.id" [style]="filedStyle!.style">
+                <option *ngFor="let fVal of field.value" [value]="fVal.val">
+                    {{fVal.view}}
+                </option>
+            </select>
+            <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
+        </div>
+    </div>
+    <div *ngIf="field.type === 'omt_test'">
+        <app-objective-omttest [layout]="field.omtFieldRequest.layout" [form]="form"
+            [controls]="field.omtFieldRequest.list" [testStyle]="filedStyle!.style"
+            [testLabelStyle]="filedStyle!.label_style" [parentFieldName]="field.name"></app-objective-omttest>
+    </div>
+    <div *ngIf="field.type === 'walk_test'">
+        <walk-test [form]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></walk-test>
+    </div>
+    <div *ngIf="field.type === 'rom_test'">
+        <rom-test [testName]="field.display" [form]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></rom-test>
+    </div>
+    <div *ngIf="field.type === 'tissue-tension-upper'">
+        <tissue-tension-upper [parentForm]="form" [topSelect]="field.value.selectTop"
+            [bodySelect]="field.value.selectBody" [parentFieldName]="field.name" [isMMT]="field.value.isMMT"
+            [testStyle]="filedStyle!.style"></tissue-tension-upper>
+    </div>
+    <div *ngIf="field.type === 'grip'">
+        <grip [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></grip>
+    </div>
+    <div *ngIf="field.type === 'child-grip'">
+        <child-grip [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></child-grip>
+    </div>
+    <div *ngIf="field.type ==='upper-body-myofascial-test'">
+        <upper-body-myofascial-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></upper-body-myofascial-test>
+    </div>
+    <div *ngIf="field.type ==='lower-body-myofascial-test'">
+        <lower-body-myofascial-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></lower-body-myofascial-test>
+    </div>
+    <div *ngIf="field.type ==='movements-test'">
+        <movements-test [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
+            [rows]="field.value.rows" [testStyle]="filedStyle!.style"></movements-test>
+    </div>
+    <div *ngIf="field.type ==='gross-muscle-test'">
+        <gross-muscle-test [parentForm]="form" [topSelect]="field.value.selectTop" [bodySelect]="field.value.selectBody"
+            [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></gross-muscle-test>
+    </div>
+    <div *ngIf="field.type ==='manual-muscle-test'">
+        <manual-muscle-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></manual-muscle-test>
+    </div>
+    <div *ngIf="field.type ==='neuro-vascular-right-left'">
+        <neuro-vascular-right-left [parentForm]="form" [topSelect]="field.value.topSelect"
+            [bodySelect]="field.value.bodySelect" [parentFieldName]="field.name"
+            [selectValues]="field.value.selectValues" [testStyle]="filedStyle!.style">
+        </neuro-vascular-right-left>
+    </div>
+    <div *ngIf="field.type ==='vertebral-artery'">
+        <vertebral-artery [parentForm]="form" [topSelect]="field.value.topSelect" [bodySelect]="field.value.bodySelect"
+            [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </vertebral-artery>
+    </div>
+    <div *ngIf="field.type === 'semmes-weinstein-upper'">
+        <semmes-weinstein-upper [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></semmes-weinstein-upper>
+    </div>
+    <div *ngIf="field.type === 'special-tests-right-left-select'">
+        <special-tests-right-left-select [parentForm]="form" [topSelect]="field.value.topSelect"
+            [bodySelect]="field.value.bodySelect" [parentFieldName]="field.name"
+            [selectValues]="field.value.selectValues" [testStyle]="filedStyle!.style">
+        </special-tests-right-left-select>
+    </div>
+    <div *ngIf="field.type === 'special-tests-right-left-check'">
+        <special-tests-right-left-check [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style">
+        </special-tests-right-left-check>
+    </div>
+    <div *ngIf="field.type === 'non-material-handling'">
+        <non-material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </non-material-handling>
+    </div>
+    <div *ngIf="field.type ==='custom-date'">
+        <custom-date [parentForm]="form" [parentFieldName]="field.name" [label]="field.display"
+            [labelStyle]="filedStyle!.label_style"></custom-date>
+    </div>
+    <div *ngIf="field.type ==='right-left-select'">
+        <right-left-select [parentForm]="form" [parentFieldName]="field.name" [labels]="field.value.labels"
+            [content]="field.value.content" [testStyle]="filedStyle!.style"></right-left-select>
+    </div>
+    <div *ngIf="field.type ==='six-min-walk-test'">
+        <six-min-walk-test [parentForm]="form" [parentFieldName]="field.name"
+            [testStyle]="filedStyle!.style"></six-min-walk-test>
+    </div>
+    <div *ngIf="field.type === 'material-handling'">
+        <material-handling [parentForm]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style">
+        </material-handling>
+    </div>
+    <div *ngIf="field.type === 'rom-test-right-left'">
+        <rom-test-right-left [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
+            [controlR]="field.value.controlR" [controlL]="field.value.controlL" [rightLabel]="field.value.rightLabel"
+            [leftLabel]="field.value.leftLabel"></rom-test-right-left>
+    </div>
+    <div *ngIf="field.type === 'hand-rom'">
+        <hand-rom [parentForm]="form" [parentFieldName]="field.name" [controlR1]="field.value.controlR1"
+            [controlR2]="field.value.controlR2" [controlL1]="field.value.controlL1" [controlL2]="field.value.controlL2"
+            [rightLabel]="field.value.rightLabel" [leftLabel]="field.value.leftLabel"></hand-rom>
+    </div>
+    <div *ngIf="field.type === 'right-left-mselect'">
+        <right-left-mselect [parentForm]="form" [parentFieldName]="field.name" [topControls]="field.value.topControls"
+            [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+            [showLabel]="field.value.showLabel"></right-left-mselect>
+    </div>
+    <div *ngIf="field.type === 'top-right-left-selects'">
+        <top-right-left-selects [parentForm]="form" [parentFieldName]="field.name"
+            [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+            [showLabel]="field.value.showLabel" [hasComment]="field.value.hasComment"></top-right-left-selects>
+    </div>
+    <div *ngIf="field.type === 'top-right-left-controls'">
+        <top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"
+            [topControls]="field.value.topControls" [controlR]="field.value.controlR" [controlL]="field.value.controlL"
+            [showLabel]="field.value.showLabel"></top-right-left-controls>
+    </div>
+    <div *ngIf="field.type === 'covavg'">
+        <covavg [parentForm]="form" [parentFieldName]="field.name"></covavg>
+    </div>
+    <div *ngIf="field.type === 'm-top-right-left-controls'">
+        <m-top-right-left-controls [parentForm]="form" [parentFieldName]="field.name"
+            [columns]="field.value.columns"></m-top-right-left-controls>
+    </div>
+    <div *ngIf="field.type === 'cutom-palpation'">
+        <cutom-palpation 
+        [parentForm]="form" 
+        [parentFieldName]="field.name"
+        [singleSections]="field.value.singleSections"
+        [dualSections]="field.value.dualSections"></cutom-palpation>
+    </div>
+    <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
+        <span *ngFor="let dependent of field.dependents;">
+            <!-- <div [ngClass]="{'border': dependent.render}"></div> -->
+            <soap-field-builder [field]="dependent " [form]="form" *ngIf="dependent.render"
+                [filedStyle]="getstyleFieldControl(dependent.name)" [styles]="styles"></soap-field-builder>
+        </span>
+    </div>
+
+</div>

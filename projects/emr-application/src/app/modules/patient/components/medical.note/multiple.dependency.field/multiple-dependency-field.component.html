@@ -1,0 +1,174 @@
+<div [formGroup]="form" *ngIf="levelOnedependent">
+    <span *ngFor="let field of levelOnedependent; index as i; first as isFirst">
+        <!--input-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+            && field.type !== 'textArea' 
+            && field.type !== 'inline-checkbox'
+            && field.type !== 'multiple_radio'
+            && field.type !== 'select'">
+            <label class="me-2 text-end" [style]="field.label_style">
+                {{field.display}}
+            </label>
+            <input cFormControl [id]="field.id" [type]="field.type" [formControlName]="field.name" sizing="sm"
+                [style]="field.style" />
+        </div>
+        <!--textArea-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'textArea'">
+            <label class="me-2 text-end" [style]="field.label_style">
+                {{field.display}}
+            </label>
+            <textarea cFormControl [id]="field.id" [formControlName]="field.name" rows="3" sizing="sm"
+                [style]="field.style"></textarea>
+        </div>
+        <!--checkbox-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type == 'checkbox'" [style]="field.style">
+            <label class="me-2 text-end"
+                [style]="field.label_style===undefined ||field.label_style===''?field.label_style:'white-space: nowrap; min-width: 190px;'"></label>
+            <c-form-check>
+                <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
+                <label cFormCheckLabel for="na">{{field.display}}</label>
+            </c-form-check>
+        </div>
+        <!--radio-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'radio'">
+            <label for="time_in_out" class="me-2 text-end" [style]="field.label_style">
+                {{field.display}}
+            </label>
+            <div class="d-flex" [style]="field.style">
+                <c-form-check class="me-3 d-flex align-items-center" *ngIf="field.extra==='na'">
+                    <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'na'" />
+                    <label cFormCheckLabel class="ms-1">N/A</label>
+                </c-form-check>
+                <c-form-check class="me-3 d-flex align-items-center">
+                    <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'yes'" />
+                    <label cFormCheckLabel class="ms-1">Yes</label>
+                </c-form-check>
+                <c-form-check class="d-flex align-items-center">
+                    <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="'no'" />
+                    <label cFormCheckLabel class="ms-1">No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <!--multiple radio -->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_radio'">
+            <label for="time_in_out" class="me-2 text-end" [style]="field.label_style">
+                {{field.display}}
+            </label>
+            <div [class]="field.class" [style]="field.style">
+                <c-form-check class="me-3 d-flex align-items-center" *ngFor="let value of field.select_values;">
+                    <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm" [value]="value" />
+                    <label cFormCheckLabel class="ms-1">{{value}}</label>
+                </c-form-check>
+            </div>
+        </div>
+        <!--inline check-->
+        <div class="d-flex" *ngIf="field.type === 'inline-checkbox'" [style]="field.style">
+            <label class="me-3" [style]="field.label_style">{{field.display}}</label>
+            <div>
+                <div class="form-check" *ngFor="let checkField of field.select_values">
+                    <input class="form-check-input" type="checkbox" value="" [id]="field.name"
+                        [formControlName]="field.name">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{checkField}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--select-->
+        <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'select'" [style]="field.style">
+            <select [formControlName]="field.name" [id]="field.id" size="sm">
+                <option *ngFor="let val of field.select_values">
+                    {{val}}
+                </option>
+            </select>
+        </div>
+        <span *ngFor="let dep of depMap; index as i; first as isFirst">
+            <div *ngIf="dep.name === field.name && dep.render === true">
+                <div *ngFor="let field of dep.dependents;">
+                    <!-- input-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+                        && field.type !== 'textArea' && field.type !== 'multiple_select'
+                        && field.type !== 'select'
+                        && field.type !== 'inline-checkbox'">
+                        <label class="me-2 text-end" [style]="field.label_style">
+                            {{field.display}}
+                        </label>
+                        <input cFormControl [id]="field.id" [type]="field.type" [formControlName]="field.name"
+                            sizing="sm" [style]="field.style" />
+                    </div>
+                    <!--checkBox-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'checkbox'" [style]="field.style">
+                        <label class="me-2 text-end" style="white-space: nowrap; min-width: 190px;"></label>
+                        <c-form-check>
+                            <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name"
+                                size="sm" />
+                            <label cFormCheckLabel for="na">{{field.display}}</label>
+                        </c-form-check>
+                    </div>
+                    <!--TextArea-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'textArea'">
+                        <label class="me-2 text-end" [style]="field.label_style">
+                            {{field.display}}
+                        </label>
+                        <textarea cFormControl [id]="field.id" [formControlName]="field.name" rows="3" sizing="sm"
+                            [style]="field.style"></textarea>
+                    </div>
+                    <!--multiple_select-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'multiple_select'"
+                        [style]="field.style">
+                        <select cSelect multiple [formControlName]="field.name" [id]="field.id">
+                            <option *ngFor="let val of field.select_values">
+                                {{val}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--select-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'select'" [style]="field.style">
+                        <select cSelect multiple="false" [formControlName]="field.name" [id]="field.id" size="sm">
+                            <option *ngFor="let val of field.select_values">
+                                {{val}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--Radio-->
+                    <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'radio'">
+                        <label for="time_in_out" class="me-2 text-end" [style]="field.label_style">
+                            {{field.display}}
+                        </label>
+                        <div class="d-flex" [style]="field.style">
+                            <c-form-check class="me-3 d-flex align-items-center" *ngIf="field.extra==='na'">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm"
+                                    [value]="'na'" />
+                                <label cFormCheckLabel class="ms-1">N/A</label>
+                            </c-form-check>
+                            <c-form-check class="me-3 d-flex align-items-center">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm"
+                                    [value]="'yes'" />
+                                <label cFormCheckLabel class="ms-1">Yes</label>
+                            </c-form-check>
+                            <c-form-check class="d-flex align-items-center">
+                                <input cFormCheckInput type="radio" [formControlName]="field.name" size="sm"
+                                    [value]="'no'" />
+                                <label cFormCheckLabel class="ms-1">No</label>
+                            </c-form-check>
+                        </div>
+                    </div>
+                    <!--inline check-->
+                    <div class="d-flex" *ngIf="field.type === 'inline-checkbox'" [style]="field.style">
+                        <label class="me-3" [style]="field.label_style">{{field.display}}</label>
+                        <div>
+                            <div class="form-check" *ngFor="let checkField of field.select_values">
+                                <input class="form-check-input" type="checkbox" value="" [id]="field.name"
+                                    [formControlName]="field.name">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{checkField}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </span>
+    </span>
+
+</div>

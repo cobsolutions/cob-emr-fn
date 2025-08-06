@@ -1,0 +1,28 @@
+<div [formGroup]="form" class="form-container">
+    <!-- Top Controls -->
+    <div class="form-row" *ngFor="let ctrl of topControls">
+      <label class="field-label">{{ ctrl.label }}</label>
+      <select [formControlName]="getControlName('top', ctrl.label)">
+        <option *ngFor="let opt of ctrl.value" [value]="opt.val">{{ opt.view }}</option>
+      </select>
+    </div>
+  
+    <!-- Side Labels -->
+    <div class="side-labels" *ngIf="showLabel">
+      <div class="side-label">{{ rightLabel }}</div>
+      <div class="side-label">{{ leftLabel }}</div>
+    </div>
+  
+    <!-- Right/Left paired controls -->
+    <div class="form-row" *ngFor="let rCtrl of controlR; let i = index">
+      <label class="field-label">{{ rCtrl.label }}</label>
+  
+      <select cSelect multiple [formControlName]="getControlName('right', rCtrl.label)" *ngIf="this.controlR.length > 0">
+        <option *ngFor="let opt of rCtrl.value" [value]="opt.val">{{ opt.view }}</option>
+      </select>
+  
+      <select cSelect multiple [formControlName]="getControlName('left', controlL[i]?.label)" *ngIf="this.controlL.length > 0">
+        <option *ngFor="let opt of controlL[i]?.value" [value]="opt.val">{{ opt.view }}</option>
+      </select>
+    </div>
+  </div>

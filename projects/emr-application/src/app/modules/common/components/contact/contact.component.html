@@ -1,4 +1,4 @@
-<form cForm #contactForm="ngForm" (ngSubmit)="add()">
+<form cForm #contactForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
     <small *ngIf="phoneType.invalid && (phoneType.dirty || phoneType.touched)" class="form-text text-danger">
         Phone Type Type is required
     </small>
@@ -28,7 +28,7 @@
         Email is required
     </small>
     <c-input-group class="mb-3" sizing="sm">
-        <span cInputGroupText id="basic-addon1">@</span>
+        <span cInputGroupText id="basic-addon1">&#64;</span>
         <input type="email" placeholder="Enter Contact Email" cFormControl id="contactEmail" name="contactEmail"
             sizing="sm" required
             [ngClass]="{'is-invalid': contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)}"
@@ -40,7 +40,7 @@
         sizing="sm" #contactAddInfo="ngModel" [(ngModel)]="contact.additionalInfo"> </textarea>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" aria-describedby="emailHelp" cButton color="primary" variant="outline"
+        <button type="submit" aria-describedby="emailHelp" cButton color="primary" variant="outline" size="sm" dispaly-input [componentRole]="componentRole"
             (click)="add()">Add</button>
     </div>
 </form>
@@ -62,7 +62,7 @@
             <td>{{address.email}}</td>
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)">
+                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
                         <svg cIcon name="cilTrash"></svg>
                     </button>
                 </c-button-group>

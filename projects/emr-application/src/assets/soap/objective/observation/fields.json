@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Indicate Body Type",
+        "value": "indicate_body_type"
+    },
+    {
+        "name": "Vitals",
+        "value": "vitals"
+    }
+]

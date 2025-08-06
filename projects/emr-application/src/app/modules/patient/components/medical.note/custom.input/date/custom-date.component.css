@@ -1,0 +1,16 @@
+.date-picker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .date-label {
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  
+  select {
+    padding: 2px 4px;
+    border: 1px solid #0074a6;
+  }
+  

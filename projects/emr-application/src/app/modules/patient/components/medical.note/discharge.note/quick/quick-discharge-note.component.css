@@ -1,0 +1,39 @@
+.form-container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="number"],input[type="date"], textarea {
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+  
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  
+  .required {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin-left: 5px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }

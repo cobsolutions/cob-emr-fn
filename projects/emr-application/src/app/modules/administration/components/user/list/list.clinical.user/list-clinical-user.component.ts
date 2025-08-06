@@ -17,12 +17,14 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   public visible = false;
   selectedUser: string
+  selecteUserUUID: string
+  editUserVisibility: boolean = false;
   constructor(private router: Router
     , private toastr: ToastrService
     , private clinicalUserService: ClinicalUserService) { super() }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['userName', 'email', 'actions']);
+    this.columns = this.constructColumns(['accountName', 'email', 'actions']);
     this.initListComponent();
     this.users$ = this.clinicalUserService.getClinicalUser(this.apiParams$).pipe(
       retry({
@@ -62,6 +64,14 @@ export class ListClinicalUserComponent extends ListTemplate implements OnInit {
     })
   }
   edit(item: any) {
-    this.router.navigate(['emr/administration/edit/user', item.uuid]);
+    this.selecteUserUUID = item.uuid
+    this.editUserVisibility = true
+  }
+  toggleEditUser() {
+    this.editUserVisibility = !this.editUserVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close')
+      this.toggleEditUser();
   }
 }

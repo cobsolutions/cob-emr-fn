@@ -1,0 +1,60 @@
+<form [formGroup]="childGripForm">
+    <div class="container">
+
+        <!-- Right Section -->
+        <div class="section" formGroupName="right">
+            <div class="header">Right</div>
+
+            <div class="form-group">
+                <label></label>
+                <div class="values" formArrayName="values">
+                    <input type="text" *ngFor="let control of rightValues.controls; let i = index"
+                        [formControlName]="i">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>COV</label>
+                <input type="text" formControlName="cov">
+            </div>
+
+            <div class="form-group">
+                <label>AVG</label>
+                <input type="text" formControlName="avg">
+            </div>
+
+            <div class="form-group">
+                <label>Comments</label>
+                <textarea formControlName="comments"></textarea>
+            </div>
+        </div>
+
+        <!-- Left Section -->
+        <div class="section" formGroupName="left">
+            <div class="header">Left</div>
+
+            <div class="form-group">
+                <label></label>
+                <div class="values" formArrayName="values">
+                    <input type="text" *ngFor="let control of leftValues.controls; let i = index" [formControlName]="i">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>COV</label>
+                <input type="text" formControlName="cov">
+            </div>
+
+            <div class="form-group">
+                <label>AVG</label>
+                <input type="text" formControlName="avg">
+            </div>
+
+            <div class="form-group">
+                <label>Comments</label>
+                <textarea formControlName="comments"></textarea>
+            </div>
+        </div>
+
+    </div>
+</form>

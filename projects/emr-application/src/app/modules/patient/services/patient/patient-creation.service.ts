@@ -15,12 +15,13 @@ export class PatientCreationService {
     var createURL = this.baseUrl + '/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(patient), { 'headers': headers })
   }
+  update(patient: Patient) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = this.baseUrl + '/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(patient), { 'headers': headers })
+  }
 
   delete(patientId: number) {
 
-  }
-
-  update(patient:Patient){
-    
   }
 }

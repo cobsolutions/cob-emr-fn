@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { filter, map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
-import { Appointment } from '../../../models/appointments/appointment';
+import { Appointment } from '../../../../scheduler/models/appointment';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PreviousAppointmentService } from '../../../services/appointment/previous-appointment.service';
 import { PateintCaseService } from '../../../services/patient/cases/pateint-case.service';
 
@@ -13,17 +14,20 @@ import { PateintCaseService } from '../../../services/patient/cases/pateint-case
 })
 export class PreviousAppointmentComponent extends ListTemplate implements OnInit {
   @Input() patientId: number;
-  @Input() caseId: number =0 ;
+  @Input() caseId: number = 0;
+  selectedClinic: Observable<number>
   appointments$!: Observable<Appointment[]>;
   columns: (string | IColumn)[];
   constructor(
     private previousAppointmentService: PreviousAppointmentService,
-    private pateintCaseService: PateintCaseService) { super(); }
+    private pateintCaseService: PateintCaseService,
+    private loggedInService: LoggedInService) { super(); }
 
   ngOnInit(): void {
     this.initListComponent();
-    this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate']);
+    this.columns = this.constructColumns(['appointmentStatus', 'startDate', 'endDate', 'clinic']);
     this.getAllAppointments();
+    this.getSelectedClinic()
     this.pateintCaseService.selectedCase$.pipe(
       filter(clinicId => clinicId != null)
     ).subscribe((caseId) => {
@@ -31,6 +35,12 @@ export class PreviousAppointmentComponent extends ListTemplate implements OnInit
       this.getPreviousAppointments();
     })
 
+  }
+  private getSelectedClinic() {
+    this.selectedClinic = this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      map(id => { return Number(id) })
+    )
   }
   private getPreviousAppointments() {
 
@@ -42,7 +52,6 @@ export class PreviousAppointmentComponent extends ListTemplate implements OnInit
   }
 
   private getAllAppointments() {
-    console.log('getAllAppointments')
     this.appointments$ = this.previousAppointmentService.findAllPreviousAppointments(this.apiParams$, this.patientId).pipe(
       retry({
         delay: (error) => {

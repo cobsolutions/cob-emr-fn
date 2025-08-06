@@ -1,82 +1,27 @@
 <ngx-spinner></ngx-spinner>
-<c-row>
+<c-row *ngIf="!selectedPatient">
     <c-col xs="12" class="mb-2">
         <h1>Patient Creation</h1>
     </c-col>
 </c-row>
 <hr />
-<div class="row alert alert-danger" *ngIf="!valid" role="alert">
-    <span *ngIf="basicInvalidFields.length > 0">
-        <strong>Basic Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of basicInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-    <span *ngIf="idInvalidFields.length > 0">
-        <strong>Identification Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of idInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-    <span *ngIf="addressInvalidFields.length > 0">
-        <strong>Address Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of addressInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-    <span *ngIf="contactInvalidFields.length > 0">
-        <strong>Contact Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of contactInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-    <span *ngIf="insuranceInvalidFields.length > 0">
-        <strong>Insurance Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of insuranceInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-    <span *ngIf="caseInvalidFields.length > 0">
-        <strong>Case Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of caseInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-
-</div>
 <c-container fluid>
     <!--Pateint Basic Component-->
     <c-row class="justify-content-center">
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Essential information</h3>
+                    <h3 *ngIf="isValidPatientInformation">essential information</h3>
+                    <span *ngIf="!isValidPatientInformation">
+                        <h3 class="text-danger">essential information <i cTextColor="danger">*</i></h3>
+                    </span>
+
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-basic-info #component [patient]="patient"></app-patient-basic-info>
+                    <!-- <small *ngIf="!isValidPatientInformation" class="form-text text-danger">
+                        Patient Basic Info is required is required
+                    </small> -->
+                    <app-patient-basic-info #component [patient]="patient"[componentRole]="componentRole"></app-patient-basic-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -86,10 +31,13 @@
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Identification Information</h3>
+                    <h3 *ngIf="isValidPatientIdentification">Identification Information</h3>
+                    <span *ngIf="!isValidPatientIdentification">
+                        <h3 class="text-danger">Identification Information<i cTextColor="danger">*</i></h3>
+                    </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-id-info #component [patient]="patient"></app-patient-id-info>
+                    <app-patient-id-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-id-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -99,10 +47,13 @@
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Address Information</h3>
+                    <h3 *ngIf="isValidPatientAddress">Address Information</h3>
+                    <span *ngIf="!isValidPatientAddress">
+                        <h3 class="text-danger">Address Information<i cTextColor="danger">*</i></h3>
+                    </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-address #component [addresses]="patient.addresses"></app-address>
+                    <app-address #component [addresses]="patient.addresses" [componentRole]="componentRole"></app-address>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -112,10 +63,13 @@
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Contact Information</h3>
+                    <h3 *ngIf="isValidPatientContact">Contact Information</h3>
+                    <span *ngIf="!isValidPatientContact">
+                        <h3 class="text-danger">Contact Information<i cTextColor="danger">*</i></h3>
+                    </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-contact #component [contacts]="patient.contacts"></app-contact>
+                    <app-contact #component [contacts]="patient.contacts" [componentRole]="componentRole"></app-contact>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -128,7 +82,7 @@
                     <h3>Emergency Information</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-emergency-info [patient]="patient"></app-patient-emergency-info>
+                    <app-patient-emergency-info [patient]="patient" [componentRole]="componentRole"></app-patient-emergency-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -138,10 +92,13 @@
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Insurance Information</h3>
+                    <h3 *ngIf="isValidPatientInsurance">Insurance Information</h3>
+                    <span *ngIf="!isValidPatientInsurance">
+                        <h3 class="text-danger">Insurance Information<i cTextColor="danger">*</i></h3>
+                    </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-insurance-info #component [patient]="patient"></app-patient-insurance-info>
+                    <app-patient-insurance-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-insurance-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -154,7 +111,7 @@
                     <h3>Clinics</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-clinic-info [patient]="patient"></app-patient-clinic-info>
+                    <app-patient-clinic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-clinic-info>
                 </c-card-body>
             </c-card>
         </c-col>
@@ -164,16 +121,37 @@
         <c-col class="col">
             <c-card class="mb-3 ustify-content-center">
                 <c-card-header>
-                    <h3>Case Information</h3>
+                    <h3 *ngIf="isValidPatientCase">Case Information</h3>
+                    <span *ngIf="!isValidPatientCase">
+                        <h3 class="text-danger">Case Information<i cTextColor="danger">*</i></h3>
+                    </span>
                 </c-card-header>
                 <c-card-body>
-                    <app-patient-case-info #component [pateint]="patient"></app-patient-case-info>
+                    <app-patient-case-info #component [pateint]="patient" [componentRole]="componentRole"></app-patient-case-info>
                 </c-card-body>
             </c-card>
         </c-col>
     </c-row>
     <!--Create Patient Button-->
     <div class="d-grid gap-2 col-2 mx-auto mb-5">
-        <button cButton color="primary" variant="outline" type="button" (click)="create()">Create</button>
+        <button cButton color="primary" variant="outline" type="button" (click)="create()" [cPopover]="popoverHtml" dispaly-input [componentRole]="componentRole"
+            cPopoverPlacement="right" [cPopoverTrigger]="'click'">Create</button>
     </div>
+    <ng-template #popoverHtml>
+        <span *ngIf="!valid">
+            <h3 class="popover-header">
+                Check Patient
+            </h3>
+            <div class="popover-body">
+                <span *ngIf="!isValidPatientInformation"> <i cTextColor="danger">Check Patient Basic Info
+                    </i><br /></span>
+                <span *ngIf="!isValidPatientIdentification"><i cTextColor="danger">Check Patient Identification
+                        Info</i><br /></span>
+                <span *ngIf="!isValidPatientContact"><i cTextColor="danger">Check Patient Contact </i> <br /></span>
+                <span *ngIf="!isValidPatientAddress"><i cTextColor="danger">Check Patient Address </i> <br /></span>
+                <span *ngIf="!isValidPatientInsurance"><i cTextColor="danger">Check Patient Insurance </i><br /></span>
+                <span *ngIf="!isValidPatientCase"><i cTextColor="danger">Check Patient Cases </i></span>
+            </div>
+        </span>
+    </ng-template>
 </c-container>

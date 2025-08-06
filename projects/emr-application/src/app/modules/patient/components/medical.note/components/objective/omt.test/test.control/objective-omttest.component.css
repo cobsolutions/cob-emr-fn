@@ -1,0 +1,46 @@
+.vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-control-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between input and label */
+  }
+  
+  .control-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px; /* Reduce space between label, input, and right label */
+  }
+  
+  .form-label-v {
+    white-space: nowrap;
+    width: 80px; /* Prevent labels from taking too much space */
+    text-align: left;
+    margin: 0 2px; /* Reduce margin between label and input */
+  }
+  
+  .form-label-h {
+    white-space: nowrap;
+    width: auto; /* Prevent labels from taking too much space */
+    text-align: left;
+    margin: 0 2px; /* Reduce margin between label and input */
+  }
+  
+  .form-group input {
+    flex: none; /* Prevents input from stretching */
+    width: 50px; /* Adjust input width as needed */
+    padding: 3px; /* Reduce padding to make input compact */
+  }
+  

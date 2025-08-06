@@ -5,6 +5,7 @@ import { MaritalStatus } from "../../common/models/enums/marital.status";
 import { Suffix } from "../../common/models/enums/suffix";
 import { Title } from "../../common/models/enums/title";
 import { PatientCase } from "./case/patient.case";
+import { Clinic } from "./clinic";
 import { Dependent } from "./dependent/patient.dependent";
 import { Emergency } from "./emergency/patient.emergency";
 import { PatientInsurance } from "./insurance/patient.insurance";
@@ -12,10 +13,11 @@ import { Contact } from "./patient.contact";
 
 export interface Patient {
     id?: number | null;
-    fullName?:string;
+    fullName?: string;
     firstName?: string;
     middleName?: string;
     lastName?: string;
+    displayName?: string;
     birthDate?: number;
     birthDate_date?: Date | null;
     gender?: Gender | null;
@@ -36,7 +38,8 @@ export interface Patient {
     isDependent?: boolean
     dependent?: Dependent;
     clinicsId?: number[];
+    clinicModels?: Clinic[]
     cases?: PatientCase[];
     patientInsuranceModels?: PatientInsurance[];
-    
+
 }

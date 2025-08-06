@@ -1,0 +1,12 @@
+<div [formGroup]="priorLevelFunctionForm">
+  <label for="init_date" class="me-2 mb-2 text-end" style="white-space: nowrap; min-width: 190px;">
+    Baseline Functional Level Included all of the Following:
+  </label>
+  <div class="fields-container">
+    <div class="field-item" *ngFor="let field of fields;">
+      <soap-field-builder [field]="field" [form]="priorLevelFunctionForm"
+        [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles">
+      </soap-field-builder>
+    </div>
+  </div>
+</div>

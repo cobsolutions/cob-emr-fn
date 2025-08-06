@@ -1,0 +1,396 @@
+{
+    "name": "medical_history",
+    "fields": [
+        {
+            "name": "history_similars_symptoms",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Previous Episodes of Same Complaints",
+                    "id": "previous_episodes_of_same_complaints",
+                    "name": "previous_episodes_of_same_complaints",
+                    "type": "radio",
+                    "extra": "na",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "previous_episodes_of_same_complaints_age",
+                            "name": "previous_episodes_of_same_complaints_age",
+                            "type": "select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "None",
+                                "1-5",
+                                "6-10",
+                                "11+"
+                            ]
+                        },
+                        {
+                            "id": "previous_episodes_of_same_complaints_first_Episode",
+                            "name": "previous_episodes_of_same_complaints_first_Episode",
+                            "type": "select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                1975,
+                                1976,
+                                1977,
+                                1978,
+                                1979,
+                                1980,
+                                1981,
+                                1982,
+                                1983,
+                                1984,
+                                1985,
+                                1986,
+                                1987,
+                                1988,
+                                1989,
+                                1990,
+                                1991,
+                                1992,
+                                1993,
+                                1994,
+                                1995,
+                                1996,
+                                1997,
+                                1998,
+                                1999,
+                                2000,
+                                2001,
+                                2002,
+                                2003,
+                                2004,
+                                2005,
+                                2006,
+                                2007,
+                                2008,
+                                2009,
+                                2010,
+                                2011,
+                                2012,
+                                2013,
+                                2014,
+                                2015,
+                                2016,
+                                2017,
+                                2018,
+                                2019,
+                                2020,
+                                2021,
+                                2022,
+                                2023,
+                                2024,
+                                2025,
+                                2026
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "display": "Previous Treatments for Similar Symptoms",
+                    "id": "previous_Treatments_for_similar_symptoms",
+                    "name": "previous_Treatments_for_similar_symptoms",
+                    "type": "radio",
+                    "extra": "na",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "previous_Treatments_for_similar_symptoms_text",
+                            "name": "previous_Treatments_for_similar_symptoms_text",
+                            "type": "textArea",
+                            "style": "padding-left: 20px;max-width : 300px",
+                            "label_style": "white-space: nowrap; min-width: 210px;"
+                        }
+                    ]
+                },
+                {
+                    "id": "history_similars_symptoms_text",
+                    "name": "history_similars_symptoms_text",
+                    "type": "textArea",
+                    "style": "padding-left: 20px;max-width : 300px",
+                    "label_style": "white-space: nowrap; min-width: 210px;"
+                }
+            ]
+        },
+        {
+            "name": "occupation_social_history",
+            "value": "yes",
+            "dependents": [
+                {
+                    "display": "Social History",
+                    "id": "social_Hhistory",
+                    "name": "social_Hhistory",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "social_Hhistory_list",
+                            "name": "social_Hhistory_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "Lives at Assisted Living Facility",
+                                "Lives with Family",
+                                "Lives with Caregiver",
+                                "Married",
+                                "Single",
+                                "Divorced",
+                                "Widowed"
+                            ]
+                        },
+                        {
+                            "id": "social_Hhistory_text",
+                            "name": "social_Hhistory_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Occupation and Work Status",
+                    "id": "occupation_and_work_status",
+                    "name": "occupation_and_work_status",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "display": "Name of Occupation",
+                            "id": "occupation_name",
+                            "name": "occupation_name",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Status",
+                            "id": "occupation_status",
+                            "name": "occupation_status",
+                            "type": "select",
+                            "select_values": [
+                                "Full Time",
+                                "Part Time",
+                                "Light Duty",
+                                "Transitional Duty",
+                                "Out of wrok",
+                                "Retired",
+                                "Not Working",
+                                "Homemaker"
+                            ],
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Duty Level",
+                            "id": "occupation_duty_level",
+                            "name": "occupation_duty_level",
+                            "type": "select",
+                            "select_values": [
+                                "Sedentary",
+                                "Light",
+                                "Medium",
+                                "Heavy",
+                                "Very Heavy"
+                            ],
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Description",
+                            "id": "occupation_description",
+                            "name": "occupation_descriptionl",
+                            "type": "textArea",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Out of Work Since",
+                            "id": "occupation_out_of_work_since",
+                            "name": "occupation_out_of_work_since",
+                            "type": "date",
+                            "style": "max-width: 190px;",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Return to Work Date",
+                            "id": "occupation_return_to_work_date",
+                            "name": "occupation_return_to_work_date",
+                            "type": "date",
+                            "style": "max-width: 190px;",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        },
+                        {
+                            "display": "Workers Compensation",
+                            "id": "occupation_workers_compensation",
+                            "name": "occupation_workers_compensation",
+                            "type": "radio",
+                            "extra": "na",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;"
+                        },
+                        {
+                            "display": "Litigation",
+                            "id": "occupation_litigation",
+                            "name": "occupation_litigation",
+                            "type": "radio",
+                            "extra": "na",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Home Layout",
+                    "id": "home_layout",
+                    "name": "home_layout",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "home_layout_list",
+                            "name": "home_layout_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "1-story",
+                                "2-story",
+                                "Condo/Apt",
+                                "Stairs/Steps",
+                                "Shower Stall",
+                                "Combo Bathtub Shower"
+                            ]
+                        },
+                        {
+                            "id": "home_layout_text",
+                            "name": "home_layout_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Durable Medical Equipment",
+                    "id": "durable_medical_equipment",
+                    "name": "durable_medical_equipment",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "id": "durable_medical_equipment_list",
+                            "name": "durable_medical_equipment_list",
+                            "type": "multiple_select",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "select_values": [
+                                "None",
+                                "Tub Bench",
+                                "Shower Chair",
+                                "Grab Bars",
+                                "Bedside Commode",
+                                "Raised Toilet Seat",
+                                "Standard Walker",
+                                "Rolling Walker",
+                                "Hemi-walker",
+                                "Quad Cane",
+                                "Straight Cane",
+                                "Wheelchair"
+                            ]
+                        },
+                        {
+                            "id": "durable_medical_equipment_text",
+                            "name": "durable_medical_equipment_text",
+                            "type": "input",
+                            "style": "padding-left: 300px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 295px;"
+                        }
+                    ]
+                },
+                {
+                    "display": "Is Patient A Tobacco User?",
+                    "id": "patient_tobacco_user",
+                    "name": "patient_tobacco_user",
+                    "type": "radio",
+                    "extra": "na",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;",
+                    "value": "yes",
+                    "dependents": [
+                        {
+                            "display": "Does patient smoke cigarettes and/or use other forms of tobacco?",
+                            "id": "patient_tobacco_user_user_other",
+                            "name": "patient_tobacco_user_user_other",
+                            "type": "radio",
+                            "style": "padding-left: 20px;max-width : 500px",
+                            "label_style": "white-space: nowrap; min-width: 300px;padding-left: 110px;"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "home_health_care",
+            "value": "yes",
+            "dependents": [
+                {
+                    "id": "home_health_care_text",
+                    "name": "home_health_care_text",
+                    "type": "textArea",
+                    "style": "padding-left: 20px;max-width : 300px",
+                    "label_style": "white-space: nowrap; min-width: 210px;"
+                }
+            ]
+        },
+        {
+            "name": "history_of_falls",
+            "value": "yes",
+            "secondValue": "no",
+            "dependents": [
+                {
+                    "display": "Falls Documented",
+                    "id": "history_of_falls_falls_documented",
+                    "name": "history_of_falls_falls_documented",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                },
+                {
+                    "display": "Risk Assessment:",
+                    "id": "history_of_falls_risk_assessment",
+                    "name": "history_of_falls_risk_assessment",
+                    "type": "inline-checkbox",
+                    "select_values": [
+                        "Documentation on whether medications are a contributing factor or not to falls",
+                        "Home fall hazards",
+                        "Postural blood pressur",
+                        "Vision"
+                    ],
+                    "style": "padding-left: 20px",
+                    "label_style": "white-space: nowrap; padding-left:150px"
+                }
+            ],
+            "secondDependents": [
+                {
+                    "display": "Falls Documented",
+                    "id": "history_of_falls_falls_documented",
+                    "name": "history_of_falls_falls_documented",
+                    "type": "radio",
+                    "style": "padding-left: 20px;max-width : 500px",
+                    "label_style": "white-space: nowrap; min-width: 300px;"
+                }
+            ]
+        }
+    ]
+}

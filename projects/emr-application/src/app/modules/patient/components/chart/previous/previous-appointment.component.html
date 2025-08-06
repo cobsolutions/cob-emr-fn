@@ -19,6 +19,11 @@
                             <ng-container *ngSwitchCase="'endDate'">
                                 {{tdContent| date:'MMM d, y, h:mm a'}}
                             </ng-container>
+                            <ng-container *ngSwitchCase="'clinic'">
+                                <div *ngIf="item.clinicModel.id !== (selectedClinic | async)">
+                                    <c-badge color="info">{{item.clinicModel.name}}</c-badge>
+                                </div>
+                            </ng-container>
                             <ng-container *ngSwitchDefault>
                                 {{tdContent}}
                             </ng-container>

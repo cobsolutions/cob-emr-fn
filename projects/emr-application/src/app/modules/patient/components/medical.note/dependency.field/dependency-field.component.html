@@ -1,0 +1,13 @@
+<div [formGroup]="form" *ngIf="dependent">
+    <span *ngFor="let field of dependent; index as i; first as isFirst">
+        <div class="d-flex align-items-center mb-3">
+            <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 185px;">
+                {{field.display}}
+            </label>
+            <div class="d-flex">
+                <input [id]="field.id" cFormControl sizing="sm" [formControlName]="field.name" [type]="field.type"
+                    [style]="field.style">
+            </div>
+        </div>
+    </span>
+</div>

@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'lodash';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { Observable } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import { InsuranceCompany } from '../../../administration/model/insurance.company/insurance.company';
+import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { Clinic } from '../../models/clinic';
 import { PateintResponse } from '../../models/response/patient.response';
 
@@ -11,7 +14,8 @@ import { PateintResponse } from '../../models/response/patient.response';
 })
 export class PatientFinderService {
   private baseUrl = environment.baseURL + 'patient'
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient
+    , private loggedInService: LoggedInService) { }
 
   getPatient(patientId: number, clinicId: number) {
     const headers = { 'content-type': 'application/json' }
@@ -19,14 +23,26 @@ export class PatientFinderService {
     return this.httpClient.get<PateintResponse>(`${getPatientURL}`, { 'headers': headers },)
   }
 
-  getInsuranceCompaniesForPatient(clinicId: number): Observable<any>{
-    console.log('service ' + clinicId)
-    var getPatientURL = environment.baseURL + 'insurance/company/find/all/clinicId/' +clinicId
+  getInsuranceCompaniesForPatient(clinicId: number): Observable<any> {
+
+    var getPatientURL = environment.baseURL + 'insurance/company/find/all/clinicId/' + clinicId
     return this.httpClient.get<InsuranceCompany[]>(`${getPatientURL}`, { observe: 'response' });
   }
 
-  getClinicsForPatientByOrganizationId(organizationId:number): Observable<any>{
-    var getPatientURL = environment.baseURL + 'clinic//find/organization/' +organizationId
+  getClinicsForPatient(): Observable<any> {
+    var getPatientURL = environment.baseURL + 'clinic/find/organization/' + this.loggedInService.getLoggedUser().organizationId;
     return this.httpClient.get<Clinic[]>(`${getPatientURL}`, { observe: 'response' });
+
+  }
+  getPatientsByName(name: string) {
+    return this.loggedInService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap((clinicId: any) => {
+        var url = this.baseUrl + '/find/name/' + name + '/clinic-id/' + clinicId
+        return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
+      })
+    )
+    // var url = this.baseUrl + '/find/name/' + name ;
+    // return this.httpClient.get<Clinic[]>(`${url}`, { observe: 'response' });
   }
 }

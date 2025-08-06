@@ -1,11 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, map, Observable, retry, switchMap, throwError } from 'rxjs';
 import { IApiParams } from '../../../common/interfaces/api.params';
 import { PaginationData } from '../../../common/interfaces/pagination.data';
 import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
 import { IData } from '../../../patient/components/list/interfaces/i.data';
+import { LoggedInUser } from '../../../security/model/loggedin.user';
+import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { InsuranceCompany } from '../../model/insurance.company/insurance.company';
 const httpOptions = {
   // headers: new HttpHeaders({
@@ -20,12 +22,17 @@ const httpOptions = {
 })
 export class InsuranceCompanyService {
   private baseUrl = environment.baseURL + 'insurance/company'
-  constructor(private httpClient: HttpClient, private clinicEmittingService: ClinicEmittingService) { }
+  constructor(private httpClient: HttpClient, private loggedInService: LoggedInService) { }
 
   create(insuranceCompany: InsuranceCompany) {
     const headers = { 'content-type': 'application/json' }
     var createURL = environment.baseURL + 'insurance/company/create'
     return this.httpClient.post(`${createURL}`, JSON.stringify(insuranceCompany), { 'headers': headers })
+  }
+  update(insuranceCompany: InsuranceCompany) {
+    const headers = { 'content-type': 'application/json' }
+    var createURL = environment.baseURL + 'insurance/company/update'
+    return this.httpClient.put(`${createURL}`, JSON.stringify(insuranceCompany), { 'headers': headers })
   }
 
   delete(id: number) {
@@ -53,17 +60,14 @@ export class InsuranceCompanyService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.clinicEmittingService.selectedClinic$.pipe(
-      switchMap(clinicId =>
-        this.httpClient
-          .get<PaginationData>(this.baseUrl + "/find/clinicId/" + clinicId, options)
-          .pipe(
-            retry({ count: 1, delay: 100000, resetOnSuccess: true }),
-            catchError(this.handleHttpError)
-          )
-      ));
+    return this.httpClient
+      .get<PaginationData>(this.baseUrl + "/find/organization/" + this.loggedInService.getLoggedUser().organizationId, options)
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);
+  }
+  public findAll(): Observable<any> {
+    var url = this.baseUrl + '/find/all/organization/' + this.loggedInService.getLoggedUser().organizationId;
+    return this.httpClient.get<InsuranceCompany[]>(`${url}`, { observe: 'response' });
   }
 }

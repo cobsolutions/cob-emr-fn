@@ -1,17 +1,16 @@
-import { PatientCase } from '../../patient/models/case/patient.case';
-import { Patient } from '../../patient/models/patient';
+import { Clinic } from '../../patient/models/clinic';
 import { AppointmentCancelNoShowReason } from './appointment.cancel.no.show.reason';
 import { AppointmentDate } from './appointment.date';
-import { AppointmentRepeat } from './appointment.repeat';
 import { AppointementStatus } from './appointment.status';
+import { AppointmnetRepeat } from './repeat/appointment.repeat';
+import { AppointmentRepetitionConfiguration } from './repeat/appointment.repetition.configuration';
 
 export class Appointment {
     id: number;
     clinicId: number;
     isAllUsers: boolean;
-    patient: Patient;
     patientId: number;
-    patientCase: PatientCase = null;
+    calendarId: number
     patientCaseId: number;
     therapyUUID: string = null;
     appointmentDate: AppointmentDate = {}
@@ -19,14 +18,20 @@ export class Appointment {
     endDate: number
     title: string;
     note: string;
-    repeatId: number;
+    appointmentTypeId?: number
     appointmentType: string | null = null;
-    appointmentRepetition: string | null = null;
-    repeat: AppointmentRepeat;
+    appointmentTypeColor: string | null = null;
+    appointmentFontTypeColor: string | null = null;
     appointmentStatus: string;
     statusHistory: AppointementStatus[]
-    appointmentCancelNoShowReason: AppointmentCancelNoShowReason
-    public constructTitle(): string {
-        return this.patient.fullName + ':' + this.patientCase.title
+    appointmentRepeat: AppointmnetRepeat;
+    appointmentRepetitionConfiguration: AppointmentRepetitionConfiguration = {
+        appointmentRepetitionType: null
     }
+    appointmentCancelNoShowReason: AppointmentCancelNoShowReason
+    clinicModel: Clinic;
+    appointmentStructure?: string
+    seriesId?: number
+    isStatusChangeable?: boolean
+
 }

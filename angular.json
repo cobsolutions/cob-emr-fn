@@ -13,6 +13,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs",
+              "base64-js",
+              "js-sha256",
+              "crypto-js",
+              "lodash",
+              "dayjs",
+              "~"
+           ],
             "outputPath": "dist/emr-application",
             "index": "projects/emr-application/src/index.html",
             "main": "projects/emr-application/src/main.ts",
@@ -20,16 +29,17 @@
             "tsConfig": "projects/emr-application/tsconfig.app.json",
             "assets": [
               "projects/emr-application/src/favicon.ico",
-              "projects/emr-application/src/assets"
+              "projects/emr-application/src/assets",
+              "projects/emr-application/src/_redirects"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "projects/emr-application/src/styles.css",
               "projects/emr-application/styles.scss",
               "projects/emr-application/src/scss/styles.scss",
               "node_modules/ngx-toastr/toastr.css"
-
             ],
             "scripts": []
           },
@@ -38,8 +48,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2m",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

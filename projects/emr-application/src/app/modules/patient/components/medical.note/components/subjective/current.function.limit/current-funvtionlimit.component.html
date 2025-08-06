@@ -1,0 +1,13 @@
+<div [formGroup]="currentFunctionForm">
+    <label for="init_date" class="me-2 mb-2 text-end" style="white-space: nowrap; min-width: 190px;">
+        Please select <strong>All</strong> applicable functional limitations:
+    </label>
+    <div class="fields-container">
+        <div class="field-item" *ngFor="let field of fields;">
+            <soap-field-builder [field]="field" [form]="currentFunctionForm"
+                [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles">
+            </soap-field-builder>
+        </div>
+    </div>
+
+</div>

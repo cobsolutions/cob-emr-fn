@@ -1,0 +1,175 @@
+<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
+<c-container fluid *ngIf="!isLoading">
+    <!-- Appointment For-->
+    <c-row class="justify-content-center">
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Appointment for</strong></c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" *ngIf="mode ==='create'" id="patients"
+                        name="patients"
+                        [ngClass]="{'is-invalid': patients.invalid && (patients.dirty || patients.touched)}"
+                        [(ngModel)]="selectedPateint" #patients="ngModel" required (change)="changePatient()">
+                        <option *ngFor="let patient of patientsList" [ngValue]="patient">
+                            {{patient.displayName}}
+                        </option>
+                    </select>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="patientcase" name="patientcase"
+                        [compareWith]="compareFn"
+                        [ngClass]="{'is-invalid': patientcase.invalid && (patientcase.dirty || patientcase.touched)}"
+                        [(ngModel)]="selectedPatientCase" #patientcase="ngModel" required>
+                        <option *ngFor="let case of selectedPateint?.cases" [ngValue]="case">
+                            {{case.title}}
+                        </option>
+                    </select>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!-- Appointment Date -->
+    <c-row>
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <strong *ngIf="validDate">Appointment at</strong>
+                    <strong *ngIf="!validDate" class="text-danger">Appointment at</strong>
+                </c-card-header>
+                <c-card-body>
+                    <div *ngIf="!validDate">
+                        <div class="text-danger">
+                            Appointment start date cant greater than appointment end date
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <c-row>
+                            <c-col xs="8">
+                                <c-date-picker size="sm" name="startDate"
+                                    [(ngModel)]="appointment.appointmentDate.startDate"
+                                    (dateChange)="changestartDate($event)"></c-date-picker>
+                            </c-col>
+                            <c-col xs="4">
+                                <c-time-picker size="sm" id="startTime" name="startTime"
+                                    [(ngModel)]="appointment.appointmentDate.startTime"
+                                    (timeChange)="changeStartTime($event)"></c-time-picker>
+                            </c-col>
+                        </c-row>
+                    </div>
+                    <c-row>
+                        <c-col xs="8">
+                            <c-date-picker size="sm" name="endDate" (dateChange)="changeEndDate($event)"
+                                [(ngModel)]="appointment.appointmentDate.endDate"></c-date-picker>
+                        </c-col>
+                        <c-col xs="4">
+                            <c-time-picker size="sm" id="endTime" name="endTime"
+                                [(ngModel)]="appointment.appointmentDate.endTime"></c-time-picker>
+                        </c-col>
+                    </c-row>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!-- Calendar-->
+    <c-row *ngIf="module ==='month' && calendars">
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <strong>Calendar</strong>
+                </c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="calendar" name="calendar" required
+                        [(ngModel)]="appointment.calendarId">
+                        <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
+                            {{calendar.name}}
+                        </option>
+                    </select>
+
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!-- Clinic-->
+    <c-row class="justify-content-center">
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Clinic</strong></c-card-header>
+                <c-card-body>
+                    <div class="mb-1">
+                        <div *ngIf="selectedPateint?.clinicModels?.length ===1">
+                            <label>{{selectedClinic.name}}</label>
+                        </div>
+                        <div *ngIf="selectedPateint?.clinicModels?.length >1">
+                            {{selectedClinic.id}}
+                            <select cFormControl cSelect class="mb-2" sizing="sm" id="patientclinic"
+                                name="patientclinic"
+                                [ngClass]="{'is-invalid': patientclinic.invalid && (patientclinic.dirty || patientclinic.touched)}"
+                                [(ngModel)]="selectedClinic" #patientclinic="ngModel" required>
+                                <option *ngFor="let clinic of selectedPateint?.clinicModels" [ngValue]="clinic">
+                                    {{clinic.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!--Therapists-->
+    <c-row *ngIf="therapists">
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Therapist</strong></c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="appTherapy" name="appTherapy"
+                        [ngClass]="{'is-invalid': appTherapy.invalid && (appTherapy.dirty || appTherapy.touched)}"
+                        [(ngModel)]="appointment.therapyUUID" #appTherapy="ngModel" required>
+                        <option *ngFor="let therapy of this.therapists" [value]="therapy.uuid">
+                            {{therapy.lastName +', ' + therapy.firstName }}
+                        </option>
+                    </select>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!-- Appointment Type-->
+    <c-row>
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Appointment Type</strong></c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="apptype" name="apptype"
+                        [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
+                        [(ngModel)]="appointment.appointmentTypeId" #apptype="ngModel" required>
+                        <option *ngFor="let type of appointmentTypes
+                        " [value]="type.id">
+                            {{type.name}}
+                        </option>
+                    </select>
+                    <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
+                        name="appointmentnote" [(ngModel)]="appointment.note" placeholder="Appointment Note"></textarea>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+    <!--Appointment Repetition-->
+    <c-row>
+        <c-col>
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header><strong>Appointment Repetition</strong></c-card-header>
+                <c-card-body>
+                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition"
+                        (change)="changeAppointmentRepetition()"
+                        [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
+                        #repetition="ngModel" [disabled]="appointmentSkeleton === 1">
+                        <option [ngValue]="null" selected>Don't Repeat</option>
+                        <option [ngValue]="'Daily'" selected>Daily</option>
+                        <option [ngValue]="'Weekly'" selected>Weekly</option>
+                        <option [ngValue]="'Monthly'" selected>Monthly</option>
+                        <option [ngValue]="'Yearly'" selected>Yearly</option>
+                    </select>
+                    <repeat-appointment #repeatAppointmentComponent [appointmentSkeleton]="appointmentSkeleton"
+                        [configuration]="appointment.appointmentRepetitionConfiguration"></repeat-appointment>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>

@@ -18,13 +18,13 @@ export const NavItems: INavData[] = [
     ]
   },
   {
-    name:'Organization',
-    url:'/emr/organization',
+    name: 'Organization',
+    url: '/emr/organization',
     iconComponent: { name: 'cilHome' },
-    children:[
+    children: [
       {
         name: 'Organizations',
-        url:'organization/list'
+        url: 'organization/list'
       }
     ]
   },
@@ -36,26 +36,65 @@ export const NavItems: INavData[] = [
       {
         name: 'View Scheduler',
         url: 'scheduler/view'
+      },
+      {
+        name: 'Scheduler Settings',
+        url: 'scheduler/settings'
+      },
+      {
+        name: 'Manage Calendars',
+        url: 'scheduler/calendar'
       }
     ]
   },
   {
-    name: 'Administration',
-    url: '/emr/administration',
-    iconComponent: { name: 'cilChart' },
+    name: 'Users',
+    url: '/emr/users',
+    iconComponent: { name: 'cilUser' },
     children: [
       {
-        name: 'Insurance Company',
-        url: 'administration/list/insurance/company'
+        name: 'Create User',
+        url: 'users/create'
       },
       {
-        name: 'Users',
-        url: 'administration/list/user'
-      },
-      {
-        name: 'Clinics',
-        url: 'administration/list/clinic'
+        name: 'Clinical Users',
+        url: 'users/list/clinical/users'
+      }, {
+        name: 'Clerical Users',
+        url: 'users/list/clerical/users'
       }
     ]
-  }
+  },
+  {
+    name: 'Clinics',
+    url: '/emr/clinics',
+    iconComponent: { name: 'cilMedicalCross' },
+    children: [
+      {
+        name: 'View Clinics',
+        url: 'clinics/list'
+      }
+    ]
+  },
+  {
+    name: 'Insurance Company',
+    url: '/emr/insurance/company',
+    iconComponent: { name: 'cilHouse' },
+    children: [
+      {
+        name: 'View Companies',
+        url: 'insurance/company/list'
+      }
+    ]
+  }, {
+    name: 'Referring Provider',
+    url: '/emr/referring/provider',
+    iconComponent: { name: 'cilUserPlus' },
+    children: [
+      {
+        name: 'ReferringProviders',
+        url: 'referring/provider/list'
+      }
+    ]
+  },
 ];

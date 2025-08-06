@@ -291,6 +291,7 @@ $cal-week-view-vars: map.merge($cal-vars, $cal-week-view-vars);
     .cal-day-columns {
       display: flex;
       flex-grow: 1;
+      width: 1000px;
     }
 
     .cal-day-column {

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core';
+import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
+import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 
 const routes: Routes = [
@@ -10,12 +12,28 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'emr-request',
+    component: OrganizationLayoutComponent,
+    canActivate: [KcAuthGuard],
+    data: {
+      title: 'organization',
+      type: 'requester'
+    },
+    children:[
+      {
+        path:'signup',
+        loadChildren: () =>
+          import('./modules/signup/signup.module').then((m) => m.SignupModule)
+      }
+    ]
+  },
+  {
     path: 'emr',
     component: DefaultLayoutComponent,
     canActivate: [KcAuthGuard],
     data: {
       title: 'Home',
-      roles: ['administration_emr_role','clinical_emr_role','clerical_emr_role','billing_emr_role']
+      type: 'user'
     },
     children: [
       {
@@ -25,13 +43,50 @@ const routes: Routes = [
       },
       {
         path: 'patient',
+        data: {
+          title: 'Patient',
+          roles: [Role.PATIENT_ROLE]
+        },
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/patient/patient.module').then((m) => m.PatientModule)
       },
       {
         path: 'administration',
+        data: {
+          title: 'Administration',
+          roles: [Role.USER_ROLE, Role.CLINIC_ROLE, Role.CLINIC_ROLE]
+        },
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/administration/administration.module').then((m) => m.AdministrationModule)
+      },
+      {
+        path: 'users',
+        data: {
+          title: 'Users',
+          roles: [Role.USER_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/users/users.module').then((m) => m.UsersModule)
+      },
+      {
+        path: 'clinics',
+        data: {
+          title: 'Clinics',
+          roles: [Role.CLINIC_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/clinic/clinic.module').then((m) => m.ClinicModule)
+      },
+      {
+        path: 'insurance/company',
+        data: {
+          title: 'Insurance Company',
+          roles: [Role.INSURANCE_COMPANY_ROLE],
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () => import('./modules/insurance.company/insurance-company.module').then((m) => m.InsuranceCompanyModule)
       },
       {
         path: 'organization',
@@ -42,6 +97,11 @@ const routes: Routes = [
         path: 'scheduler',
         loadChildren: () =>
           import('./modules/scheduler/scheduler.module').then((m) => m.SchedulerModule)
+      },
+      {
+        path: 'referring/provider',
+        loadChildren: () =>
+          import('./modules/referring.provider/refering-provider.module').then((m) => m.ReferingProviderModule)
       }
     ]
 

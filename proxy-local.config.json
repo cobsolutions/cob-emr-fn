@@ -1,6 +1,6 @@
 {
     "/emr/api/*": {
-        "target": "http://localhost:8080",
+        "target": "http://localhost:8070",
         "secure": true,
         "changeOrigin":true
     }

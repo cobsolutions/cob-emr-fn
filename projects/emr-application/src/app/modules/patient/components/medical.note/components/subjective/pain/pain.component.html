@@ -1,0 +1,27 @@
+<div [formGroup]="painForm">
+    <!-- Pain Scale: -->
+    <div class="d-flex align-items-center mb-3">
+        <label for="time_in_out" class="me-2 text-end" style="white-space: nowrap; min-width: 500px;">
+            Pain Scale:
+        </label>
+        <div class="d-flex">
+            <c-form-check class="me-3 d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="pain_scale" size="sm" [value]="'yes'" />
+                <label cFormCheckLabel class="ms-1">Yes</label>
+            </c-form-check>
+            <c-form-check class="d-flex align-items-center">
+                <input cFormCheckInput type="radio" formControlName="pain_scale" size="sm" [value]="'no'" />
+                <label cFormCheckLabel class="ms-1">No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPainEval" class=" mb-3" >
+        <div class="container">
+            <pain-evaluation (removePainScale)="remove($event)" (saveEval)="save($event)" [painEvals]="painFormData?.evals"></pain-evaluation>
+        </div>
+    </div>
+    <span *ngFor="let field of fields;">
+        <soap-field-builder [field]="field" [form]="painForm" [filedStyle]="getstyleFieldControl(field.name)"
+            [styles]="styles"></soap-field-builder>
+    </span>
+</div>

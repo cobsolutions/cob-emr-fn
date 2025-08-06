@@ -1,0 +1,54 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <h1>Clinic Creation</h1>
+    </c-col>
+</c-row>
+<hr />
+<c-container fluid>
+    <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+        <c-row class="justify-content-center">
+            <c-col class="col">
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header>
+                        <h3>Clinic Name</h3>
+                    </c-card-header>
+                    <c-card-body>
+                        <small *ngIf="submitted   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
+                            class="form-text text-danger">
+                            Clinic Name is required
+                        </small>
+                        <c-input-group class="mb-3">
+                            <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm"
+                                placeholder="Enter Clinic Name" required
+                                [ngClass]="{'is-invalid': clinicname.invalid && (clinicname.dirty || clinicname.touched)}"
+                                [(ngModel)]="clinic.name" #clinicname="ngModel" />
+                        </c-input-group>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <c-row class="justify-content-center">
+            <c-col class="col">
+                <c-card class="mb-3 ustify-content-center">
+                    <c-card-header>
+                        <h3>Address information</h3>
+                    </c-card-header>
+                    <c-card-body>
+                        <ng-container *ngIf="!validAddress">
+                            <hr>
+                            <c-alert>Please add correct clinic's address</c-alert>
+                          </ng-container>
+                        <app-single-address [address]="clinic.address"></app-single-address>
+                    </c-card-body>
+                </c-card>
+            </c-col>
+        </c-row>
+        <div class="d-grid gap-2 col-2 mx-auto mb-5">
+            <button cButton color="primary" variant="outline" type="submit">
+                <span *ngIf="isCreated">Create</span>
+                <span *ngIf="!isCreated">Update</span>
+            </button>
+        </div>
+    </form>
+</c-container>

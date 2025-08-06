@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 mb-3">
+            <input cFormControl id="companyname" name="appname" placeholder="Type Name"
+                [(ngModel)]='appointmentType.name'>
+        </div>
+        <div class="col-md-2">
+            <input [style.background]="appointmentType.color" [(colorPicker)]="color1" cFormControl
+                style="height: 40px;width: 40px;border-radius: 50%;display: inline-block;"
+                (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" />
+        </div>
+        <!-- <div class="col-md-12 mb-3">
+            <input cFormControl type="number" id="durationstep" name="durationstep" step="30"
+                placeholder="Appointment Duration">
+        </div> -->
+    </div>
+</div>

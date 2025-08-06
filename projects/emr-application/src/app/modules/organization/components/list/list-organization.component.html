@@ -12,18 +12,6 @@
     <c-smart-table #smartTable="cSmartTable" clickableRows [columnSorter]="true" [columns]="columns" header
         [items]="organiztions" [sorterValue]="{ column: 'name', state: 'asc' }"
         [tableProps]="{ hover: true, striped: true , small:true}">
-        <ng-template cTemplateId="tableDetails" let-item="item">
-            <div [visible]="this.details_visible[item.id] === true" cCollapse>
-                <c-card class="rounded-0">
-                    <c-card-body>
-                        <strong>Organization Name : </strong> {{item['name']}}
-                        <br>
-                        <strong>Billing Address : </strong>
-                        <app-view-address [address]="item['billingAddress']" [addressView] ="'column'"></app-view-address>
-                    </c-card-body>
-                </c-card>
-            </div>
-        </ng-template>
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
             <td [cAlign]="smartTable.tableDataCellProps(item, columnName)?.align"
                 [ngClass]="smartTable.tableDataCellClasses(item, columnName)">
@@ -33,19 +21,11 @@
                     </ng-container>
                     <ng-container *ngSwitchCase="'action'" class="py-2">
                         <div class="btn-group " role="group" aria-label="Basic example">
-                            <button (click)="toggleDetails(item['id'])" cButton color="primary" size="sm"
-                                variant="outline">
-                                Show Details
-                            </button>
-                            <button cButton color="primary" size="sm" variant="outline"
-                                (click)="openClinicModal(item['clinics'])">
-                                Clinics
-                            </button>
                             <button cButton color="primary" size="sm" variant="outline" (click)="edit(item)">
-                                Edit
+                                <svg cIcon name="cilInfo"></svg>
                             </button>
                             <button cButton color="primary" size="sm" variant="outline">
-                                Delete
+                                <svg cIcon name="cilTrash"></svg>
                             </button>
                         </div>
                     </ng-container>
@@ -54,12 +34,12 @@
         </ng-template>
     </c-smart-table>
 </ng-container>
-<c-modal size="lg" [visible]="clinicsVisible" (visibleChange)="handleClinicChange($event)">
+<c-modal id="editOrg" [visible]="editOrganizationVisibility" size="xl">
     <c-modal-header>
-        <h5 cModalTitle>Clinics</h5>
-        <button (click)="closeClinicModal()" cButtonClose></button>
+        <h3 cModalTitle>Organization</h3>
+        <button (click)="toggleEditOrganization()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <app-list-organization-clinics [clinics]="clinics"></app-list-organization-clinics>
+        <edit-organization [organization]="selectedOrganization" *ngIf="editOrganizationVisibility"></edit-organization>
     </c-modal-body>
 </c-modal>

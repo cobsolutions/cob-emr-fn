@@ -10,18 +10,21 @@ import { PatientFinderService } from '../../../services/patient/patient-finder.s
   styleUrls: ['./patient-clinic-info.component.css']
 })
 export class PatientClinicInfoComponent implements OnInit {
+  @Input() componentRole: string[]
   @Input() patient: Patient;
-  clinics: Observable<Clinic[]>;
-  constructor(private patientFinderService:PatientFinderService) { }
+  clinics: Clinic[];
+  constructor(private patientFinderService: PatientFinderService) { }
 
   ngOnInit(): void {
-    var organizationId:number = Number(localStorage.getItem('org'));
-    this.clinics = this.patientFinderService.getClinicsForPatientByOrganizationId(organizationId)
-    .pipe(
-      map((response:any)=>{
-          return response.body.records;
+    this.patientFinderService.getClinicsForPatient().subscribe(response => {
+      this.clinics = response.body.records
+      this.clinics.forEach(clinic => {
+        if (this.patient.clinicsId.includes(Number(clinic.id)))
+          clinic.selected = true;
+        else
+          clinic.selected = false;
       })
-    )
+    })
   }
   ddd(clinicIds: any) {
     clinicIds.forEach((element: string) => {
@@ -38,5 +41,4 @@ export class PatientClinicInfoComponent implements OnInit {
     });
     console.log(clinicIds)
   }
-
 }

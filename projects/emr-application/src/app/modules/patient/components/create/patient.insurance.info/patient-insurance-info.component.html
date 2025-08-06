@@ -1,9 +1,8 @@
-<form cForm #insuranceForm="ngForm" (ngSubmit)="add()">
+<form cForm #insuranceForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
     <small *ngIf="insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)"
         class="form-text text-danger">
         Insurance Company is required
     </small>
-
     <select cFormControl cSelect class="mb-2" sizing="sm" id="insuranceCompany" name="insuranceCompany"
         [ngClass]="{'is-invalid': insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)}"
         [(ngModel)]="patientInsurance.insuranceCompany" #insuranceCompany="ngModel">
@@ -77,13 +76,13 @@
 
     <c-col xs="auto" class="mb-2">
         <c-date-picker cFormControl closeOnSelect size="sm" placeholder="Expiration Date" FormControl
-            id="expirationDate_Date" name="expirationDate_Date" required
+            id="expirationDate_Date" name="expirationDate_Date" required disable-date-picker [componentRole]="componentRole"
             [ngClass]="{'is-invalid': expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)}"
             [(ngModel)]="patientInsurance.expirationDate_Date" #expirationDate="ngModel"></c-date-picker>
     </c-col>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button type="submit" aria-describedby="emailHelp" cButton color="primary" variant="outline"
-            (click)="add()">Add</button>
+            (click)="add()" dispaly-input [componentRole]="componentRole" size="sm">Add</button>
     </div>
 </form>
 <table class="table table-sm">
@@ -106,7 +105,7 @@
             <td>{{pateintInsurance.paymentValue}}</td>
             <td>
                 <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)">
+                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
                         <svg cIcon name="cilTrash"></svg>
                     </button>
                 </c-button-group>

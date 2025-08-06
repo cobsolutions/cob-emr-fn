@@ -3,4 +3,6 @@ export interface AppointmentCancelNoShowReason {
     reason?: string;
     reasonDate?: number;
     comment?: string
+    appointmentId?:number
+    status?:string
 }

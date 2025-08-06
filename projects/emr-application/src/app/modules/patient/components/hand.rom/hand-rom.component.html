@@ -1,0 +1,53 @@
+<div [formGroup]="form">
+    <div class="range-grid">
+        <!-- Column Headers -->
+        <div class="empty-cell"></div>
+        <div class="header right-group" style="background-color: #f9f9f9;grid-column: 2 / span 2;">Right</div>
+        <div class="header left-group" style="background-color: #f9f9f9;grid-column: 4 / span 2;">Left</div>
+
+        <!-- Sub-Headers -->
+        <div class="empty-cell"></div>
+        <div class="sub-header-cell">AROM</div>
+        <div class="sub-header-cell">PROM</div>
+        <div class="sub-header-cell">AROM</div>
+        <div class="sub-header-cell">PROM</div>
+
+        <!-- Main Grid Rows -->
+        <ng-container *ngFor="let row of controlR1" class="mb-3">
+            <div class="row">
+                <div class="label">{{ row.label }}</div>
+
+                <!-- Right AROM -->
+                <select [formControlName]="'right1_' + toCamelCase(row.label) + '_' + parentFieldName"
+                    *ngIf="row.type ==='select'">
+                    <option *ngFor="let opt of row.value" [value]="opt.val">{{ opt.view }}</option>
+                </select>
+                <input [formControlName]="'right1_' + toCamelCase(row.label) + '_' + parentFieldName"
+                    *ngIf="row.type ==='input'">
+                <!-- Right PROM -->
+                <select [formControlName]="'right2_' + toCamelCase(row.label) + '_' + parentFieldName" *ngIf="row.type ==='select'">
+                    <option *ngFor="let opt of getOptions(controlR2, row.label)" [value]="opt.val">{{ opt.view }}
+                    </option>
+                </select>
+                <input [formControlName]="'right2_' + toCamelCase(row.label) + '_' + parentFieldName"
+                    *ngIf="row.type ==='input'">
+
+                <!-- Left AROM -->
+                <select [formControlName]="'left1_' + toCamelCase(row.label) + '_' + parentFieldName" *ngIf="row.type ==='select'">
+                    <option *ngFor="let opt of getOptions(controlL1, row.label)" [value]="opt.val">{{ opt.view }}
+                    </option>
+                </select>
+                <input [formControlName]="'left1_' + toCamelCase(row.label) + '_' + parentFieldName"
+                    *ngIf="row.type ==='input'">
+                <!-- Left PROM -->
+                <select [formControlName]="'left2_' + toCamelCase(row.label) + '_' + parentFieldName" *ngIf="row.type ==='select'">
+                    <option *ngFor="let opt of getOptions(controlL2, row.label)" [value]="opt.val">{{ opt.view }}
+                    </option>
+                </select>
+                <input [formControlName]="'left2_' + toCamelCase(row.label) + '_' + parentFieldName"
+                    *ngIf="row.type ==='input'">
+            </div>
+        </ng-container>
+    </div>
+
+</div>

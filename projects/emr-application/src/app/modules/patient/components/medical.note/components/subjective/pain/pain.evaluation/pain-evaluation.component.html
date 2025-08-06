@@ -1,0 +1,106 @@
+<div [formGroup]="painEval">
+  <div class="border p-3 rounded d-inline-block">
+    <!-- Pain location-->
+    <div class="d-flex align-items-center mb-3">
+      <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+        Pain Location:
+      </label>
+      <input cFormControl sizing="sm" style="max-width: 190px;" formControlName="location">
+    </div>
+    <!--Pain Scale-->
+    <div class="d-flex align-items-center mb-3">
+      <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+      </label>
+      <table class="table borderless small-table">
+        <thead>
+          <tr>
+            <th class="text-end gray-text" colspan="100%">0 = None &nbsp;&nbsp; 5 = Moderate &nbsp;&nbsp; 10 = Extreme
+            </th>
+          </tr>
+          <tr>
+            <th></th>
+            <th *ngFor="let number of numbers" class="text-center small-text">{{ number }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="small-text">At worst</td>
+            <td *ngFor="let number of numbers" class="radio-cell">
+              <c-form-check class="d-flex justify-content-center">
+                <input cFormCheckInput type="radio" [value]="number" formControlName="worst" />
+              </c-form-check>
+            </td>
+          </tr>
+          <tr>
+            <td class="small-text">Current</td>
+            <td *ngFor="let number of numbers" class="radio-cell">
+              <c-form-check class="d-flex justify-content-center">
+                <input cFormCheckInput type="radio" [value]="number" formControlName="current" />
+              </c-form-check>
+            </td>
+          </tr>
+          <tr>
+            <td class="small-text">At best</td>
+            <td *ngFor="let number of numbers" class="radio-cell">
+              <c-form-check class="d-flex justify-content-center">
+                <input cFormCheckInput type="radio" [value]="number" formControlName="best" />
+              </c-form-check>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--Pain Description-->
+    <div class="d-flex align-items-center mb-3">
+      <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+        Pain Description:
+      </label>
+      <select cSelect sizing="sm" style="max-width: 190px;" formControlName="description">
+        <option *ngFor="let description of descriptions" [value]="description">
+          {{description}}
+        </option>
+      </select>
+    </div>
+    <!--Pain Follow-up Plan-->
+    <div class="d-flex align-items-center mb-3">
+      <label for="init_date" class="me-2 text-end" style="white-space: nowrap; min-width: 190px;">
+        Pain Follow-up Plan:
+      </label>
+      <input cFormControl sizing="sm" style="max-width: 190px;" formControlName="plan">
+    </div>
+    <div class="add-btn-container">
+      <button type="button" class="add-goal-btn" (click)="add()">
+        ➕ Add
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Table -->
+<table class="table table-sm p-1 mb-3">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>At Worst</th>
+      <th>Current</th>
+      <th>At Best</th>
+      <th>Description</th>
+      <th>Follow-up</th>
+      <th style="width: 50px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eval of painEvals; let i = index">
+      <td>{{ eval.location }}</td>
+      <td>{{ eval.worst }}</td>
+      <td>{{ eval.current }}</td>
+      <td>{{ eval.best }}</td>
+      <td>{{ eval.description }}</td>
+      <td>{{ eval.plan }}</td>
+      <td class="text-center">
+        <button cButton color="danger" variant="outline" size="sm" class="btn btn-link" (click)="remove(i)">
+          remove
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

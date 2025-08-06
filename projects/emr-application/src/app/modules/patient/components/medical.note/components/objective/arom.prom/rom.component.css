@@ -1,0 +1,24 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Label | Right | Left */
+  gap: 10px; /* Adds space between columns */
+  align-items: center; /* Aligns everything in the same row */
+  width: 70%; /* Adjust width as needed */
+}
+
+.header {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.label {
+  text-align: right;
+  font-weight: bold;
+  padding-right: 15px;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 5px;
+}

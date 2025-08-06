@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ClinicEmittingService } from '../../../../common/service/emitting/clinic-emitting.service';
 import { ListTemplate } from '../../../../common/template/list.template';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { InsuranceCompany } from '../../../model/insurance.company/insurance.company';
 import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
@@ -14,13 +15,14 @@ import { InsuranceCompanyService } from '../../../services/insurance.company/ins
   styleUrls: ['./list-insurance-company.component.css']
 })
 export class ListInsuranceCompanyComponent extends ListTemplate implements OnInit {
-
-
   columns: (string | IColumn)[];
 
   insuranceCompany$!: Observable<InsuranceCompany[]>;
-  constructor(private router: Router, private insuranceCompanyService: InsuranceCompanyService,
-    private toastr: ToastrService,) {
+  editInsuranceCompanyVisibility: boolean = false;
+  selectedInsuranceCompany: InsuranceCompany;
+  constructor(private router: Router
+    , private insuranceCompanyService: InsuranceCompanyService
+    , private toastr: ToastrService) {
     super();
   }
 
@@ -59,5 +61,19 @@ export class ListInsuranceCompanyComponent extends ListTemplate implements OnIni
       this.toastr.success('Insurance Company Deleted..!!');
       this.ngOnInit();
     })
+  }
+  edit(item: any) {
+    this.selectedInsuranceCompany = item;
+    this.editInsuranceCompanyVisibility = true
+  }
+  toggleEdiInsuranceCompany() {
+    this.editInsuranceCompanyVisibility = !this.editInsuranceCompanyVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close') {
+      this.toggleEdiInsuranceCompany();
+      this.router.navigateByUrl('emr/administration/list/insurance/company')
+    }
+
   }
 }

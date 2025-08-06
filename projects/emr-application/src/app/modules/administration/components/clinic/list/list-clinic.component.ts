@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { ToastrService } from 'ngx-toastr';
-import { from, map, Observable, retry, tap } from 'rxjs';
+import { map, Observable, retry, tap } from 'rxjs';
 import { Address } from '../../../../common/models';
-import { CacheService } from '../../../../common/service/cahce/cache.service';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { Clinic } from '../../../../patient/models/clinic';
 import { ClinicService } from '../../../services/clinic/clinic.service';
@@ -18,6 +17,8 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 export class ListClinicComponent extends ListTemplate implements OnInit {
   clinics$!: Observable<Clinic[]>;
   columns: (string | IColumn)[];
+  editClinicVisibility: boolean = false;
+  selectedClinic: Clinic;
   constructor(private router: Router
     , private clinicService: ClinicService
     , private toastr: ToastrService
@@ -26,8 +27,10 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.columns = this.constructColumns(['name', 'actions']);
     this.initListComponent();
-    
+
     this.clinics$ = this.clinicService.get(this.apiParams$).pipe(
+      tap((result => {
+      })),
       retry({
         delay: (error) => {
           console.warn('Retry: ', error);
@@ -53,7 +56,8 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
     this.router.navigateByUrl('emr/administration/create/clinic');
   }
   edit(item: any) {
-    this.router.navigate(['emr/administration/edit/clinic', item.id]);
+    this.selectedClinic = item;
+    this.editClinicVisibility = true;
   }
   remove(item: any) {
     this.clinicService.delete(item.id).subscribe(() => {
@@ -74,5 +78,12 @@ export class ListClinicComponent extends ListTemplate implements OnInit {
         result = value;
     }
     return result;
+  }
+  toggleEditClinic() {
+    this.editClinicVisibility = !this.editClinicVisibility
+  }
+  changeFacilityVisibility(event: string) {
+    if (event === 'close')
+      this.toggleEditClinic();
   }
 }

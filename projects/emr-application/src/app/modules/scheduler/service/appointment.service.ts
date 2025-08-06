@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Appointment } from '../models/appointment';
+import { AppointmentCancelNoShowReason } from '../models/appointment.cancel.no.show.reason';
 import { AppointmentFilter } from '../models/appointment.filter';
 import { AppointmentType } from '../models/appointment.type';
 
@@ -10,24 +11,48 @@ import { AppointmentType } from '../models/appointment.type';
   providedIn: 'root'
 })
 export class AppointmentService {
+  public createAppointmentEvent$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   private baseUrl = environment.baseURL;
   constructor(private _http: HttpClient) { }
-  createAppointment(appointment: Appointment) {
+  public appointmnetStartDate$: BehaviorSubject<Date | null> = new BehaviorSubject<Date | null>(null);
+
+  createRepetitionAppointment(appointment: Appointment) {
+    const createAppointmentURL = this.baseUrl + 'appointment/series/create';
+    return this._http.post(createAppointmentURL, appointment);
+  }
+  createSingleAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/create';
     return this._http.post(createAppointmentURL, appointment);
   }
-
-  retrieveAppointments(startDate: number, endDate: number, clinicId: number) {
-    const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId;
-    return this._http.get(listAppointmentURL);
+  updateSingleAppointment(appointment: Appointment) {
+    const createAppointmentURL = this.baseUrl + 'appointment/update';
+    return this._http.post(createAppointmentURL, appointment);
+  }
+  updateSeriesAppointment(appointment: Appointment, start: number, end: number) {
+    const createAppointmentURL = this.baseUrl + 'appointment/series/update/start/' + start + '/end/' + end;
+    return this._http.post(createAppointmentURL, appointment);
+  }
+  retrieveAppointments(startDate: number, endDate: number, clinicId: number, calendarId: number, statuses: string[]) {
+    let params = new HttpParams()
+    statuses.forEach(status => {
+      params = params.append('statuses', status);
+    });
+    const listAppointmentURL = this.baseUrl + 'appointment/find/startDate/' + startDate + '/endDate/' + endDate + '/' + clinicId + '/calendarId/' + calendarId;
+    return this._http.get(listAppointmentURL, { params });
   }
   retrieveAppointmentsByFilter(startDate: number, endDate: number, clinicId: number, filters: AppointmentFilter) {
     const listAppointmentURL = this.baseUrl + 'appointment/find/filter/' + startDate + '/' + endDate + '/' + clinicId;
     return this._http.post(listAppointmentURL, JSON.stringify(filters));
   }
   updateAppointment(appointment: Appointment) {
-    const updateAppointmentURL = this.baseUrl + 'appointment';
-    return this._http.put(updateAppointmentURL, JSON.stringify(appointment));
+    const headers = { 'content-type': 'application/json' }
+    const updateAppointmentURL = this.baseUrl + 'appointment/update';
+    return this._http.put(updateAppointmentURL, appointment);
+  }
+  updateAppointmentStatus(appointment: Appointment) {
+    const headers = { 'content-type': 'application/json' }
+    const updateAppointmentURL = this.baseUrl + 'appointment/update/status';
+    return this._http.put(updateAppointmentURL, appointment);
   }
   updateAppointmentList(appointment: Appointment) {
     const updateAppointmentURL = this.baseUrl + 'appointment/list';
@@ -39,6 +64,10 @@ export class AppointmentService {
   }
   retrieveAppointment(appointmentId: number): Observable<Appointment> {
     const url = this.baseUrl + 'appointment/find/id/' + appointmentId;
+    return this._http.get<Appointment>(url);
+  }
+  retrieveFullAppointment(appointmentId: number): Observable<Appointment> {
+    const url = this.baseUrl + 'appointment/find/full/id/' + appointmentId;
     return this._http.get<Appointment>(url);
   }
 
@@ -57,5 +86,28 @@ export class AppointmentService {
   deleteAppointmentList(repeatId: number, clinicId: number) {
     const createAppointmentTypURL = this.baseUrl + 'appointment/list/repeatId/' + repeatId + '/clinicId/' + clinicId;
     return this._http.delete(createAppointmentTypURL)
+  }
+
+  updateAppointmentCancelNoShow(model: AppointmentCancelNoShowReason) {
+    const url = this.baseUrl + 'appointment/update/cancel-noshow';
+    return this._http.put(url, model);
+  }
+
+  getAppointmentSerires(clinicId: number, seriesId: number, type: string) {
+    const url = this.baseUrl + 'appointment/series/clinicId/' + clinicId + '/seriesId/' + seriesId + '/type/' + type;
+    return this._http.get(url)
+  }
+  getAppointmentCancelNoShow(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/chart/cno/find/cancel/noshow/appointmentId/' + appointmentId
+    return this._http.get(url)
+  }
+
+  findAppointmentPatient(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/patient/appointment-id/' + appointmentId
+    return this._http.get(url)
+  }
+  findAppointmentPatientCase(appointmentId: number) {
+    const url = this.baseUrl + 'appointment/patient-case/appointment-id/' + appointmentId
+    return this._http.get(url)
   }
 }

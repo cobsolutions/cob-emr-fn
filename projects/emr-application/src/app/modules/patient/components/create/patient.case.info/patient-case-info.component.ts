@@ -2,11 +2,14 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { FormControl, NgForm } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BasicComponent } from 'projects/emr-application/src/app/util/basic.component';
-import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, finalize, switchMap, take, tap } from 'rxjs';
+import { User } from '../../../../administration/model/user/user';
 import { AutoApplyModifier } from '../../../../common/models/enums/auto.apply.modifier';
 import { InjuryCase } from '../../../../common/models/enums/injury.case';
 import { PlaceOfService } from '../../../../common/models/enums/place.service';
 import { ReferringPartyType } from '../../../../common/models/enums/referring.party.type';
+import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { ClinicalUserService } from '../../../../users/services/clinical/clinical-user.service';
 import { PatientCase } from '../../../models/case/patient.case';
 import { Patient } from '../../../models/patient';
 import { CaseDiagnosisService } from '../../../services/case-diagnosis.service';
@@ -17,8 +20,10 @@ import { CaseDiagnosisService } from '../../../services/case-diagnosis.service';
   styleUrls: ['./patient-case-info.component.css']
 })
 export class PatientCaseInfoComponent extends BasicComponent implements OnInit, AfterViewInit {
+  @Input() componentRole: string[]
   @Input() pateint: Patient;
   @ViewChild('caseForm') caseForm: NgForm;
+  therapists: User[]
   case: PatientCase = {
     id: null,
     title: '',
@@ -57,7 +62,9 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   diagnosisCtrl = new FormControl();
   diagnosisCode: string[] = [];
   constructor(private caseDiagnosisService: CaseDiagnosisService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    private loggedService: LoggedInService,
+    private clinicalUserService: ClinicalUserService) {
     super();
   }
   ngAfterViewInit(): void {
@@ -65,7 +72,15 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   }
 
   ngOnInit(): void {
-
+    this.loggedService.selectedClinic$.pipe(
+      filter(clinicId => clinicId !== null),
+      switchMap(clinicId => {
+        return this.clinicalUserService.getAllClinicalsUsersByClinic(clinicId)
+      })
+    ).subscribe(therapists => {
+      this.therapists = therapists
+      this.case.therapist = this.therapists[0].id;
+    })
     this.diagnosisCtrl.valueChanges
       .pipe(
         filter(text => {
@@ -133,4 +148,7 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
     this.pateint.cases.splice(index, 1);
   }
 
+  chnageTherapists(event: any) {
+    console.log(event)
+  }
 }

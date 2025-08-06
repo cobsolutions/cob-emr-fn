@@ -1,6 +1,7 @@
 import { KeycloakOptions, KeycloakService } from 'keycloak-angular';
 import { environment } from 'projects/emr-application/src/environments/environment';
-export function initializer(keycloak: KeycloakService): () => Promise<boolean> {
+import { LoggedInService } from './service/loggedIn/logged-in.service';
+export function initializer(keycloak: KeycloakService, loggedInService:LoggedInService): () => Promise<boolean> {
 
     const options: KeycloakOptions = {
       config : environment.keycloak,
@@ -12,6 +13,5 @@ export function initializer(keycloak: KeycloakService): () => Promise<boolean> {
       },
       bearerExcludedUrls: []
     };
-
-    return () => keycloak.init(options);
+    return () => keycloak.init(options)
 }

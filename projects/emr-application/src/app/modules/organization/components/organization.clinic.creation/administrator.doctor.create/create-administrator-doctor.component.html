@@ -1,19 +1,19 @@
 <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
-<select cFormControl cSelect class="mb-2" sizing="sm" id="doctype" name="doctype" required
+<!-- <select cFormControl cSelect class="mb-2" sizing="sm" id="doctype" name="doctype" required
     [ngClass]="{'is-invalid': doctype.invalid && (doctype.dirty || doctype.touched)}" [(ngModel)]="isAssignDoctorFromDB"
     #doctype="ngModel">
     <option [ngValue]="-1" disabled selected>Select User Type</option>
     <option [ngValue]="1">Select from doctors</option>
     <option [ngValue]="0">Create new doctor</option>
 
-</select>
-<span *ngIf="isAssignDoctorFromDB === 1">
-    <ng-autocomplete [data]="users" [searchKeyword]="'userName'" placeholder="Enter Doctor Name"
+</select> -->
+<!-- <span *ngIf="isAssignDoctorFromDB === 1">
+    <ng-autocomplete [data]="users | async" [searchKeyword]="'accountName'" placeholder="Enter Doctor Name"
         [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" [(ngModel)]="administratorDoctor"
         [ngModelOptions]="{standalone: true}" (selected)='pick($event)' (inputCleared)="unpick($event)">
     </ng-autocomplete>
     <ng-template #itemTemplate let-item>
-        <a [innerHTML]="item.userName"></a>
+        <a [innerHTML]="item.accountName"></a>
     </ng-template>
 
     <ng-template #notFoundTemplate let-notFound>
@@ -41,18 +41,18 @@
             <input cFormControl sizing="sm" placeholder="First Name" readonly [value]="administratorDoctor.firstName" />
 
             <input cFormControl sizing="sm" placeholder="Middle Name" readonly
-                (value)="administratorDoctor.middleName" />
+                [value]="administratorDoctor.middleName" />
 
             <input cFormControl sizing="sm" placeholder="Last Name" readonly [value]="administratorDoctor.lastName" />
         </c-input-group>
         <c-input-group class="mb-3" sizing="sm">
             <span cInputGroupText id="basic-addon1">&#64;</span>
             <input aria-describedby="basic-addon1" id="email" name="email" cFormControl required placeholder="email"
-                [value]="administratorDoctor.email" />
+                [value]="administratorDoctor.email" readonly/>
         </c-input-group>
     </span>
-</span>
-<span *ngIf="isAssignDoctorFromDB === 0">
+</span> -->
+<span>
     <form cForm #doctorForm="ngForm" (ngSubmit)="saveDoctor()">
         <!--User Name-->
         <div class="form-group" class="mb-3">
@@ -61,7 +61,7 @@
             </small>
             <c-input-group class="mb-3">
                 <input autoComplete="name" cFormControl id="userName" name="userName" sizing="sm"
-                    placeholder="Doctor User Name" required [(ngModel)]="administratorDoctor.userName"
+                    placeholder="Doctor User Name" required [(ngModel)]="administratorDoctor.accountName"
                     [ngClass]="{'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
                     #userName="ngModel" />
             </c-input-group>
@@ -152,10 +152,10 @@
     </form>
 </span>
 <div class="text-center mb-3 my-3">
-    <span *ngIf="isAssignDoctorFromDB === 1">
+    <!-- <span *ngIf="isAssignDoctorFromDB === 1">
         <button cButton color="primary" (click)="selectDoctor()">Select</button>
-    </span>
-    <span *ngIf="isAssignDoctorFromDB === 0">
+    </span> -->
+    <span>
         <button cButton color="primary" (click)="saveDoctor()">Create</button>
     </span>
 
