@@ -28,7 +28,7 @@ export var PainFormStyles: FieldControlStyles[] = [
         style: "max-width: 190px;",
         label_style: "white-space: nowrap; min-width: 500px;"
     },{
-        name: "betterwithText",
+        name: "betterWithText",
         style: "max-width: 190px;",
         label_style: "white-space: nowrap; min-width: 500px;"
     },{

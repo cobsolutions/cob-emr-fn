@@ -34,7 +34,7 @@ export class PainComponent implements OnInit {
       }, 10);
     }
     this.handlePainScale();
-    if (this.painFormData)
+    if (this.painFormData.evals)
       this.fillEvals();
     this.formReady.emit(this.painForm);
   }
