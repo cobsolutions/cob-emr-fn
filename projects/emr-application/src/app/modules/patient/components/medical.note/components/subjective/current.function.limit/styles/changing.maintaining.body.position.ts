@@ -3,101 +3,101 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const ChangingMaintainingBodyPositionStyles: FieldControlStyles[] = [
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "197_changingMaintainingBodyPosition",
+		"name": "changingMaintainingBodyPositionCurrentFunctionalLimitations",
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "198_maintainingABodyPosition",
+		"name": "maintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "205_transfers",
+		"name": "transfersChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "208_iADLs",
+		"name": "iadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "199_remainingSeated",
+		"name": "remainingSeatedMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "200_remainingStanding",
+		"name": "remainingStandingMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "201_squatting",
+		"name": "squattingMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "202_kneeling",
+		"name": "kneelingMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "203_sitting",
+		"name": "sittingMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "204_standing",
+		"name": "standingMaintainingABodyPositionChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "206_movingFromBedToChair",
+		"name": "movingFromBedToChairTransfersChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "207_slidingAlongABench",
+		"name": "slidingAlongABenchTransfersChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "209_abilityToUseTelephone",
+		"name": "abilityToUseTelephoneIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "210_shopping",
+		"name": "shoppingIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "211_foodPreparation",
+		"name": "foodPreparationIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "212_housekeeping",
+		"name": "housekeepingIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "213_laundry",
+		"name": "laundryIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "214_modeOfTransportation",
+		"name": "modeOfTransportationIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "215_responsibilityForOwnMedications",
+		"name": "responsibilityForOwnMedicationsIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "216_abilityToHandleFinances",
+		"name": "abilityToHandleFinancesIadlsChangingMaintainingBodyPositionCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	}
 ]

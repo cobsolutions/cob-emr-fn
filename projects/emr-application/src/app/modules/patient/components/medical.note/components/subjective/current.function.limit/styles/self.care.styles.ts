@@ -3,291 +3,291 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const SelfCareStyles: FieldControlStyles[] = [
     {
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "95_selfCare",
+		"name": "selfCareCurrentFunctionalLimitations",
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "96_hygiene",
+		"name": "hygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "125_sleep",
+		"name": "sleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "138_iADLs",
+		"name": "iadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "147_householdChores",
+		"name": "householdChoresSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "150_driveCommunityDistance",
+		"name": "driveCommunityDistanceSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "151_volunteering",
+		"name": "volunteeringSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "152_caregiving",
+		"name": "caregivingSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "97_grooming",
+		"name": "groomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "105_lookingAfterOnesHealth",
+		"name": "lookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "111_dressing",
+		"name": "dressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "117_bathing",
+		"name": "bathingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "121_toileting",
+		"name": "toiletingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "126_disturbedSleep",
+		"name": "disturbedSleepSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "127_sleepingPostures",
+		"name": "sleepingPosturesSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "132_pillows",
+		"name": "pillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "139_abilityToUseTelephone",
+		"name": "abilityToUseTelephoneIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "140_shopping",
+		"name": "shoppingIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "141_foodPreparation",
+		"name": "foodPreparationIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "142_housekeeping",
+		"name": "housekeepingIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "143_laundry",
+		"name": "laundryIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "144_modeOfTransportation",
+		"name": "modeOfTransportationIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "145_responsibilityForOwnMedications",
+		"name": "responsibilityForOwnMedicationsIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "146_abilityToHandleFinances",
+		"name": "abilityToHandleFinancesIadlsSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "148_cookAMeal",
+		"name": "cookAMealHouseholdChoresSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "149_laundry",
+		"name": "laundryHouseholdChoresSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "98_washingBodyParts",
+		"name": "washingBodyPartsGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "99_washingWholeBody",
+		"name": "washingWholeBodyGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "100_dryingOneself",
+		"name": "dryingOneselfGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "101_caringForSkin",
+		"name": "caringForSkinGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "102_caringForTeeth",
+		"name": "caringForTeethGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "103_caringForHair",
+		"name": "caringForHairGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "104_caringForNailsToeAndFinger",
+		"name": "caringForNailsToeAndFingerGroomingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "106_maintainingBalancedDiet",
+		"name": "maintainingBalancedDietLookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "107_keepingWarm",
+		"name": "keepingWarmLookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "108_keepingCool",
+		"name": "keepingCoolLookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "109_gettingImmunizations",
+		"name": "gettingImmunizationsLookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "110_gettingRegularPhysicalExaminations",
+		"name": "gettingRegularPhysicalExaminationsLookingAfterOnesHealthHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "112_puttingOnClothes",
+		"name": "puttingOnClothesDressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "113_puttingOnFootwear",
+		"name": "puttingOnFootwearDressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "114_puttingOnAppropriateClothing",
+		"name": "puttingOnAppropriateClothingDressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "115_removingClothes",
+		"name": "removingClothesDressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "116_removingFootwear",
+		"name": "removingFootwearDressingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "118_showering",
+		"name": "showeringBathingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "119_washingBodyParts",
+		"name": "washingBodyPartsBathingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "120_dryingOneself",
+		"name": "dryingOneselfBathingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "122_regulatingUrination",
+		"name": "regulatingUrinationToiletingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "123_regulatingDefecation",
+		"name": "regulatingDefecationToiletingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "124_regulatingMenstrualCare",
+		"name": "regulatingMenstrualCareToiletingHygieneSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "128_prone",
+		"name": "proneSleepingPosturesSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "129_supine",
+		"name": "supineSleepingPosturesSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "130_sideR",
+		"name": "sideRSleepingPosturesSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "131_sideL",
+		"name": "sideLSleepingPosturesSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "133_surface",
+		"name": "surfacePillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 30px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "134_firm",
+		"name": "firmSurfacePillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 40px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "135_soft",
+		"name": "softSurfacePillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 40px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "136_sag",
+		"name": "sagSurfacePillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 40px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "137_custom",
+		"name": "customSurfacePillowsSleepSelfCareCurrentFunctionalLimitations",
 		"style": "margin-left: 40px;"
 	}
 ];

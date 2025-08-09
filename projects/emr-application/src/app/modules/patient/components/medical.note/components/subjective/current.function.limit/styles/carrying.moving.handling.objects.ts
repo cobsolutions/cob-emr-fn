@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const CarryingMovingANDHandlingObjectsStyles: FieldControlStyles[] = [
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "218_carryingMovingAndHandlingObjects",
+		"name": "carryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
