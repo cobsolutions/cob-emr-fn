@@ -7,147 +7,148 @@ export const CarryingMovingANDHandlingObjectsStyles: FieldControlStyles[] = [
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "219_iADLs",
+		"name": "iadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "228_handAndArmUse",
+		"name": "handAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "236_fineHandUse",
+		"name": "fineHandUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "241_movingObjectsWithLowerExtremities",
+		"name": "movingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "244_communityIntegrationAccess",
+		"name": "communityIntegrationAccessCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "245_workVocationOccupation",
+		"name": "workVocationOccupationCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "246_recreation",
+		"name": "recreationCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "220_abilityToUseTelephone",
+		"name": "pullingObjectsHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "221_shopping",
+		"name": "pushingObjectsHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "222_foodPreparation",
+		"name": "reachingHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "223_housekeeping",
+		"name": "turningHandsOrArmsHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "224_laundry",
+		"name": "twistingHandsOrArmsHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "225_modeOfTransportation",
+		"name": "throwingHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "226_responsibilityForOwnMedications",
+		"name": "catchingHandAndArmUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "227_abilityToHandleFinances",
+		"name": "pickingUpFineHandUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "229_pullingObjects",
+		"name": "graspingFineHandUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "230_pushingObjects",
+		"name": "manipulatingFineHandUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "231_reaching",
+		"name": "releasingFineHandUseCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "232_turningHandsOrArms",
+		"name": "kickingMovingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "233_twistingHandsOrArms",
+		"name": "pushingWithLowerExtremitiesMovingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "234_throwing",
+		"name": "sportsRecreationCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
+		"style": "margin-left: 20px;"
+	},
+	//
+	{
+		"label_style": "white-space: nowrap; min-width: 500px;",
+		"name": "abilityToUseTelephoneIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "235_catching",
+		"name": "housekeepingIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "237_pickingUp",
+		"name": "responsibilityForOwnMedicationsIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "238_grasping",
+		"name": "abilityToHandleFinancesIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "239_manipulating",
+		"name": "foodPreparationIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "240_releasing",
+		"name": "laundryIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "242_kicking",
+		"name": "shoppingIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "243_pushingWithLowerExtremities",
-		"style": "margin-left: 20px;"
-	},
-	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "247_sports",
+		"name": "modeOfTransportationIadlsCarryingMovingAndHandlingObjectsCurrentFunctionalLimitations",
 		"style": "margin-left: 20px;"
 	}
 ]
