@@ -3,6 +3,6 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var UnexplainedWeightLossStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "6_unexplainedWeightLoss"
+        "name": "unexplainedWeightLossMedicalHistory"
     },
 ]

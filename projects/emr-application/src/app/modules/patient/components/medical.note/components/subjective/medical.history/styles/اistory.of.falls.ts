@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var HistoryOfFallsStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "69_historyOfFalls",
+        "name": "historyOfFallsMedicalHistory",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",

@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var MentalStatusCognitiveFunctionAppearsImpairedStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "4_mentalStatusCognitiveFunctionAppearsImpaired",
+        "name": "mentalStatusCognitiveFunctionAppearsImpairedMedicalHistory",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",

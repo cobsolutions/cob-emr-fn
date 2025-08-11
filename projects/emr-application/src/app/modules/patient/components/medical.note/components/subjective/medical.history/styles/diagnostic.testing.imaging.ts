@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var DiagnosticTestingImagingStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-top:5px",
-        "name": "0_diagnosticTestingImaging",
+        "name": "diagnosticTestingImagingMedicalHistory",
         "style": "width:300px"
     }
 ]

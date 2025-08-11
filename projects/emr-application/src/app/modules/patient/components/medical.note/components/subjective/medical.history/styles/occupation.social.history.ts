@@ -3,36 +3,36 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var OccupationSocialHistoryStyles: FieldControlStyles[] = [
     {
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "258_occupationSocialHistory",
+		"name": "occupationSocialHistoryMedicalHistory",
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "259_socialHistory",
+		"label_style": "white-space: nowrap; min-width: 600px;",
+		"name": "socialHistoryOccupationSocialHistoryMedicalHistory",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 600px;",
+		"name": "occupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 600px;",
+		"name": "homeLayoutOccupationSocialHistoryMedicalHistory",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 600px;",
+		"name": "durableMedicalEquipmentOccupationSocialHistoryMedicalHistory",
+		"style": "margin-left: 10px;"
+	},
+	{
+		"label_style": "white-space: nowrap; min-width: 600px;",
+		"name": "isPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "261_occupationAndWorkStatus",
-		"style": "margin-left: 10px;"
-	},
-	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "270_homeLayout",
-		"style": "margin-left: 10px;"
-	},
-	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "273_durableMedicalEquipment",
-		"style": "margin-left: 10px;"
-	},
-	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "276_isPatientATobaccoUser",
-		"style": "margin-left: 10px;"
-	},
-	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "260_socialHistorySelect",
+		"name": "socialHistorySelectSocialHistoryOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
