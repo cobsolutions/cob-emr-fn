@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const VasopneumaticStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap;",
-        "name": "9_vasopneumatic",
+        "name": "vasopneumaticModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px",
-        "name": "10_duration",
+        "name": "durationVasopneumaticModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

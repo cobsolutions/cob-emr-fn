@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const InfraredLightStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap;",
-        "name": "3_infraredLight",
+        "name": "infraredLightModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap;margin-left: 10px;",
-        "name": "4_duration",
+        "name": "durationInfraredLightModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

@@ -3,16 +3,16 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const LaserStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap; ",
-        "name": "0_laser",
+        "name": "laserModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "1_coldLaser",
+        "name": "coldLaserLaserModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "2_class4Laser",
+        "name": "class4LaserLaserModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

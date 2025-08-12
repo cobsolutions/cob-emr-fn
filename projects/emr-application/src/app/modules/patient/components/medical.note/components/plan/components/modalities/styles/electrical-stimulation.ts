@@ -3,36 +3,36 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const ElectricalStimulationStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "91_electricalStimulation",
+        "name": "electricalStimulationModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "92_preModulated",
+        "name": "preModulatedElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "93_highVolt",
+        "name": "highVoltElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "94_interferential",
+        "name": "interferentialElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "95_russian",
+        "name": "russianElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "96_other",
+        "name": "otherElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "97_electricalStimulationText",
+        "name": "electricalStimulationTextElectricalStimulationModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

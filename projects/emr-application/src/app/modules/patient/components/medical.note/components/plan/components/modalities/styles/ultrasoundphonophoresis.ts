@@ -3,36 +3,36 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const UltrasoundPhonophoresisStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "98_ultrasoundPhonophoresis",
+        "name": "ultrasoundPhonophoresisModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "99_depth",
+        "name": "depthUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "100_intensity",
+        "name": "intensityUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "101_dutyCycle",
+        "name": "dutyCycleUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "102_duration",
+        "name": "durationUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "103_location",
+        "name": "locationUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 100px;",
-        "name": "104_medication",
+        "name": "medicationUltrasoundPhonophoresisModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

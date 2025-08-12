@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const UltravioletStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "7_ultraviolet",
+        "name": "ultravioletModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "8_duration",
+        "name": "durationUltravioletModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

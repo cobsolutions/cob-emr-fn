@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const ParaffinBathStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "19_paraffinBath",
+        "name": "paraffinBathModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "20_duration",
+        "name": "durationParaffinBathModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]
