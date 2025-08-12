@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
@@ -81,11 +81,11 @@ export class PlanComponent implements OnInit {
     this.medialNoteService.find('plan').subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
-        createPlanOfCare: [''],
+        createPlanOfCare: new FormControl(false),
         frequency: ['F00'],
         duration: ['D00'],
         plan: ['PL01'],
-        physicianSignature: [''],
+        physicianSignature: new FormControl(false),
         procedures: this.fb.group({}),
         modalities: this.fb.group({}),
         specialties: this.fb.group({}),
