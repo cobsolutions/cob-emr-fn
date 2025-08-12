@@ -5,31 +5,31 @@ export const TherapeuticExercisesStyles: FieldControlStyles[] =
     [
         {
             "label_style": "white-space: nowrap; ",
-            "name": "25_therapeuticExercises"
+            "name": "therapeuticExercisesPlan"
         },
         {
             "label_style": "white-space: nowrap; ",
-            "name": "26_rOM",
+            "name": "romTherapeuticExercisesPlan",
             "style": "margin-left: 10px;"
         },
         {
             "label_style": "white-space: nowrap; ",
-            "name": "27_strength",
+            "name": "strengthTherapeuticExercisesPlan",
             "style": "margin-left: 10px;"
         },
         {
             "label_style": "white-space: nowrap; ",
-            "name": "28_endurance",
+            "name": "enduranceTherapeuticExercisesPlan",
             "style": "margin-left: 10px;"
         },
         {
             "label_style": "white-space: nowrap; ",
-            "name": "29_stability",
+            "name": "stabilityTherapeuticExercisesPlan",
             "style": "margin-left: 10px;"
         },
         {
             "label_style": "white-space: nowrap; ",
-            "name": "30_therapeuticExercises",
+            "name": "therapeuticExercisesTherapeuticExercisesPlan",
             "style": "margin-left: 10px;"
         }
     ]
