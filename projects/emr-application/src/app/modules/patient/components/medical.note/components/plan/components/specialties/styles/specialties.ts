@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const SpecialtiesStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "30_orthoticFabrication",
+        "name": "orthoticFabricationSpecialtiesPlan",
     },
     {
         "label_style": "white-space: nowrap;",
@@ -12,7 +12,7 @@ export const SpecialtiesStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "32_tENSFitting",
+        "name": "tENSFittingSpecialtiesPlan",
     },
     {
         "label_style": "white-space: nowrap;",
@@ -21,7 +21,7 @@ export const SpecialtiesStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "36_acupuncture",
+        "name": "acupunctureSpecialtiesPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
@@ -30,7 +30,7 @@ export const SpecialtiesStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "38_other",
+        "name": "otherSpecialtiesPlan",
     },
     {
         "label_style": "white-space: nowrap;",
