@@ -20,24 +20,24 @@ export var MedicalHistoryStyles: FieldControlStyles[] = [
     ...UnexplainedWeightLossStyles,
     ...PatientGoalsStyles,
     {
-        "label_style": "white-space: nowrap; min-width: 500px;margin-top:5px",
+        "label_style": "white-space: nowrap;margin-left: 145px;",
         "name": "medicalHistoryMedicalHistory",
-        "style": "width:700px"
+        "style": "margin-left: 250px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;margin-top:5px",
+        "label_style": "white-space: nowrap;margin-left: 145px;",
         "name": "complicatingPersonalFactorsMedicalHistory",
-        "style": "width:900px"
+        "style": "margin-left: 250px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;margin-top:5px;margin-left:300px",
+        "label_style": "white-space: nowrap;margin-top:5px;margin-left:400px",
         "name": "medicalHistoryReviewMedicalHistory",
         "style": "width:700px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;margin-top:5px;margin-left:300px",
+        "label_style": "white-space: nowrap;margin-left: 145px;",
         "name": "currentMedicationsMedicalHistory",
-        "style": "width:700px;"
+        "style": "margin-left: 250px;"
     },
 
 ]

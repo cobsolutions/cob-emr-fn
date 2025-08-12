@@ -6,23 +6,23 @@ export var HistoryOfFallsStyles: FieldControlStyles[] =[
         "name": "historyOfFallsMedicalHistory",
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "70_fallsDocumentedDoYouHaveDocumentationThatSupportsThePatientsFallHistory",
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 500px;",
+        "name": "fallsDocumentedDoYouHaveDocumentationThatSupportsThePatientFallHistoryHistoryOfFallsMedicalHistory",
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "72_fallsDocumentedDoYouHaveDocumentationThatSupportsThePatientsFallHistory",
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 500px;",
+        "name": "fallsDocumentedDoYouHaveDocumentationThatSupportsThePatientFallHistoryHistoryOfFallsMedicalHistoryYES",
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "74_riskAssessment",
-        "style": "margin-left: 10px;"
+        "label_style": "white-space: nowrap;margin-left: 250px;",
+        "name": "riskAssessmentHistoryOfFallsMedicalHistory",
+        "style": "margin-left: 255px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "71_fallHistoryText",
+        "name": "fallHistoryTextFallsDocumentedDoYouHaveDocumentationThatSupportsThePatientFallHistoryHistoryOfFallsMedicalHistoryTxtYES",
         "style": "margin-left: 20px;"
     },
     {

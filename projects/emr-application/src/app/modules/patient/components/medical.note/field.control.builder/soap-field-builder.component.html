@@ -38,7 +38,7 @@
      && field.type !== 'covavg'
      && field.type !== 'm-top-right-left-controls'
      && field.type !== 'right-left-mselect'
-     && field.type !== 'cutom-palpation'">
+     && field.type !== 'cutom-palpation'" >
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -95,8 +95,8 @@
     </div>
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
-        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
-            [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="field.labelStyle"
+        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value" [style]="filedStyle!.style"
+            [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="filedStyle!.label_style"
             [checkBoxStyle]="filedStyle?.style" [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
     </div>
     <!--multiple_profile_text-->

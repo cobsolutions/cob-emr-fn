@@ -36,88 +36,88 @@ export var OccupationSocialHistoryStyles: FieldControlStyles[] = [
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "262_nameOfOccupation",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "nameOfOccupationOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "263_status",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "statusOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "264_dutyLevel",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "dutyLevelOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "265_description",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "descriptionOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "266_outOfWorkSince",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "outOfWorkSinceOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "267_returnToWorkDate",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "returnToWorkDateOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "268_workersCompensation",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "workersCompensationOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "269_litigation",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "litigationOccupationAndWorkStatusOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "271_homeLayoutSelect",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "homeLayoutSelectHomeLayoutOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "272_homeLayoutText",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "homeLayoutTextHomeLayoutOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "274_durableMedicalEquipmentSelect",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "durableMedicalEquipmentSelectDurableMedicalEquipmentOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "275_durableMedicalEquipmentText",
+		"label_style": "white-space: nowrap; min-width: 750px;",
+		"name": "durableMedicalEquipmentTextDurableMedicalEquipmentOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "277_doesPatientSmokeCigarettesAndOrUseOtherFormsOfTobacco",
+		"label_style": "white-space: nowrap; min-width: 950px;",
+		"name": "doesPatientSmokeCigarettesAndOrUseOtherFormsOfTobaccoIsPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 20px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "278_recommendationMadeToStopUsingTobaccoProducts",
+		"label_style": "white-space: nowrap; min-width: 900px;",
+		"name": "recommendationMadeToStopUsingTobaccoProductsDoesPatientSmokeCigarettesAndOrUseOtherFormsOfTobaccoIsPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 30px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "279_adviceAndSupportProvidedForTobaccoUseCessation",
+		"label_style": "white-space: nowrap; min-width: 900px;",
+		"name": "adviceAndSupportProvidedForTobaccoUseCessationDoesPatientSmokeCigarettesAndOrUseOtherFormsOfTobaccoIsPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 30px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "280_continuedSupportForTobaccoUseCessationWillBeProvidedOnAllOrMostFollowUpVisits",
+		"label_style": "white-space: nowrap; min-width: 900px;",
+		"name": "continuedSupportForTobaccoUseCessationWillBeProvidedOnAllOrMostFollowUpVisitsDoesPatientSmokeCigarettesAndOrUseOtherFormsOfTobaccoIsPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 30px;"
 	},
 	{
-		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "281_patientSmokeCigarettesText",
+		"label_style": "white-space: nowrap; min-width: 900px;",
+		"name": "patientSmokeCigarettesTextDoesPatientSmokeCigarettesAndOrUseOtherFormsOfTobaccoIsPatientATobaccoUserOccupationSocialHistoryMedicalHistory",
 		"style": "margin-left: 30px;"
 	}
 ]

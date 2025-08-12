@@ -16,17 +16,17 @@ export var PreviousHistoryOfSimilarSymptomsStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "ageRangePreviousEpisodesOfSameComplaintsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "yearOfFirstEpisodePreviousEpisodesOfSameComplaintsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "commentPreviousTreatmentsForSimilarSymptomsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     }

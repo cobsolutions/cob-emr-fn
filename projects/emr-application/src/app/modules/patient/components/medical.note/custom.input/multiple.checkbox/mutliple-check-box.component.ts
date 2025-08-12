@@ -14,6 +14,7 @@ export class MutlipleCheckBoxComponent implements OnInit {
   @Input() label: string
   @Input() splitColumn: number
   @Input() labelStyle: string;
+  @Input() style: string;
   @Input() checkBoxStyle: string;
   @Input() contorl_style: string
   constructor(private fb: FormBuilder) {
@@ -26,7 +27,6 @@ export class MutlipleCheckBoxComponent implements OnInit {
     this.values.forEach(value => {
       this.form.addControl(value.val, this.fb.control(false));
       this.form.get(`${value.val}`).valueChanges.subscribe(v => {
-        console.log(v)
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
       if (value.dependencies !== undefined)
@@ -36,7 +36,6 @@ export class MutlipleCheckBoxComponent implements OnInit {
           else
           this.form.addControl(dep.fieldFormName, this.fb.control(''));
           this.form.get(`${dep.fieldFormName}`).valueChanges.subscribe(v => {
-            console.log(v)
             this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
           })
         })
