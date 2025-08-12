@@ -121,7 +121,6 @@ export class InitialExaminationComponent implements OnInit {
         );
       }
     });
-    console.log(JSON.stringify(values))
     return values;
   }
   private handleNoteFinalization() {
