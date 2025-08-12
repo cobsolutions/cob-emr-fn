@@ -7,7 +7,7 @@ export const SelfCareStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "78_selfCareText",
+        "name": "selfCareTextSelfCarePlan",
         "style": "margin-left: 10px;"
     }
 ];

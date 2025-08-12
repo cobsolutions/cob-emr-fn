@@ -7,7 +7,7 @@ export const MassageStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "40_massageText",
+        "name": "massageTextMassagePlan",
         "style": "margin-left: 10px;"
     }
 ]

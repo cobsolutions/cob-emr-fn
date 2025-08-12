@@ -7,7 +7,7 @@ export const LymphedemaStyles: FieldControlStyles[] =[
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "63_lymphedemaText",
+        "name": "lymphedemaTextLymphedemaPlan",
         "style": "margin-left: 10px;"
     }
 ]

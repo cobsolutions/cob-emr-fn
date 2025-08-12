@@ -7,7 +7,7 @@ export const CardiacRehabilitationStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "65_cardiacRehabilitationText",
+        "name": "cardiacRehabilitationTextCardiacRehabilitationPlan",
         "style": "margin-left: 10px;"
     }
 ]

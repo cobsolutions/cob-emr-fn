@@ -7,7 +7,7 @@ export const AquaticTherapyStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "42_aquaticTherapyText",
+        "name": "aquaticTherapyTextAquaticTherapyPlan",
         "style": "margin-left: 10px;"
     }
 ]

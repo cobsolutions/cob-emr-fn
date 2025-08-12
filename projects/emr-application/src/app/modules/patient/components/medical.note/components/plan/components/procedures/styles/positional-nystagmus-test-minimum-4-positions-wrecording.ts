@@ -7,7 +7,7 @@ export const PositionalNystagmusTestMinimum4PositionsWithRecordingStyles: FieldC
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "48_positionalNystagmusText",
+        "name": "positionalNystagmusTextPositionalNystagmusTestMinimum4PositionsWRecordingPlan",
         "style": "margin-left: 10px;"
     }
 ];

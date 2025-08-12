@@ -8,7 +8,7 @@ export const VestibularRehabilitationStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "67_vestibularRehabilitationText",
+        "name": "vestibularRehabilitationTextVestibularRehabilitationPlan",
         "style": "margin-left: 10px;"
     }
 ]

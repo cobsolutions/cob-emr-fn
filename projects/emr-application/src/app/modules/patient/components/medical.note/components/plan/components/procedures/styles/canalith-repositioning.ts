@@ -8,7 +8,7 @@ export const CanalithRepositioningStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "46_canalithRepositioningText",
+        "name": "canalithRepositioningTextCanalithRepositioningPlan",
         "style": "margin-left: 10px;"
     }
 ];

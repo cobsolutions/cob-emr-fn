@@ -8,7 +8,7 @@ export const SpontaneousNystagmusTestWithGazeAndFixationNystagmusWithRecordingSt
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "50_spontaneousNystagmusText",
+        "name": "spontaneousNystagmusTextSpontaneousNystagmusTestWGazeFixationNystagmusWRecordingPlan",
         "style": "margin-left: 10px;"
     }
 ];

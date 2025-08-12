@@ -7,7 +7,7 @@ export const WoundCareDebridementStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "52_woundCareDebridementText",
+        "name": "woundCareDebridementTextWoundCareDebridementPlan",
         "style": "margin-left: 10px;"
     }
 ];

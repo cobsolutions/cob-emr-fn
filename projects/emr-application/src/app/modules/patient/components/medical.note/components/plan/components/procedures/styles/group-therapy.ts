@@ -7,7 +7,7 @@ export const GroupTherapyStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "61_groupTherapyText",
+        "name": "groupTherapyTextGroupTherapyPlan",
         "style": "margin-left: 10px;"
     }
 ]

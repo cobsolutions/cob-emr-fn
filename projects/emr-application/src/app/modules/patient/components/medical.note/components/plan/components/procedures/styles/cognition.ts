@@ -7,7 +7,7 @@ export const CognitionStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "80_cognitionText",
+        "name": "cognitionTextCognitionPlan",
         "style": "margin-left: 10px;"
     }
 ];

@@ -7,42 +7,42 @@ export const PatientEducationStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "69_homeExerciseProgram",
+        "name": "homeExerciseProgramPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "70_posturalTraining",
+        "name": "posturalTrainingPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "71_ergonomics",
+        "name": "ergonomicsPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "72_liftingMechanics",
+        "name": "liftingMechanicsPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "73_tENSUse",
+        "name": "tensUsePatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "74_activityModification",
+        "name": "activityModificationPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "75_homeSafety",
+        "name": "homeSafetyPatientEducationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "76_patientEducationText",
+        "name": "patientEducationTextPatientEducationPlan",
         "style": "margin-left: 10px;"
     }
 ]
