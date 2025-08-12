@@ -3,51 +3,51 @@ import { FieldControlStyles } from "../../../filed.control.style.selector/field.
 export const AssessmentStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "9_assessmentDiagnosis",
+        "name": "assessmentDiagnosisAssessment",
         "style": "width:300px"
     },
     {
         "label_style": "margin-left:330px",
-        "name": "10_patientClinicalPresentation",
+        "name": "patientClinicalPresentationAssessment",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "11_parentPatientEducation",
+        "name": "parentPatientEducationAssessment",
         "style": "width:300px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "12_rehabPotential",
+        "name": "rehabPotentialAssessment",
         "style": "width:300px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "13_rehabPotentialtxtArea",
+        "name": "rehabPotentialTxtareaRehabPotentialAssessment",
         "style": "margin-left: 10px;"
     }
     ,
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "14_reason",
+        "name": "reasonAssessment",
         "style": "width:300px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "15_contraindicationsToTherapy",
+        "name": "contraindicationsToTherapyAssessment",
         "style": "width:300px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "16_contraindicationsToTherapyText",
+        "name": "contraindicationsToTherapyTextContraindicationsToTherapyAssessment",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "17_agreesToTheCurrentTreatmentPlanConcent",        
+        "name": "agreesToTheCurrentTreatmentPlanConcentAssessment",        
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "18_consentToCare",
+        "name": "consentToCareAssessment",
         "style": "width:300px"
     },
 ]
