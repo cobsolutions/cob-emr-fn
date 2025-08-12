@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const CognitionStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "79_cognition",
+        "name": "cognitionPlan",
     },
     {
         "label_style": "white-space: nowrap;",

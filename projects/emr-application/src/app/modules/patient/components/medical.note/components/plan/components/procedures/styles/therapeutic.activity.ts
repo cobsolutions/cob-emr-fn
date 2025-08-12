@@ -3,36 +3,36 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const TherapeuticActivityStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "31_therapeuticActivity",
+        "name": "therapeuticActivityPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "32_workSpecific",
+        "name": "workSpecificTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "33_sportSpecific",
+        "name": "sportSpecificTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "34_transfers",
+        "name": "transfersTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "35_bedMobility",
+        "name": "bedMobilityTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "36_aDLSpecific",
+        "name": "adlSpecificTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "37_therapeuticActivityTextArea",
+        "name": "therapeuticActivityTextAreaTherapeuticActivityPlan",
         "style": "margin-left: 10px;"
     }
 ]

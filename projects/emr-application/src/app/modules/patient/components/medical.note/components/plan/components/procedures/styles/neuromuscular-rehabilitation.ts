@@ -3,41 +3,41 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const NeuromuscularRehabilitationStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "16_neuromuscularRehabilitation",
+        "name": "neuromuscularRehabilitationPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "17_balanceProprioceptionTraining",
+        "name": "balanceProprioceptionTrainingNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "18_muscleReEducation",
+        "name": "muscleReEducationNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "19_sequencing",
+        "name": "sequencingNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "20_coordination",
+        "name": "coordinationNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "21_pNF",
+        "name": "pnfNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "22_redcordNeuracNeuromuscularActivation",
+        "name": "redcordNeuracNeuromuscularActivationNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "23_neuromuscularText",
+        "name": "neuromuscularTextNeuromuscularRehabilitationPlan",
         "style": "margin-left: 10px;"
     }
 ]

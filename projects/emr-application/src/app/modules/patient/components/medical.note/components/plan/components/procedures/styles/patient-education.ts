@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const PatientEducationStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "68_patientEducation",
+        "name": "patientEducationPlan",
     },
     {
         "label_style": "white-space: nowrap; ",

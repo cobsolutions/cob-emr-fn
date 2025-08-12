@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const WoundCareDebridementStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "51_woundCareDebridement",        
+        "name": "woundCareDebridementPlan",        
     },
     {
         "label_style": "white-space: nowrap;",

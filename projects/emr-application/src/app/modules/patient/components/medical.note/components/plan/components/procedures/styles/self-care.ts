@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const SelfCareStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "77_selfCare",
+        "name": "selfCarePlan",
     },
     {
         "label_style": "white-space: nowrap;",

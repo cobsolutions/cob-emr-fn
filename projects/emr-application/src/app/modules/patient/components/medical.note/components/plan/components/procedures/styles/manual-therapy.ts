@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const ManualTherapyStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "24_manualTherapy",
+        "name": "manualTherapyPlan",
     },
     {
         "label_style": "white-space: nowrap; ",

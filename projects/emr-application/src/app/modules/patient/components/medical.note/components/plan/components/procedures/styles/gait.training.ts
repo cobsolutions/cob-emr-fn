@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const GaitTrainingStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "0_gaitTraining",
+        "name": "gaitTrainingPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
@@ -12,17 +12,17 @@ export const GaitTrainingStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "2_frontWheelWalker",
+        "name": "frontWheelWalkerGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "3_4WheelWalker",
+        "name": "4WheelWalkerGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "4_hemiWalker",
+        "name": "hemiWalkerGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
@@ -32,27 +32,27 @@ export const GaitTrainingStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "6_1PointCane",
+        "name": "1PointCaneGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "7_2AxillaryCrutches",
+        "name": "2AxillaryCrutchesGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "8_1AxillaryCrutch",
+        "name": "1AxillaryCrutchGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "9_2ForearmCrutches",
+        "name": "2ForearmCrutchesGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "10_1ForearmCrutches",
+        "name": "1ForearmCrutchesGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
@@ -62,7 +62,7 @@ export const GaitTrainingStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "12_unevenSurfaces",
+        "name": "unevenSurfacesGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
@@ -72,12 +72,12 @@ export const GaitTrainingStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "14_curbs",
+        "name": "curbsGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "15_gaitTrainingTextArea",
+        "name": "gaitTrainingTextAreaGaitTrainingPlan",
         "style": "margin-left: 10px;"
     }
 ]
