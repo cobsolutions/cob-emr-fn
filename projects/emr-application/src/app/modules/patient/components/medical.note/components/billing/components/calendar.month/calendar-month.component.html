@@ -1,6 +1,6 @@
 <div [formGroup]="CalendarMonthForm">
     <span *ngFor="let field of fields;">
         <soap-field-builder [field]="field " [form]="CalendarMonthForm" [filedStyle]="getstyleFieldControl(field.name)"
-            [styles]="styles"></soap-field-builder>
+            [soapModule]="'billing'" [styles]="styles"></soap-field-builder>
     </span>
 </div>
