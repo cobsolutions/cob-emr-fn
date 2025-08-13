@@ -12,9 +12,11 @@ export class SoapFieldBuilderComponent implements OnInit {
   @Input() field: any
   @Input() filedStyle: FieldControlStyles
   @Input() styles: FieldControlStyles[]
+  @Input() soapModule:string;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    console.log('module ' + this.soapModule)
     this.buildField(this.field);
   }
 

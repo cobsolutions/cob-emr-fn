@@ -38,7 +38,7 @@
      && field.type !== 'covavg'
      && field.type !== 'm-top-right-left-controls'
      && field.type !== 'right-left-mselect'
-     && field.type !== 'cutom-palpation'" >
+     && field.type !== 'cutom-palpation'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
         </label>
@@ -56,7 +56,8 @@
     <!--checkbox-->
     <div class="d-flex align-items-center mb-1" *ngIf="field.type === 'checkbox'" [style]="filedStyle?.style">
         <label class="me-2 text-end" [style]="filedStyle?.label_style"></label>
-        <c-form-check>
+        <c-form-check [matTooltip]="soapModule ==='billing' ? 'Billing Code: ' + field.name : null"
+            [matTooltipPosition]="soapModule ==='billing'? 'above' : null">
             <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
             <label cFormCheckLabel for="na">{{field.display}}</label>
         </c-form-check>
@@ -95,9 +96,10 @@
     </div>
     <!--mutliple-checkBox-->
     <div class="mb-3" *ngIf="field.type === 'mutliple-checkBox'">
-        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value" [style]="filedStyle!.style"
-            [label]="field.display" [splitColumn]="field.checkBoxCol" [labelStyle]="filedStyle!.label_style"
-            [checkBoxStyle]="filedStyle?.style" [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
+        <mutliple-check-box [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
+            [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
+            [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
@@ -259,11 +261,8 @@
             [columns]="field.value.columns"></m-top-right-left-controls>
     </div>
     <div *ngIf="field.type === 'cutom-palpation'">
-        <cutom-palpation 
-        [parentForm]="form" 
-        [parentFieldName]="field.name"
-        [singleSections]="field.value.singleSections"
-        [dualSections]="field.value.dualSections"></cutom-palpation>
+        <cutom-palpation [parentForm]="form" [parentFieldName]="field.name"
+            [singleSections]="field.value.singleSections" [dualSections]="field.value.dualSections"></cutom-palpation>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">
