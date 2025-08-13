@@ -28,10 +28,11 @@ export var BasicFormStyles: FieldControlStyles[] = [
         label_style: "white-space: nowrap; min-width: 500px;"
     },
     {
-        name: "treatmentSide",
-        style: "white-space: nowrap; min-width: 500px;",
-        label_style: "white-space: nowrap; min-width: 500px;"
+        "label_style": "white-space: nowrap;margin-left: 140px;",
+        "name": "treatmentSide",
+        "style": "margin-left: 255px;"
     },
+   
     {
         name: "specificPhysicianOrders",
         style: "white-space: nowrap; min-width: 185px;",
