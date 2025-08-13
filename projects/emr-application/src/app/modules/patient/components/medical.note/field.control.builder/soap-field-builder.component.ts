@@ -16,7 +16,6 @@ export class SoapFieldBuilderComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log('module ' + this.soapModule)
     this.buildField(this.field);
   }
 

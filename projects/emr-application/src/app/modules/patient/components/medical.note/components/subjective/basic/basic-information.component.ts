@@ -11,6 +11,9 @@ import { BasicFormStyles } from './fields.styles';
   styleUrls: ['./basic-information.component.css']
 })
 export class BasicInformationComponent implements OnInit {
+  getDiagnosis($event: { code: string; description: string; }[]) {
+    console.log(JSON.stringify($event))
+  }
   basicForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
