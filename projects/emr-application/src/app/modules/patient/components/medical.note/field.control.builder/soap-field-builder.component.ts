@@ -12,7 +12,8 @@ export class SoapFieldBuilderComponent implements OnInit {
   @Input() field: any
   @Input() filedStyle: FieldControlStyles
   @Input() styles: FieldControlStyles[]
-  @Input() soapModule:string;
+  @Input() soapModule: string;
+  @Input() data: any
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -21,9 +22,14 @@ export class SoapFieldBuilderComponent implements OnInit {
 
   private buildField(field: any) {
     this.form.addControl(field.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null));
+    // fill Data
+    if (this.data !== undefined && this.data[this.field.name] !== null)
+      this.form.get(this.field.name).setValue(this.data[this.field.name])
+    // render dependents of parent soap field  
     if (field.dependents !== undefined && field.dependents.length > 0) {
       this.form?.get(field.name)?.valueChanges.subscribe(value => {
         if (Array.isArray(field.idField.valueChange)) {
+
           this.renderDependentsPerChangeValue(field, value)
         }
         else {
@@ -43,11 +49,17 @@ export class SoapFieldBuilderComponent implements OnInit {
       field.dependents.forEach(dependent => {
         dependent.render = true;
         this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
+        if (this.data !== undefined && this.data[dependent.name] !== null)
+          this.form.get(dependent.name).setValue(this.data[dependent.name])
       });
     } else {
       field.dependents.forEach(dependent => {
         dependent.render = false;
         this.form.removeControl(dependent.name)
+        if (dependent.dependents !== undefined || dependent.dependents !== null)
+          dependent.dependents.forEach(subdependent => {
+            this.form.removeControl(subdependent.name)
+          })
       });
     }
   }
@@ -61,6 +73,8 @@ export class SoapFieldBuilderComponent implements OnInit {
     matchSelectDependents.forEach(dependent => {
       dependent.render = true;
       this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
+      if (this.data !== undefined && this.data[dependent.name] !== null)
+        this.form.get(dependent.name).setValue(this.data[dependent.name])
     });
     const notMatchSelect = field.dependents.filter(item => item.changeValueSelect !== value);
     notMatchSelect.forEach(dependent => {

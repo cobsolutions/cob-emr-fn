@@ -73,16 +73,7 @@ export class DailyNoteComponent implements OnInit {
     })
   }
   private handleNoteFinalization() {
-    this.medialNoteService.medicalNoteType.pipe(
-      filter(type => type !== null && type === MedicalNoteType.Daily_Note),
-    ).subscribe(result => {
-      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
-      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
-        console.log('Note is finalized')
-        this.backtoPatientRecordActions();
-      })
-    })
+   
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;

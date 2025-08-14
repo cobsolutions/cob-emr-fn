@@ -103,7 +103,6 @@ export class BillingComponent implements OnInit {
     }
   }
   finalize() {
-    this.medialNoteService.medicalNoteType.next(this.noteType)
   }
   private onChangeIncludeDailyNote() {
     this.billingForm.get('dailyNoteIncluded').valueChanges.subscribe(val => {

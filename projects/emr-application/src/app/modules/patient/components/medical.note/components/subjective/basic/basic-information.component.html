@@ -1,5 +1,4 @@
-
 <span *ngFor="let field of fields;">
     <soap-field-builder [field]="field " [form]="basicForm" [filedStyle]="getstyleFieldControl(field.name)"
-        [styles]="styles"></soap-field-builder>
+        [styles]="styles" [data]="basicFormData"></soap-field-builder>
 </span>

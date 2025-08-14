@@ -49,7 +49,7 @@ export class InitialExaminationComponent implements OnInit {
         this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
-    this.handleNoteFinalization()
+    // this.handleNoteFinalization()
 
   }
   setFormValues(formGroup: FormGroup, data: any) {
@@ -123,17 +123,17 @@ export class InitialExaminationComponent implements OnInit {
     });
     return values;
   }
-  private handleNoteFinalization() {
-    this.medialNoteService.medicalNoteType.pipe(
-      filter(type => type !== null && type === MedicalNoteType.Initial_Examination),
-    ).subscribe(result => {
-      console.log('handleNoteFinalization')
-      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-      var loggedProvider = this.loggedInService.getLoggedUser().uuid;
-      this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
-        console.log('Not is finalized')
-        this.backtoPatientRecordActions();
-      })
-    })
-  }
+  // private handleNoteFinalization() {
+  //   this.medialNoteService.medicalNoteType.pipe(
+  //     filter(type => type !== null && type === MedicalNoteType.Initial_Examination),
+  //   ).subscribe(result => {
+  //     console.log('handleNoteFinalization')
+  //     var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+  //     var loggedProvider = this.loggedInService.getLoggedUser().uuid;
+  //     this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
+  //       console.log('Not is finalized')
+  //       this.backtoPatientRecordActions();
+  //     })
+  //   })
+  // }
 }

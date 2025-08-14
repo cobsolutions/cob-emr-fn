@@ -105,7 +105,6 @@ export class PlanComponent implements OnInit {
     this.planForm.setControl(section, formGroup);
   }
   finalize() {
-    this.medialNoteService.medicalNoteType.next(this.noteType)
   }
   isAuthorizthedToFinalize() {
     const logged: string = this.loggedInService.getLoggedUser().uuid;
