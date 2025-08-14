@@ -11,9 +11,6 @@ import { BasicFormStyles } from './fields.styles';
   styleUrls: ['./basic-information.component.css']
 })
 export class BasicInformationComponent implements OnInit {
-  getDiagnosis($event: { code: string; description: string; }[]) {
-    console.log(JSON.stringify($event))
-  }
   basicForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
@@ -30,18 +27,18 @@ export class BasicInformationComponent implements OnInit {
     ).subscribe(type => {
       switch (type) {
         case 'daily':
-          var excludedFields: string[] = ['ec454838-5991-4328-8ebe-2cc5439097af', 'e888a0bb-8690-4fdf-9c33-062c56a3997a']
-          this.fields = this.fields.filter(obj => !excludedFields.includes(obj.idField.id));
-          this.prepareFields();
+          // var excludedFields: string[] = ['ec454838-5991-4328-8ebe-2cc5439097af', 'e888a0bb-8690-4fdf-9c33-062c56a3997a']
+          // this.fields = this.fields.filter(obj => !excludedFields.includes(obj.idField.id));
+          // this.prepareFields();
           break;
         case 'init_exam':
           this.prepareFields();
           break;
         case 'progress':
-          this.prepareFields();
+          //this.prepareFields();
           break;
         case 'discharge':
-          this.prepareFields();
+          //this.prepareFields();
           break;
       }
     })
@@ -52,11 +49,10 @@ export class BasicInformationComponent implements OnInit {
   }
 
   private prepareFields() {
-    this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     if (this.basicFormData) {
-      // this.basicForm = this.fb.group(this.basicFormData);
       this.basicForm = this.fb.group({});
       setTimeout(() => {
+        this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
         this.basicForm.patchValue(this.basicFormData);
       }, 10);
     }
