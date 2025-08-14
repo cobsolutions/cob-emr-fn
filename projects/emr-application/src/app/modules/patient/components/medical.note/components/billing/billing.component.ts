@@ -60,9 +60,9 @@ export class BillingComponent implements OnInit {
         directTimedCodes: this.fb.group({})
       });
       if (this.billingData)
-        setTimeout(() => {
-          this.billingForm.patchValue(this.billingData);
-        }, 10);
+        this.billingForm.patchValue(this.billingData);
+      // if(this.billingData && this.billingData['dailyNoteIncluded'])
+
       this.formReady.emit(this.billingForm);
     })
   }

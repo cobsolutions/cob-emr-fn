@@ -18,13 +18,9 @@ export class UntimedCodesComponent implements OnInit {
   styles: FieldControlStyles[] = UntimedCodesStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.UntimedCodesForm = this.fb.group({})
-    if (this.untimedCodesData)
-      setTimeout(() => {
-        this.UntimedCodesForm.patchValue(this.untimedCodesData);
-      }, 10);
     this.formReady.emit(this.UntimedCodesForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

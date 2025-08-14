@@ -1,6 +1,6 @@
 <div [formGroup]="DirectTimedCodesForm">
     <span *ngFor="let field of fields;">
-        <soap-field-builder [field]="field " [form]="DirectTimedCodesForm"
-            [soapModule]="'billing'"></soap-field-builder>
+        <soap-field-builder [field]="field " [form]="DirectTimedCodesForm" [soapModule]="'billing'"
+            [data]="directTimedCodesData"></soap-field-builder>
     </span>
 </div>

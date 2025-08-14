@@ -1,6 +1,6 @@
 <div [formGroup]="NerveConductionStudiesForm">
     <span *ngFor="let field of fields;">
         <soap-field-builder [field]="field " [form]="NerveConductionStudiesForm"
-            [soapModule]="'billing'"></soap-field-builder>
+            [soapModule]="'billing'" [data]="nerveConductionStudiesData"></soap-field-builder>
     </span>
 </div>
