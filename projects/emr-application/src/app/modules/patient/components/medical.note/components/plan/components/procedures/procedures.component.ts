@@ -13,6 +13,7 @@ export class ProceduresComponent implements OnInit {
   proceduresForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() data:any
   styles: FieldControlStyles[] = ProceduresStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
