@@ -13,18 +13,21 @@ export class ObjectiveOMTTestComponent implements OnInit {
   omtTestform: FormGroup;
   @Input() layout: 'horizontal' | 'vertical' = 'vertical';
   @Input() controls: OMTTestControl[]
-  @Input() testStyle:string
-  @Input() testLabelStyle:string
+  @Input() testStyle: string
+  @Input() testLabelStyle: string
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.omtTestform = this.fb.group({});
     this.controls.forEach(control => {
       this.omtTestform.addControl(control.id, this.fb.control(''));
-      this.omtTestform.get(control.id).valueChanges.subscribe(v=>{
+      this.omtTestform.get(control.id).valueChanges.subscribe(v => {
         this.form.get(this.parentFieldName).setValue(this.getAllFormValues(this.omtTestform));
       })
     })
+    setTimeout(() => {
+      this.omtTestform.patchValue(this.form.get(this.parentFieldName).value);
+    }, 10);
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};

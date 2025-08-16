@@ -248,17 +248,15 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 500px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "omt_91374832-9e28-4e36-a106-45ce1f89f622_tinettiomttest",
         "style": "margin-left: 500px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "omt_aa308a9c-3048-42d3-a114-5fd8845f8b80_bergomttest",
         "style": "margin-left: 500px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        
         "name": "omt_20f42bc5-ee10-4f6a-b25a-a19b66859cbf_fullertonadvancedbalancescaleomttest",
         "style": "margin-left: 500px"
     },
@@ -414,12 +412,12 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "width: 255px;",
         "name": "omt_5c7de931-326d-444d-a35e-1615a8992e97_geriatricdepressionscaleomttest",
-        "style": "margin-left: 500px"
+        "style": "margin-left: 400px"
     },
     {
         "label_style": "width: 255px;",
         "name": "omt_d2a8fc19-b2d4-472e-be42-133ef389bd30_elderabusesuspicionindexomttest",
-        "style": "margin-left: 500px"
+        "style": "margin-left: 400px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
