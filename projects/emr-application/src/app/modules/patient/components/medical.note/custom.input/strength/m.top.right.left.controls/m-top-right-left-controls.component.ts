@@ -34,6 +34,9 @@ export class MTopRightLeftControlsComponent implements OnInit {
         new Set(this.columns.flatMap(c => c.controls.map(ctrl => ctrl.label)))
       );
     }
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
