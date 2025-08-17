@@ -52,6 +52,9 @@ export class TopRightLeftControlsComponent implements OnInit {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
       });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
