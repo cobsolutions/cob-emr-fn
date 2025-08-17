@@ -22,7 +22,7 @@ export class CutomPalpationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({});
@@ -32,6 +32,7 @@ export class CutomPalpationComponent implements OnInit {
       section.options.forEach(option => {
         const controlName = this.toCamelCase(`${section.title}_${option}`);
         this.form.addControl(controlName, this.fb.control(false));
+
       });
     });
 
@@ -45,15 +46,15 @@ export class CutomPalpationComponent implements OnInit {
       });
     });
 
-    // Set to parent
-    this.parentForm.setControl(this.parentFieldName, this.form);
-
     // Subscribe to value changes
     Object.keys(this.form.controls).forEach(key => {
       this.form.get(key).valueChanges.subscribe(() => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       });
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
 
   toCamelCase(text: string): string {
