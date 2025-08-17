@@ -56,11 +56,13 @@ export class TopRightLeftSelectsComponent implements OnInit {
           this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
         });
       });
-    if (this.hasComment){
+    if (this.hasComment) {
       const key = `comment_${this.parentFieldName}`;
       this.form.addControl(key, new FormControl(null));
     }
-      
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());
