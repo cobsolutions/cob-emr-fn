@@ -276,9 +276,9 @@ export var ObservationFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;width:200px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap",
         "name": "observation_5f37fed1-3204-418d-8ae6-244697dba583_breathingrestmultiplecheckbox",
-        "style": "margin-left: 500px;"
+        "style": "margin-left: 300px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
