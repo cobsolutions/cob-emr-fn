@@ -23,31 +23,34 @@ export class HandROMComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({});
     this.controlR1.forEach(control => {
-      this.form.addControl(`right1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlR1[0].value[0].val: null));
+      this.form.addControl(`right1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlR1[0].value[0].val : null));
       this.form.get(`right1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
     })
 
     this.controlR2.forEach(control => {
-      this.form.addControl(`right2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlR2[0].value[0].val: null));
+      this.form.addControl(`right2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlR2[0].value[0].val : null));
       this.form.get(`right2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
     })
 
     this.controlL1.forEach(control => {
-      this.form.addControl(`left1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlL1[0].value[0].val: null));
+      this.form.addControl(`left1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlL1[0].value[0].val : null));
       this.form.get(`left1_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
     });
     this.controlL2.forEach(control => {
-      this.form.addControl(`left2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlL2[0].value[0].val: null));
+      this.form.addControl(`left2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`, new FormControl(control.type === 'select' ? this.controlL2[0].value[0].val : null));
       this.form.get(`left2_${this.toCamelCase(control.label) + "_" + this.parentFieldName}`).valueChanges.subscribe(v => {
         this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toCamelCase(value: string): string {
     return value.replace(/\s+(.)/g, (match, group1) => group1.toUpperCase());

@@ -146,9 +146,9 @@ export var ROMFormStyles: FieldControlStyles[] = [
     },
 
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap",
         "name": "range_of_motion_f509b4e9-7c91-4b73-9d8b-863229928181_arommultiplecheckbox",
-        "style": "margin-left: 550px;"
+        "style": "margin-left: 300px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -156,9 +156,9 @@ export var ROMFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
+        "label_style": "white-space: nowrap",
         "name": "range_of_motion_150c7e6b-af3f-4c4c-bbaf-e4324ebc6cc2_arommultiplecheckbox",
-        "style": "margin-left: 550px;"
+        "style": "margin-left: 300px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
@@ -173,7 +173,7 @@ export var ROMFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 160px;",
         "name": "range_of_motion_ab938628-b9bb-4f35-83b0-9cd7f40585ec_cervicalaromcomment",
-        "style": "margin-left: 100px;width:70%"
+        "style": "margin-left: 100px;width:70%;margin-top:10px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
