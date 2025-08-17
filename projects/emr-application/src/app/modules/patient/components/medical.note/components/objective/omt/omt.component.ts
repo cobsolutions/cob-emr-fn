@@ -14,7 +14,6 @@ export class OmtComponent implements OnInit {
   omtForm: FormGroup;
   @Input() fields: any
   @Output() formReady = new EventEmitter<FormGroup>();
-  @Input() data: any
   styles: FieldControlStyles[] = OMTFormStyles;
   controls: OMTTestControl[] = []
   constructor(private fb: FormBuilder

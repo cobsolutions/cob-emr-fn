@@ -27,7 +27,7 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['omt']">
         <c-card-header>Outcome Measurement Tools</c-card-header>
         <c-card-body>
-            <omt (formReady)="setChildForm('omt', $event)" [fields]="objectiveCategoriesfields['omt']" [data]="this.objectiveData.omt"></omt>
+            <omt (formReady)="setChildForm('omt', $event)" [fields]="objectiveCategoriesfields['omt']"></omt>
         </c-card-body>
     </c-card>
     <!--Observation-->
