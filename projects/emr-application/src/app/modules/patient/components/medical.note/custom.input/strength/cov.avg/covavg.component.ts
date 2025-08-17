@@ -70,5 +70,8 @@ export class CovavgComponent implements OnInit {
     this.form.get('leftComments')?.valueChanges.subscribe(() => {
       this.parentForm.get(this.parentFieldName)?.setValue(this.form.getRawValue());
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
 }
