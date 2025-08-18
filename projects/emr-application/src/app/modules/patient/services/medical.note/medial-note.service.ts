@@ -16,8 +16,8 @@ export class MedialNoteService {
   public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
   constructor(private httpClient: HttpClient) { }
-  find(section: string) {
-    var url: string = this.baseUrl + "/find/section/" + section;
+  find(section: string, type?: string) {
+    var url: string = this.baseUrl + "/find/section/" + section + "/type/" + type;
     return this.httpClient.get(url);
   }
   findObjectiveProfile(name: string) {

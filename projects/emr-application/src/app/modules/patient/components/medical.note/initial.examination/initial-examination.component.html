@@ -17,7 +17,7 @@
                 formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
-                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]"></subjective>
+                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]" [noteType]="'InitialExamination'"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">

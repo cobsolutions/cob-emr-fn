@@ -12,12 +12,13 @@ export class SubjectiveComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() subjectiveData: any
+  @Input() noteType:string
   subjectiveFormFields: any
   constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) {
 
   }
   ngOnInit(): void {
-    this.medialNoteService.find('subjective').subscribe(fields => {
+    this.medialNoteService.find('subjective',this.noteType).subscribe(fields => {
       this.subjectiveFormFields = fields;
       if (this.subjectiveData === undefined)
         this.subjectiveForm = this.fb.group({
