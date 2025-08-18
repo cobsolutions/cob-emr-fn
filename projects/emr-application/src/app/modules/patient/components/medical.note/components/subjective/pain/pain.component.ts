@@ -28,13 +28,8 @@ export class PainComponent implements OnInit {
       'pain_scale': new FormControl(null, [Validators.required]),
       evals: this.fb.array([])
     });
-    if (this.painFormData) {
-      setTimeout(() => {
-        this.painForm.patchValue(this.painFormData);
-      }, 10);
-    }
     this.handlePainScale();
-    if (this.painFormData)
+    if (this.painFormData.evals)
       this.fillEvals();
     this.formReady.emit(this.painForm);
   }
@@ -48,13 +43,15 @@ export class PainComponent implements OnInit {
     }
   }
   private handlePainScale() {
-    this.painForm.get('pain_scale').valueChanges.subscribe(value => {
-      if (value === 'yes') {
+    if (this.painFormData['pain_scale'] !== null || this.painFormData['pain_scale'] !== undefined) {
+      this.painForm.get('pain_scale').setValue(this.painFormData['pain_scale'])
+      if (this.painFormData['pain_scale'] === 'yes') {
         this.showPainEval = true
       }
       else
         this.showPainEval = false
-    })
+    }
+
   }
   save(event: any) {
     this.evals.push(new FormControl(event))

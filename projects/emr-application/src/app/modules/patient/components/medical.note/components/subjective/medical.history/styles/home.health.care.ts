@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var HomeHealthCareStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "282_homeHealthCare"        
+        "name": "homeHealthCareMedicalHistory"        
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "283_homeHealthCareText",
+        "name": "homeHealthCareTextHomeHealthCareMedicalHistory",
         "style": "margin-left: 10px;"
     }
 ]

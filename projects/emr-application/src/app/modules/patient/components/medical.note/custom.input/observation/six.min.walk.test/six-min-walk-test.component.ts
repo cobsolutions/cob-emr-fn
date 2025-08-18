@@ -33,6 +33,9 @@ export class SixMinWalkTestComponent implements OnInit {
     this.form.get('comments').valueChanges.subscribe(() => {
       this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
     });
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   getControlName(time: string, metric: string): string {
     return `${time.replace(/\s|\./g, '')}_${metric.replace(/\s|\(|\)|%/g, '')}`;

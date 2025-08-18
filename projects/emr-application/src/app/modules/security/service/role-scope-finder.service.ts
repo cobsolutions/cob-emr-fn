@@ -18,7 +18,6 @@ export class RoleScopeFinderService {
       return of(cachedData)
     } else {
       var userRole: string[] = this.keycloakAngular.getUserRoles();
-      console.log(userRole)
       return this.userService.findUSerRoleScope(this.loggedInService.getLoggedUser().uuid, RoleScopeRequestBuilder.builder(userRole)).pipe(
         map(data => {
           this.cache.set(this.uuid, data);

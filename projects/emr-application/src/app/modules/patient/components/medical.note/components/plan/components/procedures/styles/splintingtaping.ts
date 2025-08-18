@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const SplintingTapingStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "43_splintingTaping",
+        "name": "splintingTapingPlan",
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "44_splintingTapingText",
+        "name": "splintingTapingTextSplintingTapingPlan",
         "style": "margin-left: 10px;"
     },
 ]

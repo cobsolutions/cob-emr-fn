@@ -3,16 +3,16 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const MechanicalTractionStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "27_mechanicalTraction",
+        "name": "mechanicalTractionModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "28_cervical",
+        "name": "cervicalMechanicalTractionModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "29_lumbar",
+        "name": "lumbarMechanicalTractionModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

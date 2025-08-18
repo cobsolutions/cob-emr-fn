@@ -3,31 +3,31 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var PreviousHistoryOfSimilarSymptomsStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "251_previousHistoryOfSimilarSymptoms"
+        "name": "previousHistoryOfSimilarSymptomsMedicalHistory"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "252_previousEpisodesOfSameComplaints",
+        "label_style": "white-space: nowrap; min-width: 700px;",
+        "name": "previousEpisodesOfSameComplaintsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "255_previousTreatmentsForSimilarSymptoms",
+        "label_style": "white-space: nowrap; min-width: 700px;",
+        "name": "previousTreatmentsForSimilarSymptomsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 10px;"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "253_ageRange",
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "ageRangePreviousEpisodesOfSameComplaintsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "254_yearOfFirstEpisode",
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "yearOfFirstEpisodePreviousEpisodesOfSameComplaintsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     },
     {
-        "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "256_comment",
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "commentPreviousTreatmentsForSimilarSymptomsPreviousHistoryOfSimilarSymptomsMedicalHistory",
         "style": "margin-left: 20px;width:300px"
     }
 ]

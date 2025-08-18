@@ -14,8 +14,9 @@ export class MutlipleCheckBoxComponent implements OnInit {
   @Input() label: string
   @Input() splitColumn: number
   @Input() labelStyle: string;
+  @Input() style: string;
   @Input() checkBoxStyle: string;
-  @Input() contorl_style:string
+  @Input() contorl_style: string
   constructor(private fb: FormBuilder) {
   }
 
@@ -25,14 +26,17 @@ export class MutlipleCheckBoxComponent implements OnInit {
     this.form = this.fb.group({});
     this.values.forEach(value => {
       this.form.addControl(value.val, this.fb.control(false));
-      this.form.get(`${this.toCamelCase(value.val)}`).valueChanges.subscribe(v => {
-        this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+      this.form.get(`${value.val}`).valueChanges.subscribe(v => {
+        this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
       })
       if (value.dependencies !== undefined)
         value.dependencies.forEach(dep => {
+          if (dep.fieldType === 'checkbox')
+            this.form.addControl(dep.fieldFormName, this.fb.control(false));
+          else
           this.form.addControl(dep.fieldFormName, this.fb.control(''));
-          this.form.get(`${this.toCamelCase(dep.fieldFormName)}`).valueChanges.subscribe(v => {
-            this.parentForm.get(this.parentFieldName).setValue(this.form.value);
+          this.form.get(`${dep.fieldFormName}`).valueChanges.subscribe(v => {
+            this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
           })
         })
     });
@@ -41,6 +45,10 @@ export class MutlipleCheckBoxComponent implements OnInit {
     }
     if (this.checkBoxStyle == null || this.checkBoxStyle === undefined)
       this.checkBoxStyle = 'margin-left: 510px;'
+
+    setTimeout(() => {
+      this.form.patchValue(this.parentForm.get(this.parentFieldName).value);
+    }, 10);
   }
   toggleAdditionalControl(conditionKey: string) {
     const isChecked = this.form.get(conditionKey)?.value;

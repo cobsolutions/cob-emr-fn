@@ -3,37 +3,37 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const IontophoresisStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap; ",
-        "name": "53_iontophoresis",
+        "name": "iontophoresisPlan",
       
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "54_dexamethasone",
+        "name": "dexamethasoneIontophoresisPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "55_lidocaine",
+        "name": "lidocaineIontophoresisPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "56_marcaine",
+        "name": "marcaineIontophoresisPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "57_aceticAcid",
+        "name": "aceticAcidIontophoresisPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "58_iodine",
+        "name": "iodineIontophoresisPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "59_iontophoresisText",
+        "name": "iontophoresisTextIontophoresisPlan",
         "style": "margin-left: 10px;"
     }
 ]

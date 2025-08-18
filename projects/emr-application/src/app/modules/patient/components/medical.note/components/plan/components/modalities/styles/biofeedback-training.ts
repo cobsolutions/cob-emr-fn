@@ -3,16 +3,16 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const BiofeedbackTrainingStyles: FieldControlStyles[] =
     [{
         "label_style": "white-space: nowrap",
-        "name": "11_biofeedbackTraining",
+        "name": "biofeedbackTrainingModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap;margin-left: 10px;",
-        "name": "12_biofeedbackTrainingText",
+        "name": "biofeedbackTrainingTextBiofeedbackTrainingModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap;margin-left: 10px;",
-        "name": "13_duration",
+        "name": "durationBiofeedbackTrainingModalitiesPlan",
         "style": "margin-left: 10px;"
     }
     ]

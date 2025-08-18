@@ -3,221 +3,221 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const MobilityWalkingMovingAroundStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "0_mobilityWalkingAndMovingAround",
+        "name": "mobilityWalkingAndMovingAroundPriorLevelOfFunction",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "1_iADLs",
+        "name": "iadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "10_useOfAnAssistiveDevice",
+        "name": "useOfAnAssistiveDeviceMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "11_walking",
+        "name": "walkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "18_movingAround",
+        "name": "movingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "25_movingAroundInDifferentLocations",
+        "name": "movingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "41_negotiateObstacles",
+        "name": "negotiateObstaclesMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "2_abilityToUseTelephone",
+        "name": "abilityToUseTelephoneIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "3_shopping",
+        "name": "shoppingIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "4_foodPreparation",
+        "name": "foodPreparationIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "5_housekeeping",
+        "name": "housekeepingIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "6_laundry",
+        "name": "laundryIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "7_modeOfTransportation",
+        "name": "modeOfTransportationIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "8_responsibilityForOwnMedications",
+        "name": "responsibilityForOwnMedicationsIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "9_abilityToHandleFinances",
+        "name": "abilityToHandleFinancesIadlsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "12_forward",
+        "name": "forwardWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "13_backward",
+        "name": "backwardWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "14_sideways",
+        "name": "sidewaysWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "15_strolling",
+        "name": "strollingWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "16_walkingOnDifferentSurfaces",
+        "name": "walkingOnDifferentSurfacesWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "17_walkingAroundObstacles",
+        "name": "walkingAroundObstaclesWalkingMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "19_climbing",
+        "name": "climbingMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "20_running",
+        "name": "runningMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "21_jogging",
+        "name": "joggingMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "22_skipping",
+        "name": "skippingMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "23_jumping",
+        "name": "jumpingMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "24_swimming",
+        "name": "swimmingMovingAroundMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "26_walkingBetweenRooms",
+        "name": "walkingBetweenRoomsMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "29_walkingDownTheStreet",
+        "name": "walkingDownTheStreetMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "31_walkingWithinABuilding",
+        "name": "walkingWithinABuildingMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "32_movingAroundUsingEquipment",
+        "name": "movingAroundUsingEquipmentMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "37_movingAroundUsingTransportation",
+        "name": "movingAroundUsingTransportationMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "42_bumpedInCrowdedStreets",
+        "name": "bumpedInCrowdedStreetsNegotiateObstaclesMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "43_terrain",
+        "name": "terrainNegotiateObstaclesMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 20px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "27_stairs",
+        "name": "stairsWalkingBetweenRoomsMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "28_inHome",
+        "name": "inHomeWalkingBetweenRoomsMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "30_communityDistances",
+        "name": "communityDistancesWalkingDownTheStreetMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "33_walker",
+        "name": "walkerMovingAroundUsingEquipmentMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "34_wheelchair",
+        "name": "wheelchairMovingAroundUsingEquipmentMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "35_skates",
+        "name": "skatesMovingAroundUsingEquipmentMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "36_skis",
+        "name": "skisMovingAroundUsingEquipmentMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "38_onOffBus",
+        "name": "onOffBusMovingAroundUsingTransportationMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "39_subway",
+        "name": "subwayMovingAroundUsingTransportationMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "40_publicTransportation",
+        "name": "publicTransportationMovingAroundUsingTransportationMovingAroundInDifferentLocationsMobilityWalkingAndMovingAroundPriorLevelOfFunction",
         "style": "margin-left: 30px;"
     }
 ]

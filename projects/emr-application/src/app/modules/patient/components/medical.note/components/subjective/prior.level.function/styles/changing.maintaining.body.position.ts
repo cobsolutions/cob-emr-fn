@@ -3,101 +3,101 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const ChangingMaintainingBodyPositionStyles: FieldControlStyles[] = [
     {
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "44_changingMaintainingBodyPosition"
+		"name": "changingMaintainingBodyPositionPriorLevelOfFunction"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "45_maintainingABodyPosition",
+		"name": "maintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "52_transfers",
+		"name": "transfersChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "55_iADLs",
+		"name": "iadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "46_remainingSeated",
+		"name": "remainingSeatedMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "47_remainingStanding",
+		"name": "remainingStandingMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "48_squatting",
+		"name": "squattingMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "49_kneeling",
+		"name": "kneelingMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "50_sitting",
+		"name": "sittingMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "51_standing",
+		"name": "standingMaintainingABodyPositionChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "53_movingFromBedToChair",
+		"name": "movingFromBedToChairTransfersChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "54_slidingAlongABench",
+		"name": "slidingAlongABenchTransfersChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "56_abilityToUseTelephone",
+		"name": "abilityToUseTelephoneIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "57_shopping",
+		"name": "shoppingIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "58_foodPreparation",
+		"name": "foodPreparationIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "59_housekeeping",
+		"name": "housekeepingIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "60_laundry",
+		"name": "laundryIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "61_modeOfTransportation",
+		"name": "modeOfTransportationIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "62_responsibilityForOwnMedications",
+		"name": "responsibilityForOwnMedicationsIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "63_abilityToHandleFinances",
+		"name": "abilityToHandleFinancesIadlsChangingMaintainingBodyPositionPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	}
 ]

@@ -21,11 +21,6 @@ export class PriorLevelFunctionComponent implements OnInit {
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.priorLevelFunctionForm = this.fb.group({})
-    if (this.priorLevelFunctionFormData) {
-      setTimeout(() => {
-        this.priorLevelFunctionForm.patchValue(this.priorLevelFunctionFormData);
-      }, 10);
-    }
     this.formReady.emit(this.priorLevelFunctionForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

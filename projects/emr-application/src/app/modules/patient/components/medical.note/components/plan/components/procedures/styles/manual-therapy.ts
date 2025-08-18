@@ -3,76 +3,76 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const ManualTherapyStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; ",
-        "name": "24_manualTherapy",
+        "name": "manualTherapyPlan",
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "25_softTissueMobilization",
+        "name": "softTissueMobilizationManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "26_jointMobilization",
+        "name": "jointMobilizationManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "27_spinalMobilization",
+        "name": "spinalMobilizationManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "28_manualTraction",
+        "name": "manualTractionManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "29_myofascialRelease",
+        "name": "myofascialReleaseManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "30_muscleEnergyTechniques",
+        "name": "muscleEnergyTechniquesManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "31_manualResistiveExercise",
+        "name": "manualResistiveExerciseManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "32_patellarMobs",
+        "name": "patellarMobsManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "33_cranioSacral",
+        "name": "cranioSacralManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "34_visceralManipulation",
+        "name": "visceralManipulationManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "35_dryNeedlingIntramuscularManualTherapy",
+        "name": "dryNeedlingIntramuscularManualTherapyManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "36_grastonOrASTYMTechniques",
+        "name": "grastonOrAstymTechniquesManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "37_strainCounterstrain",
+        "name": "strainCounterstrainManualTherapyPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; ",
-        "name": "38_manualTherapyText",
+        "name": "manualTherapyTextManualTherapyPlan",
         "style": "margin-left: 10px;"
     }
 ]

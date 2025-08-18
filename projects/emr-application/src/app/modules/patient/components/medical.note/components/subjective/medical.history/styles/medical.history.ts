@@ -18,5 +18,26 @@ export var MedicalHistoryStyles: FieldControlStyles[] = [
     ...DiagnosticTestingImagingStyles,
     ...MentalStatusCognitiveFunctionAppearsImpairedStyles,
     ...UnexplainedWeightLossStyles,
-    ...PatientGoalsStyles
+    ...PatientGoalsStyles,
+    {
+        "label_style": "white-space: nowrap;margin-left: 145px;",
+        "name": "medicalHistoryMedicalHistory",
+        "style": "margin-left: 250px;"
+    },
+    {
+        "label_style": "white-space: nowrap;margin-left: 145px;",
+        "name": "complicatingPersonalFactorsMedicalHistory",
+        "style": "margin-left: 250px;"
+    },
+    {
+        "label_style": "white-space: nowrap;margin-top:5px;margin-left:400px",
+        "name": "medicalHistoryReviewMedicalHistory",
+        "style": "width:700px;"
+    },
+    {
+        "label_style": "white-space: nowrap;margin-left: 145px;",
+        "name": "currentMedicationsMedicalHistory",
+        "style": "margin-left: 250px;"
+    },
+
 ]

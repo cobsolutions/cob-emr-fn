@@ -13,6 +13,7 @@ export class ModalitiesComponent implements OnInit {
   modalitiesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() data:any
   styles: FieldControlStyles[] = ModalitiesStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 

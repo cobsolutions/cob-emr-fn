@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export var PatientGoalsStyles: FieldControlStyles[] = [
     {
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "8_patientGoals",
+		"name": "patientGoalsMedicalHistory",
         "style": "width: 300px;"
 	},
 ]

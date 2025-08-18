@@ -13,6 +13,7 @@ export class SpecialtiesComponent implements OnInit {
   specialtiesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
+  @Input() data:any
   styles: FieldControlStyles[] = SpecialtiesStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService:FieldDependentsService) { }
 

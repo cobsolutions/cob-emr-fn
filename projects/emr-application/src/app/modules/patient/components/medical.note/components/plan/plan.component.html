@@ -72,7 +72,8 @@
             <div class="section">
                 <h4>Procedures</h4>
                 <hr />
-                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']">
+                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']"
+                    [data]="planData['procedures']">
                 </procedures>
             </div>
         </c-col>
@@ -81,7 +82,8 @@
             <div class="section">
                 <h4>Modalities</h4>
                 <hr />
-                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']">
+                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']"
+                    [data]="planData['modalities']">
                 </modalities>
             </div>
 
@@ -89,7 +91,8 @@
             <div class="section">
                 <h4>Specialties</h4>
                 <hr />
-                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']">
+                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']"
+                    [data]="planData['specialties']">
                 </specialties>
             </div>
         </c-col>
@@ -97,9 +100,9 @@
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control
-        [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
-    <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()"
-        [componentRole]="['finalize-medical-note-role']" *ngIf="authorizthedToFinalize">Finalize</button>
+            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()"
+            [componentRole]="['finalize-medical-note-role']" *ngIf="authorizthedToFinalize">Finalize</button>
     </div>
 </form>
 <c-modal id="foDMN" [visible]="forwardVisibility" backdrop="static">

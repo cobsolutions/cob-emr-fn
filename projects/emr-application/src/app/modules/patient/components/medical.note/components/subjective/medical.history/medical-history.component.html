@@ -2,7 +2,7 @@
     <div class="fields-container">
         <div class="field-item" *ngFor="let field of fields;">
             <soap-field-builder [field]="field" [form]="medicalHistoryForm"
-                [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles">
+                [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles" [data]="medicalHistoryFormData">
             </soap-field-builder>
         </div>
     </div>

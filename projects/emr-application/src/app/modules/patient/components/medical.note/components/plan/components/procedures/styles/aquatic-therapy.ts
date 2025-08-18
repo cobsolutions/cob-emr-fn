@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const AquaticTherapyStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "41_aquaticTherapy",
+        "name": "aquaticTherapyPlan",
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "42_aquaticTherapyText",
+        "name": "aquaticTherapyTextAquaticTherapyPlan",
         "style": "margin-left: 10px;"
     }
 ]

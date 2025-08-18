@@ -1,23 +1,58 @@
-<table class="table table-bordered cTable table-sm">
-    <thead>
-        <tr>
-            <th scope="col">Code</th>
-            <th scope="col">Description</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <td colspan="6" class="text-center" style="padding: 0px;">
-			<div class="text-end">
-                <button class="btn btn-link">Add new code</button>
-				</div>
-            </td>
-        </tr>
-    </tfoot>
-    <tbody>
-    </tbody>
-</table>
+
+<c-card class="mb-2" [style]="style">
+    <c-card-header>
+        {{title}}
+    </c-card-header>
+    <c-card-body>
+        <div class="form-group">
+            <div class="goal-form-container">
+                <div class="goal-input">
+                    <label>Enter an ICD-10 code or description</label>
+                    <c-card cBorder="primary" class="mb-2">
+                        <c-card-body>
+                            <c-input-group class="mb-3">
+                                <span cInputGroupText id="basic-addon1">
+                                    <svg cIcon name="cilNotes"></svg>
+                                </span>
+                                <input cFormControl name="icd10diagnosis" [formControl]="diagnosisCtrl" />
+                            </c-input-group>
+                            <c-multi-select class="mb-2" (valueChange)="addICD10diagnosis($event)" multiple="true"
+                                visibleItems="20">
+                                <c-multi-select-option *ngFor="let option of filteredDiagnosis">
+                                    {{ option}}
+                                </c-multi-select-option>
+                            </c-multi-select>
+
+                        </c-card-body>
+                    </c-card>
+                </div>
+                <div class="add-btn-container">
+                    <button type="button" (click)="addCode()" class="add-goal-btn">
+                        ➕ Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Table -->
+        <table class="table table-sm p-1 mb-3">
+            <thead>
+                <tr>
+                    <th style="max-width: 140px;">Codes</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let diag of addedDiagnosis; let i = index">
+                    <td>{{ diag.code }}</td>
+                    <td>{{ diag.description }}</td>
+                    <td class="text-center">
+                        <button cButton color="danger" variant="outline" size="sm" (click)="removeDiagnosis(i)">
+                            <svg cIcon name="cilTrash"></svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </c-card-body>
+</c-card>

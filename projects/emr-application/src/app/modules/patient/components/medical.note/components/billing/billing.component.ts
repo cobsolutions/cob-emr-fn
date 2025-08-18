@@ -41,7 +41,7 @@ export class BillingComponent implements OnInit {
     this.medialNoteService.find('billing').subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
-        'dailyNoteIncluded': this.fb.control(null),
+        'dailyNoteIncluded': this.fb.control(false),
         'dn_nstructions': this.fb.control("DN1"),
         'precautions': this.fb.control(null),
         'instructionsTxt': this.fb.control(null),
@@ -60,9 +60,9 @@ export class BillingComponent implements OnInit {
         directTimedCodes: this.fb.group({})
       });
       if (this.billingData)
-        setTimeout(() => {
-          this.billingForm.patchValue(this.billingData);
-        }, 10);
+        this.billingForm.patchValue(this.billingData);
+      // if(this.billingData && this.billingData['dailyNoteIncluded'])
+
       this.formReady.emit(this.billingForm);
     })
   }
@@ -103,6 +103,10 @@ export class BillingComponent implements OnInit {
     }
   }
   finalize() {
-    this.medialNoteService.medicalNoteType.next(this.noteType)
+  }
+  private onChangeIncludeDailyNote() {
+    this.billingForm.get('dailyNoteIncluded').valueChanges.subscribe(val => {
+
+    })
   }
 }

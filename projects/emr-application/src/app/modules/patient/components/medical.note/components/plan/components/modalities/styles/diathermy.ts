@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const DiathermyStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap;",
-        "name": "5_diathermy",
+        "name": "diathermyModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap;margin-left: 10px;",
-        "name": "6_duration",
+        "name": "durationDiathermyModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

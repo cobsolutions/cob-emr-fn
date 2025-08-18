@@ -22,6 +22,6 @@
     </div>
     <span *ngFor="let field of fields;">
         <soap-field-builder [field]="field" [form]="painForm" [filedStyle]="getstyleFieldControl(field.name)"
-            [styles]="styles"></soap-field-builder>
+            [styles]="styles" [data]="painFormData"></soap-field-builder>
     </span>
 </div>

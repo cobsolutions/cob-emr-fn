@@ -24,11 +24,6 @@ export class MedicalHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.medicalHistoryForm = this.fb.group({})
-    if (this.medicalHistoryFormData) {
-      setTimeout(() => {
-        this.medicalHistoryForm.patchValue(this.medicalHistoryFormData);
-      }, 10);
-    }
     this.formReady.emit(this.medicalHistoryForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

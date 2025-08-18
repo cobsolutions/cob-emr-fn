@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const PositionalNystagmusTestMinimum4PositionsWithRecordingStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "47_positionalNystagmusTestMinimum4PositionsWRecording",        
+        "name": "positionalNystagmusTestMinimum4PositionsWRecordingPlan",        
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "48_positionalNystagmusText",
+        "name": "positionalNystagmusTextPositionalNystagmusTestMinimum4PositionsWRecordingPlan",
         "style": "margin-left: 10px;"
     }
 ];

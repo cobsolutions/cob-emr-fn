@@ -3,12 +3,12 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const CanalithRepositioningStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "45_canalithRepositioning",
+        "name": "canalithRepositioningPlan",
         
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "46_canalithRepositioningText",
+        "name": "canalithRepositioningTextCanalithRepositioningPlan",
         "style": "margin-left: 10px;"
     }
 ];

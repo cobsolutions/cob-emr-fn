@@ -22,27 +22,7 @@ export class BasicInformationComponent implements OnInit {
     , private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.noteType$.pipe(
-      filter(type => type !== null),
-    ).subscribe(type => {
-      switch (type) {
-        case 'daily':
-          var excludedFields: string[] = ['ec454838-5991-4328-8ebe-2cc5439097af', 'e888a0bb-8690-4fdf-9c33-062c56a3997a']
-          this.fields = this.fields.filter(obj => !excludedFields.includes(obj.idField.id));
-          this.prepareFields();
-          break;
-        case 'init_exam':
-          this.prepareFields();
-          break;
-        case 'progress':
-          this.prepareFields();
-          break;
-        case 'discharge':
-          this.prepareFields();
-          break;
-      }
-    })
-
+    this.prepareFields();
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
     return this.styles.find(obj => obj.name === fieldName);
@@ -50,15 +30,7 @@ export class BasicInformationComponent implements OnInit {
 
   private prepareFields() {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-    if (this.basicFormData) {
-      // this.basicForm = this.fb.group(this.basicFormData);
-      this.basicForm = this.fb.group({});
-      setTimeout(() => {
-        this.basicForm.patchValue(this.basicFormData);
-      }, 10);
-    }
-    else
-      this.basicForm = this.fb.group({});
+    this.basicForm = this.fb.group({});
     this.formReady.emit(this.basicForm);
   }
 }

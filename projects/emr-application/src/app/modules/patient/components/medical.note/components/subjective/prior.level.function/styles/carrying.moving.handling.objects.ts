@@ -3,151 +3,151 @@ import { FieldControlStyles } from "../../../../filed.control.style.selector/fie
 export const CarryingMovingANDHandlingObjectsStyles: FieldControlStyles[] = [
     {
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "65_carryingMovingAndHandlingObjects"
+		"name": "carryingMovingAndHandlingObjectsPriorLevelOfFunction"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "66_iADLs",
+		"name": "iadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "75_handAndArmUse",
+		"name": "handAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "83_fineHandUse",
+		"name": "fineHandUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "88_movingObjectsWithLowerExtremities",
+		"name": "movingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "91_communityIntegrationAccess",
+		"name": "communityIntegrationAccessCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "92_workVocationOccupation",
+		"name": "workVocationOccupationCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "93_recreation",
+		"name": "recreationCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 10px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "67_abilityToUseTelephone",
+		"name": "abilityToUseTelephoneIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "68_shopping",
+		"name": "shoppingIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "69_foodPreparation",
+		"name": "foodPreparationIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "70_housekeeping",
+		"name": "housekeepingIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "71_laundry",
+		"name": "laundryIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "72_modeOfTransportation",
+		"name": "modeOfTransportationIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "73_responsibilityForOwnMedications",
+		"name": "responsibilityForOwnMedicationsIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "74_abilityToHandleFinances",
+		"name": "abilityToHandleFinancesIadlsCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "76_pullingObjects",
+		"name": "pullingObjectsHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "77_pushingObjects",
+		"name": "pushingObjectsHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "78_reaching",
+		"name": "reachingHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "79_turningHandsOrArms",
+		"name": "turningHandsOrArmsHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "80_twistingHandsOrArms",
+		"name": "twistingHandsOrArmsHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "81_throwing",
+		"name": "throwingHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "82_catching",
+		"name": "catchingHandAndArmUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "84_pickingUp",
+		"name": "pickingUpFineHandUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "85_grasping",
+		"name": "graspingFineHandUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "86_manipulating",
+		"name": "manipulatingFineHandUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "87_releasing",
+		"name": "releasingFineHandUseCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "89_kicking",
+		"name": "kickingMovingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "90_pushingWithLowerExtremities",
+		"name": "pushingWithLowerExtremitiesMovingObjectsWithLowerExtremitiesCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	},
 	{
 		"label_style": "white-space: nowrap; min-width: 500px;",
-		"name": "94_sports",
+		"name": "sportsRecreationCarryingMovingAndHandlingObjectsPriorLevelOfFunction",
 		"style": "margin-left: 20px;"
 	}
 ]

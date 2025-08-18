@@ -5,7 +5,7 @@
   <div class="fields-container">
     <div class="field-item" *ngFor="let field of fields;">
       <soap-field-builder [field]="field" [form]="priorLevelFunctionForm"
-        [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles">
+        [filedStyle]="getstyleFieldControl(field.name)" [styles]="styles" [data]="priorLevelFunctionFormData">
       </soap-field-builder>
     </div>
   </div>

@@ -3,7 +3,7 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const RemoteTherapeuticMonitoringStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "81_remoteTherapeuticMonitoring",
+        "name": "remoteTherapeuticMonitoringPlan",
     },
     {
         "label_style": "white-space: nowrap;",

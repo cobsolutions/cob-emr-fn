@@ -3,21 +3,21 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const CryotherapyStyles: FieldControlStyles[] =[
     {
         "label_style": "white-space: nowrap;",
-        "name": "21_cryotherapy",
+        "name": "cryotherapyModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "22_icePack",
+        "name": "icePackCryotherapyModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "23_iceMassage",
+        "name": "iceMassageCryotherapyModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "24_duration",
+        "name": "durationCryotherapyModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

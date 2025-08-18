@@ -4,11 +4,11 @@ export const HotPacksStyles: FieldControlStyles[] = [
     
     {
         "label_style": "white-space: nowrap;",
-        "name": "25_hotPacks",        
+        "name": "hotPacksModalitiesPlan",        
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "26_duration",
+        "name": "durationHotPacksModalitiesPlan",
         "style": "margin-left: 10px;"
     }
 ]

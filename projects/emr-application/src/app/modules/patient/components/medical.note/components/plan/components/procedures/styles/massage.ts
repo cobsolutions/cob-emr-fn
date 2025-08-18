@@ -3,11 +3,11 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const MassageStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "39_massage",
+        "name": "massagePlan",
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "40_massageText",
+        "name": "massageTextMassagePlan",
         "style": "margin-left: 10px;"
     }
 ]

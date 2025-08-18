@@ -21,11 +21,6 @@ export class CurrentFunvtionlimitComponent implements OnInit {
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.currentFunctionForm = this.fb.group({})
-    if (this.currentFunvtionlimitFormData) {
-      setTimeout(() => {
-        this.currentFunctionForm.patchValue(this.currentFunvtionlimitFormData);
-      }, 10);
-    }
     this.formReady.emit(this.currentFunctionForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {

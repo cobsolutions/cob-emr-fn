@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
@@ -81,22 +81,33 @@ export class PlanComponent implements OnInit {
     this.medialNoteService.find('plan').subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
-        createPlanOfCare: [''],
+        createPlanOfCare: new FormControl(false),
         frequency: ['F00'],
         duration: ['D00'],
         plan: ['PL01'],
-        physicianSignature: [''],
+        physicianSignature: new FormControl(false),
         procedures: this.fb.group({}),
         modalities: this.fb.group({}),
         specialties: this.fb.group({}),
       });
-      if (this.planData)
-        setTimeout(() => {
-          this.planForm.patchValue(this.planData);
-        }, 10);
+      if (this.planData && this.planData['frequency']) {
+        this.planForm.get('frequency').setValue(this.planData['frequency'])
+      }
+      if (this.planData && this.planData['duration']) {
+        this.planForm.get('duration').setValue(this.planData['duration'])
+      }
+      if (this.planData && this.planData['plan']) {
+        this.planForm.get('plan').setValue(this.planData['plan'])
+      }
+      if (this.planData && this.planData['physicianSignature']) {
+        this.planForm.get('physicianSignature').setValue(this.planData['physicianSignature'])
+      }
+      if (this.planData && this.planData['createPlanOfCare']) {
+        this.planForm.get('createPlanOfCare').setValue(this.planData['createPlanOfCare'])
+      }
       this.formReady.emit(this.planForm);
     })
-
+   
   }
   next() {
     this.stepper.next();
@@ -105,7 +116,6 @@ export class PlanComponent implements OnInit {
     this.planForm.setControl(section, formGroup);
   }
   finalize() {
-    this.medialNoteService.medicalNoteType.next(this.noteType)
   }
   isAuthorizthedToFinalize() {
     const logged: string = this.loggedInService.getLoggedUser().uuid;
@@ -122,5 +132,8 @@ export class PlanComponent implements OnInit {
       this.forwardVisibility = false;
       this.authorizthedToFinalize = false
     }
+  }
+  private fillInitSection() {
+    
   }
 }

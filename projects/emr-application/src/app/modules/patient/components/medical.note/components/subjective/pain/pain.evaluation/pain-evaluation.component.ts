@@ -24,6 +24,8 @@ export class PainEvaluationComponent implements OnInit {
   descriptions: string[] = PainDescription;
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
+    if (this.painEvals === null)
+      this.painEvals = []
     this.painEval = this.fb.group({
       'location': new FormControl(),
       'worst': new FormControl(),

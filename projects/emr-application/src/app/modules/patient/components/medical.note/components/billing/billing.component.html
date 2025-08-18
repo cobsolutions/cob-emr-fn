@@ -6,139 +6,140 @@
         <label cFormCheckLabel for="na"> Include Daily Note with this Initial Examination
         </label>
     </c-form-check>
-    <h4>Daily Note Plan (Additional Information Needed):</h4>
-    <hr />
-    <div class="mb-3 mt-3">
+    <div *ngIf="this.billingForm.get('dailyNoteIncluded').value === true">
+        <h4>Daily Note Plan (Additional Information Needed):</h4>
+        <hr />
+        <div class="mb-3 mt-3">
+            <c-row>
+                <c-col xs="12">
+                    <label style="margin-left: 3px;">Instructions:
+                        <select cSelect formControlName="dn_nstructions" sizing="sm" class="mb-2">
+                            <option *ngFor="let instruction of instructions" [value]="instruction.value">
+                                {{instruction.label}}
+                            </option>
+                        </select>
+                    </label>
+                </c-col>
+                <c-col xs="12">
+                    <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt" rows="3"></textarea>
+                </c-col>
+            </c-row>
+        </div>
+        <h4>Billing Sheet</h4>
+        <hr />
         <c-row>
             <c-col xs="12">
-                <label style="margin-left: 3px;">Instructions:
-                    <select cSelect formControlName="dn_nstructions" sizing="sm" class="mb-2">
-                        <option *ngFor="let instruction of instructions" [value]="instruction.value">
-                            {{instruction.label}}
-                        </option>
-                    </select>
-                </label>
+                <div class="form-container">
+                    <div class="column">
+                        <label for="precautions">Precautions</label>
+                        <textarea id="precautions" formControlName="precautions"></textarea>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <c-row>
+                        <!--Untimed Codes-->
+                        <c-col xs="12">
+                            <h6><strong>Untimed Codes</strong></h6>
+                            <hr />
+                            <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
+                                [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
+                                [untimedCodesData]="billingData?.untimedCodes"></untimed-codes>
+                        </c-col>
+                        <!--Calendar Month-->
+                        <c-col xs="4">
+                            <strong>Calendar Month</strong>
+                            <hr />
+                            <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
+                                [fields]="fields['calendar month']"
+                                [calendarMonthData]="billingData?.calendarMonth"></calendar-month>
+                        </c-col>
+                        <!--Nerve Conduction Studies-->
+                        <c-col xs="4">
+                            <strong>Nerve Conduction Studies</strong>
+                            <hr />
+                            <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
+                                [fields]="fields['Nerve Conduction Studies']"
+                                [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies>
+                        </c-col>
+                        <!--Respiratory-->
+                        <c-col xs="4">
+                            <strong>Respiratory</strong>
+                            <hr />
+                            <respiratory (formReady)="setChildForm('respiratory', $event)"
+                                [fields]="fields['Respiratory']" [respiratoryData]="billingData?.respiratory">
+                            </respiratory>
+                        </c-col>
+                        <!--Direct Timed Codes-->
+                        <c-col xs="12">
+                            <strong>Direct Timed Codes</strong>
+                            <hr />
+                            <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
+                                [fields]="fields['Direct Timed Codes']"
+                                [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes>
+                        </c-col>
+                    </c-row>
+                </div>
             </c-col>
+            <hr />
             <c-col xs="12">
-                <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt" rows="3"></textarea>
+                <div class="form-container">
+                    <div class="column">
+                        <label for="objective_findings"><strong>Objective Findings</strong></label>
+                        <textarea id="objective_findings" formControlName="objective_findings"></textarea>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <div class="column">
+                        <label for="pre_Treatment">Pre-Treatment</label>
+                        <textarea id="pre_Treatment" formControlName="pre_Treatment"></textarea>
+                    </div>
+                </div>
+                <div class="form-container mb-1">
+                    <div class="column">
+                        <label for="post_Treatment">Post-Treatment</label>
+                        <textarea id="post_Treatment" formControlName="post_Treatment"></textarea>
+                    </div>
+                </div>
+                <c-row>
+                    <!--Other Treatment Procedures-->
+                    <c-col xs="4">
+                        <strong>Other Treatment Procedures</strong>
+                        <hr />
+                        <other-treatment-procedures (formReady)="setChildForm('otherTreatmentProcedures', $event)"
+                            [fields]="fields['Other Treatment Procedures']"
+                            [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></other-treatment-procedures>
+                    </c-col>
+                    <!--Supplies-->
+                    <c-col xs="8">
+                        <strong>Supplies</strong>
+                        <hr />
+                        <supplies (formReady)="setChildForm('supplies', $event)" [fields]="fields['Supplies']"
+                            [SuppliesData]="billingData?.supplies"></supplies>
+                    </c-col>
+                    <c-col xs="4">
+                        <strong>Splints/Orthotics</strong>
+                        <hr />
+                        <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
+                            [fields]="fields['Splints Orthotics']"
+                            [SplintsOrthoticsData]="billingData?.splintsorthotics"></splints-orthotics>
+                    </c-col>
+                    <c-col xs="4">
+                        <strong>Casts</strong>
+                        <hr />
+                        <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"
+                            [castsData]="billingData?.casts"></casts>
+                    </c-col>
+                    <c-col xs="4">
+                        <strong>Braces</strong>
+                        <hr />
+                        <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"
+                            [bracesData]="billingData?.braces"></braces>
+                    </c-col>
+                </c-row>
             </c-col>
         </c-row>
     </div>
-    <h4>Billing Sheet</h4>
-    <hr />
-    <c-row>
-        <c-col xs="12">
-            <div class="form-container">
-                <div class="column">
-                    <label for="precautions">Precautions</label>
-                    <textarea id="precautions" formControlName="precautions"></textarea>
-                </div>
-            </div>
-
-            <div class="section">
-                <c-row>
-                    <!--Untimed Codes-->
-                    <c-col xs="12">
-                        <h6><strong>Untimed Codes</strong></h6>
-                        <hr />
-                        <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
-                            [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
-                            [untimedCodesData]="billingData?.untimedCodes"></untimed-codes>
-                    </c-col>
-                    <!--Calendar Month-->
-                    <c-col xs="4">
-                        <strong>Calendar Month</strong>
-                        <hr />
-                        <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
-                            [fields]="fields['calendar month']"
-                            [calendarMonthData]="billingData?.calendarMonth"></calendar-month>
-                    </c-col>
-                    <!--Nerve Conduction Studies-->
-                    <c-col xs="4">
-                        <strong>Nerve Conduction Studies</strong>
-                        <hr />
-                        <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
-                            [fields]="fields['Nerve Conduction Studies']"
-                            [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies>
-                    </c-col>
-                    <!--Respiratory-->
-                    <c-col xs="4">
-                        <strong>Respiratory</strong>
-                        <hr />
-                        <respiratory (formReady)="setChildForm('respiratory', $event)" [fields]="fields['Respiratory']"
-                            [respiratoryData]="billingData?.respiratory">
-                        </respiratory>
-                    </c-col>
-                    <!--Direct Timed Codes-->
-                    <c-col xs="12">
-                        <strong>Direct Timed Codes</strong>
-                        <hr />
-                        <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
-                            [fields]="fields['Direct Timed Codes']"
-                            [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes>
-                    </c-col>
-                </c-row>
-            </div>
-        </c-col>
-        <hr />
-        <c-col xs="12">
-            <div class="form-container">
-                <div class="column">
-                    <label for="objective_findings"><strong>Objective Findings</strong></label>
-                    <textarea id="objective_findings" formControlName="objective_findings"></textarea>
-                </div>
-            </div>
-            <div class="form-container">
-                <div class="column">
-                    <label for="pre_Treatment">Pre-Treatment</label>
-                    <textarea id="pre_Treatment" formControlName="pre_Treatment"></textarea>
-                </div>
-            </div>
-            <div class="form-container mb-1">
-                <div class="column">
-                    <label for="post_Treatment">Post-Treatment</label>
-                    <textarea id="post_Treatment" formControlName="post_Treatment"></textarea>
-                </div>
-            </div>
-            <c-row>
-                <!--Other Treatment Procedures-->
-                <c-col xs="4">
-                    <strong>Other Treatment Procedures</strong>
-                    <hr />
-                    <other-treatment-procedures (formReady)="setChildForm('otherTreatmentProcedures', $event)"
-                        [fields]="fields['Other Treatment Procedures']"
-                        [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></other-treatment-procedures>
-                </c-col>
-                <!--Supplies-->
-                <c-col xs="8">
-                    <strong>Supplies</strong>
-                    <hr />
-                    <supplies (formReady)="setChildForm('supplies', $event)" [fields]="fields['Supplies']"
-                        [SuppliesData]="billingData?.supplies"></supplies>
-                </c-col>
-                <c-col xs="4">
-                    <strong>Splints/Orthotics</strong>
-                    <hr />
-                    <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
-                        [fields]="fields['Splints Orthotics']"
-                        [SplintsOrthoticsData]="billingData?.splintsorthotics"></splints-orthotics>
-                </c-col>
-                <c-col xs="4">
-                    <strong>Casts</strong>
-                    <hr />
-                    <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"
-                        [castsData]="billingData?.casts"></casts>
-                </c-col>
-                <c-col xs="4">
-                    <strong>Braces</strong>
-                    <hr />
-                    <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"
-                        [bracesData]="billingData?.braces"></braces>
-                </c-col>
-            </c-row>
-        </c-col>
-    </c-row>
-
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
         <button cButton variant="outline" size="sm" class="mx-2" hide-control

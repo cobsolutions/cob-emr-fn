@@ -3,12 +3,12 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const SpontaneousNystagmusTestWithGazeAndFixationNystagmusWithRecordingStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap",
-        "name": "49_spontaneousNystagmusTestWGazeFixationNystagmusWRecording"
+        "name": "spontaneousNystagmusTestWGazeFixationNystagmusWRecordingPlan"
       
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "50_spontaneousNystagmusText",
+        "name": "spontaneousNystagmusTextSpontaneousNystagmusTestWGazeFixationNystagmusWRecordingPlan",
         "style": "margin-left: 10px;"
     }
 ];

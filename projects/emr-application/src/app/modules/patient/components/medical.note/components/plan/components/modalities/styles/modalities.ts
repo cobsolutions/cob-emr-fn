@@ -16,22 +16,22 @@ import { WhirlpoolStyles } from "./whirlpool";
 export const ModalitiesStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap;",
-        "name": "87_painRelief",
+        "name": "painReliefModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "88_decreaseInflammation",
+        "name": "decreaseInflammationModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "89_increaseBloodFlow",
+        "name": "increaseBloodFlowModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap;",
-        "name": "90_improveTissueHealing",
+        "name": "improveTissueHealingModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     ...ElectricalStimulationStyles,

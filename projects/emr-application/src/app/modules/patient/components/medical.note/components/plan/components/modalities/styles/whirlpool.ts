@@ -3,26 +3,26 @@ import { FieldControlStyles } from "../../../../../filed.control.style.selector/
 export const WhirlpoolStyles: FieldControlStyles[] =
     [{
         "label_style": "white-space: nowrap;",
-        "name": "14_whirlpool",
+        "name": "whirlpoolModalitiesPlan",
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "15_warm",
+        "name": "warmWhirlpoolModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "16_cold",
+        "name": "coldWhirlpoolModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "17_biofeedbackTrainingText",
+        "name": "biofeedbackTrainingTextWhirlpoolModalitiesPlan",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; margin-left: 10px;",
-        "name": "18_duration",
+        "name": "durationWhirlpoolModalitiesPlan",
         "style": "margin-left: 10px;"
     }
     ]
