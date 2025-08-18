@@ -18,13 +18,14 @@ export class AssessmentComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() assessmentData: any
+  @Input() noteType:string
   problemsArray: FormArray;
   goalsArray: FormArray;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private fieldDependentsService: FieldDependentsService) { }
   ngOnInit(): void {
-    this.medialNoteService.find('assessment').subscribe(fields => {
+    this.medialNoteService.find('assessment',this.noteType).subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
       this.buildForm();

@@ -22,6 +22,7 @@ export class BillingComponent implements OnInit {
   @Input() noteId: number
   @Input() caseId: number
   @Input() noteType: MedicalNoteType
+  @Input() noteTypeId:string
   fields: any
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
@@ -41,7 +42,7 @@ export class BillingComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('billing').subscribe(fields => {
+    this.medialNoteService.find('billing',this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
         'dailyNoteIncluded': this.fb.control(false),

@@ -23,9 +23,9 @@ export class PlanComponent implements OnInit {
   planOptions = ['Custom', 'Standard', 'Advanced'];
   @Input() creator: string
   @Input() noteFinalizr: string
-  @Input() noteType: MedicalNoteType
   @Input() planData: any
   @Input() noteId: number
+  @Input() noteType:string
   authorizthedToFinalize: boolean = false
   forwardVisibility: boolean = false;
   procedures = [
@@ -78,7 +78,7 @@ export class PlanComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('plan').subscribe(fields => {
+    this.medialNoteService.find('plan',this.noteType).subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
         createPlanOfCare: new FormControl(false),
