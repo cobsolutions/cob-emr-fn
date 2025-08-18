@@ -159,3 +159,16 @@
             [noteId]="noteId"></forward-modal>
     </c-modal-body>
 </c-modal>
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="togglefinalize()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <h4>Are you sure you want to finalize medical note</h4>
+        <div class="dialog-actions">
+            <button class="btn btn-yes" (click)="onYes()">Yes</button>
+            <button class="btn btn-no" (click)="onNo()">No</button>
+        </div>
+    </c-modal-body>
+</c-modal>

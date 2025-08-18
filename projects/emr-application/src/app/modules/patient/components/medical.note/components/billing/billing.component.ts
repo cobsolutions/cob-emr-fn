@@ -11,7 +11,6 @@ import { MedialNoteService } from '../../../../services/medical.note/medial-note
   styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-
   @Input() parentForm: FormGroup
   billingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
@@ -23,7 +22,7 @@ export class BillingComponent implements OnInit {
   @Input() noteType: MedicalNoteType
   fields: any
   forwardVisibility: boolean = false;
-
+  finalizeNoteVisibility: boolean = false;
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
     { label: 'Progress Therapeutic Exercises', value: 'DN2' },
@@ -103,10 +102,21 @@ export class BillingComponent implements OnInit {
     }
   }
   finalize() {
+    this.finalizeNoteVisibility = true;
+  }
+  togglefinalize() {
+    this.finalizeNoteVisibility = !this.finalizeNoteVisibility
   }
   private onChangeIncludeDailyNote() {
     this.billingForm.get('dailyNoteIncluded').valueChanges.subscribe(val => {
 
     })
   }
+  onNo() {
+    this.finalizeNoteVisibility = false;
+  }
+  onYes() {
+    throw new Error('Method not implemented.');
+  }
+
 }
