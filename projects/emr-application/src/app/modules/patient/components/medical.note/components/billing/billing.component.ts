@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
@@ -19,10 +20,12 @@ export class BillingComponent implements OnInit {
   @Input() creator: string
   @Input() noteFinalizr: string
   @Input() noteId: number
+  @Input() caseId: number
   @Input() noteType: MedicalNoteType
   fields: any
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
+  @Output() backToRecord = new EventEmitter<void>();
   instructions = [
     { label: 'Progressing Patient Next Visit', value: 'DN1' },
     { label: 'Progress Therapeutic Exercises', value: 'DN2' },
@@ -33,7 +36,8 @@ export class BillingComponent implements OnInit {
   authorizthedToFinalize: boolean = false
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.isAuthorizthedToFinalize()
@@ -112,11 +116,15 @@ export class BillingComponent implements OnInit {
 
     })
   }
-  onNo() {
-    this.finalizeNoteVisibility = false;
-  }
-  onYes() {
-    throw new Error('Method not implemented.');
+  changeFinalizeNoteVisibility(event: any) {
+    if (event === 'no') {
+      this.finalizeNoteVisibility = false
+    }
+    if (event === 'yes') {
+      this.finalizeNoteVisibility = false
+      this.toastr.success('Medical note has been finalized');
+      this.backToRecord.emit()
+    }
   }
 
 }

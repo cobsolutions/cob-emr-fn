@@ -165,10 +165,10 @@
         <button (click)="togglefinalize()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <h4>Are you sure you want to finalize medical note</h4>
-        <div class="dialog-actions">
-            <button class="btn btn-yes" (click)="onYes()">Yes</button>
-            <button class="btn btn-no" (click)="onNo()">No</button>
-        </div>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility"
+        [patientCaseId]="caseId"
+        [medicalNoteId]="noteId"
+        [noteType] ="noteType"
+        (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
     </c-modal-body>
 </c-modal>

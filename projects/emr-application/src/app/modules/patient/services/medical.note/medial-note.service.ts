@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FinalizeMedicalNoteRequest } from '../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
 
@@ -64,5 +65,10 @@ export class MedialNoteService {
     const headers = { 'content-type': 'application/json' }
     var url = this.baseUrl + '/action/finalize/provider/' + uuid
     return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
+  }
+  finalizea(request: FinalizeMedicalNoteRequest) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/action/finalize'
+    return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
 }

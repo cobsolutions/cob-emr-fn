@@ -15,6 +15,7 @@ import { MedialNoteService } from '../../../services/medical.note/medial-note.se
   styleUrls: ['./initial-examination.component.css']
 })
 export class InitialExaminationComponent implements OnInit {
+
   stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
   activeStepIndex: number;
   initialExaminationForm: FormGroup

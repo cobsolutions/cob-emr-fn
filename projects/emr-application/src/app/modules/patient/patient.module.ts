@@ -103,6 +103,7 @@ import { MTopRightLeftControlsComponent } from './components/medical.note/custom
 import { RightLeftMSelectComponent } from './components/medical.note/custom.input/Neuro.vascular/right.left.m.select/right-left-mselect.component';
 import { CutomPalpationComponent } from './components/medical.note/custom.input/palpation/cutom-palpation.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize/finalize-medical-note.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -207,6 +208,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MTopRightLeftControlsComponent,
     RightLeftMSelectComponent,
     CutomPalpationComponent,
+    FinalizeMedicalNoteComponent,
   ],
   imports: [
     CommonModule,
