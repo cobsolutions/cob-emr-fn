@@ -20,21 +20,21 @@
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('objective')!" formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
-                <!-- <billing [stepper]="stepper" [parentForm]="dailyNoteForm"
+                <billing [stepper]="stepper" [parentForm]="dailyNoteForm"
                     (formReady)="setChildForm('objective', $event)" *ngIf="visitedSteps[1]"
-                    [billingData]="medicalNoteSOAP?.objective"></billing> -->
+                    [billingData]="medicalNoteSOAP?.objective"></billing>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
-                <!-- <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
-                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment> -->
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
+                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
-                    [noteId]="medicalNoteId" [noteType]="type">
-                </plan> -->
+                    [noteId]="medicalNoteId" [noteType]="'2'">
+                </plan>
             </mat-step>
         </mat-stepper>
     </form>

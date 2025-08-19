@@ -11,5 +11,10 @@ export var CurrentFunctionStyles: FieldControlStyles[] = [
     ...MobilityWalkingMovingAroundStyles,
     ...ChangingMaintainingBodyPositionStyles,
     ...CarryingMovingANDHandlingObjectsStyles,
-    ...OtherStyles
+    ...OtherStyles,
+    {
+        name: "functionaldeficitsgains",
+        style: "max-width: 690px;height:171px",
+        label_style: "white-space: nowrap; width: 3000px;"
+    }
 ]
