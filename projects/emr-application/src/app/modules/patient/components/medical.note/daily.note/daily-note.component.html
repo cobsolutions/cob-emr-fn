@@ -16,25 +16,29 @@
             <mat-step [stepControl]="dailyNoteForm.get('subjective')!" completed="true" formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)" *ngIf="visitedSteps[0]"
-                    [subjectiveData]="medicalNoteSOAP?.subjective"></subjective>
+                    [subjectiveData]="medicalNoteSOAP?.subjective" [noteType]="'2'"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('objective')!" formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
                 <billing [stepper]="stepper" [parentForm]="dailyNoteForm"
                     (formReady)="setChildForm('objective', $event)" *ngIf="visitedSteps[1]"
-                    [billingData]="medicalNoteSOAP?.objective"></billing>
+                    [billingData]="medicalNoteSOAP?.objective" [noteId]="medicalNoteId" [noteTypeId]="'2'"></billing>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
                 <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
-                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment>
+                    [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'2'"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                <daily-plan (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteId]="medicalNoteId" [creator]="noteCreator"
+                    [noteFinalizr]="noteFinalizr" [caseId]="caseId" [noteType]="type"
+                    (backToRecord)="backtoPatientRecordActions()"></daily-plan>
+                <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
-                    [noteId]="medicalNoteId" [noteType]="type">
-                </plan>
+                    [noteId]="medicalNoteId" [noteType]="'2'">
+                </plan> -->
             </mat-step>
         </mat-stepper>
     </form>

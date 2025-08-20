@@ -1,0 +1,51 @@
+<form [formGroup]="dailyPlanForm">
+    <div class="form-inline mb-3 mt-3">
+        <c-row style="margin-left: 500px;">
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Instructions:
+                    <select formControlName="instructions">
+                        <option value="DN1">Progressing Patient Next Visit</option>
+                        <option value="DN2">Progress Therapeutic Exercises</option>
+                        <option value="DN3">Progress Note Needed</option>
+                        <option value="DN4">Anticipate Discharging Patient Next Visit</option>
+                        <option value="DNTB">(Type Below)</option>
+                    </select>
+                </label>
+            </c-col>
+            <c-col xs="12">
+                <label style="margin-left: 3px;">
+                    <textarea formControlName="instructionTxt" rows="4" cols="50"></textarea>
+                </label>
+            </c-col>
+        </c-row>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control
+            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
+        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()">Finalize</button>
+    </div>
+</form>
+<c-modal id="foDMN" [visible]="forwardVisibility" backdrop="static">
+    <c-modal-header>
+        <strong>Forward Medical Note To :</strong>
+        <button (click)="toggleFrowardModal()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
+            [noteId]="noteId"></forward-modal>
+    </c-modal-body>
+</c-modal>
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="togglefinalize()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility"
+        [patientCaseId]="caseId"
+        [medicalNoteId]="noteId"
+        [noteType] ="noteType"
+        (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+    </c-modal-body>
+</c-modal>

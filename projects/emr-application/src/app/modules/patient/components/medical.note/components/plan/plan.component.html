@@ -105,13 +105,3 @@
             [componentRole]="['finalize-medical-note-role']" *ngIf="authorizthedToFinalize">Finalize</button>
     </div>
 </form>
-<c-modal id="foDMN" [visible]="forwardVisibility" backdrop="static">
-    <c-modal-header>
-        <strong>Forward Medical Note To :</strong>
-        <button (click)="toggleFrowardModal()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
-            [noteId]="noteId"></forward-modal>
-    </c-modal-body>
-</c-modal>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 import { PlanStyles } from './styles/plan';
@@ -23,9 +22,9 @@ export class PlanComponent implements OnInit {
   planOptions = ['Custom', 'Standard', 'Advanced'];
   @Input() creator: string
   @Input() noteFinalizr: string
-  @Input() noteType: MedicalNoteType
   @Input() planData: any
   @Input() noteId: number
+  @Input() noteType: string
   authorizthedToFinalize: boolean = false
   forwardVisibility: boolean = false;
   procedures = [
@@ -78,7 +77,7 @@ export class PlanComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('plan').subscribe(fields => {
+    this.medialNoteService.find('plan', this.noteType).subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
         createPlanOfCare: new FormControl(false),
@@ -107,7 +106,7 @@ export class PlanComponent implements OnInit {
       }
       this.formReady.emit(this.planForm);
     })
-   
+
   }
   next() {
     this.stepper.next();
@@ -134,6 +133,6 @@ export class PlanComponent implements OnInit {
     }
   }
   private fillInitSection() {
-    
+
   }
 }

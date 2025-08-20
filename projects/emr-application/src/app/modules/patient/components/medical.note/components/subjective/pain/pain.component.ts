@@ -51,7 +51,12 @@ export class PainComponent implements OnInit {
       else
         this.showPainEval = false
     }
-
+    this.painForm.get('pain_scale').valueChanges.subscribe(v => {
+      if (v === "yes")
+        this.showPainEval = true
+      else
+        this.showPainEval = false
+    })
   }
   save(event: any) {
     this.evals.push(new FormControl(event))

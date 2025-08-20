@@ -8,6 +8,16 @@ export var BasicFormStyles: FieldControlStyles[] = [
         label_style: "white-space: nowrap; min-width: 500px;"
     },
     {
+        name: "dateofdailynote",
+        style: "max-width: 190px;",
+        label_style: "white-space: nowrap; min-width: 500px;"
+    },
+    {
+        name: "currentcomplaintsgains",
+        style: "max-width: 690px;height:171px",
+        label_style: "white-space: nowrap; min-width: 500px;"
+    },
+    {
         name: "timeInTimeOut",
         style: "max-width: 190px;",
         label_style: "white-space: nowrap; min-width: 500px;"
