@@ -7,23 +7,26 @@
         </label>
     </c-form-check>
     <div *ngIf="this.billingForm.get('dailyNoteIncluded').value === true">
-        <h4>Daily Note Plan (Additional Information Needed):</h4>
-        <hr />
-        <div class="mb-3 mt-3">
-            <c-row>
-                <c-col xs="12">
-                    <label style="margin-left: 3px;">Instructions:
-                        <select cSelect formControlName="dn_nstructions" sizing="sm" class="mb-2">
-                            <option *ngFor="let instruction of instructions" [value]="instruction.value">
-                                {{instruction.label}}
-                            </option>
-                        </select>
-                    </label>
-                </c-col>
-                <c-col xs="12">
-                    <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt" rows="3"></textarea>
-                </c-col>
-            </c-row>
+        <div *ngIf="noteTypeId ==='1'">
+            <h4>Daily Note Plan (Additional Information Needed):</h4>
+            <hr />
+            <div class="mb-3 mt-3">
+                <c-row>
+                    <c-col xs="12">
+                        <label style="margin-left: 3px;">Instructions:
+                            <select cSelect formControlName="dn_nstructions" sizing="sm" class="mb-2">
+                                <option *ngFor="let instruction of instructions" [value]="instruction.value">
+                                    {{instruction.label}}
+                                </option>
+                            </select>
+                        </label>
+                    </c-col>
+                    <c-col xs="12">
+                        <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt"
+                            rows="3"></textarea>
+                    </c-col>
+                </c-row>
+            </div>
         </div>
         <h4>Billing Sheet</h4>
         <hr />
@@ -165,10 +168,7 @@
         <button (click)="togglefinalize()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <finalize-medical-note *ngIf="finalizeNoteVisibility"
-        [patientCaseId]="caseId"
-        [medicalNoteId]="noteId"
-        [noteType] ="noteType"
-        (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="noteId"
+            [noteType]="noteType" (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
     </c-modal-body>
 </c-modal>
