@@ -1,1 +1,23 @@
-<p>daily-plan works!</p>
+<form [formGroup]="dailyPlanForm">
+    <div class="form-inline mb-3 mt-3">
+        <c-row style="margin-left: 500px;">
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Instructions:
+                    <select formControlName="instructions">
+                        <option value="DN1">Progressing Patient Next Visit</option>
+                        <option value="DN2">Progress Therapeutic Exercises</option>
+                        <option value="DN3">Progress Note Needed</option>
+                        <option value="DN4">Anticipate Discharging Patient Next Visit</option>
+                        <option value="DNTB">(Type Below)</option>
+                    </select>
+                </label>
+            </c-col>
+            <c-col xs="12">
+                <label style="margin-left: 3px;">
+                    <textarea formControlName="instructionTxt" rows="4" cols="50"></textarea>
+                </label>
+
+            </c-col>
+        </c-row>
+    </div>
+</form>
