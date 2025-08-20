@@ -10,6 +10,8 @@ export class DailyPlanComponent implements OnInit {
   dailyPlanForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() planData: any
+  @Input() noteId: number
+  forwardVisibility: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -25,5 +27,14 @@ export class DailyPlanComponent implements OnInit {
     }
     this.formReady.emit(this.dailyPlanForm);
   }
-
+  toggleFrowardModal() {
+    this.forwardVisibility = !this.forwardVisibility
+  }
+  finalize() {
+  }
+  changeVisibility(event: string) {
+    if (event === 'close') {
+      this.forwardVisibility = false;
+    }
+  }
 }

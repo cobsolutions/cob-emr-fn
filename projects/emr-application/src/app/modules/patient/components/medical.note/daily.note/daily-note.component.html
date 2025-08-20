@@ -32,7 +32,7 @@
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
                 <daily-plan (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [planData]="medicalNoteSOAP?.planOfCare"></daily-plan>
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteId]="medicalNoteId"></daily-plan>
                 <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
                     [noteId]="medicalNoteId" [noteType]="'2'">
