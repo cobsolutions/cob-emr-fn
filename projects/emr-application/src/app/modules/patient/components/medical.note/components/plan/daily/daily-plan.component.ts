@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MedicalNoteType } from '../../../../../models/medical.note/medical.note.type';
 
 @Component({
   selector: 'daily-plan',
@@ -11,8 +13,14 @@ export class DailyPlanComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() planData: any
   @Input() noteId: number
+  @Input() noteType: MedicalNoteType
+  @Input() caseId: number
   forwardVisibility: boolean = false;
-  constructor(private fb: FormBuilder) { }
+  finalizeNoteVisibility: boolean = false;
+  @Input() creator: string
+  @Input() noteFinalizr: string
+  @Output() backToRecord = new EventEmitter<void>();
+  constructor(private fb: FormBuilder, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.dailyPlanForm = this.fb.group({
@@ -31,10 +39,24 @@ export class DailyPlanComponent implements OnInit {
     this.forwardVisibility = !this.forwardVisibility
   }
   finalize() {
+    this.finalizeNoteVisibility = true;
   }
   changeVisibility(event: string) {
     if (event === 'close') {
       this.forwardVisibility = false;
+    }
+  }
+  togglefinalize() {
+    this.finalizeNoteVisibility = !this.finalizeNoteVisibility
+  }
+  changeFinalizeNoteVisibility(event: any) {
+    if (event === 'no') {
+      this.finalizeNoteVisibility = false
+    }
+    if (event === 'yes') {
+      this.finalizeNoteVisibility = false
+      this.toastr.success('Medical note has been finalized');
+      this.backToRecord.emit()
     }
   }
 }

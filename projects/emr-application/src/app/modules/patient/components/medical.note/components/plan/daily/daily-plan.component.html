@@ -36,3 +36,16 @@
             [noteId]="noteId"></forward-modal>
     </c-modal-body>
 </c-modal>
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="togglefinalize()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility"
+        [patientCaseId]="caseId"
+        [medicalNoteId]="noteId"
+        [noteType] ="noteType"
+        (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+    </c-modal-body>
+</c-modal>

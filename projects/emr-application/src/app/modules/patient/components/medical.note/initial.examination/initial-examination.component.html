@@ -17,7 +17,8 @@
                 formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
-                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]" [noteType]="'1'"></subjective>
+                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]" [noteType]="'1'">
+                </subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">
@@ -43,8 +44,8 @@
                 <billing [stepper]="stepper" [parentForm]="initialExaminationForm"
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"
                     [billingData]="medicalNoteSOAP?.billing" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
-                    [noteId]="medicalNoteId" [caseId]="caseId" [noteType]="type" (backToRecord)="backtoPatientRecordActions()"
-                    [noteTypeId]="'1'"></billing>
+                    [noteId]="medicalNoteId" [caseId]="caseId" [noteType]="type"
+                    (backToRecord)="backtoPatientRecordActions()" [noteTypeId]="'1'"></billing>
             </mat-step>
         </mat-stepper>
     </form>
