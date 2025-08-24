@@ -22,6 +22,16 @@ export class DischargePlanComponent implements OnInit {
       discharge: ['DN1'],
       physicianSignature: [false]
     })
+    if (this.planData && this.planData['reason']) {
+      this.dischargePlanForm.get('reason').setValue(this.planData['reason'])
+    }
+    if (this.planData && this.planData['discharge']) {
+      this.dischargePlanForm.get('discharge').setValue(this.planData['discharge'])
+    }
+    if (this.planData && this.planData['physicianSignature']) {
+      this.dischargePlanForm.get('physicianSignature').setValue(this.planData['physicianSignature'])
+    }
+    this.formReady.emit(this.dischargePlanForm);
   }
 
 }
