@@ -1,1 +1,32 @@
-<p>discharge-plan works!</p>
+<form [formGroup]="dischargePlanForm">
+    <div class="form-inline mb-3 mt-3">
+        <c-row style="margin-left: 500px;">
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Reason:
+                    <select formControlName="reason" style="margin-left:15px;margin-bottom: 10px;">
+                        <option value="D01">All Goals Met</option>
+                        <option value="D02">No Progress</option>
+                        <option value="D04">Self Discharge</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </label>
+            </c-col>
+            <c-col xs="12">
+                <label style="margin-left: 3px;">Discharge:
+                    <select formControlName="discharge">
+                        <option value="DN1">Discharge</option>
+                        <option value="DN2">Discharge to HEP</option>
+                        <option value="DN3">Progress Note Needed</option>
+                        <option value="Custom">Custom</option>
+                    </select>
+                </label>
+            </c-col>
+            <div class="form-check" style="margin-top:10px;margin-left:100px">
+                <input class="form-check-input" type="checkbox" formControlName="physicianSignature">
+                <label class="form-check-label" for="myCheckboxId">
+                    Add Physician Signature Request to this Note
+                </label>
+            </div>
+        </c-row>
+    </div>
+</form>
