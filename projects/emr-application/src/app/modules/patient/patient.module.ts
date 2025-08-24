@@ -105,6 +105,7 @@ import { CutomPalpationComponent } from './components/medical.note/custom.input/
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize/finalize-medical-note.component';
 import { DailyPlanComponent } from './components/medical.note/components/plan/daily/daily-plan.component';
+import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -211,6 +212,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CutomPalpationComponent,
     FinalizeMedicalNoteComponent,
     DailyPlanComponent,
+    DischargePlanComponent,
   ],
   imports: [
     CommonModule,
