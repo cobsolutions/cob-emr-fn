@@ -16,7 +16,7 @@
             <mat-step [stepControl]="dischargeNoteForm.get('subjective')!" completed="true" formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)" *ngIf="visitedSteps[0]"
-                    [subjectiveData]="medicalNoteSOAP?.subjective"></subjective>
+                    [subjectiveData]="medicalNoteSOAP?.subjective" [noteType]="'3'"></subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('objective')!" formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
@@ -26,14 +26,15 @@
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
                 <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
-                    [assessmentData]="medicalNoteSOAP?.assessment"></assessment>
+                    [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'3'"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <strong>Plan Of Care</strong>
-                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [planData]="medicalNoteSOAP?.planOfCare">
-                </plan>
+                <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="'3'">
+                </plan> -->
+                <discharge-plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)"
+                    *ngIf="visitedSteps[3]" [planData]="medicalNoteSOAP?.planOfCare"></discharge-plan>
             </mat-step>
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('billing')!" formGroupName="billing">
                 <ng-template matStepLabel>Billing</ng-template>
@@ -41,7 +42,8 @@
                 <billing [stepper]="stepper" [parentForm]="dischargeNoteForm"
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"
                     [billingData]="medicalNoteSOAP?.billing" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
-                    [noteId]="medicalNoteId" [noteType]="type"></billing>
+                    [noteId]="medicalNoteId" [noteType]="type" [noteTypeId]="'3'" [caseId]="caseId"
+                    (backToRecord)="backtoPatientRecordActions()"></billing>
             </mat-step>
         </mat-stepper>
     </form>
