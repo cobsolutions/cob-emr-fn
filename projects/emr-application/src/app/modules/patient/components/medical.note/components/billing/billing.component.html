@@ -7,7 +7,7 @@
         </label>
     </c-form-check>
     <div *ngIf="this.billingForm.get('dailyNoteIncluded').value === true">
-        <div *ngIf="noteTypeId ==='1'">
+        <div *ngIf="noteTypeId ==='1' || noteTypeId ==='3'">
             <h4>Daily Note Plan (Additional Information Needed):</h4>
             <hr />
             <div class="mb-3 mt-3">
