@@ -29,6 +29,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   referringNPI: string;
   @Input() case: PatientCase;
   @Input() patientId: number;
+  @Input() patientName:string
   @Input() clinicId: number;
   appointments$!: Observable<Appointment[]>;
   patientRecords$!: Observable<PatientRecord[]>

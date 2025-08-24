@@ -17,6 +17,7 @@ export class QuickDischargeNoteComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Input() medicalNoteId: number
   @Input() caseId: number
+  @Input() patientName:string
   creator: string
   noteFinalizr: string
   forwardVisibility: boolean = false;
