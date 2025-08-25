@@ -43,35 +43,20 @@ export class UeqdTestComponent implements OnInit {
       });
       return;
     }
-
-    // Calculate QuickDASH score according to the official formula
-    const values = [
-      this.quickDashForm.value.q1,
-      this.quickDashForm.value.q2,
-      this.quickDashForm.value.q3,
-      this.quickDashForm.value.q4,
-      this.quickDashForm.value.q5,
-      this.quickDashForm.value.q6,
-      this.quickDashForm.value.q7,
-      this.quickDashForm.value.q8,
-      this.quickDashForm.value.q9,
-      this.quickDashForm.value.q10,
-      this.quickDashForm.value.q11
-    ].map(val => parseInt(val, 10));
-
-    // Filter out any "Not Tested" responses (if needed)
-    const validValues = values.filter(val => !isNaN(val) && val >= 1 && val <= 5);
-
-    if (validValues.length !== 11) {
-      alert('Please answer all questions to calculate the score.');
-      return;
-    }
-
-    // Calculate the score according to the QuickDASH formula
-    const sum = validValues.reduce((acc, curr) => acc + curr, 0);
-    const score = ((sum - 11) / 44) * 100;
-
-    alert(`QuickDASH Score: ${score.toFixed(2)}`);
+    const result = {
+      "Q1": parseInt(this.quickDashForm.value.q1, 10),
+      "Q2": parseInt(this.quickDashForm.value.q2, 10),
+      "Q3": parseInt(this.quickDashForm.value.q3, 10),
+      "Q4": parseInt(this.quickDashForm.value.q4, 10),
+      "Q5": parseInt(this.quickDashForm.value.q5, 10),
+      "Q6": parseInt(this.quickDashForm.value.q6, 10),
+      "Q7": parseInt(this.quickDashForm.value.q7, 10),
+      "Q8": parseInt(this.quickDashForm.value.q8, 10),
+      "Q9": parseInt(this.quickDashForm.value.q9, 10),
+      "Q10": parseInt(this.quickDashForm.value.q10, 10),
+      "Q11": parseInt(this.quickDashForm.value.q11, 10)
+    };
+    console.log(JSON.stringify(result))
   }
   resetForm(): void {
     this.quickDashForm.reset({
