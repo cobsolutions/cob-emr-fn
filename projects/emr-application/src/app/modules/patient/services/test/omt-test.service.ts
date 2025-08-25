@@ -24,4 +24,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/spadi'
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  dashTest(answers: any) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/dash'
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }
