@@ -29,4 +29,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/dash'
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  spine(answers: any, testName: string) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/spine/test/' + testName
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }
