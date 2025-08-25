@@ -1,1 +1,80 @@
-<p>uefi-test works!</p>
+<!-- uefi.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Upper Extremity Functional Index</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>UEFI:</strong> We are interested in knowing whether you are having any difficulty at all with the activities listed below because of your upper limb problem for which you are currently seeking attention. Please provide an answer for <strong>each</strong> activity.
+        <br>
+        <strong>Today, do you or would you have any difficulty at all with:</strong>
+      </div>
+    </div>
+  
+    <form [formGroup]="uefiForm" (ngSubmit)="calculateScore()">
+      <!-- Question 1 -->
+      <div class="question">
+        <strong>1. Any of your usual work, housework, or school activities</strong>
+        <div class="options">
+          <label>
+            <input type="radio" formControlName="q1" value="0"> Extreme Difficulty or Unable to Perform Activity
+          </label>
+          <label>
+            <input type="radio" formControlName="q1" value="1"> Quite a Bit of Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q1" value="2"> Moderate Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q1" value="3"> A Little Bit of Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q1" value="4"> No Difficulty
+          </label>
+        </div>
+        <div *ngIf="uefiForm.get('q1')?.invalid && uefiForm.get('q1')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+  
+      <!-- Repeat the same pattern for questions 2-20 -->
+      <!-- Question 2 -->
+      <div class="question">
+        <strong>2. Your usual hobbies, recreational or sporting activities</strong>
+        <div class="options">
+          <label>
+            <input type="radio" formControlName="q2" value="0"> Extreme Difficulty or Unable to Perform Activity
+          </label>
+          <label>
+            <input type="radio" formControlName="q2" value="1"> Quite a Bit of Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q2" value="2"> Moderate Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q2" value="3"> A Little Bit of Difficulty
+          </label>
+          <label>
+            <input type="radio" formControlName="q2" value="4"> No Difficulty
+          </label>
+        </div>
+        <div *ngIf="uefiForm.get('q2')?.invalid && uefiForm.get('q2')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+  
+      <!-- Continue with questions 3-20 following the same pattern -->
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="uefiForm.invalid && uefiForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>
