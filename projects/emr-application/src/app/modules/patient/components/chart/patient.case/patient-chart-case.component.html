@@ -190,7 +190,7 @@
         <!--Quick Discharge Note-->
         <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"
-            [patientName]="patientName"></quick-discharge-note>
+            [patientName]="patientName" (backToRecord)="handleBackAction()" ></quick-discharge-note>
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></full-discharge-note>
     </c-card>
