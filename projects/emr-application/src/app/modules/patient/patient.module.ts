@@ -108,6 +108,7 @@ import { DailyPlanComponent } from './components/medical.note/components/plan/da
 import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
 import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.component';
 import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
+import { SpadiTestComponent } from './components/omt.tests/spadi/spadi-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -217,6 +218,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DischargePlanComponent,
     UeqdTestComponent,
     UefiTestComponent,
+    SpadiTestComponent,
   ],
   imports: [
     CommonModule,
