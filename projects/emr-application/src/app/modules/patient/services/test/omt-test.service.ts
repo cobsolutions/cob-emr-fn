@@ -14,4 +14,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/ueqd'
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  uefiTest(answers: any) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/uefi'
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }
