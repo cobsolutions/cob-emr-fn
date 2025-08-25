@@ -59,7 +59,7 @@ export class UeqdTestComponent implements OnInit {
       "Q11": parseInt(this.quickDashForm.value.q11, 10)
     };
     this.omtTestService.ueqdTest(result).subscribe(d=>{
-      console.log(JSON.stringify(d))
+      //Finalize ueqd Test  
     })
   }
   resetForm(): void {
