@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { OmtTestService } from '../../../services/test/omt-test.service';
 import { dashValidator } from '../validator/not.selected';
 
 @Component({
@@ -10,7 +11,8 @@ import { dashValidator } from '../validator/not.selected';
 export class UeqdTestComponent implements OnInit {
   quickDashForm: FormGroup;
   showInstructions = false;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder
+    ,private omtTestService:OmtTestService) {
     this.quickDashForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -56,7 +58,9 @@ export class UeqdTestComponent implements OnInit {
       "Q10": parseInt(this.quickDashForm.value.q10, 10),
       "Q11": parseInt(this.quickDashForm.value.q11, 10)
     };
-    console.log(JSON.stringify(result))
+    this.omtTestService.ueqdTest(result).subscribe(d=>{
+      console.log(JSON.stringify(d))
+    })
   }
   resetForm(): void {
     this.quickDashForm.reset({
