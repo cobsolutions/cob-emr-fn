@@ -107,6 +107,7 @@ import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize
 import { DailyPlanComponent } from './components/medical.note/components/plan/daily/daily-plan.component';
 import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
 import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.component';
+import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -215,6 +216,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DailyPlanComponent,
     DischargePlanComponent,
     UeqdTestComponent,
+    UefiTestComponent,
   ],
   imports: [
     CommonModule,
