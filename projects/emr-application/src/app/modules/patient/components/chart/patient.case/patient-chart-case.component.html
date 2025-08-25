@@ -194,8 +194,8 @@
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
         <!--Quick Discharge Note-->
         <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"
-            [patientName]="patientName" (backToRecord)="handleBackAction()" ></quick-discharge-note>
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id" [patientName]="patientName"
+            (backToRecord)="handleBackAction()"></quick-discharge-note>
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></full-discharge-note>
     </c-card>
@@ -234,12 +234,9 @@
             [value]="appointmentCancelNoShowReason?.comment"></textarea>
     </c-modal-body>
 </c-modal>
-<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static">
-    <!-- <c-modal-header>
-        
-        <button (click)="toggleOMTVisibility()" cButtonClose></button>
-    </c-modal-header> -->
+<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static" scrollable="true">
     <c-modal-body>
+        <button (click)="toggleOMTVisibility()" cButtonClose style="float: right;"></button>
         <ueqd-test></ueqd-test>
     </c-modal-body>
 </c-modal>

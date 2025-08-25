@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { dashValidator } from '../validator/not.selected';
 
 @Component({
   selector: 'ueqd-test',
@@ -18,17 +19,17 @@ export class UeqdTestComponent implements OnInit {
       painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
 
       // Quick DASH questions
-      q1: ['4', Validators.required],
-      q2: ['3', Validators.required],
-      q3: ['5', Validators.required],
-      q4: ['2', Validators.required],
-      q5: ['4', Validators.required],
-      q6: ['3', Validators.required],
-      q7: ['5', Validators.required],
-      q8: ['2', Validators.required],
-      q9: ['4', Validators.required],
-      q10: ['3', Validators.required],
-      q11: ['5', Validators.required]
+      q1: ['NT', [Validators.required, dashValidator()]],
+      q2: ['NT', [Validators.required, dashValidator()]],
+      q3: ['NT', [Validators.required, dashValidator()]],
+      q4: ['NT', [Validators.required, dashValidator()]],
+      q5: ['NT', [Validators.required, dashValidator()]],
+      q6: ['NT', [Validators.required, dashValidator()]],
+      q7: ['NT', [Validators.required, dashValidator()]],
+      q8: ['NT', [Validators.required, dashValidator()]],
+      q9: ['NT', [Validators.required, dashValidator()]],
+      q10: ['NT', [Validators.required, dashValidator()]],
+      q11: ['NT', [Validators.required, dashValidator()]]
     });
   }
   toggleInstructions(): void {
@@ -74,20 +75,19 @@ export class UeqdTestComponent implements OnInit {
   }
   resetForm(): void {
     this.quickDashForm.reset({
-      q1: '4',
-      q2: '3',
-      q3: '5',
-      q4: '2',
-      q5: '4',
-      q6: '3',
-      q7: '5',
-      q8: '2',
-      q9: '4',
-      q10: '3',
-      q11: '5'
+      q1: 'NT',
+      q2: 'NT',
+      q3: 'NT',
+      q4: 'NT',
+      q5: 'NT',
+      q6: 'NT',
+      q7: 'NT',
+      q8: 'NT',
+      q9: 'NT',
+      q10: 'NT',
+      q11: 'NT'
     });
   }
   ngOnInit(): void {
   }
-
 }
