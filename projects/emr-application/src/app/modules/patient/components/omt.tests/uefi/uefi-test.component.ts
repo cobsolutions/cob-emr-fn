@@ -39,7 +39,9 @@ export class UefiTestComponent implements OnInit {
       q17: [null, Validators.required],
       q18: [null, Validators.required],
       q19: [null, Validators.required],
-      q20: [null, Validators.required]
+      q20: [null, Validators.required],
+      q21: [null, Validators.required],
+      q22: [null, Validators.required]
     });
   }
 
