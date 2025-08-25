@@ -119,7 +119,7 @@
 
     <!-- Question 5 -->
     <div class="question">
-      <strong>5. Grooming your hair</strong>
+      <strong>5. Pushing up on your hands (eg from bathtub or chair)</strong>
       <div class="options">
         <label>
           <input type="radio" formControlName="q5" value="0"> Extreme Difficulty or Unable to Perform Activity
@@ -138,31 +138,6 @@
         </label>
       </div>
       <div *ngIf="uefiForm.get('q5')?.invalid && uefiForm.get('q5')?.touched" class="error-message">
-        Please select an answer
-      </div>
-    </div>
-
-    <!-- Question 6 -->
-    <div class="question">
-      <strong>6. Pushing up on your hands (eg from bathtub or chair)</strong>
-      <div class="options">
-        <label>
-          <input type="radio" formControlName="q6" value="0"> Extreme Difficulty or Unable to Perform Activity
-        </label>
-        <label>
-          <input type="radio" formControlName="q6" value="1"> Quite a Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q6" value="2"> Moderate Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q6" value="3"> A Little Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q6" value="4"> No Difficulty
-        </label>
-      </div>
-      <div *ngIf="uefiForm.get('q6')?.invalid && uefiForm.get('q6')?.touched" class="error-message">
         Please select an answer
       </div>
     </div>
@@ -466,7 +441,6 @@
         Please select an answer
       </div>
     </div>
-
     <!-- Question 19 -->
     <div class="question">
       <strong>19. Throwing a ball</strong>
@@ -487,14 +461,13 @@
           <input type="radio" formControlName="q19" value="4"> No Difficulty
         </label>
       </div>
-      <div *ngIf="uefiForm.get('q19')?.invalid && uefiForm.get('q19')?.touched" class="error-message">
+      <div *ngIf="uefiForm.get('q20')?.invalid && uefiForm.get('q20')?.touched" class="error-message">
         Please select an answer
       </div>
     </div>
-
     <!-- Question 20 -->
     <div class="question">
-      <strong>20. Throwing a ball</strong>
+      <strong>20. Carrying a small suitcase with your affected limb</strong>
       <div class="options">
         <label>
           <input type="radio" formControlName="q20" value="0"> Extreme Difficulty or Unable to Perform Activity
@@ -513,56 +486,6 @@
         </label>
       </div>
       <div *ngIf="uefiForm.get('q20')?.invalid && uefiForm.get('q20')?.touched" class="error-message">
-        Please select an answer
-      </div>
-    </div>
-
-    <!-- Question 21 -->
-    <div class="question">
-      <strong>21. Throwing a ball</strong>
-      <div class="options">
-        <label>
-          <input type="radio" formControlName="q21" value="0"> Extreme Difficulty or Unable to Perform Activity
-        </label>
-        <label>
-          <input type="radio" formControlName="q21" value="1"> Quite a Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q21" value="2"> Moderate Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q21" value="3"> A Little Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q21" value="4"> No Difficulty
-        </label>
-      </div>
-      <div *ngIf="uefiForm.get('q21')?.invalid && uefiForm.get('q21')?.touched" class="error-message">
-        Please select an answer
-      </div>
-    </div>
-
-    <!-- Question 22 -->
-    <div class="question">
-      <strong>22. Carrying a small suitcase with your affected limb</strong>
-      <div class="options">
-        <label>
-          <input type="radio" formControlName="q22" value="0"> Extreme Difficulty or Unable to Perform Activity
-        </label>
-        <label>
-          <input type="radio" formControlName="q22" value="1"> Quite a Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q22" value="2"> Moderate Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q22" value="3"> A Little Bit of Difficulty
-        </label>
-        <label>
-          <input type="radio" formControlName="q22" value="4"> No Difficulty
-        </label>
-      </div>
-      <div *ngIf="uefiForm.get('q22')?.invalid && uefiForm.get('q22')?.touched" class="error-message">
         Please select an answer
       </div>
     </div>
