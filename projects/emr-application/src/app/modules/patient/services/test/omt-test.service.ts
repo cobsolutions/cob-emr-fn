@@ -19,4 +19,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/uefi'
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  spadiTest(answers: any) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/spadi'
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }

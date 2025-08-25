@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { InvalidFormControls } from 'projects/emr-application/src/app/util/invalid.form';
+import { OmtTestService } from '../../../services/test/omt-test.service';
 
 @Component({
   selector: 'spadi-test',
@@ -10,7 +12,7 @@ export class SpadiTestComponent implements OnInit {
   spadiForm: FormGroup;
   showInstructions = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService ) {
     this.spadiForm = this.createForm();
   }
 
@@ -22,16 +24,16 @@ export class SpadiTestComponent implements OnInit {
       pain3: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
       pain4: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
       pain5: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      
+
       // Disability Scale Questions (6-13)
+      disability1: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      disability2: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      disability3: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      disability4: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      disability5: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
       disability6: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
       disability7: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability8: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability9: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability10: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability11: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability12: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      disability13: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
+      disability8: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
     });
   }
   toggleInstructions(): void {
@@ -43,47 +45,31 @@ export class SpadiTestComponent implements OnInit {
       Object.keys(this.spadiForm.controls).forEach(key => {
         this.spadiForm.get(key)?.markAsTouched();
       });
+      console.log(InvalidFormControls.findInvalidControlsRecursive(this.spadiForm))
       return;
     }
-
-    // Calculate SPADI score
-    const painValues = [
-      this.spadiForm.value.pain1,
-      this.spadiForm.value.pain2,
-      this.spadiForm.value.pain3,
-      this.spadiForm.value.pain4,
-      this.spadiForm.value.pain5
-    ].map(val => parseInt(val, 10));
-
-    const disabilityValues = [
-      this.spadiForm.value.disability6,
-      this.spadiForm.value.disability7,
-      this.spadiForm.value.disability8,
-      this.spadiForm.value.disability9,
-      this.spadiForm.value.disability10,
-      this.spadiForm.value.disability11,
-      this.spadiForm.value.disability12,
-      this.spadiForm.value.disability13
-    ].map(val => parseInt(val, 10));
-
-    // Calculate pain subscore (0-50)
-    const painScore = painValues.reduce((sum, score) => sum + score, 0);
-    
-    // Calculate disability subscore (0-80)
-    const disabilityScore = disabilityValues.reduce((sum, score) => sum + score, 0);
-    
-    // Calculate total score (0-130)
-    const totalScore = painScore + disabilityScore;
-    
-    // Calculate percentage scores
-    const painPercentage = (painScore / 50) * 100;
-    const disabilityPercentage = (disabilityScore / 80) * 100;
-    const totalPercentage = (totalScore / 130) * 100;
-    
-    alert(`SPADI Score:
-      Pain: ${painScore}/50 (${painPercentage.toFixed(1)}%)
-      Disability: ${disabilityScore}/80 (${disabilityPercentage.toFixed(1)}%)
-      Total: ${totalScore}/130 (${totalPercentage.toFixed(1)}%)`);
+    const result = {
+      "pain": {
+        "pain1": parseInt(this.spadiForm.value.pain1, 10),
+        "pain2": parseInt(this.spadiForm.value.pain2, 10),
+        "pain3": parseInt(this.spadiForm.value.pain3, 10),
+        "pain4": parseInt(this.spadiForm.value.pain4, 10),
+        "pain5": parseInt(this.spadiForm.value.pain5, 10)
+      },
+      "disability": {
+        "disability1": parseInt(this.spadiForm.value.disability1, 10),
+        "disability2": parseInt(this.spadiForm.value.disability2, 10),
+        "disability3": parseInt(this.spadiForm.value.disability3, 10),
+        "disability4": parseInt(this.spadiForm.value.disability4, 10),
+        "disability5": parseInt(this.spadiForm.value.disability5, 10),
+        "disability6": parseInt(this.spadiForm.value.disability6, 10),
+        "disability7": parseInt(this.spadiForm.value.disability7, 10),
+        "disability8": parseInt(this.spadiForm.value.disability8, 10)
+      }
+    }
+    this.omtTestService.spadiTest(result).subscribe(rr=>{
+      console.log(JSON.stringify(rr))
+    })
   }
 
   resetForm(): void {
