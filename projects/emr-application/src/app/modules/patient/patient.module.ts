@@ -110,6 +110,9 @@ import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.compone
 import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
 import { SpadiTestComponent } from './components/omt.tests/spadi/spadi-test.component';
 import { DashTestComponent } from './components/omt.tests/dash/dash-test.component';
+import { MolbpTestComponent } from './components/omt.tests/spine/molbp/molbp-test.component';
+import { OlbpTestComponent } from './components/omt.tests/spine/olbp/olbp-test.component';
+import { NdiTestComponent } from './components/omt.tests/spine/ndi/ndi-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -221,6 +224,9 @@ const APP_PATIENT_CHART_COMPONENTS = [
     UefiTestComponent,
     SpadiTestComponent,
     DashTestComponent,
+    MolbpTestComponent,
+    OlbpTestComponent,
+    NdiTestComponent,
   ],
   imports: [
     CommonModule,
