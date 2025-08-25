@@ -82,6 +82,11 @@
         </c-row>
     </c-card-body>
 </c-card>
+<div class="button-container m-2">
+    <button cButton color="primary" variant="outline" size="sm" (click)="show()">
+        OMT Test
+    </button>
+</div>
 <!--Patient Record-->
 <c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
     <c-card-body>
@@ -227,5 +232,14 @@
         </c-input-group>
         <textarea cFormControl id="exampleFormControlTextarea1" rows="3"
             [value]="appointmentCancelNoShowReason?.comment"></textarea>
+    </c-modal-body>
+</c-modal>
+<c-modal id="omtTest" [visible]="showTest" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3> OMT Test</h3>
+        <button (click)="toggleOMTVisibility()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <ueqd-test></ueqd-test>
     </c-modal-body>
 </c-modal>

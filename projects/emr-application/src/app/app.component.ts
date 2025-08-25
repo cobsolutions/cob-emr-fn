@@ -23,7 +23,7 @@ export class AppComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    (document.body.style as any).zoom = "0.89";
+    // (document.body.style as any).zoom = "0.89";
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

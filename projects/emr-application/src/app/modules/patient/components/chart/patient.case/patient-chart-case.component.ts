@@ -24,12 +24,13 @@ import { PatientRecordService } from '../../../services/patient/record/patient-r
   styleUrls: ['./patient-chart-case.component.css']
 })
 export class PatientChartCaseComponent extends ListTemplate implements OnInit {
+
   treatingDoctor: string;
   referringDoctor: string;
   referringNPI: string;
   @Input() case: PatientCase;
   @Input() patientId: number;
-  @Input() patientName:string
+  @Input() patientName: string
   @Input() clinicId: number;
   appointments$!: Observable<Appointment[]>;
   patientRecords$!: Observable<PatientRecord[]>
@@ -40,6 +41,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
   errorMessage: string;
+  showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   constructor(
     private patientRecordService: PatientRecordService,
@@ -54,7 +56,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.getReferringCaseData();
     this.getRecords();
   }
-
+  toggleOMTVisibility() {
+    this.showTest = !this.showTest;
+  }
+  show() {
+    this.showTest = true;
+  }
   toggleReasonVisibility(data: any) {
     this.reasonVisibility = !this.reasonVisibility;
   }

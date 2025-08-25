@@ -1,1 +1,116 @@
-<p>ueqd-test works!</p>
+<!-- quick-dash.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Upper Extremity Quick DASH</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <table>
+          <tr>
+            <td><strong>Upper Extremity Quick Dash</strong><br><hr></td>
+          </tr>
+          <tr>
+            <td height="10"><br></td>
+          </tr>
+          <tr>
+            <td>
+              This questionnaire asks about your symptoms as well as your ability to perform certain activities.<br>
+              Please answer every question, based on your condition in the last week, by selecting the appropriate option.<br>
+              If you did not have the opportunity to perform an activity in the past week, please make your best estimate
+              of which response would be the most accurate.<br>
+              It does not matter which hand or arm you use to perform the activity;
+              please answer based on your ability regardless of how you perform the task.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  
+    <form [formGroup]="quickDashForm" (ngSubmit)="calculateScore()">
+      <!-- Patient Satisfaction Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Patient Satisfaction</strong>
+        </div>
+        
+        <div class="question">
+          <label>
+            <strong><span class="asterisk">*</span></strong>
+            1. Please rate your pain level with activity
+          </label>
+        </div>
+        
+        <div class="options-row">
+          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
+            {{level}} <input type="radio" formControlName="painLevel" [value]="level">
+          </label>
+        </div>
+        
+        <div class="scale-labels">
+          <span class="scale-start">NO PAIN</span>
+          <span class="scale-end">VERY SEVERE PAIN</span>
+        </div>
+        
+        <div *ngIf="quickDashForm.get('painLevel')?.invalid && quickDashForm.get('painLevel')?.touched" 
+             class="error-message">
+          Please select a pain level
+        </div>
+      </div>
+  
+      <!-- Quick DASH Questions -->
+      <div class="form-section">
+        <div class="instruction">
+          Please rate your ability to do the following activities in the last week by selecting the appropriate response.
+        </div>
+        
+        <!-- Question 1 -->
+        <div class="question">
+          <strong>Open a tight or new jar.</strong>
+          <select formControlName="q1" class="form-select">
+            <option value="NT">Not Tested</option>
+            <option value="1">No Difficulty</option>
+            <option value="2">Mild Difficulty</option>
+            <option value="3">Moderate Difficulty</option>
+            <option value="4" selected>Severe Difficulty</option>
+            <option value="5">Unable</option>
+          </select>
+          <div *ngIf="quickDashForm.get('q1')?.invalid && quickDashForm.get('q1')?.touched" class="error-message">
+            Please select an answer
+          </div>
+        </div>
+  
+        <!-- Repeat similar structure for questions 2-11 -->
+        <!-- Question 2 -->
+        <div class="question">
+          <strong>Do heavy household chores (e.g., wash walls, floors).</strong>
+          <select formControlName="q2" class="form-select">
+            <option value="NT">Not Tested</option>
+            <option value="1">No Difficulty</option>
+            <option value="2">Mild Difficulty</option>
+            <option value="3" selected>Moderate Difficulty</option>
+            <option value="4">Severe Difficulty</option>
+            <option value="5">Unable</option>
+          </select>
+          <div *ngIf="quickDashForm.get('q2')?.invalid && quickDashForm.get('q2')?.touched" class="error-message">
+            Please select an answer
+          </div>
+        </div>
+  
+        <!-- Continue with questions 3-11 following the same pattern -->
+        <!-- ... -->
+  
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="quickDashForm.invalid && quickDashForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>
