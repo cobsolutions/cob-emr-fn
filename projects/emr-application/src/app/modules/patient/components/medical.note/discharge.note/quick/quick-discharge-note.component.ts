@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
@@ -15,16 +16,19 @@ import { MedialNoteService } from '../../../../services/medical.note/medial-note
 export class QuickDischargeNoteComponent implements OnInit {
   dischargeForm!: FormGroup;
   @Output() back = new EventEmitter<void>();
+  @Output() backToRecord = new EventEmitter<void>();
   @Input() medicalNoteId: number
   @Input() caseId: number
+  @Input() patientName: string
   creator: string
   noteFinalizr: string
   forwardVisibility: boolean = false;
-  authorizthedToFinalize: boolean = false
+  finalizeNoteVisibility: boolean = false;
   noteType: MedicalNoteType = MedicalNoteType.Quick_Discharge_Note
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
-    , private loggedInService: LoggedInService) { }
+    , private loggedInService: LoggedInService
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -42,7 +46,6 @@ export class QuickDischargeNoteComponent implements OnInit {
         this.dischargeForm.get('reason').setValue(data.comment)
         const formattedDate = moment.unix(data.dischargeDate / 1000).format('YYYY-MM-DD');
         this.dischargeForm.get('dischargeDate').setValue(formattedDate);
-        this.isAuthorizthedToFinalize()
       })
   }
   soapActions(action: string) {
@@ -79,24 +82,24 @@ export class QuickDischargeNoteComponent implements OnInit {
   changeVisibility(event: string) {
     if (event === 'close') {
       this.forwardVisibility = false;
-      this.authorizthedToFinalize = false
+    }
+  }
+  togglefinalize() {
+    this.finalizeNoteVisibility = !this.finalizeNoteVisibility
+  }
+
+  changeFinalizeNoteVisibility(event: any) {
+    if (event === 'no') {
+      this.finalizeNoteVisibility = false
+    }
+    if (event === 'yes') {
+      this.finalizeNoteVisibility = false
+      this.toastr.success('Medical note has been finalized');
+      this.backToRecord.emit()
     }
   }
   finalize() {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-    var loggedProvider = this.loggedInService.getLoggedUser().uuid;
-    this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
-      console.log('Note is finalized')
-      this.backtoPatientRecordActions();
-    })
+    this.finalizeNoteVisibility = true;
   }
-  isAuthorizthedToFinalize() {
-    console.log(this.creator)
-    console.log(this.noteFinalizr)
-    const logged: string = this.loggedInService.getLoggedUser().uuid;
-    if (this.creator === logged && this.noteFinalizr === null)
-      this.authorizthedToFinalize = true;
-    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
-      this.authorizthedToFinalize = true;
-  }
+
 }
