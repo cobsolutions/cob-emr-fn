@@ -1,15 +1,93 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
-  selector: 'app-faam-test',
+  selector: 'lower-extremity-faam-test',
   templateUrl: './faam-test.component.html',
   styleUrls: ['./faam-test.component.css']
 })
 export class FaamTestComponent implements OnInit {
+  faamSportsForm: FormGroup;
+  showInstructions = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  // Activity descriptions for the form
+  activities = [
+    "Running",
+    "Jumping",
+    "Landing",
+    "Starting and stopping quickly",
+    "Cutting/lateral movements",
+    "Low impact activities",
+    "Ability to perform activity with your normal technique",
+    "Ability to participate in your desired sport as long as you would like"
+  ];
+  difficultyOptions = [
+    { value: 4, text: 'No Difficulty' },
+    { value: 3, text: 'Slight Difficulty' },
+    { value: 2, text: 'Moderate Difficulty' },
+    { value: 1, text: 'Extreme Difficulty' },
+    { value: 0, text: 'Unable to Do' },
+    { value: 5, text: 'N/A' }
+  ];
+  constructor(private fb: FormBuilder,private omtTestService: OmtTestService) {
+    this.faamSportsForm = this.createForm();
   }
 
+  createForm(): FormGroup {
+    const formGroup: any = {
+      // Patient Satisfaction - Pain Level
+      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
+    };
+
+    // Create form controls for all 8 activities
+    for (let i = 1; i <= 8; i++) {
+      formGroup[`q${i}`] = [null, Validators.required];
+    }
+
+    return this.fb.group(formGroup);
+  }
+  toggleInstructions(): void {
+    this.showInstructions = !this.showInstructions;
+  }
+  ngOnInit(): void {
+  }
+  calculateScore(): void {
+    if (this.faamSportsForm.invalid) {
+      // Mark all fields as touched to show validation errors
+      Object.keys(this.faamSportsForm.controls).forEach(key => {
+        this.faamSportsForm.get(key)?.markAsTouched();
+      });
+      return;
+    }
+    const result= this.fillAnswers();
+    this.omtTestService.lowerExtremity(result,'faam').subscribe(rr=>{
+      console.log(JSON.stringify(rr))
+    })
+  }
+
+  resetForm(): void {
+    this.faamSportsForm.reset();
+  }
+  private fillAnswers():any {
+    var faamResult = {
+      "answers": {
+        "Q1": parseInt(this.faamSportsForm.value.q1, 10),
+        "Q2": parseInt(this.faamSportsForm.value.q2, 10),
+        "Q3": parseInt(this.faamSportsForm.value.q3, 10),
+        "Q4": parseInt(this.faamSportsForm.value.q4, 10),
+        "Q5": parseInt(this.faamSportsForm.value.q5, 10),
+        "Q6": parseInt(this.faamSportsForm.value.q6, 10),
+        "Q7": parseInt(this.faamSportsForm.value.q7, 10),
+        "Q8": parseInt(this.faamSportsForm.value.q8, 10)
+      }
+    };
+    // Filter out N/A values (value 5)
+    const filteredResult = {
+      answers: Object.fromEntries(
+        Object.entries(faamResult.answers).filter(([_, value]) => value !== 5)
+      )
+    };
+    return filteredResult;
+  }
 }
