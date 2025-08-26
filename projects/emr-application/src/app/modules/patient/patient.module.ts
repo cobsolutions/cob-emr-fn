@@ -113,6 +113,10 @@ import { DashTestComponent } from './components/omt.tests/dash/dash-test.compone
 import { MolbpTestComponent } from './components/omt.tests/spine/molbp/molbp-test.component';
 import { OlbpTestComponent } from './components/omt.tests/spine/olbp/olbp-test.component';
 import { NdiTestComponent } from './components/omt.tests/spine/ndi/ndi-test.component';
+import { LefsTestComponent } from './components/omt.tests/lower.extremity/lefs/lefs-test.component';
+import { FaamTestComponent } from './components/omt.tests/lower.extremity/faam/faam-test.component';
+import { HoosTestComponent } from './components/omt.tests/lower.extremity/hoos/hoos-test.component';
+import { KoosTestComponent } from './components/omt.tests/lower.extremity/koos/koos-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -227,6 +231,10 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MolbpTestComponent,
     OlbpTestComponent,
     NdiTestComponent,
+    LefsTestComponent,
+    FaamTestComponent,
+    HoosTestComponent,
+    KoosTestComponent,
   ],
   imports: [
     CommonModule,
