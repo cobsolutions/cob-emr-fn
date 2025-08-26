@@ -34,4 +34,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/spine/test/' + testName
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  lowerExtremity(answers: any, testName: string) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/lower-extremity/test/' + testName
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }
