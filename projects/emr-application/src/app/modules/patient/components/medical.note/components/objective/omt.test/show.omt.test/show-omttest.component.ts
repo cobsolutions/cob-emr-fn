@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-show-omttest',
+  selector: 'show-omttest',
   templateUrl: './show-omttest.component.html',
   styleUrls: ['./show-omttest.component.css']
 })
 export class ShowOMTTestComponent implements OnInit {
-
+  @Input() testName: string
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.testName)
   }
 
 }
