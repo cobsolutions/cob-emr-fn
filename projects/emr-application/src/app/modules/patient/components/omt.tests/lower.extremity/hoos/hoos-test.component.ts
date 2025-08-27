@@ -74,7 +74,7 @@ export class HoosTestComponent implements OnInit {
     }, {} as { [key: string]: any });
   }
 
-  // Helper to generate S1..Sn, A1..An, etc.
+  
   private rangeKeys(prefix: string, count: number): string[] {
     return Array.from({ length: count }, (_, i) => `${prefix}${i + 1}`);
   }
@@ -101,7 +101,7 @@ export class HoosTestComponent implements OnInit {
     console.log(JSON.stringify(result))
 
     
-    this.omtTestService.lowerExtremity(result, 'hoos').subscribe(rr => {
+    this.omtTestService.lowerExtremity(result, 'oos').subscribe(rr => {
       console.log(JSON.stringify(rr))
     })
   }
@@ -125,7 +125,7 @@ export class HoosTestComponent implements OnInit {
       });
     });
 
-    return { answers };
+    return { answers ,"oosType":"hoos" };
   }
   resetForm(): void {
     this.hoosForm.reset();
