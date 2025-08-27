@@ -117,6 +117,10 @@ import { LefsTestComponent } from './components/omt.tests/lower.extremity/lefs/l
 import { FaamTestComponent } from './components/omt.tests/lower.extremity/faam/faam-test.component';
 import { HoosTestComponent } from './components/omt.tests/lower.extremity/hoos/hoos-test.component';
 import { KoosTestComponent } from './components/omt.tests/lower.extremity/koos/koos-test.component';
+import { BergTestComponent } from './components/omt.tests/balance/berg/berg-test.component';
+import { AbcTestComponent } from './components/omt.tests/balance/abc/abc-test.component';
+import { TinettiComponent } from './components/omt.tests/balance/tinetti/tinetti.component';
+import { FabTestComponent } from './components/omt.tests/balance/fab/fab-test.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -235,6 +239,10 @@ const APP_PATIENT_CHART_COMPONENTS = [
     FaamTestComponent,
     HoosTestComponent,
     KoosTestComponent,
+    BergTestComponent,
+    AbcTestComponent,
+    TinettiComponent,
+    FabTestComponent,
   ],
   imports: [
     CommonModule,
