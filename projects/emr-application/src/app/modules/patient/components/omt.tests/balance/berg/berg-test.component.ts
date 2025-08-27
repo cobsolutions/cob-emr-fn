@@ -214,7 +214,6 @@ export class BergTestComponent implements OnInit {
     this.omtTestService.balance(result).subscribe(rr => {
       console.log(JSON.stringify(rr))
     })
-    console.log(JSON.stringify(this.fillAnswers()))
   }
   private fillAnswers() {
     const answers: Record<string, number> = {};
