@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvalidFormControls } from 'projects/emr-application/src/app/util/invalid.form';
 import { OmtTestService } from '../../../services/test/omt-test.service';
@@ -11,7 +11,7 @@ import { OmtTestService } from '../../../services/test/omt-test.service';
 export class SpadiTestComponent implements OnInit {
   spadiForm: FormGroup;
   showInstructions = false;
-
+  @Output() getResult = new EventEmitter<any>()
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService ) {
     this.spadiForm = this.createForm();
   }
@@ -67,8 +67,9 @@ export class SpadiTestComponent implements OnInit {
         "disability8": parseInt(this.spadiForm.value.disability8, 10)
       }
     }
-    this.omtTestService.spadiTest(result).subscribe(rr=>{
-      console.log(JSON.stringify(rr))
+    this.omtTestService.spadiTest(result).subscribe(val=>{
+      console.log(JSON.stringify(val))
+      this.getResult.emit(val)
     })
   }
 

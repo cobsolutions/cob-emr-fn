@@ -7,7 +7,7 @@
     <uefi-test></uefi-test>
 </span>
 <span *ngIf="testName === 'spadi'">
-    <spadi-test></spadi-test>
+    <spadi-test (getResult)="getResult($event)"></spadi-test>
 </span>
 <span *ngIf="testName === 'dash'">
     <dash-test></dash-test>

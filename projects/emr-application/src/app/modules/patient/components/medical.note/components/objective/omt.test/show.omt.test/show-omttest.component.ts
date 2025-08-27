@@ -6,6 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./show-omttest.component.css']
 })
 export class ShowOMTTestComponent implements OnInit {
+  getResult(result: any) {
+    console.log(JSON.stringify(result))
+  }
   @Input() testName: string
   constructor() { }
 
