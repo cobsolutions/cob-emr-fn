@@ -121,6 +121,7 @@ import { BergTestComponent } from './components/omt.tests/balance/berg/berg-test
 import { AbcTestComponent } from './components/omt.tests/balance/abc/abc-test.component';
 import { TinettiComponent } from './components/omt.tests/balance/tinetti/tinetti.component';
 import { FabTestComponent } from './components/omt.tests/balance/fab/fab-test.component';
+import { ShowOMTTestComponent } from './components/medical.note/components/objective/omt.test/show.omt.test/show-omttest.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -243,6 +244,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     AbcTestComponent,
     TinettiComponent,
     FabTestComponent,
+    ShowOMTTestComponent,
   ],
   imports: [
     CommonModule,

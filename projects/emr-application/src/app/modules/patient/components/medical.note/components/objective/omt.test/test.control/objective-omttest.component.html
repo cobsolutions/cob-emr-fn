@@ -40,8 +40,14 @@
 
       <!-- Button aligned to the right of the last control -->
       <div *ngIf="last" class="button-container">
-        <button type="button" class="btn btn-link">Show Test</button>
+        <button type="button" class="btn btn-link" (click)="showOMTTest()">Show Test</button>
       </div>
     </div>
   </div>
 </form>
+<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static" scrollable="true">
+  <c-modal-body>
+      <button (click)="toggleOMTVisibility()" cButtonClose style="float: right;"></button>
+      <balance-fab-test></balance-fab-test>
+  </c-modal-body>
+</c-modal>

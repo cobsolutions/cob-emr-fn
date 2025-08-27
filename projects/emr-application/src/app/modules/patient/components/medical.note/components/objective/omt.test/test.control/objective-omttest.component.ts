@@ -15,6 +15,7 @@ export class ObjectiveOMTTestComponent implements OnInit {
   @Input() controls: OMTTestControl[]
   @Input() testStyle: string
   @Input() testLabelStyle: string
+  showTest: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -45,5 +46,10 @@ export class ObjectiveOMTTestComponent implements OnInit {
     });
     return values;
   }
-
+  toggleOMTVisibility() {
+    this.showTest = !this.showTest;
+  }
+  showOMTTest() {
+    this.showTest= true
+  }
 }
