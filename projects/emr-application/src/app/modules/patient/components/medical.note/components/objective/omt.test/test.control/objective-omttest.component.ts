@@ -15,7 +15,7 @@ export class ObjectiveOMTTestComponent implements OnInit {
   @Input() controls: OMTTestControl[]
   @Input() testStyle: string
   @Input() testLabelStyle: string
-  @Input() testName:string
+  @Input() testName: string
   showTest: boolean = false;
   constructor(private fb: FormBuilder) { }
 
@@ -51,6 +51,10 @@ export class ObjectiveOMTTestComponent implements OnInit {
     this.showTest = !this.showTest;
   }
   showOMTTest() {
-    this.showTest= true;
+    this.showTest = true;
+  }
+  changeVisibility(event: any) {
+    if (event === 'close')
+      this.showTest = false;
   }
 }
