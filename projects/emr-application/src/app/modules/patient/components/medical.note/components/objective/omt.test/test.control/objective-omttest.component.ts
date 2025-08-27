@@ -15,7 +15,7 @@ export class ObjectiveOMTTestComponent implements OnInit {
   @Input() controls: OMTTestControl[]
   @Input() testStyle: string
   @Input() testLabelStyle: string
-  @Input() testName: string
+  @Input() testData: any
   showTest: boolean = false;
   constructor(private fb: FormBuilder) { }
 
@@ -53,8 +53,16 @@ export class ObjectiveOMTTestComponent implements OnInit {
   showOMTTest() {
     this.showTest = true;
   }
-  changeVisibility(event: any) {
-    if (event === 'close')
-      this.showTest = false;
+  renderData(event: any) {
+    this.showTest = false;
+    console.log(JSON.stringify(event))
+    console.log(JSON.stringify(this.testData))
+
+    Object.entries(this.testData.mapResult as Record<string, string>)
+      .forEach(([controlName, resultKey]) => {
+        if (this.omtTestform.contains(controlName) && event[resultKey] !== undefined) {
+          this.omtTestform.get(controlName)?.setValue(event[resultKey]);
+        }
+      });
   }
 }

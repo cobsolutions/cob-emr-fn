@@ -144,7 +144,7 @@
         <app-objective-omttest [layout]="field.omtFieldRequest.layout" [form]="form"
             [controls]="field.omtFieldRequest.list" [testStyle]="filedStyle!.style"
             [testLabelStyle]="filedStyle!.label_style" [parentFieldName]="field.name"
-            [testName]="field.omtFieldRequest.testName"></app-objective-omttest>
+            [testData]="field.omtFieldRequest.testData"></app-objective-omttest>
     </div>
     <div *ngIf="field.type === 'walk_test'">
         <walk-test [form]="form" [parentFieldName]="field.name" [testStyle]="filedStyle!.style"></walk-test>

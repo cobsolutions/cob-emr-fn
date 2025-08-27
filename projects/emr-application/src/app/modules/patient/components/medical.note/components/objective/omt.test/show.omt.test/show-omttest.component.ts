@@ -6,11 +6,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./show-omttest.component.css']
 })
 export class ShowOMTTestComponent implements OnInit {
-  @Output() changeVisibility = new EventEmitter<string>()
+  @Output() data = new EventEmitter<any>()
   getResult(result: any) {
     console.log(JSON.stringify(result))
-    if (result !== null)
-      this.changeVisibility.emit('close')
+    this.data.emit(result)
   }
   @Input() testName: string
   constructor() { }
