@@ -39,4 +39,9 @@ export class OmtTestService {
     var url = this.baseUrl + '/lower-extremity/test/' + testName
     return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
   }
+  balance(answers: any) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/balance'
+    return this.httpClient.post(`${url}`, JSON.stringify(answers), { 'headers': headers })
+  }
 }

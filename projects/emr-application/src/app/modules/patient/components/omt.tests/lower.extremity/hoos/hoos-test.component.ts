@@ -98,7 +98,6 @@ export class HoosTestComponent implements OnInit {
 
     this.showCompletionError = false;
     const result = this.fillAnswers()
-    console.log(JSON.stringify(result))
 
     
     this.omtTestService.lowerExtremity(result, 'oos').subscribe(rr => {
