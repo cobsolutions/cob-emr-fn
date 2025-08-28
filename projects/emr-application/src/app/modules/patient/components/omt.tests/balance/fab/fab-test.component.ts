@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,6 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class FabTestComponent implements OnInit {
   fabForm: FormGroup;
   showInstructions = false;
+  @Output() getResult = new EventEmitter<any>()
 
   // FAB Scale test items
   fabItems = [
@@ -154,8 +155,8 @@ export class FabTestComponent implements OnInit {
     const result = this.fillAnswers()
     console.log(JSON.stringify(result))
     
-    this.omtTestService.balance(result).subscribe(rr => {
-      console.log(JSON.stringify(rr))
+    this.omtTestService.balance(result).subscribe(val => {
+      this.getResult.emit(val)
     })
   }
   private fillAnswers() {

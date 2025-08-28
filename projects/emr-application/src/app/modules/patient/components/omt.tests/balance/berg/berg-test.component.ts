@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,6 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class BergTestComponent implements OnInit {
   bergForm: FormGroup;
   showInstructions = false;
+  @Output() getResult = new EventEmitter<any>()
   // Berg Balance Scale items
   bergItems = [
     {
@@ -181,7 +182,7 @@ export class BergTestComponent implements OnInit {
       ]
     }
   ];
-  constructor(private fb: FormBuilder, private omtTestService:OmtTestService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.bergForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -210,9 +211,9 @@ export class BergTestComponent implements OnInit {
     }
     const result = this.fillAnswers()
 
-    
-    this.omtTestService.balance(result).subscribe(rr => {
-      console.log(JSON.stringify(rr))
+
+    this.omtTestService.balance(result).subscribe(val => {
+      this.getResult.emit(val)
     })
   }
   private fillAnswers() {

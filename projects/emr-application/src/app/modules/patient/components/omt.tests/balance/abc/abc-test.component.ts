@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -12,6 +12,7 @@ export class AbcTestComponent implements OnInit {
   totalScore: number | null = null;
   interpretation: string = '';
   showInstructions = false;
+  @Output() getResult = new EventEmitter<any>()
   questions = [
     { id: 'Q1', text: '1. walk around the house?' },
     { id: 'Q2', text: '2. walk up or down stairs?' },
@@ -66,8 +67,8 @@ export class AbcTestComponent implements OnInit {
       return;
     }
     const result = this.fillAnswers()
-    this.omtTestService.balance(result).subscribe(rr => {
-      console.log(JSON.stringify(rr))
+    this.omtTestService.balance(result).subscribe(val => {
+      this.getResult.emit(val)
     })
   }
 
