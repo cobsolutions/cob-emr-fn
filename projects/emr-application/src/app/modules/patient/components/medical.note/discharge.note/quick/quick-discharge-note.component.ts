@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
+import { Observable } from 'rxjs';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { QuickDischargeRequest } from '../../../../models/medical.note/quick.discharge.request';
@@ -32,7 +33,13 @@ export class QuickDischargeNoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.medialNoteService.saveNoteObservable$.subscribe(val => {
-      this.draft();
+      const finalizeRequest = val;
+      if (finalizeRequest !== null)
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          })
+        });
     })
     this.dischargeForm = this.fb.group({
       dischargeDate: [Validators.required],
@@ -72,11 +79,14 @@ export class QuickDischargeNoteComponent implements OnInit {
     }
     return medicalNoteRequest
   }
-  private draft() {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel()
-    this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
+  draft() {
+    this.draftAction().subscribe(data => {
       this.backtoPatientRecordActions();
     })
+  }
+  draftAction(): Observable<any> {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    return this.medialNoteService.draft(medicalNoteRequest);
   }
   toggleFrowardModal() {
     this.forwardVisibility = !this.forwardVisibility

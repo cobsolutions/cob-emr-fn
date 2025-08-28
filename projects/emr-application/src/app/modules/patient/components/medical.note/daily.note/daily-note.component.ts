@@ -1,7 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
@@ -30,7 +30,14 @@ export class DailyNoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.medialNoteService.saveNoteObservable$.subscribe(val => {
-      this.draft();
+      const finalizeRequest = val;
+      if (finalizeRequest !== null)
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          })
+        });
+
     })
     this.medialNoteService.noteType$.next('daily')
     this.visitedSteps = [true, false, false, false]
@@ -69,12 +76,16 @@ export class DailyNoteComponent implements OnInit {
     }
     return medicalNoteRequest;
   }
-  private draft() {
-    var medicalNote: MedicalNoteRequest = this.buildMedicalNoteModel()
-    this.medialNoteService.draft(medicalNote).subscribe(data => {
+  draft() {
+    this.draftAction().subscribe(data => {
       this.backtoPatientRecordActions();
     })
   }
+  draftAction(): Observable<any> {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    return this.medialNoteService.draft(medicalNoteRequest);
+  }
+
   private handleNoteFinalization() {
 
   }

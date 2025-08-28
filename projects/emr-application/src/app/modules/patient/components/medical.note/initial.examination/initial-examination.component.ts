@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
@@ -35,8 +35,16 @@ export class InitialExaminationComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$.subscribe(val=>{
-      this.draft();
+
+    this.medialNoteService.saveNoteObservable$.subscribe(val => {
+
+      const finalizeRequest = val;
+      if (finalizeRequest !== null)
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          })
+        });
     })
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
@@ -106,10 +114,13 @@ export class InitialExaminationComponent implements OnInit {
     return medicalNoteRequest;
   }
   draft() {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-    this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
+    this.draftAction().subscribe(data => {
       this.backtoPatientRecordActions();
     })
+  }
+  draftAction(): Observable<any> {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    return this.medialNoteService.draft(medicalNoteRequest);
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};

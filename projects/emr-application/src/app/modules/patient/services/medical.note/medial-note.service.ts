@@ -10,7 +10,7 @@ import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
   providedIn: 'root'
 })
 export class MedialNoteService {
-  private saveNote = new BehaviorSubject<boolean>(null);
+  private saveNote = new BehaviorSubject<any>(null);
   saveNoteObservable$ = this.saveNote.asObservable();
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'

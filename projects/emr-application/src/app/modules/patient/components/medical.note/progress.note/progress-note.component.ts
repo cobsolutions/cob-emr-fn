@@ -1,7 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
@@ -29,8 +29,14 @@ export class ProgressNoteComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$.subscribe(val=>{
-      this.draft();
+    this.medialNoteService.saveNoteObservable$.subscribe(val => {
+      const finalizeRequest = val;
+      if (finalizeRequest !== null)
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          })
+        });
     })
     this.medialNoteService.noteType$.next('progress')
     this.visitedSteps = [true, false, false, false, false]
@@ -71,14 +77,17 @@ export class ProgressNoteComponent implements OnInit {
     }
     return medicalNoteRequest;
   }
-  private draft() {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-    this.medialNoteService.draft(medicalNoteRequest).subscribe(data => {
+  draft() {
+    this.draftAction().subscribe(data => {
       this.backtoPatientRecordActions();
     })
   }
+  draftAction(): Observable<any> {
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    return this.medialNoteService.draft(medicalNoteRequest);
+  }
   private handleNoteFinalization() {
-    
+
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
