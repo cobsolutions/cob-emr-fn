@@ -32,38 +32,15 @@ export class IcdtenComponent implements OnInit {
     this.parentForm.get(this.parentFieldName).setValue(this.addedDiagnosis);
   }
   constructor(private spinner: NgxSpinnerService, private caseDiagnosisService: CaseDiagnosisService) { }
-
-  ngOnInit(): void {
-    this.fillDiagnosisCode();
-    this.diagnosisCtrl.valueChanges
+  icdSearch() {
+    const icdVal = this.diagnosisCtrl.value
+    this.spinner.show();
+    this.caseDiagnosisService.find(icdVal)
       .pipe(
-        filter(text => {
-          if (text === undefined)
-            return false;
-          if (text.length > 1) {
-            return true
-          } else {
-            this.filteredDiagnosis = [];
-            return false;
-          }
+        finalize(() => {
+          this.isLoading = false
         }),
-        debounceTime(500),
-        tap((value) => {
-          this.filteredDiagnosis = [];
-          this.isLoading = true;
-        }),
-        switchMap((value) => {
-          this.spinner.show();
-          return this.caseDiagnosisService.find(value)
-            .pipe(
-              finalize(() => {
-                this.isLoading = false
-              }),
-            )
-        }
-        )
-      )
-      .subscribe(data => {
+      ).subscribe(data => {
         this.spinner.hide();
         if (data == undefined) {
           this.filteredDiagnosis = [];
@@ -75,6 +52,9 @@ export class IcdtenComponent implements OnInit {
         error => {
           this.isLoading = false
         });
+  }
+  ngOnInit(): void {
+    this.fillDiagnosisCode();
   }
 
   addICD10diagnosis(diagnosis: any) {
