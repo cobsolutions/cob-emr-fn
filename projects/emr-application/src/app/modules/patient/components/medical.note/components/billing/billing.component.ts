@@ -42,7 +42,7 @@ export class BillingComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('billing',this.noteTypeId).subscribe(fields => {
+    this.medialNoteService.find('billing', this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
         'dailyNoteIncluded': this.fb.control(false),
@@ -63,9 +63,11 @@ export class BillingComponent implements OnInit {
         braces: this.fb.group({}),
         directTimedCodes: this.fb.group({})
       });
-      if (this.billingData)
+      console.log(JSON.stringify(this.billingData))
+      if (this.billingData) {
         this.billingForm.patchValue(this.billingData);
-      // if(this.billingData && this.billingData['dailyNoteIncluded'])
+      }
+
 
       this.formReady.emit(this.billingForm);
     })
@@ -111,11 +113,6 @@ export class BillingComponent implements OnInit {
   }
   togglefinalize() {
     this.finalizeNoteVisibility = !this.finalizeNoteVisibility
-  }
-  private onChangeIncludeDailyNote() {
-    this.billingForm.get('dailyNoteIncluded').valueChanges.subscribe(val => {
-
-    })
   }
   changeFinalizeNoteVisibility(event: any) {
     if (event === 'no') {
