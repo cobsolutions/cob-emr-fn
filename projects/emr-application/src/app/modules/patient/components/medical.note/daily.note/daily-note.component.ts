@@ -29,6 +29,9 @@ export class DailyNoteComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.medialNoteService.saveNoteObservable$.subscribe(val => {
+      this.draft();
+    })
     this.medialNoteService.noteType$.next('daily')
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
@@ -73,7 +76,7 @@ export class DailyNoteComponent implements OnInit {
     })
   }
   private handleNoteFinalization() {
-   
+
   }
   onStepChange(event: StepperSelectionEvent): void {
     this.activeStepIndex = event.selectedIndex;
@@ -99,5 +102,5 @@ export class DailyNoteComponent implements OnInit {
     });
     return values;
   }
- 
+
 }

@@ -35,6 +35,9 @@ export class InitialExaminationComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.medialNoteService.saveNoteObservable$.subscribe(val=>{
+      this.draft();
+    })
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),

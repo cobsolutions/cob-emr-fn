@@ -31,7 +31,9 @@ export class QuickDischargeNoteComponent implements OnInit {
     , private toastr: ToastrService) { }
 
   ngOnInit(): void {
-
+    this.medialNoteService.saveNoteObservable$.subscribe(val => {
+      this.draft();
+    })
     this.dischargeForm = this.fb.group({
       dischargeDate: [Validators.required],
       numberOfVisits: [0, [Validators.required, Validators.min(0)]],

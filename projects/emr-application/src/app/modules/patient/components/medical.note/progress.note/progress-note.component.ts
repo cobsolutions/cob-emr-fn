@@ -29,6 +29,9 @@ export class ProgressNoteComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    this.medialNoteService.saveNoteObservable$.subscribe(val=>{
+      this.draft();
+    })
     this.medialNoteService.noteType$.next('progress')
     this.visitedSteps = [true, false, false, false, false]
     this.progressNoteForm = this.fb.group({

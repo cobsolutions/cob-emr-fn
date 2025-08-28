@@ -28,6 +28,7 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       noteType: this.noteType,
       finalizedBy: this.loggedInService.getLoggedUser().uuid
     }
+    this.medialNoteService.pingSaveData(true)
     this.medialNoteService.finalizea(request).subscribe(v => {
       this.changeVisibility.emit('yes')
     })
