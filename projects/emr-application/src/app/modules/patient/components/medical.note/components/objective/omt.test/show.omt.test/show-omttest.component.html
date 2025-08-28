@@ -1,47 +1,55 @@
 <!--Upper extremity quick dash score-->
+
+<span *ngIf="testName === null" style="width: 100%;">
+    <div style="width: 100%;">
+        <h1><strong>
+                Under Construction...
+            </strong></h1>
+    </div>
+</span>
 <span *ngIf="testName === 'ueqd'">
-    <ueqd-test></ueqd-test>
+    <ueqd-test (getResult)="getResult($event)"></ueqd-test>
 </span>
 
 <span *ngIf="testName === 'uefi'">
-    <uefi-test></uefi-test>
+    <uefi-test (getResult)="getResult($event)"></uefi-test>
 </span>
 <span *ngIf="testName === 'spadi'">
     <spadi-test (getResult)="getResult($event)"></spadi-test>
 </span>
 <span *ngIf="testName === 'dash'">
-    <dash-test></dash-test>
+    <dash-test (getResult)="getResult($event)"></dash-test>
 </span>
-<span *ngIf="testName === 'molbp'">
-    <spine-molbp-test></spine-molbp-test>
+<span *ngIf=" testName==='molbp'">
+    <spine-molbp-test (getResult)="getResult($event)"></spine-molbp-test>
 </span>
-<span *ngIf="testName === 'olbp'">
-    <spine-olbp-test></spine-olbp-test>
+<span *ngIf=" testName==='olbp'">
+    <spine-olbp-test (getResult)="getResult($event)"></spine-olbp-test>
 </span>
-<span *ngIf="testName === 'ndi'">
-    <spine-ndi-test></spine-ndi-test>
+<span *ngIf=" testName==='ndi'">
+    <spine-ndi-test (getResult)="getResult($event)"></spine-ndi-test>
 </span>
-<span *ngIf="testName === 'lefs'">
-    <lower-extremity-lefs-test></lower-extremity-lefs-test>
+<span *ngIf=" testName==='lefs'">
+    <lower-extremity-lefs-test (getResult)="getResult($event)"></lower-extremity-lefs-test>
 </span>
-<span *ngIf="testName === 'faam'">
-    <lower-extremity-faam-test></lower-extremity-faam-test>
+<span *ngIf=" testName==='faam'">
+    <lower-extremity-faam-test (getResult)="getResult($event)"></lower-extremity-faam-test>
 </span>
-<span *ngIf="testName === 'hoos'">
-    <lower-extremity-hoos-test></lower-extremity-hoos-test>
+<span *ngIf=" testName==='hoos'">
+    <lower-extremity-hoos-test (getResult)="getResult($event)"></lower-extremity-hoos-test>
 </span>
-<span *ngIf="testName === 'koos'">
-    <lower-extremity-koos-test></lower-extremity-koos-test>
+<span *ngIf=" testName==='koos'">
+    <lower-extremity-koos-test (getResult)="getResult($event)"></lower-extremity-koos-test>
 </span>
-<span *ngIf="testName === 'berg'">
-    <balance-berg-test></balance-berg-test>
+<span *ngIf=" testName==='berg'">
+    <balance-berg-test (getResult)="getResult($event)"></balance-berg-test>
 </span>
-<span *ngIf="testName === 'abc'">
-    <balance-abc-test></balance-abc-test>
+<span *ngIf=" testName==='abc'">
+    <balance-abc-test (getResult)="getResult($event)"></balance-abc-test>
 </span>
-<span *ngIf="testName === 'tinetti'">
-    <balance-tinetti></balance-tinetti>
+<span *ngIf=" testName==='tinetti'">
+    <balance-tinetti (getResult)="getResult($event)"></balance-tinetti>
 </span>
-<span *ngIf="testName === 'fab'">
-    <balance-fab-test></balance-fab-test>
+<span *ngIf=" testName==='fab'">
+    <balance-fab-test (getResult)="getResult($event)"></balance-fab-test>
 </span>

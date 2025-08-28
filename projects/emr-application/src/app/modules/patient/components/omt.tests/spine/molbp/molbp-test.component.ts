@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,6 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class MolbpTestComponent implements OnInit {
   oswestryForm: FormGroup;
   showInstructions = false;
+  @Output() getResult = new EventEmitter<any>()
   sections = [
     "Pain Intensity",
     "Personal Care (Washing, Dressing, etc.)",
@@ -71,8 +72,8 @@ export class MolbpTestComponent implements OnInit {
       "Q9": parseInt(this.oswestryForm.value.q9, 10),
       "Q10": parseInt(this.oswestryForm.value.q10, 10)
     };
-    this.omtTestService.spine(result, "molbp").subscribe(result => {
-      console.log(JSON.stringify(result))
+    this.omtTestService.spine(result, "molbp").subscribe(val => {
+      this.getResult.emit(val)
     })
   }
 

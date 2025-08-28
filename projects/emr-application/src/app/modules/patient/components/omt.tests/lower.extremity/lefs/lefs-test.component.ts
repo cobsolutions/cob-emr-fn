@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,7 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class LefsTestComponent implements OnInit {
   lefsForm: FormGroup;
   showInstructions = false;
-
+  @Output() getResult = new EventEmitter<any>()
   // Activity descriptions for the form
   activities = [
     "Any of your usual work, housework or school activities",
@@ -70,8 +70,8 @@ export class LefsTestComponent implements OnInit {
       return;
     }
     const result = this.fillAnswers();
-    this.omtTestService.lowerExtremity(result, 'lefs').subscribe(res => {
-      console.log(JSON.stringify(res))
+    this.omtTestService.lowerExtremity(result, 'lefs').subscribe(val => {
+      this.getResult.emit(val)
     })
   }
   resetForm(): void {

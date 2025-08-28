@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,7 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class FaamTestComponent implements OnInit {
   faamSportsForm: FormGroup;
   showInstructions = false;
-
+  @Output() getResult = new EventEmitter<any>()
   // Activity descriptions for the form
   activities = [
     "Running",
@@ -61,8 +61,8 @@ export class FaamTestComponent implements OnInit {
       return;
     }
     const result= this.fillAnswers();
-    this.omtTestService.lowerExtremity(result,'faam').subscribe(rr=>{
-      console.log(JSON.stringify(rr))
+    this.omtTestService.lowerExtremity(result,'faam').subscribe(val=>{
+      this.getResult.emit(val)
     })
   }
 

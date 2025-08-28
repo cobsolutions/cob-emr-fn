@@ -1,5 +1,5 @@
 // hoos-survey.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -13,6 +13,7 @@ export class HoosTestComponent implements OnInit {
   showInstructions = false;
   calculatedScores: any = null;
   showCompletionError = false;
+  @Output() getResult = new EventEmitter<any>()
 
   // Question options
   painLevelOptions = Array.from({ length: 11 }, (_, i) => i);
@@ -74,7 +75,7 @@ export class HoosTestComponent implements OnInit {
     }, {} as { [key: string]: any });
   }
 
-  
+
   private rangeKeys(prefix: string, count: number): string[] {
     return Array.from({ length: count }, (_, i) => `${prefix}${i + 1}`);
   }
@@ -99,9 +100,9 @@ export class HoosTestComponent implements OnInit {
     this.showCompletionError = false;
     const result = this.fillAnswers()
 
-    
-    this.omtTestService.lowerExtremity(result, 'oos').subscribe(rr => {
-      console.log(JSON.stringify(rr))
+
+    this.omtTestService.lowerExtremity(result, 'oos').subscribe(val => {
+      this.getResult.emit(val)
     })
   }
 
@@ -124,7 +125,7 @@ export class HoosTestComponent implements OnInit {
       });
     });
 
-    return { answers ,"oosType":"hoos" };
+    return { answers, "oosType": "hoos" };
   }
   resetForm(): void {
     this.hoosForm.reset();

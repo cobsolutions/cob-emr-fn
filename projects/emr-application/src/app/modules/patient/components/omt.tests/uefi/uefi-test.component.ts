@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../services/test/omt-test.service';
 
@@ -11,7 +11,7 @@ export class UefiTestComponent implements OnInit {
 
   uefiForm: FormGroup;
   showInstructions = false;
-
+  @Output() getResult = new EventEmitter<any>()
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.uefiForm = this.createForm();
   }
@@ -78,9 +78,9 @@ export class UefiTestComponent implements OnInit {
       "Q19": parseInt(this.uefiForm.value.q19, 10),
       "Q20": parseInt(this.uefiForm.value.q20, 10),
     };
-    this.omtTestService.uefiTest(result).subscribe(d => {
+    this.omtTestService.uefiTest(result).subscribe(val => {
       //Finalize ueqd Test  
-      console.log(JSON.stringify(d))
+      this.getResult.emit(val)
     })
   }
 

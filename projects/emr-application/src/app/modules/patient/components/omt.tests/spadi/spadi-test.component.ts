@@ -10,7 +10,7 @@ import { OmtTestService } from '../../../services/test/omt-test.service';
 })
 export class SpadiTestComponent implements OnInit {
   spadiForm: FormGroup;
-  showInstructions = false;
+  showInstructions = false;d
   @Output() getResult = new EventEmitter<any>()
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService ) {
     this.spadiForm = this.createForm();

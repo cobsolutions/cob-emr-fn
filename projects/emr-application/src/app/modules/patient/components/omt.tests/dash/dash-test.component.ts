@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../services/test/omt-test.service';
 import { dashValidator } from '../validator/not.selected';
@@ -11,6 +11,7 @@ import { dashValidator } from '../validator/not.selected';
 export class DashTestComponent implements OnInit {
   dashForm: FormGroup;
   showInstructions = false;
+  @Output() getResult = new EventEmitter<any>()
   // Question labels for the form
   questions = [
     "Open a tight or new jar.",
@@ -163,8 +164,8 @@ export class DashTestComponent implements OnInit {
         result[`Q${i}`] = (parseInt(value, 10) - 1);
       }
     }
-    this.omtTestService.dashTest(result).subscribe(re => {
-      console.log(JSON.stringify(re))
+    this.omtTestService.dashTest(result).subscribe(val => {
+      this.getResult.emit(val)
     })
   }
 

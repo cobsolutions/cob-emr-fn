@@ -8,14 +8,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ShowOMTTestComponent implements OnInit {
   @Output() data = new EventEmitter<any>()
   getResult(result: any) {
-    console.log(JSON.stringify(result))
     this.data.emit(result)
   }
   @Input() testName: string
-  constructor() { }
 
+  constructor() { }
   ngOnInit(): void {
-    console.log(this.testName)
   }
 
 }

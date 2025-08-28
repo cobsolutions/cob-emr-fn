@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -12,6 +12,7 @@ export class KoosTestComponent implements OnInit {
   showInstructions = false;
   calculatedScores: any = null;
   showCompletionError = false;
+  @Output() getResult = new EventEmitter<any>()
   // Question options
   painLevelOptions = Array.from({ length: 11 }, (_, i) => i);
   frequencyOptions = [
@@ -95,8 +96,8 @@ export class KoosTestComponent implements OnInit {
     console.log(JSON.stringify(result))
 
 
-    this.omtTestService.lowerExtremity(result, 'oos').subscribe(rr => {
-      console.log(JSON.stringify(rr))
+    this.omtTestService.lowerExtremity(result, 'oos').subscribe(val => {
+      this.getResult.emit(val)
     })
   }
   private fillAnswers(): any {
@@ -118,7 +119,7 @@ export class KoosTestComponent implements OnInit {
       });
     });
 
-    return { answers , "oosType":"koos" };
+    return { answers, "oosType": "koos" };
   }
   resetForm(): void {
     this.koosForm.reset();
