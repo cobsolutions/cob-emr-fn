@@ -33,6 +33,12 @@
                     </button>
                 </div>
             </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;" *ngIf="hierarchy">
+                <button type="button" (click)="copyCodes()" class="add-goal-btn">
+                    📋 Copy Codes from Diagnosis
+                </button>
+            </div>
         </div>
         <!-- Table -->
         <table class="table table-sm p-1 mb-3">

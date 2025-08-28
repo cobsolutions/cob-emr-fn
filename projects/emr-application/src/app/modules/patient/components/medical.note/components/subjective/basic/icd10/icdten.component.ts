@@ -15,13 +15,13 @@ export class IcdtenComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
   @Output() emitChanges = new EventEmitter<{ code: string; description: string }[]>()
+  @Input() hierarchy: string
   diagnosisCtrl = new FormControl();
   isLoading = false;
   selectedDiagnosis: { code: string; description: string }[];
   addedDiagnosis: { code: string; description: string }[] = [];
   filteredDiagnosis: any;
   problems: any;
-
   addCode() {
     this.addedDiagnosis = [...this.addedDiagnosis, ...this.selectedDiagnosis];
     this.parentForm.get(this.parentFieldName).setValue(this.addedDiagnosis);
@@ -54,9 +54,12 @@ export class IcdtenComponent implements OnInit {
         });
   }
   ngOnInit(): void {
+
     this.fillDiagnosisCode();
   }
+  copyCodes() {
 
+  }
   addICD10diagnosis(diagnosis: any) {
     this.selectedDiagnosis = this.transformListToObjects(diagnosis);
   }
