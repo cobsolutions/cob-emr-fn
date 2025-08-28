@@ -1,0 +1,48 @@
+<!-- fab-scale.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Fullerton Advanced Balance (FAB) Scale</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>Evaluating Risk for Falls:</strong>
+        <p>Long Form Fullerton Advanced Balance (FAB) scale Cut-Off Score: ≤ 25/40 Points</p>
+        <p>Short-Form Fullerton Advanced Balance (FAB) scale Cut-Off Score: ≤ 9/16 Points</p>
+      </div>
+    </div>
+  
+    <form [formGroup]="fabForm" (ngSubmit)="calculateScore()">
+      <!-- FAB Scale Items -->
+      <div *ngFor="let item of fabItems" class="form-section">
+        <div class="section-header">
+          <strong>{{item.number}}. {{item.title}}</strong>
+        </div>
+        
+        <div *ngIf="item.instruction" class="instruction">
+          <em>{{item.instruction}}</em>
+        </div>
+        
+        <div class="options">
+          <label *ngFor="let option of item.options; let i = index">
+            <input type="radio" [formControlName]="'Q' + item.number" [value]="i"> {{i}}: {{option}}
+          </label>
+        </div>
+        
+        <div *ngIf="fabForm.get('Q' + item.number)?.invalid && fabForm.get('Q' + item.number)?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="fabForm.invalid && fabForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>

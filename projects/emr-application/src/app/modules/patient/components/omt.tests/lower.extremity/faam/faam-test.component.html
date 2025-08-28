@@ -1,0 +1,97 @@
+<!-- faam-sports.component.html -->
+<div class="container">
+  <div class="header">
+    <h2>Foot and Ankle Ability Measure - Sports Subscale</h2>
+
+    <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+      [Instructions]
+    </a>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <p>For the most valid results it is suggested for the FAAM Sports subscale be generated only when subjects
+        completed 90% or more of the items (7 of 8)</p>
+
+      <strong>Sports Subscale:</strong>
+      <p>The response to each item on the Sports subscale is scored from 4 to 0, with 4 being 'no difficulty' and 0
+        being 'unable to do'. <span class="text-danger">N/A responses are not included in the calculation</span>.</p>
+
+      <p>The score on each of the items are added together to get the item score total. The number of items with a
+        response is multiplied by 4 to get the highest potential score.</p>
+
+      <strong>Interpretation:</strong>
+      <p>G-Code Modifiers are assigned by the Composite Score as follows:</p>
+      <ul>
+        <li>100% = CH (no difficulty)</li>
+        <li>80 - 99% = CI</li>
+        <li>60 - 79% = CJ</li>
+        <li>40 - 59% = CK</li>
+        <li>20 - 39% = CL</li>
+        <li>1 - 19% = CM</li>
+        <li>0% = CN (unable to do)</li>
+      </ul>
+    </div>
+  </div>
+
+  <form [formGroup]="faamSportsForm" (ngSubmit)="calculateScore()">
+    <!-- Patient Satisfaction Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <strong>Patient Satisfaction</strong>
+      </div>
+
+      <div class="question">
+        <label>
+          <strong><span class="asterisk">*</span></strong>
+          1. Please rate your pain level with activity
+        </label>
+      </div>
+
+      <div class="options-row">
+        <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
+          {{level}} <input type="radio" formControlName="painLevel" [value]="level">
+        </label>
+      </div>
+
+      <div class="scale-labels">
+        <span class="scale-start">NO PAIN</span>
+        <span class="scale-end">VERY SEVERE PAIN</span>
+      </div>
+
+      <div *ngIf="faamSportsForm.get('painLevel')?.invalid && faamSportsForm.get('painLevel')?.touched"
+        class="error-message">
+        Please select a pain level
+      </div>
+    </div>
+
+    <!-- Activities Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <strong>Because of your <u>foot and ankle</u> how much difficulty do you have with:</strong>
+      </div>
+
+      <!-- Activities 1-8 -->
+      <div *ngFor="let activity of activities; let i = index" class="question">
+        <strong>{{i + 1}}. {{activity}}</strong>
+        <div class="options">
+          <label *ngFor="let option of difficultyOptions">
+            <input type="radio" [formControlName]="'q' + (i + 1)" [value]="option.value"> {{option.text}}
+          </label>
+        </div>
+        <div
+          *ngIf="faamSportsForm.get('q' + (i + 1))?.invalid && faamSportsForm.get('q' + (i + 1))?.touched"
+          class="error-message">
+          Please select an answer
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Calculate Total</button>
+      <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+
+      <div *ngIf="faamSportsForm.invalid && faamSportsForm.touched" class="error-message completion-error">
+        Please select an answer for all questions.
+      </div>
+    </div>
+  </form>
+</div>

@@ -2,23 +2,24 @@
   <div [ngClass]="layout" [style]="testStyle">
     <div *ngFor="let control of controls; let last = last" class="form-control-container">
       <span *ngIf="control.type === 'input'" class="control-wrapper">
-        <label *ngIf="control.name" class="form-label" [style] ="testLabelStyle"
-          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }" >
+        <label *ngIf="control.name" class="form-label" [style]="testLabelStyle"
+          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
           {{ control.name[0] }}
         </label>
         <input cFormControl [type]="'text'" [formControlName]="control.id" sizing="sm" [style]="'width:100px'" />
         <label *ngIf="control.name"
-          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }" [style]="'width:10px'">
+          [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }"
+          [style]="'width:10px'">
           {{ control.name[1] }}
         </label>
       </span>
       <span *ngIf="control.type === 'textarea'" class="control-wrapper">
-        <label *ngIf="control.name" class="form-label" [style] ="testLabelStyle"
+        <label *ngIf="control.name" class="form-label" [style]="testLabelStyle"
           [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
           {{ control.name[0] }}
         </label>
         <!-- [style]="control.style" -->
-        <textarea cFormControl  [formControlName]="control.id" sizing="sm" [style]="'width:500px'" ></textarea>
+        <textarea cFormControl [formControlName]="control.id" sizing="sm" [style]="'width:500px'"></textarea>
         <label *ngIf="control.name"
           [ngClass]="{'form-label-v': layout === 'vertical', 'form-label-h' : layout === 'horizontal' }">
           {{ control.name[1] }}
@@ -40,8 +41,14 @@
 
       <!-- Button aligned to the right of the last control -->
       <div *ngIf="last" class="button-container">
-        <button type="button" class="btn btn-link">Show Test</button>
+        <button type="button" class="btn btn-link" (click)="showOMTTest()">Show Test</button>
       </div>
     </div>
   </div>
 </form>
+<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static" scrollable="true">
+  <c-modal-body>
+    <button (click)="toggleOMTVisibility()" cButtonClose style="float: right;"></button>
+    <show-omttest [testName]="testData?.name" *ngIf="showTest" (data)="renderData($event)"></show-omttest>
+  </c-modal-body>
+</c-modal>

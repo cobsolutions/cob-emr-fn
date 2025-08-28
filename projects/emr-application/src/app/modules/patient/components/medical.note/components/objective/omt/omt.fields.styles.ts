@@ -204,7 +204,34 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;"
     },
     {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_cbcabe27-a5f6-4861-8690-d18e3bcb3423_kneeInjuryOsteoarthritisOutcomesScore",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_d8111fc6-534c-4ae9-91a9-ea3c429fc2ec_HipDisabilityOsteoarthritisOutcomesScore",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "omt_643b5454-1764-4171-9ff1-162c778f6782_footAndAnkleAbilityMeasure",
+        "style": "margin-left: 10px;"
+    },
+    {
         "name": "omt_2159391a-61fd-4538-b360-4b522f20d5c5_lowerextremityfunctionalscaleomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_643b5454-1764-4171-9ff1-162c778f6782_footandankleabilitymeasureomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_d8111fc6-534c-4ae9-91a9-ea3c429fc2ec_hipdisabilityosteoarthritisoutcomesdcoreomttest",
+        "style": "margin-left: 500px"
+    },
+    {
+        "name": "omt_cbcabe27-a5f6-4861-8690-d18e3bcb3423_kneeinjuryosteoarthritisoutcomesscoreomttest",
         "style": "margin-left: 500px"
     },
 
@@ -212,11 +239,6 @@ export var OMTFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_mctsib",
-        "style": "margin-left: 10px;"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "omt_d05f9050-d1bd-48c0-be06-f29f0c81cc7c_abcScale",
         "style": "margin-left: 10px;"
     },
     {
@@ -256,7 +278,7 @@ export var OMTFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 500px"
     },
     {
-        
+
         "name": "omt_20f42bc5-ee10-4f6a-b25a-a19b66859cbf_fullertonadvancedbalancescaleomttest",
         "style": "margin-left: 500px"
     },

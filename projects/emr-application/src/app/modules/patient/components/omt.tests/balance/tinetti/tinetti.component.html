@@ -1,0 +1,93 @@
+<!-- tinetti.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Tinetti Balance and Gait Assessment</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>Description:</strong>
+        <p>The Tinetti assessment tool is an easily administered task-oriented test that measures an older adult's gait and balance abilities.</p>
+        
+        <strong>Equipment needed:</strong>
+        <ul>
+          <li>Hard armless chair</li>
+          <li>Stopwatch or wristwatch</li>
+          <li>15 foot walkway</li>
+        </ul>
+        
+        <strong>Completion Time:</strong>
+        <p>10-15 minutes</p>
+        
+        <strong>Score Meaning:</strong>
+        <ul>
+          <li>&lt;19 - High fall risk</li>
+          <li>19-24 - Medium fall risk</li>
+          <li>25-28 - Low fall risk</li>
+        </ul>
+      </div>
+    </div>
+  
+    <form [formGroup]="tinettiForm" (ngSubmit)="calculateScore()">
+      <!-- Balance Tests Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Balance Tests:</strong> Make sure patient is seated in a hard, armless chair.
+        </div>
+        
+        <!-- Balance Items -->
+        <div *ngFor="let item of balanceItems" class="question">
+          <strong>{{item.number}}. {{item.title}}</strong>
+          <div *ngIf="item.instruction" class="instruction">
+            <em>{{item.instruction}}</em>
+          </div>
+          
+          <div class="options">
+            <label *ngFor="let option of item.options; let i = index">
+              <input type="radio" [formControlName]="'B' + item.number" [value]="i"> {{option}}
+            </label>
+          </div>
+          
+          <div *ngIf="tinettiForm.get('B' + item.number)?.invalid && tinettiForm.get('B' + item.number)?.touched" class="error-message">
+            Please select an answer
+          </div>
+        </div>
+      </div>
+  
+      <!-- Gait Tests Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Gait Tests:</strong> Subject stands with examiner, walks down hallway or across room, first at "usual" pace, then back at "rapid, but safe" pace (using usual walking aids).
+        </div>
+        
+        <!-- Gait Items -->
+        <div *ngFor="let item of gaitItems" class="question">
+          <strong>{{item.number}}. {{item.title}}</strong>
+          <div *ngIf="item.instruction" class="instruction">
+            <em>{{item.instruction}}</em>
+          </div>
+          
+          <div class="options">
+            <label *ngFor="let option of item.options; let i = index">
+              <input type="radio" [formControlName]="'G' + item.number" [value]="i"> {{option}}
+            </label>
+          </div>
+          
+          <div *ngIf="tinettiForm.get('G' + item.number)?.invalid && tinettiForm.get('G' + item.number)?.touched" class="error-message">
+            Please select an answer
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="tinettiForm.invalid && tinettiForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>

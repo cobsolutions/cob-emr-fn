@@ -1,0 +1,47 @@
+<!-- dash.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>DASH: Disabilities of Arm, Shoulder, Hand</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>DASH: Disabilities of Arm, Shoulder, Hand</strong>
+        <hr>
+        <p>
+          This questionnaire asks about your symptoms as well as your ability to perform certain activities.<br>
+          Please answer every question, based on your condition in the last week, by selecting the appropriate option.<br>
+          If you did not have the opportunity to perform an activity in the past week, please make your best estimate
+          of which response would be the most accurate.<br>
+          It does not matter which hand or arm you use to perform the activity;
+          please answer based on your ability regardless of how you perform the task.
+        </p>
+      </div>
+    </div>
+  
+    <form [formGroup]="dashForm" (ngSubmit)="calculateScore()">
+      <!-- Questions 1-30 -->
+      <div *ngFor="let question of questions; let i = index" class="question">
+        <strong>{{i + 1}}. {{question}}</strong>
+        <select [formControlName]="'q' + (i + 1)" class="form-select">
+          <option *ngFor="let option of getOptionsForQuestion(i + 1)" [value]="option.value">
+            {{option.text}}
+          </option>
+        </select>
+        <div *ngIf="dashForm.get('q' + (i + 1))?.invalid && dashForm.get('q' + (i + 1))?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="dashForm.invalid && dashForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>

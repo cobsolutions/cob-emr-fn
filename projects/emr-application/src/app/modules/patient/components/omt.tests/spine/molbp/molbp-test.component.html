@@ -1,0 +1,176 @@
+<!-- oswestry.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Modified Oswestry Low Back Pain Disability</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>Scoring:</strong>
+        <p>Total score = SUM (points for all 10 sections)</p>
+        <p>Disability in percent = (total score) / 50 * 100</p>
+        <p>If not all of the questions are answered then disability in percent = (total score) / (5 * (number of questions answered)) * 100</p>
+        
+        <strong>Interpretation:</strong>
+        <p>0% to 20%: minimal disability<br>
+        The patient can cope with most living activities. Usually no treatment is indicated apart from advice on lifting sitting and exercise.</p>
+        
+        <p>21%-40%: moderate disability<br>
+        The patient experiences more pain and difficulty with sitting lifting and standing. Travel and social life are more difficult and they may be disabled from work. Personal care sexual activity and sleeping are not grossly affected and the patient can usually be managed by conservative means.</p>
+        
+        <p>41%-60%: severe disability<br>
+        Pain remains the main problem in this group but activities of daily living are affected. These patients require a detailed investigation.</p>
+        
+        <p>61%-80%: crippled<br>
+        Back pain impinges on all aspects of the patient's life. Positive intervention is required.</p>
+        
+        <p>81%-100%:<br>
+        These patients are either bed-bound or exaggerating their symptoms.</p>
+      </div>
+    </div>
+  
+    <form [formGroup]="oswestryForm" (ngSubmit)="calculateScore()">
+      <!-- Patient Satisfaction Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Patient Satisfaction</strong>
+        </div>
+        
+        <div class="question">
+          <label>
+            <strong><span class="asterisk">*</span></strong>
+            1. Please rate your pain level with activity
+          </label>
+        </div>
+        
+        <div class="options-row">
+          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
+            {{level}} <input type="radio" formControlName="painLevel" [value]="level">
+          </label>
+        </div>
+        
+        <div class="scale-labels">
+          <span class="scale-start">NO PAIN</span>
+          <span class="scale-end">VERY SEVERE PAIN</span>
+        </div>
+        
+        <div *ngIf="oswestryForm.get('painLevel')?.invalid && oswestryForm.get('painLevel')?.touched" class="error-message">
+          Please select a pain level
+        </div>
+      </div>
+  
+      <!-- Oswestry Sections -->
+      <div *ngFor="let section of sections; let i = index" class="form-section">
+        <div class="section-header">
+          <strong>{{i + 1}}. {{section}}</strong>
+        </div>
+        
+        <div class="question" [formGroup]="oswestryForm">
+          <!-- Section 1: Pain Intensity -->
+          <div *ngIf="i === 0">
+            <label><input type="radio" formControlName="q1" value="0"> I can tolerate the pain I have without having to use pain medication.</label><br>
+            <label><input type="radio" formControlName="q1" value="2"> The pain is bad, but I can manage without having to take pain medication.</label><br>
+            <label><input type="radio" formControlName="q1" value="4"> Pain medication provides me with complete relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="6"> Pain medication provides me with moderate relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="8"> Pain medication provides me with little relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="10"> Pain medication has no effect on my pain.</label>
+          </div>
+          
+          <!-- Section 2: Personal Care -->
+          <div *ngIf="i === 1">
+            <label><input type="radio" formControlName="q2" value="0"> I can take care of myself normally without causing increased pain.</label><br>
+            <label><input type="radio" formControlName="q2" value="1"> I can take care of myself normally, but it increases my pain.</label><br>
+            <label><input type="radio" formControlName="q2" value="2"> It is painful to take care of myself, and I am slow and careful.</label><br>
+            <label><input type="radio" formControlName="q2" value="3"> I need help, but I am able to manage most of my personal care.</label><br>
+            <label><input type="radio" formControlName="q2" value="4"> I need help every day in most aspects of my care.</label><br>
+            <label><input type="radio" formControlName="q2" value="5"> I do not get dressed, wash with difficulty, and stay in bed.</label>
+          </div>
+          
+          <div *ngIf="i === 2">
+            <label><input type="radio" formControlName="q3" value="0"> I can lift heavy weights without extra pain.</label><br>
+            <label><input type="radio" formControlName="q3" value="1"> I can lift heavy weights but it gives extra pain.</label><br>
+            <label><input type="radio" formControlName="q3" value="2"> Pain prevents me from lifting heavy weights off the floor, 
+              but I can manage if the weights are conveniently positioned (eg, on a table).</label><br>
+            <label><input type="radio" formControlName="q3" value="3"> Pain prevents me from lifting heavy weights, 
+              but I can manage light to medium weights if they are conveniently positioned.</label><br>
+            <label><input type="radio" formControlName="q3" value="4"> I can lift only very light weights.</label><br>
+            <label><input type="radio" formControlName="q3" value="5"> I cannot lift or carry anything at all.</label>
+          </div>
+
+          <div *ngIf="i === 3">
+            <label><input type="radio" formControlName="q4" value="0"> Pain does not prevent me from walking any distance.</label><br>
+            <label><input type="radio" formControlName="q4" value="1"> Pain prevents me from walking more than 1 mile.</label><br>
+            <label><input type="radio" formControlName="q4" value="2"> Pain prevents me from walking more than 1/2 mile.</label><br>
+            <label><input type="radio" formControlName="q4" value="3"> Pain prevents me from walking more than 1/4 mile.</label><br>
+            <label><input type="radio" formControlName="q4" value="4"> I can only walk with crutches or a cane.</label><br>
+            <label><input type="radio" formControlName="q4" value="5"> I am in bed most of the time and have to crawl to the toilet.</label>
+          </div>
+          <div *ngIf="i === 4">
+            <label><input type="radio" formControlName="q5" value="0"> I can sit in any chair as long as I like.</label><br>
+            <label><input type="radio" formControlName="q5" value="1"> I can sit only in my favorite chair as long as I like.</label><br>
+            <label><input type="radio" formControlName="q5" value="2"> Pain prevents me from sitting more than 1 hour.</label><br>
+            <label><input type="radio" formControlName="q5" value="3"> Pain prevents me from sitting more than 1/2 hour.</label><br>
+            <label><input type="radio" formControlName="q5" value="4"> Pain prevents me from sitting more than 10 minutes.</label><br>
+            <label><input type="radio" formControlName="q5" value="5"> Pain prevents me from sitting at all.</label>
+          </div>
+          <div *ngIf="i === 5">
+            <label><input type="radio" formControlName="q6" value="0"> I can stand as long as I want without increased pain.</label><br>
+            <label><input type="radio" formControlName="q6" value="1"> I can stand as long as I want but, it increases my pain.</label><br>
+            <label><input type="radio" formControlName="q6" value="2"> Pain prevents me from standing more than 1 hour.</label><br>
+            <label><input type="radio" formControlName="q6" value="3"> Pain prevents me from standing more than 1/2 hour.</label><br>
+            <label><input type="radio" formControlName="q6" value="4"> Pain prevents me from standing more than 10 minutes.</label><br>
+            <label><input type="radio" formControlName="q6" value="5"> Pain prevents me from standing at all.</label>
+          </div>
+          <div *ngIf="i === 6">
+            <label><input type="radio" formControlName="q7" value="0"> Pain does not prevent me from sleeping well.</label><br>
+            <label><input type="radio" formControlName="q7" value="1"> I can sleep well only by using pain medication.</label><br>
+            <label><input type="radio" formControlName="q7" value="2"> Even when I take pain medication, I sleep less than 6 hours.</label><br>
+            <label><input type="radio" formControlName="q7" value="3"> Even when I take pain medication, I sleep less than 4 hours.</label><br>
+            <label><input type="radio" formControlName="q7" value="4"> Even when I take pain medication, I sleep less than 2 hours.</label><br>
+            <label><input type="radio" formControlName="q7" value="5"> Pain prevents me from sleeping at all.</label>
+          </div>
+          <div *ngIf="i === 7">
+            <label><input type="radio" formControlName="q8" value="0"> My social life is normal and does not increase my pain.</label><br>
+            <label><input type="radio" formControlName="q8" value="1"> My social life is normal, but it increases my level of pain.</label><br>
+            <label><input type="radio" formControlName="q8" value="2"> Pain prevents me from participating in more energetic activities (e.g. sports, dancing).</label><br>
+            <label><input type="radio" formControlName="q8" value="3"> Pain prevents me from going out very often.</label><br>
+            <label><input type="radio" formControlName="q8" value="4"> Pain has restricted my social life to my home.</label><br>
+            <label><input type="radio" formControlName="q8" value="5"> I have hardly any social life because of the pain.</label>
+          </div>
+          <div *ngIf="i === 8">
+            <label><input type="radio" formControlName="q9" value="0"> I can travel anywhere without increased pain.</label><br>
+            <label><input type="radio" formControlName="q9" value="1"> I can travel anywhere, but it increases my pain.</label><br>
+            <label><input type="radio" formControlName="q9" value="2"> My pain restricts my travel over 2 hours.</label><br>
+            <label><input type="radio" formControlName="q9" value="3"> My pain restricts my travel over 1 hour.</label><br>
+            <label><input type="radio" formControlName="q9" value="4"> My pain restricts me to short necessary journeys under 1/2 hour.</label><br>
+            <label><input type="radio" formControlName="q9" value="5"> My pain prevents all travel except for visits to the physician/therapist or hospital.</label>
+          </div>
+          <div *ngIf="i === 9">
+            <label><input type="radio" formControlName="q10" value="0"> My normal homemaking/job activities do not cause pain.</label><br>
+            <label><input type="radio" formControlName="q10" value="1"> My normal homemaking/job activities increase my pain, 
+              but I can still perform all that is required of me.</label><br>
+            <label><input type="radio" formControlName="q10" value="2">  can perform most of my homemaking/job duties, 
+              but pain prevents me from performing more physically stressful activities (eg, lifting, vacuuming).</label><br>
+            <label><input type="radio" formControlName="q10" value="3"> Pain prevents me from doing anything but light duties.</label><br>
+            <label><input type="radio" formControlName="q10" value="4"> Pain prevents me from doing even light duties.</label><br>
+            <label><input type="radio" formControlName="q10" value="5"> Pain prevents me from performing any job or homemaking chores.</label>
+          </div>
+        </div>
+        
+        <div *ngIf="oswestryForm.get('q' + (i + 1))?.invalid && oswestryForm.get('q' + (i + 1))?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="oswestryForm.invalid && oswestryForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>

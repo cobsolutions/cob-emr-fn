@@ -106,6 +106,22 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize/finalize-medical-note.component';
 import { DailyPlanComponent } from './components/medical.note/components/plan/daily/daily-plan.component';
 import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
+import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.component';
+import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
+import { SpadiTestComponent } from './components/omt.tests/spadi/spadi-test.component';
+import { DashTestComponent } from './components/omt.tests/dash/dash-test.component';
+import { MolbpTestComponent } from './components/omt.tests/spine/molbp/molbp-test.component';
+import { OlbpTestComponent } from './components/omt.tests/spine/olbp/olbp-test.component';
+import { NdiTestComponent } from './components/omt.tests/spine/ndi/ndi-test.component';
+import { LefsTestComponent } from './components/omt.tests/lower.extremity/lefs/lefs-test.component';
+import { FaamTestComponent } from './components/omt.tests/lower.extremity/faam/faam-test.component';
+import { HoosTestComponent } from './components/omt.tests/lower.extremity/hoos/hoos-test.component';
+import { KoosTestComponent } from './components/omt.tests/lower.extremity/koos/koos-test.component';
+import { BergTestComponent } from './components/omt.tests/balance/berg/berg-test.component';
+import { AbcTestComponent } from './components/omt.tests/balance/abc/abc-test.component';
+import { TinettiComponent } from './components/omt.tests/balance/tinetti/tinetti.component';
+import { FabTestComponent } from './components/omt.tests/balance/fab/fab-test.component';
+import { ShowOMTTestComponent } from './components/medical.note/components/objective/omt.test/show.omt.test/show-omttest.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -213,6 +229,22 @@ const APP_PATIENT_CHART_COMPONENTS = [
     FinalizeMedicalNoteComponent,
     DailyPlanComponent,
     DischargePlanComponent,
+    UeqdTestComponent,
+    UefiTestComponent,
+    SpadiTestComponent,
+    DashTestComponent,
+    MolbpTestComponent,
+    OlbpTestComponent,
+    NdiTestComponent,
+    LefsTestComponent,
+    FaamTestComponent,
+    HoosTestComponent,
+    KoosTestComponent,
+    BergTestComponent,
+    AbcTestComponent,
+    TinettiComponent,
+    FabTestComponent,
+    ShowOMTTestComponent,
   ],
   imports: [
     CommonModule,

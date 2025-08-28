@@ -82,6 +82,11 @@
         </c-row>
     </c-card-body>
 </c-card>
+<div class="button-container m-2">
+    <button cButton color="primary" variant="outline" size="sm" (click)="show()">
+        OMT Test
+    </button>
+</div>
 <!--Patient Record-->
 <c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
     <c-card-body>
@@ -189,8 +194,8 @@
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
         <!--Quick Discharge Note-->
         <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"
-            [patientName]="patientName" (backToRecord)="handleBackAction()" ></quick-discharge-note>
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id" [patientName]="patientName"
+            (backToRecord)="handleBackAction()"></quick-discharge-note>
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></full-discharge-note>
     </c-card>
@@ -227,5 +232,11 @@
         </c-input-group>
         <textarea cFormControl id="exampleFormControlTextarea1" rows="3"
             [value]="appointmentCancelNoShowReason?.comment"></textarea>
+    </c-modal-body>
+</c-modal>
+<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static" scrollable="true">
+    <c-modal-body>
+        <button (click)="toggleOMTVisibility()" cButtonClose style="float: right;"></button>
+        <spine-molbp-test></spine-molbp-test>
     </c-modal-body>
 </c-modal>

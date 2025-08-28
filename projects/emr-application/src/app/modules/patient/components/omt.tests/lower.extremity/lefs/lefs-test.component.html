@@ -1,0 +1,93 @@
+<!-- lefs.component.html -->
+<div class="container">
+    <div class="header">
+      <h2>Lower Extremity Functional Scale</h2>
+      
+      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+        [Instructions]
+      </a>
+      
+      <div *ngIf="showInstructions" class="instructions-panel">
+        <strong>LEFS Scoring:</strong>
+        <p>LEFS score = SUM (points for all 20 activities)</p>
+        
+        <strong>Interpretation:</strong>
+        <ul>
+          <li>Minimum score: 0</li>
+          <li>Maximum score: 80</li>
+          <li>The lower the score the greater the disability.</li>
+          <li>The Minimal Detectable Change (MDC) is 9 scale points.</li>
+          <li>The Minimal clinically Important Difference (MCID) is 9 scale points.</li>
+        </ul>
+        
+        <p>Percent of maximal function = (LEFS score) / 80 * 100</p>
+        
+        <strong>Performance:</strong>
+        <ul>
+          <li>The potential error at a given point in time was +/- 5.3 scale points.</li>
+          <li>Test-retest reliability was 0.94.</li>
+          <li>Construct reliability was determined by comparison with the SF-36.</li>
+        </ul>
+      </div>
+    </div>
+  
+    <form [formGroup]="lefsForm" (ngSubmit)="calculateScore()">
+      <!-- Patient Satisfaction Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Patient Satisfaction</strong>
+        </div>
+        
+        <div class="question">
+          <label>
+            <strong><span class="asterisk">*</span></strong>
+            1. Please rate your pain level with activity
+          </label>
+        </div>
+        
+        <div class="options-row">
+          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
+            {{level}} <input type="radio" formControlName="painLevel" [value]="level">
+          </label>
+        </div>
+        
+        <div class="scale-labels">
+          <span class="scale-start">NO PAIN</span>
+          <span class="scale-end">VERY SEVERE PAIN</span>
+        </div>
+        
+        <div *ngIf="lefsForm.get('painLevel')?.invalid && lefsForm.get('painLevel')?.touched" class="error-message">
+          Please select a pain level
+        </div>
+      </div>
+  
+      <!-- Activities Section -->
+      <div class="form-section">
+        <div class="section-header">
+          <strong>Today do you or would you have any difficulty at all with these activities?</strong>
+        </div>
+        
+        <!-- Activities 1-20 -->
+        <div *ngFor="let activity of activities; let i = index" class="question">
+          <strong>{{i + 1}}. {{activity}}</strong>
+          <select [formControlName]="'q' + (i + 1)" class="form-select">
+            <option *ngFor="let option of difficultyOptions" [value]="option.value">
+              {{option.text}}
+            </option>
+          </select>
+          <div *ngIf="lefsForm.get('activity' + (i + 1))?.invalid && lefsForm.get('activity' + (i + 1))?.touched" class="error-message">
+            Please select an answer
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Calculate Total</button>
+        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+        
+        <div *ngIf="lefsForm.invalid && lefsForm.touched" class="error-message completion-error">
+          Please select an answer for all questions.
+        </div>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,259 @@
+<!-- quick-dash.component.html -->
+<div class="container">
+  <div class="header">
+    <h2>Upper Extremity Quick DASH</h2>
+
+    <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
+      [Instructions]
+    </a>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <table>
+        <tr>
+          <td><strong>Upper Extremity Quick Dash</strong><br>
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td height="10"><br></td>
+        </tr>
+        <tr>
+          <td>
+            This questionnaire asks about your symptoms as well as your ability to perform certain activities.<br>
+            Please answer every question, based on your condition in the last week, by selecting the appropriate
+            option.<br>
+            If you did not have the opportunity to perform an activity in the past week, please make your best estimate
+            of which response would be the most accurate.<br>
+            It does not matter which hand or arm you use to perform the activity;
+            please answer based on your ability regardless of how you perform the task.
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <form [formGroup]="quickDashForm" (ngSubmit)="calculateScore()">
+    <!-- Patient Satisfaction Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <strong>Patient Satisfaction</strong>
+      </div>
+
+      <div class="question">
+        <label>
+          <strong><span class="asterisk">*</span></strong>
+          1. Please rate your pain level with activity
+        </label>
+      </div>
+
+      <div class="options-row">
+        <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
+          {{level}} <input type="radio" formControlName="painLevel" [value]="level">
+        </label>
+      </div>
+
+      <div class="scale-labels">
+        <span class="scale-start">NO PAIN</span>
+        <span class="scale-end">VERY SEVERE PAIN</span>
+      </div>
+
+      <div *ngIf="quickDashForm.get('painLevel')?.invalid && quickDashForm.get('painLevel')?.touched"
+        class="error-message">
+        Please select a pain level
+      </div>
+    </div>
+
+    <!-- Quick DASH Questions -->
+    <div class="form-section">
+      <div class="instruction">
+        Please rate your ability to do the following activities in the last week by selecting the appropriate response.
+      </div>
+
+      <!-- Question 1 -->
+      <div class="question">
+        <strong>Open a tight or new jar.</strong>
+        <select formControlName="q1" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3">Moderate Difficulty</option>
+          <option value="4" selected>Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q1')?.invalid && quickDashForm.get('q1')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <strong>Do heavy household chores (e.g., wash walls, floors).</strong>
+        <select formControlName="q2" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3" selected>Moderate Difficulty</option>
+          <option value="4">Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q2')?.invalid && quickDashForm.get('q2')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">
+        <strong>Carry a shopping bag or briefcase</strong>
+        <select formControlName="q3" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3">Moderate Difficulty</option>
+          <option value="4">Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q3')?.invalid && quickDashForm.get('q3')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">
+        <strong>Wash your back.</strong>
+        <select formControlName="q4" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3">Moderate Difficulty</option>
+          <option value="4">Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q4')?.invalid && quickDashForm.get('q4')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+      <!-- Question 5 -->
+      <div class="question">
+        <strong>Use a knife to cut food.</strong>
+        <select formControlName="q5" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3">Moderate Difficulty</option>
+          <option value="4">Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q5')?.invalid && quickDashForm.get('q5')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question">
+        <strong>Recreational activities in which you take some force or impact through your arm, shoulder or hand (e.g.,
+          golf, hammering, tennis, etc.).</strong>
+        <select formControlName="q6" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">No Difficulty</option>
+          <option value="2">Mild Difficulty</option>
+          <option value="3" >Moderate Difficulty</option>
+          <option value="4">Severe Difficulty</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q6')?.invalid && quickDashForm.get('q6')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+      <!-- Question 7 -->
+      <div class="question">
+        <strong>During the past week, to what extent has your arm, shoulder or hand problem interfered with your normal
+          social activities with family, friends, neighbours or groups?</strong>
+        <select formControlName="q7" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">Not At All</option>
+          <option value="2">Slightly</option>
+          <option value="3">Moderately</option>
+          <option value="4">Quite A Bit</option>
+          <option value="5" >Extremely</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q7')?.invalid && quickDashForm.get('q7')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question">
+        <strong>During the past week, were you limited in your work or other regular daily activities as a result of
+          your arm, shoulder or hand problem?</strong>
+        <select formControlName="q8" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">Not Limited At All</option>
+          <option value="2" >Slightly Limited</option>
+          <option value="3">Moderately Limited</option>
+          <option value="4">Very Limited</option>
+          <option value="5">Unable</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q8')?.invalid && quickDashForm.get('q8')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question">
+        <strong>Arm, shoulder or hand pain.</strong>
+        <select formControlName="q9" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">None</option>
+          <option value="2">Mild</option>
+          <option value="3">Moderate</option>
+          <option value="4" >Severe</option>
+          <option value="5">Extreme</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q9')?.invalid && quickDashForm.get('q9')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+      <!-- Question 10 -->
+      <div class="question">
+        <strong>Tingling (pins and needles) in your arm, shoulder or hand.</strong>
+        <select formControlName="q10" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">None</option>
+          <option value="2">Mild</option>
+          <option value="3" >Moderate</option>
+          <option value="4">Severe</option>
+          <option value="5">Extreme</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q10')?.invalid && quickDashForm.get('q10')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+      <!-- Question 11 -->
+      <div class="question">
+        <strong>During the past week, how much difficulty have you had sleeping because of the pain in your arm,
+          shoulder or hand?</strong>
+        <select formControlName="q11" class="form-select">
+          <option value="NT">Not Tested</option>
+          <option value="1">None</option>
+          <option value="2">Mild</option>
+          <option value="3">Moderate</option>
+          <option value="4">Severe</option>
+          <option value="5">So Much Difficulty That I Can't Sleep</option>
+        </select>
+        <div *ngIf="quickDashForm.get('q11')?.invalid && quickDashForm.get('q11')?.touched" class="error-message">
+          Please select an answer
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Calculate Total</button>
+      <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+
+      <div *ngIf="quickDashForm.invalid && quickDashForm.touched" class="error-message completion-error">
+        Please select an answer for all questions.
+      </div>
+    </div>
+  </form>
+</div>
