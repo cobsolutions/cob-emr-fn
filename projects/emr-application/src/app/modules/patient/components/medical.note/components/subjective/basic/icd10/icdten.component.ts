@@ -23,7 +23,7 @@ export class IcdtenComponent implements OnInit {
   filteredDiagnosis: any;
   problems: any;
   addCode() {
-    this.addedDiagnosis = [...this.addedDiagnosis, ...this.selectedDiagnosis];
+    this.addedDiagnosis = [...this.selectedDiagnosis];
     this.parentForm.get(this.parentFieldName).setValue(this.addedDiagnosis);
   }
 
@@ -54,11 +54,18 @@ export class IcdtenComponent implements OnInit {
         });
   }
   ngOnInit(): void {
-
     this.fillDiagnosisCode();
+    if (this.hierarchy === 'child') {
+      this.caseDiagnosisService.currentData$.subscribe(val => {
+        if (val) {
+          this.addedDiagnosis = val;
+        }
+      });
+    }
   }
   copyCodes() {
-
+    if (this.hierarchy === 'parent')
+      this.caseDiagnosisService.updateData(this.addedDiagnosis);
   }
   addICD10diagnosis(diagnosis: any) {
     this.selectedDiagnosis = this.transformListToObjects(diagnosis);

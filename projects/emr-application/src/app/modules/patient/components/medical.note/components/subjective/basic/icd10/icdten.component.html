@@ -34,9 +34,14 @@
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 10px;" *ngIf="hierarchy">
+            <div style="display: flex; justify-content: flex-end; margin-top: 10px;" *ngIf="hierarchy ==='parent'">
                 <button type="button" (click)="copyCodes()" class="add-goal-btn">
-                    📋 Copy Codes from Diagnosis
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24" class="icon icon-copy">
+                        <path
+                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
+                    </svg>
+                    Copy Codes from Diagnosis
                 </button>
             </div>
         </div>
