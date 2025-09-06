@@ -12,6 +12,26 @@ export const GaitTrainingStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; ",
+        "name": "4PointWalkerGaitTrainingPlan",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; ",
+        "name": "evenSurfacesGaitTrainingPlan",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; ",
+        "name": "quadCaneGaitTrainingPlan",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; ",
+        "name": "stairsGaitTrainingPlan",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; ",
         "name": "frontWheelWalkerGaitTrainingPlan",
         "style": "margin-left: 10px;"
     },

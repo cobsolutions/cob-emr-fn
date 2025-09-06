@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
@@ -10,7 +10,7 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class TinettiComponent implements OnInit {
   tinettiForm: FormGroup;
   showInstructions = false;
-
+  @Output() getResult = new EventEmitter<any>()
   // Balance test items
   balanceItems = [
     {
@@ -240,8 +240,8 @@ export class TinettiComponent implements OnInit {
     const result = this.fillAnswers()
 
     
-    this.omtTestService.balance(result).subscribe(rr => {
-      console.log(JSON.stringify(rr))
+    this.omtTestService.balance(result).subscribe(val => {
+      this.getResult.emit(val)
     })
   }
   private fillAnswers(){

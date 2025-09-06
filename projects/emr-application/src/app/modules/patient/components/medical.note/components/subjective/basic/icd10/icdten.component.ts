@@ -15,15 +15,15 @@ export class IcdtenComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
   @Output() emitChanges = new EventEmitter<{ code: string; description: string }[]>()
+  @Input() hierarchy: string
   diagnosisCtrl = new FormControl();
   isLoading = false;
   selectedDiagnosis: { code: string; description: string }[];
   addedDiagnosis: { code: string; description: string }[] = [];
   filteredDiagnosis: any;
   problems: any;
-
   addCode() {
-    this.addedDiagnosis = [...this.addedDiagnosis, ...this.selectedDiagnosis];
+    this.addedDiagnosis = [...this.selectedDiagnosis];
     this.parentForm.get(this.parentFieldName).setValue(this.addedDiagnosis);
   }
 
@@ -32,38 +32,15 @@ export class IcdtenComponent implements OnInit {
     this.parentForm.get(this.parentFieldName).setValue(this.addedDiagnosis);
   }
   constructor(private spinner: NgxSpinnerService, private caseDiagnosisService: CaseDiagnosisService) { }
-
-  ngOnInit(): void {
-    this.fillDiagnosisCode();
-    this.diagnosisCtrl.valueChanges
+  icdSearch() {
+    const icdVal = this.diagnosisCtrl.value
+    this.spinner.show();
+    this.caseDiagnosisService.find(icdVal)
       .pipe(
-        filter(text => {
-          if (text === undefined)
-            return false;
-          if (text.length > 1) {
-            return true
-          } else {
-            this.filteredDiagnosis = [];
-            return false;
-          }
+        finalize(() => {
+          this.isLoading = false
         }),
-        debounceTime(500),
-        tap((value) => {
-          this.filteredDiagnosis = [];
-          this.isLoading = true;
-        }),
-        switchMap((value) => {
-          this.spinner.show();
-          return this.caseDiagnosisService.find(value)
-            .pipe(
-              finalize(() => {
-                this.isLoading = false
-              }),
-            )
-        }
-        )
-      )
-      .subscribe(data => {
+      ).subscribe(data => {
         this.spinner.hide();
         if (data == undefined) {
           this.filteredDiagnosis = [];
@@ -76,7 +53,20 @@ export class IcdtenComponent implements OnInit {
           this.isLoading = false
         });
   }
-
+  ngOnInit(): void {
+    this.fillDiagnosisCode();
+    if (this.hierarchy === 'child') {
+      this.caseDiagnosisService.currentData$.subscribe(val => {
+        if (val) {
+          this.addedDiagnosis = val;
+        }
+      });
+    }
+  }
+  copyCodes() {
+    if (this.hierarchy === 'parent')
+      this.caseDiagnosisService.updateData(this.addedDiagnosis);
+  }
   addICD10diagnosis(diagnosis: any) {
     this.selectedDiagnosis = this.transformListToObjects(diagnosis);
   }

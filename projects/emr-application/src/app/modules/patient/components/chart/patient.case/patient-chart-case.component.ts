@@ -113,8 +113,17 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     let medicalNoteType: string;
     let caseId = this.case.id
 
-    if (val === 'Add Initial Examination')
+    if (val === 'Add Initial Examination') {
       medicalNoteType = "INITIAL_EVALUATION"
+      this.case.patientRecordActions = [
+        "Add Daily Note",
+        "Progress Note",
+        "Discharge",
+        "Quick Discharge",
+        "Case Note"
+      ]
+    }
+
     if (val === 'Add Daily Note')
       medicalNoteType = "DAILY_NOTE"
     if (val === 'Progress Note')

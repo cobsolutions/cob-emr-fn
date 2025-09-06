@@ -2,8 +2,8 @@
     <h4>Billing:</h4>
     <hr />
     <c-form-check class="mb-4">
-        <input cFormCheckInput id="dailyNoteIncluded" type="checkbox" formControlName="dailyNoteIncluded" size="sm" />
-        <label cFormCheckLabel for="na"> Include Daily Note with this Initial Examination
+        <input cFormCheckInput id="dailyNoteIncluded" type="checkbox" formControlName="dailyNoteIncluded" size="sm" checked />
+        <label cFormCheckLabel for="dailyNoteIncluded"> Include Daily Note with this Initial Examination
         </label>
     </c-form-check>
     <div *ngIf="this.billingForm.get('dailyNoteIncluded').value === true">

@@ -10,12 +10,16 @@ import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
   providedIn: 'root'
 })
 export class MedialNoteService {
-
+  private saveNote = new BehaviorSubject<any>(null);
+  saveNoteObservable$ = this.saveNote.asObservable();
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'
   public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
   constructor(private httpClient: HttpClient) { }
+  pingSaveData(ping: any) {
+    this.saveNote.next(ping);
+  }
   find(section: string, type?: string) {
     var url: string = this.baseUrl + "/find/section/" + section + "/type/" + type;
     return this.httpClient.get(url);

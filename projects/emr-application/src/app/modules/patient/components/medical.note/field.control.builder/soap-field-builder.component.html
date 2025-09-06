@@ -267,7 +267,7 @@
             [singleSections]="field.value.singleSections" [dualSections]="field.value.dualSections"></cutom-palpation>
     </div>
     <div *ngIf="field.type === 'icdten'">
-        <icdten [title]="field.display" [style]="filedStyle!.style" [parentForm]="form" [parentFieldName]="field.name">
+        <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style" [parentForm]="form" [parentFieldName]="field.name">
         </icdten>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
