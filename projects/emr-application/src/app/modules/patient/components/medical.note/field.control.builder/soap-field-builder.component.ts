@@ -23,7 +23,7 @@ export class SoapFieldBuilderComponent implements OnInit {
   private buildField(field: any) {
     this.form.addControl(field.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null));
     // fill Data
-    if ((this.data !== undefined && this.data !== null) && this.data[this.field.name] !== null)
+    if (!(this.data === null || this.data === undefined) && this.data[this.field.name] !== null)
       this.form.get(this.field.name).setValue(this.data[this.field.name])
     // render dependents of parent soap field  
     if (field.dependents !== undefined && field.dependents.length > 0) {
@@ -49,7 +49,7 @@ export class SoapFieldBuilderComponent implements OnInit {
       field.dependents.forEach(dependent => {
         dependent.render = true;
         this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
-        if (this.data !== undefined && this.data[dependent.name] !== null)
+        if (!(this.data === null || this.data === undefined)  && this.data[dependent.name] !== null)
           this.form.get(dependent.name).setValue(this.data[dependent.name])
       });
     } else {
