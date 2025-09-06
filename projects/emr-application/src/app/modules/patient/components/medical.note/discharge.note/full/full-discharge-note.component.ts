@@ -2,7 +2,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { filter, Observable } from 'rxjs';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
@@ -24,20 +24,24 @@ export class FullDischargeNoteComponent implements OnInit {
   noteCreator: string
   noteFinalizr: string
   type: MedicalNoteType = MedicalNoteType.Discharge_Note;
+  private destroy$ = new Subject<void>();
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$.subscribe(val => {
-      const finalizeRequest = val;
-      if (finalizeRequest !== null)
+    this.medialNoteService.saveNoteObservable$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(val => {
+      if (val !== null) {
+        const finalizeRequest = val;
         this.draftAction().subscribe(d => {
           this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
             this.backtoPatientRecordActions();
-          })
+          });
         });
-    })
+      }
+    });
     this.medialNoteService.noteType$.next('discharge')
     this.visitedSteps = [true, false, false, false, false]
     this.dischargeNoteForm = this.fb.group({
@@ -54,6 +58,10 @@ export class FullDischargeNoteComponent implements OnInit {
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
   soapActions(action: string) {
     if (action === 'back')

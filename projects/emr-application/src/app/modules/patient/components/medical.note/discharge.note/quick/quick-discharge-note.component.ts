@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { QuickDischargeRequest } from '../../../../models/medical.note/quick.discharge.request';
@@ -26,21 +26,29 @@ export class QuickDischargeNoteComponent implements OnInit {
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
   noteType: MedicalNoteType = MedicalNoteType.Quick_Discharge_Note
+  private destroy$ = new Subject<void>();
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
     , private toastr: ToastrService) { }
 
+    ngOnDestroy() {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$.subscribe(val => {
-      const finalizeRequest = val;
-      if (finalizeRequest !== null)
+    this.medialNoteService.saveNoteObservable$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(val => {
+      if (val !== null) {
+        const finalizeRequest = val;
         this.draftAction().subscribe(d => {
           this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
             this.backtoPatientRecordActions();
-          })
+          });
         });
-    })
+      }
+    });
     this.dischargeForm = this.fb.group({
       dischargeDate: [Validators.required],
       numberOfVisits: [0, [Validators.required, Validators.min(0)]],

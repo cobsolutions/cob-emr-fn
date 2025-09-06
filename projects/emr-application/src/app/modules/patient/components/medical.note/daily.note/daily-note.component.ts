@@ -1,7 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { filter, Observable } from 'rxjs';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
@@ -24,21 +24,24 @@ export class DailyNoteComponent implements OnInit {
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
   noteCreator: string
   noteFinalizr: string
+  private destroy$ = new Subject<void>();
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$.subscribe(val => {
-      const finalizeRequest = val;
-      if (finalizeRequest !== null)
+    this.medialNoteService.saveNoteObservable$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(val => {
+      if (val !== null) {
+        const finalizeRequest = val;
         this.draftAction().subscribe(d => {
           this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
             this.backtoPatientRecordActions();
-          })
+          });
         });
-
-    })
+      }
+    });
     this.medialNoteService.noteType$.next('daily')
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
@@ -54,6 +57,10 @@ export class DailyNoteComponent implements OnInit {
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
   soapActions(action: string) {
     if (action === 'back')
