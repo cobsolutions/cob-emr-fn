@@ -13,4 +13,9 @@ export class MedicalNoteSummaryService {
     var url: string = this.baseUrl + "/find/score/"+id
     return this.httpClient.get(url);
   }
+
+  findInitialExaminationPlanOfCare(id:number) {
+    var url: string = this.baseUrl + "/find/plan/"+id
+    return this.httpClient.get(url);
+  }
 }
