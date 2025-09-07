@@ -122,6 +122,7 @@ import { AbcTestComponent } from './components/omt.tests/balance/abc/abc-test.co
 import { TinettiComponent } from './components/omt.tests/balance/tinetti/tinetti.component';
 import { FabTestComponent } from './components/omt.tests/balance/fab/fab-test.component';
 import { ShowOMTTestComponent } from './components/medical.note/components/objective/omt.test/show.omt.test/show-omttest.component';
+import { InitialExaminationScoreSummaryComponent } from './components/medical.note/summary/initial.examination.score.summary/initial-examination-score-summary.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -245,6 +246,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TinettiComponent,
     FabTestComponent,
     ShowOMTTestComponent,
+    InitialExaminationScoreSummaryComponent,
   ],
   imports: [
     CommonModule,
