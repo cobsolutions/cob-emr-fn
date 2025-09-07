@@ -34,14 +34,14 @@ export class BillingComponent implements OnInit {
     { label: 'Anticipate Discharging Patient Next Visit', value: 'DN4' },
     { label: '(Type Below)', value: 'DNTB' },
   ]
-  authorizthedToFinalize: boolean = false
+  // authorizthedToFinalize: boolean = false
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
     , private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.isAuthorizthedToFinalize()
+    // this.isAuthorizthedToFinalize()
     this.medialNoteService.find('billing', this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
@@ -92,20 +92,20 @@ export class BillingComponent implements OnInit {
   setChildForm(section: string, formGroup: FormGroup) {
     this.billingForm.setControl(section, formGroup);
   }
-  isAuthorizthedToFinalize() {
-    const logged: string = this.loggedInService.getLoggedUser().uuid;
-    if (this.creator === logged && this.noteFinalizr === null)
-      this.authorizthedToFinalize = true;
-    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
-      this.authorizthedToFinalize = true;
-  }
+  // isAuthorizthedToFinalize() {
+  //   const logged: string = this.loggedInService.getLoggedUser().uuid;
+  //   if (this.creator === logged && this.noteFinalizr === null)
+  //     this.authorizthedToFinalize = true;
+  //   if (this.noteFinalizr !== null && this.noteFinalizr === logged)
+  //     this.authorizthedToFinalize = true;
+  // }
   toggleFrowardModal() {
     this.forwardVisibility = !this.forwardVisibility
   }
   changeVisibility(event: string) {
     if (event === 'close') {
       this.forwardVisibility = false;
-      this.authorizthedToFinalize = false
+      // this.authorizthedToFinalize = false
     }
   }
   finalize() {

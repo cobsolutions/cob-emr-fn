@@ -25,7 +25,7 @@ export class PlanComponent implements OnInit {
   @Input() planData: any
   @Input() noteId: number
   @Input() noteType: string
-  authorizthedToFinalize: boolean = false
+  // authorizthedToFinalize: boolean = false
   forwardVisibility: boolean = false;
   procedures = [
     { label: 'Therapeutic Exercises', value: 'therapeuticExercises' },
@@ -76,7 +76,7 @@ export class PlanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isAuthorizthedToFinalize()
+    // this.isAuthorizthedToFinalize()
     this.medialNoteService.find('plan', this.noteType).subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
@@ -116,20 +116,20 @@ export class PlanComponent implements OnInit {
   }
   finalize() {
   }
-  isAuthorizthedToFinalize() {
-    const logged: string = this.loggedInService.getLoggedUser().uuid;
-    if (this.creator === logged && this.noteFinalizr === null)
-      this.authorizthedToFinalize = true;
-    if (this.noteFinalizr !== null && this.noteFinalizr === logged)
-      this.authorizthedToFinalize = true;
-  }
+  // isAuthorizthedToFinalize() {
+  //   const logged: string = this.loggedInService.getLoggedUser().uuid;
+  //   if (this.creator === logged && this.noteFinalizr === null)
+  //     this.authorizthedToFinalize = true;
+  //   if (this.noteFinalizr !== null && this.noteFinalizr === logged)
+  //     this.authorizthedToFinalize = true;
+  // }
   toggleFrowardModal() {
     this.forwardVisibility = !this.forwardVisibility
   }
   changeVisibility(event: string) {
     if (event === 'close') {
       this.forwardVisibility = false;
-      this.authorizthedToFinalize = false
+      // this.authorizthedToFinalize = false
     }
   }
   private fillInitSection() {
