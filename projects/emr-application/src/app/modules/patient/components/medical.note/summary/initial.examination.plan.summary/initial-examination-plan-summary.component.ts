@@ -1,6 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MedicalNoteSummaryService } from '../../../../services/medical.note/summary/medical-note-summary.service';
-
+interface PlanData {
+  frequency: string;
+  duration: string;
+  plan: string;
+  physicianSignature: boolean;
+  createPlanOfCare: boolean;
+  procedures: Record<string, string[]>;
+  modalities: Record<string, string[]>;
+  specialties: Record<string, string[]>;
+  assessment: {
+    shortTermGoals: string[];
+    longTermGoals: string[];
+    problems: string[];
+    assessmentDiagnosis: string;
+    patientEducation: string;
+    rehabPotential: string;
+  };
+}
 @Component({
   selector: 'initial-examination-plan-summary',
   templateUrl: './initial-examination-plan-summary.component.html',
@@ -8,11 +25,11 @@ import { MedicalNoteSummaryService } from '../../../../services/medical.note/sum
 })
 export class InitialExaminationPlanSummaryComponent implements OnInit {
   @Input() id: number
-  planData: any
+  @Input() planData!: PlanData;
   constructor(private medicalNoteSummaryService: MedicalNoteSummaryService) { }
 
   ngOnInit(): void {
-    this.medicalNoteSummaryService.findInitialExaminationPlanOfCare(this.id).subscribe(data=>{
+    this.medicalNoteSummaryService.findInitialExaminationPlanOfCare(this.id).subscribe((data:any)=>{
       this.planData = data
     })
   }
