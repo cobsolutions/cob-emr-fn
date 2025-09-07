@@ -28,6 +28,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   treatingDoctor: string;
   referringDoctor: string;
   referringNPI: string;
+  recordActionEntityId:number;
+  recordActionStauts:string;
   @Input() case: PatientCase;
   @Input() patientId: number;
   @Input() patientName: string
@@ -179,6 +181,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     }
     if (val === 'View Pdf') {
       this.viewPDFVisibility = true;
+      this.recordActionEntityId = entityId
+      this.recordActionStauts = status
       console.log('entityId ' + entityId + ' status ' + status)
     }
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-initial-examination-score-summary',
+  selector: 'initial-examination-score-summary',
   templateUrl: './initial-examination-score-summary.component.html',
   styleUrls: ['./initial-examination-score-summary.component.css']
 })
