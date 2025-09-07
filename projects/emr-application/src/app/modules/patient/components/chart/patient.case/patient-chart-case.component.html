@@ -243,7 +243,7 @@
 <c-modal id="viewPDF" [visible]="viewPDFVisibility" size="lg" backdrop="static" scrollable="true">
     <c-modal-body>
         <button (click)="toggleviewPDFVisibility()" cButtonClose style="float: right;"></button>
-        <initial-examination-score-summary
-            *ngIf="recordActionStauts ==='Initial Examination Scores'"></initial-examination-score-summary>
+        <initial-examination-score-summary *ngIf="recordActionStauts ==='Initial Examination Scores'"
+            [id]="recordActionEntityId"></initial-examination-score-summary>
     </c-modal-body>
 </c-modal>
