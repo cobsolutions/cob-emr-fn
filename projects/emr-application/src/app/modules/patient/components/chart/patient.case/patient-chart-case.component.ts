@@ -80,7 +80,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   private getRecords() {
     const patientRecordRequest: PatientRecordRequest = {
       patientId: this.patientId,
-      caseId: this.case.id
+      caseId: this.case.id,
+      loggedIn : this.loggedInService.getLoggedUser().uuid
     }
     this.patientRecords$ = this.patientRecordService.find(this.apiParams$, patientRecordRequest).pipe(
       retry({
