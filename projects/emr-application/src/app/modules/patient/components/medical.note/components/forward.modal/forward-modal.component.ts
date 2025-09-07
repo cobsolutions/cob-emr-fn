@@ -40,7 +40,7 @@ export class ForwardModalComponent implements OnInit {
       }
     })
   }
-  onUserSelect() {
+  forward() {
     this.medialNoteService.forward(this.noteId, this.selectedUserUuid).subscribe(() => {
       this.changeVisibility.emit('close')
     })
