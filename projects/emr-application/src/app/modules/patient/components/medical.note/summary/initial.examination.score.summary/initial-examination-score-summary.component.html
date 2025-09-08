@@ -1,0 +1,21 @@
+<div class="header">
+    <h2>Initial Examination Score Summary</h2>
+</div>
+<!-- score.component.html -->
+<div class="score-container" *ngIf="scoreData?.length > 0">
+    <div class="score-card" *ngFor="let exam of scoreData">
+      <span class="exam-title">{{ exam.examName }}</span>
+  
+      <div class="score-values">
+        <span class="score-item" *ngFor="let s of exam.scoreValue">
+          {{ s.scoreName | titlecase }}: <strong>{{ s.scoreValue }}</strong>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="no-data" *ngIf="!scoreData || scoreData.length === 0">
+    No scores available.
+  </div>
+  
+  

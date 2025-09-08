@@ -1,0 +1,84 @@
+<div class="plan-summary" *ngIf="planData">
+    <!-- 1️⃣ Assessment first -->
+    <section class="info-section" *ngIf="planData.assessment">
+        <h3 class="sub-title">Assessment</h3>
+        <div *ngIf="planData.assessment.assessmentDiagnosis">
+            <h4>Diagnosis</h4>
+            <p>{{ planData.assessment.assessmentDiagnosis }}</p>
+        </div>
+
+        <div *ngIf="planData.assessment.patientEducation">
+            <h4>Patient Education</h4>
+            <p>{{ planData.assessment.patientEducation }}</p>
+        </div>
+
+        <div *ngIf="planData.assessment.rehabPotential">
+            <h4>Rehab Potential</h4>
+            <p>{{ planData.assessment.rehabPotential }}</p>
+        </div>
+
+        <div *ngIf="planData.assessment.problems?.length">
+            <h4>Problems</h4>
+            <ul>
+                <li *ngFor="let prob of planData.assessment.problems">{{ prob }}</li>
+            </ul>
+        </div>
+
+        <div *ngIf="planData.assessment.shortTermGoals?.length">
+            <h4>Short Term Goals</h4>
+            <ul>
+                <li *ngFor="let goal of planData.assessment.shortTermGoals">{{ goal }}</li>
+            </ul>
+        </div>
+
+        <div *ngIf="planData.assessment.longTermGoals?.length">
+            <h4>Long Term Goals</h4>
+            <ul>
+                <li *ngFor="let goal of planData.assessment.longTermGoals">{{ goal }}</li>
+            </ul>
+        </div>
+    </section>
+    <section class="info-section">
+        <h3 class="sub-title">Plan</h3>
+        <!-- 5️⃣ General Info -->
+        <span>
+            <h3 class="sub-title-plan">General Information</h3>
+            <p><strong>Frequency:</strong> {{ planData.frequency }}</p>
+            <p><strong>Duration:</strong> {{ planData.duration }}</p>
+            <p><strong>Plan:</strong> {{ planData.plan }}</p>
+            <p><strong>Physician Signature:</strong> {{ planData.physicianSignature ? 'Yes' : 'No' }}</p>
+            <p><strong>Create Plan of Care:</strong> {{ planData.createPlanOfCare ? 'Yes' : 'No' }}</p>
+        </span>
+        <!-- 2️⃣ Procedures -->
+        <span *ngIf="planData.procedures | keyvalue as procedures">
+            <h3 class="sub-title-plan">Procedures</h3>
+            <div *ngFor="let proc of procedures">
+                <p class="category-name">{{ proc.key }}</p>
+                <ul>
+                    <li *ngFor="let item of proc.value">{{ item }}</li>
+                </ul>
+            </div>
+        </span>
+        <!-- 3️⃣ Modalities -->
+        <span *ngIf="planData.modalities | keyvalue as modalities">
+            <h3 class="sub-title-plan">Modalities</h3>
+            <div *ngFor="let modality of modalities">
+                <p class="category-name">{{ modality.key }}</p>
+                <ul>
+                    <li *ngFor="let item of modality.value">{{ item }}</li>
+                </ul>
+            </div>
+        </span>
+
+        <!-- 4️⃣ Specialties -->
+        <span *ngIf="planData.specialties | keyvalue as specialties">
+            <h3 class="sub-title-plan">Specialties</h3>
+            <div *ngFor="let specialty of specialties">
+                <p class="category-name">{{ specialty.key }}</p>
+                <ul>
+                    <li *ngFor="let item of specialty.value">{{ item }}</li>
+                </ul>
+            </div>
+        </span>
+    </section>
+</div>

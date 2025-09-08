@@ -1,0 +1,50 @@
+.plan-summary {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.info-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.sub-title {
+    background-color: #005f99;
+    /* deep professional blue */
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.sub-title-plan {
+    
+    /* deep professional blue */
+    color: rgb(9, 1, 1);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    margin: 0 0 1rem 0;
+    font-size: 1.0rem;
+    font-weight: bold;
+}
+
+.category-name {
+    font-weight: bold;
+    margin-top: 0.75rem;
+    color: #444;
+}
+
+ul {
+    margin: 0.5rem 0 0 1.25rem;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.25rem;
+}

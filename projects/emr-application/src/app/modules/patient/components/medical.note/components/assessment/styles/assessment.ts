@@ -4,7 +4,7 @@ export const AssessmentStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "assessmentDiagnosisAssessment",
-        "style": "width:300px"
+        "style": "width:900px"
     },
     {
         "label_style": "margin-left:330px",
@@ -13,7 +13,7 @@ export const AssessmentStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "parentPatientEducationAssessment",
-        "style": "width:300px"
+        "style": "width:900px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",

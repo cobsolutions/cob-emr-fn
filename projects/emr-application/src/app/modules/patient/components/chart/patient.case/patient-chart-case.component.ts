@@ -28,6 +28,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   treatingDoctor: string;
   referringDoctor: string;
   referringNPI: string;
+  recordActionEntityId:number;
+  recordActionStauts:string;
   @Input() case: PatientCase;
   @Input() patientId: number;
   @Input() patientName: string
@@ -43,6 +45,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
+  viewPDFVisibility:boolean = false;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -58,6 +61,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   toggleOMTVisibility() {
     this.showTest = !this.showTest;
+  }
+  toggleviewPDFVisibility() {
+    this.viewPDFVisibility = !this.viewPDFVisibility;
   }
   show() {
     this.showTest = true;
@@ -81,7 +87,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     const patientRecordRequest: PatientRecordRequest = {
       patientId: this.patientId,
       caseId: this.case.id,
-      loggedIn : this.loggedInService.getLoggedUser().uuid
+      loggedIn: this.loggedInService.getLoggedUser().uuid
     }
     this.patientRecords$ = this.patientRecordService.find(this.apiParams$, patientRecordRequest).pipe(
       retry({
@@ -165,12 +171,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string) {
+    console.log(val)
     if (val === 'View Reason')
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
     if (val === 'Complete') {
       this.completeMedicalNote(entityId, status)
+    }
+    if (val === 'View Pdf') {
+      this.viewPDFVisibility = true;
+      this.recordActionEntityId = entityId
+      this.recordActionStauts = status
+      console.log('entityId ' + entityId + ' status ' + status)
     }
   }
   handleBackAction() {
