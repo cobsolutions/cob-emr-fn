@@ -1,0 +1,126 @@
+<div class="plan-summary" *ngIf="data">
+
+    <!-- Patient Info -->
+    <section class="info-section" *ngIf="data.patientData">
+      
+      <div class="patient-grid">
+        <div class="info-item">
+          <strong>Name:</strong> {{ data.patientData.patientName }}
+        </div>
+        <div class="info-item">
+          <strong>Date of Birth:</strong> {{ data.patientData.dob }}
+        </div>
+        <div class="info-item">
+          <strong>Insurance:</strong> {{ data.patientData.insuranceName }}
+        </div>
+        <div class="info-item">
+          <strong>Provider Number:</strong> {{ data.patientData.providerNumber }}
+        </div>
+      </div>
+    </section>
+  
+    <!-- Subjective -->
+    <section class="info-section" *ngIf="data.subjective">
+      <h3 class="sub-title">Subjective</h3>
+  
+      <h4 class="sub-title-plan">Basic Information</h4>
+      <p><strong>Visit Number:</strong> {{ data.subjective.basicInformation['Visit Number'] }}</p>
+      <p><strong>Primary Complaint:</strong> {{ data.subjective.basicInformation['Primary Concern/Chief Complaint'] }}</p>
+      <p><strong>Date of Initial Exam:</strong> {{ data.subjective.basicInformation['Date of Initial Examination'] }}</p>
+      <p><strong>Diagnosis:</strong></p>
+      <ul>
+        <li *ngFor="let diag of data.subjective.basicInformation.Diagnosis">
+          {{ diag.code }} - {{ diag.description }}
+        </li>
+      </ul>
+  
+      <h4 class="sub-title-plan">Pain</h4>
+      <div *ngIf="data.subjective.pain['Pain Scale']?.length">
+        <p><strong>Pain Scale:</strong></p>
+      
+        <div *ngFor="let ps of data.subjective.pain['Pain Scale']; let i = index" class="pain-scale-block">
+          <p><em></em></p>
+          <ul>
+            <li *ngIf="ps.current !== undefined">Current: {{ ps.current }}</li>
+            <li *ngIf="ps.best !== undefined">Best: {{ ps.best }}</li>
+            <li *ngIf="ps.worst !== undefined">Worst: {{ ps.worst }}</li>
+            <li *ngIf="ps.location">Location: {{ ps.location }}</li>
+            <li *ngIf="ps.description">Description: {{ ps.description }}</li>
+            <li *ngIf="ps.plan">Plan: {{ ps.plan }}</li>
+          </ul>
+        </div>
+      </div>
+      <p><strong>Pain Comment:</strong> {{ data.subjective.pain['Pain Comment'] }}</p>
+      <p><strong>Aggravating Factors:</strong></p>
+      <ul>
+        <li *ngFor="let factor of data.subjective.pain['Aggravating Factors']">{{ factor }}</li>
+      </ul>
+      <p><strong>Relieving Factors:</strong></p>
+      <ul>
+        <li *ngFor="let factor of data.subjective.pain['Relieving Factors']">{{ factor }}</li>
+      </ul>
+    </section>
+  
+    <!-- Objective -->
+    <section class="info-section" *ngIf="data.objective">
+      <h3 class="sub-title">Objective</h3>
+      <div *ngFor="let exam of data.objective.omtScores">
+        <p class="category-name">{{ exam.examName }}</p>
+        <ul>
+          <li *ngFor="let score of exam.scoreValue">
+            {{ score.scoreName }}: {{ score.scoreValue }}
+          </li>
+        </ul>
+      </div>
+    </section>
+  
+    <!-- Assessment -->
+    <section class="info-section" *ngIf="data.assessmentSummary">
+      <h3 class="sub-title">Assessment</h3>
+      <p><strong>Diagnosis:</strong> {{ data.assessmentSummary.assessmentDiagnosis }}</p>
+      <p><strong>Patient Education:</strong> {{ data.assessmentSummary.patientEducation }}</p>
+      <p><strong>Rehab Potential:</strong> {{ data.assessmentSummary.rehabPotential }}</p>
+  
+      <h4 class="sub-title-plan">Problems</h4>
+      <ul>
+        <li *ngFor="let prob of data.assessmentSummary.problems">{{ prob }}</li>
+      </ul>
+  
+      <h4 class="sub-title-plan">Short Term Goals</h4>
+      <ul>
+        <li *ngFor="let goal of data.assessmentSummary.shortTermGoals">{{ goal }}</li>
+      </ul>
+  
+      <h4 class="sub-title-plan">Long Term Goals</h4>
+      <ul>
+        <li *ngFor="let goal of data.assessmentSummary.longTermGoals">{{ goal }}</li>
+      </ul>
+    </section>
+  
+    <!-- Plan of Care -->
+    <section class="info-section" *ngIf="data.planOfCare">
+      <h3 class="sub-title">Plan of Care</h3>
+      <p><strong>Frequency:</strong> {{ data.planOfCare.frequency }}</p>
+      <p><strong>Duration:</strong> {{ data.planOfCare.duration }}</p>
+      <p><strong>Plan:</strong> {{ data.planOfCare.plan }}</p>
+      <p><strong>Physician Signature:</strong> {{ data.planOfCare.physicianSignature ? 'Yes' : 'No' }}</p>
+      <p><strong>Create Plan of Care:</strong> {{ data.planOfCare.createPlanOfCare ? 'Yes' : 'No' }}</p>
+  
+      <h4 class="sub-title-plan">Procedures</h4>
+      <div *ngFor="let proc of proceduresEntries">
+        <p class="category-name">{{ proc.key }}</p>
+        <ul>
+          <li *ngFor="let item of proc.values">{{ item }}</li>
+        </ul>
+      </div>
+  
+      <h4 class="sub-title-plan">Modalities</h4>
+      <div *ngFor="let modality of modalitiesEntries">
+        <p class="category-name">{{ modality.key }}</p>
+        <ul>
+          <li *ngFor="let item of modality.values">{{ item }}</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  

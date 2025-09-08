@@ -18,4 +18,8 @@ export class MedicalNoteSummaryService {
     var url: string = this.baseUrl + "/find/plan/"+id
     return this.httpClient.get(url);
   }
+  FindInitialExaminationSummary(id:number) {
+    var url: string = this.baseUrl + "/find/initial/examination/"+id
+    return this.httpClient.get(url);
+  }
 }
