@@ -149,3 +149,5 @@
 /emr/api/clinical/user/delete/uuid/:uuid http://161.97.126.192:8070/emr/api/clinical/user/delete/uuid/:uuid 200
 /emr/api/map/field/test/convert http://161.97.126.192:8070/emr/api/map/field/test/convert 200
 /emr/api/patient/check/chart/accessibility http://161.97.126.192:8070/emr/api/patient/check/chart/accessibility 200
+
+/*  /index.html   200
