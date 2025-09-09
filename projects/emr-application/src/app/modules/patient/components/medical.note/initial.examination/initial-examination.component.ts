@@ -38,17 +38,18 @@ export class InitialExaminationComponent implements OnInit {
   ngOnInit(): void {
 
     this.medialNoteService.saveNoteObservable$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(val => {
-      if (val !== null) {
-        const finalizeRequest = val;
-        this.draftAction().subscribe(d => {
-          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-            this.backtoPatientRecordActions();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(val => {
+        if (val !== null) {
+          const finalizeRequest = val;
+          this.draftAction().subscribe(d => {
+            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+              this.backtoPatientRecordActions();
+              this.medialNoteService.closeFinalize.next(true);
+            });
           });
-        });
-      }
-    });
+        }
+      });
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),

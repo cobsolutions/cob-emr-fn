@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { filter } from 'rxjs';
+
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
@@ -17,6 +19,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
   ngOnInit(): void {
+    this.medialNoteService.closeFinalize.pipe(
+      filter(sing => sing !== null)
+    ).subscribe(sing => {
+      if (sing)
+        this.changeVisibility.emit('yes')
+    })
   }
   onNo() {
     this.changeVisibility.emit('no')
@@ -29,7 +37,6 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       finalizedBy: this.loggedInService.getLoggedUser().uuid
     }
     this.medialNoteService.pingSaveData(request)
-    this.changeVisibility.emit('yes')
   }
 
 }
