@@ -1,1 +1,169 @@
-<p>dashboard works!</p>
+<!-- dashboard.component.html -->
+<div class="dashboard-root">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">EMR</div>
+        <div class="brand-text">
+          <h1>Clinic Panel</h1>
+          <p class="muted">Overview of your system at a glance</p>
+        </div>
+      </div>
+  
+      <div class="header-actions">
+        <button class="btn ghost">Export</button>
+        <button class="btn primary">New Report</button>
+      </div>
+    </header>
+  
+    <section class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-meta">Total Patients</div>
+        <div class="stat-value">1,240</div>
+        <div class="stat-foot">Updated 5 min ago</div>
+      </article>
+  
+      <article class="stat-card">
+        <div class="stat-meta">Appointments Today</div>
+        <div class="stat-value">35</div>
+        <div class="stat-foot">Next at 11:00</div>
+      </article>
+  
+      <article class="stat-card">
+        <div class="stat-meta">Revenue</div>
+        <div class="stat-value success">$12,400</div>
+        <div class="stat-foot">Monthly target: $20k</div>
+      </article>
+  
+      <article class="stat-card">
+        <div class="stat-meta">Pending Reports</div>
+        <div class="stat-value danger">8</div>
+        <div class="stat-foot">2 urgent</div>
+      </article>
+    </section>
+  
+    <section class="main-area">
+      <div class="panel trends-card">
+        <div class="panel-header">
+          <h3>Monthly Trends</h3>
+          <div class="panel-actions">Patients vs Appointments</div>
+        </div>
+  
+        <!-- SVG Line Chart (static visual) -->
+        <div class="chart-wrap">
+          <svg viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet" class="line-chart">
+            <!-- grid -->
+            <g class="grid">
+              <line x1="60" y1="20" x2="760" y2="20"></line>
+              <line x1="60" y1="60" x2="760" y2="60"></line>
+              <line x1="60" y1="100" x2="760" y2="100"></line>
+              <line x1="60" y1="140" x2="760" y2="140"></line>
+              <line x1="60" y1="180" x2="760" y2="180"></line>
+            </g>
+  
+            <!-- labels -->
+            <g class="labels">
+              <text x="60"  y="210">Jan</text>
+              <text x="170" y="210">Feb</text>
+              <text x="280" y="210">Mar</text>
+              <text x="390" y="210">Apr</text>
+              <text x="500" y="210">May</text>
+              <text x="610" y="210">Jun</text>
+              <text x="720" y="210">Jul</text>
+            </g>
+  
+            <!-- Patients area (blue, semi-transparent) -->
+            <path class="area patients-area" d="M60,160 L170,140 L280,120 L390,150 L500,100 L610,70 L720,40 L760,40 L760,200 L60,200 Z" />
+  
+            <!-- Patients line -->
+            <path class="line patients-line" d="M60,160 L170,140 L280,120 L390,150 L500,100 L610,70 L720,40" />
+  
+            <!-- Appointments area (green) -->
+            <path class="area appts-area" d="M60,180 L170,160 L280,140 L390,150 L500,120 L610,90 L720,70 L760,70 L760,200 L60,200 Z" />
+  
+            <!-- Appointments line -->
+            <path class="line appts-line" d="M60,180 L170,160 L280,140 L390,150 L500,120 L610,90 L720,70" />
+  
+            <!-- points (patients) -->
+            <g class="points patients-points">
+              <circle cx="60"  cy="160" r="3.5"></circle>
+              <circle cx="170" cy="140" r="3.5"></circle>
+              <circle cx="280" cy="120" r="3.5"></circle>
+              <circle cx="390" cy="150" r="3.5"></circle>
+              <circle cx="500" cy="100" r="3.5"></circle>
+              <circle cx="610" cy="70"  r="3.5"></circle>
+              <circle cx="720" cy="40"  r="3.5"></circle>
+            </g>
+  
+            <!-- points (appointments) -->
+            <g class="points appts-points">
+              <circle cx="60"  cy="180" r="3.5"></circle>
+              <circle cx="170" cy="160" r="3.5"></circle>
+              <circle cx="280" cy="140" r="3.5"></circle>
+              <circle cx="390" cy="150" r="3.5"></circle>
+              <circle cx="500" cy="120" r="3.5"></circle>
+              <circle cx="610" cy="90"  r="3.5"></circle>
+              <circle cx="720" cy="70"  r="3.5"></circle>
+            </g>
+          </svg>
+        </div>
+  
+        <div class="legend">
+          <span class="legend-item"><span class="swatch blue"></span>Patients</span>
+          <span class="legend-item"><span class="swatch green"></span>Appointments</span>
+        </div>
+      </div>
+  
+      <aside class="panel side-panel">
+        <div class="panel-header">
+          <h3>Revenue Breakdown</h3>
+          <div class="panel-actions">Last month</div>
+        </div>
+  
+        <!-- SVG Doughnut (static) -->
+        <div class="doughnut-wrap">
+          <svg viewBox="0 0 200 200" class="doughnut-chart" preserveAspectRatio="xMidYMid meet">
+            <!-- outer circle background -->
+            <circle cx="100" cy="100" r="80" class="donut-bg"></circle>
+  
+            <!-- segments (use stroke-dasharray to simulate parts) -->
+            <!-- Consultations 50% -->
+            <circle class="donut seg1" cx="100" cy="100" r="60" stroke-dasharray="188 188" stroke-dashoffset="0"></circle>
+            <!-- Therapy 28% -->
+            <circle class="donut seg2" cx="100" cy="100" r="60" stroke-dasharray="105 188" stroke-dashoffset="-188"></circle>
+            <!-- Medication 14% -->
+            <circle class="donut seg3" cx="100" cy="100" r="60" stroke-dasharray="26 188" stroke-dashoffset="-293"></circle>
+            <!-- Other 8% -->
+            <circle class="donut seg4" cx="100" cy="100" r="60" stroke-dasharray="15 188" stroke-dashoffset="-319"></circle>
+  
+            <!-- center label -->
+            <g class="donut-center">
+              <text x="100" y="96" text-anchor="middle" class="donut-total">$7.5k</text>
+              <text x="100" y="116" text-anchor="middle" class="donut-sub">Revenue</text>
+            </g>
+          </svg>
+  
+          <ul class="donut-legend">
+            <li><span class="swatch blue"></span>Consultations — 50%</li>
+            <li><span class="swatch green"></span>Therapy — 28%</li>
+            <li><span class="swatch gold"></span>Medication — 14%</li>
+            <li><span class="swatch red"></span>Other — 8%</li>
+          </ul>
+        </div>
+  
+        <div class="recent card-activity">
+          <h4>Recent Activity</h4>
+          <ul>
+            <li><span>New patient registered</span><time>2 min</time></li>
+            <li><span>Appointment confirmed</span><time>15 min</time></li>
+            <li><span>Lab report uploaded</span><time>1 hr</time></li>
+            <li><span>Invoice paid</span><time>3 hr</time></li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  
+    <footer class="footer">
+      <small>Dashboard preview • Static HTML/CSS • Replace with live data when ready</small>
+    </footer>
+  </div>
+  
