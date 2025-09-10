@@ -39,7 +39,7 @@
 /emr/api/medical/note/action/finalize http://161.97.126.192:8070/emr/api/medical/note/action/finalize 200
 /emr/api/medical/note/action/find/rom/name/:name http://161.97.126.192:8070/emr/api/medical/note/action/find/rom/name/:name 200
 /emr/api/tmp/convert http://161.97.126.192:8070/emr/api/tmp/convert 200
-/emr/api/patient/find/name/:name/clinic-id/{clinic-id} http://161.97.126.192:8070/emr/api/patient/find/name/:name/clinic-id/{clinic-id} 200
+/emr/api/patient/find/name/:name/clinic-id/:clinic-id http://161.97.126.192:8070/emr/api/patient/find/name/:name/clinic-id/:clinic-id 200
 /emr/api/appointment/update/cancel-noshow http://161.97.126.192:8070/emr/api/appointment/update/cancel-noshow 200
 /emr/api/soap/update/field-name/category/:categoryId http://161.97.126.192:8070/emr/api/soap/update/field-name/category/:categoryId 200
 /emr/api/omt/test/spadi http://161.97.126.192:8070/emr/api/omt/test/spadi 200
