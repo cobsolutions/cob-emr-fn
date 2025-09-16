@@ -236,8 +236,11 @@
                             <div class="btn-group force-group" role="group" aria-label="Row actions">
                                 <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
                                     <svg cIcon name="cilPen" aria-hidden="true"></svg>
-                                </button><!--
-                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                </button>
+                                <button type="button" class="btn btn-light btn-sm btn-auth" aria-label="auth" (click)="editAuth(case.id)">
+                                    <svg cIcon name="cilLockLocked" aria-hidden="true"></svg>
+                                </button>
+                                <button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
                                     <svg cIcon name="cilTrash" aria-hidden="true"></svg>
                                 </button>
                             </div>

@@ -13,6 +13,7 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
 })
 export class EditPatientComponent implements OnInit {
 
+
   patientId: number;
   patient: any
   constructor(private route: ActivatedRoute, private patientFinderService: PatientFinderService, private loggedInService: LoggedInService) { }
@@ -31,7 +32,9 @@ export class EditPatientComponent implements OnInit {
       })
   }
 
-
+  editAuth(caseId: number) {
+    console.log(caseId)
+  }
 
 
   deleteAddress(_t22: number) {
