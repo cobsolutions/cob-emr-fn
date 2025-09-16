@@ -11,42 +11,7 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
   styleUrls: ['./edit-patient.component.css']
 })
 export class EditPatientComponent implements OnInit {
-deleteAddress(_t22: number) {
-throw new Error('Method not implemented.');
-}
-addAddress() {
-throw new Error('Method not implemented.');
-}
-deleteContact(_t32: number) {
-throw new Error('Method not implemented.');
-}
-addContact() {
-throw new Error('Method not implemented.');
-}
-deleteIdentification(_t42: number) {
-throw new Error('Method not implemented.');
-}
-addIdentification() {
-throw new Error('Method not implemented.');
-}
-deleteInsurance(_t52: number) {
-throw new Error('Method not implemented.');
-}
-addInsurance() {
-throw new Error('Method not implemented.');
-}
-deleteCase(_t62: number) {
-throw new Error('Method not implemented.');
-}
-addCase() {
-throw new Error('Method not implemented.');
-}
-deleteClinic(_t72: number) {
-throw new Error('Method not implemented.');
-}
-addClinic() {
-throw new Error('Method not implemented.');
-}
+
   patientId: number;
   patient: any
   constructor(private route: ActivatedRoute, private patientFinderService: PatientFinderService, private loggedInService: LoggedInService) { }
@@ -60,8 +25,48 @@ throw new Error('Method not implemented.');
         switchMap((clinicId) => this.patientFinderService.getPatient(this.patientId, clinicId)))
       .subscribe((response: PateintResponse) => {
         this.patient = response.records
+        console.log(JSON.stringify(this.patient))
       }, error => {
       })
   }
 
+
+
+
+  deleteAddress(_t22: number) {
+    throw new Error('Method not implemented.');
+  }
+  addAddress() {
+    throw new Error('Method not implemented.');
+  }
+  deleteContact(_t32: number) {
+    throw new Error('Method not implemented.');
+  }
+  addContact() {
+    throw new Error('Method not implemented.');
+  }
+  deleteIdentification(_t42: number) {
+    throw new Error('Method not implemented.');
+  }
+  addIdentification() {
+    throw new Error('Method not implemented.');
+  }
+  deleteInsurance(_t52: number) {
+    throw new Error('Method not implemented.');
+  }
+  addInsurance() {
+    throw new Error('Method not implemented.');
+  }
+  deleteCase(_t62: number) {
+    throw new Error('Method not implemented.');
+  }
+  addCase() {
+    throw new Error('Method not implemented.');
+  }
+  deleteClinic(_t72: number) {
+    throw new Error('Method not implemented.');
+  }
+  addClinic() {
+    throw new Error('Method not implemented.');
+  }
 }

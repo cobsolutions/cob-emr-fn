@@ -193,5 +193,103 @@ table td:last-child {
   .btn-group.force-group > .btn:focus {
     z-index: 1; /* keep hovered button above neighbor when borders overlap */
   }
+  /* Full-width card wrapper */
+.card.full-width-card {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Card header */
+  .card.full-width-card .card-header {
+    background: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Nav tabs inside header */
+  .card.full-width-card .nav-tabs {
+    border-bottom: none;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link {
+    border: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link:hover {
+    color: #0d6efd;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link.active {
+    background: #fff;
+    border-bottom: 3px solid #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+  }
+  
+  /* Card body */
+  .card.full-width-card .card-body {
+    padding: 1.25rem;
+  }
+  
+  /* Section cards inside */
+  .section-card {
+    margin-bottom: 1.25rem;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .btn-add {
+    background: #0d6efd;
+    color: #fff;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: none;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .btn-add:hover {
+    background: #0b5ed7;
+  }
+  
+  /* Table styling */
+
+  
+  .btn-group .btn {
+    border-radius: 6px !important;
+  }
+  
+  .btn-edit svg {
+    fill: #0d6efd;
+  }
+  
+  .btn-delete svg {
+    fill: #dc3545;
+  }
+  
+  
   
   
