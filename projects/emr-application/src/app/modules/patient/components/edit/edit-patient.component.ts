@@ -27,7 +27,6 @@ export class EditPatientComponent implements OnInit {
         switchMap((clinicId) => this.patientFinderService.getPatient(this.patientId, clinicId)))
       .subscribe((response: PateintResponse) => {
         this.patient = response.records
-        console.log(JSON.stringify(this.patient))
       }, error => {
       })
   }
@@ -126,5 +125,10 @@ export class EditPatientComponent implements OnInit {
     return diagnoses
       .map(d => d.diagnosisCode.trim())
       .join(', ');
+  }
+  changeFacilityVisibility(event: any) {
+    console.log(event )
+    if (event === 'close')
+      this.editAuthVisibility = false;
   }
 }

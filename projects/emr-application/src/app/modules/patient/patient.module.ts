@@ -126,6 +126,7 @@ import { InitialExaminationScoreSummaryComponent } from './components/medical.no
 import { InitialExaminationPlanSummaryComponent } from './components/medical.note/summary/initial.examination.plan.summary/initial-examination-plan-summary.component';
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
 import { EditPatientComponent } from './components/edit/edit-patient.component';
+import { AuthorizationPatientCaseComponent } from './components/authorization/authorization-patient-case.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -253,6 +254,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     InitialExaminationPlanSummaryComponent,
     InitialExaminationSummaryComponent,
     EditPatientComponent,
+    AuthorizationPatientCaseComponent,
   ],
   imports: [
     CommonModule,

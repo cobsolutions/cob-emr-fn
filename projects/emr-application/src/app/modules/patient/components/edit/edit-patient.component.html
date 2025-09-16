@@ -290,11 +290,9 @@
     </div>
 </div>
 <c-modal id="editAuth" [visible]="editAuthVisibility" size="xl" backdrop="static">
-    <c-modal-header>
-        <h3 cModalTitle>Authorization</h3>
-        <button (click)="toggleEditAuth()" cButtonClose></button>
-    </c-modal-header>
     <c-modal-body>
-        <h1>Authorization {{selectedCase}}</h1>
+        <button (click)="toggleEditAuth()" cButtonClose style="float: right;"></button>
+        <authorization-patient-case *ngIf="editAuthVisibility"
+            (changeVisibility)="changeFacilityVisibility($event)"></authorization-patient-case>
     </c-modal-body>
 </c-modal>
