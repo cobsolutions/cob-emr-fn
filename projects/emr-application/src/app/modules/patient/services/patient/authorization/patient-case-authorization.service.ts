@@ -8,21 +8,21 @@ import { PatientCaseAuthorization } from '../../../models/patient.authorization/
   providedIn: 'root'
 })
 export class PatientCaseAuthorizationService {
-  private baseUrl = environment.baseURL + 'auths'; 
+  private baseUrl = environment.baseURL + 'auths';
   constructor(private http: HttpClient) { }
   /**
    * Save or update a list of authorizations.
    * - New items (id == null) will be created
    * - Existing items (id != null) will be updated
    */
-  saveOrUpdate(auths: PatientCaseAuthorization[]): Observable<PatientCaseAuthorization[]> {
-    return this.http.post<PatientCaseAuthorization[]>(this.baseUrl, auths);
+  saveOrUpdate(auths: PatientCaseAuthorization[], patientCaseId: number): Observable<PatientCaseAuthorization[]> {
+    return this.http.post<PatientCaseAuthorization[]>(this.baseUrl + "/case/" + patientCaseId, auths);
   }
 
   /**
    * Fetch all authorizations
    */
-  list(): Observable<PatientCaseAuthorization[]> {
-    return this.http.get<PatientCaseAuthorization[]>(this.baseUrl);
+  list(patientCaseId: number): Observable<PatientCaseAuthorization[]> {
+    return this.http.get<PatientCaseAuthorization[]>(this.baseUrl + "/case/" + patientCaseId);
   }
 }

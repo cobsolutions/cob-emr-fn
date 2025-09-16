@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { PatientCaseAuthorization } from '../../models/patient.authorization/patient.case.authorization';
@@ -10,7 +10,7 @@ import { PatientCaseAuthorizationService } from '../../services/patient/authoriz
   styleUrls: ['./authorization-patient-case.component.css']
 })
 export class AuthorizationPatientCaseComponent implements OnInit {
-
+  @Input() caseId:number
   authForm!: FormGroup;
   @Output() changeVisibility = new EventEmitter<string>()
   editingIndex: number | null = null;
@@ -31,7 +31,7 @@ export class AuthorizationPatientCaseComponent implements OnInit {
     this.loadAuths();
   }
   private loadAuths(): void {
-    this.authService.list().subscribe({
+    this.authService.list(this.caseId).subscribe({
       next: (data) => {
         // convert millis back to Date objects for the form
         this.authList = data.map(auth => ({
@@ -81,7 +81,7 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       effectiveEnd: this.toMillis(a.effectiveEnd)
     }));
     console.log(JSON.stringify(payload))
-    this.authService.saveOrUpdate(payload).subscribe({
+    this.authService.saveOrUpdate(payload,this.caseId).subscribe({
       next: (updatedList) => {
         // backend returns saved records including generated ids; normalize dates to ms
         this.authList = updatedList.map(a => ({

@@ -292,7 +292,7 @@
 <c-modal id="editAuth" [visible]="editAuthVisibility" size="xl" backdrop="static">
     <c-modal-body>
         <button (click)="toggleEditAuth()" cButtonClose style="float: right;"></button>
-        <authorization-patient-case *ngIf="editAuthVisibility"
+        <authorization-patient-case *ngIf="editAuthVisibility" [caseId]="selectedCase"
             (changeVisibility)="changeFacilityVisibility($event)"></authorization-patient-case>
     </c-modal-body>
 </c-modal>
