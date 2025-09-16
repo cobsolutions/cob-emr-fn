@@ -1,1 +1,242 @@
-<p>edit-patient works!</p>
+<div class="patient-edit-container">
+    <!-- Patient Basic Info (full width, edge-to-edge) -->
+    <div class="patient-header">
+        <h2>Patient Information</h2>
+        <div class="patient-basic-info">
+            <div class="info-item">
+                <label>Name</label>
+                <span>John Doe</span>
+            </div>
+            <div class="info-item">
+                <label>Status</label>
+                <span>Active</span>
+            </div>
+            <div class="info-item">
+                <label>Sex</label>
+                <span>Male</span>
+            </div>
+            <div class="info-item">
+                <label>Date of Birth</label>
+                <span>01/01/1980</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Address</h3>
+            <button class="btn-add">+ Add Address</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>123 Main St</td>
+                    <td>Cairo</td>
+                    <td>Egypt</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Contact Info</h3>
+            <button class="btn-add">+ Add Contact</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Phone</td>
+                    <td>+1 555 123456</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Identification -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Identification</h3>
+            <button class="btn-add">+ Add ID</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Passport</td>
+                    <td>123456</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Insurance -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Insurance</h3>
+            <button class="btn-add">+ Add Insurance</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Provider</th>
+                    <th>Policy</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Blue Cross</td>
+                    <td>BC12345</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Patient Case -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Patient Case</h3>
+            <button class="btn-add">+ Add Case</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Case ID</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>123</td>
+                    <td>Diabetes follow-up</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Clinic -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Clinic</h3>
+            <button class="btn-add">+ Add Clinic</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Clinic Name</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>City Hospital</td>
+                    <td>Downtown</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
