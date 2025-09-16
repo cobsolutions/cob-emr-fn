@@ -237,7 +237,8 @@
                                 <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
                                     <svg cIcon name="cilPen" aria-hidden="true"></svg>
                                 </button>
-                                <button type="button" class="btn btn-light btn-sm btn-auth" aria-label="auth" (click)="editAuth(case.id)">
+                                <button type="button" class="btn btn-light btn-sm btn-auth" aria-label="auth"
+                                    (click)="editAuth(case.id)">
                                     <svg cIcon name="cilLockLocked" aria-hidden="true"></svg>
                                 </button>
                                 <button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
@@ -288,3 +289,12 @@
         </table>
     </div>
 </div>
+<c-modal id="editAuth" [visible]="editAuthVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Authorization</h3>
+        <button (click)="toggleEditAuth()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <h1>Authorization {{selectedCase}}</h1>
+    </c-modal-body>
+</c-modal>

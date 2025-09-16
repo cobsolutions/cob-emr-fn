@@ -12,10 +12,10 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
   styleUrls: ['./edit-patient.component.css']
 })
 export class EditPatientComponent implements OnInit {
-
-
   patientId: number;
   patient: any
+  selectedCase: number;
+  editAuthVisibility: boolean = false
   constructor(private route: ActivatedRoute, private patientFinderService: PatientFinderService, private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
@@ -33,7 +33,11 @@ export class EditPatientComponent implements OnInit {
   }
 
   editAuth(caseId: number) {
-    console.log(caseId)
+    this.selectedCase = caseId
+    this.editAuthVisibility = true
+  }
+  toggleEditAuth() {
+    this.editAuthVisibility = !this.editAuthVisibility;
   }
 
 
