@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-patient',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-patient.component.css']
 })
 export class EditPatientComponent implements OnInit {
-
-  constructor() { }
+  patientId:number;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
+    console.log(this.patientId)
   }
 
 }
