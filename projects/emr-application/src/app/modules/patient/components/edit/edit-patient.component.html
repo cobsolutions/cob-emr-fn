@@ -41,17 +41,23 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Street</th>
+                                    <th>Type</th>
+                                    <th>Address One</th>
+                                    <th>Address Two</th>
                                     <th>City</th>
-                                    <th>Country</th>
+                                    <th>State</th>
+                                    <th>Postal</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>123 Main St</td>
-                                    <td>Cairo</td>
-                                    <td>Egypt</td>
+                                <tr *ngFor="let address of patient.addresses; index as i; ">
+                                    <td>{{address.addressType}}</td>
+                                    <td>{{address.firstAddress}}</td>
+                                    <td>{{address.secondAddress !== null?address.secondAddress:""}}</td>
+                                    <td>{{address.city}}</td>
+                                    <td>{{address.state}}</td>
+                                    <td>{{address.zipCode}}</td>
                                     <td>
                                         <div class="d-flex justify-content-end">
                                             <!-- force-group class applied to ensure no gap -->
@@ -84,15 +90,17 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Value</th>
+                                <th>PhoneType</th>
+                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Phone</td>
-                                <td>+1 555 123456</td>
+                            <tr *ngFor="let contact of patient.contacts; index as i; ">
+                                <td>{{replaceUnderscoreWithSpace(contact.phoneType)}}</td>
+                                <td>{{contact.phoneNumber}}</td>
+                                <td>{{contact.email}}</td>
                                 <td>
                                     <div class="d-flex justify-content-end">
                                         <!-- force-group class applied to ensure no gap -->
@@ -124,14 +132,18 @@
                         <thead>
                             <tr>
                                 <th>Type</th>
-                                <th>Number</th>
+                                <th>ID #</th>
+                                <th>Effective Date</th>
+                                <th>Expiration Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Passport</td>
-                                <td>123456</td>
+                                <td>{{patient.idType}}</td>
+                                <td>{{patient.patientId}}</td>
+                                <td>{{patient.effectiveFromDate | date:'MM/dd/yyyy'}}</td>
+                                <td>{{patient.effectiveToDate | date:'MM/dd/yyyy'}}</td>
                                 <td>
                                     <div class="d-flex justify-content-end">
                                         <!-- force-group class applied to ensure no gap -->
@@ -163,15 +175,19 @@
         <table>
             <thead>
                 <tr>
-                    <th>Provider</th>
-                    <th>Policy</th>
+                    <th>Insurance</th>
+                    <th>Address</th>
+                    <th>Subscriber ID</th>
+                    <th>Effective Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Blue Cross</td>
-                    <td>BC12345</td>
+                <tr *ngFor="let insurance of patient.patientInsuranceModels; index as i; ">
+                    <td>{{insurance.insuranceCompany.name}}</td>
+                    <td>{{formatAmericanAddress(insurance.insuranceCompany.addresses[0])}}</td>
+                    <td>{{insurance.insuranceNumber}}</td>
+                    <td>{{insurance.expirationDate | date:'MM/dd/yyyy'}}</td>
                     <td>
                         <div class="d-flex justify-content-end">
                             <!-- force-group class applied to ensure no gap -->
@@ -199,15 +215,21 @@
         <table>
             <thead>
                 <tr>
-                    <th>Case ID</th>
-                    <th>Description</th>
+                    <th>ICD Codes</th>
+                    <th>Cause</th>
+                    <th>Physician</th>
+                    <th>Therapist</th>
+                    <th>Insurance</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>123</td>
-                    <td>Diabetes follow-up</td>
+                <tr *ngFor="let case of patient.cases; index as i; ">
+                    <td>{{formatDiagnosisList(case.caseDiagnosis)}}</td>
+                    <td>{{case.title}}</td>
+                    <td>{{case.referralCase.referringPartyName}}</td>
+                    <td>{{case.therapist}}</td>
+                    <td></td> <!-- Insurance-->
                     <td>
                         <div class="d-flex justify-content-end">
                             <!-- force-group class applied to ensure no gap -->
@@ -235,15 +257,15 @@
         <table>
             <thead>
                 <tr>
-                    <th>Clinic Name</th>
-                    <th>Location</th>
+                    <th>Name</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>City Hospital</td>
-                    <td>Downtown</td>
+                <tr *ngFor="let clinic of patient.clinicsId; index as i; ">
+                    <td>
+                        {{clinic}} <!-- Add clinic Name-->
+                    </td>
                     <td>
                         <div class="d-flex justify-content-end">
                             <!-- force-group class applied to ensure no gap -->
@@ -258,6 +280,7 @@
                         </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap, tap } from 'rxjs';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
+import { CaseDiagnosis } from '../../models/case/case.diagnosis';
 import { PateintResponse } from '../../models/response/patient.response';
 import { PatientFinderService } from '../../services/patient/patient-finder.service';
 
@@ -68,5 +69,55 @@ export class EditPatientComponent implements OnInit {
   }
   addClinic() {
     throw new Error('Method not implemented.');
+  }
+  replaceUnderscoreWithSpace(input: string): string {
+    if (!input) {
+      return input;
+    }
+    return input.includes("_") ? input.replace(/_/g, " ") : input;
+  }
+  formatAmericanAddress(address: any): string {
+    if (!address) return '';
+
+    const parts: string[] = [];
+
+    // Line 1: First + Second Address
+    if (address.firstAddress) {
+      parts.push(address.firstAddress.trim());
+    }
+    if (address.secondAddress) {
+      parts.push(address.secondAddress.trim());
+    }
+
+    // Line 2: City + State + Zip
+    const cityStateZip: string[] = [];
+    if (address.city) {
+      cityStateZip.push(address.city.trim());
+    }
+    if (address.state) {
+      cityStateZip.push(address.state.trim());
+    }
+    if (address.zipCode) {
+      cityStateZip.push(address.zipCode.trim());
+    }
+    if (cityStateZip.length > 0) {
+      parts.push(cityStateZip.join(', '));
+    }
+
+    // Line 3: Country (optional, usually omitted for US domestic)
+    if (address.country && address.country.toLowerCase() !== 'united states of america') {
+      parts.push(address.country.trim());
+    }
+
+    return parts.join('\n');
+  }
+  formatDiagnosisList(diagnoses: CaseDiagnosis[]): string {
+    if (!diagnoses || diagnoses.length === 0) {
+      return '';
+    }
+
+    return diagnoses
+      .map(d => d.diagnosisCode.trim())
+      .join(', ');
   }
 }
