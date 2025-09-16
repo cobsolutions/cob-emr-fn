@@ -125,6 +125,7 @@ import { ShowOMTTestComponent } from './components/medical.note/components/objec
 import { InitialExaminationScoreSummaryComponent } from './components/medical.note/summary/initial.examination.score.summary/initial-examination-score-summary.component';
 import { InitialExaminationPlanSummaryComponent } from './components/medical.note/summary/initial.examination.plan.summary/initial-examination-plan-summary.component';
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
+import { EditPatientComponent } from './components/edit/edit-patient.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -251,6 +252,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     InitialExaminationScoreSummaryComponent,
     InitialExaminationPlanSummaryComponent,
     InitialExaminationSummaryComponent,
+    EditPatientComponent,
   ],
   imports: [
     CommonModule,
