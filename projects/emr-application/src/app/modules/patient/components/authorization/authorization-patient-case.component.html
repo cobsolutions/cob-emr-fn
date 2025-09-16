@@ -1,4 +1,4 @@
-<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="authForm" (ngSubmit)="onAdd()">
   <div class="card p-3">
     <h5 class="card-title">Authorization</h5>
     
@@ -42,8 +42,43 @@
     </div>
 
     <div class="d-flex justify-content-end mt-4">
-      <button type="submit" class="btn btn-primary me-2">Save</button>
-      <button type="button" class="btn btn-secondary" (click)="onCancel()">Close</button>
+      <button type="submit" class="btn btn-primary me-2">Add</button>
     </div>
   </div>
 </form>
+<!-- Auth List Table (inline, no title or buttons) -->
+<div class="auth-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Auth Type</th>
+        <th>Auth Number</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let auth of authList; let i = index">
+        <td>{{ auth.authType }}</td>
+        <td>{{ auth.authNumber }}</td>
+        <td>{{ auth.effectiveStart | date:'shortDate' }}</td>
+        <td>{{ auth.effectiveEnd | date:'shortDate' }}</td>
+        <td class="text-right">
+          <div class="btn-group no-gap">
+            <button class="btn btn-sm btn-light btn-edit" (click)="onEditAuth(auth, i)">
+              <svg cIcon name="cilPen"></svg>
+            </button>
+            <button class="btn btn-sm btn-light btn-delete" (click)="onRemoveAuth(i)">
+              <svg cIcon name="cilTrash"></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-end mt-4">
+  <button type="submit" class="btn btn-primary me-2" (click)="onSave()">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Close</button>
+</div>

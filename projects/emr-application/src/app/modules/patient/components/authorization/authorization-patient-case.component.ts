@@ -7,8 +7,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./authorization-patient-case.component.css']
 })
 export class AuthorizationPatientCaseComponent implements OnInit {
+
   authForm!: FormGroup;
-  @Output()  changeVisibility = new EventEmitter<string>()
+  @Output() changeVisibility = new EventEmitter<string>()
+  editingIndex: number | null = null;
+  authList = [
+    {
+      authName: 'Test',
+      authType: 'visit',
+      authNumber: 30,
+      effectiveStart: new Date('2025-09-01'),
+      effectiveEnd: new Date('2025-09-20'),
+      insurance: { name: 'Axa', id: 393 }
+    }
+  ];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -21,17 +33,39 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       insuranceCase: [{ value: 'Axa', disabled: true }]
     });
   }
-  onSubmit(): void {
+ 
+  onAdd(): void {
     if (this.authForm.valid) {
-      console.log('Auth Data:', this.authForm.getRawValue());
-      this.changeVisibility.emit('close');
+      const newAuth = this.authForm.getRawValue();
+  
+      if (this.editingIndex !== null) {
+        // Update existing
+        this.authList[this.editingIndex] = newAuth;
+        this.editingIndex = null;
+      } else {
+        // Add new
+        this.authList.push(newAuth);
+      }
+  
+      this.authForm.reset();
     } else {
       this.authForm.markAllAsTouched();
     }
   }
-
+  onSave(): void {
+    this.authForm.reset();
+    this.changeVisibility.emit('close');
+  }
   onCancel(): void {
     this.authForm.reset();
     this.changeVisibility.emit('close');
+  }
+  onEditAuth(auth: any, index: number): void {
+    this.authForm.patchValue(auth);
+    this.editingIndex = index;
+  }
+  
+  onRemoveAuth(index: number): void {
+    this.authList.splice(index, 1);
   }
 }
