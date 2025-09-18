@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import * as moment from 'moment';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -161,7 +162,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       }
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
-
+    medicalNoteRequest.dateOfService =  moment().endOf('day').valueOf();
     this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
       this.medicalNoteId = medicalNoteId;
       this.errorMessage = undefined
