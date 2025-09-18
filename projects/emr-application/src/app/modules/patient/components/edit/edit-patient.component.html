@@ -228,8 +228,8 @@
                     <td>{{formatDiagnosisList(case.caseDiagnosis)}}</td>
                     <td>{{case.title}}</td>
                     <td>{{case.referralCase.referringPartyName}}</td>
-                    <td>{{case.therapist}}</td>
-                    <td></td> <!-- Insurance-->
+                    <td>{{case.treatingDoctor.lastName +',' + case.treatingDoctor.firstName}}</td>
+                    <td> {{case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName}}</td> <!-- Insurance-->
                     <td>
                         <div class="d-flex justify-content-end">
                             <!-- force-group class applied to ensure no gap -->
