@@ -78,11 +78,14 @@
                 <select cFormControl cSelect class="mb-2" sizing="sm" id="primaryInsurance" name="primaryInsurance"
                     required
                     [ngClass]="{'is-invalid': primaryInsurance.invalid && (primaryInsurance.dirty || primaryInsurance.touched)}"
-                    [(ngModel)]="case.caseInsuranceInformation.primaryInsurance" #primaryInsurance="ngModel">
+                    [(ngModel)]="selectedPrimaryPatientInsurance" #primaryInsurance="ngModel">
                     <option [ngValue]="null" disabled selected>Select Primary Insurance</option>
+                    <option *ngFor="let insurance of pateint.patientInsuranceModels" [ngValue]="insurance">
+                        {{insurance.insuranceCompany?.name}}
+                    </option>
                 </select>
 
-                <small *ngIf="secondaryInsurance.invalid && (secondaryInsurance.dirty || secondaryInsurance.touched)"
+                <!-- <small *ngIf="secondaryInsurance.invalid && (secondaryInsurance.dirty || secondaryInsurance.touched)"
                     class="form-text text-danger">
                     Secondary Insurance is required
                 </small>
@@ -91,7 +94,7 @@
                     [ngClass]="{'is-invalid': secondaryInsurance.invalid && (secondaryInsurance.dirty || secondaryInsurance.touched)}"
                     [(ngModel)]="case.caseInsuranceInformation.secondaryInsurance" #secondaryInsurance="ngModel">
                     <option [ngValue]="null" disabled selected>Select Primary Insurance</option>
-                </select>
+                </select> -->
             </span>
         </c-card-body>
     </c-card>
@@ -203,8 +206,8 @@
             <h6 cCardTitle>
                 <strong>Assigned Therapist</strong>
             </h6>
-            <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="case.therapist" name="therapist">
-                <option *ngFor="let therapist of therapists" [value]="therapist.id">
+            <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="selectedTherapist" name="therapist">
+                <option *ngFor="let therapist of therapists" [ngValue]="therapist.id">
                     {{therapist.lastName +',' +therapist.firstName}}
                 </option>
             </select>

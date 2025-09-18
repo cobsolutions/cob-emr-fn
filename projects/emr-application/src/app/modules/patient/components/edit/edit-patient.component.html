@@ -1,0 +1,298 @@
+<div class="patient-edit-container" *ngIf="patient">
+    <!-- Patient Basic Info (full width, edge-to-edge) -->
+    <div class="patient-header">
+        <h2>Patient Information</h2>
+        <div class="patient-basic-info">
+            <div class="info-item">
+                <label style="font-size: large;">Name</label>
+                <span>{{patient.lastName}} , {{patient.firstName}}</span>
+            </div>
+            <div class="info-item">
+                <label style="font-size: large;">Status</label>
+                <span>Active</span>
+            </div>
+            <div class="info-item">
+                <label style="font-size: large;">Sex</label>
+                <span>{{patient.gender}}</span>
+            </div>
+            <div class="info-item">
+                <label style="font-size: large;">Date of Birth</label>
+                <span>{{patient.birthDate | date:'MM/dd/yyyy'}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="card full-width-card">
+        <div class="card-header">
+            <c-nav variant="tabs">
+                <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Address</a>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>Contact</a>
+                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Identifications</a>
+            </c-nav>
+        </div>
+        <c-tab-content #tabContent="cTabContent">
+            <c-tab-pane class="p-3">
+                <!-- Address -->
+                <div class="tab-pane fade show active" id="address" role="tabpanel">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Address</h3>
+                            <button class="btn-add">+ Add Address</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Address One</th>
+                                    <th>Address Two</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Postal</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let address of patient.addresses; index as i; ">
+                                    <td>{{address.addressType}}</td>
+                                    <td>{{address.firstAddress}}</td>
+                                    <td>{{address.secondAddress !== null?address.secondAddress:""}}</td>
+                                    <td>{{address.city}}</td>
+                                    <td>{{address.state}}</td>
+                                    <td>{{address.zipCode}}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-end">
+                                            <!-- force-group class applied to ensure no gap -->
+                                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                                <button type="button" class="btn btn-light btn-sm btn-edit"
+                                                    aria-label="Edit">
+                                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                                </button><!--
+                                     --><button type="button" class="btn btn-light btn-sm btn-delete"
+                                                    aria-label="Delete">
+                                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </c-tab-pane>
+            <c-tab-pane class="p-3">
+
+                <!-- Contact Info -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3>Contact Info</h3>
+                        <button class="btn-add">+ Add Contact</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PhoneType</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contact of patient.contacts; index as i; ">
+                                <td>{{replaceUnderscoreWithSpace(contact.phoneType)}}</td>
+                                <td>{{contact.phoneNumber}}</td>
+                                <td>{{contact.email}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <!-- force-group class applied to ensure no gap -->
+                                        <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                            <button type="button" class="btn btn-light btn-sm btn-edit"
+                                                aria-label="Edit">
+                                                <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                            </button><!--
+                             --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                                <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </c-tab-pane>
+            <c-tab-pane class="p-3">
+                <!--Identification-->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h3>Identification</h3>
+                        <button class="btn-add">+ Add ID</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>ID #</th>
+                                <th>Effective Date</th>
+                                <th>Expiration Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{patient.idType}}</td>
+                                <td>{{patient.patientId}}</td>
+                                <td>{{patient.effectiveFromDate | date:'MM/dd/yyyy'}}</td>
+                                <td>{{patient.effectiveToDate | date:'MM/dd/yyyy'}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <!-- force-group class applied to ensure no gap -->
+                                        <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                            <button type="button" class="btn btn-light btn-sm btn-edit"
+                                                aria-label="Edit">
+                                                <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                            </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                                <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </c-tab-pane>
+        </c-tab-content>
+    </div>
+
+    <!-- Insurance -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Insurance</h3>
+            <button class="btn-add">+ Add Insurance</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Insurance</th>
+                    <th>Address</th>
+                    <th>Subscriber ID</th>
+                    <th>Effective Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let insurance of patient.patientInsuranceModels; index as i; ">
+                    <td>{{insurance.insuranceCompany.name}}</td>
+                    <td>{{formatAmericanAddress(insurance.insuranceCompany.addresses[0])}}</td>
+                    <td>{{insurance.insuranceNumber}}</td>
+                    <td>{{insurance.expirationDate | date:'MM/dd/yyyy'}}</td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Patient Case -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Patient Case</h3>
+            <button class="btn-add">+ Add Case</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ICD Codes</th>
+                    <th>Cause</th>
+                    <th>Physician</th>
+                    <th>Therapist</th>
+                    <th>Insurance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let case of patient.cases; index as i; ">
+                    <td>{{formatDiagnosisList(case.caseDiagnosis)}}</td>
+                    <td>{{case.title}}</td>
+                    <td>{{case.referralCase.referringPartyName}}</td>
+                    <td>{{case.treatingDoctor.lastName +',' + case.treatingDoctor.firstName}}</td>
+                    <td> {{case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName}}</td> <!-- Insurance-->
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button>
+                                <button type="button" class="btn btn-light btn-sm btn-auth" aria-label="auth"
+                                    (click)="editAuth(case)">
+                                    <svg cIcon name="cilLockLocked" aria-hidden="true"></svg>
+                                </button>
+                                <button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Clinic -->
+    <div class="section-card">
+        <div class="section-header">
+            <h3>Clinic</h3>
+            <button class="btn-add">+ Add Clinic</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clinic of patient.clinicsId; index as i; ">
+                    <td>
+                        {{clinic}} <!-- Add clinic Name-->
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <!-- force-group class applied to ensure no gap -->
+                            <div class="btn-group force-group" role="group" aria-label="Row actions">
+                                <button type="button" class="btn btn-light btn-sm btn-edit" aria-label="Edit">
+                                    <svg cIcon name="cilPen" aria-hidden="true"></svg>
+                                </button><!--
+                         --><button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
+                                    <svg cIcon name="cilTrash" aria-hidden="true"></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<c-modal id="editAuth" [visible]="editAuthVisibility" size="xl" backdrop="static">
+    <c-modal-body>
+        <button (click)="toggleEditAuth()" cButtonClose style="float: right;"></button>
+        <authorization-patient-case *ngIf="editAuthVisibility" [patientCase]="selectedCase"
+            (changeVisibility)="changeFacilityVisibility($event)"></authorization-patient-case>
+    </c-modal-body>
+</c-modal>

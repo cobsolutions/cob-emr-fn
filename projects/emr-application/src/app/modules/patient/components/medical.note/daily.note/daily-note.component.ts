@@ -1,6 +1,7 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
@@ -31,17 +32,17 @@ export class DailyNoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.medialNoteService.saveNoteObservable$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(val => {
-      if (val !== null) {
-        const finalizeRequest = val;
-        this.draftAction().subscribe(d => {
-          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-            this.backtoPatientRecordActions();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(val => {
+        if (val !== null) {
+          const finalizeRequest = val;
+          this.draftAction().subscribe(d => {
+            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+              this.backtoPatientRecordActions();
+            });
           });
-        });
-      }
-    });
+        }
+      });
     this.medialNoteService.noteType$.next('daily')
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
@@ -81,6 +82,7 @@ export class DailyNoteComponent implements OnInit {
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
     }
+    medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateofdailynote).endOf('day').valueOf();
     return medicalNoteRequest;
   }
   draft() {

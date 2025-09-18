@@ -11,7 +11,9 @@
         <c-col xs="12">
             <c-card class="mb-4">
                 <c-card-header>
-                    <strong>Patient Information</strong>
+
+                    <a [routerLink]="['/emr/patient/edit/patientId', patientId]"><strong>Patient
+                            Information</strong></a>
                 </c-card-header>
                 <c-card-body>
                     <div style="float: left;" *ngIf="patientChartInfo.gender !== 'Female'">
