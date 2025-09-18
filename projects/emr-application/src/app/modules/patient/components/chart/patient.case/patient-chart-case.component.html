@@ -59,7 +59,7 @@
                 </c-row>
             </c-col>
             <div class="card shadow-sm border-0 mb-3"
-                [ngClass]="isExpired ? 'border-danger bg-light' : 'border-success'">
+                [ngClass]="isExpired ? 'border-danger bg-light' : 'border-success'" *ngIf="case.authorizationData">
                 <div class="card-body d-flex align-items-center" *ngIf="case.authorizationData">
                     <!-- Label -->
                     <div class="me-3">
@@ -97,6 +97,15 @@
           : 'bi bi-check-circle-fill text-success fs-3'">
                         </i>
                     </div>
+                </div>
+            </div>
+            <div class="card shadow-sm border-0 mb-3" *ngIf="case.authorizationData ===null">
+                <div class="me-3">
+                    <label [sm]="3" cCol cLabel="col">
+                        <strong>
+                            <p style="color:red">Authorization is not set.</p>
+                        </strong>
+                    </label>
                 </div>
             </div>
 
