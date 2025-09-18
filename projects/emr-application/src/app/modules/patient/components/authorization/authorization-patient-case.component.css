@@ -1,0 +1,188 @@
+/* ---------- Auth Form: Healthcare identity (softer background) ---------- */
+
+/* Container / card */
+.auth-card, .card.p-3 {
+  width: 100%;
+  background: #f8fcfd;               /* light healthcare tint */
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 16px rgba(0, 86, 110, 0.08);
+  border: 1px solid #cfe9f2;
+  box-sizing: border-box;
+}
+
+/* Title */
+.auth-card .card-title,
+.auth-card .auth-title {
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #005066;                     /* deep teal */
+  border-bottom: 2px solid #d6eef4;   /* softer divider */
+  padding-bottom: 0.5rem;
+  background: #eef8fa;                /* subtle header tint */
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #004d66;
+  font-size: 0.95rem;
+}
+
+/* Inputs & selects */
+.form-control,
+.form-select {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #b6dce8;
+  padding: 0.5rem 0.75rem;
+  height: 40px;
+  font-size: 0.95rem;
+  color: #103243;
+  background-color: #ffffff;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Disabled / readonly look */
+.form-control[disabled],
+.form-control[readonly],
+.form-select[disabled] {
+  background-color: #f1f8fa;
+  color: #6b7f88;
+  opacity: 1;
+}
+
+/* Focus */
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #0090a0; /* brighter accent */
+  box-shadow: 0 0 0 0.18rem rgba(0,144,160,0.15);
+}
+
+/* Row spacing helpers */
+.row.g-3 {
+  --bs-gutter-x: 1rem;
+  --bs-gutter-y: .75rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #1e88e5;;
+  border-color: #0090a0;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.48rem 1.1rem;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #1e88e5;
+  border-color: #007a8a;
+  box-shadow: 0 6px 18px rgba(0,122,138,0.15);
+}
+
+.btn-outline-secondary {
+  background: #f1f8fa;
+  border: 1px solid #b6dce8;
+  color: #004d66;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+}
+
+/* Validation states */
+.is-invalid {
+  border-color: #e76b6b !important;
+  background-color: #fff5f5;
+  box-shadow: 0 0 0 0.12rem rgba(231,107,107,0.12);
+}
+
+.invalid-feedback {
+  display: block;
+  color: #c92a2a;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+/* Action button group */
+.btn-group.force-group {
+  display: inline-flex !important;
+  gap: 0 !important;
+  align-items: center;
+}
+
+.btn-group.force-group > button {
+  margin: 0 !important;
+  padding: 0.35rem 0.5rem !important;
+  border-radius: 0 !important;
+  border-right: 1px solid rgba(16,50,67,0.08);
+  background: #eef8fa;
+  color: #103243;
+}
+
+.btn-group.force-group > button:last-child {
+  border-right: none;
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+}
+
+.btn-group.force-group > button:first-child {
+  border-top-left-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+}
+
+/* SVG icons */
+.btn-group.force-group svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+  .row.g-3 > [class*="col-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+/* Embedded Auth List Table */
+.auth-list {
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fdfdfd;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.auth-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+.auth-list th, 
+.auth-list td {
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-list th {
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #34495e;
+}
+
+.auth-list tr:last-child td {
+  border-bottom: none;
+}
+
+.auth-list tr:hover td {
+  background: #f9fafb;
+}

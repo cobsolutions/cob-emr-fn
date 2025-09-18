@@ -1,0 +1,304 @@
+.patient-edit-container {
+    margin: 0;
+    /* remove side margins */
+    padding: 1.5rem;
+    /* keep padding for spacing */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    width: 100%;
+    /* full width container */
+    box-sizing: border-box;
+}
+
+/* Patient Basic Info */
+.patient-header {
+    width: 100%;
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+    color: white;
+    padding: 1.8rem;
+    border-radius: 0;
+    /* edge-to-edge */
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.patient-header h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.patient-basic-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.info-item label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/* Section Cards */
+.section-card {
+    background: #ffffff;
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    /* makes table scrollable if too wide */
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-card h3 {
+    margin: 0;
+    color: #1565c0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Table */
+table {
+    width: 100%;
+    /* full width inside card */
+    min-width: 600px;
+    /* ensures structure on smaller devices */
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+}
+
+table th {
+    background-color: #f5f9ff;
+    color: #1565c0;
+    font-weight: 600;
+}
+
+table th:last-child,
+table td:last-child {
+    text-align: right;
+    /* align content to the right */
+}
+
+/* Buttons */
+.btn-add {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-add:hover {
+    background-color: #1976d2;
+}
+
+.btn-edit {
+    background-color: #64b5f6;
+    color: white;
+    border: none;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 0.4rem;
+}
+
+.btn-edit:hover {
+    background-color: #1e88e5;
+}
+
+.btn-delete {
+    background-color: #ef5350;
+    color: white;
+    border: none;
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+.btn-auth {
+  background-color: #26c650;
+  color: white;
+  border: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-delete:hover {
+    background-color: #c62828;
+}
+/* Ensure the group uses flex and no gap */
+.btn-group.force-group {
+    display: inline-flex !important;
+    gap: 0 !important;           /* no gap between children */
+    align-items: center;
+  }
+  
+  /* Remove any margins and force consistent sizing */
+  .btn-group.force-group > .btn,
+  .btn-group.force-group > button {
+    margin: 0 !important;
+    padding: 0.35rem 0.55rem !important; /* adjust to taste */
+    border-radius: 0 !important;         /* make edges connect */
+    line-height: 1;
+  }
+  
+  /* Collapse the shared border so the buttons look attached */
+  .btn-group.force-group > .btn + .btn,
+  .btn-group.force-group > button + button {
+    margin-left: -1px !important; /* collapse border-gap; tweak if needed */
+  }
+  
+  /* Rounded corners only on outer edges */
+  .btn-group.force-group > .btn:first-child,
+  .btn-group.force-group > button:first-child {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+  }
+  
+  .btn-group.force-group > .btn:last-child,
+  .btn-group.force-group > button:last-child {
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+  }
+  
+  /* Make SVG icons sit cleanly (no extra inline spacing) */
+  .btn-group.force-group svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Optional: smaller visual separation on hover/focus */
+  .btn-group.force-group > .btn:hover,
+  .btn-group.force-group > .btn:focus {
+    z-index: 1; /* keep hovered button above neighbor when borders overlap */
+  }
+  /* Full-width card wrapper */
+.card.full-width-card {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Card header */
+  .card.full-width-card .card-header {
+    background: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Nav tabs inside header */
+  .card.full-width-card .nav-tabs {
+    border-bottom: none;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link {
+    border: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link:hover {
+    color: #0d6efd;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link.active {
+    background: #fff;
+    border-bottom: 3px solid #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+  }
+  
+  /* Card body */
+  .card.full-width-card .card-body {
+    padding: 1.25rem;
+  }
+  
+  /* Section cards inside */
+  .section-card {
+    margin-bottom: 1.25rem;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .section-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .btn-add {
+    background: #0d6efd;
+    color: #fff;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: none;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .btn-add:hover {
+    background: #0b5ed7;
+  }
+  
+  /* Table styling */
+
+  
+  .btn-group .btn {
+    border-radius: 6px !important;
+  }
+  
+  .btn-edit svg {
+    fill: #0d6efd;
+  }
+  
+  .btn-delete svg {
+    fill: #dc3545;
+  }
+  
+  
+  
+  

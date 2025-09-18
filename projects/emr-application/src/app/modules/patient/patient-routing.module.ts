@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientChartComponent } from './components/chart/patient-chart.component';
 import { CreatePatientComponent } from './components/create/create-patient.component';
+import { EditPatientComponent } from './components/edit/edit-patient.component';
 import { ListPatientComponent } from './components/list/list-patient.component';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
     data: {
       title: 'patient',
     },
-    children:[
+    children: [
       {
         path: 'list',
         component: ListPatientComponent,
@@ -30,6 +31,13 @@ const routes: Routes = [
         component: PatientChartComponent,
         data: {
           title: 'chart',
+        },
+      },
+      {
+        path: 'edit/patientId/:patientId',
+        component: EditPatientComponent,
+        data: {
+          title: 'edit',
         },
       },
     ]

@@ -1,0 +1,101 @@
+<ngx-spinner></ngx-spinner>
+
+<form [formGroup]="authForm" (ngSubmit)="onAdd()">
+  <div class="card p-3">
+
+    <h5 class="card-title">Authorization</h5>
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+      <span><strong>Insurance:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.insuranceCompanyName
+        }}</span>
+      <span><strong>Insurance ID:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.insuranceIdNumber
+        }}</span>
+      <span><strong>Insurance Group:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.groupNumber
+        }}</span>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Authorization #</label>
+      <input type="text" class="form-control" formControlName="authName">
+      <div *ngIf="authForm.get('authName')?.touched && authForm.get('authName')?.invalid" class="invalid-feedback">
+        Authorization # is required.
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label">Effective Start</label>
+        <input type="date" class="form-control" formControlName="effectiveStart">
+        <div *ngIf="authForm.get('effectiveStart')?.touched && authForm.get('effectiveStart')?.invalid"
+          class="invalid-feedback">
+          effectiveStart is required.
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label">Effective End</label>
+        <input type="date" class="form-control" formControlName="effectiveEnd">
+        <div *ngIf="authForm.get('effectiveEnd')?.touched && authForm.get('effectiveEnd')?.invalid"
+          class="invalid-feedback">
+          control is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label for="authType" class="form-label">Authorization Type</label>
+      <input class="form-control" formControlName="authType" readonly>
+      <!-- <div *ngIf="authForm.get('authType')?.touched && authForm.get('authType')?.invalid" class="invalid-feedback">
+        Auth Type is required.
+      </div> -->
+    </div>
+
+    <div class="mt-3">
+      <label class="form-label">Number Authorized</label>
+      <input type="number" class="form-control" formControlName="authNumber">
+      <div *ngIf="authForm.get('authNumber')?.touched && authForm.get('authNumber')?.invalid"
+        class="invalid-feedback">
+        Number Authorization is required.
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <button type="submit" class="btn btn-primary me-2">
+        {{ editingIndex !== null ? 'Update' : 'Add' }}
+      </button>
+    </div>
+  </div>
+</form>
+<!-- Auth List Table (inline, no title or buttons) -->
+<div class="auth-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Auth Type</th>
+        <th>Auth Number</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let auth of authList; let i = index">
+        <td>{{ auth.authType }}</td>
+        <td>{{ auth.authNumber }}</td>
+        <td>{{ auth.effectiveStart | date:'MM/dd/yyyy' }}</td>
+        <td>{{ auth.effectiveEnd | date:'MM/dd/yyyy' }}</td>
+        <td class="text-right">
+          <div class="btn-group no-gap">
+            <button class="btn btn-sm btn-light btn-edit" (click)="onEditAuth(auth, i)">
+              <svg cIcon name="cilPen"></svg>
+            </button>
+            <button class="btn btn-sm btn-light btn-delete" (click)="onRemoveAuth(i)">
+              <svg cIcon name="cilTrash"></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-end mt-4">
+  <button type="submit" class="btn btn-primary me-2" (click)="onSave()">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Close</button>
+</div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { PatientName } from 'projects/emr-application/src/app/util/name.util';
+import * as moment from 'moment';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
@@ -24,12 +24,12 @@ import { PatientRecordService } from '../../../services/patient/record/patient-r
   styleUrls: ['./patient-chart-case.component.css']
 })
 export class PatientChartCaseComponent extends ListTemplate implements OnInit {
-
+  isExpired: boolean = false;
   treatingDoctor: string;
   referringDoctor: string;
   referringNPI: string;
-  recordActionEntityId:number;
-  recordActionStauts:string;
+  recordActionEntityId: number;
+  recordActionStauts: string;
   @Input() case: PatientCase;
   @Input() patientId: number;
   @Input() patientName: string
@@ -45,7 +45,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
-  viewPDFVisibility:boolean = false;
+  viewPDFVisibility: boolean = false;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -55,9 +55,17 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   ngOnInit(): void {
     this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
-    this.gettreatingDoctorFullName();
+
     this.getReferringCaseData();
     this.getRecords();
+    this.checkAuthExpiration()
+  }
+  checkAuthExpiration() {
+    if (this.case.authorizationData !== null) {
+      const today = new Date();
+      const endDate = new Date(this.case.authorizationData.effectiveEndtDate);
+      this.isExpired = endDate < today;
+    }
   }
   toggleOMTVisibility() {
     this.showTest = !this.showTest;
@@ -71,12 +79,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   toggleReasonVisibility(data: any) {
     this.reasonVisibility = !this.reasonVisibility;
   }
-  gettreatingDoctorFullName() {
-    var fName: string = this.case.treatingDoctor?.firstName === undefined ? '' : this.case.treatingDoctor?.firstName;
-    var mName: string = this.case.treatingDoctor?.middleName === undefined ? '' : this.case.treatingDoctor?.middleName;
-    var lName: string = this.case.treatingDoctor?.lastName === undefined ? '' : this.case.treatingDoctor?.lastName;
-    this.treatingDoctor = PatientName.formatName(fName, mName, lName)
-  }
+
 
   getReferringCaseData() {
     this.referringDoctor = this.case.referralCase.referringPartyName === null ? '' : this.case.referralCase.referringPartyName;
@@ -161,7 +164,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       }
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
-
+    medicalNoteRequest.dateOfService = moment().endOf('day').valueOf();
     this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
       this.medicalNoteId = medicalNoteId;
       this.errorMessage = undefined

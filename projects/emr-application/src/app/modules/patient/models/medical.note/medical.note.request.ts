@@ -11,5 +11,6 @@ export interface MedicalNoteRequest {
     assessment?: any
     planOfCare?: any
     billing?: any
+    dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
 }

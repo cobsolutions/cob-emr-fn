@@ -90,6 +90,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Insurance #</th>
+            <th scope="col">Insurance Name</th>
             <th scope="col">Group #</th>
             <th scope="col">Payment Type</th>
             <th scope="col">Payment Value</th>
@@ -100,6 +101,7 @@
         <tr *ngFor="let pateintInsurance of patient.patientInsuranceModels;let i=index;">
             <td>{{i+1}}</td>
             <td>{{pateintInsurance.insuranceNumber}}</td>
+            <td>{{pateintInsurance.insuranceCompany?.name}}</td>
             <td>{{pateintInsurance.groupNumber}}</td>
             <td>{{pateintInsurance.paymentType}}</td>
             <td>{{pateintInsurance.paymentValue}}</td>

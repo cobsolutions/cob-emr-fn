@@ -21,7 +21,7 @@ import {
   PatientBasicInfoComponent, PatientCaseInfoComponent, PatientClinicInfoComponent, PatientContactInfoComponent,
   PatientEmergencyInfoComponent, PatientIdInfoComponent, PatientInsuranceInfoComponent
 } from './components/create';
-import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule } from '@coreui/angular-pro';
+import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule, SpinnerModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
@@ -125,6 +125,8 @@ import { ShowOMTTestComponent } from './components/medical.note/components/objec
 import { InitialExaminationScoreSummaryComponent } from './components/medical.note/summary/initial.examination.score.summary/initial-examination-score-summary.component';
 import { InitialExaminationPlanSummaryComponent } from './components/medical.note/summary/initial.examination.plan.summary/initial-examination-plan-summary.component';
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
+import { EditPatientComponent } from './components/edit/edit-patient.component';
+import { AuthorizationPatientCaseComponent } from './components/authorization/authorization-patient-case.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -251,6 +253,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     InitialExaminationScoreSummaryComponent,
     InitialExaminationPlanSummaryComponent,
     InitialExaminationSummaryComponent,
+    EditPatientComponent,
+    AuthorizationPatientCaseComponent,
   ],
   imports: [
     CommonModule,
@@ -267,6 +271,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TableModule,
     CalloutModule ,
     MatTooltipModule,
+    SpinnerModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]
