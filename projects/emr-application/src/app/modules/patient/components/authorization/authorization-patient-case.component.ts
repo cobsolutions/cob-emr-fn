@@ -36,8 +36,8 @@ export class AuthorizationPatientCaseComponent implements OnInit {
         // convert millis back to Date objects for the form
         this.authList = data.map(auth => ({
           ...auth,
-          effectiveStart: this.toMillis(auth.effectiveStart),
-          effectiveEnd: this.toMillis(auth.effectiveEnd)
+          effectiveStart: moment(auth.effectiveStart).endOf('day').valueOf(),
+          effectiveEnd: moment(auth.effectiveEnd).endOf('day').valueOf()
         }));
       },
       error: (err) => console.error('Failed to load auths', err)
@@ -52,8 +52,8 @@ export class AuthorizationPatientCaseComponent implements OnInit {
         authName: raw.authName,
         authType: raw.authType,
         authNumber: raw.authNumber,
-        effectiveStart: this.toMillis(raw.effectiveStart),
-        effectiveEnd: this.toMillis(raw.effectiveEnd),
+        effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(), 
+        effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(), 
         insuranceName: raw.insuranceName,
         insuranceId: raw.insuranceId
       };
@@ -77,8 +77,8 @@ export class AuthorizationPatientCaseComponent implements OnInit {
     // Normalize dates and ensure id fields are present (or null)
     const payload = this.authList.map(a => ({
       ...a,
-      effectiveStart: this.toMillis(a.effectiveStart),
-      effectiveEnd: this.toMillis(a.effectiveEnd)
+      effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
+      effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
     }));
     console.log(JSON.stringify(payload))
     this.authService.saveOrUpdate(payload,this.caseId).subscribe({
@@ -86,8 +86,8 @@ export class AuthorizationPatientCaseComponent implements OnInit {
         // backend returns saved records including generated ids; normalize dates to ms
         this.authList = updatedList.map(a => ({
           ...a,
-          effectiveStart: this.toMillis(a.effectiveStart),
-          effectiveEnd: this.toMillis(a.effectiveEnd)
+          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(), 
+          effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
         }));
 
         // reset UI state
@@ -124,8 +124,5 @@ export class AuthorizationPatientCaseComponent implements OnInit {
   onRemoveAuth(index: number): void {
     this.authList.splice(index, 1);
   }
-  private toMillis(value: any): number {
-    if (!value) return 0;
-    return Number(moment(value).format('x')) ?? 0;
-  }
+ 
 }
