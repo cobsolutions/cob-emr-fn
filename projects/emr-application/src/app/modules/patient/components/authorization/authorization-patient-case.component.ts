@@ -55,8 +55,8 @@ export class AuthorizationPatientCaseComponent implements OnInit {
         authNumber: raw.authNumber,
         effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(),
         effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(),
-        insuranceName: this.patientCase.caseInsuranceInformation.primaryInsurance.insuranceCompanyName,
-        insuranceId: Number(this.patientCase.caseInsuranceInformation.primaryInsurance.insuranceIdNumber)
+        insuranceName: this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName,
+        insuranceId: Number(this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber)
       };
 
       if (this.editingIndex !== null) {
