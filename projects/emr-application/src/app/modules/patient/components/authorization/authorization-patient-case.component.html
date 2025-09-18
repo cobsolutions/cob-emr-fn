@@ -5,11 +5,11 @@
 
     <h5 class="card-title">Authorization</h5>
     <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
-      <span><strong>Insurance:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.insuranceCompanyName
+      <span><strong>Insurance:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName
         }}</span>
-      <span><strong>Insurance ID:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.insuranceIdNumber
+      <span><strong>Insurance ID:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber
         }}</span>
-      <span><strong>Insurance Group:</strong> {{ patientCase.caseInsuranceInformation.primaryInsurance.groupNumber
+      <span><strong>Insurance Group:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.groupNumber
         }}</span>
     </div>
     <div class="mb-3">
