@@ -5,6 +5,7 @@ import { TreatingDoctor } from "./case.treating.doctor";
 import { ReferralCase } from "./case.referral";
 import { PlaceOfService } from "../../../common/models/enums/place.service";
 import { InjuryCase } from "../../../common/models/enums/injury.case";
+import { PatientCaseAuthorizationData } from "./patient.case.authorization.data";
 
 export interface PatientCase {
     id?: number| null;
@@ -19,4 +20,5 @@ export interface PatientCase {
     therapistUUID?:string;
     caseOtherInformation?: CaseOtherInformation;
     patientRecordActions?:string[]
+    authorizationData?:PatientCaseAuthorizationData;
 }

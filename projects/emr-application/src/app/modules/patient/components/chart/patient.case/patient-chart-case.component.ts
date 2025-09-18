@@ -25,12 +25,12 @@ import { PatientRecordService } from '../../../services/patient/record/patient-r
   styleUrls: ['./patient-chart-case.component.css']
 })
 export class PatientChartCaseComponent extends ListTemplate implements OnInit {
-
+  isExpired: boolean = false;
   treatingDoctor: string;
   referringDoctor: string;
   referringNPI: string;
-  recordActionEntityId:number;
-  recordActionStauts:string;
+  recordActionEntityId: number;
+  recordActionStauts: string;
   @Input() case: PatientCase;
   @Input() patientId: number;
   @Input() patientName: string
@@ -46,7 +46,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
-  viewPDFVisibility:boolean = false;
+  viewPDFVisibility: boolean = false;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -59,6 +59,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.gettreatingDoctorFullName();
     this.getReferringCaseData();
     this.getRecords();
+    this.checkAuthExpiration()
+  }
+  checkAuthExpiration() {
+    const today = new Date();
+    const endDate = new Date(this.case.authorizationData.effectiveEndtDate);
+    this.isExpired = endDate < today;
   }
   toggleOMTVisibility() {
     this.showTest = !this.showTest;
@@ -162,7 +168,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       }
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
-    medicalNoteRequest.dateOfService =  moment().endOf('day').valueOf();
+    medicalNoteRequest.dateOfService = moment().endOf('day').valueOf();
     this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
       this.medicalNoteId = medicalNoteId;
       this.errorMessage = undefined

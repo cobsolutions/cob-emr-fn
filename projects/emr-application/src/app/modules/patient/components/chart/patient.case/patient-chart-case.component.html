@@ -1,4 +1,5 @@
 <ngx-spinner></ngx-spinner>
+
 <c-card class="mb-3 ustify-content-center">
     <c-card-body>
         <!-- <c-row class="g-3">
@@ -57,9 +58,51 @@
                     </c-col>
                 </c-row>
             </c-col>
-            <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
-                <strong>Authorization</strong>
-            </label>
+            <div 
+  class="card shadow-sm border-0 mb-3"
+  [ngClass]="isExpired ? 'border-danger bg-light' : 'border-success'"
+>
+  <div class="card-body d-flex align-items-center">
+    <!-- Label -->
+    <div class="me-3">
+      <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
+        <strong>Authorization</strong>
+      </label>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-grow-1">
+      <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-primary'">
+        {{ case.authorizationData.counter }}
+      </span>
+      of
+      <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-success'">
+        {{ case.authorizationData.numberAuthorized }}
+      </span>
+      Authorized
+
+      <!-- Date -->
+      <span class="ms-2" [ngClass]="isExpired ? 'text-danger fw-bold' : 'text-muted'">
+        (until {{ case.authorizationData.effectiveEndtDate | date : 'MM/dd/yyyy' }})
+      </span>
+
+      <!-- Expired Badge -->
+      <span *ngIf="isExpired" class="badge bg-danger ms-2">
+        Expired
+      </span>
+    </div>
+
+    <!-- Icon -->
+    <div class="ms-3">
+      <i 
+        [ngClass]="isExpired 
+          ? 'bi bi-exclamation-triangle-fill text-danger fs-3' 
+          : 'bi bi-check-circle-fill text-success fs-3'">
+      </i>
+    </div>
+  </div>
+</div>
+
             <c-col [sm]="12">
             </c-col>
             <c-col [sm]="12">
