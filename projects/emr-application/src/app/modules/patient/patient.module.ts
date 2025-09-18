@@ -21,7 +21,7 @@ import {
   PatientBasicInfoComponent, PatientCaseInfoComponent, PatientClinicInfoComponent, PatientContactInfoComponent,
   PatientEmergencyInfoComponent, PatientIdInfoComponent, PatientInsuranceInfoComponent
 } from './components/create';
-import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule } from '@coreui/angular-pro';
+import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule, SpinnerModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
@@ -271,6 +271,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TableModule,
     CalloutModule ,
     MatTooltipModule,
+    SpinnerModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
 
   ]

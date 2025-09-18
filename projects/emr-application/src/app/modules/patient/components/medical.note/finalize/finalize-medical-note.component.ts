@@ -16,6 +16,8 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   @Input() medicalNoteId: number;
   @Input() noteType: MedicalNoteType
   @Output() changeVisibility = new EventEmitter<string>()
+  finalizeMessage: string = 'The medical note is being finalized. Please be patient.';
+  finalizeMessageFlag: boolean = false
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
   ngOnInit(): void {
@@ -37,6 +39,7 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       finalizedBy: this.loggedInService.getLoggedUser().uuid
     }
     this.medialNoteService.pingSaveData(request)
+    this.finalizeMessageFlag = true
   }
 
 }
