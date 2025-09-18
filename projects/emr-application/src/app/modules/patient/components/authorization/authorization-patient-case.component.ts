@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { PatientCase } from '../../models/case/patient.case';
 import { PatientCaseAuthorization } from '../../models/patient.authorization/patient.case.authorization';
 import { PatientCaseAuthorizationService } from '../../services/patient/authorization/patient-case-authorization.service';
 
@@ -10,28 +11,28 @@ import { PatientCaseAuthorizationService } from '../../services/patient/authoriz
   styleUrls: ['./authorization-patient-case.component.css']
 })
 export class AuthorizationPatientCaseComponent implements OnInit {
-  @Input() caseId:number
+  @Input() patientCase: PatientCase
   authForm!: FormGroup;
   @Output() changeVisibility = new EventEmitter<string>()
   editingIndex: number | null = null;
   authList: PatientCaseAuthorization[] = [];
-  
+
   constructor(private fb: FormBuilder, private authService: PatientCaseAuthorizationService) { }
 
   ngOnInit(): void {
     this.authForm = this.fb.group({
       id: [null],
       authName: [null, [Validators.required]],
-      authType: [null, [Validators.required]],
+      authType: ['visit', [Validators.required]],
       authNumber: [null, [Validators.required, Validators.min(1)]],
       effectiveStart: [null, [Validators.required]],
       effectiveEnd: [null, [Validators.required]],
-      insuranceCase: [{ value: 'Axa', disabled: true }]
+      insuranceCase: [{ value: null, disabled: true }]
     });
     this.loadAuths();
   }
   private loadAuths(): void {
-    this.authService.list(this.caseId).subscribe({
+    this.authService.list(this.patientCase.id).subscribe({
       next: (data) => {
         // convert millis back to Date objects for the form
         this.authList = data.map(auth => ({
@@ -52,10 +53,10 @@ export class AuthorizationPatientCaseComponent implements OnInit {
         authName: raw.authName,
         authType: raw.authType,
         authNumber: raw.authNumber,
-        effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(), 
-        effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(), 
-        insuranceName: raw.insuranceName,
-        insuranceId: raw.insuranceId
+        effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(),
+        effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(),
+        insuranceName: this.patientCase.caseInsuranceInformation.primaryInsurance.insuranceCompanyName,
+        insuranceId: Number(this.patientCase.caseInsuranceInformation.primaryInsurance.insuranceIdNumber)
       };
 
       if (this.editingIndex !== null) {
@@ -81,12 +82,12 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
     }));
     console.log(JSON.stringify(payload))
-    this.authService.saveOrUpdate(payload,this.caseId).subscribe({
+    this.authService.saveOrUpdate(payload, this.patientCase.id).subscribe({
       next: (updatedList) => {
         // backend returns saved records including generated ids; normalize dates to ms
         this.authList = updatedList.map(a => ({
           ...a,
-          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(), 
+          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
           effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
         }));
 
@@ -109,11 +110,11 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       authType: auth.authType,
       authNumber: auth.authNumber,
       effectiveStart: auth.effectiveStart
-      ? moment(Number(auth.effectiveStart)).format('YYYY-MM-DD')
-      : '',
-    effectiveEnd: auth.effectiveEnd
-      ? moment(Number(auth.effectiveEnd)).format('YYYY-MM-DD')
-      : '',
+        ? moment(Number(auth.effectiveStart)).format('YYYY-MM-DD')
+        : '',
+      effectiveEnd: auth.effectiveEnd
+        ? moment(Number(auth.effectiveEnd)).format('YYYY-MM-DD')
+        : '',
       insuranceName: auth.insuranceName,
       insuranceId: auth.insuranceId
     });
@@ -124,5 +125,5 @@ export class AuthorizationPatientCaseComponent implements OnInit {
   onRemoveAuth(index: number): void {
     this.authList.splice(index, 1);
   }
- 
+
 }

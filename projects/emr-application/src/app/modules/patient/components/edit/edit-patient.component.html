@@ -238,7 +238,7 @@
                                     <svg cIcon name="cilPen" aria-hidden="true"></svg>
                                 </button>
                                 <button type="button" class="btn btn-light btn-sm btn-auth" aria-label="auth"
-                                    (click)="editAuth(case.id)">
+                                    (click)="editAuth(case)">
                                     <svg cIcon name="cilLockLocked" aria-hidden="true"></svg>
                                 </button>
                                 <button type="button" class="btn btn-light btn-sm btn-delete" aria-label="Delete">
@@ -292,7 +292,7 @@
 <c-modal id="editAuth" [visible]="editAuthVisibility" size="xl" backdrop="static">
     <c-modal-body>
         <button (click)="toggleEditAuth()" cButtonClose style="float: right;"></button>
-        <authorization-patient-case *ngIf="editAuthVisibility" [caseId]="selectedCase"
+        <authorization-patient-case *ngIf="editAuthVisibility" [patientCase]="selectedCase"
             (changeVisibility)="changeFacilityVisibility($event)"></authorization-patient-case>
     </c-modal-body>
 </c-modal>

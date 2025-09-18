@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap, tap } from 'rxjs';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CaseDiagnosis } from '../../models/case/case.diagnosis';
+import { PatientCase } from '../../models/case/patient.case';
 import { PateintResponse } from '../../models/response/patient.response';
 import { PatientFinderService } from '../../services/patient/patient-finder.service';
 
@@ -14,7 +15,7 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
 export class EditPatientComponent implements OnInit {
   patientId: number;
   patient: any
-  selectedCase: number;
+  selectedCase: PatientCase;
   editAuthVisibility: boolean = false
   constructor(private route: ActivatedRoute, private patientFinderService: PatientFinderService, private loggedInService: LoggedInService) { }
 
@@ -31,8 +32,8 @@ export class EditPatientComponent implements OnInit {
       })
   }
 
-  editAuth(caseId: number) {
-    this.selectedCase = caseId
+  editAuth(patientCase: PatientCase) {
+    this.selectedCase = patientCase
     this.editAuthVisibility = true
   }
   toggleEditAuth() {

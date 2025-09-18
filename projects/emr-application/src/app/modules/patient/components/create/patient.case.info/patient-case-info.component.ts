@@ -10,7 +10,9 @@ import { PlaceOfService } from '../../../../common/models/enums/place.service';
 import { ReferringPartyType } from '../../../../common/models/enums/referring.party.type';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { ClinicalUserService } from '../../../../users/services/clinical/clinical-user.service';
+import { CaseInsurance } from '../../../models/case/case.insurance';
 import { PatientCase } from '../../../models/case/patient.case';
+import { PatientInsurance } from '../../../models/insurance/patient.insurance';
 import { Patient } from '../../../models/patient';
 import { CaseDiagnosisService } from '../../../services/case-diagnosis.service';
 
@@ -61,6 +63,7 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   options: any;
   diagnosisCtrl = new FormControl();
   diagnosisCode: string[] = [];
+  selectedPrimaryPatientInsurance: PatientInsurance;
   constructor(private caseDiagnosisService: CaseDiagnosisService,
     private spinner: NgxSpinnerService,
     private loggedService: LoggedInService,
@@ -137,12 +140,22 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   add() {
     if (this.caseForm.valid) {
       let patientCase: PatientCase = Object.assign({}, this.case);
-      patientCase.caseInsuranceInformation = Object.assign({}, this.case.caseInsuranceInformation);
+      this.fillCasePrimaryInsurance(patientCase)
       patientCase.referralCase = Object.assign({}, this.case.referralCase);
       patientCase.caseOtherInformation = Object.assign({}, this.case.caseOtherInformation);
       this.pateint.cases.push(patientCase);
       this.caseForm.reset();
     }
+  }
+  private fillCasePrimaryInsurance(patientCase: PatientCase) {
+    patientCase.caseInsuranceInformation = Object.assign({}, this.case.caseInsuranceInformation);
+    var primaryInsurance: CaseInsurance = {
+      id: this.selectedPrimaryPatientInsurance.id,
+      insuranceCompanyName: this.selectedPrimaryPatientInsurance.insuranceCompany.name,
+      insuranceIdNumber: this.selectedPrimaryPatientInsurance.insuranceNumber,
+      groupNumber: this.selectedPrimaryPatientInsurance.groupNumber,
+    }
+    patientCase.caseInsuranceInformation.primaryInsurance = primaryInsurance;
   }
   remove(index: number) {
     this.pateint.cases.splice(index, 1);
