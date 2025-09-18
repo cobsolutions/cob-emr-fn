@@ -206,8 +206,8 @@
             <h6 cCardTitle>
                 <strong>Assigned Therapist</strong>
             </h6>
-            <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="case.therapist" name="therapist">
-                <option *ngFor="let therapist of therapists" [value]="therapist.id">
+            <select cSelect sizing="sm" *ngIf="therapists" [(ngModel)]="selectedTherapist" name="therapist">
+                <option *ngFor="let therapist of therapists" [ngValue]="therapist.id">
                     {{therapist.lastName +',' +therapist.firstName}}
                 </option>
             </select>

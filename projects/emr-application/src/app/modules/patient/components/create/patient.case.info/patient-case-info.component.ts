@@ -64,6 +64,7 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   diagnosisCtrl = new FormControl();
   diagnosisCode: string[] = [];
   selectedPrimaryPatientInsurance: PatientInsurance;
+  selectedTherapist: number;
   constructor(private caseDiagnosisService: CaseDiagnosisService,
     private spinner: NgxSpinnerService,
     private loggedService: LoggedInService,
@@ -139,10 +140,12 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   }
   add() {
     if (this.caseForm.valid) {
+      console.log(this.selectedTherapist)
       let patientCase: PatientCase = Object.assign({}, this.case);
       this.fillCasePrimaryInsurance(patientCase)
       patientCase.referralCase = Object.assign({}, this.case.referralCase);
       patientCase.caseOtherInformation = Object.assign({}, this.case.caseOtherInformation);
+      patientCase.therapist = this.selectedTherapist;
       this.pateint.cases.push(patientCase);
       this.caseForm.reset();
     }
