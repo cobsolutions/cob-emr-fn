@@ -36,6 +36,7 @@ export class PatientChartComponent implements OnInit {
   caseId: number = 0;
   clinicId: number;
   selectedIndex = 0;  // Default to first tab
+  showFullAddress = false;
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
