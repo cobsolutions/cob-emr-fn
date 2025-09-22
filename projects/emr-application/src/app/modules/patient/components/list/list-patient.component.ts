@@ -26,7 +26,7 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
   patient$!: Observable<Patient[]>;
   componentRole: string[] = [Role.PATIENT_ROLE ];
   ngOnInit(): void {
-    this.columns = this.constructColumns(['id', 'firstName', 'middleName', 'lastName', 'patientId', 'actions']);
+    this.columns = this.constructColumns(['patientName','gender','email','phone', 'dateOfBirth', 'actions']);
     this.initListComponent();
     this.patient$ = this.patientFinderPaginationService.getPateints(this.apiParams$).pipe(
       retry({
@@ -54,9 +54,7 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
   create() {
     this.router.navigateByUrl('emr/patient/create');
   }
-  remove(patientId: number) {
 
-  }
   chart(patientId: number) {
     this.router.navigateByUrl('emr/patient/chart/patientId/' + patientId);
   }
