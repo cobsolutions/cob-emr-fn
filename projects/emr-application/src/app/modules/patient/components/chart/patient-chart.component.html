@@ -9,14 +9,6 @@
                 </a></h3>
         </div>
         <div class="patient-header">
-            <!-- Gender Icon -->
-            <div class="patient-avatar" *ngIf="patientChartInfo.gender !== 'Female'">
-                <svg cIcon name="cilUser" title="Male Patient"></svg>
-            </div>
-            <div class="patient-avatar" *ngIf="patientChartInfo.gender === 'Female'">
-                <svg cIcon name="cilUserFemale" title="Female Patient"></svg>
-            </div>
-
             <!-- Info Grid -->
             <div class="patient-info-grid">
                 <!-- Name -->
@@ -99,49 +91,55 @@
     <!-- Patient Appointment-->
     <c-row>
         <c-col xs="12">
-            <c-card class="mb-4">
-                <c-card-header>
-                    <strong>Appointment Information</strong>
-                </c-card-header>
-                <c-card-body>
-                    <c-row>
-                        <c-col>
-                            <select cFormControl cSelect class="mb-2" id="cases" name="cases" sizing="sm"
-                                (change)="changeCase($event)">
-                                <option selected value="0">All Cases</option>
-                                <option *ngFor="let case of patientCases" [value]="case.id">
-                                    {{case.title}}
-                                </option>
-                            </select>
-                        </c-col>
-                    </c-row>
+            <div class="card full-width-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <c-nav variant="tabs">
-                        <c-nav-item>
-                            <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink>
-                                <svg cIcon class="me-2" name="cilCalendar"></svg>
-                                Upcoming Appointment
-                            </a>
-                        </c-nav-item>
-                        <c-nav-item>
-                            <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=1 cNavLink>
-                                <svg cIcon class="me-2" name="cilHistory"></svg>
-                                Previous Appointment
-                            </a>
-                        </c-nav-item>
+                        <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>
+                            Upcoming Appointment
+                        </a>
+                        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
+                            Previous Appointment
+                        </a>
                     </c-nav>
-                    <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
-                        <c-tab-pane tabPaneIdx=0>
-                            <app-upcoming-appointment [patientId]="patientId"
-                                [caseId]="caseId"></app-upcoming-appointment>
-                        </c-tab-pane>
-                        <c-tab-pane tabPaneIdx=1>
+
+                    <!-- Case Selector -->
+                    <select cFormControl cSelect class="case-select" id="cases" name="cases" sizing="sm"
+                        (change)="changeCase($event)">
+                        <option selected value="0">All Cases</option>
+                        <option *ngFor="let case of patientCases" [value]="case.id">
+                            {{case.title}}
+                        </option>
+                    </select>
+                </div>
+
+                <c-tab-content #tabContent="cTabContent">
+                    <c-tab-pane class="p-3">
+                        <!-- Address -->
+                        <div class="tab-pane fade show active" id="address" role="tabpanel">
+                            <div class="section-card">
+                                <div class="section-header">
+                                    <h3>Upcoming Appointment</h3>
+                                </div>
+                                <app-upcoming-appointment [patientId]="patientId"
+                                    [caseId]="caseId"></app-upcoming-appointment>
+                            </div>
+                        </div>
+                    </c-tab-pane>
+                    <c-tab-pane class="p-3">
+
+                        <!-- Contact Info -->
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3>Previous Appointment</h3>
+
+                            </div>
                             <app-previous-appointment [patientId]="patientId"
                                 [caseId]="caseId"></app-previous-appointment>
-                        </c-tab-pane>
-                    </c-tab-content>
-                </c-card-body>
-            </c-card>
+                        </div>
 
+                    </c-tab-pane>
+                </c-tab-content>
+            </div>
         </c-col>
     </c-row>
     <!-- Patient Case-->

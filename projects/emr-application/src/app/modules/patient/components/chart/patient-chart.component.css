@@ -143,3 +143,59 @@
     font-size: 1.3rem;
     font-weight: 600;
 }
+.card.full-width-card {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Card header */
+  .card.full-width-card .card-header {
+    background: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Nav tabs inside header */
+  .card.full-width-card .nav-tabs {
+    border-bottom: none;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link {
+    border: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link:hover {
+    color: #0d6efd;
+  }
+  
+  .card.full-width-card .nav-tabs .nav-link.active {
+    background: #fff;
+    border-bottom: 3px solid #0d6efd;
+    color: #0d6efd;
+    font-weight: 600;
+  }
+  
+  /* Card body */
+  .card.full-width-card .card-body {
+    padding: 1.25rem;
+  }
+  .card.full-width-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card.full-width-card .case-select {
+    max-width: 200px;
+    margin-left: 1rem;
+  }
