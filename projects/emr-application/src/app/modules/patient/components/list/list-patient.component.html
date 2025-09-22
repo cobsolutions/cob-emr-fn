@@ -36,7 +36,7 @@
           <td>
             <ng-container [ngSwitch]="columnName">
               <ng-container *ngSwitchCase="'patientName'">
-                {{item.lastName + ',' + item.firstName}}
+                <button cButton color="link" (click)="chart(item.id)">{{item.lastName + ',' + item.firstName}}</button>
               </ng-container>
               <ng-container *ngSwitchCase="'gender'">
                 {{item.gender}}
@@ -56,12 +56,6 @@
                   <button cButton variant="ghost" color="info" (click)="edit(item)" class="action-btn-lg"
                     title="Edit Patient">
                     <svg cIcon name="cilPen" class="action-icon"></svg>
-                  </button>
-
-                  <!-- Chart -->
-                  <button cButton variant="ghost" color="success" (click)="chart(item.id)" class="action-btn-lg"
-                    title="View Chart">
-                    <svg cIcon name="cilChart" class="action-icon"></svg>
                   </button>
                 </div>
               </ng-container>
