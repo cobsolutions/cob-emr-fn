@@ -60,6 +60,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   isActive(section: string): boolean {
     return this.activeSection === section;
   }
+  formatInfo(info: string): string {
+    return info ? info.replace(/\n/g, '<br/>') : '';
+  }
   ngOnInit(): void {
     this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
