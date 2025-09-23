@@ -2,75 +2,106 @@
 
 <c-container fluid>
     <!--Pateint Basic Component-->
-    <div class="section-card">
+    <!-- patient-basic.component.html -->
+    <div class="section-card patient-basic">
         <div class="section-header">
-            <h3><a [routerLink]="['/emr/patient/edit/patientId', patientId]">
-                    Patient Information
-                </a></h3>
+            <h3 class="section-title">
+                Patient Information
+                <a [routerLink]="['/emr/patient/edit/patientId', patientId]" class="edit-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        class="icon">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                    Edit
+                </a>
+            </h3>
         </div>
-        <div class="patient-header">
-            <!-- Info Grid -->
-            <div class="patient-info-grid">
-                <!-- Name -->
-                <div class="info-card">
-                    <div class="icon">
-                        <svg cIcon name="cilUser"></svg>
+
+        <div class="patient-basic-grid">
+
+            <!-- Avatar + Name + Gender/DOB/Age -->
+            <div class="basic-left">
+                <patient-avatar [gender]="patientChartInfo.gender" [size]="80" [initials]="patientChartInfo.name">
+                </patient-avatar>
+                <div class="name-group">
+                    <div class="patient-name">{{ patientChartInfo.name }}</div>
+                    <div class="demographics-small">
+                        <span>DOB: <strong>{{ patientChartInfo.dateOfBirth | date:'MM/dd/yyyy' }}</strong></span>
+                        <span class="sep">|</span>
+                        <span>Age: <strong>{{ patientChartInfo.age }}</strong></span>
+                        <span class="sep">|</span>
+                        <span>Gender: <strong>{{ patientChartInfo.gender }}</strong></span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Contact / Other Details Grid -->
+            <div class="basic-center">
+                <div class="info-card">
+                    <div class="icon"><svg cIcon name="cilUser"></svg></div>
                     <div class="details">
                         <div class="label">Name</div>
                         <div class="value">{{ patientChartInfo.name }}</div>
                     </div>
                 </div>
 
-                <!-- Address -->
-                <div class="info-card address">
+                <!-- Address card (replace your current address card markup with this) -->
+                <div class="info-card address" [class.expanded]="showFullAddress" role="group"
+                    aria-label="Patient address">
                     <div class="icon"><svg cIcon name="cilAddressBook"></svg></div>
+
                     <div class="details">
                         <div class="label">Address</div>
-                        <div class="value" [class.expanded]="showFullAddress">
-                            {{ patientChartInfo.address[0] }}
+
+                        <!-- content area: id used for aria-controls -->
+                        <div id="addr-{{ patientId }}" class="value content"
+                            [attr.aria-hidden]="!showFullAddress ? 'false' : 'false'">
+                            <!-- render multiline address safely: join with comma and space -->
+                            {{ (patientChartInfo.address && patientChartInfo.address.length) ?
+                            (patientChartInfo.address[0]) : '—' }}
                         </div>
-                        <div class="toggle" (click)="showFullAddress = !showFullAddress">
-                            {{ showFullAddress ? 'Show Less' : 'Show More' }}
-                        </div>
+
+                        <button class="toggle-btn" (click)="toggleAddress()" [attr.aria-expanded]="showFullAddress"
+                            [attr.aria-controls]="'addr-' + patientId" type="button">
+                            <span class="toggle-text">{{ showFullAddress ? 'Show less' : 'Show more' }}</span>
+                            <!-- small chevron that rotates -->
+                            <svg class="toggle-chevron" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
-                <!-- DOB + Age -->
+
+
                 <div class="info-card">
-                    <div class="icon">
-                        <svg cIcon name="cilBirthdayCake"></svg>
-                    </div>
+                    <div class="icon"><svg cIcon name="cilBirthdayCake"></svg></div>
                     <div class="details">
                         <div class="label">Date of Birth</div>
                         <div class="value">
-                            {{ patientChartInfo.dateOfBirth }}
+                            {{ patientChartInfo.dateOfBirth | date:'MM/dd/yyyy' }}
                             <span class="age">({{ patientChartInfo.age }} yrs)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Email -->
                 <div class="info-card">
-                    <div class="icon">
-                        <svg cIcon name="cibMailRu"></svg>
-                    </div>
+                    <div class="icon"><svg cIcon name="cibMailRu"></svg></div>
                     <div class="details">
                         <div class="label">Email</div>
                         <div class="value">{{ patientChartInfo.email }}</div>
                     </div>
                 </div>
 
-                <!-- Phone -->
                 <div class="info-card">
-                    <div class="icon">
-                        <svg cIcon name="cilPhone"></svg>
-                    </div>
+                    <div class="icon"><svg cIcon name="cilPhone"></svg></div>
                     <div class="details">
                         <div class="label">Phone</div>
                         <div class="value">{{ patientChartInfo.phone }}</div>
                     </div>
                 </div>
-                <!--Gender -->
+
                 <div class="info-card">
                     <div class="icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -84,9 +115,18 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Optional Actions / Status -->
+            <div class="basic-right">
+                <div class="status-pill" *ngIf="true; else inactiveTpl">Active</div>
+                <ng-template #inactiveTpl>
+                    <div class="status-pill inactive">Inactive</div>
+                </ng-template>
+            </div>
+
+        </div>
     </div>
+
 
     <!-- Patient Appointment-->
     <c-row>
@@ -149,7 +189,8 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <c-nav variant="tabs">
                         <span *ngFor="let case of patientCases; let i = index">
-                            <a [active]="i===0" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i" cNavLink>
+                            <a [active]="i===activeTabIndex" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i"
+                                cNavLink (click)="setActiveTab(i)">
                                 {{case.title}}
                             </a>
                         </span>
@@ -158,9 +199,9 @@
                 <c-tab-content #caseContent="cTabContent">
                     <c-tab-pane class="p-3" *ngFor="let case of patientCases; let i = index">
                         <div class="tab-pane fade show active" id="address" role="tabpanel">
-                            <div class="section-card">
+                            <div class="section-card" *ngIf="i === activeTabIndex">
                                 <app-patient-chart-case [case]="case" [patientId]="patientId"
-                                    [patientName]="patientChartInfo.name" ></app-patient-chart-case>
+                                    [patientName]="patientChartInfo.name"></app-patient-chart-case>
                             </div>
                         </div>
                     </c-tab-pane>

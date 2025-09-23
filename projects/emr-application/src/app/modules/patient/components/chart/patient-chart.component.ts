@@ -37,6 +37,15 @@ export class PatientChartComponent implements OnInit {
   clinicId: number;
   selectedIndex = 0;  // Default to first tab
   showFullAddress = false;
+  activeTabIndex = 0;
+
+  setActiveTab(index: number) {
+    this.activeTabIndex = index;
+  }
+  Templat
+  toggleAddress() {
+    this.showFullAddress = !this.showFullAddress;
+  }
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
