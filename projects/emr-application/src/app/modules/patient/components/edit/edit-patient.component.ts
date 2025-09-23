@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap, tap } from 'rxjs';
+import { Address } from '../../../common/models/address';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CaseDiagnosis } from '../../models/case/case.diagnosis';
 import { PatientCase } from '../../models/case/patient.case';
@@ -39,7 +40,10 @@ export class EditPatientComponent implements OnInit {
   toggleEditAuth() {
     this.editAuthVisibility = !this.editAuthVisibility;
   }
-
+  formatUSAddressOneLine(address: Address): string {
+    const { firstAddress, city, state, zipCode, country } = address;
+    return `${firstAddress}, ${city}, ${state} ${zipCode},  USA`;
+  }
 
   deleteAddress(_t22: number) {
     throw new Error('Method not implemented.');
