@@ -29,6 +29,11 @@
             <span class="info-label">Injury Case</span>
             <span class="info-value text-capitalize">{{ case.injuryCase }}</span>
         </div>
+        <div class="info-row">
+            <span class="info-label">Insurance</span>
+            <span class="info-value text-capitalize">{{
+                case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName }}</span>
+        </div>
         <!-- Authorization Row -->
         <div class="info-row authorization-row mb-3" *ngIf="case.authorizationData">
             <span class="info-label">Authorization</span>
@@ -57,7 +62,7 @@
         <!-- If Authorization is not set -->
         <div class="info-row mb-3" *ngIf="case.authorizationData === null">
             <span class="info-label">Authorization</span>
-            <span class="value text-danger">Not set</span>
+            <span class="info-value text-capitalize text-danger">Authorization is not set</span>
         </div>
         <div class="section-card shadow-sm mb-3">
             <div class="section-header">
