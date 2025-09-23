@@ -1,29 +1,38 @@
 <div class="patient-edit-container" *ngIf="patient">
     <!-- Patient Basic Info (full width, edge-to-edge) -->
     <!-- Patient Header -->
-    <div class="d-flex align-items-center border-bottom pb-2 mb-3">
-        <div class="me-3">
-            <!-- <img [src]="patient.photoUrl || 'assets/img/avatars/1.jpg'" class="rounded-circle border" width="70"
-                height="70" /> -->
-            <patient-avatar [gender]="patient.gender" [size]="70"
-                [initials]="patient.firstName?.charAt(0) + patient.lastName?.charAt(0)"></patient-avatar>
 
+    <div class="d-flex align-items-center justify-content-between border-bottom pb-2 mb-3">
+        <!-- Left side: avatar + patient info -->
+        <div class="d-flex align-items-center">
+            <div class="me-3">
+                <patient-avatar [gender]="patient.gender" [size]="70"
+                    [initials]="patient.firstName?.charAt(0) + patient.lastName?.charAt(0)">
+                </patient-avatar>
+            </div>
+            <div>
+                <h3 class="mb-1">
+                    {{ patient.lastName | uppercase }}, {{ patient.firstName | uppercase }}
+                </h3>
+                <small class="text-muted">
+                    DOB: {{ patient.birthDate | date }} &nbsp; | &nbsp;
+                    Gender: {{ patient.gender }}
+                </small>
+            </div>
         </div>
-        <div>
-            <h3 class="mb-1"><span>{{patient.lastName |uppercase }} , {{patient.firstName |uppercase }}</span></h3>
-            <small class="text-muted">
-                DOB: {{ patient.birthDate | date }} &nbsp; | &nbsp;
-                Gender: {{ patient.gender }}
-            </small>
-        </div>
+
+        <!-- Right side: Back to Chart button -->
+        <a class="back-to-chart-btn" (click)="chart(patient.id)">
+            ← Back to Chart
+        </a>
     </div>
-
     <!-- Demographics Row -->
     <div class="row text-muted small mb-4">
         <div class="col-md-3"><strong>Phone:</strong> {{ patient.contacts[0]?.phoneNumber }}</div>
         <div class="col-md-3"><strong>Email:</strong> {{ patient.contacts[0]?.email }}</div>
         <div class="col-md-3"><strong>Address:</strong> {{ formatUSAddressOneLine(patient.addresses[0])}}</div>
-        <div class="col-md-3"><strong>Insurance:</strong> {{ patient.patientInsuranceModels[0]?.insuranceCompany?.name }}
+        <div class="col-md-3"><strong>Insurance:</strong> {{ patient.patientInsuranceModels[0]?.insuranceCompany?.name
+            }}
         </div>
     </div>
     <div class="card full-width-card">

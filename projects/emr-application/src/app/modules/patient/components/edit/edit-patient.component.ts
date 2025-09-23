@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filter, switchMap, tap } from 'rxjs';
 import { Address } from '../../../common/models/address';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
@@ -18,7 +18,10 @@ export class EditPatientComponent implements OnInit {
   patient: any
   selectedCase: PatientCase;
   editAuthVisibility: boolean = false
-  constructor(private route: ActivatedRoute, private patientFinderService: PatientFinderService, private loggedInService: LoggedInService) { }
+  constructor(private route: ActivatedRoute
+    , private patientFinderService: PatientFinderService
+    ,private loggedInService: LoggedInService
+    ,private router: Router) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
@@ -32,7 +35,9 @@ export class EditPatientComponent implements OnInit {
       }, error => {
       })
   }
-
+  chart(patientId: number) {
+    this.router.navigateByUrl('emr/patient/chart/patientId/' + patientId);
+  }
   editAuth(patientCase: PatientCase) {
     this.selectedCase = patientCase
     this.editAuthVisibility = true
