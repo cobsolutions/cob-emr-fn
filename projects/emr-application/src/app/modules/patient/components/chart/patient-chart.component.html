@@ -144,27 +144,28 @@
     </c-row>
     <!-- Patient Case-->
     <c-row class="justify-content-center">
-        <c-col class="col">
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <h4>Patient Cases</h4>
-                </c-card-header>
-                <c-card-body>
+        <c-col xs="12">
+            <div class="card full-width-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <c-nav variant="tabs">
-                        <c-nav-item *ngFor="let case of patientCases; let i = index">
-                            <a [active]="i===0" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i" cNavLink
-                                (click)="selectTab(i)">{{case.title}}</a>
-                        </c-nav-item>
+                        <span *ngFor="let case of patientCases; let i = index">
+                            <a [active]="i===0" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i" cNavLink>
+                                {{case.title}}
+                            </a>
+                        </span>
                     </c-nav>
-                    <c-tab-content #caseContent="cTabContent">
-                        <c-tab-pane class="p-3" *ngFor="let case of patientCases; let i = index">
-                            <app-patient-chart-case [case]="case" [patientId]="patientId"
-                                [patientName]="patientChartInfo.name"
-                                *ngIf="selectedIndex === i"></app-patient-chart-case>
-                        </c-tab-pane>
-                    </c-tab-content>
-                </c-card-body>
-            </c-card>
+                </div>
+                <c-tab-content #caseContent="cTabContent">
+                    <c-tab-pane class="p-3" *ngFor="let case of patientCases; let i = index">
+                        <div class="tab-pane fade show active" id="address" role="tabpanel">
+                            <div class="section-card">
+                                <app-patient-chart-case [case]="case" [patientId]="patientId"
+                                    [patientName]="patientChartInfo.name" ></app-patient-chart-case>
+                            </div>
+                        </div>
+                    </c-tab-pane>
+                </c-tab-content>
+            </div>
         </c-col>
     </c-row>
 </c-container>
