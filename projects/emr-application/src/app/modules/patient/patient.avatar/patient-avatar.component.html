@@ -1,0 +1,57 @@
+<!-- wrapper keeps avatar size stable and allows easy border/rounding -->
+<span
+  class="avatar-root"
+  [style.width.px]="size"
+  [style.height.px]="size"
+  [attr.title]="ariaLabel"
+  role="img"
+  [attr.aria-label]="ariaLabel"
+>
+  <ng-container [ngSwitch]="normalizedGender">
+    <!-- Male SVG -->
+    <svg *ngSwitchCase="'male'" viewBox="0 0 100 100" [attr.width]="size" [attr.height]="size" focusable="false" aria-hidden="true">
+      <defs>
+        <linearGradient id="maleGrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#90caf9"/>
+          <stop offset="1" stop-color="#1e88e5"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="28" r="20" fill="url(#maleGrad)"/>
+      <path d="M20 88c0-18 18-32 30-32s30 14 30 32" fill="#cfe9ff"/>
+      <path d="M50 60c-18 0-28 12-28 28h56c0-16-10-28-28-28z" fill="#fff" opacity="10.12"/>
+      <!-- subtle neck/shoulders -->
+      <path d="M65 60c0 0-5-6-15-6s-15 6-15 6v6h30v-6z" fill="#cfe9ff" opacity="0.8"/>
+    </svg>
+
+    <!-- Female SVG -->
+    <svg *ngSwitchCase="'female'" viewBox="0 0 100 100" [attr.width]="size" [attr.height]="size" focusable="false" aria-hidden="true">
+      <defs>
+        <linearGradient id="femaleGrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#f8bbd0"/>
+          <stop offset="1" stop-color="#ec407a"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="26" r="18" fill="url(#femaleGrad)"/>
+      <!-- hair -->
+      <path d="M30 30c0-8 10-18 20-18s20 10 20 18v6c0 0-8-6-20-6s-20 6-20 6v-6z" fill="#f06292" opacity="0.95"/>
+      <!-- shoulders -->
+      <path d="M18 88c0-18 18-32 32-32s32 14 32 32" fill="#ffe9f0"/>
+      <path d="M50 60c-18 0-28 12-28 28h56c0-16-10-28-28-28z" fill="#fff" opacity="10.12"/>
+    </svg>
+
+    <!-- Neutral / Unknown SVG -->
+    <svg *ngSwitchDefault viewBox="0 0 100 100" [attr.width]="size" [attr.height]="size" focusable="false" aria-hidden="true">
+      <defs>
+        <linearGradient id="neutralGrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#cfd8dc"/>
+          <stop offset="1" stop-color="#90a4ae"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="30" r="20" fill="url(#neutralGrad)"/>
+      <rect x="23" y="58" rx="12" ry="12" width="54" height="24" fill="#eceff1"/>
+    </svg>
+  </ng-container>
+
+  <!-- Optional initials overlay -->
+  <span class="avatar-initials" *ngIf="initials">{{ initials }}</span>
+</span>

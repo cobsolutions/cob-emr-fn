@@ -1,24 +1,38 @@
 <div class="patient-edit-container" *ngIf="patient">
     <!-- Patient Basic Info (full width, edge-to-edge) -->
-    <div class="patient-header">
-        <h2>Patient Information</h2>
-        <div class="patient-basic-info">
-            <div class="info-item">
-                <label style="font-size: large;">Name</label>
-                <span>{{patient.lastName}} , {{patient.firstName}}</span>
+    <!-- Patient Header -->
+
+    <div class="d-flex align-items-center justify-content-between border-bottom pb-2 mb-3">
+        <!-- Left side: avatar + patient info -->
+        <div class="d-flex align-items-center">
+            <div class="me-3">
+                <patient-avatar [gender]="patient.gender" [size]="70"
+                    [initials]="patient.firstName?.charAt(0) + patient.lastName?.charAt(0)">
+                </patient-avatar>
             </div>
-            <div class="info-item">
-                <label style="font-size: large;">Status</label>
-                <span>Active</span>
+            <div>
+                <h3 class="mb-1">
+                    {{ patient.lastName | uppercase }}, {{ patient.firstName | uppercase }}
+                </h3>
+                <small class="text-muted">
+                    DOB: {{ patient.birthDate | date }} &nbsp; | &nbsp;
+                    Gender: {{ patient.gender }}
+                </small>
             </div>
-            <div class="info-item">
-                <label style="font-size: large;">Sex</label>
-                <span>{{patient.gender}}</span>
-            </div>
-            <div class="info-item">
-                <label style="font-size: large;">Date of Birth</label>
-                <span>{{patient.birthDate | date:'MM/dd/yyyy'}}</span>
-            </div>
+        </div>
+
+        <!-- Right side: Back to Chart button -->
+        <a class="back-to-chart-btn" (click)="chart(patient.id)">
+            ← Back to Chart
+        </a>
+    </div>
+    <!-- Demographics Row -->
+    <div class="row text-muted small mb-4">
+        <div class="col-md-3"><strong>Phone:</strong> {{ patient.contacts[0]?.phoneNumber }}</div>
+        <div class="col-md-3"><strong>Email:</strong> {{ patient.contacts[0]?.email }}</div>
+        <div class="col-md-3"><strong>Address:</strong> {{ formatUSAddressOneLine(patient.addresses[0])}}</div>
+        <div class="col-md-3"><strong>Insurance:</strong> {{ patient.patientInsuranceModels[0]?.insuranceCompany?.name
+            }}
         </div>
     </div>
     <div class="card full-width-card">
@@ -229,7 +243,8 @@
                     <td>{{case.title}}</td>
                     <td>{{case.referralCase.referringPartyName}}</td>
                     <td>{{case.treatingDoctor.lastName +',' + case.treatingDoctor.firstName}}</td>
-                    <td> {{case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName}}</td> <!-- Insurance-->
+                    <td> {{case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName}}</td>
+                    <!-- Insurance-->
                     <td>
                         <div class="d-flex justify-content-end">
                             <!-- force-group class applied to ensure no gap -->

@@ -46,12 +46,23 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   viewPDFVisibility: boolean = false;
+  activeSection: string = 'records';
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
     private appointmentService: AppointmentService,
     private loggedInService: LoggedInService) { super() }
 
+  setActive(section: string) {
+    this.activeSection = section;
+  }
+
+  isActive(section: string): boolean {
+    return this.activeSection === section;
+  }
+  formatInfo(info: string): string {
+    return info ? info.replace(/\n/g, '<br/>') : '';
+  }
   ngOnInit(): void {
     this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);

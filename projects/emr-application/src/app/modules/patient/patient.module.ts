@@ -127,6 +127,7 @@ import { InitialExaminationPlanSummaryComponent } from './components/medical.not
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
 import { EditPatientComponent } from './components/edit/edit-patient.component';
 import { AuthorizationPatientCaseComponent } from './components/authorization/authorization-patient-case.component';
+import { PatientAvatarComponent } from './patient.avatar/patient-avatar.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -255,6 +256,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     InitialExaminationSummaryComponent,
     EditPatientComponent,
     AuthorizationPatientCaseComponent,
+    PatientAvatarComponent,
   ],
   imports: [
     CommonModule,

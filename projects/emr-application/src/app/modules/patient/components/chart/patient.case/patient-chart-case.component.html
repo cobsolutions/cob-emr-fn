@@ -1,240 +1,210 @@
 <ngx-spinner></ngx-spinner>
 
-<c-card class="mb-3 ustify-content-center">
-    <c-card-body>
-        <!-- <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">Treating Doctor</span>
-                    <input cFormControl readonly [value]="treatingDoctor" />
-                </c-input-group>
-            </c-col>
-        </c-row> -->
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">Referring Doctor</span>
-                    <input cFormControl readonly [value]="referringDoctor" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">ReferringNPI</span>
-                    <input cFormControl readonly [value]="referringNPI" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">PlaceOfService</span>
-                    <input cFormControl readonly [value]="case.placeOfService | lowercase" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">InjuryCase</span>
-                    <input cFormControl readonly [value]="case.injuryCase | lowercase" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="mb-3">
-            <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
-                <strong>CaseDiagnosis</strong>
+<!-- Case Information Section -->
+<div class="section-card shadow-sm mb-3">
+    <div class="section-header">
+        <h6 class="mb-0">Case Information</h6>
+    </div>
+    <div class="section-body">
+        <!-- Referring Doctor -->
+        <div class="info-row">
+            <span class="info-label">Referring Doctor</span>
+            <span class="info-value">{{ referringDoctor }}</span>
+        </div>
+
+        <!-- Referring NPI -->
+        <div class="info-row">
+            <span class="info-label">Referring NPI</span>
+            <span class="info-value">{{ referringNPI }}</span>
+        </div>
+
+        <!-- Place Of Service -->
+        <div class="info-row">
+            <span class="info-label">Place Of Service</span>
+            <span class="info-value text-capitalize">{{ case.placeOfService }}</span>
+        </div>
+
+        <!-- Injury Case -->
+        <div class="info-row">
+            <span class="info-label">Injury Case</span>
+            <span class="info-value text-capitalize">{{ case.injuryCase }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Additional Info</span>
+
+            <span class="info-value ">
+                <p style="white-space: pre-line;">
+                    {{case.additionalInfo}}
+                </p>
+            </span>
+        </div>
+
+        <!-- Authorization Row -->
+        <div class="info-row authorization-row mb-3" *ngIf="case.authorizationData">
+            <span class="info-label">Authorization</span>
+            <span class="value">
+                <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-primary'">
+                    {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
+                </span>
+                of
+                <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-success'">
+                    {{ case.authorizationData.numberAuthorized }}
+                </span>
+                Authorized
+                <span class="ms-2" [ngClass]="isExpired ? 'text-danger fw-bold' : 'text-muted'">
+                    (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
+                </span>
+                <span *ngIf="isExpired" class="badge bg-danger ms-2">Expired</span>
+            </span>
+
+            <!-- Icon -->
+            <i class="ms-2" [ngClass]="isExpired 
+         ? 'bi bi-exclamation-triangle-fill text-danger fs-5' 
+         : 'bi bi-check-circle-fill text-success fs-5'">
+            </i>
+        </div>
+
+        <!-- If Authorization is not set -->
+        <div class="info-row mb-3" *ngIf="case.authorizationData === null">
+            <span class="info-label">Authorization</span>
+            <span class="info-value text-capitalize text-danger">Authorization is not set</span>
+        </div>
+        <div class="section-card shadow-sm mb-3">
+            <div class="section-header">
+                <h6 class="mb-0">Case Diagnosis</h6>
+            </div>
+            <div class="section-body">
+                <div *ngFor="let diagnosis of case.caseDiagnosis" class="diagnosis-item">
+                    <span class="badge bg-primary me-2">{{ diagnosis.diagnosisCode }}</span>
+                    <span class="diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="actions-footer d-flex justify-content-end align-items-center gap-2 mt-3">
+            <label for="patientRecordAction" class="mx-0 text-nowrap fw-semibold">
+                Patient Record Actions:
             </label>
-            <c-col [sm]="12" *ngFor="let diagnosis of case.caseDiagnosis; let i = index">
-                <c-row>
-                    <c-col [sm]="1">
-                        <input cFormControl id="CaseDiagnosis" readonly type="text" [value]="diagnosis.diagnosisCode"
-                            sizing="sm" />
-                    </c-col>
-                    <c-col [sm]="11">
-                        <input cFormControl id="CaseDiagnosis" readonly type="text"
-                            [value]="diagnosis.diagnosisDescription" sizing="sm" />
-                    </c-col>
-                </c-row>
-            </c-col>
-            <div class="card shadow-sm border-0 mb-3"
-                [ngClass]="isExpired ? 'border-danger bg-light' : 'border-success'" *ngIf="case.authorizationData">
-                <div class="card-body d-flex align-items-center" *ngIf="case.authorizationData">
-                    <!-- Label -->
-                    <div class="me-3">
-                        <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
-                            <strong>Authorization</strong>
-                        </label>
-                    </div>
+            <c-input-group class="mb-0">
+                <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
+                    [componentRole]="componentRole">
+                    <option [value]="action" *ngFor="let action of case.patientRecordActions">
+                        {{ action }}
+                    </option>
+                </select>
+                <button cButton color="primary" variant="outline" size="sm"
+                    (click)="executeAction(patientActionSelect.value)" hide-control [componentRole]="componentRole">
+                    <svg cIcon name="cilArrowCircleRight"></svg>
+                </button>
+            </c-input-group>
+        </div>
 
-                    <!-- Content -->
-                    <div class="flex-grow-1">
-                        <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-primary'">
-                            {{ case.authorizationData.counter >0 ?case.authorizationData.counter:0 }}
-                        </span>
-                        of
-                        <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-success'">
-                            {{ case.authorizationData.numberAuthorized }}
-                        </span>
-                        Authorized
+    </div>
+</div>
 
-                        <!-- Date -->
-                        <span class="ms-2" [ngClass]="isExpired ? 'text-danger fw-bold' : 'text-muted'">
-                            (until {{ case.authorizationData.effectiveEndtDate | date : 'MM/dd/yyyy' }})
-                        </span>
+<!--Case Details-->
+<div class="case-details-container d-flex" *ngIf="patientRecord ===true">
 
-                        <!-- Expired Badge -->
-                        <span *ngIf="isExpired" class="badge bg-danger ms-2">
-                            Expired
-                        </span>
-                    </div>
+    <!-- Sidebar -->
+    <div class="case-sidebar p-3 border-end">
+        <h6 class="fw-bold mb-3">Case Details</h6>
+        <ul class="nav flex-column nav-pills">
 
-                    <!-- Icon -->
-                    <div class="ms-3">
-                        <i [ngClass]="isExpired 
-          ? 'bi bi-exclamation-triangle-fill text-danger fs-3' 
-          : 'bi bi-check-circle-fill text-success fs-3'">
-                        </i>
-                    </div>
-                </div>
-            </div>
-            <div class="card shadow-sm border-0 mb-3" *ngIf="case.authorizationData ===null">
-                <div class="me-3">
-                    <label [sm]="3" cCol cLabel="col">
-                        <strong>
-                            <p style="color:red">Authorization is not set.</p>
-                        </strong>
-                    </label>
-                </div>
-            </div>
-
-            <c-col [sm]="12">
-            </c-col>
-            <c-col [sm]="12">
-                <div class="d-flex justify-content-end">
-                    <div class="p-2 d-flex align-items-center gap-2">
-                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;"
-                            hide-control [componentRole]="componentRole">Patient
-                            Record Actions:</label>
-                        <c-input-group class="mb-3">
-                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
-                                [componentRole]="componentRole">
-                                <option [value]="action"
-                                    *ngFor="let action of case.patientRecordActions; let i = index">
-                                    {{ action }}
-                                </option>
-                            </select>
-                            <button cButton color="primary" variant="outline" size="sm"
-                                (click)="executeAction(patientActionSelect.value)" hide-control
-                                [componentRole]="componentRole">
-                                <svg cIcon name="cilArrowCircleRight"></svg>
-                            </button>
-                        </c-input-group>
-                    </div>
-                </div>
-            </c-col>
-        </c-row>
-    </c-card-body>
-</c-card>
-<!-- <div class="button-container m-2">
-    <button cButton color="primary" variant="outline" size="sm" (click)="show()">
-        OMT Test
-    </button>
-</div> -->
-<!--Patient Record-->
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
-    <c-card-body>
-        <c-nav variant="tabs">
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink>
+            <li class="nav-item mb-2">
+                <a class="nav-link d-flex align-items-center" [class.active]="isActive('records')"
+                    (click)="setActive('records')">
                     <svg cIcon class="me-2" name="cilNotes"></svg>
-                    Records
+                    Patient Records
                 </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=1 cNavLink>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link d-flex align-items-center" [class.active]="isActive('documents')"
+                    (click)="setActive('documents')">
                     <svg cIcon class="me-2" name="cilPaperclip"></svg>
                     E-Documents
                 </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=2 cNavLink>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link d-flex align-items-center" [class.active]="isActive('payments')"
+                    (click)="setActive('payments')">
                     <svg cIcon class="me-2" name="cilMoney"></svg>
                     Patient Payment
                 </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=3 cNavLink>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link d-flex align-items-center" [class.active]="isActive('home-program')"
+                    (click)="setActive('home-program')">
                     <svg cIcon class="me-2" name="cilHome"></svg>
                     Home Exercise Program
                 </a>
-            </c-nav-item>
-        </c-nav>
-        <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
-            <c-tab-pane tabPaneIdx=0>
-                <c-card class="mb-3">
-                    <c-card-body>
-                        <ng-container *ngIf="props$ | async as props">
-                            <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-                                [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-                                (itemsPerPageChange)="handleItemsPerPageChange($event)"
-                                [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-                                [tableProps]="{ hover: true, striped: false, small:true }"
-                                [tableBodyProps]="{ align: 'middle' }"
-                                (sorterValueChange)="handleSorterValueChange($event)" header>
-                                <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
-                                    let-tdContent="tdContent">
-                                    <td>
-                                        <ng-container [ngSwitch]="columnName">
-                                            <ng-container *ngSwitchCase="'record'">
-                                                {{item.status}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'date'">
-                                                {{item.date| date:'MMM d, y, h:mm a'}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchDefault>
-                                                {{tdContent}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'actions'">
-                                                <c-input-group>
-                                                    <select id="patientRecordLineAction" #patientRecordLineAction
-                                                        cSelect sizing="sm">
-                                                        <option [value]="action"
-                                                            *ngFor="let action of item.actions; let i = index">
-                                                            {{ action }}
-                                                        </option>
-                                                    </select>
-                                                    <button cButton color="primary" variant="outline" size="sm"
-                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status)">
-                                                        <svg cIcon name="cilArrowCircleRight"></svg>
-                                                    </button>
-                                                </c-input-group>
-                                            </ng-container>
-                                        </ng-container>
-                                    </td>
-                                </ng-template>
-                            </c-smart-table>
-                            <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
-                                (activePageChange)="handleActivePageChange($event)"
-                                [pages]="props.totalPages"></c-smart-pagination>
-                        </ng-container>
-                    </c-card-body>
-                </c-card>
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=1>
-                E-Documents component
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=2>
+            </li>
+        </ul>
+    </div>
+    <div class="case-content flex-grow-1 p-3">
+        <!-- Records -->
+        <div *ngIf="isActive('records')">
+            <h5>Patient Records</h5>
+            <ng-container *ngIf="props$ | async as props">
+                <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
+                    [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+                    (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+                    [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small:true }"
+                    [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
+                    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+                        let-tdContent="tdContent">
+                        <td>
+                            <ng-container [ngSwitch]="columnName">
+                                <ng-container *ngSwitchCase="'record'">
+                                    {{item.status}}
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'date'">
+                                    {{item.date| date:'MMM d, y, h:mm a'}}
+                                </ng-container>
+                                <ng-container *ngSwitchDefault>
+                                    {{tdContent}}
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'actions'">
+                                    <c-input-group>
+                                        <select id="patientRecordLineAction" #patientRecordLineAction cSelect
+                                            sizing="sm">
+                                            <option [value]="action" *ngFor="let action of item.actions; let i = index">
+                                                {{ action }}
+                                            </option>
+                                        </select>
+                                        <button cButton color="primary" variant="outline" size="sm"
+                                            (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status)">
+                                            <svg cIcon name="cilArrowCircleRight"></svg>
+                                        </button>
+                                    </c-input-group>
+                                </ng-container>
+                            </ng-container>
+                        </td>
+                    </ng-template>
+                </c-smart-table>
+                <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
+                    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+            </ng-container>
+        </div>
 
-                <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=3>
-                Home Exercise Program component
-            </c-tab-pane>
-        </c-tab-content>
-    </c-card-body>
-</c-card>
+        <!-- Documents -->
+        <div *ngIf="isActive('documents')">
+            <h5>E-Documents</h5>
+            <!-- put your Documents content here -->
+        </div>
+
+        <!-- Payments -->
+        <div *ngIf="isActive('payments')">
+            <h5>Patient Payment</h5>
+            <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
+        </div>
+
+        <!-- Home Program -->
+        <div *ngIf="isActive('home-program')">
+            <h5>Home Exercise Program</h5>
+            <!-- put your Home Program content here -->
+        </div>
+    </div>
+</div>
+
 
 <span *ngIf="patientRecord ===false">
     <c-card class="mb-3 ustify-content-center">
