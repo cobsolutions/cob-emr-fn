@@ -56,7 +56,6 @@ export class DailyPlanComponent implements OnInit {
     if (event === 'yes') {
       this.finalizeNoteVisibility = false
       this.toastr.success('Medical note has been finalized');
-      this.backToRecord.emit()
     }
   }
 }

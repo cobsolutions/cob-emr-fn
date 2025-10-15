@@ -4,8 +4,9 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
@@ -30,27 +31,29 @@ export class InitialExaminationComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   type: MedicalNoteType = MedicalNoteType.Initial_Examination;
-  private destroy$ = new Subject<void>();
+  private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
     private loggedInService: LoggedInService) {
 
   }
   ngOnInit(): void {
-
-    this.medialNoteService.saveNoteObservable$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(val => {
-        if (val !== null) {
-          const finalizeRequest = val;
-          this.draftAction().subscribe(d => {
-            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-              this.backtoPatientRecordActions();
-              this.medialNoteService.closeFinalize.next(true);
-            });
-          });
+    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+      console.log(status)
+      if (status) {
+        const request: FinalizeMedicalNoteRequest = {
+          caseId: this.caseId,
+          id: this.medicalNoteId,
+          noteType: MedicalNoteType.Initial_Examination,
+          finalizedBy: this.loggedInService.getLoggedUser().uuid
         }
-      });
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(request).subscribe(v => {
+            this.backtoPatientRecordActions();
+          });
+        });
+      }
+    });
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -59,19 +62,15 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
-    this.medialNoteService.noteType$.next('init_exam')
     if (this.medicalNoteId !== undefined)
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
-    // this.handleNoteFinalization()
-
   }
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.finalizeSub?.unsubscribe();
   }
   setFormValues(formGroup: FormGroup, data: any) {
     Object.keys(formGroup.controls).forEach(key => {
@@ -148,17 +147,4 @@ export class InitialExaminationComponent implements OnInit {
     });
     return values;
   }
-  // private handleNoteFinalization() {
-  //   this.medialNoteService.medicalNoteType.pipe(
-  //     filter(type => type !== null && type === MedicalNoteType.Initial_Examination),
-  //   ).subscribe(result => {
-  //     console.log('handleNoteFinalization')
-  //     var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-  //     var loggedProvider = this.loggedInService.getLoggedUser().uuid;
-  //     this.medialNoteService.finalize(medicalNoteRequest, loggedProvider).subscribe(() => {
-  //       console.log('Not is finalized')
-  //       this.backtoPatientRecordActions();
-  //     })
-  //   })
-  // }
 }

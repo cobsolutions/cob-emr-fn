@@ -21,24 +21,14 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
   ngOnInit(): void {
-    this.medialNoteService.closeFinalize.pipe(
-      filter(sing => sing !== null)
-    ).subscribe(sing => {
-      if (sing)
-        this.changeVisibility.emit('yes')
-    })
   }
   onNo() {
     this.changeVisibility.emit('no')
+    this.medialNoteService.notifyFinalize(false);
   }
   onYes() {
-    var request: FinalizeMedicalNoteRequest = {
-      caseId: this.patientCaseId,
-      id: this.medicalNoteId,
-      noteType: this.noteType,
-      finalizedBy: this.loggedInService.getLoggedUser().uuid
-    }
-    this.medialNoteService.pingSaveData(request)
+    this.medialNoteService.notifyFinalize(true);
+    this.changeVisibility.emit('yes')
     this.finalizeMessageFlag = true
   }
 

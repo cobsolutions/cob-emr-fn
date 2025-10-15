@@ -2,8 +2,9 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
@@ -25,25 +26,27 @@ export class DailyNoteComponent implements OnInit {
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
   noteCreator: string
   noteFinalizr: string
-  private destroy$ = new Subject<void>();
+  private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(val => {
-        if (val !== null) {
-          const finalizeRequest = val;
-          this.draftAction().subscribe(d => {
-            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-              this.backtoPatientRecordActions();
-            });
-          });
+    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+      if (status) {
+        const finalizeRequest: FinalizeMedicalNoteRequest = {
+          caseId: this.caseId,
+          id: this.medicalNoteId,
+          noteType: MedicalNoteType.Daily_Note,
+          finalizedBy: this.loggedInService.getLoggedUser().uuid
         }
-      });
-    this.medialNoteService.noteType$.next('daily')
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          });
+        });
+      }
+    })
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -60,8 +63,7 @@ export class DailyNoteComponent implements OnInit {
     this.handleNoteFinalization()
   }
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.finalizeSub?.unsubscribe();
   }
   soapActions(action: string) {
     if (action === 'back')

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FinalizeMedicalNoteRequest } from '../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
@@ -10,16 +10,16 @@ import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
   providedIn: 'root'
 })
 export class MedialNoteService {
-  public closeFinalize: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private saveNote = new BehaviorSubject<any>(null);
-  saveNoteObservable$ = this.saveNote.asObservable();
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'
-  public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
+  private finalizeSubject = new Subject<boolean>();
+  finalize$ = this.finalizeSubject.asObservable();
+  
   constructor(private httpClient: HttpClient) { }
-  pingSaveData(ping: any) {
-    this.saveNote.next(ping);
+
+  notifyFinalize(status: boolean): void {
+    this.finalizeSubject.next(status);
   }
   find(section: string, type?: string) {
     var url: string = this.baseUrl + "/find/section/" + section + "/type/" + type;
