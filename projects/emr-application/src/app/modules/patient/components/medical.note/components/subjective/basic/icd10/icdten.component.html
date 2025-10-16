@@ -1,70 +1,107 @@
 <c-card class="mb-2" [style]="style">
-    <c-card-header>
-        {{title}}
-    </c-card-header>
+    <c-card-header>{{ title }}</c-card-header>
     <c-card-body>
-        <div class="form-group">
-            <div class="goal-form-container">
-                <div class="goal-input">
-                    <label>Enter an ICD-10 code or description</label>
-                    <c-card cBorder="primary" class="mb-2">
-                        <c-card-body>
-                            <c-input-group class="mb-3">
-                                <span cInputGroupText id="basic-addon1">
-                                    <svg cIcon name="cilNotes"></svg>
-                                </span>
-                                <input cFormControl name="icd10diagnosis" [formControl]="diagnosisCtrl" />
-                                <button cButton variant="outline" (click)="icdSearch()">
-                                    <svg cIcon name="cilSearch"></svg>
-                                </button>
-                            </c-input-group>
-                            <c-multi-select class="mb-2" (valueChange)="addICD10diagnosis($event)" multiple="true"
-                                visibleItems="20">
-                                <c-multi-select-option *ngFor="let option of filteredDiagnosis">
-                                    {{ option}}
-                                </c-multi-select-option>
-                            </c-multi-select>
-                        </c-card-body>
-                    </c-card>
-                </div>
-                <div class="add-btn-container">
-                    <button type="button" (click)="addCode()" class="add-goal-btn">
-                        ➕ Add
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <!-- ➕ Add / Hide Search Icon Button -->
+            <button cButton color="primary" variant="outline" class="icon-btn" (click)="toggleSearch()"
+                [attr.title]="showSearch ? 'Hide Search' : 'Add Diagnosis'">
+                <svg *ngIf="!showSearch" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z" />
+                </svg>
+                <svg *ngIf="showSearch" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" />
+                </svg>
+            </button>
+
+            <!-- 📋 Copy Codes Icon Button -->
+            <button  cButton color="secondary" variant="outline" class="icon-btn ms-2"
+                (click)="copyCodes()" title="Copy Codes to Child" *ngIf="hierarchy === 'parent'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
+                </svg>
+            </button>
+        </div>
+
+
+        <!-- Search Section -->
+        <div *ngIf="showSearch" [@slideDown]>
+            <div class="mb-3">
+                <label>Enter ICD-10 code or description</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" [formControl]="diagnosisCtrl"
+                        placeholder="Type to search ICD-10 code" />
+                    <button cButton variant="outline" color="primary" (click)="onSearch()">
+                        {{ isLoading ? 'Searching...' : 'Search' }}
+                    </button>
+                    <button cButton variant="outline" color="secondary" (click)="clearSearch()"
+                        [disabled]="isLoading && !diagnosisCtrl.value">
+                        Clear
                     </button>
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 10px;" *ngIf="hierarchy ==='parent'">
-                <button type="button" (click)="copyCodes()" class="add-goal-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        viewBox="0 0 24 24" class="icon icon-copy">
-                        <path
-                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
-                    </svg>
-                    Copy Codes from Diagnosis
-                </button>
+            <!-- Dropdown Results -->
+            <div class="dropdown-container" *ngIf="filteredDiagnosis.length > 0">
+                <div class="dropdown-header">
+                    <span class="col-code">Code</span>
+                    <span class="col-desc">Description</span>
+                </div>
+
+                <ul class="list-group">
+                    <li *ngFor="let option of filteredDiagnosis" class="list-group-item"
+                        (mousedown)="addDiagnosis(transformToObjectArray(option))">
+                        <span class="col-code">{{ option[0] }}</span>
+                        <span class="col-desc">{{ option[1] }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="isLoading" class="text-center mb-3">
+                <c-spinner color="primary"></c-spinner>
             </div>
         </div>
-        <!-- Table -->
+
+        <!-- Added Diagnoses Table -->
         <table class="table table-sm p-1 mb-3">
             <thead>
                 <tr>
-                    <th style="max-width: 140px;">Codes</th>
+                    <th style="max-width: 140px;">Code</th>
                     <th>Description</th>
-                    <th></th>
+                    <th class="text-center" style="width: 60px;">Remove</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let diag of addedDiagnosis; let i = index">
+                <tr *ngFor="let diag of sortedDiagnosis; let i = index">
                     <td>{{ diag.code }}</td>
                     <td>{{ diag.description }}</td>
                     <td class="text-center">
-                        <button cButton color="danger" variant="outline" size="sm" (click)="removeDiagnosis(i)">
-                            <svg cIcon name="cilTrash"></svg>
-                        </button>
+                        <div class="action-buttons">
+                            <button cButton variant="ghost" class="action-btn up" (click)="moveUp(i)"
+                                [disabled]="i === 0" title="Move Up">
+                                ⬆️
+                            </button>
+
+                            <button cButton variant="ghost" class="action-btn down" (click)="moveDown(i)"
+                                [disabled]="i === addedDiagnosis.length - 1" title="Move Down">
+                                ⬇️
+                            </button>
+
+                            <button cButton variant="ghost" class="action-btn remove" (click)="removeDiagnosis(i)"
+                                title="Remove">
+                                ❌
+                            </button>
+                        </div>
                     </td>
+
                 </tr>
             </tbody>
         </table>
     </c-card-body>
 </c-card>
+<!-- <treatment-diagnosis [parentForm]="parentForm" [parentFieldName]="'icdtenCodeTreatmentDiagnosis'" [style]="style"
+    (emitChanges)="onTreatmentDiagnosisChange($event)">
+</treatment-diagnosis> -->
