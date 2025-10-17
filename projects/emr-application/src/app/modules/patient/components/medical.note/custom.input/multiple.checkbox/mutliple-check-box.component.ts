@@ -49,8 +49,6 @@ export class MutlipleCheckBoxComponent implements OnInit {
       // --- Case 1: If "N/A" is selected, uncheck all others ---
       naFormControl.valueChanges.subscribe((v: boolean) => {
         if (v) {
-          console.log('na is selected');
-
           this.values.forEach((item: any) => {
             if (item.val !== 'na') {
               const control = this.form.get(item.val);
