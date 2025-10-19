@@ -129,7 +129,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     return this.loggedInService.getLoggedUser().uuid
   }
   executeAction(val: string) {
-    this.patientRecord = false;
     this.patientRecordAction = val;
     let medicalNoteType: string;
     let caseId = this.case.id
@@ -189,7 +188,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     }
     medicalNoteRequest.dateOfService = moment().endOf('day').valueOf();
     this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteResponse: any) => {
-      console.log(JSON.stringify(medicalNoteResponse))
+      this.patientRecord = false;
       this.medicalNoteId = medicalNoteResponse.medicalNotId;
       this.errorMessage = undefined
     }, error => {
