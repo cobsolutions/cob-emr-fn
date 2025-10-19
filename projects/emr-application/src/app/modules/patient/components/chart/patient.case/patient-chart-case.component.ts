@@ -143,16 +143,28 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
         "Quick Discharge",
         "Case Note"
       ]
+      this.medicalNoteId = undefined;
     }
 
-    if (val === 'Add Daily Note')
+    if (val === 'Add Daily Note') {
       medicalNoteType = "DAILY_NOTE"
-    if (val === 'Progress Note')
+      this.medicalNoteId = undefined;
+    }
+    if (val === 'Progress Note') {
       medicalNoteType = "PROGRESS_NOTE"
-    if (val === 'Quick Discharge')
+      this.medicalNoteId = undefined;
+    }
+
+    if (val === 'Quick Discharge') {
       medicalNoteType = "QUICK_DISCHARGE_NOTE"
-    if (val === 'Discharge')
+      this.medicalNoteId = undefined;
+    }
+
+    if (val === 'Discharge') {
       medicalNoteType = "DISCHARGE_NOTE"
+      this.medicalNoteId = undefined;
+    }
+
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: caseId,
       noteType: medicalNoteType,
@@ -176,8 +188,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
     medicalNoteRequest.dateOfService = moment().endOf('day').valueOf();
-    this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteId: any) => {
-      this.medicalNoteId = medicalNoteId;
+    this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteResponse: any) => {
+      console.log(JSON.stringify(medicalNoteResponse))
+      this.medicalNoteId = medicalNoteResponse.medicalNotId;
       this.errorMessage = undefined
     }, error => {
       this.patientRecordAction = 'ERROR_FINALIZE';
