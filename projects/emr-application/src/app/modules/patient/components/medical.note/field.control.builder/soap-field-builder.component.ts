@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FieldControlStyles } from '../filed.control.style.selector/field.control.style';
 
@@ -14,10 +14,11 @@ export class SoapFieldBuilderComponent implements OnInit {
   @Input() styles: FieldControlStyles[]
   @Input() soapModule: string;
   @Input() data: any
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.buildField(this.field);
+    this.loadIsAllData();
   }
 
   private buildField(field: any) {
@@ -49,7 +50,7 @@ export class SoapFieldBuilderComponent implements OnInit {
       field.dependents.forEach(dependent => {
         dependent.render = true;
         this.form.addControl(dependent.name, this.fb.control((dependent.selectValue !== undefined || dependent.selectValue !== null) ? dependent.selectValue : null))
-        if (!(this.data === null || this.data === undefined)  && this.data[dependent.name] !== null)
+        if (!(this.data === null || this.data === undefined) && this.data[dependent.name] !== null)
           this.form.get(dependent.name).setValue(this.data[dependent.name])
       });
     } else {
@@ -81,5 +82,73 @@ export class SoapFieldBuilderComponent implements OnInit {
       dependent.render = false;
       this.form.removeControl(dependent.name)
     });
+  }
+  clickAddAll(field: any): void {
+    const isRemove = field.displayText === 'Remove All';
+    field.displayText = isRemove ? field.display : 'Remove All';
+
+    const shouldCheck = !isRemove;
+
+    // Update parent
+    const parentControl = this.form.get(field.name);
+    if (parentControl) parentControl.setValue(shouldCheck);
+
+    // Update dependents recursively
+    if (field.dependents && Array.isArray(field.dependents)) {
+      this.updateDependentsRecursively(field.dependents, shouldCheck);
+    }
+
+    // ✅ Force template refresh
+    this.cdRef.detectChanges();
+  }
+  private updateDependentsRecursively(dependents: any[], value: boolean): void {
+    dependents.forEach(dep => {
+      // ensure control exists
+      let control = this.form.get(dep.name);
+      if (!control) {
+        this.form.addControl(dep.name, this.fb.control(value));
+      } else {
+        control.setValue(value);
+        control.markAsDirty();
+      }
+
+      // ✅ Trigger render logic if the dependent has its own children
+      if (dep.dependents && dep.dependents.length > 0) {
+        // Mark render = true so Angular will display the nested structure
+        dep.render = value;
+
+        // Call your existing renderer to handle nested dependents
+        this.renderDependents(dep, value);
+      }
+    });
+
+    // Force Angular to re-check the view
+    this.cdRef.detectChanges();
+  }
+
+  private loadIsAllData() {
+    // Only handle parent fields that have dependents
+    if (this.field.dependents && Array.isArray(this.field.dependents) && this.field.isAll) {
+
+      // Only check first-level dependents
+      const allChecked = this.field.dependents.every((dep: any) => {
+        const control = this.form.get(dep.name);
+        // Only count the first-level dependents (ignore their dependents)
+        return control ? control.value === true : false;
+      });
+
+      const noneChecked = this.field.dependents.every((dep: any) => {
+        const control = this.form.get(dep.name);
+        return control ? control.value === false : true;
+      });
+
+      // If all checked → "Remove All"
+      // If none or partially checked → "Add All"
+      if (allChecked) {
+        this.field.displayText = 'Remove All';
+      } else {
+        this.field.displayText = this.field.display; // Usually "Add All"
+      }
+    }
   }
 }
