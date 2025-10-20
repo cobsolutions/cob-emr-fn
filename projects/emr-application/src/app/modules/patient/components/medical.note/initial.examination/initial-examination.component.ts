@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
@@ -31,6 +32,7 @@ export class InitialExaminationComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   type: MedicalNoteType = MedicalNoteType.Initial_Examination;
+  isLoaded: boolean = false;
   private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
@@ -62,12 +64,14 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
-    if (this.medicalNoteId !== undefined)
+    if (this.medicalNoteId !== undefined) {
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+        this.isLoaded = true
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
+    }
   }
   ngOnDestroy() {
     this.finalizeSub?.unsubscribe();
