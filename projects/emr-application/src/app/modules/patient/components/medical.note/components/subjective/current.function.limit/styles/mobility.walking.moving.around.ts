@@ -17,6 +17,11 @@ export const MobilityWalkingMovingAroundStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "useOfAnAssistiveDeviceMobilityWalkingAndMovingAroundCurrentFunctionalLimitationstText",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "walkingMobilityWalkingAndMovingAroundCurrentFunctionalLimitations",
         "style": "margin-left: 10px;"
     },
