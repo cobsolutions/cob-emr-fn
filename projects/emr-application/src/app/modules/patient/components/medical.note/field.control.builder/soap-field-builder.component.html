@@ -9,6 +9,7 @@
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
+     && field.type !== 'select-with-custom'
      && field.type !== 'multiple_select'
      && field.type !== 'custom-mutliple-radio'
      && field.type !== 'billing-code-number'
@@ -129,7 +130,10 @@
     <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
         <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
     </div>
-    <!--select-->
+    <!--select-with-custom-->
+    <div class="d-flex mb-1" *ngIf="field.type === 'select-with-custom'">
+        <select-with-custom [parentForm]="form" [parentFieldName]="field.name" [values]="field.value" [style]="filedStyle!.style"></select-with-custom>
+    </div>
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}

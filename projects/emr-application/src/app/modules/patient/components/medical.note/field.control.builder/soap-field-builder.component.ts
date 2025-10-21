@@ -22,7 +22,6 @@ export class SoapFieldBuilderComponent implements OnInit {
   }
 
   private buildField(field: any) {
-
     this.form.addControl(field.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null));
     // fill Data
     if (!(this.data === null || this.data === undefined) && this.data[this.field.name] !== null) {

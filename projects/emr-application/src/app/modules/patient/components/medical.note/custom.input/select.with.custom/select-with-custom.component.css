@@ -1,0 +1,39 @@
+.select-with-custom {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between select and input */
+  }
+  
+  /* General styling */
+  .select-with-custom select,
+  .select-with-custom input {
+    font-size: 14px;
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+  }
+  
+  /* Control sizes */
+  .select-field,
+  .input-field {
+    height: 38px;          /* ← Adjust height here */
+    line-height: 38px;     /* Centers text vertically */
+  }
+  
+  /* Optional: consistent width */
+  .select-field {
+    min-width: 160px;
+  }
+  
+  .input-field {
+    min-width: 200px;
+  }
+  
+  /* Add subtle hover/focus effect */
+  .select-with-custom select:focus,
+  .select-with-custom input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+  }
+  

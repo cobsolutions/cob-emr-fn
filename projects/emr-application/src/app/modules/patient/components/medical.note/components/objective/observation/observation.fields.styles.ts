@@ -247,8 +247,8 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
-        "name": "observation_fb019654-1f6a-428b-8e17-821c1bd2f96f_bathingselect",
-        "style": "margin-left: 10px;width:200px"
+        "name": "observation_fb019654-1f6a-428b-8e17-821c1bd2f96f_bathing",
+        "style": "margin-left: 600px;width:200px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",

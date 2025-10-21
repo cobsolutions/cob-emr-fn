@@ -130,6 +130,7 @@ import { AuthorizationPatientCaseComponent } from './components/authorization/au
 import { PatientAvatarComponent } from './patient.avatar/patient-avatar.component';
 import { TreatmentDiagnosisComponent } from './components/medical.note/components/subjective/basic/treatment.icd10/treatment-diagnosis.component';
 import { MultipleColumnsCheckboxComponent } from './components/medical.note/custom.input/multiple.columns.checkbox/multiple-columns-checkbox.component';
+import { SelectWithCustomComponent } from './components/medical.note/custom.input/select.with.custom/select-with-custom.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -261,6 +262,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PatientAvatarComponent,
     TreatmentDiagnosisComponent,
     MultipleColumnsCheckboxComponent,
+    SelectWithCustomComponent,
   ],
   imports: [
     CommonModule,
