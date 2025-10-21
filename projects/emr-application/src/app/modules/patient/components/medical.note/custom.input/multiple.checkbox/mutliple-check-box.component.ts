@@ -42,36 +42,35 @@ export class MutlipleCheckBoxComponent implements OnInit {
     });
     if (Array.isArray(this.values)) {
       const naControl = this.values.find((item: any) => item?.val === 'na');
-      if (!naControl) return;
-
-      const naFormControl = this.form.get(naControl.val);
-      if (!naFormControl) return;
-      // --- Case 1: If "N/A" is selected, uncheck all others ---
-      naFormControl.valueChanges.subscribe((v: boolean) => {
-        if (v) {
-          this.values.forEach((item: any) => {
-            if (item.val !== 'na') {
-              const control = this.form.get(item.val);
-              if (control) {
-                control.setValue(false, { emitEvent: false });
-              }
-            }
-          });
-        }
-      });
-      // --- Case 2: If any other is selected, uncheck "N/A" ---
-      this.values.forEach((item: any) => {
-        if (item.val !== 'na') {
-          const control = this.form.get(item.val);
-          if (control) {
-            control.valueChanges.subscribe((v: boolean) => {
-              if (v && naFormControl.value) {
-                naFormControl.setValue(false, { emitEvent: false });
+      if (naControl !== undefined) {
+        const naFormControl = this.form.get(naControl.val);
+        // --- Case 1: If "N/A" is selected, uncheck all others ---
+        naFormControl.valueChanges.subscribe((v: boolean) => {
+          if (v) {
+            this.values.forEach((item: any) => {
+              if (item.val !== 'na') {
+                const control = this.form.get(item.val);
+                if (control) {
+                  control.setValue(false, { emitEvent: false });
+                }
               }
             });
           }
-        }
-      });
+        });
+        // --- Case 2: If any other is selected, uncheck "N/A" ---
+        this.values.forEach((item: any) => {
+          if (item.val !== 'na') {
+            const control = this.form.get(item.val);
+            if (control) {
+              control.valueChanges.subscribe((v: boolean) => {
+                if (v && naFormControl.value) {
+                  naFormControl.setValue(false, { emitEvent: false });
+                }
+              });
+            }
+          }
+        });
+      }
     }
 
 

@@ -3,6 +3,7 @@
     <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
+     && field.type !== 'multiple-columns-checkbox'
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
@@ -106,6 +107,13 @@
             [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
             [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
             [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
+    </div>
+    <!--multiple-columns-checkbox-->
+    <div class="mb-3" *ngIf="field.type === 'multiple-columns-checkbox'">
+        <multiple-columns-checkbox [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
+            [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
+            [contorl_style]="filedStyle?.contorl_style"></multiple-columns-checkbox>
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
