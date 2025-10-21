@@ -1,6 +1,8 @@
 <div [formGroup]="form">
     <!--input-->
-    <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+    <div class="d-flex align-items-center mb-1" *ngIf="
+        field.type !== 'checkbox' 
+     && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
      && field.type !== 'multiple-columns-checkbox'
@@ -63,8 +65,7 @@
             <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
             <label cFormCheckLabel for="na">{{field.display}}</label>
 
-            <a  href="javascript:void(0)" 
-                class="ms-2 learn-more-link" *ngIf="field.isAll" (click)="clickAddAll(field)">
+            <a href="javascript:void(0)" class="ms-2 learn-more-link" *ngIf="field.isAll" (click)="clickAddAll(field)">
                 {{ field.displayText === 'Remove All' ? 'Remove All' : 'Add All' }}
             </a>
         </c-form-check>

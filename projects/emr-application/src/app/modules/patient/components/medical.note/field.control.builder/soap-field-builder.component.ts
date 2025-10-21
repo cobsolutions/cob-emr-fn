@@ -22,11 +22,21 @@ export class SoapFieldBuilderComponent implements OnInit {
   }
 
   private buildField(field: any) {
+
     this.form.addControl(field.name, this.fb.control((field.selectValue !== undefined || field.selectValue !== null) ? field.selectValue : null));
     // fill Data
     if (!(this.data === null || this.data === undefined) && this.data[this.field.name] !== null) {
       this.form.get(this.field.name).setValue(this.data[this.field.name])
+    } else {
+      let defaultValue = null;
+      if (field.type === 'date') {
+        // Format today's date as YYYY-MM-DD
+        const today = new Date();
+        defaultValue = today.toISOString().split('T')[0];
+        this.form.get(field.name)?.setValue(defaultValue)
+      }
     }
+
 
     // render dependents of parent soap field  
     if (field.dependents !== undefined && field.dependents.length > 0) {
