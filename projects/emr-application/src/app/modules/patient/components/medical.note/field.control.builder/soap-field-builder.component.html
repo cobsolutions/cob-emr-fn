@@ -132,7 +132,8 @@
     </div>
     <!--select-with-custom-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select-with-custom'">
-        <select-with-custom [parentForm]="form" [parentFieldName]="field.name" [values]="field.value" [style]="filedStyle!.style"></select-with-custom>
+        <select-with-custom [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [display]="field.display"></select-with-custom>
     </div>
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">

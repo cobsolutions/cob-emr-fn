@@ -12,6 +12,7 @@ export class SelectWithCustomComponent implements OnInit, OnDestroy {
   @Input() parentFieldName: string;
   @Input() values: any
   @Input() style: any
+  @Input() display: any
   form: FormGroup;
   hasCustom: boolean = false;
   customFieldName: string

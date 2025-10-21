@@ -412,7 +412,7 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_d2340984-3fb9-451a-8955-828ab31e8af7_type",
-        "style": "margin-left: 10px;"
+        "style": "margin-left: 575px;width:230px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
