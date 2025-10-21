@@ -1,0 +1,119 @@
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 12px;
+  }
+  
+  /* Each column */
+  .checkbox-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* Each checkbox block */
+  .checkbox-block {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  
+  .checkbox-block:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  /* Checkbox header (main option) */
+  .checkbox-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  .checkbox-header input[type="checkbox"] {
+    accent-color: #2563eb; /* blue accent (modern browsers) */
+    transform: scale(1.1);
+  }
+  
+  /* Dependencies section (when visible) */
+  .dependency-section {
+    margin-top: 10px;
+    padding-left: 22px;
+    border-left: 2px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Text and textarea dependencies */
+  .dep-text input,
+  .dep-textarea textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .dep-text input:focus,
+  .dep-textarea textarea:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  }
+  
+  /* Checkbox dependency */
+  .dep-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .medical-history-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1px;
+    margin-left: 400px;
+    max-width:500px;
+  }
+  
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Two columns */
+    gap: 1px 20px; /* Adjust spacing between items */
+    max-width: 780px;
+    margin-left: 510px;
+  }
+  .checkbox-group-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 1px 20px; /* Adjust spacing between items */
+    margin-left: 510px;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .input-container {
+    margin-left: 24px;
+    margin-top: 5px;
+  }
+  

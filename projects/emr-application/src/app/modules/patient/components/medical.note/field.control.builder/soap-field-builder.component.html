@@ -1,8 +1,11 @@
 <div [formGroup]="form">
     <!--input-->
-    <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+    <div class="d-flex align-items-center mb-1" *ngIf="
+        field.type !== 'checkbox' 
+     && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
+     && field.type !== 'multiple-columns-checkbox'
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
@@ -61,6 +64,10 @@
             [matTooltipPosition]="soapModule ==='billing'? 'above' : null">
             <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
             <label cFormCheckLabel for="na">{{field.display}}</label>
+
+            <a href="javascript:void(0)" class="ms-2 learn-more-link" *ngIf="field.isAll" (click)="clickAddAll(field)">
+                {{ field.displayText === 'Remove All' ? 'Remove All' : 'Add All' }}
+            </a>
         </c-form-check>
     </div>
     <!--radio-->
@@ -101,6 +108,13 @@
             [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
             [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
             [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
+    </div>
+    <!--multiple-columns-checkbox-->
+    <div class="mb-3" *ngIf="field.type === 'multiple-columns-checkbox'">
+        <multiple-columns-checkbox [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
+            [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
+            [contorl_style]="filedStyle?.contorl_style"></multiple-columns-checkbox>
     </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
@@ -267,7 +281,8 @@
             [singleSections]="field.value.singleSections" [dualSections]="field.value.dualSections"></cutom-palpation>
     </div>
     <div *ngIf="field.type === 'icdten'">
-        <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style" [parentForm]="form" [parentFieldName]="field.name">
+        <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style"
+            [parentForm]="form" [parentFieldName]="field.name">
         </icdten>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
