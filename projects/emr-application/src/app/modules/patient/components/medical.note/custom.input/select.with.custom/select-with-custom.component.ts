@@ -25,7 +25,7 @@ export class SelectWithCustomComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({});
     this.customFieldName = `${this.parentFieldName}_custom`;
     this.selectFieldName = `${this.parentFieldName}_select`;
-    this.form.addControl(this.selectFieldName, new FormControl(null));
+    this.form.addControl(this.selectFieldName, new FormControl(this.values[0].val));
     this.form.addControl(this.customFieldName, new FormControl(''));
 
     // Watch for select changes

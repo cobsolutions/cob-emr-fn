@@ -252,8 +252,13 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
-        "name": "observation_38f1d04b-5dfc-420b-8c30-773c49ae1ab0_toiletingselect",
-        "style": "margin-left: 10px;width:200px"
+        "name": "observation_38f1d04b-5dfc-420b-8c30-773c49ae1ab0_toileting",
+        "style": "margin-left: 600px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_3b504ab0-069d-4685-a355-11c63bbb3c26_dressing",
+        "style": "margin-left: 600px;width:200px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
@@ -262,18 +267,13 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
-        "name": "observation_3b504ab0-069d-4685-a355-11c63bbb3c26_dressingselect",
-        "style": "margin-left: 10px;width:200px"
+        "name": "observation_8e1f8a79-7f15-42aa-aa60-f51436f12695_grooming",
+        "style": "margin-left: 600px;width:200px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
-        "name": "observation_8e1f8a79-7f15-42aa-aa60-f51436f12695_groomingselect",
-        "style": "margin-left: 10px;width:200px"
-    },
-    {
-        "label_style": "white-space: nowrap; min-width: 600px;",
-        "name": "observation_83648bb2-3620-40a0-acd1-0a1d3c08a1b3_eatingselect",
-        "style": "margin-left: 10px;width:200px"
+        "name": "observation_83648bb2-3620-40a0-acd1-0a1d3c08a1b3_eating",
+        "style": "margin-left: 600px;width:200px"
     },
     {
         "label_style": "white-space: nowrap",
