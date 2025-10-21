@@ -461,6 +461,11 @@ export var ObservationFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 600px;",
+        "name": "observation_6f0dd3d6-fdd1-4fb2-aad9-f41e34cd1b9d_pitting_description",
+        "style": "margin-left: 10px; width:400px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "observation_48fa0259-a39b-47c6-88ee-5ed8f49fdd24_apprehensionofmovementselect",
         "style": "margin-left: 10px;"
     },
