@@ -1,12 +1,15 @@
 /* Shared container for rows */
 .rom-container {
   display: grid;
-  grid-template-columns: 260px 1fr 1fr; /* Adjust widths here */
+  grid-template-columns: 260px 1fr 1fr;
+  /* Adjust widths here */
   gap: 10px;
   align-items: center;
-  justify-items: start; /* Aligns content to the left */
+  justify-items: start;
+  /* Aligns content to the left */
   width: 100%;
-  max-width: 70%; /* Optional: limit max width */
+  max-width: 70%;
+  /* Optional: limit max width */
   margin: 0 auto;
   background-color: #f9f9f9;
   padding: 8px 12px;
@@ -31,7 +34,8 @@
 /* Dropdown styling */
 .dropdown {
   width: 100%;
-  max-width: 200px;   /* Controls dropdown width */
+  max-width: 200px;
+  /* Controls dropdown width */
   min-width: 120px;
   padding: 5px 6px;
   border-radius: 4px;
@@ -40,7 +44,7 @@
   font-size: 14px;
   text-align: left;
   justify-self: start;
-  margin-left:30px;
+  margin-left: 30px;
 }
 
 /* For single column layout (if needed) */
@@ -70,7 +74,27 @@
   background-color: #f9f9f9;
   font-weight: bold;
 }
+
 .apply-label {
   text-align: center !important;
   font-weight: bold;
+}
+
+.dropdown-with-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-input {
+  width: 200px;
+  padding: 2px 4px;
+  /* smaller vertical padding */
+  font-size: 0.85rem;
+  /* slightly smaller text */
+  height: 26px;
+  /* explicitly control height */
+  line-height: 1.2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
