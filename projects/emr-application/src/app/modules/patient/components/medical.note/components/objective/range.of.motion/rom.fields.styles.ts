@@ -33,6 +33,11 @@ export var ROMFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "range_of_motion_elbowProm",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "range_of_motion_wristArom",
         "style": "margin-left: 10px;"
     },

@@ -30,8 +30,7 @@ export class SelectWithCustomComponent implements OnInit, OnDestroy {
     this.form.addControl(this.customFieldName, new FormControl(''));
 
     // Watch for select changes
-    this.form.get(this.selectFieldName)!.valueChanges.subscribe((value) => {
-      console.log(value)
+    this.form.get(this.selectFieldName)!.valueChanges.subscribe((value) => { 
       if (value === 'Custom')
         this.hasCustom = true
       else
