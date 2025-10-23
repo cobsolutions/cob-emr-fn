@@ -417,6 +417,16 @@ export var StrengthFormStyles: FieldControlStyles[] = [
         "style": "margin-left: 10px;width:300px"
     },
     {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b0b3ff8d-4a4e-41af-a403-e43052f105fb_ knee_pushups_completed",
+        "style": "margin-left: 10px;width:100px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "strength_b0b3ff8d-4a4e-41af-a403-e43052f105fb_ Knee_pushups_completed_empty",
+        "style": "margin-left: 10px;width:300px"
+    },
+    {
         "label_style": "white-space: nowrap; min-width: 600px;",
         "name": "strength_599c8421-ae15-40c7-bcd9-91d3d960662f_deepNeckFlexors",
         "style": "margin-left: 10px;width:300px"
