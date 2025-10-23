@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../services/test/omt-test.service';
 
 @Component({
@@ -11,12 +13,27 @@ export class UefiTestComponent implements OnInit {
 
   uefiForm: FormGroup;
   showInstructions = false;
+  private testName: string = 'uefi';
+  medicalNoteId: number;
+  id: number
   @Output() getResult = new EventEmitter<any>()
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.uefiForm = this.createForm();
   }
 
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.uefiForm.patchValue(data.values);
+        }, 10);
+
+      })
+      console.log('medial Note ID ' + id)
+    })
   }
   createForm(): FormGroup {
     return this.fb.group({
@@ -79,7 +96,14 @@ export class UefiTestComponent implements OnInit {
       "Q20": parseInt(this.uefiForm.value.q20, 10),
     };
     this.omtTestService.uefiTest(result).subscribe(val => {
-      //Finalize ueqd Test  
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.uefiForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }

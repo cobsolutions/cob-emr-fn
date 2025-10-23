@@ -100,7 +100,6 @@ export class SpadiTestComponent implements OnInit {
         }, 10);
 
       })
-      console.log('medial Note ID ' + id)
     })
   }
 
