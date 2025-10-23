@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InvalidFormControls } from 'projects/emr-application/src/app/util/invalid.form';
+import { OMTTestValues } from '../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../services/test/omt-test.service';
 
 @Component({
@@ -10,9 +12,13 @@ import { OmtTestService } from '../../../services/test/omt-test.service';
 })
 export class SpadiTestComponent implements OnInit {
   spadiForm: FormGroup;
-  showInstructions = false;d
+  showInstructions = false;
+  private testName: string = 'spadi';
+  medicalNoteId: number;
+  id: number
   @Output() getResult = new EventEmitter<any>()
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService ) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.spadiForm = this.createForm();
   }
 
@@ -45,6 +51,7 @@ export class SpadiTestComponent implements OnInit {
       Object.keys(this.spadiForm.controls).forEach(key => {
         this.spadiForm.get(key)?.markAsTouched();
       });
+
       console.log(InvalidFormControls.findInvalidControlsRecursive(this.spadiForm))
       return;
     }
@@ -67,8 +74,15 @@ export class SpadiTestComponent implements OnInit {
         "disability8": parseInt(this.spadiForm.value.disability8, 10)
       }
     }
-    this.omtTestService.spadiTest(result).subscribe(val=>{
-      console.log(JSON.stringify(val))
+    this.omtTestService.spadiTest(result).subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.spadiForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
@@ -77,6 +91,17 @@ export class SpadiTestComponent implements OnInit {
     this.spadiForm.reset();
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.spadiForm.patchValue(data.values);
+        }, 10);
+
+      })
+      console.log('medial Note ID ' + id)
+    })
   }
 
 }
