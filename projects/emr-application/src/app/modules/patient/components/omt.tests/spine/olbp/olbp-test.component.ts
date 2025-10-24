@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -10,7 +12,10 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class OlbpTestComponent implements OnInit {
   oswestryForm: FormGroup;
   showInstructions = false;
+  private testName: string = 'spine-olbp';
   @Output() getResult = new EventEmitter<any>()
+  medicalNoteId: number;
+  id: number
   sections = [
     "Pain Intensity",
     "Personal Care (Washing, Dressing, etc.)",
@@ -23,11 +28,23 @@ export class OlbpTestComponent implements OnInit {
     "Traveling",
     "Employment / Homemaking"
   ];
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.oswestryForm = this.createForm();
   }
 
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.oswestryForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
   createForm(): FormGroup {
     return this.fb.group({
@@ -73,6 +90,14 @@ export class OlbpTestComponent implements OnInit {
       "Q10": parseInt(this.oswestryForm.value.q10, 10)
     };
     this.omtTestService.spine(result, "olbp").subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.oswestryForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
