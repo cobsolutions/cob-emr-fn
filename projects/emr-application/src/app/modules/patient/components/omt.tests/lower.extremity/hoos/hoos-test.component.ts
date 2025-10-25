@@ -1,6 +1,8 @@
 // hoos-survey.component.ts
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -13,6 +15,9 @@ export class HoosTestComponent implements OnInit {
   showInstructions = false;
   calculatedScores: any = null;
   showCompletionError = false;
+  medicalNoteId: number;
+  id: number
+  testName: string = 'lower-extremity-hoos';
   @Output() getResult = new EventEmitter<any>()
 
   // Question options
@@ -49,7 +54,9 @@ export class HoosTestComponent implements OnInit {
     { value: 4, text: 'Totally' }
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.hoosForm = this.createForm();
   }
   symptoms = this.rangeKeys('S', 5);
@@ -85,6 +92,16 @@ export class HoosTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.hoosForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
 
   calculateScore(): void {
@@ -102,6 +119,14 @@ export class HoosTestComponent implements OnInit {
 
 
     this.omtTestService.lowerExtremity(result, 'oos').subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.hoosForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
