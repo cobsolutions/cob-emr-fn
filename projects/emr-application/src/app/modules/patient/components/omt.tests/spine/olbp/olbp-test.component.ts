@@ -26,7 +26,7 @@ export class OlbpTestComponent implements OnInit {
     "Sleeping",
     "Social Life",
     "Traveling",
-    "Employment / Homemaking"
+    "Changing Degree of Pain"
   ];
   constructor(private fb: FormBuilder
     , private omtTestService: OmtTestService
@@ -47,10 +47,7 @@ export class OlbpTestComponent implements OnInit {
     })
   }
   createForm(): FormGroup {
-    return this.fb.group({
-      // Patient Satisfaction - Pain Level
-      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-
+    return this.fb.group({  
       // Oswestry sections
       q1: [null, Validators.required],
       q2: [null, Validators.required],

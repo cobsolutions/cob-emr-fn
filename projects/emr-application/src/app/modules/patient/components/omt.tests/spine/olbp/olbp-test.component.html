@@ -33,33 +33,7 @@
   
     <form [formGroup]="oswestryForm" (ngSubmit)="calculateScore()">
       <!-- Patient Satisfaction Section -->
-      <div class="form-section">
-        <div class="section-header">
-          <strong>Patient Satisfaction</strong>
-        </div>
-        
-        <div class="question">
-          <label>
-            <strong><span class="asterisk">*</span></strong>
-            1. Please rate your pain level with activity
-          </label>
-        </div>
-        
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="painLevel" [value]="level">
-          </label>
-        </div>
-        
-        <div class="scale-labels">
-          <span class="scale-start">NO PAIN</span>
-          <span class="scale-end">VERY SEVERE PAIN</span>
-        </div>
-        
-        <div *ngIf="oswestryForm.get('painLevel')?.invalid && oswestryForm.get('painLevel')?.touched" class="error-message">
-          Please select a pain level
-        </div>
-      </div>
+     
   
       <!-- Oswestry Sections -->
       <div *ngFor="let section of sections; let i = index" class="form-section">
@@ -71,11 +45,11 @@
           <!-- Section 1: Pain Intensity -->
           <div *ngIf="i === 0">
             <label><input type="radio" formControlName="q1" value="0"> I can tolerate the pain I have without having to use pain medication.</label><br>
-            <label><input type="radio" formControlName="q1" value="2"> The pain is bad, but I can manage without having to take pain medication.</label><br>
-            <label><input type="radio" formControlName="q1" value="4"> Pain medication provides me with complete relief from pain.</label><br>
-            <label><input type="radio" formControlName="q1" value="6"> Pain medication provides me with moderate relief from pain.</label><br>
-            <label><input type="radio" formControlName="q1" value="8"> Pain medication provides me with little relief from pain.</label><br>
-            <label><input type="radio" formControlName="q1" value="10"> Pain medication has no effect on my pain.</label>
+            <label><input type="radio" formControlName="q1" value="1"> The pain is bad, but I can manage without having to take pain medication.</label><br>
+            <label><input type="radio" formControlName="q1" value="2"> Pain medication provides me with complete relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="3"> Pain medication provides me with moderate relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="4"> Pain medication provides me with little relief from pain.</label><br>
+            <label><input type="radio" formControlName="q1" value="5"> Pain medication has no effect on my pain.</label>
           </div>
           
           <!-- Section 2: Personal Care -->
@@ -148,14 +122,12 @@
             <label><input type="radio" formControlName="q9" value="5"> My pain prevents all travel except for visits to the physician/therapist or hospital.</label>
           </div>
           <div *ngIf="i === 9">
-            <label><input type="radio" formControlName="q10" value="0"> My normal homemaking/job activities do not cause pain.</label><br>
-            <label><input type="radio" formControlName="q10" value="1"> My normal homemaking/job activities increase my pain, 
-              but I can still perform all that is required of me.</label><br>
-            <label><input type="radio" formControlName="q10" value="2">  can perform most of my homemaking/job duties, 
-              but pain prevents me from performing more physically stressful activities (eg, lifting, vacuuming).</label><br>
-            <label><input type="radio" formControlName="q10" value="3"> Pain prevents me from doing anything but light duties.</label><br>
-            <label><input type="radio" formControlName="q10" value="4"> Pain prevents me from doing even light duties.</label><br>
-            <label><input type="radio" formControlName="q10" value="5"> Pain prevents me from performing any job or homemaking chores.</label>
+            <label><input type="radio" formControlName="q10" value="0">My pain is rapidly getting better.</label><br>
+            <label><input type="radio" formControlName="q10" value="1">My pain fluctuates but is definitely getting better.</label><br>
+            <label><input type="radio" formControlName="q10" value="2">My pain seems to be getting better but improvement is slow.</label><br>
+            <label><input type="radio" formControlName="q10" value="3">My pain is neither getting better or worse</label><br>
+            <label><input type="radio" formControlName="q10" value="4">My pain is gradually worsening.</label><br>
+            <label><input type="radio" formControlName="q10" value="5">My pain is rapidly worsening.</label>
           </div>
         </div>
         
