@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -12,6 +14,9 @@ export class AbcTestComponent implements OnInit {
   totalScore: number | null = null;
   interpretation: string = '';
   showInstructions = false;
+  medicalNoteId: number;
+  id: number
+  testName:string = 'balance-abc'
   @Output() getResult = new EventEmitter<any>()
   questions = [
     { id: 'Q1', text: '1. walk around the house?' },
@@ -34,13 +39,25 @@ export class AbcTestComponent implements OnInit {
 
   options = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.abcForm = this.createForm();
   }
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.abcForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
 
   }
   createForm(): FormGroup {
@@ -68,6 +85,14 @@ export class AbcTestComponent implements OnInit {
     }
     const result = this.fillAnswers()
     this.omtTestService.balance(result).subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.abcForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
