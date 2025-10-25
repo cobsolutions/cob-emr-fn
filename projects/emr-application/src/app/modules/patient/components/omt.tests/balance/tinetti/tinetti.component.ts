@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -10,6 +12,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class TinettiComponent implements OnInit {
   tinettiForm: FormGroup;
   showInstructions = false;
+  medicalNoteId: number;
+  id: number
+  testName: string = 'balance-tinetti';
   @Output() getResult = new EventEmitter<any>()
   // Balance test items
   balanceItems = [
@@ -207,22 +212,24 @@ export class TinettiComponent implements OnInit {
     }
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService:OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.tinettiForm = this.createForm();
   }
   createForm(): FormGroup {
     const formGroup: any = {};
-    
+
     // Create form controls for all balance items
     for (let i = 1; i <= 10; i++) {
       formGroup[`B${i}`] = [null, Validators.required];
     }
-    
+
     // Create form controls for all gait items
     for (let i = 1; i <= 10; i++) {
       formGroup[`G${i}`] = [null, Validators.required];
     }
-    
+
     return this.fb.group(formGroup);
   }
 
@@ -239,12 +246,20 @@ export class TinettiComponent implements OnInit {
     }
     const result = this.fillAnswers()
 
-    
+
     this.omtTestService.balance(result).subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.tinettiForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
-  private fillAnswers(){
+  private fillAnswers() {
     const answers: Record<string, number> = {};
     for (var i = 1; i <= 10; i++) {
       const key = `${'B' + i}`
@@ -262,6 +277,17 @@ export class TinettiComponent implements OnInit {
     this.tinettiForm.reset();
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.tinettiForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
+
 
 }
