@@ -8,6 +8,28 @@ export var NeuroVascularStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_complaintsOfAnyRadicularSymptomsInEitherExtremityreflexes",
+        "style": "margin-left: 30px;"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_complaintsOfAnyRadicularSymptomsInEitherExtremityreflexestext",
+        "style": "margin-left: 50px; width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_complaintsOfAnyRadicularSymptomsInEitherExtremitySensory",
+        "style": "margin-left: 30px;"
+    },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "neuro_vascular_complaintsOfAnyRadicularSymptomsInEitherExtremitySensoryText",
+        "style": "margin-left: 50px; width:300px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "neuro_vascular_cranialNerveScreen",
         "style": "margin-left: 10px;"
     },

@@ -1,0 +1,45 @@
+<div [formGroup]="form" class="form-container">
+  <div class="form-row-wrapper" *ngFor="let ctrl of controls">
+    <!-- Main row -->
+    <div class="form-row">
+      <label class="field-label">{{ ctrl.label }}</label>
+      <div class="dropdown-with-custom">
+        <select [formControlName]="toCamelCase(ctrl.label)">
+          <option *ngFor="let opt of ctrl.value" [value]="opt.val">
+            {{ opt.view }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Dependent section appears below -->
+    <div
+      class="dependent-section"
+      *ngIf="form.get(toCamelCase(ctrl.label) + '_dependent')"
+    >
+      <div class="dependent-inner">
+        <!-- Multi-select -->
+        <select
+          [formControlName]="toCamelCase(ctrl.label) + '_dependent'"
+          class="dependent-select"
+          multiple
+          size="3"
+        >
+          <option *ngFor="let opt of getDependentOptions(ctrl.label)" [value]="opt">
+            {{ opt }}
+          </option>
+        </select>
+
+        <!-- Text aligned under multi-select -->
+        <div class="dependent-text-wrapper">
+          <input
+            type="text"
+            class="dependent-input"
+            placeholder="Enter details..."
+            [formControlName]="toCamelCase(ctrl.label) + '_text'"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

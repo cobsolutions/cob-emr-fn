@@ -131,6 +131,7 @@ import { PatientAvatarComponent } from './patient.avatar/patient-avatar.componen
 import { TreatmentDiagnosisComponent } from './components/medical.note/components/subjective/basic/treatment.icd10/treatment-diagnosis.component';
 import { MultipleColumnsCheckboxComponent } from './components/medical.note/custom.input/multiple.columns.checkbox/multiple-columns-checkbox.component';
 import { SelectWithCustomComponent } from './components/medical.note/custom.input/select.with.custom/select-with-custom.component';
+import { CranialNerveComponent } from './components/medical.note/custom.input/strength/cranial.nerve/cranial-nerve.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -263,6 +264,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TreatmentDiagnosisComponent,
     MultipleColumnsCheckboxComponent,
     SelectWithCustomComponent,
+    CranialNerveComponent,
   ],
   imports: [
     CommonModule,
