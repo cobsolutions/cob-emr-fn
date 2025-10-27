@@ -104,6 +104,18 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStressAtKneeFlex",
         "style": "margin-left: 10px;"
     },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress0AtKneeFlex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress30AtKneeFlex",
+        "style": "margin-left: 10px;"
+    },
+    //
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStress0AtKneeFlex",
