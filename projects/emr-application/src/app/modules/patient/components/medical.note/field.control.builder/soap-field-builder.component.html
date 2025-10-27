@@ -3,6 +3,7 @@
     <div class="d-flex align-items-center mb-1" *ngIf="
         field.type !== 'checkbox' 
      && field.type !== 'cranial-nerve' 
+     && field.type !== 'right-left-check' 
      && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
@@ -258,6 +259,11 @@
     <div *ngIf="field.type === 'cranial-nerve'">
         <cranial-nerve [parentForm]="form" [parentFieldName]="field.name" [controls]="field.value.controls"
             [dependentOptions]="field.value.dependentOptions"></cranial-nerve>
+    </div>
+    <div *ngIf="field.type === 'right-left-check'">
+        <right-left-check [parentForm]="form" [parentFieldName]="field.name" [controlR]="field.value.controlR"
+            [controlL]="field.value.controlL">
+        </right-left-check>
     </div>
     <div *ngIf="field.type === 'hand-rom'">
         <hand-rom [parentForm]="form" [parentFieldName]="field.name" [controlR1]="field.value.controlR1"

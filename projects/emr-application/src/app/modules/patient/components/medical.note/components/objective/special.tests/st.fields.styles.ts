@@ -186,6 +186,11 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_da4d89bc-906b-49ff-8eaa-8b93b388bbb4_specialtestspatellarcompressiontesttoprightleftselects",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "special_tests_ea07dc69-4dd0-4ebb-b8db-88895253a2e6_patellarPassiveMobility",
         "style": "margin-left: 10px;"
     },
