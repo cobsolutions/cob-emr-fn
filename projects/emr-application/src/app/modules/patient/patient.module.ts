@@ -133,6 +133,7 @@ import { MultipleColumnsCheckboxComponent } from './components/medical.note/cust
 import { SelectWithCustomComponent } from './components/medical.note/custom.input/select.with.custom/select-with-custom.component';
 import { CranialNerveComponent } from './components/medical.note/custom.input/strength/cranial.nerve/cranial-nerve.component';
 import { RightLeftCheckComponent } from './components/medical.note/custom.input/strength/right.left.radios/right-left-check.component';
+import { AssessmentProblemComponent } from './components/medical.note/components/assessment/problems/assessment-problem.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -267,6 +268,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SelectWithCustomComponent,
     CranialNerveComponent,
     RightLeftCheckComponent,
+    AssessmentProblemComponent,
   ],
   imports: [
     CommonModule,

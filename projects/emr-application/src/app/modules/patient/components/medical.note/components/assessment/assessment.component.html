@@ -10,7 +10,7 @@
     <c-card class="mb-2">
         <c-card-header>Problem List</c-card-header>
         <c-card-body>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <div class="goal-form-container">
                     <div class="goal-input">
                         <label>Problem Description</label>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <!-- Table -->
+            
             <table class="table table-sm p-1 mb-3">
                 <thead>
                     <tr>
@@ -43,7 +43,11 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            <assessment-problem (problemAdded)="onProblemAdded($event)"
+            (problemEdited)="onProblemEdited($event)"
+            (problemRemoved)="onProblemRemoved($event)"
+            [problems] = "problems"></assessment-problem>
         </c-card-body>
     </c-card>
 

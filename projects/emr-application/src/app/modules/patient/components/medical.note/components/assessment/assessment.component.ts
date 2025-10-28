@@ -18,14 +18,14 @@ export class AssessmentComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() assessmentData: any
-  @Input() noteType:string
+  @Input() noteType: string
   problemsArray: FormArray;
   goalsArray: FormArray;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private fieldDependentsService: FieldDependentsService) { }
   ngOnInit(): void {
-    this.medialNoteService.find('assessment',this.noteType).subscribe(fields => {
+    this.medialNoteService.find('assessment', this.noteType).subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
       this.buildForm();
@@ -45,6 +45,22 @@ export class AssessmentComponent implements OnInit {
       this.problems.push(new FormControl(problemValue)); // Add value to FormArray
       input.value = ''; // Clear input after adding
     }
+  }
+  onProblemAdded(problemValue: string) {
+    this.problems.push(new FormControl(problemValue));
+    console.log('✅ Problem added:', problemValue);
+  }
+
+  /** Handle when a problem is edited in child */
+  onProblemEdited(event: { index: number; value: string }) {
+    this.problems.at(event.index).setValue(event.value);
+    console.log(`✏️ Problem #${event.index} updated to:`, event.value);
+  }
+
+  /** Handle when a problem is removed in child */
+  onProblemRemoved(index: number) {
+    this.problems.removeAt(index);
+    console.log(`🗑 Problem #${index} removed`);
   }
 
   removeProblem(index: number) {
