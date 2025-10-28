@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -13,6 +15,9 @@ export class KoosTestComponent implements OnInit {
   calculatedScores: any = null;
   showCompletionError = false;
   @Output() getResult = new EventEmitter<any>()
+  medicalNoteId: number;
+  id: number
+  testName: string = 'lower-extremity-koos'
   // Question options
   painLevelOptions = Array.from({ length: 11 }, (_, i) => i);
   frequencyOptions = [
@@ -46,7 +51,9 @@ export class KoosTestComponent implements OnInit {
     { value: 3, text: 'Severely' },
     { value: 4, text: 'Totally' }
   ];
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.koosForm = this.createForm();
   }
 
@@ -58,6 +65,16 @@ export class KoosTestComponent implements OnInit {
     this.showInstructions = !this.showInstructions;
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.koosForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
   symptoms = this.rangeKeys('S', 7);
   pain = this.rangeKeys('P', 9);
@@ -97,6 +114,14 @@ export class KoosTestComponent implements OnInit {
 
 
     this.omtTestService.lowerExtremity(result, 'oos').subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.koosForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }

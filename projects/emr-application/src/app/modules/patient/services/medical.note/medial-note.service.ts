@@ -14,6 +14,7 @@ export class MedialNoteService {
   private soapBaseUrl = environment.baseURL + 'soap'
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
   private finalizeSubject = new Subject<boolean>();
+  public medicalNoteID$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   finalize$ = this.finalizeSubject.asObservable();
   
   constructor(private httpClient: HttpClient) { }

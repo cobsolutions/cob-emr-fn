@@ -1,42 +1,104 @@
 .form-container {
-    width: 700px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-family: Arial, sans-serif;
-    margin-left:  550px;
-    background-color: #f9f9f9;
-    padding: auto;
-  }
-  
-  .form-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .field-label {
-    padding: 4px 8px;
-    width: 300px;
-    font-weight: bold;
-  }
-  
-  select {
-    padding: 4px 8px;
-    width: 180px;
-  }
-  
-  .side-labels {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0 5px;
-    padding-left: 290px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .side-label {
-    width: 180px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+/* Top controls */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.field-label {
+  width: 220px;
+  font-weight: bold;
+  color: #333;
+}
+
+select {
+  padding: 5px 8px;
+  width: 180px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Section titles (Right/Left) */
+.section-labels {
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Two-column layout */
+.two-column-layout {
+  display: flex;
+  justify-content: space-around;
+  gap: 60px;
+}
+
+/* Each column */
+.column-section {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.column-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #0056b3;
+  text-transform: uppercase;
+}
+
+.column-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Dropdown + input combo */
+.dropdown-with-custom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-input {
+  width: 120px;
+  padding: 4px 6px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+/* Comment section */
+.comment-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.comment-section textarea {
+  width: 70%;
+  height: 80px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 14px;
+}

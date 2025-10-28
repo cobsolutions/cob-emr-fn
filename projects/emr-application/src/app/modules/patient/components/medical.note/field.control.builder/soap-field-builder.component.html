@@ -2,6 +2,8 @@
     <!--input-->
     <div class="d-flex align-items-center mb-1" *ngIf="
         field.type !== 'checkbox' 
+     && field.type !== 'cranial-nerve' 
+     && field.type !== 'right-left-check' 
      && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
@@ -9,6 +11,7 @@
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
+     && field.type !== 'select-with-custom'
      && field.type !== 'multiple_select'
      && field.type !== 'custom-mutliple-radio'
      && field.type !== 'billing-code-number'
@@ -129,7 +132,11 @@
     <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
         <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
     </div>
-    <!--select-->
+    <!--select-with-custom-->
+    <div class="d-flex mb-1" *ngIf="field.type === 'select-with-custom'">
+        <select-with-custom [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [display]="field.display"></select-with-custom>
+    </div>
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
@@ -248,6 +255,15 @@
         <rom-test-right-left [parentForm]="form" [parentFieldName]="field.name" [columns]="field.value.columns"
             [controlR]="field.value.controlR" [controlL]="field.value.controlL" [rightLabel]="field.value.rightLabel"
             [leftLabel]="field.value.leftLabel"></rom-test-right-left>
+    </div>
+    <div *ngIf="field.type === 'cranial-nerve'">
+        <cranial-nerve [parentForm]="form" [parentFieldName]="field.name" [controls]="field.value.controls"
+            [dependentOptions]="field.value.dependentOptions"></cranial-nerve>
+    </div>
+    <div *ngIf="field.type === 'right-left-check'">
+        <right-left-check [parentForm]="form" [parentFieldName]="field.name" [controlR]="field.value.controlR"
+            [controlL]="field.value.controlL">
+        </right-left-check>
     </div>
     <div *ngIf="field.type === 'hand-rom'">
         <hand-rom [parentForm]="form" [parentFieldName]="field.name" [controlR1]="field.value.controlR1"

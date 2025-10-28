@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -11,6 +13,9 @@ export class NdiTestComponent implements OnInit {
   ndiForm: FormGroup;
   showInstructions = false;
   @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'spine-ndi';
+  medicalNoteId: number;
+  id: number
   // Section titles for the form
   sections = [
     "Pain Intensity",
@@ -25,7 +30,9 @@ export class NdiTestComponent implements OnInit {
     "Recreation"
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.ndiForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -73,6 +80,14 @@ export class NdiTestComponent implements OnInit {
       "Q10": parseInt(this.ndiForm.value.q10, 10)
     };
     this.omtTestService.spine(result, "ndi").subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.ndiForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
@@ -82,6 +97,16 @@ export class NdiTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.ndiForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
 
 }

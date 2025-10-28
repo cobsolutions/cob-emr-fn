@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -10,6 +12,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class BergTestComponent implements OnInit {
   bergForm: FormGroup;
   showInstructions = false;
+  medicalNoteId: number;
+  id: number
+  testName: string = 'balance-berg';
   @Output() getResult = new EventEmitter<any>()
   // Berg Balance Scale items
   bergItems = [
@@ -182,7 +187,9 @@ export class BergTestComponent implements OnInit {
       ]
     }
   ];
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.bergForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -213,6 +220,14 @@ export class BergTestComponent implements OnInit {
 
 
     this.omtTestService.balance(result).subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.bergForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
@@ -229,6 +244,16 @@ export class BergTestComponent implements OnInit {
     this.bergForm.reset();
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.bergForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
 
 }

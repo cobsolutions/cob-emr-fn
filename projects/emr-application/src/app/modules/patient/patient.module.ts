@@ -130,6 +130,11 @@ import { AuthorizationPatientCaseComponent } from './components/authorization/au
 import { PatientAvatarComponent } from './patient.avatar/patient-avatar.component';
 import { TreatmentDiagnosisComponent } from './components/medical.note/components/subjective/basic/treatment.icd10/treatment-diagnosis.component';
 import { MultipleColumnsCheckboxComponent } from './components/medical.note/custom.input/multiple.columns.checkbox/multiple-columns-checkbox.component';
+import { SelectWithCustomComponent } from './components/medical.note/custom.input/select.with.custom/select-with-custom.component';
+import { CranialNerveComponent } from './components/medical.note/custom.input/strength/cranial.nerve/cranial-nerve.component';
+import { RightLeftCheckComponent } from './components/medical.note/custom.input/strength/right.left.radios/right-left-check.component';
+import { AssessmentProblemComponent } from './components/medical.note/components/assessment/problems/assessment-problem.component';
+import { AssessmentGoalsComponent } from './components/medical.note/components/assessment/goals/assessment-goals.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -261,6 +266,11 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PatientAvatarComponent,
     TreatmentDiagnosisComponent,
     MultipleColumnsCheckboxComponent,
+    SelectWithCustomComponent,
+    CranialNerveComponent,
+    RightLeftCheckComponent,
+    AssessmentProblemComponent,
+    AssessmentGoalsComponent,
   ],
   imports: [
     CommonModule,

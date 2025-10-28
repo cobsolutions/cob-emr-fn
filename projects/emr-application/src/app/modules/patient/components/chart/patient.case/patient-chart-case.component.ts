@@ -191,6 +191,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.patientRecord = false;
       this.medicalNoteId = medicalNoteResponse.medicalNotId;
       this.errorMessage = undefined
+      this.medialNoteService.medicalNoteID$.next(medicalNoteResponse.medicalNotId)
     }, error => {
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error.message;
@@ -202,8 +203,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
-    if (val === 'Complete') {
+    if (val === 'Complete') {      
       this.completeMedicalNote(entityId, status)
+      this.medialNoteService.medicalNoteID$.next(this.medicalNoteId)
     }
     if (val === 'View Pdf') {
       this.viewPDFVisibility = true;

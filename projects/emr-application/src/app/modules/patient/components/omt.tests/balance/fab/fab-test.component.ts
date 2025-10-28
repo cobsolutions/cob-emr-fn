@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -10,6 +12,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class FabTestComponent implements OnInit {
   fabForm: FormGroup;
   showInstructions = false;
+  medicalNoteId: number;
+  id: number
+  testName: string = 'balance-fab'
   @Output() getResult = new EventEmitter<any>()
 
   // FAB Scale test items
@@ -127,17 +132,19 @@ export class FabTestComponent implements OnInit {
     }
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService:OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.fabForm = this.createForm();
   }
   createForm(): FormGroup {
     const formGroup: any = {};
-    
+
     // Create form controls for all 10 FAB items
     for (let i = 1; i <= 10; i++) {
       formGroup[`Q${i}`] = [null, Validators.required];
     }
-    
+
     return this.fb.group(formGroup);
   }
 
@@ -154,8 +161,16 @@ export class FabTestComponent implements OnInit {
     }
     const result = this.fillAnswers()
     console.log(JSON.stringify(result))
-    
+
     this.omtTestService.balance(result).subscribe(val => {
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.fabForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
@@ -173,7 +188,17 @@ export class FabTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.fabForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
+
   }
- 
+
 }

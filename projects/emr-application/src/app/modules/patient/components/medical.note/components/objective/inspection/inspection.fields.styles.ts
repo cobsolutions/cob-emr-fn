@@ -88,13 +88,29 @@ export var InspectionFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_surgicalprecautionsselect",
+        "style": "margin-left: 600px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarMobility",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarMobility_txt",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarType",
         "style": "margin-left: 10px;"
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_scarType_select",
+        "style": "margin-left: 600px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
@@ -103,13 +119,23 @@ export var InspectionFormStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
-        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundDescription_txt",
         "style": "margin-left: 10px;"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
         "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements",
         "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements_width",
+        "style": "margin-left: 20px; width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",
+        "name": "inspection_2874b347-1608-41fe-84db-95cb5e1f66d9_woundMeasurements_length",
+        "style": "margin-left: 20px; width:200px"
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;margin-left: 150px;",

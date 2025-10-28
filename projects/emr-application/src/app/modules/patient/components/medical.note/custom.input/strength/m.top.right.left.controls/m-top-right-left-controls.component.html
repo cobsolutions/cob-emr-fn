@@ -1,46 +1,78 @@
 <div class="assessment-table" [formGroup]="form">
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th *ngFor="let column of columns">{{ column.name }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let controlLabel of movementLabels">
-          <td>{{ controlLabel }}</td>
-          <td *ngFor="let column of columns">
-            <ng-container *ngFor="let ctrl of getControls(column.name, controlLabel)">
-              <ng-container [ngSwitch]="ctrl.type">
-                
-                <!-- SELECT -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="movement-header"></th>
+        <th *ngFor="let column of columns" class="column-header">
+          {{ column.name }}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let controlLabel of movementLabels">
+        <!-- Movement label -->
+        <td class="movement-label">{{ controlLabel }}</td>
+
+        <!-- Right / Left columns -->
+        <td *ngFor="let column of columns" class="column-cell">
+          <ng-container *ngFor="let ctrl of getControls(column.name, controlLabel)">
+            <ng-container [ngSwitch]="ctrl.type">
+              <!-- SELECT -->
+              <div *ngSwitchCase="'select'" class="control-block">
                 <select
-                  *ngSwitchCase="'select'"
                   class="input-select"
                   [formControlName]="
                     column.name + '_' + toCamelCase(ctrl.label) + '_select_' + parentFieldName
                   "
                 >
-                  <option *ngFor="let opt of ctrl.value" [value]="opt.val">{{ opt.view }}</option>
+                  <option *ngFor="let opt of ctrl.value" [value]="opt.val">
+                    {{ opt.view }}
+                  </option>
                 </select>
-  
-                <!-- INPUT -->
+
                 <input
-                  *ngSwitchCase="'input'"
+                  *ngIf="
+                    form.get(
+                      column.name +
+                        '_' +
+                        toCamelCase(ctrl.label) +
+                        '_select_' +
+                        parentFieldName +
+                        '_custom'
+                    ) && ctrl.type === 'select'
+                  "
+                  type="text"
+                  class="custom-input"
+                  placeholder="Custom"
+                  [formControlName]="
+                    column.name +
+                      '_' +
+                      toCamelCase(ctrl.label) +
+                      '_select_' +
+                      parentFieldName +
+                      '_custom'
+                  "
+                />
+              </div>
+
+              <!-- INPUT -->
+              <div *ngSwitchCase="'input'" class="control-block">
+                <input
                   class="input-field"
                   type="text"
                   [formControlName]="
                     column.name + '_' + toCamelCase(ctrl.label) + '_input_' + parentFieldName
                   "
                 />
-  
-                <!-- Fallback -->
-                <span *ngSwitchDefault>Unsupported</span>
-              </ng-container>
+              </div>
+
+              <!-- Fallback -->
+              <span *ngSwitchDefault>Unsupported</span>
             </ng-container>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
+import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { OmtTestService } from '../../../../services/test/omt-test.service';
 
 @Component({
@@ -11,6 +13,9 @@ export class FaamTestComponent implements OnInit {
   faamSportsForm: FormGroup;
   showInstructions = false;
   @Output() getResult = new EventEmitter<any>()
+  medicalNoteId: number;
+  id: number
+  testName: string = 'lower-extremity-faam'
   // Activity descriptions for the form
   activities = [
     "Running",
@@ -30,7 +35,9 @@ export class FaamTestComponent implements OnInit {
     { value: 0, text: 'Unable to Do' },
     { value: 5, text: 'N/A' }
   ];
-  constructor(private fb: FormBuilder,private omtTestService: OmtTestService) {
+  constructor(private fb: FormBuilder
+    , private omtTestService: OmtTestService
+    , private medicalNotService: MedialNoteService) {
     this.faamSportsForm = this.createForm();
   }
 
@@ -51,6 +58,16 @@ export class FaamTestComponent implements OnInit {
     this.showInstructions = !this.showInstructions;
   }
   ngOnInit(): void {
+    this.medicalNotService.medicalNoteID$.subscribe(id => {
+      this.medicalNoteId = id
+      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+        this.id = data?.id
+        setTimeout(() => {
+          this.faamSportsForm.patchValue(data.values);
+        }, 10);
+
+      })
+    })
   }
   calculateScore(): void {
     if (this.faamSportsForm.invalid) {
@@ -60,8 +77,17 @@ export class FaamTestComponent implements OnInit {
       });
       return;
     }
-    const result= this.fillAnswers();
-    this.omtTestService.lowerExtremity(result,'faam').subscribe(val=>{
+    const result = this.fillAnswers();
+    this.omtTestService.lowerExtremity(result, 'faam').subscribe(val => {
+
+      var omtTestValues: OMTTestValues = {
+        id: this.id,
+        medicalNoteId: this.medicalNoteId,
+        testName: this.testName,
+        values: this.faamSportsForm.getRawValue()
+      };
+      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
+      })
       this.getResult.emit(val)
     })
   }
@@ -69,7 +95,7 @@ export class FaamTestComponent implements OnInit {
   resetForm(): void {
     this.faamSportsForm.reset();
   }
-  private fillAnswers():any {
+  private fillAnswers(): any {
     var faamResult = {
       "answers": {
         "Q1": parseInt(this.faamSportsForm.value.q1, 10),
