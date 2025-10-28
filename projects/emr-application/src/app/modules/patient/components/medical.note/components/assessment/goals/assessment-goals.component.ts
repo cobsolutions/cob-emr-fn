@@ -16,6 +16,7 @@ export class AssessmentGoalsComponent implements OnInit {
   showModal = false;
   editIndex: number | null = null;
   showCustomPeriodInput = false;
+  showCustomMetInput = false;
   goalForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -25,17 +26,27 @@ export class AssessmentGoalsComponent implements OnInit {
       description: new FormControl(goal?.description || ''),
       term: new FormControl(goal?.term || 'Short Term'),
       period: new FormControl(goal?.period || '1-week'),
-      met: new FormControl(goal?.met || 'N/A'),
-      customPeriod: new FormControl(goal?.customPeriod || '')
+      met: new FormControl(goal?.met || '0%'),
+      customPeriod: new FormControl(goal?.customPeriod || ''),
+      customMet: new FormControl(goal?.customMet || '')
     });
 
-    // Show custom field if "Custom" selected
+    // Initialize custom field visibility
     this.showCustomPeriodInput = this.goalForm.get('period')?.value === 'custom';
+    this.showCustomMetInput = this.goalForm.get('met')?.value === 'custom';
 
+    // Subscribe to select changes
     this.goalForm.get('period')?.valueChanges.subscribe((value) => {
       this.showCustomPeriodInput = value === 'custom';
       if (value !== 'custom') {
         this.goalForm.patchValue({ customPeriod: '' }, { emitEvent: false });
+      }
+    });
+
+    this.goalForm.get('met')?.valueChanges.subscribe((value) => {
+      this.showCustomMetInput = value === 'custom';
+      if (value !== 'custom') {
+        this.goalForm.patchValue({ customMet: '' }, { emitEvent: false });
       }
     });
   }
