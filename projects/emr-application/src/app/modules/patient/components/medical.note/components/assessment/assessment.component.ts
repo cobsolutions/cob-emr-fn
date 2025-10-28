@@ -63,6 +63,21 @@ export class AssessmentComponent implements OnInit {
     console.log(`🗑 Problem #${index} removed`);
   }
 
+  onGoalAdded(goalValue: any) {
+    // goalValue = { description, term, period, met }
+    this.goals.push(this.fb.group(goalValue));
+  }
+
+  onGoalEdited(event: { index: number; value: any }) {
+    const goalGroup = this.goals.at(event.index);
+    if (goalGroup) {
+      goalGroup.setValue(event.value);
+    }
+  }
+
+  onGoalRemoved(index: number) {
+    this.goals.removeAt(index);
+  }
   removeProblem(index: number) {
     this.problems.removeAt(index); // Remove value from FormArray
   }

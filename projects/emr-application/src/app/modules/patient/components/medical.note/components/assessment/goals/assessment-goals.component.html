@@ -1,0 +1,91 @@
+<div class="form-group">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5></h5>
+    <button cButton color="primary" (click)="openModal()">➕ Add Goal</button>
+  </div>
+  <!-- Table -->
+  <table class="table table-sm p-1 mb-3">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Term</th>
+        <th>Period</th>
+        <th>Goal Met</th>
+        <th class="text-center" style="width: 100px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let goal of goalsFormArray.controls; let i = index" [formGroup]="getGoalFormGroup(i)">
+        <td>{{ goal.value.description }}</td>
+        <td>{{ goal.value.term }}</td>
+        <td>{{ goal.value.period }}</td>
+        <td>{{ goal.value.met }}</td>
+        <td class="text-center">
+          <button cButton color="info" variant="ghost" size="sm" (click)="openModal(goal.value, i)">
+            <svg cIcon name="cilPencil"></svg>
+          </button>
+          <button cButton color="danger" variant="ghost" size="sm" (click)="removeGoal(i)">
+            <svg cIcon name="cilTrash"></svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade show" *ngIf="showModal" style="display: block; background: rgba(0, 0, 0, 0.4);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editIndex !== null ? 'Edit Goal' : 'Add Goal' }}</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="goalForm">
+            <div class="goal-row">
+              <div class="goal-input">
+                <label>Goal Term</label>
+                <select cSelect formControlName="term">
+                  <option value="Short Term">Short Term</option>
+                  <option value="Long Term">Long Term</option>
+                </select>
+              </div>
+              <div class="goal-input">
+                <label>Goal Period</label>
+                <select cSelect formControlName="period">
+                  <option value="1-visit">1 Visit</option>
+                  <option value="1-week">1 Week</option>
+                  <option value="2-weeks">2 Weeks</option>
+                  <option value="3-weeks">3 Weeks</option>
+                  <option value="4-weeks">4 Weeks</option>
+                  <option value="5-weeks">5 Weeks</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="goal-input">
+              <label>Goal Met</label>
+              <select cSelect formControlName="met">
+                <option value="N/A">N/A</option>
+                <option value="50%">50%</option>
+                <option value="75%">75%</option>
+                <option value="90%">90%</option>
+                <option value="100%">100%</option>
+              </select>
+            </div>
+
+            <div class="goal-input">
+              <label>Goal Description</label>
+              <textarea formControlName="description" placeholder="Enter goal description"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button cButton color="secondary" (click)="closeModal()">Cancel</button>
+          <button cButton color="primary" (click)="saveGoal()" [disabled]="goalForm.invalid">
+            {{ editIndex !== null ? 'Update' : 'Add' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

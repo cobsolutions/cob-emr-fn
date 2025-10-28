@@ -134,6 +134,7 @@ import { SelectWithCustomComponent } from './components/medical.note/custom.inpu
 import { CranialNerveComponent } from './components/medical.note/custom.input/strength/cranial.nerve/cranial-nerve.component';
 import { RightLeftCheckComponent } from './components/medical.note/custom.input/strength/right.left.radios/right-left-check.component';
 import { AssessmentProblemComponent } from './components/medical.note/components/assessment/problems/assessment-problem.component';
+import { AssessmentGoalsComponent } from './components/medical.note/components/assessment/goals/assessment-goals.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -269,6 +270,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CranialNerveComponent,
     RightLeftCheckComponent,
     AssessmentProblemComponent,
+    AssessmentGoalsComponent,
   ],
   imports: [
     CommonModule,
