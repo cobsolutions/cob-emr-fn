@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'assessment-goals',
@@ -15,18 +15,30 @@ export class AssessmentGoalsComponent implements OnInit {
 
   showModal = false;
   editIndex: number | null = null;
-
+  showCustomPeriodInput = false;
   goalForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
+  }
+  buildForm(goal: any = null): void {
     this.goalForm = this.fb.group({
-      description: ['', Validators.required],
-      term: ['Short Term', Validators.required],
-      period: ['1-week', Validators.required],
-      met: ['N/A', Validators.required],
+      description: new FormControl(goal?.description || ''),
+      term: new FormControl(goal?.term || 'Short Term'),
+      period: new FormControl(goal?.period || '1-week'),
+      met: new FormControl(goal?.met || 'N/A'),
+      customPeriod: new FormControl(goal?.customPeriod || '')
+    });
+
+    // Show custom field if "Custom" selected
+    this.showCustomPeriodInput = this.goalForm.get('period')?.value === 'custom';
+
+    this.goalForm.get('period')?.valueChanges.subscribe((value) => {
+      this.showCustomPeriodInput = value === 'custom';
+      if (value !== 'custom') {
+        this.goalForm.patchValue({ customPeriod: '' }, { emitEvent: false });
+      }
     });
   }
-
   openModal(goal?: any, index?: number): void {
     this.showModal = true;
     if (goal) {
@@ -70,6 +82,8 @@ export class AssessmentGoalsComponent implements OnInit {
     return this.goalsFormArray.at(i) as FormGroup;
   }
   ngOnInit(): void {
+    this.buildForm();
   }
+
 
 }
