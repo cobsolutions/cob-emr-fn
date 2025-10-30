@@ -11,6 +11,7 @@ import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finaliz
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 
 @Component({
   selector: 'initial-examination',
@@ -41,7 +42,6 @@ export class InitialExaminationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
-      console.log(status)
       if (status) {
         const request: FinalizeMedicalNoteRequest = {
           caseId: this.caseId,
@@ -113,7 +113,7 @@ export class InitialExaminationComponent implements OnInit {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-    var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
+    var createdNote: any = this.getAllFormValues(this.initialExaminationForm)    
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
@@ -121,7 +121,7 @@ export class InitialExaminationComponent implements OnInit {
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
-      billing: Object.keys(createdNote.billing).length === 0 ? null : createdNote.billing
+      billing: Object.keys(createdNote.billing).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.billing)
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
     return medicalNoteRequest;

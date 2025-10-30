@@ -1,5 +1,5 @@
 <div [formGroup]="RespiratoryForm">
     <span *ngFor="let field of fields;">
-        <soap-field-builder [field]="field " [form]="RespiratoryForm" [soapModule]="'billing'"></soap-field-builder>
+        <soap-field-builder [field]="field " [form]="RespiratoryForm" [soapModule]="'billing'" [data]="respiratoryData"></soap-field-builder>
     </span>
 </div>

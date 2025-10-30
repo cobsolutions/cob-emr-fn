@@ -3,6 +3,8 @@
     <div class="d-flex align-items-center mb-1" *ngIf="
         field.type !== 'checkbox' 
      && field.type !== 'cranial-nerve' 
+     && field.type !== 'cpt-billing-check-box' 
+     && field.type !== 'cpt-billing-text' 
      && field.type !== 'right-left-check' 
      && field.type !== 'radio' 
      && field.type !== 'textArea' 
@@ -130,7 +132,8 @@
             [splitColumn]="1" [style]="getstyleFieldControl(field.name)"></multiple-radio>
     </div>
     <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
-        <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
+        <billing-code-number [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name"
+            [label]='field.display' [data]="data"></billing-code-number>
     </div>
     <!--select-with-custom-->
     <div class="d-flex mb-1" *ngIf="field.type === 'select-with-custom'">
@@ -300,6 +303,14 @@
         <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style"
             [parentForm]="form" [parentFieldName]="field.name">
         </icdten>
+    </div>
+    <div *ngIf="field.type === 'cpt-billing-check-box'">
+        <cpt-billing-check-box [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name"
+            [label]='field.display' [data]="data"></cpt-billing-check-box>
+    </div>
+    <div *ngIf="field.type === 'cpt-billing-text'">
+        <cpt-billing-text [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name" [label]='field.display'
+            [data]="data"></cpt-billing-text>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

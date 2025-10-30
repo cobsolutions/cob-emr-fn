@@ -1,19 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'billing-code-number',
-  templateUrl: './billing-code-number.component.html',
-  styleUrls: ['./billing-code-number.component.css']
+  selector: 'cpt-billing-text',
+  templateUrl: './cpt-billing-text.component.html',
+  styleUrls: ['./cpt-billing-text.component.scss']
 })
-export class BillingCodeNumberComponent implements OnInit {
+export class CptBillingTextComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() parentFieldName: string;
   @Input() cpt!: string;           // e.g. "97010"
   @Input() label!: string;         // e.g. "Hot/Cold Pack"
   @Input() data: any;              // Optional: prefill data [{cpt, quantity, description}]
-  @Output() valueChange = new EventEmitter<{ cpt: string; quantity: number }>();
+  @Output() valueChange = new EventEmitter<{ cpt: string; quantity: number; description: string }>();
   form: FormGroup;
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       quantity: [''],
@@ -63,5 +64,4 @@ export class BillingCodeNumberComponent implements OnInit {
       }
     })
   }
-
 }
