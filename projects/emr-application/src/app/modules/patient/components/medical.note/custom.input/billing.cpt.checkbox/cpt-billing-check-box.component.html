@@ -1,0 +1,12 @@
+<div [formGroup]="form" class="billing-cpt-container">
+  <label class="checkbox-label">
+    <div class="checkbox-wrapper">
+      <input type="checkbox" formControlName="checked" id="cpt-checkbox" />
+      <span class="label-text">{{ label }}</span>
+
+      <!-- Tooltip visible when hovering checkbox or label -->
+      <span class="tooltip">billing code : {{ cpt }}</span>
+    </div>
+  </label>
+  <textarea *ngIf="form.get('checked')?.value" formControlName="description" class="description-box"></textarea>
+</div>

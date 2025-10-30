@@ -18,10 +18,6 @@ export class DirectTimedCodesComponent implements OnInit {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.DirectTimedCodesForm = this.fb.group({})
     this.formReady.emit(this.DirectTimedCodesForm);
-    if (this.directTimedCodesData)
-    setTimeout(() => {
-      this.DirectTimedCodesForm.patchValue(this.directTimedCodesData);
-    }, 10);
   }
 
 

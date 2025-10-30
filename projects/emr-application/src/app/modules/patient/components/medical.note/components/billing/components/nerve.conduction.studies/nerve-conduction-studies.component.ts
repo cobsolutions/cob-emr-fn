@@ -16,11 +16,7 @@ export class NerveConductionStudiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-    this.NerveConductionStudiesForm = this.fb.group({})
-    if (this.nerveConductionStudiesData)
-    setTimeout(() => {
-      this.NerveConductionStudiesForm.patchValue(this.nerveConductionStudiesData);
-    }, 10);
+    this.NerveConductionStudiesForm = this.fb.group({})    
     this.formReady.emit(this.NerveConductionStudiesForm);
   }
 

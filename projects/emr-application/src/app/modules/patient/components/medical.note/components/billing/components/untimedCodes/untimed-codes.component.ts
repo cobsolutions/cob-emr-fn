@@ -18,7 +18,7 @@ export class UntimedCodesComponent implements OnInit {
   styles: FieldControlStyles[] = UntimedCodesStyles;
   constructor(private fb: FormBuilder, private fieldDependentsService: FieldDependentsService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {  
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.UntimedCodesForm = this.fb.group({})
     this.formReady.emit(this.UntimedCodesForm);

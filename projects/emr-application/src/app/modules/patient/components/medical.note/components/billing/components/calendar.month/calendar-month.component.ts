@@ -4,7 +4,7 @@ import { FieldDependentsService } from 'projects/emr-application/src/app/modules
 import { FieldControlStyles } from '../../../../filed.control.style.selector/field.control.style';
 import { CalendarMonthStyles } from './styles/calendar.month';
 
-@Component({
+@Component({ 
   selector: 'calendar-month',
   templateUrl: './calendar-month.component.html',
   styleUrls: ['./calendar-month.component.css']
@@ -20,10 +20,6 @@ export class CalendarMonthComponent implements OnInit {
   ngOnInit(): void {
     this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     this.CalendarMonthForm = this.fb.group({})
-    if (this.calendarMonthData)
-    setTimeout(() => {
-      this.CalendarMonthForm.patchValue(this.calendarMonthData);
-    }, 10);
     this.formReady.emit(this.CalendarMonthForm);
   }
   getstyleFieldControl(fieldName: string): FieldControlStyles {
