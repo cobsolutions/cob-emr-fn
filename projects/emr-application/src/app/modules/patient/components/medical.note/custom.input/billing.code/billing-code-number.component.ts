@@ -24,7 +24,7 @@ export class BillingCodeNumberComponent implements OnInit {
     // Prefill existing data if found
     if (this.data) {
       for (let i = 0; i < this.data.length; i++) {
-        if (this.data[i].cpt === this.cpt) {
+        if (this.data[i] !== null && this.data[i].cpt === this.cpt) {
           this.form.get('quantity').setValue(this.data[i].quantity)
           Promise.resolve().then(() => {
             this.form.get('description')?.setValue(this.data[i].description);

@@ -8,6 +8,7 @@ import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finaliz
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 @Component({
   selector: 'daily-note',
   templateUrl: './daily-note.component.html',
@@ -80,7 +81,7 @@ export class DailyNoteComponent implements OnInit {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
-      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
+      billing: Object.keys(createdNote.objective).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.objective),
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
     }
