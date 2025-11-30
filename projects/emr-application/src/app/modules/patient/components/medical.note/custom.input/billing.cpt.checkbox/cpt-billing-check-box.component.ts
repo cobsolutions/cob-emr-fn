@@ -27,9 +27,10 @@ export class CptBillingCheckBoxComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(JSON.stringify(this.data))
     if (this.data) {
       for (let i = 0; i < this.data.length; i++) {
-        if (this.data[i].cpt === this.cpt) {
+        if (this.data[i] !== null && this.data[i].cpt === this.cpt) {
           this.form.get('checked').setValue(true)
           Promise.resolve().then(() => {
             this.form.get('description')?.setValue(this.data[i].description);
