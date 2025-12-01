@@ -12,6 +12,7 @@ import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.re
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
+import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
 
 @Component({
   selector: 'initial-examination',
@@ -124,6 +125,7 @@ export class InitialExaminationComponent implements OnInit {
       billing: Object.keys(createdNote.billing).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.billing)
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
+    InitSubjectiveBasicMapper.mapper(medicalNoteRequest.subjective.basic)
     return medicalNoteRequest;
   }
   draft() {
@@ -137,18 +139,32 @@ export class InitialExaminationComponent implements OnInit {
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
+  
     Object.keys(formGroup.controls).forEach((key) => {
       const control = formGroup.get(key);
+  
       if (control instanceof FormControl) {
-        values[key] = control.value;
+        let value = control.value;
+  
+        // Normalize radio buttons: yes/no → true/false
+        if (value === 'yes') value = true;
+        else if (value === 'no') value = false;
+  
+        values[key] = value;
+  
       } else if (control instanceof FormGroup) {
-        values[key] = this.getAllFormValues(control); // Recursively get values from nested FormGroup
+        values[key] = this.getAllFormValues(control);
+  
       } else if (control instanceof FormArray) {
         values[key] = control.controls.map(ctrl =>
-          ctrl instanceof FormGroup ? this.getAllFormValues(ctrl) : ctrl.value
+          ctrl instanceof FormGroup ? this.getAllFormValues(ctrl) : (
+            ctrl.value === 'yes' ? true :
+            ctrl.value === 'no' ? false :
+            ctrl.value
+          )
         );
       }
     });
     return values;
-  }
+  }  
 }
