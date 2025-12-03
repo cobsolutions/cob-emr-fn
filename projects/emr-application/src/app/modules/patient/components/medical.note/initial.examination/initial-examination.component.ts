@@ -13,6 +13,7 @@ import { MedicalNoteType } from '../../../models/medical.note/medical.note.type'
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
+import { MedicalHistoryMapper } from '../mapper/medical.history.mapper';
 
 @Component({
   selector: 'initial-examination',
@@ -114,7 +115,7 @@ export class InitialExaminationComponent implements OnInit {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-    var createdNote: any = this.getAllFormValues(this.initialExaminationForm)    
+    var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
@@ -126,6 +127,7 @@ export class InitialExaminationComponent implements OnInit {
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
     InitSubjectiveBasicMapper.mapper(medicalNoteRequest.subjective.basic)
+    MedicalHistoryMapper.map(medicalNoteRequest.subjective.medicalHistory)
     return medicalNoteRequest;
   }
   draft() {
@@ -139,32 +141,32 @@ export class InitialExaminationComponent implements OnInit {
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
-  
+
     Object.keys(formGroup.controls).forEach((key) => {
       const control = formGroup.get(key);
-  
+
       if (control instanceof FormControl) {
         let value = control.value;
-  
+
         // Normalize radio buttons: yes/no → true/false
         if (value === 'yes') value = true;
         else if (value === 'no') value = false;
-  
+
         values[key] = value;
-  
+
       } else if (control instanceof FormGroup) {
         values[key] = this.getAllFormValues(control);
-  
+
       } else if (control instanceof FormArray) {
         values[key] = control.controls.map(ctrl =>
           ctrl instanceof FormGroup ? this.getAllFormValues(ctrl) : (
             ctrl.value === 'yes' ? true :
-            ctrl.value === 'no' ? false :
-            ctrl.value
+              ctrl.value === 'no' ? false :
+                ctrl.value
           )
         );
       }
     });
     return values;
-  }  
+  }
 }
