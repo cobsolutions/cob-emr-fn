@@ -14,4 +14,11 @@ export class InitialExamNoteService {
     var url = this.baseUrl 
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
+  get(noteId:string){
+    var url = this.baseUrl + '/' + noteId;
+    return this.httpClient.get(`${url}`)
+  }
+  update(){
+
+  }
 }
