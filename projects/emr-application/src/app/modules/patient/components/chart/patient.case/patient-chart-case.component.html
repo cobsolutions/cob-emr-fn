@@ -209,8 +209,9 @@
 <span *ngIf="patientRecord ===false">
     <c-card class="mb-3 ustify-content-center">
         <!-- Initial Examination -->
-        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"></initial-examination>
+        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination' && noteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"
+            [noteId]="noteId"></initial-examination>
         <!-- Daily Note -->
         <daily-note *ngIf="patientRecordAction ==='Add Daily Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.id"></daily-note>

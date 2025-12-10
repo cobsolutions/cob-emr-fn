@@ -2,14 +2,13 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
+import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
@@ -30,6 +29,7 @@ export class InitialExaminationComponent implements OnInit {
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
   @Input() medicalNoteId: number
+  @Input() noteId: string
   noteCreator: string
   noteFinalizr: string
   @Input() caseId: number
@@ -39,7 +39,8 @@ export class InitialExaminationComponent implements OnInit {
   private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
-    private loggedInService: LoggedInService) {
+    private loggedInService: LoggedInService,
+    private initialExamNoteService: InitialExamNoteService) {
 
   }
   ngOnInit(): void {
@@ -67,12 +68,18 @@ export class InitialExaminationComponent implements OnInit {
       billing: this.fb.group({})
     });
     if (this.medicalNoteId !== undefined) {
-      this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+      this.initialExamNoteService.get(this.noteId).subscribe((data: any) => {
         this.isLoaded = true
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
         this.medicalNoteSOAP = data
       })
+      // this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+      //   this.isLoaded = true
+      //   this.noteCreator = data.createdBy;
+      //   this.noteFinalizr = data.finalizedBy;
+      //   this.medicalNoteSOAP = data
+      // })
     }
   }
   ngOnDestroy() {

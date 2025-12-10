@@ -44,6 +44,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
+  noteId:string
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
@@ -200,6 +201,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
+      this.noteId = response.id;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
