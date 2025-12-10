@@ -10,11 +10,13 @@ import { Role } from '../../../../security/model/role';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 import { PatientCase } from '../../../models/case/patient.case';
+import { CreateNodeRequest } from '../../../models/medical.note/create.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { QuickDischargeRequest } from '../../../models/medical.note/quick.discharge.request';
 
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
+import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 
@@ -51,7 +53,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
     private appointmentService: AppointmentService,
-    private loggedInService: LoggedInService) { super() }
+    private loggedInService: LoggedInService,
+    private initialExamNoteService: InitialExamNoteService) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -142,6 +145,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
         "Quick Discharge",
         "Case Note"
       ]
+      this.createInitialExamNote();
       this.medicalNoteId = undefined;
     }
 
@@ -186,12 +190,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       }
       medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
-    medicalNoteRequest.dateOfService = moment().endOf('day').valueOf();
-    this.medialNoteService.create(medicalNoteRequest).subscribe((medicalNoteResponse: any) => {
+  }
+  private createInitialExamNote() {
+    var request: CreateNodeRequest = {
+      patientId: this.patientId,
+      patientCaseId: this.case.id,
+      providerId: this.loggedInService.getLoggedUser().uuid,
+      encounterDate: moment().toDate()
+    }
+    this.initialExamNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
-      this.medicalNoteId = medicalNoteResponse.medicalNotId;
+      this.medicalNoteId = response.id;
       this.errorMessage = undefined
-      this.medialNoteService.medicalNoteID$.next(medicalNoteResponse.medicalNotId)
+      this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
     }, error => {
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error.message;
@@ -203,7 +214,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
-    if (val === 'Complete') {      
+    if (val === 'Complete') {
       this.completeMedicalNote(entityId, status)
       this.medialNoteService.medicalNoteID$.next(this.medicalNoteId)
     }

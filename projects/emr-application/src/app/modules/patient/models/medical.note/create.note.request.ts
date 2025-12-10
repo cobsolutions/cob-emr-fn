@@ -1,5 +1,5 @@
 export interface CreateNodeRequest{
-    patientId:string,
+    patientId:number,
     patientCaseId:number,
     providerId:string,
     encounterDate:Date
