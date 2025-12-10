@@ -37,7 +37,7 @@ export class MedialNoteService {
 
   create(request: MedicalNoteRequest) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl + '/action/create'
+    var url = this.baseUrl + '/initial-exam'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
   remove(id: number) {
