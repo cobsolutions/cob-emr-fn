@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 import { AssessmentStyles } from './styles/assessment';
 
@@ -22,15 +23,15 @@ export class AssessmentComponent implements OnInit {
   problemsArray: FormArray;
   goalsArray: FormArray;
   constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService
-    , private fieldDependentsService: FieldDependentsService) { }
+    , private fieldDependentsService: FieldDependentsService
+    , private soapService:SoapService) { }
   ngOnInit(): void {
-    this.medialNoteService.find('assessment', this.noteType).subscribe(fields => {
+    this.soapService.findSoapFields('assessment', this.noteType).subscribe(fields => {
       this.fields = fields['assessment']
       this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
       this.buildForm();
       this.formReady.emit(this.assessmentForm);
-    })
+    });
   }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
