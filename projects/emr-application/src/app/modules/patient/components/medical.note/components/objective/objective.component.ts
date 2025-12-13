@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { ObjectiveProfile } from './models/objective.profile';
 
 @Component({
@@ -24,7 +25,8 @@ export class ObjectiveComponent implements OnInit {
   ]
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
-    , private medicalService: MedialNoteService) { }
+    , private medicalService: MedialNoteService
+    , private soapService: SoapService) { }
 
   ngOnInit(): void {
     this.objectiveForm = this.fb.group({
@@ -45,7 +47,7 @@ export class ObjectiveComponent implements OnInit {
     }
   }
   private loadProfiles() {
-    this.profiles = this.medicalService.findObjectiveProfiles()
+    this.profiles = this.soapService.findNoteObjectiveProfiles()
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.objectiveForm.setControl(section, formGroup);
