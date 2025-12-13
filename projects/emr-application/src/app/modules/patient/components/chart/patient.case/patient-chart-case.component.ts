@@ -19,6 +19,7 @@ import { PatientRecordRequest } from '../../../models/patient.record/patient.rec
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
+import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -50,12 +51,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
+  patientCaseActions:string[]
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
     private appointmentService: AppointmentService,
     private loggedInService: LoggedInService,
-    private initialExamNoteService: InitialExamNoteService) { super() }
+    private initialExamNoteService: InitialExamNoteService,
+    private patientChartNoteService:PatientChartNoteService) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -74,6 +77,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()
+    this.findPatientCaseActions(this.case.id);
+  }
+  private findPatientCaseActions(patientCaseId:number){
+    this.patientChartNoteService.find(patientCaseId).subscribe((actions:any)=>{
+        this.patientCaseActions = actions;
+    })
   }
   checkAuthExpiration() {
     if (this.case.authorizationData !== null) {

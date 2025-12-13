@@ -80,14 +80,14 @@
                 </div>
             </div>
         </div>
-        <div class="actions-footer d-flex justify-content-end align-items-center gap-2 mt-3">
+        <div class="actions-footer d-flex justify-content-end align-items-center gap-2 mt-3" *ngIf="patientCaseActions">
             <label for="patientRecordAction" class="mx-0 text-nowrap fw-semibold">
                 Patient Record Actions:
             </label>
             <c-input-group class="mb-0">
                 <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
                     [componentRole]="componentRole">
-                    <option [value]="action" *ngFor="let action of case.patientRecordActions">
+                    <option [value]="action" *ngFor="let action of patientCaseActions">
                         {{ action }}
                     </option>
                 </select>
