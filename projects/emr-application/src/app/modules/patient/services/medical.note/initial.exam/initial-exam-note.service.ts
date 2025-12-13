@@ -11,14 +11,29 @@ export class InitialExamNoteService {
   constructor(private httpClient: HttpClient) { }
   create(request: CreateNodeRequest) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl 
+    var url = this.baseUrl
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
-  get(noteId:string){
+  draft() {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl
+    return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
+  }
+  forward() {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl
+    return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
+  }
+  finalize() {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl
+    return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
+  }
+  get(noteId: string) {
     var url = this.baseUrl + '/' + noteId;
     return this.httpClient.get(`${url}`)
   }
-  update(){
+  update() {
 
   }
 }
