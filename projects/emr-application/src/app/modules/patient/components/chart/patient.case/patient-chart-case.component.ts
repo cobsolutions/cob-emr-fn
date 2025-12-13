@@ -45,20 +45,20 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
-  noteId:string
+  noteId: string
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
-  patientCaseActions:string[]
+  patientCaseActions: string[]
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
     private appointmentService: AppointmentService,
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
-    private patientChartNoteService:PatientChartNoteService) { super() }
+    private patientChartNoteService: PatientChartNoteService) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -79,9 +79,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.checkAuthExpiration()
     this.findPatientCaseActions(this.case.id);
   }
-  private findPatientCaseActions(patientCaseId:number){
-    this.patientChartNoteService.find(patientCaseId).subscribe((actions:any)=>{
-        this.patientCaseActions = actions;
+  private findPatientCaseActions(patientCaseId: number) {
+    this.patientChartNoteService.find(patientCaseId).subscribe((actions: any) => {
+      this.patientCaseActions = actions;
     })
   }
   checkAuthExpiration() {
@@ -219,13 +219,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.errorMessage = error.error.message;
     })
   }
-  executeRecordLineAction(val: string, entityId: number, status?: string) {
-    console.log(val)
+  executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
     if (val === 'View Reason')
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(entityId);
     if (val === 'Complete') {
+      this.noteId = noteId;
       this.completeMedicalNote(entityId, status)
       this.medialNoteService.medicalNoteID$.next(this.medicalNoteId)
     }
@@ -233,7 +233,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.viewPDFVisibility = true;
       this.recordActionEntityId = entityId
       this.recordActionStauts = status
-      console.log('entityId ' + entityId + ' status ' + status)
     }
   }
   handleBackAction() {
@@ -253,10 +252,11 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     })
   }
   private completeMedicalNote(id: number, status: string) {
-    console.log(status)
     this.patientRecord = false
     this.medicalNoteId = id;
-    if (status === 'Initial Evaluation')
+    console.log('medicalNoteId ' + this.medicalNoteId)
+    console.log('status ' + status)
+    if (status === 'Initial Examination')
       this.patientRecordAction = 'Add Initial Examination';
     if (status === 'Daily Note')
       this.patientRecordAction = 'Add Daily Note';
