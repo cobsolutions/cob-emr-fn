@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 import { PlanStyles } from './styles/plan';
 
@@ -72,12 +73,13 @@ export class PlanComponent implements OnInit {
   ];
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
-    private loggedInService: LoggedInService
+    private soapService: SoapService
   ) { }
 
   ngOnInit(): void {
     // this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('plan', this.noteType).subscribe(fields => {
+
+    this.soapService.findSoapFields('plan', this.noteType).subscribe(fields => {
       this.fields = fields
       this.planForm = this.fb.group({
         createPlanOfCare: new FormControl(false),

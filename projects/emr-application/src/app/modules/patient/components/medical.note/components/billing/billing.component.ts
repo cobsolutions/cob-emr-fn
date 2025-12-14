@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 
 @Component({
   selector: 'billing',
@@ -35,14 +36,13 @@ export class BillingComponent implements OnInit {
     { label: '(Type Below)', value: 'DNTB' },
   ]
   // authorizthedToFinalize: boolean = false
-  constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService
-    , private loggedInService: LoggedInService
-    , private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder,
+    private soapService:SoapService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('billing', this.noteTypeId).subscribe(fields => {
+    this.soapService.findSoapFields('billing', this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
         'dailyNoteIncluded': this.fb.control(false),

@@ -73,7 +73,7 @@
                 <h4>Procedures</h4>
                 <hr />
                 <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']"
-                    [data]="planData['procedures']">
+                    [data]="planData?.['procedures']">
                 </procedures>
             </div>
         </c-col>
@@ -83,7 +83,7 @@
                 <h4>Modalities</h4>
                 <hr />
                 <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']"
-                    [data]="planData['modalities']">
+                    [data]="planData?.['modalities']">
                 </modalities>
             </div>
 
@@ -92,7 +92,7 @@
                 <h4>Specialties</h4>
                 <hr />
                 <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']"
-                    [data]="planData['specialties']">
+                    [data]="planData?.['specialties']">
                 </specialties>
             </div>
         </c-col>

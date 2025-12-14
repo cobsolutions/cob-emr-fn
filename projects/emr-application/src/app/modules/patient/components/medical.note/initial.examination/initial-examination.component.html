@@ -18,26 +18,26 @@
                 formGroupName="subjective">
                 <ng-template matStepLabel>Subjective</ng-template>
                 <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
-                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]" [noteType]="'1'">
+                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]" [noteType]="'InitialExamination'">
                 </subjective>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('objective')!"
                 formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
                 <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"
-                    [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'1'"></objective>
+                    [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'InitialExamination'"></objective>
             </mat-step>
             <mat-step completed="true" formGroupName="objective"
                 [stepControl]="initialExaminationForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
                 <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
-                    [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'1'"></assessment>
+                    [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'InitialExamination'"></assessment>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('planOfCare')!"
                 formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
                 <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="'1'">
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="'InitialExamination'">
                 </plan>
             </mat-step>
             <mat-step completed="true" [stepControl]="initialExaminationForm.get('billing')!" formGroupName="billing">
@@ -46,7 +46,7 @@
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4]"
                     [billingData]="medicalNoteSOAP?.billing" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
                     [noteId]="medicalNoteId" [caseId]="caseId" [noteType]="type"
-                    (backToRecord)="backtoPatientRecordActions()" [noteTypeId]="'1'"></billing>
+                    (backToRecord)="backtoPatientRecordActions()" [noteTypeId]="'InitialExamination'"></billing>
             </mat-step>
         </mat-stepper>
     </form>
