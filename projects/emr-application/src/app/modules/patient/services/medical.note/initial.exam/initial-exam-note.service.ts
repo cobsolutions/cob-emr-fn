@@ -17,7 +17,7 @@ export class InitialExamNoteService {
   }
   draft(request: MedicalNoteRequest, noteId: string) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl + '/'+noteId + '/draft'
+    var url = this.baseUrl + '/' + noteId + '/draft'
     return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
   forward() {
@@ -25,9 +25,9 @@ export class InitialExamNoteService {
     var url = this.baseUrl
     return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
   }
-  finalize() {
+  finalize(noteId: string) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl
+    var url = this.baseUrl + '/' + noteId + '/finalize'
     return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
   }
   get(noteId: string) {

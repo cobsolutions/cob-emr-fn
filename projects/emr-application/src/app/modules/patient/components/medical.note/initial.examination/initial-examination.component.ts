@@ -53,7 +53,7 @@ export class InitialExaminationComponent implements OnInit {
           finalizedBy: this.loggedInService.getLoggedUser().uuid
         }
         this.draftAction().subscribe(d => {
-          this.medialNoteService.finalizea(request).subscribe(v => {
+          this.initialExamNoteService.finalize(this.noteId).subscribe(v => {
             this.backtoPatientRecordActions();
           });
         });
