@@ -144,7 +144,7 @@ export class InitialExaminationComponent implements OnInit {
   }
   draftAction(): Observable<any> {
     var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-    return this.medialNoteService.draft(medicalNoteRequest);
+    return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};

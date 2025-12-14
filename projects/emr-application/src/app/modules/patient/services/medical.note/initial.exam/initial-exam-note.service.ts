@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
 import { CreateNodeRequest } from '../../../models/medical.note/create.note.request';
+import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,10 @@ export class InitialExamNoteService {
     var url = this.baseUrl
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
-  draft() {
+  draft(request: MedicalNoteRequest, noteId: string) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl
-    return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
+    var url = this.baseUrl + '/'+noteId + '/draft'
+    return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
   forward() {
     const headers = { 'content-type': 'application/json' }

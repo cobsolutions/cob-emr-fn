@@ -2,6 +2,7 @@ import { QuickDischargeRequest } from "./quick.discharge.request";
 
 export interface MedicalNoteRequest {
     id?: number,
+    patientId?:number
     caseId?: number;
     noteType?: string
     createdBy?: string
