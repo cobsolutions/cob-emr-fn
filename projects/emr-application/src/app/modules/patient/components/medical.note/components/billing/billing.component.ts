@@ -45,7 +45,7 @@ export class BillingComponent implements OnInit {
     this.soapService.findSoapFields('billing', this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
-        'dailyNoteIncluded': this.fb.control(false),
+        'dailyNoteIncluded': this.fb.control(true),
         'dn_nstructions': this.fb.control("DN1"),
         'precautions': this.fb.control(null),
         'instructionsTxt': this.fb.control(null),
