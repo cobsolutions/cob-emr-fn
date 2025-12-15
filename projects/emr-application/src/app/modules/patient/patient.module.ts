@@ -49,6 +49,7 @@ import { AssessmentComponent } from './components/medical.note/components/assess
 import { RomComponent } from './components/medical.note/components/objective/arom.prom/rom.component';
 import { InspectionComponent } from './components/medical.note/components/objective/inspection/inspection.component';
 import { InspectionNComponent } from './components/medical.note/components/objective/inspectionN/inspectionN.component';
+import { OutcomeMeasurementToolsComponent } from './components/medical.note/components/objective/outcome-measurement-tools/outcome-measurement-tools.component';
 import { NeuroVascularRightLeftComponent } from './components/medical.note/components/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
 import { SemmesWeinsteinUpperComponent } from './components/medical.note/components/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
 import { VertebralArteryComponent } from './components/medical.note/components/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
@@ -202,6 +203,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DirectTimedCodesComponent,
     InspectionComponent,
     InspectionNComponent,
+    OutcomeMeasurementToolsComponent,
     OmtComponent,
     MultipleTextInputComponent,
     ObjectiveOMTTestComponent,

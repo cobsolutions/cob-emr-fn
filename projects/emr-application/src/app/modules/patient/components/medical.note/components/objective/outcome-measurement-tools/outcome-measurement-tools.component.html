@@ -1,0 +1,171 @@
+<div [formGroup]="omtForm" class="omt-form">
+
+  <!-- Custom Outcome Measurement -->
+  <div class="form-row">
+    <label class="field-label">Custom Outcome Measurement</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="custom_outcome_measurement" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="custom_outcome_measurement" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Custom Outcome Measurement Fields (when Yes is selected) -->
+  <div *ngIf="showCustomOutcomeFields" class="dependent-field-box">
+    <!-- TODO: Add custom outcome measurement fields -->
+    <p class="text-muted">Custom Outcome Measurement fields will be added here</p>
+  </div>
+
+  <!-- Vestibular -->
+  <div class="form-row">
+    <label class="field-label">Vestibular</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="vestibular" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="vestibular" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Vestibular Fields (when Yes is selected) -->
+  <div *ngIf="showVestibularFields" class="dependent-field-box">
+    <!-- TODO: Add vestibular fields -->
+    <p class="text-muted">Vestibular fields will be added here</p>
+  </div>
+
+  <!-- Upper Extremity -->
+  <div class="form-row">
+    <label class="field-label">Upper Extremity</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="upper_extremity" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="upper_extremity" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Upper Extremity Fields (when Yes is selected) -->
+  <div *ngIf="showUpperExtremityFields" class="dependent-field-box">
+    <!-- TODO: Add upper extremity fields -->
+    <p class="text-muted">Upper Extremity fields will be added here</p>
+  </div>
+
+  <!-- Spine -->
+  <div class="form-row">
+    <label class="field-label">Spine</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="spine" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="spine" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Spine Fields (when Yes is selected) -->
+  <div *ngIf="showSpineFields" class="dependent-field-box">
+    <!-- TODO: Add spine fields -->
+    <p class="text-muted">Spine fields will be added here</p>
+  </div>
+
+  <!-- Lower Extremity -->
+  <div class="form-row">
+    <label class="field-label">Lower Extremity</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="lower_extremity" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lower_extremity" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Lower Extremity Fields (when Yes is selected) -->
+  <div *ngIf="showLowerExtremityFields" class="dependent-field-box">
+    <!-- TODO: Add lower extremity fields -->
+    <p class="text-muted">Lower Extremity fields will be added here</p>
+  </div>
+
+  <!-- Balance -->
+  <div class="form-row">
+    <label class="field-label">Balance</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="balance" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="balance" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Balance Fields (when Yes is selected) -->
+  <div *ngIf="showBalanceFields" class="dependent-field-box">
+    <!-- TODO: Add balance fields -->
+    <p class="text-muted">Balance fields will be added here</p>
+  </div>
+
+  <!-- Pain -->
+  <div class="form-row">
+    <label class="field-label">Pain</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="pain" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="pain" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Pain Fields (when Yes is selected) -->
+  <div *ngIf="showPainFields" class="dependent-field-box">
+    <!-- TODO: Add pain fields -->
+    <p class="text-muted">Pain fields will be added here</p>
+  </div>
+
+  <!-- General Function -->
+  <div class="form-row">
+    <label class="field-label">General Function</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="general_function" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="general_function" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- General Function Fields (when Yes is selected) -->
+  <div *ngIf="showGeneralFunctionFields" class="dependent-field-box">
+    <!-- TODO: Add general function fields -->
+    <p class="text-muted">General Function fields will be added here</p>
+  </div>
+
+</div>

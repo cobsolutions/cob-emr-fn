@@ -7,6 +7,8 @@ import { SoapService } from '../../../../services/medical.note/soap/soap.service
 import { ObjectiveProfile } from './models/objective.profile';
 import { InspectionNComponent } from './inspectionN/inspectionN.component';
 import { InspectionModel } from './inspectionN/models/inspection.model';
+import { OutcomeMeasurementToolsComponent } from './outcome-measurement-tools/outcome-measurement-tools.component';
+import { OutcomeMeasurementToolsModel } from './outcome-measurement-tools/models/outcome-measurement-tools.model';
 
 @Component({
   selector: 'objective',
@@ -18,6 +20,7 @@ export class ObjectiveComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @ViewChild(InspectionNComponent) inspectionComponent: InspectionNComponent;
+  @ViewChild(OutcomeMeasurementToolsComponent) omtComponent: OutcomeMeasurementToolsComponent;
   selectedProfile: any = null
   profiles: Observable<ObjectiveProfile[]>
   @Input() objectiveData: any
@@ -116,6 +119,17 @@ export class ObjectiveComponent implements OnInit {
   getInspectionModel(): InspectionModel | null {
     if (this.inspectionComponent) {
       return this.inspectionComponent.getInspectionModel();
+    }
+    return null;
+  }
+
+  /**
+   * Get the OMT model from OutcomeMeasurementTools component
+   * Returns null if component is not available
+   */
+  getOmtModel(): OutcomeMeasurementToolsModel | null {
+    if (this.omtComponent) {
+      return this.omtComponent.getOutcomeMeasurementToolsModel();
     }
     return null;
   }

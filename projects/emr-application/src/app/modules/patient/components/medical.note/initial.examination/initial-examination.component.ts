@@ -126,11 +126,18 @@ export class InitialExaminationComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
 
-    // Get the inspection model from ObjectiveComponent if available
+    // Get structured models from ObjectiveComponent if available
     if (this.objectiveComponent && createdNote.objective) {
+      // Get the inspection model
       const inspectionModel = this.objectiveComponent.getInspectionModel();
       if (inspectionModel) {
         createdNote.objective.inspection = inspectionModel;
+      }
+
+      // Get the OMT model
+      const omtModel = this.objectiveComponent.getOmtModel();
+      if (omtModel) {
+        createdNote.objective.omt = omtModel;
       }
     }
 

@@ -1,0 +1,55 @@
+.omt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dependent-field-box {
+  margin-left: 50px;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-left: 3px solid #6c757d;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.nested-dependent-field-box {
+  margin-left: 30px;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #e9ecef;
+  border-left: 3px solid #495057;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.field-label {
+  min-width: 250px;
+  text-align: right;
+  font-weight: 500;
+  color: #5c4742;
+  margin-bottom: 0;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Radio button styling */
+c-form-check {
+  display: flex;
+  align-items: center;
+}
+
+c-form-check label {
+  margin-bottom: 0;
+  margin-left: 0.25rem;
+}
