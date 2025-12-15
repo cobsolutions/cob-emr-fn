@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { ObjectiveProfile } from './models/objective.profile';
+import { InspectionNComponent } from './inspectionN/inspectionN.component';
+import { InspectionModel } from './inspectionN/models/inspection.model';
 
 @Component({
   selector: 'objective',
@@ -15,6 +17,7 @@ export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
+  @ViewChild(InspectionNComponent) inspectionComponent: InspectionNComponent;
   selectedProfile: any = null
   profiles: Observable<ObjectiveProfile[]>
   @Input() objectiveData: any
@@ -104,5 +107,16 @@ export class ObjectiveComponent implements OnInit {
     if (val === false) return 'no';
     if (val === null) return 'na';
     return val;
+  }
+
+  /**
+   * Get the inspection model from InspectionN component
+   * Returns null if component is not available
+   */
+  getInspectionModel(): InspectionModel | null {
+    if (this.inspectionComponent) {
+      return this.inspectionComponent.getInspectionModel();
+    }
+    return null;
   }
 }

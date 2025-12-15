@@ -13,6 +13,7 @@ import { MedialNoteService } from '../../../services/medical.note/medial-note.se
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
 import { MedicalHistoryMapper } from '../mapper/medical.history.mapper';
+import { ObjectiveComponent } from '../components/objective/objective.component';
 
 @Component({
   selector: 'initial-examination',
@@ -25,6 +26,7 @@ export class InitialExaminationComponent implements OnInit {
   activeStepIndex: number;
   initialExaminationForm: FormGroup
   @ViewChild('stepper') stepper!: MatStepper; // Get MatStepper reference
+  @ViewChild(ObjectiveComponent) objectiveComponent: ObjectiveComponent;
   @Output() formReady = new EventEmitter<FormGroup>();
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
@@ -123,6 +125,15 @@ export class InitialExaminationComponent implements OnInit {
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
+
+    // Get the inspection model from ObjectiveComponent if available
+    if (this.objectiveComponent && createdNote.objective) {
+      const inspectionModel = this.objectiveComponent.getInspectionModel();
+      if (inspectionModel) {
+        createdNote.objective.inspection = inspectionModel;
+      }
+    }
+
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,

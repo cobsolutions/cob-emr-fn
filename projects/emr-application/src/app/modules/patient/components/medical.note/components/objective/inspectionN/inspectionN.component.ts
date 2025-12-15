@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InspectionMapperService } from './services/inspection-mapper.service';
+import { InspectionModel } from './models/inspection.model';
 
 @Component({
   selector: 'inspectionN',
@@ -9,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InspectionNComponent implements OnInit {
   inspectionNForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() inspectionData: InspectionModel | null = null;
 
   // Visibility flags for dependent fields
   showPatientParentGuardianConsent: boolean = false;
@@ -63,12 +66,36 @@ export class InspectionNComponent implements OnInit {
     { value: 'custom', label: 'Custom' }
   ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private inspectionMapper: InspectionMapperService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+
+    // Load data if provided
+    if (this.inspectionData) {
+      this.loadFromDto(this.inspectionData);
+    }
+
     this.formReady.emit(this.inspectionNForm);
+  }
+
+  /**
+   * Get the inspection model from form (for sending to backend)
+   */
+  getInspectionModel(): InspectionModel {
+    return this.inspectionMapper.toModel(this.inspectionNForm.getRawValue());
+  }
+
+  /**
+   * Load inspection data from DTO into form
+   */
+  loadFromDto(dto: InspectionModel): void {
+    const formValue = this.inspectionMapper.fromDto(dto);
+    this.inspectionNForm.patchValue(formValue);
   }
 
   private initForm(): void {
