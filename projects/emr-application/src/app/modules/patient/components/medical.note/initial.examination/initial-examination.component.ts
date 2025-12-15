@@ -149,31 +149,33 @@ export class InitialExaminationComponent implements OnInit {
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};
 
-    Object.keys(formGroup.controls).forEach((key) => {
+    Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
 
       if (control instanceof FormControl) {
-        let value = control.value;
+        values[key] = this.normalizeValue(control.value);
+      }
 
-        // Normalize radio buttons: yes/no → true/false
-        if (value === 'yes') value = true;
-        else if (value === 'no') value = false;
-
-        values[key] = value;
-
-      } else if (control instanceof FormGroup) {
+      else if (control instanceof FormGroup) {
         values[key] = this.getAllFormValues(control);
+      }
 
-      } else if (control instanceof FormArray) {
+      else if (control instanceof FormArray) {
         values[key] = control.controls.map(ctrl =>
-          ctrl instanceof FormGroup ? this.getAllFormValues(ctrl) : (
-            ctrl.value === 'yes' ? true :
-              ctrl.value === 'no' ? false :
-                ctrl.value
-          )
+          ctrl instanceof FormGroup
+            ? this.getAllFormValues(ctrl)
+            : this.normalizeValue(ctrl.value)
         );
       }
     });
+
     return values;
   }
+  private normalizeValue(val: any): any {
+    if (val === 'yes') return true;
+    if (val === 'no') return false;
+    if (val === 'na' || val === 'N/A') return null;
+    return val;
+  }
+
 }

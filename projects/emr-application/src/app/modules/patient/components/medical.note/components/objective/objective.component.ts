@@ -57,11 +57,12 @@ export class ObjectiveComponent implements OnInit {
   }
   selectProfile() {
     this.objectiveForm.get('profile').setValue(this.selectedProfile);
-    this.medicalService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe((data: any) => {
+    this.soapService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe((data: any) => {
       this.fillFieldsMap(data)
       if (this.objectiveData !== null && (this.objectiveData.profile === this.selectedProfile))
         setTimeout(() => {
-          this.objectiveForm.patchValue(this.objectiveData);
+          const uiData = this.denormalizeObject(this.objectiveData);
+          this.objectiveForm.patchValue(uiData);
         }, 10);
       this.formReady.emit(this.objectiveForm);
     })
@@ -74,5 +75,34 @@ export class ObjectiveComponent implements OnInit {
       const value = foundKey ? data[foundKey] : null;
       this.objectiveCategoriesfields[this.objectiveCategories[i]] = value
     }
+  }
+  private denormalizeObject(obj: any): any {
+    if (obj === null || obj === undefined) {
+      return obj;
+    }
+
+    // Primitive value
+    if (typeof obj !== 'object') {
+      return this.denormalizePrimitive(obj);
+    }
+
+    // Array
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.denormalizeObject(item));
+    }
+
+    // Object
+    const result: any = {};
+    Object.keys(obj).forEach(key => {
+      result[key] = this.denormalizeObject(obj[key]);
+    });
+
+    return result;
+  }
+  private denormalizePrimitive(val: any): any {
+    if (val === true) return 'yes';
+    if (val === false) return 'no';
+    if (val === null) return 'na';
+    return val;
   }
 }

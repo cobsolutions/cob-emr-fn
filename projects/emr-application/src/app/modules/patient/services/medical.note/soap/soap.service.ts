@@ -17,4 +17,8 @@ export class SoapService {
     var url = this.baseUrl +'/find/objective/profile'
     return this.httpClient.get(`${url}`)
   }
+  public findSOAPFieldsByProfile(profileName:string):Observable<any> {
+    var url = this.baseUrl +'/find/field-name/profile/name/' + profileName;
+    return this.httpClient.get(`${url}`)
+  }
 }
