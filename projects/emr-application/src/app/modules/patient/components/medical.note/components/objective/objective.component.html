@@ -19,8 +19,7 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['inspection']">
         <c-card-header>Inspection</c-card-header>
         <c-card-body>
-            <inspection (formReady)="setChildForm('inspection', $event)"
-                [fields]="objectiveCategoriesfields['inspection']"></inspection>
+            <inspectionN (formReady)="setChildForm('inspection', $event)"></inspectionN>
         </c-card-body>
     </c-card>
     <!--Outcome Measurement Tools-->
