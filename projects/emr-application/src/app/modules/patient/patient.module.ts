@@ -142,6 +142,7 @@ import { CptBillingTextComponent } from './components/medical.note/custom.input/
 import { ObservationNComponent } from './components/medical.note/components/objective/observationN/observation-n.component';
 import { RangeOfMotionNComponent } from './components/medical.note/components/objective/range-of-motion/range-of-motion-n.component';
 import { StrengthNComponent } from './components/medical.note/components/objective/strengthN/strength-n.component';
+import { NeuroVascularNComponent } from './components/medical.note/components/objective/neuro-vascular/neuro-vascular-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -285,6 +286,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ObservationNComponent,
     RangeOfMotionNComponent,
     StrengthNComponent,
+    NeuroVascularNComponent,
   ],
   imports: [
     CommonModule,
