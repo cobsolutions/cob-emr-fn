@@ -139,6 +139,7 @@ import { AssessmentProblemComponent } from './components/medical.note/components
 import { AssessmentGoalsComponent } from './components/medical.note/components/assessment/goals/assessment-goals.component';
 import { CptBillingCheckBoxComponent } from './components/medical.note/custom.input/billing.cpt.checkbox/cpt-billing-check-box.component';
 import { CptBillingTextComponent } from './components/medical.note/custom.input/billing.cpt.text/cpt-billing-text.component';
+import { ObservationNComponent } from './components/medical.note/components/objective/observationN/observation-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -279,6 +280,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     AssessmentGoalsComponent,
     CptBillingCheckBoxComponent,
     CptBillingTextComponent,
+    ObservationNComponent,
   ],
   imports: [
     CommonModule,
