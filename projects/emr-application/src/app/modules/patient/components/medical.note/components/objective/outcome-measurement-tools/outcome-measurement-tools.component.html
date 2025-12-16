@@ -839,8 +839,329 @@
 
   <!-- General Function Fields (when Yes is selected) -->
   <div *ngIf="showGeneralFunctionFields" class="dependent-field-box">
-    <!-- TODO: Add general function fields -->
-    <p class="text-muted">General Function fields will be added here</p>
+    <!-- Timed Up and Go -->
+    <div class="form-row">
+      <label class="field-label">Timed Up and Go</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="timed_up_and_go" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="timed_up_and_go" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Timed Up and Go Fields (nested when Yes is selected) -->
+    <div *ngIf="showTimedUpAndGoFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Timed Up and Go; Alone</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_alone" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_alone" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Timed Up And Go; Cognitive</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_cognitive" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_cognitive" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Timed Up And Go; Manual</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_manual" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="timed_up_and_go_manual" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+    </div>
+
+    <!-- Five Time Sit To Stand -->
+    <div class="form-row">
+      <label class="field-label">Five Time Sit To Stand</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="five_time_sit" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="five_time_sit" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Five Time Sit Fields (when Yes is selected) -->
+    <div *ngIf="showFiveTimeSitFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Score</label>
+        <input cFormControl type="text" formControlName="five_time_sit_score" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Comments</label>
+        <textarea cFormControl formControlName="five_time_sit_comments" class="form-textarea" rows="3"></textarea>
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- AUDIT-C -->
+    <div class="form-row">
+      <label class="field-label">AUDIT-C</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="audit_c" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="audit_c" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- AUDIT-C Fields (when Yes is selected) -->
+    <div *ngIf="showAuditCFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="audit_c_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Barthel Index -->
+    <div class="form-row">
+      <label class="field-label">Barthel Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="barthel_index" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="barthel_index" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Barthel Index Fields (when Yes is selected) -->
+    <div *ngIf="showBarthelIndexFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="barthel_index_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Falls Efficacy Scale -->
+    <div class="form-row">
+      <label class="field-label">Falls Efficacy Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="falls_efficacy" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="falls_efficacy" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Falls Efficacy Fields (when Yes is selected) -->
+    <div *ngIf="showFallsEfficacyFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Total</label>
+        <input cFormControl type="text" formControlName="falls_efficacy_total" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Dynamic Gait Index -->
+    <div class="form-row">
+      <label class="field-label">Dynamic Gait Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="dynamic_gait" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="dynamic_gait" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Dynamic Gait Fields (when Yes is selected) -->
+    <div *ngIf="showDynamicGaitFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="dynamic_gait_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Functional Reach Test -->
+    <div class="form-row">
+      <label class="field-label">Functional Reach Test</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="functional_reach" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="functional_reach" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Functional Reach Fields (when Yes is selected) -->
+    <div *ngIf="showFunctionalReachFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="functional_reach_score" class="small-input" />
+        <select cSelect formControlName="functional_reach_units" class="ms-2" style="width: 100px;">
+          <option value="inches">inches</option>
+          <option value="cm">cm</option>
+        </select>
+        <span class="ms-2">
+          <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- SLUMS -->
+    <div class="form-row">
+      <label class="field-label">SLUMS</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="slums" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="slums" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- SLUMS Fields (when Yes is selected) -->
+    <div *ngIf="showSlumsFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="slums_score" class="small-input" />
+      </div>
+    </div>
+
+    <!-- Geriatric Depression Scale -->
+    <div class="form-row">
+      <label class="field-label">Geriatric Depression Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="geriatric_depression" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="geriatric_depression" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Geriatric Depression Fields (when Yes is selected) -->
+    <div *ngIf="showGeriatricDepressionFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="geriatric_depression_score" class="small-input" />
+        <span class="ms-2">
+          <p class="text-muted d-inline">This test has been validated in adults ≥ 18 years old.</p>
+        </span>
+      </div>
+    </div>
+
+    <!-- Elder Abuse Suspicion Index -->
+    <div class="form-row">
+      <label class="field-label">Elder Abuse Suspicion Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="elder_abuse" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="elder_abuse" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Elder Abuse Fields (when Yes is selected) -->
+    <div *ngIf="showElderAbuseFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="elder_abuse_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Elder Maltreatment Follow-Up Plan:</label>
+        <input cFormControl type="text" formControlName="elder_abuse_followup_plan" class="full-width-input" />
+      </div>
+    </div>
+
+    <!-- FOTO Patient Inquiry -->
+    <div class="form-row">
+      <label class="field-label">FOTO Patient Inquiry</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="foto_patient" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="foto_patient" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- FOTO Patient Fields (when Yes is selected) -->
+    <div *ngIf="showFotoPatientFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="foto_patient_score" class="small-input" />
+      </div>
+    </div>
   </div>
 
 </div>

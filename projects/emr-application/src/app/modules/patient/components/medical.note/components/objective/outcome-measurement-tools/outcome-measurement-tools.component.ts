@@ -182,7 +182,34 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       fabq_scale_1: [''],
       fabq_scale_2: [''],
       fabq_followup_plan: [''],
-      general_function: ['no']
+      general_function: ['no'],
+      timed_up_and_go: ['no'],
+      timed_up_and_go_alone: ['no'],
+      timed_up_and_go_cognitive: ['no'],
+      timed_up_and_go_manual: ['no'],
+      five_time_sit: ['no'],
+      five_time_sit_score: [''],
+      five_time_sit_comments: [''],
+      audit_c: ['no'],
+      audit_c_score: [''],
+      barthel_index: ['no'],
+      barthel_index_score: [''],
+      falls_efficacy: ['no'],
+      falls_efficacy_total: [''],
+      dynamic_gait: ['no'],
+      dynamic_gait_score: [''],
+      functional_reach: ['no'],
+      functional_reach_score: [''],
+      functional_reach_units: ['inches'],
+      slums: ['no'],
+      slums_score: [''],
+      geriatric_depression: ['no'],
+      geriatric_depression_score: [''],
+      elder_abuse: ['no'],
+      elder_abuse_score: [''],
+      elder_abuse_followup_plan: [''],
+      foto_patient: ['no'],
+      foto_patient_score: ['']
     });
   }
 
@@ -552,7 +579,148 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('general_function')?.valueChanges.subscribe(value => {
       this.showGeneralFunctionFields = value === 'yes';
       if (!this.showGeneralFunctionFields) {
-        // Clear general function fields when disabled
+        this.omtForm.patchValue({
+          timed_up_and_go: 'no',
+          five_time_sit: 'no',
+          audit_c: 'no',
+          barthel_index: 'no',
+          falls_efficacy: 'no',
+          dynamic_gait: 'no',
+          functional_reach: 'no',
+          slums: 'no',
+          geriatric_depression: 'no',
+          elder_abuse: 'no',
+          foto_patient: 'no'
+        });
+        this.showTimedUpAndGoFields = false;
+        this.showFiveTimeSitFields = false;
+        this.showAuditCFields = false;
+        this.showBarthelIndexFields = false;
+        this.showFallsEfficacyFields = false;
+        this.showDynamicGaitFields = false;
+        this.showFunctionalReachFields = false;
+        this.showSlumsFields = false;
+        this.showGeriatricDepressionFields = false;
+        this.showElderAbuseFields = false;
+        this.showFotoPatientFields = false;
+      }
+    });
+
+    // Timed Up and Go dependency
+    this.omtForm.get('timed_up_and_go')?.valueChanges.subscribe(value => {
+      this.showTimedUpAndGoFields = value === 'yes';
+      if (!this.showTimedUpAndGoFields) {
+        this.omtForm.patchValue({
+          timed_up_and_go_alone: 'no',
+          timed_up_and_go_cognitive: 'no',
+          timed_up_and_go_manual: 'no'
+        });
+        this.showTimedUpAndGoAloneFields = false;
+        this.showTimedUpAndGoCognitiveFields = false;
+        this.showTimedUpAndGoManualFields = false;
+      }
+    });
+
+    // Five Time Sit To Stand dependency
+    this.omtForm.get('five_time_sit')?.valueChanges.subscribe(value => {
+      this.showFiveTimeSitFields = value === 'yes';
+      if (!this.showFiveTimeSitFields) {
+        this.omtForm.patchValue({
+          five_time_sit_score: '',
+          five_time_sit_comments: ''
+        });
+      }
+    });
+
+    // AUDIT-C dependency
+    this.omtForm.get('audit_c')?.valueChanges.subscribe(value => {
+      this.showAuditCFields = value === 'yes';
+      if (!this.showAuditCFields) {
+        this.omtForm.patchValue({
+          audit_c_score: ''
+        });
+      }
+    });
+
+    // Barthel Index dependency
+    this.omtForm.get('barthel_index')?.valueChanges.subscribe(value => {
+      this.showBarthelIndexFields = value === 'yes';
+      if (!this.showBarthelIndexFields) {
+        this.omtForm.patchValue({
+          barthel_index_score: ''
+        });
+      }
+    });
+
+    // Falls Efficacy Scale dependency
+    this.omtForm.get('falls_efficacy')?.valueChanges.subscribe(value => {
+      this.showFallsEfficacyFields = value === 'yes';
+      if (!this.showFallsEfficacyFields) {
+        this.omtForm.patchValue({
+          falls_efficacy_total: ''
+        });
+      }
+    });
+
+    // Dynamic Gait Index dependency
+    this.omtForm.get('dynamic_gait')?.valueChanges.subscribe(value => {
+      this.showDynamicGaitFields = value === 'yes';
+      if (!this.showDynamicGaitFields) {
+        this.omtForm.patchValue({
+          dynamic_gait_score: ''
+        });
+      }
+    });
+
+    // Functional Reach Test dependency
+    this.omtForm.get('functional_reach')?.valueChanges.subscribe(value => {
+      this.showFunctionalReachFields = value === 'yes';
+      if (!this.showFunctionalReachFields) {
+        this.omtForm.patchValue({
+          functional_reach_score: '',
+          functional_reach_units: 'inches'
+        });
+      }
+    });
+
+    // SLUMS dependency
+    this.omtForm.get('slums')?.valueChanges.subscribe(value => {
+      this.showSlumsFields = value === 'yes';
+      if (!this.showSlumsFields) {
+        this.omtForm.patchValue({
+          slums_score: ''
+        });
+      }
+    });
+
+    // Geriatric Depression Scale dependency
+    this.omtForm.get('geriatric_depression')?.valueChanges.subscribe(value => {
+      this.showGeriatricDepressionFields = value === 'yes';
+      if (!this.showGeriatricDepressionFields) {
+        this.omtForm.patchValue({
+          geriatric_depression_score: ''
+        });
+      }
+    });
+
+    // Elder Abuse Suspicion Index dependency
+    this.omtForm.get('elder_abuse')?.valueChanges.subscribe(value => {
+      this.showElderAbuseFields = value === 'yes';
+      if (!this.showElderAbuseFields) {
+        this.omtForm.patchValue({
+          elder_abuse_score: '',
+          elder_abuse_followup_plan: ''
+        });
+      }
+    });
+
+    // FOTO Patient Inquiry dependency
+    this.omtForm.get('foto_patient')?.valueChanges.subscribe(value => {
+      this.showFotoPatientFields = value === 'yes';
+      if (!this.showFotoPatientFields) {
+        this.omtForm.patchValue({
+          foto_patient_score: ''
+        });
       }
     });
   }
