@@ -1,281 +1,347 @@
 <div [formGroup]="omtForm" class="omt-form">
+  <div class="form-row">
+    <label class="field-label">Indicate Body Type</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showBodyTypeFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Indicate Body Type</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Vitals</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="vitals" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="vitals" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showVitalsFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Vitals</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="vitals" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="vitals" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">ADL Management</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="adl_management" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="adl_management" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdlManagementFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">ADL Management</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="adl_management" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="adl_management" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Breathing at Rest</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showBreathingAtRestFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Breathing at Rest</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Transfers</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="transfers" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="transfers" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showTransfersFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Transfers</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="transfers" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="transfers" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Cast/Splint</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="cast_splint" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cast_splint" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCastSplintFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Cast/Splint</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="cast_splint" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="cast_splint" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Standing Posture</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="standing_posture" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="standing_posture" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showStandingPostureFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Standing Posture</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="standing_posture" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="standing_posture" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Protracted Scapulas</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showProtractedScapulasFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Protracted Scapulas</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Scoliosis</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="scoliosis" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="scoliosis" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showScoliosisFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Scoliosis</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="scoliosis" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="scoliosis" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Lower Extremity Structure</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showLowerExtremityStructureFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Lower Extremity Structure</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Gait</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="gait" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="gait" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showGaitFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Gait</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="gait" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="gait" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">6 Minute Walk Test</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show6MinuteWalkTestFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">6 Minute Walk Test</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Assistive Device</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="assistive_device" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="assistive_device" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAssistiveDeviceFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Assistive Device</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="assistive_device" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="assistive_device" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Immobilizer</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="immobilizer" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="immobilizer" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showImmobilizerFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Immobilizer</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="immobilizer" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="immobilizer" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscular Asymmetries</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscularAsymmetriesFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Muscular Asymmetries</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscle Guarding</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscleGuardingFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Muscle Guarding</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscle Atrophy</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscleAtrophyFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Muscle Atrophy</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Edema</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="edema" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="edema" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showEdemaFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Edema</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="edema" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="edema" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Apprehension of Movement</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showApprehensionOfMovementFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Apprehension of Movement</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Additional Comments</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
     <div class="form-row">
-        <label class="field-label">Additional Comments</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
+    </div>
+  </div>
+
 </div>
