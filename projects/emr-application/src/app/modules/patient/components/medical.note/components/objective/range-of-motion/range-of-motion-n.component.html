@@ -1,366 +1,394 @@
-
 <div [formGroup]="romForm" class="omt-form">
-    <div class="form-row">
-        <label class="field-label">No Limitations Noted</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Cervical AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Costovertebral Expansion</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Shoulder AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Shoulder PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Elbow AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Elbow PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="elbow_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="elbow_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Wrist AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Wrist PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="wrist_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="wrist_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Hand AROM-PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Thoracic AROM Sitting with Passive Overpressure</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Thoracic AROM Standing</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Lumbar AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Hip AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="hip_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="hip_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Hip PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="hip_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="hip_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Knee AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="knee_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="knee_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Knee PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="knee_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="knee_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Ankle AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Ankle PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="ankle_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="ankle_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">1st MTP AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">1st MTP PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">1st IP AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">1st IP PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Toe AROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="toe_arrom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="toe_arrom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Toe PROM</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="toe_prom" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="toe_prom" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
-    
-    <div class="form-row">
-        <label class="field-label">Additional Comments</label>
-        <div class="radio-group">
-          <c-form-check class="me-3">
-            <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
-            <label cFormCheckLabel>Yes</label>
-          </c-form-check>
-          <c-form-check>
-            <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
-            <label cFormCheckLabel>No</label>
-          </c-form-check>
-        </div>
-      </div>
+  <div class="form-row">
+    <label class="field-label">No Limitations Noted</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Cervical AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCervicalAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Costovertebral Expansion</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCostovertebralExpansionFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Shoulder AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Shoulder PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Elbow AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Elbow PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Wrist AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showWristAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Wrist PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="wrist_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wrist_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showWristPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Hand AROM-PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHandAromPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Thoracic AROM Sitting with Passive Overpressure</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure"
+          value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure"
+          value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showThoracicAromSittingWithPassiveOverpressureFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Thoracic AROM Standing</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showThoracicAromStandingFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Lumbar AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showLumbarAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Hip AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hip_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hip_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHipAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Hip PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hip_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hip_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHipPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Knee AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="knee_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="knee_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showKneeAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Knee PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="knee_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="knee_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showKneePromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Ankle AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAnkleAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Ankle PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="ankle_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="ankle_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAnklePromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">1st MTP AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">1st MTP PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stMtpPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">1st IP AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stIpAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">1st IP PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stIpPromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Toe AROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="toe_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="toe_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showToeAromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Toe PROM</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="toe_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="toe_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showToePromFields" class="dependent-field-box">
+  </div>
+  <div class="form-row">
+    <label class="field-label">Additional Comments</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+  </div>
 </div>

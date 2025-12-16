@@ -75,6 +75,109 @@ export class RangeOfMotionNComponent implements OnInit {
     })
   }
   setupValueChangeListeners() {
+    this.romForm.get('no_limitations_noted')?.valueChanges.subscribe(value => {
+      this.showNoLimitationsNotedFields = value === 'yes';
+    });
+    
+    this.romForm.get('cervical_arrom')?.valueChanges.subscribe(value => {
+      this.showCervicalAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('costovertebral_expansion')?.valueChanges.subscribe(value => {
+      this.showCostovertebralExpansionFields = value === 'yes';
+    });
+    
+    this.romForm.get('shoulder_arrom')?.valueChanges.subscribe(value => {
+      this.showShoulderAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('shoulder_prom')?.valueChanges.subscribe(value => {
+      this.showShoulderPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('elbow_arrom')?.valueChanges.subscribe(value => {
+      this.showElbowAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('elbow_prom')?.valueChanges.subscribe(value => {
+      this.showElbowPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('wrist_arrom')?.valueChanges.subscribe(value => {
+      this.showWristAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('wrist_prom')?.valueChanges.subscribe(value => {
+      this.showWristPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('hand_arrom_prom')?.valueChanges.subscribe(value => {
+      this.showHandAromPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('thoracic_arrom_sitting_with_passive_overpressure')?.valueChanges.subscribe(value => {
+      this.showThoracicAromSittingWithPassiveOverpressureFields = value === 'yes';
+    });
+    
+    this.romForm.get('thoracic_arrom_standing')?.valueChanges.subscribe(value => {
+      this.showThoracicAromStandingFields = value === 'yes';
+    });
+    
+    this.romForm.get('lumbar_arrom')?.valueChanges.subscribe(value => {
+      this.showLumbarAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('hip_arrom')?.valueChanges.subscribe(value => {
+      this.showHipAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('hip_prom')?.valueChanges.subscribe(value => {
+      this.showHipPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('knee_arrom')?.valueChanges.subscribe(value => {
+      this.showKneeAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('knee_prom')?.valueChanges.subscribe(value => {
+      this.showKneePromFields = value === 'yes';
+    });
+    
+    this.romForm.get('ankle_arrom')?.valueChanges.subscribe(value => {
+      this.showAnkleAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('ankle_prom')?.valueChanges.subscribe(value => {
+      this.showAnklePromFields = value === 'yes';
+    });
+    
+    this.romForm.get('1st_mtp_arrom')?.valueChanges.subscribe(value => {
+      this.show1stMtpAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('1st_mtp_prom')?.valueChanges.subscribe(value => {
+      this.show1stMtpPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('1st_ip_arrom')?.valueChanges.subscribe(value => {
+      this.show1stIpAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('1st_ip_prom')?.valueChanges.subscribe(value => {
+      this.show1stIpPromFields = value === 'yes';
+    });
+    
+    this.romForm.get('toe_arrom')?.valueChanges.subscribe(value => {
+      this.showToeAromFields = value === 'yes';
+    });
+    
+    this.romForm.get('toe_prom')?.valueChanges.subscribe(value => {
+      this.showToePromFields = value === 'yes';
+    });
+    
+    this.romForm.get('additional_comments')?.valueChanges.subscribe(value => {
+      this.showAdditionalCommentsFields = value === 'yes';
+    });
   }
 
 }
