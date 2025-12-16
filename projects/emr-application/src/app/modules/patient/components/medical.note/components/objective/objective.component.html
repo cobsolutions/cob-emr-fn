@@ -40,8 +40,7 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['range_of_motion']">
         <c-card-header>Range of Motion</c-card-header>
         <c-card-body>
-            <range-of-motion (formReady)="setChildForm('rangeOfMotion', $event)"
-                [fields]="objectiveCategoriesfields['range_of_motion']"></range-of-motion>
+            <range-of-motion-n (formReady)="setChildForm('omt', $event)"></range-of-motion-n>
         </c-card-body>
     </c-card>
     <!--Strength-->

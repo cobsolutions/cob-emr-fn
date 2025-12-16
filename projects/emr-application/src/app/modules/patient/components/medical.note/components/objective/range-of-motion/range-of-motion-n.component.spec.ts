@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RangeOfMotionComponent } from './range-of-motion.component';
+import { RangeOfMotionNComponent } from './range-of-motion-n.component';
 
-describe('RangeOfMotionComponent', () => {
-  let component: RangeOfMotionComponent;
-  let fixture: ComponentFixture<RangeOfMotionComponent>;
+describe('RangeOfMotionNComponent', () => {
+  let component: RangeOfMotionNComponent;
+  let fixture: ComponentFixture<RangeOfMotionNComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RangeOfMotionComponent ]
+      declarations: [ RangeOfMotionNComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RangeOfMotionComponent);
+    fixture = TestBed.createComponent(RangeOfMotionNComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
