@@ -63,7 +63,11 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wfl', label: 'WFL' },
     { value: 'limited', label: 'Limited' }
   ];
-
+  wristAROMOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' }
+  ];
   constructor(
     private fb: FormBuilder,
     private rangeOfMotionMapper: RangeOfMotionMapperService
@@ -232,6 +236,17 @@ export class RangeOfMotionNComponent implements OnInit {
       elbow_prom_pronation_left: ['not_tested'],
       elbow_prom_pronation_left_endfeel: ['not_tested'],
       wrist_arrom: ['no'],
+      extension_right: ['not_tested'],
+      extension_left: ['not_tested'],
+
+      flexion_right: ['not_tested'],
+      flexion_left: ['not_tested'],
+
+      radial_deviation_right: ['not_tested'],
+      radial_deviation_left: ['not_tested'],
+
+      ulnar_deviation_right: ['not_tested'],
+      ulnar_deviation_left: ['not_tested'],
       wrist_prom: ['no'],
       hand_arrom_prom: ['no'],
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
@@ -574,6 +589,21 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('wrist_arrom')?.valueChanges.subscribe(value => {
       this.showWristAromFields = value === 'yes';
+      if (value) {
+        this.romForm.patchValue({
+          extension_right: 'not_tested',
+          extension_left: 'not_tested',
+
+          flexion_right: 'not_tested',
+          flexion_left: 'not_tested',
+
+          radial_deviation_right: 'not_tested',
+          radial_deviation_left: 'not_tested',
+
+          ulnar_deviation_right: 'not_tested',
+          ulnar_deviation_left: 'not_tested'
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('wrist_prom')?.valueChanges.subscribe(value => {
