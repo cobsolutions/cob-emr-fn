@@ -9,11 +9,34 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ObservationNComponent implements OnInit {
   omtForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  // Visibility flags for dependent fields
+  showBodyTypeFields: boolean = false;
+  showVitalsFields: boolean = false;
+  showAdlManagementFields: boolean = false;
+  showBreathingAtRestFields: boolean = false;
+  showTransfersFields: boolean = false;
+  showCastSplintFields: boolean = false;
+  showStandingPostureFields: boolean = false;
+  showProtractedScapulasFields: boolean = false;
+  showScoliosisFields: boolean = false;
+  showLowerExtremityStructureFields: boolean = false;
+  showGaitFields: boolean = false;
+  show6MinuteWalkTestFields: boolean = false;
+  showAssistiveDeviceFields: boolean = false;
+  showImmobilizerFields: boolean = false;
+  showMuscularAsymmetriesFields: boolean = false;
+  showMuscleGuardingFields: boolean = false;
+  showMuscleAtrophyFields: boolean = false;
+  showEdemaFields: boolean = false;
+  showApprehensionOfMovementFields: boolean = false;
+  showAdditionalCommentsFields: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.setupValueChangeListeners();
   }
+
   private initForm(): void {
     this.omtForm = this.fb.group({
       indicate_body_type: ['no'],
@@ -38,5 +61,7 @@ export class ObservationNComponent implements OnInit {
       additional_comments: ['no'],
     })
   }
-
+  setupValueChangeListeners() {
+    throw new Error('Method not implemented.');
+  }
 }
