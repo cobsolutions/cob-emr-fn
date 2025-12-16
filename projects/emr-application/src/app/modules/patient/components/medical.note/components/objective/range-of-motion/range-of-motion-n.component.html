@@ -875,6 +875,14 @@
     </div>
   </div>
   <div *ngIf="showWristAromFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Apply to All</label>
+      <select cSelect formControlName="wrist_arrom_apply_to_all" class="form-select-custom">
+        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
     <div class="measurement-header">
       <div></div>
       <div class="measurement-column">Right</div>
