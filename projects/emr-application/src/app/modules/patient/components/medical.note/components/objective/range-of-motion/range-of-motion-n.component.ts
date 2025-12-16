@@ -150,8 +150,79 @@ export class RangeOfMotionNComponent implements OnInit {
       shoulder_horizontal_adduction_right: ['not_tested'],
       shoulder_horizontal_adduction_left: ['not_tested'],
       shoulder_prom: ['no'],
+      shoulder_prom_apply_to_all: [''],
+      shoulder_prom_flexion_right: ['not_tested'],
+      shoulder_prom_flexion_right_endfeel: ['not_tested'],
+      shoulder_prom_flexion_left: ['not_tested'],
+      shoulder_prom_flexion_left_endfeel: ['not_tested'],
+      shoulder_prom_scaption_right: ['not_tested'],
+      shoulder_prom_scaption_right_endfeel: ['not_tested'],
+      shoulder_prom_scaption_left: ['not_tested'],
+      shoulder_prom_scaption_left_endfeel: ['not_tested'],
+      shoulder_prom_abduction_right: ['not_tested'],
+      shoulder_prom_abduction_right_endfeel: ['not_tested'],
+      shoulder_prom_abduction_left: ['not_tested'],
+      shoulder_prom_abduction_left_endfeel: ['not_tested'],
+      shoulder_prom_extension_right: ['not_tested'],
+      shoulder_prom_extension_right_endfeel: ['not_tested'],
+      shoulder_prom_extension_left: ['not_tested'],
+      shoulder_prom_extension_left_endfeel: ['not_tested'],
+      shoulder_prom_er_neutral_right: ['not_tested'],
+      shoulder_prom_er_neutral_right_endfeel: ['not_tested'],
+      shoulder_prom_er_neutral_left: ['not_tested'],
+      shoulder_prom_er_neutral_left_endfeel: ['not_tested'],
+      shoulder_prom_ir_neutral_right: ['not_tested'],
+      shoulder_prom_ir_neutral_right_endfeel: ['not_tested'],
+      shoulder_prom_ir_neutral_left: ['not_tested'],
+      shoulder_prom_ir_neutral_left_endfeel: ['not_tested'],
+      shoulder_prom_er_scapular_plane_right: ['not_tested'],
+      shoulder_prom_er_scapular_plane_right_endfeel: ['not_tested'],
+      shoulder_prom_er_scapular_plane_left: ['not_tested'],
+      shoulder_prom_er_scapular_plane_left_endfeel: ['not_tested'],
+      shoulder_prom_ir_scapular_plane_right: ['not_tested'],
+      shoulder_prom_ir_scapular_plane_right_endfeel: ['not_tested'],
+      shoulder_prom_ir_scapular_plane_left: ['not_tested'],
+      shoulder_prom_ir_scapular_plane_left_endfeel: ['not_tested'],
+      shoulder_prom_er_90_degrees_abduction_right: ['not_tested'],
+      shoulder_prom_er_90_degrees_abduction_right_endfeel: ['not_tested'],
+      shoulder_prom_er_90_degrees_abduction_left: ['not_tested'],
+      shoulder_prom_er_90_degrees_abduction_left_endfeel: ['not_tested'],
+      shoulder_prom_ir_90_degrees_abduction_right: ['not_tested'],
+      shoulder_prom_ir_90_degrees_abduction_right_endfeel: ['not_tested'],
+      shoulder_prom_ir_90_degrees_abduction_left: ['not_tested'],
+      shoulder_prom_ir_90_degrees_abduction_left_endfeel: ['not_tested'],
+      shoulder_prom_ir_sleeper_stretch_right: ['not_tested'],
+      shoulder_prom_ir_sleeper_stretch_right_endfeel: ['not_tested'],
+      shoulder_prom_ir_sleeper_stretch_left: ['not_tested'],
+      shoulder_prom_ir_sleeper_stretch_left_endfeel: ['not_tested'],
+      shoulder_prom_horizontal_abduction_right: ['not_tested'],
+      shoulder_prom_horizontal_abduction_right_endfeel: ['not_tested'],
+      shoulder_prom_horizontal_abduction_left: ['not_tested'],
+      shoulder_prom_horizontal_abduction_left_endfeel: ['not_tested'],
+      shoulder_prom_horizontal_adduction_right: ['not_tested'],
+      shoulder_prom_horizontal_adduction_right_endfeel: ['not_tested'],
+      shoulder_prom_horizontal_adduction_left: ['not_tested'],
+      shoulder_prom_horizontal_adduction_left_endfeel: ['not_tested'],
       elbow_arrom: ['no'],
+      elbow_arrom_apply_to_all: [''],
+      elbow_arrom_flexion_right: ['not_tested'],
+      elbow_arrom_flexion_left: ['not_tested'],
+      elbow_arrom_extension_right: ['not_tested'],
+      elbow_arrom_extension_left: ['not_tested'],
+      elbow_arrom_pronation_right: ['not_tested'],
+      elbow_arrom_pronation_left: ['not_tested'],
+      elbow_arrom_supination_right: ['not_tested'],
+      elbow_arrom_supination_left: ['not_tested'],
       elbow_prom: ['no'],
+      elbow_prom_apply_to_all: [''],
+      elbow_prom_flexion_right: ['not_tested'],
+      elbow_prom_flexion_left: ['not_tested'],
+      elbow_prom_extension_right: ['not_tested'],
+      elbow_prom_extension_left: ['not_tested'],
+      elbow_prom_pronation_right: ['not_tested'],
+      elbow_prom_pronation_left: ['not_tested'],
+      elbow_prom_supination_right: ['not_tested'],
+      elbow_prom_supination_left: ['not_tested'],
       wrist_arrom: ['no'],
       wrist_prom: ['no'],
       hand_arrom_prom: ['no'],
@@ -319,14 +390,125 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('shoulder_prom')?.valueChanges.subscribe(value => {
       this.showShoulderPromFields = value === 'yes';
+      if (!this.showShoulderPromFields) {
+        this.romForm.patchValue({
+          shoulder_prom_apply_to_all: '',
+          shoulder_prom_flexion_right: 'not_tested',
+          shoulder_prom_flexion_left: 'not_tested',
+          shoulder_prom_scaption_right: 'not_tested',
+          shoulder_prom_scaption_left: 'not_tested',
+          shoulder_prom_abduction_right: 'not_tested',
+          shoulder_prom_abduction_left: 'not_tested',
+          shoulder_prom_extension_right: 'not_tested',
+          shoulder_prom_extension_left: 'not_tested',
+          shoulder_prom_functional_er_reach_right: 'not_tested',
+          shoulder_prom_functional_er_reach_left: 'not_tested',
+          shoulder_prom_functional_ir_reach_right: 'not_tested',
+          shoulder_prom_functional_ir_reach_left: 'not_tested',
+          shoulder_prom_er_neutral_right: 'not_tested',
+          shoulder_prom_er_neutral_left: 'not_tested',
+          shoulder_prom_ir_neutral_right: 'not_tested',
+          shoulder_prom_ir_neutral_left: 'not_tested',
+          shoulder_prom_horizontal_abduction_right: 'not_tested',
+          shoulder_prom_horizontal_abduction_left: 'not_tested',
+          shoulder_prom_horizontal_adduction_right: 'not_tested',
+          shoulder_prom_horizontal_adduction_left: 'not_tested'
+        });
+      }
+    });
+
+    // Shoulder PROM Apply to All
+    this.romForm.get('shoulder_prom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          shoulder_prom_flexion_right: value,
+          shoulder_prom_flexion_left: value,
+          shoulder_prom_scaption_right: value,
+          shoulder_prom_scaption_left: value,
+          shoulder_prom_abduction_right: value,
+          shoulder_prom_abduction_left: value,
+          shoulder_prom_extension_right: value,
+          shoulder_prom_extension_left: value,
+          shoulder_prom_functional_er_reach_right: value,
+          shoulder_prom_functional_er_reach_left: value,
+          shoulder_prom_functional_ir_reach_right: value,
+          shoulder_prom_functional_ir_reach_left: value,
+          shoulder_prom_er_neutral_right: value,
+          shoulder_prom_er_neutral_left: value,
+          shoulder_prom_ir_neutral_right: value,
+          shoulder_prom_ir_neutral_left: value,
+          shoulder_prom_horizontal_abduction_right: value,
+          shoulder_prom_horizontal_abduction_left: value,
+          shoulder_prom_horizontal_adduction_right: value,
+          shoulder_prom_horizontal_adduction_left: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('elbow_arrom')?.valueChanges.subscribe(value => {
       this.showElbowAromFields = value === 'yes';
+      if (!this.showElbowAromFields) {
+        this.romForm.patchValue({
+          elbow_arrom_apply_to_all: '',
+          elbow_arrom_flexion_right: 'not_tested',
+          elbow_arrom_flexion_left: 'not_tested',
+          elbow_arrom_extension_right: 'not_tested',
+          elbow_arrom_extension_left: 'not_tested',
+          elbow_arrom_pronation_right: 'not_tested',
+          elbow_arrom_pronation_left: 'not_tested',
+          elbow_arrom_supination_right: 'not_tested',
+          elbow_arrom_supination_left: 'not_tested'
+        });
+      }
+    });
+
+    // Elbow AROM Apply to All
+    this.romForm.get('elbow_arrom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          elbow_arrom_flexion_right: value,
+          elbow_arrom_flexion_left: value,
+          elbow_arrom_extension_right: value,
+          elbow_arrom_extension_left: value,
+          elbow_arrom_pronation_right: value,
+          elbow_arrom_pronation_left: value,
+          elbow_arrom_supination_right: value,
+          elbow_arrom_supination_left: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('elbow_prom')?.valueChanges.subscribe(value => {
       this.showElbowPromFields = value === 'yes';
+      if (!this.showElbowPromFields) {
+        this.romForm.patchValue({
+          elbow_prom_apply_to_all: '',
+          elbow_prom_flexion_right: 'not_tested',
+          elbow_prom_flexion_left: 'not_tested',
+          elbow_prom_extension_right: 'not_tested',
+          elbow_prom_extension_left: 'not_tested',
+          elbow_prom_pronation_right: 'not_tested',
+          elbow_prom_pronation_left: 'not_tested',
+          elbow_prom_supination_right: 'not_tested',
+          elbow_prom_supination_left: 'not_tested'
+        });
+      }
+    });
+
+    // Elbow PROM Apply to All
+    this.romForm.get('elbow_prom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          elbow_prom_flexion_right: value,
+          elbow_prom_flexion_left: value,
+          elbow_prom_extension_right: value,
+          elbow_prom_extension_left: value,
+          elbow_prom_pronation_right: value,
+          elbow_prom_pronation_left: value,
+          elbow_prom_supination_right: value,
+          elbow_prom_supination_left: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('wrist_arrom')?.valueChanges.subscribe(value => {

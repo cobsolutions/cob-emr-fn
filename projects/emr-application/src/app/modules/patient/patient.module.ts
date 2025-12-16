@@ -143,6 +143,7 @@ import { ObservationNComponent } from './components/medical.note/components/obje
 import { RangeOfMotionNComponent } from './components/medical.note/components/objective/range-of-motion/range-of-motion-n.component';
 import { StrengthNComponent } from './components/medical.note/components/objective/strengthN/strength-n.component';
 import { NeuroVascularNComponent } from './components/medical.note/components/objective/neuro-vascular/neuro-vascular-n.component';
+import { SpecialTestsNComponent } from './components/medical.note/components/objective/special-tests/special-tests-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -287,6 +288,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     RangeOfMotionNComponent,
     StrengthNComponent,
     NeuroVascularNComponent,
+    SpecialTestsNComponent,
   ],
   imports: [
     CommonModule,

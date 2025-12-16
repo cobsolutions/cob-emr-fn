@@ -67,10 +67,96 @@ export interface ShoulderAROMModel {
   horizontalAdductionLeft?: string;
 }
 
+// Shoulder PROM Model
+export interface ShoulderPROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionRightEndfeel?: string;
+  flexionLeft?: string;
+  flexionLeftEndfeel?: string;
+  scaptionRight?: string;
+  scaptionRightEndfeel?: string;
+  scaptionLeft?: string;
+  scaptionLeftEndfeel?: string;
+  abductionRight?: string;
+  abductionRightEndfeel?: string;
+  abductionLeft?: string;
+  abductionLeftEndfeel?: string;
+  extensionRight?: string;
+  extensionRightEndfeel?: string;
+  extensionLeft?: string;
+  extensionLeftEndfeel?: string;
+  erNeutralPositionRight?: string;
+  erNeutralPositionRightEndfeel?: string;
+  erNeutralPositionLeft?: string;
+  erNeutralPositionLeftEndfeel?: string;
+  irNeutralPositionRight?: string;
+  irNeutralPositionRightEndfeel?: string;
+  irNeutralPositionLeft?: string;
+  irNeutralPositionLeftEndfeel?: string;
+  erScapularPlaneRight?: string;
+  erScapularPlaneRightEndfeel?: string;
+  erScapularPlaneLeft?: string;
+  erScapularPlaneLeftEndfeel?: string;
+  irScapularPlaneRight?: string;
+  irScapularPlaneRightEndfeel?: string;
+  irScapularPlaneLeft?: string;
+  irScapularPlaneLeftEndfeel?: string;
+  er90DegreesAbductionRight?: string;
+  er90DegreesAbductionRightEndfeel?: string;
+  er90DegreesAbductionLeft?: string;
+  er90DegreesAbductionLeftEndfeel?: string;
+  ir90DegreesAbductionRight?: string;
+  ir90DegreesAbductionRightEndfeel?: string;
+  ir90DegreesAbductionLeft?: string;
+  ir90DegreesAbductionLeftEndfeel?: string;
+  irSleeperStretchRight?: string;
+  irSleeperStretchRightEndfeel?: string;
+  irSleeperStretchLeft?: string;
+  irSleeperStretchLeftEndfeel?: string;
+  horizontalAbductionRight?: string;
+  horizontalAbductionRightEndfeel?: string;
+  horizontalAbductionLeft?: string;
+  horizontalAbductionLeftEndfeel?: string;
+  horizontalAdductionRight?: string;
+  horizontalAdductionRightEndfeel?: string;
+  horizontalAdductionLeft?: string;
+  horizontalAdductionLeftEndfeel?: string;
+}
+
+// Elbow AROM Model
+export interface ElbowAROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  pronationRight?: string;
+  pronationLeft?: string;
+  supinationRight?: string;
+  supinationLeft?: string;
+}
+
+// Elbow PROM Model
+export interface ElbowPROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  pronationRight?: string;
+  pronationLeft?: string;
+  supinationRight?: string;
+  supinationLeft?: string;
+}
+
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
   noLimitationsNoted: NoLimitationsNotedModel;
   cervicalArom?: CervicalAROMModel;
   costovertebralExpansion?: CostovertebralExpansionModel;
   shoulderArom?: ShoulderAROMModel;
+  shoulderProm?: ShoulderPROMModel;
+  elbowArom?: ElbowAROMModel;
+  elbowProm?: ElbowPROMModel;
 }
