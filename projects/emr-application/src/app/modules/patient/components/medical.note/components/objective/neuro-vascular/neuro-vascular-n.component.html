@@ -1,1 +1,440 @@
-<p>neuro-vascular-n works!</p>
+<form [formGroup]="neuroVascularForm" class="rom-form">
+    <div class="form-row">
+        <label class="field-label">Complaints of any radicular symptoms in either extremity</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio"
+                    formControlName="complaints_of_any_radicular_symptoms_in_either_extremity" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio"
+                    formControlName="complaints_of_any_radicular_symptoms_in_either_extremity" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields" class="dependent-field-box">
+    </div>
+
+    <div class="form-row">
+        <label class="field-label">Cranial Nerve Screen</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="cranial_nerve_screen" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="cranial_nerve_screen" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCranialNerveScreenFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Myotomes Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="myotomes_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="myotomes_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showMyotomesUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Myotomes Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="myotomes_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="myotomes_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showMyotomesLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Dermatomes Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="dermatomes_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="dermatomes_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showDermatomesUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Dermatomes Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="dermatomes_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="dermatomes_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showDermatomesLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Upper Reflexes</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="upper_reflexes" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="upper_reflexes" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showUpperReflexesFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Lower Reflexes</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="lower_reflexes" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="lower_reflexes" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLowerReflexesFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Neural Tissue Tension Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="neural_tissue_tension_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="neural_tissue_tension_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showNeuralTissueTensionUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Neural Tissue Tension Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="neural_tissue_tension_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="neural_tissue_tension_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showNeuralTissueTensionLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Vascular</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="vascular" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="vascular" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showVascularFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Vertebral Artery</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="vertebral_artery" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="vertebral_artery" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showVertebralArteryFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Allen's Test (Circulation)</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="allen_s_test_circulation" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="allen_s_test_circulation" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showAllenSTestCirculationFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Capillary Refill</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="capillary_refill" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="capillary_refill" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCapillaryRefillFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Homan's Sign</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="homan_s_sign" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="homan_s_sign" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showHomanSSignFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Thoracic Outlet</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="thoracic_outlet" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="thoracic_outlet" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showThoracicOutletFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Lasegue's SLR</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="lasegue_s_slr" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="lasegue_s_slr" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLasegueSSlrFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Slump</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="slump" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="slump" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSlumpFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Quadrant Testing</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="quadrant_testing" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="quadrant_testing" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showQuadrantTestingFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Prone Knee Bend (Nachlas)</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="prone_knee_bend_nachlas" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="prone_knee_bend_nachlas" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showProneKneeBendNachlasFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Kernig/Brudzinski Test</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="kernig_brudzinski_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="kernig_brudzinski_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showKernigBrudzinskiTestFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Cram Test</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="cram_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="cram_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCramTestFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Seated Dural Stretch</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="seated_dural_stretch" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="seated_dural_stretch" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSeatedDuralStretchFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Semmes Weinstein Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="semmes_weinstein_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="semmes_weinstein_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSemmesWeinsteinLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Semmes Weinstein Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="semmes_weinstein_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="semmes_weinstein_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSemmesWeinsteinUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Tinel's Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="tinel_s_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="tinel_s_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showTinelSLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Tinel's Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="tinel_s_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="tinel_s_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showTinelSUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Transverse Ligament Stability</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="transverse_ligament_stability" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="transverse_ligament_stability" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showTransverseLigamentStabilityFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Additional Comments</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+    </div>
+</form>
