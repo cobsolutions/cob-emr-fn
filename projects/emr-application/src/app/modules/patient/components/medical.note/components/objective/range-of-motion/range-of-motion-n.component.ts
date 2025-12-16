@@ -9,6 +9,34 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class RangeOfMotionNComponent implements OnInit {
   romForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+
+  // Visibility flags for dependent fields
+  showNoLimitationsNotedFields: boolean = false;
+  showCervicalAromFields: boolean = false;
+  showCostovertebralExpansionFields: boolean = false;
+  showShoulderAromFields: boolean = false;
+  showShoulderPromFields: boolean = false;
+  showElbowAromFields: boolean = false;
+  showElbowPromFields: boolean = false;
+  showWristAromFields: boolean = false;
+  showWristPromFields: boolean = false;
+  showHandAromPromFields: boolean = false;
+  showThoracicAromSittingWithPassiveOverpressureFields: boolean = false;
+  showThoracicAromStandingFields: boolean = false;
+  showLumbarAromFields: boolean = false;
+  showHipAromFields: boolean = false;
+  showHipPromFields: boolean = false;
+  showKneeAromFields: boolean = false;
+  showKneePromFields: boolean = false;
+  showAnkleAromFields: boolean = false;
+  showAnklePromFields: boolean = false;
+  show1stMtpAromFields: boolean = false;
+  show1stMtpPromFields: boolean = false;
+  show1stIpAromFields: boolean = false;
+  show1stIpPromFields: boolean = false;
+  showToeAromFields: boolean = false;
+  showToePromFields: boolean = false;
+  showAdditionalCommentsFields: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -47,7 +75,6 @@ export class RangeOfMotionNComponent implements OnInit {
     })
   }
   setupValueChangeListeners() {
-    throw new Error('Method not implemented.');
   }
 
 }
