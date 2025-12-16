@@ -17,8 +17,23 @@
 
   <!-- Custom Outcome Measurement Fields (when Yes is selected) -->
   <div *ngIf="showCustomOutcomeFields" class="dependent-field-box">
-    <!-- TODO: Add custom outcome measurement fields -->
-    <p class="text-muted">Custom Outcome Measurement fields will be added here</p>
+    <!-- Name of Outcome -->
+    <div class="form-row">
+      <label class="field-label">Name of Outcome</label>
+      <input cFormControl type="text" formControlName="custom_outcome_name" class="full-width-input" />
+    </div>
+
+    <!-- Comments -->
+    <div class="form-row">
+      <label class="field-label">Comments</label>
+      <textarea cFormControl formControlName="custom_outcome_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+
+    <!-- Score -->
+    <div class="form-row">
+      <label class="field-label">Score</label>
+      <input cFormControl type="text" formControlName="custom_outcome_score" class="small-input" />
+    </div>
   </div>
 
   <!-- Vestibular -->
@@ -38,8 +53,123 @@
 
   <!-- Vestibular Fields (when Yes is selected) -->
   <div *ngIf="showVestibularFields" class="dependent-field-box">
-    <!-- TODO: Add vestibular fields -->
-    <p class="text-muted">Vestibular fields will be added here</p>
+    <!-- Cerebral Concussion -->
+    <div class="form-row">
+      <label class="field-label">Cerebral Concussion</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="cerebral_concussion" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="cerebral_concussion" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Cerebral Concussion Fields (nested when Yes is selected) -->
+    <div *ngIf="showCerebralConcussionFields" class="nested-dependent-field-box">
+      <!-- Loss of Consciousness -->
+      <div class="form-row">
+        <label class="field-label">Loss of Consciousness</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="loss_of_consciousness" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="loss_of_consciousness" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+
+      <!-- Loss of Consciousness Fields (when Yes is selected) -->
+      <div *ngIf="showLossOfConsciousnessFields" class="nested-dependent-field-box">
+        <div class="form-row">
+          <label class="field-label">Loss of Consciousness</label>
+          <select cSelect formControlName="loss_of_consciousness_select" class="form-select-custom">
+            <option *ngFor="let option of lossOfConsciousnessOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="field-label"></label>
+          <input cFormControl type="text" formControlName="loss_of_consciousness_text" class="full-width-input" />
+        </div>
+      </div>
+
+      <!-- Post-Traumatic Amnesia -->
+      <div class="form-row">
+        <label class="field-label">Post-Traumatic Amnesia</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="post_traumatic_amnesia" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="post_traumatic_amnesia" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+
+      <!-- Post-Traumatic Amnesia Fields (when Yes is selected) -->
+      <div *ngIf="showPostTraumaticAmnesiaFields" class="nested-dependent-field-box">
+        <div class="form-row">
+          <label class="field-label">Post-Traumatic Amnesia</label>
+          <select cSelect formControlName="post_traumatic_amnesia_select" class="form-select-custom">
+            <option *ngFor="let option of postTraumaticAmnesiaOptions" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="field-label"></label>
+          <input cFormControl type="text" formControlName="post_traumatic_amnesia_text" class="full-width-input" />
+        </div>
+      </div>
+
+      <!-- Post-Cerebral Concussion Scale -->
+      <div class="form-row">
+        <label class="field-label">Post-Cerebral Concussion Scale</label>
+        <div class="radio-group">
+          <c-form-check class="me-3">
+            <input cFormCheckInput type="radio" formControlName="post_cerebral_concussion_scale" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="post_cerebral_concussion_scale" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+
+      <!-- Post-Cerebral Concussion Scale Fields (when Yes is selected) -->
+      <div *ngIf="showPostCerebralConcussionScaleFields" class="nested-dependent-field-box">
+        <div class="form-row">
+          <label class="field-label">Raw Score</label>
+          <input cFormControl type="text" formControlName="post_cerebral_raw_score" class="small-input" />
+          <span class="ms-2">
+            <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          </span>
+        </div>
+        <div class="form-row">
+          <label class="field-label">Classification</label>
+          <input cFormControl type="text" formControlName="post_cerebral_classification" class="full-width-input" />
+        </div>
+        <div class="form-row">
+          <label class="field-label">% Rank</label>
+          <input cFormControl type="text" formControlName="post_cerebral_rank" class="full-width-input" />
+        </div>
+        <div class="form-row">
+          <label class="field-label"></label>
+          <input cFormControl type="text" formControlName="post_cerebral_text" class="full-width-input" />
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Upper Extremity -->
@@ -59,8 +189,115 @@
 
   <!-- Upper Extremity Fields (when Yes is selected) -->
   <div *ngIf="showUpperExtremityFields" class="dependent-field-box">
-    <!-- TODO: Add upper extremity fields -->
-    <p class="text-muted">Upper Extremity fields will be added here</p>
+    <!-- Shoulder Pain and Disability Index -->
+    <div class="form-row">
+      <label class="field-label">Shoulder Pain and Disability Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="shoulder_pain_disability" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="shoulder_pain_disability" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Shoulder Pain and Disability Index Fields (when Yes is selected) -->
+    <div *ngIf="showShoulderPainDisabilityFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Total %:</label>
+        <input cFormControl type="text" formControlName="shoulder_total_percent" class="small-input" />
+        <span class="me-2"></span>
+        <label class="field-label-inline">Pain %:</label>
+        <input cFormControl type="text" formControlName="shoulder_pain_percent" class="small-input" />
+        <span class="me-2"></span>
+        <label class="field-label-inline">Disability %:</label>
+        <input cFormControl type="text" formControlName="shoulder_disability_percent" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Upper Extremity Functional Index -->
+    <div class="form-row">
+      <label class="field-label">Upper Extremity Functional Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="upper_extremity_functional" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="upper_extremity_functional" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Upper Extremity Functional Index Fields (when Yes is selected) -->
+    <div *ngIf="showUpperExtremityFunctionalFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="upper_extremity_functional_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- DASH: Disabilities of Arm, Shoulder, Hand -->
+    <div class="form-row">
+      <label class="field-label">DASH: Disabilities of Arm, Shoulder, Hand</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="dash" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="dash" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- DASH Fields (when Yes is selected) -->
+    <div *ngIf="showDashFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="dash_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Hand Profile -->
+    <div class="form-row">
+      <label class="field-label">Hand Profile</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="hand_profile" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="hand_profile" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Hand Profile Fields (when Yes is selected) -->
+    <div *ngIf="showHandProfileFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <textarea cFormControl formControlName="hand_profile_text" class="form-textarea" rows="3"></textarea>
+        <span class="ms-2">
+          <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
   </div>
 
   <!-- Spine -->
@@ -80,8 +317,112 @@
 
   <!-- Spine Fields (when Yes is selected) -->
   <div *ngIf="showSpineFields" class="dependent-field-box">
-    <!-- TODO: Add spine fields -->
-    <p class="text-muted">Spine fields will be added here</p>
+    <!-- Neck Disability Index Questionnaire -->
+    <div class="form-row">
+      <label class="field-label">Neck Disability Index Questionnaire</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="neck_disability_index" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="neck_disability_index" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Neck Disability Index Fields (when Yes is selected) -->
+    <div *ngIf="showNeckDisabilityFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Score:</label>
+        <input cFormControl type="text" formControlName="neck_disability_score" class="small-input" />
+        <span class="me-2"></span>
+        <label class="field-label-inline">Total %:</label>
+        <input cFormControl type="text" formControlName="neck_disability_total_percent" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Oswestry Low Back Pain -->
+    <div class="form-row">
+      <label class="field-label">Oswestry Low Back Pain</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="oswestry_low_back_pain" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="oswestry_low_back_pain" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Oswestry Low Back Pain Fields (when Yes is selected) -->
+    <div *ngIf="showOswestryLowBackPainFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Disability %:</label>
+        <input cFormControl type="text" formControlName="oswestry_disability_percent" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Modified Oswestry Low Back Pain -->
+    <div class="form-row">
+      <label class="field-label">Modified Oswestry Low Back Pain</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="modified_oswestry_low_back_pain" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="modified_oswestry_low_back_pain" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Modified Oswestry Low Back Pain Fields (when Yes is selected) -->
+    <div *ngIf="showModifiedOswestryFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Disability %:</label>
+        <input cFormControl type="text" formControlName="modified_oswestry_disability_percent" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- The Quebec Back Pain Disability Scale -->
+    <div class="form-row">
+      <label class="field-label">The Quebec Back Pain Disability Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="quebec_back_pain_disability" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="quebec_back_pain_disability" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- The Quebec Back Pain Disability Scale Fields (when Yes is selected) -->
+    <div *ngIf="showQuebecBackPainFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="quebec_back_pain_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
   </div>
 
   <!-- Lower Extremity -->
@@ -101,8 +442,31 @@
 
   <!-- Lower Extremity Fields (when Yes is selected) -->
   <div *ngIf="showLowerExtremityFields" class="dependent-field-box">
-    <!-- TODO: Add lower extremity fields -->
-    <p class="text-muted">Lower Extremity fields will be added here</p>
+    <!-- Lower Extremity Functional Scale -->
+    <div class="form-row">
+      <label class="field-label">Lower Extremity Functional Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="lower_extremity_functional_scale" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="lower_extremity_functional_scale" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Lower Extremity Functional Scale Fields (when Yes is selected) -->
+    <div *ngIf="showLowerExtremityFunctionalFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="lower_extremity_functional_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
   </div>
 
   <!-- Balance -->
@@ -122,8 +486,155 @@
 
   <!-- Balance Fields (when Yes is selected) -->
   <div *ngIf="showBalanceFields" class="dependent-field-box">
-    <!-- TODO: Add balance fields -->
-    <p class="text-muted">Balance fields will be added here</p>
+    <!-- ABC Scale -->
+    <div class="form-row">
+      <label class="field-label">ABC Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="abc_scale" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="abc_scale" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- ABC Scale Fields (when Yes is selected) -->
+    <div *ngIf="showAbcScaleFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="abc_scale_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- mCTSIB -->
+    <div class="form-row">
+      <label class="field-label">mCTSIB</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="mctsib" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="mctsib" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- mCTSIB Fields (when Yes is selected) -->
+    <div *ngIf="showMctsibFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Condition 1:</label>
+        <input cFormControl type="text" formControlName="mctsib_condition_1" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Condition 2:</label>
+        <input cFormControl type="text" formControlName="mctsib_condition_2" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Condition 3:</label>
+        <input cFormControl type="text" formControlName="mctsib_condition_3" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Condition 4:</label>
+        <input cFormControl type="text" formControlName="mctsib_condition_4" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Total:</label>
+        <input cFormControl type="text" formControlName="mctsib_total" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Comments:</label>
+        <textarea cFormControl formControlName="mctsib_comments" class="form-textarea" rows="3"></textarea>
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Tinetti -->
+    <div class="form-row">
+      <label class="field-label">Tinetti</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="tinetti" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="tinetti" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Tinetti Fields (when Yes is selected) -->
+    <div *ngIf="showTinettiFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="tinetti_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Berg -->
+    <div class="form-row">
+      <label class="field-label">Berg</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="berg" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="berg" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Berg Fields (when Yes is selected) -->
+    <div *ngIf="showBergFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="berg_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Fullerton Advanced Balance (FAB) Scale -->
+    <div class="form-row">
+      <label class="field-label">Fullerton Advanced Balance (FAB) Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="fullerton" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="fullerton" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Fullerton Fields (when Yes is selected) -->
+    <div *ngIf="showFullertonFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="fullerton_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
   </div>
 
   <!-- Pain -->
@@ -143,8 +654,172 @@
 
   <!-- Pain Fields (when Yes is selected) -->
   <div *ngIf="showPainFields" class="dependent-field-box">
-    <!-- TODO: Add pain fields -->
-    <p class="text-muted">Pain fields will be added here</p>
+    <!-- McGill Pain Questionnaire -->
+    <div class="form-row">
+      <label class="field-label">McGill Pain Questionnaire</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="mcgill_pain" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="mcgill_pain" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- McGill Pain Questionnaire Fields (when Yes is selected) -->
+    <div *ngIf="showMcgillPainFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="mcgill_pain_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label"></label>
+        <p class="text-muted mb-2">
+          <a href="#" class="text-primary">Print Test</a> Once patient completes the test, please upload using <a href="#" class="text-primary">eDoc</a> to patient chart
+        </p>
+      </div>
+      <div class="form-row">
+        <label class="field-label"></label>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="mcgill_completed" />
+          <label cFormCheckLabel>McGill Questionnaire Completed</label>
+        </c-form-check>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Pain Follow-up Plan</label>
+        <textarea cFormControl formControlName="mcgill_followup_plan" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Wong-Baker FACES Pain Rating Scale -->
+    <div class="form-row">
+      <label class="field-label">Wong-Baker FACES Pain Rating Scale</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="wong_baker" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="wong_baker" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Wong-Baker Fields (when Yes is selected) -->
+    <div *ngIf="showWongBakerFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="wong_baker_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Pain Follow-up Plan</label>
+        <textarea cFormControl formControlName="wong_baker_followup_plan" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Pain Disability Index -->
+    <div class="form-row">
+      <label class="field-label">Pain Disability Index</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="pain_disability_index" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="pain_disability_index" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Pain Disability Index Fields (when Yes is selected) -->
+    <div *ngIf="showPainDisabilityIndexFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="pain_disability_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Pain Follow-up Plan</label>
+        <textarea cFormControl formControlName="pain_disability_followup_plan" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Croft Disability Questionnaire -->
+    <div class="form-row">
+      <label class="field-label">Croft Disability Questionnaire</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="croft_disability" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="croft_disability" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Croft Disability Fields (when Yes is selected) -->
+    <div *ngIf="showCroftDisabilityFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="croft_disability_score" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Pain Follow-up Plan</label>
+        <textarea cFormControl formControlName="croft_disability_followup_plan" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- The Fear-Avoidance Beliefs Questionnaire (FABQ) -->
+    <div class="form-row">
+      <label class="field-label">The Fear-Avoidance Beliefs Questionnaire (FABQ)</label>
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="fabq" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="fabq" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- FABQ Fields (when Yes is selected) -->
+    <div *ngIf="showFabqFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Scale 1</label>
+        <input cFormControl type="text" formControlName="fabq_scale_1" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Scale 2</label>
+        <input cFormControl type="text" formControlName="fabq_scale_2" class="small-input" />
+        <span class="ms-2">
+          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Pain Follow-up Plan</label>
+        <textarea cFormControl formControlName="fabq_followup_plan" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
   </div>
 
   <!-- General Function -->

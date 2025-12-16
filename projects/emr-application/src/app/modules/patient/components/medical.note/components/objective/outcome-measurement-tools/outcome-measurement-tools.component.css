@@ -38,9 +38,50 @@
   margin-bottom: 0;
 }
 
+.field-label-inline {
+  text-align: right;
+  font-weight: 500;
+  color: #5c4742;
+  margin-bottom: 0;
+  margin-left: 1rem;
+}
+
+/* Adjust field label width inside dependent boxes */
+.dependent-field-box > .form-row > .field-label {
+  min-width: 360px;
+}
+
+.dependent-field-box .nested-dependent-field-box .field-label {
+  min-width: 250px;
+}
+
 .radio-group {
   display: flex;
   gap: 1rem;
+}
+
+/* Input field sizing */
+.full-width-input {
+  width: 100%;
+  max-width: 800px;
+}
+
+.small-input {
+  width: 200px;
+}
+
+.form-textarea {
+  width: 100%;
+  max-width: 800px;
+  resize: vertical;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.form-select-custom {
+  width: 100%;
+  max-width: 800px;
 }
 
 /* Radio button styling */

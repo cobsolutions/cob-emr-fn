@@ -16,12 +16,62 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   // Visibility flags for dependent fields
   showCustomOutcomeFields: boolean = false;
   showVestibularFields: boolean = false;
+  showCerebralConcussionFields: boolean = false;
+  showLossOfConsciousnessFields: boolean = false;
+  showPostTraumaticAmnesiaFields: boolean = false;
+  showPostCerebralConcussionScaleFields: boolean = false;
   showUpperExtremityFields: boolean = false;
+  showShoulderPainDisabilityFields: boolean = false;
+  showUpperExtremityFunctionalFields: boolean = false;
+  showDashFields: boolean = false;
+  showHandProfileFields: boolean = false;
   showSpineFields: boolean = false;
+  showNeckDisabilityFields: boolean = false;
+  showOswestryLowBackPainFields: boolean = false;
+  showModifiedOswestryFields: boolean = false;
+  showQuebecBackPainFields: boolean = false;
   showLowerExtremityFields: boolean = false;
+  showLowerExtremityFunctionalFields: boolean = false;
   showBalanceFields: boolean = false;
+  showAbcScaleFields: boolean = false;
+  showMctsibFields: boolean = false;
+  showTinettiFields: boolean = false;
+  showBergFields: boolean = false;
+  showFullertonFields: boolean = false;
   showPainFields: boolean = false;
+  showMcgillPainFields: boolean = false;
+  showWongBakerFields: boolean = false;
+  showPainDisabilityIndexFields: boolean = false;
+  showCroftDisabilityFields: boolean = false;
+  showFabqFields: boolean = false;
   showGeneralFunctionFields: boolean = false;
+  showTimedUpAndGoFields: boolean = false;
+  showTimedUpAndGoAloneFields: boolean = false;
+  showTimedUpAndGoCognitiveFields: boolean = false;
+  showTimedUpAndGoManualFields: boolean = false;
+  showFiveTimeSitFields: boolean = false;
+  showAuditCFields: boolean = false;
+  showBarthelIndexFields: boolean = false;
+  showFallsEfficacyFields: boolean = false;
+  showDynamicGaitFields: boolean = false;
+  showFunctionalReachFields: boolean = false;
+  showSlumsFields: boolean = false;
+  showGeriatricDepressionFields: boolean = false;
+  showElderAbuseFields: boolean = false;
+  showFotoPatientFields: boolean = false;
+
+  // Dropdown options for vestibular
+  lossOfConsciousnessOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'less_than_30_min', label: 'Less than 30 minutes' },
+    { value: 'more_than_30_min', label: 'More than 30 minutes' }
+  ];
+
+  postTraumaticAmnesiaOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'less_than_24_hrs', label: 'Less than 24 hours' },
+    { value: 'more_than_24_hrs', label: 'More than 24 hours' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -58,12 +108,80 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   private initForm(): void {
     this.omtForm = this.fb.group({
       custom_outcome_measurement: ['no'],
+      custom_outcome_name: [''],
+      custom_outcome_comments: [''],
+      custom_outcome_score: [''],
       vestibular: ['no'],
+      cerebral_concussion: ['no'],
+      loss_of_consciousness: ['no'],
+      loss_of_consciousness_select: ['not_tested'],
+      loss_of_consciousness_text: [''],
+      post_traumatic_amnesia: ['no'],
+      post_traumatic_amnesia_select: ['not_tested'],
+      post_traumatic_amnesia_text: [''],
+      post_cerebral_concussion_scale: ['no'],
+      post_cerebral_raw_score: [''],
+      post_cerebral_classification: [''],
+      post_cerebral_rank: [''],
+      post_cerebral_text: [''],
       upper_extremity: ['no'],
+      shoulder_pain_disability: ['no'],
+      shoulder_total_percent: [''],
+      shoulder_pain_percent: [''],
+      shoulder_disability_percent: [''],
+      upper_extremity_functional: ['no'],
+      upper_extremity_functional_score: [''],
+      dash: ['no'],
+      dash_score: [''],
+      hand_profile: ['no'],
+      hand_profile_text: [''],
       spine: ['no'],
+      neck_disability_index: ['no'],
+      neck_disability_score: [''],
+      neck_disability_total_percent: [''],
+      oswestry_low_back_pain: ['no'],
+      oswestry_disability_percent: [''],
+      modified_oswestry_low_back_pain: ['no'],
+      modified_oswestry_disability_percent: [''],
+      quebec_back_pain_disability: ['no'],
+      quebec_back_pain_score: [''],
       lower_extremity: ['no'],
+      lower_extremity_functional_scale: ['no'],
+      lower_extremity_functional_score: [''],
       balance: ['no'],
+      abc_scale: ['no'],
+      abc_scale_score: [''],
+      mctsib: ['no'],
+      mctsib_condition_1: [''],
+      mctsib_condition_2: [''],
+      mctsib_condition_3: [''],
+      mctsib_condition_4: [''],
+      mctsib_total: [''],
+      mctsib_comments: [''],
+      tinetti: ['no'],
+      tinetti_score: [''],
+      berg: ['no'],
+      berg_score: [''],
+      fullerton: ['no'],
+      fullerton_score: [''],
       pain: ['no'],
+      mcgill_pain: ['no'],
+      mcgill_pain_score: [''],
+      mcgill_completed: [false],
+      mcgill_followup_plan: [''],
+      wong_baker: ['no'],
+      wong_baker_score: [''],
+      wong_baker_followup_plan: [''],
+      pain_disability_index: ['no'],
+      pain_disability_score: [''],
+      pain_disability_followup_plan: [''],
+      croft_disability: ['no'],
+      croft_disability_score: [''],
+      croft_disability_followup_plan: [''],
+      fabq: ['no'],
+      fabq_scale_1: [''],
+      fabq_scale_2: [''],
+      fabq_followup_plan: [''],
       general_function: ['no']
     });
   }
@@ -73,7 +191,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('custom_outcome_measurement')?.valueChanges.subscribe(value => {
       this.showCustomOutcomeFields = value === 'yes';
       if (!this.showCustomOutcomeFields) {
-        // Clear custom outcome fields when disabled
+        this.omtForm.patchValue({
+          custom_outcome_name: '',
+          custom_outcome_comments: '',
+          custom_outcome_score: ''
+        });
       }
     });
 
@@ -81,7 +203,60 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('vestibular')?.valueChanges.subscribe(value => {
       this.showVestibularFields = value === 'yes';
       if (!this.showVestibularFields) {
-        // Clear vestibular fields when disabled
+        this.omtForm.patchValue({
+          cerebral_concussion: 'no'
+        });
+        this.showCerebralConcussionFields = false;
+      }
+    });
+
+    // Cerebral Concussion dependency (nested under Vestibular)
+    this.omtForm.get('cerebral_concussion')?.valueChanges.subscribe(value => {
+      this.showCerebralConcussionFields = value === 'yes';
+      if (!this.showCerebralConcussionFields) {
+        this.omtForm.patchValue({
+          loss_of_consciousness: 'no',
+          post_traumatic_amnesia: 'no',
+          post_cerebral_concussion_scale: 'no'
+        });
+        this.showLossOfConsciousnessFields = false;
+        this.showPostTraumaticAmnesiaFields = false;
+        this.showPostCerebralConcussionScaleFields = false;
+      }
+    });
+
+    // Loss of Consciousness dependency (nested under Cerebral Concussion)
+    this.omtForm.get('loss_of_consciousness')?.valueChanges.subscribe(value => {
+      this.showLossOfConsciousnessFields = value === 'yes';
+      if (!this.showLossOfConsciousnessFields) {
+        this.omtForm.patchValue({
+          loss_of_consciousness_select: 'not_tested',
+          loss_of_consciousness_text: ''
+        });
+      }
+    });
+
+    // Post-Traumatic Amnesia dependency (nested under Cerebral Concussion)
+    this.omtForm.get('post_traumatic_amnesia')?.valueChanges.subscribe(value => {
+      this.showPostTraumaticAmnesiaFields = value === 'yes';
+      if (!this.showPostTraumaticAmnesiaFields) {
+        this.omtForm.patchValue({
+          post_traumatic_amnesia_select: 'not_tested',
+          post_traumatic_amnesia_text: ''
+        });
+      }
+    });
+
+    // Post-Cerebral Concussion Scale dependency (nested under Cerebral Concussion)
+    this.omtForm.get('post_cerebral_concussion_scale')?.valueChanges.subscribe(value => {
+      this.showPostCerebralConcussionScaleFields = value === 'yes';
+      if (!this.showPostCerebralConcussionScaleFields) {
+        this.omtForm.patchValue({
+          post_cerebral_raw_score: '',
+          post_cerebral_classification: '',
+          post_cerebral_rank: '',
+          post_cerebral_text: ''
+        });
       }
     });
 
@@ -89,7 +264,58 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('upper_extremity')?.valueChanges.subscribe(value => {
       this.showUpperExtremityFields = value === 'yes';
       if (!this.showUpperExtremityFields) {
-        // Clear upper extremity fields when disabled
+        this.omtForm.patchValue({
+          shoulder_pain_disability: 'no',
+          upper_extremity_functional: 'no',
+          dash: 'no',
+          hand_profile: 'no'
+        });
+        this.showShoulderPainDisabilityFields = false;
+        this.showUpperExtremityFunctionalFields = false;
+        this.showDashFields = false;
+        this.showHandProfileFields = false;
+      }
+    });
+
+    // Shoulder Pain and Disability Index dependency
+    this.omtForm.get('shoulder_pain_disability')?.valueChanges.subscribe(value => {
+      this.showShoulderPainDisabilityFields = value === 'yes';
+      if (!this.showShoulderPainDisabilityFields) {
+        this.omtForm.patchValue({
+          shoulder_total_percent: '',
+          shoulder_pain_percent: '',
+          shoulder_disability_percent: ''
+        });
+      }
+    });
+
+    // Upper Extremity Functional Index dependency
+    this.omtForm.get('upper_extremity_functional')?.valueChanges.subscribe(value => {
+      this.showUpperExtremityFunctionalFields = value === 'yes';
+      if (!this.showUpperExtremityFunctionalFields) {
+        this.omtForm.patchValue({
+          upper_extremity_functional_score: ''
+        });
+      }
+    });
+
+    // DASH dependency
+    this.omtForm.get('dash')?.valueChanges.subscribe(value => {
+      this.showDashFields = value === 'yes';
+      if (!this.showDashFields) {
+        this.omtForm.patchValue({
+          dash_score: ''
+        });
+      }
+    });
+
+    // Hand Profile dependency
+    this.omtForm.get('hand_profile')?.valueChanges.subscribe(value => {
+      this.showHandProfileFields = value === 'yes';
+      if (!this.showHandProfileFields) {
+        this.omtForm.patchValue({
+          hand_profile_text: ''
+        });
       }
     });
 
@@ -97,7 +323,57 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('spine')?.valueChanges.subscribe(value => {
       this.showSpineFields = value === 'yes';
       if (!this.showSpineFields) {
-        // Clear spine fields when disabled
+        this.omtForm.patchValue({
+          neck_disability_index: 'no',
+          oswestry_low_back_pain: 'no',
+          modified_oswestry_low_back_pain: 'no',
+          quebec_back_pain_disability: 'no'
+        });
+        this.showNeckDisabilityFields = false;
+        this.showOswestryLowBackPainFields = false;
+        this.showModifiedOswestryFields = false;
+        this.showQuebecBackPainFields = false;
+      }
+    });
+
+    // Neck Disability Index Questionnaire dependency
+    this.omtForm.get('neck_disability_index')?.valueChanges.subscribe(value => {
+      this.showNeckDisabilityFields = value === 'yes';
+      if (!this.showNeckDisabilityFields) {
+        this.omtForm.patchValue({
+          neck_disability_score: '',
+          neck_disability_total_percent: ''
+        });
+      }
+    });
+
+    // Oswestry Low Back Pain dependency
+    this.omtForm.get('oswestry_low_back_pain')?.valueChanges.subscribe(value => {
+      this.showOswestryLowBackPainFields = value === 'yes';
+      if (!this.showOswestryLowBackPainFields) {
+        this.omtForm.patchValue({
+          oswestry_disability_percent: ''
+        });
+      }
+    });
+
+    // Modified Oswestry Low Back Pain dependency
+    this.omtForm.get('modified_oswestry_low_back_pain')?.valueChanges.subscribe(value => {
+      this.showModifiedOswestryFields = value === 'yes';
+      if (!this.showModifiedOswestryFields) {
+        this.omtForm.patchValue({
+          modified_oswestry_disability_percent: ''
+        });
+      }
+    });
+
+    // Quebec Back Pain Disability Scale dependency
+    this.omtForm.get('quebec_back_pain_disability')?.valueChanges.subscribe(value => {
+      this.showQuebecBackPainFields = value === 'yes';
+      if (!this.showQuebecBackPainFields) {
+        this.omtForm.patchValue({
+          quebec_back_pain_score: ''
+        });
       }
     });
 
@@ -105,7 +381,20 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('lower_extremity')?.valueChanges.subscribe(value => {
       this.showLowerExtremityFields = value === 'yes';
       if (!this.showLowerExtremityFields) {
-        // Clear lower extremity fields when disabled
+        this.omtForm.patchValue({
+          lower_extremity_functional_scale: 'no'
+        });
+        this.showLowerExtremityFunctionalFields = false;
+      }
+    });
+
+    // Lower Extremity Functional Scale dependency
+    this.omtForm.get('lower_extremity_functional_scale')?.valueChanges.subscribe(value => {
+      this.showLowerExtremityFunctionalFields = value === 'yes';
+      if (!this.showLowerExtremityFunctionalFields) {
+        this.omtForm.patchValue({
+          lower_extremity_functional_score: ''
+        });
       }
     });
 
@@ -113,7 +402,73 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('balance')?.valueChanges.subscribe(value => {
       this.showBalanceFields = value === 'yes';
       if (!this.showBalanceFields) {
-        // Clear balance fields when disabled
+        this.omtForm.patchValue({
+          abc_scale: 'no',
+          mctsib: 'no',
+          tinetti: 'no',
+          berg: 'no',
+          fullerton: 'no'
+        });
+        this.showAbcScaleFields = false;
+        this.showMctsibFields = false;
+        this.showTinettiFields = false;
+        this.showBergFields = false;
+        this.showFullertonFields = false;
+      }
+    });
+
+    // ABC Scale dependency
+    this.omtForm.get('abc_scale')?.valueChanges.subscribe(value => {
+      this.showAbcScaleFields = value === 'yes';
+      if (!this.showAbcScaleFields) {
+        this.omtForm.patchValue({
+          abc_scale_score: ''
+        });
+      }
+    });
+
+    // mCTSIB dependency
+    this.omtForm.get('mctsib')?.valueChanges.subscribe(value => {
+      this.showMctsibFields = value === 'yes';
+      if (!this.showMctsibFields) {
+        this.omtForm.patchValue({
+          mctsib_condition_1: '',
+          mctsib_condition_2: '',
+          mctsib_condition_3: '',
+          mctsib_condition_4: '',
+          mctsib_total: '',
+          mctsib_comments: ''
+        });
+      }
+    });
+
+    // Tinetti dependency
+    this.omtForm.get('tinetti')?.valueChanges.subscribe(value => {
+      this.showTinettiFields = value === 'yes';
+      if (!this.showTinettiFields) {
+        this.omtForm.patchValue({
+          tinetti_score: ''
+        });
+      }
+    });
+
+    // Berg dependency
+    this.omtForm.get('berg')?.valueChanges.subscribe(value => {
+      this.showBergFields = value === 'yes';
+      if (!this.showBergFields) {
+        this.omtForm.patchValue({
+          berg_score: ''
+        });
+      }
+    });
+
+    // Fullerton Advanced Balance (FAB) Scale dependency
+    this.omtForm.get('fullerton')?.valueChanges.subscribe(value => {
+      this.showFullertonFields = value === 'yes';
+      if (!this.showFullertonFields) {
+        this.omtForm.patchValue({
+          fullerton_score: ''
+        });
       }
     });
 
@@ -121,7 +476,75 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     this.omtForm.get('pain')?.valueChanges.subscribe(value => {
       this.showPainFields = value === 'yes';
       if (!this.showPainFields) {
-        // Clear pain fields when disabled
+        this.omtForm.patchValue({
+          mcgill_pain: 'no',
+          wong_baker: 'no',
+          pain_disability_index: 'no',
+          croft_disability: 'no',
+          fabq: 'no'
+        });
+        this.showMcgillPainFields = false;
+        this.showWongBakerFields = false;
+        this.showPainDisabilityIndexFields = false;
+        this.showCroftDisabilityFields = false;
+        this.showFabqFields = false;
+      }
+    });
+
+    // McGill Pain Questionnaire dependency
+    this.omtForm.get('mcgill_pain')?.valueChanges.subscribe(value => {
+      this.showMcgillPainFields = value === 'yes';
+      if (!this.showMcgillPainFields) {
+        this.omtForm.patchValue({
+          mcgill_pain_score: '',
+          mcgill_completed: false,
+          mcgill_followup_plan: ''
+        });
+      }
+    });
+
+    // Wong-Baker FACES Pain Rating Scale dependency
+    this.omtForm.get('wong_baker')?.valueChanges.subscribe(value => {
+      this.showWongBakerFields = value === 'yes';
+      if (!this.showWongBakerFields) {
+        this.omtForm.patchValue({
+          wong_baker_score: '',
+          wong_baker_followup_plan: ''
+        });
+      }
+    });
+
+    // Pain Disability Index dependency
+    this.omtForm.get('pain_disability_index')?.valueChanges.subscribe(value => {
+      this.showPainDisabilityIndexFields = value === 'yes';
+      if (!this.showPainDisabilityIndexFields) {
+        this.omtForm.patchValue({
+          pain_disability_score: '',
+          pain_disability_followup_plan: ''
+        });
+      }
+    });
+
+    // Croft Disability Questionnaire dependency
+    this.omtForm.get('croft_disability')?.valueChanges.subscribe(value => {
+      this.showCroftDisabilityFields = value === 'yes';
+      if (!this.showCroftDisabilityFields) {
+        this.omtForm.patchValue({
+          croft_disability_score: '',
+          croft_disability_followup_plan: ''
+        });
+      }
+    });
+
+    // The Fear-Avoidance Beliefs Questionnaire (FABQ) dependency
+    this.omtForm.get('fabq')?.valueChanges.subscribe(value => {
+      this.showFabqFields = value === 'yes';
+      if (!this.showFabqFields) {
+        this.omtForm.patchValue({
+          fabq_scale_1: '',
+          fabq_scale_2: '',
+          fabq_followup_plan: ''
+        });
       }
     });
 
