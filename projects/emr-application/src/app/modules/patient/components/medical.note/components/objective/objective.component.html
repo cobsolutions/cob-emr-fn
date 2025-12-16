@@ -63,8 +63,7 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['special_tests']">
         <c-card-header>Special Tests</c-card-header>
         <c-card-body>
-            <special-tests (formReady)="setChildForm('specialTest', $event)"
-                [fields]="objectiveCategoriesfields['special_tests']"></special-tests>
+            <special-tests-n (formReady)="setChildForm('specialTest', $event)"></special-tests-n>
         </c-card-body>
     </c-card>
 
