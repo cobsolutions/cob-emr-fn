@@ -1,0 +1,169 @@
+<form [formGroup]="strengthForm" class="rom-form">
+    <div class="form-row">
+        <label class="field-label">No Limitations Noted</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
+    </div>
+
+    <div class="form-row">
+        <label class="field-label">Selective Tissue Tension Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSelectiveTissueTensionUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Selective Tissue Tension Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSelectiveTissueTensionLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Grip / Pinch</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="grip_pinch" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="grip_pinch" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGripPinchFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Upper</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsUpperFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Redcord Neurac Stability Tests</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="redcord_neurac_stability_tests" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="redcord_neurac_stability_tests" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showRedcordNeuracStabilityTestsFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Trunk</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_trunk" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_trunk" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsTrunkFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Lower</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsLowerFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Core Strength</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="core_strength" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="core_strength" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCoreStrengthFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Manual Muscle Tests</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="manual_muscle_tests" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="manual_muscle_tests" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showManualMuscleTestsFields" class="dependent-field-box">
+    </div>
+    <div class="form-row">
+        <label class="field-label">Additional Comments</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+
+    <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+    </div>
+</form>

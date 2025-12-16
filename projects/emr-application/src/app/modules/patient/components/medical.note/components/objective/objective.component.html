@@ -40,15 +40,14 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['range_of_motion']">
         <c-card-header>Range of Motion</c-card-header>
         <c-card-body>
-            <range-of-motion-n (formReady)="setChildForm('omt', $event)"></range-of-motion-n>
+            <range-of-motion-n (formReady)="setChildForm('rangeOfMotion', $event)"></range-of-motion-n>
         </c-card-body>
     </c-card>
     <!--Strength-->
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['strength']">
         <c-card-header>Strength</c-card-header>
         <c-card-body>
-            <strength (formReady)="setChildForm('strength', $event)" [fields]="objectiveCategoriesfields['strength']">
-            </strength>
+            <strength-n (formReady)="setChildForm('strength', $event)"></strength-n>
         </c-card-body>
     </c-card>
 
