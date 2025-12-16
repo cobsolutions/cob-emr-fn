@@ -215,18 +215,33 @@ export class RangeOfMotionNComponent implements OnInit {
       elbow_arrom_supination_left: ['not_tested'],
       elbow_prom: ['no'],
       elbow_prom_apply_to_all: [''],
-      elbow_prom_flexion_right: ['not_tested'],
-      elbow_prom_flexion_left: ['not_tested'],
       elbow_prom_extension_right: ['not_tested'],
+      elbow_prom_extension_right_endfeel: ['not_tested'],
       elbow_prom_extension_left: ['not_tested'],
-      elbow_prom_pronation_right: ['not_tested'],
-      elbow_prom_pronation_left: ['not_tested'],
+      elbow_prom_extension_left_endfeel: ['not_tested'],
+      elbow_prom_flexion_right: ['not_tested'],
+      elbow_prom_flexion_right_endfeel: ['not_tested'],
+      elbow_prom_flexion_left: ['not_tested'],
+      elbow_prom_flexion_left_endfeel: ['not_tested'],
       elbow_prom_supination_right: ['not_tested'],
+      elbow_prom_supination_right_endfeel: ['not_tested'],
       elbow_prom_supination_left: ['not_tested'],
+      elbow_prom_supination_left_endfeel: ['not_tested'],
+      elbow_prom_pronation_right: ['not_tested'],
+      elbow_prom_pronation_right_endfeel: ['not_tested'],
+      elbow_prom_pronation_left: ['not_tested'],
+      elbow_prom_pronation_left_endfeel: ['not_tested'],
       wrist_arrom: ['no'],
       wrist_prom: ['no'],
       hand_arrom_prom: ['no'],
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
+      thoracic_arrom_sitting_apply_to_all: [''],
+      thoracic_arrom_sitting_forward_bending: ['not_tested'],
+      thoracic_arrom_sitting_backward_bending: ['not_tested'],
+      thoracic_arrom_sitting_right_rotation: ['not_tested'],
+      thoracic_arrom_sitting_left_rotation: ['not_tested'],
+      thoracic_arrom_sitting_right_side_bending: ['not_tested'],
+      thoracic_arrom_sitting_left_side_bending: ['not_tested'],
       thoracic_arrom_standing: ['no'],
       lumbar_arrom: ['no'],
       hip_arrom: ['no'],
@@ -521,14 +536,22 @@ export class RangeOfMotionNComponent implements OnInit {
       if (!this.showElbowPromFields) {
         this.romForm.patchValue({
           elbow_prom_apply_to_all: '',
-          elbow_prom_flexion_right: 'not_tested',
-          elbow_prom_flexion_left: 'not_tested',
           elbow_prom_extension_right: 'not_tested',
+          elbow_prom_extension_right_endfeel: 'not_tested',
           elbow_prom_extension_left: 'not_tested',
-          elbow_prom_pronation_right: 'not_tested',
-          elbow_prom_pronation_left: 'not_tested',
+          elbow_prom_extension_left_endfeel: 'not_tested',
+          elbow_prom_flexion_right: 'not_tested',
+          elbow_prom_flexion_right_endfeel: 'not_tested',
+          elbow_prom_flexion_left: 'not_tested',
+          elbow_prom_flexion_left_endfeel: 'not_tested',
           elbow_prom_supination_right: 'not_tested',
-          elbow_prom_supination_left: 'not_tested'
+          elbow_prom_supination_right_endfeel: 'not_tested',
+          elbow_prom_supination_left: 'not_tested',
+          elbow_prom_supination_left_endfeel: 'not_tested',
+          elbow_prom_pronation_right: 'not_tested',
+          elbow_prom_pronation_right_endfeel: 'not_tested',
+          elbow_prom_pronation_left: 'not_tested',
+          elbow_prom_pronation_left_endfeel: 'not_tested'
         });
       }
     });
@@ -537,14 +560,14 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('elbow_prom_apply_to_all')?.valueChanges.subscribe(value => {
       if (value) {
         this.romForm.patchValue({
-          elbow_prom_flexion_right: value,
-          elbow_prom_flexion_left: value,
           elbow_prom_extension_right: value,
           elbow_prom_extension_left: value,
-          elbow_prom_pronation_right: value,
-          elbow_prom_pronation_left: value,
+          elbow_prom_flexion_right: value,
+          elbow_prom_flexion_left: value,
           elbow_prom_supination_right: value,
-          elbow_prom_supination_left: value
+          elbow_prom_supination_left: value,
+          elbow_prom_pronation_right: value,
+          elbow_prom_pronation_left: value
         }, { emitEvent: false });
       }
     });
@@ -563,6 +586,31 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('thoracic_arrom_sitting_with_passive_overpressure')?.valueChanges.subscribe(value => {
       this.showThoracicAromSittingWithPassiveOverpressureFields = value === 'yes';
+      if (!this.showThoracicAromSittingWithPassiveOverpressureFields) {
+        this.romForm.patchValue({
+          thoracic_arrom_sitting_apply_to_all: '',
+          thoracic_arrom_sitting_forward_bending: 'not_tested',
+          thoracic_arrom_sitting_backward_bending: 'not_tested',
+          thoracic_arrom_sitting_right_rotation: 'not_tested',
+          thoracic_arrom_sitting_left_rotation: 'not_tested',
+          thoracic_arrom_sitting_right_side_bending: 'not_tested',
+          thoracic_arrom_sitting_left_side_bending: 'not_tested'
+        });
+      }
+    });
+
+    // Thoracic AROM Sitting with Passive Overpressure Apply to All
+    this.romForm.get('thoracic_arrom_sitting_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          thoracic_arrom_sitting_forward_bending: value,
+          thoracic_arrom_sitting_backward_bending: value,
+          thoracic_arrom_sitting_right_rotation: value,
+          thoracic_arrom_sitting_left_rotation: value,
+          thoracic_arrom_sitting_right_side_bending: value,
+          thoracic_arrom_sitting_left_side_bending: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('thoracic_arrom_standing')?.valueChanges.subscribe(value => {

@@ -777,65 +777,87 @@
       </select>
     </div>
 
-    <div class="measurement-header">
-      <div></div>
-      <div class="measurement-column">Right</div>
-      <div class="measurement-column">Left</div>
-    </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Extension</label>
-      <select cSelect formControlName="elbow_prom_extension_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+    <div class="form-row">
+      <label class="field-label">Extension (Right)</label>
+      <select cSelect formControlName="elbow_prom_extension_right" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
-      <select cSelect formControlName="elbow_prom_extension_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_extension_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
     </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Flexion</label>
-      <select cSelect formControlName="elbow_prom_flexion_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+    <div class="form-row">
+      <label class="field-label">Extension (Left)</label>
+      <select cSelect formControlName="elbow_prom_extension_left" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
-      <select cSelect formControlName="elbow_prom_flexion_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_extension_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
     </div>
 
-    <div class="measurement-row">
-      <label class="measurement-label">Supination</label>
-      <select cSelect formControlName="elbow_prom_supination_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+    <div class="form-row">
+      <label class="field-label">Flexion (Right)</label>
+      <select cSelect formControlName="elbow_prom_flexion_right" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
-      <select cSelect formControlName="elbow_prom_supination_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_flexion_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Flexion (Left)</label>
+      <select cSelect formControlName="elbow_prom_flexion_left" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_flexion_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
     </div>
 
-    <div class="measurement-row">
-      <label class="measurement-label">Pronation</label>
-      <select cSelect formControlName="elbow_prom_pronation_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+    <div class="form-row">
+      <label class="field-label">Supination (Right)</label>
+      <select cSelect formControlName="elbow_prom_supination_right" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
-      <select cSelect formControlName="elbow_prom_pronation_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_supination_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Supination (Left)</label>
+      <select cSelect formControlName="elbow_prom_supination_left" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_supination_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Pronation (Right)</label>
+      <select cSelect formControlName="elbow_prom_pronation_right" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_pronation_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Pronation (Left)</label>
+      <select cSelect formControlName="elbow_prom_pronation_left" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="elbow_prom_pronation_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
       </select>
     </div>
   </div>
@@ -900,6 +922,48 @@
     </div>
   </div>
   <div *ngIf="showThoracicAromSittingWithPassiveOverpressureFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Apply to All</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_apply_to_all" class="form-select-custom">
+        <option *ngFor="let option of applyToAllOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Forward Bending</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_forward_bending" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Backward Bending</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_backward_bending" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Right Rotation</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_right_rotation" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Left Rotation</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_left_rotation" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Right Side Bending</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_right_side_bending" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Left Side Bending</label>
+      <select cSelect formControlName="thoracic_arrom_sitting_left_side_bending" class="form-select-custom">
+        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
   </div>
   <div class="form-row">
     <label class="field-label">Thoracic AROM Standing</label>

@@ -71,8 +71,7 @@
     <c-card class="mb-2" *ngIf="objectiveCategoriesfields['palpation']">
         <c-card-header>Palpation</c-card-header>
         <c-card-body>
-            <palpation (formReady)="setChildForm('palpation', $event)"
-                [fields]="objectiveCategoriesfields['palpation']"></palpation>
+            <palpation-n (formReady)="setChildForm('palpation', $event)"></palpation-n>
         </c-card-body>
     </c-card>
     <div class="mt-3">

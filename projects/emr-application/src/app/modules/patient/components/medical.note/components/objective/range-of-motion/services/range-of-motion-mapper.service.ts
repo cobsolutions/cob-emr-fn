@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel } from '../models/range-of-motion.model';
+import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class RangeOfMotionMapperService {
       shoulderArom: this.mapShoulderArom(formValue),
       shoulderProm: this.mapShoulderProm(formValue),
       elbowArom: this.mapElbowArom(formValue),
-      elbowProm: this.mapElbowProm(formValue)
+      elbowProm: this.mapElbowProm(formValue),
+      thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue)
     };
   }
 
@@ -157,14 +158,32 @@ export class RangeOfMotionMapperService {
       // Elbow PROM
       elbow_prom: dto.elbowProm?.enabled ? 'yes' : 'no',
       elbow_prom_apply_to_all: '',
-      elbow_prom_flexion_right: dto.elbowProm?.flexionRight || 'not_tested',
-      elbow_prom_flexion_left: dto.elbowProm?.flexionLeft || 'not_tested',
       elbow_prom_extension_right: dto.elbowProm?.extensionRight || 'not_tested',
+      elbow_prom_extension_right_endfeel: dto.elbowProm?.extensionRightEndfeel || 'not_tested',
       elbow_prom_extension_left: dto.elbowProm?.extensionLeft || 'not_tested',
-      elbow_prom_pronation_right: dto.elbowProm?.pronationRight || 'not_tested',
-      elbow_prom_pronation_left: dto.elbowProm?.pronationLeft || 'not_tested',
+      elbow_prom_extension_left_endfeel: dto.elbowProm?.extensionLeftEndfeel || 'not_tested',
+      elbow_prom_flexion_right: dto.elbowProm?.flexionRight || 'not_tested',
+      elbow_prom_flexion_right_endfeel: dto.elbowProm?.flexionRightEndfeel || 'not_tested',
+      elbow_prom_flexion_left: dto.elbowProm?.flexionLeft || 'not_tested',
+      elbow_prom_flexion_left_endfeel: dto.elbowProm?.flexionLeftEndfeel || 'not_tested',
       elbow_prom_supination_right: dto.elbowProm?.supinationRight || 'not_tested',
-      elbow_prom_supination_left: dto.elbowProm?.supinationLeft || 'not_tested'
+      elbow_prom_supination_right_endfeel: dto.elbowProm?.supinationRightEndfeel || 'not_tested',
+      elbow_prom_supination_left: dto.elbowProm?.supinationLeft || 'not_tested',
+      elbow_prom_supination_left_endfeel: dto.elbowProm?.supinationLeftEndfeel || 'not_tested',
+      elbow_prom_pronation_right: dto.elbowProm?.pronationRight || 'not_tested',
+      elbow_prom_pronation_right_endfeel: dto.elbowProm?.pronationRightEndfeel || 'not_tested',
+      elbow_prom_pronation_left: dto.elbowProm?.pronationLeft || 'not_tested',
+      elbow_prom_pronation_left_endfeel: dto.elbowProm?.pronationLeftEndfeel || 'not_tested',
+
+      // Thoracic AROM Sitting with Passive Overpressure
+      thoracic_arrom_sitting_with_passive_overpressure: dto.thoracicAromSittingWithPassiveOverpressure?.enabled ? 'yes' : 'no',
+      thoracic_arrom_sitting_apply_to_all: '',
+      thoracic_arrom_sitting_forward_bending: dto.thoracicAromSittingWithPassiveOverpressure?.forwardBending || 'not_tested',
+      thoracic_arrom_sitting_backward_bending: dto.thoracicAromSittingWithPassiveOverpressure?.backwardBending || 'not_tested',
+      thoracic_arrom_sitting_right_rotation: dto.thoracicAromSittingWithPassiveOverpressure?.rightRotation || 'not_tested',
+      thoracic_arrom_sitting_left_rotation: dto.thoracicAromSittingWithPassiveOverpressure?.leftRotation || 'not_tested',
+      thoracic_arrom_sitting_right_side_bending: dto.thoracicAromSittingWithPassiveOverpressure?.rightSideBending || 'not_tested',
+      thoracic_arrom_sitting_left_side_bending: dto.thoracicAromSittingWithPassiveOverpressure?.leftSideBending || 'not_tested'
     };
   }
 
@@ -342,14 +361,38 @@ export class RangeOfMotionMapperService {
     const model: ElbowPROMModel = { enabled };
 
     if (enabled) {
-      model.flexionRight = formValue.elbow_prom_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.elbow_prom_flexion_left || 'not_tested';
       model.extensionRight = formValue.elbow_prom_extension_right || 'not_tested';
+      model.extensionRightEndfeel = formValue.elbow_prom_extension_right_endfeel || 'not_tested';
       model.extensionLeft = formValue.elbow_prom_extension_left || 'not_tested';
-      model.pronationRight = formValue.elbow_prom_pronation_right || 'not_tested';
-      model.pronationLeft = formValue.elbow_prom_pronation_left || 'not_tested';
+      model.extensionLeftEndfeel = formValue.elbow_prom_extension_left_endfeel || 'not_tested';
+      model.flexionRight = formValue.elbow_prom_flexion_right || 'not_tested';
+      model.flexionRightEndfeel = formValue.elbow_prom_flexion_right_endfeel || 'not_tested';
+      model.flexionLeft = formValue.elbow_prom_flexion_left || 'not_tested';
+      model.flexionLeftEndfeel = formValue.elbow_prom_flexion_left_endfeel || 'not_tested';
       model.supinationRight = formValue.elbow_prom_supination_right || 'not_tested';
+      model.supinationRightEndfeel = formValue.elbow_prom_supination_right_endfeel || 'not_tested';
       model.supinationLeft = formValue.elbow_prom_supination_left || 'not_tested';
+      model.supinationLeftEndfeel = formValue.elbow_prom_supination_left_endfeel || 'not_tested';
+      model.pronationRight = formValue.elbow_prom_pronation_right || 'not_tested';
+      model.pronationRightEndfeel = formValue.elbow_prom_pronation_right_endfeel || 'not_tested';
+      model.pronationLeft = formValue.elbow_prom_pronation_left || 'not_tested';
+      model.pronationLeftEndfeel = formValue.elbow_prom_pronation_left_endfeel || 'not_tested';
+    }
+
+    return model;
+  }
+
+  private mapThoracicAromSittingWithPassiveOverpressure(formValue: any): ThoracicAromSittingWithPassiveOverpressureModel {
+    const enabled = formValue.thoracic_arrom_sitting_with_passive_overpressure === 'yes';
+    const model: ThoracicAromSittingWithPassiveOverpressureModel = { enabled };
+
+    if (enabled) {
+      model.forwardBending = formValue.thoracic_arrom_sitting_forward_bending || 'not_tested';
+      model.backwardBending = formValue.thoracic_arrom_sitting_backward_bending || 'not_tested';
+      model.rightRotation = formValue.thoracic_arrom_sitting_right_rotation || 'not_tested';
+      model.leftRotation = formValue.thoracic_arrom_sitting_left_rotation || 'not_tested';
+      model.rightSideBending = formValue.thoracic_arrom_sitting_right_side_bending || 'not_tested';
+      model.leftSideBending = formValue.thoracic_arrom_sitting_left_side_bending || 'not_tested';
     }
 
     return model;

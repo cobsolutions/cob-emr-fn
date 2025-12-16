@@ -140,14 +140,33 @@ export interface ElbowAROMModel {
 // Elbow PROM Model
 export interface ElbowPROMModel {
   enabled: boolean;
-  flexionRight?: string;
-  flexionLeft?: string;
   extensionRight?: string;
+  extensionRightEndfeel?: string;
   extensionLeft?: string;
-  pronationRight?: string;
-  pronationLeft?: string;
+  extensionLeftEndfeel?: string;
+  flexionRight?: string;
+  flexionRightEndfeel?: string;
+  flexionLeft?: string;
+  flexionLeftEndfeel?: string;
   supinationRight?: string;
+  supinationRightEndfeel?: string;
   supinationLeft?: string;
+  supinationLeftEndfeel?: string;
+  pronationRight?: string;
+  pronationRightEndfeel?: string;
+  pronationLeft?: string;
+  pronationLeftEndfeel?: string;
+}
+
+// Thoracic AROM Sitting with Passive Overpressure Model
+export interface ThoracicAromSittingWithPassiveOverpressureModel {
+  enabled: boolean;
+  forwardBending?: string;
+  backwardBending?: string;
+  rightRotation?: string;
+  leftRotation?: string;
+  rightSideBending?: string;
+  leftSideBending?: string;
 }
 
 // Main Range of Motion Model
@@ -159,4 +178,5 @@ export interface RangeOfMotionModel {
   shoulderProm?: ShoulderPROMModel;
   elbowArom?: ElbowAROMModel;
   elbowProm?: ElbowPROMModel;
+  thoracicAromSittingWithPassiveOverpressure?: ThoracicAromSittingWithPassiveOverpressureModel;
 }
