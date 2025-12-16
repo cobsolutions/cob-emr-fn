@@ -14,6 +14,20 @@
   </div>
   <div *ngIf="showBodyTypeFields" class="dependent-field-box">
     <div class="form-row">
+      <div class="radio-group">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="body_type" value="mesomorph" />
+          <label cFormCheckLabel>Mesomorph</label>
+        </c-form-check>
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="body_type" value="endomorph" />
+          <label cFormCheckLabel>Endomorph</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="body_type" value="ectomorph" />
+          <label cFormCheckLabel>Ectomorph</label>
+        </c-form-check>
+      </div>
     </div>
   </div>
   <div class="form-row">

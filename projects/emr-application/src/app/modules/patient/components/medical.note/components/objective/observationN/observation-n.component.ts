@@ -40,6 +40,7 @@ export class ObservationNComponent implements OnInit {
   private initForm(): void {
     this.omtForm = this.fb.group({
       indicate_body_type: ['no'],
+      body_type: ['mesomorph'],
       vitals: ['no'],
       adl_management: ['no'],
       breathing_at_rest: ['no'],
