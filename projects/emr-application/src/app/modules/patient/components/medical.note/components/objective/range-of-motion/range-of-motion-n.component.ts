@@ -83,6 +83,11 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' }
   ];
+  lumbarAROMOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -525,7 +530,17 @@ export class RangeOfMotionNComponent implements OnInit {
       thoracic_arrom_standing_right_side_bending: ['not_tested'],
       thoracic_arrom_standing_left_side_bending: ['not_tested'],
 
+      //lumbar_arrom
       lumbar_arrom: ['no'],
+      lumbar_arrom_apply_to_all: [''],
+      lumbar_arrom_forward_bending: ['not_tested'],
+      lumbar_arrom_backward_bending: ['not_tested'],
+      lumbar_arrom_right_rotation: ['not_tested'],
+      lumbar_arrom_left_rotation: ['not_tested'],
+      lumbar_arrom_right_side_bending: ['not_tested'],
+      lumbar_arrom_left_side_bending: ['not_tested'],
+      lumbar_arrom_left_comment: [null],
+
       hip_arrom: ['no'],
       hip_prom: ['no'],
       knee_arrom: ['no'],
@@ -1246,8 +1261,33 @@ export class RangeOfMotionNComponent implements OnInit {
         }, { emitEvent: false });
       }
     });
+
     this.romForm.get('lumbar_arrom')?.valueChanges.subscribe(value => {
       this.showLumbarAromFields = value === 'yes';
+      if (!this.showLumbarAromFields) {
+        this.romForm.patchValue({
+          lumbar_arrom_apply_to_all: '',
+          lumbar_arrom_forward_bending: 'not_tested',
+          lumbar_arrom_backward_bending: 'not_tested',
+          lumbar_arrom_right_rotation: 'not_tested',
+          lumbar_arrom_left_rotation: 'not_tested',
+          lumbar_arrom_right_side_bending: 'not_tested',
+          lumbar_arrom_left_side_bending: 'not_tested',
+          lumbar_arrom_left_comment: null,
+        });
+      }
+    });
+    this.romForm.get('lumbar_arrom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          lumbar_arrom_forward_bending: value,
+          lumbar_arrom_backward_bending: value,
+          lumbar_arrom_right_rotation: value,
+          lumbar_arrom_left_rotation: value,
+          lumbar_arrom_right_side_bending: value,
+          lumbar_arrom_left_side_bending: value,
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('hip_arrom')?.valueChanges.subscribe(value => {
