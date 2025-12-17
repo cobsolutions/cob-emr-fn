@@ -56,10 +56,10 @@ export class RangeOfMotionNComponent implements OnInit {
   ];
 
   applyToAllOptions = [
-    { value: '', label: '' },
+    { value: 'not_tested', label: 'Not Tested' },
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' },
-    { value: 'not_tested', label: 'Not Tested' }
+
   ];
 
   romTestOptions = [
@@ -74,6 +74,11 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wfl', label: 'WFL' }
   ];
   wristPROMOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' }
+  ];
+  thoracicAROMStandingOptions = [
     { value: 'not_tested', label: 'Not Tested' },
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' }
@@ -510,7 +515,16 @@ export class RangeOfMotionNComponent implements OnInit {
       thoracic_arrom_sitting_left_rotation: ['not_tested'],
       thoracic_arrom_sitting_right_side_bending: ['not_tested'],
       thoracic_arrom_sitting_left_side_bending: ['not_tested'],
+      //thoracic_arrom_standing
       thoracic_arrom_standing: ['no'],
+      thoracic_arrom_standing_apply_to_all: [''],
+      thoracic_arrom_standing_forward_bending: ['not_tested'],
+      thoracic_arrom_standing_backward_bending: ['not_tested'],
+      thoracic_arrom_standing_right_rotation: ['not_tested'],
+      thoracic_arrom_standing_left_rotation: ['not_tested'],
+      thoracic_arrom_standing_right_side_bending: ['not_tested'],
+      thoracic_arrom_standing_left_side_bending: ['not_tested'],
+
       lumbar_arrom: ['no'],
       hip_arrom: ['no'],
       hip_prom: ['no'],
@@ -1208,8 +1222,30 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('thoracic_arrom_standing')?.valueChanges.subscribe(value => {
       this.showThoracicAromStandingFields = value === 'yes';
+      if (!this.showThoracicAromStandingFields) {
+        this.romForm.patchValue({
+          thoracic_arrom_standing_apply_to_all: '',
+          thoracic_arrom_standing_forward_bending: 'not_tested',
+          thoracic_arrom_standing_backward_bending: 'not_tested',
+          thoracic_arrom_standing_right_rotation: 'not_tested',
+          thoracic_arrom_standing_left_rotation: 'not_tested',
+          thoracic_arrom_standing_right_side_bending: 'not_tested',
+          thoracic_arrom_standing_left_side_bending: 'not_tested'
+        });
+      }
     });
-
+    this.romForm.get('thoracic_arrom_standing_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          thoracic_arrom_standing_forward_bending: value,
+          thoracic_arrom_standing_backward_bending: value,
+          thoracic_arrom_standing_right_rotation: value,
+          thoracic_arrom_standing_left_rotation: value,
+          thoracic_arrom_standing_right_side_bending: value,
+          thoracic_arrom_standing_left_side_bending: value
+        }, { emitEvent: false });
+      }
+    });
     this.romForm.get('lumbar_arrom')?.valueChanges.subscribe(value => {
       this.showLumbarAromFields = value === 'yes';
     });
