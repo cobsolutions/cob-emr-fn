@@ -68,6 +68,12 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' }
   ];
+  wristPROMOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private rangeOfMotionMapper: RangeOfMotionMapperService
@@ -235,6 +241,7 @@ export class RangeOfMotionNComponent implements OnInit {
       elbow_prom_pronation_right_endfeel: ['not_tested'],
       elbow_prom_pronation_left: ['not_tested'],
       elbow_prom_pronation_left_endfeel: ['not_tested'],
+
       wrist_arrom: ['no'],
       wrist_arrom_apply_to_all: [''],
       extension_right: ['not_tested'],
@@ -245,7 +252,18 @@ export class RangeOfMotionNComponent implements OnInit {
       radial_deviation_left: ['not_tested'],
       ulnar_deviation_right: ['not_tested'],
       ulnar_deviation_left: ['not_tested'],
+
       wrist_prom: ['no'],
+      wrist_prom_apply_to_all: [''],
+      wrist_prom_extension_right: ['not_tested'],
+      wrist_prom_extension_left: ['not_tested'],
+      wrist_prom_flexion_right: ['not_tested'],
+      wrist_prom_flexion_left: ['not_tested'],
+      wrist_prom_radial_deviation_right: ['not_tested'],
+      wrist_prom_radial_deviation_left: ['not_tested'],
+      wrist_prom_ulnar_deviation_right: ['not_tested'],
+      wrist_prom_ulnar_deviation_left: ['not_tested'],
+
       hand_arrom_prom: ['no'],
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
       thoracic_arrom_sitting_apply_to_all: [''],
@@ -618,8 +636,33 @@ export class RangeOfMotionNComponent implements OnInit {
     });
     this.romForm.get('wrist_prom')?.valueChanges.subscribe(value => {
       this.showWristPromFields = value === 'yes';
+      this.romForm.patchValue({
+        wrist_prom_apply_to_all: '',
+        wrist_prom_extension_right: ['not_tested'],
+        wrist_prom_extension_left: ['not_tested'],
+        wrist_prom_flexion_right: ['not_tested'],
+        wrist_prom_flexion_left: ['not_tested'],
+        wrist_prom_radial_deviation_right: ['not_tested'],
+        wrist_prom_radial_deviation_left: ['not_tested'],
+        wrist_prom_ulnar_deviation_right: ['not_tested'],
+        wrist_prom_ulnar_deviation_left: ['not_tested']
+      })
     });
 
+    this.romForm.get('wrist_prom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          wrist_prom_extension_right: value,
+          wrist_prom_extension_left: value,
+          wrist_prom_flexion_right: value,
+          wrist_prom_flexion_left: value,
+          wrist_prom_radial_deviation_right: value,
+          wrist_prom_radial_deviation_left: value,
+          wrist_prom_ulnar_deviation_right: value,
+          wrist_prom_ulnar_deviation_left: value
+        }, { emitEvent: false });
+      }
+    });
     this.romForm.get('hand_arrom_prom')?.valueChanges.subscribe(value => {
       this.showHandAromPromFields = value === 'yes';
     });
