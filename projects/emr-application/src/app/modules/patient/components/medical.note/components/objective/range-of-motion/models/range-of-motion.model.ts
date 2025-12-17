@@ -463,7 +463,7 @@ export interface ThoracicAROMStandingModel {
   leftSideBending?: string;
 }
 // Lumbar AROM
-export interface LumbarAROMModel{
+export interface LumbarAROMModel {
   enabled: boolean;
   lumbarArromApplyToAll?: string;
   lumbarArromForwardBending?: string;
@@ -599,7 +599,31 @@ export interface ToePROMModel {
   fifthIpExtensionLeftEndfeel?: string;
   comments?: string;
 }
+// Hip PROM Model
+export interface WristPROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionRightEndfeel?: string;
+  flexionLeft?: string;
+  flexionLeftEndfeel?: string;
+  extensionRight?: string;
+  extensionRightEndfeel?: string;
+  extensionLeft?: string;
+  extensionLeftEndfeel?: string;
+  abductionRight?: string;
+  abductionRightEndfeel?: string;
+  abductionLeft?: string;
+  abductionLeftEndfeel?: string;
+  adductionRight?: string;
+  adductionRightEndfeel?: string;
+  adductionLeft?: string;
+  adductionLeftEndfeel?: string;
+  internalRotationRight?: string;
+  internalRotationRightEndfeel?: string;
+  internalRotationLeft?: string;
+  internalRotationLeftEndfeel?: string;
 
+}
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
   noLimitationsNoted: NoLimitationsNotedModel;
@@ -613,8 +637,8 @@ export interface RangeOfMotionModel {
   wristProm?: WristPROMModel;
   handAromProm?: HandAromPromModel;
   thoracicAromSittingWithPassiveOverpressure?: ThoracicAromSittingWithPassiveOverpressureModel;
-  thoracicAROMStandingModel?:ThoracicAROMStandingModel;
-  lumbarAROMModel?:LumbarAROMModel;
+  thoracicAROMStandingModel?: ThoracicAROMStandingModel;
+  lumbarAROMModel?: LumbarAROMModel;
   hipArom?: HipAROMModel;
   toeArom?: ToeAROMModel;
   toeProm?: ToePROMModel;
