@@ -555,33 +555,34 @@ export class RangeOfMotionNComponent implements OnInit {
       hip_external_rotation_right: ['not_tested'],
       hip_external_rotation_left: ['not_tested'],
       hip_arrom_comments: [''],
-      
+
       hip_prom: ['no'],
+      hip_prom_apply_to_all: [''],
       hip_prom_flexion_right: ['not_tested'],
       hip_prom_flexion_right_endfeel: ['not_tested'],
       hip_prom_flexion_left: ['not_tested'],
       hip_prom_flexion_left_endfeel: ['not_tested'],
-      
+
       hip_prom_extension_right: ['not_tested'],
       hip_prom_extension_right_endfeel: ['not_tested'],
       hip_prom_extension_left: ['not_tested'],
       hip_prom_extension_left_endfeel: ['not_tested'],
-      
+
       hip_prom_abduction_right: ['not_tested'],
       hip_prom_abduction_right_endfeel: ['not_tested'],
       hip_prom_abduction_left: ['not_tested'],
       hip_prom_abduction_left_endfeel: ['not_tested'],
-      
+
       hip_prom_adduction_right: ['not_tested'],
       hip_prom_adduction_right_endfeel: ['not_tested'],
       hip_prom_adduction_left: ['not_tested'],
       hip_prom_adduction_left_endfeel: ['not_tested'],
-      
+
       hip_prom_internal_rotation_right: ['not_tested'],
       hip_prom_internal_rotation_right_endfeel: ['not_tested'],
       hip_prom_internal_rotation_left: ['not_tested'],
       hip_prom_internal_rotation_left_endfeel: ['not_tested'],
-      
+
       hip_prom_external_rotation_right: ['not_tested'],
       hip_prom_external_rotation_right_endfeel: ['not_tested'],
       hip_prom_external_rotation_left: ['not_tested'],
@@ -1457,6 +1458,40 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('hip_prom')?.valueChanges.subscribe(value => {
       this.showHipPromFields = value === 'yes';
+      if (value === 'no') {
+        this.romForm.patchValue({
+          hip_prom_apply_to_all: '',
+          hip_prom_flexion_right: 'not_tested',
+          hip_prom_flexion_right_endfeel: 'not_tested',
+          hip_prom_flexion_left: 'not_tested',
+          hip_prom_flexion_left_endfeel: 'not_tested',
+
+          hip_prom_extension_right: 'not_tested',
+          hip_prom_extension_right_endfeel: 'not_tested',
+          hip_prom_extension_left: 'not_tested',
+          hip_prom_extension_left_endfeel: 'not_tested',
+
+          hip_prom_abduction_right: 'not_tested',
+          hip_prom_abduction_right_endfeel: 'not_tested',
+          hip_prom_abduction_left: 'not_tested',
+          hip_prom_abduction_left_endfeel: 'not_tested',
+
+          hip_prom_adduction_right: 'not_tested',
+          hip_prom_adduction_right_endfeel: 'not_tested',
+          hip_prom_adduction_left: 'not_tested',
+          hip_prom_adduction_left_endfeel: 'not_tested',
+
+          hip_prom_internal_rotation_right: 'not_tested',
+          hip_prom_internal_rotation_right_endfeel: 'not_tested',
+          hip_prom_internal_rotation_left: 'not_tested',
+          hip_prom_internal_rotation_left_endfeel: 'not_tested',
+
+          hip_prom_external_rotation_right: 'not_tested',
+          hip_prom_external_rotation_right_endfeel: 'not_tested',
+          hip_prom_external_rotation_left: 'not_tested',
+          hip_prom_external_rotation_left_endfeel: 'not_tested'
+        })
+      }
     });
 
     this.romForm.get('knee_arrom')?.valueChanges.subscribe(value => {
