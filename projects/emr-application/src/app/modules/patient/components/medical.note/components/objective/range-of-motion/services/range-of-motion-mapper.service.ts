@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, WristAROMModel, WristPROMModel, LumbarAROMModel } from '../models/range-of-motion.model';
+import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, HipAROMModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, ToeAROMModel, ToePROMModel, WristAROMModel, WristPROMModel, LumbarAROMModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,10 @@ export class RangeOfMotionMapperService {
       handAromProm: this.mapHandAromProm(formValue),
       thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue),
       thoracicAROMStandingModel: this.mapThoracicAROMStanding(formValue),
-      lumbarAROMModel: this.mapLumbarAROM(formValue)
+      lumbarAROMModel: this.mapLumbarAROM(formValue),
+      hipArom: this.mapHipArom(formValue),
+      toeArom: this.mapToeArom(formValue),
+      toeProm: this.mapToeProm(formValue)
     };
   }
 
@@ -479,6 +482,126 @@ export class RangeOfMotionMapperService {
 
       lumbar_arrom_left_side_bending:
         dto.lumbarAROMModel?.lumbarArromLeftSideBending || 'not_tested',
+
+      // Hip AROM
+      hip_arrom: dto.hipArom?.enabled ? 'yes' : 'no',
+      hip_flexion_right: dto.hipArom?.flexionRight || 'not_tested',
+      hip_flexion_left: dto.hipArom?.flexionLeft || 'not_tested',
+      hip_extension_right: dto.hipArom?.extensionRight || 'not_tested',
+      hip_extension_left: dto.hipArom?.extensionLeft || 'not_tested',
+      hip_abduction_right: dto.hipArom?.abductionRight || 'not_tested',
+      hip_abduction_left: dto.hipArom?.abductionLeft || 'not_tested',
+      hip_adduction_right: dto.hipArom?.adductionRight || 'not_tested',
+      hip_adduction_left: dto.hipArom?.adductionLeft || 'not_tested',
+      hip_internal_rotation_right: dto.hipArom?.internalRotationRight || 'not_tested',
+      hip_internal_rotation_left: dto.hipArom?.internalRotationLeft || 'not_tested',
+      hip_external_rotation_right: dto.hipArom?.externalRotationRight || 'not_tested',
+      hip_external_rotation_left: dto.hipArom?.externalRotationLeft || 'not_tested',
+      hip_arrom_comments: dto.hipArom?.comments || '',
+
+      // Toe AROM
+      toe_arrom: dto.toeArom?.enabled ? 'yes' : 'no',
+      toe_arom_2nd_mtp_flexion_right: dto.toeArom?.secondMtpFlexionRight || 'not_tested',
+      toe_arom_2nd_mtp_flexion_left: dto.toeArom?.secondMtpFlexionLeft || 'not_tested',
+      toe_arom_2nd_mtp_extension_right: dto.toeArom?.secondMtpExtensionRight || 'not_tested',
+      toe_arom_2nd_mtp_extension_left: dto.toeArom?.secondMtpExtensionLeft || 'not_tested',
+      toe_arom_2nd_ip_flexion_right: dto.toeArom?.secondIpFlexionRight || 'not_tested',
+      toe_arom_2nd_ip_flexion_left: dto.toeArom?.secondIpFlexionLeft || 'not_tested',
+      toe_arom_2nd_ip_extension_right: dto.toeArom?.secondIpExtensionRight || 'not_tested',
+      toe_arom_2nd_ip_extension_left: dto.toeArom?.secondIpExtensionLeft || 'not_tested',
+      toe_arom_3rd_mtp_flexion_right: dto.toeArom?.thirdMtpFlexionRight || 'not_tested',
+      toe_arom_3rd_mtp_flexion_left: dto.toeArom?.thirdMtpFlexionLeft || 'not_tested',
+      toe_arom_3rd_mtp_extension_right: dto.toeArom?.thirdMtpExtensionRight || 'not_tested',
+      toe_arom_3rd_mtp_extension_left: dto.toeArom?.thirdMtpExtensionLeft || 'not_tested',
+      toe_arom_3rd_ip_flexion_right: dto.toeArom?.thirdIpFlexionRight || 'not_tested',
+      toe_arom_3rd_ip_flexion_left: dto.toeArom?.thirdIpFlexionLeft || 'not_tested',
+      toe_arom_3rd_ip_extension_right: dto.toeArom?.thirdIpExtensionRight || 'not_tested',
+      toe_arom_3rd_ip_extension_left: dto.toeArom?.thirdIpExtensionLeft || 'not_tested',
+      toe_arom_4th_mtp_flexion_right: dto.toeArom?.fourthMtpFlexionRight || 'not_tested',
+      toe_arom_4th_mtp_flexion_left: dto.toeArom?.fourthMtpFlexionLeft || 'not_tested',
+      toe_arom_4th_mtp_extension_right: dto.toeArom?.fourthMtpExtensionRight || 'not_tested',
+      toe_arom_4th_mtp_extension_left: dto.toeArom?.fourthMtpExtensionLeft || 'not_tested',
+      toe_arom_4th_ip_flexion_right: dto.toeArom?.fourthIpFlexionRight || 'not_tested',
+      toe_arom_4th_ip_flexion_left: dto.toeArom?.fourthIpFlexionLeft || 'not_tested',
+      toe_arom_4th_ip_extension_right: dto.toeArom?.fourthIpExtensionRight || 'not_tested',
+      toe_arom_4th_ip_extension_left: dto.toeArom?.fourthIpExtensionLeft || 'not_tested',
+      toe_arom_5th_mtp_flexion_right: dto.toeArom?.fifthMtpFlexionRight || 'not_tested',
+      toe_arom_5th_mtp_flexion_left: dto.toeArom?.fifthMtpFlexionLeft || 'not_tested',
+      toe_arom_5th_mtp_extension_right: dto.toeArom?.fifthMtpExtensionRight || 'not_tested',
+      toe_arom_5th_mtp_extension_left: dto.toeArom?.fifthMtpExtensionLeft || 'not_tested',
+      toe_arom_5th_ip_flexion_right: dto.toeArom?.fifthIpFlexionRight || 'not_tested',
+      toe_arom_5th_ip_flexion_left: dto.toeArom?.fifthIpFlexionLeft || 'not_tested',
+      toe_arom_5th_ip_extension_right: dto.toeArom?.fifthIpExtensionRight || 'not_tested',
+      toe_arom_5th_ip_extension_left: dto.toeArom?.fifthIpExtensionLeft || 'not_tested',
+      toe_arrom_comments: dto.toeArom?.comments || '',
+
+      // Toe PROM
+      toe_prom: dto.toeProm?.enabled ? 'yes' : 'no',
+      toe_2nd_mtp_flexion_right: dto.toeProm?.secondMtpFlexionRight || 'not_tested',
+      toe_2nd_mtp_flexion_right_endfeel: dto.toeProm?.secondMtpFlexionRightEndfeel || 'not_tested',
+      toe_2nd_mtp_flexion_left: dto.toeProm?.secondMtpFlexionLeft || 'not_tested',
+      toe_2nd_mtp_flexion_left_endfeel: dto.toeProm?.secondMtpFlexionLeftEndfeel || 'not_tested',
+      toe_2nd_mtp_extension_right: dto.toeProm?.secondMtpExtensionRight || 'not_tested',
+      toe_2nd_mtp_extension_right_endfeel: dto.toeProm?.secondMtpExtensionRightEndfeel || 'not_tested',
+      toe_2nd_mtp_extension_left: dto.toeProm?.secondMtpExtensionLeft || 'not_tested',
+      toe_2nd_mtp_extension_left_endfeel: dto.toeProm?.secondMtpExtensionLeftEndfeel || 'not_tested',
+      toe_2nd_ip_flexion_right: dto.toeProm?.secondIpFlexionRight || 'not_tested',
+      toe_2nd_ip_flexion_right_endfeel: dto.toeProm?.secondIpFlexionRightEndfeel || 'not_tested',
+      toe_2nd_ip_flexion_left: dto.toeProm?.secondIpFlexionLeft || 'not_tested',
+      toe_2nd_ip_flexion_left_endfeel: dto.toeProm?.secondIpFlexionLeftEndfeel || 'not_tested',
+      toe_2nd_ip_extension_right: dto.toeProm?.secondIpExtensionRight || 'not_tested',
+      toe_2nd_ip_extension_right_endfeel: dto.toeProm?.secondIpExtensionRightEndfeel || 'not_tested',
+      toe_2nd_ip_extension_left: dto.toeProm?.secondIpExtensionLeft || 'not_tested',
+      toe_2nd_ip_extension_left_endfeel: dto.toeProm?.secondIpExtensionLeftEndfeel || 'not_tested',
+      toe_3rd_mtp_flexion_right: dto.toeProm?.thirdMtpFlexionRight || 'not_tested',
+      toe_3rd_mtp_flexion_right_endfeel: dto.toeProm?.thirdMtpFlexionRightEndfeel || 'not_tested',
+      toe_3rd_mtp_flexion_left: dto.toeProm?.thirdMtpFlexionLeft || 'not_tested',
+      toe_3rd_mtp_flexion_left_endfeel: dto.toeProm?.thirdMtpFlexionLeftEndfeel || 'not_tested',
+      toe_3rd_mtp_extension_right: dto.toeProm?.thirdMtpExtensionRight || 'not_tested',
+      toe_3rd_mtp_extension_right_endfeel: dto.toeProm?.thirdMtpExtensionRightEndfeel || 'not_tested',
+      toe_3rd_mtp_extension_left: dto.toeProm?.thirdMtpExtensionLeft || 'not_tested',
+      toe_3rd_mtp_extension_left_endfeel: dto.toeProm?.thirdMtpExtensionLeftEndfeel || 'not_tested',
+      toe_3rd_ip_flexion_right: dto.toeProm?.thirdIpFlexionRight || 'not_tested',
+      toe_3rd_ip_flexion_right_endfeel: dto.toeProm?.thirdIpFlexionRightEndfeel || 'not_tested',
+      toe_3rd_ip_flexion_left: dto.toeProm?.thirdIpFlexionLeft || 'not_tested',
+      toe_3rd_ip_flexion_left_endfeel: dto.toeProm?.thirdIpFlexionLeftEndfeel || 'not_tested',
+      toe_3rd_ip_extension_right: dto.toeProm?.thirdIpExtensionRight || 'not_tested',
+      toe_3rd_ip_extension_right_endfeel: dto.toeProm?.thirdIpExtensionRightEndfeel || 'not_tested',
+      toe_3rd_ip_extension_left: dto.toeProm?.thirdIpExtensionLeft || 'not_tested',
+      toe_3rd_ip_extension_left_endfeel: dto.toeProm?.thirdIpExtensionLeftEndfeel || 'not_tested',
+      toe_4th_mtp_flexion_right: dto.toeProm?.fourthMtpFlexionRight || 'not_tested',
+      toe_4th_mtp_flexion_right_endfeel: dto.toeProm?.fourthMtpFlexionRightEndfeel || 'not_tested',
+      toe_4th_mtp_flexion_left: dto.toeProm?.fourthMtpFlexionLeft || 'not_tested',
+      toe_4th_mtp_flexion_left_endfeel: dto.toeProm?.fourthMtpFlexionLeftEndfeel || 'not_tested',
+      toe_4th_mtp_extension_right: dto.toeProm?.fourthMtpExtensionRight || 'not_tested',
+      toe_4th_mtp_extension_right_endfeel: dto.toeProm?.fourthMtpExtensionRightEndfeel || 'not_tested',
+      toe_4th_mtp_extension_left: dto.toeProm?.fourthMtpExtensionLeft || 'not_tested',
+      toe_4th_mtp_extension_left_endfeel: dto.toeProm?.fourthMtpExtensionLeftEndfeel || 'not_tested',
+      toe_4th_ip_flexion_right: dto.toeProm?.fourthIpFlexionRight || 'not_tested',
+      toe_4th_ip_flexion_right_endfeel: dto.toeProm?.fourthIpFlexionRightEndfeel || 'not_tested',
+      toe_4th_ip_flexion_left: dto.toeProm?.fourthIpFlexionLeft || 'not_tested',
+      toe_4th_ip_flexion_left_endfeel: dto.toeProm?.fourthIpFlexionLeftEndfeel || 'not_tested',
+      toe_4th_ip_extension_right: dto.toeProm?.fourthIpExtensionRight || 'not_tested',
+      toe_4th_ip_extension_right_endfeel: dto.toeProm?.fourthIpExtensionRightEndfeel || 'not_tested',
+      toe_4th_ip_extension_left: dto.toeProm?.fourthIpExtensionLeft || 'not_tested',
+      toe_4th_ip_extension_left_endfeel: dto.toeProm?.fourthIpExtensionLeftEndfeel || 'not_tested',
+      toe_5th_mtp_flexion_right: dto.toeProm?.fifthMtpFlexionRight || 'not_tested',
+      toe_5th_mtp_flexion_right_endfeel: dto.toeProm?.fifthMtpFlexionRightEndfeel || 'not_tested',
+      toe_5th_mtp_flexion_left: dto.toeProm?.fifthMtpFlexionLeft || 'not_tested',
+      toe_5th_mtp_flexion_left_endfeel: dto.toeProm?.fifthMtpFlexionLeftEndfeel || 'not_tested',
+      toe_5th_mtp_extension_right: dto.toeProm?.fifthMtpExtensionRight || 'not_tested',
+      toe_5th_mtp_extension_right_endfeel: dto.toeProm?.fifthMtpExtensionRightEndfeel || 'not_tested',
+      toe_5th_mtp_extension_left: dto.toeProm?.fifthMtpExtensionLeft || 'not_tested',
+      toe_5th_mtp_extension_left_endfeel: dto.toeProm?.fifthMtpExtensionLeftEndfeel || 'not_tested',
+      toe_5th_ip_flexion_right: dto.toeProm?.fifthIpFlexionRight || 'not_tested',
+      toe_5th_ip_flexion_right_endfeel: dto.toeProm?.fifthIpFlexionRightEndfeel || 'not_tested',
+      toe_5th_ip_flexion_left: dto.toeProm?.fifthIpFlexionLeft || 'not_tested',
+      toe_5th_ip_flexion_left_endfeel: dto.toeProm?.fifthIpFlexionLeftEndfeel || 'not_tested',
+      toe_5th_ip_extension_right: dto.toeProm?.fifthIpExtensionRight || 'not_tested',
+      toe_5th_ip_extension_right_endfeel: dto.toeProm?.fifthIpExtensionRightEndfeel || 'not_tested',
+      toe_5th_ip_extension_left: dto.toeProm?.fifthIpExtensionLeft || 'not_tested',
+      toe_5th_ip_extension_left_endfeel: dto.toeProm?.fifthIpExtensionLeftEndfeel || 'not_tested',
+      toe_prom_comments: dto.toeProm?.comments || '',
     };
   }
 
@@ -1076,5 +1199,153 @@ export class RangeOfMotionMapperService {
     return model;
   }
 
+  private mapHipArom(formValue: any): HipAROMModel {
+    const enabled = formValue.hip_arrom === 'yes';
+    const model: HipAROMModel = { enabled };
+
+    if (enabled) {
+      model.flexionRight = formValue.hip_flexion_right || 'not_tested';
+      model.flexionLeft = formValue.hip_flexion_left || 'not_tested';
+      model.extensionRight = formValue.hip_extension_right || 'not_tested';
+      model.extensionLeft = formValue.hip_extension_left || 'not_tested';
+      model.abductionRight = formValue.hip_abduction_right || 'not_tested';
+      model.abductionLeft = formValue.hip_abduction_left || 'not_tested';
+      model.adductionRight = formValue.hip_adduction_right || 'not_tested';
+      model.adductionLeft = formValue.hip_adduction_left || 'not_tested';
+      model.internalRotationRight = formValue.hip_internal_rotation_right || 'not_tested';
+      model.internalRotationLeft = formValue.hip_internal_rotation_left || 'not_tested';
+      model.externalRotationRight = formValue.hip_external_rotation_right || 'not_tested';
+      model.externalRotationLeft = formValue.hip_external_rotation_left || 'not_tested';
+      model.comments = formValue.hip_arrom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapToeArom(formValue: any): ToeAROMModel {
+    const enabled = formValue.toe_arrom === 'yes';
+    const model: ToeAROMModel = { enabled };
+
+    if (enabled) {
+      model.secondMtpFlexionRight = formValue.toe_arom_2nd_mtp_flexion_right || 'not_tested';
+      model.secondMtpFlexionLeft = formValue.toe_arom_2nd_mtp_flexion_left || 'not_tested';
+      model.secondMtpExtensionRight = formValue.toe_arom_2nd_mtp_extension_right || 'not_tested';
+      model.secondMtpExtensionLeft = formValue.toe_arom_2nd_mtp_extension_left || 'not_tested';
+      model.secondIpFlexionRight = formValue.toe_arom_2nd_ip_flexion_right || 'not_tested';
+      model.secondIpFlexionLeft = formValue.toe_arom_2nd_ip_flexion_left || 'not_tested';
+      model.secondIpExtensionRight = formValue.toe_arom_2nd_ip_extension_right || 'not_tested';
+      model.secondIpExtensionLeft = formValue.toe_arom_2nd_ip_extension_left || 'not_tested';
+
+      model.thirdMtpFlexionRight = formValue.toe_arom_3rd_mtp_flexion_right || 'not_tested';
+      model.thirdMtpFlexionLeft = formValue.toe_arom_3rd_mtp_flexion_left || 'not_tested';
+      model.thirdMtpExtensionRight = formValue.toe_arom_3rd_mtp_extension_right || 'not_tested';
+      model.thirdMtpExtensionLeft = formValue.toe_arom_3rd_mtp_extension_left || 'not_tested';
+      model.thirdIpFlexionRight = formValue.toe_arom_3rd_ip_flexion_right || 'not_tested';
+      model.thirdIpFlexionLeft = formValue.toe_arom_3rd_ip_flexion_left || 'not_tested';
+      model.thirdIpExtensionRight = formValue.toe_arom_3rd_ip_extension_right || 'not_tested';
+      model.thirdIpExtensionLeft = formValue.toe_arom_3rd_ip_extension_left || 'not_tested';
+
+      model.fourthMtpFlexionRight = formValue.toe_arom_4th_mtp_flexion_right || 'not_tested';
+      model.fourthMtpFlexionLeft = formValue.toe_arom_4th_mtp_flexion_left || 'not_tested';
+      model.fourthMtpExtensionRight = formValue.toe_arom_4th_mtp_extension_right || 'not_tested';
+      model.fourthMtpExtensionLeft = formValue.toe_arom_4th_mtp_extension_left || 'not_tested';
+      model.fourthIpFlexionRight = formValue.toe_arom_4th_ip_flexion_right || 'not_tested';
+      model.fourthIpFlexionLeft = formValue.toe_arom_4th_ip_flexion_left || 'not_tested';
+      model.fourthIpExtensionRight = formValue.toe_arom_4th_ip_extension_right || 'not_tested';
+      model.fourthIpExtensionLeft = formValue.toe_arom_4th_ip_extension_left || 'not_tested';
+
+      model.fifthMtpFlexionRight = formValue.toe_arom_5th_mtp_flexion_right || 'not_tested';
+      model.fifthMtpFlexionLeft = formValue.toe_arom_5th_mtp_flexion_left || 'not_tested';
+      model.fifthMtpExtensionRight = formValue.toe_arom_5th_mtp_extension_right || 'not_tested';
+      model.fifthMtpExtensionLeft = formValue.toe_arom_5th_mtp_extension_left || 'not_tested';
+      model.fifthIpFlexionRight = formValue.toe_arom_5th_ip_flexion_right || 'not_tested';
+      model.fifthIpFlexionLeft = formValue.toe_arom_5th_ip_flexion_left || 'not_tested';
+      model.fifthIpExtensionRight = formValue.toe_arom_5th_ip_extension_right || 'not_tested';
+      model.fifthIpExtensionLeft = formValue.toe_arom_5th_ip_extension_left || 'not_tested';
+
+      model.comments = formValue.toe_arrom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapToeProm(formValue: any): ToePROMModel {
+    const enabled = formValue.toe_prom === 'yes';
+    const model: ToePROMModel = { enabled };
+
+    if (enabled) {
+      model.secondMtpFlexionRight = formValue.toe_2nd_mtp_flexion_right || 'not_tested';
+      model.secondMtpFlexionRightEndfeel = formValue.toe_2nd_mtp_flexion_right_endfeel || 'not_tested';
+      model.secondMtpFlexionLeft = formValue.toe_2nd_mtp_flexion_left || 'not_tested';
+      model.secondMtpFlexionLeftEndfeel = formValue.toe_2nd_mtp_flexion_left_endfeel || 'not_tested';
+      model.secondMtpExtensionRight = formValue.toe_2nd_mtp_extension_right || 'not_tested';
+      model.secondMtpExtensionRightEndfeel = formValue.toe_2nd_mtp_extension_right_endfeel || 'not_tested';
+      model.secondMtpExtensionLeft = formValue.toe_2nd_mtp_extension_left || 'not_tested';
+      model.secondMtpExtensionLeftEndfeel = formValue.toe_2nd_mtp_extension_left_endfeel || 'not_tested';
+      model.secondIpFlexionRight = formValue.toe_2nd_ip_flexion_right || 'not_tested';
+      model.secondIpFlexionRightEndfeel = formValue.toe_2nd_ip_flexion_right_endfeel || 'not_tested';
+      model.secondIpFlexionLeft = formValue.toe_2nd_ip_flexion_left || 'not_tested';
+      model.secondIpFlexionLeftEndfeel = formValue.toe_2nd_ip_flexion_left_endfeel || 'not_tested';
+      model.secondIpExtensionRight = formValue.toe_2nd_ip_extension_right || 'not_tested';
+      model.secondIpExtensionRightEndfeel = formValue.toe_2nd_ip_extension_right_endfeel || 'not_tested';
+      model.secondIpExtensionLeft = formValue.toe_2nd_ip_extension_left || 'not_tested';
+      model.secondIpExtensionLeftEndfeel = formValue.toe_2nd_ip_extension_left_endfeel || 'not_tested';
+
+      model.thirdMtpFlexionRight = formValue.toe_3rd_mtp_flexion_right || 'not_tested';
+      model.thirdMtpFlexionRightEndfeel = formValue.toe_3rd_mtp_flexion_right_endfeel || 'not_tested';
+      model.thirdMtpFlexionLeft = formValue.toe_3rd_mtp_flexion_left || 'not_tested';
+      model.thirdMtpFlexionLeftEndfeel = formValue.toe_3rd_mtp_flexion_left_endfeel || 'not_tested';
+      model.thirdMtpExtensionRight = formValue.toe_3rd_mtp_extension_right || 'not_tested';
+      model.thirdMtpExtensionRightEndfeel = formValue.toe_3rd_mtp_extension_right_endfeel || 'not_tested';
+      model.thirdMtpExtensionLeft = formValue.toe_3rd_mtp_extension_left || 'not_tested';
+      model.thirdMtpExtensionLeftEndfeel = formValue.toe_3rd_mtp_extension_left_endfeel || 'not_tested';
+      model.thirdIpFlexionRight = formValue.toe_3rd_ip_flexion_right || 'not_tested';
+      model.thirdIpFlexionRightEndfeel = formValue.toe_3rd_ip_flexion_right_endfeel || 'not_tested';
+      model.thirdIpFlexionLeft = formValue.toe_3rd_ip_flexion_left || 'not_tested';
+      model.thirdIpFlexionLeftEndfeel = formValue.toe_3rd_ip_flexion_left_endfeel || 'not_tested';
+      model.thirdIpExtensionRight = formValue.toe_3rd_ip_extension_right || 'not_tested';
+      model.thirdIpExtensionRightEndfeel = formValue.toe_3rd_ip_extension_right_endfeel || 'not_tested';
+      model.thirdIpExtensionLeft = formValue.toe_3rd_ip_extension_left || 'not_tested';
+      model.thirdIpExtensionLeftEndfeel = formValue.toe_3rd_ip_extension_left_endfeel || 'not_tested';
+
+      model.fourthMtpFlexionRight = formValue.toe_4th_mtp_flexion_right || 'not_tested';
+      model.fourthMtpFlexionRightEndfeel = formValue.toe_4th_mtp_flexion_right_endfeel || 'not_tested';
+      model.fourthMtpFlexionLeft = formValue.toe_4th_mtp_flexion_left || 'not_tested';
+      model.fourthMtpFlexionLeftEndfeel = formValue.toe_4th_mtp_flexion_left_endfeel || 'not_tested';
+      model.fourthMtpExtensionRight = formValue.toe_4th_mtp_extension_right || 'not_tested';
+      model.fourthMtpExtensionRightEndfeel = formValue.toe_4th_mtp_extension_right_endfeel || 'not_tested';
+      model.fourthMtpExtensionLeft = formValue.toe_4th_mtp_extension_left || 'not_tested';
+      model.fourthMtpExtensionLeftEndfeel = formValue.toe_4th_mtp_extension_left_endfeel || 'not_tested';
+      model.fourthIpFlexionRight = formValue.toe_4th_ip_flexion_right || 'not_tested';
+      model.fourthIpFlexionRightEndfeel = formValue.toe_4th_ip_flexion_right_endfeel || 'not_tested';
+      model.fourthIpFlexionLeft = formValue.toe_4th_ip_flexion_left || 'not_tested';
+      model.fourthIpFlexionLeftEndfeel = formValue.toe_4th_ip_flexion_left_endfeel || 'not_tested';
+      model.fourthIpExtensionRight = formValue.toe_4th_ip_extension_right || 'not_tested';
+      model.fourthIpExtensionRightEndfeel = formValue.toe_4th_ip_extension_right_endfeel || 'not_tested';
+      model.fourthIpExtensionLeft = formValue.toe_4th_ip_extension_left || 'not_tested';
+      model.fourthIpExtensionLeftEndfeel = formValue.toe_4th_ip_extension_left_endfeel || 'not_tested';
+
+      model.fifthMtpFlexionRight = formValue.toe_5th_mtp_flexion_right || 'not_tested';
+      model.fifthMtpFlexionRightEndfeel = formValue.toe_5th_mtp_flexion_right_endfeel || 'not_tested';
+      model.fifthMtpFlexionLeft = formValue.toe_5th_mtp_flexion_left || 'not_tested';
+      model.fifthMtpFlexionLeftEndfeel = formValue.toe_5th_mtp_flexion_left_endfeel || 'not_tested';
+      model.fifthMtpExtensionRight = formValue.toe_5th_mtp_extension_right || 'not_tested';
+      model.fifthMtpExtensionRightEndfeel = formValue.toe_5th_mtp_extension_right_endfeel || 'not_tested';
+      model.fifthMtpExtensionLeft = formValue.toe_5th_mtp_extension_left || 'not_tested';
+      model.fifthMtpExtensionLeftEndfeel = formValue.toe_5th_mtp_extension_left_endfeel || 'not_tested';
+      model.fifthIpFlexionRight = formValue.toe_5th_ip_flexion_right || 'not_tested';
+      model.fifthIpFlexionRightEndfeel = formValue.toe_5th_ip_flexion_right_endfeel || 'not_tested';
+      model.fifthIpFlexionLeft = formValue.toe_5th_ip_flexion_left || 'not_tested';
+      model.fifthIpFlexionLeftEndfeel = formValue.toe_5th_ip_flexion_left_endfeel || 'not_tested';
+      model.fifthIpExtensionRight = formValue.toe_5th_ip_extension_right || 'not_tested';
+      model.fifthIpExtensionRightEndfeel = formValue.toe_5th_ip_extension_right_endfeel || 'not_tested';
+      model.fifthIpExtensionLeft = formValue.toe_5th_ip_extension_left || 'not_tested';
+      model.fifthIpExtensionLeftEndfeel = formValue.toe_5th_ip_extension_left_endfeel || 'not_tested';
+
+      model.comments = formValue.toe_prom_comments || '';
+    }
+
+    return model;
+  }
 
 }

@@ -473,6 +473,133 @@ export interface LumbarAROMModel{
   lumbarArromRightSideBending?: string;
   lumbarArromLeftSideBending?: string;
 }
+
+// Hip AROM Model
+export interface HipAROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  abductionRight?: string;
+  abductionLeft?: string;
+  adductionRight?: string;
+  adductionLeft?: string;
+  internalRotationRight?: string;
+  internalRotationLeft?: string;
+  externalRotationRight?: string;
+  externalRotationLeft?: string;
+  comments?: string;
+}
+
+// Toe AROM Model
+export interface ToeAROMModel {
+  enabled: boolean;
+  secondMtpFlexionRight?: string;
+  secondMtpFlexionLeft?: string;
+  secondMtpExtensionRight?: string;
+  secondMtpExtensionLeft?: string;
+  secondIpFlexionRight?: string;
+  secondIpFlexionLeft?: string;
+  secondIpExtensionRight?: string;
+  secondIpExtensionLeft?: string;
+  thirdMtpFlexionRight?: string;
+  thirdMtpFlexionLeft?: string;
+  thirdMtpExtensionRight?: string;
+  thirdMtpExtensionLeft?: string;
+  thirdIpFlexionRight?: string;
+  thirdIpFlexionLeft?: string;
+  thirdIpExtensionRight?: string;
+  thirdIpExtensionLeft?: string;
+  fourthMtpFlexionRight?: string;
+  fourthMtpFlexionLeft?: string;
+  fourthMtpExtensionRight?: string;
+  fourthMtpExtensionLeft?: string;
+  fourthIpFlexionRight?: string;
+  fourthIpFlexionLeft?: string;
+  fourthIpExtensionRight?: string;
+  fourthIpExtensionLeft?: string;
+  fifthMtpFlexionRight?: string;
+  fifthMtpFlexionLeft?: string;
+  fifthMtpExtensionRight?: string;
+  fifthMtpExtensionLeft?: string;
+  fifthIpFlexionRight?: string;
+  fifthIpFlexionLeft?: string;
+  fifthIpExtensionRight?: string;
+  fifthIpExtensionLeft?: string;
+  comments?: string;
+}
+
+// Toe PROM Model
+export interface ToePROMModel {
+  enabled: boolean;
+  secondMtpFlexionRight?: string;
+  secondMtpFlexionRightEndfeel?: string;
+  secondMtpFlexionLeft?: string;
+  secondMtpFlexionLeftEndfeel?: string;
+  secondMtpExtensionRight?: string;
+  secondMtpExtensionRightEndfeel?: string;
+  secondMtpExtensionLeft?: string;
+  secondMtpExtensionLeftEndfeel?: string;
+  secondIpFlexionRight?: string;
+  secondIpFlexionRightEndfeel?: string;
+  secondIpFlexionLeft?: string;
+  secondIpFlexionLeftEndfeel?: string;
+  secondIpExtensionRight?: string;
+  secondIpExtensionRightEndfeel?: string;
+  secondIpExtensionLeft?: string;
+  secondIpExtensionLeftEndfeel?: string;
+  thirdMtpFlexionRight?: string;
+  thirdMtpFlexionRightEndfeel?: string;
+  thirdMtpFlexionLeft?: string;
+  thirdMtpFlexionLeftEndfeel?: string;
+  thirdMtpExtensionRight?: string;
+  thirdMtpExtensionRightEndfeel?: string;
+  thirdMtpExtensionLeft?: string;
+  thirdMtpExtensionLeftEndfeel?: string;
+  thirdIpFlexionRight?: string;
+  thirdIpFlexionRightEndfeel?: string;
+  thirdIpFlexionLeft?: string;
+  thirdIpFlexionLeftEndfeel?: string;
+  thirdIpExtensionRight?: string;
+  thirdIpExtensionRightEndfeel?: string;
+  thirdIpExtensionLeft?: string;
+  thirdIpExtensionLeftEndfeel?: string;
+  fourthMtpFlexionRight?: string;
+  fourthMtpFlexionRightEndfeel?: string;
+  fourthMtpFlexionLeft?: string;
+  fourthMtpFlexionLeftEndfeel?: string;
+  fourthMtpExtensionRight?: string;
+  fourthMtpExtensionRightEndfeel?: string;
+  fourthMtpExtensionLeft?: string;
+  fourthMtpExtensionLeftEndfeel?: string;
+  fourthIpFlexionRight?: string;
+  fourthIpFlexionRightEndfeel?: string;
+  fourthIpFlexionLeft?: string;
+  fourthIpFlexionLeftEndfeel?: string;
+  fourthIpExtensionRight?: string;
+  fourthIpExtensionRightEndfeel?: string;
+  fourthIpExtensionLeft?: string;
+  fourthIpExtensionLeftEndfeel?: string;
+  fifthMtpFlexionRight?: string;
+  fifthMtpFlexionRightEndfeel?: string;
+  fifthMtpFlexionLeft?: string;
+  fifthMtpFlexionLeftEndfeel?: string;
+  fifthMtpExtensionRight?: string;
+  fifthMtpExtensionRightEndfeel?: string;
+  fifthMtpExtensionLeft?: string;
+  fifthMtpExtensionLeftEndfeel?: string;
+  fifthIpFlexionRight?: string;
+  fifthIpFlexionRightEndfeel?: string;
+  fifthIpFlexionLeft?: string;
+  fifthIpFlexionLeftEndfeel?: string;
+  fifthIpExtensionRight?: string;
+  fifthIpExtensionRightEndfeel?: string;
+  fifthIpExtensionLeft?: string;
+  fifthIpExtensionLeftEndfeel?: string;
+  comments?: string;
+}
+
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
   noLimitationsNoted: NoLimitationsNotedModel;
@@ -488,4 +615,7 @@ export interface RangeOfMotionModel {
   thoracicAromSittingWithPassiveOverpressure?: ThoracicAromSittingWithPassiveOverpressureModel;
   thoracicAROMStandingModel?:ThoracicAROMStandingModel;
   lumbarAROMModel?:LumbarAROMModel;
+  hipArom?: HipAROMModel;
+  toeArom?: ToeAROMModel;
+  toeProm?: ToePROMModel;
 }
