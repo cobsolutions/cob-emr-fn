@@ -1494,6 +1494,41 @@ export class RangeOfMotionNComponent implements OnInit {
       }
     });
 
+    this.romForm.get('hip_prom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          hip_prom_flexion_right: value,
+          hip_prom_flexion_right_endfeel: value,
+          hip_prom_flexion_left: value,
+          hip_prom_flexion_left_endfeel: value,
+
+          hip_prom_extension_right: value,
+          hip_prom_extension_right_endfeel: value,
+          hip_prom_extension_left: value,
+          hip_prom_extension_left_endfeel: value,
+
+          hip_prom_abduction_right: value,
+          hip_prom_abduction_right_endfeel: value,
+          hip_prom_abduction_left: value,
+          hip_prom_abduction_left_endfeel: value,
+
+          hip_prom_adduction_right: value,
+          hip_prom_adduction_right_endfeel: value,
+          hip_prom_adduction_left: value,
+          hip_prom_adduction_left_endfeel: value,
+
+          hip_prom_internal_rotation_right: value,
+          hip_prom_internal_rotation_right_endfeel: value,
+          hip_prom_internal_rotation_left: value,
+          hip_prom_internal_rotation_left_endfeel: value,
+
+          hip_prom_external_rotation_right: value,
+          hip_prom_external_rotation_right_endfeel: value,
+          hip_prom_external_rotation_left: value,
+          hip_prom_external_rotation_left_endfeel: value
+        }, { emitEvent: false });
+      }
+    });
     this.romForm.get('knee_arrom')?.valueChanges.subscribe(value => {
       this.showKneeAromFields = value === 'yes';
     });
