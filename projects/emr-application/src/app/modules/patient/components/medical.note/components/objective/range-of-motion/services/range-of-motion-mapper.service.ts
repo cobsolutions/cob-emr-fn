@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
+import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, WristAROMModel, WristPROMModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class RangeOfMotionMapperService {
       shoulderProm: this.mapShoulderProm(formValue),
       elbowArom: this.mapElbowArom(formValue),
       elbowProm: this.mapElbowProm(formValue),
+      wristArom: this.mapWristArom(formValue),
+      wristProm: this.mapWristProm(formValue),
       thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue)
     };
   }
@@ -174,6 +176,38 @@ export class RangeOfMotionMapperService {
       elbow_prom_pronation_right_endfeel: dto.elbowProm?.pronationRightEndfeel || 'not_tested',
       elbow_prom_pronation_left: dto.elbowProm?.pronationLeft || 'not_tested',
       elbow_prom_pronation_left_endfeel: dto.elbowProm?.pronationLeftEndfeel || 'not_tested',
+
+      // Wrist AROM
+      wrist_arrom: dto.wristArom?.enabled ? 'yes' : 'no',
+      wrist_arrom_apply_to_all: '',
+      extension_right: dto.wristArom?.extensionRight || 'not_tested',
+      extension_left: dto.wristArom?.extensionLeft || 'not_tested',
+      flexion_right: dto.wristArom?.flexionRight || 'not_tested',
+      flexion_left: dto.wristArom?.flexionLeft || 'not_tested',
+      radial_deviation_right: dto.wristArom?.radialDeviationRight || 'not_tested',
+      radial_deviation_left: dto.wristArom?.radialDeviationLeft || 'not_tested',
+      ulnar_deviation_right: dto.wristArom?.ulnarDeviationRight || 'not_tested',
+      ulnar_deviation_left: dto.wristArom?.ulnarDeviationLeft || 'not_tested',
+
+      // Wrist PROM
+      wrist_prom: dto.wristProm?.enabled ? 'yes' : 'no',
+      wrist_prom_apply_to_all: '',
+      wrist_prom_extension_right: dto.wristProm?.extensionRight || 'not_tested',
+      wrist_prom_extension_right_endfeel: dto.wristProm?.extensionRightEndfeel || 'not_tested',
+      wrist_prom_extension_left: dto.wristProm?.extensionLeft || 'not_tested',
+      wrist_prom_extension_left_endfeel: dto.wristProm?.extensionLeftEndfeel || 'not_tested',
+      wrist_prom_flexion_right: dto.wristProm?.flexionRight || 'not_tested',
+      wrist_prom_flexion_right_endfeel: dto.wristProm?.flexionRightEndfeel || 'not_tested',
+      wrist_prom_flexion_left: dto.wristProm?.flexionLeft || 'not_tested',
+      wrist_prom_flexion_left_endfeel: dto.wristProm?.flexionLeftEndfeel || 'not_tested',
+      wrist_prom_radial_deviation_right: dto.wristProm?.radialDeviationRight || 'not_tested',
+      wrist_prom_radial_deviation_right_endfeel: dto.wristProm?.radialDeviationRightEndfeel || 'not_tested',
+      wrist_prom_radial_deviation_left: dto.wristProm?.radialDeviationLeft || 'not_tested',
+      wrist_prom_radial_deviation_left_endfeel: dto.wristProm?.radialDeviationLeftEndfeel || 'not_tested',
+      wrist_prom_ulnar_deviation_right: dto.wristProm?.ulnarDeviationRight || 'not_tested',
+      wrist_prom_ulnar_deviation_right_endfeel: dto.wristProm?.ulnarDeviationRightEndfeel || 'not_tested',
+      wrist_prom_ulnar_deviation_left: dto.wristProm?.ulnarDeviationLeft || 'not_tested',
+      wrist_prom_ulnar_deviation_left_endfeel: dto.wristProm?.ulnarDeviationLeftEndfeel || 'not_tested',
 
       // Thoracic AROM Sitting with Passive Overpressure
       thoracic_arrom_sitting_with_passive_overpressure: dto.thoracicAromSittingWithPassiveOverpressure?.enabled ? 'yes' : 'no',
@@ -377,6 +411,50 @@ export class RangeOfMotionMapperService {
       model.pronationRightEndfeel = formValue.elbow_prom_pronation_right_endfeel || 'not_tested';
       model.pronationLeft = formValue.elbow_prom_pronation_left || 'not_tested';
       model.pronationLeftEndfeel = formValue.elbow_prom_pronation_left_endfeel || 'not_tested';
+    }
+
+    return model;
+  }
+
+  private mapWristArom(formValue: any): WristAROMModel {
+    const enabled = formValue.wrist_arrom === 'yes';
+    const model: WristAROMModel = { enabled };
+
+    if (enabled) {
+      model.extensionRight = formValue.extension_right || 'not_tested';
+      model.extensionLeft = formValue.extension_left || 'not_tested';
+      model.flexionRight = formValue.flexion_right || 'not_tested';
+      model.flexionLeft = formValue.flexion_left || 'not_tested';
+      model.radialDeviationRight = formValue.radial_deviation_right || 'not_tested';
+      model.radialDeviationLeft = formValue.radial_deviation_left || 'not_tested';
+      model.ulnarDeviationRight = formValue.ulnar_deviation_right || 'not_tested';
+      model.ulnarDeviationLeft = formValue.ulnar_deviation_left || 'not_tested';
+    }
+
+    return model;
+  }
+
+  private mapWristProm(formValue: any): WristPROMModel {
+    const enabled = formValue.wrist_prom === 'yes';
+    const model: WristPROMModel = { enabled };
+
+    if (enabled) {
+      model.extensionRight = formValue.wrist_prom_extension_right || 'not_tested';
+      model.extensionRightEndfeel = formValue.wrist_prom_extension_right_endfeel || 'not_tested';
+      model.extensionLeft = formValue.wrist_prom_extension_left || 'not_tested';
+      model.extensionLeftEndfeel = formValue.wrist_prom_extension_left_endfeel || 'not_tested';
+      model.flexionRight = formValue.wrist_prom_flexion_right || 'not_tested';
+      model.flexionRightEndfeel = formValue.wrist_prom_flexion_right_endfeel || 'not_tested';
+      model.flexionLeft = formValue.wrist_prom_flexion_left || 'not_tested';
+      model.flexionLeftEndfeel = formValue.wrist_prom_flexion_left_endfeel || 'not_tested';
+      model.radialDeviationRight = formValue.wrist_prom_radial_deviation_right || 'not_tested';
+      model.radialDeviationRightEndfeel = formValue.wrist_prom_radial_deviation_right_endfeel || 'not_tested';
+      model.radialDeviationLeft = formValue.wrist_prom_radial_deviation_left || 'not_tested';
+      model.radialDeviationLeftEndfeel = formValue.wrist_prom_radial_deviation_left_endfeel || 'not_tested';
+      model.ulnarDeviationRight = formValue.wrist_prom_ulnar_deviation_right || 'not_tested';
+      model.ulnarDeviationRightEndfeel = formValue.wrist_prom_ulnar_deviation_right_endfeel || 'not_tested';
+      model.ulnarDeviationLeft = formValue.wrist_prom_ulnar_deviation_left || 'not_tested';
+      model.ulnarDeviationLeftEndfeel = formValue.wrist_prom_ulnar_deviation_left_endfeel || 'not_tested';
     }
 
     return model;

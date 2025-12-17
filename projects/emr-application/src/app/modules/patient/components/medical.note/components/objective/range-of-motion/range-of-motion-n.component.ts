@@ -256,13 +256,21 @@ export class RangeOfMotionNComponent implements OnInit {
       wrist_prom: ['no'],
       wrist_prom_apply_to_all: [''],
       wrist_prom_extension_right: ['not_tested'],
+      wrist_prom_extension_right_endfeel: ['not_tested'],
       wrist_prom_extension_left: ['not_tested'],
+      wrist_prom_extension_left_endfeel: ['not_tested'],
       wrist_prom_flexion_right: ['not_tested'],
+      wrist_prom_flexion_right_endfeel: ['not_tested'],
       wrist_prom_flexion_left: ['not_tested'],
+      wrist_prom_flexion_left_endfeel: ['not_tested'],
       wrist_prom_radial_deviation_right: ['not_tested'],
+      wrist_prom_radial_deviation_right_endfeel: ['not_tested'],
       wrist_prom_radial_deviation_left: ['not_tested'],
+      wrist_prom_radial_deviation_left_endfeel: ['not_tested'],
       wrist_prom_ulnar_deviation_right: ['not_tested'],
+      wrist_prom_ulnar_deviation_right_endfeel: ['not_tested'],
       wrist_prom_ulnar_deviation_left: ['not_tested'],
+      wrist_prom_ulnar_deviation_left_endfeel: ['not_tested'],
 
       hand_arrom_prom: ['no'],
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
@@ -605,7 +613,7 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('wrist_arrom')?.valueChanges.subscribe(value => {
       this.showWristAromFields = value === 'yes';
-      if (value) {
+      if (value === 'no') {
         this.romForm.patchValue({
           wrist_arrom_apply_to_all: '',
           extension_right: 'not_tested',
@@ -636,17 +644,27 @@ export class RangeOfMotionNComponent implements OnInit {
     });
     this.romForm.get('wrist_prom')?.valueChanges.subscribe(value => {
       this.showWristPromFields = value === 'yes';
-      this.romForm.patchValue({
-        wrist_prom_apply_to_all: '',
-        wrist_prom_extension_right: ['not_tested'],
-        wrist_prom_extension_left: ['not_tested'],
-        wrist_prom_flexion_right: ['not_tested'],
-        wrist_prom_flexion_left: ['not_tested'],
-        wrist_prom_radial_deviation_right: ['not_tested'],
-        wrist_prom_radial_deviation_left: ['not_tested'],
-        wrist_prom_ulnar_deviation_right: ['not_tested'],
-        wrist_prom_ulnar_deviation_left: ['not_tested']
-      })
+      if (value === 'no') {
+        this.romForm.patchValue({
+          wrist_prom_apply_to_all: '',
+          wrist_prom_extension_right: 'not_tested',
+          wrist_prom_extension_right_endfeel: 'not_tested',
+          wrist_prom_extension_left: 'not_tested',
+          wrist_prom_extension_left_endfeel: 'not_tested',
+          wrist_prom_flexion_right: 'not_tested',
+          wrist_prom_flexion_right_endfeel: 'not_tested',
+          wrist_prom_flexion_left: 'not_tested',
+          wrist_prom_flexion_left_endfeel: 'not_tested',
+          wrist_prom_radial_deviation_right: 'not_tested',
+          wrist_prom_radial_deviation_right_endfeel: 'not_tested',
+          wrist_prom_radial_deviation_left: 'not_tested',
+          wrist_prom_radial_deviation_left_endfeel: 'not_tested',
+          wrist_prom_ulnar_deviation_right: 'not_tested',
+          wrist_prom_ulnar_deviation_right_endfeel: 'not_tested',
+          wrist_prom_ulnar_deviation_left: 'not_tested',
+          wrist_prom_ulnar_deviation_left_endfeel: 'not_tested'
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('wrist_prom_apply_to_all')?.valueChanges.subscribe(value => {
