@@ -2796,6 +2796,151 @@
     </div>
   </div>
   <div *ngIf="showHipPromFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Apply to All</label>
+      <select cSelect formControlName="hip_prom_apply_to_all" class="form-select-custom">
+        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <!-- Flexion -->
+    <div class="form-row">
+      <label class="field-label">Flexion (Right)</label>
+      <select cSelect formControlName="hip_prom_flexion_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_flexion_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Flexion (Left)</label>
+      <select cSelect formControlName="hip_prom_flexion_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_flexion_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <!-- Extension -->
+    <div class="form-row">
+      <label class="field-label">Extension (Right)</label>
+      <select cSelect formControlName="hip_prom_extension_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_extension_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Extension (Left)</label>
+      <select cSelect formControlName="hip_prom_extension_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_extension_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <!-- Abduction -->
+    <div class="form-row">
+      <label class="field-label">Abduction (Right)</label>
+      <select cSelect formControlName="hip_prom_abduction_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_abduction_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Abduction (Left)</label>
+      <select cSelect formControlName="hip_prom_abduction_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_abduction_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <!-- Adduction -->
+    <div class="form-row">
+      <label class="field-label">Adduction (Right)</label>
+      <select cSelect formControlName="hip_prom_adduction_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_adduction_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Adduction (Left)</label>
+      <select cSelect formControlName="hip_prom_adduction_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_adduction_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <!-- Internal Rotation -->
+    <div class="form-row">
+      <label class="field-label">Internal Rotation (Right)</label>
+      <select cSelect formControlName="hip_prom_internal_rotation_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_internal_rotation_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Internal Rotation (Left)</label>
+      <select cSelect formControlName="hip_prom_internal_rotation_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_internal_rotation_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <!-- External Rotation -->
+    <div class="form-row">
+      <label class="field-label">External Rotation (Right)</label>
+      <select cSelect formControlName="hip_prom_external_rotation_right" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_external_rotation_right_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">External Rotation (Left)</label>
+      <select cSelect formControlName="hip_prom_external_rotation_left" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+      <label class="field-label">Endfeel</label>
+      <select cSelect formControlName="hip_prom_external_rotation_left_endfeel" class="form-select-custom">
+        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </div>
   </div>
   <div class="form-row">
     <label class="field-label">Knee AROM</label>
@@ -3235,11 +3380,7 @@
 
     <div style="margin-top: 1rem;">
       <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">Comments</label>
-      <textarea
-        class="form-textarea"
-        formControlName="toe_arrom_comments"
-        rows="3"
-        placeholder="Enter any comments...">
+      <textarea class="form-textarea" formControlName="toe_arrom_comments" rows="3" placeholder="Enter any comments...">
       </textarea>
     </div>
   </div>

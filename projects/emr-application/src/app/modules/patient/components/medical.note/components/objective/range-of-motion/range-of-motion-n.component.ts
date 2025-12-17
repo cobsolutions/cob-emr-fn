@@ -88,7 +88,12 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' }
   ];
-
+  hipPromOptions = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' },
+    { value: 'limited', label: 'Limited' }
+  ];
   constructor(
     private fb: FormBuilder,
     private rangeOfMotionMapper: RangeOfMotionMapperService
