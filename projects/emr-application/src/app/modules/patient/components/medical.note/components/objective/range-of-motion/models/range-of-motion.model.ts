@@ -600,7 +600,7 @@ export interface ToePROMModel {
   comments?: string;
 }
 // Hip PROM Model
-export interface WristPROMModel {
+export interface HipPROMModel {
   enabled: boolean;
   flexionRight?: string;
   flexionRightEndfeel?: string;
@@ -622,7 +622,11 @@ export interface WristPROMModel {
   internalRotationRightEndfeel?: string;
   internalRotationLeft?: string;
   internalRotationLeftEndfeel?: string;
-
+  
+  externalRotationRight?: string;
+  externalRotationRightEndfeel?: string;
+  externalRotationLeft?: string;
+  externalRotationLeftEndfeel?: string;
 }
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
@@ -640,6 +644,7 @@ export interface RangeOfMotionModel {
   thoracicAROMStandingModel?: ThoracicAROMStandingModel;
   lumbarAROMModel?: LumbarAROMModel;
   hipArom?: HipAROMModel;
+  hipProm?: HipPROMModel;
   toeArom?: ToeAROMModel;
   toeProm?: ToePROMModel;
 }
