@@ -192,6 +192,117 @@ export interface WristPROMModel {
   ulnarDeviationLeftEndfeel?: string;
 }
 
+// Thumb AROM-PROM Model
+export interface ThumbAromPromModel {
+  enabled: boolean;
+  cmcPalmarAbductionRightArom?: string;
+  cmcPalmarAbductionRightProm?: string;
+  cmcPalmarAbductionLeftArom?: string;
+  cmcPalmarAbductionLeftProm?: string;
+  cmcRadialAbductionRightArom?: string;
+  cmcRadialAbductionRightProm?: string;
+  cmcRadialAbductionLeftArom?: string;
+  cmcRadialAbductionLeftProm?: string;
+  cmcAdductionRightArom?: string;
+  cmcAdductionRightProm?: string;
+  cmcAdductionLeftArom?: string;
+  cmcAdductionLeftProm?: string;
+  cmcExtensionRightArom?: string;
+  cmcExtensionRightProm?: string;
+  cmcExtensionLeftArom?: string;
+  cmcExtensionLeftProm?: string;
+  cmcFlexionRightArom?: string;
+  cmcFlexionRightProm?: string;
+  cmcFlexionLeftArom?: string;
+  cmcFlexionLeftProm?: string;
+  cmcTotalMotionRightArom?: string;
+  cmcTotalMotionRightProm?: string;
+  cmcTotalMotionLeftArom?: string;
+  cmcTotalMotionLeftProm?: string;
+  mpExtensionRightArom?: string;
+  mpExtensionRightProm?: string;
+  mpExtensionLeftArom?: string;
+  mpExtensionLeftProm?: string;
+  mpFlexionRightArom?: string;
+  mpFlexionRightProm?: string;
+  mpFlexionLeftArom?: string;
+  mpFlexionLeftProm?: string;
+  mpTotalMotionRightArom?: string;
+  mpTotalMotionRightProm?: string;
+  mpTotalMotionLeftArom?: string;
+  mpTotalMotionLeftProm?: string;
+  ipExtensionRightArom?: string;
+  ipExtensionRightProm?: string;
+  ipExtensionLeftArom?: string;
+  ipExtensionLeftProm?: string;
+  ipFlexionRightArom?: string;
+  ipFlexionRightProm?: string;
+  ipFlexionLeftArom?: string;
+  ipFlexionLeftProm?: string;
+  ipTotalMotionRightArom?: string;
+  ipTotalMotionRightProm?: string;
+  ipTotalMotionLeftArom?: string;
+  ipTotalMotionLeftProm?: string;
+  comments?: string;
+}
+
+// Index Finger AROM-PROM Model
+export interface IndexFingerAromPromModel {
+  enabled: boolean;
+  mpAdductionRightArom?: string;
+  mpAdductionRightProm?: string;
+  mpAdductionLeftArom?: string;
+  mpAdductionLeftProm?: string;
+  mpExtensionRightArom?: string;
+  mpExtensionRightProm?: string;
+  mpExtensionLeftArom?: string;
+  mpExtensionLeftProm?: string;
+  mpFlexionRightArom?: string;
+  mpFlexionRightProm?: string;
+  mpFlexionLeftArom?: string;
+  mpFlexionLeftProm?: string;
+  mpTotalMotionRightArom?: string;
+  mpTotalMotionRightProm?: string;
+  mpTotalMotionLeftArom?: string;
+  mpTotalMotionLeftProm?: string;
+  pipExtensionRightArom?: string;
+  pipExtensionRightProm?: string;
+  pipExtensionLeftArom?: string;
+  pipExtensionLeftProm?: string;
+  pipFlexionRightArom?: string;
+  pipFlexionRightProm?: string;
+  pipFlexionLeftArom?: string;
+  pipFlexionLeftProm?: string;
+  pipTotalMotionRightArom?: string;
+  pipTotalMotionRightProm?: string;
+  pipTotalMotionLeftArom?: string;
+  pipTotalMotionLeftProm?: string;
+  dipExtensionRightArom?: string;
+  dipExtensionRightProm?: string;
+  dipExtensionLeftArom?: string;
+  dipExtensionLeftProm?: string;
+  dipFlexionRightArom?: string;
+  dipFlexionRightProm?: string;
+  dipFlexionLeftArom?: string;
+  dipFlexionLeftProm?: string;
+  dipTotalMotionRightArom?: string;
+  dipTotalMotionRightProm?: string;
+  dipTotalMotionLeftArom?: string;
+  dipTotalMotionLeftProm?: string;
+  comments?: string;
+}
+
+// Hand AROM-PROM Model
+export interface HandAromPromModel {
+  enabled: boolean;
+  calculateTotalRom?: boolean;
+  thumbAromProm?: ThumbAromPromModel;
+  indexFingerAromProm?: IndexFingerAromPromModel;
+  middleFingerAromProm?: boolean;
+  ringFingerAromProm?: boolean;
+  smallFingerAromProm?: boolean;
+}
+
 // Thoracic AROM Sitting with Passive Overpressure Model
 export interface ThoracicAromSittingWithPassiveOverpressureModel {
   enabled: boolean;
@@ -214,5 +325,6 @@ export interface RangeOfMotionModel {
   elbowProm?: ElbowPROMModel;
   wristArom?: WristAROMModel;
   wristProm?: WristPROMModel;
+  handAromProm?: HandAromPromModel;
   thoracicAromSittingWithPassiveOverpressure?: ThoracicAromSittingWithPassiveOverpressureModel;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, WristAROMModel, WristPROMModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
+import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, WristAROMModel, WristPROMModel, HandAromPromModel, ThumbAromPromModel, IndexFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class RangeOfMotionMapperService {
       elbowProm: this.mapElbowProm(formValue),
       wristArom: this.mapWristArom(formValue),
       wristProm: this.mapWristProm(formValue),
+      handAromProm: this.mapHandAromProm(formValue),
       thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue)
     };
   }
@@ -208,6 +209,110 @@ export class RangeOfMotionMapperService {
       wrist_prom_ulnar_deviation_right_endfeel: dto.wristProm?.ulnarDeviationRightEndfeel || 'not_tested',
       wrist_prom_ulnar_deviation_left: dto.wristProm?.ulnarDeviationLeft || 'not_tested',
       wrist_prom_ulnar_deviation_left_endfeel: dto.wristProm?.ulnarDeviationLeftEndfeel || 'not_tested',
+
+      // Hand AROM-PROM
+      hand_arrom_prom: dto.handAromProm?.enabled ? 'yes' : 'no',
+      calculate_total_rom: dto.handAromProm?.calculateTotalRom || false,
+      thumb_arrom_prom: dto.handAromProm?.thumbAromProm?.enabled || false,
+
+      // Thumb AROM-PROM
+      thumb_cmc_palmar_abduction_right_arom: dto.handAromProm?.thumbAromProm?.cmcPalmarAbductionRightArom || 'not_tested',
+      thumb_cmc_palmar_abduction_right_prom: dto.handAromProm?.thumbAromProm?.cmcPalmarAbductionRightProm || 'not_tested',
+      thumb_cmc_palmar_abduction_left_arom: dto.handAromProm?.thumbAromProm?.cmcPalmarAbductionLeftArom || 'not_tested',
+      thumb_cmc_palmar_abduction_left_prom: dto.handAromProm?.thumbAromProm?.cmcPalmarAbductionLeftProm || 'not_tested',
+      thumb_cmc_radial_abduction_right_arom: dto.handAromProm?.thumbAromProm?.cmcRadialAbductionRightArom || 'not_tested',
+      thumb_cmc_radial_abduction_right_prom: dto.handAromProm?.thumbAromProm?.cmcRadialAbductionRightProm || 'not_tested',
+      thumb_cmc_radial_abduction_left_arom: dto.handAromProm?.thumbAromProm?.cmcRadialAbductionLeftArom || 'not_tested',
+      thumb_cmc_radial_abduction_left_prom: dto.handAromProm?.thumbAromProm?.cmcRadialAbductionLeftProm || 'not_tested',
+      thumb_cmc_adduction_right_arom: dto.handAromProm?.thumbAromProm?.cmcAdductionRightArom || 'not_tested',
+      thumb_cmc_adduction_right_prom: dto.handAromProm?.thumbAromProm?.cmcAdductionRightProm || 'not_tested',
+      thumb_cmc_adduction_left_arom: dto.handAromProm?.thumbAromProm?.cmcAdductionLeftArom || 'not_tested',
+      thumb_cmc_adduction_left_prom: dto.handAromProm?.thumbAromProm?.cmcAdductionLeftProm || 'not_tested',
+      thumb_cmc_extension_right_arom: dto.handAromProm?.thumbAromProm?.cmcExtensionRightArom || 'not_tested',
+      thumb_cmc_extension_right_prom: dto.handAromProm?.thumbAromProm?.cmcExtensionRightProm || 'not_tested',
+      thumb_cmc_extension_left_arom: dto.handAromProm?.thumbAromProm?.cmcExtensionLeftArom || 'not_tested',
+      thumb_cmc_extension_left_prom: dto.handAromProm?.thumbAromProm?.cmcExtensionLeftProm || 'not_tested',
+      thumb_cmc_flexion_right_arom: dto.handAromProm?.thumbAromProm?.cmcFlexionRightArom || 'not_tested',
+      thumb_cmc_flexion_right_prom: dto.handAromProm?.thumbAromProm?.cmcFlexionRightProm || 'not_tested',
+      thumb_cmc_flexion_left_arom: dto.handAromProm?.thumbAromProm?.cmcFlexionLeftArom || 'not_tested',
+      thumb_cmc_flexion_left_prom: dto.handAromProm?.thumbAromProm?.cmcFlexionLeftProm || 'not_tested',
+      thumb_cmc_total_motion_right_arom: dto.handAromProm?.thumbAromProm?.cmcTotalMotionRightArom || '',
+      thumb_cmc_total_motion_right_prom: dto.handAromProm?.thumbAromProm?.cmcTotalMotionRightProm || '',
+      thumb_cmc_total_motion_left_arom: dto.handAromProm?.thumbAromProm?.cmcTotalMotionLeftArom || '',
+      thumb_cmc_total_motion_left_prom: dto.handAromProm?.thumbAromProm?.cmcTotalMotionLeftProm || '',
+      thumb_mp_extension_right_arom: dto.handAromProm?.thumbAromProm?.mpExtensionRightArom || 'not_tested',
+      thumb_mp_extension_right_prom: dto.handAromProm?.thumbAromProm?.mpExtensionRightProm || 'not_tested',
+      thumb_mp_extension_left_arom: dto.handAromProm?.thumbAromProm?.mpExtensionLeftArom || 'not_tested',
+      thumb_mp_extension_left_prom: dto.handAromProm?.thumbAromProm?.mpExtensionLeftProm || 'not_tested',
+      thumb_mp_flexion_right_arom: dto.handAromProm?.thumbAromProm?.mpFlexionRightArom || 'not_tested',
+      thumb_mp_flexion_right_prom: dto.handAromProm?.thumbAromProm?.mpFlexionRightProm || 'not_tested',
+      thumb_mp_flexion_left_arom: dto.handAromProm?.thumbAromProm?.mpFlexionLeftArom || 'not_tested',
+      thumb_mp_flexion_left_prom: dto.handAromProm?.thumbAromProm?.mpFlexionLeftProm || 'not_tested',
+      thumb_mp_total_motion_right_arom: dto.handAromProm?.thumbAromProm?.mpTotalMotionRightArom || '',
+      thumb_mp_total_motion_right_prom: dto.handAromProm?.thumbAromProm?.mpTotalMotionRightProm || '',
+      thumb_mp_total_motion_left_arom: dto.handAromProm?.thumbAromProm?.mpTotalMotionLeftArom || '',
+      thumb_mp_total_motion_left_prom: dto.handAromProm?.thumbAromProm?.mpTotalMotionLeftProm || '',
+      thumb_ip_extension_right_arom: dto.handAromProm?.thumbAromProm?.ipExtensionRightArom || 'not_tested',
+      thumb_ip_extension_right_prom: dto.handAromProm?.thumbAromProm?.ipExtensionRightProm || 'not_tested',
+      thumb_ip_extension_left_arom: dto.handAromProm?.thumbAromProm?.ipExtensionLeftArom || 'not_tested',
+      thumb_ip_extension_left_prom: dto.handAromProm?.thumbAromProm?.ipExtensionLeftProm || 'not_tested',
+      thumb_ip_flexion_right_arom: dto.handAromProm?.thumbAromProm?.ipFlexionRightArom || 'not_tested',
+      thumb_ip_flexion_right_prom: dto.handAromProm?.thumbAromProm?.ipFlexionRightProm || 'not_tested',
+      thumb_ip_flexion_left_arom: dto.handAromProm?.thumbAromProm?.ipFlexionLeftArom || 'not_tested',
+      thumb_ip_flexion_left_prom: dto.handAromProm?.thumbAromProm?.ipFlexionLeftProm || 'not_tested',
+      thumb_ip_total_motion_right_arom: dto.handAromProm?.thumbAromProm?.ipTotalMotionRightArom || '',
+      thumb_ip_total_motion_right_prom: dto.handAromProm?.thumbAromProm?.ipTotalMotionRightProm || '',
+      thumb_ip_total_motion_left_arom: dto.handAromProm?.thumbAromProm?.ipTotalMotionLeftArom || '',
+      thumb_ip_total_motion_left_prom: dto.handAromProm?.thumbAromProm?.ipTotalMotionLeftProm || '',
+      thumb_comments: dto.handAromProm?.thumbAromProm?.comments || '',
+
+      // Index Finger AROM-PROM
+      index_finger_arrom_prom: dto.handAromProm?.indexFingerAromProm?.enabled || false,
+      index_mp_adduction_right_arom: dto.handAromProm?.indexFingerAromProm?.mpAdductionRightArom || 'not_tested',
+      index_mp_adduction_right_prom: dto.handAromProm?.indexFingerAromProm?.mpAdductionRightProm || 'not_tested',
+      index_mp_adduction_left_arom: dto.handAromProm?.indexFingerAromProm?.mpAdductionLeftArom || 'not_tested',
+      index_mp_adduction_left_prom: dto.handAromProm?.indexFingerAromProm?.mpAdductionLeftProm || 'not_tested',
+      index_mp_extension_right_arom: dto.handAromProm?.indexFingerAromProm?.mpExtensionRightArom || 'not_tested',
+      index_mp_extension_right_prom: dto.handAromProm?.indexFingerAromProm?.mpExtensionRightProm || 'not_tested',
+      index_mp_extension_left_arom: dto.handAromProm?.indexFingerAromProm?.mpExtensionLeftArom || 'not_tested',
+      index_mp_extension_left_prom: dto.handAromProm?.indexFingerAromProm?.mpExtensionLeftProm || 'not_tested',
+      index_mp_flexion_right_arom: dto.handAromProm?.indexFingerAromProm?.mpFlexionRightArom || 'not_tested',
+      index_mp_flexion_right_prom: dto.handAromProm?.indexFingerAromProm?.mpFlexionRightProm || 'not_tested',
+      index_mp_flexion_left_arom: dto.handAromProm?.indexFingerAromProm?.mpFlexionLeftArom || 'not_tested',
+      index_mp_flexion_left_prom: dto.handAromProm?.indexFingerAromProm?.mpFlexionLeftProm || 'not_tested',
+      index_mp_total_motion_right_arom: dto.handAromProm?.indexFingerAromProm?.mpTotalMotionRightArom || '',
+      index_mp_total_motion_right_prom: dto.handAromProm?.indexFingerAromProm?.mpTotalMotionRightProm || '',
+      index_mp_total_motion_left_arom: dto.handAromProm?.indexFingerAromProm?.mpTotalMotionLeftArom || '',
+      index_mp_total_motion_left_prom: dto.handAromProm?.indexFingerAromProm?.mpTotalMotionLeftProm || '',
+      index_pip_extension_right_arom: dto.handAromProm?.indexFingerAromProm?.pipExtensionRightArom || 'not_tested',
+      index_pip_extension_right_prom: dto.handAromProm?.indexFingerAromProm?.pipExtensionRightProm || 'not_tested',
+      index_pip_extension_left_arom: dto.handAromProm?.indexFingerAromProm?.pipExtensionLeftArom || 'not_tested',
+      index_pip_extension_left_prom: dto.handAromProm?.indexFingerAromProm?.pipExtensionLeftProm || 'not_tested',
+      index_pip_flexion_right_arom: dto.handAromProm?.indexFingerAromProm?.pipFlexionRightArom || 'not_tested',
+      index_pip_flexion_right_prom: dto.handAromProm?.indexFingerAromProm?.pipFlexionRightProm || 'not_tested',
+      index_pip_flexion_left_arom: dto.handAromProm?.indexFingerAromProm?.pipFlexionLeftArom || 'not_tested',
+      index_pip_flexion_left_prom: dto.handAromProm?.indexFingerAromProm?.pipFlexionLeftProm || 'not_tested',
+      index_pip_total_motion_right_arom: dto.handAromProm?.indexFingerAromProm?.pipTotalMotionRightArom || '',
+      index_pip_total_motion_right_prom: dto.handAromProm?.indexFingerAromProm?.pipTotalMotionRightProm || '',
+      index_pip_total_motion_left_arom: dto.handAromProm?.indexFingerAromProm?.pipTotalMotionLeftArom || '',
+      index_pip_total_motion_left_prom: dto.handAromProm?.indexFingerAromProm?.pipTotalMotionLeftProm || '',
+      index_dip_extension_right_arom: dto.handAromProm?.indexFingerAromProm?.dipExtensionRightArom || 'not_tested',
+      index_dip_extension_right_prom: dto.handAromProm?.indexFingerAromProm?.dipExtensionRightProm || 'not_tested',
+      index_dip_extension_left_arom: dto.handAromProm?.indexFingerAromProm?.dipExtensionLeftArom || 'not_tested',
+      index_dip_extension_left_prom: dto.handAromProm?.indexFingerAromProm?.dipExtensionLeftProm || 'not_tested',
+      index_dip_flexion_right_arom: dto.handAromProm?.indexFingerAromProm?.dipFlexionRightArom || 'not_tested',
+      index_dip_flexion_right_prom: dto.handAromProm?.indexFingerAromProm?.dipFlexionRightProm || 'not_tested',
+      index_dip_flexion_left_arom: dto.handAromProm?.indexFingerAromProm?.dipFlexionLeftArom || 'not_tested',
+      index_dip_flexion_left_prom: dto.handAromProm?.indexFingerAromProm?.dipFlexionLeftProm || 'not_tested',
+      index_dip_total_motion_right_arom: dto.handAromProm?.indexFingerAromProm?.dipTotalMotionRightArom || '',
+      index_dip_total_motion_right_prom: dto.handAromProm?.indexFingerAromProm?.dipTotalMotionRightProm || '',
+      index_dip_total_motion_left_arom: dto.handAromProm?.indexFingerAromProm?.dipTotalMotionLeftArom || '',
+      index_dip_total_motion_left_prom: dto.handAromProm?.indexFingerAromProm?.dipTotalMotionLeftProm || '',
+      index_comments: dto.handAromProm?.indexFingerAromProm?.comments || '',
+
+      middle_finger_arrom_prom: dto.handAromProm?.middleFingerAromProm || false,
+      ring_finger_arrom_prom: dto.handAromProm?.ringFingerAromProm || false,
+      small_finger_arrom_prom: dto.handAromProm?.smallFingerAromProm || false,
 
       // Thoracic AROM Sitting with Passive Overpressure
       thoracic_arrom_sitting_with_passive_overpressure: dto.thoracicAromSittingWithPassiveOverpressure?.enabled ? 'yes' : 'no',
@@ -455,6 +560,132 @@ export class RangeOfMotionMapperService {
       model.ulnarDeviationRightEndfeel = formValue.wrist_prom_ulnar_deviation_right_endfeel || 'not_tested';
       model.ulnarDeviationLeft = formValue.wrist_prom_ulnar_deviation_left || 'not_tested';
       model.ulnarDeviationLeftEndfeel = formValue.wrist_prom_ulnar_deviation_left_endfeel || 'not_tested';
+    }
+
+    return model;
+  }
+
+  private mapHandAromProm(formValue: any): HandAromPromModel {
+    const enabled = formValue.hand_arrom_prom === 'yes';
+    const model: HandAromPromModel = { enabled };
+
+    if (enabled) {
+      model.calculateTotalRom = formValue.calculate_total_rom || false;
+      model.thumbAromProm = this.mapThumbAromProm(formValue);
+      model.indexFingerAromProm = this.mapIndexFingerAromProm(formValue);
+      model.middleFingerAromProm = formValue.middle_finger_arrom_prom || false;
+      model.ringFingerAromProm = formValue.ring_finger_arrom_prom || false;
+      model.smallFingerAromProm = formValue.small_finger_arrom_prom || false;
+    }
+
+    return model;
+  }
+
+  private mapThumbAromProm(formValue: any): ThumbAromPromModel {
+    const enabled = formValue.thumb_arrom_prom === true;
+    const model: ThumbAromPromModel = { enabled };
+
+    if (enabled) {
+      model.cmcPalmarAbductionRightArom = formValue.thumb_cmc_palmar_abduction_right_arom || 'not_tested';
+      model.cmcPalmarAbductionRightProm = formValue.thumb_cmc_palmar_abduction_right_prom || 'not_tested';
+      model.cmcPalmarAbductionLeftArom = formValue.thumb_cmc_palmar_abduction_left_arom || 'not_tested';
+      model.cmcPalmarAbductionLeftProm = formValue.thumb_cmc_palmar_abduction_left_prom || 'not_tested';
+      model.cmcRadialAbductionRightArom = formValue.thumb_cmc_radial_abduction_right_arom || 'not_tested';
+      model.cmcRadialAbductionRightProm = formValue.thumb_cmc_radial_abduction_right_prom || 'not_tested';
+      model.cmcRadialAbductionLeftArom = formValue.thumb_cmc_radial_abduction_left_arom || 'not_tested';
+      model.cmcRadialAbductionLeftProm = formValue.thumb_cmc_radial_abduction_left_prom || 'not_tested';
+      model.cmcAdductionRightArom = formValue.thumb_cmc_adduction_right_arom || 'not_tested';
+      model.cmcAdductionRightProm = formValue.thumb_cmc_adduction_right_prom || 'not_tested';
+      model.cmcAdductionLeftArom = formValue.thumb_cmc_adduction_left_arom || 'not_tested';
+      model.cmcAdductionLeftProm = formValue.thumb_cmc_adduction_left_prom || 'not_tested';
+      model.cmcExtensionRightArom = formValue.thumb_cmc_extension_right_arom || 'not_tested';
+      model.cmcExtensionRightProm = formValue.thumb_cmc_extension_right_prom || 'not_tested';
+      model.cmcExtensionLeftArom = formValue.thumb_cmc_extension_left_arom || 'not_tested';
+      model.cmcExtensionLeftProm = formValue.thumb_cmc_extension_left_prom || 'not_tested';
+      model.cmcFlexionRightArom = formValue.thumb_cmc_flexion_right_arom || 'not_tested';
+      model.cmcFlexionRightProm = formValue.thumb_cmc_flexion_right_prom || 'not_tested';
+      model.cmcFlexionLeftArom = formValue.thumb_cmc_flexion_left_arom || 'not_tested';
+      model.cmcFlexionLeftProm = formValue.thumb_cmc_flexion_left_prom || 'not_tested';
+      model.cmcTotalMotionRightArom = formValue.thumb_cmc_total_motion_right_arom || '';
+      model.cmcTotalMotionRightProm = formValue.thumb_cmc_total_motion_right_prom || '';
+      model.cmcTotalMotionLeftArom = formValue.thumb_cmc_total_motion_left_arom || '';
+      model.cmcTotalMotionLeftProm = formValue.thumb_cmc_total_motion_left_prom || '';
+      model.mpExtensionRightArom = formValue.thumb_mp_extension_right_arom || 'not_tested';
+      model.mpExtensionRightProm = formValue.thumb_mp_extension_right_prom || 'not_tested';
+      model.mpExtensionLeftArom = formValue.thumb_mp_extension_left_arom || 'not_tested';
+      model.mpExtensionLeftProm = formValue.thumb_mp_extension_left_prom || 'not_tested';
+      model.mpFlexionRightArom = formValue.thumb_mp_flexion_right_arom || 'not_tested';
+      model.mpFlexionRightProm = formValue.thumb_mp_flexion_right_prom || 'not_tested';
+      model.mpFlexionLeftArom = formValue.thumb_mp_flexion_left_arom || 'not_tested';
+      model.mpFlexionLeftProm = formValue.thumb_mp_flexion_left_prom || 'not_tested';
+      model.mpTotalMotionRightArom = formValue.thumb_mp_total_motion_right_arom || '';
+      model.mpTotalMotionRightProm = formValue.thumb_mp_total_motion_right_prom || '';
+      model.mpTotalMotionLeftArom = formValue.thumb_mp_total_motion_left_arom || '';
+      model.mpTotalMotionLeftProm = formValue.thumb_mp_total_motion_left_prom || '';
+      model.ipExtensionRightArom = formValue.thumb_ip_extension_right_arom || 'not_tested';
+      model.ipExtensionRightProm = formValue.thumb_ip_extension_right_prom || 'not_tested';
+      model.ipExtensionLeftArom = formValue.thumb_ip_extension_left_arom || 'not_tested';
+      model.ipExtensionLeftProm = formValue.thumb_ip_extension_left_prom || 'not_tested';
+      model.ipFlexionRightArom = formValue.thumb_ip_flexion_right_arom || 'not_tested';
+      model.ipFlexionRightProm = formValue.thumb_ip_flexion_right_prom || 'not_tested';
+      model.ipFlexionLeftArom = formValue.thumb_ip_flexion_left_arom || 'not_tested';
+      model.ipFlexionLeftProm = formValue.thumb_ip_flexion_left_prom || 'not_tested';
+      model.ipTotalMotionRightArom = formValue.thumb_ip_total_motion_right_arom || '';
+      model.ipTotalMotionRightProm = formValue.thumb_ip_total_motion_right_prom || '';
+      model.ipTotalMotionLeftArom = formValue.thumb_ip_total_motion_left_arom || '';
+      model.ipTotalMotionLeftProm = formValue.thumb_ip_total_motion_left_prom || '';
+      model.comments = formValue.thumb_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapIndexFingerAromProm(formValue: any): IndexFingerAromPromModel {
+    const enabled = formValue.index_finger_arrom_prom === true;
+    const model: IndexFingerAromPromModel = { enabled };
+
+    if (enabled) {
+      model.mpAdductionRightArom = formValue.index_mp_adduction_right_arom || 'not_tested';
+      model.mpAdductionRightProm = formValue.index_mp_adduction_right_prom || 'not_tested';
+      model.mpAdductionLeftArom = formValue.index_mp_adduction_left_arom || 'not_tested';
+      model.mpAdductionLeftProm = formValue.index_mp_adduction_left_prom || 'not_tested';
+      model.mpExtensionRightArom = formValue.index_mp_extension_right_arom || 'not_tested';
+      model.mpExtensionRightProm = formValue.index_mp_extension_right_prom || 'not_tested';
+      model.mpExtensionLeftArom = formValue.index_mp_extension_left_arom || 'not_tested';
+      model.mpExtensionLeftProm = formValue.index_mp_extension_left_prom || 'not_tested';
+      model.mpFlexionRightArom = formValue.index_mp_flexion_right_arom || 'not_tested';
+      model.mpFlexionRightProm = formValue.index_mp_flexion_right_prom || 'not_tested';
+      model.mpFlexionLeftArom = formValue.index_mp_flexion_left_arom || 'not_tested';
+      model.mpFlexionLeftProm = formValue.index_mp_flexion_left_prom || 'not_tested';
+      model.mpTotalMotionRightArom = formValue.index_mp_total_motion_right_arom || '';
+      model.mpTotalMotionRightProm = formValue.index_mp_total_motion_right_prom || '';
+      model.mpTotalMotionLeftArom = formValue.index_mp_total_motion_left_arom || '';
+      model.mpTotalMotionLeftProm = formValue.index_mp_total_motion_left_prom || '';
+      model.pipExtensionRightArom = formValue.index_pip_extension_right_arom || 'not_tested';
+      model.pipExtensionRightProm = formValue.index_pip_extension_right_prom || 'not_tested';
+      model.pipExtensionLeftArom = formValue.index_pip_extension_left_arom || 'not_tested';
+      model.pipExtensionLeftProm = formValue.index_pip_extension_left_prom || 'not_tested';
+      model.pipFlexionRightArom = formValue.index_pip_flexion_right_arom || 'not_tested';
+      model.pipFlexionRightProm = formValue.index_pip_flexion_right_prom || 'not_tested';
+      model.pipFlexionLeftArom = formValue.index_pip_flexion_left_arom || 'not_tested';
+      model.pipFlexionLeftProm = formValue.index_pip_flexion_left_prom || 'not_tested';
+      model.pipTotalMotionRightArom = formValue.index_pip_total_motion_right_arom || '';
+      model.pipTotalMotionRightProm = formValue.index_pip_total_motion_right_prom || '';
+      model.pipTotalMotionLeftArom = formValue.index_pip_total_motion_left_arom || '';
+      model.pipTotalMotionLeftProm = formValue.index_pip_total_motion_left_prom || '';
+      model.dipExtensionRightArom = formValue.index_dip_extension_right_arom || 'not_tested';
+      model.dipExtensionRightProm = formValue.index_dip_extension_right_prom || 'not_tested';
+      model.dipExtensionLeftArom = formValue.index_dip_extension_left_arom || 'not_tested';
+      model.dipExtensionLeftProm = formValue.index_dip_extension_left_prom || 'not_tested';
+      model.dipFlexionRightArom = formValue.index_dip_flexion_right_arom || 'not_tested';
+      model.dipFlexionRightProm = formValue.index_dip_flexion_right_prom || 'not_tested';
+      model.dipFlexionLeftArom = formValue.index_dip_flexion_left_arom || 'not_tested';
+      model.dipFlexionLeftProm = formValue.index_dip_flexion_left_prom || 'not_tested';
+      model.dipTotalMotionRightArom = formValue.index_dip_total_motion_right_arom || '';
+      model.dipTotalMotionRightProm = formValue.index_dip_total_motion_right_prom || '';
+      model.dipTotalMotionLeftArom = formValue.index_dip_total_motion_left_arom || '';
+      model.dipTotalMotionLeftProm = formValue.index_dip_total_motion_left_prom || '';
+      model.comments = formValue.index_comments || '';
     }
 
     return model;
