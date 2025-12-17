@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, WristAROMModel, WristPROMModel } from '../models/range-of-motion.model';
+import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, WristAROMModel, WristPROMModel, LumbarAROMModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,8 @@ export class RangeOfMotionMapperService {
       wristProm: this.mapWristProm(formValue),
       handAromProm: this.mapHandAromProm(formValue),
       thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue),
-      thoracicAROMStandingModel: this.mapThoracicAROMStanding(formValue)
+      thoracicAROMStandingModel: this.mapThoracicAROMStanding(formValue),
+      lumbarAROMModel: this.mapLumbarAROM(formValue)
     };
   }
 
@@ -458,6 +459,26 @@ export class RangeOfMotionMapperService {
       thoracic_arrom_standing_left_rotation: dto.thoracicAROMStandingModel?.leftRotation || 'not_tested',
       thoracic_arrom_standing_right_side_bending: dto.thoracicAROMStandingModel?.rightSideBending || 'not_tested',
       thoracic_arrom_standing_left_side_bending: dto.thoracicAROMStandingModel?.leftSideBending || 'not_tested',
+
+      //Lumbar AROM
+      lumbar_arrom: dto.lumbarAROMModel?.enabled ? 'yes' : 'no',
+      lumbar_arrom_forward_bending:
+        dto.lumbarAROMModel?.lumbarArromForwardBending || 'not_tested',
+
+      lumbar_arrom_backward_bending:
+        dto.lumbarAROMModel?.lumbarArromBackwardBending || 'not_tested',
+
+      lumbar_arrom_right_rotation:
+        dto.lumbarAROMModel?.lumbarArromRightRotation || 'not_tested',
+
+      lumbar_arrom_left_rotation:
+        dto.lumbarAROMModel?.lumbarArromLeftRotation || 'not_tested',
+
+      lumbar_arrom_right_side_bending:
+        dto.lumbarAROMModel?.lumbarArromRightSideBending || 'not_tested',
+
+      lumbar_arrom_left_side_bending:
+        dto.lumbarAROMModel?.lumbarArromLeftSideBending || 'not_tested',
     };
   }
 
@@ -1022,5 +1043,38 @@ export class RangeOfMotionMapperService {
     }
     return model;
   }
+
+  //map Lumbar AROM
+  private mapLumbarAROM(formValue: any): LumbarAROMModel {
+    const enabled = formValue.lumbar_arrom === 'yes';
+
+    const model: LumbarAROMModel = {
+      enabled,
+      lumbarArromApplyToAll: formValue.lumbar_arrom_apply_to_all || ''
+    };
+
+    if (enabled) {
+      model.lumbarArromForwardBending =
+        formValue.lumbar_arrom_forward_bending || 'not_tested';
+
+      model.lumbarArromBackwardBending =
+        formValue.lumbar_arrom_backward_bending || 'not_tested';
+
+      model.lumbarArromRightRotation =
+        formValue.lumbar_arrom_right_rotation || 'not_tested';
+
+      model.lumbarArromLeftRotation =
+        formValue.lumbar_arrom_left_rotation || 'not_tested';
+
+      model.lumbarArromRightSideBending =
+        formValue.lumbar_arrom_right_side_bending || 'not_tested';
+
+      model.lumbarArromLeftSideBending =
+        formValue.lumbar_arrom_left_side_bending || 'not_tested';
+    }
+
+    return model;
+  }
+
 
 }
