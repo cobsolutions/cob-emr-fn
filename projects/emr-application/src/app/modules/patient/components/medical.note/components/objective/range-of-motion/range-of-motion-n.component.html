@@ -1630,6 +1630,245 @@
         </c-form-check>
       </div>
     </div>
+    <div *ngIf="showMiddleFingerAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MP Adduction -->
+          <tr>
+            <td>MP Adduction</td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Extension -->
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Flexion -->
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Total Motion -->
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_right_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_right_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_left_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_left_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- PIP Extension -->
+          <tr>
+            <td>PIP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Flexion -->
+          <tr>
+            <td>PIP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Total Motion -->
+          <tr>
+            <td>PIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_right_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_right_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_left_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_left_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- DIP Extension -->
+          <tr>
+            <td>DIP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Flexion -->
+          <tr>
+            <td>DIP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Total Motion -->
+          <tr>
+            <td>DIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_right_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_right_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_left_arom" class="table-input" placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_left_prom" class="table-input" placeholder="Total Motion" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="middle_comments" rows="3" class="form-textarea" placeholder="Comments"></textarea>
+      </div>
+    </div>
     <div class="form-row">
       <label class="field-label">Ring Finger AROM/PROM</label>
       <div class="radio-group">

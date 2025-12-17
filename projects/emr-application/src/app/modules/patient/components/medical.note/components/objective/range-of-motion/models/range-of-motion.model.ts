@@ -292,13 +292,59 @@ export interface IndexFingerAromPromModel {
   comments?: string;
 }
 
+// Middle Finger AROM-PROM Model
+export interface MiddleFingerAromPromModel {
+  enabled: boolean;
+  mpAdductionRightArom?: string;
+  mpAdductionRightProm?: string;
+  mpAdductionLeftArom?: string;
+  mpAdductionLeftProm?: string;
+  mpExtensionRightArom?: string;
+  mpExtensionRightProm?: string;
+  mpExtensionLeftArom?: string;
+  mpExtensionLeftProm?: string;
+  mpFlexionRightArom?: string;
+  mpFlexionRightProm?: string;
+  mpFlexionLeftArom?: string;
+  mpFlexionLeftProm?: string;
+  mpTotalMotionRightArom?: string;
+  mpTotalMotionRightProm?: string;
+  mpTotalMotionLeftArom?: string;
+  mpTotalMotionLeftProm?: string;
+  pipExtensionRightArom?: string;
+  pipExtensionRightProm?: string;
+  pipExtensionLeftArom?: string;
+  pipExtensionLeftProm?: string;
+  pipFlexionRightArom?: string;
+  pipFlexionRightProm?: string;
+  pipFlexionLeftArom?: string;
+  pipFlexionLeftProm?: string;
+  pipTotalMotionRightArom?: string;
+  pipTotalMotionRightProm?: string;
+  pipTotalMotionLeftArom?: string;
+  pipTotalMotionLeftProm?: string;
+  dipExtensionRightArom?: string;
+  dipExtensionRightProm?: string;
+  dipExtensionLeftArom?: string;
+  dipExtensionLeftProm?: string;
+  dipFlexionRightArom?: string;
+  dipFlexionRightProm?: string;
+  dipFlexionLeftArom?: string;
+  dipFlexionLeftProm?: string;
+  dipTotalMotionRightArom?: string;
+  dipTotalMotionRightProm?: string;
+  dipTotalMotionLeftArom?: string;
+  dipTotalMotionLeftProm?: string;
+  comments?: string;
+}
+
 // Hand AROM-PROM Model
 export interface HandAromPromModel {
   enabled: boolean;
   calculateTotalRom?: boolean;
   thumbAromProm?: ThumbAromPromModel;
   indexFingerAromProm?: IndexFingerAromPromModel;
-  middleFingerAromProm?: boolean;
+  middleFingerAromProm?: MiddleFingerAromPromModel;
   ringFingerAromProm?: boolean;
   smallFingerAromProm?: boolean;
 }

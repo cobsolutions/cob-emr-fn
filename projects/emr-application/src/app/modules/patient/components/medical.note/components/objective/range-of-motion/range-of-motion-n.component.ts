@@ -28,6 +28,7 @@ export class RangeOfMotionNComponent implements OnInit {
   showHandAromPromFields: boolean = false;
   showThumbAromPromFields: boolean = false;
   showIndexFingerAromPromFields: boolean = false;
+  showMiddleFingerAromPromFields: boolean = false;
   showThoracicAromSittingWithPassiveOverpressureFields: boolean = false;
   showThoracicAromStandingFields: boolean = false;
   showLumbarAromFields: boolean = false;
@@ -371,6 +372,49 @@ export class RangeOfMotionNComponent implements OnInit {
       index_comments: [''],
 
       middle_finger_arrom_prom: [false],
+      middle_mp_adduction_right_arom: ['not_tested'],
+      middle_mp_adduction_right_prom: ['not_tested'],
+      middle_mp_adduction_left_arom: ['not_tested'],
+      middle_mp_adduction_left_prom: ['not_tested'],
+      middle_mp_extension_right_arom: ['not_tested'],
+      middle_mp_extension_right_prom: ['not_tested'],
+      middle_mp_extension_left_arom: ['not_tested'],
+      middle_mp_extension_left_prom: ['not_tested'],
+      middle_mp_flexion_right_arom: ['not_tested'],
+      middle_mp_flexion_right_prom: ['not_tested'],
+      middle_mp_flexion_left_arom: ['not_tested'],
+      middle_mp_flexion_left_prom: ['not_tested'],
+      middle_mp_total_motion_right_arom: [''],
+      middle_mp_total_motion_right_prom: [''],
+      middle_mp_total_motion_left_arom: [''],
+      middle_mp_total_motion_left_prom: [''],
+      middle_pip_extension_right_arom: ['not_tested'],
+      middle_pip_extension_right_prom: ['not_tested'],
+      middle_pip_extension_left_arom: ['not_tested'],
+      middle_pip_extension_left_prom: ['not_tested'],
+      middle_pip_flexion_right_arom: ['not_tested'],
+      middle_pip_flexion_right_prom: ['not_tested'],
+      middle_pip_flexion_left_arom: ['not_tested'],
+      middle_pip_flexion_left_prom: ['not_tested'],
+      middle_pip_total_motion_right_arom: [''],
+      middle_pip_total_motion_right_prom: [''],
+      middle_pip_total_motion_left_arom: [''],
+      middle_pip_total_motion_left_prom: [''],
+      middle_dip_extension_right_arom: ['not_tested'],
+      middle_dip_extension_right_prom: ['not_tested'],
+      middle_dip_extension_left_arom: ['not_tested'],
+      middle_dip_extension_left_prom: ['not_tested'],
+      middle_dip_flexion_right_arom: ['not_tested'],
+      middle_dip_flexion_right_prom: ['not_tested'],
+      middle_dip_flexion_left_arom: ['not_tested'],
+      middle_dip_flexion_left_prom: ['not_tested'],
+      middle_dip_total_motion_right_arom: [''],
+      middle_dip_total_motion_right_prom: [''],
+      middle_dip_total_motion_left_arom: [''],
+      middle_dip_total_motion_left_prom: [''],
+      middle_comments: [''],
+
+
       ring_finger_arrom_prom: [false],
       small_finger_arrom_prom: [false],
 
@@ -898,6 +942,55 @@ export class RangeOfMotionNComponent implements OnInit {
           index_dip_total_motion_left_arom: '',
           index_dip_total_motion_left_prom: '',
           index_comments: ''
+        }, { emitEvent: false });
+      }
+    });
+
+    this.romForm.get('middle_finger_arrom_prom')?.valueChanges.subscribe(value => {
+      this.showMiddleFingerAromPromFields = value === true;
+      if (value === false) {
+        this.romForm.patchValue({
+          middle_mp_adduction_right_arom: 'not_tested',
+          middle_mp_adduction_right_prom: 'not_tested',
+          middle_mp_adduction_left_arom: 'not_tested',
+          middle_mp_adduction_left_prom: 'not_tested',
+          middle_mp_extension_right_arom: 'not_tested',
+          middle_mp_extension_right_prom: 'not_tested',
+          middle_mp_extension_left_arom: 'not_tested',
+          middle_mp_extension_left_prom: 'not_tested',
+          middle_mp_flexion_right_arom: 'not_tested',
+          middle_mp_flexion_right_prom: 'not_tested',
+          middle_mp_flexion_left_arom: 'not_tested',
+          middle_mp_flexion_left_prom: 'not_tested',
+          middle_mp_total_motion_right_arom: '',
+          middle_mp_total_motion_right_prom: '',
+          middle_mp_total_motion_left_arom: '',
+          middle_mp_total_motion_left_prom: '',
+          middle_pip_extension_right_arom: 'not_tested',
+          middle_pip_extension_right_prom: 'not_tested',
+          middle_pip_extension_left_arom: 'not_tested',
+          middle_pip_extension_left_prom: 'not_tested',
+          middle_pip_flexion_right_arom: 'not_tested',
+          middle_pip_flexion_right_prom: 'not_tested',
+          middle_pip_flexion_left_arom: 'not_tested',
+          middle_pip_flexion_left_prom: 'not_tested',
+          middle_pip_total_motion_right_arom: '',
+          middle_pip_total_motion_right_prom: '',
+          middle_pip_total_motion_left_arom: '',
+          middle_pip_total_motion_left_prom: '',
+          middle_dip_extension_right_arom: 'not_tested',
+          middle_dip_extension_right_prom: 'not_tested',
+          middle_dip_extension_left_arom: 'not_tested',
+          middle_dip_extension_left_prom: 'not_tested',
+          middle_dip_flexion_right_arom: 'not_tested',
+          middle_dip_flexion_right_prom: 'not_tested',
+          middle_dip_flexion_left_arom: 'not_tested',
+          middle_dip_flexion_left_prom: 'not_tested',
+          middle_dip_total_motion_right_arom: '',
+          middle_dip_total_motion_right_prom: '',
+          middle_dip_total_motion_left_arom: '',
+          middle_dip_total_motion_left_prom: '',
+          middle_comments: ''
         }, { emitEvent: false });
       }
     });
