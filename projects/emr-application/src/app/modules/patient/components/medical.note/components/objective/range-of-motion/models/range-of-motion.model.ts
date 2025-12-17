@@ -452,6 +452,16 @@ export interface ThoracicAromSittingWithPassiveOverpressureModel {
   leftSideBending?: string;
 }
 
+// Thoracic AROM Standing
+export interface ThoracicAROMStandingModel {
+  enabled: boolean;
+  forwardBending?: string;
+  backwardBending?: string;
+  rightRotation?: string;
+  leftRotation?: string;
+  rightSideBending?: string;
+  leftSideBending?: string;
+}
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
   noLimitationsNoted: NoLimitationsNotedModel;
@@ -465,4 +475,5 @@ export interface RangeOfMotionModel {
   wristProm?: WristPROMModel;
   handAromProm?: HandAromPromModel;
   thoracicAromSittingWithPassiveOverpressure?: ThoracicAromSittingWithPassiveOverpressureModel;
+  thoracicAROMStandingModel?:ThoracicAROMStandingModel;
 }

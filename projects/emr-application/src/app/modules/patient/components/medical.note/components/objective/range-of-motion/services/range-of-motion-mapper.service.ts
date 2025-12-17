@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RangeOfMotionModel, NoLimitationsNotedModel, PROMModel, CervicalAROMModel, CostovertebralExpansionModel, ShoulderAROMModel, ShoulderPROMModel, ElbowAROMModel, ElbowPROMModel, WristAROMModel, WristPROMModel, HandAromPromModel, ThumbAromPromModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, RingFingerAromPromModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel } from '../models/range-of-motion.model';
+import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, WristAROMModel, WristPROMModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,8 @@ export class RangeOfMotionMapperService {
       wristArom: this.mapWristArom(formValue),
       wristProm: this.mapWristProm(formValue),
       handAromProm: this.mapHandAromProm(formValue),
-      thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue)
+      thoracicAromSittingWithPassiveOverpressure: this.mapThoracicAromSittingWithPassiveOverpressure(formValue),
+      thoracicAROMStandingModel: this.mapThoracicAROMStanding(formValue)
     };
   }
 
@@ -447,7 +448,16 @@ export class RangeOfMotionMapperService {
       thoracic_arrom_sitting_right_rotation: dto.thoracicAromSittingWithPassiveOverpressure?.rightRotation || 'not_tested',
       thoracic_arrom_sitting_left_rotation: dto.thoracicAromSittingWithPassiveOverpressure?.leftRotation || 'not_tested',
       thoracic_arrom_sitting_right_side_bending: dto.thoracicAromSittingWithPassiveOverpressure?.rightSideBending || 'not_tested',
-      thoracic_arrom_sitting_left_side_bending: dto.thoracicAromSittingWithPassiveOverpressure?.leftSideBending || 'not_tested'
+      thoracic_arrom_sitting_left_side_bending: dto.thoracicAromSittingWithPassiveOverpressure?.leftSideBending || 'not_tested',
+
+      //Thoracic AROM Standing
+      thoracic_arrom_standing: dto.thoracicAROMStandingModel?.enabled ? 'yes' : 'no',
+      thoracic_arrom_standing_forward_bending: dto.thoracicAROMStandingModel?.forwardBending || 'not_tested',
+      thoracic_arrom_standing_backward_bending: dto.thoracicAROMStandingModel?.backwardBending || 'not_tested',
+      thoracic_arrom_standing_right_rotation: dto.thoracicAROMStandingModel?.rightRotation || 'not_tested',
+      thoracic_arrom_standing_left_rotation: dto.thoracicAROMStandingModel?.leftRotation || 'not_tested',
+      thoracic_arrom_standing_right_side_bending: dto.thoracicAROMStandingModel?.rightSideBending || 'not_tested',
+      thoracic_arrom_standing_left_side_bending: dto.thoracicAROMStandingModel?.leftSideBending || 'not_tested',
     };
   }
 
@@ -984,4 +994,33 @@ export class RangeOfMotionMapperService {
 
     return model;
   }
+
+  // map ThoracicAROMStanding
+  private mapThoracicAROMStanding(formValue: any): ThoracicAROMStandingModel {
+    const enabled = formValue.thoracic_arrom_standing === 'yes';
+
+    const model: ThoracicAROMStandingModel = { enabled };
+
+    if (enabled) {
+      model.forwardBending =
+        formValue.thoracic_arrom_standing_forward_bending || 'not_tested';
+
+      model.backwardBending =
+        formValue.thoracic_arrom_standing_backward_bending || 'not_tested';
+
+      model.rightRotation =
+        formValue.thoracic_arrom_standing_right_rotation || 'not_tested';
+
+      model.leftRotation =
+        formValue.thoracic_arrom_standing_left_rotation || 'not_tested';
+
+      model.rightSideBending =
+        formValue.thoracic_arrom_standing_right_side_bending || 'not_tested';
+
+      model.leftSideBending =
+        formValue.thoracic_arrom_standing_left_side_bending || 'not_tested';
+    }
+    return model;
+  }
+
 }
