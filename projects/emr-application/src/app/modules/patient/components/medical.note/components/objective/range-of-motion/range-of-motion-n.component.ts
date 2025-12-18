@@ -602,17 +602,21 @@ export class RangeOfMotionNComponent implements OnInit {
       hip_prom_external_rotation_right_endfeel: ['not_tested'],
       hip_prom_external_rotation_left: ['not_tested'],
       hip_prom_external_rotation_left_endfeel: ['not_tested'],
+      hip_prom_comments: [''], // For common component
 
       knee_arrom: ['no'],
       knee_arom_apply_to_all: [''],
+      knee_apply_to_all: [''], // New name for common component
       knee_flexion_right: ['not_tested'],
       knee_flexion_left: ['not_tested'],
       knee_extension_right: ['not_tested'],
       knee_extension_left: ['not_tested'],
       knee_arrom_comments: [''],
+      knee_comments: [''], // New name for common component
       knee_prom: ['no'],
       ankle_arrom: ['no'],
       ankle_arom_apply_to_all: [''],
+      ankle_apply_to_all: [''], // New name for common component
       ankle_dorsiflexion_0_knee_flexion_right: ['not_tested'],
       ankle_dorsiflexion_0_knee_flexion_left: ['not_tested'],
       ankle_dorsiflexion_90_knee_flexion_right: ['not_tested'],
@@ -624,6 +628,7 @@ export class RangeOfMotionNComponent implements OnInit {
       ankle_eversion_right: ['not_tested'],
       ankle_eversion_left: ['not_tested'],
       ankle_arrom_comments: [''],
+      ankle_comments: [''], // New name for common component
       ankle_prom: ['no'],
       ankle_prom_apply_to_all: [''],
       ankle_prom_dorsiflexion_0_knee_flexion_right: ['not_tested'],
@@ -649,22 +654,27 @@ export class RangeOfMotionNComponent implements OnInit {
       ankle_prom_comments: [''],
       fst_mtp_arrom: ['no'],
       fst_mtp_arom_apply_to_all: [''],
+      fst_mtp_apply_to_all: [''], // New name for common component
       fst_mtp_flexion_right: ['not_tested'],
       fst_mtp_flexion_left: ['not_tested'],
       fst_mtp_extension_right: ['not_tested'],
       fst_mtp_extension_left: ['not_tested'],
       fst_mtp_arrom_comments: [''],
+      fst_mtp_comments: [''], // New name for common component
       fst_mtp_prom: ['no'],
       fst_ip_arrom: ['no'],
       fst_ip_arom_apply_to_all: [''],
+      fst_ip_apply_to_all: [''], // New name for common component
       fst_ip_flexion_right: ['not_tested'],
       fst_ip_flexion_left: ['not_tested'],
       fst_ip_extension_right: ['not_tested'],
       fst_ip_extension_left: ['not_tested'],
       fst_ip_arrom_comments: [''],
+      fst_ip_comments: [''], // New name for common component
       fst_ip_prom: ['no'],
       toe_arrom: ['no'],
       toe_arom_apply_to_all: [''],
+      toe_apply_to_all: [''], // New name for common component
       toe_arom_2nd_mtp_flexion_right: ['not_tested'],
       toe_arom_2nd_mtp_flexion_left: ['not_tested'],
       toe_arom_2nd_mtp_extension_right: ['not_tested'],
@@ -698,6 +708,7 @@ export class RangeOfMotionNComponent implements OnInit {
       toe_arom_5th_ip_extension_right: ['not_tested'],
       toe_arom_5th_ip_extension_left: ['not_tested'],
       toe_arrom_comments: [''],
+      toe_comments: [''], // New name for common component
       toe_prom: ['no'],
       toe_prom_apply_to_all: [''],
       toe_2nd_mtp_flexion_right: ['not_tested'],

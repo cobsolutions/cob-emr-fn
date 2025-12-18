@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'rom-dropdown-text-table',
-  templateUrl: './rom-dropdown-text-table.component.html',
-  styleUrls: ['./rom-dropdown-text-table.component.css']
+  selector: 'dropdown-text-table',
+  templateUrl: './dropdown-text-table.component.html',
+  styleUrls: ['./dropdown-text-table.component.css']
 })
-export class RomDropdownTextTableComponent implements OnInit {
+export class DropdownTextTableComponent implements OnInit {
   @Input() columns: string[] = []; // e.g., ['ROM', 'Movement Quality', 'Pain Free Movement'] or ['Right', 'Left']
   @Input() labels: string[] = []; // e.g., ['Retraction', 'Right Rotation', ...] - empty for no labels
   @Input() options: any[] = []; // Dropdown options for all columns

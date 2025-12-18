@@ -3,11 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { TopSelect } from '../../range-of-motion/config';
 
 @Component({
-  selector: 'rom-measurement-table-with-selects',
-  templateUrl: './rom-measurement-table-with-selects.component.html',
-  styleUrls: ['./rom-measurement-table-with-selects.component.css']
+  selector: 'measurement-table-with-selects',
+  templateUrl: './measurement-table-with-selects.component.html',
+  styleUrls: ['./measurement-table-with-selects.component.css']
 })
-export class RomMeasurementTableWithSelectsComponent {
+export class MeasurementTableWithSelectsComponent {
   @Input() labels: string[] = []; // Row labels like ['Flexion', 'Extension']
   @Input() options: any[] = []; // Options for table dropdowns
   @Input() formGroup!: FormGroup;

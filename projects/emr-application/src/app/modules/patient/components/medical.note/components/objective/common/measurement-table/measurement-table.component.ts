@@ -4,22 +4,21 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'rom-measurement-endfeel-table',
-  templateUrl: './rom-measurement-endfeel-table.component.html',
-  styleUrls: ['./rom-measurement-endfeel-table.component.css']
+  selector: 'measurement-table',
+  templateUrl: './measurement-table.component.html',
+  styleUrls: ['./measurement-table.component.css']
 })
-export class RomMeasurementEndfeelTableComponent implements OnInit, OnDestroy {
+export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
-  @Input() measurementOptions: any[] = [];
-  @Input() endfeelOptions: any[] = [];
+  @Input() options: any[] = [];
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
   @Input() showApplyToAll: boolean = true;
   @Input() showComments: boolean = true;
   @Input() commentsLabel: string = 'Comments';
   @Input() applyToAllLabel: string = 'Apply to All';
-  @Input() applyToAllFieldName?: string;
-  @Input() commentsFieldName?: string;
+  @Input() applyToAllFieldName?: string; // Optional custom apply to all field name
+  @Input() commentsFieldName?: string; // Optional custom comments field name
 
   private destroy$ = new Subject<void>();
 
@@ -36,20 +35,11 @@ export class RomMeasurementEndfeelTableComponent implements OnInit, OnDestroy {
 
   /**
    * Generate form control name for a measurement field
-   * Example: fieldPrefix='hip_prom_', label='Flexion', side='right' => 'hip_prom_flexion_right'
+   * Example: fieldPrefix='fst_mtp_', label='Flexion', side='right' => 'fst_mtp_flexion_right'
    */
-  getMeasurementFieldName(label: string, side: 'right' | 'left'): string {
+  getFieldName(label: string, side: 'right' | 'left'): string {
     const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
     return `${this.fieldPrefix}${normalizedLabel}_${side}`;
-  }
-
-  /**
-   * Generate form control name for an endfeel field
-   * Example: fieldPrefix='hip_prom_', label='Flexion', side='right' => 'hip_prom_flexion_right_endfeel'
-   */
-  getEndfeelFieldName(label: string, side: 'right' | 'left'): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}_${side}_endfeel`;
   }
 
   /**
@@ -76,20 +66,20 @@ export class RomMeasurementEndfeelTableComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(value => {
           if (value) {
-            this.applyValueToAllMeasurementFields(value);
+            this.applyValueToAllFields(value);
           }
         });
     }
   }
 
   /**
-   * Apply a value to all measurement fields (not endfeel)
+   * Apply a value to all measurement fields
    */
-  private applyValueToAllMeasurementFields(value: string): void {
+  private applyValueToAllFields(value: string): void {
     const updates: any = {};
     this.labels.forEach(label => {
-      const rightField = this.getMeasurementFieldName(label, 'right');
-      const leftField = this.getMeasurementFieldName(label, 'left');
+      const rightField = this.getFieldName(label, 'right');
+      const leftField = this.getFieldName(label, 'left');
       updates[rightField] = value;
       updates[leftField] = value;
     });

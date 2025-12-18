@@ -2796,7 +2796,7 @@
     </div>
   </div>
   <div *ngIf="showHipPromFields" class="dependent-field-box">
-    <rom-measurement-endfeel-table
+    <measurement-endfeel-table
       [labels]="romConfig.hipProm.labels"
       [measurementOptions]="romConfig.hipProm.measurementOptions"
       [endfeelOptions]="romConfig.hipProm.endfeelOptions"
@@ -2806,7 +2806,7 @@
       [commentsFieldName]="romConfig.hipProm.commentsFieldName"
       [showApplyToAll]="romConfig.hipProm.showApplyToAll"
       [showComments]="romConfig.hipProm.showComments">
-    </rom-measurement-endfeel-table>
+    </measurement-endfeel-table>
   </div>
   <div class="form-row">
     <label class="field-label">Knee AROM</label>
@@ -2822,7 +2822,7 @@
     </div>
   </div>
   <div *ngIf="showKneeAromFields" class="dependent-field-box">
-    <rom-measurement-table
+    <measurement-table
       [labels]="romConfig.kneeArom.labels"
       [options]="romConfig.kneeArom.options"
       [formGroup]="romForm"
@@ -2831,7 +2831,7 @@
       [commentsFieldName]="romConfig.kneeArom.commentsFieldName"
       [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
       [showComments]="romConfig.kneeArom.showComments">
-    </rom-measurement-table>
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Knee PROM</label>
@@ -2862,7 +2862,7 @@
     </div>
   </div>
   <div *ngIf="showAnkleAromFields" class="dependent-field-box">
-    <rom-measurement-table
+    <measurement-table
       [labels]="romConfig.ankleArom.labels"
       [options]="romConfig.ankleArom.options"
       [formGroup]="romForm"
@@ -2871,7 +2871,7 @@
       [commentsFieldName]="romConfig.ankleArom.commentsFieldName"
       [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
       [showComments]="romConfig.ankleArom.showComments">
-    </rom-measurement-table>
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Ankle PROM</label>
@@ -3103,7 +3103,7 @@
     </div>
   </div>
   <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
-    <rom-measurement-table
+    <measurement-table
       [labels]="romConfig.firstMtpArom.labels"
       [options]="romConfig.firstMtpArom.options"
       [formGroup]="romForm"
@@ -3112,7 +3112,7 @@
       [commentsFieldName]="romConfig.firstMtpArom.commentsFieldName"
       [showApplyToAll]="romConfig.firstMtpArom.showApplyToAll"
       [showComments]="romConfig.firstMtpArom.showComments">
-    </rom-measurement-table>
+    </measurement-table>
   </div>
 
   <div class="form-row">
@@ -3144,7 +3144,7 @@
     </div>
   </div>
   <div *ngIf="show1stIpAromFields" class="dependent-field-box">
-    <rom-measurement-table
+    <measurement-table
       [labels]="romConfig.firstIpArom.labels"
       [options]="romConfig.firstIpArom.options"
       [formGroup]="romForm"
@@ -3153,7 +3153,7 @@
       [commentsFieldName]="romConfig.firstIpArom.commentsFieldName"
       [showApplyToAll]="romConfig.firstIpArom.showApplyToAll"
       [showComments]="romConfig.firstIpArom.showComments">
-    </rom-measurement-table>
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">1st IP PROM</label>
@@ -3972,7 +3972,7 @@
     </div>
   </div>
   <div *ngIf="showShoulderAromWithLabelsFields" class="dependent-field-box">
-    <rom-dropdown-text-table
+    <dropdown-text-table
       [columns]="romConfig.shoulderAromWithLabels.columns"
       [labels]="romConfig.shoulderAromWithLabels.labels"
       [options]="romConfig.shoulderAromWithLabels.options"
@@ -3980,7 +3980,7 @@
       [fieldPrefix]="romConfig.shoulderAromWithLabels.fieldPrefix"
       [commentsFieldName]="romConfig.shoulderAromWithLabels.commentsFieldName"
       [showComments]="romConfig.shoulderAromWithLabels.showComments">
-    </rom-dropdown-text-table>
+    </dropdown-text-table>
   </div>
 
   <!-- DUMMY EXAMPLE 2: Grip Test without Labels -->
@@ -3998,7 +3998,7 @@
     </div>
   </div>
   <div *ngIf="showGripTestNoLabelsFields" class="dependent-field-box">
-    <rom-dropdown-text-table
+    <dropdown-text-table
       [columns]="romConfig.gripTestNoLabels.columns"
       [labels]="romConfig.gripTestNoLabels.labels"
       [options]="romConfig.gripTestNoLabels.options"
@@ -4006,7 +4006,7 @@
       [fieldPrefix]="romConfig.gripTestNoLabels.fieldPrefix"
       [commentsFieldName]="romConfig.gripTestNoLabels.commentsFieldName"
       [showComments]="romConfig.gripTestNoLabels.showComments">
-    </rom-dropdown-text-table>
+    </dropdown-text-table>
   </div>
 
   <!-- DUMMY EXAMPLE 3: Elbow AROM with Top Selects -->
@@ -4024,7 +4024,7 @@
     </div>
   </div>
   <div *ngIf="showElbowAromWithSelectsFields" class="dependent-field-box">
-    <rom-measurement-table-with-selects
+    <measurement-table-with-selects
       [labels]="romConfig.elbowAromWithSelects.labels"
       [options]="romConfig.elbowAromWithSelects.options"
       [formGroup]="romForm"
@@ -4032,7 +4032,7 @@
       [topSelects]="romConfig.elbowAromWithSelects.topSelects"
       [commentsFieldName]="romConfig.elbowAromWithSelects.commentsFieldName"
       [showComments]="romConfig.elbowAromWithSelects.showComments">
-    </rom-measurement-table-with-selects>
+    </measurement-table-with-selects>
   </div>
 
   <div class="form-row">
