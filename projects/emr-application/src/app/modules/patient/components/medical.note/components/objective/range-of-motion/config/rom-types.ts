@@ -5,7 +5,9 @@ export interface RomOption {
 
 export interface RomSectionConfig {
   labels: string[];
-  options: RomOption[];
+  options: RomOption[]; // Default options for all selects
+  applyToAllOptions?: RomOption[]; // Options for Apply to All dropdown (defaults to options if not provided)
+  specialOptions?: { [labelName: string]: RomOption[] }; // Override options for specific labels
   fieldPrefix: string;
   applyToAllFieldName: string;
   commentsFieldName: string;

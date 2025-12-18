@@ -13,7 +13,13 @@ export class LowerExtremityConfig {
   };
 
   static readonly ankleArom: RomSectionConfig = {
-    labels: ['Dorsiflexion', 'Plantarflexion', 'Inversion', 'Eversion'],
+    labels: [
+      'Dorsiflexion 0 Knee Flexion',
+      'Dorsiflexion 90 Knee Flexion',
+      'Plantarflexion',
+      'Inversion',
+      'Eversion'
+    ],
     options: ROM_TEST_OPTIONS,
     fieldPrefix: 'ankle_',
     applyToAllFieldName: 'ankle_apply_to_all',
@@ -23,7 +29,13 @@ export class LowerExtremityConfig {
   };
 
   static readonly ankleProm: RomSectionConfig = {
-    labels: ['Dorsiflexion', 'Plantarflexion', 'Inversion', 'Eversion'],
+    labels: [
+      'Dorsiflexion 0 Knee Flexion',
+      'Dorsiflexion 90 Knee Flexion',
+      'Plantarflexion',
+      'Inversion',
+      'Eversion'
+    ],
     options: ROM_TEST_OPTIONS,
     fieldPrefix: 'ankle_prom_',
     applyToAllFieldName: 'ankle_prom_apply_to_all',

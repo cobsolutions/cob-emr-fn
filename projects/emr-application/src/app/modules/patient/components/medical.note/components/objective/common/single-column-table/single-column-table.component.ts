@@ -10,7 +10,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class SingleColumnTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
-  @Input() options: any[] = [];
+  @Input() options: any[] = []; // Default options for all selects
+  @Input() applyToAllOptions?: any[]; // Options for Apply to All dropdown (defaults to options)
+  @Input() specialOptions?: { [labelName: string]: any[] }; // Override options for specific labels
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
   @Input() showApplyToAll: boolean = true;
@@ -54,6 +56,24 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
    */
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
+  }
+
+  /**
+   * Get options for Apply to All dropdown
+   */
+  getApplyToAllOptions(): any[] {
+    return this.applyToAllOptions || this.options;
+  }
+
+  /**
+   * Get options for a specific label
+   * Checks specialOptions first, falls back to default options
+   */
+  getOptionsForLabel(label: string): any[] {
+    if (this.specialOptions && this.specialOptions[label]) {
+      return this.specialOptions[label];
+    }
+    return this.options;
   }
 
   /**
