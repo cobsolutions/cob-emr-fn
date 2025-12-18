@@ -104,58 +104,18 @@
   </div>
 
   <div *ngIf="showCervicalAromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Forward Bending</label>
-      <select cSelect formControlName="cervical_forward_bending" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Backward Bending</label>
-      <select cSelect formControlName="cervical_backward_bending" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Right Rotation</label>
-      <select cSelect formControlName="cervical_right_rotation" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Left Rotation</label>
-      <select cSelect formControlName="cervical_left_rotation" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Right Side Bending</label>
-      <select cSelect formControlName="cervical_right_side_bending" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Left Side Bending</label>
-      <select cSelect formControlName="cervical_left_side_bending" class="form-select-custom">
-        <option *ngFor="let option of cervicalRomOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Cervical AROM Comments</label>
-      <textarea formControlName="cervical_comments" class="form-textarea" rows="3"></textarea>
-    </div>
+    <single-column-table
+    [labels]="romConfig.cervicalArom.labels"
+    [options]="romConfig.cervicalArom.options"
+    [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
+    [specialOptions]="romConfig.cervicalArom.specialOptions"
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
+    [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
+    [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
+    [showApplyToAll]="romConfig.cervicalArom.showApplyToAll"
+    [showComments]="romConfig.cervicalArom.showComments">
+  </single-column-table>    
   </div>
   <div class="form-row">
     <label class="field-label">Costovertebral Expansion</label>

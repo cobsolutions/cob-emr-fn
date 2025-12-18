@@ -15,6 +15,7 @@ import { LowerExtremityConfig } from './lower-extremity-config';
 import { UpperExtremityConfig } from './upper-extremity-config';
 import { SpecialTestsConfig } from './special-tests-config';
 import { SpineConfig } from './spine-config';
+import { CervicalAROMConfig } from './cervical-arom';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -34,6 +35,6 @@ export class RomSectionsConfig {
   // Special Tests
   static readonly gripTestNoLabels = SpecialTestsConfig.gripTestNoLabels;
 
-  // Spine
-  static readonly cervicalArom = SpineConfig.cervicalArom;
+  // CervicalAROM
+  static readonly cervicalArom = CervicalAROMConfig.cervicalArom;
 }
