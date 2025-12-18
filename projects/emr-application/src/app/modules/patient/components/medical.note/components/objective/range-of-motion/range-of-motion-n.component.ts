@@ -155,12 +155,12 @@ export class RangeOfMotionNComponent implements OnInit {
       prom_ankle: [false],
       prom_feet: [false],
       prom_comments: [''],
-      
+
       cervical_arrom: ['no'],
-      
-      
+
+
       costovertebral_expansion: ['no'],
-      
+
       shoulder_arrom: ['no'],
       shoulder_apply_to_all: [''],
       shoulder_flexion_right: ['not_tested'],
@@ -520,18 +520,10 @@ export class RangeOfMotionNComponent implements OnInit {
       small_dip_total_motion_left_arom: [''],
       small_dip_total_motion_left_prom: [''],
       small_comments: [''],
-
+      //thoracic_arrom_stting
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
-      
       //thoracic_arrom_standing
       thoracic_arrom_standing: ['no'],
-      thoracic_arrom_standing_apply_to_all: [''],
-      thoracic_arrom_standing_forward_bending: ['not_tested'],
-      thoracic_arrom_standing_backward_bending: ['not_tested'],
-      thoracic_arrom_standing_right_rotation: ['not_tested'],
-      thoracic_arrom_standing_left_rotation: ['not_tested'],
-      thoracic_arrom_standing_right_side_bending: ['not_tested'],
-      thoracic_arrom_standing_left_side_bending: ['not_tested'],
 
       //lumbar_arrom
       lumbar_arrom: ['no'],
