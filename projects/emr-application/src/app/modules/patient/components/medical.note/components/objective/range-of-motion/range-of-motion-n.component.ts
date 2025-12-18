@@ -157,24 +157,10 @@ export class RangeOfMotionNComponent implements OnInit {
       prom_comments: [''],
       
       cervical_arrom: ['no'],
-      cervical_arom_apply_to_all: [''],
-
-      // For common component with cervical_arom_ prefix
-      cervical_arom_forward_bending: ['not_tested'],
-      cervical_arom_backward_bending: ['not_tested'],
-      cervical_arom_right_rotation: ['not_tested'],
-      cervical_arom_left_rotation: ['not_tested'],
-      cervical_arom_right_side_bending: ['not_tested'],
-      cervical_arom_left_side_bending: ['not_tested'],
-      cervical_arom_comments: [''],
+      
       
       costovertebral_expansion: ['no'],
-      costovertebral_apply_to_all: [''],
-      costovertebral_t4: ['not_tested'],
-      costovertebral_t9: ['not_tested'],
-      costovertebral_umbilicus: ['not_tested'],
-      costovertebral_expansion_comments: [''],
-
+      
       shoulder_arrom: ['no'],
       shoulder_apply_to_all: [''],
       shoulder_flexion_right: ['not_tested'],
@@ -555,14 +541,6 @@ export class RangeOfMotionNComponent implements OnInit {
 
       //lumbar_arrom
       lumbar_arrom: ['no'],
-      lumbar_arrom_apply_to_all: [''],
-      lumbar_arrom_forward_bending: ['not_tested'],
-      lumbar_arrom_backward_bending: ['not_tested'],
-      lumbar_arrom_right_rotation: ['not_tested'],
-      lumbar_arrom_left_rotation: ['not_tested'],
-      lumbar_arrom_right_side_bending: ['not_tested'],
-      lumbar_arrom_left_side_bending: ['not_tested'],
-      lumbar_arrom_left_comment: [null],
 
       hip_arrom: ['no'],
       hip_flexion_right: ['not_tested'],
@@ -931,16 +909,6 @@ export class RangeOfMotionNComponent implements OnInit {
       }
     });
 
-    // Costovertebral Expansion Apply to All
-    this.romForm.get('costovertebral_apply_to_all')?.valueChanges.subscribe(value => {
-      if (value) {
-        this.romForm.patchValue({
-          costovertebral_t4: value,
-          costovertebral_t9: value,
-          costovertebral_umbilicus: value
-        }, { emitEvent: false });
-      }
-    });
 
     this.romForm.get('shoulder_arrom')?.valueChanges.subscribe(value => {
       this.showShoulderAromFields = value === 'yes';
@@ -1572,22 +1540,11 @@ export class RangeOfMotionNComponent implements OnInit {
           lumbar_arrom_left_rotation: 'not_tested',
           lumbar_arrom_right_side_bending: 'not_tested',
           lumbar_arrom_left_side_bending: 'not_tested',
-          lumbar_arrom_left_comment: null,
+          lumbar_arrom_comments: ''
         });
       }
     });
-    this.romForm.get('lumbar_arrom_apply_to_all')?.valueChanges.subscribe(value => {
-      if (value) {
-        this.romForm.patchValue({
-          lumbar_arrom_forward_bending: value,
-          lumbar_arrom_backward_bending: value,
-          lumbar_arrom_right_rotation: value,
-          lumbar_arrom_left_rotation: value,
-          lumbar_arrom_right_side_bending: value,
-          lumbar_arrom_left_side_bending: value,
-        }, { emitEvent: false });
-      }
-    });
+
 
     this.romForm.get('hip_arrom')?.valueChanges.subscribe(value => {
       this.showHipAromFields = value === 'yes';

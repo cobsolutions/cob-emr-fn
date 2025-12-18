@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -24,9 +24,41 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+  constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
+    this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
+    }
+  }
+
+  /**
+   * Dynamically add form controls if they don't exist
+   */
+  private ensureFormControlsExist(): void {
+    // Add Apply to All control if needed
+    if (this.showApplyToAll) {
+      const applyToAllFieldName = this.getApplyToAllFieldName();
+      if (!this.formGroup.get(applyToAllFieldName)) {
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+      }
+    }
+
+    // Add controls for each label
+    this.labels.forEach(label => {
+      const fieldName = this.getFieldName(label);
+      if (!this.formGroup.get(fieldName)) {
+        this.formGroup.addControl(fieldName, this.fb.control('not_tested'));
+      }
+    });
+
+    // Add comments control if needed
+    if (this.showComments) {
+      const commentsFieldName = this.getCommentsFieldName();
+      if (!this.formGroup.get(commentsFieldName)) {
+        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+      }
     }
   }
 

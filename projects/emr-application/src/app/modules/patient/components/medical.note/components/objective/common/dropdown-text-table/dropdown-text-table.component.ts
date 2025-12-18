@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'dropdown-text-table',
@@ -19,8 +19,54 @@ export class DropdownTextTableComponent implements OnInit {
 
   hasLabels: boolean = false;
 
+  constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
     this.hasLabels = this.labels && this.labels.length > 0;
+    this.ensureFormControlsExist();
+  }
+
+  /**
+   * Dynamically add form controls if they don't exist
+   */
+  private ensureFormControlsExist(): void {
+    if (this.hasLabels) {
+      // With labels: create dropdown and text for each label-column combination
+      this.labels.forEach(label => {
+        this.columns.forEach(column => {
+          const dropdownFieldName = this.getDropdownFieldName(label, column);
+          const textFieldName = this.getTextFieldName(label, column);
+
+          if (!this.formGroup.get(dropdownFieldName)) {
+            this.formGroup.addControl(dropdownFieldName, this.fb.control(''));
+          }
+          if (!this.formGroup.get(textFieldName)) {
+            this.formGroup.addControl(textFieldName, this.fb.control(''));
+          }
+        });
+      });
+    } else {
+      // Without labels: create dropdown and text for each column
+      this.columns.forEach(column => {
+        const dropdownFieldName = this.getDropdownFieldName(null, column);
+        const textFieldName = this.getTextFieldName(null, column);
+
+        if (!this.formGroup.get(dropdownFieldName)) {
+          this.formGroup.addControl(dropdownFieldName, this.fb.control(''));
+        }
+        if (!this.formGroup.get(textFieldName)) {
+          this.formGroup.addControl(textFieldName, this.fb.control(''));
+        }
+      });
+    }
+
+    // Add comments control if needed
+    if (this.showComments) {
+      const commentsFieldName = this.getCommentsFieldName();
+      if (!this.formGroup.get(commentsFieldName)) {
+        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+      }
+    }
   }
 
   /**

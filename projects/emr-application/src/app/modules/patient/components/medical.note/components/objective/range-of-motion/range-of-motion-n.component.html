@@ -2513,77 +2513,16 @@
     </div>
   </div>
   <div *ngIf="showLumbarAromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="lumbar_arrom_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_forward_bending -->
-    <div class="form-row">
-      <label class="field-label">Forward Bending</label>
-      <select cSelect formControlName="lumbar_arrom_forward_bending" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_backward_bending -->
-    <div class="form-row">
-      <label class="field-label">Backward Bending</label>
-      <select cSelect formControlName="lumbar_arrom_backward_bending" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_right_rotation -->
-    <div class="form-row">
-      <label class="field-label">Right Rotation</label>
-      <select cSelect formControlName="lumbar_arrom_right_rotation" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_left_rotation -->
-    <div class="form-row">
-      <label class="field-label">Left Rotation</label>
-      <select cSelect formControlName="lumbar_arrom_left_rotation" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_right_side_bending -->
-    <div class="form-row">
-      <label class="field-label">Right Side Bending</label>
-      <select cSelect formControlName="lumbar_arrom_right_side_bending" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <!-- lumbar_arrom_left_side_bending -->
-    <div class="form-row">
-      <label class="field-label">Left Side Bending</label>
-      <select cSelect formControlName="lumbar_arrom_left_side_bending" class="form-select-custom">
-        <option *ngFor="let option of lumbarAROMOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Lumbar AROM Comments</label>
-      <textarea cFormControl formControlName="lumbar_arrom_left_comment" rows="3" class="form-textarea"
-        placeholder="Comments"></textarea>
-    </div>
+    <single-column-table
+    [labels]="romConfig.lumbarArom.labels"
+    [options]="romConfig.lumbarArom.options"
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.lumbarArom.fieldPrefix"
+    [applyToAllFieldName]="romConfig.lumbarArom.applyToAllFieldName"
+    [commentsFieldName]="romConfig.lumbarArom.commentsFieldName"
+    [showApplyToAll]="romConfig.lumbarArom.showApplyToAll"
+    [showComments]="romConfig.lumbarArom.showComments">
+  </single-column-table>
 
   </div>
   <div class="form-row">

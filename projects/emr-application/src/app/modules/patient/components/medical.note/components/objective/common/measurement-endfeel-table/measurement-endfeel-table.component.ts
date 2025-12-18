@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -25,9 +25,54 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+  constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
+    this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
+    }
+  }
+
+  /**
+   * Dynamically add form controls if they don't exist
+   */
+  private ensureFormControlsExist(): void {
+    // Add Apply to All control if needed
+    if (this.showApplyToAll) {
+      const applyToAllFieldName = this.getApplyToAllFieldName();
+      if (!this.formGroup.get(applyToAllFieldName)) {
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+      }
+    }
+
+    // Add measurement and endfeel controls for each label (right and left)
+    this.labels.forEach(label => {
+      const rightMeasurement = this.getMeasurementFieldName(label, 'right');
+      const leftMeasurement = this.getMeasurementFieldName(label, 'left');
+      const rightEndfeel = this.getEndfeelFieldName(label, 'right');
+      const leftEndfeel = this.getEndfeelFieldName(label, 'left');
+
+      if (!this.formGroup.get(rightMeasurement)) {
+        this.formGroup.addControl(rightMeasurement, this.fb.control('not_tested'));
+      }
+      if (!this.formGroup.get(leftMeasurement)) {
+        this.formGroup.addControl(leftMeasurement, this.fb.control('not_tested'));
+      }
+      if (!this.formGroup.get(rightEndfeel)) {
+        this.formGroup.addControl(rightEndfeel, this.fb.control('not_tested'));
+      }
+      if (!this.formGroup.get(leftEndfeel)) {
+        this.formGroup.addControl(leftEndfeel, this.fb.control('not_tested'));
+      }
+    });
+
+    // Add comments control if needed
+    if (this.showComments) {
+      const commentsFieldName = this.getCommentsFieldName();
+      if (!this.formGroup.get(commentsFieldName)) {
+        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+      }
     }
   }
 

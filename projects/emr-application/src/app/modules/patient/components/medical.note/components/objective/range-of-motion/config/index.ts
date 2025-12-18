@@ -17,6 +17,7 @@ import { SpecialTestsConfig } from './special-tests-config';
 import { SpineConfig } from './spine-config';
 import { CervicalAROMConfig } from './cervical-arom';
 import { CostovertebralExpansionConfig } from './costovertebral.expansion-config';
+import { LumbarAROMConfig } from './lumbar-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -41,4 +42,7 @@ export class RomSectionsConfig {
 
   //Costovertebral Expansion
   static readonly costovertebralExpansion = CostovertebralExpansionConfig.costovertebralExpansion;
+
+  //Lumbar AROM
+static readonly lumbarArom = LumbarAROMConfig.lumbarArom;
 }
