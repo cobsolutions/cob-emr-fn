@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { TopSelect } from '../rom-sections-config';
+import { TopSelect } from '../../range-of-motion/rom-sections-config';
 
 @Component({
   selector: 'rom-measurement-table-with-selects',
