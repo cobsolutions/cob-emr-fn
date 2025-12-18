@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RangeOfMotionModel } from './models/range-of-motion.model';
 import { RangeOfMotionMapperService } from './services/range-of-motion-mapper.service';
+import { RomSectionsConfig } from '../common/rom-sections-config';
 
 @Component({
   selector: 'range-of-motion-n',
@@ -47,6 +48,11 @@ export class RangeOfMotionNComponent implements OnInit {
   showToeAromFields: boolean = false;
   showToePromFields: boolean = false;
   showAdditionalCommentsFields: boolean = false;
+
+  // Dummy examples visibility flags
+  showShoulderAromWithLabelsFields: boolean = false;
+  showGripTestNoLabelsFields: boolean = false;
+  showElbowAromWithSelectsFields: boolean = false;
 
   // Dropdown options
   cervicalRomOptions = [
@@ -94,6 +100,10 @@ export class RangeOfMotionNComponent implements OnInit {
     { value: 'wfl', label: 'WFL' },
     { value: 'limited', label: 'Limited' }
   ];
+
+  // ROM Sections Configuration
+  readonly romConfig = RomSectionsConfig;
+
   constructor(
     private fb: FormBuilder,
     private rangeOfMotionMapper: RangeOfMotionMapperService
@@ -594,12 +604,64 @@ export class RangeOfMotionNComponent implements OnInit {
       hip_prom_external_rotation_left_endfeel: ['not_tested'],
 
       knee_arrom: ['no'],
+      knee_arom_apply_to_all: [''],
+      knee_flexion_right: ['not_tested'],
+      knee_flexion_left: ['not_tested'],
+      knee_extension_right: ['not_tested'],
+      knee_extension_left: ['not_tested'],
+      knee_arrom_comments: [''],
       knee_prom: ['no'],
       ankle_arrom: ['no'],
+      ankle_arom_apply_to_all: [''],
+      ankle_dorsiflexion_0_knee_flexion_right: ['not_tested'],
+      ankle_dorsiflexion_0_knee_flexion_left: ['not_tested'],
+      ankle_dorsiflexion_90_knee_flexion_right: ['not_tested'],
+      ankle_dorsiflexion_90_knee_flexion_left: ['not_tested'],
+      ankle_plantarflexion_right: ['not_tested'],
+      ankle_plantarflexion_left: ['not_tested'],
+      ankle_inversion_right: ['not_tested'],
+      ankle_inversion_left: ['not_tested'],
+      ankle_eversion_right: ['not_tested'],
+      ankle_eversion_left: ['not_tested'],
+      ankle_arrom_comments: [''],
       ankle_prom: ['no'],
+      ankle_prom_apply_to_all: [''],
+      ankle_prom_dorsiflexion_0_knee_flexion_right: ['not_tested'],
+      ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: ['not_tested'],
+      ankle_prom_dorsiflexion_0_knee_flexion_left: ['not_tested'],
+      ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: ['not_tested'],
+      ankle_prom_dorsiflexion_90_knee_flexion_right: ['not_tested'],
+      ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: ['not_tested'],
+      ankle_prom_dorsiflexion_90_knee_flexion_left: ['not_tested'],
+      ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: ['not_tested'],
+      ankle_prom_plantarflexion_right: ['not_tested'],
+      ankle_prom_plantarflexion_right_endfeel: ['not_tested'],
+      ankle_prom_plantarflexion_left: ['not_tested'],
+      ankle_prom_plantarflexion_left_endfeel: ['not_tested'],
+      ankle_prom_inversion_right: ['not_tested'],
+      ankle_prom_inversion_right_endfeel: ['not_tested'],
+      ankle_prom_inversion_left: ['not_tested'],
+      ankle_prom_inversion_left_endfeel: ['not_tested'],
+      ankle_prom_eversion_right: ['not_tested'],
+      ankle_prom_eversion_right_endfeel: ['not_tested'],
+      ankle_prom_eversion_left: ['not_tested'],
+      ankle_prom_eversion_left_endfeel: ['not_tested'],
+      ankle_prom_comments: [''],
       fst_mtp_arrom: ['no'],
+      fst_mtp_arom_apply_to_all: [''],
+      fst_mtp_flexion_right: ['not_tested'],
+      fst_mtp_flexion_left: ['not_tested'],
+      fst_mtp_extension_right: ['not_tested'],
+      fst_mtp_extension_left: ['not_tested'],
+      fst_mtp_arrom_comments: [''],
       fst_mtp_prom: ['no'],
       fst_ip_arrom: ['no'],
+      fst_ip_arom_apply_to_all: [''],
+      fst_ip_flexion_right: ['not_tested'],
+      fst_ip_flexion_left: ['not_tested'],
+      fst_ip_extension_right: ['not_tested'],
+      fst_ip_extension_left: ['not_tested'],
+      fst_ip_arrom_comments: [''],
       fst_ip_prom: ['no'],
       toe_arrom: ['no'],
       toe_arom_apply_to_all: [''],
@@ -703,6 +765,70 @@ export class RangeOfMotionNComponent implements OnInit {
       toe_5th_ip_extension_left: ['not_tested'],
       toe_5th_ip_extension_left_endfeel: ['not_tested'],
       toe_prom_comments: [''],
+
+      // Dummy Example: Shoulder AROM with Labels
+      shoulder_arom_with_labels: ['no'],
+      shoulder_arom_retraction_rom: ['not_tested'],
+      shoulder_arom_retraction_rom_text: [''],
+      shoulder_arom_retraction_movement_quality: ['not_tested'],
+      shoulder_arom_retraction_movement_quality_text: [''],
+      shoulder_arom_retraction_pain_free_movement: ['not_tested'],
+      shoulder_arom_retraction_pain_free_movement_text: [''],
+      shoulder_arom_right_rotation_rom: ['not_tested'],
+      shoulder_arom_right_rotation_rom_text: [''],
+      shoulder_arom_right_rotation_movement_quality: ['not_tested'],
+      shoulder_arom_right_rotation_movement_quality_text: [''],
+      shoulder_arom_right_rotation_pain_free_movement: ['not_tested'],
+      shoulder_arom_right_rotation_pain_free_movement_text: [''],
+      shoulder_arom_left_rotation_rom: ['not_tested'],
+      shoulder_arom_left_rotation_rom_text: [''],
+      shoulder_arom_left_rotation_movement_quality: ['not_tested'],
+      shoulder_arom_left_rotation_movement_quality_text: [''],
+      shoulder_arom_left_rotation_pain_free_movement: ['not_tested'],
+      shoulder_arom_left_rotation_pain_free_movement_text: [''],
+      shoulder_arom_right_lateral_flexion_rom: ['not_tested'],
+      shoulder_arom_right_lateral_flexion_rom_text: [''],
+      shoulder_arom_right_lateral_flexion_movement_quality: ['not_tested'],
+      shoulder_arom_right_lateral_flexion_movement_quality_text: [''],
+      shoulder_arom_right_lateral_flexion_pain_free_movement: ['not_tested'],
+      shoulder_arom_right_lateral_flexion_pain_free_movement_text: [''],
+      shoulder_arom_left_lateral_flexion_rom: ['not_tested'],
+      shoulder_arom_left_lateral_flexion_rom_text: [''],
+      shoulder_arom_left_lateral_flexion_movement_quality: ['not_tested'],
+      shoulder_arom_left_lateral_flexion_movement_quality_text: [''],
+      shoulder_arom_left_lateral_flexion_pain_free_movement: ['not_tested'],
+      shoulder_arom_left_lateral_flexion_pain_free_movement_text: [''],
+      shoulder_arom_extension_rom: ['not_tested'],
+      shoulder_arom_extension_rom_text: [''],
+      shoulder_arom_extension_movement_quality: ['not_tested'],
+      shoulder_arom_extension_movement_quality_text: [''],
+      shoulder_arom_extension_pain_free_movement: ['not_tested'],
+      shoulder_arom_extension_pain_free_movement_text: [''],
+      shoulder_arom_comments: [''],
+
+      // Dummy Example: Grip Test without Labels
+      grip_test_no_labels: ['no'],
+      grip_test_right: ['not_tested'],
+      grip_test_right_text: [''],
+      grip_test_left: ['not_tested'],
+      grip_test_left_text: [''],
+      grip_test_comments: [''],
+
+      // Dummy Example: Elbow AROM with Top Selects
+      elbow_arom_with_selects: ['no'],
+      elbow_arom_patient_position: [''],
+      elbow_arom_test_method: [''],
+      elbow_arom_pain_level: [''],
+      elbow_arom_flexion_right: ['not_tested'],
+      elbow_arom_flexion_left: ['not_tested'],
+      elbow_arom_extension_right: ['not_tested'],
+      elbow_arom_extension_left: ['not_tested'],
+      elbow_arom_supination_right: ['not_tested'],
+      elbow_arom_supination_left: ['not_tested'],
+      elbow_arom_pronation_right: ['not_tested'],
+      elbow_arom_pronation_left: ['not_tested'],
+      elbow_arom_comments: [''],
+
       additional_comments: ['no']
     });
   }
@@ -1536,6 +1662,28 @@ export class RangeOfMotionNComponent implements OnInit {
     });
     this.romForm.get('knee_arrom')?.valueChanges.subscribe(value => {
       this.showKneeAromFields = value === 'yes';
+      if (!this.showKneeAromFields) {
+        this.romForm.patchValue({
+          knee_arom_apply_to_all: '',
+          knee_flexion_right: 'not_tested',
+          knee_flexion_left: 'not_tested',
+          knee_extension_right: 'not_tested',
+          knee_extension_left: 'not_tested',
+          knee_arrom_comments: ''
+        }, { emitEvent: false });
+      }
+    });
+
+    // Knee AROM Apply to All
+    this.romForm.get('knee_arom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          knee_flexion_right: value,
+          knee_flexion_left: value,
+          knee_extension_right: value,
+          knee_extension_left: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('knee_prom')?.valueChanges.subscribe(value => {
@@ -1544,25 +1692,147 @@ export class RangeOfMotionNComponent implements OnInit {
 
     this.romForm.get('ankle_arrom')?.valueChanges.subscribe(value => {
       this.showAnkleAromFields = value === 'yes';
+      if (!this.showAnkleAromFields) {
+        this.romForm.patchValue({
+          ankle_arom_apply_to_all: '',
+          ankle_dorsiflexion_0_knee_flexion_right: 'not_tested',
+          ankle_dorsiflexion_0_knee_flexion_left: 'not_tested',
+          ankle_dorsiflexion_90_knee_flexion_right: 'not_tested',
+          ankle_dorsiflexion_90_knee_flexion_left: 'not_tested',
+          ankle_plantarflexion_right: 'not_tested',
+          ankle_plantarflexion_left: 'not_tested',
+          ankle_inversion_right: 'not_tested',
+          ankle_inversion_left: 'not_tested',
+          ankle_eversion_right: 'not_tested',
+          ankle_eversion_left: 'not_tested',
+          ankle_arrom_comments: ''
+        }, { emitEvent: false });
+      }
+    });
+
+    // Ankle AROM Apply to All
+    this.romForm.get('ankle_arom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          ankle_dorsiflexion_0_knee_flexion_right: value,
+          ankle_dorsiflexion_0_knee_flexion_left: value,
+          ankle_dorsiflexion_90_knee_flexion_right: value,
+          ankle_dorsiflexion_90_knee_flexion_left: value,
+          ankle_plantarflexion_right: value,
+          ankle_plantarflexion_left: value,
+          ankle_inversion_right: value,
+          ankle_inversion_left: value,
+          ankle_eversion_right: value,
+          ankle_eversion_left: value
+        }, { emitEvent: false });
+      }
     });
 
     this.romForm.get('ankle_prom')?.valueChanges.subscribe(value => {
       this.showAnklePromFields = value === 'yes';
+      if (!this.showAnklePromFields) {
+        this.romForm.patchValue({
+          ankle_prom_apply_to_all: '',
+          ankle_prom_dorsiflexion_0_knee_flexion_right: 'not_tested',
+          ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: 'not_tested',
+          ankle_prom_dorsiflexion_0_knee_flexion_left: 'not_tested',
+          ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: 'not_tested',
+          ankle_prom_dorsiflexion_90_knee_flexion_right: 'not_tested',
+          ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: 'not_tested',
+          ankle_prom_dorsiflexion_90_knee_flexion_left: 'not_tested',
+          ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: 'not_tested',
+          ankle_prom_plantarflexion_right: 'not_tested',
+          ankle_prom_plantarflexion_right_endfeel: 'not_tested',
+          ankle_prom_plantarflexion_left: 'not_tested',
+          ankle_prom_plantarflexion_left_endfeel: 'not_tested',
+          ankle_prom_inversion_right: 'not_tested',
+          ankle_prom_inversion_right_endfeel: 'not_tested',
+          ankle_prom_inversion_left: 'not_tested',
+          ankle_prom_inversion_left_endfeel: 'not_tested',
+          ankle_prom_eversion_right: 'not_tested',
+          ankle_prom_eversion_right_endfeel: 'not_tested',
+          ankle_prom_eversion_left: 'not_tested',
+          ankle_prom_eversion_left_endfeel: 'not_tested',
+          ankle_prom_comments: ''
+        }, { emitEvent: false });
+      }
     });
 
-    this.romForm.get('1st_mtp_arrom')?.valueChanges.subscribe(value => {
+    // Ankle PROM Apply to All - applies only to measurement fields, not endfeel
+    this.romForm.get('ankle_prom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          ankle_prom_dorsiflexion_0_knee_flexion_right: value,
+          ankle_prom_dorsiflexion_0_knee_flexion_left: value,
+          ankle_prom_dorsiflexion_90_knee_flexion_right: value,
+          ankle_prom_dorsiflexion_90_knee_flexion_left: value,
+          ankle_prom_plantarflexion_right: value,
+          ankle_prom_plantarflexion_left: value,
+          ankle_prom_inversion_right: value,
+          ankle_prom_inversion_left: value,
+          ankle_prom_eversion_right: value,
+          ankle_prom_eversion_left: value
+        }, { emitEvent: false });
+      }
+    });
+
+    this.romForm.get('fst_mtp_arrom')?.valueChanges.subscribe(value => {
       this.show1stMtpAromFields = value === 'yes';
+      if (!this.show1stMtpAromFields) {
+        this.romForm.patchValue({
+          fst_mtp_arom_apply_to_all: '',
+          fst_mtp_flexion_right: 'not_tested',
+          fst_mtp_flexion_left: 'not_tested',
+          fst_mtp_extension_right: 'not_tested',
+          fst_mtp_extension_left: 'not_tested',
+          fst_mtp_arrom_comments: ''
+        }, { emitEvent: false });
+      }
     });
 
-    this.romForm.get('1st_mtp_prom')?.valueChanges.subscribe(value => {
+    // 1st MTP AROM Apply to All
+    this.romForm.get('fst_mtp_arom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          fst_mtp_flexion_right: value,
+          fst_mtp_flexion_left: value,
+          fst_mtp_extension_right: value,
+          fst_mtp_extension_left: value
+        }, { emitEvent: false });
+      }
+    });
+
+    this.romForm.get('fst_mtp_prom')?.valueChanges.subscribe(value => {
       this.show1stMtpPromFields = value === 'yes';
     });
 
-    this.romForm.get('1st_ip_arrom')?.valueChanges.subscribe(value => {
+    this.romForm.get('fst_ip_arrom')?.valueChanges.subscribe(value => {
       this.show1stIpAromFields = value === 'yes';
+      if (!this.show1stIpAromFields) {
+        this.romForm.patchValue({
+          fst_ip_arom_apply_to_all: '',
+          fst_ip_flexion_right: 'not_tested',
+          fst_ip_flexion_left: 'not_tested',
+          fst_ip_extension_right: 'not_tested',
+          fst_ip_extension_left: 'not_tested',
+          fst_ip_arrom_comments: ''
+        }, { emitEvent: false });
+      }
     });
 
-    this.romForm.get('1st_ip_prom')?.valueChanges.subscribe(value => {
+    // 1st IP AROM Apply to All
+    this.romForm.get('fst_ip_arom_apply_to_all')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.romForm.patchValue({
+          fst_ip_flexion_right: value,
+          fst_ip_flexion_left: value,
+          fst_ip_extension_right: value,
+          fst_ip_extension_left: value
+        }, { emitEvent: false });
+      }
+    });
+
+    this.romForm.get('fst_ip_prom')?.valueChanges.subscribe(value => {
       this.show1stIpPromFields = value === 'yes';
     });
 
@@ -1760,6 +2030,21 @@ export class RangeOfMotionNComponent implements OnInit {
           toe_5th_ip_extension_left: value
         }, { emitEvent: false });
       }
+    });
+
+    // Dummy Example: Shoulder AROM with Labels
+    this.romForm.get('shoulder_arom_with_labels')?.valueChanges.subscribe(value => {
+      this.showShoulderAromWithLabelsFields = value === 'yes';
+    });
+
+    // Dummy Example: Grip Test without Labels
+    this.romForm.get('grip_test_no_labels')?.valueChanges.subscribe(value => {
+      this.showGripTestNoLabelsFields = value === 'yes';
+    });
+
+    // Dummy Example: Elbow AROM with Top Selects
+    this.romForm.get('elbow_arom_with_selects')?.valueChanges.subscribe(value => {
+      this.showElbowAromWithSelectsFields = value === 'yes';
     });
 
     this.romForm.get('additional_comments')?.valueChanges.subscribe(value => {

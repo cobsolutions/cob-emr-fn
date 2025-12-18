@@ -628,6 +628,79 @@ export interface HipPROMModel {
   externalRotationLeft?: string;
   externalRotationLeftEndfeel?: string;
 }
+
+// Knee AROM Model
+export interface KneeAROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  comments?: string;
+}
+
+// Ankle AROM Model
+export interface AnkleAROMModel {
+  enabled: boolean;
+  dorsiflexionAt0KneeFlexionRight?: string;
+  dorsiflexionAt0KneeFlexionLeft?: string;
+  dorsiflexionAt90KneeFlexionRight?: string;
+  dorsiflexionAt90KneeFlexionLeft?: string;
+  plantarflexionRight?: string;
+  plantarflexionLeft?: string;
+  inversionRight?: string;
+  inversionLeft?: string;
+  eversionRight?: string;
+  eversionLeft?: string;
+  comments?: string;
+}
+
+// Ankle PROM Model
+export interface AnklePROMModel {
+  enabled: boolean;
+  dorsiflexionAt0KneeFlexionRight?: string;
+  dorsiflexionAt0KneeFlexionRightEndfeel?: string;
+  dorsiflexionAt0KneeFlexionLeft?: string;
+  dorsiflexionAt0KneeFlexionLeftEndfeel?: string;
+  dorsiflexionAt90KneeFlexionRight?: string;
+  dorsiflexionAt90KneeFlexionRightEndfeel?: string;
+  dorsiflexionAt90KneeFlexionLeft?: string;
+  dorsiflexionAt90KneeFlexionLeftEndfeel?: string;
+  plantarflexionRight?: string;
+  plantarflexionRightEndfeel?: string;
+  plantarflexionLeft?: string;
+  plantarflexionLeftEndfeel?: string;
+  inversionRight?: string;
+  inversionRightEndfeel?: string;
+  inversionLeft?: string;
+  inversionLeftEndfeel?: string;
+  eversionRight?: string;
+  eversionRightEndfeel?: string;
+  eversionLeft?: string;
+  eversionLeftEndfeel?: string;
+  comments?: string;
+}
+
+// 1st MTP AROM Model
+export interface FirstMtpAROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  comments?: string;
+}
+
+// 1st IP AROM Model
+export interface FirstIpAROMModel {
+  enabled: boolean;
+  flexionRight?: string;
+  flexionLeft?: string;
+  extensionRight?: string;
+  extensionLeft?: string;
+  comments?: string;
+}
+
 // Main Range of Motion Model
 export interface RangeOfMotionModel {
   noLimitationsNoted: NoLimitationsNotedModel;
@@ -645,6 +718,11 @@ export interface RangeOfMotionModel {
   lumbarAROMModel?: LumbarAROMModel;
   hipArom?: HipAROMModel;
   hipProm?: HipPROMModel;
+  kneeArom?: KneeAROMModel;
+  ankleArom?: AnkleAROMModel;
+  ankleProm?: AnklePROMModel;
+  firstMtpArom?: FirstMtpAROMModel;
+  firstIpArom?: FirstIpAROMModel;
   toeArom?: ToeAROMModel;
   toeProm?: ToePROMModel;
 }

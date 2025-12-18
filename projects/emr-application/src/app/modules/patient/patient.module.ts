@@ -145,6 +145,10 @@ import { StrengthNComponent } from './components/medical.note/components/objecti
 import { NeuroVascularNComponent } from './components/medical.note/components/objective/neuro-vascular/neuro-vascular-n.component';
 import { SpecialTestsNComponent } from './components/medical.note/components/objective/special-tests/special-tests-n.component';
 import { PalpationNComponent } from './components/medical.note/components/objective/palpationN/palpation-n.component';
+import { RomMeasurementTableComponent } from './components/medical.note/components/objective/common/rom-measurement-table/rom-measurement-table.component';
+import { RomMeasurementEndfeelTableComponent } from './components/medical.note/components/objective/common/rom-measurement-endfeel-table/rom-measurement-endfeel-table.component';
+import { RomDropdownTextTableComponent } from './components/medical.note/components/objective/common/rom-dropdown-text-table/rom-dropdown-text-table.component';
+import { RomMeasurementTableWithSelectsComponent } from './components/medical.note/components/objective/common/rom-measurement-table-with-selects/rom-measurement-table-with-selects.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -291,6 +295,10 @@ const APP_PATIENT_CHART_COMPONENTS = [
     NeuroVascularNComponent,
     SpecialTestsNComponent,
     PalpationNComponent,
+    RomMeasurementTableComponent,
+    RomMeasurementEndfeelTableComponent,
+    RomDropdownTextTableComponent,
+    RomMeasurementTableWithSelectsComponent,
   ],
   imports: [
     CommonModule,

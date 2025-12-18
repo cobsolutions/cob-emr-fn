@@ -1,0 +1,56 @@
+<div [formGroup]="formGroup">
+  <!-- Table with Labels -->
+  <table *ngIf="hasLabels" class="dropdown-text-table">
+    <thead>
+      <tr>
+        <th class="label-column"></th>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let label of labels">
+        <td class="label-cell">{{ label }}</td>
+        <td *ngFor="let column of columns" class="input-cell">
+          <select cSelect class="dropdown-input" [formControlName]="getDropdownFieldName(label, column)">
+            <option *ngFor="let option of options" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+          <input
+            type="text"
+            class="text-input"
+            [formControlName]="getTextFieldName(label, column)"
+            placeholder="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Layout without Labels (Side by Side) -->
+  <div *ngIf="!hasLabels" class="no-labels-layout">
+    <div class="column-container" *ngFor="let column of columns">
+      <label class="column-header">{{ column }}</label>
+      <select cSelect class="dropdown-input-full" [formControlName]="getDropdownFieldName(null, column)">
+        <option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <input
+        type="text"
+        class="text-input-full"
+        [formControlName]="getTextFieldName(null, column)"
+        placeholder="">
+    </div>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="getCommentsFieldName()"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

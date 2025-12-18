@@ -2796,151 +2796,17 @@
     </div>
   </div>
   <div *ngIf="showHipPromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="hip_prom_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <!-- Flexion -->
-    <div class="form-row">
-      <label class="field-label">Flexion (Right)</label>
-      <select cSelect formControlName="hip_prom_flexion_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_flexion_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Flexion (Left)</label>
-      <select cSelect formControlName="hip_prom_flexion_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_flexion_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- Extension -->
-    <div class="form-row">
-      <label class="field-label">Extension (Right)</label>
-      <select cSelect formControlName="hip_prom_extension_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_extension_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Extension (Left)</label>
-      <select cSelect formControlName="hip_prom_extension_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_extension_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- Abduction -->
-    <div class="form-row">
-      <label class="field-label">Abduction (Right)</label>
-      <select cSelect formControlName="hip_prom_abduction_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_abduction_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Abduction (Left)</label>
-      <select cSelect formControlName="hip_prom_abduction_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_abduction_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- Adduction -->
-    <div class="form-row">
-      <label class="field-label">Adduction (Right)</label>
-      <select cSelect formControlName="hip_prom_adduction_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_adduction_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Adduction (Left)</label>
-      <select cSelect formControlName="hip_prom_adduction_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_adduction_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- Internal Rotation -->
-    <div class="form-row">
-      <label class="field-label">Internal Rotation (Right)</label>
-      <select cSelect formControlName="hip_prom_internal_rotation_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_internal_rotation_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Internal Rotation (Left)</label>
-      <select cSelect formControlName="hip_prom_internal_rotation_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_internal_rotation_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <!-- External Rotation -->
-    <div class="form-row">
-      <label class="field-label">External Rotation (Right)</label>
-      <select cSelect formControlName="hip_prom_external_rotation_right" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_external_rotation_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">External Rotation (Left)</label>
-      <select cSelect formControlName="hip_prom_external_rotation_left" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="hip_prom_external_rotation_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of hipPromOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
+    <rom-measurement-endfeel-table
+      [labels]="romConfig.hipProm.labels"
+      [measurementOptions]="romConfig.hipProm.measurementOptions"
+      [endfeelOptions]="romConfig.hipProm.endfeelOptions"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.hipProm.fieldPrefix"
+      [applyToAllFieldName]="romConfig.hipProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.hipProm.commentsFieldName"
+      [showApplyToAll]="romConfig.hipProm.showApplyToAll"
+      [showComments]="romConfig.hipProm.showComments">
+    </rom-measurement-endfeel-table>
   </div>
   <div class="form-row">
     <label class="field-label">Knee AROM</label>
@@ -2956,6 +2822,16 @@
     </div>
   </div>
   <div *ngIf="showKneeAromFields" class="dependent-field-box">
+    <rom-measurement-table
+      [labels]="romConfig.kneeArom.labels"
+      [options]="romConfig.kneeArom.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.kneeArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.kneeArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.kneeArom.commentsFieldName"
+      [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
+      [showComments]="romConfig.kneeArom.showComments">
+    </rom-measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Knee PROM</label>
@@ -2986,6 +2862,16 @@
     </div>
   </div>
   <div *ngIf="showAnkleAromFields" class="dependent-field-box">
+    <rom-measurement-table
+      [labels]="romConfig.ankleArom.labels"
+      [options]="romConfig.ankleArom.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.ankleArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.ankleArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.ankleArom.commentsFieldName"
+      [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
+      [showComments]="romConfig.ankleArom.showComments">
+    </rom-measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Ankle PROM</label>
@@ -3001,6 +2887,207 @@
     </div>
   </div>
   <div *ngIf="showAnklePromFields" class="dependent-field-box">
+    <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+      <label style="min-width: 150px; text-align: right; font-weight: 500; color: #5c4742;">Apply to All</label>
+      <select cSelect style="max-width: 200px;" formControlName="ankle_prom_apply_to_all">
+        <option value="" selected>Select...</option>
+        <option *ngFor="let option of romTestOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <table class="walk-test-table">
+      <thead>
+        <tr>
+          <th style="width: 350px;"></th>
+          <th style="width: 175px;"></th>
+          <th style="width: 175px;">Endfeel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dorsiflexion at 0 Knee Flexion (Right)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_0_knee_flexion_right">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Dorsiflexion at 0 Knee Flexion (Left)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_0_knee_flexion_left">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Dorsiflexion at 90 Knee Flexion (Right)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_90_knee_flexion_right">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Dorsiflexion at 90 Knee Flexion (Left)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_90_knee_flexion_left">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Plantarflexion (Right)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_plantarflexion_right">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_plantarflexion_right_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Plantarflexion (Left)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_plantarflexion_left">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_plantarflexion_left_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Inversion (Right)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_inversion_right">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_inversion_right_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Inversion (Left)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_inversion_left">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_inversion_left_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Eversion (Right)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_eversion_right">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_eversion_right_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Eversion (Left)</td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_eversion_left">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select cSelect class="table-input" formControlName="ankle_prom_eversion_left_endfeel">
+              <option *ngFor="let option of romTestOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 1rem;">
+      <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">Comments</label>
+      <textarea
+        class="form-textarea"
+        formControlName="ankle_prom_comments"
+        rows="3"
+        placeholder="Enter any comments...">
+      </textarea>
+    </div>
   </div>
   <div class="form-row">
     <label class="field-label">1st MTP AROM</label>
@@ -3016,6 +3103,16 @@
     </div>
   </div>
   <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
+    <rom-measurement-table
+      [labels]="romConfig.firstMtpArom.labels"
+      [options]="romConfig.firstMtpArom.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.firstMtpArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.firstMtpArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.firstMtpArom.commentsFieldName"
+      [showApplyToAll]="romConfig.firstMtpArom.showApplyToAll"
+      [showComments]="romConfig.firstMtpArom.showComments">
+    </rom-measurement-table>
   </div>
 
   <div class="form-row">
@@ -3047,6 +3144,16 @@
     </div>
   </div>
   <div *ngIf="show1stIpAromFields" class="dependent-field-box">
+    <rom-measurement-table
+      [labels]="romConfig.firstIpArom.labels"
+      [options]="romConfig.firstIpArom.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.firstIpArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.firstIpArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.firstIpArom.commentsFieldName"
+      [showApplyToAll]="romConfig.firstIpArom.showApplyToAll"
+      [showComments]="romConfig.firstIpArom.showComments">
+    </rom-measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">1st IP PROM</label>
@@ -3849,6 +3956,85 @@
         placeholder="Comments"></textarea>
     </div>
   </div>
+
+  <!-- DUMMY EXAMPLE 1: Shoulder AROM with Labels -->
+  <div class="form-row">
+    <label class="field-label">Shoulder AROM (Dummy With Labels)</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_arom_with_labels" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_arom_with_labels" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderAromWithLabelsFields" class="dependent-field-box">
+    <rom-dropdown-text-table
+      [columns]="romConfig.shoulderAromWithLabels.columns"
+      [labels]="romConfig.shoulderAromWithLabels.labels"
+      [options]="romConfig.shoulderAromWithLabels.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.shoulderAromWithLabels.fieldPrefix"
+      [commentsFieldName]="romConfig.shoulderAromWithLabels.commentsFieldName"
+      [showComments]="romConfig.shoulderAromWithLabels.showComments">
+    </rom-dropdown-text-table>
+  </div>
+
+  <!-- DUMMY EXAMPLE 2: Grip Test without Labels -->
+  <div class="form-row">
+    <label class="field-label">Grip Test (Dummy Without Labels)</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="grip_test_no_labels" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="grip_test_no_labels" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showGripTestNoLabelsFields" class="dependent-field-box">
+    <rom-dropdown-text-table
+      [columns]="romConfig.gripTestNoLabels.columns"
+      [labels]="romConfig.gripTestNoLabels.labels"
+      [options]="romConfig.gripTestNoLabels.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.gripTestNoLabels.fieldPrefix"
+      [commentsFieldName]="romConfig.gripTestNoLabels.commentsFieldName"
+      [showComments]="romConfig.gripTestNoLabels.showComments">
+    </rom-dropdown-text-table>
+  </div>
+
+  <!-- DUMMY EXAMPLE 3: Elbow AROM with Top Selects -->
+  <div class="form-row">
+    <label class="field-label">Elbow AROM (Dummy With Top Selects)</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_arom_with_selects" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_arom_with_selects" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowAromWithSelectsFields" class="dependent-field-box">
+    <rom-measurement-table-with-selects
+      [labels]="romConfig.elbowAromWithSelects.labels"
+      [options]="romConfig.elbowAromWithSelects.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.elbowAromWithSelects.fieldPrefix"
+      [topSelects]="romConfig.elbowAromWithSelects.topSelects"
+      [commentsFieldName]="romConfig.elbowAromWithSelects.commentsFieldName"
+      [showComments]="romConfig.elbowAromWithSelects.showComments">
+    </rom-measurement-table-with-selects>
+  </div>
+
   <div class="form-row">
     <label class="field-label">Additional Comments</label>
     <div class="radio-group">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, HipAROMModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, ToeAROMModel, ToePROMModel, WristAROMModel, WristPROMModel, LumbarAROMModel, HipPROMModel } from '../models/range-of-motion.model';
+import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, HipAROMModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, ToeAROMModel, ToePROMModel, WristAROMModel, WristPROMModel, LumbarAROMModel, HipPROMModel, KneeAROMModel, AnkleAROMModel, AnklePROMModel, FirstMtpAROMModel, FirstIpAROMModel } from '../models/range-of-motion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,11 @@ export class RangeOfMotionMapperService {
       lumbarAROMModel: this.mapLumbarAROM(formValue),
       hipArom: this.mapHipArom(formValue),
       hipProm: this.mapHipPROM(formValue),
+      kneeArom: this.mapKneeArom(formValue),
+      ankleArom: this.mapAnkleArom(formValue),
+      ankleProm: this.mapAnkleProm(formValue),
+      firstMtpArom: this.mapFirstMtpArom(formValue),
+      firstIpArom: this.mapFirstIpArom(formValue),
       toeArom: this.mapToeArom(formValue),
       toeProm: this.mapToeProm(formValue)
     };
@@ -53,6 +58,11 @@ export class RangeOfMotionMapperService {
       ...this.fromDtoLumbarAROM(dto),
       ...this.fromDtoHipArom(dto),
       ...this.fromDtoHipProm(dto),
+      ...this.fromDtoKneeArom(dto),
+      ...this.fromDtoAnkleArom(dto),
+      ...this.fromDtoAnkleProm(dto),
+      ...this.fromDtoFirstMtpArom(dto),
+      ...this.fromDtoFirstIpArom(dto),
       ...this.fromDtoToeArom(dto),
       ...this.fromDtoToeProm(dto)
     };
@@ -615,6 +625,93 @@ export class RangeOfMotionMapperService {
 
       hip_prom_external_rotation_left: dto.hipProm?.externalRotationLeft || 'not_tested',
       hip_prom_external_rotation_left_endfeel: dto.hipProm?.externalRotationLeftEndfeel || 'not_tested'
+    };
+  }
+
+  private fromDtoKneeArom(dto: RangeOfMotionModel): any {
+    return {
+      // Knee AROM
+      knee_arrom: dto.kneeArom?.enabled ? 'yes' : 'no',
+      knee_arom_apply_to_all: '',
+      knee_flexion_right: dto.kneeArom?.flexionRight || 'not_tested',
+      knee_flexion_left: dto.kneeArom?.flexionLeft || 'not_tested',
+      knee_extension_right: dto.kneeArom?.extensionRight || 'not_tested',
+      knee_extension_left: dto.kneeArom?.extensionLeft || 'not_tested',
+      knee_arrom_comments: dto.kneeArom?.comments || ''
+    };
+  }
+
+  private fromDtoAnkleArom(dto: RangeOfMotionModel): any {
+    return {
+      // Ankle AROM
+      ankle_arrom: dto.ankleArom?.enabled ? 'yes' : 'no',
+      ankle_arom_apply_to_all: '',
+      ankle_dorsiflexion_0_knee_flexion_right: dto.ankleArom?.dorsiflexionAt0KneeFlexionRight || 'not_tested',
+      ankle_dorsiflexion_0_knee_flexion_left: dto.ankleArom?.dorsiflexionAt0KneeFlexionLeft || 'not_tested',
+      ankle_dorsiflexion_90_knee_flexion_right: dto.ankleArom?.dorsiflexionAt90KneeFlexionRight || 'not_tested',
+      ankle_dorsiflexion_90_knee_flexion_left: dto.ankleArom?.dorsiflexionAt90KneeFlexionLeft || 'not_tested',
+      ankle_plantarflexion_right: dto.ankleArom?.plantarflexionRight || 'not_tested',
+      ankle_plantarflexion_left: dto.ankleArom?.plantarflexionLeft || 'not_tested',
+      ankle_inversion_right: dto.ankleArom?.inversionRight || 'not_tested',
+      ankle_inversion_left: dto.ankleArom?.inversionLeft || 'not_tested',
+      ankle_eversion_right: dto.ankleArom?.eversionRight || 'not_tested',
+      ankle_eversion_left: dto.ankleArom?.eversionLeft || 'not_tested',
+      ankle_arrom_comments: dto.ankleArom?.comments || ''
+    };
+  }
+
+  private fromDtoAnkleProm(dto: RangeOfMotionModel): any {
+    return {
+      // Ankle PROM
+      ankle_prom: dto.ankleProm?.enabled ? 'yes' : 'no',
+      ankle_prom_apply_to_all: '',
+      ankle_prom_dorsiflexion_0_knee_flexion_right: dto.ankleProm?.dorsiflexionAt0KneeFlexionRight || 'not_tested',
+      ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: dto.ankleProm?.dorsiflexionAt0KneeFlexionRightEndfeel || 'not_tested',
+      ankle_prom_dorsiflexion_0_knee_flexion_left: dto.ankleProm?.dorsiflexionAt0KneeFlexionLeft || 'not_tested',
+      ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: dto.ankleProm?.dorsiflexionAt0KneeFlexionLeftEndfeel || 'not_tested',
+      ankle_prom_dorsiflexion_90_knee_flexion_right: dto.ankleProm?.dorsiflexionAt90KneeFlexionRight || 'not_tested',
+      ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: dto.ankleProm?.dorsiflexionAt90KneeFlexionRightEndfeel || 'not_tested',
+      ankle_prom_dorsiflexion_90_knee_flexion_left: dto.ankleProm?.dorsiflexionAt90KneeFlexionLeft || 'not_tested',
+      ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: dto.ankleProm?.dorsiflexionAt90KneeFlexionLeftEndfeel || 'not_tested',
+      ankle_prom_plantarflexion_right: dto.ankleProm?.plantarflexionRight || 'not_tested',
+      ankle_prom_plantarflexion_right_endfeel: dto.ankleProm?.plantarflexionRightEndfeel || 'not_tested',
+      ankle_prom_plantarflexion_left: dto.ankleProm?.plantarflexionLeft || 'not_tested',
+      ankle_prom_plantarflexion_left_endfeel: dto.ankleProm?.plantarflexionLeftEndfeel || 'not_tested',
+      ankle_prom_inversion_right: dto.ankleProm?.inversionRight || 'not_tested',
+      ankle_prom_inversion_right_endfeel: dto.ankleProm?.inversionRightEndfeel || 'not_tested',
+      ankle_prom_inversion_left: dto.ankleProm?.inversionLeft || 'not_tested',
+      ankle_prom_inversion_left_endfeel: dto.ankleProm?.inversionLeftEndfeel || 'not_tested',
+      ankle_prom_eversion_right: dto.ankleProm?.eversionRight || 'not_tested',
+      ankle_prom_eversion_right_endfeel: dto.ankleProm?.eversionRightEndfeel || 'not_tested',
+      ankle_prom_eversion_left: dto.ankleProm?.eversionLeft || 'not_tested',
+      ankle_prom_eversion_left_endfeel: dto.ankleProm?.eversionLeftEndfeel || 'not_tested',
+      ankle_prom_comments: dto.ankleProm?.comments || ''
+    };
+  }
+
+  private fromDtoFirstMtpArom(dto: RangeOfMotionModel): any {
+    return {
+      // 1st MTP AROM
+      fst_mtp_arrom: dto.firstMtpArom?.enabled ? 'yes' : 'no',
+      fst_mtp_arom_apply_to_all: '',
+      fst_mtp_flexion_right: dto.firstMtpArom?.flexionRight || 'not_tested',
+      fst_mtp_flexion_left: dto.firstMtpArom?.flexionLeft || 'not_tested',
+      fst_mtp_extension_right: dto.firstMtpArom?.extensionRight || 'not_tested',
+      fst_mtp_extension_left: dto.firstMtpArom?.extensionLeft || 'not_tested',
+      fst_mtp_arrom_comments: dto.firstMtpArom?.comments || ''
+    };
+  }
+
+  private fromDtoFirstIpArom(dto: RangeOfMotionModel): any {
+    return {
+      // 1st IP AROM
+      fst_ip_arrom: dto.firstIpArom?.enabled ? 'yes' : 'no',
+      fst_ip_arom_apply_to_all: '',
+      fst_ip_flexion_right: dto.firstIpArom?.flexionRight || 'not_tested',
+      fst_ip_flexion_left: dto.firstIpArom?.flexionLeft || 'not_tested',
+      fst_ip_extension_right: dto.firstIpArom?.extensionRight || 'not_tested',
+      fst_ip_extension_left: dto.firstIpArom?.extensionLeft || 'not_tested',
+      fst_ip_arrom_comments: dto.firstIpArom?.comments || ''
     };
   }
 
@@ -1389,6 +1486,103 @@ export class RangeOfMotionMapperService {
 
       model.externalRotationLeft = formValue.hip_prom_external_rotation_left || 'not_tested';
       model.externalRotationLeftEndfeel = formValue.hip_prom_external_rotation_left_endfeel || 'not_tested';
+    }
+
+    return model;
+  }
+
+  private mapKneeArom(formValue: any): KneeAROMModel {
+    const enabled = formValue.knee_arrom === 'yes';
+    const model: KneeAROMModel = { enabled };
+
+    if (enabled) {
+      model.flexionRight = formValue.knee_flexion_right || 'not_tested';
+      model.flexionLeft = formValue.knee_flexion_left || 'not_tested';
+      model.extensionRight = formValue.knee_extension_right || 'not_tested';
+      model.extensionLeft = formValue.knee_extension_left || 'not_tested';
+      model.comments = formValue.knee_arrom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapAnkleArom(formValue: any): AnkleAROMModel {
+    const enabled = formValue.ankle_arrom === 'yes';
+    const model: AnkleAROMModel = { enabled };
+
+    if (enabled) {
+      model.dorsiflexionAt0KneeFlexionRight = formValue.ankle_dorsiflexion_0_knee_flexion_right || 'not_tested';
+      model.dorsiflexionAt0KneeFlexionLeft = formValue.ankle_dorsiflexion_0_knee_flexion_left || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionRight = formValue.ankle_dorsiflexion_90_knee_flexion_right || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionLeft = formValue.ankle_dorsiflexion_90_knee_flexion_left || 'not_tested';
+      model.plantarflexionRight = formValue.ankle_plantarflexion_right || 'not_tested';
+      model.plantarflexionLeft = formValue.ankle_plantarflexion_left || 'not_tested';
+      model.inversionRight = formValue.ankle_inversion_right || 'not_tested';
+      model.inversionLeft = formValue.ankle_inversion_left || 'not_tested';
+      model.eversionRight = formValue.ankle_eversion_right || 'not_tested';
+      model.eversionLeft = formValue.ankle_eversion_left || 'not_tested';
+      model.comments = formValue.ankle_arrom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapAnkleProm(formValue: any): AnklePROMModel {
+    const enabled = formValue.ankle_prom === 'yes';
+    const model: AnklePROMModel = { enabled };
+
+    if (enabled) {
+      model.dorsiflexionAt0KneeFlexionRight = formValue.ankle_prom_dorsiflexion_0_knee_flexion_right || 'not_tested';
+      model.dorsiflexionAt0KneeFlexionRightEndfeel = formValue.ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel || 'not_tested';
+      model.dorsiflexionAt0KneeFlexionLeft = formValue.ankle_prom_dorsiflexion_0_knee_flexion_left || 'not_tested';
+      model.dorsiflexionAt0KneeFlexionLeftEndfeel = formValue.ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionRight = formValue.ankle_prom_dorsiflexion_90_knee_flexion_right || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionRightEndfeel = formValue.ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionLeft = formValue.ankle_prom_dorsiflexion_90_knee_flexion_left || 'not_tested';
+      model.dorsiflexionAt90KneeFlexionLeftEndfeel = formValue.ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel || 'not_tested';
+      model.plantarflexionRight = formValue.ankle_prom_plantarflexion_right || 'not_tested';
+      model.plantarflexionRightEndfeel = formValue.ankle_prom_plantarflexion_right_endfeel || 'not_tested';
+      model.plantarflexionLeft = formValue.ankle_prom_plantarflexion_left || 'not_tested';
+      model.plantarflexionLeftEndfeel = formValue.ankle_prom_plantarflexion_left_endfeel || 'not_tested';
+      model.inversionRight = formValue.ankle_prom_inversion_right || 'not_tested';
+      model.inversionRightEndfeel = formValue.ankle_prom_inversion_right_endfeel || 'not_tested';
+      model.inversionLeft = formValue.ankle_prom_inversion_left || 'not_tested';
+      model.inversionLeftEndfeel = formValue.ankle_prom_inversion_left_endfeel || 'not_tested';
+      model.eversionRight = formValue.ankle_prom_eversion_right || 'not_tested';
+      model.eversionRightEndfeel = formValue.ankle_prom_eversion_right_endfeel || 'not_tested';
+      model.eversionLeft = formValue.ankle_prom_eversion_left || 'not_tested';
+      model.eversionLeftEndfeel = formValue.ankle_prom_eversion_left_endfeel || 'not_tested';
+      model.comments = formValue.ankle_prom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapFirstMtpArom(formValue: any): FirstMtpAROMModel {
+    const enabled = formValue.fst_mtp_arrom === 'yes';
+    const model: FirstMtpAROMModel = { enabled };
+
+    if (enabled) {
+      model.flexionRight = formValue.fst_mtp_flexion_right || 'not_tested';
+      model.flexionLeft = formValue.fst_mtp_flexion_left || 'not_tested';
+      model.extensionRight = formValue.fst_mtp_extension_right || 'not_tested';
+      model.extensionLeft = formValue.fst_mtp_extension_left || 'not_tested';
+      model.comments = formValue.fst_mtp_arrom_comments || '';
+    }
+
+    return model;
+  }
+
+  private mapFirstIpArom(formValue: any): FirstIpAROMModel {
+    const enabled = formValue.fst_ip_arrom === 'yes';
+    const model: FirstIpAROMModel = { enabled };
+
+    if (enabled) {
+      model.flexionRight = formValue.fst_ip_flexion_right || 'not_tested';
+      model.flexionLeft = formValue.fst_ip_flexion_left || 'not_tested';
+      model.extensionRight = formValue.fst_ip_extension_right || 'not_tested';
+      model.extensionLeft = formValue.fst_ip_extension_left || 'not_tested';
+      model.comments = formValue.fst_ip_arrom_comments || '';
     }
 
     return model;
