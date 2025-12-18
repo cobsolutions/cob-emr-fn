@@ -155,15 +155,10 @@ export class RangeOfMotionNComponent implements OnInit {
       prom_ankle: [false],
       prom_feet: [false],
       prom_comments: [''],
+      
       cervical_arrom: ['no'],
-      cervical_arom_apply_to_all: [''], // For common component
-      cervical_forward_bending: ['not_tested'],
-      cervical_backward_bending: ['not_tested'],
-      cervical_right_rotation: ['not_tested'],
-      cervical_left_rotation: ['not_tested'],
-      cervical_right_side_bending: ['not_tested'],
-      cervical_left_side_bending: ['not_tested'],
-      cervical_comments: [''],
+      cervical_arom_apply_to_all: [''],
+
       // For common component with cervical_arom_ prefix
       cervical_arom_forward_bending: ['not_tested'],
       cervical_arom_backward_bending: ['not_tested'],
