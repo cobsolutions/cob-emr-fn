@@ -522,13 +522,7 @@ export class RangeOfMotionNComponent implements OnInit {
       small_comments: [''],
 
       thoracic_arrom_sitting_with_passive_overpressure: ['no'],
-      thoracic_arrom_sitting_apply_to_all: [''],
-      thoracic_arrom_sitting_forward_bending: ['not_tested'],
-      thoracic_arrom_sitting_backward_bending: ['not_tested'],
-      thoracic_arrom_sitting_right_rotation: ['not_tested'],
-      thoracic_arrom_sitting_left_rotation: ['not_tested'],
-      thoracic_arrom_sitting_right_side_bending: ['not_tested'],
-      thoracic_arrom_sitting_left_side_bending: ['not_tested'],
+      
       //thoracic_arrom_standing
       thoracic_arrom_standing: ['no'],
       thoracic_arrom_standing_apply_to_all: [''],

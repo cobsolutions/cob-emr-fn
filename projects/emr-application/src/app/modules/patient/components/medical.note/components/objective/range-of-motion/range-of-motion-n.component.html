@@ -2381,48 +2381,19 @@
     </div>
   </div>
   <div *ngIf="showThoracicAromSittingWithPassiveOverpressureFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Forward Bending</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_forward_bending" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Backward Bending</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_backward_bending" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Right Rotation</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_right_rotation" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Left Rotation</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_left_rotation" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Right Side Bending</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_right_side_bending" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Left Side Bending</label>
-      <select cSelect formControlName="thoracic_arrom_sitting_left_side_bending" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
+    <single-column-table
+      [labels]="romConfig.thoracicAromSitting.labels"
+      [options]="romConfig.thoracicAromSitting.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.thoracicAromSitting.fieldPrefix"
+      [applyToAllFieldName]="romConfig.thoracicAromSitting.applyToAllFieldName"
+      [commentsFieldName]="romConfig.thoracicAromSitting.commentsFieldName"
+      [showApplyToAll]="romConfig.thoracicAromSitting.showApplyToAll"
+      [showComments]="romConfig.thoracicAromSitting.showComments">
+    </single-column-table>
+	
+	
+	
   </div>
   <div class="form-row">
     <label class="field-label">Thoracic AROM Standing</label>

@@ -18,6 +18,7 @@ import { SpineConfig } from './spine-config';
 import { CervicalAROMConfig } from './cervical-arom';
 import { CostovertebralExpansionConfig } from './costovertebral.expansion-config';
 import { LumbarAROMConfig } from './lumbar-arom-config';
+import { ThoracicAROMSitting } from './thoracic-arom-sitting-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -44,5 +45,9 @@ export class RomSectionsConfig {
   static readonly costovertebralExpansion = CostovertebralExpansionConfig.costovertebralExpansion;
 
   //Lumbar AROM
-static readonly lumbarArom = LumbarAROMConfig.lumbarArom;
+  static readonly lumbarArom = LumbarAROMConfig.lumbarArom;
+
+  //Thoracic AROM Sitting with Passive Overpressure
+  static readonly thoracicAromSitting = ThoracicAROMSitting.thoracicAromSitting;
+
 }
