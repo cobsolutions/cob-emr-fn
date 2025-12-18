@@ -131,38 +131,16 @@
     </div>
   </div>
   <div *ngIf="showCostovertebralExpansionFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="costovertebral_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">T4</label>
-      <select cSelect formControlName="costovertebral_t4" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">T9</label>
-      <select cSelect formControlName="costovertebral_t9" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Umbilicus</label>
-      <select cSelect formControlName="costovertebral_umbilicus" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
+    <single-column-table
+      [labels]="romConfig.costovertebralExpansion.labels"
+      [options]="romConfig.costovertebralExpansion.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.costovertebralExpansion.fieldPrefix"
+      [applyToAllFieldName]="romConfig.costovertebralExpansion.applyToAllFieldName"
+      [commentsFieldName]="romConfig.costovertebralExpansion.commentsFieldName"
+      [showApplyToAll]="romConfig.costovertebralExpansion.showApplyToAll"
+      [showComments]="romConfig.costovertebralExpansion.showComments">
+    </single-column-table>
   </div>
   <div class="form-row">
     <label class="field-label">Shoulder AROM</label>

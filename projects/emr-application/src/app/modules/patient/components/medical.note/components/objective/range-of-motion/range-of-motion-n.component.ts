@@ -167,11 +167,14 @@ export class RangeOfMotionNComponent implements OnInit {
       cervical_arom_right_side_bending: ['not_tested'],
       cervical_arom_left_side_bending: ['not_tested'],
       cervical_arom_comments: [''],
+      
       costovertebral_expansion: ['no'],
       costovertebral_apply_to_all: [''],
       costovertebral_t4: ['not_tested'],
       costovertebral_t9: ['not_tested'],
       costovertebral_umbilicus: ['not_tested'],
+      costovertebral_expansion_comments: [''],
+
       shoulder_arrom: ['no'],
       shoulder_apply_to_all: [''],
       shoulder_flexion_right: ['not_tested'],
@@ -922,7 +925,8 @@ export class RangeOfMotionNComponent implements OnInit {
           costovertebral_apply_to_all: '',
           costovertebral_t4: 'not_tested',
           costovertebral_t9: 'not_tested',
-          costovertebral_umbilicus: 'not_tested'
+          costovertebral_umbilicus: 'not_tested',
+          costovertebral_expansion_comments: ''
         });
       }
     });

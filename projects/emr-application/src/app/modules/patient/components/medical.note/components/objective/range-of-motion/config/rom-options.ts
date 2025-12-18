@@ -95,3 +95,20 @@ export const CERVICAL_AROM_SPECIAL_OPTIONS: RomOption[] = [
   { value: 'b100', label: '1 Finger From Chest' },
   { value: 'b101', label: 'Chin To Chest' }
 ]
+
+export const COSTOVERTEBRAL_EXPANSION_OPTIONS: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'custom', label: 'Custom' },
+  { value: '1.0', label: '1.0' },
+  { value: '2.0', label: '2.0' },
+  { value: '3.0', label: '3.0' },
+  { value: '4.0', label: '4.0' },
+  { value: '5.0', label: '5.0' },
+  { value: '6.0', label: '6.0' },
+  { value: '7.0', label: '7.0' },
+  { value: '8.0', label: '8.0' },
+  { value: '9.0', label: '9.0' },
+  { value: '10.0', label: '10.0' }
+]
