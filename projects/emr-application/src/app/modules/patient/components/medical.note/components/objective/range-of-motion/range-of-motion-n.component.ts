@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RangeOfMotionModel } from './models/range-of-motion.model';
 import { RangeOfMotionMapperService } from './services/range-of-motion-mapper.service';
-import { RomSectionsConfig } from './rom-sections-config';
+import { RomSectionsConfig } from './config';
 
 @Component({
   selector: 'range-of-motion-n',
