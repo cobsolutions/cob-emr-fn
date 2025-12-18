@@ -26,14 +26,14 @@
         <td>{{ label }}</td>
         <td>
           <select cSelect class="table-input" [formControlName]="getFieldName(label, 'right')">
-            <option *ngFor="let option of options" [value]="option.value">
+            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
         </td>
         <td>
           <select cSelect class="table-input" [formControlName]="getFieldName(label, 'left')">
-            <option *ngFor="let option of options" [value]="option.value">
+            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
               {{ option.label }}
             </option>
           </select>

@@ -9,7 +9,8 @@ import { FormGroup } from '@angular/forms';
 export class DropdownTextTableComponent implements OnInit {
   @Input() columns: string[] = []; // e.g., ['ROM', 'Movement Quality', 'Pain Free Movement'] or ['Right', 'Left']
   @Input() labels: string[] = []; // e.g., ['Retraction', 'Right Rotation', ...] - empty for no labels
-  @Input() options: any[] = []; // Dropdown options for all columns
+  @Input() options: any[] = []; // Default dropdown options for all columns
+  @Input() specialOptions?: { [labelName: string]: any[] }; // Override options for specific labels
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = ''; // e.g., 'shoulder_arom_'
   @Input() showComments: boolean = false;
@@ -59,5 +60,16 @@ export class DropdownTextTableComponent implements OnInit {
    */
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
+  }
+
+  /**
+   * Get options for a specific label
+   * Returns specialOptions[label] if provided, otherwise falls back to options
+   */
+  getOptionsForLabel(label: string | null): any[] {
+    if (label && this.specialOptions && this.specialOptions[label]) {
+      return this.specialOptions[label];
+    }
+    return this.options;
   }
 }

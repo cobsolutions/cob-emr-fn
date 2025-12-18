@@ -10,7 +10,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
-  @Input() options: any[] = [];
+  @Input() options: any[] = []; // Default options for all measurement selects
+  @Input() applyToAllOptions?: any[]; // Options for Apply to All dropdown (defaults to options)
+  @Input() specialOptions?: { [labelName: string]: any[] }; // Override options for specific labels
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
   @Input() showApplyToAll: boolean = true;
@@ -54,6 +56,25 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
    */
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
+  }
+
+  /**
+   * Get options for Apply to All dropdown
+   * Returns applyToAllOptions if provided, otherwise falls back to options
+   */
+  getApplyToAllOptions(): any[] {
+    return this.applyToAllOptions || this.options;
+  }
+
+  /**
+   * Get options for a specific label
+   * Returns specialOptions[label] if provided, otherwise falls back to options
+   */
+  getOptionsForLabel(label: string): any[] {
+    if (this.specialOptions && this.specialOptions[label]) {
+      return this.specialOptions[label];
+    }
+    return this.options;
   }
 
   /**

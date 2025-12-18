@@ -12,7 +12,7 @@
         <td class="label-cell">{{ label }}</td>
         <td *ngFor="let column of columns" class="input-cell">
           <select cSelect class="dropdown-input" [formControlName]="getDropdownFieldName(label, column)">
-            <option *ngFor="let option of options" [value]="option.value">
+            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
@@ -31,7 +31,7 @@
     <div class="column-container" *ngFor="let column of columns">
       <label class="column-header">{{ column }}</label>
       <select cSelect class="dropdown-input-full" [formControlName]="getDropdownFieldName(null, column)">
-        <option *ngFor="let option of options" [value]="option.value">
+        <option *ngFor="let option of getOptionsForLabel(null)" [value]="option.value">
           {{ option.label }}
         </option>
       </select>

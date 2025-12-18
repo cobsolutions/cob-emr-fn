@@ -10,7 +10,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
-  @Input() measurementOptions: any[] = [];
+  @Input() measurementOptions: any[] = []; // Default measurement options for all selects
+  @Input() applyToAllMeasurementOptions?: any[]; // Options for Apply to All dropdown (defaults to measurementOptions)
+  @Input() specialMeasurementOptions?: { [labelName: string]: any[] }; // Override measurement options for specific labels
   @Input() endfeelOptions: any[] = [];
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
@@ -64,6 +66,25 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
    */
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
+  }
+
+  /**
+   * Get measurement options for Apply to All dropdown
+   * Returns applyToAllMeasurementOptions if provided, otherwise falls back to measurementOptions
+   */
+  getApplyToAllMeasurementOptions(): any[] {
+    return this.applyToAllMeasurementOptions || this.measurementOptions;
+  }
+
+  /**
+   * Get measurement options for a specific label
+   * Returns specialMeasurementOptions[label] if provided, otherwise falls back to measurementOptions
+   */
+  getMeasurementOptionsForLabel(label: string): any[] {
+    if (this.specialMeasurementOptions && this.specialMeasurementOptions[label]) {
+      return this.specialMeasurementOptions[label];
+    }
+    return this.measurementOptions;
   }
 
   /**

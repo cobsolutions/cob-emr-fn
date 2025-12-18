@@ -9,7 +9,8 @@ import { TopSelect } from '../../range-of-motion/config';
 })
 export class MeasurementTableWithSelectsComponent {
   @Input() labels: string[] = []; // Row labels like ['Flexion', 'Extension']
-  @Input() options: any[] = []; // Options for table dropdowns
+  @Input() options: any[] = []; // Default options for all measurement selects
+  @Input() specialOptions?: { [labelName: string]: any[] }; // Override options for specific labels
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
   @Input() topSelects: TopSelect[] = []; // Multiple selects at the top
@@ -31,5 +32,16 @@ export class MeasurementTableWithSelectsComponent {
    */
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
+  }
+
+  /**
+   * Get options for a specific label
+   * Returns specialOptions[label] if provided, otherwise falls back to options
+   */
+  getOptionsForLabel(label: string): any[] {
+    if (this.specialOptions && this.specialOptions[label]) {
+      return this.specialOptions[label];
+    }
+    return this.options;
   }
 }

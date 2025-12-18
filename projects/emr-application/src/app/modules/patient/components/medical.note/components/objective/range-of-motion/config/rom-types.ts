@@ -17,7 +17,9 @@ export interface RomSectionConfig {
 
 export interface RomSectionEndfeelConfig {
   labels: string[];
-  measurementOptions: RomOption[];
+  measurementOptions: RomOption[]; // Default measurement options for all selects
+  applyToAllMeasurementOptions?: RomOption[]; // Options for Apply to All dropdown (defaults to measurementOptions if not provided)
+  specialMeasurementOptions?: { [labelName: string]: RomOption[] }; // Override measurement options for specific labels
   endfeelOptions: RomOption[];
   fieldPrefix: string;
   applyToAllFieldName: string;
@@ -29,7 +31,8 @@ export interface RomSectionEndfeelConfig {
 export interface RomSectionDropdownTextConfig {
   columns: string[];
   labels: string[];
-  options: RomOption[];
+  options: RomOption[]; // Default options for all dropdowns
+  specialOptions?: { [labelName: string]: RomOption[] }; // Override options for specific labels
   fieldPrefix: string;
   commentsFieldName: string;
   showComments?: boolean;
@@ -43,7 +46,8 @@ export interface TopSelect {
 
 export interface RomSectionWithSelectsConfig {
   labels: string[];
-  options: RomOption[];
+  options: RomOption[]; // Default options for all measurement selects
+  specialOptions?: { [labelName: string]: RomOption[] }; // Override options for specific labels
   fieldPrefix: string;
   topSelects: TopSelect[];
   commentsFieldName: string;
