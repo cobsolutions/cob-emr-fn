@@ -1,0 +1,40 @@
+<div [formGroup]="formGroup">
+  <!-- Apply to All -->
+  <div *ngIf="showApplyToAll" class="apply-to-all-row">
+    <label class="field-label">{{ applyToAllLabel }}</label>
+    <select
+      cSelect
+      class="select-input"
+      [formControlName]="getApplyToAllFieldName()">
+      <option value=""></option>
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Single Column Fields -->
+  <div *ngFor="let label of labels" class="field-row">
+    <label class="field-label">{{ label }}</label>
+    <select
+      cSelect
+      class="select-input"
+      [formControlName]="getFieldName(label)">
+      <option value=""></option>
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" class="comments-section">
+    <label class="field-label">{{ commentsLabel }}</label>
+    <textarea
+      cFormControl
+      class="form-textarea"
+      rows="3"
+      [formControlName]="getCommentsFieldName()">
+    </textarea>
+  </div>
+</div>

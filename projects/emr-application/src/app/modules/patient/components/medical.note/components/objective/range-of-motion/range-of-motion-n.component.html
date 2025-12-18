@@ -4036,6 +4036,32 @@
   </div>
 
   <div class="form-row">
+    <label class="field-label">Cervical AROM (Dummy - Single Column)</label>
+    <div class="radio-group">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="cervical_arom_single_column_dummy" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cervical_arom_single_column_dummy" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCervicalAromSingleColumnFields" class="dependent-field-box">
+    <single-column-table
+      [labels]="romConfig.cervicalArom.labels"
+      [options]="romConfig.cervicalArom.options"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
+      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll"
+      [showComments]="romConfig.cervicalArom.showComments">
+    </single-column-table>
+  </div>
+
+  <div class="form-row">
     <label class="field-label">Additional Comments</label>
     <div class="radio-group">
       <c-form-check class="me-3">

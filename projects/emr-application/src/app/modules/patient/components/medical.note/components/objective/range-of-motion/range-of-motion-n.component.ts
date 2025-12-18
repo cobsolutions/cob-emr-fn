@@ -53,6 +53,7 @@ export class RangeOfMotionNComponent implements OnInit {
   showShoulderAromWithLabelsFields: boolean = false;
   showGripTestNoLabelsFields: boolean = false;
   showElbowAromWithSelectsFields: boolean = false;
+  showCervicalAromSingleColumnFields: boolean = false;
 
   // Dropdown options
   cervicalRomOptions = [
@@ -155,6 +156,7 @@ export class RangeOfMotionNComponent implements OnInit {
       prom_feet: [false],
       prom_comments: [''],
       cervical_arrom: ['no'],
+      cervical_arom_apply_to_all: [''], // For common component
       cervical_forward_bending: ['not_tested'],
       cervical_backward_bending: ['not_tested'],
       cervical_right_rotation: ['not_tested'],
@@ -162,6 +164,14 @@ export class RangeOfMotionNComponent implements OnInit {
       cervical_right_side_bending: ['not_tested'],
       cervical_left_side_bending: ['not_tested'],
       cervical_comments: [''],
+      // For common component with cervical_arom_ prefix
+      cervical_arom_forward_bending: ['not_tested'],
+      cervical_arom_backward_bending: ['not_tested'],
+      cervical_arom_right_rotation: ['not_tested'],
+      cervical_arom_left_rotation: ['not_tested'],
+      cervical_arom_right_side_bending: ['not_tested'],
+      cervical_arom_left_side_bending: ['not_tested'],
+      cervical_arom_comments: [''],
       costovertebral_expansion: ['no'],
       costovertebral_apply_to_all: [''],
       costovertebral_t4: ['not_tested'],
@@ -839,6 +849,9 @@ export class RangeOfMotionNComponent implements OnInit {
       elbow_arom_pronation_right: ['not_tested'],
       elbow_arom_pronation_left: ['not_tested'],
       elbow_arom_comments: [''],
+
+      // Dummy Example: Cervical AROM Single Column
+      cervical_arom_single_column_dummy: ['no'],
 
       additional_comments: ['no']
     });
@@ -2056,6 +2069,11 @@ export class RangeOfMotionNComponent implements OnInit {
     // Dummy Example: Elbow AROM with Top Selects
     this.romForm.get('elbow_arom_with_selects')?.valueChanges.subscribe(value => {
       this.showElbowAromWithSelectsFields = value === 'yes';
+    });
+
+    // Dummy Example: Cervical AROM Single Column
+    this.romForm.get('cervical_arom_single_column_dummy')?.valueChanges.subscribe(value => {
+      this.showCervicalAromSingleColumnFields = value === 'yes';
     });
 
     this.romForm.get('additional_comments')?.valueChanges.subscribe(value => {

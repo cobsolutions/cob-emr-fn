@@ -8,11 +8,13 @@ export * from './rom-options';
 export * from './lower-extremity-config';
 export * from './upper-extremity-config';
 export * from './special-tests-config';
+export * from './spine-config';
 
 // Combined config class for backward compatibility
 import { LowerExtremityConfig } from './lower-extremity-config';
 import { UpperExtremityConfig } from './upper-extremity-config';
 import { SpecialTestsConfig } from './special-tests-config';
+import { SpineConfig } from './spine-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -31,4 +33,7 @@ export class RomSectionsConfig {
 
   // Special Tests
   static readonly gripTestNoLabels = SpecialTestsConfig.gripTestNoLabels;
+
+  // Spine
+  static readonly cervicalArom = SpineConfig.cervicalArom;
 }
