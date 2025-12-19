@@ -33,6 +33,7 @@ import { FstIPAROM } from './fst-ip-arom-config';
 import { ShoulderPROM } from './shoulder-prom-config';
 import { ElbowPROM } from './elbow-prom-config';
 import { WristPROM } from './wrist-prom-config';
+import { ToePROM } from './toe-prom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -41,9 +42,6 @@ export class RomSectionsConfig {
   static readonly ankleProm = LowerExtremityConfig.ankleProm;
   static readonly firstMtpArom = LowerExtremityConfig.firstMtpArom;
   static readonly firstIpArom = LowerExtremityConfig.firstIpArom;
-
-  // duplicated static readonly toeArom = LowerExtremityConfig.toeArom;
-  static readonly toeProm = LowerExtremityConfig.toeProm;
 
   // Upper Extremity
   static readonly shoulderAromWithLabels = UpperExtremityConfig.shoulderAromWithLabels;
@@ -104,4 +102,8 @@ export class RomSectionsConfig {
 
   //Wrist PROM
   static readonly wristProm= WristPROM.wristProm
+
+  
+  //Toe PROM
+  static readonly toeProm= ToePROM.toeProm
 }
