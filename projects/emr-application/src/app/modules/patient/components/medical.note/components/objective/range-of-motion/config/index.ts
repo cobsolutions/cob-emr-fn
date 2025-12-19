@@ -25,6 +25,7 @@ import { ShoulderAROM } from './shoulder-arom-config';
 import { ElbowAROM } from './elbow-arom-config';
 import { WristAROM } from './wrist-arom-config';
 import { HipAromConfig } from './hip-arom-config';
+import { ToeAROM } from './toe-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -35,7 +36,8 @@ export class RomSectionsConfig {
   static readonly ankleProm = LowerExtremityConfig.ankleProm;
   static readonly firstMtpArom = LowerExtremityConfig.firstMtpArom;
   static readonly firstIpArom = LowerExtremityConfig.firstIpArom;
-  static readonly toeArom = LowerExtremityConfig.toeArom;
+
+  // duplicated static readonly toeArom = LowerExtremityConfig.toeArom;
   static readonly toeProm = LowerExtremityConfig.toeProm;
 
   // Upper Extremity
@@ -73,4 +75,7 @@ export class RomSectionsConfig {
 
   //Hip AROM
   static readonly hipArom = HipAromConfig.hipArom;
+
+  //Toe AROM
+  static readonly toeArom = ToeAROM.toeArom;
 }
