@@ -104,18 +104,14 @@
   </div>
 
   <div *ngIf="showCervicalAromFields" class="dependent-field-box">
-    <single-column-table
-    [labels]="romConfig.cervicalArom.labels"
-    [options]="romConfig.cervicalArom.options"
-    [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
-    [specialOptions]="romConfig.cervicalArom.specialOptions"
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
-    [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
-    [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
-    [showApplyToAll]="romConfig.cervicalArom.showApplyToAll"
-    [showComments]="romConfig.cervicalArom.showComments">
-  </single-column-table>    
+    <single-column-table [labels]="romConfig.cervicalArom.labels" [options]="romConfig.cervicalArom.options"
+      [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
+      [specialOptions]="romConfig.cervicalArom.specialOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
+      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll" [showComments]="romConfig.cervicalArom.showComments">
+    </single-column-table>
   </div>
   <div class="form-row">
     <label class="field-label">Costovertebral Expansion</label>
@@ -131,10 +127,8 @@
     </div>
   </div>
   <div *ngIf="showCostovertebralExpansionFields" class="dependent-field-box">
-    <single-column-table
-      [labels]="romConfig.costovertebralExpansion.labels"
-      [options]="romConfig.costovertebralExpansion.options"
-      [formGroup]="romForm"
+    <single-column-table [labels]="romConfig.costovertebralExpansion.labels"
+      [options]="romConfig.costovertebralExpansion.options" [formGroup]="romForm"
       [fieldPrefix]="romConfig.costovertebralExpansion.fieldPrefix"
       [applyToAllFieldName]="romConfig.costovertebralExpansion.applyToAllFieldName"
       [commentsFieldName]="romConfig.costovertebralExpansion.commentsFieldName"
@@ -156,18 +150,14 @@
     </div>
   </div>
   <div *ngIf="showShoulderAromFields" class="dependent-field-box">
-    <measurement-table
-    [labels]="romConfig.shoulderArom.labels"
-    [options]="romConfig.shoulderArom.options"
-    [specialOptions]="romConfig.shoulderArom.specialOptions"
-    [applyToAllOptions]="romConfig.shoulderArom.applyToAllOptions"
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.shoulderArom.fieldPrefix"
-    [applyToAllFieldName]="romConfig.shoulderArom.applyToAllFieldName"
-    [commentsFieldName]="romConfig.shoulderArom.commentsFieldName"
-    [showApplyToAll]="romConfig.shoulderArom.showApplyToAll"
-    [showComments]="romConfig.shoulderArom.showComments">
-  </measurement-table>
+    <measurement-table [labels]="romConfig.shoulderArom.labels" [options]="romConfig.shoulderArom.options"
+      [specialOptions]="romConfig.shoulderArom.specialOptions"
+      [applyToAllOptions]="romConfig.shoulderArom.applyToAllOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.shoulderArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.shoulderArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.shoulderArom.commentsFieldName"
+      [showApplyToAll]="romConfig.shoulderArom.showApplyToAll" [showComments]="romConfig.shoulderArom.showComments">
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Shoulder PROM</label>
@@ -183,18 +173,15 @@
     </div>
   </div>
   <div *ngIf="showShoulderPromFields" class="dependent-field-box">
-    <measurement-endfeel-table
-      [labels]="romConfig.shoulderProm.labels"
+    <measurement-endfeel-table [labels]="romConfig.shoulderProm.labels"
       [measurementOptions]="romConfig.shoulderProm.measurementOptions"
       [applyToAllMeasurementOptions]="romConfig.shoulderProm.applyToAllMeasurementOptions"
       [specialMeasurementOptions]="romConfig.shoulderProm.specialMeasurementOptions"
-      [endfeelOptions]="romConfig.shoulderProm.endfeelOptions"
-      [formGroup]="romForm"
+      [endfeelOptions]="romConfig.shoulderProm.endfeelOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.shoulderProm.fieldPrefix"
       [applyToAllFieldName]="romConfig.shoulderProm.applyToAllFieldName"
       [commentsFieldName]="romConfig.shoulderProm.commentsFieldName"
-      [showApplyToAll]="romConfig.shoulderProm.showApplyToAll"
-      [showComments]="romConfig.shoulderProm.showComments">
+      [showApplyToAll]="romConfig.shoulderProm.showApplyToAll" [showComments]="romConfig.shoulderProm.showComments">
     </measurement-endfeel-table>
   </div>
   <div class="form-row">
@@ -211,16 +198,11 @@
     </div>
   </div>
   <div *ngIf="showElbowAromFields" class="dependent-field-box">
-      <measurement-table
-      [labels]="romConfig.elbowArom.labels"
-      [options]="romConfig.elbowArom.options"
-      [specialOptions]="romConfig.elbowArom.specialOptions"
-      [applyToAllOptions]="romConfig.elbowArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.elbowArom.fieldPrefix"
+    <measurement-table [labels]="romConfig.elbowArom.labels" [options]="romConfig.elbowArom.options"
+      [specialOptions]="romConfig.elbowArom.specialOptions" [applyToAllOptions]="romConfig.elbowArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.elbowArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.elbowArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.elbowArom.commentsFieldName"
-      [showApplyToAll]="romConfig.elbowArom.showApplyToAll"
+      [commentsFieldName]="romConfig.elbowArom.commentsFieldName" [showApplyToAll]="romConfig.elbowArom.showApplyToAll"
       [showComments]="romConfig.elbowArom.showComments">
     </measurement-table>
   </div>
@@ -238,98 +220,18 @@
     </div>
   </div>
   <div *ngIf="showElbowPromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="elbow_prom_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Extension (Right)</label>
-      <select cSelect formControlName="elbow_prom_extension_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_extension_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Extension (Left)</label>
-      <select cSelect formControlName="elbow_prom_extension_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_extension_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Flexion (Right)</label>
-      <select cSelect formControlName="elbow_prom_flexion_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_flexion_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Flexion (Left)</label>
-      <select cSelect formControlName="elbow_prom_flexion_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_flexion_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Supination (Right)</label>
-      <select cSelect formControlName="elbow_prom_supination_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_supination_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Supination (Left)</label>
-      <select cSelect formControlName="elbow_prom_supination_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_supination_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="field-label">Pronation (Right)</label>
-      <select cSelect formControlName="elbow_prom_pronation_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_pronation_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Pronation (Left)</label>
-      <select cSelect formControlName="elbow_prom_pronation_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="elbow_prom_pronation_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
+    <measurement-endfeel-table [labels]="romConfig.elbowProm.labels"
+    [measurementOptions]="romConfig.elbowProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.elbowProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.elbowProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.elbowProm.endfeelOptions" 
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.elbowProm.fieldPrefix"
+    [applyToAllFieldName]="romConfig.elbowProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.elbowProm.commentsFieldName"
+    [showApplyToAll]="romConfig.elbowProm.showApplyToAll" 
+    [showComments]="romConfig.elbowProm.showComments">
+  </measurement-endfeel-table>
   </div>
   <div class="form-row">
     <label class="field-label">Wrist AROM</label>
@@ -345,16 +247,11 @@
     </div>
   </div>
   <div *ngIf="showWristAromFields" class="dependent-field-box">
-      <measurement-table
-      [labels]="romConfig.wristArom.labels"
-      [options]="romConfig.wristArom.options"
-      [specialOptions]="romConfig.wristArom.specialOptions"
-      [applyToAllOptions]="romConfig.wristArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.wristArom.fieldPrefix"
+    <measurement-table [labels]="romConfig.wristArom.labels" [options]="romConfig.wristArom.options"
+      [specialOptions]="romConfig.wristArom.specialOptions" [applyToAllOptions]="romConfig.wristArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.wristArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.wristArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.wristArom.commentsFieldName"
-      [showApplyToAll]="romConfig.wristArom.showApplyToAll"
+      [commentsFieldName]="romConfig.wristArom.commentsFieldName" [showApplyToAll]="romConfig.wristArom.showApplyToAll"
       [showComments]="romConfig.wristArom.showComments">
     </measurement-table>
 
@@ -1857,19 +1754,17 @@
     </div>
   </div>
   <div *ngIf="showThoracicAromSittingWithPassiveOverpressureFields" class="dependent-field-box">
-    <single-column-table
-      [labels]="romConfig.thoracicAromSitting.labels"
-      [options]="romConfig.thoracicAromSitting.options"
-      [formGroup]="romForm"
+    <single-column-table [labels]="romConfig.thoracicAromSitting.labels"
+      [options]="romConfig.thoracicAromSitting.options" [formGroup]="romForm"
       [fieldPrefix]="romConfig.thoracicAromSitting.fieldPrefix"
       [applyToAllFieldName]="romConfig.thoracicAromSitting.applyToAllFieldName"
       [commentsFieldName]="romConfig.thoracicAromSitting.commentsFieldName"
       [showApplyToAll]="romConfig.thoracicAromSitting.showApplyToAll"
       [showComments]="romConfig.thoracicAromSitting.showComments">
     </single-column-table>
-	
-	
-	
+
+
+
   </div>
   <div class="form-row">
     <label class="field-label">Thoracic AROM Standing</label>
@@ -1885,10 +1780,8 @@
     </div>
   </div>
   <div *ngIf="showThoracicAromStandingFields" class="dependent-field-box">
-    <single-column-table
-      [labels]="romConfig.thoracicAromStanding.labels"
-      [options]="romConfig.thoracicAromStanding.options"
-      [formGroup]="romForm"
+    <single-column-table [labels]="romConfig.thoracicAromStanding.labels"
+      [options]="romConfig.thoracicAromStanding.options" [formGroup]="romForm"
       [fieldPrefix]="romConfig.thoracicAromStanding.fieldPrefix"
       [applyToAllFieldName]="romConfig.thoracicAromStanding.applyToAllFieldName"
       [commentsFieldName]="romConfig.thoracicAromStanding.commentsFieldName"
@@ -1911,16 +1804,12 @@
     </div>
   </div>
   <div *ngIf="showLumbarAromFields" class="dependent-field-box">
-    <single-column-table
-    [labels]="romConfig.lumbarArom.labels"
-    [options]="romConfig.lumbarArom.options"
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.lumbarArom.fieldPrefix"
-    [applyToAllFieldName]="romConfig.lumbarArom.applyToAllFieldName"
-    [commentsFieldName]="romConfig.lumbarArom.commentsFieldName"
-    [showApplyToAll]="romConfig.lumbarArom.showApplyToAll"
-    [showComments]="romConfig.lumbarArom.showComments">
-  </single-column-table>
+    <single-column-table [labels]="romConfig.lumbarArom.labels" [options]="romConfig.lumbarArom.options"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.lumbarArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.lumbarArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.lumbarArom.commentsFieldName"
+      [showApplyToAll]="romConfig.lumbarArom.showApplyToAll" [showComments]="romConfig.lumbarArom.showComments">
+    </single-column-table>
 
   </div>
   <div class="form-row">
@@ -1937,18 +1826,13 @@
     </div>
   </div>
   <div *ngIf="showHipAromFields" class="dependent-field-box">
-    <measurement-table
-    [labels]="romConfig.hipArom.labels"
-    [options]="romConfig.hipArom.options"
-    [specialOptions]="romConfig.hipArom.specialOptions"
-    [applyToAllOptions]="romConfig.hipArom.applyToAllOptions"
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.hipArom.fieldPrefix"
-    [applyToAllFieldName]="romConfig.hipArom.applyToAllFieldName"
-    [commentsFieldName]="romConfig.hipArom.commentsFieldName"
-    [showApplyToAll]="romConfig.hipArom.showApplyToAll"
-    [showComments]="romConfig.hipArom.showComments">
-  </measurement-table>
+    <measurement-table [labels]="romConfig.hipArom.labels" [options]="romConfig.hipArom.options"
+      [specialOptions]="romConfig.hipArom.specialOptions" [applyToAllOptions]="romConfig.hipArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.hipArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.hipArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.hipArom.commentsFieldName" [showApplyToAll]="romConfig.hipArom.showApplyToAll"
+      [showComments]="romConfig.hipArom.showComments">
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Hip PROM</label>
@@ -1964,17 +1848,13 @@
     </div>
   </div>
   <div *ngIf="showHipPromFields" class="dependent-field-box">
-    <measurement-endfeel-table
-      [labels]="romConfig.hipProm.labels"
+    <measurement-endfeel-table [labels]="romConfig.hipProm.labels"
       [measurementOptions]="romConfig.hipProm.measurementOptions"
       [applyToAllMeasurementOptions]="romConfig.hipProm.applyToAllMeasurementOptions"
       [specialMeasurementOptions]="romConfig.hipProm.specialMeasurementOptions"
-      [endfeelOptions]="romConfig.hipProm.endfeelOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.hipProm.fieldPrefix"
-      [applyToAllFieldName]="romConfig.hipProm.applyToAllFieldName"
-      [commentsFieldName]="romConfig.hipProm.commentsFieldName"
-      [showApplyToAll]="romConfig.hipProm.showApplyToAll"
+      [endfeelOptions]="romConfig.hipProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.hipProm.fieldPrefix" [applyToAllFieldName]="romConfig.hipProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.hipProm.commentsFieldName" [showApplyToAll]="romConfig.hipProm.showApplyToAll"
       [showComments]="romConfig.hipProm.showComments">
     </measurement-endfeel-table>
   </div>
@@ -1992,16 +1872,11 @@
     </div>
   </div>
   <div *ngIf="showKneeAromFields" class="dependent-field-box">
-    <measurement-table
-      [labels]="romConfig.kneeArom.labels"
-      [options]="romConfig.kneeArom.options"
-      [specialOptions]="romConfig.kneeArom.specialOptions"
-      [applyToAllOptions]="romConfig.kneeArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.kneeArom.fieldPrefix"
+    <measurement-table [labels]="romConfig.kneeArom.labels" [options]="romConfig.kneeArom.options"
+      [specialOptions]="romConfig.kneeArom.specialOptions" [applyToAllOptions]="romConfig.kneeArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.kneeArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.kneeArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.kneeArom.commentsFieldName"
-      [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
+      [commentsFieldName]="romConfig.kneeArom.commentsFieldName" [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
       [showComments]="romConfig.kneeArom.showComments">
     </measurement-table>
   </div>
@@ -2034,16 +1909,11 @@
     </div>
   </div>
   <div *ngIf="showAnkleAromFields" class="dependent-field-box">
-    <measurement-table
-      [labels]="romConfig.ankleArom.labels"
-      [options]="romConfig.ankleArom.options"
-      [specialOptions]="romConfig.ankleArom.specialOptions"
-      [applyToAllOptions]="romConfig.ankleArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.ankleArom.fieldPrefix"
+    <measurement-table [labels]="romConfig.ankleArom.labels" [options]="romConfig.ankleArom.options"
+      [specialOptions]="romConfig.ankleArom.specialOptions" [applyToAllOptions]="romConfig.ankleArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.ankleArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.ankleArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.ankleArom.commentsFieldName"
-      [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
+      [commentsFieldName]="romConfig.ankleArom.commentsFieldName" [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
       [showComments]="romConfig.ankleArom.showComments">
     </measurement-table>
   </div>
@@ -2255,10 +2125,7 @@
 
     <div style="margin-top: 1rem;">
       <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">Comments</label>
-      <textarea
-        class="form-textarea"
-        formControlName="ankle_prom_comments"
-        rows="3"
+      <textarea class="form-textarea" formControlName="ankle_prom_comments" rows="3"
         placeholder="Enter any comments...">
       </textarea>
     </div>
@@ -2277,17 +2144,12 @@
     </div>
   </div>
   <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
-    <measurement-table
-      [labels]="romConfig.fstMTPArom.labels"
-      [options]="romConfig.fstMTPArom.options"
+    <measurement-table [labels]="romConfig.fstMTPArom.labels" [options]="romConfig.fstMTPArom.options"
       [specialOptions]="romConfig.fstMTPArom.specialOptions"
-      [applyToAllOptions]="romConfig.fstMTPArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.fstMTPArom.fieldPrefix"
-      [applyToAllFieldName]="romConfig.fstMTPArom.applyToAllFieldName"
+      [applyToAllOptions]="romConfig.fstMTPArom.applyToAllOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.fstMTPArom.fieldPrefix" [applyToAllFieldName]="romConfig.fstMTPArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.fstMTPArom.commentsFieldName"
-      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll"
-      [showComments]="romConfig.fstMTPArom.showComments">
+      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll" [showComments]="romConfig.fstMTPArom.showComments">
     </measurement-table>
   </div>
 
@@ -2320,16 +2182,11 @@
     </div>
   </div>
   <div *ngIf="show1stIpAromFields" class="dependent-field-box">
-    <measurement-table
-      [labels]="romConfig.fstipArom.labels"
-      [options]="romConfig.fstipArom.options"
-      [specialOptions]="romConfig.fstipArom.specialOptions"
-      [applyToAllOptions]="romConfig.fstipArom.applyToAllOptions"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.fstipArom.fieldPrefix"
+    <measurement-table [labels]="romConfig.fstipArom.labels" [options]="romConfig.fstipArom.options"
+      [specialOptions]="romConfig.fstipArom.specialOptions" [applyToAllOptions]="romConfig.fstipArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.fstipArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.fstipArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.fstipArom.commentsFieldName"
-      [showApplyToAll]="romConfig.fstipArom.showApplyToAll"
+      [commentsFieldName]="romConfig.fstipArom.commentsFieldName" [showApplyToAll]="romConfig.fstipArom.showApplyToAll"
       [showComments]="romConfig.fstipArom.showComments">
     </measurement-table>
   </div>
@@ -2362,19 +2219,14 @@
     </div>
   </div>
   <div *ngIf="showToeAromFields" class="dependent-field-box">
-	
-    <measurement-table
-    [labels]="romConfig.toeArom.labels"
-    [options]="romConfig.toeArom.options"
-    [specialOptions]="romConfig.toeArom.specialOptions"
-    [applyToAllOptions]="romConfig.toeArom.applyToAllOptions"
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.toeArom.fieldPrefix"
-    [applyToAllFieldName]="romConfig.toeArom.applyToAllFieldName"
-    [commentsFieldName]="romConfig.toeArom.commentsFieldName"
-    [showApplyToAll]="romConfig.toeArom.showApplyToAll"
-    [showComments]="romConfig.toeArom.showComments">
-  </measurement-table>
+
+    <measurement-table [labels]="romConfig.toeArom.labels" [options]="romConfig.toeArom.options"
+      [specialOptions]="romConfig.toeArom.specialOptions" [applyToAllOptions]="romConfig.toeArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.toeArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.toeArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.toeArom.commentsFieldName" [showApplyToAll]="romConfig.toeArom.showApplyToAll"
+      [showComments]="romConfig.toeArom.showComments">
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Toe PROM</label>
@@ -2857,12 +2709,9 @@
     </div>
   </div>
   <div *ngIf="showShoulderAromWithLabelsFields" class="dependent-field-box">
-    <dropdown-text-table
-      [columns]="romConfig.shoulderAromWithLabels.columns"
-      [labels]="romConfig.shoulderAromWithLabels.labels"
-      [options]="romConfig.shoulderAromWithLabels.options"
-      [formGroup]="romForm"
-      [fieldPrefix]="romConfig.shoulderAromWithLabels.fieldPrefix"
+    <dropdown-text-table [columns]="romConfig.shoulderAromWithLabels.columns"
+      [labels]="romConfig.shoulderAromWithLabels.labels" [options]="romConfig.shoulderAromWithLabels.options"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.shoulderAromWithLabels.fieldPrefix"
       [commentsFieldName]="romConfig.shoulderAromWithLabels.commentsFieldName"
       [showComments]="romConfig.shoulderAromWithLabels.showComments">
     </dropdown-text-table>
@@ -2883,11 +2732,8 @@
     </div>
   </div>
   <div *ngIf="showGripTestNoLabelsFields" class="dependent-field-box">
-    <dropdown-text-table
-      [columns]="romConfig.gripTestNoLabels.columns"
-      [labels]="romConfig.gripTestNoLabels.labels"
-      [options]="romConfig.gripTestNoLabels.options"
-      [formGroup]="romForm"
+    <dropdown-text-table [columns]="romConfig.gripTestNoLabels.columns" [labels]="romConfig.gripTestNoLabels.labels"
+      [options]="romConfig.gripTestNoLabels.options" [formGroup]="romForm"
       [fieldPrefix]="romConfig.gripTestNoLabels.fieldPrefix"
       [commentsFieldName]="romConfig.gripTestNoLabels.commentsFieldName"
       [showComments]="romConfig.gripTestNoLabels.showComments">
@@ -2909,10 +2755,8 @@
     </div>
   </div>
   <div *ngIf="showElbowAromWithSelectsFields" class="dependent-field-box">
-    <measurement-table-with-selects
-      [labels]="romConfig.elbowAromWithSelects.labels"
-      [options]="romConfig.elbowAromWithSelects.options"
-      [formGroup]="romForm"
+    <measurement-table-with-selects [labels]="romConfig.elbowAromWithSelects.labels"
+      [options]="romConfig.elbowAromWithSelects.options" [formGroup]="romForm"
       [fieldPrefix]="romConfig.elbowAromWithSelects.fieldPrefix"
       [topSelects]="romConfig.elbowAromWithSelects.topSelects"
       [commentsFieldName]="romConfig.elbowAromWithSelects.commentsFieldName"
@@ -2934,17 +2778,13 @@
     </div>
   </div>
   <div *ngIf="showCervicalAromSingleColumnFields" class="dependent-field-box">
-    <single-column-table
-      [labels]="romConfig.cervicalArom.labels"
-      [options]="romConfig.cervicalArom.options"
+    <single-column-table [labels]="romConfig.cervicalArom.labels" [options]="romConfig.cervicalArom.options"
       [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
-      [specialOptions]="romConfig.cervicalArom.specialOptions"
-      [formGroup]="romForm"
+      [specialOptions]="romConfig.cervicalArom.specialOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
-      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll"
-      [showComments]="romConfig.cervicalArom.showComments">
+      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll" [showComments]="romConfig.cervicalArom.showComments">
     </single-column-table>
   </div>
 

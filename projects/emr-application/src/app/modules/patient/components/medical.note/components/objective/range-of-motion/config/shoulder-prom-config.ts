@@ -1,4 +1,4 @@
-import { DEFAULT_APPLY_TO_ALL_OPTIONS, SHOULDER_PROM_120_OPTION, SHOULDER_PROM_180_OPTION, SHOULDER_PROM_80_OPTION, SHOULDER_PROM_90_OPTION, SHOULDER_PROM_ENDFEEL_OPTION } from "./rom-options";
+import { DEFAULT_APPLY_TO_ALL_OPTIONS, ENDFEEL_OPTION, SHOULDER_PROM_120_OPTION, SHOULDER_PROM_180_OPTION, SHOULDER_PROM_80_OPTION, SHOULDER_PROM_90_OPTION } from "./rom-options";
 import { RomSectionConfig, RomSectionEndfeelConfig } from "./rom-types";
 
 export class ShoulderPROM {
@@ -40,6 +40,6 @@ export class ShoulderPROM {
         commentsFieldName: 'shoulderProm_comments',
         showApplyToAll: true,
         showComments: false,
-        endfeelOptions: SHOULDER_PROM_ENDFEEL_OPTION
+        endfeelOptions: ENDFEEL_OPTION
     };
 }

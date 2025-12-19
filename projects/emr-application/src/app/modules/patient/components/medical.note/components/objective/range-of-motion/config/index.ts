@@ -31,6 +31,7 @@ import { AnkleAROM } from './ankle-arom-config';
 import { FstMTPArom } from './fst-mtp-arom-config';
 import { FstIPAROM } from './fst-ip-arom-config';
 import { ShoulderPROM } from './shoulder-prom-config';
+import { ElbowPROM } from './elbow-prom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -96,4 +97,7 @@ export class RomSectionsConfig {
 
   //Shoulder PROM
   static readonly shoulderProm= ShoulderPROM.shoulderProm
+
+  //Elbow PROM
+  static readonly elbowProm= ElbowPROM.elbowProm
 }
