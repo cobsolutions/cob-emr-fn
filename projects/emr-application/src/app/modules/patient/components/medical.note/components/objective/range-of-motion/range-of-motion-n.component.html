@@ -2587,14 +2587,16 @@
   </div>
   <div *ngIf="show1stIpAromFields" class="dependent-field-box">
     <measurement-table
-      [labels]="romConfig.firstIpArom.labels"
-      [options]="romConfig.firstIpArom.options"
+      [labels]="romConfig.fstipArom.labels"
+      [options]="romConfig.fstipArom.options"
+      [specialOptions]="romConfig.fstipArom.specialOptions"
+      [applyToAllOptions]="romConfig.fstipArom.applyToAllOptions"
       [formGroup]="romForm"
-      [fieldPrefix]="romConfig.firstIpArom.fieldPrefix"
-      [applyToAllFieldName]="romConfig.firstIpArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.firstIpArom.commentsFieldName"
-      [showApplyToAll]="romConfig.firstIpArom.showApplyToAll"
-      [showComments]="romConfig.firstIpArom.showComments">
+      [fieldPrefix]="romConfig.fstipArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.fstipArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstipArom.commentsFieldName"
+      [showApplyToAll]="romConfig.fstipArom.showApplyToAll"
+      [showComments]="romConfig.fstipArom.showComments">
     </measurement-table>
   </div>
   <div class="form-row">

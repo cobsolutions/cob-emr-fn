@@ -29,6 +29,7 @@ import { ToeAROM } from './toe-arom-config';
 import { KneeAROM } from './knee-arom-config';
 import { AnkleAROM } from './ankle-arom-config';
 import { FstMTPArom } from './fst-mtp-arom-config';
+import { FstIPAROM } from './fst-ip-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -88,4 +89,7 @@ export class RomSectionsConfig {
 
   //1st MTP AROM
   static readonly fstMTPArom = FstMTPArom.fstMTPArom;
+
+  //1st IP AROM
+  static readonly fstipArom = FstIPAROM.fstipArom;
 }
