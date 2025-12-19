@@ -22,6 +22,7 @@ import { ThoracicAROMSitting } from './thoracic-arom-sitting-config';
 import { ThoracicAROMStanding } from './thoracic-arom-standing-config';
 import { ShoulderAROM } from './shoulder-arom-config';
 import { ElbowAROM } from './elbow-arom-config';
+import { WristAROM } from './wrist-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -63,4 +64,7 @@ export class RomSectionsConfig {
 
   //Elbow AROM
   static readonly elbowArom = ElbowAROM.elbowArom;
+
+  //Wrist AROM
+  static readonly wristArom = WristAROM.wristArom;
 }
