@@ -2205,125 +2205,18 @@
     </div>
   </div>
   <div *ngIf="showHipAromFields" class="dependent-field-box">
-    <table class="walk-test-table">
-      <thead>
-        <tr>
-          <th style="width: 200px;"></th>
-          <th style="width: 250px;">Right</th>
-          <th style="width: 250px;">Left</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Flexion</td>
-          <td>
-            <select cSelect formControlName="hip_flexion_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_flexion_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Extension</td>
-          <td>
-            <select cSelect formControlName="hip_extension_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_extension_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Abduction</td>
-          <td>
-            <select cSelect formControlName="hip_abduction_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_abduction_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Adduction</td>
-          <td>
-            <select cSelect formControlName="hip_adduction_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_adduction_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Internal Rotation</td>
-          <td>
-            <select cSelect formControlName="hip_internal_rotation_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_internal_rotation_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>External Rotation</td>
-          <td>
-            <select cSelect formControlName="hip_external_rotation_right" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-          <td>
-            <select cSelect formControlName="hip_external_rotation_left" class="table-input">
-              <option *ngFor="let option of romTestOptions" [value]="option.value">
-                {{ option.label }}
-              </option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="form-row" style="margin-top: 1rem;">
-      <label class="field-label">Hip AROM Comments</label>
-      <textarea cFormControl formControlName="hip_arrom_comments" rows="3" class="form-textarea"
-        placeholder="Comments"></textarea>
-    </div>
+    <measurement-table
+    [labels]="romConfig.hipArom.labels"
+    [options]="romConfig.hipArom.options"
+    [specialOptions]="romConfig.hipArom.specialOptions"
+    [applyToAllOptions]="romConfig.hipArom.applyToAllOptions"
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.hipArom.fieldPrefix"
+    [applyToAllFieldName]="romConfig.hipArom.applyToAllFieldName"
+    [commentsFieldName]="romConfig.hipArom.commentsFieldName"
+    [showApplyToAll]="romConfig.hipArom.showApplyToAll"
+    [showComments]="romConfig.hipArom.showComments">
+  </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Hip PROM</label>

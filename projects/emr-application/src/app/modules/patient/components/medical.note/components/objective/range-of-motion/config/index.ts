@@ -9,6 +9,7 @@ export * from './lower-extremity-config';
 export * from './upper-extremity-config';
 export * from './special-tests-config';
 export * from './spine-config';
+export * from './hip-arom-config';
 
 // Combined config class for backward compatibility
 import { LowerExtremityConfig } from './lower-extremity-config';
@@ -23,9 +24,12 @@ import { ThoracicAROMStanding } from './thoracic-arom-standing-config';
 import { ShoulderAROM } from './shoulder-arom-config';
 import { ElbowAROM } from './elbow-arom-config';
 import { WristAROM } from './wrist-arom-config';
+import { HipAromConfig } from './hip-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
+  
+  static readonly hipProm = LowerExtremityConfig.hipProm;
   static readonly kneeArom = LowerExtremityConfig.kneeArom;
   static readonly ankleArom = LowerExtremityConfig.ankleArom;
   static readonly ankleProm = LowerExtremityConfig.ankleProm;
@@ -33,7 +37,6 @@ export class RomSectionsConfig {
   static readonly firstIpArom = LowerExtremityConfig.firstIpArom;
   static readonly toeArom = LowerExtremityConfig.toeArom;
   static readonly toeProm = LowerExtremityConfig.toeProm;
-  static readonly hipProm = LowerExtremityConfig.hipProm;
 
   // Upper Extremity
   static readonly shoulderAromWithLabels = UpperExtremityConfig.shoulderAromWithLabels;
@@ -67,4 +70,7 @@ export class RomSectionsConfig {
 
   //Wrist AROM
   static readonly wristArom = WristAROM.wristArom;
+
+  //Hip AROM
+  static readonly hipArom = HipAromConfig.hipArom;
 }
