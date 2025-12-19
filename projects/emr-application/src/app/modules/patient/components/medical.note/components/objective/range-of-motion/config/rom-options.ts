@@ -195,6 +195,7 @@ export const THORACIC_AROM_STANDING_OPTIONS: RomOption[] = [
   { value: '100', label: '100' }
 ]
 export const SHOULDER_AROM_OPTIONS: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
   { value: 'wnl', label: 'WNL' },
   { value: 'wfl', label: 'WFL' },
   { value: 'custom', label: 'Custom' },
