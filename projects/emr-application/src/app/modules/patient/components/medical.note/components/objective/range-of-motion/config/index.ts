@@ -27,12 +27,12 @@ import { WristAROM } from './wrist-arom-config';
 import { HipAromConfig } from './hip-arom-config';
 import { ToeAROM } from './toe-arom-config';
 import { KneeAROM } from './knee-arom-config';
+import { AnkleAROM } from './ankle-arom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
-  
+
   static readonly hipProm = LowerExtremityConfig.hipProm;
-  static readonly ankleArom = LowerExtremityConfig.ankleArom;
   static readonly ankleProm = LowerExtremityConfig.ankleProm;
   static readonly firstMtpArom = LowerExtremityConfig.firstMtpArom;
   static readonly firstIpArom = LowerExtremityConfig.firstIpArom;
@@ -81,4 +81,7 @@ export class RomSectionsConfig {
 
   //Knee AROM
   static readonly kneeArom = KneeAROM.kneeArom;
+
+  //ankle AROM
+  static readonly ankleArom = AnkleAROM.ankleArom;
 }
