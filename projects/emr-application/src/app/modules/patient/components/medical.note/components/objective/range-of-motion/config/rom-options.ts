@@ -1541,6 +1541,73 @@ export const TOE_PROM_40_OPTION: RomOption[] = [
   { value: '30 °', label: '30 °' },
   { value: '35 °', label: '35 °' },
   { value: '40 °', label: '40 °' }
-
 ]
 
+export const HIP_PROM_OPTION: RomOption[] = [
+
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'WNL', label: 'WNL' },
+  { value: 'WFL', label: 'WFL' },
+  { value: 'Custom', label: 'Custom' },
+  { value: '130 °', label: '130 °' },
+  { value: '125 °', label: '125 °' },
+  { value: '120 °', label: '120 °' },
+  { value: '115 °', label: '115 °' },
+  { value: '110 °', label: '110 °' },
+  { value: '105 °', label: '105 °' },
+  { value: '100 °', label: '100 °' },
+  { value: '95 °', label: '95 °' },
+  { value: '90 °', label: '90 °' },
+  { value: '85 °', label: '85 °' },
+  { value: '80 °', label: '80 °' },
+  { value: '60 °', label: '60 °' },
+  { value: '40 °', label: '40 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '0 °', label: '0 °' }
+]
+
+export const HIP_PROM_30_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'custom', label: 'Custom' },
+  { value: '(30) °', label: '(30) °' },
+  { value: '(25) °', label: '(25) °' },
+  { value: '(20) °', label: '(20) °' },
+  { value: '(15) °', label: '(15) °' },
+  { value: '(10) °', label: '(10) °' },
+  { value: '(5) °', label: '(5) °' },
+  { value: '0 °', label: '0 °' },
+  { value: '5 °', label: '5 °' },
+  { value: '10 °', label: '10 °' },
+  { value: '15 °', label: '15 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '25 °', label: '25 °' },
+  { value: '30 °', label: '30 °' }
+]
+
+export const HIP_PROM_90_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'custom', label: 'Custom' },
+  { value: '0 °', label: '0 °' },
+  { value: '5 °', label: '5 °' },
+  { value: '10 °', label: '10 °' },
+  { value: '15 °', label: '15 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '25 °', label: '25 °' },
+  { value: '30 °', label: '30 °' },
+  { value: '35 °', label: '35 °' },
+  { value: '40 °', label: '40 °' },
+  { value: '45 °', label: '45 °' },
+  { value: '50 °', label: '50 °' },
+  { value: '55 °', label: '55 °' },
+  { value: '60 °', label: '60 °' },
+  { value: '65 °', label: '65 °' },
+  { value: '70 °', label: '70 °' },
+  { value: '80 °', label: '80 °' },
+  { value: '85 °', label: '85 °' },
+  { value: '90 °', label: '90 °' }
+
+]

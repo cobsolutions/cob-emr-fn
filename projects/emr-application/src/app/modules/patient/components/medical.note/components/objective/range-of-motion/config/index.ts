@@ -34,15 +34,10 @@ import { ShoulderPROM } from './shoulder-prom-config';
 import { ElbowPROM } from './elbow-prom-config';
 import { WristPROM } from './wrist-prom-config';
 import { ToePROM } from './toe-prom-config';
+import { HipPROM } from './hip-prom-config';
 
 export class RomSectionsConfig {
-  // Lower Extremity
-
-  static readonly hipProm = LowerExtremityConfig.hipProm;
-  static readonly ankleProm = LowerExtremityConfig.ankleProm;
-  static readonly firstMtpArom = LowerExtremityConfig.firstMtpArom;
-  static readonly firstIpArom = LowerExtremityConfig.firstIpArom;
-
+  
   // Upper Extremity
   static readonly shoulderAromWithLabels = UpperExtremityConfig.shoulderAromWithLabels;
   static readonly elbowAromWithSelects = UpperExtremityConfig.elbowAromWithSelects;
@@ -101,9 +96,9 @@ export class RomSectionsConfig {
   static readonly elbowProm= ElbowPROM.elbowProm
 
   //Wrist PROM
-  static readonly wristProm= WristPROM.wristProm
-
-  
+  static readonly wristProm= WristPROM.wristProm  
   //Toe PROM
   static readonly toeProm= ToePROM.toeProm
+  //HiPProm
+  static readonly hipProm = HipPROM.hipProm;
 }
