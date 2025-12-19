@@ -2544,14 +2544,16 @@
   </div>
   <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
     <measurement-table
-      [labels]="romConfig.firstMtpArom.labels"
-      [options]="romConfig.firstMtpArom.options"
+      [labels]="romConfig.fstMTPArom.labels"
+      [options]="romConfig.fstMTPArom.options"
+      [specialOptions]="romConfig.fstMTPArom.specialOptions"
+      [applyToAllOptions]="romConfig.fstMTPArom.applyToAllOptions"
       [formGroup]="romForm"
-      [fieldPrefix]="romConfig.firstMtpArom.fieldPrefix"
-      [applyToAllFieldName]="romConfig.firstMtpArom.applyToAllFieldName"
-      [commentsFieldName]="romConfig.firstMtpArom.commentsFieldName"
-      [showApplyToAll]="romConfig.firstMtpArom.showApplyToAll"
-      [showComments]="romConfig.firstMtpArom.showComments">
+      [fieldPrefix]="romConfig.fstMTPArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.fstMTPArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstMTPArom.commentsFieldName"
+      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll"
+      [showComments]="romConfig.fstMTPArom.showComments">
     </measurement-table>
   </div>
 
