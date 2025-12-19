@@ -478,76 +478,17 @@
     </div>
   </div>
   <div *ngIf="showElbowAromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="elbow_arrom_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div class="measurement-header">
-      <div></div>
-      <div class="measurement-column">Right</div>
-      <div class="measurement-column">Left</div>
-    </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Extension</label>
-      <select cSelect formControlName="elbow_arrom_extension_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-      <select cSelect formControlName="elbow_arrom_extension_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Flexion</label>
-      <select cSelect formControlName="elbow_arrom_flexion_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-      <select cSelect formControlName="elbow_arrom_flexion_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Supination</label>
-      <select cSelect formControlName="elbow_arrom_supination_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-      <select cSelect formControlName="elbow_arrom_supination_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div class="measurement-row">
-      <label class="measurement-label">Pronation</label>
-      <select cSelect formControlName="elbow_arrom_pronation_right" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-      <select cSelect formControlName="elbow_arrom_pronation_left" class="measurement-input">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
+      <measurement-table
+      [labels]="romConfig.elbowArom.labels"
+      [options]="romConfig.elbowArom.options"
+      [specialOptions]="romConfig.elbowArom.specialOptions"
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.elbowArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.elbowArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.elbowArom.commentsFieldName"
+      [showApplyToAll]="romConfig.elbowArom.showApplyToAll"
+      [showComments]="romConfig.elbowArom.showComments">
+    </measurement-table>
   </div>
   <div class="form-row">
     <label class="field-label">Elbow PROM</label>
