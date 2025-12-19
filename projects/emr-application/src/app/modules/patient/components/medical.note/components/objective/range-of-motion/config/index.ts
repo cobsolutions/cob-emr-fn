@@ -32,6 +32,7 @@ import { FstMTPArom } from './fst-mtp-arom-config';
 import { FstIPAROM } from './fst-ip-arom-config';
 import { ShoulderPROM } from './shoulder-prom-config';
 import { ElbowPROM } from './elbow-prom-config';
+import { WristPROM } from './wrist-prom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -100,4 +101,7 @@ export class RomSectionsConfig {
 
   //Elbow PROM
   static readonly elbowProm= ElbowPROM.elbowProm
+
+  //Wrist PROM
+  static readonly wristProm= WristPROM.wristProm
 }

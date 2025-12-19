@@ -221,17 +221,14 @@
   </div>
   <div *ngIf="showElbowPromFields" class="dependent-field-box">
     <measurement-endfeel-table [labels]="romConfig.elbowProm.labels"
-    [measurementOptions]="romConfig.elbowProm.measurementOptions"
-    [applyToAllMeasurementOptions]="romConfig.elbowProm.applyToAllMeasurementOptions"
-    [specialMeasurementOptions]="romConfig.elbowProm.specialMeasurementOptions"
-    [endfeelOptions]="romConfig.elbowProm.endfeelOptions" 
-    [formGroup]="romForm"
-    [fieldPrefix]="romConfig.elbowProm.fieldPrefix"
-    [applyToAllFieldName]="romConfig.elbowProm.applyToAllFieldName"
-    [commentsFieldName]="romConfig.elbowProm.commentsFieldName"
-    [showApplyToAll]="romConfig.elbowProm.showApplyToAll" 
-    [showComments]="romConfig.elbowProm.showComments">
-  </measurement-endfeel-table>
+      [measurementOptions]="romConfig.elbowProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.elbowProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.elbowProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.elbowProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.elbowProm.fieldPrefix" [applyToAllFieldName]="romConfig.elbowProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.elbowProm.commentsFieldName" [showApplyToAll]="romConfig.elbowProm.showApplyToAll"
+      [showComments]="romConfig.elbowProm.showComments">
+    </measurement-endfeel-table>
   </div>
   <div class="form-row">
     <label class="field-label">Wrist AROM</label>
@@ -271,94 +268,15 @@
   </div>
 
   <div *ngIf="showWristPromFields" class="dependent-field-box">
-    <div class="form-row">
-      <label class="field-label">Apply to All</label>
-      <select cSelect formControlName="wrist_prom_apply_to_all" class="form-select-custom">
-        <option *ngFor="let option of applyToAllOptions" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Extension (Right)</label>
-      <select cSelect formControlName="wrist_prom_extension_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_extension_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Extension (Left)</label>
-      <select cSelect formControlName="wrist_prom_extension_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_extension_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Flexion (Right)</label>
-      <select cSelect formControlName="wrist_prom_flexion_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_flexion_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Flexion (Left)</label>
-      <select cSelect formControlName="wrist_prom_flexion_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_flexion_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Radial Deviation (Right)</label>
-      <select cSelect formControlName="wrist_prom_radial_deviation_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_radial_deviation_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Radial Deviation (Left)</label>
-      <select cSelect formControlName="wrist_prom_radial_deviation_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_radial_deviation_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Ulnar Deviation (Right)</label>
-      <select cSelect formControlName="wrist_prom_ulnar_deviation_right" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_ulnar_deviation_right_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label class="field-label">Ulnar Deviation (Left)</label>
-      <select cSelect formControlName="wrist_prom_ulnar_deviation_left" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-      <label class="field-label">Endfeel</label>
-      <select cSelect formControlName="wrist_prom_ulnar_deviation_left_endfeel" class="form-select-custom">
-        <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
-      </select>
-    </div>
+    <measurement-endfeel-table [labels]="romConfig.wristProm.labels"
+      [measurementOptions]="romConfig.wristProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.wristProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.wristProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.wristProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.wristProm.fieldPrefix" [applyToAllFieldName]="romConfig.wristProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.wristProm.commentsFieldName" [showApplyToAll]="romConfig.wristProm.showApplyToAll"
+      [showComments]="romConfig.wristProm.showComments">
+    </measurement-endfeel-table>
   </div>
 
   <div class="form-row">
