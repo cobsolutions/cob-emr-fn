@@ -1250,3 +1250,102 @@ export const EXTENSION_FST_IP_AROM_OPTION: RomOption[] = [
   { value: '85 °', label: '85 °' },
   { value: '90 °', label: '90 °' }
 ]
+
+
+export const SHOULDER_PROM_180_OPTION: RomOption[] = [
+
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'Custom', label: 'Custom' },
+  { value: '90 °', label: '90 °' },
+  { value: '100 °', label: '100 °' },
+  { value: '110 °', label: '110 °' },
+  { value: '120 °', label: '120 °' },
+  { value: '130 °', label: '130 °' },
+  { value: '140 °', label: '140 °' },
+  { value: '150 °', label: '150 °' },
+  { value: '160 °', label: '160 °' },
+  { value: '170 °', label: '170 °' },
+  { value: '180 °', label: '180 °' }
+]
+
+export const SHOULDER_PROM_80_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'Custom', label: 'Custom' },
+  { value: '10 °', label: '10 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '30 °', label: '30 °' },
+  { value: '40 °', label: '40 °' },
+  { value: '50 °', label: '50 °' },
+  { value: '60 °', label: '60 °' },
+  { value: '70 °', label: '70 °' },
+  { value: '80 °', label: '80 °' }
+]
+export const SHOULDER_PROM_90_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'Custom', label: 'Custom' },
+  { value: '0 °', label: '0 °' },
+  { value: '10 °', label: '10 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '30 °', label: '30 °' },
+  { value: '40 °', label: '40 °' },
+  { value: '45 °', label: '45 °' },
+  { value: '50 °', label: '50 °' },
+  { value: '55 °', label: '55 °' },
+  { value: '60 °', label: '60 °' },
+  { value: '65 °', label: '65 °' },
+  { value: '70 °', label: '70 °' },
+  { value: '75 °', label: '75 °' },
+  { value: '80 °', label: '80 °' },
+  { value: '85 °', label: '85 °' },
+  { value: '90 °', label: '90 °' }
+]
+export const SHOULDER_PROM_120_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'wnl', label: 'WNL' },
+  { value: 'wfl', label: 'WFL' },
+  { value: 'Custom', label: 'Custom' },
+  { value: '0 °', label: '0 °' },
+  { value: '10 °', label: '10 °' },
+  { value: '20 °', label: '20 °' },
+  { value: '30 °', label: '30 °' },
+  { value: '40 °', label: '40 °' },
+  { value: '45 °', label: '45 °' },
+  { value: '50 °', label: '50 °' },
+  { value: '55 °', label: '55 °' },
+  { value: '60 °', label: '60 °' },
+  { value: '65 °', label: '65 °' },
+  { value: '70 °', label: '70 °' },
+  { value: '75 °', label: '75 °' },
+  { value: '80 °', label: '80 °' },
+  { value: '85 °', label: '85 °' },
+  { value: '90 °', label: '90 °' },
+  { value: '95 °', label: '95 °' },
+  { value: '100 °', label: '100 °' },
+  { value: '105 °', label: '105 °' },
+  { value: '110 °', label: '110 °' },
+  { value: '115 °', label: '115 °' },
+  { value: '120 °', label: '120 °' }
+]
+export const SHOULDER_PROM_ENDFEEL_OPTION: RomOption[] = [
+  { value: 'not_tested', label: 'Not Tested' },
+  { value: 'Normal Soft Tissue', label: 'Normal Soft Tissue' },
+  { value: 'Normal Muscular', label: 'Normal Muscular' },
+  { value: 'Normal Ligamentous', label: 'Normal Ligamentous' },
+  { value: 'Capsular', label: 'Capsular' },
+  { value: 'Adhesions/Scarring', label: 'Adhesions/Scarring' },
+  { value: 'Bony Block', label: 'Bony Block' },
+  { value: 'Bony Grate', label: 'Bony Grate' },
+  { value: 'Springy Rebound', label: 'Springy Rebound' },
+  { value: 'Pannus', label: 'Pannus' },
+  { value: 'Loose', label: 'Loose' },
+  { value: 'Empty', label: 'Empty' },
+  { value: 'Painful', label: 'Painful' },
+  { value: 'Muscle Guarding', label: 'Muscle Guarding' },
+  { value: 'Custom', label: 'Custom' }
+]

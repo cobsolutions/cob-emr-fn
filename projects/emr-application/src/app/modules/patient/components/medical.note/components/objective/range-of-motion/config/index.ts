@@ -30,6 +30,7 @@ import { KneeAROM } from './knee-arom-config';
 import { AnkleAROM } from './ankle-arom-config';
 import { FstMTPArom } from './fst-mtp-arom-config';
 import { FstIPAROM } from './fst-ip-arom-config';
+import { ShoulderPROM } from './shoulder-prom-config';
 
 export class RomSectionsConfig {
   // Lower Extremity
@@ -92,4 +93,7 @@ export class RomSectionsConfig {
 
   //1st IP AROM
   static readonly fstipArom = FstIPAROM.fstipArom;
+
+  //Shoulder PROM
+  static readonly shoulderProm= ShoulderPROM.shoulderProm
 }
