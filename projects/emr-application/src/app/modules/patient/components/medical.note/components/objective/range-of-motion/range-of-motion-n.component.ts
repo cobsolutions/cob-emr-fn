@@ -55,47 +55,11 @@ export class RangeOfMotionNComponent implements OnInit {
   showElbowAromWithSelectsFields: boolean = false;
   showCervicalAromSingleColumnFields: boolean = false;
 
-  // Dropdown options
-  cervicalRomOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wfl', label: 'WFL' },
-    { value: 'limited', label: 'Limited' }
-  ];
 
-  applyToAllOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' },
 
-  ];
+ 
 
   romTestOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' },
-    { value: 'limited', label: 'Limited' }
-  ];
-  wristAROMOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' }
-  ];
-  wristPROMOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' }
-  ];
-  thoracicAROMStandingOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' }
-  ];
-  lumbarAROMOptions = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' }
-  ];
-  hipPromOptions = [
     { value: 'not_tested', label: 'Not Tested' },
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' },

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { StrengthSectionsConfig } from './config';
 
 @Component({
   selector: 'strength-n',
@@ -23,6 +24,8 @@ export class StrengthNComponent implements OnInit {
   showAdditionalCommentsFields: boolean = false;
   constructor(private fb: FormBuilder) { }
 
+  // Strength Sections Configuration
+  readonly strengthConfig = StrengthSectionsConfig;
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
