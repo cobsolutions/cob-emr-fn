@@ -1,43 +1,43 @@
 // Export all types
-export * from './rom-types';
-
-// Export all options
-export * from './rom-options';
-
+export * from './hip-arom-config';
 // Export all config classes
 export * from './lower-extremity-config';
-export * from './upper-extremity-config';
+// Export all options
+export * from './rom-options';
+export * from './rom-types';
 export * from './special-tests-config';
 export * from './spine-config';
-export * from './hip-arom-config';
+export * from './upper-extremity-config';
+
+
 
 // Combined config class for backward compatibility
-import { LowerExtremityConfig } from './lower-extremity-config';
-import { UpperExtremityConfig } from './upper-extremity-config';
-import { SpecialTestsConfig } from './special-tests-config';
-import { SpineConfig } from './spine-config';
+import { AnkleAROM } from './ankle-arom-config';
+import { AnklePROM } from './ankle-prom-config';
 import { CervicalAROMConfig } from './cervical-arom';
 import { CostovertebralExpansionConfig } from './costovertebral.expansion-config';
+import { ElbowAROM } from './elbow-arom-config';
+import { ElbowPROM } from './elbow-prom-config';
+import { FstIPAROM } from './fst-ip-arom-config';
+import { FSTIPPROM } from './fst-ip-prom-config';
+import { FstMTPArom } from './fst-mtp-arom-config';
+import { FStMTPPROM } from './fst-mtp-prom-config';
+import { HipAromConfig } from './hip-arom-config';
+import { HipPROM } from './hip-prom-config';
+import { KneeAROM } from './knee-arom-config';
 import { LumbarAROMConfig } from './lumbar-arom-config';
+import { ShoulderAROM } from './shoulder-arom-config';
+import { ShoulderPROM } from './shoulder-prom-config';
+import { SpecialTestsConfig } from './special-tests-config';
 import { ThoracicAROMSitting } from './thoracic-arom-sitting-config';
 import { ThoracicAROMStanding } from './thoracic-arom-standing-config';
-import { ShoulderAROM } from './shoulder-arom-config';
-import { ElbowAROM } from './elbow-arom-config';
-import { WristAROM } from './wrist-arom-config';
-import { HipAromConfig } from './hip-arom-config';
 import { ToeAROM } from './toe-arom-config';
-import { KneeAROM } from './knee-arom-config';
-import { AnkleAROM } from './ankle-arom-config';
-import { FstMTPArom } from './fst-mtp-arom-config';
-import { FstIPAROM } from './fst-ip-arom-config';
-import { ShoulderPROM } from './shoulder-prom-config';
-import { ElbowPROM } from './elbow-prom-config';
-import { WristPROM } from './wrist-prom-config';
 import { ToePROM } from './toe-prom-config';
-import { HipPROM } from './hip-prom-config';
-import { AnklePROM } from './ankle-prom-config';
-import {FStMTPPROM} from './fst-mtp-prom-config';
-import {FSTIPPROM} from './fst-ip-prom-config';
+import { UpperExtremityConfig } from './upper-extremity-config';
+import { WristAROM } from './wrist-arom-config';
+import { WristPROM } from './wrist-prom-config';
+import { KneePROM } from './knee-prom-config';
+
 
 export class RomSectionsConfig {
   
@@ -113,4 +113,7 @@ export class RomSectionsConfig {
 
   //1st IP PROM
   static readonly fstipProm = FSTIPPROM.fstipProm;
+
+  //1st IP PROM
+  static readonly kneeProm = KneePROM.kneeProm;
 }

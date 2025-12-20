@@ -1828,6 +1828,20 @@
     </div>
   </div>
   <div *ngIf="showKneePromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+    [labels]="romConfig.kneeProm.labels"
+    [measurementOptions]="romConfig.kneeProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.kneeProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.kneeProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.kneeProm.endfeelOptions" 
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.kneeProm.fieldPrefix" 
+    [applyToAllFieldName]="romConfig.kneeProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.kneeProm.commentsFieldName" 
+    [showApplyToAll]="romConfig.kneeProm.showApplyToAll"
+    [showComments]="romConfig.kneeProm.showComments"
+ >
+</measurement-endfeel-table>
   </div>
   <!--Ankle AROM-->
   <div class="form-row">
