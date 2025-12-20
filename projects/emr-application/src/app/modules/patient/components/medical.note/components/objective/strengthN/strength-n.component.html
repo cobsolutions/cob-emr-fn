@@ -221,6 +221,15 @@
         </div>
     </div>
     <div *ngIf="showGripPinchFields" class="dependent-field-box">
+        <dropdown-text-table 
+        [columns]="strengthConfig.gripPinch.columns"
+            [labels]="strengthConfig.gripPinch.labels" 
+            [options]="strengthConfig.gripPinch.options"
+            [formGroup]="strengthForm" 
+            [fieldPrefix]="strengthConfig.gripPinch.fieldPrefix"
+            [commentsFieldName]="strengthConfig.gripPinch.commentsFieldName"
+            [showComments]="strengthConfig.gripPinch.showComments">
+        </dropdown-text-table>
     </div>
     <!-- Gross Muscle Tests Upper -->
     <div class="form-row">

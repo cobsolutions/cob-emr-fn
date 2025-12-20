@@ -126,6 +126,11 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('grip_pinch')?.valueChanges.subscribe(value => {
       this.showGripPinchFields = value === 'yes';
+      if(this.showGripPinchFields){
+        this.strengthForm.patchValue({
+          
+        })
+      }
     });
 
     this.strengthForm.get('gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
