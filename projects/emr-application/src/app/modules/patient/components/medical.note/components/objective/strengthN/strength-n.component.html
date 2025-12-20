@@ -1,4 +1,5 @@
 <form [formGroup]="strengthForm" class="rom-form">
+    <!-- No Limitations Noted -->
     <div class="form-row">
         <label class="field-label">No Limitations Noted</label>
         <div class="radio-group">
@@ -13,7 +14,7 @@
         </div>
     </div>
     <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
-        <!-- AROM Checkbox -->
+        <!-- Upper Extremity Checkbox -->
         <div class="form-row">
             <c-form-check>
                 <input cFormCheckInput type="checkbox" formControlName="uper_extremity" />
@@ -21,7 +22,7 @@
             </c-form-check>
         </div>
 
-        <!-- PROM Checkbox -->
+        <!-- Lower Extremity Checkbox -->
         <div class="form-row">
             <c-form-check>
                 <input cFormCheckInput type="checkbox" formControlName="lower_extremity" />
@@ -29,7 +30,7 @@
             </c-form-check>
         </div>
     </div>
-
+    <!-- Selective Tissue Tension Upper -->
     <div class="form-row">
         <label class="field-label">Selective Tissue Tension Upper</label>
         <div class="radio-group">
@@ -44,7 +45,101 @@
         </div>
     </div>
     <div *ngIf="showSelectiveTissueTensionUpperFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Cervical</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Trunk</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="trunk" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="trunk" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Back Ribs</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="back_ribs" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="back_ribs" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Shoulder</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="shoulder" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="shoulder" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Elbow</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="elbow" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="elbow" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Wrist</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="wrist" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="wrist" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Hand</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="hand" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="hand" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
     </div>
+
+
+
     <div class="form-row">
         <label class="field-label">Selective Tissue Tension Lower</label>
         <div class="radio-group">

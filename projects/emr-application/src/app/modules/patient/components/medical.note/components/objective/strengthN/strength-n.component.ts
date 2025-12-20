@@ -32,7 +32,16 @@ export class StrengthNComponent implements OnInit {
       no_limitations_noted: ['no'],
       uper_extremity: [false],
       lower_extremity: [false],
+
       selective_tissue_tension_upper: ['no'],
+      cervical: ['no'],
+      trunk: ['no'],
+      back_ribs: ['no'],
+      shoulder: ['no'],
+      elbow: ['no'],
+      wrist: ['no'],
+      hand: ['no'],
+
       selective_tissue_tension_lower: ['no'],
       grip_pinch: ['no'],
       gross_muscle_tests_upper: ['no'],
@@ -52,12 +61,22 @@ export class StrengthNComponent implements OnInit {
           no_limitations_noted: false,
           uper_extremity: false,
         });
-
       }
     });
 
     this.strengthForm.get('selective_tissue_tension_upper')?.valueChanges.subscribe(value => {
       this.showSelectiveTissueTensionUpperFields = value === 'yes';
+      if (!this.showSelectiveTissueTensionUpperFields) {
+        this.strengthForm.patchValue({
+          cervical: false,
+          trunk: false,
+          back_ribs: false,
+          shoulder: false,
+          elbow: false,
+          wrist: false,
+          hand: false,
+        });
+      }
     });
 
     this.strengthForm.get('selective_tissue_tension_lower')?.valueChanges.subscribe(value => {
