@@ -35,6 +35,7 @@ import { ElbowPROM } from './elbow-prom-config';
 import { WristPROM } from './wrist-prom-config';
 import { ToePROM } from './toe-prom-config';
 import { HipPROM } from './hip-prom-config';
+import { AnklePROM } from './ankle-prom-config';
 
 export class RomSectionsConfig {
   
@@ -101,4 +102,7 @@ export class RomSectionsConfig {
   static readonly toeProm= ToePROM.toeProm
   //HiPProm
   static readonly hipProm = HipPROM.hipProm;
+
+  //AnklePROM
+  static readonly ankleProm = AnklePROM.ankleProm;
 }
