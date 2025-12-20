@@ -1969,6 +1969,20 @@
     </div>
   </div>
   <div *ngIf="show1stIpPromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+      [labels]="romConfig.fstipProm.labels"
+      [measurementOptions]="romConfig.fstipProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.fstipProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.fstipProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.fstipProm.endfeelOptions" 
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.fstipProm.fieldPrefix" 
+      [applyToAllFieldName]="romConfig.fstipProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstipProm.commentsFieldName" 
+      [showApplyToAll]="romConfig.fstipProm.showApplyToAll"
+      [showComments]="romConfig.fstipProm.showComments"
+ >
+</measurement-endfeel-table>
   </div>
   <!--Toe AROM-->
   <div class="form-row">

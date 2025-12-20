@@ -37,6 +37,7 @@ import { ToePROM } from './toe-prom-config';
 import { HipPROM } from './hip-prom-config';
 import { AnklePROM } from './ankle-prom-config';
 import {FStMTPPROM} from './fst-mtp-prom-config';
+import {FSTIPPROM} from './fst-ip-prom-config';
 
 export class RomSectionsConfig {
   
@@ -109,4 +110,7 @@ export class RomSectionsConfig {
 
   //1st MTP PROM
   static readonly fstmtpProm = FStMTPPROM.FstmtpProm;
+
+  //1st IP PROM
+  static readonly fstipProm = FSTIPPROM.fstipProm;
 }
