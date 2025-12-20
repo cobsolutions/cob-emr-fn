@@ -71,6 +71,11 @@ export class StrengthNComponent implements OnInit {
       ankle_gross_muscle_tests_lower: ['no'],
 
       core_strength: ['no'],
+      prone_extensioncore_strength: ['no'],
+      supine_flexion_core_strength: ['no'],
+      situps_core_strength: ['no'],
+      pushup_core_strength: ['no'],
+
       manual_muscle_tests: ['no'],
       additional_comments: ['no']
     })
@@ -160,6 +165,14 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('core_strength')?.valueChanges.subscribe(value => {
       this.showCoreStrengthFields = value === 'yes';
+      if (!this.showCoreStrengthFields) {
+        this.strengthForm.patchValue({
+          prone_extensioncore_strength: false,
+          supine_flexion_core_strength: false,
+          situps_core_strength: false,
+          pushup_core_strength: false,
+        })
+      }
     });
 
     this.strengthForm.get('manual_muscle_tests')?.valueChanges.subscribe(value => {

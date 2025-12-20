@@ -448,6 +448,7 @@
             </div>
         </div>
     </div>
+    <!-- Core Strength -->
     <div class="form-row">
         <label class="field-label">Core Strength</label>
         <div class="radio-group">
@@ -462,6 +463,58 @@
         </div>
     </div>
     <div *ngIf="showCoreStrengthFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Prone Extension</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="prone_extensioncore_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="prone_extensioncore_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Supine Flexion</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="supine_flexion_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="supine_flexion_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Situps</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="situps_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="situps_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Pushup</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pushup_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pushup_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Manual Muscle Tests</label>
