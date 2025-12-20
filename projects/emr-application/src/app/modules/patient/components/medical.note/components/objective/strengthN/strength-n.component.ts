@@ -77,7 +77,9 @@ export class StrengthNComponent implements OnInit {
       pushup_core_strength: ['no'],
 
       manual_muscle_tests: ['no'],
-      additional_comments: ['no']
+
+      additional_comments: ['no'],
+      additional_comments_text: ['']
     })
   }
   setupValueChangeListeners() {
@@ -181,6 +183,9 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('additional_comments')?.valueChanges.subscribe(value => {
       this.showAdditionalCommentsFields = value === 'yes';
+      if (!this.showAdditionalCommentsFields) {
+        this.strengthForm.get('additional_comments_text')?.setValue('');
+      }
     });
   }
 
