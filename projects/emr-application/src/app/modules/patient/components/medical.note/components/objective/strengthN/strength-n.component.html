@@ -273,13 +273,11 @@
             <label class="field-label">Elbow</label>
             <div class="radio-group">
                 <c-form-check class="me-3">
-                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper"
-                        value="yes" />
+                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper" value="yes" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
-                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper"
-                        value="no" />
+                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper" value="no" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
@@ -288,18 +286,17 @@
             <label class="field-label">Wrist</label>
             <div class="radio-group">
                 <c-form-check class="me-3">
-                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper"
-                        value="yes" />
+                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper" value="yes" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
-                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper"
-                        value="no" />
+                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper" value="no" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
         </div>
     </div>
+    <!-- Redcord Neurac Stability Tests -->
     <div class="form-row">
         <label class="field-label">Redcord Neurac Stability Tests</label>
         <div class="radio-group">
@@ -314,6 +311,71 @@
         </div>
     </div>
     <div *ngIf="showRedcordNeuracStabilityTestsFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Upper Body Myofascial Tests</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="upper_body_myofascial_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="upper_body_myofascial_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Lower Body Myofascial Tests</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="lower_body_myofascial_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="lower_body_myofascial_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Cervical Movements</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical_movements" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical_movements" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Cervical Motor Control Tests</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical_motor_control_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical_motor_control_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Lumbar Motor Control Tests</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="lumbar_motor_control_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="lumbar_motor_control_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Gross Muscle Tests Trunk</label>

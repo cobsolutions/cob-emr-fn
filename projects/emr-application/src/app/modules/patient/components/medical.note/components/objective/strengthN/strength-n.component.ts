@@ -57,6 +57,12 @@ export class StrengthNComponent implements OnInit {
       wrist_gross_muscle_tests_upper: ['no'],
 
       redcord_neurac_stability_tests: ['no'],
+      upper_body_myofascial_tests: ['no'],
+      lower_body_myofascial_tests: ['no'],
+      cervical_movements: ['no'],
+      cervical_motor_control_tests: ['no'],
+      lumbar_motor_control_tests: ['no'],
+
       gross_muscle_tests_trunk: ['no'],
       gross_muscle_tests_lower: ['no'],
       core_strength: ['no'],
@@ -121,6 +127,15 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('redcord_neurac_stability_tests')?.valueChanges.subscribe(value => {
       this.showRedcordNeuracStabilityTestsFields = value === 'yes';
+      if (!this.showRedcordNeuracStabilityTestsFields) {
+        this.strengthForm.patchValue({
+          upper_body_myofascial_tests: false,
+          lower_body_myofascial_tests: false,
+          cervical_movements: false,
+          cervical_motor_control_tests: false,
+          lumbar_motor_control_tests: false
+        })
+      }
     });
 
     this.strengthForm.get('gross_muscle_tests_trunk')?.valueChanges.subscribe(value => {
