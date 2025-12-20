@@ -392,6 +392,8 @@
     </div>
     <div *ngIf="showGrossMuscleTestsTrunkFields" class="dependent-field-box">
     </div>
+
+    <!-- Gross Muscle Tests Lower -->
     <div class="form-row">
         <label class="field-label">Gross Muscle Tests Lower</label>
         <div class="radio-group">
@@ -406,6 +408,45 @@
         </div>
     </div>
     <div *ngIf="showGrossMuscleTestsLowerFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Hip</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="hip_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="hip_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Knee</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="knee_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="knee_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Ankle</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="ankle_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="ankle_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Core Strength</label>

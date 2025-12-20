@@ -64,7 +64,12 @@ export class StrengthNComponent implements OnInit {
       lumbar_motor_control_tests: ['no'],
 
       gross_muscle_tests_trunk: ['no'],
+
       gross_muscle_tests_lower: ['no'],
+      hip_gross_muscle_tests_lower: ['no'],
+      knee_gross_muscle_tests_lower: ['no'],
+      ankle_gross_muscle_tests_lower: ['no'],
+
       core_strength: ['no'],
       manual_muscle_tests: ['no'],
       additional_comments: ['no']
@@ -144,6 +149,13 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
       this.showGrossMuscleTestsLowerFields = value === 'yes';
+      if (!this.showGrossMuscleTestsLowerFields) {
+        this.strengthForm.patchValue({
+          hip_gross_muscle_tests_lower: false,
+          knee_gross_muscle_tests_lower: false,
+          ankle_gross_muscle_tests_lower: false
+        })
+      }
     });
 
     this.strengthForm.get('core_strength')?.valueChanges.subscribe(value => {
