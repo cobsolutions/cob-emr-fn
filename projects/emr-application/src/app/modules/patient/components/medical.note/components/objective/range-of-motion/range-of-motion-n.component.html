@@ -1916,6 +1916,20 @@
     </div>
   </div>
   <div *ngIf="show1stMtpPromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+    [labels]="romConfig.fstmtpProm.labels"
+    [measurementOptions]="romConfig.fstmtpProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.fstmtpProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.fstmtpProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.fstmtpProm.endfeelOptions" 
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.fstmtpProm.fieldPrefix" 
+    [applyToAllFieldName]="romConfig.fstmtpProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.fstmtpProm.commentsFieldName" 
+    [showApplyToAll]="romConfig.fstmtpProm.showApplyToAll"
+    [showComments]="romConfig.fstmtpProm.showComments"
+ >
+</measurement-endfeel-table>
   </div>
   <!--1st IP AROM-->
   <div class="form-row">

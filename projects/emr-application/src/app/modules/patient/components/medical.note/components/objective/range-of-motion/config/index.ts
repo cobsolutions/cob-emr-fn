@@ -36,6 +36,7 @@ import { WristPROM } from './wrist-prom-config';
 import { ToePROM } from './toe-prom-config';
 import { HipPROM } from './hip-prom-config';
 import { AnklePROM } from './ankle-prom-config';
+import {FStMTPPROM} from './fst-mtp-prom-config';
 
 export class RomSectionsConfig {
   
@@ -105,4 +106,7 @@ export class RomSectionsConfig {
 
   //AnklePROM
   static readonly ankleProm = AnklePROM.ankleProm;
+
+  //1st MTP PROM
+  static readonly fstmtpProm = FStMTPPROM.FstmtpProm;
 }
