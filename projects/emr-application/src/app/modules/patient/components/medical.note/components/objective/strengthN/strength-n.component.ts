@@ -49,7 +49,13 @@ export class StrengthNComponent implements OnInit {
       foot: ['no'],
 
       grip_pinch: ['no'],
+
       gross_muscle_tests_upper: ['no'],
+      cervical_gross_muscle_tests_upper: ['no'],
+      shoulder_gross_muscle_tests_upper: ['no'],
+      elbow_gross_muscle_tests_upper: ['no'],
+      wrist_gross_muscle_tests_upper: ['no'],
+
       redcord_neurac_stability_tests: ['no'],
       gross_muscle_tests_trunk: ['no'],
       gross_muscle_tests_lower: ['no'],
@@ -103,6 +109,14 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
       this.showGrossMuscleTestsUpperFields = value === 'yes';
+      if (!this.showGrossMuscleTestsUpperFields) {
+        this.strengthForm.patchValue({
+          cervical_gross_muscle_tests_upper: false,
+          shoulder_gross_muscle_tests_upper: false,
+          elbow_gross_muscle_tests_upper: false,
+          wrist_gross_muscle_tests_upper: false
+        })
+      }
     });
 
     this.strengthForm.get('redcord_neurac_stability_tests')?.valueChanges.subscribe(value => {
