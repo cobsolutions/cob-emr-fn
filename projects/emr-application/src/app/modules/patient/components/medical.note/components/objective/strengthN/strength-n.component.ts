@@ -43,6 +43,11 @@ export class StrengthNComponent implements OnInit {
       hand: ['no'],
 
       selective_tissue_tension_lower: ['no'],
+      hip: ['no'],
+      knee: ['no'],
+      ankle: ['no'],
+      foot: ['no'],
+
       grip_pinch: ['no'],
       gross_muscle_tests_upper: ['no'],
       redcord_neurac_stability_tests: ['no'],
@@ -81,6 +86,15 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('selective_tissue_tension_lower')?.valueChanges.subscribe(value => {
       this.showSelectiveTissueTensionLowerFields = value === 'yes';
+      if (!this.showSelectiveTissueTensionLowerFields) {
+        this.strengthForm.patchValue({
+          hip: false,
+          knee: false,
+          ankle: false,
+          foot: false
+        })
+      }
+
     });
 
     this.strengthForm.get('grip_pinch')?.valueChanges.subscribe(value => {
