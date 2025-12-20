@@ -30,6 +30,8 @@ export class StrengthNComponent implements OnInit {
   initForm() {
     this.strengthForm = this.fb.group({
       no_limitations_noted: ['no'],
+      uper_extremity: [false],
+      lower_extremity: [false],
       selective_tissue_tension_upper: ['no'],
       selective_tissue_tension_lower: ['no'],
       grip_pinch: ['no'],
@@ -45,6 +47,13 @@ export class StrengthNComponent implements OnInit {
   setupValueChangeListeners() {
     this.strengthForm.get('no_limitations_noted')?.valueChanges.subscribe(value => {
       this.showNoLimitationsNotedFields = value === 'yes';
+      if (!this.showNoLimitationsNotedFields) {
+        this.strengthForm.patchValue({
+          no_limitations_noted: false,
+          uper_extremity: false,
+        });
+
+      }
     });
 
     this.strengthForm.get('selective_tissue_tension_upper')?.valueChanges.subscribe(value => {

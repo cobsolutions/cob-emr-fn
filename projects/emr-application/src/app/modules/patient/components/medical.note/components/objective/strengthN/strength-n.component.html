@@ -13,6 +13,21 @@
         </div>
     </div>
     <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
+        <!-- AROM Checkbox -->
+        <div class="form-row">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" formControlName="uper_extremity" />
+                <label cFormCheckLabel>Upper Extremity</label>
+            </c-form-check>
+        </div>
+
+        <!-- PROM Checkbox -->
+        <div class="form-row">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" formControlName="lower_extremity" />
+                <label cFormCheckLabel>Lower Extremity</label>
+            </c-form-check>
+        </div>
     </div>
 
     <div class="form-row">
