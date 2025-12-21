@@ -64,3 +64,11 @@ export const dermatomesLower_OPTIONS: RomOption[] = [
     { value: 'Grossly intact to light touch', label: 'Grossly intact to light touch' },
     { value: 'not_tested', label: 'Not Tested' }
 ];
+export const upperReflexes_OPTIONS: RomOption[] = [
+    { value: 'not_tsted', label: 'Not Tested' },
+    { value: '0 Absent', label: '0 Absent' },
+    { value: '1 + Diminished', label: '1 + Diminished' },
+    { value: '2 + Normal', label: '2 + Normal' },
+    { value: '3 + Increased', label: '3 + Increased' },
+    { value: '4 + Clonus', label: '4 + Clonus' }
+  ];

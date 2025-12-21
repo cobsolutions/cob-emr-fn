@@ -147,6 +147,16 @@
         </div>
     </div>
     <div *ngIf="showUpperReflexesFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.upperReflexes.labels"
+      [options]="neuroVascularConfig.upperReflexes.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.upperReflexes.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.upperReflexes.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.upperReflexes.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.upperReflexes.showApplyToAll"
+      [showComments]="neuroVascularConfig.upperReflexes.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Lower Reflexes</label>
