@@ -105,6 +105,12 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: 'Normal', label: 'Normal' },
     { value: 'Abnormal', label: 'Abnormal' }
   ];
+  export const homansSign_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+  
   
   
   

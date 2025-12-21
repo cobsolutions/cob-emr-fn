@@ -3,6 +3,7 @@ import { CapillaryRefill } from "./capillary-refill";
 import { CranialNerveScreen } from "./cranial-nerve-screen-config";
 import { DermatomesLower } from "./dermatomes-lower";
 import { DermatomesUpper } from "./dermatomes-upper";
+import { HomansSign } from "./homans-sign";
 import { LowerReflexes } from "./lower-reflexes";
 import { MyotomesLower } from "./myotomes-lower";
 import { MyotomesUpper } from "./myotomes-upper";
@@ -38,4 +39,6 @@ export class NeuroVascularConfig {
     static readonly allensTestCirculation = AllensTestCirculation.allensTestCirculation;
     
     static readonly capillaryRefill = CapillaryRefill.capillaryRefill;
+    
+    static readonly homansSign = HomansSign.homansSign;
 }

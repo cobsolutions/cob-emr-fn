@@ -337,6 +337,16 @@
         </div>
     </div>
     <div *ngIf="showHomanSSignFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.homansSign.labels"
+      [options]="neuroVascularConfig.homansSign.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.homansSign.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.homansSign.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.homansSign.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.homansSign.showApplyToAll"
+      [showComments]="neuroVascularConfig.homansSign.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Thoracic Outlet</label>
