@@ -412,6 +412,16 @@
         </div>
     </div>
     <div *ngIf="showSlumpFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.slump.labels"
+      [options]="neuroVascularConfig.slump.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.slump.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.slump.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.slump.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.slump.showApplyToAll"
+      [showComments]="neuroVascularConfig.slump.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Quadrant Testing</label>
