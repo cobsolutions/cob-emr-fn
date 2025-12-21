@@ -72,3 +72,12 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: '3 + Increased', label: '3 + Increased' },
     { value: '4 + Clonus', label: '4 + Clonus' }
   ];
+  export const lowerReflexes_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '0 Absent', label: '0 Absent' },
+    { value: '1 + Diminished', label: '1 + Diminished' },
+    { value: '2 + Normal', label: '2 + Normal' },
+    { value: '3 + Increased', label: '3 + Increased' },
+    { value: '4 + Clonus', label: '4 + Clonus' }
+  ];
+  
