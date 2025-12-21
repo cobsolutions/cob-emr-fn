@@ -287,6 +287,16 @@
         </div>
     </div>
     <div *ngIf="showAllenSTestCirculationFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.allensTestCirculation.labels"
+      [options]="neuroVascularConfig.allensTestCirculation.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.allensTestCirculation.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.allensTestCirculation.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.allensTestCirculation.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.allensTestCirculation.showApplyToAll"
+      [showComments]="neuroVascularConfig.allensTestCirculation.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Capillary Refill</label>

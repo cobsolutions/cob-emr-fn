@@ -1,3 +1,4 @@
+import { AllensTestCirculation } from "./allens-test-circulation";
 import { CranialNerveScreen } from "./cranial-nerve-screen-config";
 import { DermatomesLower } from "./dermatomes-lower";
 import { DermatomesUpper } from "./dermatomes-upper";
@@ -31,4 +32,7 @@ export class NeuroVascularConfig {
     
     static readonly vascular = Vascular.vascular;
 
+    
+
+    static readonly allensTestCirculation = AllensTestCirculation.allensTestCirculation;
 }
