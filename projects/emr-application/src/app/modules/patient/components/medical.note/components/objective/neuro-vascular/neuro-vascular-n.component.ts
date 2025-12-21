@@ -79,7 +79,8 @@ export class NeuroVascularNComponent implements OnInit {
       tinel_s_lower: ['no'],
       tinel_s_upper: ['no'],
       transverse_ligament_stability: ['no'],
-      additional_comments: ['no']
+      additional_comments: ['no'],
+      additional_comments_text:['']
     })
   }
   setupValueChangeListeners() {
