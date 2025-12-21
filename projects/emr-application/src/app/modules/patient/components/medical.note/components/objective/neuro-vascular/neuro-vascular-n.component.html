@@ -462,6 +462,16 @@
         </div>
     </div>
     <div *ngIf="showProneKneeBendNachlasFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.proneKneeBendNachlas.labels"
+      [options]="neuroVascularConfig.proneKneeBendNachlas.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.proneKneeBendNachlas.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.proneKneeBendNachlas.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.proneKneeBendNachlas.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.proneKneeBendNachlas.showApplyToAll"
+      [showComments]="neuroVascularConfig.proneKneeBendNachlas.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Kernig/Brudzinski Test</label>
