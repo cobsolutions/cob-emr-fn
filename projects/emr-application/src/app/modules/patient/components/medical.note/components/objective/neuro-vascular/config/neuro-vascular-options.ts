@@ -80,4 +80,9 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: '3 + Increased', label: '3 + Increased' },
     { value: '4 + Clonus', label: '4 + Clonus' }
   ];
-  
+  export const neuralTissueTensionUpper_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+    
