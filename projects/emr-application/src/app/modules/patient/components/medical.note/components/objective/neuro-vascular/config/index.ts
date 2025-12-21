@@ -7,6 +7,7 @@ import { MyotomesUpper } from "./myotomes-upper";
 import { NeuralTissueTensionLower } from "./neural-tissue-tension-lower";
 import { NeuralTissueTensionUpper } from "./neural-tissue-tension-upper";
 import { UpperReflexes } from "./upper-reflexes";
+import { Vascular } from "./vascular";
 
 export class NeuroVascularConfig {
 
@@ -21,11 +22,13 @@ export class NeuroVascularConfig {
     static readonly dermatomesLower = DermatomesLower.dermatomesLower;
 
     static readonly upperReflexes = UpperReflexes.upperReflexes;
-    
+
     static readonly lowerReflexes = LowerReflexes.lowerReflexes;
-    
+
     static readonly neuralTissueTensionUpper = NeuralTissueTensionUpper.neuralTissueTensionUpper;
 
     static readonly neuralTissueTensionLower = NeuralTissueTensionLower.neuralTissueTensionLower;
     
+    static readonly vascular = Vascular.vascular;
+
 }

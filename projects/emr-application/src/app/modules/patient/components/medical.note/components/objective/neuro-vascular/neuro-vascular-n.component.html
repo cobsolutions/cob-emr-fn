@@ -247,6 +247,16 @@
         </div>
     </div>
     <div *ngIf="showVascularFields" class="dependent-field-box">
+        <measurement-table
+        [labels]="neuroVascularConfig.vascular.labels"
+        [options]="neuroVascularConfig.vascular.options"
+        [formGroup]="neuroVascularForm"
+        [fieldPrefix]="neuroVascularConfig.vascular.fieldPrefix"
+        [applyToAllFieldName]="neuroVascularConfig.vascular.applyToAllFieldName"
+        [commentsFieldName]="neuroVascularConfig.vascular.commentsFieldName"
+        [showApplyToAll]="neuroVascularConfig.vascular.showApplyToAll"
+        [showComments]="neuroVascularConfig.vascular.showComments">
+      </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Vertebral Artery</label>
