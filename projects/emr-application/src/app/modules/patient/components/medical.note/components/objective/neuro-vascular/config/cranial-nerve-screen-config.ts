@@ -45,7 +45,7 @@ export class CranialNerveScreen {
       'Tongue Protrusion (CN 12)'
     ],
     options: CranialNerveScreen_OPTION,
-    fieldPrefix: 'cervical_arom_',
+    fieldPrefix: 'cranial_nerve_screen_',
     applyToAllFieldName: '',
     commentsFieldName: '',
     showApplyToAll: false,

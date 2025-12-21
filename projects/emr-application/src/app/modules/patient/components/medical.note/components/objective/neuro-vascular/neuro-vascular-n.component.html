@@ -31,16 +31,14 @@
         </div>
     </div>
     <div *ngIf="showCranialNerveScreenFields" class="dependent-field-box">
-        <single-column-table
-      [labels]="neuroVascularConfig.cranialNerveScreen.labels"
-      [options]="neuroVascularConfig.cranialNerveScreen.options"
-      [formGroup]="neuroVascularForm"
-      [fieldPrefix]="neuroVascularConfig.cranialNerveScreen.fieldPrefix"
-      [applyToAllFieldName]="neuroVascularConfig.cranialNerveScreen.applyToAllFieldName"
-      [commentsFieldName]="neuroVascularConfig.cranialNerveScreen.commentsFieldName"
-      [showApplyToAll]="neuroVascularConfig.cranialNerveScreen.showApplyToAll"
-      [showComments]="neuroVascularConfig.cranialNerveScreen.showComments">
-    </single-column-table>
+        <single-column-table [labels]="neuroVascularConfig.cranialNerveScreen.labels"
+            [options]="neuroVascularConfig.cranialNerveScreen.options" [formGroup]="neuroVascularForm"
+            [fieldPrefix]="neuroVascularConfig.cranialNerveScreen.fieldPrefix"
+            [applyToAllFieldName]="neuroVascularConfig.cranialNerveScreen.applyToAllFieldName"
+            [commentsFieldName]="neuroVascularConfig.cranialNerveScreen.commentsFieldName"
+            [showApplyToAll]="neuroVascularConfig.cranialNerveScreen.showApplyToAll"
+            [showComments]="neuroVascularConfig.cranialNerveScreen.showComments">
+        </single-column-table>
     </div>
     <div class="form-row">
         <label class="field-label">Myotomes Upper</label>
@@ -56,6 +54,13 @@
         </div>
     </div>
     <div *ngIf="showMyotomesUpperFields" class="dependent-field-box">
+        <measurement-table-with-selects [labels]="neuroVascularConfig.myotomesUpperSelect.labels"
+            [options]="neuroVascularConfig.myotomesUpperSelect.options" [formGroup]="neuroVascularForm"
+            [fieldPrefix]="neuroVascularConfig.myotomesUpperSelect.fieldPrefix"
+            [topSelects]="neuroVascularConfig.myotomesUpperSelect.topSelects"
+            [commentsFieldName]="neuroVascularConfig.myotomesUpperSelect.commentsFieldName"
+            [showComments]="neuroVascularConfig.myotomesUpperSelect.showComments">
+        </measurement-table-with-selects>
     </div>
     <div class="form-row">
         <label class="field-label">Myotomes Lower</label>
