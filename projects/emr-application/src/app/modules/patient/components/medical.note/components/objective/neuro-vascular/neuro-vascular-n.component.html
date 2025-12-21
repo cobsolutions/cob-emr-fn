@@ -512,6 +512,16 @@
         </div>
     </div>
     <div *ngIf="showCramTestFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.cramTest.labels"
+      [options]="neuroVascularConfig.cramTest.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.cramTest.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.cramTest.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.cramTest.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.cramTest.showApplyToAll"
+      [showComments]="neuroVascularConfig.cramTest.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Seated Dural Stretch</label>

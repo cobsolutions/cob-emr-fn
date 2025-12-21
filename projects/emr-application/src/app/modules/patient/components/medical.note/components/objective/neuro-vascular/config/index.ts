@@ -1,5 +1,6 @@
 import { AllensTestCirculation } from "./allens-test-circulation";
 import { CapillaryRefill } from "./capillary-refill";
+import { CramTest } from "./cram-test";
 import { CranialNerveScreen } from "./cranial-nerve-screen-config";
 import { DermatomesLower } from "./dermatomes-lower";
 import { DermatomesUpper } from "./dermatomes-upper";
@@ -63,4 +64,7 @@ export class NeuroVascularConfig {
 
     
     static readonly kernigBrudzinskiTest = KernigBrudzinskiTest.kernigBrudzinskiTest;
+
+    
+    static readonly cramTest = CramTest.cramTest;
 }
