@@ -362,6 +362,16 @@
         </div>
     </div>
     <div *ngIf="showThoracicOutletFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.thoracicOutlet.labels"
+      [options]="neuroVascularConfig.thoracicOutlet.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.thoracicOutlet.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.thoracicOutlet.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.thoracicOutlet.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.thoracicOutlet.showApplyToAll"
+      [showComments]="neuroVascularConfig.thoracicOutlet.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Lasegue's SLR</label>

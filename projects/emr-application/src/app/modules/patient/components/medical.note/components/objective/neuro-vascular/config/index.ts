@@ -9,6 +9,7 @@ import { MyotomesLower } from "./myotomes-lower";
 import { MyotomesUpper } from "./myotomes-upper";
 import { NeuralTissueTensionLower } from "./neural-tissue-tension-lower";
 import { NeuralTissueTensionUpper } from "./neural-tissue-tension-upper";
+import { ThoracicOutlet } from "./thoracic-outlet";
 import { UpperReflexes } from "./upper-reflexes";
 import { Vascular } from "./vascular";
 
@@ -41,4 +42,6 @@ export class NeuroVascularConfig {
     static readonly capillaryRefill = CapillaryRefill.capillaryRefill;
     
     static readonly homansSign = HomansSign.homansSign;
+    
+    static readonly thoracicOutlet = ThoracicOutlet.thoracicOutlet;
 }
