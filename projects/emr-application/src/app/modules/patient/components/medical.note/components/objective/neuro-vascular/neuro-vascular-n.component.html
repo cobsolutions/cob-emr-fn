@@ -592,6 +592,16 @@
         </div>
     </div>
     <div *ngIf="showTinelSLowerFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.tinelsLower.labels"
+      [options]="neuroVascularConfig.tinelsLower.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.tinelsLower.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.tinelsLower.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.tinelsLower.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.tinelsLower.showApplyToAll"
+      [showComments]="neuroVascularConfig.tinelsLower.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Tinel's Upper</label>

@@ -17,6 +17,7 @@ import { QuadrantTesting } from "./quadrant-testing";
 import { SeatedDuralStretch } from "./seated-dural-stretch";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
+import { TinelsLower } from "./tinels-lower";
 import { UpperReflexes } from "./upper-reflexes";
 import { Vascular } from "./vascular";
 
@@ -71,4 +72,7 @@ export class NeuroVascularConfig {
 
     
     static readonly seatedDuralStretch = SeatedDuralStretch.seatedDuralStretch;
+
+    
+    static readonly tinelsLower = TinelsLower.tinelsLower;
 }
