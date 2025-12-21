@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NeuroVascularConfig } from './config';
 
 @Component({
   selector: 'neuro-vascular-n',
@@ -9,7 +10,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class NeuroVascularNComponent implements OnInit {
   neuroVascularForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-
+  readonly neuroVascularConfig = NeuroVascularConfig
+  
   showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields: boolean = false;
   showCranialNerveScreenFields: boolean = false;
   showMyotomesUpperFields: boolean = false;
