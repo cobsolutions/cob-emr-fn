@@ -934,13 +934,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('costovertebral_expansion')?.valueChanges.subscribe(value => {
       this.showCostovertebralExpansionFields = value === 'yes';
       if (!this.showCostovertebralExpansionFields) {
-        this.romForm.patchValue({
-          costovertebral_apply_to_all: '',
-          costovertebral_t4: 'not_tested',
-          costovertebral_t9: 'not_tested',
-          costovertebral_umbilicus: 'not_tested',
-          costovertebral_expansion_comments: ''
-        });
+        // Use generic reset helper with config
+        this.resetSingleColumnFields(this.romConfig.costovertebralExpansion);
       }
     });
 
@@ -948,29 +943,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('shoulder_arrom')?.valueChanges.subscribe(value => {
       this.showShoulderAromFields = value === 'yes';
       if (!this.showShoulderAromFields) {
-        this.romForm.patchValue({
-          shoulder_apply_to_all: '',
-          shoulder_flexion_right: 'not_tested',
-          shoulder_flexion_left: 'not_tested',
-          shoulder_scaption_right: 'not_tested',
-          shoulder_scaption_left: 'not_tested',
-          shoulder_abduction_right: 'not_tested',
-          shoulder_abduction_left: 'not_tested',
-          shoulder_extension_right: 'not_tested',
-          shoulder_extension_left: 'not_tested',
-          shoulder_functional_er_reach_right: 'not_tested',
-          shoulder_functional_er_reach_left: 'not_tested',
-          shoulder_functional_ir_reach_right: 'not_tested',
-          shoulder_functional_ir_reach_left: 'not_tested',
-          shoulder_er_neutral_right: 'not_tested',
-          shoulder_er_neutral_left: 'not_tested',
-          shoulder_ir_neutral_right: 'not_tested',
-          shoulder_ir_neutral_left: 'not_tested',
-          shoulder_horizontal_abduction_right: 'not_tested',
-          shoulder_horizontal_abduction_left: 'not_tested',
-          shoulder_horizontal_adduction_right: 'not_tested',
-          shoulder_horizontal_adduction_left: 'not_tested'
-        });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.shoulderArom);
       }
     });
 
@@ -1005,61 +979,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('shoulder_prom')?.valueChanges.subscribe(value => {
       this.showShoulderPromFields = value === 'yes';
       if (!this.showShoulderPromFields) {
-        this.romForm.patchValue({
-          shoulder_prom_apply_to_all: '',
-          shoulder_prom_flexion_right: 'not_tested',
-          shoulder_prom_flexion_right_endfeel: 'not_tested',
-          shoulder_prom_flexion_left: 'not_tested',
-          shoulder_prom_flexion_left_endfeel: 'not_tested',
-          shoulder_prom_scaption_right: 'not_tested',
-          shoulder_prom_scaption_right_endfeel: 'not_tested',
-          shoulder_prom_scaption_left: 'not_tested',
-          shoulder_prom_scaption_left_endfeel: 'not_tested',
-          shoulder_prom_abduction_right: 'not_tested',
-          shoulder_prom_abduction_right_endfeel: 'not_tested',
-          shoulder_prom_abduction_left: 'not_tested',
-          shoulder_prom_abduction_left_endfeel: 'not_tested',
-          shoulder_prom_extension_right: 'not_tested',
-          shoulder_prom_extension_right_endfeel: 'not_tested',
-          shoulder_prom_extension_left: 'not_tested',
-          shoulder_prom_extension_left_endfeel: 'not_tested',
-          shoulder_prom_er_neutral_right: 'not_tested',
-          shoulder_prom_er_neutral_right_endfeel: 'not_tested',
-          shoulder_prom_er_neutral_left: 'not_tested',
-          shoulder_prom_er_neutral_left_endfeel: 'not_tested',
-          shoulder_prom_ir_neutral_right: 'not_tested',
-          shoulder_prom_ir_neutral_right_endfeel: 'not_tested',
-          shoulder_prom_ir_neutral_left: 'not_tested',
-          shoulder_prom_ir_neutral_left_endfeel: 'not_tested',
-          shoulder_prom_er_scapular_plane_right: 'not_tested',
-          shoulder_prom_er_scapular_plane_right_endfeel: 'not_tested',
-          shoulder_prom_er_scapular_plane_left: 'not_tested',
-          shoulder_prom_er_scapular_plane_left_endfeel: 'not_tested',
-          shoulder_prom_ir_scapular_plane_right: 'not_tested',
-          shoulder_prom_ir_scapular_plane_right_endfeel: 'not_tested',
-          shoulder_prom_ir_scapular_plane_left: 'not_tested',
-          shoulder_prom_ir_scapular_plane_left_endfeel: 'not_tested',
-          shoulder_prom_er_90_degrees_abduction_right: 'not_tested',
-          shoulder_prom_er_90_degrees_abduction_right_endfeel: 'not_tested',
-          shoulder_prom_er_90_degrees_abduction_left: 'not_tested',
-          shoulder_prom_er_90_degrees_abduction_left_endfeel: 'not_tested',
-          shoulder_prom_ir_90_degrees_abduction_right: 'not_tested',
-          shoulder_prom_ir_90_degrees_abduction_right_endfeel: 'not_tested',
-          shoulder_prom_ir_90_degrees_abduction_left: 'not_tested',
-          shoulder_prom_ir_90_degrees_abduction_left_endfeel: 'not_tested',
-          shoulder_prom_ir_sleeper_stretch_right: 'not_tested',
-          shoulder_prom_ir_sleeper_stretch_right_endfeel: 'not_tested',
-          shoulder_prom_ir_sleeper_stretch_left: 'not_tested',
-          shoulder_prom_ir_sleeper_stretch_left_endfeel: 'not_tested',
-          shoulder_prom_horizontal_abduction_right: 'not_tested',
-          shoulder_prom_horizontal_abduction_right_endfeel: 'not_tested',
-          shoulder_prom_horizontal_abduction_left: 'not_tested',
-          shoulder_prom_horizontal_abduction_left_endfeel: 'not_tested',
-          shoulder_prom_horizontal_adduction_right: 'not_tested',
-          shoulder_prom_horizontal_adduction_right_endfeel: 'not_tested',
-          shoulder_prom_horizontal_adduction_left: 'not_tested',
-          shoulder_prom_horizontal_adduction_left_endfeel: 'not_tested'
-        });
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.shoulderProm);
       }
     });
 
@@ -1100,17 +1021,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('elbow_arrom')?.valueChanges.subscribe(value => {
       this.showElbowAromFields = value === 'yes';
       if (!this.showElbowAromFields) {
-        this.romForm.patchValue({
-          elbow_arrom_apply_to_all: '',
-          elbow_arrom_flexion_right: 'not_tested',
-          elbow_arrom_flexion_left: 'not_tested',
-          elbow_arrom_extension_right: 'not_tested',
-          elbow_arrom_extension_left: 'not_tested',
-          elbow_arrom_pronation_right: 'not_tested',
-          elbow_arrom_pronation_left: 'not_tested',
-          elbow_arrom_supination_right: 'not_tested',
-          elbow_arrom_supination_left: 'not_tested'
-        });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.elbowArom);
       }
     });
 
@@ -1133,25 +1045,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('elbow_prom')?.valueChanges.subscribe(value => {
       this.showElbowPromFields = value === 'yes';
       if (!this.showElbowPromFields) {
-        this.romForm.patchValue({
-          elbow_prom_apply_to_all: '',
-          elbow_prom_extension_right: 'not_tested',
-          elbow_prom_extension_right_endfeel: 'not_tested',
-          elbow_prom_extension_left: 'not_tested',
-          elbow_prom_extension_left_endfeel: 'not_tested',
-          elbow_prom_flexion_right: 'not_tested',
-          elbow_prom_flexion_right_endfeel: 'not_tested',
-          elbow_prom_flexion_left: 'not_tested',
-          elbow_prom_flexion_left_endfeel: 'not_tested',
-          elbow_prom_supination_right: 'not_tested',
-          elbow_prom_supination_right_endfeel: 'not_tested',
-          elbow_prom_supination_left: 'not_tested',
-          elbow_prom_supination_left_endfeel: 'not_tested',
-          elbow_prom_pronation_right: 'not_tested',
-          elbow_prom_pronation_right_endfeel: 'not_tested',
-          elbow_prom_pronation_left: 'not_tested',
-          elbow_prom_pronation_left_endfeel: 'not_tested'
-        });
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.elbowProm);
       }
     });
 
@@ -1174,17 +1069,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('wrist_arrom')?.valueChanges.subscribe(value => {
       this.showWristAromFields = value === 'yes';
       if (value === 'no') {
-        this.romForm.patchValue({
-          wrist_arrom_apply_to_all: '',
-          extension_right: 'not_tested',
-          extension_left: 'not_tested',
-          flexion_right: 'not_tested',
-          flexion_left: 'not_tested',
-          radial_deviation_right: 'not_tested',
-          radial_deviation_left: 'not_tested',
-          ulnar_deviation_right: 'not_tested',
-          ulnar_deviation_left: 'not_tested'
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.wristArom);
       }
     });
 
@@ -1205,25 +1091,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('wrist_prom')?.valueChanges.subscribe(value => {
       this.showWristPromFields = value === 'yes';
       if (value === 'no') {
-        this.romForm.patchValue({
-          wrist_prom_apply_to_all: '',
-          wrist_prom_extension_right: 'not_tested',
-          wrist_prom_extension_right_endfeel: 'not_tested',
-          wrist_prom_extension_left: 'not_tested',
-          wrist_prom_extension_left_endfeel: 'not_tested',
-          wrist_prom_flexion_right: 'not_tested',
-          wrist_prom_flexion_right_endfeel: 'not_tested',
-          wrist_prom_flexion_left: 'not_tested',
-          wrist_prom_flexion_left_endfeel: 'not_tested',
-          wrist_prom_radial_deviation_right: 'not_tested',
-          wrist_prom_radial_deviation_right_endfeel: 'not_tested',
-          wrist_prom_radial_deviation_left: 'not_tested',
-          wrist_prom_radial_deviation_left_endfeel: 'not_tested',
-          wrist_prom_ulnar_deviation_right: 'not_tested',
-          wrist_prom_ulnar_deviation_right_endfeel: 'not_tested',
-          wrist_prom_ulnar_deviation_left: 'not_tested',
-          wrist_prom_ulnar_deviation_left_endfeel: 'not_tested'
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.wristProm);
       }
     });
 
@@ -1567,16 +1436,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('lumbar_arrom')?.valueChanges.subscribe(value => {
       this.showLumbarAromFields = value === 'yes';
       if (!this.showLumbarAromFields) {
-        this.romForm.patchValue({
-          lumbar_arrom_apply_to_all: '',
-          lumbar_arrom_forward_bending: 'not_tested',
-          lumbar_arrom_backward_bending: 'not_tested',
-          lumbar_arrom_right_rotation: 'not_tested',
-          lumbar_arrom_left_rotation: 'not_tested',
-          lumbar_arrom_right_side_bending: 'not_tested',
-          lumbar_arrom_left_side_bending: 'not_tested',
-          lumbar_arrom_comments: ''
-        });
+        // Use generic reset helper with config
+        this.resetSingleColumnFields(this.romConfig.lumbarArom);
       }
     });
 
@@ -1584,59 +1445,16 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('hip_arrom')?.valueChanges.subscribe(value => {
       this.showHipAromFields = value === 'yes';
       if (!this.showHipAromFields) {
-        this.romForm.patchValue({
-          hip_flexion_right: 'not_tested',
-          hip_flexion_left: 'not_tested',
-          hip_extension_right: 'not_tested',
-          hip_extension_left: 'not_tested',
-          hip_abduction_right: 'not_tested',
-          hip_abduction_left: 'not_tested',
-          hip_adduction_right: 'not_tested',
-          hip_adduction_left: 'not_tested',
-          hip_internal_rotation_right: 'not_tested',
-          hip_internal_rotation_left: 'not_tested',
-          hip_external_rotation_right: 'not_tested',
-          hip_external_rotation_left: 'not_tested',
-          hip_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.hipArom);
       }
     });
 
     this.romForm.get('hip_prom')?.valueChanges.subscribe(value => {
       this.showHipPromFields = value === 'yes';
       if (value === 'no') {
-        this.romForm.patchValue({
-          hip_prom_apply_to_all: '',
-          hip_prom_flexion_right: 'not_tested',
-          hip_prom_flexion_right_endfeel: 'not_tested',
-          hip_prom_flexion_left: 'not_tested',
-          hip_prom_flexion_left_endfeel: 'not_tested',
-
-          hip_prom_extension_right: 'not_tested',
-          hip_prom_extension_right_endfeel: 'not_tested',
-          hip_prom_extension_left: 'not_tested',
-          hip_prom_extension_left_endfeel: 'not_tested',
-
-          hip_prom_abduction_right: 'not_tested',
-          hip_prom_abduction_right_endfeel: 'not_tested',
-          hip_prom_abduction_left: 'not_tested',
-          hip_prom_abduction_left_endfeel: 'not_tested',
-
-          hip_prom_adduction_right: 'not_tested',
-          hip_prom_adduction_right_endfeel: 'not_tested',
-          hip_prom_adduction_left: 'not_tested',
-          hip_prom_adduction_left_endfeel: 'not_tested',
-
-          hip_prom_internal_rotation_right: 'not_tested',
-          hip_prom_internal_rotation_right_endfeel: 'not_tested',
-          hip_prom_internal_rotation_left: 'not_tested',
-          hip_prom_internal_rotation_left_endfeel: 'not_tested',
-
-          hip_prom_external_rotation_right: 'not_tested',
-          hip_prom_external_rotation_right_endfeel: 'not_tested',
-          hip_prom_external_rotation_left: 'not_tested',
-          hip_prom_external_rotation_left_endfeel: 'not_tested'
-        })
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.hipProm);
       }
     });
 
@@ -1678,14 +1496,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('knee_arrom')?.valueChanges.subscribe(value => {
       this.showKneeAromFields = value === 'yes';
       if (!this.showKneeAromFields) {
-        this.romForm.patchValue({
-          knee_arom_apply_to_all: '',
-          knee_flexion_right: 'not_tested',
-          knee_flexion_left: 'not_tested',
-          knee_extension_right: 'not_tested',
-          knee_extension_left: 'not_tested',
-          knee_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.kneeArom);
       }
     });
 
@@ -1708,20 +1520,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('ankle_arrom')?.valueChanges.subscribe(value => {
       this.showAnkleAromFields = value === 'yes';
       if (!this.showAnkleAromFields) {
-        this.romForm.patchValue({
-          ankle_arom_apply_to_all: '',
-          ankle_dorsiflexion_0_knee_flexion_right: 'not_tested',
-          ankle_dorsiflexion_0_knee_flexion_left: 'not_tested',
-          ankle_dorsiflexion_90_knee_flexion_right: 'not_tested',
-          ankle_dorsiflexion_90_knee_flexion_left: 'not_tested',
-          ankle_plantarflexion_right: 'not_tested',
-          ankle_plantarflexion_left: 'not_tested',
-          ankle_inversion_right: 'not_tested',
-          ankle_inversion_left: 'not_tested',
-          ankle_eversion_right: 'not_tested',
-          ankle_eversion_left: 'not_tested',
-          ankle_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.ankleArom);
       }
     });
 
@@ -1746,30 +1546,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('ankle_prom')?.valueChanges.subscribe(value => {
       this.showAnklePromFields = value === 'yes';
       if (!this.showAnklePromFields) {
-        this.romForm.patchValue({
-          ankle_prom_apply_to_all: '',
-          ankle_prom_dorsiflexion_0_knee_flexion_right: 'not_tested',
-          ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: 'not_tested',
-          ankle_prom_dorsiflexion_0_knee_flexion_left: 'not_tested',
-          ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: 'not_tested',
-          ankle_prom_dorsiflexion_90_knee_flexion_right: 'not_tested',
-          ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: 'not_tested',
-          ankle_prom_dorsiflexion_90_knee_flexion_left: 'not_tested',
-          ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: 'not_tested',
-          ankle_prom_plantarflexion_right: 'not_tested',
-          ankle_prom_plantarflexion_right_endfeel: 'not_tested',
-          ankle_prom_plantarflexion_left: 'not_tested',
-          ankle_prom_plantarflexion_left_endfeel: 'not_tested',
-          ankle_prom_inversion_right: 'not_tested',
-          ankle_prom_inversion_right_endfeel: 'not_tested',
-          ankle_prom_inversion_left: 'not_tested',
-          ankle_prom_inversion_left_endfeel: 'not_tested',
-          ankle_prom_eversion_right: 'not_tested',
-          ankle_prom_eversion_right_endfeel: 'not_tested',
-          ankle_prom_eversion_left: 'not_tested',
-          ankle_prom_eversion_left_endfeel: 'not_tested',
-          ankle_prom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.ankleProm);
       }
     });
 
@@ -1794,14 +1572,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('fst_mtp_arrom')?.valueChanges.subscribe(value => {
       this.show1stMtpAromFields = value === 'yes';
       if (!this.show1stMtpAromFields) {
-        this.romForm.patchValue({
-          fst_mtp_arom_apply_to_all: '',
-          fst_mtp_flexion_right: 'not_tested',
-          fst_mtp_flexion_left: 'not_tested',
-          fst_mtp_extension_right: 'not_tested',
-          fst_mtp_extension_left: 'not_tested',
-          fst_mtp_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.fstMTPArom);
       }
     });
 
@@ -1824,14 +1596,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('fst_ip_arrom')?.valueChanges.subscribe(value => {
       this.show1stIpAromFields = value === 'yes';
       if (!this.show1stIpAromFields) {
-        this.romForm.patchValue({
-          fst_ip_arom_apply_to_all: '',
-          fst_ip_flexion_right: 'not_tested',
-          fst_ip_flexion_left: 'not_tested',
-          fst_ip_extension_right: 'not_tested',
-          fst_ip_extension_left: 'not_tested',
-          fst_ip_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.fstipArom);
       }
     });
 
@@ -1854,116 +1620,16 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('toe_arrom')?.valueChanges.subscribe(value => {
       this.showToeAromFields = value === 'yes';
       if (!this.showToeAromFields) {
-        this.romForm.patchValue({
-          toe_arom_apply_to_all: '',
-          toe_arom_2nd_mtp_flexion_right: 'not_tested',
-          toe_arom_2nd_mtp_flexion_left: 'not_tested',
-          toe_arom_2nd_mtp_extension_right: 'not_tested',
-          toe_arom_2nd_mtp_extension_left: 'not_tested',
-          toe_arom_2nd_ip_flexion_right: 'not_tested',
-          toe_arom_2nd_ip_flexion_left: 'not_tested',
-          toe_arom_2nd_ip_extension_right: 'not_tested',
-          toe_arom_2nd_ip_extension_left: 'not_tested',
-          toe_arom_3rd_mtp_flexion_right: 'not_tested',
-          toe_arom_3rd_mtp_flexion_left: 'not_tested',
-          toe_arom_3rd_mtp_extension_right: 'not_tested',
-          toe_arom_3rd_mtp_extension_left: 'not_tested',
-          toe_arom_3rd_ip_flexion_right: 'not_tested',
-          toe_arom_3rd_ip_flexion_left: 'not_tested',
-          toe_arom_3rd_ip_extension_right: 'not_tested',
-          toe_arom_3rd_ip_extension_left: 'not_tested',
-          toe_arom_4th_mtp_flexion_right: 'not_tested',
-          toe_arom_4th_mtp_flexion_left: 'not_tested',
-          toe_arom_4th_mtp_extension_right: 'not_tested',
-          toe_arom_4th_mtp_extension_left: 'not_tested',
-          toe_arom_4th_ip_flexion_right: 'not_tested',
-          toe_arom_4th_ip_flexion_left: 'not_tested',
-          toe_arom_4th_ip_extension_right: 'not_tested',
-          toe_arom_4th_ip_extension_left: 'not_tested',
-          toe_arom_5th_mtp_flexion_right: 'not_tested',
-          toe_arom_5th_mtp_flexion_left: 'not_tested',
-          toe_arom_5th_mtp_extension_right: 'not_tested',
-          toe_arom_5th_mtp_extension_left: 'not_tested',
-          toe_arom_5th_ip_flexion_right: 'not_tested',
-          toe_arom_5th_ip_flexion_left: 'not_tested',
-          toe_arom_5th_ip_extension_right: 'not_tested',
-          toe_arom_5th_ip_extension_left: 'not_tested',
-          toe_arrom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementFields(this.romConfig.toeArom);
       }
     });
 
     this.romForm.get('toe_prom')?.valueChanges.subscribe(value => {
       this.showToePromFields = value === 'yes';
       if (!this.showToePromFields) {
-        this.romForm.patchValue({
-          toe_prom_apply_to_all: '',
-          toe_2nd_mtp_flexion_right: 'not_tested',
-          toe_2nd_mtp_flexion_right_endfeel: 'not_tested',
-          toe_2nd_mtp_flexion_left: 'not_tested',
-          toe_2nd_mtp_flexion_left_endfeel: 'not_tested',
-          toe_2nd_mtp_extension_right: 'not_tested',
-          toe_2nd_mtp_extension_right_endfeel: 'not_tested',
-          toe_2nd_mtp_extension_left: 'not_tested',
-          toe_2nd_mtp_extension_left_endfeel: 'not_tested',
-          toe_2nd_ip_flexion_right: 'not_tested',
-          toe_2nd_ip_flexion_right_endfeel: 'not_tested',
-          toe_2nd_ip_flexion_left: 'not_tested',
-          toe_2nd_ip_flexion_left_endfeel: 'not_tested',
-          toe_2nd_ip_extension_right: 'not_tested',
-          toe_2nd_ip_extension_right_endfeel: 'not_tested',
-          toe_2nd_ip_extension_left: 'not_tested',
-          toe_2nd_ip_extension_left_endfeel: 'not_tested',
-          toe_3rd_mtp_flexion_right: 'not_tested',
-          toe_3rd_mtp_flexion_right_endfeel: 'not_tested',
-          toe_3rd_mtp_flexion_left: 'not_tested',
-          toe_3rd_mtp_flexion_left_endfeel: 'not_tested',
-          toe_3rd_mtp_extension_right: 'not_tested',
-          toe_3rd_mtp_extension_right_endfeel: 'not_tested',
-          toe_3rd_mtp_extension_left: 'not_tested',
-          toe_3rd_mtp_extension_left_endfeel: 'not_tested',
-          toe_3rd_ip_flexion_right: 'not_tested',
-          toe_3rd_ip_flexion_right_endfeel: 'not_tested',
-          toe_3rd_ip_flexion_left: 'not_tested',
-          toe_3rd_ip_flexion_left_endfeel: 'not_tested',
-          toe_3rd_ip_extension_right: 'not_tested',
-          toe_3rd_ip_extension_right_endfeel: 'not_tested',
-          toe_3rd_ip_extension_left: 'not_tested',
-          toe_3rd_ip_extension_left_endfeel: 'not_tested',
-          toe_4th_mtp_flexion_right: 'not_tested',
-          toe_4th_mtp_flexion_right_endfeel: 'not_tested',
-          toe_4th_mtp_flexion_left: 'not_tested',
-          toe_4th_mtp_flexion_left_endfeel: 'not_tested',
-          toe_4th_mtp_extension_right: 'not_tested',
-          toe_4th_mtp_extension_right_endfeel: 'not_tested',
-          toe_4th_mtp_extension_left: 'not_tested',
-          toe_4th_mtp_extension_left_endfeel: 'not_tested',
-          toe_4th_ip_flexion_right: 'not_tested',
-          toe_4th_ip_flexion_right_endfeel: 'not_tested',
-          toe_4th_ip_flexion_left: 'not_tested',
-          toe_4th_ip_flexion_left_endfeel: 'not_tested',
-          toe_4th_ip_extension_right: 'not_tested',
-          toe_4th_ip_extension_right_endfeel: 'not_tested',
-          toe_4th_ip_extension_left: 'not_tested',
-          toe_4th_ip_extension_left_endfeel: 'not_tested',
-          toe_5th_mtp_flexion_right: 'not_tested',
-          toe_5th_mtp_flexion_right_endfeel: 'not_tested',
-          toe_5th_mtp_flexion_left: 'not_tested',
-          toe_5th_mtp_flexion_left_endfeel: 'not_tested',
-          toe_5th_mtp_extension_right: 'not_tested',
-          toe_5th_mtp_extension_right_endfeel: 'not_tested',
-          toe_5th_mtp_extension_left: 'not_tested',
-          toe_5th_mtp_extension_left_endfeel: 'not_tested',
-          toe_5th_ip_flexion_right: 'not_tested',
-          toe_5th_ip_flexion_right_endfeel: 'not_tested',
-          toe_5th_ip_flexion_left: 'not_tested',
-          toe_5th_ip_flexion_left_endfeel: 'not_tested',
-          toe_5th_ip_extension_right: 'not_tested',
-          toe_5th_ip_extension_right_endfeel: 'not_tested',
-          toe_5th_ip_extension_left: 'not_tested',
-          toe_5th_ip_extension_left_endfeel: 'not_tested',
-          toe_prom_comments: ''
-        }, { emitEvent: false });
+        // Use generic reset helper with config
+        this.resetMeasurementEndfeelFields(this.romConfig.toeProm);
       }
     });
 
