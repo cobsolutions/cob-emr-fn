@@ -122,6 +122,16 @@
         </div>
     </div>
     <div *ngIf="showDermatomesLowerFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.dermatomesLower.labels"
+      [options]="neuroVascularConfig.dermatomesLower.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.dermatomesLower.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.dermatomesLower.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.dermatomesLower.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.dermatomesLower.showApplyToAll"
+      [showComments]="neuroVascularConfig.dermatomesLower.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Upper Reflexes</label>

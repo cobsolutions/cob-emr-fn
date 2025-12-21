@@ -55,4 +55,12 @@ export const dermatomesUpper_OPTIONS: RomOption[] = [
     { value: 'Hypersensitive to light touch', label: 'Hypersensitive to light touch' },
     { value: 'Absent', label: 'Absent' },
     { value: 'not_tested', label: 'Not Tested' }
-  ];
+];
+export const dermatomesLower_OPTIONS: RomOption[] = [
+    { value: 'Normal', label: 'Normal' },
+    { value: 'Hyposensitivity', label: 'Hyposensitivity' },
+    { value: 'Hypersensitivity', label: 'Hypersensitivity' },
+    { value: 'No Sensation', label: 'No Sensation' },
+    { value: 'Grossly intact to light touch', label: 'Grossly intact to light touch' },
+    { value: 'not_tested', label: 'Not Tested' }
+];
