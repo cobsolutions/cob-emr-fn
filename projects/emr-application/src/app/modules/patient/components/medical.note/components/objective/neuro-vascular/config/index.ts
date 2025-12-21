@@ -10,6 +10,7 @@ import { MyotomesLower } from "./myotomes-lower";
 import { MyotomesUpper } from "./myotomes-upper";
 import { NeuralTissueTensionLower } from "./neural-tissue-tension-lower";
 import { NeuralTissueTensionUpper } from "./neural-tissue-tension-upper";
+import { QuadrantTesting } from "./quadrant-testing";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
 import { UpperReflexes } from "./upper-reflexes";
@@ -52,4 +53,6 @@ export class NeuroVascularConfig {
 
     
     static readonly slump = Slump.slump;
+    
+    static readonly quadrantTesting = QuadrantTesting.quadrantTesting;
 }

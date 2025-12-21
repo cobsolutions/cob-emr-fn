@@ -437,6 +437,16 @@
         </div>
     </div>
     <div *ngIf="showQuadrantTestingFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.quadrantTesting.labels"
+      [options]="neuroVascularConfig.quadrantTesting.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.quadrantTesting.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.quadrantTesting.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.quadrantTesting.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.quadrantTesting.showApplyToAll"
+      [showComments]="neuroVascularConfig.quadrantTesting.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Prone Knee Bend (Nachlas)</label>
