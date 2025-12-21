@@ -617,6 +617,16 @@
         </div>
     </div>
     <div *ngIf="showTinelSUpperFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.tinelsUpper.labels"
+      [options]="neuroVascularConfig.tinelsUpper.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.tinelsUpper.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.tinelsUpper.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.tinelsUpper.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.tinelsUpper.showApplyToAll"
+      [showComments]="neuroVascularConfig.tinelsUpper.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Transverse Ligament Stability</label>

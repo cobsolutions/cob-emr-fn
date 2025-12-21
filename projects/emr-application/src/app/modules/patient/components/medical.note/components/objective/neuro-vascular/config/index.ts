@@ -18,6 +18,7 @@ import { SeatedDuralStretch } from "./seated-dural-stretch";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
 import { TinelsLower } from "./tinels-lower";
+import { TinelsUpper } from "./tinels-upper";
 import { UpperReflexes } from "./upper-reflexes";
 import { Vascular } from "./vascular";
 
@@ -75,4 +76,6 @@ export class NeuroVascularConfig {
 
     
     static readonly tinelsLower = TinelsLower.tinelsLower;
+    
+    static readonly tinelsUpper = TinelsUpper.tinelsUpper;
 }
