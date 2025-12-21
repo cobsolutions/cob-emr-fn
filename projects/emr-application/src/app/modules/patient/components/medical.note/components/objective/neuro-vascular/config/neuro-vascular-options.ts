@@ -85,4 +85,10 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: 'Positive', label: 'Positive' },
     { value: 'Negative', label: 'Negative' }
   ];
+  export const neuralTissueTensionLower_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+  
     

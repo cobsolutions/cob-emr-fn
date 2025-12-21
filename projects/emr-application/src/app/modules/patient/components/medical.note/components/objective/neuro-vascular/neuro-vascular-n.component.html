@@ -222,6 +222,16 @@
         </div>
     </div>
     <div *ngIf="showNeuralTissueTensionLowerFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.neuralTissueTensionLower.labels"
+      [options]="neuroVascularConfig.neuralTissueTensionLower.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.neuralTissueTensionLower.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.neuralTissueTensionLower.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.neuralTissueTensionLower.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.neuralTissueTensionLower.showApplyToAll"
+      [showComments]="neuroVascularConfig.neuralTissueTensionLower.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Vascular</label>
