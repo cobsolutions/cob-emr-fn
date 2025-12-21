@@ -160,6 +160,13 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: 'Positive', label: 'Positive' },
     { value: 'Negative', label: 'Negative' }
   ];
+  export const TransverseLigamentStability_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Negative', label: 'Negative' },
+    { value: 'Positive With Clunk', label: 'Positive With Clunk' },
+    { value: 'Positive With Discomfort', label: 'Positive With Discomfort' },
+    { value: 'custom', label: 'Custom' }
+  ];
   
   
   
