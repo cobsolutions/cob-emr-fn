@@ -76,16 +76,14 @@
         </div>
     </div>
     <div *ngIf="showMyotomesLowerFields" class="dependent-field-box">
-        <measurement-table
-      [labels]="neuroVascularConfig.myotomesLowerSelect.labels"
-      [options]="neuroVascularConfig.myotomesLowerSelect.options"
-      [formGroup]="neuroVascularForm"
-      [fieldPrefix]="neuroVascularConfig.myotomesLowerSelect.fieldPrefix"
-      [applyToAllFieldName]="neuroVascularConfig.myotomesLowerSelect.applyToAllFieldName"
-      [commentsFieldName]="neuroVascularConfig.myotomesLowerSelect.commentsFieldName"
-      [showApplyToAll]="neuroVascularConfig.myotomesLowerSelect.showApplyToAll"
-      [showComments]="neuroVascularConfig.myotomesLowerSelect.showComments">
-    </measurement-table>
+        <measurement-table [labels]="neuroVascularConfig.myotomesLowerSelect.labels"
+            [options]="neuroVascularConfig.myotomesLowerSelect.options" [formGroup]="neuroVascularForm"
+            [fieldPrefix]="neuroVascularConfig.myotomesLowerSelect.fieldPrefix"
+            [applyToAllFieldName]="neuroVascularConfig.myotomesLowerSelect.applyToAllFieldName"
+            [commentsFieldName]="neuroVascularConfig.myotomesLowerSelect.commentsFieldName"
+            [showApplyToAll]="neuroVascularConfig.myotomesLowerSelect.showApplyToAll"
+            [showComments]="neuroVascularConfig.myotomesLowerSelect.showComments">
+        </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Dermatomes Upper</label>
@@ -101,6 +99,14 @@
         </div>
     </div>
     <div *ngIf="showDermatomesUpperFields" class="dependent-field-box">
+        <measurement-table [labels]="neuroVascularConfig.dermatomesUpperSelect.labels"
+            [options]="neuroVascularConfig.dermatomesUpperSelect.options" [formGroup]="neuroVascularForm"
+            [fieldPrefix]="neuroVascularConfig.dermatomesUpperSelect.fieldPrefix"
+            [applyToAllFieldName]="neuroVascularConfig.dermatomesUpperSelect.applyToAllFieldName"
+            [commentsFieldName]="neuroVascularConfig.dermatomesUpperSelect.commentsFieldName"
+            [showApplyToAll]="neuroVascularConfig.dermatomesUpperSelect.showApplyToAll"
+            [showComments]="neuroVascularConfig.dermatomesUpperSelect.showComments">
+        </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Dermatomes Lower</label>

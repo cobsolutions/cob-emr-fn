@@ -46,3 +46,13 @@ export const MyotomesLower_OPTIONS: RomOption[] = [
     { value: 'wnl', label: 'WNL' },
     { value: 'wfl', label: 'WFL' },
 ]
+export const dermatomesUpper_OPTIONS: RomOption[] = [
+    { value: 'Normal', label: 'Normal' },
+    { value: 'Grossly intact to light touch', label: 'Grossly intact to light touch' },
+    { value: 'Diminished to light touch', label: 'Diminished to light touch' },
+    { value: 'Diminished to sharp/dull', label: 'Diminished to sharp/dull' },
+    { value: 'Diminished to hot/cold', label: 'Diminished to hot/cold' },
+    { value: 'Hypersensitive to light touch', label: 'Hypersensitive to light touch' },
+    { value: 'Absent', label: 'Absent' },
+    { value: 'not_tested', label: 'Not Tested' }
+  ];
