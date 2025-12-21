@@ -13,9 +13,9 @@ export class ElbowPROM{
             'Supination':ELBOW_PROM_90_OPTION,
             'Pronation':ELBOW_PROM_90_OPTION
         },
-        fieldPrefix: 'elbo_prom_',
-        applyToAllFieldName: 'elbo_prom_apply_to_all',
-        commentsFieldName: 'elbo_prom_comments',
+        fieldPrefix: 'elbow_prom_',
+        applyToAllFieldName: 'elbow_prom_apply_to_all',
+        commentsFieldName: 'elbow_prom_comments',
         showApplyToAll: true,
         showComments: false,
         endfeelOptions: ENDFEEL_OPTION

@@ -12,9 +12,9 @@ export class FstIPAROM {
             'Flexion': FLEXION_FST_IP_AROM_OPTION,
             'Extension': EXTENSION_FST_IP_AROM_OPTION
         },
-        fieldPrefix: 'fstip_arom_',
-        applyToAllFieldName: 'fstip_arom_apply_to_all',
-        commentsFieldName: 'fstip_arom_comments',
+        fieldPrefix: 'fst_ip_',
+        applyToAllFieldName: 'fst_ip_apply_to_all',
+        commentsFieldName: 'fst_ip_arrom_comments',
         showApplyToAll: true,
         showComments: false
     };

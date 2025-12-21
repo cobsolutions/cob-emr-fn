@@ -15,9 +15,9 @@ export class AnkleAROM {
             'Inversion': INVERSION_ANKLE_AROM_OPTION,
             'Eversion': EVERSION_ANKLE_AROM_OPTION
         },
-        fieldPrefix: 'ankle_arom_',
-        applyToAllFieldName: 'ankle_arom_apply_to_all',
-        commentsFieldName: 'ankle_arom_comments',
+        fieldPrefix: 'ankle_',
+        applyToAllFieldName: 'ankle_apply_to_all',
+        commentsFieldName: 'ankle_arrom_comments',
         showApplyToAll: true,
         showComments: false
     };

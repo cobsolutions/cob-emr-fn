@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { generateSingleColumnFieldName } from '../form-field-utils';
 
 @Component({
   selector: 'single-column-table',
@@ -72,8 +73,7 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
    * Example: fieldPrefix='cervical_arom_', label='Forward Bending' => 'cervical_arom_forward_bending'
    */
   getFieldName(label: string): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}`;
+    return generateSingleColumnFieldName(this.fieldPrefix, label);
   }
 
   /**

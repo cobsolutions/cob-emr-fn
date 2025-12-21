@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { TopSelect } from '../../range-of-motion/config';
+import { generateMeasurementFieldName } from '../form-field-utils';
 
 @Component({
   selector: 'measurement-table-with-selects',
@@ -62,8 +63,7 @@ export class MeasurementTableWithSelectsComponent implements OnInit {
    * Example: fieldPrefix='elbow_', label='Flexion', side='right' => 'elbow_flexion_right'
    */
   getFieldName(label: string, side: 'right' | 'left'): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}_${side}`;
+    return generateMeasurementFieldName(this.fieldPrefix, label, side);
   }
 
   /**

@@ -26,9 +26,9 @@ export class ShoulderAROM {
             'Horizontal Adduction': SHOULDER_AROM_POSITION_ABDUCTION_OPTIONS,
         },
         applyToAllOptions: APPLY_TO_ALL_OPTIONS,
-        fieldPrefix: 'shoulder_arrom_',
-        applyToAllFieldName: 'shoulder_arrom_apply_to_all',
-        commentsFieldName: 'shoulder_arrom_comments',
+        fieldPrefix: 'shoulder_',
+        applyToAllFieldName: 'shoulder_apply_to_all',
+        commentsFieldName: 'shoulder_comments',
         showApplyToAll: true,
         showComments: false
     };

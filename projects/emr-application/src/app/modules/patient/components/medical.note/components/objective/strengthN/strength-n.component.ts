@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { generateMeasurementFieldName } from '../common/form-field-utils';
+import { RomSectionConfig, RomSectionWithSelectsConfig } from '../range-of-motion/config';
 import { StrengthSectionsConfig } from './config';
 
 @Component({
@@ -30,6 +32,39 @@ export class StrengthNComponent implements OnInit {
     this.initForm();
     this.setupValueChangeListeners();
   }
+  /**
+  * Generic helper to reset measurement-table fields (right/left)
+  * Uses the same config and naming logic as the child component
+  */
+  private resetMeasurementFields(config: RomSectionConfig): void {
+    const updates: any = {};
+
+    // Reset Apply to All field
+    if (config.showApplyToAll) {
+      updates[config.applyToAllFieldName] = '';
+    }
+
+    // Reset all measurement fields (right and left)
+    config.labels.forEach(label => {
+      const rightField = generateMeasurementFieldName(config.fieldPrefix, label, 'right');
+      const leftField = generateMeasurementFieldName(config.fieldPrefix, label, 'left');
+      updates[rightField] = 'not_tested';
+      updates[leftField] = 'not_tested';
+    });
+
+    // Reset comments field
+    if (config.showComments) {
+      updates[config.commentsFieldName] = '';
+    }
+
+    this.strengthForm.patchValue(updates, { emitEvent: false });
+  }
+  /*
+    TODO
+  */
+  private resetMeasurementFieldsWithSelect(config: RomSectionWithSelectsConfig): void {
+
+  }
   initForm() {
     this.strengthForm = this.fb.group({
       no_limitations_noted: ['no'],
@@ -52,6 +87,10 @@ export class StrengthNComponent implements OnInit {
       foot: ['no'],
 
       grip_pinch: ['no'],
+      rapid_exchange: ['no'],
+      repeated_grip: ['no'],
+      five_level_grip: ['no'],
+
 
       gross_muscle_tests_upper: ['no'],
       cervical_gross_muscle_tests_upper: ['no'],
@@ -126,9 +165,9 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('grip_pinch')?.valueChanges.subscribe(value => {
       this.showGripPinchFields = value === 'yes';
-      if(this.showGripPinchFields){
+      if (this.showGripPinchFields) {
         this.strengthForm.patchValue({
-          
+
         })
       }
     });
@@ -160,6 +199,10 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('gross_muscle_tests_trunk')?.valueChanges.subscribe(value => {
       this.showGrossMuscleTestsTrunkFields = value === 'yes';
+      if (!this.showGrossMuscleTestsTrunkFields) {
+        // Use generic reset helper with config
+        this.resetMeasurementFieldsWithSelect(this.strengthConfig.grossMuscleTestsTrunk);
+      }
     });
 
     this.strengthForm.get('gross_muscle_tests_lower')?.valueChanges.subscribe(value => {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { generateMeasurementFieldName, generateEndfeelFieldName } from '../form-field-utils';
 
 @Component({
   selector: 'measurement-endfeel-table',
@@ -86,8 +87,7 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
    * Example: fieldPrefix='hip_prom_', label='Flexion', side='right' => 'hip_prom_flexion_right'
    */
   getMeasurementFieldName(label: string, side: 'right' | 'left'): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}_${side}`;
+    return generateMeasurementFieldName(this.fieldPrefix, label, side);
   }
 
   /**
@@ -95,8 +95,7 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
    * Example: fieldPrefix='hip_prom_', label='Flexion', side='right' => 'hip_prom_flexion_right_endfeel'
    */
   getEndfeelFieldName(label: string, side: 'right' | 'left'): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}_${side}_endfeel`;
+    return generateEndfeelFieldName(this.fieldPrefix, label, side);
   }
 
   /**

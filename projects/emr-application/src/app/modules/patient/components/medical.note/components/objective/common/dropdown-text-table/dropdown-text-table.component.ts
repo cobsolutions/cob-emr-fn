@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { generateDropdownFieldName, generateTextFieldName } from '../form-field-utils';
 
 @Component({
   selector: 'dropdown-text-table',
@@ -38,7 +39,7 @@ export class DropdownTextTableComponent implements OnInit {
           const textFieldName = this.getTextFieldName(label, column);
 
           if (!this.formGroup.get(dropdownFieldName)) {
-            this.formGroup.addControl(dropdownFieldName, this.fb.control(''));
+            this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
           }
           if (!this.formGroup.get(textFieldName)) {
             this.formGroup.addControl(textFieldName, this.fb.control(''));
@@ -75,14 +76,7 @@ export class DropdownTextTableComponent implements OnInit {
    * Without labels: fieldPrefix_columnName (e.g., shoulder_arom_right)
    */
   getDropdownFieldName(label: string | null, column: string): string {
-    const normalizedColumn = column.toLowerCase().replace(/\s+/g, '_');
-
-    if (label) {
-      const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-      return `${this.fieldPrefix}${normalizedLabel}_${normalizedColumn}`;
-    } else {
-      return `${this.fieldPrefix}${normalizedColumn}`;
-    }
+    return generateDropdownFieldName(this.fieldPrefix, label, column);
   }
 
   /**
@@ -91,14 +85,7 @@ export class DropdownTextTableComponent implements OnInit {
    * Without labels: fieldPrefix_columnName_text
    */
   getTextFieldName(label: string | null, column: string): string {
-    const normalizedColumn = column.toLowerCase().replace(/\s+/g, '_');
-
-    if (label) {
-      const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-      return `${this.fieldPrefix}${normalizedLabel}_${normalizedColumn}_text`;
-    } else {
-      return `${this.fieldPrefix}${normalizedColumn}_text`;
-    }
+    return generateTextFieldName(this.fieldPrefix, label, column);
   }
 
   /**

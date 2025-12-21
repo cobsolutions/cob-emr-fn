@@ -16,9 +16,9 @@ export class CervicalAROMConfig{
         specialOptions: {
           'Forward Bending': CERVICAL_AROM_SPECIAL_OPTIONS // Special options for Forward Bending (WFL, Limited, Painful, Restricted)
         },
-        fieldPrefix: 'cervical_arom_',
-        applyToAllFieldName: 'cervical_arom_apply_to_all',
-        commentsFieldName: 'cervical_arom_comments',
+        fieldPrefix: 'cervical_',
+        applyToAllFieldName: 'cervical_apply_to_all',
+        commentsFieldName: 'cervical_comments',
         showApplyToAll: true,
         showComments: true
       };

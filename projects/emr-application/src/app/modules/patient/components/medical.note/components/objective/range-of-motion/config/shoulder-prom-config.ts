@@ -35,9 +35,9 @@ export class ShoulderPROM {
             'Horizontal Abduction': SHOULDER_PROM_120_OPTION,
             'Horizontal Adduction': SHOULDER_PROM_120_OPTION
         },
-        fieldPrefix: 'shoulderProm_',
-        applyToAllFieldName: 'shoulderProm_apply_to_all',
-        commentsFieldName: 'shoulderProm_comments',
+        fieldPrefix: 'shoulder_prom_',
+        applyToAllFieldName: 'shoulder_prom_apply_to_all',
+        commentsFieldName: 'shoulder_prom_comments',
         showApplyToAll: true,
         showComments: false,
         endfeelOptions: ENDFEEL_OPTION

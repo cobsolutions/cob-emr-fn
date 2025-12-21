@@ -10,8 +10,8 @@ export class FstMTPArom {
             'Flexion': FLEXION_FST_MTP_AROM_OPTION,
             'Extension': EXTENSION_FST_MTP_AROM_OPTION,
         },
-        fieldPrefix: 'fst_mtp_arrom_',
-        applyToAllFieldName: 'fst_mtp_arrom_apply_to_all',
+        fieldPrefix: 'fst_mtp_',
+        applyToAllFieldName: 'fst_mtp_apply_to_all',
         commentsFieldName: 'fst_mtp_arrom_comments',
         showApplyToAll: true,
         showComments: false

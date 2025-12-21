@@ -13,9 +13,9 @@ export class ElbowAROM {
             'Supination': ALBOW_AROM_SUPINATION_PRONATION_OPTIONS,
             'Pronation': ALBOW_AROM_SUPINATION_PRONATION_OPTIONS
         },
-        fieldPrefix: 'elbow_arom_',
-        applyToAllFieldName: 'elbow_arom_apply_to_all',
-        commentsFieldName: 'elbow_arom_comments',
+        fieldPrefix: 'elbow_arrom_',
+        applyToAllFieldName: 'elbow_arrom_apply_to_all',
+        commentsFieldName: 'elbow_arrom_comments',
         showApplyToAll: true,
         showComments: false
     };

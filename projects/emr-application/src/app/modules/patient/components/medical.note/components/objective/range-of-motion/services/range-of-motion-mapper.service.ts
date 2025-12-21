@@ -1,5 +1,24 @@
 import { Injectable } from '@angular/core';
 import { CervicalAROMModel, CostovertebralExpansionModel, ElbowAROMModel, ElbowPROMModel, HandAromPromModel, HipAROMModel, IndexFingerAromPromModel, MiddleFingerAromPromModel, NoLimitationsNotedModel, RangeOfMotionModel, RingFingerAromPromModel, ShoulderAROMModel, ShoulderPROMModel, SmallFingerAromPromModel, ThoracicAromSittingWithPassiveOverpressureModel, ThoracicAROMStandingModel, ThumbAromPromModel, ToeAROMModel, ToePROMModel, WristAROMModel, WristPROMModel, LumbarAROMModel, HipPROMModel, KneeAROMModel, AnkleAROMModel, AnklePROMModel, FirstMtpAROMModel, FirstIpAROMModel } from '../models/range-of-motion.model';
+import { mapSingleColumnSection, fromDtoSingleColumnSection, mapMeasurementSection, fromDtoMeasurementSection, mapMeasurementEndfeelSection, fromDtoMeasurementEndfeelSection } from '../common/mapper-utils';
+import { CervicalAROMConfig } from '../config/cervical-arom';
+import { LumbarAROMConfig } from '../config/lumbar-arom-config';
+import { CostovertebralExpansionConfig } from '../config/costovertebral.expansion-config';
+import { ShoulderAROM } from '../config/shoulder-arom-config';
+import { ShoulderPROM } from '../config/shoulder-prom-config';
+import { ElbowAROM } from '../config/elbow-arom-config';
+import { ElbowPROM } from '../config/elbow-prom-config';
+import { WristAROM } from '../config/wrist-arom-config';
+import { WristPROM } from '../config/wrist-prom-config';
+import { HipAromConfig } from '../config/hip-arom-config';
+import { HipPROM } from '../config/hip-prom-config';
+import { KneeAROM } from '../config/knee-arom-config';
+import { AnkleAROM } from '../config/ankle-arom-config';
+import { AnklePROM } from '../config/ankle-prom-config';
+import { FstMTPArom } from '../config/fst-mtp-arom-config';
+import { FstIPAROM } from '../config/fst-ip-arom-config';
+import { ToeAROM } from '../config/toe-arom-config';
+import { ToePROM } from '../config/toe-prom-config';
 
 @Injectable({
   providedIn: 'root'
@@ -90,196 +109,68 @@ export class RangeOfMotionMapperService {
   }
 
   private fromDtoCervicalArom(dto: RangeOfMotionModel): any {
-    return {
-      // Cervical AROM
-      cervical_arrom: dto.cervicalArom?.enabled ? 'yes' : 'no',
-      cervical_forward_bending: dto.cervicalArom?.forwardBending || 'not_tested',
-      cervical_backward_bending: dto.cervicalArom?.backwardBending || 'not_tested',
-      cervical_right_rotation: dto.cervicalArom?.rightRotation || 'not_tested',
-      cervical_left_rotation: dto.cervicalArom?.leftRotation || 'not_tested',
-      cervical_right_side_bending: dto.cervicalArom?.rightSideBending || 'not_tested',
-      cervical_left_side_bending: dto.cervicalArom?.leftSideBending || 'not_tested',
-      cervical_comments: dto.cervicalArom?.comments || ''
-    };
+    // Using generic mapper with config - no manual field mapping!
+    return fromDtoSingleColumnSection(
+      dto.cervicalArom,
+      CervicalAROMConfig.cervicalArom,
+      'cervical_arrom'
+    );
   }
 
   private fromDtoCostovertebralExpansion(dto: RangeOfMotionModel): any {
-    return {
-      // Costovertebral Expansion
-      costovertebral_expansion: dto.costovertebralExpansion?.enabled ? 'yes' : 'no',
-      costovertebral_apply_to_all: '',
-      costovertebral_t4: dto.costovertebralExpansion?.t4 || 'not_tested',
-      costovertebral_t9: dto.costovertebralExpansion?.t9 || 'not_tested',
-      costovertebral_umbilicus: dto.costovertebralExpansion?.umbilicus || 'not_tested'
-    };
+    return fromDtoSingleColumnSection(
+      dto.costovertebralExpansion,
+      CostovertebralExpansionConfig.costovertebralExpansion,
+      'costovertebral_expansion'
+    );
   }
 
   private fromDtoShoulderArom(dto: RangeOfMotionModel): any {
-    return {
-      // Shoulder AROM
-      shoulder_arrom: dto.shoulderArom?.enabled ? 'yes' : 'no',
-      shoulder_apply_to_all: '',
-      shoulder_flexion_right: dto.shoulderArom?.flexionRight || 'not_tested',
-      shoulder_flexion_left: dto.shoulderArom?.flexionLeft || 'not_tested',
-      shoulder_scaption_right: dto.shoulderArom?.scaptionRight || 'not_tested',
-      shoulder_scaption_left: dto.shoulderArom?.scaptionLeft || 'not_tested',
-      shoulder_abduction_right: dto.shoulderArom?.abductionRight || 'not_tested',
-      shoulder_abduction_left: dto.shoulderArom?.abductionLeft || 'not_tested',
-      shoulder_extension_right: dto.shoulderArom?.extensionRight || 'not_tested',
-      shoulder_extension_left: dto.shoulderArom?.extensionLeft || 'not_tested',
-      shoulder_functional_er_reach_right: dto.shoulderArom?.functionalExternalRotationReachRight || 'not_tested',
-      shoulder_functional_er_reach_left: dto.shoulderArom?.functionalExternalRotationReachLeft || 'not_tested',
-      shoulder_functional_ir_reach_right: dto.shoulderArom?.functionalInternalRotationReachRight || 'not_tested',
-      shoulder_functional_ir_reach_left: dto.shoulderArom?.functionalInternalRotationReachLeft || 'not_tested',
-      shoulder_er_neutral_right: dto.shoulderArom?.erNeutralPositionRight || 'not_tested',
-      shoulder_er_neutral_left: dto.shoulderArom?.erNeutralPositionLeft || 'not_tested',
-      shoulder_ir_neutral_right: dto.shoulderArom?.irNeutralPositionRight || 'not_tested',
-      shoulder_ir_neutral_left: dto.shoulderArom?.irNeutralPositionLeft || 'not_tested',
-      shoulder_horizontal_abduction_right: dto.shoulderArom?.horizontalAbductionRight || 'not_tested',
-      shoulder_horizontal_abduction_left: dto.shoulderArom?.horizontalAbductionLeft || 'not_tested',
-      shoulder_horizontal_adduction_right: dto.shoulderArom?.horizontalAdductionRight || 'not_tested',
-      shoulder_horizontal_adduction_left: dto.shoulderArom?.horizontalAdductionLeft || 'not_tested'
-    };
+    return fromDtoMeasurementSection(
+      dto.shoulderArom,
+      ShoulderAROM.shoulderArom,
+      'shoulder_arrom'
+    );
   }
 
   private fromDtoShoulderProm(dto: RangeOfMotionModel): any {
-    return {
-      // Shoulder PROM
-      shoulder_prom: dto.shoulderProm?.enabled ? 'yes' : 'no',
-      shoulder_prom_apply_to_all: '',
-      shoulder_prom_flexion_right: dto.shoulderProm?.flexionRight || 'not_tested',
-      shoulder_prom_flexion_right_endfeel: dto.shoulderProm?.flexionRightEndfeel || 'not_tested',
-      shoulder_prom_flexion_left: dto.shoulderProm?.flexionLeft || 'not_tested',
-      shoulder_prom_flexion_left_endfeel: dto.shoulderProm?.flexionLeftEndfeel || 'not_tested',
-      shoulder_prom_scaption_right: dto.shoulderProm?.scaptionRight || 'not_tested',
-      shoulder_prom_scaption_right_endfeel: dto.shoulderProm?.scaptionRightEndfeel || 'not_tested',
-      shoulder_prom_scaption_left: dto.shoulderProm?.scaptionLeft || 'not_tested',
-      shoulder_prom_scaption_left_endfeel: dto.shoulderProm?.scaptionLeftEndfeel || 'not_tested',
-      shoulder_prom_abduction_right: dto.shoulderProm?.abductionRight || 'not_tested',
-      shoulder_prom_abduction_right_endfeel: dto.shoulderProm?.abductionRightEndfeel || 'not_tested',
-      shoulder_prom_abduction_left: dto.shoulderProm?.abductionLeft || 'not_tested',
-      shoulder_prom_abduction_left_endfeel: dto.shoulderProm?.abductionLeftEndfeel || 'not_tested',
-      shoulder_prom_extension_right: dto.shoulderProm?.extensionRight || 'not_tested',
-      shoulder_prom_extension_right_endfeel: dto.shoulderProm?.extensionRightEndfeel || 'not_tested',
-      shoulder_prom_extension_left: dto.shoulderProm?.extensionLeft || 'not_tested',
-      shoulder_prom_extension_left_endfeel: dto.shoulderProm?.extensionLeftEndfeel || 'not_tested',
-      shoulder_prom_er_neutral_right: dto.shoulderProm?.erNeutralPositionRight || 'not_tested',
-      shoulder_prom_er_neutral_right_endfeel: dto.shoulderProm?.erNeutralPositionRightEndfeel || 'not_tested',
-      shoulder_prom_er_neutral_left: dto.shoulderProm?.erNeutralPositionLeft || 'not_tested',
-      shoulder_prom_er_neutral_left_endfeel: dto.shoulderProm?.erNeutralPositionLeftEndfeel || 'not_tested',
-      shoulder_prom_ir_neutral_right: dto.shoulderProm?.irNeutralPositionRight || 'not_tested',
-      shoulder_prom_ir_neutral_right_endfeel: dto.shoulderProm?.irNeutralPositionRightEndfeel || 'not_tested',
-      shoulder_prom_ir_neutral_left: dto.shoulderProm?.irNeutralPositionLeft || 'not_tested',
-      shoulder_prom_ir_neutral_left_endfeel: dto.shoulderProm?.irNeutralPositionLeftEndfeel || 'not_tested',
-      shoulder_prom_er_scapular_plane_right: dto.shoulderProm?.erScapularPlaneRight || 'not_tested',
-      shoulder_prom_er_scapular_plane_right_endfeel: dto.shoulderProm?.erScapularPlaneRightEndfeel || 'not_tested',
-      shoulder_prom_er_scapular_plane_left: dto.shoulderProm?.erScapularPlaneLeft || 'not_tested',
-      shoulder_prom_er_scapular_plane_left_endfeel: dto.shoulderProm?.erScapularPlaneLeftEndfeel || 'not_tested',
-      shoulder_prom_ir_scapular_plane_right: dto.shoulderProm?.irScapularPlaneRight || 'not_tested',
-      shoulder_prom_ir_scapular_plane_right_endfeel: dto.shoulderProm?.irScapularPlaneRightEndfeel || 'not_tested',
-      shoulder_prom_ir_scapular_plane_left: dto.shoulderProm?.irScapularPlaneLeft || 'not_tested',
-      shoulder_prom_ir_scapular_plane_left_endfeel: dto.shoulderProm?.irScapularPlaneLeftEndfeel || 'not_tested',
-      shoulder_prom_er_90_degrees_abduction_right: dto.shoulderProm?.er90DegreesAbductionRight || 'not_tested',
-      shoulder_prom_er_90_degrees_abduction_right_endfeel: dto.shoulderProm?.er90DegreesAbductionRightEndfeel || 'not_tested',
-      shoulder_prom_er_90_degrees_abduction_left: dto.shoulderProm?.er90DegreesAbductionLeft || 'not_tested',
-      shoulder_prom_er_90_degrees_abduction_left_endfeel: dto.shoulderProm?.er90DegreesAbductionLeftEndfeel || 'not_tested',
-      shoulder_prom_ir_90_degrees_abduction_right: dto.shoulderProm?.ir90DegreesAbductionRight || 'not_tested',
-      shoulder_prom_ir_90_degrees_abduction_right_endfeel: dto.shoulderProm?.ir90DegreesAbductionRightEndfeel || 'not_tested',
-      shoulder_prom_ir_90_degrees_abduction_left: dto.shoulderProm?.ir90DegreesAbductionLeft || 'not_tested',
-      shoulder_prom_ir_90_degrees_abduction_left_endfeel: dto.shoulderProm?.ir90DegreesAbductionLeftEndfeel || 'not_tested',
-      shoulder_prom_ir_sleeper_stretch_right: dto.shoulderProm?.irSleeperStretchRight || 'not_tested',
-      shoulder_prom_ir_sleeper_stretch_right_endfeel: dto.shoulderProm?.irSleeperStretchRightEndfeel || 'not_tested',
-      shoulder_prom_ir_sleeper_stretch_left: dto.shoulderProm?.irSleeperStretchLeft || 'not_tested',
-      shoulder_prom_ir_sleeper_stretch_left_endfeel: dto.shoulderProm?.irSleeperStretchLeftEndfeel || 'not_tested',
-      shoulder_prom_horizontal_abduction_right: dto.shoulderProm?.horizontalAbductionRight || 'not_tested',
-      shoulder_prom_horizontal_abduction_right_endfeel: dto.shoulderProm?.horizontalAbductionRightEndfeel || 'not_tested',
-      shoulder_prom_horizontal_abduction_left: dto.shoulderProm?.horizontalAbductionLeft || 'not_tested',
-      shoulder_prom_horizontal_abduction_left_endfeel: dto.shoulderProm?.horizontalAbductionLeftEndfeel || 'not_tested',
-      shoulder_prom_horizontal_adduction_right: dto.shoulderProm?.horizontalAdductionRight || 'not_tested',
-      shoulder_prom_horizontal_adduction_right_endfeel: dto.shoulderProm?.horizontalAdductionRightEndfeel || 'not_tested',
-      shoulder_prom_horizontal_adduction_left: dto.shoulderProm?.horizontalAdductionLeft || 'not_tested',
-      shoulder_prom_horizontal_adduction_left_endfeel: dto.shoulderProm?.horizontalAdductionLeftEndfeel || 'not_tested'
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.shoulderProm,
+      ShoulderPROM.shoulderProm,
+      'shoulder_prom'
+    );
   }
 
   private fromDtoElbowArom(dto: RangeOfMotionModel): any {
-    return {
-      // Elbow AROM
-      elbow_arrom: dto.elbowArom?.enabled ? 'yes' : 'no',
-      elbow_arrom_apply_to_all: '',
-      elbow_arrom_flexion_right: dto.elbowArom?.flexionRight || 'not_tested',
-      elbow_arrom_flexion_left: dto.elbowArom?.flexionLeft || 'not_tested',
-      elbow_arrom_extension_right: dto.elbowArom?.extensionRight || 'not_tested',
-      elbow_arrom_extension_left: dto.elbowArom?.extensionLeft || 'not_tested',
-      elbow_arrom_pronation_right: dto.elbowArom?.pronationRight || 'not_tested',
-      elbow_arrom_pronation_left: dto.elbowArom?.pronationLeft || 'not_tested',
-      elbow_arrom_supination_right: dto.elbowArom?.supinationRight || 'not_tested',
-      elbow_arrom_supination_left: dto.elbowArom?.supinationLeft || 'not_tested'
-    };
+    return fromDtoMeasurementSection(
+      dto.elbowArom,
+      ElbowAROM.elbowArom,
+      'elbow_arrom'
+    );
   }
 
   private fromDtoElbowProm(dto: RangeOfMotionModel): any {
-    return {
-      // Elbow PROM
-      elbow_prom: dto.elbowProm?.enabled ? 'yes' : 'no',
-      elbow_prom_apply_to_all: '',
-      elbow_prom_extension_right: dto.elbowProm?.extensionRight || 'not_tested',
-      elbow_prom_extension_right_endfeel: dto.elbowProm?.extensionRightEndfeel || 'not_tested',
-      elbow_prom_extension_left: dto.elbowProm?.extensionLeft || 'not_tested',
-      elbow_prom_extension_left_endfeel: dto.elbowProm?.extensionLeftEndfeel || 'not_tested',
-      elbow_prom_flexion_right: dto.elbowProm?.flexionRight || 'not_tested',
-      elbow_prom_flexion_right_endfeel: dto.elbowProm?.flexionRightEndfeel || 'not_tested',
-      elbow_prom_flexion_left: dto.elbowProm?.flexionLeft || 'not_tested',
-      elbow_prom_flexion_left_endfeel: dto.elbowProm?.flexionLeftEndfeel || 'not_tested',
-      elbow_prom_supination_right: dto.elbowProm?.supinationRight || 'not_tested',
-      elbow_prom_supination_right_endfeel: dto.elbowProm?.supinationRightEndfeel || 'not_tested',
-      elbow_prom_supination_left: dto.elbowProm?.supinationLeft || 'not_tested',
-      elbow_prom_supination_left_endfeel: dto.elbowProm?.supinationLeftEndfeel || 'not_tested',
-      elbow_prom_pronation_right: dto.elbowProm?.pronationRight || 'not_tested',
-      elbow_prom_pronation_right_endfeel: dto.elbowProm?.pronationRightEndfeel || 'not_tested',
-      elbow_prom_pronation_left: dto.elbowProm?.pronationLeft || 'not_tested',
-      elbow_prom_pronation_left_endfeel: dto.elbowProm?.pronationLeftEndfeel || 'not_tested'
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.elbowProm,
+      ElbowPROM.elbowProm,
+      'elbow_prom'
+    );
   }
 
   private fromDtoWristArom(dto: RangeOfMotionModel): any {
-    return {
-      // Wrist AROM
-      wrist_arrom: dto.wristArom?.enabled ? 'yes' : 'no',
-      wrist_arrom_apply_to_all: '',
-      extension_right: dto.wristArom?.extensionRight || 'not_tested',
-      extension_left: dto.wristArom?.extensionLeft || 'not_tested',
-      flexion_right: dto.wristArom?.flexionRight || 'not_tested',
-      flexion_left: dto.wristArom?.flexionLeft || 'not_tested',
-      radial_deviation_right: dto.wristArom?.radialDeviationRight || 'not_tested',
-      radial_deviation_left: dto.wristArom?.radialDeviationLeft || 'not_tested',
-      ulnar_deviation_right: dto.wristArom?.ulnarDeviationRight || 'not_tested',
-      ulnar_deviation_left: dto.wristArom?.ulnarDeviationLeft || 'not_tested'
-    };
+    return fromDtoMeasurementSection(
+      dto.wristArom,
+      WristAROM.wristArom,
+      'wrist_arrom'
+    );
   }
 
   private fromDtoWristProm(dto: RangeOfMotionModel): any {
-    return {
-      // Wrist PROM
-      wrist_prom: dto.wristProm?.enabled ? 'yes' : 'no',
-      wrist_prom_apply_to_all: '',
-      wrist_prom_extension_right: dto.wristProm?.extensionRight || 'not_tested',
-      wrist_prom_extension_right_endfeel: dto.wristProm?.extensionRightEndfeel || 'not_tested',
-      wrist_prom_extension_left: dto.wristProm?.extensionLeft || 'not_tested',
-      wrist_prom_extension_left_endfeel: dto.wristProm?.extensionLeftEndfeel || 'not_tested',
-      wrist_prom_flexion_right: dto.wristProm?.flexionRight || 'not_tested',
-      wrist_prom_flexion_right_endfeel: dto.wristProm?.flexionRightEndfeel || 'not_tested',
-      wrist_prom_flexion_left: dto.wristProm?.flexionLeft || 'not_tested',
-      wrist_prom_flexion_left_endfeel: dto.wristProm?.flexionLeftEndfeel || 'not_tested',
-      wrist_prom_radial_deviation_right: dto.wristProm?.radialDeviationRight || 'not_tested',
-      wrist_prom_radial_deviation_right_endfeel: dto.wristProm?.radialDeviationRightEndfeel || 'not_tested',
-      wrist_prom_radial_deviation_left: dto.wristProm?.radialDeviationLeft || 'not_tested',
-      wrist_prom_radial_deviation_left_endfeel: dto.wristProm?.radialDeviationLeftEndfeel || 'not_tested',
-      wrist_prom_ulnar_deviation_right: dto.wristProm?.ulnarDeviationRight || 'not_tested',
-      wrist_prom_ulnar_deviation_right_endfeel: dto.wristProm?.ulnarDeviationRightEndfeel || 'not_tested',
-      wrist_prom_ulnar_deviation_left: dto.wristProm?.ulnarDeviationLeft || 'not_tested',
-      wrist_prom_ulnar_deviation_left_endfeel: dto.wristProm?.ulnarDeviationLeftEndfeel || 'not_tested'
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.wristProm,
+      WristPROM.wristProm,
+      'wrist_prom'
+    );
   }
 
   private fromDtoHandAromProm(dto: RangeOfMotionModel): any {
@@ -543,290 +434,87 @@ export class RangeOfMotionMapperService {
   }
 
   private fromDtoLumbarAROM(dto: RangeOfMotionModel): any {
-    return {
-      //Lumbar AROM
-      lumbar_arrom: dto.lumbarAROMModel?.enabled ? 'yes' : 'no',
-      lumbar_arrom_forward_bending:
-        dto.lumbarAROMModel?.lumbarArromForwardBending || 'not_tested',
-
-      lumbar_arrom_backward_bending:
-        dto.lumbarAROMModel?.lumbarArromBackwardBending || 'not_tested',
-
-      lumbar_arrom_right_rotation:
-        dto.lumbarAROMModel?.lumbarArromRightRotation || 'not_tested',
-
-      lumbar_arrom_left_rotation:
-        dto.lumbarAROMModel?.lumbarArromLeftRotation || 'not_tested',
-
-      lumbar_arrom_right_side_bending:
-        dto.lumbarAROMModel?.lumbarArromRightSideBending || 'not_tested',
-
-      lumbar_arrom_left_side_bending:
-        dto.lumbarAROMModel?.lumbarArromLeftSideBending || 'not_tested'
-    };
+    const result = fromDtoSingleColumnSection(
+      dto.lumbarAROMModel,
+      LumbarAROMConfig.lumbarArom,
+      'lumbar_arrom'
+    );
+    // Lumbar AROM stores applyToAll in the model
+    result.lumbar_arrom_apply_to_all = dto.lumbarAROMModel?.lumbarArromApplyToAll || '';
+    return result;
   }
 
   private fromDtoHipArom(dto: RangeOfMotionModel): any {
-    return {
-      // Hip AROM
-      hip_arrom: dto.hipArom?.enabled ? 'yes' : 'no',
-      hip_flexion_right: dto.hipArom?.flexionRight || 'not_tested',
-      hip_flexion_left: dto.hipArom?.flexionLeft || 'not_tested',
-      hip_extension_right: dto.hipArom?.extensionRight || 'not_tested',
-      hip_extension_left: dto.hipArom?.extensionLeft || 'not_tested',
-      hip_abduction_right: dto.hipArom?.abductionRight || 'not_tested',
-      hip_abduction_left: dto.hipArom?.abductionLeft || 'not_tested',
-      hip_adduction_right: dto.hipArom?.adductionRight || 'not_tested',
-      hip_adduction_left: dto.hipArom?.adductionLeft || 'not_tested',
-      hip_internal_rotation_right: dto.hipArom?.internalRotationRight || 'not_tested',
-      hip_internal_rotation_left: dto.hipArom?.internalRotationLeft || 'not_tested',
-      hip_external_rotation_right: dto.hipArom?.externalRotationRight || 'not_tested',
-      hip_external_rotation_left: dto.hipArom?.externalRotationLeft || 'not_tested',
-      hip_arrom_comments: dto.hipArom?.comments || ''
-    };
+    // Using generic mapper with config - no manual field mapping!
+    return fromDtoMeasurementSection(
+      dto.hipArom,
+      HipAromConfig.hipArom,
+      'hip_arrom'
+    );
   }
 
   private fromDtoHipProm(dto: RangeOfMotionModel): any {
-    return {
-      // Hip PROM
-      hip_prom: dto.hipProm?.enabled ? 'yes' : 'no',
-      hip_prom_flexion_right: dto.hipProm?.flexionRight || 'not_tested',
-      hip_prom_flexion_right_endfeel: dto.hipProm?.flexionRightEndfeel || 'not_tested',
-
-      hip_prom_flexion_left: dto.hipProm?.flexionLeft || 'not_tested',
-      hip_prom_flexion_left_endfeel: dto.hipProm?.flexionLeftEndfeel || 'not_tested',
-
-      hip_prom_extension_right: dto.hipProm?.extensionRight || 'not_tested',
-      hip_prom_extension_right_endfeel: dto.hipProm?.extensionRightEndfeel || 'not_tested',
-
-      hip_prom_extension_left: dto.hipProm?.extensionLeft || 'not_tested',
-      hip_prom_extension_left_endfeel: dto.hipProm?.extensionLeftEndfeel || 'not_tested',
-
-      hip_prom_abduction_right: dto.hipProm?.abductionRight || 'not_tested',
-      hip_prom_abduction_right_endfeel: dto.hipProm?.abductionRightEndfeel || 'not_tested',
-
-      hip_prom_abduction_left: dto.hipProm?.abductionLeft || 'not_tested',
-      hip_prom_abduction_left_endfeel: dto.hipProm?.abductionLeftEndfeel || 'not_tested',
-
-      hip_prom_adduction_right: dto.hipProm?.adductionRight || 'not_tested',
-      hip_prom_adduction_right_endfeel: dto.hipProm?.adductionRightEndfeel || 'not_tested',
-
-      hip_prom_adduction_left: dto.hipProm?.adductionLeft || 'not_tested',
-      hip_prom_adduction_left_endfeel: dto.hipProm?.adductionLeftEndfeel || 'not_tested',
-
-      hip_prom_internal_rotation_right: dto.hipProm?.internalRotationRight || 'not_tested',
-      hip_prom_internal_rotation_right_endfeel: dto.hipProm?.internalRotationRightEndfeel || 'not_tested',
-
-      hip_prom_internal_rotation_left: dto.hipProm?.internalRotationLeft || 'not_tested',
-      hip_prom_internal_rotation_left_endfeel: dto.hipProm?.internalRotationLeftEndfeel || 'not_tested',
-
-      hip_prom_external_rotation_right: dto.hipProm?.externalRotationRight || 'not_tested',
-      hip_prom_external_rotation_right_endfeel: dto.hipProm?.externalRotationRightEndfeel || 'not_tested',
-
-      hip_prom_external_rotation_left: dto.hipProm?.externalRotationLeft || 'not_tested',
-      hip_prom_external_rotation_left_endfeel: dto.hipProm?.externalRotationLeftEndfeel || 'not_tested'
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.hipProm,
+      HipPROM.hipProm,
+      'hip_prom'
+    );
   }
 
   private fromDtoKneeArom(dto: RangeOfMotionModel): any {
-    return {
-      // Knee AROM
-      knee_arrom: dto.kneeArom?.enabled ? 'yes' : 'no',
-      knee_arom_apply_to_all: '',
-      knee_flexion_right: dto.kneeArom?.flexionRight || 'not_tested',
-      knee_flexion_left: dto.kneeArom?.flexionLeft || 'not_tested',
-      knee_extension_right: dto.kneeArom?.extensionRight || 'not_tested',
-      knee_extension_left: dto.kneeArom?.extensionLeft || 'not_tested',
-      knee_arrom_comments: dto.kneeArom?.comments || ''
-    };
+    return fromDtoMeasurementSection(
+      dto.kneeArom,
+      KneeAROM.kneeArom,
+      'knee_arrom'
+    );
   }
 
   private fromDtoAnkleArom(dto: RangeOfMotionModel): any {
-    return {
-      // Ankle AROM
-      ankle_arrom: dto.ankleArom?.enabled ? 'yes' : 'no',
-      ankle_arom_apply_to_all: '',
-      ankle_dorsiflexion_0_knee_flexion_right: dto.ankleArom?.dorsiflexionAt0KneeFlexionRight || 'not_tested',
-      ankle_dorsiflexion_0_knee_flexion_left: dto.ankleArom?.dorsiflexionAt0KneeFlexionLeft || 'not_tested',
-      ankle_dorsiflexion_90_knee_flexion_right: dto.ankleArom?.dorsiflexionAt90KneeFlexionRight || 'not_tested',
-      ankle_dorsiflexion_90_knee_flexion_left: dto.ankleArom?.dorsiflexionAt90KneeFlexionLeft || 'not_tested',
-      ankle_plantarflexion_right: dto.ankleArom?.plantarflexionRight || 'not_tested',
-      ankle_plantarflexion_left: dto.ankleArom?.plantarflexionLeft || 'not_tested',
-      ankle_inversion_right: dto.ankleArom?.inversionRight || 'not_tested',
-      ankle_inversion_left: dto.ankleArom?.inversionLeft || 'not_tested',
-      ankle_eversion_right: dto.ankleArom?.eversionRight || 'not_tested',
-      ankle_eversion_left: dto.ankleArom?.eversionLeft || 'not_tested',
-      ankle_arrom_comments: dto.ankleArom?.comments || ''
-    };
+    return fromDtoMeasurementSection(
+      dto.ankleArom,
+      AnkleAROM.ankleArom,
+      'ankle_arrom'
+    );
   }
 
   private fromDtoAnkleProm(dto: RangeOfMotionModel): any {
-    return {
-      // Ankle PROM
-      ankle_prom: dto.ankleProm?.enabled ? 'yes' : 'no',
-      ankle_prom_apply_to_all: '',
-      ankle_prom_dorsiflexion_0_knee_flexion_right: dto.ankleProm?.dorsiflexionAt0KneeFlexionRight || 'not_tested',
-      ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: dto.ankleProm?.dorsiflexionAt0KneeFlexionRightEndfeel || 'not_tested',
-      ankle_prom_dorsiflexion_0_knee_flexion_left: dto.ankleProm?.dorsiflexionAt0KneeFlexionLeft || 'not_tested',
-      ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: dto.ankleProm?.dorsiflexionAt0KneeFlexionLeftEndfeel || 'not_tested',
-      ankle_prom_dorsiflexion_90_knee_flexion_right: dto.ankleProm?.dorsiflexionAt90KneeFlexionRight || 'not_tested',
-      ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: dto.ankleProm?.dorsiflexionAt90KneeFlexionRightEndfeel || 'not_tested',
-      ankle_prom_dorsiflexion_90_knee_flexion_left: dto.ankleProm?.dorsiflexionAt90KneeFlexionLeft || 'not_tested',
-      ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: dto.ankleProm?.dorsiflexionAt90KneeFlexionLeftEndfeel || 'not_tested',
-      ankle_prom_plantarflexion_right: dto.ankleProm?.plantarflexionRight || 'not_tested',
-      ankle_prom_plantarflexion_right_endfeel: dto.ankleProm?.plantarflexionRightEndfeel || 'not_tested',
-      ankle_prom_plantarflexion_left: dto.ankleProm?.plantarflexionLeft || 'not_tested',
-      ankle_prom_plantarflexion_left_endfeel: dto.ankleProm?.plantarflexionLeftEndfeel || 'not_tested',
-      ankle_prom_inversion_right: dto.ankleProm?.inversionRight || 'not_tested',
-      ankle_prom_inversion_right_endfeel: dto.ankleProm?.inversionRightEndfeel || 'not_tested',
-      ankle_prom_inversion_left: dto.ankleProm?.inversionLeft || 'not_tested',
-      ankle_prom_inversion_left_endfeel: dto.ankleProm?.inversionLeftEndfeel || 'not_tested',
-      ankle_prom_eversion_right: dto.ankleProm?.eversionRight || 'not_tested',
-      ankle_prom_eversion_right_endfeel: dto.ankleProm?.eversionRightEndfeel || 'not_tested',
-      ankle_prom_eversion_left: dto.ankleProm?.eversionLeft || 'not_tested',
-      ankle_prom_eversion_left_endfeel: dto.ankleProm?.eversionLeftEndfeel || 'not_tested',
-      ankle_prom_comments: dto.ankleProm?.comments || ''
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.ankleProm,
+      AnklePROM.ankleProm,
+      'ankle_prom'
+    );
   }
 
   private fromDtoFirstMtpArom(dto: RangeOfMotionModel): any {
-    return {
-      // 1st MTP AROM
-      fst_mtp_arrom: dto.firstMtpArom?.enabled ? 'yes' : 'no',
-      fst_mtp_arom_apply_to_all: '',
-      fst_mtp_flexion_right: dto.firstMtpArom?.flexionRight || 'not_tested',
-      fst_mtp_flexion_left: dto.firstMtpArom?.flexionLeft || 'not_tested',
-      fst_mtp_extension_right: dto.firstMtpArom?.extensionRight || 'not_tested',
-      fst_mtp_extension_left: dto.firstMtpArom?.extensionLeft || 'not_tested',
-      fst_mtp_arrom_comments: dto.firstMtpArom?.comments || ''
-    };
+    return fromDtoMeasurementSection(
+      dto.firstMtpArom,
+      FstMTPArom.fstMTPArom,
+      'fst_mtp_arrom'
+    );
   }
 
   private fromDtoFirstIpArom(dto: RangeOfMotionModel): any {
-    return {
-      // 1st IP AROM
-      fst_ip_arrom: dto.firstIpArom?.enabled ? 'yes' : 'no',
-      fst_ip_arom_apply_to_all: '',
-      fst_ip_flexion_right: dto.firstIpArom?.flexionRight || 'not_tested',
-      fst_ip_flexion_left: dto.firstIpArom?.flexionLeft || 'not_tested',
-      fst_ip_extension_right: dto.firstIpArom?.extensionRight || 'not_tested',
-      fst_ip_extension_left: dto.firstIpArom?.extensionLeft || 'not_tested',
-      fst_ip_arrom_comments: dto.firstIpArom?.comments || ''
-    };
+    return fromDtoMeasurementSection(
+      dto.firstIpArom,
+      FstIPAROM.fstipArom,
+      'fst_ip_arrom'
+    );
   }
 
   private fromDtoToeArom(dto: RangeOfMotionModel): any {
-    return {
-      // Toe AROM
-      toe_arrom: dto.toeArom?.enabled ? 'yes' : 'no',
-      toe_arom_apply_to_all: '',
-      toe_arom_2nd_mtp_flexion_right: dto.toeArom?.secondMtpFlexionRight || 'not_tested',
-      toe_arom_2nd_mtp_flexion_left: dto.toeArom?.secondMtpFlexionLeft || 'not_tested',
-      toe_arom_2nd_mtp_extension_right: dto.toeArom?.secondMtpExtensionRight || 'not_tested',
-      toe_arom_2nd_mtp_extension_left: dto.toeArom?.secondMtpExtensionLeft || 'not_tested',
-      toe_arom_2nd_ip_flexion_right: dto.toeArom?.secondIpFlexionRight || 'not_tested',
-      toe_arom_2nd_ip_flexion_left: dto.toeArom?.secondIpFlexionLeft || 'not_tested',
-      toe_arom_2nd_ip_extension_right: dto.toeArom?.secondIpExtensionRight || 'not_tested',
-      toe_arom_2nd_ip_extension_left: dto.toeArom?.secondIpExtensionLeft || 'not_tested',
-      toe_arom_3rd_mtp_flexion_right: dto.toeArom?.thirdMtpFlexionRight || 'not_tested',
-      toe_arom_3rd_mtp_flexion_left: dto.toeArom?.thirdMtpFlexionLeft || 'not_tested',
-      toe_arom_3rd_mtp_extension_right: dto.toeArom?.thirdMtpExtensionRight || 'not_tested',
-      toe_arom_3rd_mtp_extension_left: dto.toeArom?.thirdMtpExtensionLeft || 'not_tested',
-      toe_arom_3rd_ip_flexion_right: dto.toeArom?.thirdIpFlexionRight || 'not_tested',
-      toe_arom_3rd_ip_flexion_left: dto.toeArom?.thirdIpFlexionLeft || 'not_tested',
-      toe_arom_3rd_ip_extension_right: dto.toeArom?.thirdIpExtensionRight || 'not_tested',
-      toe_arom_3rd_ip_extension_left: dto.toeArom?.thirdIpExtensionLeft || 'not_tested',
-      toe_arom_4th_mtp_flexion_right: dto.toeArom?.fourthMtpFlexionRight || 'not_tested',
-      toe_arom_4th_mtp_flexion_left: dto.toeArom?.fourthMtpFlexionLeft || 'not_tested',
-      toe_arom_4th_mtp_extension_right: dto.toeArom?.fourthMtpExtensionRight || 'not_tested',
-      toe_arom_4th_mtp_extension_left: dto.toeArom?.fourthMtpExtensionLeft || 'not_tested',
-      toe_arom_4th_ip_flexion_right: dto.toeArom?.fourthIpFlexionRight || 'not_tested',
-      toe_arom_4th_ip_flexion_left: dto.toeArom?.fourthIpFlexionLeft || 'not_tested',
-      toe_arom_4th_ip_extension_right: dto.toeArom?.fourthIpExtensionRight || 'not_tested',
-      toe_arom_4th_ip_extension_left: dto.toeArom?.fourthIpExtensionLeft || 'not_tested',
-      toe_arom_5th_mtp_flexion_right: dto.toeArom?.fifthMtpFlexionRight || 'not_tested',
-      toe_arom_5th_mtp_flexion_left: dto.toeArom?.fifthMtpFlexionLeft || 'not_tested',
-      toe_arom_5th_mtp_extension_right: dto.toeArom?.fifthMtpExtensionRight || 'not_tested',
-      toe_arom_5th_mtp_extension_left: dto.toeArom?.fifthMtpExtensionLeft || 'not_tested',
-      toe_arom_5th_ip_flexion_right: dto.toeArom?.fifthIpFlexionRight || 'not_tested',
-      toe_arom_5th_ip_flexion_left: dto.toeArom?.fifthIpFlexionLeft || 'not_tested',
-      toe_arom_5th_ip_extension_right: dto.toeArom?.fifthIpExtensionRight || 'not_tested',
-      toe_arom_5th_ip_extension_left: dto.toeArom?.fifthIpExtensionLeft || 'not_tested',
-      toe_arrom_comments: dto.toeArom?.comments || ''
-    };
+    return fromDtoMeasurementSection(
+      dto.toeArom,
+      ToeAROM.toeArom,
+      'toe_arrom'
+    );
   }
 
   private fromDtoToeProm(dto: RangeOfMotionModel): any {
-    return {
-      // Toe PROM
-      toe_prom: dto.toeProm?.enabled ? 'yes' : 'no',
-      toe_prom_apply_to_all: '',
-      toe_2nd_mtp_flexion_right: dto.toeProm?.secondMtpFlexionRight || 'not_tested',
-      toe_2nd_mtp_flexion_right_endfeel: dto.toeProm?.secondMtpFlexionRightEndfeel || 'not_tested',
-      toe_2nd_mtp_flexion_left: dto.toeProm?.secondMtpFlexionLeft || 'not_tested',
-      toe_2nd_mtp_flexion_left_endfeel: dto.toeProm?.secondMtpFlexionLeftEndfeel || 'not_tested',
-      toe_2nd_mtp_extension_right: dto.toeProm?.secondMtpExtensionRight || 'not_tested',
-      toe_2nd_mtp_extension_right_endfeel: dto.toeProm?.secondMtpExtensionRightEndfeel || 'not_tested',
-      toe_2nd_mtp_extension_left: dto.toeProm?.secondMtpExtensionLeft || 'not_tested',
-      toe_2nd_mtp_extension_left_endfeel: dto.toeProm?.secondMtpExtensionLeftEndfeel || 'not_tested',
-      toe_2nd_ip_flexion_right: dto.toeProm?.secondIpFlexionRight || 'not_tested',
-      toe_2nd_ip_flexion_right_endfeel: dto.toeProm?.secondIpFlexionRightEndfeel || 'not_tested',
-      toe_2nd_ip_flexion_left: dto.toeProm?.secondIpFlexionLeft || 'not_tested',
-      toe_2nd_ip_flexion_left_endfeel: dto.toeProm?.secondIpFlexionLeftEndfeel || 'not_tested',
-      toe_2nd_ip_extension_right: dto.toeProm?.secondIpExtensionRight || 'not_tested',
-      toe_2nd_ip_extension_right_endfeel: dto.toeProm?.secondIpExtensionRightEndfeel || 'not_tested',
-      toe_2nd_ip_extension_left: dto.toeProm?.secondIpExtensionLeft || 'not_tested',
-      toe_2nd_ip_extension_left_endfeel: dto.toeProm?.secondIpExtensionLeftEndfeel || 'not_tested',
-      toe_3rd_mtp_flexion_right: dto.toeProm?.thirdMtpFlexionRight || 'not_tested',
-      toe_3rd_mtp_flexion_right_endfeel: dto.toeProm?.thirdMtpFlexionRightEndfeel || 'not_tested',
-      toe_3rd_mtp_flexion_left: dto.toeProm?.thirdMtpFlexionLeft || 'not_tested',
-      toe_3rd_mtp_flexion_left_endfeel: dto.toeProm?.thirdMtpFlexionLeftEndfeel || 'not_tested',
-      toe_3rd_mtp_extension_right: dto.toeProm?.thirdMtpExtensionRight || 'not_tested',
-      toe_3rd_mtp_extension_right_endfeel: dto.toeProm?.thirdMtpExtensionRightEndfeel || 'not_tested',
-      toe_3rd_mtp_extension_left: dto.toeProm?.thirdMtpExtensionLeft || 'not_tested',
-      toe_3rd_mtp_extension_left_endfeel: dto.toeProm?.thirdMtpExtensionLeftEndfeel || 'not_tested',
-      toe_3rd_ip_flexion_right: dto.toeProm?.thirdIpFlexionRight || 'not_tested',
-      toe_3rd_ip_flexion_right_endfeel: dto.toeProm?.thirdIpFlexionRightEndfeel || 'not_tested',
-      toe_3rd_ip_flexion_left: dto.toeProm?.thirdIpFlexionLeft || 'not_tested',
-      toe_3rd_ip_flexion_left_endfeel: dto.toeProm?.thirdIpFlexionLeftEndfeel || 'not_tested',
-      toe_3rd_ip_extension_right: dto.toeProm?.thirdIpExtensionRight || 'not_tested',
-      toe_3rd_ip_extension_right_endfeel: dto.toeProm?.thirdIpExtensionRightEndfeel || 'not_tested',
-      toe_3rd_ip_extension_left: dto.toeProm?.thirdIpExtensionLeft || 'not_tested',
-      toe_3rd_ip_extension_left_endfeel: dto.toeProm?.thirdIpExtensionLeftEndfeel || 'not_tested',
-      toe_4th_mtp_flexion_right: dto.toeProm?.fourthMtpFlexionRight || 'not_tested',
-      toe_4th_mtp_flexion_right_endfeel: dto.toeProm?.fourthMtpFlexionRightEndfeel || 'not_tested',
-      toe_4th_mtp_flexion_left: dto.toeProm?.fourthMtpFlexionLeft || 'not_tested',
-      toe_4th_mtp_flexion_left_endfeel: dto.toeProm?.fourthMtpFlexionLeftEndfeel || 'not_tested',
-      toe_4th_mtp_extension_right: dto.toeProm?.fourthMtpExtensionRight || 'not_tested',
-      toe_4th_mtp_extension_right_endfeel: dto.toeProm?.fourthMtpExtensionRightEndfeel || 'not_tested',
-      toe_4th_mtp_extension_left: dto.toeProm?.fourthMtpExtensionLeft || 'not_tested',
-      toe_4th_mtp_extension_left_endfeel: dto.toeProm?.fourthMtpExtensionLeftEndfeel || 'not_tested',
-      toe_4th_ip_flexion_right: dto.toeProm?.fourthIpFlexionRight || 'not_tested',
-      toe_4th_ip_flexion_right_endfeel: dto.toeProm?.fourthIpFlexionRightEndfeel || 'not_tested',
-      toe_4th_ip_flexion_left: dto.toeProm?.fourthIpFlexionLeft || 'not_tested',
-      toe_4th_ip_flexion_left_endfeel: dto.toeProm?.fourthIpFlexionLeftEndfeel || 'not_tested',
-      toe_4th_ip_extension_right: dto.toeProm?.fourthIpExtensionRight || 'not_tested',
-      toe_4th_ip_extension_right_endfeel: dto.toeProm?.fourthIpExtensionRightEndfeel || 'not_tested',
-      toe_4th_ip_extension_left: dto.toeProm?.fourthIpExtensionLeft || 'not_tested',
-      toe_4th_ip_extension_left_endfeel: dto.toeProm?.fourthIpExtensionLeftEndfeel || 'not_tested',
-      toe_5th_mtp_flexion_right: dto.toeProm?.fifthMtpFlexionRight || 'not_tested',
-      toe_5th_mtp_flexion_right_endfeel: dto.toeProm?.fifthMtpFlexionRightEndfeel || 'not_tested',
-      toe_5th_mtp_flexion_left: dto.toeProm?.fifthMtpFlexionLeft || 'not_tested',
-      toe_5th_mtp_flexion_left_endfeel: dto.toeProm?.fifthMtpFlexionLeftEndfeel || 'not_tested',
-      toe_5th_mtp_extension_right: dto.toeProm?.fifthMtpExtensionRight || 'not_tested',
-      toe_5th_mtp_extension_right_endfeel: dto.toeProm?.fifthMtpExtensionRightEndfeel || 'not_tested',
-      toe_5th_mtp_extension_left: dto.toeProm?.fifthMtpExtensionLeft || 'not_tested',
-      toe_5th_mtp_extension_left_endfeel: dto.toeProm?.fifthMtpExtensionLeftEndfeel || 'not_tested',
-      toe_5th_ip_flexion_right: dto.toeProm?.fifthIpFlexionRight || 'not_tested',
-      toe_5th_ip_flexion_right_endfeel: dto.toeProm?.fifthIpFlexionRightEndfeel || 'not_tested',
-      toe_5th_ip_flexion_left: dto.toeProm?.fifthIpFlexionLeft || 'not_tested',
-      toe_5th_ip_flexion_left_endfeel: dto.toeProm?.fifthIpFlexionLeftEndfeel || 'not_tested',
-      toe_5th_ip_extension_right: dto.toeProm?.fifthIpExtensionRight || 'not_tested',
-      toe_5th_ip_extension_right_endfeel: dto.toeProm?.fifthIpExtensionRightEndfeel || 'not_tested',
-      toe_5th_ip_extension_left: dto.toeProm?.fifthIpExtensionLeft || 'not_tested',
-      toe_5th_ip_extension_left_endfeel: dto.toeProm?.fifthIpExtensionLeftEndfeel || 'not_tested',
-      toe_prom_comments: dto.toeProm?.comments || ''
-    };
+    return fromDtoMeasurementEndfeelSection(
+      dto.toeProm,
+      ToePROM.toeProm,
+      'toe_prom'
+    );
   }
 
   private mapNoLimitationsNoted(formValue: any): NoLimitationsNotedModel {
@@ -859,213 +547,68 @@ export class RangeOfMotionMapperService {
   }
 
   private mapCervicalArom(formValue: any): CervicalAROMModel {
-    const enabled = formValue.cervical_arrom === 'yes';
-    const model: CervicalAROMModel = { enabled };
-
-    if (enabled) {
-      model.forwardBending = formValue.cervical_forward_bending || 'not_tested';
-      model.backwardBending = formValue.cervical_backward_bending || 'not_tested';
-      model.rightRotation = formValue.cervical_right_rotation || 'not_tested';
-      model.leftRotation = formValue.cervical_left_rotation || 'not_tested';
-      model.rightSideBending = formValue.cervical_right_side_bending || 'not_tested';
-      model.leftSideBending = formValue.cervical_left_side_bending || 'not_tested';
-      model.comments = formValue.cervical_comments || '';
-    }
-
-    return model;
+    // Using generic mapper with config - no manual field mapping!
+    return mapSingleColumnSection(
+      formValue,
+      CervicalAROMConfig.cervicalArom,
+      'cervical_arrom'
+    ) as CervicalAROMModel;
   }
 
   private mapCostovertebralExpansion(formValue: any): CostovertebralExpansionModel {
-    const enabled = formValue.costovertebral_expansion === 'yes';
-    const model: CostovertebralExpansionModel = { enabled };
-
-    if (enabled) {
-      model.t4 = formValue.costovertebral_t4 || 'not_tested';
-      model.t9 = formValue.costovertebral_t9 || 'not_tested';
-      model.umbilicus = formValue.costovertebral_umbilicus || 'not_tested';
-    }
-
-    return model;
+    return mapSingleColumnSection(
+      formValue,
+      CostovertebralExpansionConfig.costovertebralExpansion,
+      'costovertebral_expansion'
+    ) as CostovertebralExpansionModel;
   }
 
   private mapShoulderArom(formValue: any): ShoulderAROMModel {
-    const enabled = formValue.shoulder_arrom === 'yes';
-    const model: ShoulderAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.shoulder_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.shoulder_flexion_left || 'not_tested';
-      model.scaptionRight = formValue.shoulder_scaption_right || 'not_tested';
-      model.scaptionLeft = formValue.shoulder_scaption_left || 'not_tested';
-      model.abductionRight = formValue.shoulder_abduction_right || 'not_tested';
-      model.abductionLeft = formValue.shoulder_abduction_left || 'not_tested';
-      model.extensionRight = formValue.shoulder_extension_right || 'not_tested';
-      model.extensionLeft = formValue.shoulder_extension_left || 'not_tested';
-      model.functionalExternalRotationReachRight = formValue.shoulder_functional_er_reach_right || 'not_tested';
-      model.functionalExternalRotationReachLeft = formValue.shoulder_functional_er_reach_left || 'not_tested';
-      model.functionalInternalRotationReachRight = formValue.shoulder_functional_ir_reach_right || 'not_tested';
-      model.functionalInternalRotationReachLeft = formValue.shoulder_functional_ir_reach_left || 'not_tested';
-      model.erNeutralPositionRight = formValue.shoulder_er_neutral_right || 'not_tested';
-      model.erNeutralPositionLeft = formValue.shoulder_er_neutral_left || 'not_tested';
-      model.irNeutralPositionRight = formValue.shoulder_ir_neutral_right || 'not_tested';
-      model.irNeutralPositionLeft = formValue.shoulder_ir_neutral_left || 'not_tested';
-      model.horizontalAbductionRight = formValue.shoulder_horizontal_abduction_right || 'not_tested';
-      model.horizontalAbductionLeft = formValue.shoulder_horizontal_abduction_left || 'not_tested';
-      model.horizontalAdductionRight = formValue.shoulder_horizontal_adduction_right || 'not_tested';
-      model.horizontalAdductionLeft = formValue.shoulder_horizontal_adduction_left || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      ShoulderAROM.shoulderArom,
+      'shoulder_arrom'
+    ) as ShoulderAROMModel;
   }
 
   private mapShoulderProm(formValue: any): ShoulderPROMModel {
-    const enabled = formValue.shoulder_prom === 'yes';
-    const model: ShoulderPROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.shoulder_prom_flexion_right || 'not_tested';
-      model.flexionRightEndfeel = formValue.shoulder_prom_flexion_right_endfeel || 'not_tested';
-      model.flexionLeft = formValue.shoulder_prom_flexion_left || 'not_tested';
-      model.flexionLeftEndfeel = formValue.shoulder_prom_flexion_left_endfeel || 'not_tested';
-      model.scaptionRight = formValue.shoulder_prom_scaption_right || 'not_tested';
-      model.scaptionRightEndfeel = formValue.shoulder_prom_scaption_right_endfeel || 'not_tested';
-      model.scaptionLeft = formValue.shoulder_prom_scaption_left || 'not_tested';
-      model.scaptionLeftEndfeel = formValue.shoulder_prom_scaption_left_endfeel || 'not_tested';
-      model.abductionRight = formValue.shoulder_prom_abduction_right || 'not_tested';
-      model.abductionRightEndfeel = formValue.shoulder_prom_abduction_right_endfeel || 'not_tested';
-      model.abductionLeft = formValue.shoulder_prom_abduction_left || 'not_tested';
-      model.abductionLeftEndfeel = formValue.shoulder_prom_abduction_left_endfeel || 'not_tested';
-      model.extensionRight = formValue.shoulder_prom_extension_right || 'not_tested';
-      model.extensionRightEndfeel = formValue.shoulder_prom_extension_right_endfeel || 'not_tested';
-      model.extensionLeft = formValue.shoulder_prom_extension_left || 'not_tested';
-      model.extensionLeftEndfeel = formValue.shoulder_prom_extension_left_endfeel || 'not_tested';
-      model.erNeutralPositionRight = formValue.shoulder_prom_er_neutral_right || 'not_tested';
-      model.erNeutralPositionRightEndfeel = formValue.shoulder_prom_er_neutral_right_endfeel || 'not_tested';
-      model.erNeutralPositionLeft = formValue.shoulder_prom_er_neutral_left || 'not_tested';
-      model.erNeutralPositionLeftEndfeel = formValue.shoulder_prom_er_neutral_left_endfeel || 'not_tested';
-      model.irNeutralPositionRight = formValue.shoulder_prom_ir_neutral_right || 'not_tested';
-      model.irNeutralPositionRightEndfeel = formValue.shoulder_prom_ir_neutral_right_endfeel || 'not_tested';
-      model.irNeutralPositionLeft = formValue.shoulder_prom_ir_neutral_left || 'not_tested';
-      model.irNeutralPositionLeftEndfeel = formValue.shoulder_prom_ir_neutral_left_endfeel || 'not_tested';
-      model.erScapularPlaneRight = formValue.shoulder_prom_er_scapular_plane_right || 'not_tested';
-      model.erScapularPlaneRightEndfeel = formValue.shoulder_prom_er_scapular_plane_right_endfeel || 'not_tested';
-      model.erScapularPlaneLeft = formValue.shoulder_prom_er_scapular_plane_left || 'not_tested';
-      model.erScapularPlaneLeftEndfeel = formValue.shoulder_prom_er_scapular_plane_left_endfeel || 'not_tested';
-      model.irScapularPlaneRight = formValue.shoulder_prom_ir_scapular_plane_right || 'not_tested';
-      model.irScapularPlaneRightEndfeel = formValue.shoulder_prom_ir_scapular_plane_right_endfeel || 'not_tested';
-      model.irScapularPlaneLeft = formValue.shoulder_prom_ir_scapular_plane_left || 'not_tested';
-      model.irScapularPlaneLeftEndfeel = formValue.shoulder_prom_ir_scapular_plane_left_endfeel || 'not_tested';
-      model.er90DegreesAbductionRight = formValue.shoulder_prom_er_90_degrees_abduction_right || 'not_tested';
-      model.er90DegreesAbductionRightEndfeel = formValue.shoulder_prom_er_90_degrees_abduction_right_endfeel || 'not_tested';
-      model.er90DegreesAbductionLeft = formValue.shoulder_prom_er_90_degrees_abduction_left || 'not_tested';
-      model.er90DegreesAbductionLeftEndfeel = formValue.shoulder_prom_er_90_degrees_abduction_left_endfeel || 'not_tested';
-      model.ir90DegreesAbductionRight = formValue.shoulder_prom_ir_90_degrees_abduction_right || 'not_tested';
-      model.ir90DegreesAbductionRightEndfeel = formValue.shoulder_prom_ir_90_degrees_abduction_right_endfeel || 'not_tested';
-      model.ir90DegreesAbductionLeft = formValue.shoulder_prom_ir_90_degrees_abduction_left || 'not_tested';
-      model.ir90DegreesAbductionLeftEndfeel = formValue.shoulder_prom_ir_90_degrees_abduction_left_endfeel || 'not_tested';
-      model.irSleeperStretchRight = formValue.shoulder_prom_ir_sleeper_stretch_right || 'not_tested';
-      model.irSleeperStretchRightEndfeel = formValue.shoulder_prom_ir_sleeper_stretch_right_endfeel || 'not_tested';
-      model.irSleeperStretchLeft = formValue.shoulder_prom_ir_sleeper_stretch_left || 'not_tested';
-      model.irSleeperStretchLeftEndfeel = formValue.shoulder_prom_ir_sleeper_stretch_left_endfeel || 'not_tested';
-      model.horizontalAbductionRight = formValue.shoulder_prom_horizontal_abduction_right || 'not_tested';
-      model.horizontalAbductionRightEndfeel = formValue.shoulder_prom_horizontal_abduction_right_endfeel || 'not_tested';
-      model.horizontalAbductionLeft = formValue.shoulder_prom_horizontal_abduction_left || 'not_tested';
-      model.horizontalAbductionLeftEndfeel = formValue.shoulder_prom_horizontal_abduction_left_endfeel || 'not_tested';
-      model.horizontalAdductionRight = formValue.shoulder_prom_horizontal_adduction_right || 'not_tested';
-      model.horizontalAdductionRightEndfeel = formValue.shoulder_prom_horizontal_adduction_right_endfeel || 'not_tested';
-      model.horizontalAdductionLeft = formValue.shoulder_prom_horizontal_adduction_left || 'not_tested';
-      model.horizontalAdductionLeftEndfeel = formValue.shoulder_prom_horizontal_adduction_left_endfeel || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      ShoulderPROM.shoulderProm,
+      'shoulder_prom'
+    ) as ShoulderPROMModel;
   }
 
   private mapElbowArom(formValue: any): ElbowAROMModel {
-    const enabled = formValue.elbow_arrom === 'yes';
-    const model: ElbowAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.elbow_arrom_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.elbow_arrom_flexion_left || 'not_tested';
-      model.extensionRight = formValue.elbow_arrom_extension_right || 'not_tested';
-      model.extensionLeft = formValue.elbow_arrom_extension_left || 'not_tested';
-      model.pronationRight = formValue.elbow_arrom_pronation_right || 'not_tested';
-      model.pronationLeft = formValue.elbow_arrom_pronation_left || 'not_tested';
-      model.supinationRight = formValue.elbow_arrom_supination_right || 'not_tested';
-      model.supinationLeft = formValue.elbow_arrom_supination_left || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      ElbowAROM.elbowArom,
+      'elbow_arrom'
+    ) as ElbowAROMModel;
   }
 
   private mapElbowProm(formValue: any): ElbowPROMModel {
-    const enabled = formValue.elbow_prom === 'yes';
-    const model: ElbowPROMModel = { enabled };
-
-    if (enabled) {
-      model.extensionRight = formValue.elbow_prom_extension_right || 'not_tested';
-      model.extensionRightEndfeel = formValue.elbow_prom_extension_right_endfeel || 'not_tested';
-      model.extensionLeft = formValue.elbow_prom_extension_left || 'not_tested';
-      model.extensionLeftEndfeel = formValue.elbow_prom_extension_left_endfeel || 'not_tested';
-      model.flexionRight = formValue.elbow_prom_flexion_right || 'not_tested';
-      model.flexionRightEndfeel = formValue.elbow_prom_flexion_right_endfeel || 'not_tested';
-      model.flexionLeft = formValue.elbow_prom_flexion_left || 'not_tested';
-      model.flexionLeftEndfeel = formValue.elbow_prom_flexion_left_endfeel || 'not_tested';
-      model.supinationRight = formValue.elbow_prom_supination_right || 'not_tested';
-      model.supinationRightEndfeel = formValue.elbow_prom_supination_right_endfeel || 'not_tested';
-      model.supinationLeft = formValue.elbow_prom_supination_left || 'not_tested';
-      model.supinationLeftEndfeel = formValue.elbow_prom_supination_left_endfeel || 'not_tested';
-      model.pronationRight = formValue.elbow_prom_pronation_right || 'not_tested';
-      model.pronationRightEndfeel = formValue.elbow_prom_pronation_right_endfeel || 'not_tested';
-      model.pronationLeft = formValue.elbow_prom_pronation_left || 'not_tested';
-      model.pronationLeftEndfeel = formValue.elbow_prom_pronation_left_endfeel || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      ElbowPROM.elbowProm,
+      'elbow_prom'
+    ) as ElbowPROMModel;
   }
 
   private mapWristArom(formValue: any): WristAROMModel {
-    const enabled = formValue.wrist_arrom === 'yes';
-    const model: WristAROMModel = { enabled };
-
-    if (enabled) {
-      model.extensionRight = formValue.extension_right || 'not_tested';
-      model.extensionLeft = formValue.extension_left || 'not_tested';
-      model.flexionRight = formValue.flexion_right || 'not_tested';
-      model.flexionLeft = formValue.flexion_left || 'not_tested';
-      model.radialDeviationRight = formValue.radial_deviation_right || 'not_tested';
-      model.radialDeviationLeft = formValue.radial_deviation_left || 'not_tested';
-      model.ulnarDeviationRight = formValue.ulnar_deviation_right || 'not_tested';
-      model.ulnarDeviationLeft = formValue.ulnar_deviation_left || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      WristAROM.wristArom,
+      'wrist_arrom'
+    ) as WristAROMModel;
   }
 
   private mapWristProm(formValue: any): WristPROMModel {
-    const enabled = formValue.wrist_prom === 'yes';
-    const model: WristPROMModel = { enabled };
-
-    if (enabled) {
-      model.extensionRight = formValue.wrist_prom_extension_right || 'not_tested';
-      model.extensionRightEndfeel = formValue.wrist_prom_extension_right_endfeel || 'not_tested';
-      model.extensionLeft = formValue.wrist_prom_extension_left || 'not_tested';
-      model.extensionLeftEndfeel = formValue.wrist_prom_extension_left_endfeel || 'not_tested';
-      model.flexionRight = formValue.wrist_prom_flexion_right || 'not_tested';
-      model.flexionRightEndfeel = formValue.wrist_prom_flexion_right_endfeel || 'not_tested';
-      model.flexionLeft = formValue.wrist_prom_flexion_left || 'not_tested';
-      model.flexionLeftEndfeel = formValue.wrist_prom_flexion_left_endfeel || 'not_tested';
-      model.radialDeviationRight = formValue.wrist_prom_radial_deviation_right || 'not_tested';
-      model.radialDeviationRightEndfeel = formValue.wrist_prom_radial_deviation_right_endfeel || 'not_tested';
-      model.radialDeviationLeft = formValue.wrist_prom_radial_deviation_left || 'not_tested';
-      model.radialDeviationLeftEndfeel = formValue.wrist_prom_radial_deviation_left_endfeel || 'not_tested';
-      model.ulnarDeviationRight = formValue.wrist_prom_ulnar_deviation_right || 'not_tested';
-      model.ulnarDeviationRightEndfeel = formValue.wrist_prom_ulnar_deviation_right_endfeel || 'not_tested';
-      model.ulnarDeviationLeft = formValue.wrist_prom_ulnar_deviation_left || 'not_tested';
-      model.ulnarDeviationLeftEndfeel = formValue.wrist_prom_ulnar_deviation_left_endfeel || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      WristPROM.wristProm,
+      'wrist_prom'
+    ) as WristPROMModel;
   }
 
   private mapHandAromProm(formValue: any): HandAromPromModel {
@@ -1393,325 +936,90 @@ export class RangeOfMotionMapperService {
 
   //map Lumbar AROM
   private mapLumbarAROM(formValue: any): LumbarAROMModel {
-    const enabled = formValue.lumbar_arrom === 'yes';
+    // Using generic mapper with config - no manual field mapping!
+    const model = mapSingleColumnSection(
+      formValue,
+      LumbarAROMConfig.lumbarArom,
+      'lumbar_arrom'
+    ) as LumbarAROMModel;
 
-    const model: LumbarAROMModel = {
-      enabled,
-      lumbarArromApplyToAll: formValue.lumbar_arrom_apply_to_all || ''
-    };
-
-    if (enabled) {
-      model.lumbarArromForwardBending =
-        formValue.lumbar_arrom_forward_bending || 'not_tested';
-
-      model.lumbarArromBackwardBending =
-        formValue.lumbar_arrom_backward_bending || 'not_tested';
-
-      model.lumbarArromRightRotation =
-        formValue.lumbar_arrom_right_rotation || 'not_tested';
-
-      model.lumbarArromLeftRotation =
-        formValue.lumbar_arrom_left_rotation || 'not_tested';
-
-      model.lumbarArromRightSideBending =
-        formValue.lumbar_arrom_right_side_bending || 'not_tested';
-
-      model.lumbarArromLeftSideBending =
-        formValue.lumbar_arrom_left_side_bending || 'not_tested';
-    }
+    // Lumbar AROM stores applyToAll in the model (unlike other sections)
+    model.lumbarArromApplyToAll = formValue.lumbar_arrom_apply_to_all || '';
 
     return model;
   }
 
   private mapHipArom(formValue: any): HipAROMModel {
-    const enabled = formValue.hip_arrom === 'yes';
-    const model: HipAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.hip_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.hip_flexion_left || 'not_tested';
-      model.extensionRight = formValue.hip_extension_right || 'not_tested';
-      model.extensionLeft = formValue.hip_extension_left || 'not_tested';
-      model.abductionRight = formValue.hip_abduction_right || 'not_tested';
-      model.abductionLeft = formValue.hip_abduction_left || 'not_tested';
-      model.adductionRight = formValue.hip_adduction_right || 'not_tested';
-      model.adductionLeft = formValue.hip_adduction_left || 'not_tested';
-      model.internalRotationRight = formValue.hip_internal_rotation_right || 'not_tested';
-      model.internalRotationLeft = formValue.hip_internal_rotation_left || 'not_tested';
-      model.externalRotationRight = formValue.hip_external_rotation_right || 'not_tested';
-      model.externalRotationLeft = formValue.hip_external_rotation_left || 'not_tested';
-      model.comments = formValue.hip_arrom_comments || '';
-    }
-
-    return model;
+    // Using generic mapper with config - no manual field mapping!
+    return mapMeasurementSection(
+      formValue,
+      HipAromConfig.hipArom,
+      'hip_arrom'
+    ) as HipAROMModel;
   }
 
   private mapHipPROM(formValue: any): HipPROMModel {
-    const enabled = formValue.hip_prom === 'yes';
-
-    const model: HipPROMModel = { enabled };
-    if (enabled) {
-      model.flexionRight = formValue.hip_prom_flexion_right || 'not_tested';
-      model.flexionRightEndfeel = formValue.hip_prom_flexion_right_endfeel || 'not_tested';
-
-      model.flexionLeft = formValue.hip_prom_flexion_left || 'not_tested';
-      model.flexionLeftEndfeel = formValue.hip_prom_flexion_left_endfeel || 'not_tested';
-
-      model.extensionRight = formValue.hip_prom_extension_right || 'not_tested';
-      model.extensionRightEndfeel = formValue.hip_prom_extension_right_endfeel || 'not_tested';
-
-      model.extensionLeft = formValue.hip_prom_extension_left || 'not_tested';
-      model.extensionLeftEndfeel = formValue.hip_prom_extension_left_endfeel || 'not_tested';
-
-      model.abductionRight = formValue.hip_prom_abduction_right || 'not_tested';
-      model.abductionRightEndfeel = formValue.hip_prom_abduction_right_endfeel || 'not_tested';
-
-      model.abductionLeft = formValue.hip_prom_abduction_left || 'not_tested';
-      model.abductionLeftEndfeel = formValue.hip_prom_abduction_left_endfeel || 'not_tested';
-
-      model.adductionRight = formValue.hip_prom_adduction_right || 'not_tested';
-      model.adductionRightEndfeel = formValue.hip_prom_adduction_right_endfeel || 'not_tested';
-
-      model.adductionLeft = formValue.hip_prom_adduction_left || 'not_tested';
-      model.adductionLeftEndfeel = formValue.hip_prom_adduction_left_endfeel || 'not_tested';
-
-      model.internalRotationRight = formValue.hip_prom_internal_rotation_right || 'not_tested';
-      model.internalRotationRightEndfeel = formValue.hip_prom_internal_rotation_right_endfeel || 'not_tested';
-
-      model.internalRotationLeft = formValue.hip_prom_internal_rotation_left || 'not_tested';
-      model.internalRotationLeftEndfeel = formValue.hip_prom_internal_rotation_left_endfeel || 'not_tested';
-
-      model.externalRotationRight = formValue.hip_prom_external_rotation_right || 'not_tested';
-      model.externalRotationRightEndfeel = formValue.hip_prom_external_rotation_right_endfeel || 'not_tested';
-
-      model.externalRotationLeft = formValue.hip_prom_external_rotation_left || 'not_tested';
-      model.externalRotationLeftEndfeel = formValue.hip_prom_external_rotation_left_endfeel || 'not_tested';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      HipPROM.hipProm,
+      'hip_prom'
+    ) as HipPROMModel;
   }
 
   private mapKneeArom(formValue: any): KneeAROMModel {
-    const enabled = formValue.knee_arrom === 'yes';
-    const model: KneeAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.knee_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.knee_flexion_left || 'not_tested';
-      model.extensionRight = formValue.knee_extension_right || 'not_tested';
-      model.extensionLeft = formValue.knee_extension_left || 'not_tested';
-      model.comments = formValue.knee_arrom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      KneeAROM.kneeArom,
+      'knee_arrom'
+    ) as KneeAROMModel;
   }
 
   private mapAnkleArom(formValue: any): AnkleAROMModel {
-    const enabled = formValue.ankle_arrom === 'yes';
-    const model: AnkleAROMModel = { enabled };
-
-    if (enabled) {
-      model.dorsiflexionAt0KneeFlexionRight = formValue.ankle_dorsiflexion_0_knee_flexion_right || 'not_tested';
-      model.dorsiflexionAt0KneeFlexionLeft = formValue.ankle_dorsiflexion_0_knee_flexion_left || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionRight = formValue.ankle_dorsiflexion_90_knee_flexion_right || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionLeft = formValue.ankle_dorsiflexion_90_knee_flexion_left || 'not_tested';
-      model.plantarflexionRight = formValue.ankle_plantarflexion_right || 'not_tested';
-      model.plantarflexionLeft = formValue.ankle_plantarflexion_left || 'not_tested';
-      model.inversionRight = formValue.ankle_inversion_right || 'not_tested';
-      model.inversionLeft = formValue.ankle_inversion_left || 'not_tested';
-      model.eversionRight = formValue.ankle_eversion_right || 'not_tested';
-      model.eversionLeft = formValue.ankle_eversion_left || 'not_tested';
-      model.comments = formValue.ankle_arrom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      AnkleAROM.ankleArom,
+      'ankle_arrom'
+    ) as AnkleAROMModel;
   }
 
   private mapAnkleProm(formValue: any): AnklePROMModel {
-    const enabled = formValue.ankle_prom === 'yes';
-    const model: AnklePROMModel = { enabled };
-
-    if (enabled) {
-      model.dorsiflexionAt0KneeFlexionRight = formValue.ankle_prom_dorsiflexion_0_knee_flexion_right || 'not_tested';
-      model.dorsiflexionAt0KneeFlexionRightEndfeel = formValue.ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel || 'not_tested';
-      model.dorsiflexionAt0KneeFlexionLeft = formValue.ankle_prom_dorsiflexion_0_knee_flexion_left || 'not_tested';
-      model.dorsiflexionAt0KneeFlexionLeftEndfeel = formValue.ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionRight = formValue.ankle_prom_dorsiflexion_90_knee_flexion_right || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionRightEndfeel = formValue.ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionLeft = formValue.ankle_prom_dorsiflexion_90_knee_flexion_left || 'not_tested';
-      model.dorsiflexionAt90KneeFlexionLeftEndfeel = formValue.ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel || 'not_tested';
-      model.plantarflexionRight = formValue.ankle_prom_plantarflexion_right || 'not_tested';
-      model.plantarflexionRightEndfeel = formValue.ankle_prom_plantarflexion_right_endfeel || 'not_tested';
-      model.plantarflexionLeft = formValue.ankle_prom_plantarflexion_left || 'not_tested';
-      model.plantarflexionLeftEndfeel = formValue.ankle_prom_plantarflexion_left_endfeel || 'not_tested';
-      model.inversionRight = formValue.ankle_prom_inversion_right || 'not_tested';
-      model.inversionRightEndfeel = formValue.ankle_prom_inversion_right_endfeel || 'not_tested';
-      model.inversionLeft = formValue.ankle_prom_inversion_left || 'not_tested';
-      model.inversionLeftEndfeel = formValue.ankle_prom_inversion_left_endfeel || 'not_tested';
-      model.eversionRight = formValue.ankle_prom_eversion_right || 'not_tested';
-      model.eversionRightEndfeel = formValue.ankle_prom_eversion_right_endfeel || 'not_tested';
-      model.eversionLeft = formValue.ankle_prom_eversion_left || 'not_tested';
-      model.eversionLeftEndfeel = formValue.ankle_prom_eversion_left_endfeel || 'not_tested';
-      model.comments = formValue.ankle_prom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      AnklePROM.ankleProm,
+      'ankle_prom'
+    ) as AnklePROMModel;
   }
 
   private mapFirstMtpArom(formValue: any): FirstMtpAROMModel {
-    const enabled = formValue.fst_mtp_arrom === 'yes';
-    const model: FirstMtpAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.fst_mtp_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.fst_mtp_flexion_left || 'not_tested';
-      model.extensionRight = formValue.fst_mtp_extension_right || 'not_tested';
-      model.extensionLeft = formValue.fst_mtp_extension_left || 'not_tested';
-      model.comments = formValue.fst_mtp_arrom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      FstMTPArom.fstMTPArom,
+      'fst_mtp_arrom'
+    ) as FirstMtpAROMModel;
   }
 
   private mapFirstIpArom(formValue: any): FirstIpAROMModel {
-    const enabled = formValue.fst_ip_arrom === 'yes';
-    const model: FirstIpAROMModel = { enabled };
-
-    if (enabled) {
-      model.flexionRight = formValue.fst_ip_flexion_right || 'not_tested';
-      model.flexionLeft = formValue.fst_ip_flexion_left || 'not_tested';
-      model.extensionRight = formValue.fst_ip_extension_right || 'not_tested';
-      model.extensionLeft = formValue.fst_ip_extension_left || 'not_tested';
-      model.comments = formValue.fst_ip_arrom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      FstIPAROM.fstipArom,
+      'fst_ip_arrom'
+    ) as FirstIpAROMModel;
   }
 
   private mapToeArom(formValue: any): ToeAROMModel {
-    const enabled = formValue.toe_arrom === 'yes';
-    const model: ToeAROMModel = { enabled };
-
-    if (enabled) {
-      model.secondMtpFlexionRight = formValue.toe_arom_2nd_mtp_flexion_right || 'not_tested';
-      model.secondMtpFlexionLeft = formValue.toe_arom_2nd_mtp_flexion_left || 'not_tested';
-      model.secondMtpExtensionRight = formValue.toe_arom_2nd_mtp_extension_right || 'not_tested';
-      model.secondMtpExtensionLeft = formValue.toe_arom_2nd_mtp_extension_left || 'not_tested';
-      model.secondIpFlexionRight = formValue.toe_arom_2nd_ip_flexion_right || 'not_tested';
-      model.secondIpFlexionLeft = formValue.toe_arom_2nd_ip_flexion_left || 'not_tested';
-      model.secondIpExtensionRight = formValue.toe_arom_2nd_ip_extension_right || 'not_tested';
-      model.secondIpExtensionLeft = formValue.toe_arom_2nd_ip_extension_left || 'not_tested';
-
-      model.thirdMtpFlexionRight = formValue.toe_arom_3rd_mtp_flexion_right || 'not_tested';
-      model.thirdMtpFlexionLeft = formValue.toe_arom_3rd_mtp_flexion_left || 'not_tested';
-      model.thirdMtpExtensionRight = formValue.toe_arom_3rd_mtp_extension_right || 'not_tested';
-      model.thirdMtpExtensionLeft = formValue.toe_arom_3rd_mtp_extension_left || 'not_tested';
-      model.thirdIpFlexionRight = formValue.toe_arom_3rd_ip_flexion_right || 'not_tested';
-      model.thirdIpFlexionLeft = formValue.toe_arom_3rd_ip_flexion_left || 'not_tested';
-      model.thirdIpExtensionRight = formValue.toe_arom_3rd_ip_extension_right || 'not_tested';
-      model.thirdIpExtensionLeft = formValue.toe_arom_3rd_ip_extension_left || 'not_tested';
-
-      model.fourthMtpFlexionRight = formValue.toe_arom_4th_mtp_flexion_right || 'not_tested';
-      model.fourthMtpFlexionLeft = formValue.toe_arom_4th_mtp_flexion_left || 'not_tested';
-      model.fourthMtpExtensionRight = formValue.toe_arom_4th_mtp_extension_right || 'not_tested';
-      model.fourthMtpExtensionLeft = formValue.toe_arom_4th_mtp_extension_left || 'not_tested';
-      model.fourthIpFlexionRight = formValue.toe_arom_4th_ip_flexion_right || 'not_tested';
-      model.fourthIpFlexionLeft = formValue.toe_arom_4th_ip_flexion_left || 'not_tested';
-      model.fourthIpExtensionRight = formValue.toe_arom_4th_ip_extension_right || 'not_tested';
-      model.fourthIpExtensionLeft = formValue.toe_arom_4th_ip_extension_left || 'not_tested';
-
-      model.fifthMtpFlexionRight = formValue.toe_arom_5th_mtp_flexion_right || 'not_tested';
-      model.fifthMtpFlexionLeft = formValue.toe_arom_5th_mtp_flexion_left || 'not_tested';
-      model.fifthMtpExtensionRight = formValue.toe_arom_5th_mtp_extension_right || 'not_tested';
-      model.fifthMtpExtensionLeft = formValue.toe_arom_5th_mtp_extension_left || 'not_tested';
-      model.fifthIpFlexionRight = formValue.toe_arom_5th_ip_flexion_right || 'not_tested';
-      model.fifthIpFlexionLeft = formValue.toe_arom_5th_ip_flexion_left || 'not_tested';
-      model.fifthIpExtensionRight = formValue.toe_arom_5th_ip_extension_right || 'not_tested';
-      model.fifthIpExtensionLeft = formValue.toe_arom_5th_ip_extension_left || 'not_tested';
-
-      model.comments = formValue.toe_arrom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementSection(
+      formValue,
+      ToeAROM.toeArom,
+      'toe_arrom'
+    ) as ToeAROMModel;
   }
 
   private mapToeProm(formValue: any): ToePROMModel {
-    const enabled = formValue.toe_prom === 'yes';
-    const model: ToePROMModel = { enabled };
-
-    if (enabled) {
-      model.secondMtpFlexionRight = formValue.toe_2nd_mtp_flexion_right || 'not_tested';
-      model.secondMtpFlexionRightEndfeel = formValue.toe_2nd_mtp_flexion_right_endfeel || 'not_tested';
-      model.secondMtpFlexionLeft = formValue.toe_2nd_mtp_flexion_left || 'not_tested';
-      model.secondMtpFlexionLeftEndfeel = formValue.toe_2nd_mtp_flexion_left_endfeel || 'not_tested';
-      model.secondMtpExtensionRight = formValue.toe_2nd_mtp_extension_right || 'not_tested';
-      model.secondMtpExtensionRightEndfeel = formValue.toe_2nd_mtp_extension_right_endfeel || 'not_tested';
-      model.secondMtpExtensionLeft = formValue.toe_2nd_mtp_extension_left || 'not_tested';
-      model.secondMtpExtensionLeftEndfeel = formValue.toe_2nd_mtp_extension_left_endfeel || 'not_tested';
-      model.secondIpFlexionRight = formValue.toe_2nd_ip_flexion_right || 'not_tested';
-      model.secondIpFlexionRightEndfeel = formValue.toe_2nd_ip_flexion_right_endfeel || 'not_tested';
-      model.secondIpFlexionLeft = formValue.toe_2nd_ip_flexion_left || 'not_tested';
-      model.secondIpFlexionLeftEndfeel = formValue.toe_2nd_ip_flexion_left_endfeel || 'not_tested';
-      model.secondIpExtensionRight = formValue.toe_2nd_ip_extension_right || 'not_tested';
-      model.secondIpExtensionRightEndfeel = formValue.toe_2nd_ip_extension_right_endfeel || 'not_tested';
-      model.secondIpExtensionLeft = formValue.toe_2nd_ip_extension_left || 'not_tested';
-      model.secondIpExtensionLeftEndfeel = formValue.toe_2nd_ip_extension_left_endfeel || 'not_tested';
-
-      model.thirdMtpFlexionRight = formValue.toe_3rd_mtp_flexion_right || 'not_tested';
-      model.thirdMtpFlexionRightEndfeel = formValue.toe_3rd_mtp_flexion_right_endfeel || 'not_tested';
-      model.thirdMtpFlexionLeft = formValue.toe_3rd_mtp_flexion_left || 'not_tested';
-      model.thirdMtpFlexionLeftEndfeel = formValue.toe_3rd_mtp_flexion_left_endfeel || 'not_tested';
-      model.thirdMtpExtensionRight = formValue.toe_3rd_mtp_extension_right || 'not_tested';
-      model.thirdMtpExtensionRightEndfeel = formValue.toe_3rd_mtp_extension_right_endfeel || 'not_tested';
-      model.thirdMtpExtensionLeft = formValue.toe_3rd_mtp_extension_left || 'not_tested';
-      model.thirdMtpExtensionLeftEndfeel = formValue.toe_3rd_mtp_extension_left_endfeel || 'not_tested';
-      model.thirdIpFlexionRight = formValue.toe_3rd_ip_flexion_right || 'not_tested';
-      model.thirdIpFlexionRightEndfeel = formValue.toe_3rd_ip_flexion_right_endfeel || 'not_tested';
-      model.thirdIpFlexionLeft = formValue.toe_3rd_ip_flexion_left || 'not_tested';
-      model.thirdIpFlexionLeftEndfeel = formValue.toe_3rd_ip_flexion_left_endfeel || 'not_tested';
-      model.thirdIpExtensionRight = formValue.toe_3rd_ip_extension_right || 'not_tested';
-      model.thirdIpExtensionRightEndfeel = formValue.toe_3rd_ip_extension_right_endfeel || 'not_tested';
-      model.thirdIpExtensionLeft = formValue.toe_3rd_ip_extension_left || 'not_tested';
-      model.thirdIpExtensionLeftEndfeel = formValue.toe_3rd_ip_extension_left_endfeel || 'not_tested';
-
-      model.fourthMtpFlexionRight = formValue.toe_4th_mtp_flexion_right || 'not_tested';
-      model.fourthMtpFlexionRightEndfeel = formValue.toe_4th_mtp_flexion_right_endfeel || 'not_tested';
-      model.fourthMtpFlexionLeft = formValue.toe_4th_mtp_flexion_left || 'not_tested';
-      model.fourthMtpFlexionLeftEndfeel = formValue.toe_4th_mtp_flexion_left_endfeel || 'not_tested';
-      model.fourthMtpExtensionRight = formValue.toe_4th_mtp_extension_right || 'not_tested';
-      model.fourthMtpExtensionRightEndfeel = formValue.toe_4th_mtp_extension_right_endfeel || 'not_tested';
-      model.fourthMtpExtensionLeft = formValue.toe_4th_mtp_extension_left || 'not_tested';
-      model.fourthMtpExtensionLeftEndfeel = formValue.toe_4th_mtp_extension_left_endfeel || 'not_tested';
-      model.fourthIpFlexionRight = formValue.toe_4th_ip_flexion_right || 'not_tested';
-      model.fourthIpFlexionRightEndfeel = formValue.toe_4th_ip_flexion_right_endfeel || 'not_tested';
-      model.fourthIpFlexionLeft = formValue.toe_4th_ip_flexion_left || 'not_tested';
-      model.fourthIpFlexionLeftEndfeel = formValue.toe_4th_ip_flexion_left_endfeel || 'not_tested';
-      model.fourthIpExtensionRight = formValue.toe_4th_ip_extension_right || 'not_tested';
-      model.fourthIpExtensionRightEndfeel = formValue.toe_4th_ip_extension_right_endfeel || 'not_tested';
-      model.fourthIpExtensionLeft = formValue.toe_4th_ip_extension_left || 'not_tested';
-      model.fourthIpExtensionLeftEndfeel = formValue.toe_4th_ip_extension_left_endfeel || 'not_tested';
-
-      model.fifthMtpFlexionRight = formValue.toe_5th_mtp_flexion_right || 'not_tested';
-      model.fifthMtpFlexionRightEndfeel = formValue.toe_5th_mtp_flexion_right_endfeel || 'not_tested';
-      model.fifthMtpFlexionLeft = formValue.toe_5th_mtp_flexion_left || 'not_tested';
-      model.fifthMtpFlexionLeftEndfeel = formValue.toe_5th_mtp_flexion_left_endfeel || 'not_tested';
-      model.fifthMtpExtensionRight = formValue.toe_5th_mtp_extension_right || 'not_tested';
-      model.fifthMtpExtensionRightEndfeel = formValue.toe_5th_mtp_extension_right_endfeel || 'not_tested';
-      model.fifthMtpExtensionLeft = formValue.toe_5th_mtp_extension_left || 'not_tested';
-      model.fifthMtpExtensionLeftEndfeel = formValue.toe_5th_mtp_extension_left_endfeel || 'not_tested';
-      model.fifthIpFlexionRight = formValue.toe_5th_ip_flexion_right || 'not_tested';
-      model.fifthIpFlexionRightEndfeel = formValue.toe_5th_ip_flexion_right_endfeel || 'not_tested';
-      model.fifthIpFlexionLeft = formValue.toe_5th_ip_flexion_left || 'not_tested';
-      model.fifthIpFlexionLeftEndfeel = formValue.toe_5th_ip_flexion_left_endfeel || 'not_tested';
-      model.fifthIpExtensionRight = formValue.toe_5th_ip_extension_right || 'not_tested';
-      model.fifthIpExtensionRightEndfeel = formValue.toe_5th_ip_extension_right_endfeel || 'not_tested';
-      model.fifthIpExtensionLeft = formValue.toe_5th_ip_extension_left || 'not_tested';
-      model.fifthIpExtensionLeftEndfeel = formValue.toe_5th_ip_extension_left_endfeel || 'not_tested';
-
-      model.comments = formValue.toe_prom_comments || '';
-    }
-
-    return model;
+    return mapMeasurementEndfeelSection(
+      formValue,
+      ToePROM.toeProm,
+      'toe_prom'
+    ) as ToePROMModel;
   }
 
 }

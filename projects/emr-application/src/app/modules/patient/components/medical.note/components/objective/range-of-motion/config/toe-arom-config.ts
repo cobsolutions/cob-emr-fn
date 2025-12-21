@@ -39,8 +39,8 @@ export class ToeAROM {
             '5th IP Flexion': FTH_IP_FLEXION_OPTION,
             '5th IP Extension': FTH_IP_EXTENSION_OPTION
         },
-        fieldPrefix: 'toe_arrom_',
-        applyToAllFieldName: 'toe_arrom_apply_to_all',
+        fieldPrefix: 'toe_arom_',
+        applyToAllFieldName: 'toe_arom_apply_to_all',
         commentsFieldName: 'toe_arrom_comments',
         showApplyToAll: true,
         showComments: false

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { generateMeasurementFieldName } from '../form-field-utils';
 
 @Component({
   selector: 'measurement-table',
@@ -77,8 +78,7 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
    * Example: fieldPrefix='fst_mtp_', label='Flexion', side='right' => 'fst_mtp_flexion_right'
    */
   getFieldName(label: string, side: 'right' | 'left'): string {
-    const normalizedLabel = label.toLowerCase().replace(/\s+/g, '_');
-    return `${this.fieldPrefix}${normalizedLabel}_${side}`;
+    return generateMeasurementFieldName(this.fieldPrefix, label, side);
   }
 
   /**

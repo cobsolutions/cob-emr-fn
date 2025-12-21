@@ -198,3 +198,42 @@ export const Tripod_Pinch_Grip_OPTION: RomOption[] = [
     { value: '29.5', label: '29.5' },
     { value: '30', label: '30' }
 ]
+export const Gross_Muscle_Tests_Trunk_OPTION: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '5/5', label: '5/5' },
+    { value: '5-/5', label: '5-/5' },
+    { value: '4+/5', label: '4+/5' },
+    { value: '4/5', label: '4/5' },
+    { value: '4-/5', label: '4-/5' },
+    { value: '3+/5', label: '3+/5' },
+    { value: '3/5', label: '3/5' },
+    { value: '3-/5', label: '3-/5' },
+    { value: '2+/5', label: '2+/5' },
+    { value: '2/5', label: '2/5' },
+    { value: '2-/5', label: '2-/5' },
+    { value: '1+/5', label: '1+/5' },
+    { value: '1/5', label: '1/5' },
+    { value: '1-/5', label: '1-/5' },
+    { value: '0/5', label: '0/5' },
+    { value: 'Custom', label: 'Custom' }
+]
+
+export const ManualMuscleTests_OPTION: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '5/5', label: '5/5' },
+    { value: '5-/5', label: '5-/5' },
+    { value: '4+/5', label: '4+/5' },
+    { value: '4/5', label: '4/5' },
+    { value: '4-/5', label: '4-/5' },
+    { value: '3+/5', label: '3+/5' },
+    { value: '3/5', label: '3/5' },
+    { value: '3-/5', label: '3-/5' },
+    { value: '2+/5', label: '2+/5' },
+    { value: '2/5', label: '2/5' },
+    { value: '2-/5', label: '2-/5' },
+    { value: '1+/5', label: '1+/5' },
+    { value: '1/5', label: '1/5' },
+    { value: '1-/5', label: '1-/5' },
+    { value: '0/5', label: '0/5' },
+    { value: 'Custom', label: 'Custom' }
+]

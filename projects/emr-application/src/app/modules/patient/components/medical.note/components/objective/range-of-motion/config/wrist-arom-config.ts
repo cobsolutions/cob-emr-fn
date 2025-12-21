@@ -13,7 +13,7 @@ export class WristAROM {
             'Supination': WRIST_AROM_SUPINATION_PRONATION_OPTIONS,
             'Pronation': WRIST_AROM_SUPINATION_PRONATION_OPTIONS
         },
-        fieldPrefix: 'wrist_arrom',
+        fieldPrefix: '',
         applyToAllFieldName: 'wrist_arrom_apply_to_all',
         commentsFieldName: 'wrist_arrom_comments',
         showApplyToAll: true,

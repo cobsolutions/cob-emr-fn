@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RangeOfMotionModel } from './models/range-of-motion.model';
 import { RangeOfMotionMapperService } from './services/range-of-motion-mapper.service';
-import { RomSectionsConfig } from './config';
+import { RomSectionsConfig, RomSectionConfig, RomSectionEndfeelConfig } from './config';
+import { generateSingleColumnFieldName, generateMeasurementFieldName, generateEndfeelFieldName } from '../common/form-field-utils';
 
 @Component({
   selector: 'range-of-motion-n',
@@ -73,6 +74,97 @@ export class RangeOfMotionNComponent implements OnInit {
     private fb: FormBuilder,
     private rangeOfMotionMapper: RangeOfMotionMapperService
   ) { }
+
+  /**
+   * Generic helper to reset single-column-table fields
+   * Uses the same config and naming logic as the child component
+   */
+  private resetSingleColumnFields(config: RomSectionConfig): void {
+    const updates: any = {};
+
+    // Reset Apply to All field
+    if (config.showApplyToAll) {
+      const applyToAllField = config.applyToAllFieldName;
+      updates[applyToAllField] = '';
+    }
+
+    // Reset all label fields using the shared utility
+    config.labels.forEach(label => {
+      const fieldName = generateSingleColumnFieldName(config.fieldPrefix, label);
+      updates[fieldName] = 'not_tested';
+    });
+
+    // Reset comments field
+    if (config.showComments) {
+      const commentsField = config.commentsFieldName;
+      updates[commentsField] = '';
+    }
+
+    this.romForm.patchValue(updates, { emitEvent: false });
+  }
+
+  /**
+   * Generic helper to reset measurement-table fields (right/left)
+   * Uses the same config and naming logic as the child component
+   */
+  private resetMeasurementFields(config: RomSectionConfig): void {
+    const updates: any = {};
+
+    // Reset Apply to All field
+    if (config.showApplyToAll) {
+      updates[config.applyToAllFieldName] = '';
+    }
+
+    // Reset all measurement fields (right and left)
+    config.labels.forEach(label => {
+      const rightField = generateMeasurementFieldName(config.fieldPrefix, label, 'right');
+      const leftField = generateMeasurementFieldName(config.fieldPrefix, label, 'left');
+      updates[rightField] = 'not_tested';
+      updates[leftField] = 'not_tested';
+    });
+
+    // Reset comments field
+    if (config.showComments) {
+      updates[config.commentsFieldName] = '';
+    }
+
+    this.romForm.patchValue(updates, { emitEvent: false });
+  }
+
+  /**
+   * Generic helper to reset measurement-endfeel-table fields (measurement + endfeel for right/left)
+   * Uses the same config and naming logic as the child component
+   */
+  private resetMeasurementEndfeelFields(config: RomSectionEndfeelConfig): void {
+    const updates: any = {};
+
+    // Reset Apply to All field
+    if (config.showApplyToAll) {
+      updates[config.applyToAllFieldName] = '';
+    }
+
+    // Reset all measurement and endfeel fields (right and left)
+    config.labels.forEach(label => {
+      // Right side - measurement and endfeel
+      const rightMeasurement = generateMeasurementFieldName(config.fieldPrefix, label, 'right');
+      const rightEndfeel = generateEndfeelFieldName(config.fieldPrefix, label, 'right');
+      updates[rightMeasurement] = 'not_tested';
+      updates[rightEndfeel] = 'not_tested';
+
+      // Left side - measurement and endfeel
+      const leftMeasurement = generateMeasurementFieldName(config.fieldPrefix, label, 'left');
+      const leftEndfeel = generateEndfeelFieldName(config.fieldPrefix, label, 'left');
+      updates[leftMeasurement] = 'not_tested';
+      updates[leftEndfeel] = 'not_tested';
+    });
+
+    // Reset comments field
+    if (config.showComments) {
+      updates[config.commentsFieldName] = '';
+    }
+
+    this.romForm.patchValue(updates, { emitEvent: false });
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -834,15 +926,8 @@ export class RangeOfMotionNComponent implements OnInit {
     this.romForm.get('cervical_arrom')?.valueChanges.subscribe(value => {
       this.showCervicalAromFields = value === 'yes';
       if (!this.showCervicalAromFields) {
-        this.romForm.patchValue({
-          cervical_forward_bending: 'not_tested',
-          cervical_backward_bending: 'not_tested',
-          cervical_right_rotation: 'not_tested',
-          cervical_left_rotation: 'not_tested',
-          cervical_right_side_bending: 'not_tested',
-          cervical_left_side_bending: 'not_tested',
-          cervical_comments: ''
-        });
+        // Use generic reset helper with config
+        this.resetSingleColumnFields(this.romConfig.cervicalArom);
       }
     });
 

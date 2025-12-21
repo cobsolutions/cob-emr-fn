@@ -11,8 +11,8 @@ export class KneeAROM {
         specialOptions: {
             'Extension': KNEE_AROM_EXTENSION_OPTION
         },
-        fieldPrefix: 'knee_arrom_',
-        applyToAllFieldName: 'knee_arrom_apply_to_all',
+        fieldPrefix: 'knee_',
+        applyToAllFieldName: 'knee_apply_to_all',
         commentsFieldName: 'knee_arrom_comments',
         showApplyToAll: true,
         showComments: false

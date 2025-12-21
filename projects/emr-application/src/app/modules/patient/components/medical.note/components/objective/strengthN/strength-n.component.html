@@ -162,7 +162,7 @@
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
-                    <input cFormCheckInput type="radio" formControlName="blood_pressure" value="no" />
+                    <input cFormCheckInput type="radio" formControlName="hip" value="no" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
@@ -221,15 +221,53 @@
         </div>
     </div>
     <div *ngIf="showGripPinchFields" class="dependent-field-box">
-        <dropdown-text-table 
-        [columns]="strengthConfig.gripPinch.columns"
-            [labels]="strengthConfig.gripPinch.labels" 
-            [options]="strengthConfig.gripPinch.options"
-            [formGroup]="strengthForm" 
-            [fieldPrefix]="strengthConfig.gripPinch.fieldPrefix"
+        <dropdown-text-table [columns]="strengthConfig.gripPinch.columns" [labels]="strengthConfig.gripPinch.labels"
+            [options]="strengthConfig.gripPinch.options" [specialOptions]="strengthConfig.gripPinch.specialOptions" ,
+            [formGroup]="strengthForm" [fieldPrefix]="strengthConfig.gripPinch.fieldPrefix"
             [commentsFieldName]="strengthConfig.gripPinch.commentsFieldName"
             [showComments]="strengthConfig.gripPinch.showComments">
         </dropdown-text-table>
+        <div class="form-row">
+            <label class="field-label">Rapid Exchange</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="rapid_exchange" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="rapid_exchange" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Repeated Grip</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="repeated_grip" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="repeated_grip" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Five Level Grip</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="five_level_grip" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="five_level_grip" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+
     </div>
     <!-- Gross Muscle Tests Upper -->
     <div class="form-row">
@@ -400,6 +438,13 @@
         </div>
     </div>
     <div *ngIf="showGrossMuscleTestsTrunkFields" class="dependent-field-box">
+        <measurement-table-with-selects [labels]="strengthConfig.grossMuscleTestsTrunk.labels"
+            [options]="strengthConfig.grossMuscleTestsTrunk.options" [formGroup]="strengthForm"
+            [fieldPrefix]="strengthConfig.grossMuscleTestsTrunk.fieldPrefix"
+            [topSelects]="strengthConfig.grossMuscleTestsTrunk.topSelects"
+            [commentsFieldName]="strengthConfig.grossMuscleTestsTrunk.commentsFieldName"
+            [showComments]="strengthConfig.grossMuscleTestsTrunk.showComments">
+        </measurement-table-with-selects>
     </div>
 
     <!-- Gross Muscle Tests Lower -->
@@ -539,6 +584,13 @@
         </div>
     </div>
     <div *ngIf="showManualMuscleTestsFields" class="dependent-field-box">
+        <measurement-table-with-selects [labels]="strengthConfig.manualMuscleTests.labels"
+            [options]="strengthConfig.manualMuscleTests.options" [formGroup]="strengthForm"
+            [fieldPrefix]="strengthConfig.manualMuscleTests.fieldPrefix"
+            [topSelects]="strengthConfig.manualMuscleTests.topSelects"
+            [commentsFieldName]="strengthConfig.manualMuscleTests.commentsFieldName"
+            [showComments]="strengthConfig.manualMuscleTests.showComments">
+        </measurement-table-with-selects>
     </div>
     <div class="form-row">
         <label class="field-label">Additional Comments</label>
