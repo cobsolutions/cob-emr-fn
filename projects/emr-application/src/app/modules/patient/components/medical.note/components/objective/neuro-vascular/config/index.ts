@@ -4,6 +4,7 @@ import { CranialNerveScreen } from "./cranial-nerve-screen-config";
 import { DermatomesLower } from "./dermatomes-lower";
 import { DermatomesUpper } from "./dermatomes-upper";
 import { HomansSign } from "./homans-sign";
+import { LaseguesSLR } from "./lasegues-slr";
 import { LowerReflexes } from "./lower-reflexes";
 import { MyotomesLower } from "./myotomes-lower";
 import { MyotomesUpper } from "./myotomes-upper";
@@ -44,4 +45,7 @@ export class NeuroVascularConfig {
     static readonly homansSign = HomansSign.homansSign;
     
     static readonly thoracicOutlet = ThoracicOutlet.thoracicOutlet;
+
+    
+    static readonly laseguesSLR = LaseguesSLR.laseguesSLR;
 }

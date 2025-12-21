@@ -387,6 +387,16 @@
         </div>
     </div>
     <div *ngIf="showLasegueSSlrFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.laseguesSLR.labels"
+      [options]="neuroVascularConfig.laseguesSLR.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.laseguesSLR.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.laseguesSLR.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.laseguesSLR.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.laseguesSLR.showApplyToAll"
+      [showComments]="neuroVascularConfig.laseguesSLR.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Slump</label>
