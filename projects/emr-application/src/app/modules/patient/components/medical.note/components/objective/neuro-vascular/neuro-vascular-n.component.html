@@ -76,6 +76,16 @@
         </div>
     </div>
     <div *ngIf="showMyotomesLowerFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.myotomesLowerSelect.labels"
+      [options]="neuroVascularConfig.myotomesLowerSelect.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.myotomesLowerSelect.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.myotomesLowerSelect.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.myotomesLowerSelect.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.myotomesLowerSelect.showApplyToAll"
+      [showComments]="neuroVascularConfig.myotomesLowerSelect.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Dermatomes Upper</label>
