@@ -4,6 +4,7 @@ import { CranialNerveScreen } from "./cranial-nerve-screen-config";
 import { DermatomesLower } from "./dermatomes-lower";
 import { DermatomesUpper } from "./dermatomes-upper";
 import { HomansSign } from "./homans-sign";
+import { KernigBrudzinskiTest } from "./kernigbrudzinski-test";
 import { LaseguesSLR } from "./lasegues-slr";
 import { LowerReflexes } from "./lower-reflexes";
 import { MyotomesLower } from "./myotomes-lower";
@@ -59,4 +60,7 @@ export class NeuroVascularConfig {
 
     
     static readonly proneKneeBendNachlas = ProneKneeBendNachlas.proneKneeBendNachlas;
+
+    
+    static readonly kernigBrudzinskiTest = KernigBrudzinskiTest.kernigBrudzinskiTest;
 }

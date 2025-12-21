@@ -487,6 +487,16 @@
         </div>
     </div>
     <div *ngIf="showKernigBrudzinskiTestFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.kernigBrudzinskiTest.labels"
+      [options]="neuroVascularConfig.kernigBrudzinskiTest.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.kernigBrudzinskiTest.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.kernigBrudzinskiTest.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.kernigBrudzinskiTest.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.kernigBrudzinskiTest.showApplyToAll"
+      [showComments]="neuroVascularConfig.kernigBrudzinskiTest.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Cram Test</label>
