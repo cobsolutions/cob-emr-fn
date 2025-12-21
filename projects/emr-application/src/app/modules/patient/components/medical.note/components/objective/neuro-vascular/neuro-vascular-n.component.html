@@ -537,6 +537,16 @@
         </div>
     </div>
     <div *ngIf="showSeatedDuralStretchFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.seatedDuralStretch.labels"
+      [options]="neuroVascularConfig.seatedDuralStretch.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.seatedDuralStretch.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.seatedDuralStretch.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.seatedDuralStretch.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.seatedDuralStretch.showApplyToAll"
+      [showComments]="neuroVascularConfig.seatedDuralStretch.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Semmes Weinstein Lower</label>

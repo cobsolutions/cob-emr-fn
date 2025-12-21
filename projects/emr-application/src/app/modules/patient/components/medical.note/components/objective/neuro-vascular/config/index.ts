@@ -14,6 +14,7 @@ import { NeuralTissueTensionLower } from "./neural-tissue-tension-lower";
 import { NeuralTissueTensionUpper } from "./neural-tissue-tension-upper";
 import { ProneKneeBendNachlas } from "./prone-knee-bend-nachlas";
 import { QuadrantTesting } from "./quadrant-testing";
+import { SeatedDuralStretch } from "./seated-dural-stretch";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
 import { UpperReflexes } from "./upper-reflexes";
@@ -67,4 +68,7 @@ export class NeuroVascularConfig {
 
     
     static readonly cramTest = CramTest.cramTest;
+
+    
+    static readonly seatedDuralStretch = SeatedDuralStretch.seatedDuralStretch;
 }
