@@ -312,6 +312,16 @@
         </div>
     </div>
     <div *ngIf="showCapillaryRefillFields" class="dependent-field-box">
+        <measurement-table
+      [labels]="neuroVascularConfig.capillaryRefill.labels"
+      [options]="neuroVascularConfig.capillaryRefill.options"
+      [formGroup]="neuroVascularForm"
+      [fieldPrefix]="neuroVascularConfig.capillaryRefill.fieldPrefix"
+      [applyToAllFieldName]="neuroVascularConfig.capillaryRefill.applyToAllFieldName"
+      [commentsFieldName]="neuroVascularConfig.capillaryRefill.commentsFieldName"
+      [showApplyToAll]="neuroVascularConfig.capillaryRefill.showApplyToAll"
+      [showComments]="neuroVascularConfig.capillaryRefill.showComments">
+    </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Homan's Sign</label>

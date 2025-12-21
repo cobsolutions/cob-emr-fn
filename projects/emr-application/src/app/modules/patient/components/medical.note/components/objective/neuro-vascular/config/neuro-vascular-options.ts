@@ -100,6 +100,11 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: 'Positive', label: 'Positive' },
     { value: 'Negative', label: 'Negative' }
   ];
+  export const capillaryRefill_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Normal', label: 'Normal' },
+    { value: 'Abnormal', label: 'Abnormal' }
+  ];
   
   
   
