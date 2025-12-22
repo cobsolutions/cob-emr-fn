@@ -19,8 +19,8 @@ export class SelectiveFunctionalMovementAssessment {
     fieldPrefix: 'selective_functional_movement_assessment_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }
