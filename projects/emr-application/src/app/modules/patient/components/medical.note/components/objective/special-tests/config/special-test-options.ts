@@ -48,5 +48,11 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Positive', label: 'Positive' },
     { value: 'Negative', label: 'Negative' }
   ];
+  export const anteriorDrawer_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+  
   
   
