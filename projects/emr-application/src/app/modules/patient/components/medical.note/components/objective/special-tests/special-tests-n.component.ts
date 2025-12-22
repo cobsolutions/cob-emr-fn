@@ -12,8 +12,8 @@ export class SpecialTestsNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   showFlexibilityFields: boolean = false;
   showFlexibilityoberFields: boolean = false;
+  showFlexibilityHamstringFlexibilityFields : boolean = false
 
-  
   showStructuralFields: boolean = false;
   showLigamentIntegrityKneeFields: boolean = false;
   showStorkStandSiMobilityTestFields: boolean = false;
@@ -101,6 +101,13 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('ober')?.valueChanges.subscribe(value => {
       this.showFlexibilityoberFields = value === 'yes';
     });
+    this.specialTestForm.get('_90_90_hamstring_flexibility')?.valueChanges.subscribe(value => {
+      this.showFlexibilityHamstringFlexibilityFields = value === 'yes';
+    });
+
+
+
+
 
     this.specialTestForm.get('structural')?.valueChanges.subscribe(value => {
       this.showStructuralFields = value === 'yes';
