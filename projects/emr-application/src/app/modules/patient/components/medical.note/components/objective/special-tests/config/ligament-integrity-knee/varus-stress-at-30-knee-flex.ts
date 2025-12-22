@@ -15,8 +15,8 @@ export class VarusStressAt30KneeFlex {
     fieldPrefix: 'varus_stress_at_30_knee_flex_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }

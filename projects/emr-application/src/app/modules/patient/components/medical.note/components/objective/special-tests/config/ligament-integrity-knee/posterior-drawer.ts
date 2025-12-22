@@ -15,8 +15,8 @@ export class PosteriorDrawer {
     fieldPrefix: 'posterior_drawer_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }

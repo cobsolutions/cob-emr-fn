@@ -15,8 +15,8 @@ export class PivotShift {
     fieldPrefix: 'pivot_shift_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }
