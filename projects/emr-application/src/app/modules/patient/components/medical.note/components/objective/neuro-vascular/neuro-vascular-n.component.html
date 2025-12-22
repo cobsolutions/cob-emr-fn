@@ -709,7 +709,15 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinUpperThumbFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinUpperThumbFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.thumb.columns"
+                [labels]="neuroVascularConfig.thumb.labels"
+                [options]="neuroVascularConfig.thumb.options" [formGroup]="neuroVascularForm"
+                [fieldPrefix]="neuroVascularConfig.thumb.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.thumb.commentsFieldName"
+                [showComments]="neuroVascularConfig.thumb.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Index Finger</label>
             <div class="radio-group">

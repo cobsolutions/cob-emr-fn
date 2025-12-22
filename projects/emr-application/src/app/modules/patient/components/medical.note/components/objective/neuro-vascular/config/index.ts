@@ -22,6 +22,7 @@ import { FirstToet } from "./semmes-weinstein-lower/fst-toe";
 import { PlantarSurface } from "./semmes-weinstein-lower/plantar-surface";
 import { SecondToe } from "./semmes-weinstein-lower/snd-toe";
 import { ThirdToe } from "./semmes-weinstein-lower/third-toe";
+import { Thumb } from "./semmes-weinstein-upper/thumb";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
 import { TinelsLower } from "./tinels-lower";
@@ -96,4 +97,5 @@ export class NeuroVascularConfig {
     static readonly fifthToe = FifthTeo.fifthToe;
     static readonly plantarSurface = PlantarSurface.plantarSurface;
     static readonly dorsalSurface = DorsalSurface.dorsalSurface;
+    static readonly thumb = Thumb.thumb;
 }
