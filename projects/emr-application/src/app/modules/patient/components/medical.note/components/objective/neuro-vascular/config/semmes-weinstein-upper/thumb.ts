@@ -10,8 +10,8 @@ export class Thumb {
   columns: ['Right', 'Left'],
   labels: ['Radial', 'Ulnar'],
   options: DORSAL_SURFACE_OPTIONS,
-  fieldPrefix: 'dorsal_surface_',
-  commentsFieldName: 'dorsal_surface_comments',
+  fieldPrefix: 'thumb_',
+  commentsFieldName: 'thumb_comments',
   showComments: false
 };
 

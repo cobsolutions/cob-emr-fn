@@ -239,6 +239,45 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
     { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
   ];
+  export const indexFinger_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const middleFinger_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const ringFinger_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const smallFinger_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  
+  
+  
   
   
   

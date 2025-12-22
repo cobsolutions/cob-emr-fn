@@ -711,9 +711,8 @@
         </div>
         <div *ngIf="showSemmesWeinsteinUpperThumbFields" class="dependent-field-box">
             <dropdown-text-table [columns]="neuroVascularConfig.thumb.columns"
-                [labels]="neuroVascularConfig.thumb.labels"
-                [options]="neuroVascularConfig.thumb.options" [formGroup]="neuroVascularForm"
-                [fieldPrefix]="neuroVascularConfig.thumb.fieldPrefix"
+                [labels]="neuroVascularConfig.thumb.labels" [options]="neuroVascularConfig.thumb.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.thumb.fieldPrefix"
                 [commentsFieldName]="neuroVascularConfig.thumb.commentsFieldName"
                 [showComments]="neuroVascularConfig.thumb.showComments">
             </dropdown-text-table>
@@ -733,7 +732,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinUpperIndexFingerFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinUpperIndexFingerFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.indexFinger.columns"
+                [labels]="neuroVascularConfig.indexFinger.labels" [options]="neuroVascularConfig.indexFinger.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.indexFinger.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.indexFinger.commentsFieldName"
+                [showComments]="neuroVascularConfig.indexFinger.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Middle Finger</label>
             <div class="radio-group">
@@ -749,7 +755,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinUpperMiddleFingerFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinUpperMiddleFingerFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.middleFinger.columns"
+                [labels]="neuroVascularConfig.middleFinger.labels" [options]="neuroVascularConfig.middleFinger.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.middleFinger.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.middleFinger.commentsFieldName"
+                [showComments]="neuroVascularConfig.middleFinger.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Ring Finger</label>
             <div class="radio-group">
@@ -765,7 +778,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinUpperRingFingerFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinUpperRingFingerFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.ringFinger.columns"
+                [labels]="neuroVascularConfig.ringFinger.labels" [options]="neuroVascularConfig.ringFinger.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.ringFinger.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.ringFinger.commentsFieldName"
+                [showComments]="neuroVascularConfig.ringFinger.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Small Finger</label>
             <div class="radio-group">
@@ -781,7 +801,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinUpperSmallFingerFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinUpperSmallFingerFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.smallFinger.columns"
+                [labels]="neuroVascularConfig.smallFinger.labels" [options]="neuroVascularConfig.smallFinger.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.smallFinger.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.smallFinger.commentsFieldName"
+                [showComments]="neuroVascularConfig.smallFinger.showComments">
+            </dropdown-text-table>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Tinel's Lower</label>

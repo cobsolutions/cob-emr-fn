@@ -22,6 +22,10 @@ import { FirstToet } from "./semmes-weinstein-lower/fst-toe";
 import { PlantarSurface } from "./semmes-weinstein-lower/plantar-surface";
 import { SecondToe } from "./semmes-weinstein-lower/snd-toe";
 import { ThirdToe } from "./semmes-weinstein-lower/third-toe";
+import { IndexFinger } from "./semmes-weinstein-upper/index-finger";
+import { MiddleFinger } from "./semmes-weinstein-upper/middle-finger";
+import { RingFinger } from "./semmes-weinstein-upper/ring-finger";
+import { SmallFinger } from "./semmes-weinstein-upper/small-finger";
 import { Thumb } from "./semmes-weinstein-upper/thumb";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
@@ -98,4 +102,8 @@ export class NeuroVascularConfig {
     static readonly plantarSurface = PlantarSurface.plantarSurface;
     static readonly dorsalSurface = DorsalSurface.dorsalSurface;
     static readonly thumb = Thumb.thumb;
+    static readonly indexFinger = IndexFinger.indexFinger;
+    static readonly middleFinger = MiddleFinger.middleFinger;
+    static readonly ringFinger = RingFinger.ringFinger;
+    static readonly smallFinger = SmallFinger.smallFinger;
 }
