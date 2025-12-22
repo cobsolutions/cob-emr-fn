@@ -540,7 +540,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerFstToeFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerFstToeFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.firstToet.columns"
+                [labels]="neuroVascularConfig.firstToet.labels" [options]="neuroVascularConfig.firstToet.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.firstToet.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.firstToet.commentsFieldName"
+                [showComments]="neuroVascularConfig.firstToet.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">2nd Toe</label>
             <div class="radio-group">
@@ -554,7 +561,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerSndToeFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerSndToeFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.secondToe.columns"
+                [labels]="neuroVascularConfig.secondToe.labels" [options]="neuroVascularConfig.secondToe.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.secondToe.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.secondToe.commentsFieldName"
+                [showComments]="neuroVascularConfig.secondToe.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">3rd Toe</label>
             <div class="radio-group">
@@ -568,7 +582,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerThirdToeFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerThirdToeFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.thirdToe.columns"
+                [labels]="neuroVascularConfig.thirdToe.labels" [options]="neuroVascularConfig.thirdToe.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.thirdToe.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.thirdToe.commentsFieldName"
+                [showComments]="neuroVascularConfig.thirdToe.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">4th Toe</label>
             <div class="radio-group">
@@ -582,7 +603,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerFourthToeFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerFourthToeFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.fourthToe.columns"
+                [labels]="neuroVascularConfig.fourthToe.labels" [options]="neuroVascularConfig.fourthToe.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.fourthToe.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.fourthToe.commentsFieldName"
+                [showComments]="neuroVascularConfig.fourthToe.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">5th Toe</label>
             <div class="radio-group">
@@ -597,7 +625,14 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerFifthToeFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerFifthToeFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.fifthToe.columns"
+                [labels]="neuroVascularConfig.fifthToe.labels" [options]="neuroVascularConfig.fifthToe.options"
+                [formGroup]="neuroVascularForm" [fieldPrefix]="neuroVascularConfig.fifthToe.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.fifthToe.commentsFieldName"
+                [showComments]="neuroVascularConfig.fifthToe.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Plantar Surface</label>
             <div class="radio-group">
@@ -613,7 +648,15 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerPlantarSurfaceFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerPlantarSurfaceFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.plantarSurface.columns"
+                [labels]="neuroVascularConfig.plantarSurface.labels"
+                [options]="neuroVascularConfig.plantarSurface.options" [formGroup]="neuroVascularForm"
+                [fieldPrefix]="neuroVascularConfig.plantarSurface.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.plantarSurface.commentsFieldName"
+                [showComments]="neuroVascularConfig.plantarSurface.showComments">
+            </dropdown-text-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Dorsal Surface</label>
             <div class="radio-group">
@@ -629,7 +672,15 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showSemmesWeinsteinLowerDorsalSurfaceFields" class="dependent-field-box"></div>
+        <div *ngIf="showSemmesWeinsteinLowerDorsalSurfaceFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="neuroVascularConfig.dorsalSurface.columns"
+                [labels]="neuroVascularConfig.dorsalSurface.labels"
+                [options]="neuroVascularConfig.dorsalSurface.options" [formGroup]="neuroVascularForm"
+                [fieldPrefix]="neuroVascularConfig.dorsalSurface.fieldPrefix"
+                [commentsFieldName]="neuroVascularConfig.dorsalSurface.commentsFieldName"
+                [showComments]="neuroVascularConfig.dorsalSurface.showComments">
+            </dropdown-text-table>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Semmes Weinstein Upper</label>

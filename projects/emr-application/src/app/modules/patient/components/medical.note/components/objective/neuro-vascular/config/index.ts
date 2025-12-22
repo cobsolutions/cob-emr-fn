@@ -15,6 +15,13 @@ import { NeuralTissueTensionUpper } from "./neural-tissue-tension-upper";
 import { ProneKneeBendNachlas } from "./prone-knee-bend-nachlas";
 import { QuadrantTesting } from "./quadrant-testing";
 import { SeatedDuralStretch } from "./seated-dural-stretch";
+import { DorsalSurface } from "./semmes-weinstein-lower/dorsal-surface";
+import { FifthTeo } from "./semmes-weinstein-lower/fifth-toe";
+import { FourthToe } from "./semmes-weinstein-lower/fourth-toe";
+import { FirstToet } from "./semmes-weinstein-lower/fst-toe";
+import { PlantarSurface } from "./semmes-weinstein-lower/plantar-surface";
+import { SecondToe } from "./semmes-weinstein-lower/snd-toe";
+import { ThirdToe } from "./semmes-weinstein-lower/third-toe";
 import { Slump } from "./slump";
 import { ThoracicOutlet } from "./thoracic-outlet";
 import { TinelsLower } from "./tinels-lower";
@@ -81,4 +88,12 @@ export class NeuroVascularConfig {
     static readonly tinelsUpper = TinelsUpper.tinelsUpper;
     
     static readonly transverseLigamentStability = TransverseLigamentStability.transverseLigamentStability;
+
+    static readonly firstToet = FirstToet.firstToet;
+    static readonly secondToe = SecondToe.secondToe;
+    static readonly thirdToe = ThirdToe.thirdToe;
+    static readonly fourthToe = FourthToe.fourthToe;
+    static readonly fifthToe = FifthTeo.fifthToe;
+    static readonly plantarSurface = PlantarSurface.plantarSurface;
+    static readonly dorsalSurface = DorsalSurface.dorsalSurface;
 }

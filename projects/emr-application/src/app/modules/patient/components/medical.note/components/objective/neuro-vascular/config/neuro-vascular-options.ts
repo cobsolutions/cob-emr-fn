@@ -167,6 +167,74 @@ export const upperReflexes_OPTIONS: RomOption[] = [
     { value: 'Positive With Discomfort', label: 'Positive With Discomfort' },
     { value: 'custom', label: 'Custom' }
   ];
+  export const firstToet_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const secondToe_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const thirdToe_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const fourthToe_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const fifthToe_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const plantarSurface_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  export const dorsalSurface_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '1.65-2.83 mm (green) Normal light touch', label: '1.65-2.83 mm (green) Normal light touch' },
+    { value: '3.22-3.61 mm (blue) Diminished light touch', label: '3.22-3.61 mm (blue) Diminished light touch' },
+    { value: '3.84-4.31 mm (purple) Diminished protective sensation', label: '3.84-4.31 mm (purple) Diminished protective sensation' },
+    { value: '4.56-6.45 mm (red) Loss of protective sensation', label: '4.56-6.45 mm (red) Loss of protective sensation' },
+    { value: '6.65 mm (red) Deep pressure only', label: '6.65 mm (red) Deep pressure only' },
+    { value: 'Greater than 6.65 mm (red lined) Untestable (no response)', label: 'Greater than 6.65 mm (red lined) Untestable (no response)' }
+  ];
+  
+  
+  
+  
+  
   
   
   
