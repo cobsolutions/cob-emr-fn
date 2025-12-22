@@ -1,5 +1,10 @@
 import { RomOption } from "../../range-of-motion/config";
 
+export const DEFAULT_APPLY_TO_ALL_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'wnl', label: 'WNL' },
+    { value: 'wfl', label: 'WFL' }
+  ]
 export const ober_OPTIONS: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
     { value: 'Positive', label: 'Positive' },
@@ -22,3 +27,9 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'yes', label: 'Yes' },
     { value: 'no', label: 'No' }
   ];
+  export const valgusStressAt0KneeFlex_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+  

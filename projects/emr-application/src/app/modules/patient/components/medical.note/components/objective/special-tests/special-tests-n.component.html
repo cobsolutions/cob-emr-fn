@@ -192,6 +192,18 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showLigamentIntegrityKneeValgusStressAt0KneeFlexFields" class="dependent-field-box">
+            <measurement-table
+            [labels]="specialTestConfig.valgusStressAt0KneeFlex.labels"
+            [options]="specialTestConfig.valgusStressAt0KneeFlex.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.valgusStressAt0KneeFlex.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.valgusStressAt0KneeFlex.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.valgusStressAt0KneeFlex.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.valgusStressAt0KneeFlex.showApplyToAll"
+            [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments">
+          </measurement-table>
+        </div>
 
         <div class="form-row">
             <label class="field-label">Valgus Stress at 30 Knee Flex</label>

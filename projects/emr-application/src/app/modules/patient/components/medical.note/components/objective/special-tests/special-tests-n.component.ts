@@ -12,13 +12,15 @@ export class SpecialTestsNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   showFlexibilityFields: boolean = false;
   showFlexibilityoberFields: boolean = false;
-  showFlexibilityHamstringFlexibilityFields : boolean = false
+  showFlexibilityHamstringFlexibilityFields: boolean = false
 
   showStructuralFields: boolean = false;
-  showFlexibilityCraigTestFields : boolean = false
-  showFlexibilityTibialTorsionFields : boolean = false
+  showFlexibilityCraigTestFields: boolean = false
+  showFlexibilityTibialTorsionFields: boolean = false
 
   showLigamentIntegrityKneeFields: boolean = false;
+  showLigamentIntegrityKneeValgusStressAt0KneeFlexFields: boolean = false;
+
   showStorkStandSiMobilityTestFields: boolean = false;
   showPatellofemoralFields: boolean = false;
   showFunctionalFields: boolean = false;
@@ -60,7 +62,7 @@ export class SpecialTestsNComponent implements OnInit {
       sag_sign: ['no'],
 
 
-      
+
 
 
       stork_stand_si_mobility_test: ['no'],
@@ -110,8 +112,8 @@ export class SpecialTestsNComponent implements OnInit {
     });
 
 
-    
-    
+
+
 
     this.specialTestForm.get('structural')?.valueChanges.subscribe(value => {
       this.showStructuralFields = value === 'yes';
@@ -128,6 +130,11 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('ligament_integrity_knee')?.valueChanges.subscribe(value => {
       this.showLigamentIntegrityKneeFields = value === 'yes';
     });
+
+    this.specialTestForm.get('valgus_stress_at_0_knee_flex')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeValgusStressAt0KneeFlexFields = value === 'yes';
+    });
+
 
     this.specialTestForm.get('stork_stand_si_mobility_test')?.valueChanges.subscribe(value => {
       this.showStorkStandSiMobilityTestFields = value === 'yes';
@@ -156,7 +163,7 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('tmr_fab_4_worksheet')?.valueChanges.subscribe(value => {
       this.showTmrFab4WorksheetFields = value === 'yes';
     });
-    
+
     this.specialTestForm.get('additional_comments')?.valueChanges.subscribe(value => {
       this.additionalCommentsFields = value === 'yes';
     });
