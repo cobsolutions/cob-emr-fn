@@ -59,7 +59,11 @@ export class SpecialTestsNComponent implements OnInit {
 
   showAlarLigamentTestFields: boolean = false;
   showAlarLigamentStressFields: boolean = false;
+  
   showWorkConditioningFields: boolean = false;
+  showWorkConditioningMaterialHandlingFields: boolean = false;
+  showWorkConditioningNonMaterialHandlingFields: boolean = false;
+
   showTmrFab4WorksheetFields: boolean = false;
   additionalCommentsFields: boolean = false;
 
@@ -284,6 +288,12 @@ export class SpecialTestsNComponent implements OnInit {
 
     this.specialTestForm.get('work_conditioning')?.valueChanges.subscribe(value => {
       this.showWorkConditioningFields = value === 'yes';
+    });
+    this.specialTestForm.get('material_handling_bilateral_lifting')?.valueChanges.subscribe(value => {
+      this.showWorkConditioningMaterialHandlingFields = value === 'yes';
+    });
+    this.specialTestForm.get('non_material_handling')?.valueChanges.subscribe(value => {
+      this.showWorkConditioningNonMaterialHandlingFields = value === 'yes';
     });
 
     this.specialTestForm.get('tmr_fab_4_worksheet')?.valueChanges.subscribe(value => {
