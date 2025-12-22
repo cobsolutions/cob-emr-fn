@@ -130,6 +130,16 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showFlexibilityCraigTestFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.craigsTestNoLabels.columns"
+            [labels]="specialTestConfig.craigsTestNoLabels.labels"
+            [options]="specialTestConfig.craigsTestNoLabels.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.craigsTestNoLabels.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.craigsTestNoLabels.commentsFieldName"
+            [hasTextInput]="specialTestConfig.craigsTestNoLabels.hasTextInput"
+            [showComments]="specialTestConfig.craigsTestNoLabels.showComments">
+        </dropdown-text-table>
+        </div>
 
         <div class="form-row">
             <label class="field-label">Tibial Torsion</label>
@@ -144,7 +154,16 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFlexibilityTibialTorsionFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.tibialTorsionFieldTestNoLabels.columns"
+            [labels]="specialTestConfig.tibialTorsionFieldTestNoLabels.labels"
+            [options]="specialTestConfig.tibialTorsionFieldTestNoLabels.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.tibialTorsionFieldTestNoLabels.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.tibialTorsionFieldTestNoLabels.commentsFieldName"
+            [hasTextInput]="specialTestConfig.tibialTorsionFieldTestNoLabels.hasTextInput"
+            [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments">
+        </dropdown-text-table>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Ligament Integrity Knee</label>

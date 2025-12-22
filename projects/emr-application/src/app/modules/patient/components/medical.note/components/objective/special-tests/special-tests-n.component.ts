@@ -15,6 +15,9 @@ export class SpecialTestsNComponent implements OnInit {
   showFlexibilityHamstringFlexibilityFields : boolean = false
 
   showStructuralFields: boolean = false;
+  showFlexibilityCraigTestFields : boolean = false
+  showFlexibilityTibialTorsionFields : boolean = false
+
   showLigamentIntegrityKneeFields: boolean = false;
   showStorkStandSiMobilityTestFields: boolean = false;
   showPatellofemoralFields: boolean = false;
@@ -41,6 +44,10 @@ export class SpecialTestsNComponent implements OnInit {
       gastrocnemius_length: ['no'],
       soleus_muscle_length: ['no'],
 
+      structural: ['no'],
+      craigs_test: ['no'],
+      tibial_torsion: ['no'],
+
       ligament_integrity_knee: ['no'],
       valgus_stress_at_0_knee_flex: ['no'],
       valgus_stress_at_30_knee_flex: ['no'],
@@ -53,10 +60,7 @@ export class SpecialTestsNComponent implements OnInit {
       sag_sign: ['no'],
 
 
-      structural: ['no'],
-      craigs_test: ['no'],
-
-      tibial_torsion: ['no'],
+      
 
 
       stork_stand_si_mobility_test: ['no'],
@@ -106,12 +110,20 @@ export class SpecialTestsNComponent implements OnInit {
     });
 
 
-
-
+    
+    
 
     this.specialTestForm.get('structural')?.valueChanges.subscribe(value => {
       this.showStructuralFields = value === 'yes';
     });
+    this.specialTestForm.get('craigs_test')?.valueChanges.subscribe(value => {
+      this.showFlexibilityCraigTestFields = value === 'yes';
+    });
+    this.specialTestForm.get('tibial_torsion')?.valueChanges.subscribe(value => {
+      this.showFlexibilityTibialTorsionFields = value === 'yes';
+    });
+
+
 
     this.specialTestForm.get('ligament_integrity_knee')?.valueChanges.subscribe(value => {
       this.showLigamentIntegrityKneeFields = value === 'yes';
