@@ -515,6 +515,16 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarCompressionFields" class="dependent-field-box">
+            <measurement-table
+            [labels]="specialTestConfig.patellarCompression.labels"
+            [options]="specialTestConfig.patellarCompression.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.patellarCompression.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.patellarCompression.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.patellarCompression.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.patellarCompression.showApplyToAll"
+            [showComments]="specialTestConfig.patellarCompression.showComments">
+          </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Patellar Passive Mobility</label>

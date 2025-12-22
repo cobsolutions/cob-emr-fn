@@ -14,6 +14,7 @@ import { SagSign } from "./ligament-integrity-knee/sag-sign";
 import { StorkStandSIMobilityTest } from "./stork-stand-si-mobility-test/stork-stand-si-mobility-test";
 import { JSign } from "./patellofemoral/j-sign";
 import { PatellarBallottement } from "./patellofemoral/patellar-ballottement";
+import { PatellarCompression } from "./patellofemoral/patellar-compression";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -54,4 +55,6 @@ export class SpecialTestConfig {
 
 
     static readonly patellarBallottement = PatellarBallottement.patellarBallottement
+    
+    static readonly patellarCompression = PatellarCompression.patellarCompression
 }
