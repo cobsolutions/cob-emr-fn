@@ -14,6 +14,12 @@ export interface RomSectionConfig {
   showApplyToAll?: boolean;
   showComments?: boolean;
 }
+export interface RomInputSectionConfig {
+  labels: string[];
+  fieldPrefix: string;
+  commentsFieldName: string;
+  showComments?: boolean;
+}
 
 export interface RomSectionEndfeelConfig {
   labels: string[];
