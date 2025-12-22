@@ -114,7 +114,9 @@ export class SpecialTestsNComponent implements OnInit {
       _2_leg_squat_with_overhead_reach: ['no'],
       _1_leg_squat_with_overhead_reach: ['no'],
       running_mechanics: ['no'],
+      running_mechanics_comments_text: [''],
       back_extension: ['no'],
+      back_extension_comments_text: [''],
 
 
       alar_ligament_test: ['no'],

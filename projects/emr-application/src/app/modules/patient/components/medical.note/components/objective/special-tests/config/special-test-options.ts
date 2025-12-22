@@ -102,7 +102,7 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Negative', label: 'Negative' }
   ];
   export const selectiveFunctionalMovementAssessment_OPTIONS: RomOption[] = [
-    { value: 'Not Tested', label: 'Not Tested' },
+    { value: 'not_tested', label: 'Not Tested' },
     { value: 'Dysfunctional and Painful', label: 'Dysfunctional and Painful' },
     { value: 'Dysfunctional and Non-Painful', label: 'Dysfunctional and Non-Painful' },
     { value: 'Functional and Painful', label: 'Functional and Painful' },

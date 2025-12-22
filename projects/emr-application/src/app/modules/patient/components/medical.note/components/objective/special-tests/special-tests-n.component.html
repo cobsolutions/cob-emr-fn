@@ -735,7 +735,9 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctionalRunningMechanicsFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctionalRunningMechanicsFields" class="dependent-field-box">
+            <textarea formControlName="running_mechanics_comments_text" class="form-textarea" rows="4"></textarea>
+        </div>
         <div class="form-row">
             <label class="field-label">Back Extension</label>
             <div class="radio-group">
@@ -749,7 +751,10 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctionalBackExtensionFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctionalBackExtensionFields" class="dependent-field-box">
+            <label cFormCheckLabel>Hold Duration</label>
+            <input formControlName="back_extension_comments_text" class="form-textarea"/>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Test</label>

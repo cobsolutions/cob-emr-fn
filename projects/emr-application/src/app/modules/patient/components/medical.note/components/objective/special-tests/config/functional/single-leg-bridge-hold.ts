@@ -15,8 +15,8 @@ export class SingleLegBridgeHold {
     fieldPrefix: 'single_leg_bridge_hold_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }
