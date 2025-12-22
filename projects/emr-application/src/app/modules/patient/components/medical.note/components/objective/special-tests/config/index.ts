@@ -2,6 +2,7 @@ import { HamstringFlexibilityTest } from "./flexibility/9090-hamstring-flexibili
 import { OberTest } from "./flexibility/ober-test";
 import { AnteriorDrawer } from "./ligament-integrity-knee/anterior-drawer";
 import { Lachmans } from "./ligament-integrity-knee/lachmans";
+import { PivotShift } from "./ligament-integrity-knee/pivot-shift";
 import { PosteriorDrawer } from "./ligament-integrity-knee/posterior-drawer";
 import { ValgusStressAt0KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-0-knee-flex";
 import { ValgusStressAt30KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-30-knee-flex";
@@ -37,4 +38,6 @@ export class SpecialTestConfig {
 
     
     static readonly lachmans = Lachmans.lachmans;
+    
+    static readonly pivotShift = PivotShift.pivotShift;
 }
