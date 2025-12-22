@@ -2,6 +2,7 @@ import { HamstringFlexibilityTest } from "./flexibility/9090-hamstring-flexibili
 import { OberTest } from "./flexibility/ober-test";
 import { ValgusStressAt0KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-0-knee-flex";
 import { ValgusStressAt30KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-30-knee-flex";
+import { VarusStressAt0KneeFlex } from "./ligament-integrity-knee/varus-stress-at-0-knee-flex";
 import { CraigsTest } from "./structural/craigs-test";
 import { TibialTorsion } from "./structural/tibial-torsion";
 
@@ -19,5 +20,7 @@ export class SpecialTestConfig {
 
     
     static readonly valgusStressAt30KneeFlex = ValgusStressAt30KneeFlex.valgusStressAt30KneeFlex;
+    
+    static readonly varusStressAt0KneeFlex = VarusStressAt0KneeFlex.varusStressAt0KneeFlex;
 
 }
