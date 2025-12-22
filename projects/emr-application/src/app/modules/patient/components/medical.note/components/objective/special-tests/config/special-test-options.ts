@@ -109,6 +109,15 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Functional and Non-Painful', label: 'Functional and Non-Painful' },
     { value: 'Custom', label: 'Custom' }
   ];
+  export const singleLegBridgeHold_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Pass', label: 'Pass' },
+    { value: 'Fail', label: 'Fail' },
+    { value: 'Hamstring Dominant', label: 'Hamstring Dominant' },
+    { value: 'Glut Dominant', label: 'Glut Dominant' },
+    { value: 'custom', label: 'Custom' }
+  ];
+  
   
   
   

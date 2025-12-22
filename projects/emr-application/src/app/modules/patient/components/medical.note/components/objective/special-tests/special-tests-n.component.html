@@ -665,7 +665,18 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctionalSingleLegBridgeHoldFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctionalSingleLegBridgeHoldFields" class="dependent-field-box">
+            <measurement-table
+            [labels]="specialTestConfig.singleLegBridgeHold.labels"
+            [options]="specialTestConfig.singleLegBridgeHold.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.singleLegBridgeHold.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.singleLegBridgeHold.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.singleLegBridgeHold.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.singleLegBridgeHold.showApplyToAll"
+            [showComments]="specialTestConfig.singleLegBridgeHold.showComments">
+          </measurement-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Single Leg Hop Test (for distance)</label>
             <div class="radio-group">
