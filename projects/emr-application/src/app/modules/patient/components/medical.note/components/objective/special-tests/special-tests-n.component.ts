@@ -31,13 +31,13 @@ export class SpecialTestsNComponent implements OnInit {
 
 
   showStorkStandSiMobilityTestFields: boolean = false;
-  
+
   showPatellofemoralFields: boolean = false;
   showPatellofemoralJSignFields: boolean = false;
   showPatellofemoralPatellarBallottementFields: boolean = false;
   showPatellofemoralPatellarCompressionFields: boolean = false;
   showPatellofemoralPatellarPassiveMobilityFields: boolean = false;
-  
+
 
 
 
@@ -183,9 +183,23 @@ export class SpecialTestsNComponent implements OnInit {
       this.showStorkStandSiMobilityTestFields = value === 'yes';
     });
 
+
     this.specialTestForm.get('patellofemoral')?.valueChanges.subscribe(value => {
       this.showPatellofemoralFields = value === 'yes';
     });
+    this.specialTestForm.get('j_sign')?.valueChanges.subscribe(value => {
+      this.showPatellofemoralJSignFields = value === 'yes';
+    });
+    this.specialTestForm.get('patellar_ballottement')?.valueChanges.subscribe(value => {
+      this.showPatellofemoralPatellarBallottementFields = value === 'yes';
+    });
+    this.specialTestForm.get('patellar_compression')?.valueChanges.subscribe(value => {
+      this.showPatellofemoralPatellarCompressionFields = value === 'yes';
+    });
+    this.specialTestForm.get('patellar_passive_mobility')?.valueChanges.subscribe(value => {
+      this.showPatellofemoralPatellarPassiveMobilityFields = value === 'yes';
+    });
+
 
     this.specialTestForm.get('functional')?.valueChanges.subscribe(value => {
       this.showFunctionalFields = value === 'yes';

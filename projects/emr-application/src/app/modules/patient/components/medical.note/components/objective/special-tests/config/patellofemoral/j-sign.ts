@@ -14,8 +14,8 @@ export class JSign {
     fieldPrefix: 'j_sign_',
     applyToAllFieldName: '',
     commentsFieldName: '',
-    showApplyToAll: true,
-    showComments: true
+    showApplyToAll: false,
+    showComments: false
   };
   
 }
