@@ -862,7 +862,17 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showWorkConditioningMaterialHandlingFields" class="dependent-field-box"></div>
+        <div *ngIf="showWorkConditioningMaterialHandlingFields" class="dependent-field-box">
+            <material-handling-work-condition [labels]="specialTestConfig.liftingTest.labels"
+                [columnHeaders]="specialTestConfig.liftingTest.columnHeaders"
+                [columnPlaceholders]="specialTestConfig.liftingTest.columnPlaceholders"
+                [options]="specialTestConfig.liftingTest.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.liftingTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.liftingTest.commentsFieldName"
+                [commentsLabel]="specialTestConfig.liftingTest.commentsLabel"
+                [showComments]="specialTestConfig.liftingTest.showComments">
+            </material-handling-work-condition>
+        </div>
         <div class="form-row">
             <label class="field-label">Non-Material Handling</label>
             <div class="radio-group">
@@ -876,7 +886,9 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showWorkConditioningNonMaterialHandlingFields" class="dependent-field-box"></div>
+        <div *ngIf="showWorkConditioningNonMaterialHandlingFields" class="dependent-field-box">
+
+        </div>
 
     </div>
     <div class="form-row">

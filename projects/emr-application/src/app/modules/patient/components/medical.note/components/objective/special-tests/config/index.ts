@@ -27,6 +27,7 @@ import { SoleusMuscleLengthTest } from "./flexibility/soleus-muscle-length-test"
 import { ThomasTest } from "./flexibility/thomas-test";
 import { TwoLegSquatWithOverheadReach } from "./functional/2-leg-squat-with-overhead-reach";
 import { OneLegSquatWithOverheadReach } from "./functional/1-leg-squat-with-overhead-reach";
+import { MaterialHandlingBilateralLifting } from "./work-conditioning/material-handling-bilateral-lifting";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -88,5 +89,6 @@ export class SpecialTestConfig {
 
     static readonly twoLegSquatWithOverheadReach = TwoLegSquatWithOverheadReach.twoLegSquatWithOverheadReach;
     static readonly oneLegSquatWithOverheadReach = OneLegSquatWithOverheadReach.oneLegSquatWithOverheadReach;
+    static readonly liftingTest = MaterialHandlingBilateralLifting.liftingTest;
 
 }
