@@ -11,7 +11,7 @@ export class NeuroVascularNComponent implements OnInit {
   neuroVascularForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   readonly neuroVascularConfig = NeuroVascularConfig
-  
+
   showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields: boolean = false;
   showCranialNerveScreenFields: boolean = false;
   showMyotomesUpperFields: boolean = false;
@@ -35,7 +35,16 @@ export class NeuroVascularNComponent implements OnInit {
   showKernigBrudzinskiTestFields: boolean = false;
   showCramTestFields: boolean = false;
   showSeatedDuralStretchFields: boolean = false;
+
   showSemmesWeinsteinLowerFields: boolean = false;
+  showSemmesWeinsteinLowerFstToeFields: boolean = false;
+  showSemmesWeinsteinLowerSndToeFields: boolean = false;
+  showSemmesWeinsteinLowerThirdToeFields: boolean = false;
+  showSemmesWeinsteinLowerFourthToeFields: boolean = false;
+  showSemmesWeinsteinLowerFifthToeFields: boolean = false;
+  showSemmesWeinsteinLowerPlantarSurfaceFields: boolean = false;
+  showSemmesWeinsteinLowerDorsalSurfaceFields: boolean = false;
+
   showSemmesWeinsteinUpperFields: boolean = false;
   showTinelSLowerFields: boolean = false;
   showTinelSUpperFields: boolean = false;
@@ -74,13 +83,23 @@ export class NeuroVascularNComponent implements OnInit {
       kernig_brudzinski_test: ['no'],
       cram_test: ['no'],
       seated_dural_stretch: ['no'],
+
       semmes_weinstein_lower: ['no'],
+      fst_toe_semmes_weinstein_lower: ['no'],
+      snd_toe_semmes_weinstein_lower: ['no'],
+      thrd_toe_semmes_weinstein_lower: ['no'],
+      frth_toe_semmes_weinstein_lower: ['no'],
+      fifth_toe_semmes_weinstein_lower: ['no'],
+      plantar_surface_semmes_weinstein_lower: ['no'],
+      dorsal_surface_semmes_weinstein_lower: ['no'],
+
+
       semmes_weinstein_upper: ['no'],
       tinel_s_lower: ['no'],
       tinel_s_upper: ['no'],
       transverse_ligament_stability: ['no'],
       additional_comments: ['no'],
-      additional_comments_text:['']
+      additional_comments_text: ['']
     })
   }
   setupValueChangeListeners() {
@@ -179,6 +198,29 @@ export class NeuroVascularNComponent implements OnInit {
     this.neuroVascularForm.get('semmes_weinstein_lower')?.valueChanges.subscribe(value => {
       this.showSemmesWeinsteinLowerFields = value === 'yes';
     });
+    this.neuroVascularForm.get('fst_toe_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerFstToeFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('snd_toe_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerSndToeFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('thrd_toe_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerThirdToeFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('frth_toe_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerFourthToeFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('fifth_toe_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerFifthToeFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('plantar_surface_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerPlantarSurfaceFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('dorsal_surface_semmes_weinstein_lower')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinLowerDorsalSurfaceFields = value === 'yes';
+    });
+
+
 
     this.neuroVascularForm.get('semmes_weinstein_upper')?.valueChanges.subscribe(value => {
       this.showSemmesWeinsteinUpperFields = value === 'yes';
