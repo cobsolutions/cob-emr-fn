@@ -10,6 +10,7 @@ import { VarusStressAt0KneeFlex } from "./ligament-integrity-knee/varus-stress-a
 import { VarusStressAt30KneeFlex } from "./ligament-integrity-knee/varus-stress-at-30-knee-flex";
 import { CraigsTest } from "./structural/craigs-test";
 import { TibialTorsion } from "./structural/tibial-torsion";
+import {SagSign} from  "./ligament-integrity-knee/sag-sign";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -40,4 +41,6 @@ export class SpecialTestConfig {
     static readonly lachmans = Lachmans.lachmans;
     
     static readonly pivotShift = PivotShift.pivotShift;
+    
+    static readonly sagSign = SagSign.sagSign;
 }
