@@ -28,14 +28,60 @@ export class SpecialTestsNComponent implements OnInit {
   initForm() {
     this.specialTestForm = this.fb.group({
       flexibility: ['no'],
-      structural: ['no'],
+      thomas_test: ['no'],
+      ober: ['no'],
+      _90_90_hamstring_flexibility: ['no'],
+      gastrocnemius_length: ['no'],
+      soleus_muscle_length: ['no'],
+
       ligament_integrity_knee: ['no'],
+      valgus_stress_at_0_knee_flex: ['no'],
+      valgus_stress_at_30_knee_flex: ['no'],
+      varus_stress_at_0_knee_flex: ['no'],
+      varus_stress_at_30_knee_flex: ['no'],
+      anterior_drawer: ['no'],
+      posterior_drawer: ['no'],
+      lachmans: ['no'],
+      pivot_shift: ['no'],
+      sag_sign: ['no'],
+
+
+      structural: ['no'],
+      craigs_test: ['no'],
+
+      tibial_torsion: ['no'],
+
+
       stork_stand_si_mobility_test: ['no'],
+
+
       patellofemoral: ['no'],
+      j_sign: ['no'],
+      patellar_ballottement: ['no'],
+      patellar_compression: ['no'],
+      patellar_passive_mobility: ['no'],
+
       functional: ['no'],
+      core_stabilization: ['no'],
+      selective_functional_movement_assessment: ['no'],
+      _30_second_chair_stand: ['no'],
+      side_bridge_plank: ['no'],
+      prone_plank: ['no'],
+      single_leg_bridge_hold: ['no'],
+      single_leg_hop_test_for_distance: ['no'],
+      _2_leg_squat_with_overhead_reach: ['no'],
+      _1_leg_squat_with_overhead_reach: ['no'],
+      running_mechanics: ['no'],
+      back_extension: ['no'],
+
+
       alar_ligament_test: ['no'],
       alar_ligament_stress: ['no'],
+
       work_conditioning: ['no'],
+      material_handling_bilateral_lifting: ['no'],
+      non_material_handling: ['no'],
+
       tmr_fab_4_worksheet: ['no']
     })
   }
