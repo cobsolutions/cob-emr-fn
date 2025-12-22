@@ -129,6 +129,7 @@ export class SpecialTestsNComponent implements OnInit {
       non_material_handling: ['no'],
 
       tmr_fab_4_worksheet: ['no'],
+      tmr_fab_4_worksheet_comments_text: [''],
       additional_comments: ['no'],
       additional_comments_text: ['']
     })
