@@ -618,4 +618,20 @@
     </div>
     <div *ngIf="showTmrFab4WorksheetFields" class="dependent-field-box">
     </div>
+    <div class="form-row">
+        <label class="field-label">Additional Comments</label>
+        <div class="radio-group">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="additionalCommentsFields" class="dependent-field-box">
+        <textarea formControlName="additional_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
 </div>

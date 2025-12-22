@@ -19,6 +19,7 @@ export class SpecialTestsNComponent implements OnInit {
   showAlarLigamentStressFields: boolean = false;
   showWorkConditioningFields: boolean = false;
   showTmrFab4WorksheetFields: boolean = false;
+  additionalCommentsFields: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -82,7 +83,9 @@ export class SpecialTestsNComponent implements OnInit {
       material_handling_bilateral_lifting: ['no'],
       non_material_handling: ['no'],
 
-      tmr_fab_4_worksheet: ['no']
+      tmr_fab_4_worksheet: ['no'],
+      additional_comments: ['no'],
+      additional_comments_text: ['']
     })
   }
   setupValueChangeListeners() {
@@ -124,6 +127,10 @@ export class SpecialTestsNComponent implements OnInit {
 
     this.specialTestForm.get('tmr_fab_4_worksheet')?.valueChanges.subscribe(value => {
       this.showTmrFab4WorksheetFields = value === 'yes';
+    });
+    
+    this.specialTestForm.get('additional_comments')?.valueChanges.subscribe(value => {
+      this.additionalCommentsFields = value === 'yes';
     });
   }
 
