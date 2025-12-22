@@ -16,6 +16,7 @@ import { JSign } from "./patellofemoral/j-sign";
 import { PatellarBallottement } from "./patellofemoral/patellar-ballottement";
 import { PatellarCompression } from "./patellofemoral/patellar-compression";
 import { PatellarPassiveMobility } from "./patellofemoral/patellar-passive-mobility";
+import { SelectiveFunctionalMovementAssessment } from "./functional/selective-functional-movement-assessment";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -61,4 +62,6 @@ export class SpecialTestConfig {
 
     
     static readonly patellarPassiveMobility = PatellarPassiveMobility.patellarPassiveMobility
+    
+    static readonly selectiveFunctionalMovementAssessment = SelectiveFunctionalMovementAssessment.selectiveFunctionalMovementAssessment;
 }

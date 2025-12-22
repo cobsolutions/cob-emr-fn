@@ -588,6 +588,7 @@
                     <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
                         value="yes" />
                     <label cFormCheckLabel>Yes</label>
+                    
                 </c-form-check>
                 <c-form-check>
                     <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
@@ -597,6 +598,16 @@
             </div>
         </div>
         <div *ngIf="showFunctionalSelectiveFunctionalMovementAssessmentFields" class="dependent-field-box">
+            <measurement-table
+            [labels]="specialTestConfig.selectiveFunctionalMovementAssessment.labels"
+            [options]="specialTestConfig.selectiveFunctionalMovementAssessment.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.selectiveFunctionalMovementAssessment.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.selectiveFunctionalMovementAssessment.showApplyToAll"
+            [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments">
+          </measurement-table>
 		</div>
         <div class="form-row">
             <label class="field-label">30 Second Chair Stand</label>
