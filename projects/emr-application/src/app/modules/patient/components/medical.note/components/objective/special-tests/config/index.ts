@@ -1,6 +1,7 @@
 import { HamstringFlexibilityTest } from "./flexibility/9090-hamstring-flexibility-test";
 import { OberTest } from "./flexibility/ober-test";
 import { AnteriorDrawer } from "./ligament-integrity-knee/anterior-drawer";
+import { Lachmans } from "./ligament-integrity-knee/lachmans";
 import { PosteriorDrawer } from "./ligament-integrity-knee/posterior-drawer";
 import { ValgusStressAt0KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-0-knee-flex";
 import { ValgusStressAt30KneeFlex } from "./ligament-integrity-knee/valgus-stress-at-30-knee-flex";
@@ -31,6 +32,9 @@ export class SpecialTestConfig {
     
     static readonly anteriorDrawer = AnteriorDrawer.anteriorDrawer;
 
-    PosteriorDrawer
+    
     static readonly posteriorDrawer = PosteriorDrawer.posteriorDrawer;
+
+    
+    static readonly lachmans = Lachmans.lachmans;
 }
