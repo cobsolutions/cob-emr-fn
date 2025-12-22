@@ -1,0 +1,71 @@
+<div [formGroup]="formGroup">
+    <!-- Apply to All - Now with checkboxes for selection -->
+    <div *ngIf="showApplyToAll" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+      <label style="min-width: 150px; text-align: right; font-weight: 500; color: #5c4742;">{{ applyToAllLabel }}</label>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <label *ngFor="let option of getApplyToAllOptions()" style="display: flex; align-items: center; gap: 0.25rem;">
+          <input 
+            type="checkbox" 
+            [value]="option.value"
+            [checked]="isApplyToAllOptionSelected(option.value)"
+            (change)="toggleApplyToAllOption($event, option.value)">
+          {{ option.label }}
+        </label>
+      </div>
+    </div>
+  
+    <!-- Measurement Table with Checkboxes -->
+    <table class="walk-test-table">
+      <thead>
+        <tr>
+          <th style="width: 300px;"></th>
+          <th style="width: 200px;">Right</th>
+          <th style="width: 200px;">Left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let label of labels">
+          <td>{{ label }}</td>
+          <td style="vertical-align: top;">
+            <div class="checkbox-container">
+              <label *ngFor="let option of getOptionsForLabel(label)" 
+                     style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                <input 
+                  type="checkbox" 
+                  class="table-checkbox"
+                  [value]="option.value"
+                  [checked]="isOptionSelected(label, 'right', option.value)"
+                  (change)="toggleOption($event, label, 'right', option.value)">
+                {{ option.label }}
+              </label>
+            </div>
+          </td>
+          <td style="vertical-align: top;">
+            <div class="checkbox-container">
+              <label *ngFor="let option of getOptionsForLabel(label)" 
+                     style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+                <input 
+                  type="checkbox" 
+                  class="table-checkbox"
+                  [value]="option.value"
+                  [checked]="isOptionSelected(label, 'left', option.value)"
+                  (change)="toggleOption($event, label, 'left', option.value)">
+                {{ option.label }}
+              </label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Comments -->
+    <div *ngIf="showComments" style="margin-top: 1rem;">
+      <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+      <textarea
+        class="form-textarea"
+        [formControlName]="getCommentsFieldName()"
+        rows="3"
+        placeholder="Enter any comments...">
+      </textarea>
+    </div>
+  </div>

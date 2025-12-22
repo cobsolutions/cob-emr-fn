@@ -151,6 +151,7 @@ import { DropdownTextTableComponent } from './components/medical.note/components
 import { MeasurementTableWithSelectsComponent } from './components/medical.note/components/objective/common/measurement-table-with-selects/measurement-table-with-selects.component';
 import { SingleColumnTableComponent } from './components/medical.note/components/objective/common/single-column-table/single-column-table.component';
 import { MeasurementInputTableComponent } from './components/medical.note/components/objective/common/measurement-table-inputs/measurement-input-table.component';
+import { MeasurementCheckTableComponent } from './components/medical.note/components/objective/common/measurement-table-check/measurement-check-table.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -303,6 +304,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MeasurementTableWithSelectsComponent,
     SingleColumnTableComponent,
     MeasurementInputTableComponent,
+    MeasurementCheckTableComponent,
   ],
   imports: [
     CommonModule,
