@@ -696,7 +696,84 @@
         </div>
     </div>
     <div *ngIf="showSemmesWeinsteinUpperFields" class="dependent-field-box">
-
+        <div class="form-row">
+            <label class="field-label">Thumb</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="thumb_semmes_weinstein_upper" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="thumb_semmes_weinstein_upper" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSemmesWeinsteinUpperThumbFields" class="dependent-field-box"></div>
+        <div class="form-row">
+            <label class="field-label">Index Finger</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="index_finger_semmes_weinstein_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="index_finger_semmes_weinstein_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSemmesWeinsteinUpperIndexFingerFields" class="dependent-field-box"></div>
+        <div class="form-row">
+            <label class="field-label">Middle Finger</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="middle_finger_semmes_weinstein_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="middle_finger_semmes_weinstein_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSemmesWeinsteinUpperMiddleFingerFields" class="dependent-field-box"></div>
+        <div class="form-row">
+            <label class="field-label">Ring Finger</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="ring_finger_semmes_weinstein_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="ring_finger_semmes_weinstein_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSemmesWeinsteinUpperRingFingerFields" class="dependent-field-box"></div>
+        <div class="form-row">
+            <label class="field-label">Small Finger</label>
+            <div class="radio-group">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="small_finger_semmes_weinstein_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="small_finger_semmes_weinstein_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSemmesWeinsteinUpperSmallFingerFields" class="dependent-field-box"></div>
     </div>
     <div class="form-row">
         <label class="field-label">Tinel's Lower</label>

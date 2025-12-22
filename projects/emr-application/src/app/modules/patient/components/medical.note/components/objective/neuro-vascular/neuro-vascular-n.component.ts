@@ -46,6 +46,12 @@ export class NeuroVascularNComponent implements OnInit {
   showSemmesWeinsteinLowerDorsalSurfaceFields: boolean = false;
 
   showSemmesWeinsteinUpperFields: boolean = false;
+  showSemmesWeinsteinUpperThumbFields: boolean = false;
+  showSemmesWeinsteinUpperIndexFingerFields: boolean = false;
+  showSemmesWeinsteinUpperMiddleFingerFields: boolean = false;
+  showSemmesWeinsteinUpperRingFingerFields: boolean = false;
+  showSemmesWeinsteinUpperSmallFingerFields: boolean = false;
+
   showTinelSLowerFields: boolean = false;
   showTinelSUpperFields: boolean = false;
   showTransverseLigamentStabilityFields: boolean = false;
@@ -95,6 +101,12 @@ export class NeuroVascularNComponent implements OnInit {
 
 
       semmes_weinstein_upper: ['no'],
+      thumb_semmes_weinstein_upper: ['no'],
+      index_finger_semmes_weinstein_upper: ['no'],
+      middle_finger_semmes_weinstein_upper: ['no'],
+      ring_finger_semmes_weinstein_upper: ['no'],
+      small_finger_semmes_weinstein_upper: ['no'],
+
       tinel_s_lower: ['no'],
       tinel_s_upper: ['no'],
       transverse_ligament_stability: ['no'],
@@ -225,6 +237,22 @@ export class NeuroVascularNComponent implements OnInit {
     this.neuroVascularForm.get('semmes_weinstein_upper')?.valueChanges.subscribe(value => {
       this.showSemmesWeinsteinUpperFields = value === 'yes';
     });
+    this.neuroVascularForm.get('thumb_semmes_weinstein_upper')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinUpperThumbFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('index_finger_semmes_weinstein_upper')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinUpperIndexFingerFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('middle_finger_semmes_weinstein_upper')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinUpperMiddleFingerFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('ring_finger_semmes_weinstein_upper')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinUpperRingFingerFields = value === 'yes';
+    });
+    this.neuroVascularForm.get('small_finger_semmes_weinstein_upper')?.valueChanges.subscribe(value => {
+      this.showSemmesWeinsteinUpperSmallFingerFields = value === 'yes';
+    });
+
 
     this.neuroVascularForm.get('tinel_s_lower')?.valueChanges.subscribe(value => {
       this.showTinelSLowerFields = value === 'yes';
