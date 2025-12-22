@@ -20,6 +20,8 @@ import { SelectiveFunctionalMovementAssessment } from "./functional/selective-fu
 import { SingleLegBridgeHold } from "./functional/single-leg-bridge-hold";
 import { AlarLigamentTest } from "./alar-ligament-test/alar-ligament-test";
 import { SideBridgePlank } from "./functional/side-bridgeplank";
+import { PronePlank } from "./functional/prone-plank";
+import { SingleLegHopTestForDistance } from "./functional/single-leg-hop-test-for-distance";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -71,6 +73,9 @@ export class SpecialTestConfig {
     static readonly singleLegBridgeHold = SingleLegBridgeHold.singleLegBridgeHold;
 
     static readonly alarLigamentTest = AlarLigamentTest.alarLigamentTest;
-    SideBridgePlank
+    
     static readonly sideBridgePlank = SideBridgePlank.sideBridgePlank;
+    static readonly pronePlank = PronePlank.pronePlank;
+    static readonly singleLegHopTestForDistance = SingleLegHopTestForDistance.singleLegHopTestForDistance;
+
 }

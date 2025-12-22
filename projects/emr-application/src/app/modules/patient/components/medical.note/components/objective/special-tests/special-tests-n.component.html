@@ -629,13 +629,11 @@
             </div>
         </div>
         <div *ngIf="showFunctionalSideBridgePlankFields" class="dependent-field-box">
-            <measurement-input-table
-            [labels]="specialTestConfig.sideBridgePlank.labels"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.sideBridgePlank.fieldPrefix"
-            [commentsFieldName]="specialTestConfig.sideBridgePlank.commentsFieldName"            
-            [showComments]="specialTestConfig.sideBridgePlank.showComments">
-          </measurement-input-table>
+            <measurement-input-table [labels]="specialTestConfig.sideBridgePlank.labels" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.sideBridgePlank.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.sideBridgePlank.commentsFieldName"
+                [showComments]="specialTestConfig.sideBridgePlank.showComments">
+            </measurement-input-table>
         </div>
         <div class="form-row">
             <label class="field-label">Prone Plank</label>
@@ -650,7 +648,13 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctionalPronePlankFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctionalPronePlankFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.pronePlank.labels" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.pronePlank.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.pronePlank.commentsFieldName"
+                [showComments]="specialTestConfig.pronePlank.showComments">
+            </measurement-input-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Single Leg Bridge Hold</label>
             <div class="radio-group">
@@ -688,7 +692,13 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctionalSingleLegHopTestForDistanceFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctionalSingleLegHopTestForDistanceFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.singleLegHopTestForDistance.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.singleLegHopTestForDistance.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.singleLegHopTestForDistance.commentsFieldName"
+                [showComments]="specialTestConfig.singleLegHopTestForDistance.showComments">
+            </measurement-input-table>
+        </div>
         <div class="form-row">
             <label class="field-label">2 Leg Squat With Overhead Reach</label>
             <div class="radio-group">
