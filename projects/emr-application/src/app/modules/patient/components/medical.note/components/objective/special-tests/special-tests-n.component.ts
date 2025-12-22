@@ -42,6 +42,18 @@ export class SpecialTestsNComponent implements OnInit {
 
 
   showFunctionalFields: boolean = false;
+  showFunctionalCoreStabilizationFields: boolean = false
+  showFunctionalSelectiveFunctionalMovementAssessmentFields: boolean = false
+  showFunctional30SecondChairStandFields: boolean = false
+  showFunctionalSideBridgePlankFields: boolean = false
+  showFunctionalPronePlankFields: boolean = false
+  showFunctionalSingleLegBridgeHoldFields: boolean = false
+  showFunctionalSingleLegHopTestForDistanceFields: boolean = false
+  showFunctional2LegSquatWithOverheadReachFields: boolean = false
+  showFunctional1LegSquatWithOverheadReachFields: boolean = false
+  showFunctionalRunningMechanicsFields: boolean = false
+  showFunctionalBackExtensionFields: boolean = false
+
   showAlarLigamentTestFields: boolean = false;
   showAlarLigamentStressFields: boolean = false;
   showWorkConditioningFields: boolean = false;
@@ -204,6 +216,41 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('functional')?.valueChanges.subscribe(value => {
       this.showFunctionalFields = value === 'yes';
     });
+    this.specialTestForm.get('core_stabilization')?.valueChanges.subscribe(value => {
+      this.showFunctionalCoreStabilizationFields = value === 'yes';
+    });
+    this.specialTestForm.get('selective_functional_movement_assessment')?.valueChanges.subscribe(value => {
+      this.showFunctionalSelectiveFunctionalMovementAssessmentFields = value === 'yes';
+    });
+    this.specialTestForm.get('_30_second_chair_stand')?.valueChanges.subscribe(value => {
+      this.showFunctional30SecondChairStandFields = value === 'yes';
+    });
+    this.specialTestForm.get('side_bridge_plank')?.valueChanges.subscribe(value => {
+      this.showFunctionalSideBridgePlankFields = value === 'yes';
+    });
+    this.specialTestForm.get('prone_plank')?.valueChanges.subscribe(value => {
+      this.showFunctionalPronePlankFields = value === 'yes';
+    });
+    this.specialTestForm.get('single_leg_bridge_hold')?.valueChanges.subscribe(value => {
+      this.showFunctionalSingleLegBridgeHoldFields = value === 'yes';
+    });
+    this.specialTestForm.get('single_leg_hop_test_for_distance')?.valueChanges.subscribe(value => {
+      this.showFunctionalSingleLegHopTestForDistanceFields = value === 'yes';
+    });
+    this.specialTestForm.get('_2_leg_squat_with_overhead_reach')?.valueChanges.subscribe(value => {
+      this.showFunctional2LegSquatWithOverheadReachFields = value === 'yes';
+    });
+    this.specialTestForm.get('_1_leg_squat_with_overhead_reach')?.valueChanges.subscribe(value => {
+      this.showFunctional1LegSquatWithOverheadReachFields = value === 'yes';
+    });
+    this.specialTestForm.get('running_mechanics')?.valueChanges.subscribe(value => {
+      this.showFunctionalRunningMechanicsFields = value === 'yes';
+    });
+    this.specialTestForm.get('back_extension')?.valueChanges.subscribe(value => {
+      this.showFunctionalBackExtensionFields = value === 'yes';
+    });
+
+
 
     this.specialTestForm.get('alar_ligament_test')?.valueChanges.subscribe(value => {
       this.showAlarLigamentTestFields = value === 'yes';

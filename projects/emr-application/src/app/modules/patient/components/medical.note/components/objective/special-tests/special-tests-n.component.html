@@ -579,7 +579,8 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalCoreStabilizationFields" class="dependent-field-box">
+		</div>
         <div class="form-row">
             <label class="field-label">Selective Functional Movement Assessment</label>
             <div class="radio-group">
@@ -595,7 +596,8 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalSelectiveFunctionalMovementAssessmentFields" class="dependent-field-box">
+		</div>
         <div class="form-row">
             <label class="field-label">30 Second Chair Stand</label>
             <div class="radio-group">
@@ -609,7 +611,8 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctional30SecondChairStandFields" class="dependent-field-box">
+		</div>
         <div class="form-row">
             <label class="field-label">Side Bridge/Plank</label>
             <div class="radio-group">
@@ -623,7 +626,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalSideBridgePlankFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">Prone Plank</label>
             <div class="radio-group">
@@ -637,7 +640,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalPronePlankFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">Single Leg Bridge Hold</label>
             <div class="radio-group">
@@ -651,7 +654,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalSingleLegBridgeHoldFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">Single Leg Hop Test (for distance)</label>
             <div class="radio-group">
@@ -666,7 +669,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalSingleLegHopTestForDistanceFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">2 Leg Squat With Overhead Reach</label>
             <div class="radio-group">
@@ -681,7 +684,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctional2LegSquatWithOverheadReachFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">1 Leg Squat With Overhead Reach</label>
             <div class="radio-group">
@@ -696,7 +699,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctional1LegSquatWithOverheadReachFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">Running Mechanics</label>
             <div class="radio-group">
@@ -710,7 +713,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalRunningMechanicsFields" class="dependent-field-box"></div>
         <div class="form-row">
             <label class="field-label">Back Extension</label>
             <div class="radio-group">
@@ -724,7 +727,7 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showFunctionalBackExtensionFields" class="dependent-field-box"></div>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Test</label>
