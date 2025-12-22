@@ -770,6 +770,16 @@
         </div>
     </div>
     <div *ngIf="showAlarLigamentTestFields" class="dependent-field-box">
+        <measurement-table
+            [labels]="specialTestConfig.alarLigamentTest.labels"
+            [options]="specialTestConfig.alarLigamentTest.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.alarLigamentTest.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.alarLigamentTest.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.alarLigamentTest.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.alarLigamentTest.showApplyToAll"
+            [showComments]="specialTestConfig.alarLigamentTest.showComments">
+          </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Stress</label>

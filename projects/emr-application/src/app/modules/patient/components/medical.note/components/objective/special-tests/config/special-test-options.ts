@@ -117,6 +117,11 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Glut Dominant', label: 'Glut Dominant' },
     { value: 'custom', label: 'Custom' }
   ];
+  export const AlarLigamentTest_OPTIONS: RomOption[] = [
+    { value: 'Normal', label: 'Normal' },
+  { value: 'Abnormal', label: 'Abnormal' },
+  { value: 'not_tested', label: 'Not Tested' }
+  ];
   
   
   

@@ -18,6 +18,7 @@ import { PatellarCompression } from "./patellofemoral/patellar-compression";
 import { PatellarPassiveMobility } from "./patellofemoral/patellar-passive-mobility";
 import { SelectiveFunctionalMovementAssessment } from "./functional/selective-functional-movement-assessment";
 import { SingleLegBridgeHold } from "./functional/single-leg-bridge-hold";
+import { AlarLigamentTest } from "./alar-ligament-test/alar-ligament-test";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -67,4 +68,6 @@ export class SpecialTestConfig {
     static readonly selectiveFunctionalMovementAssessment = SelectiveFunctionalMovementAssessment.selectiveFunctionalMovementAssessment;
 
     static readonly singleLegBridgeHold = SingleLegBridgeHold.singleLegBridgeHold;
+
+    static readonly alarLigamentTest = AlarLigamentTest.alarLigamentTest;
 }
