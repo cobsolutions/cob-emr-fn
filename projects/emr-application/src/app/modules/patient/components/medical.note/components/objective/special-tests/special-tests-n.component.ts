@@ -13,6 +13,8 @@ export class SpecialTestsNComponent implements OnInit {
   showFlexibilityFields: boolean = false;
   showFlexibilityoberFields: boolean = false;
   showFlexibilityHamstringFlexibilityFields: boolean = false
+  showFlexibilityGastrocnemiusLengthFields: boolean = false
+  showFlexibilitySoleusMuscleLengthFields: boolean = false
 
   showStructuralFields: boolean = false;
   showFlexibilityCraigTestFields: boolean = false
@@ -142,6 +144,12 @@ export class SpecialTestsNComponent implements OnInit {
   setupValueChangeListeners() {
     this.specialTestForm.get('flexibility')?.valueChanges.subscribe(value => {
       this.showFlexibilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('gastrocnemius_length')?.valueChanges.subscribe(value => {
+      this.showFlexibilityGastrocnemiusLengthFields = value === 'yes';
+    });
+    this.specialTestForm.get('soleus_muscle_length')?.valueChanges.subscribe(value => {
+      this.showFlexibilitySoleusMuscleLengthFields = value === 'yes';
     });
     this.specialTestForm.get('ober')?.valueChanges.subscribe(value => {
       this.showFlexibilityoberFields = value === 'yes';

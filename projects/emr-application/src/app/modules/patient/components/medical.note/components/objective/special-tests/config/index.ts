@@ -22,6 +22,8 @@ import { AlarLigamentTest } from "./alar-ligament-test/alar-ligament-test";
 import { SideBridgePlank } from "./functional/side-bridgeplank";
 import { PronePlank } from "./functional/prone-plank";
 import { SingleLegHopTestForDistance } from "./functional/single-leg-hop-test-for-distance";
+import { GastrocnemiusLengthTest } from "./flexibility/gastrocnemius-length-test";
+import { SoleusMuscleLengthTest } from "./flexibility/soleus-muscle-length-test";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -77,5 +79,7 @@ export class SpecialTestConfig {
     static readonly sideBridgePlank = SideBridgePlank.sideBridgePlank;
     static readonly pronePlank = PronePlank.pronePlank;
     static readonly singleLegHopTestForDistance = SingleLegHopTestForDistance.singleLegHopTestForDistance;
+    static readonly gastrocnemiusLengthTest = GastrocnemiusLengthTest.gastrocnemiusLengthTest;
+    static readonly soleusMuscleLengthTest = SoleusMuscleLengthTest.soleusMuscleLengthTest;
 
 }
