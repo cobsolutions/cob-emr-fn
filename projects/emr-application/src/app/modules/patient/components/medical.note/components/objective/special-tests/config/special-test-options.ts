@@ -85,6 +85,11 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Negative', label: 'Negative' }
   ];
   
+  export const patellarBallottement_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
   
   
   

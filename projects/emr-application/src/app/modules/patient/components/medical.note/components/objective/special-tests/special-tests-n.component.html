@@ -489,6 +489,16 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarBallottementFields" class="dependent-field-box">
+            <measurement-table
+      [labels]="specialTestConfig.patellarBallottement.labels"
+      [options]="specialTestConfig.patellarBallottement.options"
+      [formGroup]="specialTestForm"
+      [fieldPrefix]="specialTestConfig.patellarBallottement.fieldPrefix"
+      [applyToAllFieldName]="specialTestConfig.patellarBallottement.applyToAllFieldName"
+      [commentsFieldName]="specialTestConfig.patellarBallottement.commentsFieldName"
+      [showApplyToAll]="specialTestConfig.patellarBallottement.showApplyToAll"
+      [showComments]="specialTestConfig.patellarBallottement.showComments">
+    </measurement-table>
         </div>
 
         <div class="form-row">

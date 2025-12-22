@@ -13,6 +13,7 @@ import { TibialTorsion } from "./structural/tibial-torsion";
 import { SagSign } from "./ligament-integrity-knee/sag-sign";
 import { StorkStandSIMobilityTest } from "./stork-stand-si-mobility-test/stork-stand-si-mobility-test";
 import { JSign } from "./patellofemoral/j-sign";
+import { PatellarBallottement } from "./patellofemoral/patellar-ballottement";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -50,4 +51,7 @@ export class SpecialTestConfig {
 
 
     static readonly jSign = JSign.jSign
+
+
+    static readonly patellarBallottement = PatellarBallottement.patellarBallottement
 }
