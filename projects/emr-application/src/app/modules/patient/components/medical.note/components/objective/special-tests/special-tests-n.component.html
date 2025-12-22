@@ -734,7 +734,15 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctional2LegSquatWithOverheadReachFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctional2LegSquatWithOverheadReachFields" class="dependent-field-box">
+            <measurement-check-table
+            [labels]="specialTestConfig.twoLegSquatWithOverheadReach.labels"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.twoLegSquatWithOverheadReach.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.twoLegSquatWithOverheadReach.commentsFieldName"
+            [showComments]="specialTestConfig.twoLegSquatWithOverheadReach.showComments">
+        </measurement-check-table>
+        </div>
         <div class="form-row">
             <label class="field-label">1 Leg Squat With Overhead Reach</label>
             <div class="radio-group">
@@ -749,7 +757,15 @@
                 </c-form-check>
             </div>
         </div>
-        <div *ngIf="showFunctional1LegSquatWithOverheadReachFields" class="dependent-field-box"></div>
+        <div *ngIf="showFunctional1LegSquatWithOverheadReachFields" class="dependent-field-box">
+            <measurement-check-table
+            [labels]="specialTestConfig.oneLegSquatWithOverheadReach.labels"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.oneLegSquatWithOverheadReach.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.oneLegSquatWithOverheadReach.commentsFieldName"
+            [showComments]="specialTestConfig.oneLegSquatWithOverheadReach.showComments">
+        </measurement-check-table>
+        </div>
         <div class="form-row">
             <label class="field-label">Running Mechanics</label>
             <div class="radio-group">

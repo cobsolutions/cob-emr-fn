@@ -25,6 +25,8 @@ import { SingleLegHopTestForDistance } from "./functional/single-leg-hop-test-fo
 import { GastrocnemiusLengthTest } from "./flexibility/gastrocnemius-length-test";
 import { SoleusMuscleLengthTest } from "./flexibility/soleus-muscle-length-test";
 import { ThomasTest } from "./flexibility/thomas-test";
+import { TwoLegSquatWithOverheadReach } from "./functional/2-leg-squat-with-overhead-reach";
+import { OneLegSquatWithOverheadReach } from "./functional/1-leg-squat-with-overhead-reach";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -83,5 +85,8 @@ export class SpecialTestConfig {
     static readonly gastrocnemiusLengthTest = GastrocnemiusLengthTest.gastrocnemiusLengthTest;
     static readonly soleusMuscleLengthTest = SoleusMuscleLengthTest.soleusMuscleLengthTest;
     static readonly thomasTest = ThomasTest.thomasTest;
+
+    static readonly twoLegSquatWithOverheadReach = TwoLegSquatWithOverheadReach.twoLegSquatWithOverheadReach;
+    static readonly oneLegSquatWithOverheadReach = OneLegSquatWithOverheadReach.oneLegSquatWithOverheadReach;
 
 }
