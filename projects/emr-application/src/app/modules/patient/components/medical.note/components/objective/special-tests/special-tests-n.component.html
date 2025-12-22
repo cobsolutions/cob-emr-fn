@@ -26,6 +26,15 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showFlexibilityThomasTestFields" class="dependent-field-box">
+            <measurement-check-table 
+                [labels]="specialTestConfig.thomasTest.labels" 
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.thomasTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.thomasTest.commentsFieldName"
+                [showComments]="specialTestConfig.thomasTest.showComments">
+            </measurement-check-table>
+        </div>
 
         <div class="form-row">
             <label class="field-label">Ober</label>

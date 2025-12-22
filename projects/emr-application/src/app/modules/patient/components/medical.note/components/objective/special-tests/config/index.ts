@@ -24,6 +24,7 @@ import { PronePlank } from "./functional/prone-plank";
 import { SingleLegHopTestForDistance } from "./functional/single-leg-hop-test-for-distance";
 import { GastrocnemiusLengthTest } from "./flexibility/gastrocnemius-length-test";
 import { SoleusMuscleLengthTest } from "./flexibility/soleus-muscle-length-test";
+import { ThomasTest } from "./flexibility/thomas-test";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -81,5 +82,6 @@ export class SpecialTestConfig {
     static readonly singleLegHopTestForDistance = SingleLegHopTestForDistance.singleLegHopTestForDistance;
     static readonly gastrocnemiusLengthTest = GastrocnemiusLengthTest.gastrocnemiusLengthTest;
     static readonly soleusMuscleLengthTest = SoleusMuscleLengthTest.soleusMuscleLengthTest;
+    static readonly thomasTest = ThomasTest.thomasTest;
 
 }

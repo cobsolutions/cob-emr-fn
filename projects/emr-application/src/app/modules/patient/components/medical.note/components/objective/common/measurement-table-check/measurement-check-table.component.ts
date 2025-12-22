@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { RomOption } from '../../range-of-motion/config';
 import { generateMeasurementFieldName } from '../form-field-utils';
 interface CheckboxOption {
   value: string;
@@ -13,12 +14,11 @@ interface CheckboxOption {
 })
 export class MeasurementCheckTableComponent implements OnInit {
   @Input() labels: string[] = [];
-  @Input() options: CheckboxOption[] = []; // Checkbox options for all measurement rows
-  @Input() applyToAllOptions?: CheckboxOption[]; // Options for Apply to All checkboxes
-  @Input() specialOptions?: { [labelName: string]: CheckboxOption[] }; // Override options for specific labels
+  @Input() options: RomOption[] = []; // Checkbox options for all measurement rows
+  @Input() applyToAllOptions?: RomOption[]; // Options for Apply to All checkboxes
+  @Input() specialOptions?: { [labelName: string]: RomOption[] }; // Override options for specific labels
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
-  @Input() showApplyToAll: boolean = true;
   @Input() showComments: boolean = true;
   @Input() commentsLabel: string = 'Comments';
   @Input() applyToAllLabel: string = 'Apply to All';
@@ -33,19 +33,17 @@ export class MeasurementCheckTableComponent implements OnInit {
   ngOnInit(): void {
     this.ensureFormControlsExist();
   }
+  getCheckboxId(label: string, side: 'right' | 'left'): string {
+    const cleanLabel = label.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+    return `${this.fieldPrefix}${cleanLabel}_${side}_checkbox`;
+  }
 
   /**
    * Dynamically add form controls if they don't exist
    * For checkboxes, we store selected values as comma-separated strings
    */
   private ensureFormControlsExist(): void {
-    // Add Apply to All control if needed - store as comma-separated string
-    if (this.showApplyToAll) {
-      const applyToAllFieldName = this.getApplyToAllFieldName();
-      if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
-      }
-    }
+    
 
     // Add controls for each label (right and left) - store as comma-separated strings
     this.labels.forEach(label => {
