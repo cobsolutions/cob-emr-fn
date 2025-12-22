@@ -462,6 +462,18 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showPatellofemoralJSignFields" class="dependent-field-box">
+            <measurement-table
+      [labels]="specialTestConfig.jSign.labels"
+      [options]="specialTestConfig.jSign.options"
+      [formGroup]="specialTestForm"
+      [fieldPrefix]="specialTestConfig.jSign.fieldPrefix"
+      [applyToAllFieldName]="specialTestConfig.jSign.applyToAllFieldName"
+      [commentsFieldName]="specialTestConfig.jSign.commentsFieldName"
+      [showApplyToAll]="specialTestConfig.jSign.showApplyToAll"
+      [showComments]="specialTestConfig.jSign.showComments">
+    </measurement-table>
+        </div>
 
         <div class="form-row">
             <label class="field-label">Patellar Ballottement</label>
@@ -475,6 +487,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showPatellofemoralPatellarBallottementFields" class="dependent-field-box">
         </div>
 
         <div class="form-row">
@@ -490,7 +504,8 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showPatellofemoralPatellarCompressionFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Patellar Passive Mobility</label>
             <div class="radio-group">
@@ -504,7 +519,8 @@
                 </c-form-check>
             </div>
         </div>
-
+        <div *ngIf="showPatellofemoralPatellarPassiveMobilityFields" class="dependent-field-box">
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Functional</label>

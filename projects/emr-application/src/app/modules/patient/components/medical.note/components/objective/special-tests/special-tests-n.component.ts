@@ -31,7 +31,16 @@ export class SpecialTestsNComponent implements OnInit {
 
 
   showStorkStandSiMobilityTestFields: boolean = false;
+  
   showPatellofemoralFields: boolean = false;
+  showPatellofemoralJSignFields: boolean = false;
+  showPatellofemoralPatellarBallottementFields: boolean = false;
+  showPatellofemoralPatellarCompressionFields: boolean = false;
+  showPatellofemoralPatellarPassiveMobilityFields: boolean = false;
+  
+
+
+
   showFunctionalFields: boolean = false;
   showAlarLigamentTestFields: boolean = false;
   showAlarLigamentStressFields: boolean = false;

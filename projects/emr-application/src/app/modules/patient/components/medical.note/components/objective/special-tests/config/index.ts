@@ -10,40 +10,44 @@ import { VarusStressAt0KneeFlex } from "./ligament-integrity-knee/varus-stress-a
 import { VarusStressAt30KneeFlex } from "./ligament-integrity-knee/varus-stress-at-30-knee-flex";
 import { CraigsTest } from "./structural/craigs-test";
 import { TibialTorsion } from "./structural/tibial-torsion";
-import {SagSign} from  "./ligament-integrity-knee/sag-sign";
+import { SagSign } from "./ligament-integrity-knee/sag-sign";
 import { StorkStandSIMobilityTest } from "./stork-stand-si-mobility-test/stork-stand-si-mobility-test";
+import { JSign } from "./patellofemoral/j-sign";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
     static readonly ninetynineHamstringFlexibilityTestNoLabels = HamstringFlexibilityTest.ninetynineHamstringFlexibilityTestNoLabels;
 
     static readonly craigsTestNoLabels = CraigsTest.craigsTestNoLabels;
-    
+
     static readonly tibialTorsionFieldTestNoLabels = TibialTorsion.tibialTorsionFieldTestNoLabels;
 
-    
+
 
     static readonly valgusStressAt0KneeFlex = ValgusStressAt0KneeFlex.valgusStressAt0KneeFlex;
 
-    
+
     static readonly valgusStressAt30KneeFlex = ValgusStressAt30KneeFlex.valgusStressAt30KneeFlex;
-    
+
     static readonly varusStressAt0KneeFlex = VarusStressAt0KneeFlex.varusStressAt0KneeFlex;
 
     static readonly varusStressAt30KneeFlex = VarusStressAt30KneeFlex.varusStressAt30KneeFlex;
 
-    
+
     static readonly anteriorDrawer = AnteriorDrawer.anteriorDrawer;
 
-    
+
     static readonly posteriorDrawer = PosteriorDrawer.posteriorDrawer;
 
-    
+
     static readonly lachmans = Lachmans.lachmans;
-    
+
     static readonly pivotShift = PivotShift.pivotShift;
-    
+
     static readonly sagSign = SagSign.sagSign;
 
     static readonly storkStandSiMobilityTest = StorkStandSIMobilityTest.storkStandSiMobilityTest
+
+
+    static readonly jSign = JSign.jSign
 }
