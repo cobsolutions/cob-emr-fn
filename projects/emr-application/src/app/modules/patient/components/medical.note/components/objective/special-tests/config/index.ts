@@ -11,6 +11,7 @@ import { VarusStressAt30KneeFlex } from "./ligament-integrity-knee/varus-stress-
 import { CraigsTest } from "./structural/craigs-test";
 import { TibialTorsion } from "./structural/tibial-torsion";
 import {SagSign} from  "./ligament-integrity-knee/sag-sign";
+import { StorkStandSIMobilityTest } from "./stork-stand-si-mobility-test/stork-stand-si-mobility-test";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -43,4 +44,6 @@ export class SpecialTestConfig {
     static readonly pivotShift = PivotShift.pivotShift;
     
     static readonly sagSign = SagSign.sagSign;
+
+    static readonly storkStandSiMobilityTest = StorkStandSIMobilityTest.storkStandSiMobilityTest
 }

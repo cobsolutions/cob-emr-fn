@@ -76,7 +76,6 @@ export class SpecialTestsNComponent implements OnInit {
 
       stork_stand_si_mobility_test: ['no'],
 
-
       patellofemoral: ['no'],
       j_sign: ['no'],
       patellar_ballottement: ['no'],

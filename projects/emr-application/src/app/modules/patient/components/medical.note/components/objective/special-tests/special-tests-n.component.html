@@ -424,6 +424,16 @@
         </div>
     </div>
     <div *ngIf="showStorkStandSiMobilityTestFields" class="dependent-field-box">
+        <measurement-table
+            [labels]="specialTestConfig.storkStandSiMobilityTest.labels"
+            [options]="specialTestConfig.storkStandSiMobilityTest.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.storkStandSiMobilityTest.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.storkStandSiMobilityTest.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.storkStandSiMobilityTest.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.storkStandSiMobilityTest.showApplyToAll"
+            [showComments]="specialTestConfig.storkStandSiMobilityTest.showComments">
+          </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Patellofemoral</label>
