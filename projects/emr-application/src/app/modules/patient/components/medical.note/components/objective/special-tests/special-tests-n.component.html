@@ -540,6 +540,16 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarPassiveMobilityFields" class="dependent-field-box">
+            <measurement-table
+            [labels]="specialTestConfig.patellarPassiveMobility.labels"
+            [options]="specialTestConfig.patellarPassiveMobility.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.patellarPassiveMobility.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.patellarPassiveMobility.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.patellarPassiveMobility.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.patellarPassiveMobility.showApplyToAll"
+            [showComments]="specialTestConfig.patellarPassiveMobility.showComments">
+          </measurement-table>
         </div>
     </div>
     <div class="form-row">

@@ -15,6 +15,7 @@ import { StorkStandSIMobilityTest } from "./stork-stand-si-mobility-test/stork-s
 import { JSign } from "./patellofemoral/j-sign";
 import { PatellarBallottement } from "./patellofemoral/patellar-ballottement";
 import { PatellarCompression } from "./patellofemoral/patellar-compression";
+import { PatellarPassiveMobility } from "./patellofemoral/patellar-passive-mobility";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -57,4 +58,7 @@ export class SpecialTestConfig {
     static readonly patellarBallottement = PatellarBallottement.patellarBallottement
     
     static readonly patellarCompression = PatellarCompression.patellarCompression
+
+    
+    static readonly patellarPassiveMobility = PatellarPassiveMobility.patellarPassiveMobility
 }
