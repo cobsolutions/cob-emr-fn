@@ -20,6 +20,15 @@ export class SpecialTestsNComponent implements OnInit {
 
   showLigamentIntegrityKneeFields: boolean = false;
   showLigamentIntegrityKneeValgusStressAt0KneeFlexFields: boolean = false;
+  showLigamentIntegrityKneeValgusStressAt30KneeFlexFields: boolean = false;
+  showLigamentIntegrityKneeVarusStressat0KneeFlexFields: boolean = false;
+  showLigamentIntegrityKneeVarusStressat30KneeFlexFields: boolean = false;
+  showLigamentIntegrityKneeAnteriorDrawerFields: boolean = false;
+  showLigamentIntegrityKneePosteriorDrawerFields: boolean = false;
+  showLigamentIntegrityKneeLachmansFields: boolean = false;
+  showLigamentIntegrityKneePivotShiftFields: boolean = false;
+  showLigamentIntegrityKneeSagSignFields: boolean = false;
+
 
   showStorkStandSiMobilityTestFields: boolean = false;
   showPatellofemoralFields: boolean = false;
@@ -130,10 +139,36 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('ligament_integrity_knee')?.valueChanges.subscribe(value => {
       this.showLigamentIntegrityKneeFields = value === 'yes';
     });
-
     this.specialTestForm.get('valgus_stress_at_0_knee_flex')?.valueChanges.subscribe(value => {
       this.showLigamentIntegrityKneeValgusStressAt0KneeFlexFields = value === 'yes';
     });
+    this.specialTestForm.get('valgus_stress_at_30_knee_flex')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeValgusStressAt30KneeFlexFields = value === 'yes';
+    });
+    this.specialTestForm.get('varus_stress_at_0_knee_flex')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeVarusStressat0KneeFlexFields = value === 'yes';
+    });
+    this.specialTestForm.get('varus_stress_at_30_knee_flex')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeVarusStressat30KneeFlexFields = value === 'yes';
+    });
+    this.specialTestForm.get('anterior_drawer')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeAnteriorDrawerFields = value === 'yes';
+    });
+    this.specialTestForm.get('posterior_drawer')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneePosteriorDrawerFields = value === 'yes';
+    });
+    this.specialTestForm.get('lachmans')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeLachmansFields = value === 'yes';
+    });
+    this.specialTestForm.get('pivot_shift')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneePivotShiftFields = value === 'yes';
+    });
+    this.specialTestForm.get('sag_sign')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityKneeSagSignFields = value === 'yes';
+    });
+
+
+
 
 
     this.specialTestForm.get('stork_stand_si_mobility_test')?.valueChanges.subscribe(value => {
