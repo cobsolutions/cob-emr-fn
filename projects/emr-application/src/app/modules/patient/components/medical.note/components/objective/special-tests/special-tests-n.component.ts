@@ -120,7 +120,9 @@ export class SpecialTestsNComponent implements OnInit {
 
 
       alar_ligament_test: ['no'],
+
       alar_ligament_stress: ['no'],
+      alar_ligament_stress_comments_text: [''],
 
       work_conditioning: ['no'],
       material_handling_bilateral_lifting: ['no'],
