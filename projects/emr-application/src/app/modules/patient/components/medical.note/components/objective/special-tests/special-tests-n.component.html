@@ -66,13 +66,14 @@
         </div>
         <div *ngIf="showFlexibilityHamstringFlexibilityFields" class="dependent-field-box">
             <dropdown-text-table [columns]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.columns"
-            [labels]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.labels"
-            [options]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.options" [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.fieldPrefix"
-            [commentsFieldName]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.commentsFieldName"
-            [hasTextInput]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.hasTextInput"
-            [showComments]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.showComments">
-        </dropdown-text-table>
+                [labels]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.labels"
+                [options]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.options"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.showComments">
+            </dropdown-text-table>
         </div>
         <div class="form-row">
             <label class="field-label">Gastrocnemius Length</label>
@@ -132,13 +133,13 @@
         </div>
         <div *ngIf="showFlexibilityCraigTestFields" class="dependent-field-box">
             <dropdown-text-table [columns]="specialTestConfig.craigsTestNoLabels.columns"
-            [labels]="specialTestConfig.craigsTestNoLabels.labels"
-            [options]="specialTestConfig.craigsTestNoLabels.options" [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.craigsTestNoLabels.fieldPrefix"
-            [commentsFieldName]="specialTestConfig.craigsTestNoLabels.commentsFieldName"
-            [hasTextInput]="specialTestConfig.craigsTestNoLabels.hasTextInput"
-            [showComments]="specialTestConfig.craigsTestNoLabels.showComments">
-        </dropdown-text-table>
+                [labels]="specialTestConfig.craigsTestNoLabels.labels"
+                [options]="specialTestConfig.craigsTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.craigsTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.craigsTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.craigsTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.craigsTestNoLabels.showComments">
+            </dropdown-text-table>
         </div>
 
         <div class="form-row">
@@ -156,13 +157,13 @@
         </div>
         <div *ngIf="showFlexibilityTibialTorsionFields" class="dependent-field-box">
             <dropdown-text-table [columns]="specialTestConfig.tibialTorsionFieldTestNoLabels.columns"
-            [labels]="specialTestConfig.tibialTorsionFieldTestNoLabels.labels"
-            [options]="specialTestConfig.tibialTorsionFieldTestNoLabels.options" [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.tibialTorsionFieldTestNoLabels.fieldPrefix"
-            [commentsFieldName]="specialTestConfig.tibialTorsionFieldTestNoLabels.commentsFieldName"
-            [hasTextInput]="specialTestConfig.tibialTorsionFieldTestNoLabels.hasTextInput"
-            [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments">
-        </dropdown-text-table>
+                [labels]="specialTestConfig.tibialTorsionFieldTestNoLabels.labels"
+                [options]="specialTestConfig.tibialTorsionFieldTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.tibialTorsionFieldTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.tibialTorsionFieldTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.tibialTorsionFieldTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments">
+            </dropdown-text-table>
         </div>
     </div>
     <div class="form-row">
@@ -193,16 +194,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeValgusStressAt0KneeFlexFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.valgusStressAt0KneeFlex.labels"
-            [options]="specialTestConfig.valgusStressAt0KneeFlex.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.valgusStressAt0KneeFlex.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.valgusStressAt0KneeFlex.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.valgusStressAt0KneeFlex.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.valgusStressAt0KneeFlex.showApplyToAll"
-            [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.valgusStressAt0KneeFlex.labels"
+                [options]="specialTestConfig.valgusStressAt0KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.valgusStressAt0KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.valgusStressAt0KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.valgusStressAt0KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.valgusStressAt0KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -219,16 +218,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeValgusStressAt30KneeFlexFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.valgusStressAt30KneeFlex.labels"
-            [options]="specialTestConfig.valgusStressAt30KneeFlex.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.valgusStressAt30KneeFlex.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.valgusStressAt30KneeFlex.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.valgusStressAt30KneeFlex.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.valgusStressAt30KneeFlex.showApplyToAll"
-            [showComments]="specialTestConfig.valgusStressAt30KneeFlex.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.valgusStressAt30KneeFlex.labels"
+                [options]="specialTestConfig.valgusStressAt30KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.valgusStressAt30KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.valgusStressAt30KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.valgusStressAt30KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.valgusStressAt30KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.valgusStressAt30KneeFlex.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -245,16 +242,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeVarusStressat0KneeFlexFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.varusStressAt0KneeFlex.labels"
-            [options]="specialTestConfig.varusStressAt0KneeFlex.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.varusStressAt0KneeFlex.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.varusStressAt0KneeFlex.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.varusStressAt0KneeFlex.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.varusStressAt0KneeFlex.showApplyToAll"
-            [showComments]="specialTestConfig.varusStressAt0KneeFlex.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.varusStressAt0KneeFlex.labels"
+                [options]="specialTestConfig.varusStressAt0KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.varusStressAt0KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.varusStressAt0KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.varusStressAt0KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.varusStressAt0KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.varusStressAt0KneeFlex.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -271,16 +266,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeVarusStressat30KneeFlexFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.varusStressAt30KneeFlex.labels"
-            [options]="specialTestConfig.varusStressAt30KneeFlex.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.varusStressAt30KneeFlex.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.varusStressAt30KneeFlex.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.varusStressAt30KneeFlex.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.varusStressAt30KneeFlex.showApplyToAll"
-            [showComments]="specialTestConfig.varusStressAt30KneeFlex.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.varusStressAt30KneeFlex.labels"
+                [options]="specialTestConfig.varusStressAt30KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.varusStressAt30KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.varusStressAt30KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.varusStressAt30KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.varusStressAt30KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.varusStressAt30KneeFlex.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -297,16 +290,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeAnteriorDrawerFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.anteriorDrawer.labels"
-            [options]="specialTestConfig.anteriorDrawer.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.anteriorDrawer.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.anteriorDrawer.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.anteriorDrawer.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.anteriorDrawer.showApplyToAll"
-            [showComments]="specialTestConfig.anteriorDrawer.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.anteriorDrawer.labels"
+                [options]="specialTestConfig.anteriorDrawer.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.anteriorDrawer.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.anteriorDrawer.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.anteriorDrawer.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.anteriorDrawer.showApplyToAll"
+                [showComments]="specialTestConfig.anteriorDrawer.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -323,16 +314,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneePosteriorDrawerFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.posteriorDrawer.labels"
-            [options]="specialTestConfig.posteriorDrawer.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.posteriorDrawer.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.posteriorDrawer.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.posteriorDrawer.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.posteriorDrawer.showApplyToAll"
-            [showComments]="specialTestConfig.posteriorDrawer.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.posteriorDrawer.labels"
+                [options]="specialTestConfig.posteriorDrawer.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.posteriorDrawer.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.posteriorDrawer.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.posteriorDrawer.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.posteriorDrawer.showApplyToAll"
+                [showComments]="specialTestConfig.posteriorDrawer.showComments">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Lachman's</label>
@@ -348,16 +337,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeLachmansFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.lachmans.labels"
-            [options]="specialTestConfig.lachmans.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.lachmans.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.lachmans.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.lachmans.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.lachmans.showApplyToAll"
-            [showComments]="specialTestConfig.lachmans.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.lachmans.labels"
+                [options]="specialTestConfig.lachmans.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.lachmans.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.lachmans.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.lachmans.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.lachmans.showApplyToAll"
+                [showComments]="specialTestConfig.lachmans.showComments">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Pivot Shift</label>
@@ -373,16 +360,14 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneePivotShiftFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.pivotShift.labels"
-            [options]="specialTestConfig.pivotShift.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.pivotShift.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.pivotShift.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.pivotShift.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.pivotShift.showApplyToAll"
-            [showComments]="specialTestConfig.pivotShift.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.pivotShift.labels"
+                [options]="specialTestConfig.pivotShift.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.pivotShift.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.pivotShift.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.pivotShift.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.pivotShift.showApplyToAll"
+                [showComments]="specialTestConfig.pivotShift.showComments">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Sag Sign</label>
@@ -398,16 +383,13 @@
             </div>
         </div>
         <div *ngIf="showLigamentIntegrityKneeSagSignFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.sagSign.labels"
-            [options]="specialTestConfig.sagSign.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.sagSign.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.sagSign.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.sagSign.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.sagSign.showApplyToAll"
-            [showComments]="specialTestConfig.sagSign.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.sagSign.labels" [options]="specialTestConfig.sagSign.options"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.sagSign.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.sagSign.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.sagSign.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.sagSign.showApplyToAll"
+                [showComments]="specialTestConfig.sagSign.showComments">
+            </measurement-table>
         </div>
     </div>
     <div class="form-row">
@@ -424,16 +406,14 @@
         </div>
     </div>
     <div *ngIf="showStorkStandSiMobilityTestFields" class="dependent-field-box">
-        <measurement-table
-            [labels]="specialTestConfig.storkStandSiMobilityTest.labels"
-            [options]="specialTestConfig.storkStandSiMobilityTest.options"
-            [formGroup]="specialTestForm"
+        <measurement-table [labels]="specialTestConfig.storkStandSiMobilityTest.labels"
+            [options]="specialTestConfig.storkStandSiMobilityTest.options" [formGroup]="specialTestForm"
             [fieldPrefix]="specialTestConfig.storkStandSiMobilityTest.fieldPrefix"
             [applyToAllFieldName]="specialTestConfig.storkStandSiMobilityTest.applyToAllFieldName"
             [commentsFieldName]="specialTestConfig.storkStandSiMobilityTest.commentsFieldName"
             [showApplyToAll]="specialTestConfig.storkStandSiMobilityTest.showApplyToAll"
             [showComments]="specialTestConfig.storkStandSiMobilityTest.showComments">
-          </measurement-table>
+        </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Patellofemoral</label>
@@ -463,16 +443,13 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralJSignFields" class="dependent-field-box">
-            <measurement-table
-      [labels]="specialTestConfig.jSign.labels"
-      [options]="specialTestConfig.jSign.options"
-      [formGroup]="specialTestForm"
-      [fieldPrefix]="specialTestConfig.jSign.fieldPrefix"
-      [applyToAllFieldName]="specialTestConfig.jSign.applyToAllFieldName"
-      [commentsFieldName]="specialTestConfig.jSign.commentsFieldName"
-      [showApplyToAll]="specialTestConfig.jSign.showApplyToAll"
-      [showComments]="specialTestConfig.jSign.showComments">
-    </measurement-table>
+            <measurement-table [labels]="specialTestConfig.jSign.labels" [options]="specialTestConfig.jSign.options"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.jSign.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.jSign.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.jSign.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.jSign.showApplyToAll"
+                [showComments]="specialTestConfig.jSign.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -489,16 +466,14 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarBallottementFields" class="dependent-field-box">
-            <measurement-table
-      [labels]="specialTestConfig.patellarBallottement.labels"
-      [options]="specialTestConfig.patellarBallottement.options"
-      [formGroup]="specialTestForm"
-      [fieldPrefix]="specialTestConfig.patellarBallottement.fieldPrefix"
-      [applyToAllFieldName]="specialTestConfig.patellarBallottement.applyToAllFieldName"
-      [commentsFieldName]="specialTestConfig.patellarBallottement.commentsFieldName"
-      [showApplyToAll]="specialTestConfig.patellarBallottement.showApplyToAll"
-      [showComments]="specialTestConfig.patellarBallottement.showComments">
-    </measurement-table>
+            <measurement-table [labels]="specialTestConfig.patellarBallottement.labels"
+                [options]="specialTestConfig.patellarBallottement.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.patellarBallottement.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.patellarBallottement.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.patellarBallottement.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.patellarBallottement.showApplyToAll"
+                [showComments]="specialTestConfig.patellarBallottement.showComments">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -515,16 +490,14 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarCompressionFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.patellarCompression.labels"
-            [options]="specialTestConfig.patellarCompression.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.patellarCompression.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.patellarCompression.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.patellarCompression.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.patellarCompression.showApplyToAll"
-            [showComments]="specialTestConfig.patellarCompression.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.patellarCompression.labels"
+                [options]="specialTestConfig.patellarCompression.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.patellarCompression.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.patellarCompression.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.patellarCompression.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.patellarCompression.showApplyToAll"
+                [showComments]="specialTestConfig.patellarCompression.showComments">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Patellar Passive Mobility</label>
@@ -540,16 +513,14 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarPassiveMobilityFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.patellarPassiveMobility.labels"
-            [options]="specialTestConfig.patellarPassiveMobility.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.patellarPassiveMobility.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.patellarPassiveMobility.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.patellarPassiveMobility.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.patellarPassiveMobility.showApplyToAll"
-            [showComments]="specialTestConfig.patellarPassiveMobility.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.patellarPassiveMobility.labels"
+                [options]="specialTestConfig.patellarPassiveMobility.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.patellarPassiveMobility.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.patellarPassiveMobility.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.patellarPassiveMobility.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.patellarPassiveMobility.showApplyToAll"
+                [showComments]="specialTestConfig.patellarPassiveMobility.showComments">
+            </measurement-table>
         </div>
     </div>
     <div class="form-row">
@@ -580,7 +551,9 @@
             </div>
         </div>
         <div *ngIf="showFunctionalCoreStabilizationFields" class="dependent-field-box">
-		</div>
+            <label style="margin-right: 10px;">Hold Duration</label>
+            <input formControlName="hold_duration_comments_text" class="form-textarea" />
+        </div>
         <div class="form-row">
             <label class="field-label">Selective Functional Movement Assessment</label>
             <div class="radio-group">
@@ -588,7 +561,7 @@
                     <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
                         value="yes" />
                     <label cFormCheckLabel>Yes</label>
-                    
+
                 </c-form-check>
                 <c-form-check>
                     <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
@@ -598,17 +571,16 @@
             </div>
         </div>
         <div *ngIf="showFunctionalSelectiveFunctionalMovementAssessmentFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.selectiveFunctionalMovementAssessment.labels"
-            [options]="specialTestConfig.selectiveFunctionalMovementAssessment.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.selectiveFunctionalMovementAssessment.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.selectiveFunctionalMovementAssessment.showApplyToAll"
-            [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments">
-          </measurement-table>
-		</div>
+            <measurement-table [labels]="specialTestConfig.selectiveFunctionalMovementAssessment.labels"
+                [options]="specialTestConfig.selectiveFunctionalMovementAssessment.options"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.selectiveFunctionalMovementAssessment.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.selectiveFunctionalMovementAssessment.showApplyToAll"
+                [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments">
+            </measurement-table>
+        </div>
         <div class="form-row">
             <label class="field-label">30 Second Chair Stand</label>
             <div class="radio-group">
@@ -623,7 +595,26 @@
             </div>
         </div>
         <div *ngIf="showFunctional30SecondChairStandFields" class="dependent-field-box">
-		</div>
+            <c-row>
+                <c-col xs="2">
+                    <label style="margin-right: 10px">Number of Stands in 30 Seconds</label>
+                </c-col>
+                <c-col xs="10">
+                    <input formControlName="number_of_stands_30_second_chair_stand" class="form-textarea"
+                        style="max-width:290px" />
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col xs="2">
+                    <label style="margin-right: 10px"></label>
+                </c-col>
+                <c-col xs="10">
+                    <label style="margin-right: 10px"></label>
+                    <textarea formControlName="comment_30_second_chair_stand" class="form-textarea" rows="4"
+                        style="max-width:100%"></textarea>
+                </c-col>
+            </c-row>
+        </div>
         <div class="form-row">
             <label class="field-label">Side Bridge/Plank</label>
             <div class="radio-group">
@@ -666,16 +657,14 @@
             </div>
         </div>
         <div *ngIf="showFunctionalSingleLegBridgeHoldFields" class="dependent-field-box">
-            <measurement-table
-            [labels]="specialTestConfig.singleLegBridgeHold.labels"
-            [options]="specialTestConfig.singleLegBridgeHold.options"
-            [formGroup]="specialTestForm"
-            [fieldPrefix]="specialTestConfig.singleLegBridgeHold.fieldPrefix"
-            [applyToAllFieldName]="specialTestConfig.singleLegBridgeHold.applyToAllFieldName"
-            [commentsFieldName]="specialTestConfig.singleLegBridgeHold.commentsFieldName"
-            [showApplyToAll]="specialTestConfig.singleLegBridgeHold.showApplyToAll"
-            [showComments]="specialTestConfig.singleLegBridgeHold.showComments">
-          </measurement-table>
+            <measurement-table [labels]="specialTestConfig.singleLegBridgeHold.labels"
+                [options]="specialTestConfig.singleLegBridgeHold.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.singleLegBridgeHold.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.singleLegBridgeHold.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.singleLegBridgeHold.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.singleLegBridgeHold.showApplyToAll"
+                [showComments]="specialTestConfig.singleLegBridgeHold.showComments">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Single Leg Hop Test (for distance)</label>
@@ -753,7 +742,7 @@
         </div>
         <div *ngIf="showFunctionalBackExtensionFields" class="dependent-field-box">
             <label cFormCheckLabel>Hold Duration</label>
-            <input formControlName="back_extension_comments_text" class="form-textarea"/>
+            <input formControlName="back_extension_comments_text" class="form-textarea" />
         </div>
     </div>
     <div class="form-row">
@@ -770,16 +759,14 @@
         </div>
     </div>
     <div *ngIf="showAlarLigamentTestFields" class="dependent-field-box">
-        <measurement-table
-            [labels]="specialTestConfig.alarLigamentTest.labels"
-            [options]="specialTestConfig.alarLigamentTest.options"
-            [formGroup]="specialTestForm"
+        <measurement-table [labels]="specialTestConfig.alarLigamentTest.labels"
+            [options]="specialTestConfig.alarLigamentTest.options" [formGroup]="specialTestForm"
             [fieldPrefix]="specialTestConfig.alarLigamentTest.fieldPrefix"
             [applyToAllFieldName]="specialTestConfig.alarLigamentTest.applyToAllFieldName"
             [commentsFieldName]="specialTestConfig.alarLigamentTest.commentsFieldName"
             [showApplyToAll]="specialTestConfig.alarLigamentTest.showApplyToAll"
             [showComments]="specialTestConfig.alarLigamentTest.showComments">
-          </measurement-table>
+        </measurement-table>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Stress</label>

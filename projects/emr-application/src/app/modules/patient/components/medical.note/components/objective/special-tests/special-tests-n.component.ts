@@ -105,8 +105,13 @@ export class SpecialTestsNComponent implements OnInit {
 
       functional: ['no'],
       core_stabilization: ['no'],
+      hold_duration_comments_text: [''],
+
       selective_functional_movement_assessment: ['no'],
+
       _30_second_chair_stand: ['no'],
+      number_of_stands_30_second_chair_stand:[''],
+      comment_30_second_chair_stand:[''],
       side_bridge_plank: ['no'],
       prone_plank: ['no'],
       single_leg_bridge_hold: ['no'],
