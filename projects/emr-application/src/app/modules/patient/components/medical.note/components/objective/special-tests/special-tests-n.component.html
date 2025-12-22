@@ -40,6 +40,16 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showFlexibilityoberFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.oberTestNoLabels.columns"
+                [labels]="specialTestConfig.oberTestNoLabels.labels"
+                [options]="specialTestConfig.oberTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.oberTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.oberTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.oberTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.oberTestNoLabels.showComments">
+            </dropdown-text-table>
+        </div>
 
         <div class="form-row">
             <label class="field-label">90/90 Hamstring Flexibility</label>

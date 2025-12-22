@@ -16,7 +16,7 @@
               {{ option.label }}
             </option>
           </select>
-          <input
+          <input *ngIf="hasTextInput"
             type="text"
             class="text-input"
             [formControlName]="getTextFieldName(label, column)"
@@ -35,7 +35,7 @@
           {{ option.label }}
         </option>
       </select>
-      <input
+      <input *ngIf="hasTextInput"
         type="text"
         class="text-input-full"
         [formControlName]="getTextFieldName(null, column)"

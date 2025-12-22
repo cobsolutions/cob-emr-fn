@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SpecialTestConfig } from './config';
 
 @Component({
   selector: 'special-tests-n',
@@ -10,6 +11,9 @@ export class SpecialTestsNComponent implements OnInit {
   specialTestForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   showFlexibilityFields: boolean = false;
+  showFlexibilityoberFields: boolean = false;
+
+  
   showStructuralFields: boolean = false;
   showLigamentIntegrityKneeFields: boolean = false;
   showStorkStandSiMobilityTestFields: boolean = false;
@@ -20,6 +24,8 @@ export class SpecialTestsNComponent implements OnInit {
   showWorkConditioningFields: boolean = false;
   showTmrFab4WorksheetFields: boolean = false;
   additionalCommentsFields: boolean = false;
+
+  readonly specialTestConfig = SpecialTestConfig;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -91,6 +97,9 @@ export class SpecialTestsNComponent implements OnInit {
   setupValueChangeListeners() {
     this.specialTestForm.get('flexibility')?.valueChanges.subscribe(value => {
       this.showFlexibilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('ober')?.valueChanges.subscribe(value => {
+      this.showFlexibilityoberFields = value === 'yes';
     });
 
     this.specialTestForm.get('structural')?.valueChanges.subscribe(value => {

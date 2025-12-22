@@ -36,6 +36,7 @@ export interface RomSectionDropdownTextConfig {
   fieldPrefix: string;
   commentsFieldName: string;
   showComments?: boolean;
+  hasTextInput?: boolean;
 }
 
 export interface TopSelect {

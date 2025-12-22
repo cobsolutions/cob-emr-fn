@@ -17,6 +17,7 @@ export class DropdownTextTableComponent implements OnInit {
   @Input() showComments: boolean = false;
   @Input() commentsLabel: string = 'Comments';
   @Input() commentsFieldName?: string;
+  @Input() hasTextInput?:boolean = true
 
   hasLabels: boolean = false;
 
@@ -41,7 +42,7 @@ export class DropdownTextTableComponent implements OnInit {
           if (!this.formGroup.get(dropdownFieldName)) {
             this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
           }
-          if (!this.formGroup.get(textFieldName)) {
+          if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
             this.formGroup.addControl(textFieldName, this.fb.control(''));
           }
         });
@@ -53,9 +54,9 @@ export class DropdownTextTableComponent implements OnInit {
         const textFieldName = this.getTextFieldName(null, column);
 
         if (!this.formGroup.get(dropdownFieldName)) {
-          this.formGroup.addControl(dropdownFieldName, this.fb.control(''));
+          this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
         }
-        if (!this.formGroup.get(textFieldName)) {
+        if (!this.formGroup.get(textFieldName)&& this.hasTextInput) {
           this.formGroup.addControl(textFieldName, this.fb.control(''));
         }
       });
