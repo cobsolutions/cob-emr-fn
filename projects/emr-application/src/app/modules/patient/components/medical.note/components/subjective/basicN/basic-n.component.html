@@ -19,28 +19,33 @@
       </c-form-check>
     </div>
   </div>
+  <div *ngIf="showHospitalizationTime" class="dependent-field-box">
+    <div class="time-field">
+      <label for="timeIn">Time In</label>
+      <input id="timeIn" type="time" formControlName="time_in" />
+    </div>
+
+    <div class="time-field">
+      <label for="timeOut">Time Out</label>
+      <input id="timeOut" type="time" formControlName="time_out" />
+    </div>
+  </div>
 
   <!-- Visit Number -->
   <div class="form-row">
     <label class="field-label">Visit Number</label>
-    <input type="text" class="form-input small-input" formControlName="number_of_visit" placeholder="Enter visit number" />
+    <input type="text" class="form-input small-input" formControlName="number_of_visit"
+      placeholder="Enter visit number" />
   </div>
 
   <!-- ICD-10 Diagnosis Component -->
-  <icdten
-    [parentForm]="basicForm"
-    [parentFieldName]="diagnosisFieldName"
-    [title]="'ICD-10 Diagnosis'"
-    [hierarchy]="'parent'"
-    [style]="'width:100%; margin-top:10px; margin-bottom:10px;'">
+  <icdten [parentForm]="basicForm" [parentFieldName]="diagnosisFieldName" [title]="'ICD-10 Diagnosis'"
+    [hierarchy]="'parent'" [style]="'width:100%; margin-top:10px; margin-bottom:10px;'">
   </icdten>
 
   <!-- Treatment Diagnosis Component -->
-  <treatment-diagnosis
-    [parentForm]="basicForm"
-    [parentFieldName]="treatmentDiagnosisFieldName"
-    [style]="'width:100%; margin-top:10px; margin-bottom:10px;'"
-    (emitChanges)="onTreatmentDiagnosisChange($event)">
+  <treatment-diagnosis [parentForm]="basicForm" [parentFieldName]="treatmentDiagnosisFieldName"
+    [style]="'width:100%; margin-top:10px; margin-bottom:10px;'" (emitChanges)="onTreatmentDiagnosisChange($event)">
   </treatment-diagnosis>
 
   <!-- Treatment Side -->
@@ -76,6 +81,9 @@
       </c-form-check>
     </div>
   </div>
+  <div *ngIf="specificPhysicianOrders" class="dependent-field-box">
+    <textarea formControlName="specific_physician_rders_text" class="form-textarea" rows="4"></textarea>
+  </div>
 
   <!-- Injury/Onset Date/Change of Status Date -->
   <div class="form-row">
@@ -101,6 +109,12 @@
       </c-form-check>
     </div>
   </div>
+  <div *ngIf="showNewInjury" class="dependent-field-box">
+    <div class="form-row">
+      <input class="form-input small-input" formControlName="new_injury_text" />
+    </div>
+  </div>
+
 
   <!-- Surgery Performed -->
   <div class="form-row">
@@ -114,6 +128,20 @@
         <input cFormCheckInput type="radio" formControlName="surgery_performed" value="no" />
         <label cFormCheckLabel>No</label>
       </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showSurgeryPperformed" class="dependent-field-box">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="field-label">Date of Surgery</label>
+        <input type="date" class="form-input small-input" formControlName="surgery_performed_date_of_surgery" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="field-label">Type of Surgery</label>
+        <input formControlName="surgery_performed_type_of_surgery" class="form-input small-input" />
+      </div>
     </div>
   </div>
 
@@ -147,27 +175,12 @@
   <!-- Pelvic Speech Profile -->
   <div class="form-row">
     <label class="field-label">Pelvic Speech Profile</label>
-    <select class="form-select-custom" formControlName="pelvic_speech_profile">
-      <option value="">Select...</option>
+    <select class="form-select-custom small-input" formControlName="pelvic_speech_profile">
+      <option value="">Select</option>
       <option value="normal">Normal</option>
       <option value="abnormal">Abnormal</option>
       <option value="not_assessed">Not Assessed</option>
     </select>
-  </div>
-
-  <!-- Movement Based Spinal Assessment Questionnaire -->
-  <div class="form-row">
-    <label class="field-label">Movement Based Spinal Assessment Questionnaire</label>
-    <div class="radio-group-primary">
-      <c-form-check>
-        <input cFormCheckInput type="radio" formControlName="movement_based_spinal_assessment_questionnaire" value="yes" />
-        <label cFormCheckLabel>Yes</label>
-      </c-form-check>
-      <c-form-check>
-        <input cFormCheckInput type="radio" formControlName="movement_based_spinal_assessment_questionnaire" value="no" />
-        <label cFormCheckLabel>No</label>
-      </c-form-check>
-    </div>
   </div>
 
   <!-- History of Present Condition/Mechanism of Injury -->
