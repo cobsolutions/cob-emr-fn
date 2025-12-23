@@ -11,6 +11,12 @@ export class BasicNComponent implements OnInit {
   showHospitalizationDates = false;
   @Output() formReady = new EventEmitter<FormGroup>();
 
+  // ICD-10 Diagnosis configuration
+  diagnosisFieldName = 'icdten_diagnosis';
+
+  // Treatment Diagnosis configuration
+  treatmentDiagnosisFieldName = 'treatment_diagnosis';
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -32,11 +38,23 @@ export class BasicNComponent implements OnInit {
       }
     });
   }
+
+  onDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
+    // Optional: Handle changes from ICD-10 diagnosis component
+    console.log('ICD-10 Diagnosis updated:', diagnoses);
+  }
+
+  onTreatmentDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
+    // Optional: Handle changes from treatment diagnosis component
+    console.log('Treatment Diagnosis updated:', diagnoses);
+  }
   initForm() {
     this.basicForm = this.fb.group({
       dos_date: [null], // name : Date of Initial Examination , Type Date Picker
-      time:[null],  // name  Time In/Time Out , type radio
+      time:['no'],  // name  Time In/Time Out , type radio
       number_of_visit:[''], // Visit Number , type : input text
+      icdten_diagnosis: [[]], // ICD-10 Diagnosis codes
+      treatment_diagnosis: [[]], // Treatment Diagnosis ICD-10 codes
       treatment_side:[], //name Treatment Side checkboxs  (N/A,Left,Right) in vertical align , Type checkbox
       specific_physician_rders:['no'], //name Specific Physician Orders , type radio box
       injury_onset_date:[null], //name Injury/Onset Date/Change of Status Date , type : date picker

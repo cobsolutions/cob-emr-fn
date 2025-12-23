@@ -26,6 +26,23 @@
     <input type="text" class="form-input small-input" formControlName="number_of_visit" placeholder="Enter visit number" />
   </div>
 
+  <!-- ICD-10 Diagnosis Component -->
+  <icdten
+    [parentForm]="basicForm"
+    [parentFieldName]="diagnosisFieldName"
+    [title]="'ICD-10 Diagnosis'"
+    [hierarchy]="'parent'"
+    [style]="'width:100%; margin-top:10px; margin-bottom:10px;'">
+  </icdten>
+
+  <!-- Treatment Diagnosis Component -->
+  <treatment-diagnosis
+    [parentForm]="basicForm"
+    [parentFieldName]="treatmentDiagnosisFieldName"
+    [style]="'width:100%; margin-top:10px; margin-bottom:10px;'"
+    (emitChanges)="onTreatmentDiagnosisChange($event)">
+  </treatment-diagnosis>
+
   <!-- Treatment Side -->
   <div class="form-row">
     <label class="field-label">Treatment Side</label>
