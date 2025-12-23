@@ -2,8 +2,8 @@
   <!-- Patient Consent -->
   <div class="form-row">
     <label class="field-label">Patient Consent</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="patient_consent" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -18,8 +18,8 @@
   <div class="dependent-field-box" *ngIf="showPatientParentGuardianConsent">
     <div class="form-row">
       <label class="field-label">Patient/Parent/Guardian Consent</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="patient_parent_guardian_consent" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -34,8 +34,8 @@
   <!-- Chaperone -->
   <div class="form-row">
     <label class="field-label">Chaperone</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="chaperone" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -68,8 +68,8 @@
   <!-- Girth Measurement Upper -->
   <div class="form-row">
     <label class="field-label">Girth Measurement Upper</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="girth_measurement_upper" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -122,8 +122,8 @@
   <!-- Girth Measurement Lower -->
   <div class="form-row">
     <label class="field-label">Girth Measurement Lower</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="girth_measurement_lower" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -188,8 +188,8 @@
   <!-- Post Operative/Wound Healing -->
   <div class="form-row">
     <label class="field-label">Post Operative/Wound Healing</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="post_operative_wound_healing" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -216,8 +216,8 @@
     <!-- Surgical Precautions -->
     <div class="form-row">
       <label class="field-label">Surgical Precautions</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="surgical_precautions" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -244,8 +244,8 @@
     <!-- Scar Mobility -->
     <div class="form-row">
       <label class="field-label">Scar Mobility</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="scar_mobility" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -267,8 +267,8 @@
     <!-- Scar Type -->
     <div class="form-row">
       <label class="field-label">Scar Type</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="scar_type" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -295,8 +295,8 @@
     <!-- Wound Description -->
     <div class="form-row">
       <label class="field-label">Wound Description</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="wound_description" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -318,8 +318,8 @@
     <!-- Wound Measurements -->
     <div class="form-row">
       <label class="field-label">Wound Measurements</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="wound_measurements" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -346,8 +346,8 @@
   <!-- Wound Care -->
   <div class="form-row">
     <label class="field-label">Wound Care</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="wound_care" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -363,12 +363,12 @@
     <!-- Surface Culture Used To Exudate? -->
     <div class="form-row">
       <label class="field-label">Surface Culture Used To Exudate?</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="surface_culture_used" value="na" />
           <label cFormCheckLabel>N/A</label>
         </c-form-check>
-        <c-form-check class="me-3">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="surface_culture_used" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -420,8 +420,8 @@
   <!-- Surgical Scarring -->
   <div class="form-row">
     <label class="field-label">Surgical Scarring</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="surgical_scarring" value="no" />
         <label cFormCheckLabel>No</label>
       </c-form-check>
@@ -450,8 +450,8 @@
   <!-- Body Mass Index -->
   <div class="form-row">
     <label class="field-label">Body Mass Index</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="body_mass_index" value="no" />
         <label cFormCheckLabel>No</label>
       </c-form-check>
@@ -474,8 +474,8 @@
     </div>
     <div class="form-row">
       <label class="field-label">Units</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="bmi_units" value="lbs_in" />
           <label cFormCheckLabel>lbs/in</label>
         </c-form-check>
@@ -498,8 +498,8 @@
   <!-- Additional Comments -->
   <div class="form-row">
     <label class="field-label">Additional Comments</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
         <label cFormCheckLabel>No</label>
       </c-form-check>
