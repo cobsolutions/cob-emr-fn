@@ -20,7 +20,9 @@ export class PalpationNComponent implements OnInit {
   initForm() {
     this.palpationTestForm = this.fb.group({
       palpation: ['no'],
-      additional_comments: ['no']
+
+      additional_comments: ['no'],
+      additional_comments_text: ['']
     })
   }
   setupValueChangeListeners() {
