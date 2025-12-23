@@ -157,6 +157,7 @@ import { NonMaterialHandlingWorkConditionComponent } from './components/medical.
 import { TitleCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-list/title-checkbox-list.component';
 import { TitleMultipleColumnsCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-columns-list/title-multiple-columns-checkbox-list.component';
 import { BasicNComponent } from './components/medical.note/components/subjective/basicN/basic-n.component';
+import { PriorLevelFunctionNComponent } from './components/medical.note/components/subjective/prior-level-of-functionN/prior-level-function-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -315,6 +316,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TitleCheckboxListComponent,
     TitleMultipleColumnsCheckboxListComponent,
     BasicNComponent,
+    PriorLevelFunctionNComponent,
   ],
   imports: [
     CommonModule,
