@@ -1,4 +1,4 @@
-import { MuscleAssessmentConfig } from "./right-temporalis-config";
+import { MuscleAssessmentConfig } from "./muscle-assessment-config";
 import { TemperaturePalpation } from "./temperature-palpation-config";
 
 export class PalpationConfig{
