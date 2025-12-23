@@ -8,15 +8,29 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class BasicNComponent implements OnInit {
   basicForm!: FormGroup;
+  showHospitalizationDates = false;
   @Output() formReady = new EventEmitter<FormGroup>();
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    this.formReady.emit(this.basicForm);
   }
+
   setupValueChangeListeners() {
-    
+    // Listen to prior_hospitalization changes to show/hide date fields
+    this.basicForm.get('prior_hospitalization')?.valueChanges.subscribe(value => {
+      this.showHospitalizationDates = value === 'yes';
+      if (value === 'no') {
+        // Clear the date fields when user selects 'no'
+        this.basicForm.patchValue({
+          from_date: null,
+          to_date: null
+        });
+      }
+    });
   }
   initForm() {
     this.basicForm = this.fb.group({

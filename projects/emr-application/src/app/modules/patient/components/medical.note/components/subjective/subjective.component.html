@@ -2,9 +2,7 @@
     <c-card class="mb-2">
         <c-card-header>Basic Information</c-card-header>
         <c-card-body>
-            <basic-information (formReady)="setChildForm('basic', $event)"
-                [fields]="subjectiveFormFields['Basic Information']"
-                [basicFormData]="subjectiveData?.basic"></basic-information>
+            <subjective-basic-n (formReady)="setChildForm('basic', $event)"></subjective-basic-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">

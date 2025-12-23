@@ -1,1 +1,169 @@
-<p>basic-n works!</p>
+<div [formGroup]="basicForm" class="basic-form">
+  <!-- Date of Initial Examination -->
+  <div class="form-row">
+    <label class="field-label">Date of Initial Examination</label>
+    <input type="date" class="form-input small-input" formControlName="dos_date" />
+  </div>
+
+  <!-- Time In/Time Out -->
+  <div class="form-row">
+    <label class="field-label">Time In/Time Out</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="time" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="time" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Visit Number -->
+  <div class="form-row">
+    <label class="field-label">Visit Number</label>
+    <input type="text" class="form-input small-input" formControlName="number_of_visit" placeholder="Enter visit number" />
+  </div>
+
+  <!-- Treatment Side -->
+  <div class="form-row">
+    <label class="field-label">Treatment Side</label>
+    <div class="checkbox-group-vertical">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="na" />
+        <label cFormCheckLabel>N/A</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="left" />
+        <label cFormCheckLabel>Left</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="right" />
+        <label cFormCheckLabel>Right</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Specific Physician Orders -->
+  <div class="form-row">
+    <label class="field-label">Specific Physician Orders</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="specific_physician_rders" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="specific_physician_rders" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Injury/Onset Date/Change of Status Date -->
+  <div class="form-row">
+    <label class="field-label">Injury/Onset Date/Change of Status Date</label>
+    <input type="date" class="form-input small-input" formControlName="injury_onset_date" />
+  </div>
+
+  <!-- Condition Checkboxes -->
+  <div class="form-row">
+    <label class="field-label">Condition Type</label>
+    <div class="checkbox-group-vertical">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="chronic" />
+        <label cFormCheckLabel>Chronic</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="Insidious" />
+        <label cFormCheckLabel>Insidious</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="new_injury" />
+        <label cFormCheckLabel>New Injury</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Surgery Performed -->
+  <div class="form-row">
+    <label class="field-label">Surgery Performed</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="surgery_performed" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="surgery_performed" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Prior Hospitalization -->
+  <div class="form-row">
+    <label class="field-label">Prior Hospitalization</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="prior_hospitalization" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="prior_hospitalization" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Hospitalization Dates (shown conditionally if prior_hospitalization is yes) -->
+  <div *ngIf="showHospitalizationDates" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">From Date</label>
+      <input type="date" class="form-input small-input" formControlName="from_date" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">To Date</label>
+      <input type="date" class="form-input small-input" formControlName="to_date" />
+    </div>
+  </div>
+
+  <!-- Pelvic Speech Profile -->
+  <div class="form-row">
+    <label class="field-label">Pelvic Speech Profile</label>
+    <select class="form-select-custom" formControlName="pelvic_speech_profile">
+      <option value="">Select...</option>
+      <option value="normal">Normal</option>
+      <option value="abnormal">Abnormal</option>
+      <option value="not_assessed">Not Assessed</option>
+    </select>
+  </div>
+
+  <!-- Movement Based Spinal Assessment Questionnaire -->
+  <div class="form-row">
+    <label class="field-label">Movement Based Spinal Assessment Questionnaire</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="movement_based_spinal_assessment_questionnaire" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="movement_based_spinal_assessment_questionnaire" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- History of Present Condition/Mechanism of Injury -->
+  <div class="form-row-vertical">
+    <label class="field-label-vertical">History of Present Condition/Mechanism of Injury</label>
+    <textarea formControlName="history_of_present_condition_Mechanism_of_injury" class="form-textarea" rows="4"
+      placeholder="Enter history of present condition or mechanism of injury..."></textarea>
+  </div>
+
+  <!-- Primary Concern/Chief Complaint -->
+  <div class="form-row-vertical">
+    <label class="field-label-vertical">Primary Concern/Chief Complaint</label>
+    <textarea formControlName="primary_concern_chief_complaint" class="form-textarea" rows="4"
+      placeholder="Enter primary concern or chief complaint..."></textarea>
+  </div>
+</div>
