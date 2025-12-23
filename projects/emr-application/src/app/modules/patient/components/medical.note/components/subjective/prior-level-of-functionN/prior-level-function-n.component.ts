@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-prior-level-function-n',
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class PriorLevelFunctionNComponent implements OnInit {
   priorLevelFunctionForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -17,7 +17,7 @@ export class PriorLevelFunctionNComponent implements OnInit {
     this.formReady.emit(this.priorLevelFunctionForm);
   }
   initForm() {
-    throw new Error('Method not implemented.');
+    this.priorLevelFunctionForm = this.fb.group({})
   }
   setupValueChangeListeners() {
     throw new Error('Method not implemented.');
