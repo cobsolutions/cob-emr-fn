@@ -152,6 +152,91 @@ c-form-check label {
   margin-left: 0;
 }
 
+/* Color coding for Yes/No options (Medical Safety) */
+
+/* YES option - Green theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]) {
+  border-color: #d4edda;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]):hover {
+  border-color: #28a745;
+  background-color: #f1f9f3;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]:checked) {
+  border-color: #28a745;
+  background-color: #d4edda;
+  box-shadow: 0 3px 6px rgba(40, 167, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="yes"]:checked + label {
+  color: #155724;
+  font-weight: 600;
+}
+
+/* NO option - Red theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]) {
+  border-color: #f8d7da;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]):hover {
+  border-color: #dc3545;
+  background-color: #fef5f6;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]:checked) {
+  border-color: #dc3545;
+  background-color: #f8d7da;
+  box-shadow: 0 3px 6px rgba(220, 53, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="no"]:checked + label {
+  color: #721c24;
+  font-weight: 600;
+}
+
+/* IN/OUT options - Blue theme for Time In/Out */
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]) {
+  border-color: #cce5ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]):hover {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]:checked) {
+  border-color: #007bff;
+  background-color: #cce5ff;
+  box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="in"]:checked + label {
+  color: #004085;
+  font-weight: 600;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]) {
+  border-color: #d1ecf1;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]):hover {
+  border-color: #17a2b8;
+  background-color: #e8f6f8;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]:checked) {
+  border-color: #17a2b8;
+  background-color: #d1ecf1;
+  box-shadow: 0 3px 6px rgba(23, 162, 184, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="out"]:checked + label {
+  color: #0c5460;
+  font-weight: 600;
+}
+
 /* Checkbox styling enhancements */
 .checkbox-group-horizontal c-form-check,
 .checkbox-group-vertical c-form-check {
