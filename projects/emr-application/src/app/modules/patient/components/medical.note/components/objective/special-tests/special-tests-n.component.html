@@ -887,7 +887,19 @@
             </div>
         </div>
         <div *ngIf="showWorkConditioningNonMaterialHandlingFields" class="dependent-field-box">
-
+            <non-material-handling-work-condition
+            [items]="specialTestConfig.nonMaterialHandling.items"
+            [columnHeaders]="specialTestConfig.nonMaterialHandling.columnHeaders"
+            [frequencyColumns]="specialTestConfig.nonMaterialHandling.frequencyColumns"
+            [adequateColumn]="specialTestConfig.nonMaterialHandling.adequateColumn"
+            [options]="specialTestConfig.nonMaterialHandling.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.nonMaterialHandling.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.nonMaterialHandling.commentsFieldName"
+            [commentsLabel]="specialTestConfig.nonMaterialHandling.commentsLabel"
+            [showComments]="specialTestConfig.nonMaterialHandling.showComments"
+            [columnWidths]="specialTestConfig.nonMaterialHandling.columnWidths">
+          </non-material-handling-work-condition>
         </div>
 
     </div>
