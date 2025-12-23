@@ -154,6 +154,7 @@ import { MeasurementInputTableComponent } from './components/medical.note/compon
 import { MeasurementCheckTableComponent } from './components/medical.note/components/objective/common/measurement-table-check/measurement-check-table.component';
 import { MaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/material-handling/material-handling-work-condition.component';
 import { NonMaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/non-material-handling/non-material-handling-work-condition.component';
+import { TitleCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-list/title-checkbox-list.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -309,6 +310,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     MeasurementCheckTableComponent,
     MaterialHandlingWorkConditionComponent,
     NonMaterialHandlingWorkConditionComponent,
+    TitleCheckboxListComponent,
   ],
   imports: [
     CommonModule,
