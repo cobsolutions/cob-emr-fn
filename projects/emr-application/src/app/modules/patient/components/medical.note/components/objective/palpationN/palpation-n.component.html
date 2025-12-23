@@ -36,6 +36,17 @@
                 [showComments]="PalpationConfig.temperaturePalpation.showComments">
             </measurement-table>
         </div>
+        <title-checkbox-list 
+        [title]="PalpationConfig.rightTemporalis.title"
+        [labels]="PalpationConfig.rightTemporalis.labels"
+        [formGroup]="palpationTestForm"
+        [fieldPrefix]="PalpationConfig.rightTemporalis.fieldPrefix"
+        [showNormalCheckbox]="PalpationConfig.rightTemporalis.showNormalCheckbox"
+        [showComments]="PalpationConfig.rightTemporalis.showComments"
+        [commentsLabel]="PalpationConfig.rightTemporalis.commentsLabel"
+        [commentsFieldName]="PalpationConfig.rightTemporalis.commentsFieldName"
+        [normalFieldName]="PalpationConfig.rightTemporalis.normalFieldName">
+    </title-checkbox-list>
     </div>
     <div class="form-row">
         <label class="field-label">Additional Comments</label>

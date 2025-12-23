@@ -1,1 +1,60 @@
-<p>title-checkbox-list works!</p>
+<div *ngIf="formGroup; else noFormTemplate" [formGroup]="formGroup">
+    <!-- Loading state -->
+    <div *ngIf="!title || !labels" class="loading-state">
+      <p>Loading muscle assessment...</p>
+    </div>
+  
+    <!-- Title Section -->
+    <div *ngIf="title" class="title-section">
+      <h3 class="muscle-title">{{ title }}</h3>
+      <div *ngIf="showNormalCheckbox" class="normal-checkbox">
+        <label class="normal-label">
+          <input 
+            type="checkbox" 
+            class="normal-checkbox-input"
+            [formControlName]="getNormalFieldName()"
+            [id]="getNormalFieldName() + '_checkbox'">
+          <span class="normal-text">Normal</span>
+        </label>
+      </div>
+    </div>
+  
+    <!-- Checkboxes List -->
+    <div *ngIf="labels && labels.length > 0" class="checkbox-list">
+      <div *ngFor="let label of labels; let i = index" class="checkbox-item">
+        <label class="checkbox-wrapper" [for]="getFieldName(label, i) + '_checkbox'">
+          <input 
+            type="checkbox" 
+            class="table-checkbox"
+            [formControlName]="getFieldName(label, i)"
+            [id]="getFieldName(label, i) + '_checkbox'">
+          <span class="checkbox-text">{{ label }}</span>
+        </label>
+      </div>
+    </div>
+  
+    <!-- Empty state -->
+    <div *ngIf="labels && labels.length === 0" class="empty-state">
+      <p>No assessment criteria available.</p>
+    </div>
+  
+    <!-- Comments Section -->
+    <div *ngIf="showComments" class="comments-section">
+      <label class="comments-label" [for]="getCommentsFieldName() + '_textarea'">
+        {{ commentsLabel }}
+      </label>
+      <textarea
+        class="form-textarea"
+        [formControlName]="getCommentsFieldName()"
+        [id]="getCommentsFieldName() + '_textarea'"
+        rows="3"
+        [placeholder]="'Enter any comments for ' + (title || 'this muscle') + '...'">
+      </textarea>
+    </div>
+  </div>
+  
+  <ng-template #noFormTemplate>
+    <div class="error-state">
+      <p>⚠️ Error: Form group is not provided for muscle assessment.</p>
+    </div>
+  </ng-template>
