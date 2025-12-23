@@ -28,7 +28,7 @@ export class MaterialHandlingBilateralLifting {
       { value: '', label: 'Clear All' },
       { value: 'WAY', label: 'Set All to WAY' },
       { value: 'NAY', label: 'Set All to NAY' }
-    ]
+    ],
   };
 }
 

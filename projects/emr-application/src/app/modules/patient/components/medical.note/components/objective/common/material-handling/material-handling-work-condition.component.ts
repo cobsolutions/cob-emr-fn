@@ -11,12 +11,17 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
 
   @Input() labels: string[] = [];
   @Input() columnHeaders: string[] = [];
+  @Input() selectColumnIndices: number[] = []; // Indices of columns that should be selects
+  @Input() selectOptions: { [columnIndex: number]: { value: string, label: string }[] } = {}; // Options for select columns
   @Input() options: any[] = []; // Options for Apply to All dropdown
+  @Input() applyToAllOptions?: any[]; // Options for Apply to All dropdown
   @Input() columnPlaceholders: string[] = []; // Optional placeholders for each column
   @Input() formGroup!: FormGroup;
   @Input() fieldPrefix: string = '';
+  @Input() showApplyToAll: boolean = true;
   @Input() showComments: boolean = true;
-  @Input() commentsLabel: string;
+  @Input() commentsLabel: string = 'Comments';
+  @Input() applyToAllLabel: string = 'Apply to All';
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
   @Input() columnWidths: number[] = []; // Optional custom widths for columns
@@ -27,15 +32,26 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
 
   ngOnInit(): void {
     this.ensureFormControlsExist();
-    
+    if (this.showApplyToAll) {
+      this.setupApplyToAllListener();
+    }
   }
 
   private ensureFormControlsExist(): void {
+    // Add Apply to All control if needed
+    if (this.showApplyToAll) {
+      const applyToAllFieldName = this.getApplyToAllFieldName();
+      if (!this.formGroup.get(applyToAllFieldName)) {
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+      }
+    }
+
     // Add controls for each label and column combination
     this.labels.forEach(label => {
       this.columnHeaders.forEach((column, colIndex) => {
         const fieldName = this.getFieldName(label, colIndex);
         if (!this.formGroup.get(fieldName)) {
+          // Use empty string as default for all controls
           this.formGroup.addControl(fieldName, this.fb.control(''));
         }
       });
@@ -75,6 +91,37 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
   }
 
   /**
+   * Check if a column should be a select dropdown
+   */
+  isSelectColumn(columnIndex: number): boolean {
+    // Check if this column index is in the selectColumnIndices array
+    if (this.selectColumnIndices.includes(columnIndex)) {
+      return true;
+    }
+    
+    // Also check by column header name (for convenience)
+    const columnName = this.columnHeaders[columnIndex].toLowerCase();
+    return columnName.includes('adequate') || columnName.includes('yes') || columnName.includes('no');
+  }
+
+  /**
+   * Get options for a specific select column
+   */
+  getSelectOptions(columnIndex: number): { value: string, label: string }[] {
+    // Return custom options if provided
+    if (this.selectOptions && this.selectOptions[columnIndex]) {
+      return this.selectOptions[columnIndex];
+    }
+    
+    // Default YES/NO options for "Adequate For Job" type columns
+    return [
+      { value: 'na', label: 'N/A' },
+      { value: 'YES', label: 'YES' },
+      { value: 'NO', label: 'NO' }
+    ];
+  }
+
+  /**
    * Generate form control name for Apply to All field
    */
   getApplyToAllFieldName(): string {
@@ -87,6 +134,14 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
   getCommentsFieldName(): string {
     return this.commentsFieldName || `${this.fieldPrefix}comments`;
   }
+
+  /**
+   * Get options for Apply to All dropdown
+   */
+  getApplyToAllOptions(): any[] {
+    return this.applyToAllOptions || this.options;
+  }
+
   /**
    * Get placeholder for a specific column
    */
@@ -94,7 +149,13 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
     if (this.columnPlaceholders && this.columnPlaceholders[columnIndex]) {
       return this.columnPlaceholders[columnIndex];
     }
-    return 'Enter value...'; // Default placeholder
+    
+    // Different placeholder for select columns
+    if (this.isSelectColumn(columnIndex)) {
+      return 'N/A';
+    }
+    
+    return 'Enter value...'; // Default placeholder for inputs
   }
 
   /**
