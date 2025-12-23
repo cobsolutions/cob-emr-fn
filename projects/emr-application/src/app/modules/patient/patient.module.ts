@@ -158,6 +158,7 @@ import { TitleCheckboxListComponent } from './components/medical.note/components
 import { TitleMultipleColumnsCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-columns-list/title-multiple-columns-checkbox-list.component';
 import { BasicNComponent } from './components/medical.note/components/subjective/basicN/basic-n.component';
 import { PriorLevelFunctionNComponent } from './components/medical.note/components/subjective/prior-level-of-functionN/prior-level-function-n.component';
+import { HierarchyCheckboxComponent } from './components/medical.note/components/subjective/common/hierarchy-checkbox/hierarchy-checkbox.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -317,6 +318,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     TitleMultipleColumnsCheckboxListComponent,
     BasicNComponent,
     PriorLevelFunctionNComponent,
+    HierarchyCheckboxComponent,
   ],
   imports: [
     CommonModule,

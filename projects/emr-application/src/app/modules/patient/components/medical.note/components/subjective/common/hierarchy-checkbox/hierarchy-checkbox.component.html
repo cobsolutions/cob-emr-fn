@@ -1,0 +1,119 @@
+<div class="checkbox-container">
+  <div class="columns-wrapper">
+    <div *ngFor="let columnData of getColumnData(); let colIndex = index" class="column">
+      <div *ngFor="let category of columnData" class="category-section">
+        <div class="category-header">
+          <button class="expand-category-btn" (click)="toggleCategoryCollapse(category)">
+            {{ getCategoryArrowIcon(category) }}
+          </button>
+          <label class="main-checkbox" (click)="onCategoryCheckboxClick(category, $event)">
+            <input 
+              type="checkbox" 
+              [checked]="isCategoryChecked(category)"
+              [indeterminate]="isCategoryIndeterminate(category)"
+              readonly
+            />
+            <span class="checkmark"></span>
+            <span class="category-title">{{ category.title }}</span>
+          </label>
+          <!-- Category level Add All button - show when any child is checked -->
+          <button 
+            *ngIf="isCategoryChecked(category) || isCategoryIndeterminate(category)" 
+            class="add-all-btn"
+            (click)="addAllFirstLevelForCategory(category)"
+          >
+            Add All
+          </button>
+        </div>
+        
+        <!-- Category content - collapsible -->
+        <div *ngIf="!category.collapsed" class="category-content">
+          <div class="items-list">
+            <div *ngFor="let item of category.items" class="item-level-1">
+              <div class="item-row">
+                <div class="item-controls">
+                  <button 
+                    *ngIf="hasChildren(item)" 
+                    class="expand-btn"
+                    (click)="toggleItemCollapse(item)"
+                  >
+                    {{ getItemArrowIcon(item) }}
+                  </button>
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      [checked]="item.checked"
+                      [indeterminate]="item.indeterminate"
+                      (change)="onItemCheckboxChange(item, $event)"
+                    />
+                    <span class="checkmark"></span>
+                    {{ item.label }}
+                  </label>
+                </div>
+                <!-- Item level Add All button - only show when item is checked -->
+                <button 
+                  *ngIf="shouldShowAddAllButton(item)" 
+                  class="add-all-item-btn"
+                  (click)="addAllFirstLevel(item)"
+                >
+                  Add All
+                </button>
+              </div>
+              
+              <!-- Level 2 - Collapsible -->
+              <div *ngIf="item.children && !item.collapsed" class="level-2">
+                <div *ngFor="let child of item.children" class="item-level-2">
+                  <div class="item-row">
+                    <div class="item-controls">
+                      <button 
+                        *ngIf="hasChildren(child)" 
+                        class="expand-btn"
+                        (click)="toggleItemCollapse(child)"
+                      >
+                        {{ getItemArrowIcon(child) }}
+                      </button>
+                      <label>
+                        <input 
+                          type="checkbox" 
+                          [checked]="child.checked"
+                          [indeterminate]="child.indeterminate"
+                          (change)="onItemCheckboxChange(child, $event)"
+                        />
+                        <span class="checkmark"></span>
+                        {{ child.label }}
+                      </label>
+                    </div>
+                    <!-- Child level Add All button -->
+                    <button 
+                      *ngIf="shouldShowAddAllButton(child)" 
+                      class="add-all-item-btn"
+                      (click)="addAllFirstLevel(child)"
+                    >
+                      Add All
+                    </button>
+                  </div>
+                  
+                  <!-- Level 3 - Collapsible -->
+                  <div *ngIf="child.children && !child.collapsed" class="level-3">
+                    <div *ngFor="let grandChild of child.children" class="item-level-3">
+                      <label>
+                        <input 
+                          type="checkbox" 
+                          [checked]="grandChild.checked"
+                          [indeterminate]="grandChild.indeterminate"
+                          (change)="onItemCheckboxChange(grandChild, $event)"
+                        />
+                        <span class="checkmark"></span>
+                        {{ grandChild.label }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
