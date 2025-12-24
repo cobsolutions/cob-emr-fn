@@ -162,6 +162,7 @@ import { HierarchyCheckboxComponent } from './components/medical.note/components
 import { CurrentFunctionalLimitationsNComponent } from './components/medical.note/components/subjective/current-functional-limitationsN/current-functional-limitations-n.component';
 import { MedicalHistoryNComponent } from './components/medical.note/components/subjective/medical-historyN/medical-history-n.component';
 import { ListCheckboxWithChildComponent } from './components/medical.note/components/subjective/common/list-checkbox-with-child/list-checkbox-with-child.component';
+import { PainNComponent } from './components/medical.note/components/subjective/painN/pain-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -325,6 +326,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CurrentFunctionalLimitationsNComponent,
     MedicalHistoryNComponent,
     ListCheckboxWithChildComponent,
+    PainNComponent,
   ],
   imports: [
     CommonModule,
