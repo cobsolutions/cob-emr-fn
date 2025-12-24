@@ -30,6 +30,15 @@ export class MedicalHistoryNComponent implements OnInit {
     { value: 'divorced', label: 'Divorced' },
     { value: 'widowed', label: 'Widowed' }
   ];
+  homeLayoutOptions = [
+    { value: '1_story', label: '1-story' },
+    { value: '2_story', label: '2-story' },
+    { value: 'condo_apt', label: 'Condo/Apt' },
+    { value: 'stairs_steps', label: 'Stairs/Steps' },
+    { value: 'shower_stall', label: 'Shower Stall' },
+    { value: 'combo_bathtub_shower', label: 'Combo Bathtub Shower' },
+    { value: 'w_c_accessible', label: 'W/C Accessible' }
+  ]
 
   workStatusOptions = [
     { value: 'working', label: 'Working' },
@@ -74,10 +83,13 @@ export class MedicalHistoryNComponent implements OnInit {
       occupation_social_history_occupation_and_work_status_sescription: [''],
       occupation_social_history_occupation_and_work_status_out_of_work_since: [''],
       occupation_social_history_occupation_and_work_status_return_to_work_date: [''],
-      
 
-      
+
+
       occupation_social_history_home_layout: ['no'],
+      occupation_social_history_home_layout_list: [''],
+      occupation_social_history_home_layout_text: [''],
+
       occupation_social_history_durable_medical_equipment: ['no'],
       occupation_social_history_patient_tobacco_user: ['no'],
       home_health_care: ['no'],
