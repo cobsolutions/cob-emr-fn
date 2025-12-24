@@ -12,6 +12,10 @@
             </c-form-check>
         </div>
     </div>
+    <div *ngIf="showPainScale" class="dependent-field-box">
+     <!-- Add PainEvaluationComponent here -->
+     <!-- Consider its output to be set as a formControl In painForm -->
+    </div>
     <div class="form-row">
         <label class="field-label">Aggravating Factors</label>
         <select multiple class="form-multiselect-custom" formControlName="aggravating_factors">
