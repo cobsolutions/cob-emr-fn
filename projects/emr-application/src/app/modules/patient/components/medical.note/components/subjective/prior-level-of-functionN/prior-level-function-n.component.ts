@@ -8,10 +8,6 @@ import { CheckboxHierarchy } from '../common/hierarchy-checkbox/interface/checkb
   styleUrls: ['./prior-level-function-n.component.css']
 })
 export class PriorLevelFunctionNComponent implements OnInit {
-  onSelectionChange(data: CheckboxHierarchy[]): void {
-    console.log('Selected items:', data);
-    // Handle selection changes here
-  }
   checkboxData: CheckboxHierarchy[] = [
     {
       title: 'Self Care',
@@ -453,12 +449,22 @@ export class PriorLevelFunctionNComponent implements OnInit {
   }
 
   setupValueChangeListeners() {
-    // Subscribe to form value changes if needed
+    // Subscribe to all form value changes (including hierarchy checkboxes)
     this.priorLevelFunctionForm.valueChanges.subscribe(values => {
+      // All form values including hierarchy checkboxes and comments
+      // Example values:
+      // {
+      //   'prior-level-function_self-care_hygiene': true,
+      //   'prior-level-function_self-care_comment': 'some comment',
+      //   'prior_level_function_other': true,
+      //   'prior_level_function_other_text': 'other text'
+      // }
+      console.log('Form values changed:', values);
     });
+
     this.priorLevelFunctionForm.get('prior_level_function_other')?.valueChanges.subscribe(value => {
-      this.showHoOther = value ;
-    })
+      this.showHoOther = value;
+    });
   }
 
 }
