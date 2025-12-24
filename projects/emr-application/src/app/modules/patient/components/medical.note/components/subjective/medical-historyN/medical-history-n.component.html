@@ -34,6 +34,25 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showPreviousEpisodesOfSameComplaints" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <select class="form-select-custom small-input"
+                    formControlName="previous_episodes_of_same_complaints_range">
+                    <option value="">None</option>
+                    <option value="r_1-5">1-5</option>
+                    <option value="r_6-10">6-10</option>
+                    <option value="g_10">11+</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Year of First Episode</label>
+                <select class="form-select-custom small-input"
+                    formControlName="previous_episodes_of_same_complaints_year_first_episode">
+                    <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                </select>
+            </div>
+        </div>
         <div class="form-row">
             <label class="field-label">Previous Treatments for Similar Symptoms</label>
             <div class="radio-group-primary">
@@ -53,6 +72,15 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showPreviousTreatmentsForSimilarSymptoms" class="dependent-field-box">
+            <textarea formControlName="previous_treatments_for_similar_symptoms_text" class="form-textarea"
+                rows="4"></textarea>
+        </div>
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="previous_treatments_for_similar_symptoms_text" class="form-textarea"
+                rows="4"></textarea>
         </div>
     </div>
     <div class="form-row">
@@ -78,6 +106,84 @@
             </c-form-check>
         </div>
     </div>
+    <div *ngIf="showOccupationSocialHistory" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Social History</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_social_history"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_social_history"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Occupation and Work Status</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_occupation_and_work_status" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_occupation_and_work_status" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Home Layout</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_home_layout"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_home_layout"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Durable Medical Equipment</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_durable_medical_equipment" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_durable_medical_equipment" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Is Patient A Tobacco User?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_patient_tobacco_user"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_patient_tobacco_user"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+    </div>
+
     <div class="form-row">
         <label class="field-label">Home Health Care</label>
         <div class="radio-group-primary">
