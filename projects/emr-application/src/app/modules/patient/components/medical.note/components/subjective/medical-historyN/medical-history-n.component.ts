@@ -51,6 +51,14 @@ export class MedicalHistoryNComponent implements OnInit {
     { label: 'Rheumatoid Arthritis', value: 'rheumatoid_arthritis', childType: 'text', childPlaceholder: 'Enter details' },
     { label: 'Traumatic Brain Injury', value: 'traumatic_brain_injury', childType: 'text', childPlaceholder: 'Enter details' }
   ];
+  currentMedicationsOptions: CheckboxOption[] = [
+    { label: 'Prescription', value: 'prescription', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Over The Counter', value: 'over_the_counter', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Herbals', value: 'herbals', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Vitamin/Mineral/Dietary Supplements', value: 'vitamin_mineral_dietary_supplements', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Other', value: 'other', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Not currently taking any medications', value: 'not_currently_taking_any_medications', childType: 'text', childPlaceholder: 'Enter details' }
+  ]
   complicatingPersonalFactorsOptions: CheckboxOption[] = [
     { label: 'No Known Complicating Factors Affecting the Plan of Care', value: 'no_known_complicating_factors_affecting_the_plan_of_care', childType: 'textarea', childPlaceholder: 'Enter details' },
     { label: 'Allergies', value: 'allergies', childType: 'textarea', childPlaceholder: 'Enter details' },
