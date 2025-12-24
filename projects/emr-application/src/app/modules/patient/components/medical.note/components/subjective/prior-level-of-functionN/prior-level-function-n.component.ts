@@ -459,7 +459,6 @@ export class PriorLevelFunctionNComponent implements OnInit {
       //   'prior_level_function_other': true,
       //   'prior_level_function_other_text': 'other text'
       // }
-      console.log('Form values changed:', values);
     });
 
     this.priorLevelFunctionForm.get('prior_level_function_other')?.valueChanges.subscribe(value => {

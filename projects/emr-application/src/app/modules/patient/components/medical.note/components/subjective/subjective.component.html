@@ -5,7 +5,7 @@
             <!-- <basic-information (formReady)="setChildForm('basic', $event)"
                 [fields]="subjectiveFormFields['Basic Information']"
                 [basicFormData]="subjectiveData?.basic"></basic-information> -->
-                <subjective-basic-n (formReady)="setChildForm('basic', $event)"></subjective-basic-n>
+            <subjective-basic-n (formReady)="setChildForm('basic', $event)"></subjective-basic-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">
@@ -22,17 +22,19 @@
             <!-- <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
                 [fields]="subjectiveFormFields['Prior Level Of Function']"
                 [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function> -->
-                <subjective-prior-level-function-n (formReady)="setChildForm('currentFunction', $event)">
-                </subjective-prior-level-function-n>
+            <subjective-prior-level-function-n (formReady)="setChildForm('priorFunction', $event)">
+            </subjective-prior-level-function-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">
         <c-card-header>Current Functional Limitations</c-card-header>
         <c-card-body>
-            <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
+            <!-- <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
                 [fields]="subjectiveFormFields['Current Functional Limitations']"
-                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit>
-                
+                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit> -->
+            <subjective-current-functional-limitations-n (formReady)="setChildForm('currentFunction', $event)">
+            </subjective-current-functional-limitations-n>
+
         </c-card-body>
     </c-card>
 
