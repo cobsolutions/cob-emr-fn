@@ -3,7 +3,9 @@
         <c-card-header class="enhanced-card-header basic-info-header">
             <div class="card-header-content">
                 <div class="card-header-title">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
@@ -23,7 +25,9 @@
         <c-card-header class="enhanced-card-header pain-header">
             <div class="card-header-content">
                 <div class="card-header-title">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                     </svg>
                     <span>Pain</span>
@@ -41,7 +45,9 @@
         <c-card-header class="enhanced-card-header prior-function-header">
             <div class="card-header-content">
                 <div class="card-header-title">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
                         <polyline points="17 6 23 6 23 12"></polyline>
                     </svg>
@@ -62,7 +68,9 @@
         <c-card-header class="enhanced-card-header">
             <div class="card-header-content">
                 <div class="card-header-title">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                         <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -88,7 +96,9 @@
         <c-card-header class="enhanced-card-header medical-history-header">
             <div class="card-header-content">
                 <div class="card-header-title">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                     </svg>
                     <span>Medical History</span>
@@ -97,9 +107,12 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <medical-history (formReady)="setChildForm('medicalHistory', $event)"
+            <!-- <medical-history (formReady)="setChildForm('medicalHistory', $event)"
                 [fields]="subjectiveFormFields['Medical History']"
-                [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history>
+                [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history> -->
+            <subjective-medical-history-n (formReady)="setChildForm('medicalHistory', $event)">
+
+            </subjective-medical-history-n>
         </c-card-body>
     </c-card>
 
@@ -107,7 +120,8 @@
     <div class="action-buttons">
         <button cButton class="next-button" (click)="next()">
             <span>Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
         </button>

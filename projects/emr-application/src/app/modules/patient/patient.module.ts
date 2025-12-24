@@ -160,6 +160,7 @@ import { BasicNComponent } from './components/medical.note/components/subjective
 import { PriorLevelFunctionNComponent } from './components/medical.note/components/subjective/prior-level-of-functionN/prior-level-function-n.component';
 import { HierarchyCheckboxComponent } from './components/medical.note/components/subjective/common/hierarchy-checkbox/hierarchy-checkbox.component';
 import { CurrentFunctionalLimitationsNComponent } from './components/medical.note/components/subjective/current-functional-limitationsN/current-functional-limitations-n.component';
+import { MedicalHistoryNComponent } from './components/medical.note/components/subjective/medical-historyN/medical-history-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -321,6 +322,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     PriorLevelFunctionNComponent,
     HierarchyCheckboxComponent,
     CurrentFunctionalLimitationsNComponent,
+    MedicalHistoryNComponent,
   ],
   imports: [
     CommonModule,

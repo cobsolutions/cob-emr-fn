@@ -1,0 +1,99 @@
+<div [formGroup]="medicalHistoryForm" class="basic-form">
+    <div class="form-row">
+        <label class="field-label">Previous History of Similar Symptoms</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="previous_history_of_similar_symptoms"
+                    value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="previous_history_of_similar_symptoms" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">General Health:</label>
+        <select class="form-select-custom small-input" formControlName="general_health">
+            <option value="">Select</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+            <option value="poor">Custom</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Occupation/Social History</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Home Health Care</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="home_health_care" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="home_health_care" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">History of Falls</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="na" />
+                <label cFormCheckLabel>N/A</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Mental Status/Cognitive Function Appears Impaired</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Unexplained Weight Loss</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="na" />
+                <label cFormCheckLabel>N/A</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+</div>
