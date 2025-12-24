@@ -296,3 +296,58 @@
     color: #5c4742;
     font-weight: 500;
   }
+
+  /* Vertical radio button group styling */
+  .radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .radio-group-vertical c-form-check {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .radio-group-vertical c-form-check:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .radio-group-vertical c-form-check input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+  }
+
+  .radio-group-vertical c-form-check label {
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .radio-group-vertical c-form-check:has(input[type="radio"]:checked) {
+    border-color: #5c4742;
+    background-color: #e8e3e1;
+    box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+  }
+
+  .radio-group-vertical c-form-check input[type="radio"]:checked + label {
+    color: #5c4742;
+    font-weight: 500;
+  }

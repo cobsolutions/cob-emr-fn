@@ -186,6 +186,7 @@ export class MedicalHistoryNComponent implements OnInit {
       risk_assessment_home_fall_hazards: [false],
       risk_assessment_postural_blood_pressure: [false],
       risk_assessment_vision: [false],
+      medical_history_review: [''],
       mental_status_cognitive_function_appears_impaired: ['no'],
       unexplained_weight_loss: ['na'],
       diagnostic_testing_Imaging: ['']

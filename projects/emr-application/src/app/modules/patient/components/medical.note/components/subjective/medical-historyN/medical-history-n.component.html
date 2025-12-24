@@ -407,6 +407,28 @@
         [options]="complicatingPersonalFactorsOptions">
     </list-checkbox-with-child>
     <div class="form-row">
+        <label class="field-label">Medical History Review</label>
+        <div class="radio-group-vertical">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" value="low_complexity" />
+                <label cFormCheckLabel><strong>Low Complexity</strong> - The patient has a history of present problem
+                    without any personal factors and/or comorbidities that impact the plan of care.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review"
+                    value="moderate_complexity" />
+                <label cFormCheckLabel><strong>Moderate Complexity</strong> - The patient has a history of present
+                    problem with a history of 1-2 personal factors and/or comorbidities that impact the plan of
+                    care.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" value="high_complexity" />
+                <label cFormCheckLabel><strong>High Complexity</strong> - The patient has a history of present problem
+                    with a history of 3 or more factors and/or comorbidities that impact the plan of care.</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
         <label class="field-label">Mental Status/Cognitive Function Appears Impaired</label>
         <div class="radio-group-primary">
             <c-form-check>
