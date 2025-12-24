@@ -36,9 +36,10 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
+            <!-- <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
                 [painFormData]="subjectiveData?.pain">
-            </pain>
+            </pain> -->
+            <subjective-pain-n (formReady)="setChildForm('pain', $event)"></subjective-pain-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-3 enhanced-card">

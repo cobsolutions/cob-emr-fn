@@ -1,1 +1,42 @@
-<p>pain-n works!</p>
+<div [formGroup]="painForm" class="basic-form">
+    <div class="form-row">
+        <label class="field-label">Pain Scale</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="pain_scale" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="pain_scale" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Aggravating Factors</label>
+        <select multiple class="form-multiselect-custom" formControlName="aggravating_factors">
+            <option *ngFor="let option of aggravatingFactorsOptions" [value]="option.value">
+                {{ option.label }}
+            </option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Restrictions and Pain Alleviators</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="restrictions_pain_alleviators" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showRestrictionsPainAlleviators" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="restrictions_pain_alleviators_text" class="form-textarea" rows="4"></textarea>
+        </div>
+    </div>
+</div>
