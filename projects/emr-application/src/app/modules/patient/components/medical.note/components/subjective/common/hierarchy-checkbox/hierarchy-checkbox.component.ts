@@ -3,7 +3,7 @@ import { CheckboxHierarchy } from './interface/checkbox-hierarchy';
 import { CheckboxItem } from './interface/checkbox-item';
 
 @Component({
-  selector: 'app-hierarchy-checkbox',
+  selector: 'hierarchy-checkbox',
   templateUrl: './hierarchy-checkbox.component.html',
   styleUrls: ['./hierarchy-checkbox.component.css']
 })
