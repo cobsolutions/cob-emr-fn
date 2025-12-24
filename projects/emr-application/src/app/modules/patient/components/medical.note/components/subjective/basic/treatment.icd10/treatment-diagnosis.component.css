@@ -1,69 +1,193 @@
+/* Enhanced Card Styling - Clinical EMR Theme */
+::ng-deep c-card {
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+::ng-deep c-card:hover {
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+/* Enhanced Card Header - Medical Blue Theme */
+::ng-deep c-card-header {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-bottom: 3px solid #2196F3;
+  color: #1565c0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+
+::ng-deep c-card-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #2196F3;
+}
+
+/* Enhanced Card Body */
+::ng-deep c-card-body {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+/* Toolbar */
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 10px;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Dropdown container */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #2196F3;
+  background: #e3f2fd;
+  color: #1976d2;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.icon-btn:hover {
+  background: #2196F3;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+/* Search Section */
+.mb-3 label {
+  color: #546e7a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-group {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.input-group .form-control {
+  border: 1px solid #bbdefb;
+  border-right: none;
+  padding: 0.625rem 1rem;
+  font-size: 0.95rem;
+}
+
+.input-group .form-control:focus {
+  border-color: #2196F3;
+  box-shadow: none;
+  outline: none;
+}
+
+.input-group button {
+  border: 1px solid #2196F3;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.input-group button:first-of-type {
+  background: #2196F3;
+  color: #ffffff;
+}
+
+.input-group button:first-of-type:hover {
+  background: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.input-group button:last-of-type {
+  background: #ffffff;
+  color: #546e7a;
+  border-color: #90caf9;
+}
+
+.input-group button:last-of-type:hover {
+  background: #f8fbff;
+  border-color: #2196F3;
+}
+
+/* Enhanced Dropdown Container */
 .dropdown-container {
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
+  border: 1px solid #e3f2fd;
+  border-radius: 8px;
   background: #fff;
   overflow: hidden;
-  max-height: 260px;
+  max-height: 280px;
   overflow-y: auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+  margin-top: 1rem;
 }
 
-/* Header inside dropdown */
+/* Enhanced Dropdown Header - Lighter Theme */
 .dropdown-header {
   display: flex;
-  background: #f8f9fa;
+  background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
   font-weight: 600;
-  padding: 8px 10px;
-  border-bottom: 1px solid #dee2e6;
+  padding: 10px 12px;
+  border-bottom: 2px solid #90caf9;
+  color: #1976d2;
+  font-size: 0.9rem;
+  box-shadow: 0 1px 3px rgba(33, 150, 243, 0.08);
 }
 
-/* List items */
+/* Enhanced List Items */
+.list-group {
+  margin: 0;
+  padding: 0;
+}
+
 .list-group-item {
   display: flex;
   align-items: center;
-  padding: 8px 10px;
+  padding: 10px 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f4f8;
 }
 
 .list-group-item:hover {
-  background-color: #f1f9ff;
-  transform: scale(1.01);
+  background: linear-gradient(90deg, #f8fbff 0%, #ffffff 100%);
+  border-left: 3px solid #2196F3;
+  padding-left: 9px;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
 }
 
 .list-group-item:active {
-  background-color: #e0f7fa;
+  background: #e3f2fd;
 }
 
 /* Column layout */
 .col-code {
-  flex: 0 0 120px;
-  font-weight: 500;
-  color: #0d6efd;
+  flex: 0 0 130px;
+  font-weight: 600;
+  color: #1976d2;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
 }
 
 .col-desc {
   flex: 1;
   font-size: 0.9rem;
-  color: #333;
-}
-
-/* Table */
-.table th,
-.table td {
-  vertical-align: middle;
-}
-
-.table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
+  color: #37474f;
+  line-height: 1.4;
 }
 
 /* Spinner */
@@ -71,10 +195,57 @@
   margin: 1rem auto;
 }
 
+/* Enhanced Table Styling - Clinical EMR */
 .table {
+  border: 1px solid #e3f2fd;
   border-radius: 8px;
   background-color: #fff;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.08);
+}
+
+.table thead {
+  background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
+}
+
+.table th {
+  background: transparent;
+  border-bottom: 2px solid #90caf9;
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px;
+  vertical-align: middle;
+  box-shadow: 0 1px 3px rgba(33, 150, 243, 0.08);
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f4f8;
+}
+
+.table tbody tr:hover {
+  background: linear-gradient(90deg, #f8fbff 0%, #ffffff 100%);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 10px 12px;
+  color: #37474f;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.table td:first-child {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #1976d2;
 }
 
 .table td.text-center {
@@ -82,7 +253,7 @@
   white-space: nowrap;
 }
 
-/* Group the buttons horizontally */
+/* Enhanced Action Buttons */
 .action-buttons {
   display: flex;
   align-items: center;
@@ -90,42 +261,62 @@
   gap: 6px;
 }
 
-/* Style for all action buttons */
 .action-btn {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
-  background-color: #f8f9fa;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-/* Hover and active states */
 .action-btn:hover {
-  transform: scale(1.08);
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Color variants */
+/* Move Up/Down Buttons - Medical Blue */
 .action-btn.up,
 .action-btn.down {
-  color: #0d6efd;
-  background-color: #e7f1ff;
+  color: #1976d2;
+  background: #e3f2fd;
+  border-color: #90caf9;
 }
 
+.action-btn.up:hover,
+.action-btn.down:hover {
+  background: #bbdefb;
+  border-color: #2196F3;
+  color: #0d47a1;
+}
+
+/* Remove Button - Medical Red */
 .action-btn.remove {
-  color: #dc3545;
-  background-color: #fbe9eb;
+  color: #c62828;
+  background: #ffebee;
+  border-color: #ef9a9a;
 }
 
-/* Disabled state */
+.action-btn.remove:hover {
+  background: #ffcdd2;
+  border-color: #c62828;
+  color: #b71c1c;
+}
+
+/* Disabled State */
 .action-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
+}
+
+.action-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
 }
