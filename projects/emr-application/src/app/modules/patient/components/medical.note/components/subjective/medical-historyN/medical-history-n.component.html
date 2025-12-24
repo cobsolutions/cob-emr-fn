@@ -471,4 +471,9 @@
     <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Current Medications"
         [options]="currentMedicationsOptions">
     </list-checkbox-with-child>
+    <div class="form-row">
+        <label class="field-label">Patient Goals</label>
+        <textarea formControlName="patient_goals" class="form-textarea"
+            rows="6"></textarea>
+    </div>
 </div>

@@ -199,7 +199,8 @@ export class MedicalHistoryNComponent implements OnInit {
       mental_status_cognitive_function_appears_impaired: ['no'],
       mental_status_cognitive_function_appears_impaired_text: [''],
       unexplained_weight_loss: ['na'],
-      diagnostic_testing_Imaging: ['']
+      diagnostic_testing_Imaging: [''],
+      patient_goals:[]
     })
   }
   setupValueChangeListeners() {
