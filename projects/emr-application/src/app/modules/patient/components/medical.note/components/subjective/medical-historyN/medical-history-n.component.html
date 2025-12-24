@@ -13,6 +13,48 @@
             </c-form-check>
         </div>
     </div>
+    <div *ngIf="showPreviousHistoryOfSimilarSymptoms" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Previous Episodes of Same Complaints</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        value="na" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Previous Treatments for Similar Symptoms</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        value="na" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+    </div>
     <div class="form-row">
         <label class="field-label">General Health:</label>
         <select class="form-select-custom small-input" formControlName="general_health">
@@ -70,11 +112,13 @@
         <label class="field-label">Mental Status/Cognitive Function Appears Impaired</label>
         <div class="radio-group-primary">
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired" value="yes" />
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired"
+                    value="yes" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired" value="no" />
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired"
+                    value="no" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </div>

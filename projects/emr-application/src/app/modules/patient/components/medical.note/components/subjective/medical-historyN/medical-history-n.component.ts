@@ -10,7 +10,7 @@ export class MedicalHistoryNComponent implements OnInit {
   medicalHistoryForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   constructor(private fb: FormBuilder) { }
-
+  showPreviousHistoryOfSimilarSymptoms:boolean= false
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
@@ -19,6 +19,9 @@ export class MedicalHistoryNComponent implements OnInit {
   initForm() {
     this.medicalHistoryForm = this.fb.group({
       previous_history_of_similar_symptoms: ['no'],
+      previous_episodes_of_same_complaints:['no'],
+      previous_treatments_for_similar_symptoms:['no'],
+
       general_health: [''],
       occupation_social_history: ['no'],
       home_health_care: ['no'],
@@ -28,7 +31,9 @@ export class MedicalHistoryNComponent implements OnInit {
     })
   }
   setupValueChangeListeners() {
-    throw new Error('Method not implemented.');
+    this.medicalHistoryForm.get('previous_history_of_similar_symptoms')?.valueChanges.subscribe(value => {
+      this.showPreviousHistoryOfSimilarSymptoms = value === 'yes'
+    })
   }
 
 }
