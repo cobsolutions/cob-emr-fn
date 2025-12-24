@@ -16,13 +16,13 @@
             <span class="checkmark"></span>
             <span class="category-title">{{ category.title }}</span>
           </label>
-          <!-- Category level Add All button - show when any child is checked -->
-          <button 
-            *ngIf="isCategoryChecked(category) || isCategoryIndeterminate(category)" 
-            class="add-all-btn"
-            (click)="addAllFirstLevelForCategory(category)"
+          <!-- Category level Add/Remove All button - show when category is checked and expanded -->
+          <button
+            *ngIf="category.checked && !category.collapsed"
+            [class]="areAllCategoryItemsChecked(category) ? 'remove-all-btn' : 'add-all-btn'"
+            (click)="areAllCategoryItemsChecked(category) ? removeAllFirstLevelForCategory(category) : addAllFirstLevelForCategory(category)"
           >
-            Add All
+            {{ areAllCategoryItemsChecked(category) ? 'Remove All' : 'Add All' }}
           </button>
         </div>
         
@@ -50,13 +50,13 @@
                     {{ item.label }}
                   </label>
                 </div>
-                <!-- Item level Add All button - only show when item is checked -->
-                <button 
-                  *ngIf="shouldShowAddAllButton(item)" 
-                  class="add-all-item-btn"
-                  (click)="addAllFirstLevel(item)"
+                <!-- Item level Add/Remove All button - only show when item is checked -->
+                <button
+                  *ngIf="shouldShowAddAllButton(item)"
+                  [class]="areAllFirstLevelChildrenChecked(item) ? 'remove-all-item-btn' : 'add-all-item-btn'"
+                  (click)="areAllFirstLevelChildrenChecked(item) ? removeAllFirstLevel(item) : addAllFirstLevel(item)"
                 >
-                  Add All
+                  {{ areAllFirstLevelChildrenChecked(item) ? 'Remove All' : 'Add All' }}
                 </button>
               </div>
               
@@ -83,13 +83,13 @@
                         {{ child.label }}
                       </label>
                     </div>
-                    <!-- Child level Add All button -->
-                    <button 
-                      *ngIf="shouldShowAddAllButton(child)" 
-                      class="add-all-item-btn"
-                      (click)="addAllFirstLevel(child)"
+                    <!-- Child level Add/Remove All button -->
+                    <button
+                      *ngIf="shouldShowAddAllButton(child)"
+                      [class]="areAllFirstLevelChildrenChecked(child) ? 'remove-all-item-btn' : 'add-all-item-btn'"
+                      (click)="areAllFirstLevelChildrenChecked(child) ? removeAllFirstLevel(child) : addAllFirstLevel(child)"
                     >
-                      Add All
+                      {{ areAllFirstLevelChildrenChecked(child) ? 'Remove All' : 'Add All' }}
                     </button>
                   </div>
                   

@@ -23,7 +23,10 @@ export class HierarchyCheckboxComponent implements OnInit {
   private initializeCollapsedState(): void {
     this.data.forEach(category => {
       if (category.collapsed === undefined) {
-        category.collapsed = false; // Expanded by default
+        category.collapsed = true; // Collapsed by default
+      }
+      if (category.checked === undefined) {
+        category.checked = false; // Unchecked by default
       }
 
       // Initialize category states
@@ -57,22 +60,26 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.categoryIndeterminateStates.set(category.title, hasCheckedChildren && !allChildrenChecked || hasIndeterminate);
   }
 
-  // Toggle category checkbox - only for expanding/collapsing
+  // Toggle category checkbox - check the category and expand without checking children
   onCategoryCheckboxClick(category: CheckboxHierarchy, event: MouseEvent): void {
     event.preventDefault(); // Prevent default checkbox behavior
     event.stopPropagation();
 
-    // Toggle expanded/collapsed state
-    category.collapsed = !category.collapsed;
+    // Toggle checked state for UX
+    category.checked = !category.checked;
 
-    if (!category.collapsed) {
-      // When expanding, expand first level children
+    if (category.checked) {
+      // When checking, expand the category without checking children
+      category.collapsed = false;
+    } else {
+      // When unchecking, collapse the category and uncheck all children
+      category.collapsed = true;
       category.items.forEach(item => {
-        this.expandFirstLevelChildren(item);
+        this.uncheckChildren(item);
       });
     }
 
-    // We're not changing checked state here, just visual expand/collapse
+    this.selectionChange.emit(this.data);
   }
 
   // Toggle regular item checkbox
@@ -118,10 +125,8 @@ export class HierarchyCheckboxComponent implements OnInit {
         child.checked = true;
         child.indeterminate = false;
 
-        // Don't check deeper levels
-        if (child.children) {
-          this.uncheckChildren(child);
-        }
+        // Uncheck deeper levels (grandchildren and beyond)
+        this.uncheckDescendants(child);
       });
 
       // Update parent state
@@ -134,11 +139,69 @@ export class HierarchyCheckboxComponent implements OnInit {
     }
   }
 
-  // Add All for entire category
+  // Remove All functionality for item
+  removeAllFirstLevel(item: CheckboxItem): void {
+    if (item.children) {
+      // Uncheck only first level children
+      item.children.forEach(child => {
+        child.checked = false;
+        child.indeterminate = false;
+
+        // Also uncheck all their descendants
+        this.uncheckDescendants(child);
+      });
+
+      // Update parent state
+      this.updateParentState(item);
+
+      // Update category states
+      this.updateAllCategoryStates();
+
+      this.selectionChange.emit(this.data);
+    }
+  }
+
+  // Check if all first level children are checked
+  areAllFirstLevelChildrenChecked(item: CheckboxItem): boolean {
+    if (!item.children || item.children.length === 0) return false;
+    return item.children.every(child => child.checked);
+  }
+
+  // Add All for entire category - check only the direct items, not their children
   addAllFirstLevelForCategory(category: CheckboxHierarchy): void {
     category.items.forEach(item => {
-      this.addAllFirstLevel(item);
+      item.checked = true;
+      item.indeterminate = false;
+
+      // Uncheck all descendants of this item
+      this.uncheckDescendants(item);
     });
+
+    // Update category states
+    this.updateAllCategoryStates();
+
+    this.selectionChange.emit(this.data);
+  }
+
+  // Remove All for entire category
+  removeAllFirstLevelForCategory(category: CheckboxHierarchy): void {
+    category.items.forEach(item => {
+      item.checked = false;
+      item.indeterminate = false;
+
+      // Uncheck all descendants of this item
+      this.uncheckDescendants(item);
+    });
+
+    // Update category states
+    this.updateAllCategoryStates();
+
+    this.selectionChange.emit(this.data);
+  }
+
+  // Check if all direct items in category are checked
+  areAllCategoryItemsChecked(category: CheckboxHierarchy): boolean {
+    return category.items.length > 0 && category.items.every(item => item.checked);
   }
 
   // Uncheck all children
@@ -153,9 +216,20 @@ export class HierarchyCheckboxComponent implements OnInit {
     }
   }
 
-  // Check if item should show "Add All" button
+  // Uncheck only descendants (not the item itself)
+  private uncheckDescendants(item: CheckboxItem): void {
+    if (item.children) {
+      item.children.forEach(child => {
+        child.checked = false;
+        child.indeterminate = false;
+        this.uncheckDescendants(child);
+      });
+    }
+  }
+
+  // Check if item should show "Add All" button - only when item is checked and expanded
   shouldShowAddAllButton(item: CheckboxItem): boolean {
-    return !item.collapsed && item.children && item.children.length > 0;
+    return item.checked && !item.collapsed && item.children && item.children.length > 0;
   }
 
   // Toggle item collapse
@@ -275,10 +349,12 @@ export class HierarchyCheckboxComponent implements OnInit {
 
   // Check if category is checked (for visual state)
   isCategoryChecked(category: CheckboxHierarchy): boolean {
-    return this.categoryCheckedStates.get(category.title) || false;
+    return category.checked || false;
   }
 
   isCategoryIndeterminate(category: CheckboxHierarchy): boolean {
+    // Don't show indeterminate if category is explicitly checked
+    if (category.checked) return false;
     return this.categoryIndeterminateStates.get(category.title) || false;
   }
   // Toggle category collapse (for arrow button)

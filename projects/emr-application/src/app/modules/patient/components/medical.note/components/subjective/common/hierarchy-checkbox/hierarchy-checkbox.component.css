@@ -220,6 +220,24 @@
     background: #218838;
     transform: scale(1.05);
   }
+
+  .remove-all-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .remove-all-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+  }
   
   .category-content {
     margin-top: 16px;
@@ -343,6 +361,24 @@
   
   .add-all-item-btn:hover {
     background: #218838;
+    transform: scale(1.05);
+  }
+
+  .remove-all-item-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .remove-all-item-btn:hover {
+    background: #c82333;
     transform: scale(1.05);
   }
   
