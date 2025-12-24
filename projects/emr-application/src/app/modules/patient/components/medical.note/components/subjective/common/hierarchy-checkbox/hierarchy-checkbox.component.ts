@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { CheckboxHierarchy } from './interface/checkbox-hierarchy';
 import { CheckboxItem } from './interface/checkbox-item';
 
@@ -10,14 +11,137 @@ import { CheckboxItem } from './interface/checkbox-item';
 export class HierarchyCheckboxComponent implements OnInit {
   @Input() data: CheckboxHierarchy[] = [];
   @Input() columns: number = 2;
+  @Input() formGroup!: FormGroup;
+  @Input() sectionPrefix: string = ''; // Optional prefix for form control names
   @Output() selectionChange = new EventEmitter<CheckboxHierarchy[]>();
 
   // Track category checked states separately
   categoryCheckedStates: Map<string, boolean> = new Map();
   categoryIndeterminateStates: Map<string, boolean> = new Map();
 
+  // Map to store the unique form control names for each item
+  private itemFormControlNames: Map<CheckboxItem, string> = new Map();
+
+  // Map to store the unique form control names for category comments
+  private categoryCommentFormControlNames: Map<CheckboxHierarchy, string> = new Map();
+
   ngOnInit() {
     this.initializeCollapsedState();
+    this.initializeFormControls();
+  }
+
+  // Initialize form controls for all hierarchy items
+  private initializeFormControls(): void {
+    if (!this.formGroup) return;
+
+    this.data.forEach(category => {
+      const categoryKey = this.sanitizeKey(category.title);
+
+      // Add form control for category comment
+      this.addCategoryCommentToForm(category, categoryKey);
+
+      category.items.forEach(item => {
+        this.addItemToForm(item, categoryKey);
+      });
+    });
+  }
+
+  // Add category comment form control
+  private addCategoryCommentToForm(category: CheckboxHierarchy, categoryKey: string): void {
+    if (!this.formGroup) return;
+
+    const commentFormControlName = this.generateCategoryCommentFormControlName(categoryKey);
+
+    // Store the mapping between category and its comment form control name
+    this.categoryCommentFormControlNames.set(category, commentFormControlName);
+
+    // Add form control for the comment
+    this.formGroup.addControl(commentFormControlName, new FormControl(category.comment || ''));
+  }
+
+  // Generate unique form control name for category comment
+  private generateCategoryCommentFormControlName(categoryKey: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+    parts.push('comment');
+
+    return parts.join('_');
+  }
+
+  // Generate unique form control name for an item
+  private generateFormControlName(categoryKey: string, itemPath: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+    parts.push(itemPath);
+
+    return parts.join('_');
+  }
+
+  // Sanitize a string to be used as a key (remove spaces, special chars, convert to lowercase)
+  private sanitizeKey(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  // Recursively add item and its children to the form
+  private addItemToForm(item: CheckboxItem, categoryKey: string, parentPath: string = ''): void {
+    if (!this.formGroup) return;
+
+    // Build the hierarchical path for this item
+    const itemPath = parentPath ? `${parentPath}.${item.id}` : item.id;
+
+    // Generate unique form control name
+    const formControlName = this.generateFormControlName(categoryKey, itemPath);
+
+    // Store the mapping between item and its form control name
+    this.itemFormControlNames.set(item, formControlName);
+
+    // Add form control for this item
+    this.formGroup.addControl(formControlName, new FormControl(item.checked || false));
+
+    // Recursively add children
+    if (item.children) {
+      item.children.forEach(child => {
+        this.addItemToForm(child, categoryKey, itemPath);
+      });
+    }
+  }
+
+  // Update form control value when checkbox changes
+  private updateFormControl(item: CheckboxItem): void {
+    if (!this.formGroup) return;
+
+    // Get the unique form control name for this item
+    const formControlName = this.itemFormControlNames.get(item);
+    if (!formControlName) return;
+
+    const control = this.formGroup.get(formControlName);
+    if (control) {
+      control.setValue(item.checked || false);
+    }
+  }
+
+  // Update all form controls recursively
+  private updateFormControlsRecursively(item: CheckboxItem): void {
+    this.updateFormControl(item);
+
+    if (item.children) {
+      item.children.forEach(child => {
+        this.updateFormControlsRecursively(child);
+      });
+    }
   }
 
   private initializeCollapsedState(): void {
@@ -89,6 +213,9 @@ export class HierarchyCheckboxComponent implements OnInit {
 
     this.toggleItem(item, checked);
 
+    // Update form controls recursively
+    this.updateFormControlsRecursively(item);
+
     // Update category states
     this.updateAllCategoryStates();
 
@@ -125,6 +252,9 @@ export class HierarchyCheckboxComponent implements OnInit {
         child.checked = true;
         child.indeterminate = false;
 
+        // Update form control for this child
+        this.updateFormControl(child);
+
         // Uncheck deeper levels (grandchildren and beyond)
         this.uncheckDescendants(child);
       });
@@ -146,6 +276,9 @@ export class HierarchyCheckboxComponent implements OnInit {
       item.children.forEach(child => {
         child.checked = false;
         child.indeterminate = false;
+
+        // Update form control for this child
+        this.updateFormControl(child);
 
         // Also uncheck all their descendants
         this.uncheckDescendants(child);
@@ -173,6 +306,9 @@ export class HierarchyCheckboxComponent implements OnInit {
       item.checked = true;
       item.indeterminate = false;
 
+      // Update form control for this item
+      this.updateFormControl(item);
+
       // Uncheck all descendants of this item
       this.uncheckDescendants(item);
     });
@@ -188,6 +324,9 @@ export class HierarchyCheckboxComponent implements OnInit {
     category.items.forEach(item => {
       item.checked = false;
       item.indeterminate = false;
+
+      // Update form control for this item
+      this.updateFormControl(item);
 
       // Uncheck all descendants of this item
       this.uncheckDescendants(item);
@@ -209,6 +348,9 @@ export class HierarchyCheckboxComponent implements OnInit {
     item.checked = false;
     item.indeterminate = false;
 
+    // Update form control
+    this.updateFormControl(item);
+
     if (item.children) {
       item.children.forEach(child => {
         this.uncheckChildren(child);
@@ -222,6 +364,10 @@ export class HierarchyCheckboxComponent implements OnInit {
       item.children.forEach(child => {
         child.checked = false;
         child.indeterminate = false;
+
+        // Update form control for this child
+        this.updateFormControl(child);
+
         this.uncheckDescendants(child);
       });
     }
@@ -278,6 +424,10 @@ export class HierarchyCheckboxComponent implements OnInit {
     item.children.forEach(child => {
       child.checked = checked;
       child.indeterminate = false;
+
+      // Update form control for this child
+      this.updateFormControl(child);
+
       this.updateChildren(child, checked);
     });
   }
@@ -360,5 +510,24 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Toggle category collapse (for arrow button)
   toggleCategoryCollapse(category: CheckboxHierarchy): void {
     category.collapsed = !category.collapsed;
+  }
+
+  // Handle category comment change
+  onCategoryCommentChange(category: CheckboxHierarchy, event: Event): void {
+    const target = event.target as HTMLTextAreaElement;
+    category.comment = target.value;
+
+    // Update form control
+    if (this.formGroup) {
+      const formControlName = this.categoryCommentFormControlNames.get(category);
+      if (formControlName) {
+        const control = this.formGroup.get(formControlName);
+        if (control) {
+          control.setValue(target.value);
+        }
+      }
+    }
+
+    this.selectionChange.emit(this.data);
   }
 }

@@ -1,6 +1,7 @@
 
-    <hierarchy-checkbox 
+    <hierarchy-checkbox
       [data]="checkboxData"
+      [formGroup]="priorLevelFunctionForm"
+      [sectionPrefix]="'prior-level-function'"
       (selectionChange)="onSelectionChange($event)">
     </hierarchy-checkbox>
-  

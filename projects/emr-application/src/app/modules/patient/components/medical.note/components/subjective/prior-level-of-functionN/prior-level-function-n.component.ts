@@ -16,6 +16,7 @@ export class PriorLevelFunctionNComponent implements OnInit {
     {
       title: 'Self Care',
       collapsed: true,
+      comment: '',
       items: [
         {
           id: 'hygiene',
@@ -164,10 +165,11 @@ export class PriorLevelFunctionNComponent implements OnInit {
         { id: 'volunteering', label: 'Volunteering', checked: false, indeterminate: false, collapsed: true },
         { id: 'caregiving', label: 'Caregiving', checked: false, indeterminate: false, collapsed: true }
       ]
-    }, 
+    },
     {
       title: 'Mobility: Walking & Moving Around',
       collapsed: true,
+      comment: '',
       items: [
         {
           id: 'mobility-iadls',
@@ -295,6 +297,7 @@ export class PriorLevelFunctionNComponent implements OnInit {
     {
       title: 'Changing & Maintaining Body Position',
       collapsed: true,
+      comment: '',
       items: [
         {
           id: 'maintaining-body-position',
@@ -344,6 +347,7 @@ export class PriorLevelFunctionNComponent implements OnInit {
     {
       title: 'Carrying, Moving & Handling Objects',
       collapsed: true,
+      comment: '',
       items: [
         {
           id: 'carrying-iadls',
@@ -442,8 +446,12 @@ export class PriorLevelFunctionNComponent implements OnInit {
   initForm() {
     this.priorLevelFunctionForm = this.fb.group({})
   }
+
   setupValueChangeListeners() {
-    throw new Error('Method not implemented.');
+    // Subscribe to form value changes if needed
+    this.priorLevelFunctionForm.valueChanges.subscribe(values => {
+      console.log('Form values changed:', values);
+    });
   }
 
 }

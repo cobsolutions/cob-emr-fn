@@ -112,6 +112,18 @@
               </div>
             </div>
           </div>
+
+          <!-- Category Comment Textarea - show only when category is checked -->
+          <div *ngIf="category.checked" class="category-comment-section">
+            <label class="comment-label">Comments:</label>
+            <textarea
+              class="category-comment-textarea"
+              [value]="category.comment || ''"
+              (input)="onCategoryCommentChange(category, $event)"
+              placeholder="Add your comments here..."
+              rows="3"
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
