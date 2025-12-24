@@ -20,6 +20,7 @@ export class MedicalHistoryNComponent implements OnInit {
   showOccupationSocialHistoryHomeLayout: boolean = false;
   showOccupationSocialHistoryDurableMedicalEquipment: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUser: boolean = false;
+  showOccupationSocialHistoryPatientTobaccoUserOtherForm: boolean = false;
 
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
@@ -69,6 +70,11 @@ export class MedicalHistoryNComponent implements OnInit {
     { value: 'heavy', label: 'Heavy' },
     { value: 'very_heavy', label: 'Very Heavy' }
   ];
+  tobaccoCessationOptions = [
+    { value: 'recommendation_made', label: 'Recommendation made to stop using tobacco products', formControlName: 'tobacco_cessation_recommendation_made' },
+    { value: 'advice_support_provided', label: 'Advice and support provided for tobacco use cessation', formControlName: 'tobacco_cessation advice_support_provided' },
+    { value: 'continued_support', label: 'Continued support for tobacco use cessation will be provided on all or most follow up visits', formControlName: 'tobacco_cessation_continued_support' }
+  ];
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
@@ -106,9 +112,15 @@ export class MedicalHistoryNComponent implements OnInit {
 
       occupation_social_history_durable_medical_equipment: ['no'],
       occupation_social_history_durable_medical_equipment_list: ['no'],
-      occupation_social_history_durable_medical_equipment_text: ['no'],
+      occupation_social_history_durable_medical_equipment_text: [''],
 
       occupation_social_history_patient_tobacco_user: ['no'],
+      occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco: ['no'],
+      occupation_social_history_patient_tobacco_user_other_form_text: [''],
+      tobacco_cessation_recommendation_made: [false],
+      tobacco_cessation_advice_support_provided: [false],
+      tobacco_cessation_continued_support: [false],
+
       home_health_care: ['no'],
       history_of_falls: ['na'],
       mental_status_cognitive_function_appears_impaired: ['no'],
@@ -143,6 +155,9 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryPatientTobaccoUser = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistoryPatientTobaccoUserOtherForm = value === 'yes'
     })
   }
   private populateYears() {

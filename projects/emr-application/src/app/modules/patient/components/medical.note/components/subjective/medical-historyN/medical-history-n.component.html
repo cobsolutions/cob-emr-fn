@@ -243,7 +243,8 @@
         <div *ngIf="showOccupationSocialHistoryDurableMedicalEquipment" class="dependent-field-box">
             <div class="form-row">
                 <label class="field-label"></label>
-                <select multiple class="form-multiselect-custom" formControlName="occupation_social_history_durable_medical_equipment_list">
+                <select multiple class="form-multiselect-custom"
+                    formControlName="occupation_social_history_durable_medical_equipment_list">
                     <option *ngFor="let option of durableMedicalEquipmentOptions" [value]="option.value">
                         {{ option.label }}
                     </option>
@@ -251,7 +252,8 @@
             </div>
             <div class="form-row">
                 <label class="field-label"></label>
-                <input cFormInput formControlName="occupation_social_history_durable_medical_equipment_text" class="form-input" />
+                <input cFormInput formControlName="occupation_social_history_durable_medical_equipment_text"
+                    class="form-input" />
             </div>
         </div>
         <div class="form-row">
@@ -270,6 +272,38 @@
             </div>
         </div>
         <div *ngIf="showOccupationSocialHistoryPatientTobaccoUser" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Does patient smoke cigarettes and/or use other forms of tobacco??</label>
+                <div class="radio-group-primary">
+                    <c-form-check>
+                        <input cFormCheckInput type="radio"
+                            formControlName="occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco"
+                            value="yes" />
+                        <label cFormCheckLabel>Yes</label>
+                    </c-form-check>
+                    <c-form-check>
+                        <input cFormCheckInput type="radio"
+                            formControlName="occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco"
+                            value="no" />
+                        <label cFormCheckLabel>No</label>
+                    </c-form-check>
+                </div>
+            </div>
+            <div *ngIf="showOccupationSocialHistoryPatientTobaccoUserOtherForm" class="dependent-field-box">
+                <div class="form-row">
+                    <label class="field-label"></label>
+                    <div class="checkbox-group-vertical">
+                        <c-form-check *ngFor="let option of tobaccoCessationOptions">
+                            <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+                            <label cFormCheckLabel>{{ option.label }}</label>
+                        </c-form-check>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="field-label"></label>
+                    <textarea formControlName="occupation_social_history_patient_tobacco_user_other_form_text" class="form-textarea" rows="4"></textarea>
+                </div>
+            </div>
         </div>
     </div>
 
