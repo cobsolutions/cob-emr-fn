@@ -30,6 +30,22 @@ export class MedicalHistoryNComponent implements OnInit {
     { value: 'divorced', label: 'Divorced' },
     { value: 'widowed', label: 'Widowed' }
   ];
+
+  workStatusOptions = [
+    { value: 'working', label: 'Working' },
+    { value: 'on_leave', label: 'On Leave' },
+    { value: 'disabled', label: 'Disabled' },
+    { value: 'retired', label: 'Retired' },
+    { value: 'unemployed', label: 'Unemployed' }
+  ];
+
+  dutyLevelOptions = [
+    { value: 'sedentary', label: 'Sedentary' },
+    { value: 'light', label: 'Light' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'heavy', label: 'Heavy' },
+    { value: 'very_heavy', label: 'Very Heavy' }
+  ];
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
@@ -52,6 +68,15 @@ export class MedicalHistoryNComponent implements OnInit {
       occupation_social_history_text: [],
       occupation_social_history_social_history: ['no'],
       occupation_social_history_occupation_and_work_status: ['no'],
+      occupation_social_history_occupation_and_work_name_of_occupation: [''],
+      occupation_social_history_occupation_and_work_status_status: [''],
+      occupation_social_history_occupation_and_work_status_duty_level: [''],
+      occupation_social_history_occupation_and_work_status_sescription: [''],
+      occupation_social_history_occupation_and_work_status_out_of_work_since: [''],
+      occupation_social_history_occupation_and_work_status_return_to_work_date: [''],
+      
+
+      
       occupation_social_history_home_layout: ['no'],
       occupation_social_history_durable_medical_equipment: ['no'],
       occupation_social_history_patient_tobacco_user: ['no'],

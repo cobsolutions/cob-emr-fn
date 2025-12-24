@@ -152,6 +152,40 @@
             </div>
         </div>
         <div *ngIf="showOccupationSocialHistoryOccupationAndWorkStatus" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Name of Occupation</label>
+                <input cFormInput formControlName="occupation_social_history_occupation_and_work_name_of_occupation" class="form-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Status</label>
+                <select class="form-select-custom small-input" formControlName="occupation_social_history_occupation_and_work_status_status">
+                    <option value="">Select</option>
+                    <option *ngFor="let option of workStatusOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Duty Level</label>
+                <select class="form-select-custom small-input" formControlName="occupation_social_history_occupation_and_work_status_duty_level">
+                    <option value="">Select</option>
+                    <option *ngFor="let option of dutyLevelOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Description</label>
+                <input cFormInput formControlName="occupation_social_history_occupation_and_work_status_sescription" class="form-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Out of Work Since</label>
+                <input cFormInput type="date" formControlName="occupation_social_history_occupation_and_work_status_out_of_work_since" class="form-input small-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Return to Work Date</label>
+                <input cFormInput type="date" formControlName="occupation_social_history_occupation_and_work_status_return_to_work_date" class="form-input small-input" />
+            </div>
         </div>
         <div class="form-row">
             <label class="field-label">Home Layout</label>
