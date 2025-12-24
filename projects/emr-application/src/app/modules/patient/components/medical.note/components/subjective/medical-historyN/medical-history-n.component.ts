@@ -15,6 +15,11 @@ export class MedicalHistoryNComponent implements OnInit {
   showPreviousEpisodesOfSameComplaints: boolean = false
   showPreviousTreatmentsForSimilarSymptoms: boolean = false
   showOccupationSocialHistory: boolean = false
+  showOccupationSocialHistorySocialHistory: boolean = false
+  showOccupationSocialHistoryOccupationAndWorkStatus: boolean = false;
+  showOccupationSocialHistoryHomeLayout: boolean = false;
+  showOccupationSocialHistoryDurableMedicalEquipment: boolean = false;
+  showOccupationSocialHistoryPatientTobaccoUser: boolean = false;
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
@@ -57,6 +62,21 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistory = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_social_history')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistorySocialHistory = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_occupation_and_work_status')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistoryOccupationAndWorkStatus = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_home_layout')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistoryHomeLayout = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_durable_medical_equipment')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistoryDurableMedicalEquipment = value === 'yes'
+    })
+    this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user')?.valueChanges.subscribe(value => {
+      this.showOccupationSocialHistoryPatientTobaccoUser = value === 'yes'
     })
   }
   private populateYears() {
