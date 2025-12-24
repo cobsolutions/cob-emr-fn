@@ -39,6 +39,20 @@ export class MedicalHistoryNComponent implements OnInit {
     { value: 'combo_bathtub_shower', label: 'Combo Bathtub Shower' },
     { value: 'w_c_accessible', label: 'W/C Accessible' }
   ]
+  durableMedicalEquipmentOptions = [
+    { value: 'none', label: 'None' },
+    { value: 'tub_bench', label: 'Tub Bench' },
+    { value: 'shower_chair', label: 'Shower Chair' },
+    { value: 'grab_bars', label: 'Grab Bars' },
+    { value: 'bedside_commode', label: 'Bedside Commode' },
+    { value: 'raised_toilet_seat', label: 'Raised Toilet Seat' },
+    { value: 'standard_walker', label: 'Standard Walker' },
+    { value: 'rolling_walker', label: 'Rolling Walker' },
+    { value: 'hemi_walker', label: 'Hemi-walker' },
+    { value: 'quad_cane', label: 'Quad Cane' },
+    { value: 'straight_cane', label: 'Straight Cane' },
+    { value: 'wheelchair', label: 'Wheelchair' }
+  ]
 
   workStatusOptions = [
     { value: 'working', label: 'Working' },
@@ -91,6 +105,9 @@ export class MedicalHistoryNComponent implements OnInit {
       occupation_social_history_home_layout_text: [''],
 
       occupation_social_history_durable_medical_equipment: ['no'],
+      occupation_social_history_durable_medical_equipment_list: ['no'],
+      occupation_social_history_durable_medical_equipment_text: ['no'],
+
       occupation_social_history_patient_tobacco_user: ['no'],
       home_health_care: ['no'],
       history_of_falls: ['na'],
