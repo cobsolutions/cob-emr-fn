@@ -1,3 +1,8 @@
+/* Allow modals to escape from this container */
+.basic-form {
+  overflow: visible !important;
+}
+
 .form-row {
     display: flex;
     align-items: center;
@@ -11,6 +16,23 @@
       border-left: 3px solid #6c757d;
       margin-bottom: 0.5rem;
       border-radius: 0.25rem;
+      /* Removed position: relative to allow modal to break out */
+    }
+
+    /* Ensure pain-evaluation component has proper spacing */
+    .dependent-field-box pain-evaluation {
+      display: block;
+      width: 100%;
+    }
+
+    /* Allow pain-evaluation modal to escape parent boundaries */
+    .dependent-field-box pain-evaluation .modal {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 9999 !important;
     }
     .form-input {
       width: 100%;

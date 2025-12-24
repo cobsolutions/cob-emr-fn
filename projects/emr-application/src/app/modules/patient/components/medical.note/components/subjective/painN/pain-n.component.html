@@ -13,8 +13,11 @@
         </div>
     </div>
     <div *ngIf="showPainScale" class="dependent-field-box">
-     <!-- Add PainEvaluationComponent here -->
-     <!-- Consider its output to be set as a formControl In painForm -->
+        <pain-evaluation
+            [painEvals]="painEvaluations"
+            (saveEval)="handlePainEvalSave($event)"
+            (removePainScale)="handlePainEvalRemove($event)">
+        </pain-evaluation>
     </div>
     <div class="form-row">
         <label class="field-label">Aggravating Factors</label>

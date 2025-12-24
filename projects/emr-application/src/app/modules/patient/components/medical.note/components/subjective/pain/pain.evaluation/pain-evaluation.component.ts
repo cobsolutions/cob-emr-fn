@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PainDescription } from '../../../../lookups/pain.description';
 
@@ -7,7 +7,7 @@ import { PainDescription } from '../../../../lookups/pain.description';
   templateUrl: './pain-evaluation.component.html',
   styleUrls: ['./pain-evaluation.component.css']
 })
-export class PainEvaluationComponent implements OnInit {
+export class PainEvaluationComponent implements OnInit, OnDestroy {
   painEval: FormGroup;
   numbers = ['NT', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -27,6 +27,13 @@ export class PainEvaluationComponent implements OnInit {
     this.createForm();
   }
 
+  ngOnDestroy(): void {
+    // Ensure body scroll is unlocked when component is destroyed
+    if (this.showModal) {
+      this.unlockBodyScroll();
+    }
+  }
+
   createForm(): void {
     this.painEval = this.fb.group({
       location: new FormControl(''),
@@ -43,17 +50,34 @@ export class PainEvaluationComponent implements OnInit {
     this.editIndex = null;
     this.painEval.reset();
     this.showModal = true;
+    this.lockBodyScroll();
   }
 
   openEditModal(index: number): void {
     this.editIndex = index;
     this.painEval.patchValue(this.painEvals[index]);
     this.showModal = true;
+    this.lockBodyScroll();
   }
 
   closeModal(): void {
     this.showModal = false;
     this.painEval.reset();
+    this.unlockBodyScroll();
+  }
+
+  private lockBodyScroll(): void {
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = this.getScrollbarWidth() + 'px';
+  }
+
+  private unlockBodyScroll(): void {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  private getScrollbarWidth(): number {
+    return window.innerWidth - document.documentElement.clientWidth;
   }
 
   remove(index: number): void {

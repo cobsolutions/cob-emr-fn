@@ -12,6 +12,9 @@ export class PainNComponent implements OnInit {
   showPainScale: boolean = false;
   showRestrictionsPainAlleviators: boolean = false;
 
+  // Pain evaluation data
+  painEvaluations: any[] = [];
+
   aggravatingFactorsOptions = [
     { value: 'sitting', label: 'Sitting' },
     { value: 'standing', label: 'Standing' },
@@ -34,6 +37,7 @@ export class PainNComponent implements OnInit {
   initForm() {
     this.painForm = this.fb.group({
       pain_scale: ['no'],
+      pain_evaluations: [[]],
       aggravating_factors: [],
       restrictions_pain_alleviators: ['no'],
       restrictions_pain_alleviators_text: [''],
@@ -46,6 +50,20 @@ export class PainNComponent implements OnInit {
     this.painForm.get('restrictions_pain_alleviators')?.valueChanges.subscribe(value => {
       this.showRestrictionsPainAlleviators = value === 'yes'
     })
+  }
+
+  // Handle pain evaluation save
+  handlePainEvalSave(evaluation: any): void {
+    this.painForm.patchValue({
+      pain_evaluations: this.painEvaluations
+    });
+  }
+
+  // Handle pain evaluation removal
+  handlePainEvalRemove(index: number): void {
+    this.painForm.patchValue({
+      pain_evaluations: this.painEvaluations
+    });
   }
 
 }

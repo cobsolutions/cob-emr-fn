@@ -4,6 +4,19 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  overflow: visible; /* Changed from hidden to visible to allow modals to break out */
+}
+
+/* Allow modals to escape card boundaries */
+.enhanced-card,
+.enhanced-card-body,
+c-card,
+c-card-body {
+  overflow: visible !important;
+}
+
+/* Preserve overflow hidden for card header only */
+.enhanced-card .enhanced-card-header {
   overflow: hidden;
 }
 
