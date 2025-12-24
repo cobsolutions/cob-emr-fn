@@ -307,7 +307,6 @@
             </div>
         </div>
     </div>
-
     <div class="form-row">
         <label class="field-label">Home Health Care</label>
         <div class="radio-group-primary">
@@ -342,6 +341,59 @@
                 <input cFormCheckInput type="radio" formControlName="history_of_falls" value="no" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showHistoryOfFallsYES" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Falls Documented:Do you have documentation that supports the patient's fall
+                history?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHistoryOfFallsdocument" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="history_of_falls_document_text" class="form-textarea" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Risk Assessment</label>
+            <div class="checkbox-group-vertical">
+                <c-form-check *ngFor="let option of riskAssessmentOptions">
+                    <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+                    <label cFormCheckLabel>{{ option.label }}</label>
+                </c-form-check>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showHistoryOfFallsNO" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Falls Documented:Do you have documentation that supports the patient's fall
+                history?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHistoryOfFallsdocument" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="history_of_falls_document_text" class="form-textarea" rows="4"></textarea>
+            </div>
         </div>
     </div>
     <div class="form-row">

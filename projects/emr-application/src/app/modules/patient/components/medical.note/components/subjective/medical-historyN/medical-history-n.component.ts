@@ -21,7 +21,10 @@ export class MedicalHistoryNComponent implements OnInit {
   showOccupationSocialHistoryDurableMedicalEquipment: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUser: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUserOtherForm: boolean = false;
-  showHomeHealthCare:boolean= false
+  showHomeHealthCare: boolean = false
+  showHistoryOfFallsYES: boolean = false;
+  showHistoryOfFallsNO: boolean = false;
+  showHistoryOfFallsdocument: boolean = false;
 
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
@@ -73,8 +76,15 @@ export class MedicalHistoryNComponent implements OnInit {
   ];
   tobaccoCessationOptions = [
     { value: 'recommendation_made', label: 'Recommendation made to stop using tobacco products', formControlName: 'tobacco_cessation_recommendation_made' },
-    { value: 'advice_support_provided', label: 'Advice and support provided for tobacco use cessation', formControlName: 'tobacco_cessation advice_support_provided' },
+    { value: 'advice_support_provided', label: 'Advice and support provided for tobacco use cessation', formControlName: 'tobacco_cessation_advice_support_provided' },
     { value: 'continued_support', label: 'Continued support for tobacco use cessation will be provided on all or most follow up visits', formControlName: 'tobacco_cessation_continued_support' }
+  ];
+
+  riskAssessmentOptions = [
+    { value: 'medications_contributing_factor', label: 'Documentation on whether medications are a contributing factor or not to falls', formControlName: 'risk_assessment_medications_contributing_factor' },
+    { value: 'home_fall_hazards', label: 'Home fall hazards', formControlName: 'risk_assessment_home_fall_hazards' },
+    { value: 'postural_blood_pressure', label: 'Postural blood pressure', formControlName: 'risk_assessment_postural_blood_pressure' },
+    { value: 'vision', label: 'Vision', formControlName: 'risk_assessment_vision' }
   ];
   ngOnInit(): void {
     this.initForm();
@@ -125,6 +135,12 @@ export class MedicalHistoryNComponent implements OnInit {
       home_health_care: ['no'],
       home_health_care_text: [''],
       history_of_falls: ['na'],
+      history_of_falls_document:['no'],
+      history_of_falls_document_text:[''],
+      risk_assessment_medications_contributing_factor: [false],
+      risk_assessment_home_fall_hazards: [false],
+      risk_assessment_postural_blood_pressure: [false],
+      risk_assessment_vision: [false],
       mental_status_cognitive_function_appears_impaired: ['no'],
       unexplained_weight_loss: ['na'],
     })
@@ -163,6 +179,13 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('home_health_care')?.valueChanges.subscribe(value => {
       this.showHomeHealthCare = value === 'yes'
+    })
+    this.medicalHistoryForm.get('history_of_falls')?.valueChanges.subscribe(value => {
+      this.showHistoryOfFallsYES= value === 'yes';
+      this.showHistoryOfFallsNO= value === 'no';
+    })
+    this.medicalHistoryForm.get('history_of_falls_document')?.valueChanges.subscribe(value => {
+      this.showHistoryOfFallsdocument= value === 'yes';
     })
   }
   private populateYears() {
