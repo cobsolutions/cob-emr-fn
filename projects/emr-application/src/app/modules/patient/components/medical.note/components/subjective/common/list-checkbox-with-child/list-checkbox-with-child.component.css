@@ -1,0 +1,142 @@
+.checkbox-with-child-container {
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.field-label {
+    min-width: 360px;
+    text-align: right;
+    font-weight: 500;
+    color: #5c4742;
+    margin-bottom: 0;
+    margin-right: 9px;
+    padding-top: 0.75rem;
+}
+
+/* Vertical checkbox group with child inputs */
+.checkbox-group-vertical-with-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+.checkbox-with-child-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.checkbox-item:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+}
+
+.checkbox-item label {
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.checkbox-item:has(input[type="checkbox"]:checked) {
+    border-color: #5c4742;
+    background-color: #e8e3e1;
+    box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+}
+
+.checkbox-item input[type="checkbox"]:checked + label {
+    color: #5c4742;
+    font-weight: 500;
+}
+
+/* Child input container */
+.child-input-container {
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #5c4742;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.child-input,
+.child-textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.child-input:focus,
+.child-textarea:focus {
+    outline: none;
+    border-color: #5c4742;
+    box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
+}
+
+.child-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-input {
+    width: 100%;
+    max-width: 800px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-textarea {
+    width: 100%;
+    max-width: 800px;
+    resize: vertical;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+}

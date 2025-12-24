@@ -1,1 +1,25 @@
-<p>list-checkbox-with-child works!</p>
+<div [formGroup]="formGroup" class="checkbox-with-child-container">
+    <div class="form-row" *ngIf="displayTitle || title">
+        <label class="field-label">{{ displayTitle || title }}</label>
+        <div class="checkbox-group-vertical-with-child">
+            <div *ngFor="let option of prefixedOptions" class="checkbox-with-child-item">
+                <c-form-check class="checkbox-item">
+                    <input cFormCheckInput type="checkbox" [formControlName]="option.checkboxControlName" />
+                    <label cFormCheckLabel>{{ option.label }}</label>
+                </c-form-check>
+                <div *ngIf="isCheckboxChecked(option.checkboxControlName)" class="child-input-container">
+                    <input *ngIf="option.childType === 'text'"
+                           cFormInput
+                           [formControlName]="option.childControlName"
+                           class="form-input child-input"
+                           [placeholder]="option.childPlaceholder || ''" />
+                    <textarea *ngIf="option.childType === 'textarea'"
+                              [formControlName]="option.childControlName"
+                              class="form-textarea child-textarea"
+                              [rows]="option.childRows"
+                              [placeholder]="option.childPlaceholder || ''"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
