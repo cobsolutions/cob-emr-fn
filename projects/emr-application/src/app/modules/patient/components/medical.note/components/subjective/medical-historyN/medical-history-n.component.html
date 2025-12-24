@@ -443,6 +443,14 @@
             </c-form-check>
         </div>
     </div>
+    <div *ngIf="showMentalStatusCognitiveFunctionAppearsImpaired" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="mental_status_cognitive_function_appears_impaired_text" class="form-textarea"
+                rows="4"></textarea>
+        </div>
+
+    </div>
     <div class="form-row">
         <label class="field-label">Unexplained Weight Loss</label>
         <div class="radio-group-primary">

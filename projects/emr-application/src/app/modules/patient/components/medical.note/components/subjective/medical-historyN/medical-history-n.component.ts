@@ -26,6 +26,7 @@ export class MedicalHistoryNComponent implements OnInit {
   showHistoryOfFallsYES: boolean = false;
   showHistoryOfFallsNO: boolean = false;
   showHistoryOfFallsdocument: boolean = false;
+  showMentalStatusCognitiveFunctionAppearsImpaired: boolean = false;
   medicalHistoryOptions: CheckboxOption[] = [
     { label: 'No Known Significant PMH To Affect Treatment', value: 'no_known_significant_pmh_to_affect_treatment', childType: 'text', childPlaceholder: 'Enter details' },
     { label: "Alzheimer's", value: 'alzheimers', childType: 'text', childPlaceholder: 'Enter details' },
@@ -188,6 +189,7 @@ export class MedicalHistoryNComponent implements OnInit {
       risk_assessment_vision: [false],
       medical_history_review: [''],
       mental_status_cognitive_function_appears_impaired: ['no'],
+      mental_status_cognitive_function_appears_impaired_text: [''],
       unexplained_weight_loss: ['na'],
       diagnostic_testing_Imaging: ['']
     })
@@ -233,6 +235,9 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('history_of_falls_document')?.valueChanges.subscribe(value => {
       this.showHistoryOfFallsdocument = value === 'yes';
+    })
+    this.medicalHistoryForm.get('mental_status_cognitive_function_appears_impaired')?.valueChanges.subscribe(value => {
+      this.showMentalStatusCognitiveFunctionAppearsImpaired = value === 'yes';
     })
   }
   private populateYears() {
