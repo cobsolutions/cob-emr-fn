@@ -26,9 +26,29 @@ export class MedicalHistoryNComponent implements OnInit {
   showHistoryOfFallsYES: boolean = false;
   showHistoryOfFallsNO: boolean = false;
   showHistoryOfFallsdocument: boolean = false;
-  options :CheckboxOption[]= [
-    { label: 'Option 1', value: 'option1', childType: 'text', childPlaceholder: 'Enter details' },
-    { label: 'Option 2', value: 'option2', childType: 'textarea', childRows: 4 }
+  medicalHistoryOptions: CheckboxOption[] = [
+    { label: 'No Known Significant PMH To Affect Treatment', value: 'no_known_significant_pmh_to_affect_treatment', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: "Alzheimer's", value: 'alzheimers', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Cardiovascular Disease', value: 'cardiovascular_disease', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Cauda Equina Syndrome', value: 'cauda_equina_syndrome', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Cerebral Vascular Accident', value: 'cerebral_vascular_accident', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Current Infection', value: 'current_infection', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Diabetes Mellitus Type 1', value: 'diabetes_mellitus_type_1', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Diabetes Mellitus Type 2', value: 'diabetes_mellitus_type_2', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Fibromyalgia', value: 'fibromyalgia', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Fracture Or Suspected Fracture', value: 'fracture_or_suspected_fracture', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'High Blood Pressure', value: 'high_blood_pressure', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'History Of Cancer', value: 'history_of_cancer', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: "Huntington's", value: 'huntingtons', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Immunosuppression', value: 'immunosuppression', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Lupus', value: 'lupus', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Muscular Dystrophy', value: 'muscular_dystrophy', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Other (enter description below)', value: 'other_enter_description_below', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Obesity', value: 'obesity', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Osteoarthritis', value: 'osteoarthritis', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: "Parkinson's", value: 'parkinsons', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Rheumatoid Arthritis', value: 'rheumatoid_arthritis', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Traumatic Brain Injury', value: 'traumatic_brain_injury', childType: 'text', childPlaceholder: 'Enter details' }
   ];
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
@@ -139,8 +159,8 @@ export class MedicalHistoryNComponent implements OnInit {
       home_health_care: ['no'],
       home_health_care_text: [''],
       history_of_falls: ['na'],
-      history_of_falls_document:['no'],
-      history_of_falls_document_text:[''],
+      history_of_falls_document: ['no'],
+      history_of_falls_document_text: [''],
       risk_assessment_medications_contributing_factor: [false],
       risk_assessment_home_fall_hazards: [false],
       risk_assessment_postural_blood_pressure: [false],
@@ -185,11 +205,11 @@ export class MedicalHistoryNComponent implements OnInit {
       this.showHomeHealthCare = value === 'yes'
     })
     this.medicalHistoryForm.get('history_of_falls')?.valueChanges.subscribe(value => {
-      this.showHistoryOfFallsYES= value === 'yes';
-      this.showHistoryOfFallsNO= value === 'no';
+      this.showHistoryOfFallsYES = value === 'yes';
+      this.showHistoryOfFallsNO = value === 'no';
     })
     this.medicalHistoryForm.get('history_of_falls_document')?.valueChanges.subscribe(value => {
-      this.showHistoryOfFallsdocument= value === 'yes';
+      this.showHistoryOfFallsdocument = value === 'yes';
     })
   }
   private populateYears() {

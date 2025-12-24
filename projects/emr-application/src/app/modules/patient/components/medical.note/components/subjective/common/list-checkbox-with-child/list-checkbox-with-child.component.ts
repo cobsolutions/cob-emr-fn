@@ -10,7 +10,7 @@ export interface CheckboxOption {
 }
 
 @Component({
-  selector: 'app-list-checkbox-with-child',
+  selector: 'list-checkbox-with-child',
   templateUrl: './list-checkbox-with-child.component.html',
   styleUrls: ['./list-checkbox-with-child.component.css']
 })
@@ -29,6 +29,9 @@ export class ListCheckboxWithChildComponent implements OnInit {
     childPlaceholder?: string;
     childRows?: number;
   }[] = [];
+
+  optionColumns: typeof this.prefixedOptions[] = [];
+  useMultiColumn: boolean = false;
 
   constructor() { }
 
@@ -57,6 +60,26 @@ export class ListCheckboxWithChildComponent implements OnInit {
         childRows: option.childRows || 3
       };
     });
+
+    // Split into columns if more than 10 options
+    if (this.prefixedOptions.length > 10) {
+      this.useMultiColumn = true;
+      this.splitIntoColumns();
+    } else {
+      this.useMultiColumn = false;
+      this.optionColumns = [this.prefixedOptions];
+    }
+  }
+
+  private splitIntoColumns(): void {
+    const totalOptions = this.prefixedOptions.length;
+    const numColumns = Math.ceil(totalOptions / 10);
+    const optionsPerColumn = Math.ceil(totalOptions / numColumns);
+
+    this.optionColumns = [];
+    for (let i = 0; i < totalOptions; i += optionsPerColumn) {
+      this.optionColumns.push(this.prefixedOptions.slice(i, i + optionsPerColumn));
+    }
   }
 
   // Convert title to lowercase with underscores
