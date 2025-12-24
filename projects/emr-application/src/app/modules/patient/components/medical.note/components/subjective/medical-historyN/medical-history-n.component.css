@@ -199,3 +199,45 @@
     border-color: #5c4742;
     box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
   }
+
+  .form-multiselect-custom {
+    width: 100%;
+    max-width: 800px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #ced4da;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    font-size: 1rem;
+    min-height: 200px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .form-multiselect-custom:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+  }
+
+  .form-multiselect-custom:focus {
+    outline: none;
+    border-color: #5c4742;
+    box-shadow: 0 0 0 0.3rem rgba(92, 71, 66, 0.2);
+    background-color: #ffffff;
+  }
+
+  .form-multiselect-custom option {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    margin: 0.125rem 0;
+    cursor: pointer;
+  }
+
+  .form-multiselect-custom option:hover {
+    background-color: #e8e3e1;
+  }
+
+  .form-multiselect-custom option:checked {
+    background-color: #5c4742;
+    color: #ffffff;
+    font-weight: 500;
+  }

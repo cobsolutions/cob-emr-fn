@@ -20,6 +20,16 @@ export class MedicalHistoryNComponent implements OnInit {
   showOccupationSocialHistoryHomeLayout: boolean = false;
   showOccupationSocialHistoryDurableMedicalEquipment: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUser: boolean = false;
+
+  socialHistoryOptions = [
+    { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
+    { value: 'lives_with_family', label: 'Lives with Family' },
+    { value: 'lives_with_caregiver', label: 'Lives with Caregiver' },
+    { value: 'married', label: 'Married' },
+    { value: 'single', label: 'Single' },
+    { value: 'divorced', label: 'Divorced' },
+    { value: 'widowed', label: 'Widowed' }
+  ];
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
@@ -38,6 +48,8 @@ export class MedicalHistoryNComponent implements OnInit {
 
       general_health: [''],
       occupation_social_history: ['no'],
+      occupation_social_history_list: [],
+      occupation_social_history_text: [],
       occupation_social_history_social_history: ['no'],
       occupation_social_history_occupation_and_work_status: ['no'],
       occupation_social_history_home_layout: ['no'],
