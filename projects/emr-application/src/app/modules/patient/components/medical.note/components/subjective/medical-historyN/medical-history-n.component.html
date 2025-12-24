@@ -301,7 +301,8 @@
                 </div>
                 <div class="form-row">
                     <label class="field-label"></label>
-                    <textarea formControlName="occupation_social_history_patient_tobacco_user_other_form_text" class="form-textarea" rows="4"></textarea>
+                    <textarea formControlName="occupation_social_history_patient_tobacco_user_other_form_text"
+                        class="form-textarea" rows="4"></textarea>
                 </div>
             </div>
         </div>
@@ -318,6 +319,12 @@
                 <input cFormCheckInput type="radio" formControlName="home_health_care" value="no" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showHomeHealthCare" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="home_health_care_text" class="form-textarea" rows="4"></textarea>
         </div>
     </div>
     <div class="form-row">

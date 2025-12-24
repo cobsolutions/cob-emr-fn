@@ -21,6 +21,7 @@ export class MedicalHistoryNComponent implements OnInit {
   showOccupationSocialHistoryDurableMedicalEquipment: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUser: boolean = false;
   showOccupationSocialHistoryPatientTobaccoUserOtherForm: boolean = false;
+  showHomeHealthCare:boolean= false
 
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
@@ -122,6 +123,7 @@ export class MedicalHistoryNComponent implements OnInit {
       tobacco_cessation_continued_support: [false],
 
       home_health_care: ['no'],
+      home_health_care_text: [''],
       history_of_falls: ['na'],
       mental_status_cognitive_function_appears_impaired: ['no'],
       unexplained_weight_loss: ['na'],
@@ -158,6 +160,9 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryPatientTobaccoUserOtherForm = value === 'yes'
+    })
+    this.medicalHistoryForm.get('home_health_care')?.valueChanges.subscribe(value => {
+      this.showHomeHealthCare = value === 'yes'
     })
   }
   private populateYears() {
