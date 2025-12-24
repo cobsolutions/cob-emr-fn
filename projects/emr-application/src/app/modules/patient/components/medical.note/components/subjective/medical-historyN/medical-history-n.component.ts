@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { CheckboxOption } from '../common/list-checkbox-with-child/list-checkbox-with-child.component';
 
 @Component({
   selector: 'subjective-medical-history-n',
@@ -25,7 +26,10 @@ export class MedicalHistoryNComponent implements OnInit {
   showHistoryOfFallsYES: boolean = false;
   showHistoryOfFallsNO: boolean = false;
   showHistoryOfFallsdocument: boolean = false;
-
+  options :CheckboxOption[]= [
+    { label: 'Option 1', value: 'option1', childType: 'text', childPlaceholder: 'Enter details' },
+    { label: 'Option 2', value: 'option2', childType: 'textarea', childRows: 4 }
+  ];
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
     { value: 'lives_with_family', label: 'Lives with Family' },
