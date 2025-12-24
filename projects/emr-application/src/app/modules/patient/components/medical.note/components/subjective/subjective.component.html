@@ -22,17 +22,17 @@
             <!-- <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
                 [fields]="subjectiveFormFields['Prior Level Of Function']"
                 [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function> -->
-
+                <subjective-prior-level-function-n (formReady)="setChildForm('currentFunction', $event)">
+                </subjective-prior-level-function-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-2">
         <c-card-header>Current Functional Limitations</c-card-header>
         <c-card-body>
-            <!-- <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
+            <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
                 [fields]="subjectiveFormFields['Current Functional Limitations']"
-                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit> -->
-                <subjective-prior-level-function-n (formReady)="setChildForm('currentFunction', $event)">
-                </subjective-prior-level-function-n>
+                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit>
+                
         </c-card-body>
     </c-card>
 

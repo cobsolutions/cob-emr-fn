@@ -436,6 +436,7 @@ export class PriorLevelFunctionNComponent implements OnInit {
 
   priorLevelFunctionForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  showHoOther:boolean = false
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -444,14 +445,20 @@ export class PriorLevelFunctionNComponent implements OnInit {
     this.formReady.emit(this.priorLevelFunctionForm);
   }
   initForm() {
-    this.priorLevelFunctionForm = this.fb.group({})
+    this.priorLevelFunctionForm = this.fb.group({
+      prior_level_function_other: [],
+      prior_level_function_other_text: [],
+
+    })
   }
 
   setupValueChangeListeners() {
     // Subscribe to form value changes if needed
     this.priorLevelFunctionForm.valueChanges.subscribe(values => {
-      console.log('Form values changed:', values);
     });
+    this.priorLevelFunctionForm.get('prior_level_function_other')?.valueChanges.subscribe(value => {
+      this.showHoOther = value ;
+    })
   }
 
 }

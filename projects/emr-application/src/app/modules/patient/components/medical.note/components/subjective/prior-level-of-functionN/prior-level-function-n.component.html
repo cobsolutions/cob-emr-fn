@@ -1,7 +1,18 @@
-
-    <hierarchy-checkbox
-      [data]="checkboxData"
-      [formGroup]="priorLevelFunctionForm"
-      [sectionPrefix]="'prior-level-function'"
-      (selectionChange)="onSelectionChange($event)">
+<div [formGroup]="priorLevelFunctionForm" class="basic-form">
+  <div class="form-row">
+    <hierarchy-checkbox [data]="checkboxData" [formGroup]="priorLevelFunctionForm"
+      [sectionPrefix]="'prior-level-function'" (selectionChange)="onSelectionChange($event)">
     </hierarchy-checkbox>
+  </div>
+  <div class="form-row">
+    <c-form-check>
+      <input cFormCheckInput type="checkbox" formControlName="prior_level_function_other" value="other" />
+      <label cFormCheckLabel>Other</label>
+    </c-form-check>
+  </div>
+  <div *ngIf="showHoOther" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="prior_level_function_other_text" class="form-textarea" rows="4"></textarea>
+    </div>
+  </div>
+</div>
