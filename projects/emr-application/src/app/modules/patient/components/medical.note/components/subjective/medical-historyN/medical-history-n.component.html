@@ -400,6 +400,13 @@
         [options]="medicalHistoryOptions">
     </list-checkbox-with-child>
     <div class="form-row">
+        <label class="field-label">Diagnostic Testing/Imaging:</label>
+        <textarea formControlName="diagnostic_testing_Imaging" class="form-textarea" rows="4"></textarea>
+    </div>
+    <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Complicating/Personal Factors"
+        [options]="complicatingPersonalFactorsOptions">
+    </list-checkbox-with-child>
+    <div class="form-row">
         <label class="field-label">Mental Status/Cognitive Function Appears Impaired</label>
         <div class="radio-group-primary">
             <c-form-check>

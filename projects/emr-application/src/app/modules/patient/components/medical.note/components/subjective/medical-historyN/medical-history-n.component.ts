@@ -50,6 +50,27 @@ export class MedicalHistoryNComponent implements OnInit {
     { label: 'Rheumatoid Arthritis', value: 'rheumatoid_arthritis', childType: 'text', childPlaceholder: 'Enter details' },
     { label: 'Traumatic Brain Injury', value: 'traumatic_brain_injury', childType: 'text', childPlaceholder: 'Enter details' }
   ];
+  complicatingPersonalFactorsOptions: CheckboxOption[] = [
+    { label: 'No Known Complicating Factors Affecting the Plan of Care', value: 'no_known_complicating_factors_affecting_the_plan_of_care', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Allergies', value: 'allergies', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Attitudes/Motivation', value: 'attitudes_motivation', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Character', value: 'character', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Coping Style', value: 'coping_style', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Education level', value: 'education_level', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Home Environment', value: 'home_environment', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Lifestyle', value: 'lifestyle', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Litigation', value: 'litigation', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Other (enter description below)', value: 'other_enter_description_below', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Mechanism of injury/ Illness', value: 'mechanism_of_injury_illness', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Multiple Treatment Areas', value: 'multiple_treatment_areas', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Patient age', value: 'patient_age', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Previous Therapy', value: 'previous_therapy', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Psycho-Social', value: 'psycho_social', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Rehab Potential', value: 'rehab_potential', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Social background', value: 'social_background', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Surgical History', value: 'surgical_history', childType: 'textarea', childPlaceholder: 'Enter details' },
+    { label: 'Time since onset of injury/illness', value: 'time_since_onset_of_injury_illness', childType: 'textarea', childPlaceholder: 'Enter details' }
+  ]
   socialHistoryOptions = [
     { value: 'lives_at_assisted_living_facility', label: 'Lives at Assisted Living Facility' },
     { value: 'lives_with_family', label: 'Lives with Family' },
@@ -167,6 +188,7 @@ export class MedicalHistoryNComponent implements OnInit {
       risk_assessment_vision: [false],
       mental_status_cognitive_function_appears_impaired: ['no'],
       unexplained_weight_loss: ['na'],
+      diagnostic_testing_Imaging: ['']
     })
   }
   setupValueChangeListeners() {
