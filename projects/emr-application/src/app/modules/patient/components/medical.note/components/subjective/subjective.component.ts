@@ -19,28 +19,30 @@ export class SubjectiveComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.soapService.findSoapFields('subjective', this.noteType).subscribe(fields => {
-      this.subjectiveFormFields = fields;
-      if (this.subjectiveData === undefined)
-        this.subjectiveForm = this.fb.group({
-          basic: this.fb.group({}),
-          priorFunction: this.fb.group({}),
-          currentFunction: this.fb.group({}),
-          pain: this.fb.group({}),
-          medicalHistory: this.fb.group({})
+    this.subjectiveForm = this.fb.group({
+      basic: this.fb.group({}),
+      priorFunction: this.fb.group({}),
+      currentFunction: this.fb.group({}),
+      pain: this.fb.group({}),
+      medicalHistory: this.fb.group({})
 
-        });
-      else
-        this.subjectiveForm = this.fb.group({
-          basic: this.fb.group({}),
-          priorFunction: this.fb.group({}),
-          currentFunction: this.fb.group({}),
-          pain: this.fb.group({}),
-          medicalHistory: this.fb.group({})
+    });
+    this.formReady.emit(this.subjectiveForm);
+    // this.soapService.findSoapFields('subjective', this.noteType).subscribe(fields => {
+    //   this.subjectiveFormFields = fields;
+    //   if (this.subjectiveData === undefined)
+        
+    //   else
+    //     this.subjectiveForm = this.fb.group({
+    //       basic: this.fb.group({}),
+    //       priorFunction: this.fb.group({}),
+    //       currentFunction: this.fb.group({}),
+    //       pain: this.fb.group({}),
+    //       medicalHistory: this.fb.group({})
 
-        });
-      this.formReady.emit(this.subjectiveForm);
-    })
+    //     });
+      
+    // })
   }
   createFormGroup(obj: any): FormGroup {
     const group: any = {};
