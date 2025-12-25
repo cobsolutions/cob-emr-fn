@@ -26,12 +26,12 @@ export class AssessmentComponent implements OnInit {
     , private fieldDependentsService: FieldDependentsService
     , private soapService:SoapService) { }
   ngOnInit(): void {
-    this.soapService.findSoapFields('assessment', this.noteType).subscribe(fields => {
-      this.fields = fields['assessment']
-      this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-      this.buildForm();
+    this.buildForm();
       this.formReady.emit(this.assessmentForm);
-    });
+    // this.soapService.findSoapFields('assessment', this.noteType).subscribe(fields => {
+    //   this.fields = fields['assessment']
+    //   this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+    // });
   }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
@@ -113,6 +113,12 @@ export class AssessmentComponent implements OnInit {
 
   private buildForm() {
     this.assessmentForm = this.fb.group({
+      assessment_diagnosis:[''],
+      patient_clinical_presentation:[],
+      parent_patient_education:[],
+      rehab_potential:[''],
+      contraindications_to_therapy:['no'],
+      consent_to_care:[],
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })

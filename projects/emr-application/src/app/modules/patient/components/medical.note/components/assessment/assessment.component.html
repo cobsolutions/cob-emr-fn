@@ -1,11 +1,68 @@
-<form [formGroup]="assessmentForm" *ngIf="fields">
-    <div class="fields-container">
-        <div class="field-item" *ngFor="let field of fields;">
-            <soap-field-builder [field]="field" [form]="assessmentForm" [filedStyle]="getstyleFieldControl(field.name)"
-                [styles]="styles">
-            </soap-field-builder>
+<form [formGroup]="assessmentForm">
+    <!-- Assessment/Diagnosis -->
+    <div class="form-row">
+        <label class="field-label">Assessment/Diagnosis</label>
+        <textarea formControlName="assessment_diagnosis" class="form-textarea" rows="10"></textarea>
+    </div>
+    <!-- Patient Clinical Presentation  -->
+    <div class="form-row">
+        <label class="field-label">Patient Clinical Presentation</label>
+        <div class="radio-group-vertical">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
+                    value="low_complexity" />
+                <label cFormCheckLabel><strong>Low Complexity</strong> - The clinical presentation is stable and/or
+                    uncomplicated.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
+                    value="moderate_complexity" />
+                <label cFormCheckLabel><strong>Moderate Complexity</strong> - The clinical presentation is evolving with
+                    changing characteristics.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
+                    value="high_complexity" />
+                <label cFormCheckLabel><strong>High Complexity</strong> - he clinical presentation is unstable with
+                    unpredictable characteristics.</label>
+            </c-form-check>
         </div>
     </div>
+    <!-- Parent/Patient Education: -->
+    <div class="form-row">
+        <label class="field-label">Parent/Patient Education</label>
+        <textarea formControlName="parent_patient_education" class="form-textarea" rows="10"></textarea>
+    </div>
+    <!-- Rehab Potential -->
+    <div class="form-row">
+        <label class="field-label">Rehab Potential</label>
+        <select class="form-select-custom small-input" formControlName="rehab_potential">
+            <option value="">Select</option>
+            <option value="excellent">Excellent</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+        </select>
+    </div>
+    <!-- Contraindications to Therapy -->
+    <div class="form-row">
+        <label class="field-label">Contraindications to Therapy</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="contraindications_to_therapy" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="contraindications_to_therapy" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!-- Consent to care -->
+    <div class="form-row">
+        <label class="field-label">Consent to care</label>
+        <textarea formControlName="consent_to_care" class="form-textarea" rows="7"></textarea>
+    </div>
+
     <!-- Problem List -->
     <c-card class="mb-2">
         <c-card-header>Problem List</c-card-header>
