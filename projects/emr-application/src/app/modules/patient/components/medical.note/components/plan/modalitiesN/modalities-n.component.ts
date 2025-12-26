@@ -43,14 +43,118 @@ export class ModalitiesNComponent implements OnInit {
     "value": "electrical_stimulation",
     "formControlName": "modalities_electrical_stimulation",
     "showChildren": false,
-    "children": []
+    "children": [{
+      "label": "Pre-Modulated",
+      "value": "pre_modulated",
+      "formControlName": "modalities_pre_modulated"
+    },
+    {
+      "label": "High Volt",
+      "value": "high_volt",
+      "formControlName": "modalities_high_volt"
+    },
+    {
+      "label": "Interferential",
+      "value": "interferential",
+      "formControlName": "modalities_interferential"
+    },
+    {
+      "label": "Russian",
+      "value": "russian",
+      "formControlName": "modalities_russian"
+    },
+    {
+      "label": "Other",
+      "value": "other",
+      "formControlName": "modalities_other"
+    }]
   },
   {
     "label": "Ultrasound/Phonophoresis",
     "value": "ultrasound_phonophoresis",
     "formControlName": "modalities_ultrasound_phonophoresis",
     "showChildren": false,
-    "children": []
+    "children": [{
+      "label": "1MHz",
+      "value": "1mhz",
+      "formControlName": "procedure_1mhz"
+    },
+    {
+      "label": "2MHz",
+      "value": "2mhz",
+      "formControlName": "procedure_2mhz"
+    },
+    {
+      "label": "3MHz",
+      "value": "3mhz",
+      "formControlName": "procedure_3mhz"
+    }, {
+      label: 'Intensity',
+      value: 'intensity',
+      formControlName: 'modalities_intensity',
+      childType: 'select',
+      selectOptions: [
+        { value: '', label: 'select' },
+        { value: '.5_w_cm²', label: '.5 w/cm²' },
+        { value: '.6_w_cm²', label: '.6 w/cm²' },
+        { value: '.7_w_cm²', label: '.7 w/cm²' },
+        { value: '.8_w_cm²', label: '.8 w/cm²' },
+        { value: '.9_w_cm²', label: '.9 w/cm²' },
+        { value: '1.0_w_cm²', label: '1.0 w/cm²' },
+        { value: '1.1_w_cm²', label: '1.1 w/cm²' },
+        { value: '1.2_w_cm²', label: '1.2 w/cm²' },
+        { value: '1.3_w_cm²', label: '1.3 w/cm²' },
+        { value: '1.4_w_cm²', label: '1.4 w/cm²' },
+        { value: '1.5_w_cm²', label: '1.5 w/cm²' },
+        { value: '1.6_w_cm²', label: '1.6 w/cm²' },
+        { value: '1.7_w_cm²', label: '1.7 w/cm²' },
+        { value: '1.8_w_cm²', label: '1.8 w/cm²' },
+        { value: '1.9_w_cm²', label: '1.9 w/cm²' },
+        { value: '2.0_w_cm²', label: '2.0 w/cm²' }
+      ]
+    },
+    {
+      label: 'Duty Cycle',
+      value: 'duty_cycle',
+      formControlName: 'modalities_duty_cycle',
+      childType: 'select',
+      selectOptions: [
+        { value: '', label: 'Select' },
+        { value: '10_%', label: '10%' },
+        { value: '20_%', label: '20%' },
+        { value: '30_%', label: '30%' },
+        { value: '40_%', label: '40%' },
+        { value: '50_%', label: '50%' },
+        { value: '60_%', label: '60%' },
+        { value: '70_%', label: '70%' },
+        { value: '80_%', label: '80%' },
+        { value: '90_%', label: '90%' },
+        { value: '100_%', label: '100%' }
+      ]
+    }, {
+      label: 'Duration',
+      value: 'duration',
+      formControlName: 'modalities_duration',
+      childType: 'select',
+      selectOptions: [
+        { value: '', label: ' ' },
+        { value: '3_minutes', label: '3 minutes' },
+        { value: '4_minutes', label: '4 minutes' },
+        { value: '5_minutes', label: '5 minutes' },
+        { value: '6_minutes', label: '6 minutes' },
+        { value: '7_minutes', label: '7 minutes' },
+        { value: '8_minutes', label: '8 minutes' },
+        { value: '9_minutes', label: '9 minutes' },
+        { value: '10_minutes', label: '10 minutes' },
+        { value: '11_minutes', label: '11 minutes' },
+        { value: '12_minutes', label: '12 minutes' },
+        { value: '13_minutes', label: '13 minutes' },
+        { value: '14_minutes', label: '14 minutes' },
+        { value: '15_minutes', label: '15 minutes' },
+        { value: 'custom', label: 'Custom' }
+      ]
+    }
+    ]
   },
   {
     "label": "Laser",
@@ -64,7 +168,19 @@ export class ModalitiesNComponent implements OnInit {
     "value": "infrared_light",
     "formControlName": "modalities_infrared_light",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        "label": "Cold Laser",
+        "value": "cold_laser",
+        "formControlName": "modalities_cold_laser"
+      },
+      {
+        "label": "Class 4 Laser",
+        "value": "class_4_laser",
+        "formControlName": "modalities_class_4_laser"
+      }
+
+    ]
   },
   {
     "label": "Diathermy",
