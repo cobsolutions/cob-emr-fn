@@ -13,18 +13,19 @@ export class BillingNComponent implements OnInit {
   @Input() stepper!: MatStepper
   @Input() noteTypeId: string
   BillingForm: FormGroup;
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
   }
   initForm() {
     this.BillingForm = this.fb.group({
-      dailyNoteIncluded:[true],
-      precautions:[''],
-      objective_findings:[''],
-      pre_Treatment:[''],
-      post_Treatment:['']
+      dailyNoteIncluded: [true],
+      precautions: [''],
+      objective_findings: [''],
+      pre_Treatment: [''],
+      post_Treatment: [''],
+      untimed_codes: this.fb.group({})
     });
   }
 
