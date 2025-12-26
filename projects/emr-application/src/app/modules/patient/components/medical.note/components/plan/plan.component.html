@@ -72,9 +72,10 @@
             <div class="section">
                 <h4>Procedures</h4>
                 <hr />
-                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']"
+                <!-- <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']"
                     [data]="planData?.['procedures']">
-                </procedures>
+                </procedures> -->
+                <plan-procedures-n (formReady)="setChildForm('procedures', $event)"></plan-procedures-n>
             </div>
         </c-col>
         <c-col xs="6">

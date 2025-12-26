@@ -1,1 +1,23 @@
-<p>procedures-n works!</p>
+<div [formGroup]="ProceduresForm">
+    <div class="checkbox-group-vertical">
+        <div *ngFor="let option of procedureOptions">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+                <label cFormCheckLabel>{{ option.label }}</label>
+            </c-form-check>
+
+            <div *ngIf="option.showChildren && option.children" class="child-checkbox-group">
+                <c-form-check *ngFor="let child of option.children" class="child-checkbox">
+                    <input cFormCheckInput type="checkbox" [formControlName]="child.formControlName" />
+                    <label cFormCheckLabel>{{ child.label }}</label>
+                </c-form-check>
+
+                <textarea
+                    class="child-textarea"
+                    [formControlName]="option.formControlName + '_notes'"
+                    rows="4"
+                    placeholder="Additional notes..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>
