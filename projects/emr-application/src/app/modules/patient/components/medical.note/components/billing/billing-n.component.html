@@ -163,7 +163,8 @@
                             <!-- <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
                                 [fields]="fields['calendar month']"
                                 [calendarMonthData]="billingData?.calendarMonth"></calendar-month> -->
-                                <billing-calendar-month-n (formReady)="setChildForm('calendarMonth', $event)"></billing-calendar-month-n>
+                            <billing-calendar-month-n
+                                (formReady)="setChildForm('calendarMonth', $event)"></billing-calendar-month-n>
                         </div>
                     </c-col>
 
@@ -181,6 +182,8 @@
                             <!-- <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
                                 [fields]="fields['Nerve Conduction Studies']"
                                 [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies> -->
+                            <billing-nerve-conduction-studies-n
+                                (formReady)="setChildForm('nerveConductionStudies', $event)"></billing-nerve-conduction-studies-n>
                         </div>
                     </c-col>
 
