@@ -83,9 +83,10 @@
             <div class="section">
                 <h4>Modalities</h4>
                 <hr />
-                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']"
+                <!-- <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']"
                     [data]="planData?.['modalities']">
-                </modalities>
+                </modalities> -->
+                <plan-modalities-n (formReady)="setChildForm('modalities', $event)"></plan-modalities-n>
             </div>
 
             <!-- Specialties -->
