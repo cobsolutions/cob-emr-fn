@@ -17,12 +17,18 @@ export class StrappingNComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.loadCPTCodes();
+    this.initForm();
   }
 
   initForm() {
-    this.StrappingForm = this.fb.group({});
+    const formControls: any = {};
+
+    this.billingCPTCodeList.forEach(code => {
+      formControls[code.cpt] = [0];
+    });
+
+    this.StrappingForm = this.fb.group(formControls);
     this.formReady.emit(this.StrappingForm);
   }
 

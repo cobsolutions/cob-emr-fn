@@ -18,24 +18,30 @@ export class UntimedCodesNComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.loadCPTCodes();
+    this.initForm();
   }
 
   loadCPTCodes() {
     this.billingCPTCodeList = UNTIMED_CODES_DATA;
-    this.billingCPTCodeList.forEach(code => {
-      this.checkedCodes.set(code.cpt, false);
-    });
   }
 
   initForm() {
-    this.UntimedCodes = this.fb.group({});
+    const formControls: any = {};
+
+    this.billingCPTCodeList.forEach(code => {
+      formControls[code.cpt + '_checked'] = [false];
+      formControls[code.cpt + '_notes'] = [''];
+      this.checkedCodes.set(code.cpt, false);
+    });
+
+    this.UntimedCodes = this.fb.group(formControls);
     this.formReady.emit(this.UntimedCodes);
   }
 
   onCheckboxChange(cpt: string, event: any) {
-    this.checkedCodes.set(cpt, event.target.checked);
+    const isChecked = event.target.checked;
+    this.checkedCodes.set(cpt, isChecked);
   }
 
   isChecked(cpt: string): boolean {
