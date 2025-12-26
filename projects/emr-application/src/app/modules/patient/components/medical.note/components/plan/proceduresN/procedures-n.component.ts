@@ -257,7 +257,26 @@ export class ProceduresNComponent implements OnInit {
       value: 'massage',
       formControlName: 'procedure_massage',
       showChildren: false,
-      children: []
+      children: [
+        {
+          label: 'Massage Type',
+          value: 'massage_type',
+          formControlName: 'procedure_massage_type',
+          childType: 'select',
+          selectOptions: [
+            { label: 'Swedish Massage', value: 'swedish' },
+            { label: 'Deep Tissue', value: 'deep_tissue' },
+            { label: 'Sports Massage', value: 'sports' },
+            { label: 'Trigger Point', value: 'trigger_point' }
+          ]
+        },
+        {
+          label: 'Manual Lymphatic Drainage',
+          value: 'manual_lymphatic_drainage',
+          formControlName: 'procedure_manual_lymphatic_drainage',
+          childType: 'checkbox'
+        }
+      ]
     },
     {
       label: 'Aquatic Therapy',
@@ -271,7 +290,20 @@ export class ProceduresNComponent implements OnInit {
       value: 'splinting_taping',
       formControlName: 'procedure_splinting_taping',
       showChildren: false,
-      children: []
+      children: [
+        {
+          label: 'Taping Method',
+          value: 'taping_method',
+          formControlName: 'procedure_taping_method',
+          childType: 'select',
+          selectOptions: [
+            { label: 'Kinesio Taping', value: 'kinesio' },
+            { label: 'Athletic Taping', value: 'athletic' },
+            { label: 'McConnell Taping', value: 'mcconnell' },
+            { label: 'Compression Bandaging', value: 'compression' }
+          ]
+        }
+      ]
     },
     {
       label: 'Canalith Repositioning',
@@ -419,20 +451,8 @@ export class ProceduresNComponent implements OnInit {
   }
 
   initForm() {
-    const formControls: any = {};
-
-    this.procedureOptions.forEach(option => {
-      formControls[option.formControlName] = [false];
-      formControls[option.formControlName + '_notes'] = [''];
-
-      if (option.children) {
-        option.children.forEach(child => {
-          formControls[child.formControlName] = [false];
-        });
-      }
-    });
-
-    this.ProceduresForm = this.fb.group(formControls);
+    // Create empty form group - controls will be added by PlanHierarchyCheckboxListComponent
+    this.ProceduresForm = this.fb.group({});
   }
 
 }

@@ -8,10 +8,24 @@
 
             <!-- Show children and textarea if option has children -->
             <div *ngIf="option.showChildren && option.children && option.children.length > 0" class="child-checkbox-group">
-                <c-form-check *ngFor="let child of option.children" class="child-checkbox">
-                    <input cFormCheckInput type="checkbox" [formControlName]="child.formControlName" />
-                    <label cFormCheckLabel>{{ child.label }}</label>
-                </c-form-check>
+                <div *ngFor="let child of option.children">
+                    <!-- Render as checkbox if childType is 'checkbox' or not specified -->
+                    <c-form-check *ngIf="!child.childType || child.childType === 'checkbox'" class="child-checkbox">
+                        <input cFormCheckInput type="checkbox" [formControlName]="child.formControlName" />
+                        <label cFormCheckLabel>{{ child.label }}</label>
+                    </c-form-check>
+
+                    <!-- Render as select if childType is 'select' -->
+                    <div *ngIf="child.childType === 'select'" class="child-select-container">
+                        <label class="child-select-label">{{ child.label }}</label>
+                        <select class="child-select" [formControlName]="child.formControlName">
+                            <option value="">Select</option>
+                            <option *ngFor="let opt of child.selectOptions" [value]="opt.value">
+                                {{ opt.label }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
                 <textarea
                     class="child-textarea"
