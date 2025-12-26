@@ -161,7 +161,16 @@ export class ModalitiesNComponent implements OnInit {
     "value": "laser",
     "formControlName": "modalities_laser",
     "showChildren": false,
-    "children": []
+    "children": [{
+      "label": "Cold Laser",
+      "value": "cold_laser",
+      "formControlName": "procedure_cold_laser"
+    },
+    {
+      "label": "Class 4 Laser",
+      "value": "class_4_laser",
+      "formControlName": "procedure_class_4_laser"
+    }]
   },
   {
     "label": "Infrared Light",
@@ -170,14 +179,27 @@ export class ModalitiesNComponent implements OnInit {
     "showChildren": false,
     "children": [
       {
-        "label": "Cold Laser",
-        "value": "cold_laser",
-        "formControlName": "modalities_cold_laser"
-      },
-      {
-        "label": "Class 4 Laser",
-        "value": "class_4_laser",
-        "formControlName": "modalities_class_4_laser"
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_lnfrared_light_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: 'Select' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
       }
 
     ]
@@ -187,63 +209,285 @@ export class ModalitiesNComponent implements OnInit {
     "value": "diathermy",
     "formControlName": "modalities_diathermy",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_diathermy_light_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Ultraviolet",
     "value": "ultraviolet",
     "formControlName": "modalities_ultraviolet",
     "showChildren": false,
-    "children": []
+    "children": [{
+      label: 'Duration',
+      value: 'duration',
+      formControlName: 'modalities_ultraviolet_light_duration',
+      childType: 'select',
+      selectOptions: [
+        { value: '', label: ' ' },
+        { value: '3_minutes', label: '3 minutes' },
+        { value: '4_minutes', label: '4 minutes' },
+        { value: '5_minutes', label: '5 minutes' },
+        { value: '6_minutes', label: '6 minutes' },
+        { value: '7_minutes', label: '7 minutes' },
+        { value: '8_minutes', label: '8 minutes' },
+        { value: '9_minutes', label: '9 minutes' },
+        { value: '10_minutes', label: '10 minutes' },
+        { value: '11_minutes', label: '11 minutes' },
+        { value: '12_minutes', label: '12 minutes' },
+        { value: '13_minutes', label: '13 minutes' },
+        { value: '14_minutes', label: '14 minutes' },
+        { value: '15_minutes', label: '15 minutes' },
+        { value: 'custom', label: 'Custom' }
+      ]
+    }]
   },
   {
     "label": "Vasopneumatic",
     "value": "vasopneumatic",
     "formControlName": "modalities_vasopneumatic",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_vasopneumatic_light_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Biofeedback Training",
     "value": "biofeedback_training",
     "formControlName": "modalities_biofeedback_training",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_biofeedback_training_light_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Whirlpool",
     "value": "whirlpool",
     "formControlName": "modalities_whirlpool",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        "label": "Warm",
+        "value": "warm",
+        "formControlName": "modalities_whirlpool_warm"
+      },
+      {
+        "label": "Cold",
+        "value": "cold",
+        "formControlName": "modalities_whirlpool_cold"
+      },
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_whirlpool_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Paraffin Bath",
     "value": "paraffin_bath",
     "formControlName": "modalities_paraffin_bath",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_paraffin_bath_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Cryotherapy",
     "value": "cryotherapy",
     "formControlName": "modalities_cryotherapy",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        "label": "Ice Pack",
+        "value": "ice_pack",
+        "formControlName": "modalities_cryotherapy_ice_pack"
+      },
+      {
+        "label": "Ice Massage",
+        "value": "ice_massage",
+        "formControlName": "modalities_cryotherapy_ice_massage"
+      },
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_cryotherapy_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Hot Packs",
     "value": "hot_packs",
     "formControlName": "modalities_hot_packs",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_hot_packs_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: ' ' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }
+    ]
   },
   {
     "label": "Mechanical Traction",
     "value": "mechanical_traction",
     "formControlName": "modalities_mechanical_traction",
     "showChildren": false,
-    "children": []
+    "children": [
+      {
+        "label": "Cervical",
+        "value": "cervical",
+        "formControlName": "modalities_mechanical_cervical"
+      },
+      {
+        "label": "Lumbar",
+        "value": "lumbar",
+        "formControlName": "modalities_mechanical_lumbar"
+      }
+
+    ]
   }]
   constructor(private fb: FormBuilder) { }
 
