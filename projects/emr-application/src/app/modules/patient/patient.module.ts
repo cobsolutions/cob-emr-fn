@@ -171,6 +171,7 @@ import { BillingNComponent } from './components/medical.note/components/billing/
 import { UntimedCodesNComponent } from './components/medical.note/components/billing/componentsN/untimed-codes/untimed-codes-n.component';
 import { StrappingNComponent } from './components/medical.note/components/billing/componentsN/strapping/strapping-n.component';
 import { DirectTimedCodeNComponent } from './components/medical.note/components/billing/componentsN/direct-timed-codes/direct-timed-code-n.component';
+import { CalendarMonthNComponent } from './components/medical.note/components/billing/componentsN/calendar-month/calendar-month-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -343,6 +344,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     UntimedCodesNComponent,
     StrappingNComponent,
     DirectTimedCodeNComponent,
+    CalendarMonthNComponent,
   ],
   imports: [
     CommonModule,
