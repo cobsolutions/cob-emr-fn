@@ -169,6 +169,7 @@ import { ModalitiesNComponent } from './components/medical.note/components/plan/
 import { SpecialtiesNComponent } from './components/medical.note/components/plan/specialtiesN/specialties-n.component';
 import { BillingNComponent } from './components/medical.note/components/billing/billing-n.component';
 import { UntimedCodesNComponent } from './components/medical.note/components/billing/componentsN/untimed-codes/untimed-codes-n.component';
+import { StrappingNComponent } from './components/medical.note/components/billing/componentsN/strapping/strapping-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -339,6 +340,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SpecialtiesNComponent,
     BillingNComponent,
     UntimedCodesNComponent,
+    StrappingNComponent,
   ],
   imports: [
     CommonModule,
