@@ -1,14 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CheckboxHierarchy } from '../../subjective/common/hierarchy-checkbox/interface/checkbox-hierarchy';
-
-interface ProcedureOption {
-  label: string;
-  value: string;
-  formControlName: string;
-  children?: ProcedureOption[];
-  showChildren?: boolean;
-}
+import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-option';
 
 @Component({
   selector: 'plan-procedures-n',
@@ -19,7 +11,7 @@ export class ProceduresNComponent implements OnInit {
   ProceduresForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
 
-  procedureOptions: ProcedureOption[] = [
+  procedureOptions: HierarchyCheckboxOption[] = [
     {
       label: 'Therapeutic Exercises',
       value: 'therapeutic_exercises',
@@ -423,7 +415,6 @@ export class ProceduresNComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.setupValueChangeListeners();
     this.formReady.emit(this.ProceduresForm);
   }
 
@@ -442,21 +433,6 @@ export class ProceduresNComponent implements OnInit {
     });
 
     this.ProceduresForm = this.fb.group(formControls);
-  }
-
-  setupValueChangeListeners() {
-    this.procedureOptions.forEach(option => {
-      this.ProceduresForm.get(option.formControlName)?.valueChanges.subscribe(checked => {
-        option.showChildren = checked;
-
-        if (!checked && option.children) {
-          option.children.forEach(child => {
-            this.ProceduresForm.get(child.formControlName)?.setValue(false);
-          });
-          this.ProceduresForm.get(option.formControlName + '_notes')?.setValue('');
-        }
-      });
-    });
   }
 
 }
