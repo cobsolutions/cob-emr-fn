@@ -31,25 +31,25 @@ c-card-body {
   color: white;
 }
 
-/* Card Header Color Gradients */
+/* Card Header Color Gradients - Matching Plan/Billing Theme */
 .basic-info-header {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
 }
 
 .pain-header {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  background: linear-gradient(135deg, #5c4742 0%, #6d5850 100%);
 }
 
 .prior-function-header {
-  background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+  background: linear-gradient(135deg, #5c4742 0%, #6d5850 100%);
 }
 
 .enhanced-card-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #5c4742 0%, #6d5850 100%);
 }
 
 .medical-history-header {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #5c4742 0%, #6d5850 100%);
 }
 
 .card-header-content {
@@ -101,7 +101,7 @@ c-card-body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   color: white;
   border: none;
   padding: 10px 24px;
@@ -110,12 +110,12 @@ c-card-body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
 .next-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
 }
 
 .next-button:active {
