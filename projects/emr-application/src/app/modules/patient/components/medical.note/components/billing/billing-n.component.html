@@ -123,7 +123,8 @@
                                 [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
                                 [untimedCodesData]="billingData?.untimedCodes"></untimed-codes> -->
                             <!-- Untimed Codes -->
-                            <billing-untimed-codes-n (formReady)="setChildForm('untimedCodes', $event)"></billing-untimed-codes-n>
+                            <billing-untimed-codes-n
+                                (formReady)="setChildForm('untimedCodes', $event)"></billing-untimed-codes-n>
                         </div>
                     </c-col>
 
@@ -217,6 +218,8 @@
                             <!-- <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
                                 [fields]="fields['Direct Timed Codes']"
                                 [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes> -->
+                            <billing-direct-timed-code-n
+                                (formReady)="setChildForm('directTimedCodes', $event)"></billing-direct-timed-code-n>
                         </div>
                     </c-col>
                 </c-row>

@@ -1,0 +1,173 @@
+import { BillingCPTCode } from "../interface/billing-cpt-code";
+export const DIRECT_TIMED_CODE_CODES_DATA: BillingCPTCode[] = [
+    {
+        "cpt": "97032",
+        "description": "E-Stim Manual",
+        "quantity": 0
+    },
+    {
+        "cpt": "97033",
+        "description": "Iontophoresis",
+        "quantity": 0
+    },
+    {
+        "cpt": "97035",
+        "description": "Ultrasound/Phonophoresis",
+        "quantity": 0
+    },
+    {
+        "cpt": "97110",
+        "description": "Therapeutic Exercise",
+        "quantity": 0
+    },
+    {
+        "cpt": "97112",
+        "description": "Neuromuscular Re-Education",
+        "quantity": 0
+    },
+    {
+        "cpt": "97113",
+        "description": "Aquatic Exercise",
+        "quantity": 0
+    },
+    {
+        "cpt": "97116",
+        "description": "Gait Training",
+        "quantity": 0
+    },
+    {
+        "cpt": "97124",
+        "description": "Massage",
+        "quantity": 0
+    },
+    {
+        "cpt": "97140",
+        "description": "Manual Therapy",
+        "quantity": 0
+    },
+    {
+        "cpt": "97530",
+        "description": "Therapeutic Activity/Kinetic",
+        "quantity": 0
+    },
+    {
+        "cpt": "97535",
+        "description": "Self Care- ADLs",
+        "quantity": 0
+    },
+    {
+        "cpt": "98960",
+        "description": "Education and training for patient self-management, each 30 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "97760",
+        "description": "Orthotic management and training initial encounter",
+        "quantity": 0
+    },
+    {
+        "cpt": "97761",
+        "description": "Prosthetic training initial encounter",
+        "quantity": 0
+    },
+    {
+        "cpt": "97598",
+        "description": "Debridement Area Each Additional 20 sq cm",
+        "quantity": 0
+    },
+    {
+        "cpt": "97545",
+        "description": "Work hardening/conditioning; initial 2 hours",
+        "quantity": 0
+    },
+    {
+        "cpt": "97546",
+        "description": "Work hardening/conditioning; each additional hour",
+        "quantity": 0
+    },
+    {
+        "cpt": "97750",
+        "description": "FCE/Performance Test",
+        "quantity": 0
+    },
+    {
+        "cpt": "97755",
+        "description": "Assistive Tech Assessment",
+        "quantity": 0
+    },
+    {
+        "cpt": "97533",
+        "description": "Sensory Integrative Techniques",
+        "quantity": 0
+    },
+    {
+        "cpt": "96110",
+        "description": "Developmental Testing Per Hour",
+        "quantity": 0
+    },
+    {
+        "cpt": "97542",
+        "description": "Wheelchair Management",
+        "quantity": 0
+    },
+    {
+        "cpt": "97034",
+        "description": "Contrast Baths (constant attendance required)",
+        "quantity": 0
+    },
+    {
+        "cpt": "97139",
+        "description": "Unlisted Therapeutic Procedure",
+        "quantity": 0
+    },
+    {
+        "cpt": "97763",
+        "description": "Orthotic/prosthetic management and/or training subsequent encounter",
+        "quantity": 0
+    },
+    {
+        "cpt": "97537",
+        "description": "Community / work reintegration training direct, each 15 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "96125",
+        "description": "Standardized cognitive performance testing - (eg, Ross Information Processing Assessment) per hour of a qualified health care professional's time, both face-to-face time administering tests to the patient and time interpreting these test results and preparing the report",
+        "quantity": 0
+    },
+    {
+        "cpt": "90912",
+        "description": "Biofeedback training, perineal muscles, anorectal or urethral sphincter, including EMG and/or manometry, when performed; initial 15 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "90913",
+        "description": "Biofeedback training, perineal muscles, anorectal or urethral sphincter, including EMG and/or manometry, when performed; each additional 15 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "97129",
+        "description": "Therapeutic interventions that focus on cognitive function (eg, attention, memory, executive function) and compensatory strategies to manage the performance of an activity (eg, managing time), direct (one-on-one) patient contact; initial 15 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "97130",
+        "description": "Therapeutic interventions that focus on cognitive function (eg, attention, memory, reasoning, executive function) and compensatory strategies to manage the performance of an activity (eg, managing time), direct (one-on-one) patient contact; each additional 15 minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "96112",
+        "description": "Developmental test by qualified healthcare professional; first hour",
+        "quantity": 0
+    },
+    {
+        "cpt": "96113",
+        "description": "Developmental test by qualified healthcare professional; each add'l 30 min",
+        "quantity": 0
+    },
+    {
+        "cpt": "98980",
+        "description": "Remote therapeutic monitoring treatment management services by physician or other qualified health care professional, first 20 minutes per calendar month",
+        "quantity": 0
+    }
+]

@@ -1,0 +1,21 @@
+<div class="strapping-container" [formGroup]="DirectTimedCodeForm">
+    <div class="strapping-list">
+        <div *ngFor="let code of billingCPTCodeList" class="strapping-item">
+            <input
+              type="number"
+              [id]="'strapping-' + code.cpt"
+              [formControlName]="code.cpt"
+              class="form-control strapping-input"
+              min="0"
+              placeholder="0"
+            />
+            <label
+              [for]="'strapping-' + code.cpt"
+              class="strapping-label"
+              [title]="'CPT Code: ' + code.cpt"
+            >
+              {{ code.description }}
+            </label>
+          </div>
+    </div>
+</div>
