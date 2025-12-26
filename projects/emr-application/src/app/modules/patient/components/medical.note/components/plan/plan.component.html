@@ -93,9 +93,10 @@
             <div class="section">
                 <h4>Specialties</h4>
                 <hr />
-                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']"
+                <!-- <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']"
                     [data]="planData?.['specialties']">
-                </specialties>
+                </specialties> -->
+                <plan-specialties-n (formReady)="setChildForm('specialties', $event)"></plan-specialties-n>
             </div>
         </c-col>
     </c-row>

@@ -166,6 +166,7 @@ import { PainNComponent } from './components/medical.note/components/subjective/
 import { ProceduresNComponent } from './components/medical.note/components/plan/proceduresN/procedures-n.component';
 import { PlanHierarchyCheckboxListComponent } from './components/medical.note/components/plan/common/plan-hierarchy-checkbox-list/plan-hierarchy-checkbox-list.component';
 import { ModalitiesNComponent } from './components/medical.note/components/plan/modalitiesN/modalities-n.component';
+import { SpecialtiesNComponent } from './components/medical.note/components/plan/specialtiesN/specialties-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -333,6 +334,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ProceduresNComponent,
     PlanHierarchyCheckboxListComponent,
     ModalitiesNComponent,
+    SpecialtiesNComponent,
   ],
   imports: [
     CommonModule,
