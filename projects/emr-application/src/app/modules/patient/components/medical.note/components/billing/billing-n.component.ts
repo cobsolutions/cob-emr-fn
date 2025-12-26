@@ -28,5 +28,12 @@ export class BillingNComponent implements OnInit {
       untimed_codes: this.fb.group({})
     });
   }
-
+  setChildForm(section: string, formGroup: FormGroup) {
+    // console.log('section ' + section);
+    // console.log('formGroup.controls ' + JSON.stringify(formGroup.controls))
+    // Object.keys(formGroup.controls).forEach(key => {
+    //   console.log(key, formGroup.get(key));
+    // });
+    this.BillingForm.setControl(section, formGroup);
+  }
 }

@@ -123,6 +123,7 @@
                                 [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
                                 [untimedCodesData]="billingData?.untimedCodes"></untimed-codes> -->
                             <!-- Untimed Codes -->
+                            <billing-untimed-codes-n (formReady)="setChildForm('untimedCodes', $event)"></billing-untimed-codes-n>
                         </div>
                     </c-col>
 
