@@ -1,0 +1,363 @@
+<form [formGroup]="BillingForm">
+    <!-- Main Section Card -->
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header plan-config-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="9" x2="15" y2="9"></line>
+                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                    </svg>
+                    <span>Billing Configuration</span>
+                </div>
+                <span class="card-badge">Required</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <c-row>
+                <c-col xs="12">
+                    <div class="plan-checkbox-group">
+                        <c-form-check>
+                            <input cFormCheckInput id="dailyNoteIncluded" type="checkbox"
+                                formControlName="dailyNoteIncluded" />
+                            <label cFormCheckLabel for="dailyNoteIncluded">Include Daily Note with this Initial
+                                Examination</label>
+                        </c-form-check>
+                    </div>
+                </c-col>
+            </c-row>
+        </c-card-body>
+    </c-card>
+
+    <div *ngIf="this.BillingForm.get('dailyNoteIncluded').value === true">
+        <!-- Daily Note Plan Card -->
+        <!-- <c-card class="mb-3 enhanced-card" *ngIf="noteTypeId ==='1' || noteTypeId ==='3'">
+            <c-card-header class="enhanced-card-header treatment-header">
+                <div class="card-header-content">
+                    <div class="card-header-title">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>Daily Note Plan</span>
+                    </div>
+                    <span class="card-badge">Additional Info</span>
+                </div>
+            </c-card-header>
+            <c-card-body class="enhanced-card-body">
+                <c-row>
+                    <c-col xs="12">
+                        <div class="plan-select-group">
+                            <label class="plan-select-label">Instructions</label>
+                            <select class="plan-select" formControlName="dn_nstructions">
+                                <option *ngFor="let instruction of instructions" [value]="instruction.value">
+                                    {{instruction.label}}
+                                </option>
+                            </select>
+                        </div>
+                    </c-col>
+                    <c-col xs="12">
+                        <textarea cFormControl id="instructionsTxt" formControlName="instructionsTxt"
+                            rows="3"></textarea>
+                    </c-col>
+                </c-row>
+            </c-card-body>
+        </c-card> -->
+
+        <!-- Billing Sheet Card -->
+        <c-card class="mb-3 enhanced-card">
+            <c-card-header class="enhanced-card-header treatment-header">
+                <div class="card-header-content">
+                    <div class="card-header-title">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        <span>Billing Sheet</span>
+                    </div>
+                    <span class="card-badge">CPT Codes</span>
+                </div>
+            </c-card-header>
+            <c-card-body class="enhanced-card-body">
+                <c-row class="mb-3">
+                    <c-col xs="12">
+                        <div class="plan-select-group">
+                            <label class="plan-select-label">Precautions</label>
+                            <textarea id="precautions" class="form-control" formControlName="precautions"
+                                rows="3"></textarea>
+                        </div>
+                    </c-col>
+                </c-row>
+
+                <!-- CPT Codes Section Header -->
+                <div class="section-divider">
+                    <h5 class="section-header-light">CPT Codes</h5>
+                </div>
+
+                <c-row>
+                    <!--Untimed Codes-->
+                    <c-col xs="12">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="9" x2="15" y2="9"></line>
+                                </svg>
+                                <h4 class="treatment-section-title">Untimed Codes</h4>
+                            </div>
+                            <!-- <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
+                                [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
+                                [untimedCodesData]="billingData?.untimedCodes"></untimed-codes> -->
+                        </div>
+                    </c-col>
+
+                    <!--Calendar Month-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <h4 class="treatment-section-title">Calendar Month</h4>
+                            </div>
+                            <!-- <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
+                                [fields]="fields['calendar month']"
+                                [calendarMonthData]="billingData?.calendarMonth"></calendar-month> -->
+                        </div>
+                    </c-col>
+
+                    <!--Nerve Conduction Studies-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                </svg>
+                                <h4 class="treatment-section-title">Nerve Conduction Studies</h4>
+                            </div>
+                            <!-- <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
+                                [fields]="fields['Nerve Conduction Studies']"
+                                [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies> -->
+                        </div>
+                    </c-col>
+
+                    <!--Respiratory-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                    </path>
+                                </svg>
+                                <h4 class="treatment-section-title">Respiratory</h4>
+                            </div>
+                            <!-- <respiratory (formReady)="setChildForm('respiratory', $event)"
+                                [fields]="fields['Respiratory']" [respiratoryData]="billingData?.respiratory">
+                            </respiratory> -->
+                        </div>
+                    </c-col>
+
+                    <!--Direct Timed Codes-->
+                    <c-col xs="12">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <h4 class="treatment-section-title">Direct Timed Codes</h4>
+                            </div>
+                            <!-- <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
+                                [fields]="fields['Direct Timed Codes']"
+                                [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes> -->
+                        </div>
+                    </c-col>
+                </c-row>
+
+                <!-- Clinical Findings Section Header -->
+                <div class="section-divider mt-4">
+                    <h5 class="section-header-light">Clinical Findings</h5>
+                </div>
+
+                <c-row>
+                    <c-col xs="12">
+                        <div class="plan-select-group">
+                            <label class="plan-select-label"><strong>Objective Findings</strong></label>
+                            <textarea id="objective_findings" class="form-control" formControlName="objective_findings"
+                                rows="4"></textarea>
+                        </div>
+                    </c-col>
+                </c-row>
+                <c-row class="mb-3">
+                    <c-col xs="12">
+                        <div class="plan-select-group">
+                            <label class="plan-select-label"><strong>Pre-Treatment</strong></label>
+                            <textarea id="pre_Treatment" class="form-control" formControlName="pre_Treatment"
+                                rows="4"></textarea>
+                        </div>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col xs="12">
+                        <div class="plan-select-group">
+                            <label class="plan-select-label"><strong>Post-Treatment</strong></label>
+                            <textarea id="post_Treatment" class="form-control" formControlName="post_Treatment"
+                                rows="4"></textarea>
+                        </div>
+                    </c-col>
+                </c-row>
+
+                <!-- Additional Treatment & Supplies Section Header -->
+                <div class="section-divider mt-4">
+                    <h5 class="section-header-light">Additional Treatment & Supplies</h5>
+                </div>
+
+                <c-row>
+                    <!--Other Treatment Procedures-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                                    </path>
+                                </svg>
+                                <h4 class="treatment-section-title">Other Treatment Procedures</h4>
+                            </div>
+                            <!-- <other-treatment-procedures (formReady)="setChildForm('otherTreatmentProcedures', $event)"
+                                [fields]="fields['Other Treatment Procedures']"
+                                [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></other-treatment-procedures> -->
+                        </div>
+                    </c-col>
+
+                    <!--Supplies-->
+                    <c-col xs="12" lg="8">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                    </path>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                </svg>
+                                <h4 class="treatment-section-title">Supplies</h4>
+                            </div>
+                            <!-- <supplies (formReady)="setChildForm('supplies', $event)" [fields]="fields['Supplies']"
+                                [SuppliesData]="billingData?.supplies"></supplies> -->
+                        </div>
+                    </c-col>
+
+                    <!--Splints/Orthotics-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                <h4 class="treatment-section-title">Splints/Orthotics</h4>
+                            </div>
+                            <!-- <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
+                                [fields]="fields['Splints Orthotics']"
+                                [SplintsOrthoticsData]="billingData?.splintsorthotics"></splints-orthotics> -->
+                        </div>
+                    </c-col>
+
+                    <!--Casts-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="6" y="4" width="4" height="16"></rect>
+                                    <rect x="14" y="4" width="4" height="16"></rect>
+                                </svg>
+                                <h4 class="treatment-section-title">Casts</h4>
+                            </div>
+                            <!-- <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"
+                                [castsData]="billingData?.casts"></casts> -->
+                        </div>
+                    </c-col>
+
+                    <!--Braces-->
+                    <c-col xs="12" lg="4">
+                        <div class="treatment-section">
+                            <div class="treatment-section-header">
+                                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                                <h4 class="treatment-section-title">Braces</h4>
+                            </div>
+                            <!-- <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"
+                                [bracesData]="billingData?.braces"></braces> -->
+                        </div>
+                    </c-col>
+                </c-row>
+            </c-card-body>
+        </c-card>
+    </div>
+
+    <div class="action-buttons">
+        <button cButton matStepperPrevious class="action-button back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+        <div class="action-buttons-right">
+            <button cButton class="action-button forward-button" hide-control
+                [componentRole]="['forward-medical-note-role']">
+                <span>Forward</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                </svg>
+            </button>
+            <button cButton class="action-button finalize-button" hide-control
+                [componentRole]="['finalize-medical-note-role']">
+                <span>Finalize</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+</form>
