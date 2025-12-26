@@ -20,18 +20,26 @@ export class DirectTimedCodeNComponent implements OnInit {
     this.loadCPTCodes();
     this.initForm();
   }
+
   initForm() {
     const formControls: any = {};
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.DirectTimedCodeForm = this.fb.group(formControls);
     this.formReady.emit(this.DirectTimedCodeForm);
   }
+
   loadCPTCodes() {
     this.billingCPTCodeList = DIRECT_TIMED_CODE_CODES_DATA;
+  }
+
+  hasValue(cpt: string): boolean {
+    const value = this.DirectTimedCodeForm.get(cpt)?.value;
+    return value && value > 0;
   }
 
 }
