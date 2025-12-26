@@ -4,30 +4,30 @@ import { BillingCPTCode } from '../interface/billing-cpt-code';
 import { STRAPPING_CODES_DATA } from './STRAPPING_CODES_DATA';
 
 @Component({
-  selector: 'app-strapping-n',
+  selector: 'billing-strapping-n',
   templateUrl: './strapping-n.component.html',
   styleUrls: ['./strapping-n.component.css']
 })
 export class StrappingNComponent implements OnInit {
   StrappingForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  sctrappingCPTCodeList: BillingCPTCode[] = [];
-  checkedCodes: Map<string, boolean> = new Map();
+
+  billingCPTCodeList: BillingCPTCode[] = [];
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
     this.loadCPTCodes();
   }
+
   initForm() {
     this.StrappingForm = this.fb.group({});
     this.formReady.emit(this.StrappingForm);
   }
+
   loadCPTCodes() {
-    this.sctrappingCPTCodeList = STRAPPING_CODES_DATA;
-    this.sctrappingCPTCodeList.forEach(code => {
-      this.checkedCodes.set(code.cpt, false);
-    });
+    this.billingCPTCodeList = STRAPPING_CODES_DATA;
   }
 
 }

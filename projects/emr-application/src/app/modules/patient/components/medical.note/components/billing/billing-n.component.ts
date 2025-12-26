@@ -25,7 +25,8 @@ export class BillingNComponent implements OnInit {
       objective_findings: [''],
       pre_Treatment: [''],
       post_Treatment: [''],
-      untimed_codes: this.fb.group({})
+      untimed_codes: this.fb.group({}),
+      strapping: this.fb.group({})
     });
   }
   setChildForm(section: string, formGroup: FormGroup) {
