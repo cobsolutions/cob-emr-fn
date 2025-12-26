@@ -1,6 +1,8 @@
 <form [formGroup]="billingForm" *ngIf="fields">
+    <!-- Main Section -->
     <h4>Billing:</h4>
     <hr />
+    <!-- Include Daily Note with this Initial Examination CheckBox -->
     <c-form-check class="mb-4">
         <input cFormCheckInput id="dailyNoteIncluded" type="checkbox" formControlName="dailyNoteIncluded" size="sm" checked />
         <label cFormCheckLabel for="dailyNoteIncluded"> Include Daily Note with this Initial Examination
@@ -28,6 +30,7 @@
                 </c-row>
             </div>
         </div>
+        <!-- Billing Sheet -->
         <h4>Billing Sheet</h4>
         <hr />
         <c-row>
@@ -38,7 +41,7 @@
                         <textarea id="precautions" formControlName="precautions"></textarea>
                     </div>
                 </div>
-
+                <!-- CPT sections -->
                 <div class="section">
                     <c-row>
                         <!--Untimed Codes-->
@@ -85,6 +88,7 @@
                 </div>
             </c-col>
             <hr />
+            <!-- Free Text  Section -->
             <c-col xs="12">
                 <div class="form-container">
                     <div class="column">
