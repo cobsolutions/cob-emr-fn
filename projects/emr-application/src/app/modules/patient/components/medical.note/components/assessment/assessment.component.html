@@ -82,8 +82,20 @@
     </c-card>
 
 
-    <div class="mt-3">
-        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    <div class="action-buttons">
+        <button cButton matStepperPrevious class="action-button back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+        <button cButton class="action-button next-button" (click)="next()">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
     </div>
 </form>
