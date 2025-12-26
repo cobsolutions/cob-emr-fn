@@ -31,6 +31,7 @@ export class UntimedCodesNComponent implements OnInit {
 
   initForm() {
     this.UntimedCodes = this.fb.group({});
+    this.formReady.emit(this.UntimedCodes);
   }
 
   onCheckboxChange(cpt: string, event: any) {
