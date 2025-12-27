@@ -14,6 +14,7 @@ import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code
 import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
 import { MedicalHistoryMapper } from '../mapper/medical.history.mapper';
 import { ObjectiveComponent } from '../components/objective/objective.component';
+import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
 
 @Component({
   selector: 'initial-examination',
@@ -42,7 +43,8 @@ export class InitialExaminationComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
     private loggedInService: LoggedInService,
-    private initialExamNoteService: InitialExamNoteService) {
+    private initialExamNoteService: InitialExamNoteService,
+    private subjectiveMapper: SubjectiveMapperService) {
 
   }
   ngOnInit(): void {
@@ -117,8 +119,11 @@ export class InitialExaminationComponent implements OnInit {
   soapActions(action: string) {
     if (action === 'back')
       this.backtoPatientRecordActions()
-    if (action === 'draft')
-      console.log(this.getAllFormValues(this.initialExaminationForm))
+    if (action === 'draft') {
+      const formValues = this.getAllFormValues(this.initialExaminationForm);
+      console.log('Form Values:', formValues);
+      console.log('Mapped Subjective:', this.subjectiveMapper.toModel(formValues.subjective));
+    }
     // this.draft();
   }
   backtoPatientRecordActions() {
@@ -145,15 +150,13 @@ export class InitialExaminationComponent implements OnInit {
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
-      subjective: createdNote.subjective,
+      subjective: this.subjectiveMapper.toModel(createdNote.subjective),
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
       billing: Object.keys(createdNote.billing).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.billing)
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
-    InitSubjectiveBasicMapper.mapper(medicalNoteRequest.subjective.basic)
-    MedicalHistoryMapper.map(medicalNoteRequest.subjective.medicalHistory)
     return medicalNoteRequest;
   }
   draft() {
