@@ -175,6 +175,10 @@ import { CalendarMonthNComponent } from './components/medical.note/components/bi
 import { NerveConductionStudiesNComponent } from './components/medical.note/components/billing/componentsN/nerve-conduction-studies/nerve-conduction-studies-n.component';
 import { RespiratoryNComponent } from './components/medical.note/components/billing/componentsN/respiratory/respiratory-n.component';
 import { OtherTreatmentProceduresNComponent } from './components/medical.note/components/billing/componentsN/other-treatment-procedures/other-treatment-procedures-n.component';
+import { SuppliesNComponent } from './components/medical.note/components/billing/componentsN/supplies/supplies-n.component';
+import { SplintsOrthoticsNComponent } from './components/medical.note/components/billing/componentsN/splints-orthotics/splints-orthotics-n.component';
+import { CastsNComponent } from './components/medical.note/components/billing/componentsN/casts/casts-n.component';
+import { BracesNComponent } from './components/medical.note/components/billing/componentsN/braces/braces-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -351,6 +355,10 @@ const APP_PATIENT_CHART_COMPONENTS = [
     NerveConductionStudiesNComponent,
     RespiratoryNComponent,
     OtherTreatmentProceduresNComponent,
+    SuppliesNComponent,
+    SplintsOrthoticsNComponent,
+    CastsNComponent,
+    BracesNComponent,
   ],
   imports: [
     CommonModule,
