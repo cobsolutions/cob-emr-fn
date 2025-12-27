@@ -30,6 +30,7 @@ export class BillingNComponent implements OnInit {
       directTimedCodes: this.fb.group({}),
       calendarMonth: this.fb.group({}),
       nerveConductionStudies: this.fb.group({}),
+      respiratory: this.fb.group({}),
     });
   }
   setChildForm(section: string, formGroup: FormGroup) {

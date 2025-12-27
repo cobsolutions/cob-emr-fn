@@ -173,6 +173,7 @@ import { StrappingNComponent } from './components/medical.note/components/billin
 import { DirectTimedCodeNComponent } from './components/medical.note/components/billing/componentsN/direct-timed-codes/direct-timed-code-n.component';
 import { CalendarMonthNComponent } from './components/medical.note/components/billing/componentsN/calendar-month/calendar-month-n.component';
 import { NerveConductionStudiesNComponent } from './components/medical.note/components/billing/componentsN/nerve-conduction-studies/nerve-conduction-studies-n.component';
+import { RespiratoryNComponent } from './components/medical.note/components/billing/componentsN/respiratory/respiratory-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -347,6 +348,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DirectTimedCodeNComponent,
     CalendarMonthNComponent,
     NerveConductionStudiesNComponent,
+    RespiratoryNComponent,
   ],
   imports: [
     CommonModule,
