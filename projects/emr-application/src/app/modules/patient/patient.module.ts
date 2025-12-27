@@ -174,6 +174,7 @@ import { DirectTimedCodeNComponent } from './components/medical.note/components/
 import { CalendarMonthNComponent } from './components/medical.note/components/billing/componentsN/calendar-month/calendar-month-n.component';
 import { NerveConductionStudiesNComponent } from './components/medical.note/components/billing/componentsN/nerve-conduction-studies/nerve-conduction-studies-n.component';
 import { RespiratoryNComponent } from './components/medical.note/components/billing/componentsN/respiratory/respiratory-n.component';
+import { OtherTreatmentProceduresNComponent } from './components/medical.note/components/billing/componentsN/other-treatment-procedures/other-treatment-procedures-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -349,6 +350,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     CalendarMonthNComponent,
     NerveConductionStudiesNComponent,
     RespiratoryNComponent,
+    OtherTreatmentProceduresNComponent,
   ],
   imports: [
     CommonModule,
