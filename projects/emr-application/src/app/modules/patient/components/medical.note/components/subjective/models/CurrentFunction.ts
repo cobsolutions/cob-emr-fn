@@ -1,0 +1,37 @@
+export interface CurrentFunction {
+    currentFunctionalLimitationsOther?: boolean;
+    currentFunctionalLimitationsFunctionOtherText?: string;
+    currentFunctionalLimitationsFunctionOtherLymphedema?: boolean;
+    currentFunctionalLimitationsFunctionOtherLymphedemaText?: string;
+    currentFunctionalLimitationsFunctionOtherWoundHealing?: boolean;
+    currentFunctionalLimitationsFunctionOtherWoundHealingText?: string;
+    currentFunctionalLimitationsFunctionOtherPelvicHealth?: boolean;
+    currentFunctionalLimitationsFunctionOtherPelvicHealthText?: string;
+    currentFunctionalLimitationsSelfCareComment?: string;
+    currentFunctionalLimitationsSelfCareHygiene?: boolean;
+    currentFunctionalLimitationsSelfCareSleep?: boolean;
+    currentFunctionalLimitationsSelfCareIadls?: boolean;
+    currentFunctionalLimitationsSelfCareHouseholdChores?: boolean;
+    currentFunctionalLimitationsSelfCareDriveCommunity?: boolean;
+    currentFunctionalLimitationsSelfCareVolunteering?: boolean;
+    currentFunctionalLimitationsSelfCareCaregiving?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundComment?: string;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundMobilityIadls?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundAssistiveDevice?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundWalking?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundMovingAround?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundDifferentLocations?: boolean;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundNegotiateObstacles?: boolean;
+    currentFunctionalLimitationsChangingMaintainingBodyPositionComment?: string;
+    currentFunctionalLimitationsChangingMaintainingBodyPositionMaintainingBodyPosition?: boolean;
+    currentFunctionalLimitationsChangingMaintainingBodyPositionTransfers?: boolean;
+    currentFunctionalLimitationsChangingMaintainingBodyPositionBodyPositionIadls?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsComment?: string;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsCarryingIadls?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsHandArmUse?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsFineHandUse?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsLowerExtremities?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsCommunityIntegration?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsWorkVocation?: boolean;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsRecreation?: boolean;
+}
