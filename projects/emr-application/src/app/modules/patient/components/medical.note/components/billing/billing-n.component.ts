@@ -34,6 +34,7 @@ export class BillingNComponent implements OnInit {
       otherTreatmentProcedures: this.fb.group({}),
       supplies: this.fb.group({}),
       splintsorthotics: this.fb.group({}),
+      casts: this.fb.group({}),
     });
   }
   setChildForm(section: string, formGroup: FormGroup) {
