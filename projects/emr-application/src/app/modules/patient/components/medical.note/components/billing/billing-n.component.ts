@@ -32,6 +32,7 @@ export class BillingNComponent implements OnInit {
       nerveConductionStudies: this.fb.group({}),
       respiratory: this.fb.group({}),
       otherTreatmentProcedures: this.fb.group({}),
+      supplies: this.fb.group({}),
     });
   }
   setChildForm(section: string, formGroup: FormGroup) {
