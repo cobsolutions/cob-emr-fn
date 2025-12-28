@@ -22,6 +22,7 @@ export class PalpationNComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    this.formReady.emit(this.palpationTestForm);
   }
   initForm() {
     this.palpationTestForm = this.fb.group({

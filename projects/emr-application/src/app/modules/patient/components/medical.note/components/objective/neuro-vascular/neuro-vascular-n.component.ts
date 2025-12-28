@@ -63,6 +63,7 @@ export class NeuroVascularNComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    this.formReady.emit(this.neuroVascularForm);
   }
   initForm() {
     this.neuroVascularForm = this.fb.group({

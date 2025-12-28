@@ -31,6 +31,7 @@ export class StrengthNComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    this.formReady.emit(this.strengthForm);
   }
   /**
   * Generic helper to reset measurement-table fields (right/left)

@@ -121,7 +121,7 @@ export class InitialExaminationComponent implements OnInit {
       this.backtoPatientRecordActions()
     if (action === 'draft') {
       const formValues = this.getAllFormValues(this.initialExaminationForm);
-      console.log('Form Values:', formValues);
+      console.log('Form Values:', formValues.objective.palpation);
       console.log('Mapped Subjective:', this.subjectiveMapper.toModel(formValues.subjective));
     }
     // this.draft();

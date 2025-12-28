@@ -73,6 +73,7 @@ export class SpecialTestsNComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    this.formReady.emit(this.specialTestForm);
   }
   initForm() {
     this.specialTestForm = this.fb.group({
