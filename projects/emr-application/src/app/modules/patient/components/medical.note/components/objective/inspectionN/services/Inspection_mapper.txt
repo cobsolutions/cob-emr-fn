@@ -1,0 +1,80 @@
+Patient Consent Obj
+	patient_consent
+	patient_parent_guardian_consent
+Chaperone Obj
+	chaperone
+	chaperone_present
+inspection
+Girth Measurement Upper Obj	
+		girth_measurement_upper
+		upper_arm_right
+		upper_arm_left
+		mid_biceps_right
+		mid_biceps_left
+		elbow_flexion_crease_right
+		elbow_flexion_crease_left
+		forearm_right
+		forearm_left
+		wrist_right
+		wrist_left
+Girth Measurement Lower Obj 
+		girth_measurement_lower
+		mid_patella_right
+		mid_patella_left
+		mid_thigh_right
+		mid_thigh_left
+		mid_calf_right
+		mid_calf_left
+		mid_malleoli_right
+		mid_malleoli_left
+		ankle_figure_8_right
+		ankle_figure_8_left
+		mid_foot_right
+		mid_foot_left
+		metatarsal_heads_right
+		metatarsal_heads_left
+
+Post Operative Wound Healing Obj
+		post_operative_wound_healing true,
+		incision_sites
+		Surgical Precautions Obj
+			surgical_precautions
+		Scar Mobility Obj
+			scar_mobility
+			scar_mobility_text
+		Scar Type
+			"scar_type
+			"scar_type_select
+		Wound Description
+			wound_description
+			wound_description_text
+		Wound Measurements
+			wound_measurements
+			wound_length
+			wound_width
+
+Wound Care Obj
+		wound_care
+		surface culture Obj
+			surface_culture_used
+			surface_culture_used
+			surface_culture_levine
+			surface_culture_deep_swab
+			surface_culture_semiquantitative
+			surface_culture_quantitative
+			surface_culture_technique
+			surface_culture_reasoning
+		
+Surgical Scarring Obj
+		surgical_scarring
+		surgical_scarring_select
+Body Mass Index Obj 
+		body_mass_index
+		bmi_weight
+		bmi_height
+		bmi_units
+		bmi_index
+		bmi_followup_plan
+Additional Comments Obj
+	additional_comments
+	additional_comments_text
