@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { RangeOfMotionModel } from './models/range-of-motion.model';
 import { RangeOfMotionMapperService } from './services/range-of-motion-mapper.service';
 import { RomSectionsConfig, RomSectionConfig, RomSectionEndfeelConfig } from './config';
 import { generateSingleColumnFieldName, generateMeasurementFieldName, generateEndfeelFieldName } from '../common/form-field-utils';
+import { RangeOfMotion } from './models/RangeOfMotion';
 
 @Component({
   selector: 'range-of-motion-n',
@@ -11,7 +11,7 @@ import { generateSingleColumnFieldName, generateMeasurementFieldName, generateEn
   styleUrls: ['./range-of-motion-n.component.css']
 })
 export class RangeOfMotionNComponent implements OnInit {
-  @Input() rangeOfMotionData?: RangeOfMotionModel;
+  @Input() rangeOfMotionData?: RangeOfMotion;
   @Output() formReady = new EventEmitter<FormGroup>();
 
   romForm!: FormGroup;
@@ -181,14 +181,14 @@ export class RangeOfMotionNComponent implements OnInit {
   /**
    * Get the range of motion model from form (for sending to backend)
    */
-  getRangeOfMotionModel(): RangeOfMotionModel {
+  getRangeOfMotionModel(): RangeOfMotion {
     return this.rangeOfMotionMapper.toModel(this.romForm.getRawValue());
   }
 
   /**
    * Load range of motion data from DTO into form
    */
-  loadFromDto(dto: RangeOfMotionModel): void {
+  loadFromDto(dto: RangeOfMotion): void {
     const formValue = this.rangeOfMotionMapper.fromDto(dto);
     this.romForm.patchValue(formValue);
   }
