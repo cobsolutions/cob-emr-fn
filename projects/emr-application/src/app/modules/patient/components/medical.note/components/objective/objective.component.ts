@@ -6,9 +6,9 @@ import { MedialNoteService } from '../../../../services/medical.note/medial-note
 import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { ObjectiveProfile } from './models/objective.profile';
 import { InspectionNComponent } from './inspectionN/inspectionN.component';
-import { InspectionModel } from './inspectionN/models/inspection.model';
 import { OutcomeMeasurementToolsComponent } from './outcome-measurement-tools/outcome-measurement-tools.component';
 import { OutcomeMeasurementToolsModel } from './outcome-measurement-tools/models/outcome-measurement-tools.model';
+import { Inspection } from './inspectionN/models/Inspection';
 
 @Component({
   selector: 'objective',
@@ -116,7 +116,7 @@ export class ObjectiveComponent implements OnInit {
    * Get the inspection model from InspectionN component
    * Returns null if component is not available
    */
-  getInspectionModel(): InspectionModel | null {
+  getInspectionModel(): Inspection | null {
     if (this.inspectionComponent) {
       return this.inspectionComponent.getInspectionModel();
     }
