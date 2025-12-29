@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ObservationMapperService } from './services/observation-mapper.service';
-import { ObservationModel } from './models/observation.model';
+import { Observation } from './models/Observation';
 
 @Component({
   selector: 'observation-n',
@@ -11,7 +11,7 @@ import { ObservationModel } from './models/observation.model';
 export class ObservationNComponent implements OnInit {
   omtForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  @Input() observationData: ObservationModel | null = null;
+  @Input() observationData: Observation | null = null;
 
   // Visibility flags for dependent fields
   showBodyTypeFields: boolean = false;
@@ -196,14 +196,14 @@ export class ObservationNComponent implements OnInit {
   /**
    * Get the observation model from form (for sending to backend)
    */
-  getObservationModel(): ObservationModel {
+  getObservationModel(): Observation {
     return this.observationMapper.toModel(this.omtForm.getRawValue());
   }
 
   /**
    * Load observation data from DTO into form
    */
-  loadFromDto(dto: ObservationModel): void {
+  loadFromDto(dto: Observation): void {
     const formValue = this.observationMapper.fromDto(dto);
     this.omtForm.patchValue(formValue);
   }

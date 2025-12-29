@@ -1,37 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ObservationModel,
-  BodyTypeModel,
-  VitalsModel,
-  BloodPressureModel,
-  TemperatureModel,
-  PulseModel,
-  RespirationModel,
-  WeightModel,
-  ADLManagementModel,
-  ADLItemModel,
-  BreathingAtRestModel,
-  TransfersModel,
-  TransferItemModel,
-  CastSplintModel,
-  CastSplintInstanceModel,
-  StandingPostureModel,
-  ProtractedScapulasModel,
-  ScoliosisModel,
-  LowerExtremityStructureModel,
-  LowerExtremityMeasurementModel,
-  GaitModel,
-  SixMinuteWalkTestModel,
-  SixMinuteWalkRowModel,
-  AssistiveDeviceModel,
-  ImmobilizerModel,
-  MuscularAsymmetriesModel,
-  MuscleGuardingModel,
-  MuscleAtrophyModel,
-  EdemaModel,
-  ApprehensionOfMovementModel,
-  AdditionalCommentsModel
-} from '../models/observation.model';
+import { Observation } from '../models/Observation';
 
 @Injectable({
   providedIn: 'root'
@@ -41,643 +9,427 @@ export class ObservationMapperService {
   /**
    * Converts form raw value to ObservationModel for backend
    */
-  toModel(formValue: any): ObservationModel {
+  toModel(formValue: any): Observation {
     return {
-      bodyType: this.mapBodyType(formValue),
-      vitals: this.mapVitals(formValue),
-      adlManagement: this.mapADLManagement(formValue),
-      breathingAtRest: this.mapBreathingAtRest(formValue),
-      transfers: this.mapTransfers(formValue),
-      castSplint: this.mapCastSplint(formValue),
-      standingPosture: this.mapStandingPosture(formValue),
-      protractedScapulas: this.mapProtractedScapulas(formValue),
-      scoliosis: this.mapScoliosis(formValue),
-      lowerExtremityStructure: this.mapLowerExtremityStructure(formValue),
-      gait: this.mapGait(formValue),
-      sixMinuteWalkTest: this.mapSixMinuteWalkTest(formValue),
-      assistiveDevice: this.mapAssistiveDevice(formValue),
-      immobilizer: this.mapImmobilizer(formValue),
-      muscularAsymmetries: this.mapMuscularAsymmetries(formValue),
-      muscleGuarding: this.mapMuscleGuarding(formValue),
-      muscleAtrophy: this.mapMuscleAtrophy(formValue),
-      edema: this.mapEdema(formValue),
-      apprehensionOfMovement: this.mapApprehensionOfMovement(formValue),
-      additionalComments: this.mapAdditionalComments(formValue)
+      indicateBodyType: {
+        indicateBodyType: formValue.indicate_body_type || false,
+        bodyType: formValue.body_type || ''
+      },
+      vitals: {
+        vitals: formValue.vitals || false,
+        temperature: formValue.temperature || false,
+        bloodPressure: {
+          bloodPressure: formValue.blood_pressure || false,
+          bloodPressureOrthostaticRisk: formValue.blood_pressure_orthostatic_risk || false,
+          bloodPressureArm: formValue.blood_pressure_arm || '',
+          bloodPressureSystolic: formValue.blood_pressure_systolic || '',
+          bloodPressureDiastolic: formValue.blood_pressure_diastolic || '',
+          bloodPressureLocation: formValue.blood_pressure_location || '',
+          bloodPressurePosition: formValue.blood_pressure_position || ''
+        },
+        pulse: {
+          pulse: formValue.pulse || false,
+          pulseValue: formValue.pulse_value || '',
+          pulseBpmType: formValue.pulse_bpm_type || '',
+          pulseRight: formValue.pulse_right || '',
+          pulseLeft: formValue.pulse_left || ''
+        },
+        respiration: {
+          respiration: formValue.respiration || false,
+          respirationSelections: formValue.respiration_selections || [],
+          respirationComments: formValue.respiration_comments || ''
+        },
+        weight: {
+          weight: formValue.weight || false,
+          weightValue: formValue.weight_value || '',
+          weightUnit: formValue.weight_unit || ''
+        }
+      },
+      aDLManagement: {
+        adlManagement: formValue.adl_management || false,
+        adlBathing: formValue.adl_bathing || false,
+        adlBathingStatus: formValue.adl_bathing_status || '',
+        adlToileting: formValue.adl_toileting || false,
+        adlToiletingStatus: formValue.adl_toileting_status || '',
+        adlDressing: formValue.adl_dressing || false,
+        adlDressingStatus: formValue.adl_dressing_status || '',
+        adlGrooming: formValue.adl_grooming || false,
+        adlGroomingStatus: formValue.adl_grooming_status || '',
+        adlEating: formValue.adl_eating || false,
+        adlEatingStatus: formValue.adl_eating_status || ''
+      },
+      breathingatRest: {
+        breathingAtRest: formValue.breathing_at_rest || false,
+        breathingApical: formValue.breathing_apical || false,
+        breathingDiaphragmatically: formValue.breathing_diaphragmatically || false,
+        breathingShortened: formValue.breathing_shortened || false,
+        breathingAsymmetrical: formValue.breathing_asymmetrical || false,
+        breathingDecreased: formValue.breathing_decreased || false,
+        breathingAccessory: formValue.breathing_accessory || false,
+        breathingComments: formValue.breathing_comments || ''
+      },
+      transfers: {
+        transfers: formValue.transfers || false,
+        transferSupineToSit: formValue.transfer_supine_to_sit || false,
+        transferSupineToSitStatus: formValue.transfer_supine_to_sit_status || '',
+        transferSupineToSitComments: formValue.transfer_supine_to_sit_comments || '',
+        transferSitToStand: formValue.transfer_sit_to_stand || false,
+        transferSitToStandStatus: formValue.transfer_sit_to_stand_status || '',
+        transferSitToStandComments: formValue.transfer_sit_to_stand_comments || '',
+        transferToilet: formValue.transfer_toilet || false,
+        transferToiletStatus: formValue.transfer_toilet_status || '',
+        transferToiletComments: formValue.transfer_toilet_comments || ''
+      },
+      castSplint: {
+        castSplint: formValue.cast_splint || false,
+        castSplintType_1: formValue.cast_splint_type_1 || '',
+        castSplintComplaints_1: formValue.cast_splint_complaints_1 || '',
+        castSplintDateApplied_1: formValue.cast_splint_date_applied_1 || '',
+        castSplintComments_1: formValue.cast_splint_comments_1 || '',
+        castSplintType_2: formValue.cast_splint_type_2 || '',
+        castSplintComplaints_2: formValue.cast_splint_complaints_2 || '',
+        castSplintDateApplied_2: formValue.cast_splint_date_applied_2 || '',
+        castSplintDateRemoved_2: formValue.cast_splint_date_removed_2 || '',
+        castSplintComments_2: formValue.cast_splint_comments_2 || ''
+      },
+      standingPosture: {
+        standingPosture: formValue.standing_posture || false,
+        standingPostureSelections: formValue.standing_posture_selections || [],
+        standingPostureComments: formValue.standing_posture_comments || ''
+      },
+      protractedScapulas: {
+        protractedScapulas: formValue.protracted_scapulas || false,
+        protractedScapulasRight: formValue.protracted_scapulas_right || '',
+        protractedScapulasLeft: formValue.protracted_scapulas_left || ''
+      },
+      scoliosis: {
+        scoliosis: formValue.scoliosis || false,
+        scoliosisType: formValue.scoliosis_type || '',
+        scoliosisCurvature: formValue.scoliosis_curvature || ''
+      },
+      lowerExtremityStructure: {
+        lowerExtremityStructure: formValue.lower_extremity_structure || false,
+        lesGenuValgusRight: formValue.les_genu_valgus_right || '',
+        lesGenuValgusLeft: formValue.les_genu_valgus_left || '',
+        lesGenuVarusRight: formValue.les_genu_varus_right || '',
+        lesGenuVarusLeft: formValue.les_genu_varus_left || '',
+        lesTibialTorsionRight: formValue.les_tibial_torsion_right || '',
+        lesTibialTorsionLeft: formValue.les_tibial_torsion_left || '',
+        lesGenuRecurvatumRight: formValue.les_genu_recurvatum_right || '',
+        lesGenuRecurvatumLeft: formValue.les_genu_recurvatum_left || '',
+        lesFootPronationRight: formValue.les_foot_pronation_right || '',
+        lesFootPronationLeft: formValue.les_foot_pronation_left || '',
+        lesFootSupinationRight: formValue.les_foot_supination_right || '',
+        lesFootSupinationLeft: formValue.les_foot_supination_left || '',
+        lesFemoralAnteversionRight: formValue.les_femoral_anteversion_right || '',
+        lesFemoralAnteversionLeft: formValue.les_femoral_anteversion_left || '',
+        lesFemoralRetroversionRight: formValue.les_femoral_retroversion_right || '',
+        lesFemoralRetroversionLeft: formValue.les_femoral_retroversion_left || '',
+        lesDyskineticLeChainRight: formValue.les_dyskinetic_le_chain_right || '',
+        lesDyskineticLeChainLeft: formValue.les_dyskinetic_le_chain_left || '',
+        lesPatellarPositionRight: formValue.les_patellar_position_right || '',
+        lesPatellarPositionLeft: formValue.les_patellar_position_left || '',
+        lesCalcanealExostosisRight: formValue.les_calcaneal_exostosis_right || '',
+        lesCalcanealExostosisLeft: formValue.les_calcaneal_exostosis_left || '',
+        lesCalcanealValgusRight: formValue.les_calcaneal_valgus_right || '',
+        lesCalcanealValgusLeft: formValue.les_calcaneal_valgus_left || '',
+        lesCalcanealVarusRight: formValue.les_calcaneal_varus_right || '',
+        lesCalcanealVarusLeft: formValue.les_calcaneal_varus_left || '',
+        lesHalluxValgusRight: formValue.les_hallux_valgus_right || '',
+        lesHalluxValgusLeft: formValue.les_hallux_valgus_left || ''
+      },
+      gait: {
+        gait: formValue.gait || false,
+        gaitSelections: formValue.gait_selections || [],
+        gaitComments: formValue.gait_comments || ''
+      },
+      sixMinuteWalkTest: {
+        sixMinuteWalkTest: formValue.six_minute_walk_test || false,
+        walkRestSp02: formValue.walk_rest_sp02 || '',
+        walkRestHeartRate: formValue.walk_rest_heart_rate || '',
+        walkRestRespiratoryRate: formValue.walk_rest_respiratory_rate || '',
+        walkRestBorgScale: formValue.walk_rest_borg_scale || '',
+        walkRestDistance: formValue.walk_rest_distance || '',
+        walk_1minSp02: formValue.walk_1min_sp02 || '',
+        walk_1minHeartRate: formValue.walk_1min_heart_rate || '',
+        walk_1minRespiratoryRate: formValue.walk_1min_respiratory_rate || '',
+        walk_1minBorgScale: formValue.walk_1min_borg_scale || '',
+        walk_1minDistance: formValue.walk_1min_distance || '',
+        walk_2minSp02: formValue.walk_2min_sp02 || '',
+        walk_2minHeartRate: formValue.walk_2min_heart_rate || '',
+        walk_2minRespiratoryRate: formValue.walk_2min_respiratory_rate || '',
+        walk_2minBorgScale: formValue.walk_2min_borg_scale || '',
+        walk_2minDistance: formValue.walk_2min_distance || '',
+        walk_3minSp02: formValue.walk_3min_sp02 || '',
+        walk_3minHeartRate: formValue.walk_3min_heart_rate || '',
+        walk_3minRespiratoryRate: formValue.walk_3min_respiratory_rate || '',
+        walk_3minBorgScale: formValue.walk_3min_borg_scale || '',
+        walk_3minDistance: formValue.walk_3min_distance || '',
+        walk_4minSp02: formValue.walk_4min_sp02 || '',
+        walk_4minHeartRate: formValue.walk_4min_heart_rate || '',
+        walk_4minRespiratoryRate: formValue.walk_4min_respiratory_rate || '',
+        walk_4minBorgScale: formValue.walk_4min_borg_scale || '',
+        walk_4minDistance: formValue.walk_4min_distance || '',
+        walk_5minSp02: formValue.walk_5min_sp02 || '',
+        walk_5minHeartRate: formValue.walk_5min_heart_rate || '',
+        walk_5minRespiratoryRate: formValue.walk_5min_respiratory_rate || '',
+        walk_5minBorgScale: formValue.walk_5min_borg_scale || '',
+        walk_5minDistance: formValue.walk_5min_distance || '',
+        walk_6minSp02: formValue.walk_6min_sp02 || '',
+        walk_6minHeartRate: formValue.walk_6min_heart_rate || '',
+        walk_6minRespiratoryRate: formValue.walk_6min_respiratory_rate || '',
+        walk_6minBorgScale: formValue.walk_6min_borg_scale || '',
+        walk_6minDistance: formValue.walk_6min_distance || '',
+        walkComments: formValue.walk_comments || ''
+      },
+      assistiveDevice: {
+        assistiveDevice: formValue.assistive_device || false,
+        assistiveDeviceType: formValue.assistive_device_type || '',
+        assistiveDeviceHand: formValue.assistive_device_hand || '',
+        assistiveDeviceComments: formValue.assistive_device_comments || ''
+      },
+      immobilizer: {
+        immobilizer: formValue.immobilizer || false,
+        immobilizerType: formValue.immobilizer_type || '',
+        immobilizerCompliant: formValue.immobilizer_compliant || false
+      },
+      muscularAsymmetries: {
+        muscularAsymmetries: formValue.muscular_asymmetries || false,
+        muscularAsymmetriesDescription: formValue.muscular_asymmetries_description || ''
+      },
+      muscleGuarding: {
+        muscleGuarding: formValue.muscle_guarding || false,
+        muscleGuardingValue: formValue.muscle_guarding_value || ''
+      },
+      muscleAtrophy: {
+        muscleAtrophy: formValue.muscle_atrophy || false,
+        muscleAtrophyDescription: formValue.muscle_atrophy_description || ''
+      },
+      edema: {
+        edemaDescription: formValue.edema_description || '',
+        edemaPitting: formValue.edema_pitting || false
+      },
+      apprehensionofMovement: {
+        apprehensionOfMovement: formValue.apprehension_of_movement || false,
+        apprehensionValue: formValue.apprehension_value || ''
+      },
+      additionalComments: {
+        additionalComments: formValue.additional_comments || false,
+        additionalCommentsText: formValue.additional_comments_text || ''
+      }
     };
   }
 
   /**
    * Converts DTO from backend to form value object
    */
-  fromDto(dto: ObservationModel): any {
+  fromDto(dto: Observation): any {
     return {
-      // Body Type
-      indicate_body_type: dto.bodyType.enabled ? 'yes' : 'no',
-      body_type: dto.bodyType.bodyType || 'mesomorph',
+      // Indicate Body Type
+      indicate_body_type: dto.indicateBodyType?.indicateBodyType || false,
+      body_type: dto.indicateBodyType?.bodyType || '',
 
       // Vitals
-      vitals: dto.vitals.enabled ? 'yes' : 'no',
-      blood_pressure: dto.vitals.bloodPressure?.enabled ? 'yes' : 'no',
-      blood_pressure_orthostatic_risk: dto.vitals.bloodPressure?.orthostaticRisk || false,
-      blood_pressure_arm: dto.vitals.bloodPressure?.arm || 'right',
-      blood_pressure_systolic: dto.vitals.bloodPressure?.systolic || '',
-      blood_pressure_diastolic: dto.vitals.bloodPressure?.diastolic || '',
-      blood_pressure_location: dto.vitals.bloodPressure?.location || 'upper_arm',
-      blood_pressure_position: dto.vitals.bloodPressure?.position || 'sitting',
-      temperature: dto.vitals.temperature?.enabled ? 'yes' : 'no',
-      pulse: dto.vitals.pulse?.enabled ? 'yes' : 'no',
-      pulse_value: dto.vitals.pulse?.value || '',
-      pulse_bpm_type: dto.vitals.pulse?.bpmType || 'bpm_radial',
-      pulse_right: dto.vitals.pulse?.right || 'not_tested',
-      pulse_left: dto.vitals.pulse?.left || 'not_tested',
-      respiration: dto.vitals.respiration?.enabled ? 'yes' : 'no',
-      respiration_selections: dto.vitals.respiration?.selections || [],
-      respiration_comments: dto.vitals.respiration?.comments || '',
-      weight: dto.vitals.weight?.enabled ? 'yes' : 'no',
-      weight_value: dto.vitals.weight?.value || '',
-      weight_unit: dto.vitals.weight?.unit || 'lbs',
+      vitals: dto.vitals?.vitals || false,
+      temperature: dto.vitals?.temperature || false,
+
+      // Blood Pressure
+      blood_pressure: dto.vitals?.bloodPressure?.bloodPressure || false,
+      blood_pressure_orthostatic_risk: dto.vitals?.bloodPressure?.bloodPressureOrthostaticRisk || false,
+      blood_pressure_arm: dto.vitals?.bloodPressure?.bloodPressureArm || '',
+      blood_pressure_systolic: dto.vitals?.bloodPressure?.bloodPressureSystolic || '',
+      blood_pressure_diastolic: dto.vitals?.bloodPressure?.bloodPressureDiastolic || '',
+      blood_pressure_location: dto.vitals?.bloodPressure?.bloodPressureLocation || '',
+      blood_pressure_position: dto.vitals?.bloodPressure?.bloodPressurePosition || '',
+
+      // Pulse
+      pulse: dto.vitals?.pulse?.pulse || false,
+      pulse_value: dto.vitals?.pulse?.pulseValue || '',
+      pulse_bpm_type: dto.vitals?.pulse?.pulseBpmType || '',
+      pulse_right: dto.vitals?.pulse?.pulseRight || '',
+      pulse_left: dto.vitals?.pulse?.pulseLeft || '',
+
+      // Respiration
+      respiration: dto.vitals?.respiration?.respiration || false,
+      respiration_selections: dto.vitals?.respiration?.respirationSelections || [],
+      respiration_comments: dto.vitals?.respiration?.respirationComments || '',
+
+      // Weight
+      weight: dto.vitals?.weight?.weight || false,
+      weight_value: dto.vitals?.weight?.weightValue || '',
+      weight_unit: dto.vitals?.weight?.weightUnit || '',
 
       // ADL Management
-      adl_management: dto.adlManagement.enabled ? 'yes' : 'no',
-      adl_bathing: dto.adlManagement.bathing?.value || 'no',
-      adl_bathing_status: dto.adlManagement.bathing?.status || 'independent',
-      adl_toileting: dto.adlManagement.toileting?.value || 'no',
-      adl_toileting_status: dto.adlManagement.toileting?.status || 'independent',
-      adl_dressing: dto.adlManagement.dressing?.value || 'no',
-      adl_dressing_status: dto.adlManagement.dressing?.status || 'independent',
-      adl_grooming: dto.adlManagement.grooming?.value || 'no',
-      adl_grooming_status: dto.adlManagement.grooming?.status || 'independent',
-      adl_eating: dto.adlManagement.eating?.value || 'no',
-      adl_eating_status: dto.adlManagement.eating?.status || 'independent',
+      adl_management: dto.aDLManagement?.adlManagement || false,
+      adl_bathing: dto.aDLManagement?.adlBathing || false,
+      adl_bathing_status: dto.aDLManagement?.adlBathingStatus || '',
+      adl_toileting: dto.aDLManagement?.adlToileting || false,
+      adl_toileting_status: dto.aDLManagement?.adlToiletingStatus || '',
+      adl_dressing: dto.aDLManagement?.adlDressing || false,
+      adl_dressing_status: dto.aDLManagement?.adlDressingStatus || '',
+      adl_grooming: dto.aDLManagement?.adlGrooming || false,
+      adl_grooming_status: dto.aDLManagement?.adlGroomingStatus || '',
+      adl_eating: dto.aDLManagement?.adlEating || false,
+      adl_eating_status: dto.aDLManagement?.adlEatingStatus || '',
 
       // Breathing at Rest
-      breathing_at_rest: dto.breathingAtRest.enabled ? 'yes' : 'no',
-      breathing_apical: dto.breathingAtRest.apical || false,
-      breathing_diaphragmatically: dto.breathingAtRest.diaphragmatically || false,
-      breathing_shortened: dto.breathingAtRest.shortenedInhalation || false,
-      breathing_asymmetrical: dto.breathingAtRest.asymmetricalRibExcursion || false,
-      breathing_decreased: dto.breathingAtRest.decreasedRibMotion || false,
-      breathing_accessory: dto.breathingAtRest.useOfAccessoryMuscles || false,
-      breathing_comments: dto.breathingAtRest.comments || '',
+      breathing_at_rest: dto.breathingatRest?.breathingAtRest || false,
+      breathing_apical: dto.breathingatRest?.breathingApical || false,
+      breathing_diaphragmatically: dto.breathingatRest?.breathingDiaphragmatically || false,
+      breathing_shortened: dto.breathingatRest?.breathingShortened || false,
+      breathing_asymmetrical: dto.breathingatRest?.breathingAsymmetrical || false,
+      breathing_decreased: dto.breathingatRest?.breathingDecreased || false,
+      breathing_accessory: dto.breathingatRest?.breathingAccessory || false,
+      breathing_comments: dto.breathingatRest?.breathingComments || '',
 
       // Transfers
-      transfers: dto.transfers.enabled ? 'yes' : 'no',
-      transfer_supine_to_sit: dto.transfers.supineToSit?.value || 'no',
-      transfer_supine_to_sit_status: dto.transfers.supineToSit?.status || 'independent',
-      transfer_supine_to_sit_comments: dto.transfers.supineToSit?.comments || '',
-      transfer_sit_to_stand: dto.transfers.sitToStand?.value || 'no',
-      transfer_sit_to_stand_status: dto.transfers.sitToStand?.status || 'independent',
-      transfer_sit_to_stand_comments: dto.transfers.sitToStand?.comments || '',
-      transfer_toilet: dto.transfers.toiletTransfers?.value || 'no',
-      transfer_toilet_status: dto.transfers.toiletTransfers?.status || 'independent',
-      transfer_toilet_comments: dto.transfers.toiletTransfers?.comments || '',
+      transfers: dto.transfers?.transfers || false,
+      transfer_supine_to_sit: dto.transfers?.transferSupineToSit || false,
+      transfer_supine_to_sit_status: dto.transfers?.transferSupineToSitStatus || '',
+      transfer_supine_to_sit_comments: dto.transfers?.transferSupineToSitComments || '',
+      transfer_sit_to_stand: dto.transfers?.transferSitToStand || false,
+      transfer_sit_to_stand_status: dto.transfers?.transferSitToStandStatus || '',
+      transfer_sit_to_stand_comments: dto.transfers?.transferSitToStandComments || '',
+      transfer_toilet: dto.transfers?.transferToilet || false,
+      transfer_toilet_status: dto.transfers?.transferToiletStatus || '',
+      transfer_toilet_comments: dto.transfers?.transferToiletComments || '',
 
-      // Cast/Splint
-      cast_splint: dto.castSplint.enabled ? 'yes' : 'no',
-      cast_splint_type_1: dto.castSplint.instance1?.type || 'cast',
-      cast_splint_complaints_1: dto.castSplint.instance1?.complaintsWithUse || 'not_tested',
-      cast_splint_date_applied_1: dto.castSplint.instance1?.dateApplied || '',
-      cast_splint_date_removed_1: dto.castSplint.instance1?.dateRemoved || '',
-      cast_splint_comments_1: dto.castSplint.instance1?.comments || '',
-      cast_splint_type_2: dto.castSplint.instance2?.type || 'not_tested',
-      cast_splint_complaints_2: dto.castSplint.instance2?.complaintsWithUse || 'not_tested',
-      cast_splint_date_applied_2: dto.castSplint.instance2?.dateApplied || '',
-      cast_splint_date_removed_2: dto.castSplint.instance2?.dateRemoved || '',
-      cast_splint_comments_2: dto.castSplint.instance2?.comments || '',
+      // Cast Splint
+      cast_splint: dto.castSplint?.castSplint || false,
+      cast_splint_type_1: dto.castSplint?.castSplintType_1 || '',
+      cast_splint_complaints_1: dto.castSplint?.castSplintComplaints_1 || '',
+      cast_splint_date_applied_1: dto.castSplint?.castSplintDateApplied_1 || '',
+      cast_splint_comments_1: dto.castSplint?.castSplintComments_1 || '',
+      cast_splint_type_2: dto.castSplint?.castSplintType_2 || '',
+      cast_splint_complaints_2: dto.castSplint?.castSplintComplaints_2 || '',
+      cast_splint_date_applied_2: dto.castSplint?.castSplintDateApplied_2 || '',
+      cast_splint_date_removed_2: dto.castSplint?.castSplintDateRemoved_2 || '',
+      cast_splint_comments_2: dto.castSplint?.castSplintComments_2 || '',
 
       // Standing Posture
-      standing_posture: dto.standingPosture.enabled ? 'yes' : 'no',
-      standing_posture_selections: dto.standingPosture.selections || [],
-      standing_posture_comments: dto.standingPosture.comments || '',
+      standing_posture: dto.standingPosture?.standingPosture || false,
+      standing_posture_selections: dto.standingPosture?.standingPostureSelections || [],
+      standing_posture_comments: dto.standingPosture?.standingPostureComments || '',
 
       // Protracted Scapulas
-      protracted_scapulas: dto.protractedScapulas.enabled ? 'yes' : 'no',
-      protracted_scapulas_right: dto.protractedScapulas.right || '1cm',
-      protracted_scapulas_left: dto.protractedScapulas.left || '1cm',
+      protracted_scapulas: dto.protractedScapulas?.protractedScapulas || false,
+      protracted_scapulas_right: dto.protractedScapulas?.protractedScapulasRight || '',
+      protracted_scapulas_left: dto.protractedScapulas?.protractedScapulasLeft || '',
 
       // Scoliosis
-      scoliosis: dto.scoliosis.enabled ? 'yes' : 'no',
-      scoliosis_type: dto.scoliosis.type || 'functional',
-      scoliosis_curvature: dto.scoliosis.curvature || 'right',
+      scoliosis: dto.scoliosis?.scoliosis || false,
+      scoliosis_type: dto.scoliosis?.scoliosisType || '',
+      scoliosis_curvature: dto.scoliosis?.scoliosisCurvature || '',
 
       // Lower Extremity Structure
-      lower_extremity_structure: dto.lowerExtremityStructure.enabled ? 'yes' : 'no',
-      les_genu_valgus_right: dto.lowerExtremityStructure.genuValgus?.right || 'not_tested',
-      les_genu_valgus_left: dto.lowerExtremityStructure.genuValgus?.left || 'not_tested',
-      les_genu_varus_right: dto.lowerExtremityStructure.genuVarus?.right || 'not_tested',
-      les_genu_varus_left: dto.lowerExtremityStructure.genuVarus?.left || 'not_tested',
-      les_tibial_torsion_right: dto.lowerExtremityStructure.tibialTorsion?.right || 'not_tested',
-      les_tibial_torsion_left: dto.lowerExtremityStructure.tibialTorsion?.left || 'not_tested',
-      les_genu_recurvatum_right: dto.lowerExtremityStructure.genuRecurvatum?.right || 'not_tested',
-      les_genu_recurvatum_left: dto.lowerExtremityStructure.genuRecurvatum?.left || 'not_tested',
-      les_foot_pronation_right: dto.lowerExtremityStructure.footPronation?.right || 'not_tested',
-      les_foot_pronation_left: dto.lowerExtremityStructure.footPronation?.left || 'not_tested',
-      les_foot_supination_right: dto.lowerExtremityStructure.footSupination?.right || 'not_tested',
-      les_foot_supination_left: dto.lowerExtremityStructure.footSupination?.left || 'not_tested',
-      les_femoral_anteversion_right: dto.lowerExtremityStructure.femoralAnteversion?.right || 'not_tested',
-      les_femoral_anteversion_left: dto.lowerExtremityStructure.femoralAnteversion?.left || 'not_tested',
-      les_femoral_retroversion_right: dto.lowerExtremityStructure.femoralRetroversion?.right || 'not_tested',
-      les_femoral_retroversion_left: dto.lowerExtremityStructure.femoralRetroversion?.left || 'not_tested',
-      les_dyskinetic_le_chain_right: dto.lowerExtremityStructure.dyskineticLEChain?.right || 'not_tested',
-      les_dyskinetic_le_chain_left: dto.lowerExtremityStructure.dyskineticLEChain?.left || 'not_tested',
-      les_patellar_position_right: dto.lowerExtremityStructure.patellarPosition?.right || 'not_tested',
-      les_patellar_position_left: dto.lowerExtremityStructure.patellarPosition?.left || 'not_tested',
-      les_calcaneal_exostosis_right: dto.lowerExtremityStructure.calcanealExostosis?.right || 'not_tested',
-      les_calcaneal_exostosis_left: dto.lowerExtremityStructure.calcanealExostosis?.left || 'not_tested',
-      les_calcaneal_valgus_right: dto.lowerExtremityStructure.calcanealValgus?.right || 'not_tested',
-      les_calcaneal_valgus_left: dto.lowerExtremityStructure.calcanealValgus?.left || 'not_tested',
-      les_calcaneal_varus_right: dto.lowerExtremityStructure.calcanealVarus?.right || 'not_tested',
-      les_calcaneal_varus_left: dto.lowerExtremityStructure.calcanealVarus?.left || 'not_tested',
-      les_hallux_valgus_right: dto.lowerExtremityStructure.halluxValgus?.right || 'not_tested',
-      les_hallux_valgus_left: dto.lowerExtremityStructure.halluxValgus?.left || 'not_tested',
+      lower_extremity_structure: dto.lowerExtremityStructure?.lowerExtremityStructure || false,
+      les_genu_valgus_right: dto.lowerExtremityStructure?.lesGenuValgusRight || '',
+      les_genu_valgus_left: dto.lowerExtremityStructure?.lesGenuValgusLeft || '',
+      les_genu_varus_right: dto.lowerExtremityStructure?.lesGenuVarusRight || '',
+      les_genu_varus_left: dto.lowerExtremityStructure?.lesGenuVarusLeft || '',
+      les_tibial_torsion_right: dto.lowerExtremityStructure?.lesTibialTorsionRight || '',
+      les_tibial_torsion_left: dto.lowerExtremityStructure?.lesTibialTorsionLeft || '',
+      les_genu_recurvatum_right: dto.lowerExtremityStructure?.lesGenuRecurvatumRight || '',
+      les_genu_recurvatum_left: dto.lowerExtremityStructure?.lesGenuRecurvatumLeft || '',
+      les_foot_pronation_right: dto.lowerExtremityStructure?.lesFootPronationRight || '',
+      les_foot_pronation_left: dto.lowerExtremityStructure?.lesFootPronationLeft || '',
+      les_foot_supination_right: dto.lowerExtremityStructure?.lesFootSupinationRight || '',
+      les_foot_supination_left: dto.lowerExtremityStructure?.lesFootSupinationLeft || '',
+      les_femoral_anteversion_right: dto.lowerExtremityStructure?.lesFemoralAnteversionRight || '',
+      les_femoral_anteversion_left: dto.lowerExtremityStructure?.lesFemoralAnteversionLeft || '',
+      les_femoral_retroversion_right: dto.lowerExtremityStructure?.lesFemoralRetroversionRight || '',
+      les_femoral_retroversion_left: dto.lowerExtremityStructure?.lesFemoralRetroversionLeft || '',
+      les_dyskinetic_le_chain_right: dto.lowerExtremityStructure?.lesDyskineticLeChainRight || '',
+      les_dyskinetic_le_chain_left: dto.lowerExtremityStructure?.lesDyskineticLeChainLeft || '',
+      les_patellar_position_right: dto.lowerExtremityStructure?.lesPatellarPositionRight || '',
+      les_patellar_position_left: dto.lowerExtremityStructure?.lesPatellarPositionLeft || '',
+      les_calcaneal_exostosis_right: dto.lowerExtremityStructure?.lesCalcanealExostosisRight || '',
+      les_calcaneal_exostosis_left: dto.lowerExtremityStructure?.lesCalcanealExostosisLeft || '',
+      les_calcaneal_valgus_right: dto.lowerExtremityStructure?.lesCalcanealValgusRight || '',
+      les_calcaneal_valgus_left: dto.lowerExtremityStructure?.lesCalcanealValgusLeft || '',
+      les_calcaneal_varus_right: dto.lowerExtremityStructure?.lesCalcanealVarusRight || '',
+      les_calcaneal_varus_left: dto.lowerExtremityStructure?.lesCalcanealVarusLeft || '',
+      les_hallux_valgus_right: dto.lowerExtremityStructure?.lesHalluxValgusRight || '',
+      les_hallux_valgus_left: dto.lowerExtremityStructure?.lesHalluxValgusLeft || '',
 
       // Gait
-      gait: dto.gait.enabled ? 'yes' : 'no',
-      gait_selections: dto.gait.selections || [],
-      gait_comments: dto.gait.comments || '',
+      gait: dto.gait?.gait || false,
+      gait_selections: dto.gait?.gaitSelections || [],
+      gait_comments: dto.gait?.gaitComments || '',
 
-      // 6 Minute Walk Test
-      six_minute_walk_test: dto.sixMinuteWalkTest.enabled ? 'yes' : 'no',
-      walk_rest_sp02: dto.sixMinuteWalkTest.rest?.sp02 || '',
-      walk_rest_heart_rate: dto.sixMinuteWalkTest.rest?.heartRate || '',
-      walk_rest_respiratory_rate: dto.sixMinuteWalkTest.rest?.respiratoryRate || '',
-      walk_rest_borg_scale: dto.sixMinuteWalkTest.rest?.borgScale || '',
-      walk_rest_distance: dto.sixMinuteWalkTest.rest?.distance || '',
-      walk_1min_sp02: dto.sixMinuteWalkTest.min1?.sp02 || '',
-      walk_1min_heart_rate: dto.sixMinuteWalkTest.min1?.heartRate || '',
-      walk_1min_respiratory_rate: dto.sixMinuteWalkTest.min1?.respiratoryRate || '',
-      walk_1min_borg_scale: dto.sixMinuteWalkTest.min1?.borgScale || '',
-      walk_1min_distance: dto.sixMinuteWalkTest.min1?.distance || '',
-      walk_2min_sp02: dto.sixMinuteWalkTest.min2?.sp02 || '',
-      walk_2min_heart_rate: dto.sixMinuteWalkTest.min2?.heartRate || '',
-      walk_2min_respiratory_rate: dto.sixMinuteWalkTest.min2?.respiratoryRate || '',
-      walk_2min_borg_scale: dto.sixMinuteWalkTest.min2?.borgScale || '',
-      walk_2min_distance: dto.sixMinuteWalkTest.min2?.distance || '',
-      walk_3min_sp02: dto.sixMinuteWalkTest.min3?.sp02 || '',
-      walk_3min_heart_rate: dto.sixMinuteWalkTest.min3?.heartRate || '',
-      walk_3min_respiratory_rate: dto.sixMinuteWalkTest.min3?.respiratoryRate || '',
-      walk_3min_borg_scale: dto.sixMinuteWalkTest.min3?.borgScale || '',
-      walk_3min_distance: dto.sixMinuteWalkTest.min3?.distance || '',
-      walk_4min_sp02: dto.sixMinuteWalkTest.min4?.sp02 || '',
-      walk_4min_heart_rate: dto.sixMinuteWalkTest.min4?.heartRate || '',
-      walk_4min_respiratory_rate: dto.sixMinuteWalkTest.min4?.respiratoryRate || '',
-      walk_4min_borg_scale: dto.sixMinuteWalkTest.min4?.borgScale || '',
-      walk_4min_distance: dto.sixMinuteWalkTest.min4?.distance || '',
-      walk_5min_sp02: dto.sixMinuteWalkTest.min5?.sp02 || '',
-      walk_5min_heart_rate: dto.sixMinuteWalkTest.min5?.heartRate || '',
-      walk_5min_respiratory_rate: dto.sixMinuteWalkTest.min5?.respiratoryRate || '',
-      walk_5min_borg_scale: dto.sixMinuteWalkTest.min5?.borgScale || '',
-      walk_5min_distance: dto.sixMinuteWalkTest.min5?.distance || '',
-      walk_6min_sp02: dto.sixMinuteWalkTest.min6?.sp02 || '',
-      walk_6min_heart_rate: dto.sixMinuteWalkTest.min6?.heartRate || '',
-      walk_6min_respiratory_rate: dto.sixMinuteWalkTest.min6?.respiratoryRate || '',
-      walk_6min_borg_scale: dto.sixMinuteWalkTest.min6?.borgScale || '',
-      walk_6min_distance: dto.sixMinuteWalkTest.min6?.distance || '',
-      walk_comments: dto.sixMinuteWalkTest.comments || '',
+      // Six Minute Walk Test
+      six_minute_walk_test: dto.sixMinuteWalkTest?.sixMinuteWalkTest || false,
+      walk_rest_sp02: dto.sixMinuteWalkTest?.walkRestSp02 || '',
+      walk_rest_heart_rate: dto.sixMinuteWalkTest?.walkRestHeartRate || '',
+      walk_rest_respiratory_rate: dto.sixMinuteWalkTest?.walkRestRespiratoryRate || '',
+      walk_rest_borg_scale: dto.sixMinuteWalkTest?.walkRestBorgScale || '',
+      walk_rest_distance: dto.sixMinuteWalkTest?.walkRestDistance || '',
+      walk_1min_sp02: dto.sixMinuteWalkTest?.walk_1minSp02 || '',
+      walk_1min_heart_rate: dto.sixMinuteWalkTest?.walk_1minHeartRate || '',
+      walk_1min_respiratory_rate: dto.sixMinuteWalkTest?.walk_1minRespiratoryRate || '',
+      walk_1min_borg_scale: dto.sixMinuteWalkTest?.walk_1minBorgScale || '',
+      walk_1min_distance: dto.sixMinuteWalkTest?.walk_1minDistance || '',
+      walk_2min_sp02: dto.sixMinuteWalkTest?.walk_2minSp02 || '',
+      walk_2min_heart_rate: dto.sixMinuteWalkTest?.walk_2minHeartRate || '',
+      walk_2min_respiratory_rate: dto.sixMinuteWalkTest?.walk_2minRespiratoryRate || '',
+      walk_2min_borg_scale: dto.sixMinuteWalkTest?.walk_2minBorgScale || '',
+      walk_2min_distance: dto.sixMinuteWalkTest?.walk_2minDistance || '',
+      walk_3min_sp02: dto.sixMinuteWalkTest?.walk_3minSp02 || '',
+      walk_3min_heart_rate: dto.sixMinuteWalkTest?.walk_3minHeartRate || '',
+      walk_3min_respiratory_rate: dto.sixMinuteWalkTest?.walk_3minRespiratoryRate || '',
+      walk_3min_borg_scale: dto.sixMinuteWalkTest?.walk_3minBorgScale || '',
+      walk_3min_distance: dto.sixMinuteWalkTest?.walk_3minDistance || '',
+      walk_4min_sp02: dto.sixMinuteWalkTest?.walk_4minSp02 || '',
+      walk_4min_heart_rate: dto.sixMinuteWalkTest?.walk_4minHeartRate || '',
+      walk_4min_respiratory_rate: dto.sixMinuteWalkTest?.walk_4minRespiratoryRate || '',
+      walk_4min_borg_scale: dto.sixMinuteWalkTest?.walk_4minBorgScale || '',
+      walk_4min_distance: dto.sixMinuteWalkTest?.walk_4minDistance || '',
+      walk_5min_sp02: dto.sixMinuteWalkTest?.walk_5minSp02 || '',
+      walk_5min_heart_rate: dto.sixMinuteWalkTest?.walk_5minHeartRate || '',
+      walk_5min_respiratory_rate: dto.sixMinuteWalkTest?.walk_5minRespiratoryRate || '',
+      walk_5min_borg_scale: dto.sixMinuteWalkTest?.walk_5minBorgScale || '',
+      walk_5min_distance: dto.sixMinuteWalkTest?.walk_5minDistance || '',
+      walk_6min_sp02: dto.sixMinuteWalkTest?.walk_6minSp02 || '',
+      walk_6min_heart_rate: dto.sixMinuteWalkTest?.walk_6minHeartRate || '',
+      walk_6min_respiratory_rate: dto.sixMinuteWalkTest?.walk_6minRespiratoryRate || '',
+      walk_6min_borg_scale: dto.sixMinuteWalkTest?.walk_6minBorgScale || '',
+      walk_6min_distance: dto.sixMinuteWalkTest?.walk_6minDistance || '',
+      walk_comments: dto.sixMinuteWalkTest?.walkComments || '',
 
       // Assistive Device
-      assistive_device: dto.assistiveDevice.enabled ? 'yes' : 'no',
-      assistive_device_type: dto.assistiveDevice.type || '2_axillary_crutches',
-      assistive_device_hand: dto.assistiveDevice.handUsed || 'bilateral',
-      assistive_device_comments: dto.assistiveDevice.comments || '',
+      assistive_device: dto.assistiveDevice?.assistiveDevice || false,
+      assistive_device_type: dto.assistiveDevice?.assistiveDeviceType || '',
+      assistive_device_hand: dto.assistiveDevice?.assistiveDeviceHand || '',
+      assistive_device_comments: dto.assistiveDevice?.assistiveDeviceComments || '',
 
       // Immobilizer
-      immobilizer: dto.immobilizer.enabled ? 'yes' : 'no',
-      immobilizer_type: dto.immobilizer.type || '',
-      immobilizer_compliant: dto.immobilizer.compliantWithUse || 'no',
+      immobilizer: dto.immobilizer?.immobilizer || false,
+      immobilizer_type: dto.immobilizer?.immobilizerType || '',
+      immobilizer_compliant: dto.immobilizer?.immobilizerCompliant || false,
 
       // Muscular Asymmetries
-      muscular_asymmetries: dto.muscularAsymmetries.enabled ? 'yes' : 'no',
-      muscular_asymmetries_description: dto.muscularAsymmetries.description || '',
+      muscular_asymmetries: dto.muscularAsymmetries?.muscularAsymmetries || false,
+      muscular_asymmetries_description: dto.muscularAsymmetries?.muscularAsymmetriesDescription || '',
 
       // Muscle Guarding
-      muscle_guarding: dto.muscleGuarding.enabled ? 'yes' : 'no',
-      muscle_guarding_value: dto.muscleGuarding.value || 'none',
+      muscle_guarding: dto.muscleGuarding?.muscleGuarding || false,
+      muscle_guarding_value: dto.muscleGuarding?.muscleGuardingValue || '',
 
       // Muscle Atrophy
-      muscle_atrophy: dto.muscleAtrophy.enabled ? 'yes' : 'no',
-      muscle_atrophy_description: dto.muscleAtrophy.description || '',
+      muscle_atrophy: dto.muscleAtrophy?.muscleAtrophy || false,
+      muscle_atrophy_description: dto.muscleAtrophy?.muscleAtrophyDescription || '',
 
       // Edema
-      edema: dto.edema.enabled ? 'yes' : 'no',
-      edema_description: dto.edema.description || '',
-      edema_pitting: dto.edema.pitting || 'no',
+      edema_description: dto.edema?.edemaDescription || '',
+      edema_pitting: dto.edema?.edemaPitting || false,
 
       // Apprehension of Movement
-      apprehension_of_movement: dto.apprehensionOfMovement.enabled ? 'yes' : 'no',
-      apprehension_value: dto.apprehensionOfMovement.value || 'none',
+      apprehension_of_movement: dto.apprehensionofMovement?.apprehensionOfMovement || false,
+      apprehension_value: dto.apprehensionofMovement?.apprehensionValue || '',
 
       // Additional Comments
-      additional_comments: dto.additionalComments.enabled ? 'yes' : 'no',
-      additional_comments_text: dto.additionalComments.text || ''
-    };
-  }
-
-  // Private mapping methods for toModel
-  private mapBodyType(formValue: any): BodyTypeModel {
-    const enabled = formValue.indicate_body_type === 'yes';
-    const model: BodyTypeModel = { enabled };
-    if (enabled) {
-      model.bodyType = formValue.body_type || 'mesomorph';
-    }
-    return model;
-  }
-
-  private mapVitals(formValue: any): VitalsModel {
-    const enabled = formValue.vitals === 'yes';
-    const model: VitalsModel = { enabled };
-
-    if (enabled) {
-      model.bloodPressure = this.mapBloodPressure(formValue);
-      model.temperature = this.mapTemperature(formValue);
-      model.pulse = this.mapPulse(formValue);
-      model.respiration = this.mapRespiration(formValue);
-      model.weight = this.mapWeight(formValue);
-    }
-
-    return model;
-  }
-
-  private mapBloodPressure(formValue: any): BloodPressureModel {
-    const enabled = formValue.blood_pressure === 'yes';
-    const model: BloodPressureModel = { enabled };
-
-    if (enabled) {
-      model.orthostaticRisk = formValue.blood_pressure_orthostatic_risk || false;
-      model.arm = formValue.blood_pressure_arm || 'right';
-      model.systolic = formValue.blood_pressure_systolic || '';
-      model.diastolic = formValue.blood_pressure_diastolic || '';
-      model.location = formValue.blood_pressure_location || 'upper_arm';
-      model.position = formValue.blood_pressure_position || 'sitting';
-    }
-
-    return model;
-  }
-
-  private mapTemperature(formValue: any): TemperatureModel {
-    return {
-      enabled: formValue.temperature === 'yes'
-    };
-  }
-
-  private mapPulse(formValue: any): PulseModel {
-    const enabled = formValue.pulse === 'yes';
-    const model: PulseModel = { enabled };
-
-    if (enabled) {
-      model.value = formValue.pulse_value || '';
-      model.bpmType = formValue.pulse_bpm_type || 'bpm_radial';
-      model.right = formValue.pulse_right || 'not_tested';
-      model.left = formValue.pulse_left || 'not_tested';
-    }
-
-    return model;
-  }
-
-  private mapRespiration(formValue: any): RespirationModel {
-    const enabled = formValue.respiration === 'yes';
-    const model: RespirationModel = { enabled };
-
-    if (enabled) {
-      model.selections = formValue.respiration_selections || [];
-      model.comments = formValue.respiration_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapWeight(formValue: any): WeightModel {
-    const enabled = formValue.weight === 'yes';
-    const model: WeightModel = { enabled };
-
-    if (enabled) {
-      model.value = formValue.weight_value || '';
-      model.unit = formValue.weight_unit || 'lbs';
-    }
-
-    return model;
-  }
-
-  private mapADLManagement(formValue: any): ADLManagementModel {
-    const enabled = formValue.adl_management === 'yes';
-    const model: ADLManagementModel = { enabled };
-
-    if (enabled) {
-      model.bathing = {
-        value: formValue.adl_bathing || 'no',
-        status: formValue.adl_bathing === 'yes' ? formValue.adl_bathing_status : undefined
-      };
-      model.toileting = {
-        value: formValue.adl_toileting || 'no',
-        status: formValue.adl_toileting === 'yes' ? formValue.adl_toileting_status : undefined
-      };
-      model.dressing = {
-        value: formValue.adl_dressing || 'no',
-        status: formValue.adl_dressing === 'yes' ? formValue.adl_dressing_status : undefined
-      };
-      model.grooming = {
-        value: formValue.adl_grooming || 'no',
-        status: formValue.adl_grooming === 'yes' ? formValue.adl_grooming_status : undefined
-      };
-      model.eating = {
-        value: formValue.adl_eating || 'no',
-        status: formValue.adl_eating === 'yes' ? formValue.adl_eating_status : undefined
-      };
-    }
-
-    return model;
-  }
-
-  private mapBreathingAtRest(formValue: any): BreathingAtRestModel {
-    const enabled = formValue.breathing_at_rest === 'yes';
-    const model: BreathingAtRestModel = { enabled };
-
-    if (enabled) {
-      model.apical = formValue.breathing_apical || false;
-      model.diaphragmatically = formValue.breathing_diaphragmatically || false;
-      model.shortenedInhalation = formValue.breathing_shortened || false;
-      model.asymmetricalRibExcursion = formValue.breathing_asymmetrical || false;
-      model.decreasedRibMotion = formValue.breathing_decreased || false;
-      model.useOfAccessoryMuscles = formValue.breathing_accessory || false;
-      model.comments = formValue.breathing_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapTransfers(formValue: any): TransfersModel {
-    const enabled = formValue.transfers === 'yes';
-    const model: TransfersModel = { enabled };
-
-    if (enabled) {
-      model.supineToSit = {
-        value: formValue.transfer_supine_to_sit || 'no',
-        status: formValue.transfer_supine_to_sit === 'yes' ? formValue.transfer_supine_to_sit_status : undefined,
-        comments: formValue.transfer_supine_to_sit === 'yes' ? formValue.transfer_supine_to_sit_comments || '' : undefined
-      };
-      model.sitToStand = {
-        value: formValue.transfer_sit_to_stand || 'no',
-        status: formValue.transfer_sit_to_stand === 'yes' ? formValue.transfer_sit_to_stand_status : undefined,
-        comments: formValue.transfer_sit_to_stand === 'yes' ? formValue.transfer_sit_to_stand_comments || '' : undefined
-      };
-      model.toiletTransfers = {
-        value: formValue.transfer_toilet || 'no',
-        status: formValue.transfer_toilet === 'yes' ? formValue.transfer_toilet_status : undefined,
-        comments: formValue.transfer_toilet === 'yes' ? formValue.transfer_toilet_comments || '' : undefined
-      };
-    }
-
-    return model;
-  }
-
-  private mapCastSplint(formValue: any): CastSplintModel {
-    const enabled = formValue.cast_splint === 'yes';
-    const model: CastSplintModel = { enabled };
-
-    if (enabled) {
-      model.instance1 = {
-        type: formValue.cast_splint_type_1 || 'cast',
-        complaintsWithUse: formValue.cast_splint_complaints_1 || 'not_tested',
-        dateApplied: formValue.cast_splint_date_applied_1 || '',
-        dateRemoved: formValue.cast_splint_date_removed_1 || '',
-        comments: formValue.cast_splint_comments_1 || ''
-      };
-      model.instance2 = {
-        type: formValue.cast_splint_type_2 || 'not_tested',
-        complaintsWithUse: formValue.cast_splint_complaints_2 || 'not_tested',
-        dateApplied: formValue.cast_splint_date_applied_2 || '',
-        dateRemoved: formValue.cast_splint_date_removed_2 || '',
-        comments: formValue.cast_splint_comments_2 || ''
-      };
-    }
-
-    return model;
-  }
-
-  private mapStandingPosture(formValue: any): StandingPostureModel {
-    const enabled = formValue.standing_posture === 'yes';
-    const model: StandingPostureModel = { enabled };
-
-    if (enabled) {
-      model.selections = formValue.standing_posture_selections || [];
-      model.comments = formValue.standing_posture_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapProtractedScapulas(formValue: any): ProtractedScapulasModel {
-    const enabled = formValue.protracted_scapulas === 'yes';
-    const model: ProtractedScapulasModel = { enabled };
-
-    if (enabled) {
-      model.right = formValue.protracted_scapulas_right || '1cm';
-      model.left = formValue.protracted_scapulas_left || '1cm';
-    }
-
-    return model;
-  }
-
-  private mapScoliosis(formValue: any): ScoliosisModel {
-    const enabled = formValue.scoliosis === 'yes';
-    const model: ScoliosisModel = { enabled };
-
-    if (enabled) {
-      model.type = formValue.scoliosis_type || 'functional';
-      model.curvature = formValue.scoliosis_curvature || 'right';
-    }
-
-    return model;
-  }
-
-  private mapLowerExtremityStructure(formValue: any): LowerExtremityStructureModel {
-    const enabled = formValue.lower_extremity_structure === 'yes';
-    const model: LowerExtremityStructureModel = { enabled };
-
-    if (enabled) {
-      model.genuValgus = this.createLowerExtremityMeasurement(
-        formValue.les_genu_valgus_right, formValue.les_genu_valgus_left
-      );
-      model.genuVarus = this.createLowerExtremityMeasurement(
-        formValue.les_genu_varus_right, formValue.les_genu_varus_left
-      );
-      model.tibialTorsion = this.createLowerExtremityMeasurement(
-        formValue.les_tibial_torsion_right, formValue.les_tibial_torsion_left
-      );
-      model.genuRecurvatum = this.createLowerExtremityMeasurement(
-        formValue.les_genu_recurvatum_right, formValue.les_genu_recurvatum_left
-      );
-      model.footPronation = this.createLowerExtremityMeasurement(
-        formValue.les_foot_pronation_right, formValue.les_foot_pronation_left
-      );
-      model.footSupination = this.createLowerExtremityMeasurement(
-        formValue.les_foot_supination_right, formValue.les_foot_supination_left
-      );
-      model.femoralAnteversion = this.createLowerExtremityMeasurement(
-        formValue.les_femoral_anteversion_right, formValue.les_femoral_anteversion_left
-      );
-      model.femoralRetroversion = this.createLowerExtremityMeasurement(
-        formValue.les_femoral_retroversion_right, formValue.les_femoral_retroversion_left
-      );
-      model.dyskineticLEChain = this.createLowerExtremityMeasurement(
-        formValue.les_dyskinetic_le_chain_right, formValue.les_dyskinetic_le_chain_left
-      );
-      model.patellarPosition = this.createLowerExtremityMeasurement(
-        formValue.les_patellar_position_right, formValue.les_patellar_position_left
-      );
-      model.calcanealExostosis = this.createLowerExtremityMeasurement(
-        formValue.les_calcaneal_exostosis_right, formValue.les_calcaneal_exostosis_left
-      );
-      model.calcanealValgus = this.createLowerExtremityMeasurement(
-        formValue.les_calcaneal_valgus_right, formValue.les_calcaneal_valgus_left
-      );
-      model.calcanealVarus = this.createLowerExtremityMeasurement(
-        formValue.les_calcaneal_varus_right, formValue.les_calcaneal_varus_left
-      );
-      model.halluxValgus = this.createLowerExtremityMeasurement(
-        formValue.les_hallux_valgus_right, formValue.les_hallux_valgus_left
-      );
-    }
-
-    return model;
-  }
-
-  private mapGait(formValue: any): GaitModel {
-    const enabled = formValue.gait === 'yes';
-    const model: GaitModel = { enabled };
-
-    if (enabled) {
-      model.selections = formValue.gait_selections || [];
-      model.comments = formValue.gait_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapSixMinuteWalkTest(formValue: any): SixMinuteWalkTestModel {
-    const enabled = formValue.six_minute_walk_test === 'yes';
-    const model: SixMinuteWalkTestModel = { enabled };
-
-    if (enabled) {
-      model.rest = this.createWalkRow(formValue, 'rest');
-      model.min1 = this.createWalkRow(formValue, '1min');
-      model.min2 = this.createWalkRow(formValue, '2min');
-      model.min3 = this.createWalkRow(formValue, '3min');
-      model.min4 = this.createWalkRow(formValue, '4min');
-      model.min5 = this.createWalkRow(formValue, '5min');
-      model.min6 = this.createWalkRow(formValue, '6min');
-      model.comments = formValue.walk_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapAssistiveDevice(formValue: any): AssistiveDeviceModel {
-    const enabled = formValue.assistive_device === 'yes';
-    const model: AssistiveDeviceModel = { enabled };
-
-    if (enabled) {
-      model.type = formValue.assistive_device_type || '2_axillary_crutches';
-      model.handUsed = formValue.assistive_device_hand || 'bilateral';
-      model.comments = formValue.assistive_device_comments || '';
-    }
-
-    return model;
-  }
-
-  private mapImmobilizer(formValue: any): ImmobilizerModel {
-    const enabled = formValue.immobilizer === 'yes';
-    const model: ImmobilizerModel = { enabled };
-
-    if (enabled) {
-      model.type = formValue.immobilizer_type || '';
-      model.compliantWithUse = formValue.immobilizer_compliant || 'no';
-    }
-
-    return model;
-  }
-
-  private mapMuscularAsymmetries(formValue: any): MuscularAsymmetriesModel {
-    const enabled = formValue.muscular_asymmetries === 'yes';
-    const model: MuscularAsymmetriesModel = { enabled };
-
-    if (enabled) {
-      model.description = formValue.muscular_asymmetries_description || '';
-    }
-
-    return model;
-  }
-
-  private mapMuscleGuarding(formValue: any): MuscleGuardingModel {
-    const enabled = formValue.muscle_guarding === 'yes';
-    const model: MuscleGuardingModel = { enabled };
-
-    if (enabled) {
-      model.value = formValue.muscle_guarding_value || 'none';
-    }
-
-    return model;
-  }
-
-  private mapMuscleAtrophy(formValue: any): MuscleAtrophyModel {
-    const enabled = formValue.muscle_atrophy === 'yes';
-    const model: MuscleAtrophyModel = { enabled };
-
-    if (enabled) {
-      model.description = formValue.muscle_atrophy_description || '';
-    }
-
-    return model;
-  }
-
-  private mapEdema(formValue: any): EdemaModel {
-    const enabled = formValue.edema === 'yes';
-    const model: EdemaModel = { enabled };
-
-    if (enabled) {
-      model.description = formValue.edema_description || '';
-      model.pitting = formValue.edema_pitting || 'no';
-    }
-
-    return model;
-  }
-
-  private mapApprehensionOfMovement(formValue: any): ApprehensionOfMovementModel {
-    const enabled = formValue.apprehension_of_movement === 'yes';
-    const model: ApprehensionOfMovementModel = { enabled };
-
-    if (enabled) {
-      model.value = formValue.apprehension_value || 'none';
-    }
-
-    return model;
-  }
-
-  private mapAdditionalComments(formValue: any): AdditionalCommentsModel {
-    const enabled = formValue.additional_comments === 'yes';
-    const model: AdditionalCommentsModel = { enabled };
-
-    if (enabled) {
-      model.text = formValue.additional_comments_text || '';
-    }
-
-    return model;
-  }
-
-  private createLowerExtremityMeasurement(right: string, left: string): LowerExtremityMeasurementModel {
-    return {
-      right: right || 'not_tested',
-      left: left || 'not_tested'
-    };
-  }
-
-  private createWalkRow(formValue: any, prefix: string): SixMinuteWalkRowModel {
-    return {
-      sp02: formValue[`walk_${prefix}_sp02`] || '',
-      heartRate: formValue[`walk_${prefix}_heart_rate`] || '',
-      respiratoryRate: formValue[`walk_${prefix}_respiratory_rate`] || '',
-      borgScale: formValue[`walk_${prefix}_borg_scale`] || '',
-      distance: formValue[`walk_${prefix}_distance`] || ''
+      additional_comments: dto.additionalComments?.additionalComments || false,
+      additional_comments_text: dto.additionalComments?.additionalCommentsText || ''
     };
   }
 }
