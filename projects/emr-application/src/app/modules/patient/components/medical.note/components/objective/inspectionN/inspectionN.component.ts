@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InspectionMapperService } from './services/inspection-mapper.service';
-import { InspectionModel } from './models/inspection.model';
+import { Inspection } from './models/Inspection';
 
 @Component({
   selector: 'inspectionN',
@@ -11,7 +11,7 @@ import { InspectionModel } from './models/inspection.model';
 export class InspectionNComponent implements OnInit {
   inspectionNForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  @Input() inspectionData: InspectionModel | null = null;
+  @Input() inspectionData: Inspection | null = null;
 
   // Visibility flags for dependent fields
   showPatientParentGuardianConsent: boolean = false;
@@ -86,14 +86,14 @@ export class InspectionNComponent implements OnInit {
   /**
    * Get the inspection model from form (for sending to backend)
    */
-  getInspectionModel(): InspectionModel {
+  getInspectionModel(): Inspection {
     return this.inspectionMapper.toModel(this.inspectionNForm.getRawValue());
   }
 
   /**
    * Load inspection data from DTO into form
    */
-  loadFromDto(dto: InspectionModel): void {
+  loadFromDto(dto: Inspection): void {
     const formValue = this.inspectionMapper.fromDto(dto);
     this.inspectionNForm.patchValue(formValue);
   }
