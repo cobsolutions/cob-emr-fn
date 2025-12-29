@@ -27,6 +27,7 @@ export class SplintsOrthoticsNComponent implements OnInit {
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.SplintsOrthoticsForm = this.fb.group(formControls);

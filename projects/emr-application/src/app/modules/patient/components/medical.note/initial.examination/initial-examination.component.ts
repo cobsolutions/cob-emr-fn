@@ -15,6 +15,7 @@ import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mappe
 import { MedicalHistoryMapper } from '../mapper/medical.history.mapper';
 import { ObjectiveComponent } from '../components/objective/objective.component';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
+import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
 
 @Component({
   selector: 'initial-examination',
@@ -44,7 +45,8 @@ export class InitialExaminationComponent implements OnInit {
     private medialNoteService: MedialNoteService,
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
-    private subjectiveMapper: SubjectiveMapperService) {
+    private subjectiveMapper: SubjectiveMapperService,
+    private  billingMapperService:BillingMapperService) {
 
   }
   ngOnInit(): void {
@@ -121,8 +123,8 @@ export class InitialExaminationComponent implements OnInit {
       this.backtoPatientRecordActions()
     if (action === 'draft') {
       const formValues = this.getAllFormValues(this.initialExaminationForm);
-      console.log('Form Values:', formValues.planOfCare);
-      console.log('Mapped Subjective:', this.subjectiveMapper.toModel(formValues.subjective));
+      // console.log('Form Values:', formValues.billing);
+      console.log('Mapped Billing:', this.billingMapperService.toModel(formValues.billing));
       // var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
       // console.log(medicalNoteRequest)
     }

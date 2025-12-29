@@ -25,6 +25,7 @@ export class CalendarMonthNComponent implements OnInit {
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.CalendarMonthForm = this.fb.group(formControls);

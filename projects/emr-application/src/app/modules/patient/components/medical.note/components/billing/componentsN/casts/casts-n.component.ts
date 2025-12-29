@@ -26,6 +26,7 @@ export class CastsNComponent implements OnInit {
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.CastsForm = this.fb.group(formControls);

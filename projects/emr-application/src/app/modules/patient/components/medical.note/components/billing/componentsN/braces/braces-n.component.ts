@@ -27,6 +27,7 @@ export class BracesNComponent implements OnInit {
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.BracesForm = this.fb.group(formControls);

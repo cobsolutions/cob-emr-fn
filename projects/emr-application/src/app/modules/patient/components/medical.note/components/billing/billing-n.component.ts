@@ -17,6 +17,7 @@ export class BillingNComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.formReady.emit(this.BillingForm);
   }
   initForm() {
     this.BillingForm = this.fb.group({

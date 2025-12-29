@@ -25,6 +25,7 @@ export class RespiratoryNComponent implements OnInit {
 
     this.billingCPTCodeList.forEach(code => {
       formControls[code.cpt] = [0];
+      formControls[code.cpt + '_notes'] = [''];
     });
 
     this.RespiratoryForm = this.fb.group(formControls);
