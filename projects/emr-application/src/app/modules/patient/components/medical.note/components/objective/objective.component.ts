@@ -7,8 +7,8 @@ import { SoapService } from '../../../../services/medical.note/soap/soap.service
 import { ObjectiveProfile } from './models/objective.profile';
 import { InspectionNComponent } from './inspectionN/inspectionN.component';
 import { OutcomeMeasurementToolsComponent } from './outcome-measurement-tools/outcome-measurement-tools.component';
-import { OutcomeMeasurementToolsModel } from './outcome-measurement-tools/models/outcome-measurement-tools.model';
 import { Inspection } from './inspectionN/models/Inspection';
+import { Omt } from './outcome-measurement-tools/models/Omt';
 
 @Component({
   selector: 'objective',
@@ -127,7 +127,7 @@ export class ObjectiveComponent implements OnInit {
    * Get the OMT model from OutcomeMeasurementTools component
    * Returns null if component is not available
    */
-  getOmtModel(): OutcomeMeasurementToolsModel | null {
+  getOmtModel(): Omt | null {
     if (this.omtComponent) {
       return this.omtComponent.getOutcomeMeasurementToolsModel();
     }

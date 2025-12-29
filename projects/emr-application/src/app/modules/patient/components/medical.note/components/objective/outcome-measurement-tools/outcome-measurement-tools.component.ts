@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Omt } from './models/Omt';
 import { OutcomeMeasurementToolsMapperService } from './services/outcome-measurement-tools-mapper.service';
-import { OutcomeMeasurementToolsModel } from './models/outcome-measurement-tools.model';
+
 
 @Component({
   selector: 'outcome-measurement-tools',
@@ -11,7 +12,7 @@ import { OutcomeMeasurementToolsModel } from './models/outcome-measurement-tools
 export class OutcomeMeasurementToolsComponent implements OnInit {
   omtForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  @Input() omtData: OutcomeMeasurementToolsModel | null = null;
+  @Input() omtData: Omt | null = null;
 
   // Visibility flags for dependent fields
   showCustomOutcomeFields: boolean = false;
@@ -93,14 +94,14 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   /**
    * Get the OMT model from form (for sending to backend)
    */
-  getOutcomeMeasurementToolsModel(): OutcomeMeasurementToolsModel {
+  getOutcomeMeasurementToolsModel(): Omt {
     return this.omtMapper.toModel(this.omtForm.getRawValue());
   }
 
   /**
    * Load OMT data from DTO into form
    */
-  loadFromDto(dto: OutcomeMeasurementToolsModel): void {
+  loadFromDto(dto: Omt): void {
     const formValue = this.omtMapper.fromDto(dto);
     this.omtForm.patchValue(formValue);
   }
