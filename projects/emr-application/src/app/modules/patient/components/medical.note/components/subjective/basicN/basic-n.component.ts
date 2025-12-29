@@ -97,4 +97,28 @@ export class BasicNComponent implements OnInit {
       }
     });
   }
+
+  // Treatment Side checkbox array handling
+  onTreatmentSideChange(value: string, isChecked: boolean): void {
+    const currentValues: string[] = this.basicForm.get('treatment_side')?.value || [];
+
+    if (isChecked) {
+      // Add value if not already present
+      if (!currentValues.includes(value)) {
+        this.basicForm.patchValue({
+          treatment_side: [...currentValues, value]
+        });
+      }
+    } else {
+      // Remove value
+      this.basicForm.patchValue({
+        treatment_side: currentValues.filter(v => v !== value)
+      });
+    }
+  }
+
+  isTreatmentSideSelected(value: string): boolean {
+    const currentValues: string[] = this.basicForm.get('treatment_side')?.value || [];
+    return currentValues.includes(value);
+  }
 }

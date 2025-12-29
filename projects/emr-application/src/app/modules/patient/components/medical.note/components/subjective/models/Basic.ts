@@ -9,7 +9,7 @@ export interface Basic {
     numberOfVisit?: number;
     icdtenDiagnosis?: IcdtenDiagnosi[];
     treatmentDiagnosis?: TreatmentDiagnosi[];
-    treatmentSide?: boolean;
+    treatmentSide?: string[];
     specificPhysicianRders?: boolean;
     specificPhysicianRdersText?: string;
     injuryOnsetDate?: string;

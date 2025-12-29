@@ -53,15 +53,18 @@
     <label class="field-label">Treatment Side</label>
     <div class="checkbox-group-vertical">
       <c-form-check>
-        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="na" />
+        <input cFormCheckInput type="checkbox" [checked]="isTreatmentSideSelected('na')"
+               (change)="onTreatmentSideChange('na', $any($event.target).checked)" value="na" />
         <label cFormCheckLabel>N/A</label>
       </c-form-check>
       <c-form-check>
-        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="left" />
+        <input cFormCheckInput type="checkbox" [checked]="isTreatmentSideSelected('left')"
+               (change)="onTreatmentSideChange('left', $any($event.target).checked)" value="left" />
         <label cFormCheckLabel>Left</label>
       </c-form-check>
       <c-form-check>
-        <input cFormCheckInput type="checkbox" formControlName="treatment_side" value="right" />
+        <input cFormCheckInput type="checkbox" [checked]="isTreatmentSideSelected('right')"
+               (change)="onTreatmentSideChange('right', $any($event.target).checked)" value="right" />
         <label cFormCheckLabel>Right</label>
       </c-form-check>
     </div>
