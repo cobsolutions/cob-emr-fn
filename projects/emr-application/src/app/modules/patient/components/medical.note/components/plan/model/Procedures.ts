@@ -1,0 +1,35 @@
+export interface Procedures {
+  procedureTherapeuticExercises: boolean;
+  procedureTherapeuticExercisesNotes: string;
+  procedureRom: boolean;
+  procedureStrength: boolean;
+  procedureEndurance: boolean;
+  procedureStability: boolean;
+  procedureTherapeuticActivity: boolean;
+  procedureTherapeuticActivityNotes: string;
+  procedureWorkSpecific: boolean;
+  procedureSportSpecific: boolean;
+  procedureTransfers: boolean;
+  procedureBedMobility: boolean;
+  procedureAdlSpecific: boolean;
+  procedureGaitTraining: boolean;
+  procedureGaitTrainingNotes: string;
+  procedureNeuromuscularRehabilitation: boolean;
+  procedureNeuromuscularRehabilitationNotes: string;
+  procedureManualTherapy: boolean;
+  procedureManualTherapyNotes: string;
+  procedureMassage: boolean;
+  procedureMassageNotes: string;
+  procedureAquaticTherapy: boolean;
+  procedureAquaticTherapyNotes: string;
+  procedureSplintingTaping: boolean;
+  procedureSplintingTapingNotes: string;
+  procedureCanalithRepositioning: boolean;
+  procedureCanalithRepositioningNotes: string;
+  procedureGroupTherapy: boolean;
+  procedureGroupTherapyNotes: string;
+  procedurePatientEducation: boolean;
+  procedurePatientEducationNotes: string;
+  procedureRemoteTherapeuticMonitoring: boolean;
+  procedureRemoteTherapeuticMonitoringNotes: string;
+}

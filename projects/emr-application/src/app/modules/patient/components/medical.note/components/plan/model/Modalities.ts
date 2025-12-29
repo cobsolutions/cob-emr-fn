@@ -1,0 +1,34 @@
+export interface Modalities {
+  modalitiesPainRelief: boolean;
+  modalitiesPainReliefNotes: string;
+  modalitiesDecreaseInflammation: boolean;
+  modalitiesDecreaseInflammationNotes: string;
+  modalitiesIncreaseBloodFlow: boolean;
+  modalitiesIncreaseBloodFlowNotes: string;
+  modalitiesImproveTissueHealing: boolean;
+  modalitiesImproveTissueHealingNotes: string;
+  modalitiesElectricalStimulation: boolean;
+  modalitiesElectricalStimulationNotes: string;
+  modalitiesUltrasoundPhonophoresis: boolean;
+  modalitiesUltrasoundPhonophoresisNotes: string;
+  modalitiesLaser: boolean;
+  modalitiesLaserNotes: string;
+  modalitiesInfraredLight: boolean;
+  modalitiesInfraredLightNotes: string;
+  modalitiesDiathermy: boolean;
+  modalitiesDiathermyNotes: string;
+  modalitiesUltraviolet: boolean;
+  modalitiesUltravioletNotes: string;
+  modalitiesVasopneumatic: boolean;
+  modalitiesVasopneumaticNotes: string;
+  modalitiesWhirlpool: boolean;
+  modalitiesWhirlpoolNotes: string;
+  modalitiesParaffinBath: boolean;
+  modalitiesParaffinBathNotes: string;
+  modalitiesCryotherapy: boolean;
+  modalitiesCryotherapyNotes: string;
+  modalitiesHotPacks: boolean;
+  modalitiesHotPacksNotes: string;
+  modalitiesMechanicalTraction: boolean;
+  modalitiesMechanicalTractionNotes: string;
+}
