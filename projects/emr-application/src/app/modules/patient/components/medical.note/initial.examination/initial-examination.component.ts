@@ -120,10 +120,10 @@ export class InitialExaminationComponent implements OnInit {
     if (action === 'back')
       this.backtoPatientRecordActions()
     if (action === 'draft') {
-      const formValues = this.getAllFormValues(this.initialExaminationForm);
-      console.log('Mapped Subjective:', this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup));
-      //  var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-      // console.log(medicalNoteRequest)
+      // const formValues = this.getAllFormValues(this.initialExaminationForm);
+      // console.log('Mapped Subjective:', this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup));
+       var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      console.log(medicalNoteRequest)
     }
     // this.draft();
   }
@@ -151,7 +151,7 @@ export class InitialExaminationComponent implements OnInit {
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
-      subjective: this.subjectiveMapper.toModel(createdNote.subjective),
+      subjective: this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup),
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
