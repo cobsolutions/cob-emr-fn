@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CurrentFunction } from '../models';
+import { CarryingMovingHandlingObjectsDTOMapper } from './current.function.mapper/dto/carrying.moving.handling.objects.mapper.dto';
+import { ChangingMaintainingBodyPositionDTOMapper } from './current.function.mapper/dto/changing.maintaining.body.position.mapper.dto';
+import { MobilityWalkingMovingAroundDTOMapper } from './current.function.mapper/dto/mobility.walking.moving.around.mapper.dto';
+import { SelfCareDTOMapper } from './current.function.mapper/dto/self.care.mapper.dto';
+import { CarryingMovingHandlingObjectsMapper } from './current.function.mapper/form/carrying.moving.handling.objects.mapper.model';
+import { ChangingMaintainingBodyPositionMapper } from './current.function.mapper/form/changing.maintaining.body.position.mapper.model';
+import { MobilityWalkingMovingAroundMapper } from './current.function.mapper/form/mobility.walking.moving.around.mapper.model';
 import { SelfCareMapper } from './current.function.mapper/form/self.care.mapper.model';
 
 @Injectable({
@@ -24,6 +31,9 @@ export class CurrentFunctionMapperService {
       return value;
     };
     SelfCareMapper.map(formGroup, mapped, getValue);
+    MobilityWalkingMovingAroundMapper.map(formGroup, mapped, getValue);
+    ChangingMaintainingBodyPositionMapper.map(formGroup, mapped, getValue);
+    CarryingMovingHandlingObjectsMapper.map(formGroup, mapped, getValue);
     return mapped;
   }
   /**
@@ -46,6 +56,10 @@ export class CurrentFunctionMapperService {
         }
       }
     };
+    SelfCareDTOMapper.map(priorFunction, setValue);
+    MobilityWalkingMovingAroundDTOMapper.map(priorFunction, setValue)
+    ChangingMaintainingBodyPositionDTOMapper.map(priorFunction, setValue);
+    CarryingMovingHandlingObjectsDTOMapper.map(priorFunction, setValue);
     return formValue;
   }
 }
