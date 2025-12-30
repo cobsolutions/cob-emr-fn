@@ -1,37 +1,18 @@
+import { CarryingMovingHandlingObjects } from "./current.function.models/carrying.moving.handling.objects/CarryingMovingHandlingObjects";
+import { ChangingMaintainingBodyPosition } from "./current.function.models/changing.maintaining.body.position/ChangingMaintainingBodyPosition";
+import { MobilityWalkingMovingAround } from "./current.function.models/mobility.walking.moving.around/MobilityWalkingMovingAround";
+import { SelfCare } from "./current.function.models/self.care/SelfCare";
+
 export interface CurrentFunction {
-    currentFunctionalLimitationsOther?: boolean;
-    currentFunctionalLimitationsFunctionOtherText?: string;
-    currentFunctionalLimitationsFunctionOtherLymphedema?: boolean;
-    currentFunctionalLimitationsFunctionOtherLymphedemaText?: string;
-    currentFunctionalLimitationsFunctionOtherWoundHealing?: boolean;
-    currentFunctionalLimitationsFunctionOtherWoundHealingText?: string;
-    currentFunctionalLimitationsFunctionOtherPelvicHealth?: boolean;
-    currentFunctionalLimitationsFunctionOtherPelvicHealthText?: string;
-    currentFunctionalLimitationsSelfCareComment?: string;
-    currentFunctionalLimitationsSelfCareHygiene?: boolean;
-    currentFunctionalLimitationsSelfCareSleep?: boolean;
-    currentFunctionalLimitationsSelfCareIadls?: boolean;
-    currentFunctionalLimitationsSelfCareHouseholdChores?: boolean;
-    currentFunctionalLimitationsSelfCareDriveCommunity?: boolean;
-    currentFunctionalLimitationsSelfCareVolunteering?: boolean;
-    currentFunctionalLimitationsSelfCareCaregiving?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundComment?: string;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundMobilityIadls?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundAssistiveDevice?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundWalking?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundMovingAround?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundDifferentLocations?: boolean;
-    currentFunctionalLimitationsMobilityWalkingMovingAroundNegotiateObstacles?: boolean;
-    currentFunctionalLimitationsChangingMaintainingBodyPositionComment?: string;
-    currentFunctionalLimitationsChangingMaintainingBodyPositionMaintainingBodyPosition?: boolean;
-    currentFunctionalLimitationsChangingMaintainingBodyPositionTransfers?: boolean;
-    currentFunctionalLimitationsChangingMaintainingBodyPositionBodyPositionIadls?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsComment?: string;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsCarryingIadls?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsHandArmUse?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsFineHandUse?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsLowerExtremities?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsCommunityIntegration?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsWorkVocation?: boolean;
-    currentFunctionalLimitationsCarryingMovingHandlingObjectsRecreation?: boolean;
+    selfCare?:SelfCare;
+    mobilityWalkingMovingAround?:MobilityWalkingMovingAround;
+    changingMaintainingBodyPosition?:ChangingMaintainingBodyPosition;
+    carryingMovingHandlingObjects?:CarryingMovingHandlingObjects
+
+    priorLevelFunctionOther?: boolean;
+    priorLevelFunctionOtherText?: string;
+    priorLevelFunctionSelfCareComment?: string;
+    priorLevelFunctionMobilityWalkingMovingAroundComment?: string;
+    priorLevelFunctionChangingMaintainingBodyPositionComment?: string;
+    priorLevelFunctionCarryingMovingHandlingObjectsComment?: string;
 }

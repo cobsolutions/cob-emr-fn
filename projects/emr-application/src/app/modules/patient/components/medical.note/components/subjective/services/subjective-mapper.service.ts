@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Subjective } from '../models/Subjective';
 import { Basic } from '../models/Basic';
-import { Pain } from '../models/Pain';
-import { PriorFunction } from '../models/PriorFunction';
 import { CurrentFunction } from '../models/CurrentFunction';
 import { MedicalHistory } from '../models/MedicalHistory';
+import { Pain } from '../models/Pain';
+import { Subjective } from '../models/Subjective';
+import { CurrentFunctionMapperService } from './current.function.mapper.service';
 import { PriorFunctionMapperService } from './prior-function-mapper.service';
 
 @Injectable({
@@ -13,7 +13,8 @@ import { PriorFunctionMapperService } from './prior-function-mapper.service';
 })
 export class SubjectiveMapperService {
 
-  constructor(private priorFunctionMapper: PriorFunctionMapperService) { }
+  constructor(private priorFunctionMapper: PriorFunctionMapperService,
+    private currentFunctionMapper: CurrentFunctionMapperService) { }
 
   /**
    * Converts camelCase to snake_case
@@ -270,7 +271,8 @@ export class SubjectiveMapperService {
     // Map currentFunction section
     const currentFunctionGroup = formGroup.get('currentFunction') as FormGroup;
     if (currentFunctionGroup) {
-      subjective.currentFunction = this.mapCurrentFunctionToModel(currentFunctionGroup.getRawValue());
+
+      subjective.currentFunction = this.currentFunctionMapper.toModel(currentFunctionGroup)
     }
 
     // Map medicalHistory section
@@ -310,6 +312,8 @@ export class SubjectiveMapperService {
 
     // Map currentFunction section
     if (dto.currentFunction) {
+      const currentFunctionGroup = formGroup?.get('currentFunction') as FormGroup;
+      this.currentFunctionMapper.fromDto(dto.currentFunction,currentFunctionGroup)
       formValue.currentFunction = this.mapCurrentFunctionFromDto(dto.currentFunction);
     }
 
@@ -415,35 +419,6 @@ export class SubjectiveMapperService {
       restrictions_pain_alleviators: !!pain.restrictionsPainAlleviatorsText || pain.restrictionsPainAlleviators,
       restrictions_pain_alleviators_text: pain.restrictionsPainAlleviatorsText
     };
-
-    return mapped;
-  }
-
-  /**
-   * Maps currentFunction section from form (mixed kebab-snake format) to DTO (camelCase)
-   */
-  private mapCurrentFunctionToModel(currentFunction: any): CurrentFunction {
-    // Convert from mixed kebab-snake format to camelCase
-    // Example: current-functional-limitations_self-care_hygiene -> currentFunctionalLimitationsSelfCareHygiene
-    const camelCased = this.convertObjectFromMixedToCamelCase(currentFunction);
-    const mapped: CurrentFunction = { ...camelCased };
-
-    // Handle conditional fields
-    if (!mapped.currentFunctionalLimitationsOther) {
-      mapped.currentFunctionalLimitationsFunctionOtherText = undefined;
-    }
-
-    if (!mapped.currentFunctionalLimitationsFunctionOtherLymphedema) {
-      mapped.currentFunctionalLimitationsFunctionOtherLymphedemaText = undefined;
-    }
-
-    if (!mapped.currentFunctionalLimitationsFunctionOtherWoundHealing) {
-      mapped.currentFunctionalLimitationsFunctionOtherWoundHealingText = undefined;
-    }
-
-    if (!mapped.currentFunctionalLimitationsFunctionOtherPelvicHealth) {
-      mapped.currentFunctionalLimitationsFunctionOtherPelvicHealthText = undefined;
-    }
 
     return mapped;
   }
