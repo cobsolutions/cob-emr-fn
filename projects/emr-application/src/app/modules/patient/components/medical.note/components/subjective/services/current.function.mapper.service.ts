@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CurrentFunction } from '../models';
+import { SelfCareMapper } from './current.function.mapper/form/self.care.mapper.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CurrentFunctionMapperService {
       // Return the value as-is, including false
       return value;
     };
-    
+    SelfCareMapper.map(formGroup, mapped, getValue);
     return mapped;
   }
   /**
