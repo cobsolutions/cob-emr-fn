@@ -10,12 +10,10 @@ import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.re
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
-import { InitSubjectiveBasicMapper } from '../mapper/init.subjective.basic.mapper';
-import { MedicalHistoryMapper } from '../mapper/medical.history.mapper';
 import { ObjectiveComponent } from '../components/objective/objective.component';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
-import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
 
 @Component({
   selector: 'initial-examination',
@@ -123,9 +121,10 @@ export class InitialExaminationComponent implements OnInit {
       this.backtoPatientRecordActions()
     if (action === 'draft') {
       const formValues = this.getAllFormValues(this.initialExaminationForm);
-      console.log('Form Values:', formValues.subjective);
-      // console.log('Mapped Billing:', this.billingMapperService.toModel(formValues.billing));
-      // var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      console.log('Mapped Subjective:', this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup));
+      // console.log('Mapped Billing:', this.billingMapperService.toModel(formValues.subjective));
+      
+      //  var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
       // console.log(medicalNoteRequest)
     }
     // this.draft();
@@ -169,7 +168,7 @@ export class InitialExaminationComponent implements OnInit {
     })
   }
   draftAction(): Observable<any> {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel().subjective;
     return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
   }
   getAllFormValues(formGroup: FormGroup): any {

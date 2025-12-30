@@ -4,7 +4,13 @@
       "Bash(npm run build:*)",
       "Bash(mkdir:*)",
       "Bash(wc:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:emr-application:*)",
+      "Bash(npm run:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(npx ng build)",
+      "Bash(cat:*)"
     ]
   }
 }

@@ -14,7 +14,7 @@ export class BasicInformationComponent implements OnInit {
   basicForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() fields: any
-  treatmentSide: string
+  treatmentSide: string[]
   styles: FieldControlStyles[] = BasicFormStyles;
   @Input() basicFormData: any
   constructor(private fb: FormBuilder

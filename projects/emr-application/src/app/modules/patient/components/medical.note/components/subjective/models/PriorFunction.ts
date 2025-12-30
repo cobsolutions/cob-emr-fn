@@ -1,31 +1,19 @@
+import { CarryingMovingHandlingObjects } from "./prior.function.models/carrying.moving.handling.objects/CarryingMovingHandlingObjects";
+import { ChangingMaintainingBodyPosition } from "./prior.function.models/changing.maintaining.body.position/ChangingMaintainingBodyPosition";
+import { MobilityWalkingMovingAround } from "./prior.function.models/mobility.walking.moving.around/MobilityWalkingMovingAround";
+import { SelfCare } from "./prior.function.models/self.care/SelfCare";
+
 export interface PriorFunction {
+    selfCare?:SelfCare;
+    mobilityWalkingMovingAround?:MobilityWalkingMovingAround;
+    changingMaintainingBodyPosition?:ChangingMaintainingBodyPosition;
+    carryingMovingHandlingObjects?:CarryingMovingHandlingObjects
+
     priorLevelFunctionOther?: boolean;
     priorLevelFunctionOtherText?: string;
     priorLevelFunctionSelfCareComment?: string;
-    priorLevelFunctionSelfCareHygiene?: boolean;
-    priorLevelFunctionSelfCareSleep?: boolean;
-    priorLevelFunctionSelfCareIadls?: boolean;
-    priorLevelFunctionSelfCareHouseholdChores?: boolean;
-    priorLevelFunctionSelfCareDriveCommunity?: boolean;
-    priorLevelFunctionSelfCareVolunteering?: boolean;
-    priorLevelFunctionSelfCareCaregiving?: boolean;
     priorLevelFunctionMobilityWalkingMovingAroundComment?: string;
-    priorLevelFunctionMobilityWalkingMovingAroundMobilityIadls?: boolean;
-    priorLevelFunctionMobilityWalkingMovingAroundAssistiveDevice?: boolean;
-    priorLevelFunctionMobilityWalkingMovingAroundWalking?: boolean;
-    priorLevelFunctionMobilityWalkingMovingAroundMovingAround?: boolean;
-    priorLevelFunctionMobilityWalkingMovingAroundDifferentLocations?: boolean;
-    priorLevelFunctionMobilityWalkingMovingAroundNegotiateObstacles?: boolean;
     priorLevelFunctionChangingMaintainingBodyPositionComment?: string;
-    priorLevelFunctionChangingMaintainingBodyPositionMaintainingBodyPosition?: boolean;
-    priorLevelFunctionChangingMaintainingBodyPositionTransfers?: boolean;
-    priorLevelFunctionChangingMaintainingBodyPositionBodyPositionIadls?: boolean;
     priorLevelFunctionCarryingMovingHandlingObjectsComment?: string;
-    priorLevelFunctionCarryingMovingHandlingObjectsCarryingIadls?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsHandArmUse?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsFineHandUse?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsLowerExtremities?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsCommunityIntegration?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsWorkVocation?: boolean;
-    priorLevelFunctionCarryingMovingHandlingObjectsRecreation?: boolean;
+    
 }

@@ -82,7 +82,8 @@ export class HierarchyCheckboxComponent implements OnInit {
     }
 
     parts.push(categoryKey);
-    parts.push(itemPath);
+    // Replace dots and hyphens with underscores to maintain consistent naming for nested items
+    parts.push(itemPath.replace(/[\.\-]/g, '_'));
 
     return parts.join('_');
   }
