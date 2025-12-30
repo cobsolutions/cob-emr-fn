@@ -782,7 +782,11 @@ export class PriorFunctionMapperService {
 
   private mapChangingMaintainingBodyPosition(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== CHANGING MAINTAINING BODY POSITION ==========
-
+    const maintainingABodyPositionFlag = getValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position');
+    if (maintainingABodyPositionFlag !== undefined) {
+      if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
+      mapped.changingMaintainingBodyPosition.maintainingABodyPositionFlag = maintainingABodyPositionFlag;
+    }
     // Maintaining A Body Position
     const remainingSeated = getValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position_remaining_seated');
     if (remainingSeated !== undefined) {
@@ -826,6 +830,11 @@ export class PriorFunctionMapperService {
       mapped.changingMaintainingBodyPosition.maintainingABodyPosition.standing = standing;
     }
 
+    const transfersFlag = getValue('prior-level-function_changing-maintaining-body-position_transfers');
+    if (transfersFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.changingMaintainingBodyPosition.transfersFlag = transfersFlag;
+    }
     // Transfers
     const bedToChair = getValue('prior-level-function_changing-maintaining-body-position_transfers_bed_to_chair');
     if (bedToChair !== undefined) {
@@ -841,6 +850,11 @@ export class PriorFunctionMapperService {
       mapped.changingMaintainingBodyPosition.transfers.slidingAlongABench = slidingBench;
     }
 
+    const iADLsFlag = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls');
+    if (iADLsFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.changingMaintainingBodyPosition.iADLsFlag = iADLsFlag;
+    }
     // Body Position IADLs
     const bodyPositionTelephone = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_use_telephone');
     if (bodyPositionTelephone !== undefined) {
@@ -901,7 +915,11 @@ export class PriorFunctionMapperService {
 
   private mapCarryingMovingHandlingObjects(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== CARRYING MOVING HANDLING OBJECTS ==========
-
+    const iADLsFlag = getValue('prior-level-function_carrying-moving-handling-objects_carrying_iadls');
+    if (iADLsFlag !== undefined) {
+      if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+      mapped.carryingMovingHandlingObjects.iADLsFlag = iADLsFlag;
+    }
     // Carrying IADLs
     const carryingTelephone = getValue('prior-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone');
     if (carryingTelephone !== undefined) {
@@ -959,6 +977,11 @@ export class PriorFunctionMapperService {
       mapped.carryingMovingHandlingObjects.iADLs.abilityToHandleFinances = carryingFinances;
     }
 
+    const handArmUseFlag = getValue('prior-level-function_carrying-moving-handling-objects_hand_arm_use');
+    if (handArmUseFlag !== undefined) {
+      if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+      mapped.carryingMovingHandlingObjects.handArmUseFlag = handArmUseFlag;
+    }
     // Hand Arm Use
     const pullingObjects = getValue('prior-level-function_carrying-moving-handling-objects_hand_arm_use_pulling_objects');
     if (pullingObjects !== undefined) {
@@ -1009,6 +1032,11 @@ export class PriorFunctionMapperService {
       mapped.carryingMovingHandlingObjects.handArmUse.catching = catching;
     }
 
+    const fineHandUseFlag = getValue('prior-level-function_carrying-moving-handling-objects_fine_hand_use');
+    if (iADLsFlag !== undefined) {
+      if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+      mapped.carryingMovingHandlingObjects.fineHandUseFlag = fineHandUseFlag;
+    }
     // Fine Hand Use
     const pickingUp = getValue('prior-level-function_carrying-moving-handling-objects_fine_hand_use_picking_up');
     if (pickingUp !== undefined) {
@@ -1038,6 +1066,11 @@ export class PriorFunctionMapperService {
       mapped.carryingMovingHandlingObjects.fineHandUse.releasing = releasing;
     }
 
+    const movingObjectsWithLowerExtremitiesFlag = getValue('prior-level-function_carrying-moving-handling-objects_lower_extremities');
+    if (movingObjectsWithLowerExtremitiesFlag !== undefined) {
+      if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+      mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremitiesFlag = movingObjectsWithLowerExtremitiesFlag;
+    }
     // Moving Objects With Lower Extremities
     const kicking = getValue('prior-level-function_carrying-moving-handling-objects_lower_extremities_kicking');
     if (kicking !== undefined) {
@@ -1065,6 +1098,11 @@ export class PriorFunctionMapperService {
     if (workVocation !== undefined) {
       if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
       mapped.carryingMovingHandlingObjects.workVocationOccupation = workVocation;
+    }
+    const recreationFlag = getValue('prior-level-function_carrying-moving-handling-objects_recreation');
+    if (iADLsFlag !== undefined) {
+      if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+      mapped.carryingMovingHandlingObjects.recreationFlag = recreationFlag;
     }
 
     // Recreation
