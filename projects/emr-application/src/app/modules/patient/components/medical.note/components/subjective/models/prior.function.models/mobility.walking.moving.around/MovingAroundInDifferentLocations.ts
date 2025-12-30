@@ -9,17 +9,17 @@ export interface MovingAroundInDifferentLocations {
   walkingBetweenRooms: WalkingBetweenRooms;
 
   // "prior-level-function_mobility-walking-moving-around_different_locations_down_street": false,
-  walkingDownTheStreetFlag:boolean
+  walkingDownTheStreetFlag:boolean;
   walkingDownTheStreet: WalkingDownTheStreet;
 
   // "prior-level-function_mobility-walking-moving-around_different_locations_within_building": false,
   walkingWithinABuilding: boolean;
 
   // "prior-level-function_mobility-walking-moving-around_different_locations_using_equipment": false,
-  movingAroundUsingEquipmentFlag:boolean
+  movingAroundUsingEquipmentFlag:boolean;
   movingAroundUsingEquipment: MovingAroundUsingEquipment;
 
   // "prior-level-function_mobility-walking-moving-around_different_locations_using_transportation": false,
-  movingAroundUsingTransportationFlag:boolean
+  movingAroundUsingTransportationFlag:boolean;
   movingAroundUsingTransportation: MovingAroundUsingTransportation;
 }

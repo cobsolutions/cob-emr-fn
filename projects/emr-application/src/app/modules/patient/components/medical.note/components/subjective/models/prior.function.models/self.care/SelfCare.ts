@@ -11,10 +11,10 @@ export interface SelfCare {
   sleepFlag: boolean;
   sleep: Sleep;
   //prior-level-function_self-care_iadls
-  iADLsFlag: boolean
+  iADLsFlag: boolean;
   iADLs: IADLs;
   // prior-level-function_self-care_household_chores
-  householdChoresFlag: boolean
+  householdChoresFlag: boolean;
   householdChores: HouseholdChores;
   //prior-level-function_self-care_drive_community
   driveCommunityDistance: boolean;

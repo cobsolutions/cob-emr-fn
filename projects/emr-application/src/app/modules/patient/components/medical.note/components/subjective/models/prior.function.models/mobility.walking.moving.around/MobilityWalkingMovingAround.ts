@@ -6,7 +6,7 @@ import { NegotiateObstacles } from "./NegotiateObstacles";
 
 export interface MobilityWalkingMovingAround {
   //"prior-level-function_mobility-walking-moving-around_mobility_iadls": false,
-  iADLsFlag:boolean
+  iADLsFlag:boolean;
   iADLs: IADLs;
 
   // "prior-level-function_mobility-walking-moving-around_assistive_device": false,
@@ -19,11 +19,11 @@ export interface MobilityWalkingMovingAround {
   movingAroundFlag: boolean;
   movingAround: MovingAround;
 
-  "prior-level-function_mobility-walking-moving-around_different_locations": false,
-  movingAroundInDifferentLocationsFlag:boolean
+  // "prior-level-function_mobility-walking-moving-around_different_locations": false,
+  movingAroundInDifferentLocationsFlag:boolean;
   movingAroundInDifferentLocations: MovingAroundInDifferentLocations;
 
   // "prior-level-function_mobility-walking-moving-around_negotiate_obstacles": false,
-  negotiateObstaclesFlag:boolean
+  negotiateObstaclesFlag:boolean;
   negotiateObstacles: NegotiateObstacles;
 }

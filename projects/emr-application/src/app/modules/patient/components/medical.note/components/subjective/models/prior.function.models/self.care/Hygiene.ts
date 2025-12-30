@@ -10,7 +10,7 @@ export interface Hygiene {
 
   grooming: Grooming;
   //prior-level-function_self-care_hygiene_looking_after_health
-  lookingAfterHealthFlag:boolean
+  lookingAfterHealthFlag:boolean;
 
   lookingAfterHealth: LookingAfterHealth;
   //prior-level-function_self-care_hygiene_dressing

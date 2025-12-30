@@ -6,19 +6,19 @@ import { Recreation } from "./Recreation";
 
 export interface CarryingMovingHandlingObjects {
   // "prior-level-function_carrying-moving-handling-objects_carrying_iadls": false,
-  iADLsFlag:boolean
+  iADLsFlag:boolean;
   iADLs: IADLs;
 
   // "prior-level-function_carrying-moving-handling-objects_hand_arm_use": false,
-  handArmUseFlag:boolean
+  handArmUseFlag:boolean;
   handArmUse: HandArmUse;
 
   // "prior-level-function_carrying-moving-handling-objects_fine_hand_use": false,
-  fineHandUseFlag:boolean
+  fineHandUseFlag:boolean;
   fineHandUse: FineHandUse;
 
   // "prior-level-function_carrying-moving-handling-objects_lower_extremities": false,
-  movingObjectsWithLowerExtremitiesFlag:boolean
+  movingObjectsWithLowerExtremitiesFlag:boolean;
   movingObjectsWithLowerExtremities: MovingObjectsWithLowerExtremities;
 
   // "prior-level-function_carrying-moving-handling-objects_community_integration": false,
@@ -28,6 +28,6 @@ export interface CarryingMovingHandlingObjects {
   workVocationOccupation: boolean;
   
   // "prior-level-function_carrying-moving-handling-objects_recreation": false,
-  recreationFlag:boolean
+  recreationFlag:boolean;
   recreation: Recreation;
 }

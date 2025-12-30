@@ -20,10 +20,10 @@ export interface MobilityWalkingMovingAround {
   movingAround: MovingAround;
 
   //current_functional_limitations_mobility-walking-moving-around_different_locations
-  movingAroundInDifferentLocationsFlag:boolean
+  movingAroundInDifferentLocationsFlag:boolean;
   movingAroundInDifferentLocations: MovingAroundInDifferentLocations;
 
   // current_functional_limitations_mobility-walking-moving-around_negotiate_obstacles
-  negotiateObstaclesFlag:boolean
+  negotiateObstaclesFlag:boolean;
   negotiateObstacles: NegotiateObstacles;
 }
