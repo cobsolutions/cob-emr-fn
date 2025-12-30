@@ -15,7 +15,6 @@ export class PriorFunctionMapperService {
    * @returns PriorFunction DTO for backend
    */
   toModel(formGroup: FormGroup): PriorFunction {
-    console.log('mapPriorFunctionToModel')
     const mapped: PriorFunction = {};
 
     // Helper to get value from form control
@@ -24,7 +23,17 @@ export class PriorFunctionMapperService {
       // Return the value as-is, including false
       return value;
     };
+    // Call helper methods for other sections
+    this.mapSelfCare(formGroup, mapped, getValue);
+    this.mapMobilityWalkingMovingAround(formGroup, mapped, getValue);
+    this.mapChangingMaintainingBodyPosition(formGroup, mapped, getValue);
+    this.mapCarryingMovingHandlingObjects(formGroup, mapped, getValue);
+    this.mapPriorFunctionComments(formGroup, mapped, getValue);
 
+    return mapped;
+  }
+
+  private mapSelfCare(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== SELF CARE ==========
 
     // Self Care - Hygiene
@@ -464,16 +473,7 @@ export class PriorFunctionMapperService {
       if (!mapped.selfCare) mapped.selfCare = {} as any;
       mapped.selfCare.caregiving = caregiving;
     }
-
-    // Call helper methods for other sections
-    this.mapMobilityWalkingMovingAround(formGroup, mapped, getValue);
-    this.mapChangingMaintainingBodyPosition(formGroup, mapped, getValue);
-    this.mapCarryingMovingHandlingObjects(formGroup, mapped, getValue);
-    this.mapPriorFunctionComments(formGroup, mapped, getValue);
-
-    return mapped;
   }
-
   private mapMobilityWalkingMovingAround(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== MOBILITY WALKING MOVING AROUND ==========
 
