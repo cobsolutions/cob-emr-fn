@@ -477,6 +477,13 @@ export class PriorFunctionMapperService {
   private mapMobilityWalkingMovingAround(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== MOBILITY WALKING MOVING AROUND ==========
 
+    // IADLs Flag
+    const mobilityIADLsFlag = getValue('prior-level-function_mobility-walking-moving-around_mobility_iadls');
+    if (mobilityIADLsFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.mobilityWalkingMovingAround.iADLsFlag = mobilityIADLsFlag;
+    }
+
     // IADLs
     const mobilityIADLsTelephone = getValue('prior-level-function_mobility-walking-moving-around_mobility_iadls_mobility_use_telephone');
     if (mobilityIADLsTelephone !== undefined) {
@@ -541,6 +548,13 @@ export class PriorFunctionMapperService {
       mapped.mobilityWalkingMovingAround.useOfAnAssistiveDevice = assistiveDevice;
     }
 
+    // Walking Flag
+    const walkingFlag = getValue('prior-level-function_mobility-walking-moving-around_walking');
+    if (walkingFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.mobilityWalkingMovingAround.walkingFlag = walkingFlag;
+    }
+
     // Walking
     const walkingForward = getValue('prior-level-function_mobility-walking-moving-around_walking_walking_forward');
     if (walkingForward !== undefined) {
@@ -582,6 +596,13 @@ export class PriorFunctionMapperService {
       if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
       if (!mapped.mobilityWalkingMovingAround.walking) mapped.mobilityWalkingMovingAround.walking = {} as any;
       mapped.mobilityWalkingMovingAround.walking.walkingAroundObstacles = walkingObstacles;
+    }
+
+    // Moving Around Flag
+    const movingAroundFlag = getValue('prior-level-function_mobility-walking-moving-around_moving_around');
+    if (movingAroundFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.mobilityWalkingMovingAround.movingAroundFlag = movingAroundFlag;
     }
 
     // Moving Around
@@ -627,6 +648,21 @@ export class PriorFunctionMapperService {
       mapped.mobilityWalkingMovingAround.movingAround.swimming = swimming;
     }
 
+    // Moving Around In Different Locations Flag
+    const movingAroundInDifferentLocationsFlag = getValue('prior-level-function_mobility-walking-moving-around_different_locations');
+    if (movingAroundInDifferentLocationsFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocationsFlag = movingAroundInDifferentLocationsFlag;
+    }
+
+    // Moving Around In Different Locations - Walking Between Rooms Flag
+    const walkingBetweenRoomsFlag = getValue('prior-level-function_mobility-walking-moving-around_different_locations_between_rooms');
+    if (walkingBetweenRoomsFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      if (!mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations) mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations = {} as any;
+      mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.walkingBetweenRoomsFlag = walkingBetweenRoomsFlag;
+    }
+
     // Moving Around In Different Locations
     const betweenRoomsStairs = getValue('prior-level-function_mobility-walking-moving-around_different_locations_between_rooms_stairs');
     if (betweenRoomsStairs !== undefined) {
@@ -642,6 +678,14 @@ export class PriorFunctionMapperService {
       if (!mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations) mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations = {} as any;
       if (!mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.walkingBetweenRooms) mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.walkingBetweenRooms = {} as any;
       mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.walkingBetweenRooms.inHome = betweenRoomsInHome;
+    }
+
+    // Walking Down The Street Flag
+    const walkingDownTheStreetFlag = getValue('prior-level-function_mobility-walking-moving-around_different_locations_down_street');
+    if (walkingDownTheStreetFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      if (!mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations) mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations = {} as any;
+      mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.walkingDownTheStreetFlag = walkingDownTheStreetFlag;
     }
 
     const downStreetCommunity = getValue('prior-level-function_mobility-walking-moving-around_different_locations_down_street_community_distances');
@@ -715,6 +759,11 @@ export class PriorFunctionMapperService {
       mapped.mobilityWalkingMovingAround.movingAroundInDifferentLocations.movingAroundUsingTransportation.publicTransportation = transportPublic;
     }
 
+    const negotiateObstaclesFlag = getValue('prior-level-function_mobility-walking-moving-around_negotiate_obstacles');
+    if (negotiateObstaclesFlag !== undefined) {
+      if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+      mapped.mobilityWalkingMovingAround.negotiateObstaclesFlag = negotiateObstaclesFlag;
+    }
     // Negotiate Obstacles
     const crowdedStreets = getValue('prior-level-function_mobility-walking-moving-around_negotiate_obstacles_crowded_streets');
     if (crowdedStreets !== undefined) {
