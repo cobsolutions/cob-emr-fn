@@ -74,8 +74,11 @@
             </div>
         </div>
         <div *ngIf="showPreviousTreatmentsForSimilarSymptoms" class="dependent-field-box">
-            <textarea formControlName="previous_treatments_for_similar_symptoms_text" class="form-textarea"
-                rows="4"></textarea>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="previous_treatments_for_similar_symptoms_text" class="form-textarea"
+                    rows="4"></textarea>
+            </div>
         </div>
         <div class="form-row">
             <label class="field-label"></label>
@@ -473,7 +476,6 @@
     </list-checkbox-with-child>
     <div class="form-row">
         <label class="field-label">Patient Goals</label>
-        <textarea formControlName="patient_goals" class="form-textarea"
-            rows="6"></textarea>
+        <textarea formControlName="patient_goals" class="form-textarea" rows="6"></textarea>
     </div>
 </div>
