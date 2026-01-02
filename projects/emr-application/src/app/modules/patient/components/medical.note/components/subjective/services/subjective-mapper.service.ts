@@ -716,99 +716,117 @@ export class SubjectiveMapperService {
   /**
    * Maps medicalHistory section from DTO (camelCase) to form (snake_case)
    */
-  private mapMedicalHistoryFromDto(medicalHistory: any): any {
-    const mapped = { ...medicalHistory };
+  private mapMedicalHistoryFromDto(dto: MedicalHistory): any {
+    const mapped: any = {};
 
-    // Set boolean flags based on presence of related fields
-    const conditionalChecks: Array<{ checkbox: string; fields: string[] }> = [
-      { checkbox: 'previousHistoryOfSimilarSymptoms', fields: ['previousHistoryOfSimilarSymptomsText'] },
-      { checkbox: 'previousTreatmentsForSimilarSymptoms', fields: ['previousTreatmentsForSimilarSymptomsText'] },
-      { checkbox: 'occupationSocialHistory', fields: ['occupationSocialHistoryList', 'occupationSocialHistoryText'] },
-      {
-        checkbox: 'occupationSocialHistoryOccupationAndWorkStatus',
-        fields: [
-          'occupationSocialHistoryOccupationAndWorkNameOfOccupation',
-          'occupationSocialHistoryOccupationAndWorkStatusStatus',
-          'occupationSocialHistoryOccupationAndWorkStatusDutyLevel',
-          'occupationSocialHistoryOccupationAndWorkStatusSescription',
-          'occupationSocialHistoryOccupationAndWorkStatusOutOfWorkSince',
-          'occupationSocialHistoryOccupationAndWorkStatusReturnToWorkDate'
-        ]
-      },
-      { checkbox: 'occupationSocialHistoryHomeLayout', fields: ['occupationSocialHistoryHomeLayoutList', 'occupationSocialHistoryHomeLayoutText'] },
-      { checkbox: 'occupationSocialHistoryDurableMedicalEquipment', fields: ['occupationSocialHistoryDurableMedicalEquipmentList', 'occupationSocialHistoryDurableMedicalEquipmentText'] },
-      { checkbox: 'occupationSocialHistoryPatientTobaccoUser', fields: ['occupationSocialHistoryPatientTobaccoUserCigarettesOrAndOtherFormsTobacco', 'occupationSocialHistoryPatientTobaccoUserOtherFormText'] },
-      { checkbox: 'homeHealthCare', fields: ['homeHealthCareText'] },
-      { checkbox: 'historyOfFallsDocument', fields: ['historyOfFallsDocumentText'] },
-      { checkbox: 'mentalStatusCognitiveFunctionAppearsImpaired', fields: ['mentalStatusCognitiveFunctionAppearsImpairedText'] }
-    ];
+    // previousHistoryOfSimilarSymptoms
+    mapped.previous_history_of_similar_symptoms = dto.isPreviousHistoryOfSimilarSymptoms;
 
-    conditionalChecks.forEach(({ checkbox, fields }) => {
-      if (fields.some(field => mapped[field])) {
-        mapped[checkbox] = true;
+    if (dto.previousHistorySymptoms) {
+      const symptoms = dto.previousHistorySymptoms;
+      mapped.previous_episodes_of_same_complaints = symptoms.isEpisode;
+      mapped.previous_episodes_of_same_complaints_range = symptoms.episodeAgerRange;
+      mapped.previous_episodes_of_same_complaints_year_first_episode = symptoms.episodeYear;
+      mapped.previous_treatments_for_similar_symptoms = symptoms.isSimilarSymptoms;
+      mapped.previous_history_of_similar_symptoms_text = symptoms.similarSymptomsTxt;
+      mapped.previous_treatments_for_similar_symptoms_text = symptoms.description;
+    }
+
+    // occupationSocialHistory
+    mapped.occupation_social_history = dto.isOccupationSocialHistory;
+
+    if (dto.occupationSocialHistory) {
+      const social = dto.occupationSocialHistory;
+      mapped.occupation_social_history_social_history = social.isSocialHistory;
+      mapped.occupation_social_history_occupation_and_work_status = social.isWorkStatus;
+      mapped.occupation_social_history_home_layout = social.isHomeLayout;
+      mapped.occupation_social_history_durable_medical_equipment = social.isMedicalEquipment;
+      mapped.occupation_social_history_patient_tobacco_user = social.isTobaccoUser;
+      mapped.occupation_social_history_list = social.socialHistoryList;
+      mapped.occupation_social_history_text = social.socialHistoryListDescription;
+      mapped.occupation_social_history_occupation_and_work_name_of_occupation = social.occupationName;
+      mapped.occupation_social_history_occupation_and_work_status_status = social.occupationStatus;
+      mapped.occupation_social_history_occupation_and_work_status_duty_level = social.occupationDutyLevel;
+      mapped.occupation_social_history_occupation_and_work_status_sescription = social.occupationDescription;
+      mapped.occupation_social_history_occupation_and_work_status_out_of_work_since = social.occupationOutOfWorkSince;
+      mapped.occupation_social_history_occupation_and_work_status_return_to_work_date = social.occupationReturnToWorkDate;
+      mapped.occupation_social_history_home_layout_text = social.homeLayoutDescription;
+      mapped.occupation_social_history_home_layout_list = social.homeLayoutList;
+      mapped.occupation_social_history_durable_medical_equipment_list = social.MedicalEquipmentsList;
+      mapped.occupation_social_history_durable_medical_equipment_text = social.MedicalEquipmentsListDescription;
+      mapped.occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco = social.isPatientUseOtherFormsOfTobacco;
+
+      if (social.patientSmokerAdvices && social.patientSmokerAdvices.length >= 3) {
+        mapped.tobacco_cessation_recommendation_made = social.patientSmokerAdvices[0];
+        mapped.tobacco_cessation_advice_support_provided = social.patientSmokerAdvices[1];
+        mapped.tobacco_cessation_continued_support = social.patientSmokerAdvices[2];
       }
-    });
 
-    // Handle checkbox-text pairs
-    const checkboxTextPairs = [
-      'medicalHistoryNoKnownSignificantPmhToAffectTreatment',
-      'medicalHistoryAlzheimers',
-      'medicalHistoryCardiovascularDisease',
-      'medicalHistoryCaudaEquinaSyndrome',
-      'medicalHistoryCerebralVascularAccident',
-      'medicalHistoryCurrentInfection',
-      'medicalHistoryDiabetesMellitusType_1',
-      'medicalHistoryDiabetesMellitusType_2',
-      'medicalHistoryFibromyalgia',
-      'medicalHistoryFractureOrSuspectedFracture',
-      'medicalHistoryHighBloodPressure',
-      'medicalHistoryHistoryOfCancer',
-      'medicalHistoryHuntingtons',
-      'medicalHistoryImmunosuppression',
-      'medicalHistoryLupus',
-      'medicalHistoryMuscularDystrophy',
-      'medicalHistoryOtherEnterDescriptionBelow',
-      'medicalHistoryObesity',
-      'medicalHistoryOsteoarthritis',
-      'medicalHistoryParkinsons',
-      'medicalHistoryRheumatoidArthritis',
-      'medicalHistoryTraumaticBrainInjury',
-      'complicatingpersonalFactorsNoKnownComplicatingFactorsAffectingThePlanOfCare',
-      'complicatingpersonalFactorsAllergies',
-      'complicatingpersonalFactorsAttitudesMotivation',
-      'complicatingpersonalFactorsCharacter',
-      'complicatingpersonalFactorsCopingStyle',
-      'complicatingpersonalFactorsEducationLevel',
-      'complicatingpersonalFactorsHomeEnvironment',
-      'complicatingpersonalFactorsLifestyle',
-      'complicatingpersonalFactorsLitigation',
-      'complicatingpersonalFactorsOtherEnterDescriptionBelow',
-      'complicatingpersonalFactorsMechanismOfInjuryIllness',
-      'complicatingpersonalFactorsMultipleTreatmentAreas',
-      'complicatingpersonalFactorsPatientAge',
-      'complicatingpersonalFactorsPreviousTherapy',
-      'complicatingpersonalFactorsPsychoSocial',
-      'complicatingpersonalFactorsRehabPotential',
-      'complicatingpersonalFactorsSocialBackground',
-      'complicatingpersonalFactorsSurgicalHistory',
-      'complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllness',
-      'currentMedicationsPrescription',
-      'currentMedicationsOverTheCounter',
-      'currentMedicationsHerbals',
-      'currentMedicationsVitaminMineralDietarySupplements',
-      'currentMedicationsOther',
-      'currentMedicationsNotCurrentlyTakingAnyMedications'
-    ];
+      mapped.occupation_social_history_patient_tobacco_user_other_form_text = social.patientSmokerAdvicesDescription;
+    }
 
-    checkboxTextPairs.forEach(base => {
-      const checkboxKey = `${base}Checkbox`;
-      const textKey = `${base}Text`;
-      if (mapped[textKey]) {
-        mapped[checkboxKey] = true;
+    // homeHealthCare
+    mapped.home_health_care = dto.isHomeHealthCare;
+    mapped.home_health_care_text = dto.homeHealthCareDescription;
+
+    // historyOfFalls
+    mapped.history_of_falls = dto.isHistoryOfFalls;
+
+    if (dto.historyFall) {
+      const fall = dto.historyFall;
+      mapped.history_of_falls_document = fall.isFallsDocumented;
+      mapped.history_of_falls_document_text = fall.isFallsDocumentedDescription;
+
+      if (fall.riskAssessment && fall.riskAssessment.length >= 4) {
+        mapped.risk_assessment_medications_contributing_factor = fall.riskAssessment[0];
+        mapped.risk_assessment_home_fall_hazards = fall.riskAssessment[1];
+        mapped.risk_assessment_postural_blood_pressure = fall.riskAssessment[2];
+        mapped.risk_assessment_vision = fall.riskAssessment[3];
       }
-    });
+    }
 
-    // Convert all keys to snake_case for form
-    return this.convertObjectToSnakeCase(mapped);
+    // Map medical history diseases from array to individual checkbox/text pairs
+    if (dto.medicalHistoryDisease && dto.medicalHistoryDisease.length > 0) {
+      dto.medicalHistoryDisease.forEach(disease => {
+        if (disease.diseaseName) {
+          const snakeCaseField = this.toSnakeCase(disease.diseaseName).substring(1);
+          mapped[`medical_history_${snakeCaseField}_checkbox`] = true;
+          mapped[`medical_history_${snakeCaseField}_text`] = disease.diseaseDescription;
+        }
+      });
+    }
+
+    // Map personal complications from array to individual checkbox/text pairs
+    if (dto.personalComplication && dto.personalComplication.length > 0) {
+      dto.personalComplication.forEach(complication => {
+        if (complication.complicationName) {
+          const snakeCaseField = this.toSnakeCase(complication.complicationName).substring(1);
+          mapped[`complicatingpersonal_factors_${snakeCaseField}_checkbox`] = true;
+          mapped[`complicatingpersonal_factors_${snakeCaseField}_text`] = complication.complicationDescription;
+        }
+      });
+    }
+
+    // Map current medications from array to individual checkbox/text pairs
+    if (dto.currentMedication && dto.currentMedication.length > 0) {
+      dto.currentMedication.forEach(medication => {
+        if (medication.medicationName) {
+          const snakeCaseField = this.toSnakeCase(medication.medicationName).substring(1);
+          mapped[`current_medications_${snakeCaseField}_checkbox`] = true;
+          mapped[`current_medications_${snakeCaseField}_text`] = medication.medicationDescription;
+        }
+      });
+    }
+
+    // Simple fields
+    mapped.general_health = dto.generalHealth;
+    mapped.diagnostic_testing_imaging = dto.diagnosticTest;
+    mapped.patient_goals = dto.patientGoals;
+    mapped.medical_history_review = dto.medicalHistoryReview;
+    mapped.mental_status_cognitive_function_appears_impaired = dto.isMentalStatus;
+    mapped.mental_status_cognitive_function_appears_impaired_text = dto.mentalStatusDescription;
+    mapped.unexplained_weight_loss = dto.weightLoss;
+
+    return mapped;
   }
 }
