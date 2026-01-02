@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Basic } from '../models/Basic';
 import { CurrentFunction } from '../models/CurrentFunction';
-import { MedicalHistory } from '../models/MedicalHistory';
+import { MedicalHistory } from '../models/medical.history/medical.history';
+import { MedicalHistoryDisease } from '../models/medical.history/medical.history.disease';
+import { PersonalComplication } from '../models/medical.history/personal.complication';
+import { CurrentMedication } from '../models/medical.history/current.medication';
+import { PreviousHistorySymptoms } from '../models/medical.history/previous.history.symptoms';
+import { OccupationSocialHistory } from '../models/medical.history/occupation.social.history';
+import { HistoryFall } from '../models/medical.history/history.falls';
 import { Pain } from '../models/Pain';
 import { Subjective } from '../models/Subjective';
 import { CurrentFunctionMapperService } from './current.function.mapper.service';
@@ -454,103 +460,239 @@ export class SubjectiveMapperService {
   /**
    * Maps medicalHistory section from form (snake_case) to DTO (camelCase)
    */
-  private mapMedicalHistoryToModel(medicalHistory: any): MedicalHistory {
-    // Convert from snake_case to camelCase
-    const camelCased = this.convertObjectToCamelCase(medicalHistory);
-    const updated: MedicalHistory = { ...camelCased };
+  private mapMedicalHistoryToModel(formGroup: FormGroup): MedicalHistory {
+    const medicalHistory: MedicalHistory = {};
 
-    // Handle conditional fields
-    const conditionalFields: Array<{ checkbox: string; fields: string[] }> = [
-      { checkbox: 'previousHistoryOfSimilarSymptoms', fields: ['previousHistoryOfSimilarSymptomsText'] },
-      { checkbox: 'previousTreatmentsForSimilarSymptoms', fields: ['previousTreatmentsForSimilarSymptomsText'] },
-      { checkbox: 'occupationSocialHistory', fields: ['occupationSocialHistoryList', 'occupationSocialHistoryText'] },
-      {
-        checkbox: 'occupationSocialHistoryOccupationAndWorkStatus',
-        fields: [
-          'occupationSocialHistoryOccupationAndWorkNameOfOccupation',
-          'occupationSocialHistoryOccupationAndWorkStatusStatus',
-          'occupationSocialHistoryOccupationAndWorkStatusDutyLevel',
-          'occupationSocialHistoryOccupationAndWorkStatusSescription',
-          'occupationSocialHistoryOccupationAndWorkStatusOutOfWorkSince',
-          'occupationSocialHistoryOccupationAndWorkStatusReturnToWorkDate'
-        ]
-      },
-      { checkbox: 'occupationSocialHistoryHomeLayout', fields: ['occupationSocialHistoryHomeLayoutList', 'occupationSocialHistoryHomeLayoutText'] },
-      { checkbox: 'occupationSocialHistoryDurableMedicalEquipment', fields: ['occupationSocialHistoryDurableMedicalEquipmentList', 'occupationSocialHistoryDurableMedicalEquipmentText'] },
-      { checkbox: 'occupationSocialHistoryPatientTobaccoUser', fields: ['occupationSocialHistoryPatientTobaccoUserCigarettesOrAndOtherFormsTobacco', 'occupationSocialHistoryPatientTobaccoUserOtherFormText'] },
-      { checkbox: 'homeHealthCare', fields: ['homeHealthCareText'] },
-      { checkbox: 'historyOfFallsDocument', fields: ['historyOfFallsDocumentText'] },
-      { checkbox: 'mentalStatusCognitiveFunctionAppearsImpaired', fields: ['mentalStatusCognitiveFunctionAppearsImpairedText'] }
+    // previousHistoryOfSimilarSymptoms
+    const isPreviousHistoryOfSimilarSymptoms = formGroup.get('previous_history_of_similar_symptoms')?.value;
+    medicalHistory.isPreviousHistoryOfSimilarSymptoms = isPreviousHistoryOfSimilarSymptoms;
+
+    if (isPreviousHistoryOfSimilarSymptoms) {
+      const previousHistorySymptoms: PreviousHistorySymptoms = {};
+
+      // previousEpisodesOfSameComplaints
+      previousHistorySymptoms.isEpisode = formGroup.get('previous_episodes_of_same_complaints')?.value;
+      // previousEpisodesOfSameComplaintsRange
+      previousHistorySymptoms.episodeAgerRange = formGroup.get('previous_episodes_of_same_complaints_range')?.value;
+      // previousEpisodesOfSameComplaintsYearFirstEpisode
+      previousHistorySymptoms.episodeYear = formGroup.get('previous_episodes_of_same_complaints_year_first_episode')?.value;
+      // previousTreatmentsForSimilarSymptoms
+      previousHistorySymptoms.isSimilarSymptoms = formGroup.get('previous_treatments_for_similar_symptoms')?.value;
+      // previousHistoryOfSimilarSymptomsText
+      previousHistorySymptoms.similarSymptomsTxt = formGroup.get('previous_history_of_similar_symptoms_text')?.value;
+      // previousTreatmentsForSimilarSymptomsText
+      previousHistorySymptoms.description = formGroup.get('previous_treatments_for_similar_symptoms_text')?.value;
+
+      medicalHistory.previousHistorySymptoms = previousHistorySymptoms;
+    }
+
+    // occupationSocialHistory
+    const isOccupationSocialHistory = formGroup.get('occupation_social_history')?.value;
+    medicalHistory.isOccupationSocialHistory = isOccupationSocialHistory;
+
+    if (isOccupationSocialHistory) {
+      const occupationSocialHistory: OccupationSocialHistory = {};
+
+      // occupationSocialHistorySocialHistory
+      occupationSocialHistory.isSocialHistory = formGroup.get('occupation_social_history_social_history')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatus
+      occupationSocialHistory.isWorkStatus = formGroup.get('occupation_social_history_occupation_and_work_status')?.value;
+      // occupationSocialHistoryHomeLayout
+      occupationSocialHistory.isHomeLayout = formGroup.get('occupation_social_history_home_layout')?.value;
+      // occupationSocialHistoryDurableMedicalEquipmentList
+      occupationSocialHistory.isMedicalEquipment = formGroup.get('occupation_social_history_durable_medical_equipment')?.value;
+      // occupationSocialHistoryPatientTobaccoUser
+      occupationSocialHistory.isTobaccoUser = formGroup.get('occupation_social_history_patient_tobacco_user')?.value;
+
+      // occupationSocialHistoryList
+      occupationSocialHistory.socialHistoryList = formGroup.get('occupation_social_history_list')?.value;
+      // occupationSocialHistoryText
+      occupationSocialHistory.socialHistoryListDescription = formGroup.get('occupation_social_history_text')?.value;
+      // occupationSocialHistoryOccupationAndWorkNameOfOccupation
+      occupationSocialHistory.occupationName = formGroup.get('occupation_social_history_occupation_and_work_name_of_occupation')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatusStatus
+      occupationSocialHistory.occupationStatus = formGroup.get('occupation_social_history_occupation_and_work_status_status')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatusDutyLevel
+      occupationSocialHistory.occupationDutyLevel = formGroup.get('occupation_social_history_occupation_and_work_status_duty_level')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatusSescription
+      occupationSocialHistory.occupationDescription = formGroup.get('occupation_social_history_occupation_and_work_status_sescription')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatusOutOfWorkSince
+      occupationSocialHistory.occupationOutOfWorkSince = formGroup.get('occupation_social_history_occupation_and_work_status_out_of_work_since')?.value;
+      // occupationSocialHistoryOccupationAndWorkStatusReturnToWorkDate
+      occupationSocialHistory.occupationReturnToWorkDate = formGroup.get('occupation_social_history_occupation_and_work_status_return_to_work_date')?.value;
+      // occupationSocialHistoryHomeLayoutText
+      occupationSocialHistory.homeLayoutDescription = formGroup.get('occupation_social_history_home_layout_text')?.value;
+      // occupationSocialHistoryHomeLayoutList
+      occupationSocialHistory.homeLayoutList = formGroup.get('occupation_social_history_home_layout_list')?.value;
+      // occupationSocialHistoryDurableMedicalEquipmentList
+      occupationSocialHistory.MedicalEquipmentsList = formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value;
+      // occupationSocialHistoryDurableMedicalEquipmentText
+      occupationSocialHistory.MedicalEquipmentsListDescription = formGroup.get('occupation_social_history_durable_medical_equipment_text')?.value;
+
+      // occupationSocialHistoryPatientTobaccoUserCigarettesOrAndOtherFormsTobacco
+      occupationSocialHistory.isPatientUseOtherFormsOfTobacco = formGroup.get('occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco')?.value;
+      // tobaccoCessationRecommendationMade, tobaccoCessationAdviceSupportProvided, tobaccoCessationContinuedSupport
+      occupationSocialHistory.patientSmokerAdvices = [
+        formGroup.get('tobacco_cessation_recommendation_made')?.value,
+        formGroup.get('tobacco_cessation_advice_support_provided')?.value,
+        formGroup.get('tobacco_cessation_continued_support')?.value
+      ];
+      // occupationSocialHistoryPatientTobaccoUserOtherFormText
+      occupationSocialHistory.patientSmokerAdvicesDescription = formGroup.get('occupation_social_history_patient_tobacco_user_other_form_text')?.value;
+
+      medicalHistory.occupationSocialHistory = occupationSocialHistory;
+    }
+
+    // homeHealthCare
+    medicalHistory.isHomeHealthCare = formGroup.get('home_health_care')?.value;
+    // homeHealthCareText
+    if (medicalHistory.isHomeHealthCare) {
+      medicalHistory.homeHealthCareDescription = formGroup.get('home_health_care_text')?.value;
+    }
+
+    // historyOfFalls
+    const isHistoryOfFalls = formGroup.get('history_of_falls')?.value;
+    medicalHistory.isHistoryOfFalls = isHistoryOfFalls;
+
+    if (isHistoryOfFalls) {
+      const historyFall: HistoryFall = {};
+
+      // historyOfFallsDocument
+      historyFall.isFallsDocumented = formGroup.get('history_of_falls_document')?.value;
+      // historyOfFallsDocumentText
+      historyFall.isFallsDocumentedDescription = formGroup.get('history_of_falls_document_text')?.value;
+      // riskAssessmentMedicationsContributingFactor, riskAssessmentHomeFallHazards, riskAssessmentPosturalBloodPressure, riskAssessmentVision
+      historyFall.riskAssessment = [
+        formGroup.get('risk_assessment_medications_contributing_factor')?.value,
+        formGroup.get('risk_assessment_home_fall_hazards')?.value,
+        formGroup.get('risk_assessment_postural_blood_pressure')?.value,
+        formGroup.get('risk_assessment_vision')?.value
+      ];
+
+      medicalHistory.historyFall = historyFall;
+    }
+
+    // Map medical history diseases
+    const medicalHistoryDiseaseList: MedicalHistoryDisease[] = [];
+    const medicalHistoryFields = [
+      'Alzheimers',
+      'CardiovascularDisease',
+      'CaudaEquinaSyndrome',
+      'CerebralVascularAccident',
+      'CurrentInfection',
+      'DiabetesMellitusType_1',
+      'DiabetesMellitusType_2',
+      'Fibromyalgia',
+      'FractureOrSuspectedFracture',
+      'HighBloodPressure',
+      'HistoryOfCancer',
+      'Huntingtons',
+      'Immunosuppression',
+      'Lupus',
+      'MuscularDystrophy',
+      'OtherEnterDescriptionBelow',
+      'Obesity',
+      'Osteoarthritis',
+      'Parkinsons',
+      'RheumatoidArthritis',
+      'TraumaticBrainInjury'
     ];
 
-    conditionalFields.forEach(({ checkbox, fields }) => {
-      if (!updated[checkbox as keyof MedicalHistory]) {
-        fields.forEach(field => {
-          (updated as any)[field] = undefined;
+    medicalHistoryFields.forEach(field => {
+      const checkboxKey = `medical_history_${this.toSnakeCase(field)}_checkbox`;
+      const textKey = `medical_history_${this.toSnakeCase(field)}_text`;
+      const isChecked = formGroup.get(checkboxKey)?.value;
+
+      if (isChecked) {
+        medicalHistoryDiseaseList.push({
+          diseaseName: field,
+          diseaseDescription: formGroup.get(textKey)?.value
         });
       }
     });
 
-    // Handle checkbox-text pairs
-    const checkboxTextPairs = [
-      'medicalHistoryNoKnownSignificantPmhToAffectTreatment',
-      'medicalHistoryAlzheimers',
-      'medicalHistoryCardiovascularDisease',
-      'medicalHistoryCaudaEquinaSyndrome',
-      'medicalHistoryCerebralVascularAccident',
-      'medicalHistoryCurrentInfection',
-      'medicalHistoryDiabetesMellitusType_1',
-      'medicalHistoryDiabetesMellitusType_2',
-      'medicalHistoryFibromyalgia',
-      'medicalHistoryFractureOrSuspectedFracture',
-      'medicalHistoryHighBloodPressure',
-      'medicalHistoryHistoryOfCancer',
-      'medicalHistoryHuntingtons',
-      'medicalHistoryImmunosuppression',
-      'medicalHistoryLupus',
-      'medicalHistoryMuscularDystrophy',
-      'medicalHistoryOtherEnterDescriptionBelow',
-      'medicalHistoryObesity',
-      'medicalHistoryOsteoarthritis',
-      'medicalHistoryParkinsons',
-      'medicalHistoryRheumatoidArthritis',
-      'medicalHistoryTraumaticBrainInjury',
-      'complicatingpersonalFactorsNoKnownComplicatingFactorsAffectingThePlanOfCare',
-      'complicatingpersonalFactorsAllergies',
-      'complicatingpersonalFactorsAttitudesMotivation',
-      'complicatingpersonalFactorsCharacter',
-      'complicatingpersonalFactorsCopingStyle',
-      'complicatingpersonalFactorsEducationLevel',
-      'complicatingpersonalFactorsHomeEnvironment',
-      'complicatingpersonalFactorsLifestyle',
-      'complicatingpersonalFactorsLitigation',
-      'complicatingpersonalFactorsOtherEnterDescriptionBelow',
-      'complicatingpersonalFactorsMechanismOfInjuryIllness',
-      'complicatingpersonalFactorsMultipleTreatmentAreas',
-      'complicatingpersonalFactorsPatientAge',
-      'complicatingpersonalFactorsPreviousTherapy',
-      'complicatingpersonalFactorsPsychoSocial',
-      'complicatingpersonalFactorsRehabPotential',
-      'complicatingpersonalFactorsSocialBackground',
-      'complicatingpersonalFactorsSurgicalHistory',
-      'complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllness',
-      'currentMedicationsPrescription',
-      'currentMedicationsOverTheCounter',
-      'currentMedicationsHerbals',
-      'currentMedicationsVitaminMineralDietarySupplements',
-      'currentMedicationsOther',
-      'currentMedicationsNotCurrentlyTakingAnyMedications'
+    if (medicalHistoryDiseaseList.length > 0) {
+      medicalHistory.medicalHistoryDisease = medicalHistoryDiseaseList;
+    }
+
+    // Map personal complications
+    const personalComplicationList: PersonalComplication[] = [];
+    const personalComplicationFields = [
+      'MechanismOfInjuryIllness',
+      'MultipleTreatmentAreas',
+      'PatientAge',
+      'PreviousTherapy',
+      'PsychoSocial',
+      'RehabPotential',
+      'SocialBackground',
+      'SurgicalHistory',
+      'TimeSinceOnsetOfInjuryIllness'
     ];
 
-    checkboxTextPairs.forEach(base => {
-      const checkboxKey = `${base}Checkbox`;
-      const textKey = `${base}Text`;
-      if (!updated[checkboxKey as keyof MedicalHistory]) {
-        (updated as any)[textKey] = undefined;
+    personalComplicationFields.forEach(field => {
+      const checkboxKey = `complicatingpersonal_factors_${this.toSnakeCase(field)}_checkbox`;
+      const textKey = `complicatingpersonal_factors_${this.toSnakeCase(field)}_text`;
+      const isChecked = formGroup.get(checkboxKey)?.value;
+
+      if (isChecked) {
+        personalComplicationList.push({
+          complicationName: field,
+          complicationDescription: formGroup.get(textKey)?.value
+        });
       }
     });
 
-    return updated;
+    if (personalComplicationList.length > 0) {
+      medicalHistory.personalComplication = personalComplicationList;
+    }
+
+    // Map current medications
+    const currentMedicationList: CurrentMedication[] = [];
+    const currentMedicationFields = [
+      'Prescription',
+      'OverTheCounter',
+      'Herbals',
+      'VitaminMineralDietarySupplements',
+      'Other',
+      'NotCurrentlyTakingAnyMedications'
+    ];
+
+    currentMedicationFields.forEach(field => {
+      const checkboxKey = `current_medications_${this.toSnakeCase(field)}_checkbox`;
+      const textKey = `current_medications_${this.toSnakeCase(field)}_text`;
+      const isChecked = formGroup.get(checkboxKey)?.value;
+
+      if (isChecked) {
+        currentMedicationList.push({
+          medicationName: field,
+          medicationDescription: formGroup.get(textKey)?.value
+        });
+      }
+    });
+
+    if (currentMedicationList.length > 0) {
+      medicalHistory.currentMedication = currentMedicationList;
+    }
+
+    // generalHealth
+    medicalHistory.generalHealth = formGroup.get('general_health')?.value;
+    // diagnosticTesting_Imaging
+    medicalHistory.diagnosticTest = formGroup.get('diagnostic_testing_imaging')?.value;
+    // patientGoals
+    medicalHistory.patientGoals = formGroup.get('patient_goals')?.value;
+
+    // medicalHistoryReview
+    medicalHistory.medicalHistoryReview = formGroup.get('medical_history_review')?.value;
+    // mentalStatusCognitiveFunctionAppearsImpaired
+    medicalHistory.isMentalStatus = formGroup.get('mental_status_cognitive_function_appears_impaired')?.value;
+    // mentalStatusCognitiveFunctionAppearsImpairedText
+    if (medicalHistory.isMentalStatus) {
+      medicalHistory.mentalStatusDescription = formGroup.get('mental_status_cognitive_function_appears_impaired_text')?.value;
+    }
+    // unexplainedWeightLoss
+    medicalHistory.weightLoss = formGroup.get('unexplained_weight_loss')?.value;
+
+    return medicalHistory;
   }
 
   /**
