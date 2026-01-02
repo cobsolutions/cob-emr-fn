@@ -109,6 +109,7 @@ export interface MedicalHistory {
     complicatingpersonalFactorsLitigationText?: string;
     complicatingpersonalFactorsOtherEnterDescriptionBelowCheckbox?: boolean;
     complicatingpersonalFactorsOtherEnterDescriptionBelowText?: string;
+    
     complicatingpersonalFactorsMechanismOfInjuryIllnessCheckbox?: boolean;
     complicatingpersonalFactorsMechanismOfInjuryIllnessText?: string;
     complicatingpersonalFactorsMultipleTreatmentAreasCheckbox?: boolean;

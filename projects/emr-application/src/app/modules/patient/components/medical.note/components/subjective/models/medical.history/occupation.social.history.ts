@@ -1,27 +1,49 @@
-export interface OccupationSocialHistory{
-    isSocialHistory?:boolean,
-    isWorkStatus?:boolean,
-    isHomeLayout?:boolean,
-    isMedicalEquipment?:boolean,
-    isTobaccoUser?:boolean,
+export interface OccupationSocialHistory {
+    //occupationSocialHistorySocialHistory
+    isSocialHistory?: boolean,
+    //occupationSocialHistoryOccupationAndWorkStatus
+    isWorkStatus?: boolean,
+    //occupationSocialHistoryHomeLayout
+    isHomeLayout?: boolean,
+    //occupationSocialHistoryDurableMedicalEquipmentList
+    isMedicalEquipment?: boolean,
 
-    socialHistoryList?:string[],
-    socialHistoryListDescription?:string,
-    occupationName?:string,
-    occupationStatus?:string,
-    occupationDutyLevel?:string,
-    occupationDescription?:string,
-    occupationOutOfWorkSince?:Date,
-    occupationReturnToWorkDate?:Date,
+    //occupationSocialHistoryPatientTobaccoUser
+    isTobaccoUser?: boolean,
 
-    homeLayoutDescription?:string,
+    //occupationSocialHistoryList
+    socialHistoryList?: string[],
+    // occupationSocialHistoryText
+    socialHistoryListDescription?: string,
+    //occupationSocialHistoryOccupationAndWorkNameOfOccupation
+    occupationName?: string,
+    // occupationSocialHistoryOccupationAndWorkStatusStatus
+    occupationStatus?: string,
+    // occupationSocialHistoryOccupationAndWorkStatusDutyLevel
+    occupationDutyLevel?: string,
+    //occupationSocialHistoryOccupationAndWorkStatusSescription
+    occupationDescription?: string,
+    // occupationSocialHistoryOccupationAndWorkStatusOutOfWorkSince
+    occupationOutOfWorkSince?: Date,
+    // occupationSocialHistoryOccupationAndWorkStatusReturnToWorkDate
+    occupationReturnToWorkDate?: Date,
+    // occupationSocialHistoryHomeLayoutText
+    homeLayoutDescription?: string,
+    //occupationSocialHistoryHomeLayoutList
+    homeLayoutList?: string,
+    // occupationSocialHistoryDurableMedicalEquipmentList
+    MedicalEquipmentsList?: string[],
+    //occupationSocialHistoryDurableMedicalEquipmentText
+    MedicalEquipmentsListDescription?: string
 
-    MedicalEquipmentsList?:string[],
-    MedicalEquipmentsListDescription?:string
-    
-    isPatientUseOtherFormsOfTobacco?:boolean,
-    patientSmokerAdvices?:string[]
-    patientSmokerAdvicesDescription?:string
+    //occupationSocialHistoryPatientTobaccoUser
+    isPatientUseOtherFormsOfTobacco?: boolean,
+    //tobaccoCessationRecommendationMade
+    //tobaccoCessationAdviceSupportProvided
+    //tobaccoCessationContinuedSupport
+    patientSmokerAdvices?: boolean[]
+    // occupationSocialHistoryPatientTobaccoUserOtherFormText
+    patientSmokerAdvicesDescription?: string
 
 
 

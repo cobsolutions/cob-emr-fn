@@ -1,5 +1,11 @@
 export interface HistoryFall{
+    //historyOfFallsDocument
     isFallsDocumented?:boolean
+    // historyOfFallsDocumentText
     isFallsDocumentedDescription?:string,
-    riskAssessment?:string[]
+    //riskAssessmentMedicationsContributingFactor
+    //riskAssessmentHomeFallHazards
+    //riskAssessmentPosturalBloodPressure
+    //riskAssessmentVision
+    riskAssessment?:boolean[]
 }
