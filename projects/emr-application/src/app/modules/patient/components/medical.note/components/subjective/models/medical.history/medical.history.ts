@@ -19,8 +19,8 @@ export interface MedicalHistory {
     homeHealthCareDescription?: string,
 
     //historyOfFalls
-    isHistoryOfFalls?: boolean
-    historyFall?: HistoryFall
+    isHistoryOfFalls?: boolean,
+    historyFall?: HistoryFall,
 
     // medicalHistoryAlzheimersCheckbox?: boolean;
     // medicalHistoryAlzheimersText?: string;
@@ -63,7 +63,7 @@ export interface MedicalHistory {
     // medicalHistoryRheumatoidArthritisCheckbox?: boolean;
     // medicalHistoryRheumatoidArthritisText?: string;
     // medicalHistoryTraumaticBrainInjuryCheckbox?: boolean;
-    medicalHistoryDisease?: MedicalHistoryDisease[]
+    medicalHistoryDisease?: MedicalHistoryDisease[],
 
     // complicatingpersonalFactorsMechanismOfInjuryIllnessCheckbox?: boolean;
     // complicatingpersonalFactorsMechanismOfInjuryIllnessText?: string;
@@ -83,7 +83,7 @@ export interface MedicalHistory {
     // complicatingpersonalFactorsSurgicalHistoryText?: string;
     // complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllnessCheckbox?: boolean;
     // complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllnessText?: string;
-    personalComplication?: PersonalComplication[]
+    personalComplication?: PersonalComplication[],
 
     // currentMedicationsPrescriptionCheckbox?: boolean;
     // currentMedicationsPrescriptionText?: string;
@@ -97,7 +97,7 @@ export interface MedicalHistory {
     // currentMedicationsOtherText?: string;
     // currentMedicationsNotCurrentlyTakingAnyMedicationsCheckbox?: boolean;
     // currentMedicationsNotCurrentlyTakingAnyMedicationsText?: string;
-    currentMedication?: CurrentMedication[]
+    currentMedication?: CurrentMedication[],
 
     //generalHealth
     generalHealth?: string,
@@ -107,11 +107,11 @@ export interface MedicalHistory {
     patientGoals?: string,
 
     //medicalHistoryReview
-    medicalHistoryReview?: string
+    medicalHistoryReview?: string,
     //mentalStatusCognitiveFunctionAppearsImpaired
-    isMentalStatus?: boolean
+    isMentalStatus?: boolean,
     // mentalStatusCognitiveFunctionAppearsImpairedText
-    mentalStatusDescription?: string
+    mentalStatusDescription?: string,
     //unexplainedWeightLoss
     weightLoss?: boolean
 
