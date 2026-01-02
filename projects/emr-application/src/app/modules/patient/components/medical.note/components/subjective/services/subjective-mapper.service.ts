@@ -573,6 +573,7 @@ export class SubjectiveMapperService {
     }
 
     // Map medical history diseases
+    // Prefix: "medicalHistory", Suffix: "Checkbox"
     const medicalHistoryDiseaseList: MedicalHistoryDisease[] = [];
     const medicalHistoryFields = [
       'Alzheimers',
@@ -599,8 +600,10 @@ export class SubjectiveMapperService {
     ];
 
     medicalHistoryFields.forEach(field => {
-      const checkboxKey = `medical_history_${this.toSnakeCase(field)}_checkbox`;
-      const textKey = `medical_history_${this.toSnakeCase(field)}_text`;
+      // Convert field to snake_case and remove leading underscore
+      const snakeCaseField = this.toSnakeCase(field).substring(1);
+      const checkboxKey = `medical_history_${snakeCaseField}_checkbox`;
+      const textKey = `medical_history_${snakeCaseField}_text`;
       const isChecked = formGroup.get(checkboxKey)?.value;
 
       if (isChecked) {
@@ -616,8 +619,18 @@ export class SubjectiveMapperService {
     }
 
     // Map personal complications
+    // Prefix: "complicatingpersonalFactors", Suffix: "Checkbox"
     const personalComplicationList: PersonalComplication[] = [];
     const personalComplicationFields = [
+      'Allergies',
+      'AttitudesMotivation',
+      'Character',
+      'CopingStyle',
+      'EducationLevel',
+      'HomeEnvironment',
+      'Lifestyle',
+      'Litigation',
+      'OtherEnterDescriptionBelow',
       'MechanismOfInjuryIllness',
       'MultipleTreatmentAreas',
       'PatientAge',
@@ -630,8 +643,10 @@ export class SubjectiveMapperService {
     ];
 
     personalComplicationFields.forEach(field => {
-      const checkboxKey = `complicatingpersonal_factors_${this.toSnakeCase(field)}_checkbox`;
-      const textKey = `complicatingpersonal_factors_${this.toSnakeCase(field)}_text`;
+      // Convert field to snake_case and remove leading underscore
+      const snakeCaseField = this.toSnakeCase(field).substring(1);
+      const checkboxKey = `complicatingpersonal_factors_${snakeCaseField}_checkbox`;
+      const textKey = `complicatingpersonal_factors_${snakeCaseField}_text`;
       const isChecked = formGroup.get(checkboxKey)?.value;
 
       if (isChecked) {
@@ -647,6 +662,7 @@ export class SubjectiveMapperService {
     }
 
     // Map current medications
+    // Prefix: "currentMedications", Suffix: "Checkbox"
     const currentMedicationList: CurrentMedication[] = [];
     const currentMedicationFields = [
       'Prescription',
@@ -658,8 +674,10 @@ export class SubjectiveMapperService {
     ];
 
     currentMedicationFields.forEach(field => {
-      const checkboxKey = `current_medications_${this.toSnakeCase(field)}_checkbox`;
-      const textKey = `current_medications_${this.toSnakeCase(field)}_text`;
+      // Convert field to snake_case and remove leading underscore
+      const snakeCaseField = this.toSnakeCase(field).substring(1);
+      const checkboxKey = `current_medications_${snakeCaseField}_checkbox`;
+      const textKey = `current_medications_${snakeCaseField}_text`;
       const isChecked = formGroup.get(checkboxKey)?.value;
 
       if (isChecked) {
