@@ -278,7 +278,7 @@ export class SubjectiveMapperService {
     // Map medicalHistory section
     const medicalHistoryGroup = formGroup.get('medicalHistory') as FormGroup;
     if (medicalHistoryGroup) {
-      subjective.medicalHistory = this.mapMedicalHistoryToModel(medicalHistoryGroup.getRawValue());
+      subjective.medicalHistory = this.mapMedicalHistoryToModel(medicalHistoryGroup);
     }
 
     return subjective;

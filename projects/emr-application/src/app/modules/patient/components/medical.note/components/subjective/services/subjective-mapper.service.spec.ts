@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SubjectiveMapperService } from './subjective-mapper.service';
+import { SubjectiveMapperService } from './subjective-mapper.service.ts';
 
 describe('SubjectiveMapperService', () => {
   let service: SubjectiveMapperService;

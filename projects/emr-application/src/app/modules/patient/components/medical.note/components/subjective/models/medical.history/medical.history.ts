@@ -63,28 +63,7 @@ export interface MedicalHistory {
     // medicalHistoryRheumatoidArthritisCheckbox?: boolean;
     // medicalHistoryRheumatoidArthritisText?: string;
     // medicalHistoryTraumaticBrainInjuryCheckbox?: boolean;
-    // medicalHistoryTraumaticBrainInjuryText?: string;
-    // complicatingpersonalFactorsNoKnownComplicatingFactorsAffectingThePlanOfCareCheckbox?: boolean;
-    // complicatingpersonalFactorsNoKnownComplicatingFactorsAffectingThePlanOfCareText?: string;
-    // complicatingpersonalFactorsAllergiesCheckbox?: boolean;
-    // complicatingpersonalFactorsAllergiesText?: string;
-    // complicatingpersonalFactorsAttitudesMotivationCheckbox?: boolean;
-    // complicatingpersonalFactorsAttitudesMotivationText?: string;
-    // complicatingpersonalFactorsCharacterCheckbox?: boolean;
-    // complicatingpersonalFactorsCharacterText?: string;
-    // complicatingpersonalFactorsCopingStyleCheckbox?: boolean;
-    // complicatingpersonalFactorsCopingStyleText?: string;
-    // complicatingpersonalFactorsEducationLevelCheckbox?: boolean;
-    // complicatingpersonalFactorsEducationLevelText?: string;
-    // complicatingpersonalFactorsHomeEnvironmentCheckbox?: boolean;
-    // complicatingpersonalFactorsHomeEnvironmentText?: string;
-    // complicatingpersonalFactorsLifestyleCheckbox?: boolean;
-    // complicatingpersonalFactorsLifestyleText?: string;
-    // complicatingpersonalFactorsLitigationCheckbox?: boolean;
-    // complicatingpersonalFactorsLitigationText?: string;
-    // complicatingpersonalFactorsOtherEnterDescriptionBelowCheckbox?: boolean;
-    // complicatingpersonalFactorsOtherEnterDescriptionBelowText?: string;
-    medicalHistoryDisease?: MedicalHistoryDisease
+    medicalHistoryDisease?: MedicalHistoryDisease[]
 
     // complicatingpersonalFactorsMechanismOfInjuryIllnessCheckbox?: boolean;
     // complicatingpersonalFactorsMechanismOfInjuryIllnessText?: string;
@@ -104,7 +83,7 @@ export interface MedicalHistory {
     // complicatingpersonalFactorsSurgicalHistoryText?: string;
     // complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllnessCheckbox?: boolean;
     // complicatingpersonalFactorsTimeSinceOnsetOfInjuryIllnessText?: string;
-    personalComplication?: PersonalComplication
+    personalComplication?: PersonalComplication[]
 
     // currentMedicationsPrescriptionCheckbox?: boolean;
     // currentMedicationsPrescriptionText?: string;
@@ -118,7 +97,7 @@ export interface MedicalHistory {
     // currentMedicationsOtherText?: string;
     // currentMedicationsNotCurrentlyTakingAnyMedicationsCheckbox?: boolean;
     // currentMedicationsNotCurrentlyTakingAnyMedicationsText?: string;
-    currentMedication?: CurrentMedication
+    currentMedication?: CurrentMedication[]
 
     //generalHealth
     generalHealth?: string,

@@ -1,6 +1,6 @@
 import { Basic } from "./Basic";
 import { CurrentFunction } from "./CurrentFunction";
-import { MedicalHistory } from "./MedicalHistory";
+import { MedicalHistory } from "./medical.history/medical.history";
 import { Pain } from "./Pain";
 import { PriorFunction } from "./PriorFunction";
 
