@@ -90,9 +90,9 @@ export class MedicalHistoryMapperService {
       // occupationSocialHistoryHomeLayoutList
       occupationSocialHistory.homeLayoutList = formGroup.get('occupation_social_history_home_layout_list')?.value;
       // occupationSocialHistoryDurableMedicalEquipmentList
-      occupationSocialHistory.MedicalEquipmentsList = formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value;
+      occupationSocialHistory.medicalEquipmentsList = formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value;
       // occupationSocialHistoryDurableMedicalEquipmentText
-      occupationSocialHistory.MedicalEquipmentsListDescription = formGroup.get('occupation_social_history_durable_medical_equipment_text')?.value;
+      occupationSocialHistory.medicalEquipmentsListDescription = formGroup.get('occupation_social_history_durable_medical_equipment_text')?.value;
 
       // occupationSocialHistoryPatientTobaccoUserCigarettesOrAndOtherFormsTobacco
       occupationSocialHistory.isPatientUseOtherFormsOfTobacco = formGroup.get('occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco')?.value;
@@ -317,8 +317,8 @@ export class MedicalHistoryMapperService {
       mapped.occupation_social_history_occupation_and_work_status_return_to_work_date = social.occupationReturnToWorkDate;
       mapped.occupation_social_history_home_layout_text = social.homeLayoutDescription;
       mapped.occupation_social_history_home_layout_list = social.homeLayoutList;
-      mapped.occupation_social_history_durable_medical_equipment_list = social.MedicalEquipmentsList;
-      mapped.occupation_social_history_durable_medical_equipment_text = social.MedicalEquipmentsListDescription;
+      mapped.occupation_social_history_durable_medical_equipment_list = social.medicalEquipmentsList;
+      mapped.occupation_social_history_durable_medical_equipment_text = social.medicalEquipmentsListDescription;
       mapped.occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco = social.isPatientUseOtherFormsOfTobacco;
 
       if (social.patientSmokerAdvices && social.patientSmokerAdvices.length >= 3) {

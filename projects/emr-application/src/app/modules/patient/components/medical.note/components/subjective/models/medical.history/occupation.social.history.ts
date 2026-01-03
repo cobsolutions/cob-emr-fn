@@ -32,9 +32,9 @@ export interface OccupationSocialHistory {
     //occupationSocialHistoryHomeLayoutList
     homeLayoutList?: string,
     // occupationSocialHistoryDurableMedicalEquipmentList
-    MedicalEquipmentsList?: string[],
+    medicalEquipmentsList?: string[],
     //occupationSocialHistoryDurableMedicalEquipmentText
-    MedicalEquipmentsListDescription?: string
+    medicalEquipmentsListDescription?: string
 
     //occupationSocialHistoryPatientTobaccoUser
     isPatientUseOtherFormsOfTobacco?: boolean,
