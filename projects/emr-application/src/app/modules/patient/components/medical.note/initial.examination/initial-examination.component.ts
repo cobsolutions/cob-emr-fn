@@ -38,7 +38,7 @@ export class InitialExaminationComponent implements OnInit {
   @Input() caseId: number
   medicalNoteSOAP: any
   type: MedicalNoteType = MedicalNoteType.Initial_Examination;
-  isLoaded: boolean = false;
+  isLoaded: boolean = true;
   private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
@@ -49,21 +49,21 @@ export class InitialExaminationComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
-      if (status) {
-        const request: FinalizeMedicalNoteRequest = {
-          caseId: this.caseId,
-          id: this.medicalNoteId,
-          noteType: MedicalNoteType.Initial_Examination,
-          finalizedBy: this.loggedInService.getLoggedUser().uuid
-        }
-        this.draftAction().subscribe(d => {
-          this.initialExamNoteService.finalize(this.noteId).subscribe(v => {
-            this.backtoPatientRecordActions();
-          });
-        });
-      }
-    });
+    // this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+    //   if (status) {
+    //     const request: FinalizeMedicalNoteRequest = {
+    //       caseId: this.caseId,
+    //       id: this.medicalNoteId,
+    //       noteType: MedicalNoteType.Initial_Examination,
+    //       finalizedBy: this.loggedInService.getLoggedUser().uuid
+    //     }
+    //     this.draftAction().subscribe(d => {
+    //       this.initialExamNoteService.finalize(this.noteId).subscribe(v => {
+    //         this.backtoPatientRecordActions();
+    //       });
+    //     });
+    //   }
+    // });
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -72,20 +72,20 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
-    if (this.medicalNoteId !== undefined) {
-      this.initialExamNoteService.get(this.noteId).subscribe((data: any) => {
-        this.isLoaded = true
-        this.noteCreator = data.createdBy;
-        this.noteFinalizr = data.finalizedBy;
-        this.medicalNoteSOAP = data
-      })
+    // if (this.medicalNoteId !== undefined) {
+    //   this.initialExamNoteService.get(this.noteId).subscribe((data: any) => {
+    //     this.isLoaded = true
+    //     this.noteCreator = data.createdBy;
+    //     this.noteFinalizr = data.finalizedBy;
+    //     this.medicalNoteSOAP = data
+    //   })
       // this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
       //   this.isLoaded = true
       //   this.noteCreator = data.createdBy;
       //   this.noteFinalizr = data.finalizedBy;
       //   this.medicalNoteSOAP = data
       // })
-    }
+    //}
   }
   ngOnDestroy() {
     this.finalizeSub?.unsubscribe();
@@ -159,6 +159,8 @@ export class InitialExaminationComponent implements OnInit {
       billing: Object.keys(createdNote.billing).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.billing)
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
+    //Normalize Yes , No to true or false
+    this.normalizeYesNoInObject(medicalNoteRequest);
     return medicalNoteRequest;
   }
   draft() {
@@ -200,6 +202,31 @@ export class InitialExaminationComponent implements OnInit {
     if (val === 'no') return false;
     if (val === 'na' || val === 'N/A') return null;
     return val;
+  }
+
+  private normalizeYesNoInObject(obj: any): void {
+    if (obj === null || obj === undefined) {
+      return;
+    }
+
+    if (Array.isArray(obj)) {
+      obj.forEach((item, index) => {
+        if (typeof item === 'string') {
+          obj[index] = this.normalizeValue(item);
+        } else if (typeof item === 'object') {
+          this.normalizeYesNoInObject(item);
+        }
+      });
+    } else if (typeof obj === 'object') {
+      Object.keys(obj).forEach(key => {
+        const value = obj[key];
+        if (typeof value === 'string') {
+          obj[key] = this.normalizeValue(value);
+        } else if (typeof value === 'object') {
+          this.normalizeYesNoInObject(value);
+        }
+      });
+    }
   }
 
 }

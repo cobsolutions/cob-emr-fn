@@ -177,40 +177,25 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       medicalNoteType = "DISCHARGE_NOTE"
       this.medicalNoteId = undefined;
     }
-
-    var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: caseId,
-      noteType: medicalNoteType,
-      createdBy: this.getLoggedDoctor(),
-      subjective: {
-        basic: {},
-        pain: {},
-        priorFunction: {},
-        currentFunction: {},
-        medicalHistory: {}
-      },
-      assessment: {},
-      planOfCare: {},
-      billing: {}
-    }
     if (val === 'Quick Discharge') {
       var quickDischargeRequest: QuickDischargeRequest = {
         dischargeDate: 0,
         numberOfVisits: 0
       }
-      medicalNoteRequest.quickDischargeRequest = quickDischargeRequest;
     }
   }
   private createInitialExamNote() {
     var request: CreateNodeRequest = {
       patientId: this.patientId,
-      patientCaseId: this.case.id,
+      caseId: this.case.id,
       providerId: this.loggedInService.getLoggedUser().uuid,
+      noteType: 'INITIAL_EXAM',
       encounterDate: moment().toDate()
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {
+      console.log(JSON.stringify(response))
       this.patientRecord = false;
-      this.noteId = response.id;
+      this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
