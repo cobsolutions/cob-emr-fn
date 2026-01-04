@@ -54,10 +54,10 @@ export class BasicNComponent implements OnInit {
       specific_physician_rders: ['no'], //name Specific Physician Orders , type radio box
       specific_physician_rders_text: [''],
       injury_onset_date: [null], //name Injury/Onset Date/Change of Status Date , type : date picker
-      chronic: [], //check box
-      insidious: [], //check box
-      new_injury: [], //check box
-      new_injury_text: [], //check box
+      chronic: [false], //check box
+      insidious: [false], //check box
+      new_injury: [false], //check box
+      new_injury_text: [''], //check box
 
       surgery_performed: ['no'],
       surgery_performed_date_of_surgery: [null],

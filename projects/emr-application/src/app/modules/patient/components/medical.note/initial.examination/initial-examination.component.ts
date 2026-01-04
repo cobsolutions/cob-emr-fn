@@ -5,17 +5,15 @@ import { MatStepper } from '@angular/material/stepper';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
-import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
-import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
-import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
-import { ObjectiveComponent } from '../components/objective/objective.component';
-import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
 import { AssessmentMapperService } from '../components/assessment/service/assessment-mapper.service';
+import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
+import { ObjectiveComponent } from '../components/objective/objective.component';
 import { PlanOfCareMapperService } from '../components/plan/service/plan-of-care-mapper.service';
+import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
 
 
 @Component({
@@ -78,34 +76,38 @@ export class InitialExaminationComponent implements OnInit {
           }
 
           // Denormalize true/false to yes/no
-          const denormalizedSubjective = this.denormalizeNote(subjectiveFormValue);
+          const denormalizedSubjective = this.denormalizeNote(subjectiveFormValue, subjectiveFormGroup);
           this.initialExaminationForm.get('subjective')?.patchValue(denormalizedSubjective);
         }
 
         if (note.objective) {
           // Objective doesn't have a centralized mapper, so denormalize and patch directly
-          const objectiveFormValue = this.denormalizeNote(note.objective);
+          const objectiveFormGroup = this.initialExaminationForm.get('objective') as FormGroup;
+          const objectiveFormValue = this.denormalizeNote(note.objective, objectiveFormGroup);
           this.initialExaminationForm.get('objective')?.patchValue(objectiveFormValue);
         }
 
         if (note.assessment) {
           const assessmentFormValue = this.assessmentMapper.fromDto(note.assessment);
           // Denormalize true/false to yes/no
-          const denormalizedAssessment = this.denormalizeNote(assessmentFormValue);
+          const assessmentFormGroup = this.initialExaminationForm.get('assessment') as FormGroup;
+          const denormalizedAssessment = this.denormalizeNote(assessmentFormValue, assessmentFormGroup);
           this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
         }
 
         if (note.planOfCare) {
           const planOfCareFormValue = this.planOfCareMapper.fromDto(note.planOfCare);
           // Denormalize true/false to yes/no
-          const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue);
+          const planOfCareFormGroup = this.initialExaminationForm.get('planOfCare') as FormGroup;
+          const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue, planOfCareFormGroup);
           this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
         }
 
         if (note.billing) {
           const billingFormValue = this.billingMapperService.fromDto(note.billing);
           // Denormalize true/false to yes/no
-          const denormalizedBilling = this.denormalizeNote(billingFormValue);
+          const billingFormGroup = this.initialExaminationForm.get('billing') as FormGroup;
+          const denormalizedBilling = this.denormalizeNote(billingFormValue, billingFormGroup);
           this.initialExaminationForm.get('billing')?.patchValue(denormalizedBilling);
         }
       }
@@ -217,18 +219,18 @@ export class InitialExaminationComponent implements OnInit {
     return val;
   }
 
-  private denormalizeNote(note: any): any {
+  private denormalizeNote(note: any, formGroup?: FormGroup): any {
     if (note === null || note === undefined) {
       return note;
     }
 
     // Deep clone the note to avoid mutating the original
     const denormalized = JSON.parse(JSON.stringify(note));
-    this.denormalizeTrueFalseInObject(denormalized);
+    this.denormalizeTrueFalseInObject(denormalized, formGroup);
     return denormalized;
   }
 
-  private denormalizeTrueFalseInObject(obj: any): void {
+  private denormalizeTrueFalseInObject(obj: any, formGroup?: FormGroup): void {
     if (obj === null || obj === undefined) {
       return;
     }
@@ -238,19 +240,46 @@ export class InitialExaminationComponent implements OnInit {
         if (typeof item === 'boolean') {
           obj[index] = this.denormalizeValue(item);
         } else if (typeof item === 'object') {
-          this.denormalizeTrueFalseInObject(item);
+          this.denormalizeTrueFalseInObject(item, undefined);
         }
       });
     } else if (typeof obj === 'object') {
       Object.keys(obj).forEach(key => {
         const value = obj[key];
+
         if (typeof value === 'boolean') {
-          obj[key] = this.denormalizeValue(value);
+          // Check if this field exists in the form and if it's initialized with a boolean
+          const shouldKeepBoolean = this.shouldKeepAsBoolean(key, formGroup);
+
+          if (!shouldKeepBoolean) {
+            obj[key] = this.denormalizeValue(value);
+          }
         } else if (typeof value === 'object') {
-          this.denormalizeTrueFalseInObject(value);
+          // Navigate deeper into nested FormGroups if available
+          const nestedFormGroup = formGroup?.get(key) as FormGroup;
+          this.denormalizeTrueFalseInObject(value, nestedFormGroup);
         }
       });
     }
+  }
+
+  private shouldKeepAsBoolean(key: string, formGroup?: FormGroup): boolean {
+    if (!formGroup) {
+      return false;
+    }
+
+    // Try to get the form control for this key
+    const control = formGroup.get(key);
+
+    if (control) {
+      // If the control exists and its initial value is boolean, keep it as boolean (checkbox)
+      // This works because checkboxes are initialized with boolean values (true/false)
+      // while radio buttons are initialized with null or string values ('yes'/'no')
+      const initialValue = control.value;
+      return typeof initialValue === 'boolean';
+    }
+
+    return false;
   }
 
   private normalizeYesNoInObject(obj: any): void {
