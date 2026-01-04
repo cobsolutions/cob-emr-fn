@@ -239,8 +239,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   private completeMedicalNote(id: number, status: string) {
     this.patientRecord = false
     this.medicalNoteId = id;
-    console.log('medicalNoteId ' + this.medicalNoteId)
-    console.log('status ' + status)
     if (status === 'Initial Examination')
       this.patientRecordAction = 'Add Initial Examination';
     if (status === 'Daily Note')
