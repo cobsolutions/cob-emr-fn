@@ -122,8 +122,8 @@ export class InitialExaminationComponent implements OnInit {
       this.backtoPatientRecordActions()
     if (action === 'draft') {
       // const formValues = this.getAllFormValues(this.initialExaminationForm);
-      // console.log('Mapped Subjective:', this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup));
-       var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+      // console.log('formValues:', formValues);
+      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
       console.log(medicalNoteRequest)
     }
     // this.draft();

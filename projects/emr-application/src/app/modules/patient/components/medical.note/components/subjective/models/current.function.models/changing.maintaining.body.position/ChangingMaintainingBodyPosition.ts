@@ -3,6 +3,8 @@ import { Transfers } from "./Transfers";
 import { IADLs } from "./IADLs";
 
 export interface ChangingMaintainingBodyPosition {
+  // current_functional_limitations_changing-maintaining-body-position
+  changingMaintainingBodyPositionFlag?: boolean;
   // current_functional_limitations_changing-maintaining-body-position_maintaining_body_position
   maintainingABodyPositionFlag:boolean;
   maintainingABodyPosition: MaintainingABodyPosition;

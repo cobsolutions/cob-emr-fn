@@ -5,6 +5,13 @@ export class SelfCareMapper{
     public static map(formGroup: FormGroup, mapped: CurrentFunction, getValue: (controlName: string) => any): void {
         // ========== SELF CARE ==========
 
+        // Self Care Category Flag
+        const selfCareFlag = getValue('current_functional_limitations_self-care');
+        if (selfCareFlag !== undefined) {
+          if (!mapped.selfCare) mapped.selfCare = {} as any;
+          mapped.selfCare.selfCareFlag = selfCareFlag;
+        }
+
         // Self Care - Hygiene
         const hygieneFlag = getValue('current_functional_limitations_self-care_hygiene');
         if (hygieneFlag !== undefined) {

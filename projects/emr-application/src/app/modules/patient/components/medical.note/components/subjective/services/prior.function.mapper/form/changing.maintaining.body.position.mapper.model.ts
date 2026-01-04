@@ -5,6 +5,14 @@ import { PriorFunction } from "../../../models";
 export class ChangingMaintainingBodyPositionMapper {
     public  static map(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
         // ========== CHANGING MAINTAINING BODY POSITION ==========
+
+        // Changing Maintaining Body Position Category Flag
+        const changingMaintainingBodyPositionFlag = getValue('prior-level-function_changing-maintaining-body-position');
+        if (changingMaintainingBodyPositionFlag !== undefined) {
+          if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
+          mapped.changingMaintainingBodyPosition.changingMaintainingBodyPositionFlag = changingMaintainingBodyPositionFlag;
+        }
+
         const maintainingABodyPositionFlag = getValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position');
         if (maintainingABodyPositionFlag !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;

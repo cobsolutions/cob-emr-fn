@@ -3,9 +3,12 @@ import { PriorFunction } from "../../../models";
 export class CarryingMovingHandlingObjectsDTOMapper {
     public static map(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
         if (!priorFunction.carryingMovingHandlingObjects) return;
-    
+
         const carrying = priorFunction.carryingMovingHandlingObjects;
-    
+
+        // Carrying Moving Handling Objects Category Flag
+        setValue('prior-level-function_carrying-moving-handling-objects', carrying.carryingMovingHandlingObjectsFlag);
+
         // IADLs
         if (carrying.iADLs) {
           setValue('prior-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone', carrying.iADLs.abilityToUseTelephone);

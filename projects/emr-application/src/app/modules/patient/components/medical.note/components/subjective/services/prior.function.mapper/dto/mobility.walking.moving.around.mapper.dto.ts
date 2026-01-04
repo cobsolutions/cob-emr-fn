@@ -3,9 +3,12 @@ import { PriorFunction } from "../../../models";
 export class MobilityWalkingMovingAroundDTOMapper{
     public static map(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
         if (!priorFunction.mobilityWalkingMovingAround) return;
-    
+
         const mobility = priorFunction.mobilityWalkingMovingAround;
-    
+
+        // Mobility Walking Moving Around Category Flag
+        setValue('prior-level-function_mobility-walking-moving-around', mobility.mobilityWalkingMovingAroundFlag);
+
         // IADLs
         if (mobility.iADLs) {
           setValue('prior-level-function_mobility-walking-moving-around_mobility_iadls_mobility_use_telephone', mobility.iADLs.abilityToUseTelephone);

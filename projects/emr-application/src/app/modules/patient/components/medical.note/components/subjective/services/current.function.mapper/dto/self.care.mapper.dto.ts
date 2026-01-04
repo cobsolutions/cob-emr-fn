@@ -6,6 +6,9 @@ export class SelfCareDTOMapper {
         if (currentFunction.selfCare) {
           const selfCare = currentFunction.selfCare;
 
+          // Self Care Category Flag
+          setValue('current-level-function_self-care', selfCare.selfCareFlag);
+
           // Hygiene Flag
           setValue('current-level-function_self-care_hygiene', selfCare.hygieneFlag);
 

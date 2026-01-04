@@ -456,6 +456,41 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit {
     })
   }
   setupValueChangeListeners() {
+    // Subscribe to all form value changes (including hierarchy checkboxes)
+    this.currentFunctionalLimitationsForm.valueChanges.subscribe(values => {
+      // All form values including hierarchy checkboxes and comments
+      // Example values:
+      // {
+      //   'current-level-function_self-care': true, // Category checkbox
+      //   'current-level-function_self-care_hygiene': true,
+      //   'current-level-function_self-care_comment': 'some comment',
+      //   'current-level-function_mobility-walking-moving-around': false, // Category checkbox
+      //   'current_functional_limitations_other': true,
+      //   'current_functional_limitations_function_other_text': 'other text'
+      // }
+    });
+
+    // Listen to category formControl changes
+    // Self Care category
+    this.currentFunctionalLimitationsForm.get('current-level-function_self-care')?.valueChanges.subscribe(value => {
+      console.log('Self Care category checked:', value);
+    });
+
+    // Mobility category
+    this.currentFunctionalLimitationsForm.get('current-level-function_mobility-walking-moving-around')?.valueChanges.subscribe(value => {
+      console.log('Mobility category checked:', value);
+    });
+
+    // Changing & Maintaining Body Position category
+    this.currentFunctionalLimitationsForm.get('current-level-function_changing-maintaining-body-position')?.valueChanges.subscribe(value => {
+      console.log('Changing & Maintaining Body Position category checked:', value);
+    });
+
+    // Carrying, Moving & Handling Objects category
+    this.currentFunctionalLimitationsForm.get('current-level-function_carrying-moving-handling-objects')?.valueChanges.subscribe(value => {
+      console.log('Carrying, Moving & Handling Objects category checked:', value);
+    });
+
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_other')?.valueChanges.subscribe(value => {
       this.showHoOther = value;
     });
@@ -468,6 +503,20 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit {
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_function_other_pelvic_health')?.valueChanges.subscribe(value => {
       this.showHoOtherPelvicHealth = value === 'yes';
     });
+  }
+
+  // Helper method to get category formControl value
+  getCategoryValue(categoryKey: string): boolean {
+    const formControlName = `current-level-function_${categoryKey}`;
+    return this.currentFunctionalLimitationsForm.get(formControlName)?.value || false;
+  }
+
+  // Helper method to check if any category is selected
+  isAnyCategorySelected(): boolean {
+    return this.getCategoryValue('self-care') ||
+           this.getCategoryValue('mobility-walking-moving-around') ||
+           this.getCategoryValue('changing-maintaining-body-position') ||
+           this.getCategoryValue('carrying-moving-handling-objects');
   }
 
 }

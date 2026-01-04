@@ -5,7 +5,14 @@ import { PriorFunction } from "../../../models";
 export class MobilityWalkingMovingAroundMapper{
     public static map(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
         // ========== MOBILITY WALKING MOVING AROUND ==========
-    
+
+        // Mobility Walking Moving Around Category Flag
+        const mobilityWalkingMovingAroundFlag = getValue('prior-level-function_mobility-walking-moving-around');
+        if (mobilityWalkingMovingAroundFlag !== undefined) {
+          if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
+          mapped.mobilityWalkingMovingAround.mobilityWalkingMovingAroundFlag = mobilityWalkingMovingAroundFlag;
+        }
+
         // IADLs Flag
         const mobilityIADLsFlag = getValue('prior-level-function_mobility-walking-moving-around_mobility_iadls');
         if (mobilityIADLsFlag !== undefined) {

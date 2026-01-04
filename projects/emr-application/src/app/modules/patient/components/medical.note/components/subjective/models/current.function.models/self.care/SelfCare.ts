@@ -4,6 +4,8 @@ import { IADLs } from "./IADLs";
 import { HouseholdChores } from "./HouseholdChores";
 
 export interface SelfCare {
+  //current_functional_limitations_self-care
+  selfCareFlag?: boolean;
   //current_functional_limitations_self-care_hygiene
   hygieneFlag: boolean;
   hygiene: Hygiene;

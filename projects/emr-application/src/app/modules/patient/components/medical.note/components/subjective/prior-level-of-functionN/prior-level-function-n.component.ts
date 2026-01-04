@@ -454,16 +454,53 @@ export class PriorLevelFunctionNComponent implements OnInit {
       // All form values including hierarchy checkboxes and comments
       // Example values:
       // {
+      //   'prior-level-function_self-care': true, // Category checkbox
       //   'prior-level-function_self-care_hygiene': true,
       //   'prior-level-function_self-care_comment': 'some comment',
+      //   'prior-level-function_mobility-walking-moving-around': false, // Category checkbox
       //   'prior_level_function_other': true,
       //   'prior_level_function_other_text': 'other text'
       // }
     });
 
+    // Listen to category formControl changes
+    // Self Care category
+    this.priorLevelFunctionForm.get('prior-level-function_self-care')?.valueChanges.subscribe(value => {
+      console.log('Self Care category checked:', value);
+    });
+
+    // Mobility category
+    this.priorLevelFunctionForm.get('prior-level-function_mobility-walking-moving-around')?.valueChanges.subscribe(value => {
+      console.log('Mobility category checked:', value);
+    });
+
+    // Changing & Maintaining Body Position category
+    this.priorLevelFunctionForm.get('prior-level-function_changing-maintaining-body-position')?.valueChanges.subscribe(value => {
+      console.log('Changing & Maintaining Body Position category checked:', value);
+    });
+
+    // Carrying, Moving & Handling Objects category
+    this.priorLevelFunctionForm.get('prior-level-function_carrying-moving-handling-objects')?.valueChanges.subscribe(value => {
+      console.log('Carrying, Moving & Handling Objects category checked:', value);
+    });
+
     this.priorLevelFunctionForm.get('prior_level_function_other')?.valueChanges.subscribe(value => {
       this.showHoOther = value;
     });
+  }
+
+  // Helper method to get category formControl value
+  getCategoryValue(categoryKey: string): boolean {
+    const formControlName = `prior-level-function_${categoryKey}`;
+    return this.priorLevelFunctionForm.get(formControlName)?.value || false;
+  }
+
+  // Helper method to check if any category is selected
+  isAnyCategorySelected(): boolean {
+    return this.getCategoryValue('self-care') ||
+           this.getCategoryValue('mobility-walking-moving-around') ||
+           this.getCategoryValue('changing-maintaining-body-position') ||
+           this.getCategoryValue('carrying-moving-handling-objects');
   }
 
 }

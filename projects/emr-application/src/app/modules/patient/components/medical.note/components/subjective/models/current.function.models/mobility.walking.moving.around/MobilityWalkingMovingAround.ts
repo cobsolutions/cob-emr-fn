@@ -5,6 +5,8 @@ import { MovingAroundInDifferentLocations } from "./MovingAroundInDifferentLocat
 import { NegotiateObstacles } from "./NegotiateObstacles";
 
 export interface MobilityWalkingMovingAround {
+  //"current_functional_limitations_mobility-walking-moving-around
+  mobilityWalkingMovingAroundFlag?: boolean;
   //"current_functional_limitations_mobility-walking-moving-around_mobility_iadls
   iADLsFlag:boolean
   iADLs: IADLs;

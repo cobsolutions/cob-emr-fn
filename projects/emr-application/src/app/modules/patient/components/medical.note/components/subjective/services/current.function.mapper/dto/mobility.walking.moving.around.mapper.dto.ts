@@ -6,6 +6,9 @@ export class MobilityWalkingMovingAroundDTOMapper {
 
     const mobility = currentFunction.mobilityWalkingMovingAround;
 
+    // Mobility Walking Moving Around Category Flag
+    setValue('current-level-function_mobility-walking-moving-around', mobility.mobilityWalkingMovingAroundFlag);
+
     // IADLs
     if (mobility.iADLs) {
       setValue('current-level-function_mobility-walking-moving-around_mobility_iadls_mobility_use_telephone', mobility.iADLs.abilityToUseTelephone);

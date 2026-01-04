@@ -6,6 +6,9 @@ export class CarryingMovingHandlingObjectsDTOMapper {
 
     const carrying = currentFunction.carryingMovingHandlingObjects;
 
+    // Carrying Moving Handling Objects Category Flag
+    setValue('current-level-function_carrying-moving-handling-objects', carrying.carryingMovingHandlingObjectsFlag);
+
     // IADLs
     if (carrying.iADLs) {
       setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone', carrying.iADLs.abilityToUseTelephone);

@@ -25,6 +25,9 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Map to store the unique form control names for category comments
   private categoryCommentFormControlNames: Map<CheckboxHierarchy, string> = new Map();
 
+  // Map to store the unique form control names for category checkboxes
+  private categoryFormControlNames: Map<CheckboxHierarchy, string> = new Map();
+
   ngOnInit() {
     this.initializeCollapsedState();
     this.initializeFormControls();
@@ -37,6 +40,9 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.data.forEach(category => {
       const categoryKey = this.sanitizeKey(category.title);
 
+      // Add form control for category checkbox
+      this.addCategoryToForm(category, categoryKey);
+
       // Add form control for category comment
       this.addCategoryCommentToForm(category, categoryKey);
 
@@ -44,6 +50,19 @@ export class HierarchyCheckboxComponent implements OnInit {
         this.addItemToForm(item, categoryKey);
       });
     });
+  }
+
+  // Add category checkbox form control
+  private addCategoryToForm(category: CheckboxHierarchy, categoryKey: string): void {
+    if (!this.formGroup) return;
+
+    const categoryFormControlName = this.generateCategoryFormControlName(categoryKey);
+
+    // Store the mapping between category and its form control name
+    this.categoryFormControlNames.set(category, categoryFormControlName);
+
+    // Add form control for the category checkbox
+    this.formGroup.addControl(categoryFormControlName, new FormControl(category.checked || false));
   }
 
   // Add category comment form control
@@ -57,6 +76,19 @@ export class HierarchyCheckboxComponent implements OnInit {
 
     // Add form control for the comment
     this.formGroup.addControl(commentFormControlName, new FormControl(category.comment || ''));
+  }
+
+  // Generate unique form control name for category checkbox
+  private generateCategoryFormControlName(categoryKey: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+
+    return parts.join('_');
   }
 
   // Generate unique form control name for category comment
@@ -117,6 +149,20 @@ export class HierarchyCheckboxComponent implements OnInit {
       item.children.forEach(child => {
         this.addItemToForm(child, categoryKey, itemPath);
       });
+    }
+  }
+
+  // Update category form control value when category checkbox changes
+  private updateCategoryFormControl(category: CheckboxHierarchy): void {
+    if (!this.formGroup) return;
+
+    // Get the unique form control name for this category
+    const formControlName = this.categoryFormControlNames.get(category);
+    if (!formControlName) return;
+
+    const control = this.formGroup.get(formControlName);
+    if (control) {
+      control.setValue(category.checked || false);
     }
   }
 
@@ -192,6 +238,9 @@ export class HierarchyCheckboxComponent implements OnInit {
 
     // Toggle checked state for UX
     category.checked = !category.checked;
+
+    // Update form control for category
+    this.updateCategoryFormControl(category);
 
     if (category.checked) {
       // When checking, expand the category without checking children

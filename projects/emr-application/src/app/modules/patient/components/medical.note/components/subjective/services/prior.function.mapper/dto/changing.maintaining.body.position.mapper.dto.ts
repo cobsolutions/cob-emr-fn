@@ -3,9 +3,12 @@ import { PriorFunction } from "../../../models";
 export class ChangingMaintainingBodyPositionDTOMapper {
     public static map(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
         if (!priorFunction.changingMaintainingBodyPosition) return;
-    
+
         const changing = priorFunction.changingMaintainingBodyPosition;
-    
+
+        // Changing Maintaining Body Position Category Flag
+        setValue('prior-level-function_changing-maintaining-body-position', changing.changingMaintainingBodyPositionFlag);
+
         // Maintaining A Body Position
         if (changing.maintainingABodyPosition) {
           setValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position_remaining_seated', changing.maintainingABodyPosition.remainingSeated);

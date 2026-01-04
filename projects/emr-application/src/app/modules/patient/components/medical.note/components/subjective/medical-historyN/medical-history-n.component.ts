@@ -172,11 +172,11 @@ export class MedicalHistoryNComponent implements OnInit {
 
 
       occupation_social_history_home_layout: ['no'],
-      occupation_social_history_home_layout_list: [''],
+      occupation_social_history_home_layout_list: [],
       occupation_social_history_home_layout_text: [''],
 
       occupation_social_history_durable_medical_equipment: ['no'],
-      occupation_social_history_durable_medical_equipment_list: ['no'],
+      occupation_social_history_durable_medical_equipment_list: [],
       occupation_social_history_durable_medical_equipment_text: [''],
 
       occupation_social_history_patient_tobacco_user: ['no'],

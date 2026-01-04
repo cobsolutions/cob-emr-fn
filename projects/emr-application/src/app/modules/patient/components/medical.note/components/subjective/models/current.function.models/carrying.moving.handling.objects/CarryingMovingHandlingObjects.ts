@@ -5,6 +5,8 @@ import { MovingObjectsWithLowerExtremities } from "./MovingObjectsWithLowerExtre
 import { Recreation } from "./Recreation";
 
 export interface CarryingMovingHandlingObjects {
+  // current_functional_limitations_carrying-moving-handling-objects
+  carryingMovingHandlingObjectsFlag?: boolean;
   // current_functional_limitations_carrying-moving-handling-objects_carrying_iadls
   iADLsFlag:boolean
   iADLs: IADLs;

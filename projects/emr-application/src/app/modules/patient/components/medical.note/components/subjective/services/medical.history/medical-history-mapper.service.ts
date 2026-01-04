@@ -88,9 +88,9 @@ export class MedicalHistoryMapperService {
       // occupationSocialHistoryHomeLayoutText
       occupationSocialHistory.homeLayoutDescription = formGroup.get('occupation_social_history_home_layout_text')?.value;
       // occupationSocialHistoryHomeLayoutList
-      occupationSocialHistory.homeLayoutList = formGroup.get('occupation_social_history_home_layout_list')?.value;
+      occupationSocialHistory.homeLayoutList = formGroup.get('occupation_social_history_home_layout_list')?.value === '' ? null : formGroup.get('occupation_social_history_home_layout_list')?.value;
       // occupationSocialHistoryDurableMedicalEquipmentList
-      occupationSocialHistory.medicalEquipmentsList = formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value;
+      occupationSocialHistory.medicalEquipmentsList = formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value === '' ? null : formGroup.get('occupation_social_history_durable_medical_equipment_list')?.value;
       // occupationSocialHistoryDurableMedicalEquipmentText
       occupationSocialHistory.medicalEquipmentsListDescription = formGroup.get('occupation_social_history_durable_medical_equipment_text')?.value;
 

@@ -6,6 +6,9 @@ export class ChangingMaintainingBodyPositionDTOMapper {
 
         const changing = currentFunction.changingMaintainingBodyPosition;
 
+        // Changing Maintaining Body Position Category Flag
+        setValue('current-level-function_changing-maintaining-body-position', changing.changingMaintainingBodyPositionFlag);
+
         // Maintaining A Body Position
         if (changing.maintainingABodyPosition) {
           setValue('current-level-function_changing-maintaining-body-position_maintaining_body_position_remaining_seated', changing.maintainingABodyPosition.remainingSeated);

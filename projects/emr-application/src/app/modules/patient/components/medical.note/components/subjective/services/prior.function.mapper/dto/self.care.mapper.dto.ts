@@ -1,11 +1,14 @@
 import { PriorFunction } from "../../../models";
 
-export class SelfCareDTOMapper { 
+export class SelfCareDTOMapper {
     public static map(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
         // ========== SELF CARE ==========
         if (priorFunction.selfCare) {
           const selfCare = priorFunction.selfCare;
-    
+
+          // Self Care Category Flag
+          setValue('prior-level-function_self-care', selfCare.selfCareFlag);
+
           // Hygiene Flag
           setValue('prior-level-function_self-care_hygiene', selfCare.hygieneFlag);
     

@@ -5,6 +5,14 @@ import { PriorFunction } from "../../../models";
 export class CarryingMovingHandlingObjectsMapper {
     public static map(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
         // ========== CARRYING MOVING HANDLING OBJECTS ==========
+
+        // Carrying Moving Handling Objects Category Flag
+        const carryingMovingHandlingObjectsFlag = getValue('prior-level-function_carrying-moving-handling-objects');
+        if (carryingMovingHandlingObjectsFlag !== undefined) {
+          if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
+          mapped.carryingMovingHandlingObjects.carryingMovingHandlingObjectsFlag = carryingMovingHandlingObjectsFlag;
+        }
+
         const iADLsFlag = getValue('prior-level-function_carrying-moving-handling-objects_carrying_iadls');
         if (iADLsFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;

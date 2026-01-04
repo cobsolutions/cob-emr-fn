@@ -315,7 +315,7 @@ export class SubjectiveMapperService {
     // Map currentFunction section
     if (dto.currentFunction) {
       const currentFunctionGroup = formGroup?.get('currentFunction') as FormGroup;
-      this.currentFunctionMapper.fromDto(dto.currentFunction,currentFunctionGroup)
+      this.currentFunctionMapper.fromDto(dto.currentFunction, currentFunctionGroup)
       formValue.currentFunction = this.mapCurrentFunctionFromDto(dto.currentFunction);
     }
 
@@ -334,8 +334,8 @@ export class SubjectiveMapperService {
     const mapped: Basic = {
       dosDate: basic.dos_date,
       time: basic.time,
-      timeIn: basic.time ? basic.time_in : undefined,
-      timeOut: basic.time ? basic.time_out : undefined,
+      timeIn: basic.time !== 'no' ? basic.time_in : undefined,
+      timeOut: basic.time !== 'no' ? basic.time_out : undefined,
       numberOfVisit: basic.number_of_visit,
       icdtenDiagnosis: basic.icdten_diagnosis,
       treatmentDiagnosis: basic.treatment_diagnosis,
@@ -357,7 +357,6 @@ export class SubjectiveMapperService {
       historyOfPresentCondition_MechanismOfInjury: basic.history_of_present_condition_mechanism_of_injury,
       primaryConcernChiefComplaint: basic.primary_concern_chief_complaint
     };
-
     return mapped;
   }
 

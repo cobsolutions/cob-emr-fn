@@ -4,7 +4,14 @@ import { PriorFunction } from "../../../models";
 export class SelfCareMapper{
     public static map(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
         // ========== SELF CARE ==========
-    
+
+        // Self Care Category Flag
+        const selfCareFlag = getValue('prior-level-function_self-care');
+        if (selfCareFlag !== undefined) {
+          if (!mapped.selfCare) mapped.selfCare = {} as any;
+          mapped.selfCare.selfCareFlag = selfCareFlag;
+        }
+
         // Self Care - Hygiene
         const hygieneFlag = getValue('prior-level-function_self-care_hygiene');
         if (hygieneFlag !== undefined) {
