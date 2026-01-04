@@ -63,11 +63,7 @@ export class ObjectiveComponent implements OnInit {
       palpation: this.fb.group({}),
       profile: new FormControl(null),
     });
-    
-    if (this.objectiveData) {
-      this.selectedProfile = this.objectiveData.profile;
-      this.selectProfile();
-    }
+    this.formReady.emit(this.objectiveForm);
   }
   get activeProfiles(): ObjectiveProfile[] {
     return this.profiles.filter(p => p.active);

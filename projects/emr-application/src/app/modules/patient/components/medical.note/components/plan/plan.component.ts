@@ -77,38 +77,17 @@ export class PlanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.isAuthorizthedToFinalize()
-
-    this.soapService.findSoapFields('plan', this.noteType).subscribe(fields => {
-      this.fields = fields
-      this.planForm = this.fb.group({
-        createPlanOfCare: new FormControl(false),
-        frequency: ['F00'],
-        duration: ['D00'],
-        plan: ['PL01'],
-        physicianSignature: new FormControl(false),
-        procedures: this.fb.group({}),
-        modalities: this.fb.group({}),
-        specialties: this.fb.group({}),
-      });
-      if (this.planData && this.planData['frequency']) {
-        this.planForm.get('frequency').setValue(this.planData['frequency'])
-      }
-      if (this.planData && this.planData['duration']) {
-        this.planForm.get('duration').setValue(this.planData['duration'])
-      }
-      if (this.planData && this.planData['plan']) {
-        this.planForm.get('plan').setValue(this.planData['plan'])
-      }
-      if (this.planData && this.planData['physicianSignature']) {
-        this.planForm.get('physicianSignature').setValue(this.planData['physicianSignature'])
-      }
-      if (this.planData && this.planData['createPlanOfCare']) {
-        this.planForm.get('createPlanOfCare').setValue(this.planData['createPlanOfCare'])
-      }
-      this.formReady.emit(this.planForm);
+    this.planForm = this.fb.group({
+      createPlanOfCare: new FormControl(false),
+      frequency: ['F00'],
+      duration: ['D00'],
+      plan: ['PL01'],
+      physicianSignature: new FormControl(false),
+      procedures: this.fb.group({}),
+      modalities: this.fb.group({}),
+      specialties: this.fb.group({}),
     })
-
+    this.formReady.emit(this.planForm);
   }
   next() {
     this.stepper.next();
