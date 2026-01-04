@@ -1,12 +1,60 @@
-<span *ngIf="!finalizeMessageFlag">
-    <h4>Are you sure you want to finalize medical note</h4>
-    <div class="dialog-actions">
-        <button class="btn btn-yes" (click)="onYes()">Yes</button>
-        <button class="btn btn-no" (click)="onNo()">No</button>
+<div class="finalize-modal-container">
+    <!-- Confirmation State -->
+    <div *ngIf="!finalizeMessageFlag" class="finalize-content">
+        <!-- Warning Section -->
+        <div class="warning-section">
+            <div class="warning-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <div class="warning-text">
+                <p class="warning-title">Finalize Medical Note</p>
+                <p class="warning-description">Once finalized, this medical note cannot be edited. Please review all information before proceeding.</p>
+            </div>
+        </div>
+
+        <!-- Confirmation Message -->
+        <div class="confirmation-message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>Are you sure you want to finalize this medical note?</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="dialog-actions">
+            <button class="btn btn-no" (click)="onNo()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <span>Cancel</span>
+            </button>
+            <button class="btn btn-yes" (click)="onYes()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Yes, Finalize</span>
+            </button>
+        </div>
     </div>
-</span>
-<span *ngIf="finalizeMessageFlag">
-    <h4>{{finalizeMessage}}
-        <c-spinner color="secondary" variant="grow"></c-spinner>
-    </h4>
-</span>
+
+    <!-- Processing State -->
+    <div *ngIf="finalizeMessageFlag" class="processing-state">
+        <div class="spinner-container">
+            <c-spinner color="primary" variant="grow"></c-spinner>
+        </div>
+        <div class="processing-text">
+            <p class="processing-title">Finalizing Medical Note</p>
+            <p class="processing-description">{{finalizeMessage}}</p>
+        </div>
+    </div>
+</div>

@@ -378,7 +378,7 @@
         </button>
         <div class="action-buttons-right">
             <button cButton class="action-button forward-button" hide-control
-                [componentRole]="['forward-medical-note-role']">
+                [componentRole]="['forward-medical-note-role']" (click)="showForwardModal()">
                 <span>Forward</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -387,7 +387,7 @@
                 </svg>
             </button>
             <button cButton class="action-button finalize-button" hide-control
-                [componentRole]="['finalize-medical-note-role']">
+                [componentRole]="['finalize-medical-note-role']" (click)="showFinalizeNotePopup()">
                 <span>Finalize</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -397,3 +397,25 @@
         </div>
     </div>
 </form>
+
+<c-modal id="forwardModal" [visible]="forwardVisibility" backdrop="static">
+    <c-modal-header>
+        <strong>Forward Medical Note To :</strong>
+        <button (click)="forwardVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeForwardVisibility($event)"
+            [noteId]="medicalNoteId"></forward-modal>
+    </c-modal-body>
+</c-modal>
+
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="finalizeNoteVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
+            [noteType]="noteType" (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+    </c-modal-body>
+</c-modal>

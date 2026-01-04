@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'billing-n',
@@ -12,8 +14,13 @@ export class BillingNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() noteTypeId: string
+  @Input() caseId: number
+  @Input() medicalNoteId: number
   BillingForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  finalizeNoteVisibility: boolean = false;
+  forwardVisibility: boolean = false;
+  noteType: MedicalNoteType = MedicalNoteType.Initial_Examination;
+  constructor(private fb: FormBuilder, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -46,5 +53,29 @@ export class BillingNComponent implements OnInit {
     //   console.log(key, formGroup.get(key));
     // });
     this.BillingForm.setControl(section, formGroup);
+  }
+
+  showForwardModal() {
+    this.forwardVisibility = true;
+  }
+
+  changeForwardVisibility(event: string) {
+    if (event === 'close') {
+      this.forwardVisibility = false;
+    }
+  }
+
+  showFinalizeNotePopup() {
+    this.finalizeNoteVisibility = true;
+  }
+
+  changeFinalizeNoteVisibility(event: any) {
+    if (event === 'no') {
+      this.finalizeNoteVisibility = false;
+    }
+    if (event === 'yes') {
+      this.finalizeNoteVisibility = false;
+      this.toastr.success('Medical note has been finalized');
+    }
   }
 }
