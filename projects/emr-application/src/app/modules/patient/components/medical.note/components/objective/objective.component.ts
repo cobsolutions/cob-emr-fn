@@ -22,13 +22,30 @@ export class ObjectiveComponent implements OnInit {
   @ViewChild(InspectionNComponent) inspectionComponent: InspectionNComponent;
   @ViewChild(OutcomeMeasurementToolsComponent) omtComponent: OutcomeMeasurementToolsComponent;
   selectedProfile: any = null
-  profiles: Observable<ObjectiveProfile[]>
   @Input() objectiveData: any
   @Input() isNotInitialExaminationNote: boolean = false
   @Input() noteType: string
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
+  profiles:ObjectiveProfile[]=[
+    { id: 1, name: 'Jaw', active: false },
+    { id: 2, name: 'Cervical', active: false },
+    { id: 3, name: 'Shoulder', active: false },
+    { id: 4, name: 'Elbow', active: false },
+    { id: 5, name: 'Wrist/Hand', active: false },
+    { id: 6, name: 'Thoracic Spine Ribs', active: false },
+    { id: 7, name: 'Lumbar/Pelvis', active: false },
+    { id: 8, name: 'Hip', active: false },
+    { id: 9, name: 'Knee', active: false },
+    { id: 10, name: 'Ankle', active: false },
+    { id: 11, name: 'Foot', active: false },
+    { id: 12, name: 'General', active: true },
+    { id: 13, name: 'Vestibular', active: false },
+    { id: 14, name: 'Pelvic Health', active: false },
+    { id: 15, name: 'Speech', active: false }
+  ]
+  isProfileSelected :boolean = false
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
     , private medicalService: MedialNoteService
@@ -46,14 +63,14 @@ export class ObjectiveComponent implements OnInit {
       palpation: this.fb.group({}),
       profile: new FormControl(null),
     });
-    this.loadProfiles();
+    
     if (this.objectiveData) {
       this.selectedProfile = this.objectiveData.profile;
       this.selectProfile();
     }
   }
-  private loadProfiles() {
-    this.profiles = this.soapService.findNoteObjectiveProfiles()
+  get activeProfiles(): ObjectiveProfile[] {
+    return this.profiles.filter(p => p.active);
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.objectiveForm.setControl(section, formGroup);
@@ -63,15 +80,8 @@ export class ObjectiveComponent implements OnInit {
   }
   selectProfile() {
     this.objectiveForm.get('profile').setValue(this.selectedProfile);
-    this.soapService.findSOAPFieldsByProfile(this.selectedProfile.toLowerCase()).subscribe((data: any) => {
-      this.fillFieldsMap(data)
-      if (this.objectiveData !== null && (this.objectiveData.profile === this.selectedProfile))
-        setTimeout(() => {
-          const uiData = this.denormalizeObject(this.objectiveData);
-          this.objectiveForm.patchValue(uiData);
-        }, 10);
-      this.formReady.emit(this.objectiveForm);
-    })
+    this.isProfileSelected = true
+    this.formReady.emit(this.objectiveForm);
   }
   private fillFieldsMap(data: any) {
     for (let i = 0; i < this.objectiveCategories.length; i++) {

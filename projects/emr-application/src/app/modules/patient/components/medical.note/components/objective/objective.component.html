@@ -20,16 +20,16 @@
             <select id="profile-select" cSelect (change)="selectProfile()" [(ngModel)]="selectedProfile"
                 [disabled]="isNotInitialExaminationNote">
                 <option disabled selected value="null">Select Examination Profile</option>
-                <option *ngFor="let profile of profiles | async" [value]="profile.name">
+                <option *ngFor="let profile of activeProfiles " [value]="profile.name">
                     {{ profile.name }}
                 </option>
             </select>
         </c-card-body>
     </c-card>
 </div>
-<div [formGroup]="objectiveForm" *ngIf="objectiveCategoriesfields">
+<div [formGroup]="objectiveForm" *ngIf="isProfileSelected">
     <!--Inspection-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['inspection']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header inspection-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -50,7 +50,7 @@
     </c-card>
 
     <!--Outcome Measurement Tools-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['omt']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header omt-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -72,7 +72,7 @@
     </c-card>
 
     <!--Observation-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['observation']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header observation-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -93,7 +93,7 @@
     </c-card>
 
     <!--Range of Motion-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['range_of_motion']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header rom-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -113,7 +113,7 @@
     </c-card>
 
     <!--Strength-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['strength']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header strength-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -121,7 +121,8 @@
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M6.5 6.5L10 3h4l3.5 3.5"></path>
-                        <path d="M6 14a2 2 0 0 1-2 2H2v-4h2a2 2 0 0 1 2 2zm14 0a2 2 0 0 0 2 2h2v-4h-2a2 2 0 0 0-2 2z"></path>
+                        <path d="M6 14a2 2 0 0 1-2 2H2v-4h2a2 2 0 0 1 2 2zm14 0a2 2 0 0 0 2 2h2v-4h-2a2 2 0 0 0-2 2z">
+                        </path>
                         <path d="M18 10H6v4h12v-4z"></path>
                     </svg>
                     <span>Strength</span>
@@ -135,7 +136,7 @@
     </c-card>
 
     <!--Neuro-Vascular-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['neuro_vascular']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header neuro-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -155,7 +156,7 @@
     </c-card>
 
     <!--Special Tests-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['special_tests']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header tests-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -177,7 +178,7 @@
     </c-card>
 
     <!--Palpation-->
-    <c-card class="mb-3 enhanced-card" *ngIf="objectiveCategoriesfields['palpation']">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header palpation-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -187,7 +188,9 @@
                         <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
                         <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path>
                         <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
-                        <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+                        <path
+                            d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15">
+                        </path>
                     </svg>
                     <span>Palpation</span>
                 </div>
