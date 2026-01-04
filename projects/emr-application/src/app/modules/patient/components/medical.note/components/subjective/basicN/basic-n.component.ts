@@ -55,7 +55,7 @@ export class BasicNComponent implements OnInit {
       specific_physician_rders_text: [''],
       injury_onset_date: [null], //name Injury/Onset Date/Change of Status Date , type : date picker
       chronic: [], //check box
-      Insidious: [], //check box
+      insidious: [], //check box
       new_injury: [], //check box
       new_injury_text: [], //check box
 

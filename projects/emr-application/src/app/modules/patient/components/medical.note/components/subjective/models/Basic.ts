@@ -14,7 +14,7 @@ export interface Basic {
     specificPhysicianRdersText?: string;
     injuryOnsetDate?: string;
     chronic?: boolean;
-    Insidious?: boolean;
+    insidious?: boolean;
     newInjury?: boolean;
     newInjuryText?: string;
     surgeryPerformed?: boolean;

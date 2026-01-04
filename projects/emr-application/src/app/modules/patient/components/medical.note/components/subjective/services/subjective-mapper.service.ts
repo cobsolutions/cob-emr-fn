@@ -344,7 +344,7 @@ export class SubjectiveMapperService {
       specificPhysicianRdersText: basic.specific_physician_rders ? basic.specific_physician_rders_text : undefined,
       injuryOnsetDate: basic.injury_onset_date,
       chronic: basic.chronic,
-      Insidious: basic.insidious,
+      insidious: basic.insidious,
       newInjury: basic.new_injury,
       newInjuryText: basic.new_injury ? basic.new_injury_text : undefined,
       surgeryPerformed: basic.surgery_performed,
@@ -364,6 +364,7 @@ export class SubjectiveMapperService {
    * Maps basic section from DTO (camelCase) to form (snake_case)
    */
   private mapBasicFromDto(basic: any): any {
+    console.log('basic.chronic ', basic.chronic)
     const mapped: any = {
       dos_date: basic.dosDate,
       time: !!(basic.timeIn || basic.timeOut),
@@ -377,7 +378,7 @@ export class SubjectiveMapperService {
       specific_physician_rders_text: basic.specificPhysicianRdersText,
       injury_onset_date: basic.injuryOnsetDate,
       chronic: basic.chronic,
-      insidious: basic.Insidious,
+      insidious: basic.insidious,
       new_injury: !!basic.newInjuryText || basic.newInjury,
       new_injury_text: basic.newInjuryText,
       surgery_performed: !!(basic.surgeryPerformedDateOfSurgery || basic.surgeryPerformedTypeOfSurgery) || basic.surgeryPerformed,

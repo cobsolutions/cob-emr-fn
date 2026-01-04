@@ -61,8 +61,8 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
-    this.initialExamNoteService.get(this.noteId).subscribe((note:any)=>{
-      console.log('note data' , note)
+    this.initialExamNoteService.get(this.noteId).subscribe((note: any) => {
+      console.log('note : ' , note)
       if (note) {
         this.medicalNoteSOAP = note;
 
@@ -175,6 +175,7 @@ export class InitialExaminationComponent implements OnInit {
   }
   draftAction(): Observable<any> {
     var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
+    console.log('medicalNoteRequest : ', medicalNoteRequest)
     return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
   }
   getAllFormValues(formGroup: FormGroup): any {
