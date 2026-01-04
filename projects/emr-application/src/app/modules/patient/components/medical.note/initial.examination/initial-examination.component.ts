@@ -14,6 +14,8 @@ import { BillingMapperService } from '../components/billing/service/billing-mapp
 import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 import { ObjectiveComponent } from '../components/objective/objective.component';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
+import { AssessmentMapperService } from '../components/assessment/service/assessment-mapper.service';
+import { PlanOfCareMapperService } from '../components/plan/service/plan-of-care-mapper.service';
 
 
 @Component({
@@ -45,25 +47,12 @@ export class InitialExaminationComponent implements OnInit {
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
     private subjectiveMapper: SubjectiveMapperService,
-    private billingMapperService: BillingMapperService) {
+    private billingMapperService: BillingMapperService,
+    private assessmentMapper: AssessmentMapperService,
+    private planOfCareMapper: PlanOfCareMapperService) {
 
   }
   ngOnInit(): void {
-    // this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
-    //   if (status) {
-    //     const request: FinalizeMedicalNoteRequest = {
-    //       caseId: this.caseId,
-    //       id: this.medicalNoteId,
-    //       noteType: MedicalNoteType.Initial_Examination,
-    //       finalizedBy: this.loggedInService.getLoggedUser().uuid
-    //     }
-    //     this.draftAction().subscribe(d => {
-    //       this.initialExamNoteService.finalize(this.noteId).subscribe(v => {
-    //         this.backtoPatientRecordActions();
-    //       });
-    //     });
-    //   }
-    // });
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -72,20 +61,55 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
-    // if (this.medicalNoteId !== undefined) {
-    //   this.initialExamNoteService.get(this.noteId).subscribe((data: any) => {
-    //     this.isLoaded = true
-    //     this.noteCreator = data.createdBy;
-    //     this.noteFinalizr = data.finalizedBy;
-    //     this.medicalNoteSOAP = data
-    //   })
-    // this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
-    //   this.isLoaded = true
-    //   this.noteCreator = data.createdBy;
-    //   this.noteFinalizr = data.finalizedBy;
-    //   this.medicalNoteSOAP = data
-    // })
-    //}
+    this.initialExamNoteService.get(this.noteId).subscribe((note:any)=>{
+      console.log('note data' , note)
+      if (note) {
+        this.medicalNoteSOAP = note;
+
+        // Use mappers to convert DTO to form values, then denormalize
+        if (note.subjective) {
+          const subjectiveFormGroup = this.initialExaminationForm.get('subjective') as FormGroup;
+          let subjectiveFormValue = this.subjectiveMapper.fromDto(note.subjective, subjectiveFormGroup);
+
+          // Set the date of service if available
+          if (note.dateOfService && subjectiveFormValue.basic) {
+            const dateOfService = moment(note.dateOfService);
+            subjectiveFormValue.basic.dos_date = dateOfService.format('YYYY-MM-DD');
+          }
+
+          // Denormalize true/false to yes/no
+          const denormalizedSubjective = this.denormalizeNote(subjectiveFormValue);
+          this.initialExaminationForm.get('subjective')?.patchValue(denormalizedSubjective);
+        }
+
+        if (note.objective) {
+          // Objective doesn't have a centralized mapper, so denormalize and patch directly
+          const objectiveFormValue = this.denormalizeNote(note.objective);
+          this.initialExaminationForm.get('objective')?.patchValue(objectiveFormValue);
+        }
+
+        if (note.assessment) {
+          const assessmentFormValue = this.assessmentMapper.fromDto(note.assessment);
+          // Denormalize true/false to yes/no
+          const denormalizedAssessment = this.denormalizeNote(assessmentFormValue);
+          this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
+        }
+
+        if (note.planOfCare) {
+          const planOfCareFormValue = this.planOfCareMapper.fromDto(note.planOfCare);
+          // Denormalize true/false to yes/no
+          const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue);
+          this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
+        }
+
+        if (note.billing) {
+          const billingFormValue = this.billingMapperService.fromDto(note.billing);
+          // Denormalize true/false to yes/no
+          const denormalizedBilling = this.denormalizeNote(billingFormValue);
+          this.initialExaminationForm.get('billing')?.patchValue(denormalizedBilling);
+        }
+      }
+    })
   }
   ngOnDestroy() {
     this.finalizeSub?.unsubscribe();
@@ -183,6 +207,49 @@ export class InitialExaminationComponent implements OnInit {
     if (val === 'no') return false;
     if (val === 'na' || val === 'N/A') return null;
     return val;
+  }
+
+  private denormalizeValue(val: any): any {
+    if (val === true) return 'yes';
+    if (val === false) return 'no';
+    if (val === null || val === undefined) return null;
+    return val;
+  }
+
+  private denormalizeNote(note: any): any {
+    if (note === null || note === undefined) {
+      return note;
+    }
+
+    // Deep clone the note to avoid mutating the original
+    const denormalized = JSON.parse(JSON.stringify(note));
+    this.denormalizeTrueFalseInObject(denormalized);
+    return denormalized;
+  }
+
+  private denormalizeTrueFalseInObject(obj: any): void {
+    if (obj === null || obj === undefined) {
+      return;
+    }
+
+    if (Array.isArray(obj)) {
+      obj.forEach((item, index) => {
+        if (typeof item === 'boolean') {
+          obj[index] = this.denormalizeValue(item);
+        } else if (typeof item === 'object') {
+          this.denormalizeTrueFalseInObject(item);
+        }
+      });
+    } else if (typeof obj === 'object') {
+      Object.keys(obj).forEach(key => {
+        const value = obj[key];
+        if (typeof value === 'boolean') {
+          obj[key] = this.denormalizeValue(value);
+        } else if (typeof value === 'object') {
+          this.denormalizeTrueFalseInObject(value);
+        }
+      });
+    }
   }
 
   private normalizeYesNoInObject(obj: any): void {
