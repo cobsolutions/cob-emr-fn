@@ -79,12 +79,12 @@ export class InitialExaminationComponent implements OnInit {
     //     this.noteFinalizr = data.finalizedBy;
     //     this.medicalNoteSOAP = data
     //   })
-      // this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
-      //   this.isLoaded = true
-      //   this.noteCreator = data.createdBy;
-      //   this.noteFinalizr = data.finalizedBy;
-      //   this.medicalNoteSOAP = data
-      // })
+    // this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
+    //   this.isLoaded = true
+    //   this.noteCreator = data.createdBy;
+    //   this.noteFinalizr = data.finalizedBy;
+    //   this.medicalNoteSOAP = data
+    // })
     //}
   }
   ngOnDestroy() {
@@ -121,42 +121,23 @@ export class InitialExaminationComponent implements OnInit {
     if (action === 'back')
       this.backtoPatientRecordActions()
     if (action === 'draft') {
-      // const formValues = this.getAllFormValues(this.initialExaminationForm);
-      // console.log('formValues:', formValues);
-      var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-      console.log(medicalNoteRequest)
+      this.draft();
     }
-    // this.draft();
+
   }
   backtoPatientRecordActions() {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-    var createdNote: any = this.getAllFormValues(this.initialExaminationForm)
-
-    // Get structured models from ObjectiveComponent if available
-    if (this.objectiveComponent && createdNote.objective) {
-      // Get the inspection model
-      const inspectionModel = this.objectiveComponent.getInspectionModel();
-      if (inspectionModel) {
-        createdNote.objective.inspection = inspectionModel;
-      }
-
-      // Get the OMT model
-      const omtModel = this.objectiveComponent.getOmtModel();
-      if (omtModel) {
-        createdNote.objective.omt = omtModel;
-      }
-    }
 
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup),
-      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
-      assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
-      planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
-      billing: Object.keys(createdNote.billing).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.billing)
+      objective: null,
+      assessment: null,
+      planOfCare: null,
+      billing: null
     }
     medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
     //Normalize Yes , No to true or false
@@ -169,7 +150,7 @@ export class InitialExaminationComponent implements OnInit {
     })
   }
   draftAction(): Observable<any> {
-    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel().subjective;
+    var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
     return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
   }
   getAllFormValues(formGroup: FormGroup): any {
