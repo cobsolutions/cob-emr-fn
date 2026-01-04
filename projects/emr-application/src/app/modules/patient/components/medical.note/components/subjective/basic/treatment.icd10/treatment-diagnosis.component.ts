@@ -120,7 +120,6 @@ export class TreatmentDiagnosisComponent implements OnInit {
 
   private fillDiagnosisCode(): void {
     const saved = this.parentForm.get(this.parentFieldName)?.value;
-    console.log(saved)
     if (saved) this.addedDiagnosis = [...saved];
   }
 
