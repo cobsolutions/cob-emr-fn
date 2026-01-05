@@ -6,6 +6,7 @@ export interface Dressing {
             "prior-level-function_self-care_hygiene_dressing_removing_clothes": true,
             "prior-level-function_self-care_hygiene_dressing_removing_footwear": true,
   */
+  dressingFlag:boolean
   puttingOnClothes: boolean;
   puttingOnFootwear: boolean;
   puttingOnAppropriateClothing: boolean;

@@ -147,6 +147,7 @@ export class InitialExaminationComponent implements OnInit {
     if (action === 'back')
       this.backtoPatientRecordActions()
     if (action === 'draft') {
+      console.log('initialExaminationForm : ' , this.getAllFormValues(this.initialExaminationForm))
       this.draft();
     }
 

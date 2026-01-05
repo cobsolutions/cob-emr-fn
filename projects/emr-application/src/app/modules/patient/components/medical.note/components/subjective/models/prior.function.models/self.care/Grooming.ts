@@ -8,6 +8,7 @@ export interface Grooming {
    "prior-level-function_self-care_hygiene_grooming_caring_for_hair": true,
    "prior-level-function_self-care_hygiene_grooming_caring_for_nails": true
   */
+  groomingFlag: boolean;
   washingBodyParts: boolean;
   washingWholeBody: boolean;
   dryingOneself: boolean;

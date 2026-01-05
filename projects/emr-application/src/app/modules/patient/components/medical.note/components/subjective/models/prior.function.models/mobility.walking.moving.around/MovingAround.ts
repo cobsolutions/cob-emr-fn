@@ -5,6 +5,9 @@ export interface MovingAround {
   // "prior-level-function_mobility-walking-moving-around_moving_around_skipping": false,
   // "prior-level-function_mobility-walking-moving-around_moving_around_jumping": false,
   // "prior-level-function_mobility-walking-moving-around_moving_around_swimming": false,
+
+  // "prior-level-function_mobility-walking-moving-around_moving_around"
+  movingAroundFlag: boolean;
   climbing: boolean;
   running: boolean;
   jogging: boolean;

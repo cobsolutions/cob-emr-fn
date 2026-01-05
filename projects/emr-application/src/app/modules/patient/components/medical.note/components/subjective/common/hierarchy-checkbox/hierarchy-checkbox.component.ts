@@ -31,6 +31,7 @@ export class HierarchyCheckboxComponent implements OnInit {
   ngOnInit() {
     this.initializeCollapsedState();
     this.initializeFormControls();
+    this.expandCheckedItems();
   }
 
   // Initialize form controls for all hierarchy items
@@ -206,6 +207,51 @@ export class HierarchyCheckboxComponent implements OnInit {
       category.items.forEach(item => {
         this.setInitialCollapsedState(item);
       });
+    });
+  }
+
+  // Expand categories and items that are checked (when loading data)
+  // Public method so parent components can call it after updating data
+  public expandCheckedItems(): void {
+    this.data.forEach(category => {
+      // Expand category if it's checked or has any checked children
+      if (category.checked || this.hasAnyCheckedChild(category.items)) {
+        category.collapsed = false;
+      }
+
+      category.items.forEach(item => {
+        this.expandCheckedItemRecursive(item);
+      });
+    });
+  }
+
+  // Recursively expand items that are checked
+  private expandCheckedItemRecursive(item: CheckboxItem): void {
+    if (item.checked) {
+      item.collapsed = false;
+    }
+
+    // If item has any checked children, expand it
+    if (item.children && this.hasAnyCheckedChild(item.children)) {
+      item.collapsed = false;
+    }
+
+    // Recursively check children
+    if (item.children) {
+      item.children.forEach(child => {
+        this.expandCheckedItemRecursive(child);
+      });
+    }
+  }
+
+  // Helper to check if any child in the array is checked
+  private hasAnyCheckedChild(items: CheckboxItem[]): boolean {
+    return items.some(item => {
+      if (item.checked) return true;
+      if (item.children) {
+        return this.hasAnyCheckedChild(item.children);
+      }
+      return false;
     });
   }
 

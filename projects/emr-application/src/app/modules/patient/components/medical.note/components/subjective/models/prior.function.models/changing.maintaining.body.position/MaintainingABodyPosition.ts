@@ -5,6 +5,8 @@ export interface MaintainingABodyPosition {
   //           "prior-level-function_changing-maintaining-body-position_maintaining_body_position_kneeling": false,
   //           "prior-level-function_changing-maintaining-body-position_maintaining_body_position_sitting": false,
   //           "prior-level-function_changing-maintaining-body-position_maintaining_body_position_standing": false,
+  //"prior-level-function_changing-maintaining-body-position_maintaining_body_position": false,
+  maintainingABodyPositionFlag:boolean;
   remainingSeated: boolean;
   remainingStanding: boolean;
   squatting: boolean;

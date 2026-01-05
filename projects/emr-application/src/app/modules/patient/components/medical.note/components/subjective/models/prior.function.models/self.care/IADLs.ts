@@ -7,6 +7,8 @@ export interface IADLs {
   //           "prior-level-function_self-care_iadls_transportation": false,
   //           "prior-level-function_self-care_iadls_medications": false,
   //           "prior-level-function_self-care_iadls_finances": false,
+  //prior-level-function_self-care_iadls
+  iadlsFlag: boolean;
   abilityToUseTelephone: boolean;
   shopping: boolean;
   foodPreparation: boolean;

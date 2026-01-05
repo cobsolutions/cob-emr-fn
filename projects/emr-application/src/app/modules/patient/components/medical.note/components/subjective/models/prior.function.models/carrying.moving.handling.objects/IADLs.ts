@@ -7,6 +7,8 @@ export interface IADLs {
   //           "prior-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_transportation": false,
   //           "prior-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_medications": false,
   //           "prior-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_finances": false,
+  // "prior-level-function_carrying-moving-handling-objects_carrying_iadls": false,
+  iadlsFlag:boolean;
   abilityToUseTelephone: boolean;
   shopping: boolean;
   foodPreparation: boolean;

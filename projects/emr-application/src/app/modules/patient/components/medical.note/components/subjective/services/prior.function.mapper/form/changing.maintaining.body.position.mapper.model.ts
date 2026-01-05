@@ -16,7 +16,8 @@ export class ChangingMaintainingBodyPositionMapper {
         const maintainingABodyPositionFlag = getValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position');
         if (maintainingABodyPositionFlag !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            mapped.changingMaintainingBodyPosition.maintainingABodyPositionFlag = maintainingABodyPositionFlag;
+            if (!mapped.changingMaintainingBodyPosition.maintainingABodyPosition) mapped.changingMaintainingBodyPosition.maintainingABodyPosition = {} as any;
+            mapped.changingMaintainingBodyPosition.maintainingABodyPosition.maintainingABodyPositionFlag = maintainingABodyPositionFlag;
         }
         // Maintaining A Body Position
         const remainingSeated = getValue('prior-level-function_changing-maintaining-body-position_maintaining_body_position_remaining_seated');
@@ -63,8 +64,9 @@ export class ChangingMaintainingBodyPositionMapper {
 
         const transfersFlag = getValue('prior-level-function_changing-maintaining-body-position_transfers');
         if (transfersFlag !== undefined) {
-            if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
-            mapped.changingMaintainingBodyPosition.transfersFlag = transfersFlag;
+            if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
+            if (!mapped.changingMaintainingBodyPosition.transfers) mapped.changingMaintainingBodyPosition.transfers = {} as any;
+            mapped.changingMaintainingBodyPosition.transfers.transfersFlag = transfersFlag;
         }
         // Transfers
         const bedToChair = getValue('prior-level-function_changing-maintaining-body-position_transfers_bed_to_chair');
@@ -83,64 +85,65 @@ export class ChangingMaintainingBodyPositionMapper {
 
         const iADLsFlag = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls');
         if (iADLsFlag !== undefined) {
-            if (!mapped.mobilityWalkingMovingAround) mapped.mobilityWalkingMovingAround = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLsFlag = iADLsFlag;
+            if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.iadlsFlag = iADLsFlag;
         }
         // Body Position IADLs
         const bodyPositionTelephone = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_use_telephone');
         if (bodyPositionTelephone !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.abilityToUseTelephone = bodyPositionTelephone;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.abilityToUseTelephone = bodyPositionTelephone;
         }
 
         const bodyPositionShopping = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_shopping');
         if (bodyPositionShopping !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.shopping = bodyPositionShopping;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.shopping = bodyPositionShopping;
         }
 
         const bodyPositionFoodPrep = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_food_prep');
         if (bodyPositionFoodPrep !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.foodPreparation = bodyPositionFoodPrep;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.foodPreparation = bodyPositionFoodPrep;
         }
 
         const bodyPositionHousekeeping = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_housekeeping');
         if (bodyPositionHousekeeping !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.housekeeping = bodyPositionHousekeeping;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.housekeeping = bodyPositionHousekeeping;
         }
 
         const bodyPositionLaundry = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_laundry');
         if (bodyPositionLaundry !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.laundry = bodyPositionLaundry;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.laundry = bodyPositionLaundry;
         }
 
         const bodyPositionTransportation = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_transportation');
         if (bodyPositionTransportation !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.modeOfTransportation = bodyPositionTransportation;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.modeOfTransportation = bodyPositionTransportation;
         }
 
         const bodyPositionMedications = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_medications');
         if (bodyPositionMedications !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.responsibilityForOwnMedications = bodyPositionMedications;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.responsibilityForOwnMedications = bodyPositionMedications;
         }
 
         const bodyPositionFinances = getValue('prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_finances');
         if (bodyPositionFinances !== undefined) {
             if (!mapped.changingMaintainingBodyPosition) mapped.changingMaintainingBodyPosition = {} as any;
-            if (!mapped.changingMaintainingBodyPosition.iADLs) mapped.changingMaintainingBodyPosition.iADLs = {} as any;
-            mapped.changingMaintainingBodyPosition.iADLs.abilityToHandleFinances = bodyPositionFinances;
+            if (!mapped.changingMaintainingBodyPosition.iadls) mapped.changingMaintainingBodyPosition.iadls = {} as any;
+            mapped.changingMaintainingBodyPosition.iadls.abilityToHandleFinances = bodyPositionFinances;
         }
     }
 }

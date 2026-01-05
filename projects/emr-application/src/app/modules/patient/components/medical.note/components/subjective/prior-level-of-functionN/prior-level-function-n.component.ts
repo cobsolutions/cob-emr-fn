@@ -1,13 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CheckboxHierarchy } from '../common/hierarchy-checkbox/interface/checkbox-hierarchy';
+import { PriorFunctionMapperService } from '../services/prior-function-mapper.service';
+import { HierarchyCheckboxComponent } from '../common/hierarchy-checkbox/hierarchy-checkbox.component';
 
 @Component({
   selector: 'subjective-prior-level-function-n',
   templateUrl: './prior-level-function-n.component.html',
   styleUrls: ['./prior-level-function-n.component.css']
 })
-export class PriorLevelFunctionNComponent implements OnInit {
+export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
+  @Input() priorLevelFunctionFormData: any;
+  @ViewChild('hierarchyCheckbox') hierarchyCheckbox!: HierarchyCheckboxComponent;
   checkboxData: CheckboxHierarchy[] = [
     {
       title: 'Self Care',
@@ -433,12 +437,23 @@ export class PriorLevelFunctionNComponent implements OnInit {
   priorLevelFunctionForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   showHoOther:boolean = false
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private priorFunctionMapper: PriorFunctionMapperService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.patchFormData();
     this.setupValueChangeListeners();
     this.formReady.emit(this.priorLevelFunctionForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // React to changes in priorLevelFunctionFormData
+    if (changes['priorLevelFunctionFormData'] && !changes['priorLevelFunctionFormData'].firstChange && this.priorLevelFunctionForm) {
+      this.patchFormData();
+    }
   }
   initForm() {
     this.priorLevelFunctionForm = this.fb.group({
@@ -446,6 +461,78 @@ export class PriorLevelFunctionNComponent implements OnInit {
       prior_level_function_other_text: [],
 
     })
+  }
+
+  patchFormData() {
+    if (this.priorLevelFunctionFormData) {
+      // Use mapper to convert DTO to form control values
+      const formValues = this.priorFunctionMapper.fromDto(this.priorLevelFunctionFormData);
+
+      // Update checkboxData based on the mapped form control values
+      this.updateCheckboxDataFromMappedValues(formValues);
+
+      // Use setTimeout to ensure hierarchy-checkbox components have created form controls
+      setTimeout(() => {
+        this.priorLevelFunctionForm.patchValue(formValues, { emitEvent: false });
+
+        // Expand checked items after data is loaded
+        if (this.hierarchyCheckbox) {
+          this.hierarchyCheckbox.expandCheckedItems();
+        }
+      }, 0);
+    }
+  }
+
+  private updateCheckboxDataFromMappedValues(formValues: any) {
+    if (!formValues) return;
+
+    // Recursively update items based on form control values
+    const updateItemRecursive = (item: any, categoryKey: string, itemPath: string) => {
+      // Build form control name matching hierarchy-checkbox naming convention
+      const normalizedItemPath = itemPath.replace(/[\.\-]/g, '_');
+      const formControlName = `prior-level-function_${categoryKey}_${normalizedItemPath}`;
+
+      if (formValues[formControlName] !== undefined) {
+        item.checked = formValues[formControlName];
+      }
+
+      // Recursively update children
+      if (item.children) {
+        item.children.forEach((child: any) => {
+          const childPath = itemPath ? `${itemPath}.${child.id}` : child.id;
+          updateItemRecursive(child, categoryKey, childPath);
+        });
+      }
+    };
+
+    // Update each category
+    this.checkboxData.forEach(category => {
+      const categoryKey = this.sanitizeKey(category.title);
+      const categoryFormControlName = `prior-level-function_${categoryKey}`;
+
+      // Update category checked state
+      if (formValues[categoryFormControlName] !== undefined) {
+        category.checked = formValues[categoryFormControlName];
+      }
+
+      // Update category comment
+      const commentFormControlName = `prior-level-function_${categoryKey}_comment`;
+      if (formValues[commentFormControlName] !== undefined) {
+        category.comment = formValues[commentFormControlName];
+      }
+
+      // Update items within this category
+      category.items.forEach(item => {
+        updateItemRecursive(item, categoryKey, item.id);
+      });
+    });
+  }
+
+  private sanitizeKey(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
   setupValueChangeListeners() {

@@ -7,6 +7,8 @@ export interface IADLs {
   //           "prior-level-function_mobility-walking-moving-around_mobility_iadls_mobility_transportation": false,
   //           "prior-level-function_mobility-walking-moving-around_mobility_iadls_mobility_medications": false,
   //           "prior-level-function_mobility-walking-moving-around_mobility_iadls_mobility_finances": false,
+  //"prior-level-function_mobility-walking-moving-around_mobility_iadls": false,
+  iadlsFlag:boolean;
   abilityToUseTelephone: boolean;
   shopping: boolean;
   foodPreparation: boolean;

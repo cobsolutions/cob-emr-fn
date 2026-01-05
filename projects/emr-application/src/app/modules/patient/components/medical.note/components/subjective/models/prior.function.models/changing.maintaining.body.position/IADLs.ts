@@ -7,6 +7,9 @@ export interface IADLs {
   //           "prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_transportation": false,
   //           "prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_medications": false,
   //           "prior-level-function_changing-maintaining-body-position_body_position_iadls_body_position_finances": false,
+
+  // "prior-level-function_changing-maintaining-body-position_body_position_iadls": false,
+  iadlsFlag:boolean;
   abilityToUseTelephone: boolean;
   shopping: boolean;
   foodPreparation: boolean;

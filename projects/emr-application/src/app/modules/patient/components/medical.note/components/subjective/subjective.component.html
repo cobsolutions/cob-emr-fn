@@ -61,7 +61,8 @@
             <!-- <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
                 [fields]="subjectiveFormFields['Prior Level Of Function']"
                 [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function> -->
-            <subjective-prior-level-function-n (formReady)="setChildForm('priorFunction', $event)">
+            <subjective-prior-level-function-n (formReady)="setChildForm('priorFunction', $event)"
+                [priorLevelFunctionFormData]="subjectiveData?.priorFunction">
             </subjective-prior-level-function-n>
         </c-card-body>
     </c-card>

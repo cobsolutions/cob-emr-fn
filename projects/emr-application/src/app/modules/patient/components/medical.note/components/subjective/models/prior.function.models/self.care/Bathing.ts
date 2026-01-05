@@ -3,6 +3,7 @@ export interface Bathing {
   //           "prior-level-function_self-care_hygiene_bathing_bathing_tub": true,
   //           "prior-level-function_self-care_hygiene_bathing_bathing_wash_parts": true,
   //           "prior-level-function_self-care_hygiene_bathing_bathing_drying": true,
+  bathingFlag:boolean
   showering: boolean;
   bathing: boolean;
   washingBodyParts: boolean;

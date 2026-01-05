@@ -3,6 +3,9 @@ export interface MovingAroundUsingEquipment {
   //           "prior-level-function_mobility-walking-moving-around_different_locations_using_equipment_wheelchair": false,
   //           "prior-level-function_mobility-walking-moving-around_different_locations_using_equipment_skates": false,
   //           "prior-level-function_mobility-walking-moving-around_different_locations_using_equipment_skis": false,
+
+  // "prior-level-function_mobility-walking-moving-around_different_locations_using_equipment": false,
+  movingAroundUsingEquipmentFlag:boolean;
   walker: boolean;
   wheelchair: boolean;
   skates: boolean;

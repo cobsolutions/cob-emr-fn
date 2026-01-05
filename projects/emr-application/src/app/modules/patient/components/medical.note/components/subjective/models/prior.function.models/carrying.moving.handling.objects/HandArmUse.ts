@@ -6,6 +6,10 @@ export interface HandArmUse {
   //           "prior-level-function_carrying-moving-handling-objects_hand_arm_use_twisting_hands_arms": false,
   //           "prior-level-function_carrying-moving-handling-objects_hand_arm_use_throwing": false,
   //           "prior-level-function_carrying-moving-handling-objects_hand_arm_use_catching": false,
+
+
+  // "prior-level-function_carrying-moving-handling-objects_hand_arm_use": false,
+  handArmUseFlag:boolean;
   pullingObjects: boolean;
   pushingObjects: boolean;
   reaching: boolean;

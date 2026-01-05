@@ -7,16 +7,14 @@ export interface SelfCare {
   //prior-level-function_self-care
   selfCareFlag?: boolean;
   //prior-level-function_self-care_hygiene
-  hygieneFlag: boolean;
+  
   hygiene: Hygiene;
-  //prior-level-function_self-care_sleep
-  sleepFlag: boolean;
+  
   sleep: Sleep;
-  //prior-level-function_self-care_iadls
-  iADLsFlag: boolean;
-  iADLs: IADLs;
+  
+  iadls: IADLs;
   // prior-level-function_self-care_household_chores
-  householdChoresFlag: boolean;
+  
   householdChores: HouseholdChores;
   //prior-level-function_self-care_drive_community
   driveCommunityDistance: boolean;
