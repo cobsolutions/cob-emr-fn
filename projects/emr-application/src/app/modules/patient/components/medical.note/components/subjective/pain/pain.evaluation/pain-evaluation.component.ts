@@ -48,21 +48,50 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
 
   openAddModal(): void {
     this.editIndex = null;
-    this.painEval.reset();
+    this.painEval.reset({
+      location: '',
+      worst: '',
+      current: '',
+      best: '',
+      description: 'Not Tested',
+      custom: '',
+      plan: ''
+    });
     this.showModal = true;
     this.lockBodyScroll();
   }
 
   openEditModal(index: number): void {
     this.editIndex = index;
-    this.painEval.patchValue(this.painEvals[index]);
+    const evalData = this.painEvals[index];
+    console.log('evalData.description : ', evalData.description)
+    // Ensure numeric fields are properly typed for radio button comparison
+    this.painEval.patchValue({
+      location: evalData.location || '',
+      worst: evalData.worst === 'NT' ? 'NT' : (evalData.worst !== null && evalData.worst !== undefined ? Number(evalData.worst) : ''),
+      current: evalData.current === 'NT' ? 'NT' : (evalData.current !== null && evalData.current !== undefined ? Number(evalData.current) : ''),
+      best: evalData.best === 'NT' ? 'NT' : (evalData.best !== null && evalData.best !== undefined ? Number(evalData.best) : ''),
+      description: evalData.description || 'Not Tested',
+      custom: evalData.custom || '',
+      plan: evalData.plan || ''
+    });
+
     this.showModal = true;
     this.lockBodyScroll();
   }
 
   closeModal(): void {
     this.showModal = false;
-    this.painEval.reset();
+    this.painEval.reset({
+      location: '',
+      worst: '',
+      current: '',
+      best: '',
+      description: 'Not Tested',
+      custom: '',
+      plan: ''
+    });
+    this.editIndex = null;
     this.unlockBodyScroll();
   }
 

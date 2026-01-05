@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -6,9 +6,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './pain-n.component.html',
   styleUrls: ['./pain-n.component.css']
 })
-export class PainNComponent implements OnInit {
+export class PainNComponent implements OnInit, OnChanges {
   painForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() painFormData: any;
   showPainScale: boolean = false;
   showRestrictionsPainAlleviators: boolean = false;
 
@@ -31,8 +32,16 @@ export class PainNComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.patchFormData();
     this.setupValueChangeListeners();
     this.formReady.emit(this.painForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // React to changes in painFormData
+    if (changes['painFormData'] && !changes['painFormData'].firstChange && this.painForm) {
+      this.patchFormData();
+    }
   }
   initForm() {
     this.painForm = this.fb.group({
@@ -50,6 +59,38 @@ export class PainNComponent implements OnInit {
     this.painForm.get('restrictions_pain_alleviators')?.valueChanges.subscribe(value => {
       this.showRestrictionsPainAlleviators = value === 'yes'
     })
+  }
+
+  patchFormData() {
+    if (this.painFormData) {
+      // Handle both DTO format (camelCase) and form format (snake_case)
+      const formData = {
+        pain_scale: this.painFormData.pain_scale ||
+          (this.painFormData.painScale !== undefined ? (this.painFormData.painScale ? 'yes' : 'no') : 'no'),
+        pain_evaluations: this.painFormData.pain_evaluations || this.painFormData.painEvaluations || [],
+        aggravating_factors: this.painFormData.aggravating_factors || this.painFormData.aggravatingFactors || [],
+        restrictions_pain_alleviators: this.painFormData.restrictions_pain_alleviators ||
+          (this.painFormData.restrictionsPainAlleviators !== undefined ?
+            (this.painFormData.restrictionsPainAlleviators ? 'yes' : 'no') : 'no'),
+        restrictions_pain_alleviators_text: this.painFormData.restrictions_pain_alleviators_text ||
+          this.painFormData.restrictionsPainAlleviatorsText || ''
+      };
+
+      this.painForm.patchValue(formData);
+
+      // Set pain evaluations array
+      if (formData.pain_evaluations && formData.pain_evaluations.length > 0) {
+        this.painEvaluations = formData.pain_evaluations;
+      }
+
+      // Set visibility flags based on patched values
+      if (formData.pain_scale === 'yes') {
+        this.showPainScale = true;
+      }
+      if (formData.restrictions_pain_alleviators === 'yes') {
+        this.showRestrictionsPainAlleviators = true;
+      }
+    }
   }
 
   // Handle pain evaluation save

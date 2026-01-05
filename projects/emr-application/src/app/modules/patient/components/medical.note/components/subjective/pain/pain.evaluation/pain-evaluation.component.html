@@ -97,7 +97,7 @@
         <div class="mb-3 d-flex align-items-center">
           <label class="me-2" style="min-width: 190px;">Pain Description:</label>
           <select cSelect sizing="sm" formControlName="description" style="max-width: 190px;">
-            <option *ngFor="let desc of descriptions">{{ desc }}</option>
+            <option *ngFor="let desc of descriptions" [value]="desc">{{ desc }}</option>
           </select>
         </div>
         <div class="mb-3 d-flex align-items-center" *ngIf="painEval.get('description').value ==='Custom'">
