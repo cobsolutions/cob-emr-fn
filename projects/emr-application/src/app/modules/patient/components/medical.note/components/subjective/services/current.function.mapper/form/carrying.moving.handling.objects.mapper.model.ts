@@ -16,69 +16,71 @@ export class CarryingMovingHandlingObjectsMapper {
         const iADLsFlag = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls');
         if (iADLsFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLsFlag = iADLsFlag;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.iadlsFlag = iADLsFlag;
         }
         // Carrying IADLs
         const carryingTelephone = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone');
         if (carryingTelephone !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.abilityToUseTelephone = carryingTelephone;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.abilityToUseTelephone = carryingTelephone;
         }
 
         const carryingShopping = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_shopping');
         if (carryingShopping !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.shopping = carryingShopping;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.shopping = carryingShopping;
         }
 
         const carryingFoodPrep = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_food_prep');
         if (carryingFoodPrep !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.foodPreparation = carryingFoodPrep;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.foodPreparation = carryingFoodPrep;
         }
 
         const carryingHousekeeping = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_housekeeping');
         if (carryingHousekeeping !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.housekeeping = carryingHousekeeping;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.housekeeping = carryingHousekeeping;
         }
 
         const carryingLaundry = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_laundry');
         if (carryingLaundry !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.laundry = carryingLaundry;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.laundry = carryingLaundry;
         }
 
         const carryingTransportation = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_transportation');
         if (carryingTransportation !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.modeOfTransportation = carryingTransportation;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.modeOfTransportation = carryingTransportation;
         }
 
         const carryingMedications = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_medications');
         if (carryingMedications !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.responsibilityForOwnMedications = carryingMedications;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.responsibilityForOwnMedications = carryingMedications;
         }
 
         const carryingFinances = getValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_finances');
         if (carryingFinances !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            if (!mapped.carryingMovingHandlingObjects.iADLs) mapped.carryingMovingHandlingObjects.iADLs = {} as any;
-            mapped.carryingMovingHandlingObjects.iADLs.abilityToHandleFinances = carryingFinances;
+            if (!mapped.carryingMovingHandlingObjects.iadls) mapped.carryingMovingHandlingObjects.iadls = {} as any;
+            mapped.carryingMovingHandlingObjects.iadls.abilityToHandleFinances = carryingFinances;
         }
 
         const handArmUseFlag = getValue('current-level-function_carrying-moving-handling-objects_hand_arm_use');
         if (handArmUseFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            mapped.carryingMovingHandlingObjects.handArmUseFlag = handArmUseFlag;
+            if (!mapped.carryingMovingHandlingObjects.handArmUse) mapped.carryingMovingHandlingObjects.handArmUse = {} as any;
+            mapped.carryingMovingHandlingObjects.handArmUse.handArmUseFlag = handArmUseFlag;
         }
         // Hand Arm Use
         const pullingObjects = getValue('current-level-function_carrying-moving-handling-objects_hand_arm_use_pulling_objects');
@@ -131,9 +133,10 @@ export class CarryingMovingHandlingObjectsMapper {
         }
 
         const fineHandUseFlag = getValue('current-level-function_carrying-moving-handling-objects_fine_hand_use');
-        if (iADLsFlag !== undefined) {
+        if (fineHandUseFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            mapped.carryingMovingHandlingObjects.fineHandUseFlag = fineHandUseFlag;
+            if (!mapped.carryingMovingHandlingObjects.fineHandUse) mapped.carryingMovingHandlingObjects.fineHandUse = {} as any;
+            mapped.carryingMovingHandlingObjects.fineHandUse.fineHandUseFlag = fineHandUseFlag;
         }
         // Fine Hand Use
         const pickingUp = getValue('current-level-function_carrying-moving-handling-objects_fine_hand_use_picking_up');
@@ -167,7 +170,8 @@ export class CarryingMovingHandlingObjectsMapper {
         const movingObjectsWithLowerExtremitiesFlag = getValue('current-level-function_carrying-moving-handling-objects_lower_extremities');
         if (movingObjectsWithLowerExtremitiesFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremitiesFlag = movingObjectsWithLowerExtremitiesFlag;
+            if (!mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities) mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities = {} as any;
+            mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities.movingObjectsWithLowerExtremitiesFlag = movingObjectsWithLowerExtremitiesFlag;
         }
         // Moving Objects With Lower Extremities
         const kicking = getValue('current-level-function_carrying-moving-handling-objects_lower_extremities_kicking');
@@ -198,9 +202,10 @@ export class CarryingMovingHandlingObjectsMapper {
             mapped.carryingMovingHandlingObjects.workVocationOccupation = workVocation;
         }
         const recreationFlag = getValue('current-level-function_carrying-moving-handling-objects_recreation');
-        if (iADLsFlag !== undefined) {
+        if (recreationFlag !== undefined) {
             if (!mapped.carryingMovingHandlingObjects) mapped.carryingMovingHandlingObjects = {} as any;
-            mapped.carryingMovingHandlingObjects.recreationFlag = recreationFlag;
+            if (!mapped.carryingMovingHandlingObjects.recreation) mapped.carryingMovingHandlingObjects.recreation = {} as any;
+            mapped.carryingMovingHandlingObjects.recreation.recreationFlag = recreationFlag;
         }
 
         // Recreation

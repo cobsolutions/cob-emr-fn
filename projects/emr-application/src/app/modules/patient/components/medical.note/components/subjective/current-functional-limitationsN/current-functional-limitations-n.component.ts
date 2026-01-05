@@ -1,21 +1,25 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { HierarchyCheckboxComponent } from '../common/hierarchy-checkbox/hierarchy-checkbox.component';
 import { CheckboxHierarchy } from '../common/hierarchy-checkbox/interface/checkbox-hierarchy';
+import { CurrentFunctionMapperService } from '../services/current.function.mapper.service';
 
 @Component({
   selector: 'subjective-current-functional-limitations-n',
   templateUrl: './current-functional-limitations-n.component.html',
   styleUrls: ['./current-functional-limitations-n.component.css']
 })
-export class CurrentFunctionalLimitationsNComponent implements OnInit {
+export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges {
 
   currentFunctionalLimitationsForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() currentFunctionFormData: any;
   showHoOther: boolean = false
   showHoOtherlymphedema: boolean = false
   showHoOtherWoundhealing: boolean = false
   showHoOtherPelvicHealth: boolean = false
-  constructor(private fb: FormBuilder) { }
+  @ViewChild('hierarchyCheckbox') hierarchyCheckbox!: HierarchyCheckboxComponent;
+  constructor(private fb: FormBuilder,private currentFunctionMapperService: CurrentFunctionMapperService) { }
   checkboxData: CheckboxHierarchy[] = [
     {
       title: 'Self Care',
@@ -439,8 +443,35 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.initForm();
+    this.patchFormData();
     this.setupValueChangeListeners();
     this.formReady.emit(this.currentFunctionalLimitationsForm);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // React to changes in currentFunctionFormData
+    if (changes['currentFunctionFormData'] && !changes['currentFunctionFormData'].firstChange && this.currentFunctionalLimitationsForm) {
+      this.patchFormData();
+    }
+  }
+  patchFormData() {
+    if (this.currentFunctionFormData) {
+      // Use mapper to convert DTO to form control values
+      const formValues = this.currentFunctionMapperService.fromDto(this.currentFunctionFormData);
+
+      // Update checkboxData based on the mapped form control values
+      this.updateCheckboxDataFromMappedValues(formValues);
+
+      // Use setTimeout to ensure hierarchy-checkbox components have created form controls
+      setTimeout(() => {
+        this.currentFunctionalLimitationsForm.patchValue(formValues, { emitEvent: false });
+
+        // Expand checked items after data is loaded
+        if (this.hierarchyCheckbox) {
+          this.hierarchyCheckbox.expandCheckedItems();
+        }
+      }, 0);
+    }
   }
   initForm() {
     this.currentFunctionalLimitationsForm = this.fb.group({
@@ -517,6 +548,58 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit {
            this.getCategoryValue('mobility-walking-moving-around') ||
            this.getCategoryValue('changing-maintaining-body-position') ||
            this.getCategoryValue('carrying-moving-handling-objects');
+  }
+
+  private updateCheckboxDataFromMappedValues(formValues: any) {
+    if (!formValues) return;
+
+    // Recursively update items based on form control values
+    const updateItemRecursive = (item: any, categoryKey: string, itemPath: string) => {
+      // Build form control name matching hierarchy-checkbox naming convention
+      const normalizedItemPath = itemPath.replace(/[\.\-]/g, '_');
+      const formControlName = `current-level-function_${categoryKey}_${normalizedItemPath}`;
+
+      if (formValues[formControlName] !== undefined) {
+        item.checked = formValues[formControlName];
+      }
+
+      // Recursively update children
+      if (item.children) {
+        item.children.forEach((child: any) => {
+          const childPath = itemPath ? `${itemPath}.${child.id}` : child.id;
+          updateItemRecursive(child, categoryKey, childPath);
+        });
+      }
+    };
+
+    // Update each category
+    this.checkboxData.forEach(category => {
+      const categoryKey = this.sanitizeKey(category.title);
+      const categoryFormControlName = `current-level-function_${categoryKey}`;
+
+      // Update category checked state
+      if (formValues[categoryFormControlName] !== undefined) {
+        category.checked = formValues[categoryFormControlName];
+      }
+
+      // Update category comment
+      const commentFormControlName = `current-level-function_${categoryKey}_comment`;
+      if (formValues[commentFormControlName] !== undefined) {
+        category.comment = formValues[commentFormControlName];
+      }
+
+      // Update items within this category
+      category.items.forEach(item => {
+        updateItemRecursive(item, categoryKey, item.id);
+      });
+    });
+  }
+
+  private sanitizeKey(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
   }
 
 }

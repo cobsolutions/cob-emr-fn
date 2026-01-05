@@ -1,7 +1,7 @@
 <div [formGroup]="currentFunctionalLimitationsForm" class="basic-form">
 
-  <hierarchy-checkbox [data]="checkboxData" [formGroup]="currentFunctionalLimitationsForm"
-    [sectionPrefix]="'current_functional_limitations'">
+  <hierarchy-checkbox #hierarchyCheckbox [data]="checkboxData" [formGroup]="currentFunctionalLimitationsForm"
+    [sectionPrefix]="'current-level-function'">
   </hierarchy-checkbox>
 
   <div class="form-row">

@@ -39,7 +39,8 @@
             <!-- <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
                 [painFormData]="subjectiveData?.pain">
             </pain> -->
-            <subjective-pain-n (formReady)="setChildForm('pain', $event)" [painFormData]="subjectiveData?.pain"></subjective-pain-n>
+            <subjective-pain-n (formReady)="setChildForm('pain', $event)"
+                [painFormData]="subjectiveData?.pain"></subjective-pain-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-3 enhanced-card">
@@ -88,7 +89,8 @@
             <!-- <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
                 [fields]="subjectiveFormFields['Current Functional Limitations']"
                 [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit> -->
-            <subjective-current-functional-limitations-n (formReady)="setChildForm('currentFunction', $event)">
+            <subjective-current-functional-limitations-n (formReady)="setChildForm('currentFunction', $event)"
+                [currentFunctionFormData]="subjectiveData?.currentFunction">
             </subjective-current-functional-limitations-n>
 
         </c-card-body>

@@ -9,17 +9,23 @@ export class CarryingMovingHandlingObjectsDTOMapper {
     // Carrying Moving Handling Objects Category Flag
     setValue('current-level-function_carrying-moving-handling-objects', carrying.carryingMovingHandlingObjectsFlag);
 
+    // IADLs Flag
+    setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls', carrying.iadls.iadlsFlag);
+
     // IADLs
-    if (carrying.iADLs) {
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone', carrying.iADLs.abilityToUseTelephone);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_shopping', carrying.iADLs.shopping);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_food_prep', carrying.iADLs.foodPreparation);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_housekeeping', carrying.iADLs.housekeeping);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_laundry', carrying.iADLs.laundry);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_transportation', carrying.iADLs.modeOfTransportation);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_medications', carrying.iADLs.responsibilityForOwnMedications);
-      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_finances', carrying.iADLs.abilityToHandleFinances);
+    if (carrying.iadls) {
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_use_telephone', carrying.iadls.abilityToUseTelephone);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_shopping', carrying.iadls.shopping);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_food_prep', carrying.iadls.foodPreparation);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_housekeeping', carrying.iadls.housekeeping);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_laundry', carrying.iadls.laundry);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_transportation', carrying.iadls.modeOfTransportation);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_medications', carrying.iadls.responsibilityForOwnMedications);
+      setValue('current-level-function_carrying-moving-handling-objects_carrying_iadls_carrying_finances', carrying.iadls.abilityToHandleFinances);
     }
+
+    // Hand Arm Use Flag
+    setValue('current-level-function_carrying-moving-handling-objects_hand_arm_use', carrying.handArmUse.handArmUseFlag);
 
     // Hand Arm Use
     if (carrying.handArmUse) {
@@ -32,6 +38,9 @@ export class CarryingMovingHandlingObjectsDTOMapper {
       setValue('current-level-function_carrying-moving-handling-objects_hand_arm_use_catching', carrying.handArmUse.catching);
     }
 
+    // Fine Hand Use Flag
+    setValue('current-level-function_carrying-moving-handling-objects_fine_hand_use', carrying.fineHandUse.fineHandUseFlag);
+
     // Fine Hand Use
     if (carrying.fineHandUse) {
       setValue('current-level-function_carrying-moving-handling-objects_fine_hand_use_picking_up', carrying.fineHandUse.pickingUp);
@@ -39,6 +48,9 @@ export class CarryingMovingHandlingObjectsDTOMapper {
       setValue('current-level-function_carrying-moving-handling-objects_fine_hand_use_manipulating', carrying.fineHandUse.manipulating);
       setValue('current-level-function_carrying-moving-handling-objects_fine_hand_use_releasing', carrying.fineHandUse.releasing);
     }
+
+    // Moving Objects With Lower Extremities Flag
+    setValue('current-level-function_carrying-moving-handling-objects_lower_extremities', carrying.movingObjectsWithLowerExtremities.movingObjectsWithLowerExtremitiesFlag);
 
     // Moving Objects With Lower Extremities
     if (carrying.movingObjectsWithLowerExtremities) {
@@ -51,6 +63,9 @@ export class CarryingMovingHandlingObjectsDTOMapper {
 
     // Work Vocation
     setValue('current-level-function_carrying-moving-handling-objects_work_vocation', carrying.workVocationOccupation);
+
+    // Recreation Flag
+    setValue('current-level-function_carrying-moving-handling-objects_recreation', carrying.recreation.recreationFlag);
 
     // Recreation
     if (carrying.recreation) {

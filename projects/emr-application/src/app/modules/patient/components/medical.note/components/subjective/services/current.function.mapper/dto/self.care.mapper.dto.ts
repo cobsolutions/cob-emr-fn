@@ -10,13 +10,13 @@ export class SelfCareDTOMapper {
           setValue('current-level-function_self-care', selfCare.selfCareFlag);
 
           // Hygiene Flag
-          setValue('current-level-function_self-care_hygiene', selfCare.hygieneFlag);
+          setValue('current-level-function_self-care_hygiene', selfCare.hygiene.hygieneFlag);
 
           if (selfCare.hygiene) {
             const hygiene = selfCare.hygiene;
 
             // Grooming
-            setValue('current-level-function_self-care_hygiene_grooming', hygiene.groomingFlag);
+            setValue('current-level-function_self-care_hygiene_grooming', hygiene.grooming.groomingFlag);
             if (hygiene.grooming) {
               setValue('current-level-function_self-care_hygiene_grooming_washing_body_parts', hygiene.grooming.washingBodyParts);
               setValue('current-level-function_self-care_hygiene_grooming_washing_whole_body', hygiene.grooming.washingWholeBody);
@@ -28,7 +28,7 @@ export class SelfCareDTOMapper {
             }
 
             // Looking After Health
-            setValue('current-level-function_self-care_hygiene_looking_after_health', hygiene.lookingAfterHealthFlag);
+            setValue('current-level-function_self-care_hygiene_looking_after_health', hygiene.lookingAfterHealth.lookingAfterHealthFlag);
             if (hygiene.lookingAfterHealth) {
               setValue('current-level-function_self-care_hygiene_looking_after_health_balanced_diet', hygiene.lookingAfterHealth.maintainingBalancedDiet);
               setValue('current-level-function_self-care_hygiene_looking_after_health_keeping_warm', hygiene.lookingAfterHealth.keepingWarm);
@@ -38,7 +38,7 @@ export class SelfCareDTOMapper {
             }
 
             // Dressing
-            setValue('current-level-function_self-care_hygiene_dressing', hygiene.dressingFlag);
+            setValue('current-level-function_self-care_hygiene_dressing', hygiene.dressing.dressingFlag);
             if (hygiene.dressing) {
               setValue('current-level-function_self-care_hygiene_dressing_putting_on_clothes', hygiene.dressing.puttingOnClothes);
               setValue('current-level-function_self-care_hygiene_dressing_putting_on_footwear', hygiene.dressing.puttingOnFootwear);
@@ -48,7 +48,7 @@ export class SelfCareDTOMapper {
             }
 
             // Bathing
-            setValue('current-level-function_self-care_hygiene_bathing', hygiene.bathingFlag);
+            setValue('current-level-function_self-care_hygiene_bathing', hygiene.bathing.bathingFlag);
             if (hygiene.bathing) {
               setValue('current-level-function_self-care_hygiene_bathing_showering', hygiene.bathing.showering);
               setValue('current-level-function_self-care_hygiene_bathing_bathing_tub', hygiene.bathing.bathing);
@@ -57,7 +57,7 @@ export class SelfCareDTOMapper {
             }
 
             // Toileting
-            setValue('current-level-function_self-care_hygiene_toileting', hygiene.toiletingFlag);
+            setValue('current-level-function_self-care_hygiene_toileting', hygiene.toileting.toiletingFlag);
             if (hygiene.toileting) {
               setValue('current-level-function_self-care_hygiene_toileting_urination', hygiene.toileting.regulatingUrination);
               setValue('current-level-function_self-care_hygiene_toileting_defecation', hygiene.toileting.regulatingDefecation);
@@ -66,11 +66,11 @@ export class SelfCareDTOMapper {
           }
 
           // Sleep
-          setValue('current-level-function_self-care_sleep', selfCare.sleepFlag);
+          setValue('current-level-function_self-care_sleep', selfCare.sleep.sleepFlag);
           if (selfCare.sleep) {
             // Map sleep children
             setValue('current-level-function_self-care_sleep_disturbed_sleep', selfCare.sleep.disturbedSleep);
-            setValue('current-level-function_self-care_sleep_sleeping_postures', selfCare.sleep.sleepingPosturesFlag);
+            setValue('current-level-function_self-care_sleep_sleeping_postures', selfCare.sleep.sleepingPostures.sleepingPosturesFlag);
             if (selfCare.sleep.sleepingPostures) {
               setValue('current-level-function_self-care_sleep_sleeping_postures_prone', selfCare.sleep.sleepingPostures.prone);
               setValue('current-level-function_self-care_sleep_sleeping_postures_supine', selfCare.sleep.sleepingPostures.supine);
@@ -78,7 +78,7 @@ export class SelfCareDTOMapper {
               setValue('current-level-function_self-care_sleep_sleeping_postures_side_left', selfCare.sleep.sleepingPostures.sideL);
             }
             setValue('current-level-function_self-care_sleep_pillows', selfCare.sleep.pillows);
-            setValue('current-level-function_self-care_sleep_surface', selfCare.sleep.surfaceFlag);
+            setValue('current-level-function_self-care_sleep_surface', selfCare.sleep.surface.surfaceFlag);
             if (selfCare.sleep.surface) {
               setValue('current-level-function_self-care_sleep_surface_firm', selfCare.sleep.surface.firm);
               setValue('current-level-function_self-care_sleep_surface_soft', selfCare.sleep.surface.soft);
@@ -87,20 +87,20 @@ export class SelfCareDTOMapper {
           }
 
           // IADLs
-          setValue('current-level-function_self-care_iadls', selfCare.iADLsFlag);
-          if (selfCare.iADLs) {
-            setValue('current-level-function_self-care_iadls_use_telephone', selfCare.iADLs.abilityToUseTelephone);
-            setValue('current-level-function_self-care_iadls_shopping', selfCare.iADLs.shopping);
-            setValue('current-level-function_self-care_iadls_food_prep', selfCare.iADLs.foodPreparation);
-            setValue('current-level-function_self-care_iadls_housekeeping', selfCare.iADLs.housekeeping);
-            setValue('current-level-function_self-care_iadls_laundry_iadl', selfCare.iADLs.laundry);
-            setValue('current-level-function_self-care_iadls_transportation', selfCare.iADLs.modeOfTransportation);
-            setValue('current-level-function_self-care_iadls_medications', selfCare.iADLs.responsibilityForOwnMedications);
-            setValue('current-level-function_self-care_iadls_finances', selfCare.iADLs.abilityToHandleFinances);
+          setValue('current-level-function_self-care_iadls', selfCare.iadls.iadlsFlag);
+          if (selfCare.iadls) {
+            setValue('current-level-function_self-care_iadls_use_telephone', selfCare.iadls.abilityToUseTelephone);
+            setValue('current-level-function_self-care_iadls_shopping', selfCare.iadls.shopping);
+            setValue('current-level-function_self-care_iadls_food_prep', selfCare.iadls.foodPreparation);
+            setValue('current-level-function_self-care_iadls_housekeeping', selfCare.iadls.housekeeping);
+            setValue('current-level-function_self-care_iadls_laundry_iadl', selfCare.iadls.laundry);
+            setValue('current-level-function_self-care_iadls_transportation', selfCare.iadls.modeOfTransportation);
+            setValue('current-level-function_self-care_iadls_medications', selfCare.iadls.responsibilityForOwnMedications);
+            setValue('current-level-function_self-care_iadls_finances', selfCare.iadls.abilityToHandleFinances);
           }
 
           // Household Chores
-          setValue('current-level-function_self-care_household_chores', selfCare.householdChoresFlag);
+          setValue('current-level-function_self-care_household_chores', selfCare.householdChores.householdChoresFlag);
           if (selfCare.householdChores) {
             setValue('current-level-function_self-care_household_chores_cook_meal', selfCare.householdChores.cookAMeal);
             setValue('current-level-function_self-care_household_chores_laundry_chore', selfCare.householdChores.laundry);

@@ -1,7 +1,8 @@
-import { CarryingMovingHandlingObjects } from "./current.function.models/carrying.moving.handling.objects/CarryingMovingHandlingObjects";
-import { ChangingMaintainingBodyPosition } from "./current.function.models/changing.maintaining.body.position/ChangingMaintainingBodyPosition";
-import { MobilityWalkingMovingAround } from "./current.function.models/mobility.walking.moving.around/MobilityWalkingMovingAround";
-import { SelfCare } from "./current.function.models/self.care/SelfCare";
+import { CarryingMovingHandlingObjects } from "./prior.function.models/carrying.moving.handling.objects/CarryingMovingHandlingObjects";
+import { ChangingMaintainingBodyPosition } from "./prior.function.models/changing.maintaining.body.position/ChangingMaintainingBodyPosition";
+import { MobilityWalkingMovingAround } from "./prior.function.models/mobility.walking.moving.around/MobilityWalkingMovingAround";
+import { SelfCare } from "./prior.function.models/self.care/SelfCare";
+
 
 export interface CurrentFunction {
     selfCare?:SelfCare;
