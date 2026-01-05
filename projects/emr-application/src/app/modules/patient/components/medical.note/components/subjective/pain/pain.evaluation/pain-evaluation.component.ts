@@ -64,7 +64,6 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
   openEditModal(index: number): void {
     this.editIndex = index;
     const evalData = this.painEvals[index];
-    console.log('evalData.description : ', evalData.description)
     // Ensure numeric fields are properly typed for radio button comparison
     this.painEval.patchValue({
       location: evalData.location || '',
@@ -118,7 +117,11 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
     const painEval = this.getAllFormValues(this.painEval);
 
     if (this.editIndex !== null) {
-      // Update existing record
+      // Update existing record - preserve the id if it exists
+      const existingId = this.painEvals[this.editIndex].id;
+      if (existingId !== undefined && existingId !== null) {
+        painEval.id = existingId;
+      }
       this.painEvals[this.editIndex] = painEval;
     } else {
       // Add new record
