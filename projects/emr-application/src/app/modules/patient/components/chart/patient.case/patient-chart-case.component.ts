@@ -221,7 +221,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     }
   }
   handleBackAction() {
-    console.log('back to records')
     this.patientRecord = true;
   }
   private getAppointment(id: number) {

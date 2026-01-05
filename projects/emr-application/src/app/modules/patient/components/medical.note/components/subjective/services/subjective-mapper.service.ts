@@ -364,7 +364,6 @@ export class SubjectiveMapperService {
    * Maps basic section from DTO (camelCase) to form (snake_case)
    */
   private mapBasicFromDto(basic: any): any {
-    console.log('basic.chronic ', basic.chronic)
     const mapped: any = {
       dos_date: basic.dosDate,
       time: !!(basic.timeIn || basic.timeOut),
