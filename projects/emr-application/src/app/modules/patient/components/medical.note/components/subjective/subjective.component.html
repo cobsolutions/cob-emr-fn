@@ -18,7 +18,8 @@
             <!-- <basic-information (formReady)="setChildForm('basic', $event)"
                 [fields]="subjectiveFormFields['Basic Information']"
                 [basicFormData]="subjectiveData?.basic"></basic-information> -->
-            <subjective-basic-n (formReady)="setChildForm('basic', $event)"></subjective-basic-n>
+            <subjective-basic-n (formReady)="setChildForm('basic', $event)"
+                [basicFormData]="subjectiveData?.basic"></subjective-basic-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-3 enhanced-card">

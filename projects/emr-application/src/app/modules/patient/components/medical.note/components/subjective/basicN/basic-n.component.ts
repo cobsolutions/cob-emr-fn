@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,7 @@ export class BasicNComponent implements OnInit {
   showHospitalizationTime = false;
   showSurgeryPperformed = false;
   showNewInjury = false;
+  @Input() basicFormData: any;
   @Output() formReady = new EventEmitter<FormGroup>();
 
   // ICD-10 Diagnosis configuration
@@ -25,8 +26,24 @@ export class BasicNComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.patchFormData()
     this.setupValueChangeListeners();
     this.formReady.emit(this.basicForm);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    // React to changes in painFormData
+    if (changes['basicFormData'] && !changes['basicFormData'].firstChange && this.basicForm) {
+      this.patchFormData();
+    }
+  }
+  patchFormData() {
+    if (this.basicFormData) {
+      const formData = {
+        icdten_diagnosis: this.basicFormData.icdtenDiagnosis
+      }
+      console.log('formData ', formData)
+      this.basicForm.patchValue(formData);
+    }
   }
 
 

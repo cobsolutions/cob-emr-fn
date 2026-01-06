@@ -42,6 +42,15 @@ export class IcdtenComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillDiagnosisCode();
+
+    // Subscribe to form control value changes to detect when parent patches data
+    this.parentForm.get(this.parentFieldName)?.valueChanges.subscribe(value => {
+      console.log('Form control value changed:', value);
+      if (value && value.length > 0 && this.addedDiagnosis.length === 0) {
+        this.addedDiagnosis = [...value];
+      }
+    });
+
     if (this.hierarchy === 'child') {
       this.caseDiagnosisService.currentData$.subscribe(list => {
         if (list && list.length > 0) {
@@ -135,6 +144,7 @@ export class IcdtenComponent implements OnInit {
 
   private fillDiagnosisCode(): void {
     const saved = this.parentForm.get(this.parentFieldName)?.value;
+    console.log('saved ' ,saved)
     if (saved) this.addedDiagnosis = [...saved];
   }
 
