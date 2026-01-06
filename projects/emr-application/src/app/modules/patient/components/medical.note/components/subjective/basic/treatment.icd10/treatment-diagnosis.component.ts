@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CaseDiagnosisService } from 'projects/emr-application/src/app/modules/patient/services/case-diagnosis.service';
 import { finalize } from 'rxjs/operators';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { cilCopy } from '@coreui/icons';
 
 @Component({
   selector: 'treatment-diagnosis',
@@ -24,6 +25,7 @@ export class TreatmentDiagnosisComponent implements OnInit {
   @Input() parentForm!: FormGroup;
   @Input() parentFieldName!: string;
   @Input() style: string;
+  @Input() copiedicdten: { code: string; description: string; order: number }
   @Output() emitChanges = new EventEmitter<{ code: string; description: string; order: number }[]>();
 
   diagnosisCtrl = new FormControl();
@@ -32,10 +34,34 @@ export class TreatmentDiagnosisComponent implements OnInit {
   isLoading = false;
   showSearch = false;
 
-  constructor(private caseDiagnosisService: CaseDiagnosisService) {}
+  constructor(private caseDiagnosisService: CaseDiagnosisService) { }
 
   ngOnInit(): void {
     this.fillDiagnosisCode();
+    this.caseDiagnosisService.currentData$.subscribe((copiedData:any[]) => {
+      if (copiedData && copiedData.length > 0) {
+        copiedData.forEach(item => {
+          const exists = this.addedDiagnosis.some((d) => d.code === item.code);
+          if (!exists) {
+            const newDiagnosis = {
+              code: item.code,
+              description: item.description,
+              order: this.addedDiagnosis.length,
+            };
+            this.addedDiagnosis.push(newDiagnosis);
+          }
+        });
+        this.updateParentForm();
+      }
+    })
+    this.parentForm.get(this.parentFieldName)?.valueChanges.subscribe(value => {
+      // Sync with parent form whenever it changes, not just when empty
+      if (value && Array.isArray(value)) {
+        this.addedDiagnosis = [...value];
+      } else if (!value || value.length === 0) {
+        this.addedDiagnosis = [];
+      }
+    });
   }
 
   /** 🔍 Manual search triggered by button */

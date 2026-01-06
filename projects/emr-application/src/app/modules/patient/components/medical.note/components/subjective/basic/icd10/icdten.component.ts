@@ -40,6 +40,9 @@ export class IcdtenComponent implements OnInit {
     private caseDiagnosisService: CaseDiagnosisService
   ) { }
 
+  get codes(){
+    return this.addedDiagnosis;
+  }
   ngOnInit(): void {
     this.fillDiagnosisCode();
 
@@ -170,6 +173,7 @@ export class IcdtenComponent implements OnInit {
     this.emitChanges.emit(this.addedDiagnosis);
   }
   copyCodes(): void {
+    console.log(this.addedDiagnosis)
     this.caseDiagnosisService.copy(this.addedDiagnosis);
     // if (this.treatmentDiagnosisComp) {
     //   this.treatmentDiagnosisComp.receiveCopiedCodes(this.addedDiagnosis);

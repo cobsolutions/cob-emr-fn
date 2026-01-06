@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { IcdtenComponent } from '../basic/icd10/icdten.component';
 
 @Component({
   selector: 'subjective-basic-n',
@@ -40,8 +41,7 @@ export class BasicNComponent implements OnInit {
     if (this.basicFormData) {
       const formData = {
         icdten_diagnosis: this.basicFormData.icdtenDiagnosis
-      }
-      console.log('formData ', formData)
+      }      
       this.basicForm.patchValue(formData);
     }
   }
@@ -49,12 +49,11 @@ export class BasicNComponent implements OnInit {
 
   onDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
     // Optional: Handle changes from ICD-10 diagnosis component
-    console.log('ICD-10 Diagnosis updated:', diagnoses);
+    
   }
 
   onTreatmentDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
-    // Optional: Handle changes from treatment diagnosis component
-    console.log('Treatment Diagnosis updated:', diagnoses);
+    
   }
   initForm() {
     this.basicForm = this.fb.group({
