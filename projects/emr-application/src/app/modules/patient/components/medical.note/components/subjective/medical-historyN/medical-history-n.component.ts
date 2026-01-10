@@ -235,9 +235,24 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistory = value === 'yes'
+      if(value ==='no'){
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_social_history:'no',
+          occupation_social_history_occupation_and_work_status:'no',
+          occupation_social_history_home_layout:'no',
+          occupation_social_history_durable_medical_equipment:'no',
+          occupation_social_history_patient_tobacco_user:'no'
+        })
+      }
     })
     this.medicalHistoryForm.get('occupation_social_history_social_history')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistorySocialHistory = value === 'yes'
+      if (this.showOccupationSocialHistorySocialHistory === null
+        || !this.showOccupationSocialHistorySocialHistory)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_list: null,
+          occupation_social_history_text:null
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history_occupation_and_work_status')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryOccupationAndWorkStatus = value === 'yes'
@@ -245,11 +260,11 @@ export class MedicalHistoryNComponent implements OnInit {
         || !this.showOccupationSocialHistoryOccupationAndWorkStatus)
         this.medicalHistoryForm.patchValue({
           occupation_social_history_occupation_and_work_name_of_occupation: null,
-          occupation_social_history_occupation_and_work_status_status:null,
-          occupation_social_history_occupation_and_work_status_duty_level:null,
-          occupation_social_history_occupation_and_work_status_sescription:null,
-          occupation_social_history_occupation_and_work_status_out_of_work_since:null,
-          occupation_social_history_occupation_and_work_status_return_to_work_date:null
+          occupation_social_history_occupation_and_work_status_status: null,
+          occupation_social_history_occupation_and_work_status_duty_level: null,
+          occupation_social_history_occupation_and_work_status_sescription: null,
+          occupation_social_history_occupation_and_work_status_out_of_work_since: null,
+          occupation_social_history_occupation_and_work_status_return_to_work_date: null
         })
     })
     this.medicalHistoryForm.get('occupation_social_history_home_layout')?.valueChanges.subscribe(value => {
@@ -283,7 +298,7 @@ export class MedicalHistoryNComponent implements OnInit {
       if (this.showOccupationSocialHistoryPatientTobaccoUserOtherForm === null
         || !this.showOccupationSocialHistoryPatientTobaccoUserOtherForm)
         this.medicalHistoryForm.patchValue({
-          occupation_social_history_patient_tobacco_user_other_form_text:null,
+          occupation_social_history_patient_tobacco_user_other_form_text: null,
           tobacco_cessation_recommendation_made: false,
           tobacco_cessation_advice_support_provided: false,
           tobacco_cessation_continued_support: false
@@ -291,10 +306,33 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('home_health_care')?.valueChanges.subscribe(value => {
       this.showHomeHealthCare = value === 'yes'
+      if (this.showHomeHealthCare === null
+        || !this.showHomeHealthCare)
+        this.medicalHistoryForm.patchValue({
+          home_health_care_text: null
+        })
     })
     this.medicalHistoryForm.get('history_of_falls')?.valueChanges.subscribe(value => {
       this.showHistoryOfFallsYES = value === 'yes';
       this.showHistoryOfFallsNO = value === 'no';
+      console.log(value)
+      if (value === null)
+        this.medicalHistoryForm.patchValue({
+          history_of_falls_document: 'no',
+          history_of_falls_document_text: null,
+          risk_assessment_medications_contributing_factor: null,
+          risk_assessment_home_fall_hazards: null,
+          risk_assessment_postural_blood_pressure: null,
+          risk_assessment_vision: null
+        })
+      if (value === 'no') {
+        this.medicalHistoryForm.patchValue({
+          risk_assessment_medications_contributing_factor: null,
+          risk_assessment_home_fall_hazards: null,
+          risk_assessment_postural_blood_pressure: null,
+          risk_assessment_vision: null
+        })
+      }
     })
     this.medicalHistoryForm.get('history_of_falls_document')?.valueChanges.subscribe(value => {
       this.showHistoryOfFallsdocument = value === 'yes';
