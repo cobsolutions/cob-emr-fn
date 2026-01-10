@@ -235,13 +235,13 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistory = value === 'yes'
-      if(value ==='no'){
+      if (value === 'no') {
         this.medicalHistoryForm.patchValue({
-          occupation_social_history_social_history:'no',
-          occupation_social_history_occupation_and_work_status:'no',
-          occupation_social_history_home_layout:'no',
-          occupation_social_history_durable_medical_equipment:'no',
-          occupation_social_history_patient_tobacco_user:'no'
+          occupation_social_history_social_history: 'no',
+          occupation_social_history_occupation_and_work_status: 'no',
+          occupation_social_history_home_layout: 'no',
+          occupation_social_history_durable_medical_equipment: 'no',
+          occupation_social_history_patient_tobacco_user: 'no'
         })
       }
     })
@@ -251,7 +251,7 @@ export class MedicalHistoryNComponent implements OnInit {
         || !this.showOccupationSocialHistorySocialHistory)
         this.medicalHistoryForm.patchValue({
           occupation_social_history_list: null,
-          occupation_social_history_text:null
+          occupation_social_history_text: null
         })
     })
     this.medicalHistoryForm.get('occupation_social_history_occupation_and_work_status')?.valueChanges.subscribe(value => {
@@ -339,6 +339,11 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('mental_status_cognitive_function_appears_impaired')?.valueChanges.subscribe(value => {
       this.showMentalStatusCognitiveFunctionAppearsImpaired = value === 'yes';
+      if (value === 'no') {
+        this.medicalHistoryForm.patchValue({
+          mental_status_cognitive_function_appears_impaired_text: null
+        })
+      }
     })
   }
   private populateYears() {
