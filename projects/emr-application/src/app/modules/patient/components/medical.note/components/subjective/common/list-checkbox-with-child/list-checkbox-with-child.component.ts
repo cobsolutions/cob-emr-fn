@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 export interface CheckboxOption {
   label: string;
@@ -14,7 +15,7 @@ export interface CheckboxOption {
   templateUrl: './list-checkbox-with-child.component.html',
   styleUrls: ['./list-checkbox-with-child.component.css']
 })
-export class ListCheckboxWithChildComponent implements OnInit {
+export class ListCheckboxWithChildComponent implements OnInit, OnDestroy {
   @Input() formGroup!: FormGroup;
   @Input() title: string = '';
   @Input() options: CheckboxOption[] = [];
@@ -32,6 +33,7 @@ export class ListCheckboxWithChildComponent implements OnInit {
 
   optionColumns: typeof this.prefixedOptions[] = [];
   useMultiColumn: boolean = false;
+  private subscriptions: Subscription[] = [];
 
   constructor() { }
 
@@ -48,6 +50,19 @@ export class ListCheckboxWithChildComponent implements OnInit {
       }
       if (!this.formGroup.contains(childControlName)) {
         this.formGroup.addControl(childControlName, new FormControl(''));
+      }
+
+      // Subscribe to checkbox changes to reset child when unchecked
+      const checkboxControl = this.formGroup.get(checkboxControlName);
+      const childControl = this.formGroup.get(childControlName);
+
+      if (checkboxControl && childControl) {
+        const subscription = checkboxControl.valueChanges.subscribe(isChecked => {
+          if (!isChecked) {
+            childControl.setValue('');
+          }
+        });
+        this.subscriptions.push(subscription);
       }
 
       return {
@@ -94,6 +109,10 @@ export class ListCheckboxWithChildComponent implements OnInit {
   // Check if checkbox is checked to show/hide child input
   isCheckboxChecked(controlName: string): boolean {
     return this.formGroup.get(controlName)?.value === true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }
