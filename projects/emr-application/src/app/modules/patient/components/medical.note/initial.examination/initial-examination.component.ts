@@ -12,6 +12,7 @@ import { MedialNoteService } from '../../../services/medical.note/medial-note.se
 import { AssessmentMapperService } from '../components/assessment/service/assessment-mapper.service';
 import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
 import { ObjectiveComponent } from '../components/objective/objective.component';
+import { ObjectiveMapperService } from '../components/objective/service/objective-mapper.service';
 import { PlanOfCareMapperService } from '../components/plan/service/plan-of-care-mapper.service';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
 
@@ -45,6 +46,7 @@ export class InitialExaminationComponent implements OnInit {
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
     private subjectiveMapper: SubjectiveMapperService,
+    private objectiveMapperService: ObjectiveMapperService,
     private billingMapperService: BillingMapperService,
     private assessmentMapper: AssessmentMapperService,
     private planOfCareMapper: PlanOfCareMapperService) {
@@ -60,7 +62,7 @@ export class InitialExaminationComponent implements OnInit {
       billing: this.fb.group({})
     });
     this.initialExamNoteService.get(this.noteId).subscribe((note: any) => {
-      console.log('note : ' , note)
+      console.log('note : ', note)
       if (note) {
         this.medicalNoteSOAP = note;
 
@@ -147,7 +149,7 @@ export class InitialExaminationComponent implements OnInit {
     if (action === 'back')
       this.backtoPatientRecordActions()
     if (action === 'draft') {
-      console.log('initialExaminationForm : ' , this.getAllFormValues(this.initialExaminationForm))
+      console.log('initialExaminationForm : ', this.getAllFormValues(this.initialExaminationForm))
       this.draft();
     }
 
@@ -161,7 +163,7 @@ export class InitialExaminationComponent implements OnInit {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup),
-      objective: null,
+      objective: this.objectiveMapperService.toModel(this.initialExaminationForm.get('objective') as FormGroup),
       assessment: null,
       planOfCare: null,
       billing: null
