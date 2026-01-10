@@ -254,9 +254,21 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history_home_layout')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryHomeLayout = value === 'yes'
+      if (this.showOccupationSocialHistoryHomeLayout === null
+        || !this.showOccupationSocialHistoryHomeLayout)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_home_layout_list: null,
+          occupation_social_history_home_layout_text: null
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history_durable_medical_equipment')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryDurableMedicalEquipment = value === 'yes'
+      if (this.showOccupationSocialHistoryDurableMedicalEquipment === null
+        || !this.showOccupationSocialHistoryDurableMedicalEquipment)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_durable_medical_equipment_list: null,
+          occupation_social_history_durable_medical_equipment_text: null
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryPatientTobaccoUser = value === 'yes'
