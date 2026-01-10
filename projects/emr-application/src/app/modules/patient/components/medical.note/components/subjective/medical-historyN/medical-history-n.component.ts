@@ -200,19 +200,38 @@ export class MedicalHistoryNComponent implements OnInit {
       mental_status_cognitive_function_appears_impaired_text: [''],
       unexplained_weight_loss: ['na'],
       diagnostic_testing_Imaging: [''],
-      patient_goals:[]
+      patient_goals: []
     })
   }
   setupValueChangeListeners() {
     this.medicalHistoryForm.get('previous_history_of_similar_symptoms')?.valueChanges.subscribe(value => {
       this.showPreviousHistoryOfSimilarSymptoms = value === 'yes'
+      if (this.showPreviousHistoryOfSimilarSymptoms === null
+        || !this.showPreviousHistoryOfSimilarSymptoms) {
+        this.medicalHistoryForm.patchValue({
+          previous_episodes_of_same_complaints: null,
+          previous_treatments_for_similar_symptoms: null,
+          previous_history_of_similar_symptoms_text: null
+        })
+      }
     })
 
     this.medicalHistoryForm.get('previous_episodes_of_same_complaints')?.valueChanges.subscribe(value => {
       this.showPreviousEpisodesOfSameComplaints = value === 'yes'
+      if (this.showPreviousEpisodesOfSameComplaints === null
+        || !this.showPreviousEpisodesOfSameComplaints)
+        this.medicalHistoryForm.patchValue({
+          previous_episodes_of_same_complaints_range: null,
+          previous_episodes_of_same_complaints_year_first_episode: null
+        })
     })
     this.medicalHistoryForm.get('previous_treatments_for_similar_symptoms')?.valueChanges.subscribe(value => {
       this.showPreviousTreatmentsForSimilarSymptoms = value === 'yes'
+      if (this.showPreviousTreatmentsForSimilarSymptoms === null
+        || !this.showPreviousTreatmentsForSimilarSymptoms)
+        this.medicalHistoryForm.patchValue({
+          previous_treatments_for_similar_symptoms_text: null
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistory = value === 'yes'
