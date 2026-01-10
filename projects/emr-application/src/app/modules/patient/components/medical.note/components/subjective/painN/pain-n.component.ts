@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormDependencyClearerService } from 'projects/emr-application/src/app/modules/common/service/form-dependency-clearer.service';
 
 @Component({
   selector: 'subjective-pain-n',
   templateUrl: './pain-n.component.html',
   styleUrls: ['./pain-n.component.css']
 })
-export class PainNComponent implements OnInit, OnChanges {
+export class PainNComponent implements OnInit, OnChanges, OnDestroy {
   painForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() painFormData: any;
@@ -15,6 +16,8 @@ export class PainNComponent implements OnInit, OnChanges {
 
   // Pain evaluation data
   painEvaluations: any[] = [];
+
+  private readonly FORM_ID = 'pain-n-form';
 
   aggravatingFactorsOptions = [
     { value: 'sitting', label: 'Sitting' },
@@ -28,7 +31,11 @@ export class PainNComponent implements OnInit, OnChanges {
     { value: 'lying_down', label: 'Lying Down' },
     { value: 'cough_sneeze', label: 'Cough/sneeze' }
   ]
-  constructor(private fb: FormBuilder) { }
+
+  constructor(
+    private fb: FormBuilder,
+    private formDependencyClearer: FormDependencyClearerService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -53,12 +60,33 @@ export class PainNComponent implements OnInit, OnChanges {
     })
   }
   setupValueChangeListeners() {
+    // Set up visibility listeners
     this.painForm.get('pain_scale')?.valueChanges.subscribe(value => {
       this.showPainScale = value === 'yes'
     })
     this.painForm.get('restrictions_pain_alleviators')?.valueChanges.subscribe(value => {
       this.showRestrictionsPainAlleviators = value === 'yes'
     })
+
+    // Set up dependency clearing using the generic service
+    this.formDependencyClearer.setupDependencies(this.painForm, [
+      {
+        parentField: 'pain_scale',
+        showWhenValue: 'yes',
+        dependentFields: ['pain_evaluations'],
+        clearValues: { pain_evaluations: [] }
+      },
+      {
+        parentField: 'restrictions_pain_alleviators',
+        showWhenValue: 'yes',
+        dependentFields: ['restrictions_pain_alleviators_text']
+      }
+    ], this.FORM_ID);
+  }
+
+  ngOnDestroy(): void {
+    // Clean up subscriptions
+    this.formDependencyClearer.cleanup(this.FORM_ID);
   }
 
   patchFormData() {

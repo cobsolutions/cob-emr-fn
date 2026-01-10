@@ -1,12 +1,12 @@
 export interface PreviousHistorySymptoms{
     //previousEpisodesOfSameComplaints
-    isEpisode?:boolean,
+    isEpisode?:string,
     //previousEpisodesOfSameComplaintsRange
     episodeAgerRange?:string,
     //previousEpisodesOfSameComplaintsYearFirstEpisode
     episodeYear?:number
     //previousTreatmentsForSimilarSymptoms
-    isSimilarSymptoms?:boolean,
+    isSimilarSymptoms?:string,
     //previousHistoryOfSimilarSymptomsText
     similarSymptomsTxt?:string
     //previousTreatmentsForSimilarSymptomsText

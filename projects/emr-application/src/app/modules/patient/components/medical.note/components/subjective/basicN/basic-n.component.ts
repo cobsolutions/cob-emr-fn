@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChil
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IcdtenComponent } from '../basic/icd10/icdten.component';
 
+
 @Component({
   selector: 'subjective-basic-n',
   templateUrl: './basic-n.component.html',
@@ -41,7 +42,7 @@ export class BasicNComponent implements OnInit {
     if (this.basicFormData) {
       const formData = {
         icdten_diagnosis: this.basicFormData.icdtenDiagnosis
-      }      
+      }
       this.basicForm.patchValue(formData);
     }
   }
@@ -49,19 +50,19 @@ export class BasicNComponent implements OnInit {
 
   onDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
     // Optional: Handle changes from ICD-10 diagnosis component
-    
+
   }
 
   onTreatmentDiagnosisChange(diagnoses: { code: string; description: string; order: number }[]): void {
-    
+
   }
   initForm() {
     this.basicForm = this.fb.group({
       dos_date: [null], // name : Date of Initial Examination , Type Date Picker
       time: ['no'],  // name  Time In/Time Out , type radio
 
-      time_in: ['no'],
-      time_out: ['no'],
+      time_in: [],
+      time_out: [],
       number_of_visit: [''], // Visit Number , type : input text
       icdten_diagnosis: [[]], // ICD-10 Diagnosis codes
       treatment_diagnosis: [[]], // Treatment Diagnosis ICD-10 codes
@@ -90,26 +91,47 @@ export class BasicNComponent implements OnInit {
   setupValueChangeListeners() {
     this.basicForm.get('time')?.valueChanges.subscribe(value => {
       this.showHospitalizationTime = value === 'yes'
+      if (value === 'no') {
+        this.basicForm.patchValue({
+          time_in: null,
+          time_out: null
+        })
+      }
     })
     this.basicForm.get('specific_physician_rders')?.valueChanges.subscribe(value => {
       this.specificPhysicianOrders = value === 'yes'
+      if (value === 'no') {
+        this.basicForm.patchValue({
+          specific_physician_rders_text: ''
+        })
+      }
     })
     this.basicForm.get('surgery_performed')?.valueChanges.subscribe(value => {
       this.showSurgeryPperformed = value === 'yes'
+      if (value === 'no') {
+        this.basicForm.patchValue({
+          surgery_performed_date_of_surgery: null,
+          surgery_performed_type_of_surgery: null
+        })
+      }
     })
 
     this.basicForm.get('new_injury')?.valueChanges.subscribe(value => {
       this.showNewInjury = value
+      if (value === false) {
+        this.basicForm.patchValue({
+          new_injury_text: null
+        })
+      }
     });
-    // Listen to prior_hospitalization changes to show/hide date fields
+
     this.basicForm.get('prior_hospitalization')?.valueChanges.subscribe(value => {
       this.showHospitalizationDates = value === 'yes';
       if (value === 'no') {
-        // Clear the date fields when user selects 'no'
         this.basicForm.patchValue({
           from_date: null,
           to_date: null
-        });
+        })
       }
     });
   }
