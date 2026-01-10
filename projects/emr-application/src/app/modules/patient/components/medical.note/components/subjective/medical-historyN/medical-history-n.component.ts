@@ -272,9 +272,22 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryPatientTobaccoUser = value === 'yes'
+      if (this.showOccupationSocialHistoryPatientTobaccoUser === null
+        || !this.showOccupationSocialHistoryPatientTobaccoUser)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco: 'no'
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryPatientTobaccoUserOtherForm = value === 'yes'
+      if (this.showOccupationSocialHistoryPatientTobaccoUserOtherForm === null
+        || !this.showOccupationSocialHistoryPatientTobaccoUserOtherForm)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_patient_tobacco_user_other_form_text:null,
+          tobacco_cessation_recommendation_made: false,
+          tobacco_cessation_advice_support_provided: false,
+          tobacco_cessation_continued_support: false
+        })
     })
     this.medicalHistoryForm.get('home_health_care')?.valueChanges.subscribe(value => {
       this.showHomeHealthCare = value === 'yes'
