@@ -260,7 +260,7 @@ export class MedicalHistoryMapperService {
     // generalHealth
     medicalHistory.generalHealth = formGroup.get('general_health')?.value;
     // diagnosticTesting_Imaging
-    medicalHistory.diagnosticTest = formGroup.get('diagnostic_testing_imaging')?.value;
+    medicalHistory.diagnosticTest = formGroup.get('diagnostic_testing_Imaging')?.value;
     // patientGoals
     medicalHistory.patientGoals = formGroup.get('patient_goals')?.value;
 
@@ -385,7 +385,7 @@ export class MedicalHistoryMapperService {
 
     // Simple fields
     mapped.general_health = dto.generalHealth;
-    mapped.diagnostic_testing_imaging = dto.diagnosticTest;
+    mapped.diagnostic_testing_Imaging = dto.diagnosticTest;
     mapped.patient_goals = dto.patientGoals;
     mapped.medical_history_review = dto.medicalHistoryReview;
     mapped.mental_status_cognitive_function_appears_impaired = dto.isMentalStatus;
