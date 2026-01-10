@@ -241,6 +241,16 @@ export class MedicalHistoryNComponent implements OnInit {
     })
     this.medicalHistoryForm.get('occupation_social_history_occupation_and_work_status')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryOccupationAndWorkStatus = value === 'yes'
+      if (this.showOccupationSocialHistoryOccupationAndWorkStatus === null
+        || !this.showOccupationSocialHistoryOccupationAndWorkStatus)
+        this.medicalHistoryForm.patchValue({
+          occupation_social_history_occupation_and_work_name_of_occupation: null,
+          occupation_social_history_occupation_and_work_status_status:null,
+          occupation_social_history_occupation_and_work_status_duty_level:null,
+          occupation_social_history_occupation_and_work_status_sescription:null,
+          occupation_social_history_occupation_and_work_status_out_of_work_since:null,
+          occupation_social_history_occupation_and_work_status_return_to_work_date:null
+        })
     })
     this.medicalHistoryForm.get('occupation_social_history_home_layout')?.valueChanges.subscribe(value => {
       this.showOccupationSocialHistoryHomeLayout = value === 'yes'
