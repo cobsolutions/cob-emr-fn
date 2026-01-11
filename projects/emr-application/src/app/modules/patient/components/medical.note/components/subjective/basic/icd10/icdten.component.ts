@@ -48,7 +48,7 @@ export class IcdtenComponent implements OnInit {
 
     // Subscribe to form control value changes to detect when parent patches data
     this.parentForm.get(this.parentFieldName)?.valueChanges.subscribe(value => {
-      console.log('Form control value changed:', value);
+      
       if (value && value.length > 0 && this.addedDiagnosis.length === 0) {
         this.addedDiagnosis = [...value];
       }
@@ -147,7 +147,6 @@ export class IcdtenComponent implements OnInit {
 
   private fillDiagnosisCode(): void {
     const saved = this.parentForm.get(this.parentFieldName)?.value;
-    console.log('saved ' ,saved)
     if (saved) this.addedDiagnosis = [...saved];
   }
 
