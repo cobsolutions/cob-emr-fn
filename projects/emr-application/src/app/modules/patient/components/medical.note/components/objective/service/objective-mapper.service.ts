@@ -14,7 +14,10 @@ export class ObjectiveMapperService {
     }
 
     const objective: Objective = {};
-    objective.profile = formGroup.get('profile').value;
+    const profileControl = formGroup.get('profile');
+    if (profileControl) {
+      objective.profile = profileControl.value;
+    }
     return objective;
   }
 
