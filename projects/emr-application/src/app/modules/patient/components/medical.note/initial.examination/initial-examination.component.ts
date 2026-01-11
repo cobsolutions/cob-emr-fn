@@ -179,7 +179,6 @@ export class InitialExaminationComponent implements OnInit {
 
     // Patch pending data if available
     if (section === 'objective' && this.pendingObjectiveData) {
-      console.log('Patching pending objective data:', this.pendingObjectiveData);
       this.initialExaminationForm.get('objective')?.patchValue(this.pendingObjectiveData);
       this.pendingObjectiveData = null;
     } else if (section === 'subjective' && this.pendingSubjectiveData) {
@@ -200,7 +199,6 @@ export class InitialExaminationComponent implements OnInit {
     if (action === 'back')
       this.backtoPatientRecordActions()
     if (action === 'draft') {
-      console.log('initialExaminationForm : ', this.getAllFormValues(this.initialExaminationForm))
       this.draft();
     }
 
