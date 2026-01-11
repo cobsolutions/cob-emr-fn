@@ -17,13 +17,15 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <select id="profile-select" cSelect (change)="selectProfile()" [(ngModel)]="selectedProfile"
-                [disabled]="isNotInitialExaminationNote">
-                <option disabled selected value="null">Select Examination Profile</option>
-                <option *ngFor="let profile of activeProfiles " [value]="profile.name">
-                    {{ profile.name }}
-                </option>
-            </select>
+            <div [formGroup]="objectiveForm">
+                <select id="profile-select" cSelect formControlName="profile" (change)="selectProfile()"
+                    [disabled]="isNotInitialExaminationNote">
+                    <option disabled [value]="null">Select Examination Profile</option>
+                    <option *ngFor="let profile of activeProfiles " [value]="profile.name">
+                        {{ profile.name }}
+                    </option>
+                </select>
+            </div>
         </c-card-body>
     </c-card>
 </div>

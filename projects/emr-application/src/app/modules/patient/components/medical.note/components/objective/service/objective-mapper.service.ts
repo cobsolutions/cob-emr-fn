@@ -12,7 +12,7 @@ export class ObjectiveMapperService {
     if (!formGroup) {
       return {};
     }
-    
+
     const objective: Objective = {};
     objective.profile = formGroup.get('profile').value;
     return objective;
@@ -22,5 +22,10 @@ export class ObjectiveMapperService {
     if (!dto) {
       return {};
     }
+    const formValue: any = {};
+    if (dto.profile)
+      formValue.profile = dto.profile
+
+    return formValue;
   }
 }

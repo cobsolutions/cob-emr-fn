@@ -52,6 +52,12 @@ export class InitialExaminationComponent implements OnInit {
     private planOfCareMapper: PlanOfCareMapperService) {
 
   }
+  private pendingObjectiveData: any = null;
+  private pendingSubjectiveData: any = null;
+  private pendingAssessmentData: any = null;
+  private pendingPlanOfCareData: any = null;
+  private pendingBillingData: any = null;
+
   ngOnInit(): void {
     this.visitedSteps = [true, false, false, false, false]
     this.initialExaminationForm = this.fb.group({
@@ -79,14 +85,25 @@ export class InitialExaminationComponent implements OnInit {
 
           // Denormalize true/false to yes/no
           const denormalizedSubjective = this.denormalizeNote(subjectiveFormValue, subjectiveFormGroup);
-          this.initialExaminationForm.get('subjective')?.patchValue(denormalizedSubjective);
+          this.pendingSubjectiveData = denormalizedSubjective;
+          // Patch now if form is already set, otherwise wait for formReady
+          if (this.initialExaminationForm.get('subjective')?.get('basic')) {
+            this.initialExaminationForm.get('subjective')?.patchValue(denormalizedSubjective);
+            this.pendingSubjectiveData = null;
+          }
         }
 
         if (note.objective) {
-          // Objective doesn't have a centralized mapper, so denormalize and patch directly
           const objectiveFormGroup = this.initialExaminationForm.get('objective') as FormGroup;
-          const objectiveFormValue = this.denormalizeNote(note.objective, objectiveFormGroup);
-          this.initialExaminationForm.get('objective')?.patchValue(objectiveFormValue);
+          let objectiveFormValue = this.objectiveMapperService.fromDto(note.objective, objectiveFormGroup)
+          const denormalizedObjective = this.denormalizeNote(objectiveFormValue, objectiveFormGroup);
+          this.pendingObjectiveData = denormalizedObjective;
+          // Patch now if form is already set, otherwise wait for formReady
+          if (this.initialExaminationForm.get('objective')?.get('profile')) {
+            this.initialExaminationForm.get('objective')?.patchValue(denormalizedObjective);
+            this.pendingObjectiveData = null;
+          }
+
         }
 
         if (note.assessment) {
@@ -94,7 +111,12 @@ export class InitialExaminationComponent implements OnInit {
           // Denormalize true/false to yes/no
           const assessmentFormGroup = this.initialExaminationForm.get('assessment') as FormGroup;
           const denormalizedAssessment = this.denormalizeNote(assessmentFormValue, assessmentFormGroup);
-          this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
+          this.pendingAssessmentData = denormalizedAssessment;
+          // Check if form is already set up
+          if (Object.keys(this.initialExaminationForm.get('assessment') as FormGroup).length > 0) {
+            this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
+            this.pendingAssessmentData = null;
+          }
         }
 
         if (note.planOfCare) {
@@ -102,7 +124,12 @@ export class InitialExaminationComponent implements OnInit {
           // Denormalize true/false to yes/no
           const planOfCareFormGroup = this.initialExaminationForm.get('planOfCare') as FormGroup;
           const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue, planOfCareFormGroup);
-          this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
+          this.pendingPlanOfCareData = denormalizedPlanOfCare;
+          // Check if form is already set up
+          if (Object.keys(this.initialExaminationForm.get('planOfCare') as FormGroup).length > 0) {
+            this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
+            this.pendingPlanOfCareData = null;
+          }
         }
 
         if (note.billing) {
@@ -110,7 +137,12 @@ export class InitialExaminationComponent implements OnInit {
           // Denormalize true/false to yes/no
           const billingFormGroup = this.initialExaminationForm.get('billing') as FormGroup;
           const denormalizedBilling = this.denormalizeNote(billingFormValue, billingFormGroup);
-          this.initialExaminationForm.get('billing')?.patchValue(denormalizedBilling);
+          this.pendingBillingData = denormalizedBilling;
+          // Check if form is already set up
+          if (Object.keys(this.initialExaminationForm.get('billing') as FormGroup).length > 0) {
+            this.initialExaminationForm.get('billing')?.patchValue(denormalizedBilling);
+            this.pendingBillingData = null;
+          }
         }
       }
     })
@@ -144,6 +176,25 @@ export class InitialExaminationComponent implements OnInit {
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.initialExaminationForm.setControl(section, formGroup);
+
+    // Patch pending data if available
+    if (section === 'objective' && this.pendingObjectiveData) {
+      console.log('Patching pending objective data:', this.pendingObjectiveData);
+      this.initialExaminationForm.get('objective')?.patchValue(this.pendingObjectiveData);
+      this.pendingObjectiveData = null;
+    } else if (section === 'subjective' && this.pendingSubjectiveData) {
+      this.initialExaminationForm.get('subjective')?.patchValue(this.pendingSubjectiveData);
+      this.pendingSubjectiveData = null;
+    } else if (section === 'assessment' && this.pendingAssessmentData) {
+      this.initialExaminationForm.get('assessment')?.patchValue(this.pendingAssessmentData);
+      this.pendingAssessmentData = null;
+    } else if (section === 'planOfCare' && this.pendingPlanOfCareData) {
+      this.initialExaminationForm.get('planOfCare')?.patchValue(this.pendingPlanOfCareData);
+      this.pendingPlanOfCareData = null;
+    } else if (section === 'billing' && this.pendingBillingData) {
+      this.initialExaminationForm.get('billing')?.patchValue(this.pendingBillingData);
+      this.pendingBillingData = null;
+    }
   }
   soapActions(action: string) {
     if (action === 'back')

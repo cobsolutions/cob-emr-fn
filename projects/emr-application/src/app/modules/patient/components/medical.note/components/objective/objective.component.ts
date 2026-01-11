@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { ObjectiveProfile } from './models/objective.profile';
@@ -15,7 +16,7 @@ import { Omt } from './outcome-measurement-tools/models/Omt';
   templateUrl: './objective.component.html',
   styleUrls: ['./objective.component.css']
 })
-export class ObjectiveComponent implements OnInit {
+export class ObjectiveComponent implements OnInit, AfterViewInit {
   objectiveForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
@@ -64,6 +65,28 @@ export class ObjectiveComponent implements OnInit {
       profile: new FormControl(null),
     });
     this.formReady.emit(this.objectiveForm);
+
+    // Subscribe to profile form control changes and sync with selectedProfile
+    // Use startWith to also handle initial value
+    this.objectiveForm.get('profile')?.valueChanges
+      .pipe(startWith(this.objectiveForm.get('profile')?.value))
+      .subscribe(value => {
+        if (value) {
+          this.selectedProfile = value;
+          this.isProfileSelected = true;
+        }
+      });
+  }
+
+  ngAfterViewInit(): void {
+    // Additional check after view init to handle any timing issues
+    setTimeout(() => {
+      const profileValue = this.objectiveForm.get('profile')?.value;
+      if (profileValue && !this.isProfileSelected) {
+        this.selectedProfile = profileValue;
+        this.isProfileSelected = true;
+      }
+    }, 100);
   }
   get activeProfiles(): ObjectiveProfile[] {
     return this.profiles.filter(p => p.active);
@@ -75,8 +98,8 @@ export class ObjectiveComponent implements OnInit {
     this.stepper.next();
   }
   selectProfile() {
-    this.objectiveForm.get('profile').setValue(this.selectedProfile);
-    this.isProfileSelected = true
+    this.selectedProfile = this.objectiveForm.get('profile')?.value;
+    this.isProfileSelected = true;
     this.formReady.emit(this.objectiveForm);
   }
   private fillFieldsMap(data: any) {
