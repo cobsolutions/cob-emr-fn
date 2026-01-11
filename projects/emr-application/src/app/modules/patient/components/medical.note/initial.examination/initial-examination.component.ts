@@ -68,7 +68,6 @@ export class InitialExaminationComponent implements OnInit {
       billing: this.fb.group({})
     });
     this.initialExamNoteService.get(this.noteId).subscribe((note: any) => {
-      console.log('note : ', note)
       if (note) {
         this.medicalNoteSOAP = note;
 
@@ -99,7 +98,10 @@ export class InitialExaminationComponent implements OnInit {
           const denormalizedObjective = this.denormalizeNote(objectiveFormValue, objectiveFormGroup);
           this.pendingObjectiveData = denormalizedObjective;
           // Patch now if form is already set, otherwise wait for formReady
-          if (this.initialExaminationForm.get('objective')?.get('profile')) {
+          // Check if both profile AND inspection forms are initialized
+          const profileExists = this.initialExaminationForm.get('objective')?.get('profile');
+          const inspectionInitialized = this.initialExaminationForm.get('objective')?.get('inspection')?.get('patient_consent');
+          if (profileExists && inspectionInitialized) {
             this.initialExaminationForm.get('objective')?.patchValue(denormalizedObjective);
             this.pendingObjectiveData = null;
           }

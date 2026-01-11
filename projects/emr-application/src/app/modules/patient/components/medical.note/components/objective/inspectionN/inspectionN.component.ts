@@ -34,8 +34,8 @@ export class InspectionNComponent implements OnInit {
 
   // Dropdown options
   chaperoneOptions = [
-    { value: 'no', label: 'No' },
-    { value: 'yes', label: 'Yes' }
+    { value: 'not_existing', label: 'No' },
+    { value: 'existing', label: 'Yes' }
   ];
 
   incisionSitesOptions = [
@@ -77,6 +77,7 @@ export class InspectionNComponent implements OnInit {
 
     // Load data if provided
     if (this.inspectionData) {
+      console.log('this.inspectionData ' , this.inspectionData)
       this.loadFromDto(this.inspectionData);
     }
 

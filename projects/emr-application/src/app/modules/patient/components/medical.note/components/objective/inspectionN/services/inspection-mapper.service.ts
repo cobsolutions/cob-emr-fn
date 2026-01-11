@@ -22,7 +22,7 @@ export class InspectionMapperService {
       // Chaperone
       chaperone: {
         chaperone: formValue.chaperone === 'yes',
-        chaperonePresent: formValue.chaperone_present === 'yes'
+        chaperonePresent: formValue.chaperone_present
       },
 
       // Girth Measurement Upper
@@ -68,7 +68,12 @@ export class InspectionMapperService {
         woundLength: formValue.wound_length || '',
         woundWidth: formValue.wound_width || '',
         surgicalPrecautions: {
-          surgicalPrecautions: formValue.surgical_precautions === 'yes'
+          surgicalPrecautions: formValue.surgical_precautions === 'yes',
+          surgicalPrecautionSelection: formValue.surgical_precautions_select
+        },
+        scarType: {
+          scarType: formValue.scar_type === 'yes',
+          scarTypeSelection: formValue.scar_type_select
         },
         scarMobility: {
           scarMobility: formValue.scar_mobility === 'yes',
@@ -80,7 +85,8 @@ export class InspectionMapperService {
       woundCare: {
         woundCare: formValue.wound_care === 'yes',
         surfaceculture: {
-          surfaceCultureUsed: formValue.surface_culture_used === 'yes',
+          surfaceCultureUsed: formValue.surface_culture_used === 'yes' ? true :
+                             formValue.surface_culture_used === 'no' ? false : null,
           surfaceCultureLevine: formValue.surface_culture_levine || false,
           surfaceCultureDeepSwab: formValue.surface_culture_deep_swab || false,
           surfaceCultureSemiquantitative: formValue.surface_culture_semiquantitative || false,
@@ -128,7 +134,7 @@ export class InspectionMapperService {
 
       // Chaperone
       chaperone: dto.chaperone?.chaperone ? 'yes' : 'no',
-      chaperone_present: dto.chaperone?.chaperonePresent ? 'yes' : 'no',
+      chaperone_present: dto.chaperone?.chaperonePresent,
 
       // Girth Measurement Upper
       girth_measurement_upper: dto.girthMeasurementUpper?.girthMeasurementUpper ? 'yes' : 'no',
@@ -162,9 +168,9 @@ export class InspectionMapperService {
 
       // Post Operative Wound Healing - derive toggle from presence of data
       post_operative_wound_healing: dto.postOperativeWoundHealing?.incisionSites ||
-                                     dto.postOperativeWoundHealing?.woundDescription ||
-                                     dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautions ||
-                                     dto.postOperativeWoundHealing?.scarMobility?.scarMobility ? 'yes' : 'no',
+        dto.postOperativeWoundHealing?.woundDescription ||
+        dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautions ||
+        dto.postOperativeWoundHealing?.scarMobility?.scarMobility ? 'yes' : 'no',
       incision_sites: dto.postOperativeWoundHealing?.incisionSites || null,
       wound_description: dto.postOperativeWoundHealing?.woundDescription ? 'yes' : 'no',
       wound_description_text: dto.postOperativeWoundHealing?.woundDescriptionText || '',
@@ -172,15 +178,18 @@ export class InspectionMapperService {
       wound_length: dto.postOperativeWoundHealing?.woundLength || '',
       wound_width: dto.postOperativeWoundHealing?.woundWidth || '',
       surgical_precautions: dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautions ? 'yes' : 'no',
-      surgical_precautions_select: null, // Not in DTO
+      surgical_precautions_select: dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautionSelection,
+
+      scar_type: dto.postOperativeWoundHealing?.scarType?.scarType ? 'yes' : 'no',
+      scar_type_select: dto.postOperativeWoundHealing?.scarType?.scarTypeSelection,
       scar_mobility: dto.postOperativeWoundHealing?.scarMobility?.scarMobility ? 'yes' : 'no',
       scar_mobility_text: dto.postOperativeWoundHealing?.scarMobility?.scarMobilityText || '',
-      scar_type: 'no', // Not in DTO
-      scar_type_select: null, // Not in DTO
+
 
       // Wound Care
       wound_care: dto.woundCare?.woundCare ? 'yes' : 'no',
-      surface_culture_used: dto.woundCare?.surfaceculture?.surfaceCultureUsed ? 'yes' : 'na',
+      surface_culture_used: dto.woundCare?.surfaceculture?.surfaceCultureUsed === true ? 'yes' :
+                           dto.woundCare?.surfaceculture?.surfaceCultureUsed === false ? 'no' : null,
       surface_culture_levine: dto.woundCare?.surfaceculture?.surfaceCultureLevine || false,
       surface_culture_deep_swab: dto.woundCare?.surfaceculture?.surfaceCultureDeepSwab || false,
       surface_culture_semiquantitative: dto.woundCare?.surfaceculture?.surfaceCultureSemiquantitative || false,
@@ -206,5 +215,5 @@ export class InspectionMapperService {
     };
   }
 
- 
+
 }

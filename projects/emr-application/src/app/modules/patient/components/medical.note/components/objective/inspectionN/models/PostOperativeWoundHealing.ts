@@ -1,3 +1,4 @@
+import { ScarType } from "./scar.type";
 import { ScarMobility } from "./ScarMobility";
 import { SurgicalPrecautions } from "./SurgicalPrecautions";
 
@@ -9,5 +10,6 @@ export interface PostOperativeWoundHealing {
   woundLength: string;
   woundWidth: string;
   surgicalPrecautions: SurgicalPrecautions;
+  scarType: ScarType;
   scarMobility: ScarMobility;
 }

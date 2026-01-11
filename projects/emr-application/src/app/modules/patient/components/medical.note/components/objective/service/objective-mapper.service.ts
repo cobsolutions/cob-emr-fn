@@ -35,7 +35,10 @@ export class ObjectiveMapperService {
     const formValue: any = {};
     if (dto.profile)
       formValue.profile = dto.profile
-
+    if (dto.inspection) {
+      formValue.inspection = this.inspectionMapper.fromDto(dto.inspection)
+    }
+    console.log('formValue  ', formValue)
     return formValue;
   }
 }

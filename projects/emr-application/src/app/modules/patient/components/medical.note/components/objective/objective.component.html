@@ -47,7 +47,7 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <inspectionN (formReady)="setChildForm('inspection', $event)"></inspectionN>
+            <inspectionN [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)"></inspectionN>
         </c-card-body>
     </c-card>
 
