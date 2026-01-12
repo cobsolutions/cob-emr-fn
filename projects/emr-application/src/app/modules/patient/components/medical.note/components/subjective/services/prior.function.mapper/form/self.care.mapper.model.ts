@@ -14,7 +14,6 @@ export class SelfCareMapper {
 
     // Self Care - Hygiene
     const hygieneFlag = getValue('prior-level-function_self-care_hygiene');
-    console.log('hygieneFlag : ', hygieneFlag)
     if (hygieneFlag !== undefined) {
       if (!mapped.selfCare) mapped.selfCare = {} as any;
       if (!mapped.selfCare.hygiene) mapped.selfCare.hygiene = {} as any;
