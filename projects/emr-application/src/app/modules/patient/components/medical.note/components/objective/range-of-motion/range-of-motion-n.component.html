@@ -3,7 +3,7 @@
   <!-- No Limitations Noted -->
   <div class="form-row">
     <label class="field-label">No Limitations Noted</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -92,7 +92,7 @@
   <!-- Cervical AROM Fields -->
   <div class="form-row">
     <label class="field-label">Cervical AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -117,7 +117,7 @@
   <!-- Costovertebral Expansion-->
   <div class="form-row">
     <label class="field-label">Costovertebral Expansion</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -141,7 +141,7 @@
   <!--Shoulder AROM -->
   <div class="form-row">
     <label class="field-label">Shoulder AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -165,7 +165,7 @@
   <!-- Shoulder PROM -->
   <div class="form-row">
     <label class="field-label">Shoulder PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -191,7 +191,7 @@
   <!--Elbow AROM -->
   <div class="form-row">
     <label class="field-label">Elbow AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -214,7 +214,7 @@
   <!--Elbow PROM-->
   <div class="form-row">
     <label class="field-label">Elbow PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="elbow_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -239,7 +239,7 @@
   <!--Wrist AROM-->
   <div class="form-row">
     <label class="field-label">Wrist AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -263,7 +263,7 @@
   <!--Wrist PROM-->
   <div class="form-row">
     <label class="field-label">Wrist PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="wrist_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -290,7 +290,7 @@
   <!--Hand AROM/PROM -->
   <div class="form-row">
     <label class="field-label">Hand AROM-PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -304,7 +304,7 @@
   <div *ngIf="showHandAromPromFields" class="dependent-field-box">
     <div class="form-row">
       <label class="field-label">Calculate Total ROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="calculate_total_rom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -317,7 +317,7 @@
     </div>
     <div class="form-row">
       <label class="field-label">Thumb AROM/PROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="thumb_arrom_prom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -606,7 +606,7 @@
     </div>
     <div class="form-row">
       <label class="field-label">Index Finger AROM/PROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="index_finger_arrom_prom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -871,7 +871,7 @@
     </div>
     <div class="form-row">
       <label class="field-label">Middle Finger AROM/PROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="middle_finger_arrom_prom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -1136,7 +1136,7 @@
     </div>
     <div class="form-row">
       <label class="field-label">Ring Finger AROM/PROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="ring_finger_arrom_prom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -1401,7 +1401,7 @@
     </div>
     <div class="form-row">
       <label class="field-label">Small Finger AROM/PROM</label>
-      <div class="radio-group">
+      <div class="radio-group radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="small_finger_arrom_prom" [value]="false" />
           <label cFormCheckLabel>No</label>
@@ -1668,7 +1668,7 @@
   <!--Thoracic AROM Sitting with Passive Overpressure-->
   <div class="form-row">
     <label class="field-label">Thoracic AROM Sitting with Passive Overpressure</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure"
           value="yes" />
@@ -1697,7 +1697,7 @@
   <!--Thoracic AROM Standing-->
   <div class="form-row">
     <label class="field-label">Thoracic AROM Standing</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1722,7 +1722,7 @@
   <!--Lumbar AROM -->
   <div class="form-row">
     <label class="field-label">Lumbar AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1745,7 +1745,7 @@
   <!--Hip AROM-->
   <div class="form-row">
     <label class="field-label">Hip AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="hip_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1768,7 +1768,7 @@
   <!--Hip PROM-->
   <div class="form-row">
     <label class="field-label">Hip PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="hip_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1793,7 +1793,7 @@
   <!--Knee AROM-->
   <div class="form-row">
     <label class="field-label">Knee AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="knee_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1816,7 +1816,7 @@
   <!--Knee PROM-->
   <div class="form-row">
     <label class="field-label">Knee PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="knee_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1846,7 +1846,7 @@
   <!--Ankle AROM-->
   <div class="form-row">
     <label class="field-label">Ankle AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1869,7 +1869,7 @@
   <!--Ankle PROM-->
   <div class="form-row">
     <label class="field-label">Ankle PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="ankle_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1894,7 +1894,7 @@
   <!--1st MTP AROM-->
   <div class="form-row">
     <label class="field-label">1st MTP AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1918,7 +1918,7 @@
   <!--1st MTP PROM-->
   <div class="form-row">
     <label class="field-label">1st MTP PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1948,7 +1948,7 @@
   <!--1st IP AROM-->
   <div class="form-row">
     <label class="field-label">1st IP AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -1971,7 +1971,7 @@
   <!--1st IP PROM-->
   <div class="form-row">
     <label class="field-label">1st IP PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2001,7 +2001,7 @@
   <!--Toe AROM-->
   <div class="form-row">
     <label class="field-label">Toe AROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="toe_arrom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2026,7 +2026,7 @@
   <!--Toe PROM-->
   <div class="form-row">
     <label class="field-label">Toe PROM</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="toe_prom" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2050,7 +2050,7 @@
   </div>
   <div class="form-row">
     <label class="field-label">Additional Comments</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2066,7 +2066,7 @@
   <!-- DUMMY EXAMPLE 1: Shoulder AROM with Labels -->
   <div class="form-row">
     <label class="field-label">Shoulder AROM (Dummy With Labels)</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="shoulder_arom_with_labels" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2089,7 +2089,7 @@
   <!-- DUMMY EXAMPLE 2: Grip Test without Labels -->
   <div class="form-row">
     <label class="field-label">Grip Test (Dummy Without Labels)</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="grip_test_no_labels" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2112,7 +2112,7 @@
   <!-- DUMMY EXAMPLE 3: Elbow AROM with Top Selects -->
   <div class="form-row">
     <label class="field-label">Elbow AROM (Dummy With Top Selects)</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="elbow_arom_with_selects" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -2135,7 +2135,7 @@
 
   <div class="form-row">
     <label class="field-label">Cervical AROM (Dummy - Single Column)</label>
-    <div class="radio-group">
+    <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="cervical_arom_single_column_dummy" value="yes" />
         <label cFormCheckLabel>Yes</label>
