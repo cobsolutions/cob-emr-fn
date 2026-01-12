@@ -13,7 +13,6 @@ import { RangeOfMotion } from './models/RangeOfMotion';
 export class RangeOfMotionNComponent implements OnInit {
   @Input() rangeOfMotionData?: RangeOfMotion;
   @Output() formReady = new EventEmitter<FormGroup>();
-
   romForm!: FormGroup;
 
   // Visibility flags for dependent fields

@@ -12,6 +12,7 @@ import { ObservationNComponent } from './observationN/observation-n.component';
 import { Inspection } from './inspectionN/models/Inspection';
 import { Omt } from './outcome-measurement-tools/models/Omt';
 import { Observation } from './observationN/models/Observation';
+import { RangeOfMotion } from './range-of-motion/models/RangeOfMotion';
 
 @Component({
   selector: 'objective',
@@ -30,12 +31,13 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   @Input() isNotInitialExaminationNote: boolean = false
   @Input() noteType: string
   inspectionData: Inspection | null = null;
-  omtData : Omt |null = null
-  observationData : Observation |null = null
+  omtData: Omt | null = null
+  observationData: Observation | null = null
+  romData: RangeOfMotion | null = null;
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
-  profiles:ObjectiveProfile[]=[
+  profiles: ObjectiveProfile[] = [
     { id: 1, name: 'Jaw', active: false },
     { id: 2, name: 'Cervical', active: false },
     { id: 3, name: 'Shoulder', active: false },
@@ -52,7 +54,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     { id: 14, name: 'Pelvic Health', active: false },
     { id: 15, name: 'Speech', active: false }
   ]
-  isProfileSelected :boolean = false
+  isProfileSelected: boolean = false
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
     , private medicalService: MedialNoteService
@@ -81,8 +83,11 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     if (this.objectiveData?.omt) {
       this.omtData = this.objectiveData?.omt;
     }
-    if(this.objectiveData?.observation){
-      this.observationData= this.objectiveData?.observation
+    if (this.objectiveData?.observation) {
+      this.observationData = this.objectiveData?.observation
+    }
+    if (this.objectiveData?.rom) {
+      this.romData = this.objectiveData?.rom
     }
 
     // Subscribe to profile form control changes and sync with selectedProfile

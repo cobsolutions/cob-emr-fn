@@ -47,7 +47,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <inspectionN [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)"></inspectionN>
+            <inspectionN [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)">
+            </inspectionN>
         </c-card-body>
     </c-card>
 
@@ -69,7 +70,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <outcome-measurement-tools (formReady)="setChildForm('omt', $event)" [omtData]="omtData"></outcome-measurement-tools>
+            <outcome-measurement-tools (formReady)="setChildForm('omt', $event)"
+                [omtData]="omtData"></outcome-measurement-tools>
         </c-card-body>
     </c-card>
 
@@ -90,7 +92,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <observation-n (formReady)="setChildForm('observation', $event)" [observationData]="observationData"></observation-n>
+            <observation-n (formReady)="setChildForm('observation', $event)"
+                [observationData]="observationData"></observation-n>
         </c-card-body>
     </c-card>
 
@@ -110,7 +113,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <range-of-motion-n (formReady)="setChildForm('rangeOfMotion', $event)"></range-of-motion-n>
+            <range-of-motion-n (formReady)="setChildForm('rangeOfMotion', $event)"
+                [rangeOfMotionData]="romData"></range-of-motion-n>
         </c-card-body>
     </c-card>
 
