@@ -1,8 +1,8 @@
 <div [formGroup]="omtForm" class="omt-form">
   <div class="form-row">
     <label class="field-label">Indicate Body Type</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -14,12 +14,12 @@
   </div>
   <div *ngIf="showBodyTypeFields" class="dependent-field-box">
     <div class="form-row">
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="body_type" value="mesomorph" />
           <label cFormCheckLabel>Mesomorph</label>
         </c-form-check>
-        <c-form-check class="me-3">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="body_type" value="endomorph" />
           <label cFormCheckLabel>Endomorph</label>
         </c-form-check>
@@ -32,8 +32,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Vitals</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="vitals" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -47,8 +47,8 @@
     <!-- Blood Pressure -->
     <div class="form-row">
       <label class="field-label">Blood Pressure</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="blood_pressure" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -113,8 +113,8 @@
     <!-- Temperature -->
     <div class="form-row">
       <label class="field-label">Temperature</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="temperature" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -128,8 +128,8 @@
     <!-- Pulse -->
     <div class="form-row">
       <label class="field-label">Pulse</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="pulse" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -144,12 +144,12 @@
         <input cFormControl type="text" formControlName="pulse_value" class="form-input" placeholder="Pulse value" />
       </div>
       <div class="form-row">
-        <div class="radio-group">
-          <c-form-check class="me-3">
+        <div class="radio-group-primary">
+          <c-form-check>
             <input cFormCheckInput type="radio" formControlName="pulse_bpm_type" value="bpm_radial" />
             <label cFormCheckLabel>BPM Radial</label>
           </c-form-check>
-          <c-form-check class="me-3">
+          <c-form-check>
             <input cFormCheckInput type="radio" formControlName="pulse_bpm_type" value="bpm_carotid" />
             <label cFormCheckLabel>BPM Carotid</label>
           </c-form-check>
@@ -180,8 +180,8 @@
     <!-- Respiration -->
     <div class="form-row">
       <label class="field-label">Respiration</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="respiration" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -208,8 +208,8 @@
     <!-- Weight -->
     <div class="form-row">
       <label class="field-label">Weight</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="weight" value="yes" />
           <label cFormCheckLabel>Yes</label>
         </c-form-check>
@@ -224,8 +224,8 @@
         <input cFormControl type="text" formControlName="weight_value" class="form-input" />
       </div>
       <div class="form-row">
-        <div class="radio-group">
-          <c-form-check class="me-3">
+        <div class="radio-group-primary">
+          <c-form-check>
             <input cFormCheckInput type="radio" formControlName="weight_unit" value="lbs" />
             <label cFormCheckLabel>Lbs</label>
           </c-form-check>
@@ -239,8 +239,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">ADL Management</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="adl_management" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -253,8 +253,8 @@
   <div *ngIf="showAdlManagementFields" class="dependent-field-box">
     <div class="form-row">
       <label class="field-label">Bathing</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="adl_bathing" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -274,8 +274,8 @@
 
     <div class="form-row">
       <label class="field-label">Toileting</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="adl_toileting" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -295,8 +295,8 @@
 
     <div class="form-row">
       <label class="field-label">Dressing</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="adl_dressing" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -316,8 +316,8 @@
 
     <div class="form-row">
       <label class="field-label">Grooming</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="adl_grooming" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -337,8 +337,8 @@
 
     <div class="form-row">
       <label class="field-label">Eating</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="adl_eating" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -359,8 +359,8 @@
 
   <div class="form-row">
     <label class="field-label">Breathing at Rest</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -415,8 +415,8 @@
 
   <div class="form-row">
     <label class="field-label">Transfers</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="transfers" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -429,8 +429,8 @@
   <div *ngIf="showTransfersFields" class="dependent-field-box">
     <div class="form-row">
       <label class="field-label">Supine to Sit</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="transfer_supine_to_sit" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -453,8 +453,8 @@
 
     <div class="form-row">
       <label class="field-label">Sit to Stand</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="transfer_sit_to_stand" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -477,8 +477,8 @@
 
     <div class="form-row">
       <label class="field-label">Toilet Transfers</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="transfer_toilet" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -501,8 +501,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Cast/Splint</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="cast_splint" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -570,8 +570,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Standing Posture</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="standing_posture" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -596,8 +596,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Protracted Scapulas</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -629,8 +629,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Scoliosis</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="scoliosis" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -661,8 +661,8 @@
 
   <div class="form-row">
     <label class="field-label">Lower Extremity Structure</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -877,8 +877,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Gait</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="gait" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -903,8 +903,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">6 Minute Walk Test</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -992,8 +992,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Assistive Device</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="assistive_device" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1026,8 +1026,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Immobilizer</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="immobilizer" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1043,8 +1043,8 @@
     </div>
     <div class="form-row">
       <label class="field-label">Compliant with Use</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="immobilizer_compliant" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -1057,8 +1057,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Muscular Asymmetries</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1075,8 +1075,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Muscle Guarding</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1097,8 +1097,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Muscle Atrophy</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1116,8 +1116,8 @@
 
   <div class="form-row">
     <label class="field-label">Edema</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="edema" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1133,8 +1133,8 @@
     </div>
     <div class="form-row">
       <label class="field-label">Pitting</label>
-      <div class="radio-group">
-        <c-form-check class="me-3">
+      <div class="radio-group-primary">
+        <c-form-check>
           <input cFormCheckInput type="radio" formControlName="edema_pitting" value="no" />
           <label cFormCheckLabel>No</label>
         </c-form-check>
@@ -1147,8 +1147,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Apprehension of Movement</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>
@@ -1169,8 +1169,8 @@
   </div>
   <div class="form-row">
     <label class="field-label">Additional Comments</label>
-    <div class="radio-group">
-      <c-form-check class="me-3">
+    <div class="radio-group-primary">
+      <c-form-check>
         <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
         <label cFormCheckLabel>Yes</label>
       </c-form-check>

@@ -60,6 +60,12 @@
   gap: 1rem;
 }
 
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 /* Input field sizing */
 .full-width-input {
   width: 100%;
@@ -206,5 +212,30 @@ c-form-check label {
 
 .radio-group-primary c-form-check input[type="radio"][value="na"]:checked + label {
   color: #495057;
+  font-weight: 600;
+}
+
+/* BMI Units options - Blue theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]) {
+  border-color: #cce5ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]):hover {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]:checked) {
+  border-color: #007bff;
+  background-color: #cce5ff;
+  box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="lbs_in"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="kg_cm"]:checked + label {
+  color: #004085;
   font-weight: 600;
 }
