@@ -90,7 +90,7 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <observation-n (formReady)="setChildForm('observation', $event)"></observation-n>
+            <observation-n (formReady)="setChildForm('observation', $event)" [observationData]="observationData"></observation-n>
         </c-card-body>
     </c-card>
 

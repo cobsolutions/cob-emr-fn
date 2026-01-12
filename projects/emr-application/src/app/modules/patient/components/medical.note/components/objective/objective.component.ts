@@ -10,6 +10,7 @@ import { InspectionNComponent } from './inspectionN/inspectionN.component';
 import { OutcomeMeasurementToolsComponent } from './outcome-measurement-tools/outcome-measurement-tools.component';
 import { Inspection } from './inspectionN/models/Inspection';
 import { Omt } from './outcome-measurement-tools/models/Omt';
+import { Observation } from './observationN/models/Observation';
 
 @Component({
   selector: 'objective',
@@ -28,6 +29,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   @Input() noteType: string
   inspectionData: Inspection | null = null;
   omtData : Omt |null = null
+  observationData : Observation |null = null
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
@@ -75,7 +77,10 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
 
     // Extract omt data if objectiveData is provided
     if (this.objectiveData?.omt) {
-      this.omtData = this.objectiveData.omt;
+      this.omtData = this.objectiveData?.omt;
+    }
+    if(this.objectiveData?.observation){
+      this.observationData= this.objectiveData?.observation
     }
 
     // Subscribe to profile form control changes and sync with selectedProfile

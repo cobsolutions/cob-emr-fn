@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { InspectionMapperService } from '../inspectionN/services/inspection-mapper.service';
 import { Objective } from '../models/objective';
+import { ObservationMapperService } from '../observationN/services/observation-mapper.service';
 import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
 
 @Injectable({
@@ -10,7 +11,8 @@ import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-too
 export class ObjectiveMapperService {
 
   constructor(private inspectionMapper: InspectionMapperService,
-    private omtMapper: OutcomeMeasurementToolsMapperService) { }
+    private omtMapper: OutcomeMeasurementToolsMapperService,
+    private observationMapper: ObservationMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -26,10 +28,14 @@ export class ObjectiveMapperService {
     if (inspectionControl) {
       objective.inspection = this.inspectionMapper.toModel(inspectionControl.value);
     }
-    const omt = formGroup.get('omt');    
-    if (omt) {
+    const omt = formGroup.get('omt');
+    if (omt) 
       objective.omt = this.omtMapper.toModel(omt.value);
-    }
+
+    const observationControl = formGroup.get('observation')
+    if (observationControl)
+    objective.observation= this.observationMapper.toModel(observationControl.value)
+    
     return objective;
   }
 
@@ -43,7 +49,10 @@ export class ObjectiveMapperService {
     if (dto.inspection) {
       formValue.inspection = this.inspectionMapper.fromDto(dto.inspection)
     }
-    console.log('formValue  ', formValue)
+    // if (dto.observation) {
+    //   formValue.observation = this.observationMapper.fromDto(dto.observation)
+    // }
+    
     return formValue;
   }
 }
