@@ -8,6 +8,7 @@ import { SoapService } from '../../../../services/medical.note/soap/soap.service
 import { ObjectiveProfile } from './models/objective.profile';
 import { InspectionNComponent } from './inspectionN/inspectionN.component';
 import { OutcomeMeasurementToolsComponent } from './outcome-measurement-tools/outcome-measurement-tools.component';
+import { ObservationNComponent } from './observationN/observation-n.component';
 import { Inspection } from './inspectionN/models/Inspection';
 import { Omt } from './outcome-measurement-tools/models/Omt';
 import { Observation } from './observationN/models/Observation';
@@ -23,6 +24,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   @Input() stepper!: MatStepper
   @ViewChild(InspectionNComponent) inspectionComponent: InspectionNComponent;
   @ViewChild(OutcomeMeasurementToolsComponent) omtComponent: OutcomeMeasurementToolsComponent;
+  @ViewChild(ObservationNComponent) observationComponent: ObservationNComponent;
   selectedProfile: any = null
   @Input() objectiveData: any
   @Input() isNotInitialExaminationNote: boolean = false
@@ -176,6 +178,17 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   getOmtModel(): Omt | null {
     if (this.omtComponent) {
       return this.omtComponent.getOutcomeMeasurementToolsModel();
+    }
+    return null;
+  }
+
+  /**
+   * Get the Observation model from ObservationN component
+   * Returns null if component is not available
+   */
+  getObservationModel(): Observation | null {
+    if (this.observationComponent) {
+      return this.observationComponent.getObservationModel();
     }
     return null;
   }

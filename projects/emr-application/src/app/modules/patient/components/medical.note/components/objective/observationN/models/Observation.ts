@@ -22,7 +22,7 @@ import { Vitals } from "./Vitals";
 export interface Observation {
   indicateBodyType: IndicateBodyType;
   vitals: Vitals;
-  aDLManagement: ADLManagement;
+  adlManagement: ADLManagement;
   breathingatRest: BreathingatRest;
   transfers: Transfers;
   castSplint: CastSplint;

@@ -29,13 +29,16 @@ export class ObjectiveMapperService {
       objective.inspection = this.inspectionMapper.toModel(inspectionControl.value);
     }
     const omt = formGroup.get('omt');
-    if (omt) 
+    if (omt)
       objective.omt = this.omtMapper.toModel(omt.value);
 
     const observationControl = formGroup.get('observation')
-    if (observationControl)
-    objective.observation= this.observationMapper.toModel(observationControl.value)
-    
+    if (observationControl) {
+      console.log('observationControl.value  ', observationControl.value)
+      objective.observation = this.observationMapper.toModel(observationControl.value)
+    }
+
+
     return objective;
   }
 
@@ -52,7 +55,7 @@ export class ObjectiveMapperService {
     // if (dto.observation) {
     //   formValue.observation = this.observationMapper.fromDto(dto.observation)
     // }
-    
+
     return formValue;
   }
 }
