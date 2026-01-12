@@ -209,7 +209,7 @@ export class InitialExaminationComponent implements OnInit {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-
+    console.log(this.initialExaminationForm)
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
@@ -232,8 +232,8 @@ export class InitialExaminationComponent implements OnInit {
   draftAction(): Observable<any> {
     var medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
     console.log('medicalNoteRequest : ', medicalNoteRequest)
-    return null;
-    // return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
+    
+    return this.initialExamNoteService.draft(medicalNoteRequest, this.noteId);
   }
   getAllFormValues(formGroup: FormGroup): any {
     const values: any = {};

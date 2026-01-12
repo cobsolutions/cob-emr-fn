@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { InspectionMapperService } from '../inspectionN/services/inspection-mapper.service';
 import { Objective } from '../models/objective';
+import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObjectiveMapperService {
 
-  constructor(private inspectionMapper: InspectionMapperService) { }
+  constructor(private inspectionMapper: InspectionMapperService,
+    private omtMapper: OutcomeMeasurementToolsMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -24,7 +26,10 @@ export class ObjectiveMapperService {
     if (inspectionControl) {
       objective.inspection = this.inspectionMapper.toModel(inspectionControl.value);
     }
-
+    const omt = formGroup.get('omt');    
+    if (omt) {
+      objective.omt = this.omtMapper.toModel(omt.value);
+    }
     return objective;
   }
 

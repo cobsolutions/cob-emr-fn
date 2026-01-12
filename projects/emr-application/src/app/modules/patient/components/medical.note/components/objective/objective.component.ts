@@ -27,6 +27,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   @Input() isNotInitialExaminationNote: boolean = false
   @Input() noteType: string
   inspectionData: Inspection | null = null;
+  omtData : Omt |null = null
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
@@ -70,6 +71,11 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     // Extract inspection data if objectiveData is provided
     if (this.objectiveData?.inspection) {
       this.inspectionData = this.objectiveData.inspection;
+    }
+
+    // Extract omt data if objectiveData is provided
+    if (this.objectiveData?.omt) {
+      this.omtData = this.objectiveData.omt;
     }
 
     // Subscribe to profile form control changes and sync with selectedProfile
