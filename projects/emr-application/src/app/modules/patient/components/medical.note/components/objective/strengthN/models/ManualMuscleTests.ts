@@ -75,4 +75,5 @@ export interface ManualMuscleTests {
   manualMuscleTestsflexorHallucisLeft: string;
   manualMuscleTestsflexorDigitorumLongusRight: string;
   manualMuscleTestsflexorDigitorumLongusLeft: string;
+  manualMuscleTestsComments: string;
 }

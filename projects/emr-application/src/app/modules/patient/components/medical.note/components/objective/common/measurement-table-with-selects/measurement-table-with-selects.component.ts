@@ -34,6 +34,9 @@ export class MeasurementTableWithSelectsComponent implements OnInit {
     this.topSelects.forEach(select => {
       const initialValue = this.initialData?.[select.fieldName] || '';
       if (!this.formGroup.get(select.fieldName)) {
+        if(this.fieldPrefix ==='gross_muscle_tests_'){
+          console.log('select.fieldName' , select.fieldName)
+        }
         this.formGroup.addControl(select.fieldName, this.fb.control(initialValue));
       }
     });

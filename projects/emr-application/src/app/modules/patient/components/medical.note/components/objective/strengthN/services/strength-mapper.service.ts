@@ -89,11 +89,13 @@ export class StrengthMapperService {
       // Gross Muscle Tests Trunk
       gross_muscle_tests_trunk: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunk ? 'yes' : 'no',
       gross_muscle_tests_stabilization: dto.grossMuscleTestsTrunk?.grossMuscleTestsStabilization || '',
+      gross_muscle_tests_upper_abdominals: dto.grossMuscleTestsTrunk?.grossMuscleTestsUpperAbdominals || '',
       gross_muscle_tests_quality: dto.grossMuscleTestsTrunk?.grossMuscleTestsQuality || '',
       gross_muscle_tests_obliques_right: dto.grossMuscleTestsTrunk?.grossMuscleTestsObliquesRight || '',
       gross_muscle_tests_obliques_left: dto.grossMuscleTestsTrunk?.grossMuscleTestsObliquesLeft || '',
       gross_muscle_tests_trunk_extensors_right: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsRight || '',
       gross_muscle_tests_trunk_extensors_left: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsLeft || '',
+      gross_muscle_comments: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkComment || '',
 
       // Gross Muscle Tests Lower
       gross_muscle_tests_lower: dto.grossMuscleTestsLower?.grossMuscleTestsLower ? 'yes' : 'no',
@@ -185,6 +187,7 @@ export class StrengthMapperService {
       manual_muscle_testsflexor_hallucis_left: dto.manualMuscleTests?.manualMuscleTestsflexorHallucisLeft || '',
       manual_muscle_testsflexor_digitorum_longus_right: dto.manualMuscleTests?.manualMuscleTestsflexorDigitorumLongusRight || '',
       manual_muscle_testsflexor_digitorum_longus_left: dto.manualMuscleTests?.manualMuscleTestsflexorDigitorumLongusLeft || '',
+      manual_muscle_tests_comments: dto.manualMuscleTests?.manualMuscleTestsComments || '',
 
       // Additional Comments
       additional_comments: dto.additionalComments?.additionalComments ? 'yes' : 'no',
@@ -267,11 +270,13 @@ export class StrengthMapperService {
     const grossMuscleTestsTrunk: GrossMuscleTestsTrunk = {
       grossMuscleTestsTrunk: formValue.gross_muscle_tests_trunk === 'yes',
       grossMuscleTestsStabilization: formValue.gross_muscle_tests_stabilization || '',
+      grossMuscleTestsUpperAbdominals: formValue.gross_muscle_tests_upper_abdominals,
       grossMuscleTestsQuality: formValue.gross_muscle_tests_quality || '',
       grossMuscleTestsObliquesRight: formValue.gross_muscle_tests_obliques_right || '',
       grossMuscleTestsObliquesLeft: formValue.gross_muscle_tests_obliques_left || '',
       grossMuscleTestsTrunkExtensorsRight: formValue.gross_muscle_tests_trunk_extensors_right || '',
-      grossMuscleTestsTrunkExtensorsLeft: formValue.gross_muscle_tests_trunk_extensors_left || ''
+      grossMuscleTestsTrunkExtensorsLeft: formValue.gross_muscle_tests_trunk_extensors_left || '',
+      grossMuscleTestsTrunkComment: formValue.gross_muscle_comments || ''
     };
 
     const grossMuscleTestsLower: GrossMuscleTestsLower = {
@@ -365,7 +370,8 @@ export class StrengthMapperService {
       manualMuscleTestsflexorHallucisRight: formValue.manual_muscle_testsflexor_hallucis_right || '',
       manualMuscleTestsflexorHallucisLeft: formValue.manual_muscle_testsflexor_hallucis_left || '',
       manualMuscleTestsflexorDigitorumLongusRight: formValue.manual_muscle_testsflexor_digitorum_longus_right || '',
-      manualMuscleTestsflexorDigitorumLongusLeft: formValue.manual_muscle_testsflexor_digitorum_longus_left || ''
+      manualMuscleTestsflexorDigitorumLongusLeft: formValue.manual_muscle_testsflexor_digitorum_longus_left || '',
+      manualMuscleTestsComments: formValue.manual_muscle_tests_comments || ''
     };
 
     const additionalComments: AdditionalComments = {

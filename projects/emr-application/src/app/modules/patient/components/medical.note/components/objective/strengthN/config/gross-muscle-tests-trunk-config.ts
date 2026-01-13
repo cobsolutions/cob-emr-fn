@@ -19,7 +19,7 @@ export class GrossMuscleTestsTrunk {
             },
             {
                 label: 'Upper Abdominals',
-                fieldName: 'gross_muscle_tests_stabilization',
+                fieldName: 'gross_muscle_tests_upper_abdominals',
                 options: [
                     { value: 'not_tested', label: 'Not Tested' },
                     { value: '5/5', label: '5/5' },
@@ -64,7 +64,7 @@ export class GrossMuscleTestsTrunk {
                 ]
             }
         ],
-        commentsFieldName: 'elbow_arom_comments',
+        commentsFieldName: 'gross_muscle_comments',
         showComments: true
     };
 
