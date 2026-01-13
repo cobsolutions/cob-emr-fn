@@ -10,7 +10,7 @@ export class AssessmentMapperService {
   constructor() { }
   toModel(formValue: FormGroup): AssessmentModel {
     return {
-      assessmentDiagnosis: formValue.get('patient_clinical_presentation').value,
+      assessmentDiagnosis: formValue.get('assessment_diagnosis').value,
       patientClinicalPresentation: formValue.get('patient_clinical_presentation').value,
       rehabPotential: formValue.get('rehab_potential').value,
       contraindicationsTotherapy: formValue.get('contraindications_to_therapy').value === 'yes' || formValue.get('contraindications_to_therapy').value === true,
