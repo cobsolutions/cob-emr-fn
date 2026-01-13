@@ -22,6 +22,7 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
   @Input() applyToAllLabel: string = 'Apply to All';
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -41,24 +42,27 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
     // Add Apply to All control if needed
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
-    // Add controls for each label
+    // Add controls for each label with initial values
     this.labels.forEach(label => {
       const fieldName = this.getFieldName(label);
+      const initialValue = this.initialData?.[fieldName] || 'not_tested';
       if (!this.formGroup.get(fieldName)) {
-        this.formGroup.addControl(fieldName, this.fb.control('not_tested'));
+        this.formGroup.addControl(fieldName, this.fb.control(initialValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }
