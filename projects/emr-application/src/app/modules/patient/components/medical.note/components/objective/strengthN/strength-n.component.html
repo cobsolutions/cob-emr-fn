@@ -225,7 +225,8 @@
             [options]="strengthConfig.gripPinch.options" [specialOptions]="strengthConfig.gripPinch.specialOptions" ,
             [formGroup]="strengthForm" [fieldPrefix]="strengthConfig.gripPinch.fieldPrefix"
             [commentsFieldName]="strengthConfig.gripPinch.commentsFieldName"
-            [showComments]="strengthConfig.gripPinch.showComments">
+            [showComments]="strengthConfig.gripPinch.showComments"
+            [initialData]="formData">
         </dropdown-text-table>
         <div class="form-row">
             <label class="field-label">Rapid Exchange</label>
@@ -443,7 +444,8 @@
             [fieldPrefix]="strengthConfig.grossMuscleTestsTrunk.fieldPrefix"
             [topSelects]="strengthConfig.grossMuscleTestsTrunk.topSelects"
             [commentsFieldName]="strengthConfig.grossMuscleTestsTrunk.commentsFieldName"
-            [showComments]="strengthConfig.grossMuscleTestsTrunk.showComments">
+            [showComments]="strengthConfig.grossMuscleTestsTrunk.showComments"
+            [initialData]="formData">
         </measurement-table-with-selects>
     </div>
 
@@ -589,7 +591,8 @@
             [fieldPrefix]="strengthConfig.manualMuscleTests.fieldPrefix"
             [topSelects]="strengthConfig.manualMuscleTests.topSelects"
             [commentsFieldName]="strengthConfig.manualMuscleTests.commentsFieldName"
-            [showComments]="strengthConfig.manualMuscleTests.showComments">
+            [showComments]="strengthConfig.manualMuscleTests.showComments"
+            [initialData]="formData">
         </measurement-table-with-selects>
     </div>
     <div class="form-row">

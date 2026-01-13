@@ -18,6 +18,7 @@ export class DropdownTextTableComponent implements OnInit {
   @Input() commentsLabel: string = 'Comments';
   @Input() commentsFieldName?: string;
   @Input() hasTextInput?: boolean = true
+  @Input() initialData?: any; // Initial values for controls
 
   hasLabels: boolean = false;
 
@@ -40,11 +41,15 @@ export class DropdownTextTableComponent implements OnInit {
         this.columns.forEach(column => {
           const dropdownFieldName = this.getDropdownFieldName(label, column);
           const textFieldName = this.getTextFieldName(label, column);
+
+          const dropdownValue = this.initialData?.[dropdownFieldName] || 'not_tested';
+          const textValue = this.initialData?.[textFieldName] || '';
+
           if (!this.formGroup.get(dropdownFieldName)) {
-            this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
+            this.formGroup.addControl(dropdownFieldName, this.fb.control(dropdownValue));
           }
           if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
-            this.formGroup.addControl(textFieldName, this.fb.control(''));
+            this.formGroup.addControl(textFieldName, this.fb.control(textValue));
           }
         });
       });
@@ -54,11 +59,14 @@ export class DropdownTextTableComponent implements OnInit {
         const dropdownFieldName = this.getDropdownFieldName(null, column);
         const textFieldName = this.getTextFieldName(null, column);
 
+        const dropdownValue = this.initialData?.[dropdownFieldName] || 'not_tested';
+        const textValue = this.initialData?.[textFieldName] || '';
+
         if (!this.formGroup.get(dropdownFieldName)) {
-          this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
+          this.formGroup.addControl(dropdownFieldName, this.fb.control(dropdownValue));
         }
         if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
-          this.formGroup.addControl(textFieldName, this.fb.control(''));
+          this.formGroup.addControl(textFieldName, this.fb.control(textValue));
         }
       });
     }
@@ -66,8 +74,9 @@ export class DropdownTextTableComponent implements OnInit {
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const commentsValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(commentsValue));
       }
     }
   }

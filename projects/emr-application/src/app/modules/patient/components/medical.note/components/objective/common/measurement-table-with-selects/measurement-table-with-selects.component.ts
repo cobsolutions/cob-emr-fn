@@ -18,6 +18,7 @@ export class MeasurementTableWithSelectsComponent implements OnInit {
   @Input() showComments: boolean = true;
   @Input() commentsLabel: string = 'Comments';
   @Input() commentsFieldName?: string;
+  @Input() initialData?: any; // Initial values for controls
 
   constructor(private fb: FormBuilder) {}
 
@@ -31,8 +32,9 @@ export class MeasurementTableWithSelectsComponent implements OnInit {
   private ensureFormControlsExist(): void {
     // Add top select controls
     this.topSelects.forEach(select => {
+      const initialValue = this.initialData?.[select.fieldName] || '';
       if (!this.formGroup.get(select.fieldName)) {
-        this.formGroup.addControl(select.fieldName, this.fb.control(''));
+        this.formGroup.addControl(select.fieldName, this.fb.control(initialValue));
       }
     });
 
@@ -41,19 +43,23 @@ export class MeasurementTableWithSelectsComponent implements OnInit {
       const rightField = this.getFieldName(label, 'right');
       const leftField = this.getFieldName(label, 'left');
 
+      const rightValue = this.initialData?.[rightField] || 'not_tested';
+      const leftValue = this.initialData?.[leftField] || 'not_tested';
+
       if (!this.formGroup.get(rightField)) {
-        this.formGroup.addControl(rightField, this.fb.control('not_tested'));
+        this.formGroup.addControl(rightField, this.fb.control(rightValue));
       }
       if (!this.formGroup.get(leftField)) {
-        this.formGroup.addControl(leftField, this.fb.control('not_tested'));
+        this.formGroup.addControl(leftField, this.fb.control(leftValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const commentsValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(commentsValue));
       }
     }
   }
