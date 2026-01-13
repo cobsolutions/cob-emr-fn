@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -23,8 +23,7 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   @Input() applyToAllLabel: string = 'Apply to All';
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
-
-  @Output() controlsReady = new EventEmitter<void>(); // Emit when dynamic controls are created
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -35,9 +34,6 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
-
-    // Emit after controls are created and ready
-    this.controlsReady.emit();
   }
 
   /**
@@ -47,37 +43,44 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
     // Add Apply to All control if needed
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
-    // Add measurement and endfeel controls for each label (right and left)
+    // Add measurement and endfeel controls for each label (right and left) with initial values
     this.labels.forEach(label => {
       const rightMeasurement = this.getMeasurementFieldName(label, 'right');
       const leftMeasurement = this.getMeasurementFieldName(label, 'left');
       const rightEndfeel = this.getEndfeelFieldName(label, 'right');
       const leftEndfeel = this.getEndfeelFieldName(label, 'left');
 
+      const rightMeasurementValue = this.initialData?.[rightMeasurement] || 'not_tested';
+      const leftMeasurementValue = this.initialData?.[leftMeasurement] || 'not_tested';
+      const rightEndfeelValue = this.initialData?.[rightEndfeel] || 'not_tested';
+      const leftEndfeelValue = this.initialData?.[leftEndfeel] || 'not_tested';
+
       if (!this.formGroup.get(rightMeasurement)) {
-        this.formGroup.addControl(rightMeasurement, this.fb.control('not_tested'));
+        this.formGroup.addControl(rightMeasurement, this.fb.control(rightMeasurementValue));
       }
       if (!this.formGroup.get(leftMeasurement)) {
-        this.formGroup.addControl(leftMeasurement, this.fb.control('not_tested'));
+        this.formGroup.addControl(leftMeasurement, this.fb.control(leftMeasurementValue));
       }
       if (!this.formGroup.get(rightEndfeel)) {
-        this.formGroup.addControl(rightEndfeel, this.fb.control('not_tested'));
+        this.formGroup.addControl(rightEndfeel, this.fb.control(rightEndfeelValue));
       }
       if (!this.formGroup.get(leftEndfeel)) {
-        this.formGroup.addControl(leftEndfeel, this.fb.control('not_tested'));
+        this.formGroup.addControl(leftEndfeel, this.fb.control(leftEndfeelValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }

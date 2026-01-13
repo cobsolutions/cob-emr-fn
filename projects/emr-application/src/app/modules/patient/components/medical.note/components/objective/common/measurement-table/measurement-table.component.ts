@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,8 +22,7 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() applyToAllLabel: string = 'Apply to All';
   @Input() applyToAllFieldName?: string; // Optional custom apply to all field name
   @Input() commentsFieldName?: string; // Optional custom comments field name
-
-  @Output() controlsReady = new EventEmitter<void>(); // Emit when dynamic controls are created
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -34,9 +33,6 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
-
-    // Emit after controls are created and ready
-    this.controlsReady.emit();
   }
 
   /**
@@ -46,32 +42,34 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
     // Add Apply to All control if needed
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
-    // Add controls for each label (right and left)
+    // Add controls for each label (right and left) with initial values
     this.labels.forEach(label => {
       const rightField = this.getFieldName(label, 'right');
       const leftField = this.getFieldName(label, 'left');
-      if (this.fieldPrefix === 'shoulder_') {
-        console.log('rightField ', rightField)
-        console.log('leftField ', leftField)
-      }
+
+      const rightValue = this.initialData?.[rightField] || 'not_tested';
+      const leftValue = this.initialData?.[leftField] || 'not_tested';
+
       if (!this.formGroup.get(rightField)) {
-        this.formGroup.addControl(rightField, this.fb.control('not_tested'));
+        this.formGroup.addControl(rightField, this.fb.control(rightValue));
       }
       if (!this.formGroup.get(leftField)) {
-        this.formGroup.addControl(leftField, this.fb.control('not_tested'));
+        this.formGroup.addControl(leftField, this.fb.control(leftValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }

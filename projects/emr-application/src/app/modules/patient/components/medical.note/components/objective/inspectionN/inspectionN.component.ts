@@ -77,7 +77,6 @@ export class InspectionNComponent implements OnInit {
 
     // Load data if provided
     if (this.inspectionData) {
-      console.log('this.inspectionData ' , this.inspectionData)
       this.loadFromDto(this.inspectionData);
     }
 

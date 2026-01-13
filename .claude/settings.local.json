@@ -10,7 +10,8 @@
       "Bash(grep:*)",
       "Bash(find:*)",
       "Bash(npx ng build)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npx ng build:*)"
     ]
   }
 }

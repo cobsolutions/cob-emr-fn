@@ -15,10 +15,7 @@ export class RangeOfMotionNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   romForm!: FormGroup;
 
-  private pendingData?: RangeOfMotion; // Store data temporarily until child components initialize
-  private readyTables = new Set<string>(); // Track which measurement tables are ready
-  private expectedTables = new Set<string>(); // Track which tables we expect based on data
-  private hasLoadedData = false; // Prevent multiple loads
+  formData: any = {}; // Store mapped form data to pass to child components
 
   // Visibility flags for dependent fields
   showNoLimitationsNotedFields: boolean = false;
@@ -174,69 +171,13 @@ export class RangeOfMotionNComponent implements OnInit {
     this.initForm();
     this.setupValueChangeListeners();
 
+    // Load data if provided
     if (this.rangeOfMotionData) {
-      this.pendingData = this.rangeOfMotionData;
-      const formValue = this.rangeOfMotionMapper.fromDto(this.rangeOfMotionData);
-
-      // Determine which measurement tables will be created based on the data
-      this.detectExpectedTables(formValue);
-
-      // First patch: triggers visibility flags (e.g., shoulder_arrom: 'yes' shows measurement-table)
-      // This will cause the child components to be created via *ngIf
-      this.romForm.patchValue(formValue);
-
-      // If no measurement tables are expected, load data immediately
-      if (this.expectedTables.size === 0) {
-        this.hasLoadedData = true;
-        this.pendingData = undefined;
-      }
+      this.formData = this.rangeOfMotionMapper.fromDto(this.rangeOfMotionData);
+      this.romForm.patchValue(this.formData); // Single patch - child components will use formData
     }
 
     this.formReady.emit(this.romForm);
-  }
-
-  /**
-   * Detect which measurement tables will be created based on form data
-   */
-  private detectExpectedTables(formValue: any): void {
-    if (formValue.shoulder_arrom === 'yes') this.expectedTables.add('shoulder_arom');
-    if (formValue.shoulder_prom === 'yes') this.expectedTables.add('shoulder_prom');
-    if (formValue.elbow_arrom === 'yes') this.expectedTables.add('elbow_arom');
-    if (formValue.elbow_prom === 'yes') this.expectedTables.add('elbow_prom');
-    if (formValue.wrist_arrom === 'yes') this.expectedTables.add('wrist_arom');
-    if (formValue.wrist_prom === 'yes') this.expectedTables.add('wrist_prom');
-    if (formValue.hip_arrom === 'yes') this.expectedTables.add('hip_arom');
-    if (formValue.hip_prom === 'yes') this.expectedTables.add('hip_prom');
-    if (formValue.knee_arrom === 'yes') this.expectedTables.add('knee_arom');
-    if (formValue.knee_prom === 'yes') this.expectedTables.add('knee_prom');
-    if (formValue.ankle_arrom === 'yes') this.expectedTables.add('ankle_arom');
-    if (formValue.ankle_prom === 'yes') this.expectedTables.add('ankle_prom');
-    if (formValue.fst_mtp_arrom === 'yes') this.expectedTables.add('fst_mtp_arom');
-    if (formValue.fst_mtp_prom === 'yes') this.expectedTables.add('fst_mtp_prom');
-    if (formValue.fst_ip_arrom === 'yes') this.expectedTables.add('fst_ip_arom');
-    if (formValue.fst_ip_prom === 'yes') this.expectedTables.add('fst_ip_prom');
-    if (formValue.toe_arrom === 'yes') this.expectedTables.add('toe_arom');
-    if (formValue.toe_prom === 'yes') this.expectedTables.add('toe_prom');
-
-    console.log('Expected tables:', Array.from(this.expectedTables));
-  }
-
-  /**
-   * Called when a measurement table component has initialized and created its controls
-   */
-  onMeasurementTableReady(tableName: string): void {
-    this.readyTables.add(tableName);
-    console.log(`Table ready: ${tableName}. Ready tables:`, Array.from(this.readyTables));
-    console.log(`Expected: ${this.expectedTables.size}, Ready: ${this.readyTables.size}`);
-
-    // Check if all expected tables are ready
-    if (this.pendingData && !this.hasLoadedData && this.readyTables.size === this.expectedTables.size) {
-      console.log('All tables ready! Patching data again...');
-      // All measurement tables have initialized, now patch the data again
-      this.loadFromDto(this.pendingData);
-      this.hasLoadedData = true;
-      this.pendingData = undefined;
-    }
   }
 
   /**
@@ -282,117 +223,12 @@ export class RangeOfMotionNComponent implements OnInit {
       shoulder_arrom: ['no'],
 
       shoulder_prom: ['no'],
-      shoulder_prom_apply_to_all: [''],
-      shoulder_prom_flexion_right: ['not_tested'],
-      shoulder_prom_flexion_right_endfeel: ['not_tested'],
-      shoulder_prom_flexion_left: ['not_tested'],
-      shoulder_prom_flexion_left_endfeel: ['not_tested'],
-      shoulder_prom_scaption_right: ['not_tested'],
-      shoulder_prom_scaption_right_endfeel: ['not_tested'],
-      shoulder_prom_scaption_left: ['not_tested'],
-      shoulder_prom_scaption_left_endfeel: ['not_tested'],
-      shoulder_prom_abduction_right: ['not_tested'],
-      shoulder_prom_abduction_right_endfeel: ['not_tested'],
-      shoulder_prom_abduction_left: ['not_tested'],
-      shoulder_prom_abduction_left_endfeel: ['not_tested'],
-      shoulder_prom_extension_right: ['not_tested'],
-      shoulder_prom_extension_right_endfeel: ['not_tested'],
-      shoulder_prom_extension_left: ['not_tested'],
-      shoulder_prom_extension_left_endfeel: ['not_tested'],
-      shoulder_prom_er_neutral_right: ['not_tested'],
-      shoulder_prom_er_neutral_right_endfeel: ['not_tested'],
-      shoulder_prom_er_neutral_left: ['not_tested'],
-      shoulder_prom_er_neutral_left_endfeel: ['not_tested'],
-      shoulder_prom_ir_neutral_right: ['not_tested'],
-      shoulder_prom_ir_neutral_right_endfeel: ['not_tested'],
-      shoulder_prom_ir_neutral_left: ['not_tested'],
-      shoulder_prom_ir_neutral_left_endfeel: ['not_tested'],
-      shoulder_prom_er_scapular_plane_right: ['not_tested'],
-      shoulder_prom_er_scapular_plane_right_endfeel: ['not_tested'],
-      shoulder_prom_er_scapular_plane_left: ['not_tested'],
-      shoulder_prom_er_scapular_plane_left_endfeel: ['not_tested'],
-      shoulder_prom_ir_scapular_plane_right: ['not_tested'],
-      shoulder_prom_ir_scapular_plane_right_endfeel: ['not_tested'],
-      shoulder_prom_ir_scapular_plane_left: ['not_tested'],
-      shoulder_prom_ir_scapular_plane_left_endfeel: ['not_tested'],
-      shoulder_prom_er_90_degrees_abduction_right: ['not_tested'],
-      shoulder_prom_er_90_degrees_abduction_right_endfeel: ['not_tested'],
-      shoulder_prom_er_90_degrees_abduction_left: ['not_tested'],
-      shoulder_prom_er_90_degrees_abduction_left_endfeel: ['not_tested'],
-      shoulder_prom_ir_90_degrees_abduction_right: ['not_tested'],
-      shoulder_prom_ir_90_degrees_abduction_right_endfeel: ['not_tested'],
-      shoulder_prom_ir_90_degrees_abduction_left: ['not_tested'],
-      shoulder_prom_ir_90_degrees_abduction_left_endfeel: ['not_tested'],
-      shoulder_prom_ir_sleeper_stretch_right: ['not_tested'],
-      shoulder_prom_ir_sleeper_stretch_right_endfeel: ['not_tested'],
-      shoulder_prom_ir_sleeper_stretch_left: ['not_tested'],
-      shoulder_prom_ir_sleeper_stretch_left_endfeel: ['not_tested'],
-      shoulder_prom_horizontal_abduction_right: ['not_tested'],
-      shoulder_prom_horizontal_abduction_right_endfeel: ['not_tested'],
-      shoulder_prom_horizontal_abduction_left: ['not_tested'],
-      shoulder_prom_horizontal_abduction_left_endfeel: ['not_tested'],
-      shoulder_prom_horizontal_adduction_right: ['not_tested'],
-      shoulder_prom_horizontal_adduction_right_endfeel: ['not_tested'],
-      shoulder_prom_horizontal_adduction_left: ['not_tested'],
-      shoulder_prom_horizontal_adduction_left_endfeel: ['not_tested'],
       elbow_arrom: ['no'],
-      elbow_arrom_apply_to_all: [''],
-      elbow_arrom_flexion_right: ['not_tested'],
-      elbow_arrom_flexion_left: ['not_tested'],
-      elbow_arrom_extension_right: ['not_tested'],
-      elbow_arrom_extension_left: ['not_tested'],
-      elbow_arrom_pronation_right: ['not_tested'],
-      elbow_arrom_pronation_left: ['not_tested'],
-      elbow_arrom_supination_right: ['not_tested'],
-      elbow_arrom_supination_left: ['not_tested'],
       elbow_prom: ['no'],
-      elbow_prom_apply_to_all: [''],
-      elbow_prom_extension_right: ['not_tested'],
-      elbow_prom_extension_right_endfeel: ['not_tested'],
-      elbow_prom_extension_left: ['not_tested'],
-      elbow_prom_extension_left_endfeel: ['not_tested'],
-      elbow_prom_flexion_right: ['not_tested'],
-      elbow_prom_flexion_right_endfeel: ['not_tested'],
-      elbow_prom_flexion_left: ['not_tested'],
-      elbow_prom_flexion_left_endfeel: ['not_tested'],
-      elbow_prom_supination_right: ['not_tested'],
-      elbow_prom_supination_right_endfeel: ['not_tested'],
-      elbow_prom_supination_left: ['not_tested'],
-      elbow_prom_supination_left_endfeel: ['not_tested'],
-      elbow_prom_pronation_right: ['not_tested'],
-      elbow_prom_pronation_right_endfeel: ['not_tested'],
-      elbow_prom_pronation_left: ['not_tested'],
-      elbow_prom_pronation_left_endfeel: ['not_tested'],
 
       wrist_arrom: ['no'],
-      wrist_arrom_apply_to_all: [''],
-      extension_right: ['not_tested'],
-      extension_left: ['not_tested'],
-      flexion_right: ['not_tested'],
-      flexion_left: ['not_tested'],
-      radial_deviation_right: ['not_tested'],
-      radial_deviation_left: ['not_tested'],
-      ulnar_deviation_right: ['not_tested'],
-      ulnar_deviation_left: ['not_tested'],
 
       wrist_prom: ['no'],
-      wrist_prom_apply_to_all: [''],
-      wrist_prom_extension_right: ['not_tested'],
-      wrist_prom_extension_right_endfeel: ['not_tested'],
-      wrist_prom_extension_left: ['not_tested'],
-      wrist_prom_extension_left_endfeel: ['not_tested'],
-      wrist_prom_flexion_right: ['not_tested'],
-      wrist_prom_flexion_right_endfeel: ['not_tested'],
-      wrist_prom_flexion_left: ['not_tested'],
-      wrist_prom_flexion_left_endfeel: ['not_tested'],
-      wrist_prom_radial_deviation_right: ['not_tested'],
-      wrist_prom_radial_deviation_right_endfeel: ['not_tested'],
-      wrist_prom_radial_deviation_left: ['not_tested'],
-      wrist_prom_radial_deviation_left_endfeel: ['not_tested'],
-      wrist_prom_ulnar_deviation_right: ['not_tested'],
-      wrist_prom_ulnar_deviation_right_endfeel: ['not_tested'],
-      wrist_prom_ulnar_deviation_left: ['not_tested'],
-      wrist_prom_ulnar_deviation_left_endfeel: ['not_tested'],
 
       hand_arrom_prom: ['no'],
       calculate_total_rom: [false],
@@ -627,291 +463,19 @@ export class RangeOfMotionNComponent implements OnInit {
       lumbar_arrom: ['no'],
 
       hip_arrom: ['no'],
-      hip_flexion_right: ['not_tested'],
-      hip_flexion_left: ['not_tested'],
-      hip_extension_right: ['not_tested'],
-      hip_extension_left: ['not_tested'],
-      hip_abduction_right: ['not_tested'],
-      hip_abduction_left: ['not_tested'],
-      hip_adduction_right: ['not_tested'],
-      hip_adduction_left: ['not_tested'],
-      hip_internal_rotation_right: ['not_tested'],
-      hip_internal_rotation_left: ['not_tested'],
-      hip_external_rotation_right: ['not_tested'],
-      hip_external_rotation_left: ['not_tested'],
-      hip_arrom_comments: [''],
 
       hip_prom: ['no'],
-      hip_prom_apply_to_all: [''],
-      hip_prom_flexion_right: ['not_tested'],
-      hip_prom_flexion_right_endfeel: ['not_tested'],
-      hip_prom_flexion_left: ['not_tested'],
-      hip_prom_flexion_left_endfeel: ['not_tested'],
-
-      hip_prom_extension_right: ['not_tested'],
-      hip_prom_extension_right_endfeel: ['not_tested'],
-      hip_prom_extension_left: ['not_tested'],
-      hip_prom_extension_left_endfeel: ['not_tested'],
-
-      hip_prom_abduction_right: ['not_tested'],
-      hip_prom_abduction_right_endfeel: ['not_tested'],
-      hip_prom_abduction_left: ['not_tested'],
-      hip_prom_abduction_left_endfeel: ['not_tested'],
-
-      hip_prom_adduction_right: ['not_tested'],
-      hip_prom_adduction_right_endfeel: ['not_tested'],
-      hip_prom_adduction_left: ['not_tested'],
-      hip_prom_adduction_left_endfeel: ['not_tested'],
-
-      hip_prom_internal_rotation_right: ['not_tested'],
-      hip_prom_internal_rotation_right_endfeel: ['not_tested'],
-      hip_prom_internal_rotation_left: ['not_tested'],
-      hip_prom_internal_rotation_left_endfeel: ['not_tested'],
-
-      hip_prom_external_rotation_right: ['not_tested'],
-      hip_prom_external_rotation_right_endfeel: ['not_tested'],
-      hip_prom_external_rotation_left: ['not_tested'],
-      hip_prom_external_rotation_left_endfeel: ['not_tested'],
-      hip_prom_comments: [''], // For common component
 
       knee_arrom: ['no'],
-      knee_arom_apply_to_all: [''],
-      knee_apply_to_all: [''], // New name for common component
-      knee_flexion_right: ['not_tested'],
-      knee_flexion_left: ['not_tested'],
-      knee_extension_right: ['not_tested'],
-      knee_extension_left: ['not_tested'],
-      knee_arrom_comments: [''],
-      knee_comments: [''], // New name for common component
       knee_prom: ['no'],
       ankle_arrom: ['no'],
-      ankle_arom_apply_to_all: [''],
-      ankle_apply_to_all: [''], // New name for common component
-      ankle_dorsiflexion_0_knee_flexion_right: ['not_tested'],
-      ankle_dorsiflexion_0_knee_flexion_left: ['not_tested'],
-      ankle_dorsiflexion_90_knee_flexion_right: ['not_tested'],
-      ankle_dorsiflexion_90_knee_flexion_left: ['not_tested'],
-      ankle_plantarflexion_right: ['not_tested'],
-      ankle_plantarflexion_left: ['not_tested'],
-      ankle_inversion_right: ['not_tested'],
-      ankle_inversion_left: ['not_tested'],
-      ankle_eversion_right: ['not_tested'],
-      ankle_eversion_left: ['not_tested'],
-      ankle_arrom_comments: [''],
-      ankle_comments: [''], // New name for common component
       ankle_prom: ['no'],
-      ankle_prom_apply_to_all: [''],
-      ankle_prom_dorsiflexion_0_knee_flexion_right: ['not_tested'],
-      ankle_prom_dorsiflexion_0_knee_flexion_right_endfeel: ['not_tested'],
-      ankle_prom_dorsiflexion_0_knee_flexion_left: ['not_tested'],
-      ankle_prom_dorsiflexion_0_knee_flexion_left_endfeel: ['not_tested'],
-      ankle_prom_dorsiflexion_90_knee_flexion_right: ['not_tested'],
-      ankle_prom_dorsiflexion_90_knee_flexion_right_endfeel: ['not_tested'],
-      ankle_prom_dorsiflexion_90_knee_flexion_left: ['not_tested'],
-      ankle_prom_dorsiflexion_90_knee_flexion_left_endfeel: ['not_tested'],
-      ankle_prom_plantarflexion_right: ['not_tested'],
-      ankle_prom_plantarflexion_right_endfeel: ['not_tested'],
-      ankle_prom_plantarflexion_left: ['not_tested'],
-      ankle_prom_plantarflexion_left_endfeel: ['not_tested'],
-      ankle_prom_inversion_right: ['not_tested'],
-      ankle_prom_inversion_right_endfeel: ['not_tested'],
-      ankle_prom_inversion_left: ['not_tested'],
-      ankle_prom_inversion_left_endfeel: ['not_tested'],
-      ankle_prom_eversion_right: ['not_tested'],
-      ankle_prom_eversion_right_endfeel: ['not_tested'],
-      ankle_prom_eversion_left: ['not_tested'],
-      ankle_prom_eversion_left_endfeel: ['not_tested'],
-      ankle_prom_comments: [''],
       fst_mtp_arrom: ['no'],
-      fst_mtp_arom_apply_to_all: [''],
-      fst_mtp_apply_to_all: [''], // New name for common component
-      fst_mtp_flexion_right: ['not_tested'],
-      fst_mtp_flexion_left: ['not_tested'],
-      fst_mtp_extension_right: ['not_tested'],
-      fst_mtp_extension_left: ['not_tested'],
-      fst_mtp_arrom_comments: [''],
-      fst_mtp_comments: [''], // New name for common component
       fst_mtp_prom: ['no'],
       fst_ip_arrom: ['no'],
-      fst_ip_arom_apply_to_all: [''],
-      fst_ip_apply_to_all: [''], // New name for common component
-      fst_ip_flexion_right: ['not_tested'],
-      fst_ip_flexion_left: ['not_tested'],
-      fst_ip_extension_right: ['not_tested'],
-      fst_ip_extension_left: ['not_tested'],
-      fst_ip_arrom_comments: [''],
-      fst_ip_comments: [''], // New name for common component
       fst_ip_prom: ['no'],
       toe_arrom: ['no'],
-      toe_arom_apply_to_all: [''],
-      toe_apply_to_all: [''], // New name for common component
-      toe_arom_2nd_mtp_flexion_right: ['not_tested'],
-      toe_arom_2nd_mtp_flexion_left: ['not_tested'],
-      toe_arom_2nd_mtp_extension_right: ['not_tested'],
-      toe_arom_2nd_mtp_extension_left: ['not_tested'],
-      toe_arom_2nd_ip_flexion_right: ['not_tested'],
-      toe_arom_2nd_ip_flexion_left: ['not_tested'],
-      toe_arom_2nd_ip_extension_right: ['not_tested'],
-      toe_arom_2nd_ip_extension_left: ['not_tested'],
-      toe_arom_3rd_mtp_flexion_right: ['not_tested'],
-      toe_arom_3rd_mtp_flexion_left: ['not_tested'],
-      toe_arom_3rd_mtp_extension_right: ['not_tested'],
-      toe_arom_3rd_mtp_extension_left: ['not_tested'],
-      toe_arom_3rd_ip_flexion_right: ['not_tested'],
-      toe_arom_3rd_ip_flexion_left: ['not_tested'],
-      toe_arom_3rd_ip_extension_right: ['not_tested'],
-      toe_arom_3rd_ip_extension_left: ['not_tested'],
-      toe_arom_4th_mtp_flexion_right: ['not_tested'],
-      toe_arom_4th_mtp_flexion_left: ['not_tested'],
-      toe_arom_4th_mtp_extension_right: ['not_tested'],
-      toe_arom_4th_mtp_extension_left: ['not_tested'],
-      toe_arom_4th_ip_flexion_right: ['not_tested'],
-      toe_arom_4th_ip_flexion_left: ['not_tested'],
-      toe_arom_4th_ip_extension_right: ['not_tested'],
-      toe_arom_4th_ip_extension_left: ['not_tested'],
-      toe_arom_5th_mtp_flexion_right: ['not_tested'],
-      toe_arom_5th_mtp_flexion_left: ['not_tested'],
-      toe_arom_5th_mtp_extension_right: ['not_tested'],
-      toe_arom_5th_mtp_extension_left: ['not_tested'],
-      toe_arom_5th_ip_flexion_right: ['not_tested'],
-      toe_arom_5th_ip_flexion_left: ['not_tested'],
-      toe_arom_5th_ip_extension_right: ['not_tested'],
-      toe_arom_5th_ip_extension_left: ['not_tested'],
-      toe_arrom_comments: [''],
-      toe_comments: [''], // New name for common component
       toe_prom: ['no'],
-      toe_prom_apply_to_all: [''],
-      toe_2nd_mtp_flexion_right: ['not_tested'],
-      toe_2nd_mtp_flexion_right_endfeel: ['not_tested'],
-      toe_2nd_mtp_flexion_left: ['not_tested'],
-      toe_2nd_mtp_flexion_left_endfeel: ['not_tested'],
-      toe_2nd_mtp_extension_right: ['not_tested'],
-      toe_2nd_mtp_extension_right_endfeel: ['not_tested'],
-      toe_2nd_mtp_extension_left: ['not_tested'],
-      toe_2nd_mtp_extension_left_endfeel: ['not_tested'],
-      toe_2nd_ip_flexion_right: ['not_tested'],
-      toe_2nd_ip_flexion_right_endfeel: ['not_tested'],
-      toe_2nd_ip_flexion_left: ['not_tested'],
-      toe_2nd_ip_flexion_left_endfeel: ['not_tested'],
-      toe_2nd_ip_extension_right: ['not_tested'],
-      toe_2nd_ip_extension_right_endfeel: ['not_tested'],
-      toe_2nd_ip_extension_left: ['not_tested'],
-      toe_2nd_ip_extension_left_endfeel: ['not_tested'],
-      toe_3rd_mtp_flexion_right: ['not_tested'],
-      toe_3rd_mtp_flexion_right_endfeel: ['not_tested'],
-      toe_3rd_mtp_flexion_left: ['not_tested'],
-      toe_3rd_mtp_flexion_left_endfeel: ['not_tested'],
-      toe_3rd_mtp_extension_right: ['not_tested'],
-      toe_3rd_mtp_extension_right_endfeel: ['not_tested'],
-      toe_3rd_mtp_extension_left: ['not_tested'],
-      toe_3rd_mtp_extension_left_endfeel: ['not_tested'],
-      toe_3rd_ip_flexion_right: ['not_tested'],
-      toe_3rd_ip_flexion_right_endfeel: ['not_tested'],
-      toe_3rd_ip_flexion_left: ['not_tested'],
-      toe_3rd_ip_flexion_left_endfeel: ['not_tested'],
-      toe_3rd_ip_extension_right: ['not_tested'],
-      toe_3rd_ip_extension_right_endfeel: ['not_tested'],
-      toe_3rd_ip_extension_left: ['not_tested'],
-      toe_3rd_ip_extension_left_endfeel: ['not_tested'],
-      toe_4th_mtp_flexion_right: ['not_tested'],
-      toe_4th_mtp_flexion_right_endfeel: ['not_tested'],
-      toe_4th_mtp_flexion_left: ['not_tested'],
-      toe_4th_mtp_flexion_left_endfeel: ['not_tested'],
-      toe_4th_mtp_extension_right: ['not_tested'],
-      toe_4th_mtp_extension_right_endfeel: ['not_tested'],
-      toe_4th_mtp_extension_left: ['not_tested'],
-      toe_4th_mtp_extension_left_endfeel: ['not_tested'],
-      toe_4th_ip_flexion_right: ['not_tested'],
-      toe_4th_ip_flexion_right_endfeel: ['not_tested'],
-      toe_4th_ip_flexion_left: ['not_tested'],
-      toe_4th_ip_flexion_left_endfeel: ['not_tested'],
-      toe_4th_ip_extension_right: ['not_tested'],
-      toe_4th_ip_extension_right_endfeel: ['not_tested'],
-      toe_4th_ip_extension_left: ['not_tested'],
-      toe_4th_ip_extension_left_endfeel: ['not_tested'],
-      toe_5th_mtp_flexion_right: ['not_tested'],
-      toe_5th_mtp_flexion_right_endfeel: ['not_tested'],
-      toe_5th_mtp_flexion_left: ['not_tested'],
-      toe_5th_mtp_flexion_left_endfeel: ['not_tested'],
-      toe_5th_mtp_extension_right: ['not_tested'],
-      toe_5th_mtp_extension_right_endfeel: ['not_tested'],
-      toe_5th_mtp_extension_left: ['not_tested'],
-      toe_5th_mtp_extension_left_endfeel: ['not_tested'],
-      toe_5th_ip_flexion_right: ['not_tested'],
-      toe_5th_ip_flexion_right_endfeel: ['not_tested'],
-      toe_5th_ip_flexion_left: ['not_tested'],
-      toe_5th_ip_flexion_left_endfeel: ['not_tested'],
-      toe_5th_ip_extension_right: ['not_tested'],
-      toe_5th_ip_extension_right_endfeel: ['not_tested'],
-      toe_5th_ip_extension_left: ['not_tested'],
-      toe_5th_ip_extension_left_endfeel: ['not_tested'],
-      toe_prom_comments: [''],
-
-      // Dummy Example: Shoulder AROM with Labels
-      shoulder_arom_with_labels: ['no'],
-      shoulder_arom_retraction_rom: ['not_tested'],
-      shoulder_arom_retraction_rom_text: [''],
-      shoulder_arom_retraction_movement_quality: ['not_tested'],
-      shoulder_arom_retraction_movement_quality_text: [''],
-      shoulder_arom_retraction_pain_free_movement: ['not_tested'],
-      shoulder_arom_retraction_pain_free_movement_text: [''],
-      shoulder_arom_right_rotation_rom: ['not_tested'],
-      shoulder_arom_right_rotation_rom_text: [''],
-      shoulder_arom_right_rotation_movement_quality: ['not_tested'],
-      shoulder_arom_right_rotation_movement_quality_text: [''],
-      shoulder_arom_right_rotation_pain_free_movement: ['not_tested'],
-      shoulder_arom_right_rotation_pain_free_movement_text: [''],
-      shoulder_arom_left_rotation_rom: ['not_tested'],
-      shoulder_arom_left_rotation_rom_text: [''],
-      shoulder_arom_left_rotation_movement_quality: ['not_tested'],
-      shoulder_arom_left_rotation_movement_quality_text: [''],
-      shoulder_arom_left_rotation_pain_free_movement: ['not_tested'],
-      shoulder_arom_left_rotation_pain_free_movement_text: [''],
-      shoulder_arom_right_lateral_flexion_rom: ['not_tested'],
-      shoulder_arom_right_lateral_flexion_rom_text: [''],
-      shoulder_arom_right_lateral_flexion_movement_quality: ['not_tested'],
-      shoulder_arom_right_lateral_flexion_movement_quality_text: [''],
-      shoulder_arom_right_lateral_flexion_pain_free_movement: ['not_tested'],
-      shoulder_arom_right_lateral_flexion_pain_free_movement_text: [''],
-      shoulder_arom_left_lateral_flexion_rom: ['not_tested'],
-      shoulder_arom_left_lateral_flexion_rom_text: [''],
-      shoulder_arom_left_lateral_flexion_movement_quality: ['not_tested'],
-      shoulder_arom_left_lateral_flexion_movement_quality_text: [''],
-      shoulder_arom_left_lateral_flexion_pain_free_movement: ['not_tested'],
-      shoulder_arom_left_lateral_flexion_pain_free_movement_text: [''],
-      shoulder_arom_extension_rom: ['not_tested'],
-      shoulder_arom_extension_rom_text: [''],
-      shoulder_arom_extension_movement_quality: ['not_tested'],
-      shoulder_arom_extension_movement_quality_text: [''],
-      shoulder_arom_extension_pain_free_movement: ['not_tested'],
-      shoulder_arom_extension_pain_free_movement_text: [''],
-      shoulder_arom_comments: [''],
-
-      // Dummy Example: Grip Test without Labels
-      grip_test_no_labels: ['no'],
-      grip_test_right: ['not_tested'],
-      grip_test_right_text: [''],
-      grip_test_left: ['not_tested'],
-      grip_test_left_text: [''],
-      grip_test_comments: [''],
-
-      // Dummy Example: Elbow AROM with Top Selects
-      elbow_arom_with_selects: ['no'],
-      elbow_arom_patient_position: [''],
-      elbow_arom_test_method: [''],
-      elbow_arom_pain_level: [''],
-      elbow_arom_flexion_right: ['not_tested'],
-      elbow_arom_flexion_left: ['not_tested'],
-      elbow_arom_extension_right: ['not_tested'],
-      elbow_arom_extension_left: ['not_tested'],
-      elbow_arom_supination_right: ['not_tested'],
-      elbow_arom_supination_left: ['not_tested'],
-      elbow_arom_pronation_right: ['not_tested'],
-      elbow_arom_pronation_left: ['not_tested'],
-      elbow_arom_comments: [''],
-
-      // Dummy Example: Cervical AROM Single Column
-      cervical_arom_single_column_dummy: ['no'],
 
       additional_comments: ['no']
     });
