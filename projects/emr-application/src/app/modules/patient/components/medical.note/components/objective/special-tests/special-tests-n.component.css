@@ -163,4 +163,207 @@
     color: #6c757d;
     margin-top: 0.25rem;
   }
-  
+  	  /* Enhanced primary radio button styling */
+.radio-group-primary {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+	  
+	.radio-group-primary c-form-check {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.radio-group-primary c-form-check:hover {
+  border-color: #5c4742;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.radio-group-primary c-form-check input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.radio-group-primary c-form-check input[type="radio"]:checked + label {
+  color: #5c4742;
+  font-weight: 600;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"]:checked) {
+  border-color: #5c4742;
+  background-color: #e8e3e1;
+  box-shadow: 0 3px 6px rgba(92, 71, 66, 0.2);
+}
+
+.radio-group-primary c-form-check label {
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 0;
+}
+
+/* Color coding for Yes/No options (Medical Safety) */
+
+/* YES option - Green theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]) {
+  border-color: #d4edda;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]):hover {
+  border-color: #28a745;
+  background-color: #f1f9f3;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]:checked) {
+  border-color: #28a745;
+  background-color: #d4edda;
+  box-shadow: 0 3px 6px rgba(40, 167, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="yes"]:checked + label {
+  color: #155724;
+  font-weight: 600;
+}
+
+/* NO option - Red theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]) {
+  border-color: #f8d7da;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]):hover {
+  border-color: #dc3545;
+  background-color: #fef5f6;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]:checked) {
+  border-color: #dc3545;
+  background-color: #f8d7da;
+  box-shadow: 0 3px 6px rgba(220, 53, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="no"]:checked + label {
+  color: #721c24;
+  font-weight: 600;
+}
+
+/* N/A option - Gray theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="na"]) {
+  border-color: #e2e3e5;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="na"]):hover {
+  border-color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="na"]:checked) {
+  border-color: #6c757d;
+  background-color: #e2e3e5;
+  box-shadow: 0 3px 6px rgba(108, 117, 125, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="na"]:checked + label {
+  color: #495057;
+  font-weight: 600;
+}
+
+/* BMI Units options - Blue theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg"]) {
+  border-color: #cce5ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg"]):hover {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs_in"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg_cm"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="lbs"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="kg"]:checked) {
+  border-color: #007bff;
+  background-color: #cce5ff;
+  box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="lbs_in"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="kg_cm"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="lbs"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="kg"]:checked + label {
+  color: #004085;
+  font-weight: 600;
+}
+
+/* BPM type options - Purple theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_radial"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_carotid"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_posterior"]) {
+  border-color: #e7d4f5;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_radial"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_carotid"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_posterior"]):hover {
+  border-color: #6f42c1;
+  background-color: #f3ebfa;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_radial"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_carotid"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="bpm_posterior"]:checked) {
+  border-color: #6f42c1;
+  background-color: #e7d4f5;
+  box-shadow: 0 3px 6px rgba(111, 66, 193, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="bpm_radial"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="bpm_carotid"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="bpm_posterior"]:checked + label {
+  color: #3d1a6b;
+  font-weight: 600;
+}
+
+/* Body type options - Orange theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="mesomorph"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="endomorph"]),
+.radio-group-primary c-form-check:has(input[type="radio"][value="ectomorph"]) {
+  border-color: #ffeac1;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="mesomorph"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="endomorph"]):hover,
+.radio-group-primary c-form-check:has(input[type="radio"][value="ectomorph"]):hover {
+  border-color: #fd7e14;
+  background-color: #fff5e6;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="mesomorph"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="endomorph"]:checked),
+.radio-group-primary c-form-check:has(input[type="radio"][value="ectomorph"]:checked) {
+  border-color: #fd7e14;
+  background-color: #ffeac1;
+  box-shadow: 0 3px 6px rgba(253, 126, 20, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="mesomorph"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="endomorph"]:checked + label,
+.radio-group-primary c-form-check input[type="radio"][value="ectomorph"]:checked + label {
+  color: #7a3d0a;
+  font-weight: 600;
+}
