@@ -137,8 +137,7 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <strength-n (formReady)="setChildForm('strength', $event)"
-                [strengthData]="strengthData"></strength-n>
+            <strength-n (formReady)="setChildForm('strength', $event)" [strengthData]="strengthData"></strength-n>
         </c-card-body>
     </c-card>
 
@@ -158,7 +157,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <neuro-vascular-n (formReady)="setChildForm('neuroVascular', $event)"></neuro-vascular-n>
+            <neuro-vascular-n (formReady)="setChildForm('neuroVascular', $event)"
+                [neuroVascularData]="neuroVascularData"></neuro-vascular-n>
         </c-card-body>
     </c-card>
 

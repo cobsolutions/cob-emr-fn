@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NeuroVascularConfig } from './config';
+import { NeuroVascular } from './models/NeuroVascular';
+import { NeuroVascularMapperService } from './services/neuro-vascular-mapper.service';
 
 @Component({
   selector: 'neuro-vascular-n',
@@ -11,6 +13,8 @@ export class NeuroVascularNComponent implements OnInit {
   neuroVascularForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   readonly neuroVascularConfig = NeuroVascularConfig
+  @Input() neuroVascularData?: NeuroVascular;
+  formData: any = {}; 
 
   showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields: boolean = false;
   showCranialNerveScreenFields: boolean = false;
@@ -58,11 +62,16 @@ export class NeuroVascularNComponent implements OnInit {
   showAdditionalCommentsFields: boolean = false;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private neuroVascularMapperService : NeuroVascularMapperService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    if (this.neuroVascularData) {
+      this.formData = this.neuroVascularMapperService.fromDto(this.neuroVascularData);
+      this.neuroVascularForm.patchValue(this.formData); // Single patch - child components will use formData
+    }
     this.formReady.emit(this.neuroVascularForm);
   }
   initForm() {
