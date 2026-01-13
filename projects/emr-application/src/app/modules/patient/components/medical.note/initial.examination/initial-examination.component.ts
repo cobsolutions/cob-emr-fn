@@ -41,6 +41,9 @@ export class InitialExaminationComponent implements OnInit {
   type: MedicalNoteType = MedicalNoteType.Initial_Examination;
   isLoaded: boolean = true;
   private finalizeSub!: Subscription;
+  showScrollArrow: boolean = false;
+  showUpArrow: boolean = false;
+  showDownArrow: boolean = false;
   constructor(private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
     private loggedInService: LoggedInService,
@@ -67,6 +70,10 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: this.fb.group({}),
       billing: this.fb.group({})
     });
+
+    // Add scroll event listener
+    window.addEventListener('scroll', this.onScroll.bind(this));
+
     this.initialExamNoteService.get(this.noteId).subscribe((note: any) => {
       if (note) {
         this.medicalNoteSOAP = note;
@@ -151,6 +158,40 @@ export class InitialExaminationComponent implements OnInit {
   }
   ngOnDestroy() {
     this.finalizeSub?.unsubscribe();
+    window.removeEventListener('scroll', this.onScroll.bind(this));
+  }
+
+  onScroll(): void {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+
+    // Show arrow container if page is scrollable
+    this.showScrollArrow = scrollHeight > clientHeight + 100;
+
+    // Show up arrow if scrolled down more than 200px
+    this.showUpArrow = scrollTop > 200;
+
+    // Show down arrow if there's more content below (not near bottom)
+    const isNearBottom = (scrollTop + clientHeight) >= (scrollHeight - 150);
+    this.showDownArrow = !isNearBottom && this.showScrollArrow;
+  }
+
+  scrollPageUp(): void {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const viewportHeight = window.innerHeight;
+    const targetScroll = Math.max(0, currentScroll - viewportHeight * 0.8);
+
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  }
+
+  scrollPageDown(): void {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const viewportHeight = window.innerHeight;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const targetScroll = Math.min(maxScroll, currentScroll + viewportHeight * 0.8);
+
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   }
   setFormValues(formGroup: FormGroup, data: any) {
     Object.keys(formGroup.controls).forEach(key => {

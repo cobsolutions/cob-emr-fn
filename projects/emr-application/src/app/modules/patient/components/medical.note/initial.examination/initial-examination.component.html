@@ -54,4 +54,27 @@
             </mat-step>
         </mat-stepper>
     </form>
+
+    <!-- Scroll Arrows -->
+    <div class="scroll-arrow-container" *ngIf="showScrollArrow">
+        <!-- Scroll Up Arrow -->
+        <div class="scroll-arrow scroll-up" *ngIf="showUpArrow" (click)="scrollPageUp()" title="Scroll Up One Page">
+            <div class="arrow-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+            </div>
+            <span class="arrow-label">Up</span>
+        </div>
+
+        <!-- Scroll Down Arrow -->
+        <div class="scroll-arrow scroll-down" *ngIf="showDownArrow" (click)="scrollPageDown()" title="Scroll Down One Page">
+            <div class="arrow-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <span class="arrow-label">Down</span>
+        </div>
+    </div>
 </c-container>
