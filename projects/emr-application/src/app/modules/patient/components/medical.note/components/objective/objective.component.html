@@ -180,7 +180,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <special-tests-n (formReady)="setChildForm('specialTest', $event)"></special-tests-n>
+            <special-tests-n (formReady)="setChildForm('specialTest', $event)"
+                [specialTestData]="specialTestData"></special-tests-n>
         </c-card-body>
     </c-card>
 

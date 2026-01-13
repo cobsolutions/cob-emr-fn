@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SpecialTestConfig } from './config';
+import { SpecialTest } from './model/SpecialTest';
+import { SpecialTestsMapperService } from './service/special-tests-mapper.service';
 
 @Component({
   selector: 'special-tests-n',
@@ -11,6 +13,8 @@ export class SpecialTestsNComponent implements OnInit {
   specialTestForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   showFlexibilityFields: boolean = false;
+  @Input() specialTestData?: SpecialTest;
+  formData: any = {};
   showFlexibilityoberFields: boolean = false;
   showFlexibilityHamstringFlexibilityFields: boolean = false
   showFlexibilityGastrocnemiusLengthFields: boolean = false
@@ -59,7 +63,7 @@ export class SpecialTestsNComponent implements OnInit {
 
   showAlarLigamentTestFields: boolean = false;
   showAlarLigamentStressFields: boolean = false;
-  
+
   showWorkConditioningFields: boolean = false;
   showWorkConditioningMaterialHandlingFields: boolean = false;
   showWorkConditioningNonMaterialHandlingFields: boolean = false;
@@ -68,11 +72,16 @@ export class SpecialTestsNComponent implements OnInit {
   additionalCommentsFields: boolean = false;
 
   readonly specialTestConfig = SpecialTestConfig;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private specialTestsMapperService: SpecialTestsMapperService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    if (this.specialTestData) {
+      this.formData = this.specialTestsMapperService.fromDto(this.specialTestData);
+      this.specialTestForm.patchValue(this.formData); // Single patch - child components will use formData
+    }
     this.formReady.emit(this.specialTestForm);
   }
   initForm() {
@@ -118,8 +127,8 @@ export class SpecialTestsNComponent implements OnInit {
       selective_functional_movement_assessment: ['no'],
 
       _30_second_chair_stand: ['no'],
-      number_of_stands_30_second_chair_stand:[''],
-      comment_30_second_chair_stand:[''],
+      number_of_stands_30_second_chair_stand: [''],
+      comment_30_second_chair_stand: [''],
       side_bridge_plank: ['no'],
       prone_plank: ['no'],
       single_leg_bridge_hold: ['no'],
