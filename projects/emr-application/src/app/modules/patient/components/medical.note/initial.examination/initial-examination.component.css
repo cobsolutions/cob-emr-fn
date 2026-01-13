@@ -236,6 +236,76 @@
     align-items: center;
 }
 
+/* Arrow Group */
+.arrow-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+/* Jump Button (hidden by default, shown on hover) */
+.jump-button {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    user-select: none;
+    pointer-events: none;
+}
+
+.arrow-group:hover .jump-button {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Jump Circle */
+.jump-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3),
+                0 2px 4px rgba(40, 167, 69, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Jump Button Hover Effects */
+.jump-button:hover .jump-circle {
+    background: linear-gradient(135deg, #218838 0%, #1c7430 100%);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4),
+                0 3px 6px rgba(40, 167, 69, 0.3);
+    transform: scale(1.05);
+}
+
+.jump-button:active .jump-circle {
+    transform: scale(0.95);
+}
+
+/* Jump Circle Shine Effect */
+.jump-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.jump-button:hover .jump-circle::before {
+    left: 100%;
+}
+
 /* Scroll Arrow Base Styles */
 .scroll-arrow {
     display: flex;
@@ -394,11 +464,38 @@
     .arrow-label {
         font-size: 10px;
     }
+
+    .jump-circle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .jump-circle svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Auto-show jump buttons on mobile (no hover) */
+    .arrow-group .jump-button {
+        opacity: 0.7;
+        transform: scale(0.9);
+        pointer-events: auto;
+    }
+
+    .arrow-group .jump-button:active {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Accessibility - Focus State */
 .scroll-arrow:focus-visible .arrow-circle {
     outline: 3px solid #5c4742;
+    outline-offset: 4px;
+}
+
+.jump-button:focus-visible .jump-circle {
+    outline: 3px solid #28a745;
     outline-offset: 4px;
 }
 

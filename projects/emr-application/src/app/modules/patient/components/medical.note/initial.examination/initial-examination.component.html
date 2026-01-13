@@ -57,24 +57,50 @@
 
     <!-- Scroll Arrows -->
     <div class="scroll-arrow-container" *ngIf="showScrollArrow">
-        <!-- Scroll Up Arrow -->
-        <div class="scroll-arrow scroll-up" *ngIf="showUpArrow" (click)="scrollPageUp()" title="Scroll Up One Page">
-            <div class="arrow-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="18 15 12 9 6 15"></polyline>
-                </svg>
+        <!-- Scroll Up Group -->
+        <div class="arrow-group" *ngIf="showUpArrow">
+            <!-- Jump to Top Button (appears on hover) -->
+            <div class="jump-button jump-top" (click)="scrollToTop()" title="Jump to Top">
+                <div class="jump-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                        <polyline points="18 20 12 14 6 20"></polyline>
+                    </svg>
+                </div>
             </div>
-            <span class="arrow-label">Up</span>
+
+            <!-- Page Up Arrow -->
+            <div class="scroll-arrow scroll-up" (click)="scrollPageUp()" title="Scroll Up One Page">
+                <div class="arrow-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </div>
+                <span class="arrow-label">Up</span>
+            </div>
         </div>
 
-        <!-- Scroll Down Arrow -->
-        <div class="scroll-arrow scroll-down" *ngIf="showDownArrow" (click)="scrollPageDown()" title="Scroll Down One Page">
-            <div class="arrow-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+        <!-- Scroll Down Group -->
+        <div class="arrow-group" *ngIf="showDownArrow">
+            <!-- Page Down Arrow -->
+            <div class="scroll-arrow scroll-down" (click)="scrollPageDown()" title="Scroll Down One Page">
+                <div class="arrow-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <span class="arrow-label">Down</span>
             </div>
-            <span class="arrow-label">Down</span>
+
+            <!-- Jump to Bottom Button (appears on hover) -->
+            <div class="jump-button jump-bottom" (click)="scrollToBottom()" title="Jump to Bottom">
+                <div class="jump-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 4 12 10 18 4"></polyline>
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 </c-container>

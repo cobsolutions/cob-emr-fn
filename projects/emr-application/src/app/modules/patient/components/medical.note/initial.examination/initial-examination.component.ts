@@ -193,6 +193,14 @@ export class InitialExaminationComponent implements OnInit {
 
     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  scrollToBottom(): void {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  }
   setFormValues(formGroup: FormGroup, data: any) {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
