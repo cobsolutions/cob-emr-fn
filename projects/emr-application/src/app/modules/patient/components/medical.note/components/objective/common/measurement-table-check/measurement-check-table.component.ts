@@ -25,6 +25,7 @@ export class MeasurementCheckTableComponent implements OnInit {
   @Input() applyToAllFieldName?: string; // Optional custom apply to all field name
   @Input() commentsFieldName?: string; // Optional custom comments field name
   @Input() allowMultipleSelections: boolean = true; // Allow multiple checkboxes to be selected
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -43,26 +44,30 @@ export class MeasurementCheckTableComponent implements OnInit {
    * For checkboxes, we store selected values as comma-separated strings
    */
   private ensureFormControlsExist(): void {
-    
+
 
     // Add controls for each label (right and left) - store as comma-separated strings
     this.labels.forEach(label => {
       const rightField = this.getFieldName(label, 'right');
       const leftField = this.getFieldName(label, 'left');
 
+      const rightValue = this.initialData?.[rightField] || '';
+      const leftValue = this.initialData?.[leftField] || '';
+
       if (!this.formGroup.get(rightField)) {
-        this.formGroup.addControl(rightField, this.fb.control(''));
+        this.formGroup.addControl(rightField, this.fb.control(rightValue));
       }
       if (!this.formGroup.get(leftField)) {
-        this.formGroup.addControl(leftField, this.fb.control(''));
+        this.formGroup.addControl(leftField, this.fb.control(leftValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }

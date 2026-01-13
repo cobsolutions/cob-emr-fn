@@ -27,10 +27,11 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
   @Input() columnWidths: number[] = []; // Optional custom widths for columns
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.ensureFormControlsExist();
@@ -41,10 +42,12 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
 
   private ensureFormControlsExist(): void {
     // Add Apply to All control if needed
+    console.log('this.initialData ', this.initialData)
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
@@ -53,23 +56,26 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
       // Add frequency checkbox controls (Occasional, Frequent, Constant)
       this.frequencyColumns.forEach((column, index) => {
         const fieldName = this.getFrequencyFieldName(item, index);
+        const initialValue = this.initialData?.[fieldName] || false;
         if (!this.formGroup.get(fieldName)) {
-          this.formGroup.addControl(fieldName, this.fb.control(false));
+          this.formGroup.addControl(fieldName, this.fb.control(initialValue));
         }
       });
 
       // Add adequate select control
       const adequateFieldName = this.getAdequateFieldName(item);
+      const initialValue = this.initialData?.[adequateFieldName] || '';
       if (!this.formGroup.get(adequateFieldName)) {
-        this.formGroup.addControl(adequateFieldName, this.fb.control(''));
+        this.formGroup.addControl(adequateFieldName, this.fb.control(initialValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }
@@ -149,7 +155,7 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
    */
   private applyValueToAllFields(value: string): void {
     const updates: any = {};
-    
+
     if (value === 'check_all') {
       // Check all frequency checkboxes
       this.items.forEach(item => {
@@ -173,7 +179,7 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
         updates[fieldName] = 'YES'; // Or any other value from dropdown
       });
     }
-    
+
     this.formGroup.patchValue(updates, { emitEvent: false });
   }
 

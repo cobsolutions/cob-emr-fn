@@ -30,7 +30,8 @@
             <measurement-check-table [labels]="specialTestConfig.thomasTest.labels" [formGroup]="specialTestForm"
                 [fieldPrefix]="specialTestConfig.thomasTest.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.thomasTest.commentsFieldName"
-                [showComments]="specialTestConfig.thomasTest.showComments">
+                [showComments]="specialTestConfig.thomasTest.showComments"
+                [initialData]="formData">
             </measurement-check-table>
         </div>
 
@@ -54,7 +55,8 @@
                 [fieldPrefix]="specialTestConfig.oberTestNoLabels.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.oberTestNoLabels.commentsFieldName"
                 [hasTextInput]="specialTestConfig.oberTestNoLabels.hasTextInput"
-                [showComments]="specialTestConfig.oberTestNoLabels.showComments">
+                [showComments]="specialTestConfig.oberTestNoLabels.showComments"
+                [initialData]="formData">
             </dropdown-text-table>
         </div>
 
@@ -79,7 +81,8 @@
                 [fieldPrefix]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.commentsFieldName"
                 [hasTextInput]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.hasTextInput"
-                [showComments]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.showComments">
+                [showComments]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.showComments"
+                [initialData]="formData">
             </dropdown-text-table>
         </div>
         <div class="form-row">
@@ -99,7 +102,8 @@
             <measurement-input-table [labels]="specialTestConfig.gastrocnemiusLengthTest.labels"
                 [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.gastrocnemiusLengthTest.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.gastrocnemiusLengthTest.commentsFieldName"
-                [showComments]="specialTestConfig.gastrocnemiusLengthTest.showComments">
+                [showComments]="specialTestConfig.gastrocnemiusLengthTest.showComments"
+                [initialData]="formData">
             </measurement-input-table>
         </div>
         <div class="form-row">
@@ -119,7 +123,8 @@
             <measurement-input-table [labels]="specialTestConfig.soleusMuscleLengthTest.labels"
                 [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.soleusMuscleLengthTest.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.soleusMuscleLengthTest.commentsFieldName"
-                [showComments]="specialTestConfig.soleusMuscleLengthTest.showComments">
+                [showComments]="specialTestConfig.soleusMuscleLengthTest.showComments"
+                [initialData]="formData">
             </measurement-input-table>
         </div>
     </div>
@@ -157,7 +162,8 @@
                 [fieldPrefix]="specialTestConfig.craigsTestNoLabels.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.craigsTestNoLabels.commentsFieldName"
                 [hasTextInput]="specialTestConfig.craigsTestNoLabels.hasTextInput"
-                [showComments]="specialTestConfig.craigsTestNoLabels.showComments">
+                [showComments]="specialTestConfig.craigsTestNoLabels.showComments"
+                [initialData]="formData">
             </dropdown-text-table>
         </div>
 
@@ -181,7 +187,8 @@
                 [fieldPrefix]="specialTestConfig.tibialTorsionFieldTestNoLabels.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.tibialTorsionFieldTestNoLabels.commentsFieldName"
                 [hasTextInput]="specialTestConfig.tibialTorsionFieldTestNoLabels.hasTextInput"
-                [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments">
+                [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments"
+                [initialData]="formData">
             </dropdown-text-table>
         </div>
     </div>
@@ -219,7 +226,8 @@
                 [applyToAllFieldName]="specialTestConfig.valgusStressAt0KneeFlex.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.valgusStressAt0KneeFlex.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.valgusStressAt0KneeFlex.showApplyToAll"
-                [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments">
+                [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -243,7 +251,8 @@
                 [applyToAllFieldName]="specialTestConfig.valgusStressAt30KneeFlex.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.valgusStressAt30KneeFlex.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.valgusStressAt30KneeFlex.showApplyToAll"
-                [showComments]="specialTestConfig.valgusStressAt30KneeFlex.showComments">
+                [showComments]="specialTestConfig.valgusStressAt30KneeFlex.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -267,7 +276,8 @@
                 [applyToAllFieldName]="specialTestConfig.varusStressAt0KneeFlex.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.varusStressAt0KneeFlex.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.varusStressAt0KneeFlex.showApplyToAll"
-                [showComments]="specialTestConfig.varusStressAt0KneeFlex.showComments">
+                [showComments]="specialTestConfig.varusStressAt0KneeFlex.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -291,7 +301,8 @@
                 [applyToAllFieldName]="specialTestConfig.varusStressAt30KneeFlex.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.varusStressAt30KneeFlex.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.varusStressAt30KneeFlex.showApplyToAll"
-                [showComments]="specialTestConfig.varusStressAt30KneeFlex.showComments">
+                [showComments]="specialTestConfig.varusStressAt30KneeFlex.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -315,7 +326,8 @@
                 [applyToAllFieldName]="specialTestConfig.anteriorDrawer.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.anteriorDrawer.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.anteriorDrawer.showApplyToAll"
-                [showComments]="specialTestConfig.anteriorDrawer.showComments">
+                [showComments]="specialTestConfig.anteriorDrawer.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -339,7 +351,8 @@
                 [applyToAllFieldName]="specialTestConfig.posteriorDrawer.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.posteriorDrawer.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.posteriorDrawer.showApplyToAll"
-                [showComments]="specialTestConfig.posteriorDrawer.showComments">
+                [showComments]="specialTestConfig.posteriorDrawer.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -362,7 +375,8 @@
                 [applyToAllFieldName]="specialTestConfig.lachmans.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.lachmans.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.lachmans.showApplyToAll"
-                [showComments]="specialTestConfig.lachmans.showComments">
+                [showComments]="specialTestConfig.lachmans.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -385,7 +399,8 @@
                 [applyToAllFieldName]="specialTestConfig.pivotShift.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.pivotShift.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.pivotShift.showApplyToAll"
-                [showComments]="specialTestConfig.pivotShift.showComments">
+                [showComments]="specialTestConfig.pivotShift.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -407,7 +422,8 @@
                 [applyToAllFieldName]="specialTestConfig.sagSign.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.sagSign.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.sagSign.showApplyToAll"
-                [showComments]="specialTestConfig.sagSign.showComments">
+                [showComments]="specialTestConfig.sagSign.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
     </div>
@@ -431,7 +447,8 @@
             [applyToAllFieldName]="specialTestConfig.storkStandSiMobilityTest.applyToAllFieldName"
             [commentsFieldName]="specialTestConfig.storkStandSiMobilityTest.commentsFieldName"
             [showApplyToAll]="specialTestConfig.storkStandSiMobilityTest.showApplyToAll"
-            [showComments]="specialTestConfig.storkStandSiMobilityTest.showComments">
+            [showComments]="specialTestConfig.storkStandSiMobilityTest.showComments"
+            [initialData]="formData">
         </measurement-table>
     </div>
     <div class="form-row">
@@ -467,7 +484,8 @@
                 [applyToAllFieldName]="specialTestConfig.jSign.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.jSign.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.jSign.showApplyToAll"
-                [showComments]="specialTestConfig.jSign.showComments">
+                [showComments]="specialTestConfig.jSign.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -491,7 +509,8 @@
                 [applyToAllFieldName]="specialTestConfig.patellarBallottement.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.patellarBallottement.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.patellarBallottement.showApplyToAll"
-                [showComments]="specialTestConfig.patellarBallottement.showComments">
+                [showComments]="specialTestConfig.patellarBallottement.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
 
@@ -515,7 +534,8 @@
                 [applyToAllFieldName]="specialTestConfig.patellarCompression.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.patellarCompression.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.patellarCompression.showApplyToAll"
-                [showComments]="specialTestConfig.patellarCompression.showComments">
+                [showComments]="specialTestConfig.patellarCompression.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -538,7 +558,8 @@
                 [applyToAllFieldName]="specialTestConfig.patellarPassiveMobility.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.patellarPassiveMobility.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.patellarPassiveMobility.showApplyToAll"
-                [showComments]="specialTestConfig.patellarPassiveMobility.showComments">
+                [showComments]="specialTestConfig.patellarPassiveMobility.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
     </div>
@@ -597,7 +618,8 @@
                 [applyToAllFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.selectiveFunctionalMovementAssessment.showApplyToAll"
-                [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments">
+                [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -651,7 +673,8 @@
             <measurement-input-table [labels]="specialTestConfig.sideBridgePlank.labels" [formGroup]="specialTestForm"
                 [fieldPrefix]="specialTestConfig.sideBridgePlank.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.sideBridgePlank.commentsFieldName"
-                [showComments]="specialTestConfig.sideBridgePlank.showComments">
+                [showComments]="specialTestConfig.sideBridgePlank.showComments"
+                [initialData]="formData">
             </measurement-input-table>
         </div>
         <div class="form-row">
@@ -671,7 +694,8 @@
             <measurement-input-table [labels]="specialTestConfig.pronePlank.labels" [formGroup]="specialTestForm"
                 [fieldPrefix]="specialTestConfig.pronePlank.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.pronePlank.commentsFieldName"
-                [showComments]="specialTestConfig.pronePlank.showComments">
+                [showComments]="specialTestConfig.pronePlank.showComments"
+                [initialData]="formData">
             </measurement-input-table>
         </div>
         <div class="form-row">
@@ -694,7 +718,8 @@
                 [applyToAllFieldName]="specialTestConfig.singleLegBridgeHold.applyToAllFieldName"
                 [commentsFieldName]="specialTestConfig.singleLegBridgeHold.commentsFieldName"
                 [showApplyToAll]="specialTestConfig.singleLegBridgeHold.showApplyToAll"
-                [showComments]="specialTestConfig.singleLegBridgeHold.showComments">
+                [showComments]="specialTestConfig.singleLegBridgeHold.showComments"
+                [initialData]="formData">
             </measurement-table>
         </div>
         <div class="form-row">
@@ -715,7 +740,8 @@
             <measurement-input-table [labels]="specialTestConfig.singleLegHopTestForDistance.labels"
                 [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.singleLegHopTestForDistance.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.singleLegHopTestForDistance.commentsFieldName"
-                [showComments]="specialTestConfig.singleLegHopTestForDistance.showComments">
+                [showComments]="specialTestConfig.singleLegHopTestForDistance.showComments"
+                [initialData]="formData">
             </measurement-input-table>
         </div>
         <div class="form-row">
@@ -736,7 +762,8 @@
             <measurement-check-table [labels]="specialTestConfig.twoLegSquatWithOverheadReach.labels"
                 [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.twoLegSquatWithOverheadReach.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.twoLegSquatWithOverheadReach.commentsFieldName"
-                [showComments]="specialTestConfig.twoLegSquatWithOverheadReach.showComments">
+                [showComments]="specialTestConfig.twoLegSquatWithOverheadReach.showComments"
+                [initialData]="formData">
             </measurement-check-table>
         </div>
         <div class="form-row">
@@ -757,7 +784,8 @@
             <measurement-check-table [labels]="specialTestConfig.oneLegSquatWithOverheadReach.labels"
                 [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.oneLegSquatWithOverheadReach.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.oneLegSquatWithOverheadReach.commentsFieldName"
-                [showComments]="specialTestConfig.oneLegSquatWithOverheadReach.showComments">
+                [showComments]="specialTestConfig.oneLegSquatWithOverheadReach.showComments"
+                [initialData]="formData">
             </measurement-check-table>
         </div>
         <div class="form-row">
@@ -814,7 +842,8 @@
             [applyToAllFieldName]="specialTestConfig.alarLigamentTest.applyToAllFieldName"
             [commentsFieldName]="specialTestConfig.alarLigamentTest.commentsFieldName"
             [showApplyToAll]="specialTestConfig.alarLigamentTest.showApplyToAll"
-            [showComments]="specialTestConfig.alarLigamentTest.showComments">
+            [showComments]="specialTestConfig.alarLigamentTest.showComments"
+            [initialData]="formData">
         </measurement-table>
     </div>
     <div class="form-row">
@@ -870,7 +899,8 @@
                 [fieldPrefix]="specialTestConfig.liftingTest.fieldPrefix"
                 [commentsFieldName]="specialTestConfig.liftingTest.commentsFieldName"
                 [commentsLabel]="specialTestConfig.liftingTest.commentsLabel"
-                [showComments]="specialTestConfig.liftingTest.showComments">
+                [showComments]="specialTestConfig.liftingTest.showComments"
+                [initialData]="formData">
             </material-handling-work-condition>
         </div>
         <div class="form-row">
@@ -898,7 +928,8 @@
             [commentsFieldName]="specialTestConfig.nonMaterialHandling.commentsFieldName"
             [commentsLabel]="specialTestConfig.nonMaterialHandling.commentsLabel"
             [showComments]="specialTestConfig.nonMaterialHandling.showComments"
-            [columnWidths]="specialTestConfig.nonMaterialHandling.columnWidths">
+            [columnWidths]="specialTestConfig.nonMaterialHandling.columnWidths"
+            [initialData]="formData">
           </non-material-handling-work-condition>
         </div>
 

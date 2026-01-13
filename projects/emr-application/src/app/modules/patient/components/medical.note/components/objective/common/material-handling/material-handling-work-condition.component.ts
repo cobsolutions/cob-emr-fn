@@ -25,6 +25,7 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
   @Input() columnWidths: number[] = []; // Optional custom widths for columns
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -41,8 +42,9 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
     // Add Apply to All control if needed
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
@@ -50,9 +52,9 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
     this.labels.forEach(label => {
       this.columnHeaders.forEach((column, colIndex) => {
         const fieldName = this.getFieldName(label, colIndex);
+        const initialValue = this.initialData?.[fieldName] || '';
         if (!this.formGroup.get(fieldName)) {
-          // Use empty string as default for all controls
-          this.formGroup.addControl(fieldName, this.fb.control(''));
+          this.formGroup.addControl(fieldName, this.fb.control(initialValue));
         }
       });
     });
@@ -60,8 +62,9 @@ export class MaterialHandlingWorkConditionComponent implements OnInit {
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }

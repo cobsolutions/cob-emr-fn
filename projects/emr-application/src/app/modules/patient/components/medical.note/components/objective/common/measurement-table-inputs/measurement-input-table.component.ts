@@ -22,6 +22,7 @@ export class MeasurementInputTableComponent implements OnInit {
   @Input() commentsFieldName?: string; // Optional custom comments field name
   @Input() placeholderMapping: { [labelName: string]: string } = {}; // Custom placeholders for specific labels
   @Input() defaultPlaceholder: string = 'Enter measurement...'; // Default placeholder
+  @Input() initialData?: any; // Initial values for controls
 
   private destroy$ = new Subject<void>();
 
@@ -41,8 +42,9 @@ export class MeasurementInputTableComponent implements OnInit {
     // Add Apply to All control if needed
     if (this.showApplyToAll) {
       const applyToAllFieldName = this.getApplyToAllFieldName();
+      const initialValue = this.initialData?.[applyToAllFieldName] || '';
       if (!this.formGroup.get(applyToAllFieldName)) {
-        this.formGroup.addControl(applyToAllFieldName, this.fb.control(''));
+        this.formGroup.addControl(applyToAllFieldName, this.fb.control(initialValue));
       }
     }
 
@@ -51,19 +53,23 @@ export class MeasurementInputTableComponent implements OnInit {
       const rightField = this.getFieldName(label, 'right');
       const leftField = this.getFieldName(label, 'left');
 
+      const rightValue = this.initialData?.[rightField] || '';
+      const leftValue = this.initialData?.[leftField] || '';
+
       if (!this.formGroup.get(rightField)) {
-        this.formGroup.addControl(rightField, this.fb.control(''));
+        this.formGroup.addControl(rightField, this.fb.control(rightValue));
       }
       if (!this.formGroup.get(leftField)) {
-        this.formGroup.addControl(leftField, this.fb.control(''));
+        this.formGroup.addControl(leftField, this.fb.control(leftValue));
       }
     });
 
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
   }
