@@ -40,8 +40,6 @@ export class DropdownTextTableComponent implements OnInit {
         this.columns.forEach(column => {
           const dropdownFieldName = this.getDropdownFieldName(label, column);
           const textFieldName = this.getTextFieldName(label, column);
-
-          console.log('dropdownFieldName ', dropdownFieldName)
           if (!this.formGroup.get(dropdownFieldName)) {
             this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
           }

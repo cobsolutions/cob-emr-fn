@@ -2,7 +2,7 @@
     <!-- No Limitations Noted -->
     <div class="form-row">
         <label class="field-label">No Limitations Noted</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -33,7 +33,7 @@
     <!-- Selective Tissue Tension Upper -->
     <div class="form-row">
         <label class="field-label">Selective Tissue Tension Upper</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_upper" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -47,7 +47,7 @@
     <div *ngIf="showSelectiveTissueTensionUpperFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Cervical</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="cervical" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -60,7 +60,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Trunk</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="trunk" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -73,7 +73,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Back Ribs</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="back_ribs" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -86,7 +86,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Shoulder</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="shoulder" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -99,7 +99,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Elbow</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="elbow" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -112,7 +112,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Wrist</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="wrist" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -125,7 +125,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Hand</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="hand" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -142,7 +142,7 @@
     <!-- Selective Tissue Tension Lower -->
     <div class="form-row">
         <label class="field-label">Selective Tissue Tension Lower</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_lower" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -156,7 +156,7 @@
     <div *ngIf="showSelectiveTissueTensionLowerFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Hip</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="hip" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -169,7 +169,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Knee</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="knee" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -182,7 +182,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Ankle</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="ankle" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -195,7 +195,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Foot</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="foot" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -209,7 +209,7 @@
     </div>
     <div class="form-row">
         <label class="field-label">Grip / Pinch</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="grip_pinch" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -229,7 +229,7 @@
         </dropdown-text-table>
         <div class="form-row">
             <label class="field-label">Rapid Exchange</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="rapid_exchange" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -243,7 +243,7 @@
 
         <div class="form-row">
             <label class="field-label">Repeated Grip</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="repeated_grip" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -256,7 +256,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Five Level Grip</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="five_level_grip" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -272,7 +272,7 @@
     <!-- Gross Muscle Tests Upper -->
     <div class="form-row">
         <label class="field-label">Gross Muscle Tests Upper</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_upper" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -286,7 +286,7 @@
     <div *ngIf="showGrossMuscleTestsUpperFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Cervical</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="cervical_gross_muscle_tests_upper"
                         value="yes" />
@@ -302,7 +302,7 @@
 
         <div class="form-row">
             <label class="field-label">Shoulder</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="shoulder_gross_muscle_tests_upper"
                         value="yes" />
@@ -318,7 +318,7 @@
 
         <div class="form-row">
             <label class="field-label">Elbow</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -331,7 +331,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Wrist</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -346,7 +346,7 @@
     <!-- Redcord Neurac Stability Tests -->
     <div class="form-row">
         <label class="field-label">Redcord Neurac Stability Tests</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="redcord_neurac_stability_tests" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -360,7 +360,7 @@
     <div *ngIf="showRedcordNeuracStabilityTestsFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Upper Body Myofascial Tests</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="upper_body_myofascial_tests" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -373,7 +373,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Lower Body Myofascial Tests</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="lower_body_myofascial_tests" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -386,7 +386,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Cervical Movements</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="cervical_movements" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -399,7 +399,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Cervical Motor Control Tests</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="cervical_motor_control_tests" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -412,7 +412,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Lumbar Motor Control Tests</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="lumbar_motor_control_tests" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -426,7 +426,7 @@
     </div>
     <div class="form-row">
         <label class="field-label">Gross Muscle Tests Trunk</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_trunk" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -450,7 +450,7 @@
     <!-- Gross Muscle Tests Lower -->
     <div class="form-row">
         <label class="field-label">Gross Muscle Tests Lower</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_lower" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -464,7 +464,7 @@
     <div *ngIf="showGrossMuscleTestsLowerFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Hip</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="hip_gross_muscle_tests_lower" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -477,7 +477,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Knee</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="knee_gross_muscle_tests_lower" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -490,7 +490,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Ankle</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="ankle_gross_muscle_tests_lower" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -505,7 +505,7 @@
     <!-- Core Strength -->
     <div class="form-row">
         <label class="field-label">Core Strength</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="core_strength" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -519,7 +519,7 @@
     <div *ngIf="showCoreStrengthFields" class="dependent-field-box">
         <div class="form-row">
             <label class="field-label">Prone Extension</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="prone_extensioncore_strength" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -532,7 +532,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Supine Flexion</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="supine_flexion_core_strength" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -545,7 +545,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Situps</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="situps_core_strength" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -558,7 +558,7 @@
         </div>
         <div class="form-row">
             <label class="field-label">Pushup</label>
-            <div class="radio-group">
+            <div class="radio-group-primary">
                 <c-form-check class="me-3">
                     <input cFormCheckInput type="radio" formControlName="pushup_core_strength" value="yes" />
                     <label cFormCheckLabel>Yes</label>
@@ -572,7 +572,7 @@
     </div>
     <div class="form-row">
         <label class="field-label">Manual Muscle Tests</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="manual_muscle_tests" value="yes" />
                 <label cFormCheckLabel>Yes</label>
@@ -594,7 +594,7 @@
     </div>
     <div class="form-row">
         <label class="field-label">Additional Comments</label>
-        <div class="radio-group">
+        <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
                 <label cFormCheckLabel>Yes</label>

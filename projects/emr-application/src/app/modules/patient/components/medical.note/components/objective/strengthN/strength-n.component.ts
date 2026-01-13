@@ -130,8 +130,8 @@ export class StrengthNComponent implements OnInit {
       this.showNoLimitationsNotedFields = value === 'yes';
       if (!this.showNoLimitationsNotedFields) {
         this.strengthForm.patchValue({
-          no_limitations_noted: false,
           uper_extremity: false,
+          lower_extremity: false
         });
       }
     });
@@ -140,13 +140,13 @@ export class StrengthNComponent implements OnInit {
       this.showSelectiveTissueTensionUpperFields = value === 'yes';
       if (!this.showSelectiveTissueTensionUpperFields) {
         this.strengthForm.patchValue({
-          cervical: false,
-          trunk: false,
-          back_ribs: false,
-          shoulder: false,
-          elbow: false,
-          wrist: false,
-          hand: false,
+          cervical: 'no',
+          trunk: 'no',
+          back_ribs: 'no',
+          shoulder: 'no',
+          elbow: 'no',
+          wrist: 'no',
+          hand: 'no',
         });
       }
     });
@@ -155,10 +155,10 @@ export class StrengthNComponent implements OnInit {
       this.showSelectiveTissueTensionLowerFields = value === 'yes';
       if (!this.showSelectiveTissueTensionLowerFields) {
         this.strengthForm.patchValue({
-          hip: false,
-          knee: false,
-          ankle: false,
-          foot: false
+          hip: 'no',
+          knee: 'no',
+          ankle: 'no',
+          foot: 'no'
         })
       }
 
@@ -166,9 +166,11 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('grip_pinch')?.valueChanges.subscribe(value => {
       this.showGripPinchFields = value === 'yes';
-      if (this.showGripPinchFields) {
+      if (!this.showGripPinchFields) {
         this.strengthForm.patchValue({
-
+          rapid_exchange: 'no',
+          repeated_grip: 'no',
+          five_level_grip: 'no'
         })
       }
     });
@@ -177,10 +179,10 @@ export class StrengthNComponent implements OnInit {
       this.showGrossMuscleTestsUpperFields = value === 'yes';
       if (!this.showGrossMuscleTestsUpperFields) {
         this.strengthForm.patchValue({
-          cervical_gross_muscle_tests_upper: false,
-          shoulder_gross_muscle_tests_upper: false,
-          elbow_gross_muscle_tests_upper: false,
-          wrist_gross_muscle_tests_upper: false
+          cervical_gross_muscle_tests_upper: 'no',
+          shoulder_gross_muscle_tests_upper: 'no',
+          elbow_gross_muscle_tests_upper: 'no',
+          wrist_gross_muscle_tests_upper: 'no'
         })
       }
     });
@@ -189,11 +191,11 @@ export class StrengthNComponent implements OnInit {
       this.showRedcordNeuracStabilityTestsFields = value === 'yes';
       if (!this.showRedcordNeuracStabilityTestsFields) {
         this.strengthForm.patchValue({
-          upper_body_myofascial_tests: false,
-          lower_body_myofascial_tests: false,
-          cervical_movements: false,
-          cervical_motor_control_tests: false,
-          lumbar_motor_control_tests: false
+          upper_body_myofascial_tests: 'no',
+          lower_body_myofascial_tests: 'no',
+          cervical_movements: 'no',
+          cervical_motor_control_tests: 'no',
+          lumbar_motor_control_tests: 'no'
         })
       }
     });
@@ -210,9 +212,9 @@ export class StrengthNComponent implements OnInit {
       this.showGrossMuscleTestsLowerFields = value === 'yes';
       if (!this.showGrossMuscleTestsLowerFields) {
         this.strengthForm.patchValue({
-          hip_gross_muscle_tests_lower: false,
-          knee_gross_muscle_tests_lower: false,
-          ankle_gross_muscle_tests_lower: false
+          hip_gross_muscle_tests_lower: 'no',
+          knee_gross_muscle_tests_lower: 'no',
+          ankle_gross_muscle_tests_lower: 'no'
         })
       }
     });
@@ -221,10 +223,10 @@ export class StrengthNComponent implements OnInit {
       this.showCoreStrengthFields = value === 'yes';
       if (!this.showCoreStrengthFields) {
         this.strengthForm.patchValue({
-          prone_extensioncore_strength: false,
-          supine_flexion_core_strength: false,
-          situps_core_strength: false,
-          pushup_core_strength: false,
+          prone_extensioncore_strength: 'no',
+          supine_flexion_core_strength: 'no',
+          situps_core_strength: 'no',
+          pushup_core_strength: 'no',
         })
       }
     });
