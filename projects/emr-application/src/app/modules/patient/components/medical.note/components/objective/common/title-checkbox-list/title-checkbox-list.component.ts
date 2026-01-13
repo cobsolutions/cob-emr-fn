@@ -20,6 +20,7 @@ export class TitleCheckboxListComponent implements OnInit {
  @Input() commentsLabel: string = 'Comments';
  @Input() commentsFieldName?: string;
  @Input() normalFieldName?: string;
+ @Input() initialData?: any; // Initial values for controls
 
  constructor(private fb: FormBuilder) {}
 
@@ -46,8 +47,10 @@ export class TitleCheckboxListComponent implements OnInit {
    // Add Normal checkbox control if needed
    if (this.showNormalCheckbox) {
      const normalFieldName = this.getNormalFieldName();
+     const rawValue = this.initialData?.[normalFieldName];
+     const initialValue = this.normalizeCheckboxValue(rawValue);
      if (!this.formGroup.get(normalFieldName)) {
-       this.formGroup.addControl(normalFieldName, this.fb.control(false));
+       this.formGroup.addControl(normalFieldName, this.fb.control(initialValue));
      }
    }
 
@@ -55,8 +58,10 @@ export class TitleCheckboxListComponent implements OnInit {
    if (this.labels && this.labels.length > 0) {
      this.labels.forEach((label, index) => {
        const fieldName = this.getFieldName(label, index);
+       const rawValue = this.initialData?.[fieldName];
+       const initialValue = this.normalizeCheckboxValue(rawValue);
        if (!this.formGroup.get(fieldName)) {
-         this.formGroup.addControl(fieldName, this.fb.control(false));
+         this.formGroup.addControl(fieldName, this.fb.control(initialValue));
        }
      });
    }
@@ -64,10 +69,20 @@ export class TitleCheckboxListComponent implements OnInit {
    // Add comments control if needed
    if (this.showComments) {
      const commentsFieldName = this.getCommentsFieldName();
+     const initialValue = this.initialData?.[commentsFieldName] || '';
      if (!this.formGroup.get(commentsFieldName)) {
-       this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+       this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
      }
    }
+ }
+
+ /**
+  * Normalize checkbox values: convert 'yes'/'no' or true/false to boolean
+  */
+ private normalizeCheckboxValue(value: any): boolean {
+   if (value === 'yes' || value === true || value === 'true') return true;
+   if (value === 'no' || value === false || value === 'false') return false;
+   return false;
  }
 
  /**

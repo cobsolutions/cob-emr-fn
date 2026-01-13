@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PalpationConfig } from './config';
+import { Palpation } from './model/Palpation';
+import { PalpationMapperService } from './service/palpation-mapper.service';
 
 
 @Component({
@@ -11,17 +13,25 @@ import { PalpationConfig } from './config';
 export class PalpationNComponent implements OnInit {
   palpationTestForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() palpationData?: Palpation;
+  formData: any = {};
   readonly PalpationConfig = PalpationConfig
 
   showPalpationFields: boolean = false;
   showPalpationTemperaturPpalpationFields: boolean = false;
   showAdditionalCommentsFields: boolean = false;
-  
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+    private palpationMapperService: PalpationMapperService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+    console.log('palpation', this.palpationData)
+    if (this.palpationData) {
+      this.formData = this.palpationMapperService.fromDto(this.palpationData);
+      this.palpationTestForm.patchValue(this.formData); // Single patch - child components will use formData
+    }
     this.formReady.emit(this.palpationTestForm);
   }
   initForm() {

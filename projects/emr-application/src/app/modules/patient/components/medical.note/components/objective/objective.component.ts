@@ -16,6 +16,7 @@ import { RangeOfMotion } from './range-of-motion/models/RangeOfMotion';
 import { Strength } from './strengthN/models/Strength';
 import { NeuroVascular } from './neuro-vascular/models/NeuroVascular';
 import { SpecialTest } from './special-tests/model/SpecialTest';
+import { Palpation } from './palpationN/model/Palpation';
 
 @Component({
   selector: 'objective',
@@ -40,6 +41,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   strengthData: Strength | null = null;
   neuroVascularData: NeuroVascular | null = null;
   specialTestData: SpecialTest | null = null;
+  palpationData:Palpation | null = null;
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
@@ -103,6 +105,9 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     }
     if(this.objectiveData?.specialTest){
         this.specialTestData = this.objectiveData?.specialTest;
+    }
+    if(this.objectiveData?.palpation){
+      this.palpationData = this.objectiveData?.palpation;
     }
 
     // Subscribe to profile form control changes and sync with selectedProfile

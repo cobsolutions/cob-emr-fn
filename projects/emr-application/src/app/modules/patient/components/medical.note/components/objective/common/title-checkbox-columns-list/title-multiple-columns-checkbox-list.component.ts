@@ -22,6 +22,7 @@ export class TitleMultipleColumnsCheckboxListComponent implements OnInit {
   @Input() normalFieldName?: string;
   @Input() rightColumnLabel: string = 'Right';
   @Input() leftColumnLabel: string = 'Left';
+  @Input() initialData?: any; // Initial values for controls
 
   constructor(private fb: FormBuilder) {}
 
@@ -48,8 +49,10 @@ export class TitleMultipleColumnsCheckboxListComponent implements OnInit {
     // Add Normal checkbox control if needed
     if (this.showNormalCheckbox) {
       const normalFieldName = this.getNormalFieldName();
+      const rawValue = this.initialData?.[normalFieldName];
+      const initialValue = this.normalizeCheckboxValue(rawValue);
       if (!this.formGroup.get(normalFieldName)) {
-        this.formGroup.addControl(normalFieldName, this.fb.control(false));
+        this.formGroup.addControl(normalFieldName, this.fb.control(initialValue));
       }
     }
 
@@ -59,12 +62,18 @@ export class TitleMultipleColumnsCheckboxListComponent implements OnInit {
         const rightFieldName = this.getFieldName(label, 'right', index);
         const leftFieldName = this.getFieldName(label, 'left', index);
 
+        const rightRawValue = this.initialData?.[rightFieldName];
+        const leftRawValue = this.initialData?.[leftFieldName];
+
+        const rightValue = this.normalizeCheckboxValue(rightRawValue);
+        const leftValue = this.normalizeCheckboxValue(leftRawValue);
+
         if (!this.formGroup.get(rightFieldName)) {
-          this.formGroup.addControl(rightFieldName, this.fb.control(false));
+          this.formGroup.addControl(rightFieldName, this.fb.control(rightValue));
         }
 
         if (!this.formGroup.get(leftFieldName)) {
-          this.formGroup.addControl(leftFieldName, this.fb.control(false));
+          this.formGroup.addControl(leftFieldName, this.fb.control(leftValue));
         }
       });
     }
@@ -72,10 +81,20 @@ export class TitleMultipleColumnsCheckboxListComponent implements OnInit {
     // Add comments control if needed
     if (this.showComments) {
       const commentsFieldName = this.getCommentsFieldName();
+      const initialValue = this.initialData?.[commentsFieldName] || '';
       if (!this.formGroup.get(commentsFieldName)) {
-        this.formGroup.addControl(commentsFieldName, this.fb.control(''));
+        this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
+  }
+
+  /**
+   * Normalize checkbox values: convert 'yes'/'no' or true/false to boolean
+   */
+  private normalizeCheckboxValue(value: any): boolean {
+    if (value === 'yes' || value === true || value === 'true') return true;
+    if (value === 'no' || value === false || value === 'false') return false;
+    return false;
   }
 
   /**

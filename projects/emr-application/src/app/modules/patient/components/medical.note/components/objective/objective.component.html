@@ -206,7 +206,7 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <palpation-n (formReady)="setChildForm('palpation', $event)"></palpation-n>
+            <palpation-n (formReady)="setChildForm('palpation', $event)" [palpationData]="palpationData"></palpation-n>
         </c-card-body>
     </c-card>
     <div class="action-buttons">

@@ -33,7 +33,8 @@
         [applyToAllFieldName]="PalpationConfig.temperaturePalpation.applyToAllFieldName"
         [commentsFieldName]="PalpationConfig.temperaturePalpation.commentsFieldName"
         [showApplyToAll]="PalpationConfig.temperaturePalpation.showApplyToAll"
-        [showComments]="PalpationConfig.temperaturePalpation.showComments">
+        [showComments]="PalpationConfig.temperaturePalpation.showComments"
+        [initialData]="formData">
       </measurement-table>
     </div>
     <title-checkbox-list [title]="PalpationConfig.rightTemporalis.title"
@@ -43,7 +44,8 @@
       [showComments]="PalpationConfig.rightTemporalis.showComments"
       [commentsLabel]="PalpationConfig.rightTemporalis.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightTemporalis.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightTemporalis.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightTemporalis.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
     <title-checkbox-list [title]="PalpationConfig.leftTemporalis.title" [labels]="PalpationConfig.leftTemporalis.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.leftTemporalis.fieldPrefix"
@@ -51,7 +53,8 @@
       [showComments]="PalpationConfig.leftTemporalis.showComments"
       [commentsLabel]="PalpationConfig.leftTemporalis.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftTemporalis.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftTemporalis.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftTemporalis.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightMasseter.title" [labels]="PalpationConfig.rightMasseter.labels"
@@ -60,7 +63,8 @@
       [showComments]="PalpationConfig.rightMasseter.showComments"
       [commentsLabel]="PalpationConfig.rightMasseter.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightMasseter.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightMasseter.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightMasseter.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftMasseter.title" [labels]="PalpationConfig.leftMasseter.labels"
@@ -69,7 +73,8 @@
       [showComments]="PalpationConfig.leftMasseter.showComments"
       [commentsLabel]="PalpationConfig.leftMasseter.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftMasseter.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftMasseter.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftMasseter.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightScm.title" [labels]="PalpationConfig.rightScm.labels"
@@ -77,7 +82,8 @@
       [showNormalCheckbox]="PalpationConfig.rightScm.showNormalCheckbox"
       [showComments]="PalpationConfig.rightScm.showComments" [commentsLabel]="PalpationConfig.rightScm.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightScm.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightScm.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightScm.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftScm.title" [labels]="PalpationConfig.leftScm.labels"
@@ -85,7 +91,8 @@
       [showNormalCheckbox]="PalpationConfig.leftScm.showNormalCheckbox"
       [showComments]="PalpationConfig.leftScm.showComments" [commentsLabel]="PalpationConfig.leftScm.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftScm.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftScm.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftScm.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightScalenes.title" [labels]="PalpationConfig.rightScalenes.labels"
@@ -94,7 +101,8 @@
       [showComments]="PalpationConfig.rightScalenes.showComments"
       [commentsLabel]="PalpationConfig.rightScalenes.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightScalenes.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightScalenes.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightScalenes.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftScalenes.title" [labels]="PalpationConfig.leftScalenes.labels"
@@ -103,7 +111,8 @@
       [showComments]="PalpationConfig.leftScalenes.showComments"
       [commentsLabel]="PalpationConfig.leftScalenes.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftScalenes.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftScalenes.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftScalenes.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightSuboccipitalMyofascia.title"
@@ -113,7 +122,8 @@
       [showComments]="PalpationConfig.rightSuboccipitalMyofascia.showComments"
       [commentsLabel]="PalpationConfig.rightSuboccipitalMyofascia.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightSuboccipitalMyofascia.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightSuboccipitalMyofascia.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightSuboccipitalMyofascia.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftSuboccipitalMyofascia.title"
@@ -123,7 +133,8 @@
       [showComments]="PalpationConfig.leftSuboccipitalMyofascia.showComments"
       [commentsLabel]="PalpationConfig.leftSuboccipitalMyofascia.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftSuboccipitalMyofascia.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftSuboccipitalMyofascia.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftSuboccipitalMyofascia.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightLevatorScapula.title"
@@ -133,7 +144,8 @@
       [showComments]="PalpationConfig.rightLevatorScapula.showComments"
       [commentsLabel]="PalpationConfig.rightLevatorScapula.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightLevatorScapula.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightLevatorScapula.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightLevatorScapula.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftLevatorScapula.title"
@@ -143,7 +155,8 @@
       [showComments]="PalpationConfig.leftLevatorScapula.showComments"
       [commentsLabel]="PalpationConfig.leftLevatorScapula.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftLevatorScapula.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftLevatorScapula.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftLevatorScapula.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightUpperTrapezius.title"
@@ -153,7 +166,8 @@
       [showComments]="PalpationConfig.rightUpperTrapezius.showComments"
       [commentsLabel]="PalpationConfig.rightUpperTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightUpperTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightUpperTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightUpperTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftUpperTrapezius.title"
@@ -163,7 +177,8 @@
       [showComments]="PalpationConfig.leftUpperTrapezius.showComments"
       [commentsLabel]="PalpationConfig.leftUpperTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftUpperTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftUpperTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftUpperTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightMiddleTrapezius.title"
@@ -173,7 +188,8 @@
       [showComments]="PalpationConfig.rightMiddleTrapezius.showComments"
       [commentsLabel]="PalpationConfig.rightMiddleTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightMiddleTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightMiddleTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightMiddleTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftMiddleTrapezius.title"
@@ -183,7 +199,8 @@
       [showComments]="PalpationConfig.leftMiddleTrapezius.showComments"
       [commentsLabel]="PalpationConfig.leftMiddleTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftMiddleTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftMiddleTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftMiddleTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightLowerTrapezius.title"
@@ -193,7 +210,8 @@
       [showComments]="PalpationConfig.rightLowerTrapezius.showComments"
       [commentsLabel]="PalpationConfig.rightLowerTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightLowerTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightLowerTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightLowerTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftLowerTrapezius.title"
@@ -203,7 +221,8 @@
       [showComments]="PalpationConfig.leftLowerTrapezius.showComments"
       [commentsLabel]="PalpationConfig.leftLowerTrapezius.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftLowerTrapezius.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftLowerTrapezius.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftLowerTrapezius.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightQuadratusLumborum.title"
@@ -213,7 +232,8 @@
       [showComments]="PalpationConfig.rightQuadratusLumborum.showComments"
       [commentsLabel]="PalpationConfig.rightQuadratusLumborum.commentsLabel"
       [commentsFieldName]="PalpationConfig.rightQuadratusLumborum.commentsFieldName"
-      [normalFieldName]="PalpationConfig.rightQuadratusLumborum.normalFieldName">
+      [normalFieldName]="PalpationConfig.rightQuadratusLumborum.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftQuadratusLumborum.title"
@@ -223,296 +243,297 @@
       [showComments]="PalpationConfig.leftQuadratusLumborum.showComments"
       [commentsLabel]="PalpationConfig.leftQuadratusLumborum.commentsLabel"
       [commentsFieldName]="PalpationConfig.leftQuadratusLumborum.commentsFieldName"
-      [normalFieldName]="PalpationConfig.leftQuadratusLumborum.normalFieldName">
+      [normalFieldName]="PalpationConfig.leftQuadratusLumborum.normalFieldName"
+      [initialData]="formData">
     </title-checkbox-list>
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.siJointLine.title"
       [labels]="PalpationConfig.siJointLine.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.siJointLine.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.rightSacralMultifidii.title"
       [labels]="PalpationConfig.rightSacralMultifidii.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightSacralMultifidii.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.leftSacralMultifidii.title"
       [labels]="PalpationConfig.leftSacralMultifidii.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftSacralMultifidii.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.aSIS.title" [labels]="PalpationConfig.aSIS.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.aSIS.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.pSIS.title" [labels]="PalpationConfig.pSIS.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.pSIS.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.ischialTuberosity.title"
       [labels]="PalpationConfig.ischialTuberosity.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.ischialTuberosity.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.pubicSymphysis.title"
       [labels]="PalpationConfig.pubicSymphysis.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.pubicSymphysis.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
     <title-checkbox-list [title]="PalpationConfig.pubicSymphysis.title" [labels]="PalpationConfig.pubicSymphysis.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.pubicSymphysis.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightRotatorCuffInsertionAtGreaterTubercle.title"
       [labels]="PalpationConfig.rightRotatorCuffInsertionAtGreaterTubercle.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightRotatorCuffInsertionAtGreaterTubercle.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftRotatorCuffInsertionAtGreaterTubercle.title"
       [labels]="PalpationConfig.leftRotatorCuffInsertionAtGreaterTubercle.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftRotatorCuffInsertionAtGreaterTubercle.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightRotatorCuffInsertionAtLesserTubercle.title"
       [labels]="PalpationConfig.rightRotatorCuffInsertionAtLesserTubercle.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightRotatorCuffInsertionAtLesserTubercle.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftRotatorCuffInsertionAtLesserTubercle.title"
       [labels]="PalpationConfig.leftRotatorCuffInsertionAtLesserTubercle.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftRotatorCuffInsertionAtLesserTubercle.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightPiriformis.title"
       [labels]="PalpationConfig.rightPiriformis.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightPiriformis.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftPiriformis.title" [labels]="PalpationConfig.leftPiriformis.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.leftPiriformis.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightPosteriorCuff.title"
       [labels]="PalpationConfig.rightPosteriorCuff.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightPosteriorCuff.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftPosteriorCuff.title"
       [labels]="PalpationConfig.leftPosteriorCuff.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftPosteriorCuff.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightGluteusMaximus.title"
       [labels]="PalpationConfig.rightGluteusMaximus.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightGluteusMaximus.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftGluteusMaximus.title"
       [labels]="PalpationConfig.leftGluteusMaximus.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftGluteusMaximus.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightGluteusMedius.title"
       [labels]="PalpationConfig.rightGluteusMedius.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightGluteusMedius.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftGluteusMedius.title"
       [labels]="PalpationConfig.leftGluteusMedius.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftGluteusMedius.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightEcrl.title" [labels]="PalpationConfig.rightEcrl.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.rightEcrl.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftEcrl.title" [labels]="PalpationConfig.leftEcrl.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.leftEcrl.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.rightBicepsShortHead.title"
       [labels]="PalpationConfig.rightBicepsShortHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.rightBicepsShortHead.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <title-checkbox-list [title]="PalpationConfig.leftBicepsShortHead.title"
       [labels]="PalpationConfig.leftBicepsShortHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.leftBicepsShortHead.fieldPrefix" [showNormalCheckbox]="" [showComments]="false"
-      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
 
     <!-- Repeat the same pattern for all remaining items... -->
 
     <title-checkbox-list [title]="PalpationConfig.leftItBand.title" [labels]="PalpationConfig.leftItBand.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.leftItBand.fieldPrefix" [showNormalCheckbox]=""
-      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''">
+      [showComments]="false" [commentsLabel]="" [commentsFieldName]="''" [normalFieldName]="''" [initialData]="formData">
     </title-checkbox-list>
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.tibialTuberosity.title"
       [labels]="PalpationConfig.tibialTuberosity.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.tibialTuberosity.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.lateralJointLine.title"
       [labels]="PalpationConfig.lateralJointLine.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.lateralJointLine.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.medialJointLine.title"
       [labels]="PalpationConfig.medialJointLine.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.medialJointLine.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.pesAnserine.title"
       [labels]="PalpationConfig.pesAnserine.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.pesAnserine.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.lcl.title" [labels]="PalpationConfig.lcl.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.lcl.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.mcl.title" [labels]="PalpationConfig.mcl.labels"
       [formGroup]="palpationTestForm" [fieldPrefix]="PalpationConfig.mcl.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.anteriorTibialis.title"
       [labels]="PalpationConfig.anteriorTibialis.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.anteriorTibialis.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.posteriorTibialis.title"
       [labels]="PalpationConfig.posteriorTibialis.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.posteriorTibialis.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.peroneals.title"
       [labels]="PalpationConfig.peroneals.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.peroneals.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.gastrocSoleusJunction.title"
       [labels]="PalpationConfig.gastrocSoleusJunction.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.gastrocSoleusJunction.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.achillesTendon.title"
       [labels]="PalpationConfig.achillesTendon.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.achillesTendon.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.calcaneus.title"
       [labels]="PalpationConfig.calcaneus.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.calcaneus.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.retrocalcanealBursa.title"
       [labels]="PalpationConfig.retrocalcanealBursa.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.retrocalcanealBursa.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.deltoidLigaments.title"
       [labels]="PalpationConfig.deltoidLigaments.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.deltoidLigaments.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.anteriorTalofibularLigament.title"
       [labels]="PalpationConfig.anteriorTalofibularLigament.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.anteriorTalofibularLigament.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.calcaneofibularLigament.title"
       [labels]="PalpationConfig.calcaneofibularLigament.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.calcaneofibularLigament.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.posteriorTalofibularLigament.title"
       [labels]="PalpationConfig.posteriorTalofibularLigament.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.posteriorTalofibularLigament.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.plantarFascia.title"
       [labels]="PalpationConfig.plantarFascia.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.plantarFascia.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.mortonsInterdigit.title"
       [labels]="PalpationConfig.mortonsInterdigit.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.mortonsInterdigit.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.firstMetatarsalHead.title"
       [labels]="PalpationConfig.firstMetatarsalHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.firstMetatarsalHead.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.secondMetatarsalHead.title"
       [labels]="PalpationConfig.secondMetatarsalHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.secondMetatarsalHead.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.thirdMetatarsalHead.title"
       [labels]="PalpationConfig.thirdMetatarsalHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.thirdMetatarsalHead.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.fourthMetatarsalHead.title"
       [labels]="PalpationConfig.fourthMetatarsalHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.fourthMetatarsalHead.fieldPrefix" [showNormalCheckbox]="true"
-      [showComments]="false" commentsLabel="">
+      [showComments]="false" commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.fifthMetatarsalHead.title"
       [labels]="PalpationConfig.fifthMetatarsalHead.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.fifthMetatarsalHead.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
     <title-multiple-columns-checkbox-list [title]="PalpationConfig.sesamoids.title"
       [labels]="PalpationConfig.sesamoids.labels" [formGroup]="palpationTestForm"
       [fieldPrefix]="PalpationConfig.sesamoids.fieldPrefix" [showNormalCheckbox]="true" [showComments]="false"
-      commentsLabel="">
+      commentsLabel="" [initialData]="formData">
     </title-multiple-columns-checkbox-list>
 
   </div>
