@@ -1,7 +1,7 @@
 <div [formGroup]="palpationTestForm" class="omt-form">
   <div class="form-row">
     <label class="field-label">Palpation</label>
-    <div class="radio-group">
+    <div class="radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="palpation" value="yes" />
         <label cFormCheckLabel>Yes</label>
@@ -15,7 +15,7 @@
   <div *ngIf="showPalpationFields" class="dependent-field-box">
     <div class="form-row">
       <label class="field-label">Temperature Palpation</label>
-      <div class="radio-group">
+      <div class="radio-group-primary">
         <c-form-check class="me-3">
           <input cFormCheckInput type="radio" formControlName="temperature_palpation" value="yes" />
           <label cFormCheckLabel>Yes</label>
@@ -518,7 +518,7 @@
   </div>
   <div class="form-row">
     <label class="field-label">Additional Comments</label>
-    <div class="radio-group">
+    <div class="radio-group-primary">
       <c-form-check class="me-3">
         <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
         <label cFormCheckLabel>Yes</label>
