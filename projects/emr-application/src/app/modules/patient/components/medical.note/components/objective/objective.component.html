@@ -31,7 +31,7 @@
 </div>
 <div [formGroup]="objectiveForm" *ngIf="isProfileSelected">
     <!--Inspection-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header inspection-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -50,10 +50,10 @@
             <inspectionN [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)">
             </inspectionN>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Outcome Measurement Tools-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header omt-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -73,10 +73,10 @@
             <outcome-measurement-tools (formReady)="setChildForm('omt', $event)"
                 [omtData]="omtData"></outcome-measurement-tools>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Observation-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header observation-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -95,10 +95,10 @@
             <observation-n (formReady)="setChildForm('observation', $event)"
                 [observationData]="observationData"></observation-n>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Range of Motion-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header rom-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -116,10 +116,10 @@
             <range-of-motion-n (formReady)="setChildForm('rangeOfMotion', $event)"
                 [rangeOfMotionData]="romData"></range-of-motion-n>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Strength-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header strength-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -139,10 +139,10 @@
         <c-card-body class="enhanced-card-body">
             <strength-n (formReady)="setChildForm('strength', $event)" [strengthData]="strengthData"></strength-n>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Neuro-Vascular-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header neuro-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -160,10 +160,10 @@
             <neuro-vascular-n (formReady)="setChildForm('neuroVascular', $event)"
                 [neuroVascularData]="neuroVascularData"></neuro-vascular-n>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Special Tests-->
-    <!-- <c-card class="mb-3 enhanced-card">
+    <c-card class="mb-3 enhanced-card">
         <c-card-header class="enhanced-card-header tests-header">
             <div class="card-header-content">
                 <div class="card-header-title">
@@ -183,7 +183,7 @@
             <special-tests-n (formReady)="setChildForm('specialTest', $event)"
             [specialTestData]="specialTestData"></special-tests-n>
         </c-card-body>
-    </c-card> -->
+    </c-card>
 
     <!--Palpation-->
     <c-card class="mb-3 enhanced-card">
