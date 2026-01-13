@@ -6,6 +6,7 @@ import { NeuroVascularMapperService } from '../neuro-vascular/services/neuro-vas
 import { ObservationMapperService } from '../observationN/services/observation-mapper.service';
 import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
 import { RangeOfMotionMapperService } from '../range-of-motion/services/range-of-motion-mapper.service';
+import { SpecialTestsMapperService } from '../special-tests/service/special-tests-mapper.service';
 import { StrengthMapperService } from '../strengthN/services/strength-mapper.service';
 
 @Injectable({
@@ -18,7 +19,8 @@ export class ObjectiveMapperService {
     private observationMapper: ObservationMapperService,
     private rangeOfMotionMapperService: RangeOfMotionMapperService,
     private strengthMapperService: StrengthMapperService,
-    private neuroVascularMapperService: NeuroVascularMapperService) { }
+    private neuroVascularMapperService: NeuroVascularMapperService,
+    private specialTestsMapperService: SpecialTestsMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -53,7 +55,10 @@ export class ObjectiveMapperService {
     const neuroVascularControl = formGroup.get('neuroVascular')
     if (neuroVascularControl) {
       objective.neuroVascular = this.neuroVascularMapperService.toModel(neuroVascularControl.value)
-
+    }
+    const specialTestControl = formGroup.get('specialTest')
+    if (specialTestControl) {
+      objective.specialTest = this.specialTestsMapperService.toModel(specialTestControl.value)
     }
 
     return objective;
