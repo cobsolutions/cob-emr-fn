@@ -137,7 +137,8 @@
             </div>
         </c-card-header>
         <c-card-body class="enhanced-card-body">
-            <strength-n (formReady)="setChildForm('strength', $event)"></strength-n>
+            <strength-n (formReady)="setChildForm('strength', $event)"
+                [strengthData]="strengthData"></strength-n>
         </c-card-body>
     </c-card>
 

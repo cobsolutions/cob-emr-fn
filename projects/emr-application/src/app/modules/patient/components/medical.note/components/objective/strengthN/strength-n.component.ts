@@ -1,8 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { generateMeasurementFieldName } from '../common/form-field-utils';
 import { RomSectionConfig, RomSectionWithSelectsConfig } from '../range-of-motion/config';
 import { StrengthSectionsConfig } from './config';
+import { Strength } from './models/Strength';
+import { StrengthMapperService } from './services/strength-mapper.service';
 
 @Component({
   selector: 'strength-n',
@@ -10,8 +12,11 @@ import { StrengthSectionsConfig } from './config';
   styleUrls: ['./strength-n.component.css']
 })
 export class StrengthNComponent implements OnInit {
-  strengthForm!: FormGroup;
+  @Input() strengthData?: Strength;
   @Output() formReady = new EventEmitter<FormGroup>();
+  strengthForm!: FormGroup;
+
+  formData: any = {}; // Store mapped form data to pass to child components
 
   showNoLimitationsNotedFields: boolean = false;
   showSelectiveTissueTensionUpperFields: boolean = false;
@@ -24,13 +29,25 @@ export class StrengthNComponent implements OnInit {
   showCoreStrengthFields: boolean = false;
   showManualMuscleTestsFields: boolean = false;
   showAdditionalCommentsFields: boolean = false;
-  constructor(private fb: FormBuilder) { }
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
+
+  constructor(
+    private fb: FormBuilder,
+    private strengthMapper: StrengthMapperService
+  ) { }
+
   ngOnInit(): void {
     this.initForm();
     this.setupValueChangeListeners();
+
+    // Load data if provided
+    if (this.strengthData) {
+      this.formData = this.strengthMapper.fromDto(this.strengthData);
+      this.strengthForm.patchValue(this.formData); // Single patch - child components will use formData
+    }
+
     this.formReady.emit(this.strengthForm);
   }
   /**
@@ -241,6 +258,21 @@ export class StrengthNComponent implements OnInit {
         this.strengthForm.get('additional_comments_text')?.setValue('');
       }
     });
+  }
+
+  /**
+   * Get the strength model from form (for sending to backend)
+   */
+  getStrengthModel(): Strength {
+    return this.strengthMapper.toModel(this.strengthForm.getRawValue());
+  }
+
+  /**
+   * Load strength data from DTO into form
+   */
+  loadFromDto(dto: Strength): void {
+    const formValue = this.strengthMapper.fromDto(dto);
+    this.strengthForm.patchValue(formValue);
   }
 
 }

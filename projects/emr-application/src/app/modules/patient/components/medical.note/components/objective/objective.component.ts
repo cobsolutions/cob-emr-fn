@@ -13,6 +13,7 @@ import { Inspection } from './inspectionN/models/Inspection';
 import { Omt } from './outcome-measurement-tools/models/Omt';
 import { Observation } from './observationN/models/Observation';
 import { RangeOfMotion } from './range-of-motion/models/RangeOfMotion';
+import { Strength } from './strengthN/models/Strength';
 
 @Component({
   selector: 'objective',
@@ -34,6 +35,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   omtData: Omt | null = null
   observationData: Observation | null = null
   romData: RangeOfMotion | null = null;
+  strengthData: Strength | null = null;
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
@@ -88,6 +90,9 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     }
     if (this.objectiveData?.rom) {
       this.romData = this.objectiveData?.rom
+    }
+    if (this.objectiveData?.strength) {
+      this.strengthData = this.objectiveData?.strength
     }
 
     // Subscribe to profile form control changes and sync with selectedProfile
