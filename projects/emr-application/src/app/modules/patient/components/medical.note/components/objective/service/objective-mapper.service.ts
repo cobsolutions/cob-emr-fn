@@ -5,6 +5,7 @@ import { Objective } from '../models/objective';
 import { NeuroVascularMapperService } from '../neuro-vascular/services/neuro-vascular-mapper.service';
 import { ObservationMapperService } from '../observationN/services/observation-mapper.service';
 import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
+import { PalpationMapperService } from '../palpationN/service/palpation-mapper.service';
 import { RangeOfMotionMapperService } from '../range-of-motion/services/range-of-motion-mapper.service';
 import { SpecialTestsMapperService } from '../special-tests/service/special-tests-mapper.service';
 import { StrengthMapperService } from '../strengthN/services/strength-mapper.service';
@@ -20,7 +21,8 @@ export class ObjectiveMapperService {
     private rangeOfMotionMapperService: RangeOfMotionMapperService,
     private strengthMapperService: StrengthMapperService,
     private neuroVascularMapperService: NeuroVascularMapperService,
-    private specialTestsMapperService: SpecialTestsMapperService) { }
+    private specialTestsMapperService: SpecialTestsMapperService,
+    private palpationMapperService: PalpationMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -59,6 +61,10 @@ export class ObjectiveMapperService {
     const specialTestControl = formGroup.get('specialTest')
     if (specialTestControl) {
       objective.specialTest = this.specialTestsMapperService.toModel(specialTestControl.value)
+    }
+    const palpationControl = formGroup.get('palpation')
+    if (palpationControl) {
+      objective.palpation = this.palpationMapperService.toModel(palpationControl.value)
     }
 
     return objective;
