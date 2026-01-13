@@ -15,6 +15,11 @@ export class RangeOfMotionNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   romForm!: FormGroup;
 
+  private pendingData?: RangeOfMotion; // Store data temporarily until child components initialize
+  private readyTables = new Set<string>(); // Track which measurement tables are ready
+  private expectedTables = new Set<string>(); // Track which tables we expect based on data
+  private hasLoadedData = false; // Prevent multiple loads
+
   // Visibility flags for dependent fields
   showNoLimitationsNotedFields: boolean = false;
   showPromFields: boolean = false;
@@ -57,7 +62,7 @@ export class RangeOfMotionNComponent implements OnInit {
 
 
 
- 
+
 
   romTestOptions = [
     { value: 'not_tested', label: 'Not Tested' },
@@ -169,12 +174,69 @@ export class RangeOfMotionNComponent implements OnInit {
     this.initForm();
     this.setupValueChangeListeners();
 
-    // Load data if provided
     if (this.rangeOfMotionData) {
-      this.loadFromDto(this.rangeOfMotionData);
+      this.pendingData = this.rangeOfMotionData;
+      const formValue = this.rangeOfMotionMapper.fromDto(this.rangeOfMotionData);
+
+      // Determine which measurement tables will be created based on the data
+      this.detectExpectedTables(formValue);
+
+      // First patch: triggers visibility flags (e.g., shoulder_arrom: 'yes' shows measurement-table)
+      // This will cause the child components to be created via *ngIf
+      this.romForm.patchValue(formValue);
+
+      // If no measurement tables are expected, load data immediately
+      if (this.expectedTables.size === 0) {
+        this.hasLoadedData = true;
+        this.pendingData = undefined;
+      }
     }
 
     this.formReady.emit(this.romForm);
+  }
+
+  /**
+   * Detect which measurement tables will be created based on form data
+   */
+  private detectExpectedTables(formValue: any): void {
+    if (formValue.shoulder_arrom === 'yes') this.expectedTables.add('shoulder_arom');
+    if (formValue.shoulder_prom === 'yes') this.expectedTables.add('shoulder_prom');
+    if (formValue.elbow_arrom === 'yes') this.expectedTables.add('elbow_arom');
+    if (formValue.elbow_prom === 'yes') this.expectedTables.add('elbow_prom');
+    if (formValue.wrist_arrom === 'yes') this.expectedTables.add('wrist_arom');
+    if (formValue.wrist_prom === 'yes') this.expectedTables.add('wrist_prom');
+    if (formValue.hip_arrom === 'yes') this.expectedTables.add('hip_arom');
+    if (formValue.hip_prom === 'yes') this.expectedTables.add('hip_prom');
+    if (formValue.knee_arrom === 'yes') this.expectedTables.add('knee_arom');
+    if (formValue.knee_prom === 'yes') this.expectedTables.add('knee_prom');
+    if (formValue.ankle_arrom === 'yes') this.expectedTables.add('ankle_arom');
+    if (formValue.ankle_prom === 'yes') this.expectedTables.add('ankle_prom');
+    if (formValue.fst_mtp_arrom === 'yes') this.expectedTables.add('fst_mtp_arom');
+    if (formValue.fst_mtp_prom === 'yes') this.expectedTables.add('fst_mtp_prom');
+    if (formValue.fst_ip_arrom === 'yes') this.expectedTables.add('fst_ip_arom');
+    if (formValue.fst_ip_prom === 'yes') this.expectedTables.add('fst_ip_prom');
+    if (formValue.toe_arrom === 'yes') this.expectedTables.add('toe_arom');
+    if (formValue.toe_prom === 'yes') this.expectedTables.add('toe_prom');
+
+    console.log('Expected tables:', Array.from(this.expectedTables));
+  }
+
+  /**
+   * Called when a measurement table component has initialized and created its controls
+   */
+  onMeasurementTableReady(tableName: string): void {
+    this.readyTables.add(tableName);
+    console.log(`Table ready: ${tableName}. Ready tables:`, Array.from(this.readyTables));
+    console.log(`Expected: ${this.expectedTables.size}, Ready: ${this.readyTables.size}`);
+
+    // Check if all expected tables are ready
+    if (this.pendingData && !this.hasLoadedData && this.readyTables.size === this.expectedTables.size) {
+      console.log('All tables ready! Patching data again...');
+      // All measurement tables have initialized, now patch the data again
+      this.loadFromDto(this.pendingData);
+      this.hasLoadedData = true;
+      this.pendingData = undefined;
+    }
   }
 
   /**
@@ -189,6 +251,7 @@ export class RangeOfMotionNComponent implements OnInit {
    */
   loadFromDto(dto: RangeOfMotion): void {
     const formValue = this.rangeOfMotionMapper.fromDto(dto);
+    console.log('ROM- formValue ', formValue)
     this.romForm.patchValue(formValue);
   }
 
@@ -217,27 +280,7 @@ export class RangeOfMotionNComponent implements OnInit {
       costovertebral_expansion: ['no'],
 
       shoulder_arrom: ['no'],
-      shoulder_apply_to_all: [''],
-      shoulder_flexion_right: ['not_tested'],
-      shoulder_flexion_left: ['not_tested'],
-      shoulder_scaption_right: ['not_tested'],
-      shoulder_scaption_left: ['not_tested'],
-      shoulder_abduction_right: ['not_tested'],
-      shoulder_abduction_left: ['not_tested'],
-      shoulder_extension_right: ['not_tested'],
-      shoulder_extension_left: ['not_tested'],
-      shoulder_functional_er_reach_right: ['not_tested'],
-      shoulder_functional_er_reach_left: ['not_tested'],
-      shoulder_functional_ir_reach_right: ['not_tested'],
-      shoulder_functional_ir_reach_left: ['not_tested'],
-      shoulder_er_neutral_right: ['not_tested'],
-      shoulder_er_neutral_left: ['not_tested'],
-      shoulder_ir_neutral_right: ['not_tested'],
-      shoulder_ir_neutral_left: ['not_tested'],
-      shoulder_horizontal_abduction_right: ['not_tested'],
-      shoulder_horizontal_abduction_left: ['not_tested'],
-      shoulder_horizontal_adduction_right: ['not_tested'],
-      shoulder_horizontal_adduction_left: ['not_tested'],
+
       shoulder_prom: ['no'],
       shoulder_prom_apply_to_all: [''],
       shoulder_prom_flexion_right: ['not_tested'],

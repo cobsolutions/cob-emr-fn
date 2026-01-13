@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RangeOfMotion } from '../models/RangeOfMotion';
+import { ShoulderAROMMapper } from './shoulder/shoulderAROMMapper';
 
 @Injectable({
   providedIn: 'root'
@@ -37,30 +38,7 @@ export class RangeOfMotionMapperService {
         cervicalArrom: formValue.cervical_arrom === 'yes'
       },
 
-      shoulderAROM: {
-        shoulderArrom: formValue.shoulder_arrom === 'yes',
-        shoulderApplyToAll: formValue.shoulder_apply_to_all || '',
-        shoulderFlexionRight: formValue.shoulder_flexion_right || '',
-        shoulderFlexionLeft: formValue.shoulder_flexion_left || '',
-        shoulderScaptionRight: formValue.shoulder_scaption_right || '',
-        shoulderScaptionLeft: formValue.shoulder_scaption_left || '',
-        shoulderAbductionRight: formValue.shoulder_abduction_right || '',
-        shoulderAbductionLeft: formValue.shoulder_abduction_left || '',
-        shoulderExtensionRight: formValue.shoulder_extension_right || '',
-        shoulderExtensionLeft: formValue.shoulder_extension_left || '',
-        shoulderFunctionalErReachRight: formValue.shoulder_functional_er_reach_right || '',
-        shoulderFunctionalErReachLeft: formValue.shoulder_functional_er_reach_left || '',
-        shoulderFunctionalIrReachRight: formValue.shoulder_functional_ir_reach_right || '',
-        shoulderFunctionalIrReachLeft: formValue.shoulder_functional_ir_reach_left || '',
-        shoulderErNeutralRight: formValue.shoulder_er_neutral_right || '',
-        shoulderErNeutralLeft: formValue.shoulder_er_neutral_left || '',
-        shoulderIrNeutralRight: formValue.shoulder_ir_neutral_right || '',
-        shoulderIrNeutralLeft: formValue.shoulder_ir_neutral_left || '',
-        shoulderHorizontalAbductionRight: formValue.shoulder_horizontal_abduction_right || '',
-        shoulderHorizontalAbductionLeft: formValue.shoulder_horizontal_abduction_left || '',
-        shoulderHorizontalAdductionRight: formValue.shoulder_horizontal_adduction_right || '',
-        shoulderHorizontalAdductionLeft: formValue.shoulder_horizontal_adduction_left || ''
-      },
+      shoulderAROM: ShoulderAROMMapper.toModel(formValue),
 
       shoulderPROM: this.mapShoulderPROM(formValue),
 
@@ -141,6 +119,7 @@ export class RangeOfMotionMapperService {
    * Convert RangeOfMotion DTO to form values (for loading from backend)
    */
   fromDto(dto: RangeOfMotion): any {
+    
     return {
       costovertebral_expansion: dto.costovertebralExpansion ? 'yes' : 'no',
 
@@ -162,7 +141,7 @@ export class RangeOfMotionMapperService {
 
       cervical_arrom: dto.cervicalAROM.cervicalArrom ? 'yes' : 'no',
 
-      ...this.unmapShoulderAROM(dto.shoulderAROM),
+      ...ShoulderAROMMapper.fromDto(dto.shoulderAROM),
       ...this.unmapShoulderPROM(dto.shoulderPROM),
       ...this.unmapElbowAROM(dto.elbowAROM),
       ...this.unmapElbowPROM(dto.elbowPROM),
@@ -691,7 +670,8 @@ export class RangeOfMotionMapperService {
       fstMtpFlexionLeft: formValue.fst_mtp_flexion_left || '',
       fstMtpExtensionRight: formValue.fst_mtp_extension_right || '',
       fstMtpExtensionLeft: formValue.fst_mtp_extension_left || '',
-      fstMtpArromComments: formValue.fst_mtp_arrom_comments || ''
+      fstMtpArromComments: formValue.fst_mtp_arrom_comments || '',
+      fstMtpComments: formValue.fst_mtp_comments || ''
     };
   }
 
@@ -1224,7 +1204,8 @@ export class RangeOfMotionMapperService {
       fst_mtp_flexion_left: fstMTPAROM.fstMtpFlexionLeft,
       fst_mtp_extension_right: fstMTPAROM.fstMtpExtensionRight,
       fst_mtp_extension_left: fstMTPAROM.fstMtpExtensionLeft,
-      fst_mtp_arrom_comments: fstMTPAROM.fstMtpArromComments
+      fst_mtp_arrom_comments: fstMTPAROM.fstMtpArromComments,
+      fst_mtp_comments: fstMTPAROM.fstMtpComments
     };
   }
 

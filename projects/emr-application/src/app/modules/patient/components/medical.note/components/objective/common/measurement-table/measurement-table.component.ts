@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -23,15 +23,20 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() applyToAllFieldName?: string; // Optional custom apply to all field name
   @Input() commentsFieldName?: string; // Optional custom comments field name
 
+  @Output() controlsReady = new EventEmitter<void>(); // Emit when dynamic controls are created
+
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
+
+    // Emit after controls are created and ready
+    this.controlsReady.emit();
   }
 
   /**
@@ -50,7 +55,10 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
     this.labels.forEach(label => {
       const rightField = this.getFieldName(label, 'right');
       const leftField = this.getFieldName(label, 'left');
-
+      if (this.fieldPrefix === 'shoulder_') {
+        console.log('rightField ', rightField)
+        console.log('leftField ', leftField)
+      }
       if (!this.formGroup.get(rightField)) {
         this.formGroup.addControl(rightField, this.fb.control('not_tested'));
       }

@@ -17,11 +17,11 @@ export class DropdownTextTableComponent implements OnInit {
   @Input() showComments: boolean = false;
   @Input() commentsLabel: string = 'Comments';
   @Input() commentsFieldName?: string;
-  @Input() hasTextInput?:boolean = true
+  @Input() hasTextInput?: boolean = true
 
   hasLabels: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.hasLabels = this.labels && this.labels.length > 0;
@@ -32,13 +32,16 @@ export class DropdownTextTableComponent implements OnInit {
    * Dynamically add form controls if they don't exist
    */
   private ensureFormControlsExist(): void {
+    console.log('fieldPrefix , ' + this.fieldPrefix)
     if (this.hasLabels) {
+      console.log('this.hasLabels , ' + this.fieldPrefix)
       // With labels: create dropdown and text for each label-column combination
       this.labels.forEach(label => {
         this.columns.forEach(column => {
           const dropdownFieldName = this.getDropdownFieldName(label, column);
           const textFieldName = this.getTextFieldName(label, column);
 
+          console.log('dropdownFieldName ', dropdownFieldName)
           if (!this.formGroup.get(dropdownFieldName)) {
             this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
           }
@@ -56,7 +59,7 @@ export class DropdownTextTableComponent implements OnInit {
         if (!this.formGroup.get(dropdownFieldName)) {
           this.formGroup.addControl(dropdownFieldName, this.fb.control('not_tested'));
         }
-        if (!this.formGroup.get(textFieldName)&& this.hasTextInput) {
+        if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
           this.formGroup.addControl(textFieldName, this.fb.control(''));
         }
       });

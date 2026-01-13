@@ -159,7 +159,8 @@
       [fieldPrefix]="romConfig.shoulderArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.shoulderArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.shoulderArom.commentsFieldName"
-      [showApplyToAll]="romConfig.shoulderArom.showApplyToAll" [showComments]="romConfig.shoulderArom.showComments">
+      [showApplyToAll]="romConfig.shoulderArom.showApplyToAll" [showComments]="romConfig.shoulderArom.showComments"
+      (controlsReady)="onMeasurementTableReady('shoulder_arom')">
     </measurement-table>
   </div>
   <!-- Shoulder PROM -->
@@ -185,7 +186,8 @@
       [fieldPrefix]="romConfig.shoulderProm.fieldPrefix"
       [applyToAllFieldName]="romConfig.shoulderProm.applyToAllFieldName"
       [commentsFieldName]="romConfig.shoulderProm.commentsFieldName"
-      [showApplyToAll]="romConfig.shoulderProm.showApplyToAll" [showComments]="romConfig.shoulderProm.showComments">
+      [showApplyToAll]="romConfig.shoulderProm.showApplyToAll" [showComments]="romConfig.shoulderProm.showComments"
+      (controlsReady)="onMeasurementTableReady('shoulder_prom')">
     </measurement-endfeel-table>
   </div>
   <!--Elbow AROM -->
@@ -208,7 +210,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.elbowArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.elbowArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.elbowArom.commentsFieldName" [showApplyToAll]="romConfig.elbowArom.showApplyToAll"
-      [showComments]="romConfig.elbowArom.showComments">
+      [showComments]="romConfig.elbowArom.showComments"
+      (controlsReady)="onMeasurementTableReady('elbow_arom')">
     </measurement-table>
   </div>
   <!--Elbow PROM-->
@@ -233,7 +236,8 @@
       [endfeelOptions]="romConfig.elbowProm.endfeelOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.elbowProm.fieldPrefix" [applyToAllFieldName]="romConfig.elbowProm.applyToAllFieldName"
       [commentsFieldName]="romConfig.elbowProm.commentsFieldName" [showApplyToAll]="romConfig.elbowProm.showApplyToAll"
-      [showComments]="romConfig.elbowProm.showComments">
+      [showComments]="romConfig.elbowProm.showComments"
+      (controlsReady)="onMeasurementTableReady('elbow_prom')">
     </measurement-endfeel-table>
   </div>
   <!--Wrist AROM-->
@@ -256,7 +260,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.wristArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.wristArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.wristArom.commentsFieldName" [showApplyToAll]="romConfig.wristArom.showApplyToAll"
-      [showComments]="romConfig.wristArom.showComments">
+      [showComments]="romConfig.wristArom.showComments"
+      (controlsReady)="onMeasurementTableReady('wrist_arom')">
     </measurement-table>
 
   </div>
@@ -283,7 +288,8 @@
       [endfeelOptions]="romConfig.wristProm.endfeelOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.wristProm.fieldPrefix" [applyToAllFieldName]="romConfig.wristProm.applyToAllFieldName"
       [commentsFieldName]="romConfig.wristProm.commentsFieldName" [showApplyToAll]="romConfig.wristProm.showApplyToAll"
-      [showComments]="romConfig.wristProm.showComments">
+      [showComments]="romConfig.wristProm.showComments"
+      (controlsReady)="onMeasurementTableReady('wrist_prom')">
     </measurement-endfeel-table>
   </div>
 
@@ -1762,7 +1768,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.hipArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.hipArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.hipArom.commentsFieldName" [showApplyToAll]="romConfig.hipArom.showApplyToAll"
-      [showComments]="romConfig.hipArom.showComments">
+      [showComments]="romConfig.hipArom.showComments"
+      (controlsReady)="onMeasurementTableReady('hip_arom')">
     </measurement-table>
   </div>
   <!--Hip PROM-->
@@ -1787,7 +1794,8 @@
       [endfeelOptions]="romConfig.hipProm.endfeelOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.hipProm.fieldPrefix" [applyToAllFieldName]="romConfig.hipProm.applyToAllFieldName"
       [commentsFieldName]="romConfig.hipProm.commentsFieldName" [showApplyToAll]="romConfig.hipProm.showApplyToAll"
-      [showComments]="romConfig.hipProm.showComments">
+      [showComments]="romConfig.hipProm.showComments"
+      (controlsReady)="onMeasurementTableReady('hip_prom')">
     </measurement-endfeel-table>
   </div>
   <!--Knee AROM-->
@@ -1810,7 +1818,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.kneeArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.kneeArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.kneeArom.commentsFieldName" [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
-      [showComments]="romConfig.kneeArom.showComments">
+      [showComments]="romConfig.kneeArom.showComments"
+      (controlsReady)="onMeasurementTableReady('knee_arom')">
     </measurement-table>
   </div>
   <!--Knee PROM-->
@@ -1840,7 +1849,7 @@
     [commentsFieldName]="romConfig.kneeProm.commentsFieldName" 
     [showApplyToAll]="romConfig.kneeProm.showApplyToAll"
     [showComments]="romConfig.kneeProm.showComments"
- >
+    (controlsReady)="onMeasurementTableReady('knee_prom')">
 </measurement-endfeel-table>
   </div>
   <!--Ankle AROM-->
@@ -1863,7 +1872,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.ankleArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.ankleArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.ankleArom.commentsFieldName" [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
-      [showComments]="romConfig.ankleArom.showComments">
+      [showComments]="romConfig.ankleArom.showComments"
+      (controlsReady)="onMeasurementTableReady('ankle_arom')">
     </measurement-table>
   </div>
   <!--Ankle PROM-->
@@ -1888,7 +1898,8 @@
         [endfeelOptions]="romConfig.ankleProm.endfeelOptions" [formGroup]="romForm"
         [fieldPrefix]="romConfig.ankleProm.fieldPrefix" [applyToAllFieldName]="romConfig.ankleProm.applyToAllFieldName"
         [commentsFieldName]="romConfig.ankleProm.commentsFieldName" [showApplyToAll]="romConfig.ankleProm.showApplyToAll"
-        [showComments]="romConfig.ankleProm.showComments">
+        [showComments]="romConfig.ankleProm.showComments"
+        (controlsReady)="onMeasurementTableReady('ankle_prom')">
       </measurement-endfeel-table>
   </div>
   <!--1st MTP AROM-->
@@ -1911,7 +1922,8 @@
       [applyToAllOptions]="romConfig.fstMTPArom.applyToAllOptions" [formGroup]="romForm"
       [fieldPrefix]="romConfig.fstMTPArom.fieldPrefix" [applyToAllFieldName]="romConfig.fstMTPArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.fstMTPArom.commentsFieldName"
-      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll" [showComments]="romConfig.fstMTPArom.showComments">
+      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll" [showComments]="romConfig.fstMTPArom.showComments"
+      (controlsReady)="onMeasurementTableReady('fst_mtp_arom')">
     </measurement-table>
   </div>
 
@@ -1939,10 +1951,10 @@
     [formGroup]="romForm"
     [fieldPrefix]="romConfig.fstmtpProm.fieldPrefix" 
     [applyToAllFieldName]="romConfig.fstmtpProm.applyToAllFieldName"
-    [commentsFieldName]="romConfig.fstmtpProm.commentsFieldName" 
+    [commentsFieldName]="romConfig.fstmtpProm.commentsFieldName"
     [showApplyToAll]="romConfig.fstmtpProm.showApplyToAll"
     [showComments]="romConfig.fstmtpProm.showComments"
- >
+    (controlsReady)="onMeasurementTableReady('fst_mtp_prom')">
 </measurement-endfeel-table>
   </div>
   <!--1st IP AROM-->
@@ -1965,7 +1977,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.fstipArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.fstipArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.fstipArom.commentsFieldName" [showApplyToAll]="romConfig.fstipArom.showApplyToAll"
-      [showComments]="romConfig.fstipArom.showComments">
+      [showComments]="romConfig.fstipArom.showComments"
+      (controlsReady)="onMeasurementTableReady('fst_ip_arom')">
     </measurement-table>
   </div>
   <!--1st IP PROM-->
@@ -1992,10 +2005,10 @@
       [formGroup]="romForm"
       [fieldPrefix]="romConfig.fstipProm.fieldPrefix" 
       [applyToAllFieldName]="romConfig.fstipProm.applyToAllFieldName"
-      [commentsFieldName]="romConfig.fstipProm.commentsFieldName" 
+      [commentsFieldName]="romConfig.fstipProm.commentsFieldName"
       [showApplyToAll]="romConfig.fstipProm.showApplyToAll"
       [showComments]="romConfig.fstipProm.showComments"
- >
+      (controlsReady)="onMeasurementTableReady('fst_ip_prom')">
 </measurement-endfeel-table>
   </div>
   <!--Toe AROM-->
@@ -2020,7 +2033,8 @@
       [formGroup]="romForm" [fieldPrefix]="romConfig.toeArom.fieldPrefix"
       [applyToAllFieldName]="romConfig.toeArom.applyToAllFieldName"
       [commentsFieldName]="romConfig.toeArom.commentsFieldName" [showApplyToAll]="romConfig.toeArom.showApplyToAll"
-      [showComments]="romConfig.toeArom.showComments">
+      [showComments]="romConfig.toeArom.showComments"
+      (controlsReady)="onMeasurementTableReady('toe_arom')">
     </measurement-table>
   </div>
   <!--Toe PROM-->
@@ -2045,7 +2059,8 @@
     [endfeelOptions]="romConfig.toeProm.endfeelOptions" [formGroup]="romForm"
     [fieldPrefix]="romConfig.toeProm.fieldPrefix" [applyToAllFieldName]="romConfig.toeProm.applyToAllFieldName"
     [commentsFieldName]="romConfig.toeProm.commentsFieldName" [showApplyToAll]="romConfig.toeProm.showApplyToAll"
-    [showComments]="romConfig.toeProm.showComments">
+    [showComments]="romConfig.toeProm.showComments"
+    (controlsReady)="onMeasurementTableReady('toe_prom')">
   </measurement-endfeel-table>
   </div>
   <div class="form-row">
@@ -2064,7 +2079,7 @@
   <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
   </div>
   <!-- DUMMY EXAMPLE 1: Shoulder AROM with Labels -->
-  <div class="form-row">
+  <!-- <div class="form-row">
     <label class="field-label">Shoulder AROM (Dummy With Labels)</label>
     <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
@@ -2084,10 +2099,10 @@
       [commentsFieldName]="romConfig.shoulderAromWithLabels.commentsFieldName"
       [showComments]="romConfig.shoulderAromWithLabels.showComments">
     </dropdown-text-table>
-  </div>
+  </div> -->
 
   <!-- DUMMY EXAMPLE 2: Grip Test without Labels -->
-  <div class="form-row">
+  <!-- <div class="form-row">
     <label class="field-label">Grip Test (Dummy Without Labels)</label>
     <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
@@ -2107,10 +2122,10 @@
       [commentsFieldName]="romConfig.gripTestNoLabels.commentsFieldName"
       [showComments]="romConfig.gripTestNoLabels.showComments">
     </dropdown-text-table>
-  </div>
+  </div> -->
 
   <!-- DUMMY EXAMPLE 3: Elbow AROM with Top Selects -->
-  <div class="form-row">
+  <!-- <div class="form-row">
     <label class="field-label">Elbow AROM (Dummy With Top Selects)</label>
     <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
@@ -2131,9 +2146,9 @@
       [commentsFieldName]="romConfig.elbowAromWithSelects.commentsFieldName"
       [showComments]="romConfig.elbowAromWithSelects.showComments">
     </measurement-table-with-selects>
-  </div>
+  </div> -->
 
-  <div class="form-row">
+  <!-- <div class="form-row">
     <label class="field-label">Cervical AROM (Dummy - Single Column)</label>
     <div class="radio-group radio-group-primary">
       <c-form-check class="me-3">
@@ -2155,5 +2170,5 @@
       [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
       [showApplyToAll]="romConfig.cervicalArom.showApplyToAll" [showComments]="romConfig.cervicalArom.showComments">
     </single-column-table>
-  </div>
+  </div> -->
 </form>

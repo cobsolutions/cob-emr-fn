@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -24,6 +24,8 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   @Input() applyToAllFieldName?: string;
   @Input() commentsFieldName?: string;
 
+  @Output() controlsReady = new EventEmitter<void>(); // Emit when dynamic controls are created
+
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {}
@@ -33,6 +35,9 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
+
+    // Emit after controls are created and ready
+    this.controlsReady.emit();
   }
 
   /**

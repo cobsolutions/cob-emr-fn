@@ -12,7 +12,7 @@ export class FSTIPPROM{
             'Flexion' :FStMTPPROM_75_OPTION,
             'Extension' :FStMTPPROM_90_OPTION
         },
-        fieldPrefix: 'fstip_prom_',
+        fieldPrefix: 'fst_ip_',
         applyToAllFieldName: 'fstip_prom_apply_to_all',
         commentsFieldName: 'fstip_prom_comments',
         showApplyToAll: true,

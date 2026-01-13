@@ -209,7 +209,8 @@ export class InitialExaminationComponent implements OnInit {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-    console.log(this.initialExaminationForm)
+    const formRawData = this.initialExaminationForm.get('objective') as FormGroup
+    console.log('formObjectiveRawData  ', formRawData.getRawValue())
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,

@@ -41,7 +41,7 @@ export class ToePROM{
             "5th IP Flexion":TOE_PROM_75_OPTION,
             "5th IP Extension":TOE_PROM_40_OPTION
         },
-        fieldPrefix: 'toe_prom_',
+        fieldPrefix: 'toe_',
         applyToAllFieldName: 'toe_prom_apply_to_all',
         commentsFieldName: 'toe_prom_comments',
         showApplyToAll: true,
