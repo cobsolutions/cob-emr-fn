@@ -258,14 +258,14 @@ export class InitialExaminationComponent implements OnInit {
     this.back.emit();
   }
   private buildMedicalNoteModel(): MedicalNoteRequest {
-    const formRawData = this.initialExaminationForm.get('objective') as FormGroup
-    console.log('formObjectiveRawData  ', formRawData.getRawValue())
+    const formRawData = this.initialExaminationForm as FormGroup
+    console.log('formRawData  ', formRawData.getRawValue())
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
       subjective: this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup),
       objective: this.objectiveMapperService.toModel(this.initialExaminationForm.get('objective') as FormGroup),
-      assessment: null,
+      assessment: this.assessmentMapper.toModel(this.initialExaminationForm.get('assessment') as FormGroup),
       planOfCare: null,
       billing: null
     }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AssessmentModel } from '../model/assessment.model';
 
 @Injectable({
@@ -7,15 +8,15 @@ import { AssessmentModel } from '../model/assessment.model';
 export class AssessmentMapperService {
 
   constructor() { }
-  toModel(formValue: any): AssessmentModel {
+  toModel(formValue: FormGroup): AssessmentModel {
     return {
-      assessmentDiagnosis: formValue.assessment_diagnosis,
-      patientClinicalPresentation: formValue.patient_clinical_presentation,
-      rehabPotential: formValue.rehab_potential,
-      contraindicationsTotherapy: formValue.contraindications_to_therapy === 'yes' || formValue.contraindications_to_therapy === true,
-      consentToCare: formValue.consent_to_care,
-      problems: formValue.problems || [],
-      goals: formValue.goals?.map((goal: any) => ({
+      assessmentDiagnosis: formValue.get('patient_clinical_presentation').value,
+      patientClinicalPresentation: formValue.get('patient_clinical_presentation').value,
+      rehabPotential: formValue.get('rehab_potential').value,
+      contraindicationsTotherapy: formValue.get('contraindications_to_therapy').value === 'yes' || formValue.get('contraindications_to_therapy').value === true,
+      consentToCare: formValue.get('consent_to_care').value,
+      problems: formValue.get('problems').value || [],
+      goals: formValue.get('goals').value?.map((goal: any) => ({
         description: goal.description,
         term: goal.term,
         period: goal.period,
