@@ -112,7 +112,6 @@ export class InitialExaminationComponent implements OnInit {
             this.initialExaminationForm.get('objective')?.patchValue(denormalizedObjective);
             this.pendingObjectiveData = null;
           }
-
         }
 
         if (note.assessment) {
@@ -122,7 +121,7 @@ export class InitialExaminationComponent implements OnInit {
           const denormalizedAssessment = this.denormalizeNote(assessmentFormValue, assessmentFormGroup);
           this.pendingAssessmentData = denormalizedAssessment;
           // Check if form is already set up
-          if (Object.keys(this.initialExaminationForm.get('assessment') as FormGroup).length > 0) {
+          if (Object.keys((this.initialExaminationForm.get('assessment') as FormGroup).controls).length > 0) {
             this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
             this.pendingAssessmentData = null;
           }
@@ -135,7 +134,7 @@ export class InitialExaminationComponent implements OnInit {
           const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue, planOfCareFormGroup);
           this.pendingPlanOfCareData = denormalizedPlanOfCare;
           // Check if form is already set up
-          if (Object.keys(this.initialExaminationForm.get('planOfCare') as FormGroup).length > 0) {
+          if (Object.keys((this.initialExaminationForm.get('planOfCare') as FormGroup).controls).length > 0) {
             this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
             this.pendingPlanOfCareData = null;
           }
@@ -148,7 +147,7 @@ export class InitialExaminationComponent implements OnInit {
           const denormalizedBilling = this.denormalizeNote(billingFormValue, billingFormGroup);
           this.pendingBillingData = denormalizedBilling;
           // Check if form is already set up
-          if (Object.keys(this.initialExaminationForm.get('billing') as FormGroup).length > 0) {
+          if (Object.keys((this.initialExaminationForm.get('billing') as FormGroup).controls).length > 0) {
             this.initialExaminationForm.get('billing')?.patchValue(denormalizedBilling);
             this.pendingBillingData = null;
           }
