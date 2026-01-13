@@ -5,6 +5,7 @@ import { Objective } from '../models/objective';
 import { ObservationMapperService } from '../observationN/services/observation-mapper.service';
 import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
 import { RangeOfMotionMapperService } from '../range-of-motion/services/range-of-motion-mapper.service';
+import { StrengthMapperService } from '../strengthN/services/strength-mapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ObjectiveMapperService {
   constructor(private inspectionMapper: InspectionMapperService,
     private omtMapper: OutcomeMeasurementToolsMapperService,
     private observationMapper: ObservationMapperService,
-    private rangeOfMotionMapperService: RangeOfMotionMapperService) { }
+    private rangeOfMotionMapperService: RangeOfMotionMapperService,
+    private strengthMapperService:StrengthMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -42,7 +44,10 @@ export class ObjectiveMapperService {
     if (romControl) {
       objective.rom = this.rangeOfMotionMapperService.toModel(romControl.value)
     }
-
+    const strengthControl = formGroup.get('strength')
+    if(strengthControl){
+      objective.strength = this.strengthMapperService.toModel(strengthControl.value)
+    }
 
     return objective;
   }
