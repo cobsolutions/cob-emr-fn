@@ -25,10 +25,11 @@
           <td *ngFor="let column of frequencyColumns; let colIndex = index">
             <div class="checkbox-container">
               <label class="checkbox-wrapper">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   class="table-checkbox"
-                  [formControlName]="getFrequencyFieldName(item, colIndex)">
+                  [checked]="isCheckboxChecked(item, colIndex)"
+                  (change)="onCheckboxChange($event, item, colIndex)">
               </label>
             </div>
           </td>

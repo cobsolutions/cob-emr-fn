@@ -56,7 +56,7 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
       // Add frequency checkbox controls (Occasional, Frequent, Constant)
       this.frequencyColumns.forEach((column, index) => {
         const fieldName = this.getFrequencyFieldName(item, index);
-        const initialValue = this.initialData?.[fieldName] || false;
+        const initialValue = this.initialData?.[fieldName] || 'no';
         if (!this.formGroup.get(fieldName)) {
           this.formGroup.addControl(fieldName, this.fb.control(initialValue));
         }
@@ -135,6 +135,25 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
   }
 
   /**
+   * Check if a checkbox is checked based on string value
+   */
+  isCheckboxChecked(item: DemonstratedItem, columnIndex: number): boolean {
+    const fieldName = this.getFrequencyFieldName(item, columnIndex);
+    const value = this.formGroup.get(fieldName)?.value;
+    return value === 'yes' || value === true;
+  }
+
+  /**
+   * Handle checkbox change event
+   */
+  onCheckboxChange(event: Event, item: DemonstratedItem, columnIndex: number): void {
+    const checkbox = event.target as HTMLInputElement;
+    const fieldName = this.getFrequencyFieldName(item, columnIndex);
+    const newValue = checkbox.checked ? 'yes' : 'no';
+    this.formGroup.get(fieldName)?.setValue(newValue);
+  }
+
+  /**
    * Setup Apply to All listener
    */
   private setupApplyToAllListener(): void {
@@ -161,7 +180,7 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
       this.items.forEach(item => {
         this.frequencyColumns.forEach((column, index) => {
           const fieldName = this.getFrequencyFieldName(item, index);
-          updates[fieldName] = true;
+          updates[fieldName] = 'yes';
         });
       });
     } else if (value === 'uncheck_all') {
@@ -169,7 +188,7 @@ export class NonMaterialHandlingWorkConditionComponent implements OnInit {
       this.items.forEach(item => {
         this.frequencyColumns.forEach((column, index) => {
           const fieldName = this.getFrequencyFieldName(item, index);
-          updates[fieldName] = false;
+          updates[fieldName] = 'no';
         });
       });
     } else if (value === 'set_adequate') {
