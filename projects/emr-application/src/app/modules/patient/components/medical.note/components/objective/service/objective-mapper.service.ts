@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { InspectionMapperService } from '../inspectionN/services/inspection-mapper.service';
 import { Objective } from '../models/objective';
+import { NeuroVascularMapperService } from '../neuro-vascular/services/neuro-vascular-mapper.service';
 import { ObservationMapperService } from '../observationN/services/observation-mapper.service';
 import { OutcomeMeasurementToolsMapperService } from '../outcome-measurement-tools/services/outcome-measurement-tools-mapper.service';
 import { RangeOfMotionMapperService } from '../range-of-motion/services/range-of-motion-mapper.service';
@@ -16,7 +17,8 @@ export class ObjectiveMapperService {
     private omtMapper: OutcomeMeasurementToolsMapperService,
     private observationMapper: ObservationMapperService,
     private rangeOfMotionMapperService: RangeOfMotionMapperService,
-    private strengthMapperService:StrengthMapperService) { }
+    private strengthMapperService: StrengthMapperService,
+    private neuroVascularMapperService: NeuroVascularMapperService) { }
   toModel(formGroup: FormGroup): Objective {
     if (!formGroup) {
       return {};
@@ -45,8 +47,13 @@ export class ObjectiveMapperService {
       objective.rom = this.rangeOfMotionMapperService.toModel(romControl.value)
     }
     const strengthControl = formGroup.get('strength')
-    if(strengthControl){
+    if (strengthControl) {
       objective.strength = this.strengthMapperService.toModel(strengthControl.value)
+    }
+    const neuroVascularControl = formGroup.get('neuroVascular')
+    if (neuroVascularControl) {
+      objective.neuroVascular = this.neuroVascularMapperService.toModel(neuroVascularControl.value)
+
     }
 
     return objective;
