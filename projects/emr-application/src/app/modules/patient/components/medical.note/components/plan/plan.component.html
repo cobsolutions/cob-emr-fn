@@ -73,16 +73,16 @@
                 <c-col xs="12" md="6">
                     <div class="plan-checkbox-group">
                         <c-form-check>
-                            <input cFormCheckInput type="checkbox" formControlName="createPlanOfCare" id="createPlanOfCare" />
-                            <label cFormCheckLabel for="createPlanOfCare">Create Plan of Care Document</label>
+                            <input cFormCheckInput type="checkbox" formControlName="create_plan_of_care" id="create_plan_of_care" />
+                            <label cFormCheckLabel for="create_plan_of_care">Create Plan of Care Document</label>
                         </c-form-check>
                     </div>
                 </c-col>
                 <c-col xs="12" md="6">
                     <div class="plan-checkbox-group">
                         <c-form-check>
-                            <input cFormCheckInput type="checkbox" formControlName="physicianSignature" id="physicianSignature" />
-                            <label cFormCheckLabel for="physicianSignature">Add Physician Signature Request to this Note</label>
+                            <input cFormCheckInput type="checkbox" formControlName="physician_signature" id="physician_signature" />
+                            <label cFormCheckLabel for="physician_signature">Add Physician Signature Request to this Note</label>
                         </c-form-check>
                     </div>
                 </c-col>
@@ -118,7 +118,10 @@
                             </svg>
                             <h4 class="treatment-section-title">Procedures</h4>
                         </div>
-                        <plan-procedures-n (formReady)="setChildForm('procedures', $event)"></plan-procedures-n>
+                        <plan-procedures-n
+                            [proceduresData]="proceduresData"
+                            (formReady)="setChildForm('procedures', $event)">
+                        </plan-procedures-n>
                     </div>
                 </c-col>
 
@@ -135,7 +138,10 @@
                             </svg>
                             <h4 class="treatment-section-title">Modalities</h4>
                         </div>
-                        <plan-modalities-n (formReady)="setChildForm('modalities', $event)"></plan-modalities-n>
+                        <plan-modalities-n
+                            [modalitiesData]="modalitiesData"
+                            (formReady)="setChildForm('modalities', $event)">
+                        </plan-modalities-n>
                     </div>
                 </c-col>
 
@@ -150,7 +156,10 @@
                             </svg>
                             <h4 class="treatment-section-title">Specialties</h4>
                         </div>
-                        <plan-specialties-n (formReady)="setChildForm('specialties', $event)"></plan-specialties-n>
+                        <plan-specialties-n
+                            [specialtiesData]="specialtiesData"
+                            (formReady)="setChildForm('specialties', $event)">
+                        </plan-specialties-n>
                     </div>
                 </c-col>
             </c-row>

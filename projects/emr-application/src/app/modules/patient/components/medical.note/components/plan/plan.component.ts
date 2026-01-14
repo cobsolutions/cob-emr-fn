@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
@@ -12,7 +12,7 @@ import { PlanStyles } from './styles/plan';
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.css']
 })
-export class PlanComponent implements OnInit, AfterViewInit {
+export class PlanComponent implements OnInit, AfterViewInit, OnChanges {
   planForm: FormGroup;
   fields: any
   styles: FieldControlStyles[] = PlanStyles;
@@ -28,6 +28,11 @@ export class PlanComponent implements OnInit, AfterViewInit {
   @Input() noteType: string
   // authorizthedToFinalize: boolean = false
   forwardVisibility: boolean = false;
+
+  // Data for child components
+  proceduresData: any = null;
+  modalitiesData: any = null;
+  specialtiesData: any = null;
   procedures = [
     { label: 'Therapeutic Exercises', value: 'therapeuticExercises' },
     { label: 'Therapeutic Activity', value: 'therapeuticActivity' },
@@ -78,15 +83,27 @@ export class PlanComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.planForm = this.fb.group({
-      createPlanOfCare: new FormControl(false),
+      create_plan_of_care: new FormControl(false),
       frequency: ['F00'],
       duration: ['D00'],
       plan: ['PL01'],
-      physicianSignature: new FormControl(false),
+      physician_signature: new FormControl(false),
       procedures: this.fb.group({}),
       modalities: this.fb.group({}),
       specialties: this.fb.group({}),
-    })
+    });
+
+    // Fill form if planData is already available
+    if (this.planData) {
+      this.fillFormWithData();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Handle when planData changes
+    if (changes['planData'] && changes['planData'].currentValue && this.planForm) {
+      this.fillFormWithData();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -116,7 +133,70 @@ export class PlanComponent implements OnInit, AfterViewInit {
       // this.authorizthedToFinalize = false
     }
   }
-  private fillInitSection() {
 
+  private fillFormWithData(): void {
+    if (!this.planData) {
+      return;
+    }
+
+    // Patch the main form fields
+    this.planForm.patchValue({
+      create_plan_of_care: this.planData.create_plan_of_care || false,
+      frequency: this.planData.frequency || 'F00',
+      duration: this.planData.duration || 'D00',
+      plan: this.planData.plan || 'PL01',
+      physician_signature: this.planData.physician_signature || false
+    });
+
+    // Extract data for child components
+    this.proceduresData = this.extractProceduresData(this.planData);
+    this.modalitiesData = this.extractModalitiesData(this.planData);
+    this.specialtiesData = this.extractSpecialtiesData(this.planData);
+  }
+
+  private extractProceduresData(data: any): any {
+    if (!data) return null;
+
+    const procedureFields = {};
+    Object.keys(data).forEach(key => {
+      if (key.startsWith('procedure_')) {
+        procedureFields[key] = data[key];
+      }
+    });
+
+    return Object.keys(procedureFields).length > 0 ? procedureFields : null;
+  }
+
+  private extractModalitiesData(data: any): any {
+    if (!data) return null;
+
+    const modalitiesFields = {};
+    Object.keys(data).forEach(key => {
+      if (key.startsWith('modalities_')) {
+        modalitiesFields[key] = data[key];
+      }
+    });
+
+    return Object.keys(modalitiesFields).length > 0 ? modalitiesFields : null;
+  }
+
+  private extractSpecialtiesData(data: any): any {
+    if (!data) return null;
+
+    // Specialties use modalities_ prefix but are in the specialties section
+    // Based on the mapper, specialties include: modalities_orthotic_fabrication, modalities_tens_fitting, modalities_acupuncture, modalities_other
+    const specialtiesFields = {};
+    const specialtyKeys = ['modalities_orthotic_fabrication', 'modalities_orthotic_fabrication_notes',
+                           'modalities_tens_fitting', 'modalities_tens_fitting_notes',
+                           'modalities_acupuncture', 'modalities_acupuncture_notes',
+                           'modalities_other', 'modalities_other_notes'];
+
+    specialtyKeys.forEach(key => {
+      if (data.hasOwnProperty(key)) {
+        specialtiesFields[key] = data[key];
+      }
+    });
+
+    return Object.keys(specialtiesFields).length > 0 ? specialtiesFields : null;
   }
 }

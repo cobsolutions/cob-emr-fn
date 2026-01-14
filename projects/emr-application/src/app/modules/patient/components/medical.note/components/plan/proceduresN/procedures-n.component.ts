@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-option';
 
@@ -10,6 +10,7 @@ import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-
 export class ProceduresNComponent implements OnInit, AfterViewInit {
   ProceduresForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() proceduresData: any = null;
 
   procedureOptions: HierarchyCheckboxOption[] = [
     {

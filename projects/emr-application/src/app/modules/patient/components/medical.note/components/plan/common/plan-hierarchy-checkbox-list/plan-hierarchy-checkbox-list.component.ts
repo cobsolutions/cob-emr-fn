@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HierarchyCheckboxOption } from '../interface/hierarchy-checkbox-option';
 
@@ -7,16 +7,24 @@ import { HierarchyCheckboxOption } from '../interface/hierarchy-checkbox-option'
   templateUrl: './plan-hierarchy-checkbox-list.component.html',
   styleUrls: ['./plan-hierarchy-checkbox-list.component.css']
 })
-export class PlanHierarchyCheckboxListComponent implements OnInit {
+export class PlanHierarchyCheckboxListComponent implements OnInit, OnChanges {
   @Input() formGroup!: FormGroup;
   @Input() prefix!: string;
   @Input() options: HierarchyCheckboxOption[] = [];
+  @Input() initialData: any = null;
 
   constructor() { }
 
   ngOnInit(): void {
     this.createFormControls();
     this.setupValueChangeListeners();
+    this.populateFormWithData();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['initialData'] && changes['initialData'].currentValue && this.formGroup) {
+      this.populateFormWithData();
+    }
   }
 
   createFormControls(): void {
@@ -63,6 +71,23 @@ export class PlanHierarchyCheckboxListComponent implements OnInit {
           this.formGroup.get(option.formControlName + '_notes')?.setValue('');
         }
       });
+    });
+  }
+
+  populateFormWithData(): void {
+    if (!this.initialData || !this.formGroup) {
+      return;
+    }
+
+    // Patch the form with initial data
+    this.formGroup.patchValue(this.initialData);
+
+    // Update showChildren based on checkbox values
+    this.options.forEach(option => {
+      const value = this.formGroup.get(option.formControlName)?.value;
+      if (value === true) {
+        option.showChildren = true;
+      }
     });
   }
 

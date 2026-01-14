@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-option';
 
@@ -9,6 +9,7 @@ import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-
 })
 export class SpecialtiesNComponent implements OnInit, AfterViewInit {
   SpecialtiesForm: FormGroup;
+  @Input() specialtiesData: any = null;
   specialtiesOptions: HierarchyCheckboxOption[] = [
     {
       "label": "Orthotic Fabrication",

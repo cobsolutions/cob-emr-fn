@@ -13,17 +13,17 @@ export class PlanOfCareMapperService {
   constructor() { }
 
   /**
-   * Converts form values (DTO from backend) to PlanOfCare model
-   * @param formValue FormGroup with snake_case fields
+   * Converts form values to PlanOfCare model (for sending to backend)
+   * @param formValue FormGroup with camelCase top-level fields and snake_case child fields
    * @returns PlanOfCare model with camelCase fields
    */
   toModel(formValue: FormGroup): PlanOfCare {
     return {
-      createPlanOfCare: formValue.get('createPlanOfCare')?.value || false,
+      createPlanOfCare: formValue.get('create_plan_of_care')?.value,
       frequency: formValue.get('frequency')?.value || '',
       duration: formValue.get('duration')?.value || '',
       plan: formValue.get('plan')?.value || '',
-      physicianSignature: formValue.get('physicianSignature')?.value || false,
+      physicianSignature: formValue.get('physician_signature')?.value,
       procedures: this.mapProceduresToModel(formValue.get('procedures') as FormGroup),
       modalities: this.mapModalitiesToModel(formValue.get('modalities') as FormGroup),
       specialties: this.mapSpecialtiesToModel(formValue.get('specialties') as FormGroup)
@@ -31,17 +31,17 @@ export class PlanOfCareMapperService {
   }
 
   /**
-   * Converts PlanOfCare model to form values (DTO for backend)
+   * Converts PlanOfCare model to form values (for patching the form)
    * @param dto PlanOfCare model with camelCase fields
-   * @returns Form values object with snake_case fields
+   * @returns Form values object with snake_case fields matching form control names
    */
   fromDto(dto: PlanOfCare): any {
     return {
-      createPlanOfCare: dto.createPlanOfCare || false,
+      create_plan_of_care: dto.createPlanOfCare,
       frequency: dto.frequency || '',
       duration: dto.duration || '',
       plan: dto.plan || '',
-      physicianSignature: dto.physicianSignature || false,
+      physician_signature: dto.physicianSignature,
       ...this.mapProceduresFromDto(dto.procedures),
       ...this.mapModalitiesFromDto(dto.modalities),
       ...this.mapSpecialtiesFromDto(dto.specialties)

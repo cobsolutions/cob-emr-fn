@@ -129,13 +129,12 @@ export class InitialExaminationComponent implements OnInit {
 
         if (note.planOfCare) {
           const planOfCareFormValue = this.planOfCareMapper.fromDto(note.planOfCare);
-          // Denormalize true/false to yes/no
-          const planOfCareFormGroup = this.initialExaminationForm.get('planOfCare') as FormGroup;
-          const denormalizedPlanOfCare = this.denormalizeNote(planOfCareFormValue, planOfCareFormGroup);
-          this.pendingPlanOfCareData = denormalizedPlanOfCare;
+          this.pendingPlanOfCareData = planOfCareFormValue;
+          // Update medicalNoteSOAP with mapped form values for the template
+          this.medicalNoteSOAP.planOfCare = planOfCareFormValue;
           // Check if form is already set up
           if (Object.keys((this.initialExaminationForm.get('planOfCare') as FormGroup).controls).length > 0) {
-            this.initialExaminationForm.get('planOfCare')?.patchValue(denormalizedPlanOfCare);
+            this.initialExaminationForm.get('planOfCare')?.patchValue(planOfCareFormValue);
             this.pendingPlanOfCareData = null;
           }
         }
