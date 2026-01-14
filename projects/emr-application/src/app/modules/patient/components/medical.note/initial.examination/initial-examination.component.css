@@ -3,6 +3,89 @@
     justify-content: flex-end;
   }
 
+/* Action Input Group Styles */
+.action-input-group {
+    max-width: 280px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(92, 71, 66, 0.15);
+    transition: all 0.3s ease;
+}
+
+.action-input-group:hover {
+    box-shadow: 0 4px 12px rgba(92, 71, 66, 0.25);
+}
+
+.action-input-group:focus-within {
+    box-shadow: 0 4px 16px rgba(92, 71, 66, 0.3);
+}
+
+/* Action Select Dropdown */
+.action-select {
+    border: 2px solid #5c4742 !important;
+    border-right: none !important;
+    border-radius: 8px 0 0 8px !important;
+    background-color: #ffffff !important;
+    color: #5c4742 !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 40px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.action-select:hover {
+    background-color: rgba(92, 71, 66, 0.05) !important;
+}
+
+.action-select:focus {
+    outline: none !important;
+    border-color: #4a3935 !important;
+    background-color: #ffffff !important;
+}
+
+/* Action Button */
+.action-button {
+    background: linear-gradient(135deg, #5c4742 0%, #4a3935 100%) !important;
+    border: 2px solid #5c4742 !important;
+    border-radius: 0 8px 8px 0 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    min-height: 40px !important;
+    padding: 0.5rem 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.3s ease !important;
+}
+
+.action-button:hover {
+    background: linear-gradient(135deg, #4a3935 0%, #3d2e2b 100%) !important;
+    border-color: #4a3935 !important;
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(92, 71, 66, 0.3) !important;
+}
+
+.action-button:active {
+    transform: translateX(0);
+    box-shadow: 0 1px 4px rgba(92, 71, 66, 0.2) !important;
+}
+
+.action-button svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.action-button:hover svg {
+    transform: translateX(2px);
+}
+
+.button-text {
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
 /* Enhanced Stepper Design */
 ::ng-deep .mat-stepper-horizontal {
     background: transparent;

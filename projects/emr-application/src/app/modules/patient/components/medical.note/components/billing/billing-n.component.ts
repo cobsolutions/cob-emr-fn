@@ -16,6 +16,7 @@ export class BillingNComponent implements OnInit {
   @Input() noteTypeId: string
   @Input() caseId: number
   @Input() medicalNoteId: number
+  @Input() billingData: any;
   BillingForm: FormGroup;
   finalizeNoteVisibility: boolean = false;
   forwardVisibility: boolean = false;
@@ -31,8 +32,8 @@ export class BillingNComponent implements OnInit {
       dailyNoteIncluded: [true],
       precautions: [''],
       objective_findings: [''],
-      pre_Treatment: [''],
-      post_Treatment: [''],
+      pre_treatment: [''],
+      post_treatment: [''],
       untimedCodes: this.fb.group({}),
       strapping: this.fb.group({}),
       directTimedCodes: this.fb.group({}),

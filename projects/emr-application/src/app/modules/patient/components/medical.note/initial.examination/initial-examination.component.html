@@ -2,13 +2,14 @@
 <c-container fluid="true" *ngIf="isLoaded">
     <div class="button-container m-2">
         <!-- <button (click)="backtoPatientRecordActions()" class="btn btn-link">Back to patient records</button> -->
-        <c-input-group class="mb-3" style="max-width: 225px;">
-            <select id="soapActionList" #soapActionList cSelect sizing="sm">
+        <c-input-group #actionInputGroup class="action-input-group mb-3">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm" class="action-select">
                 <option value="back">Back to patient records</option>
                 <option value="draft">Save as draft</option>
             </select>
-            <button cButton color="primary" variant="outline" size="sm" (click)="soapActions(soapActionList.value)">
+            <button cButton color="primary" size="sm" class="action-button" (click)="soapActions(soapActionList.value)">
                 <svg cIcon name="cilArrowCircleRight"></svg>
+                <span class="button-text">Go</span>
             </button>
         </c-input-group>
     </div>
@@ -50,7 +51,8 @@
                 <ng-template matStepLabel>Billing</ng-template>
                 <billing-n [stepper]="stepper" [parentForm]="initialExaminationForm"
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4] "
-                    [noteTypeId]="'InitialExamination'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"></billing-n>
+                    [noteTypeId]="'InitialExamination'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
+                    [billingData]="medicalNoteSOAP?.billing"></billing-n>
             </mat-step>
         </mat-stepper>
     </form>
@@ -62,7 +64,8 @@
             <!-- Jump to Top Button (appears on hover) -->
             <div class="jump-button jump-top" (click)="scrollToTop()" title="Jump to Top">
                 <div class="jump-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="18 15 12 9 6 15"></polyline>
                         <polyline points="18 20 12 14 6 20"></polyline>
                     </svg>
@@ -72,7 +75,8 @@
             <!-- Page Up Arrow -->
             <div class="scroll-arrow scroll-up" (click)="scrollPageUp()" title="Scroll Up One Page">
                 <div class="arrow-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="18 15 12 9 6 15"></polyline>
                     </svg>
                 </div>
@@ -85,7 +89,8 @@
             <!-- Page Down Arrow -->
             <div class="scroll-arrow scroll-down" (click)="scrollPageDown()" title="Scroll Down One Page">
                 <div class="arrow-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </div>
@@ -95,7 +100,8 @@
             <!-- Jump to Bottom Button (appears on hover) -->
             <div class="jump-button jump-bottom" (click)="scrollToBottom()" title="Jump to Bottom">
                 <div class="jump-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 4 12 10 18 4"></polyline>
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>

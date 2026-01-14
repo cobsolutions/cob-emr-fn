@@ -1,5 +1,5 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import * as moment from 'moment';
@@ -29,6 +29,7 @@ export class InitialExaminationComponent implements OnInit {
   initialExaminationForm: FormGroup
   @ViewChild('stepper') stepper!: MatStepper; // Get MatStepper reference
   @ViewChild(ObjectiveComponent) objectiveComponent: ObjectiveComponent;
+  @ViewChild('actionInputGroup', { read: ElementRef }) actionInputGroup!: ElementRef;
   @Output() formReady = new EventEmitter<FormGroup>();
   visitedSteps: boolean[] = [];
   @Output() back = new EventEmitter<void>();
@@ -193,7 +194,11 @@ export class InitialExaminationComponent implements OnInit {
   }
 
   scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.actionInputGroup?.nativeElement) {
+      this.actionInputGroup.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   scrollToBottom(): void {

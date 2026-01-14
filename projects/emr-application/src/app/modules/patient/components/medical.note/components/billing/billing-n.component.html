@@ -31,8 +31,7 @@
             </c-row>
         </c-card-body>
     </c-card>
-
-    <div *ngIf="this.BillingForm.get('dailyNoteIncluded').value === true">
+    <div *ngIf="this.BillingForm.get('dailyNoteIncluded').value === 'yes'">
         <!-- Daily Note Plan Card -->
         <!-- <c-card class="mb-3 enhanced-card" *ngIf="noteTypeId ==='1' || noteTypeId ==='3'">
             <c-card-header class="enhanced-card-header treatment-header">
@@ -119,12 +118,10 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Untimed Codes</h4>
                             </div>
-                            <!-- <untimed-codes (formReady)="setChildForm('untimedCodes', $event)"
-                                [fields]="fields['Untimed Codes']" [strappingfields]="fields['Strapping']"
-                                [untimedCodesData]="billingData?.untimedCodes"></untimed-codes> -->
                             <!-- Untimed Codes -->
                             <billing-untimed-codes-n
-                                (formReady)="setChildForm('untimedCodes', $event)"></billing-untimed-codes-n>
+                                (formReady)="setChildForm('untimedCodes', $event)"
+                                [untimedCodesData]="billingData?.untimedCodes"></billing-untimed-codes-n>
                         </div>
                     </c-col>
 
@@ -142,7 +139,8 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Strapping</h4>
                             </div>
-                            <billing-strapping-n (formReady)="setChildForm('strapping', $event)"></billing-strapping-n>
+                            <billing-strapping-n (formReady)="setChildForm('strapping', $event)"
+                                [strappingData]="billingData?.strapping"></billing-strapping-n>
                         </div>
                     </c-col>
 
@@ -160,11 +158,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Calendar Month</h4>
                             </div>
-                            <!-- <calendar-month (formReady)="setChildForm('calendarMonth', $event)"
-                                [fields]="fields['calendar month']"
-                                [calendarMonthData]="billingData?.calendarMonth"></calendar-month> -->
                             <billing-calendar-month-n
-                                (formReady)="setChildForm('calendarMonth', $event)"></billing-calendar-month-n>
+                                (formReady)="setChildForm('calendarMonth', $event)"
+                                [calendarMonthData]="billingData?.calendarMonth"></billing-calendar-month-n>
                         </div>
                     </c-col>
 
@@ -179,11 +175,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Nerve Conduction Studies</h4>
                             </div>
-                            <!-- <nerve-conduction-studies (formReady)="setChildForm('nerveConduction', $event)"
-                                [fields]="fields['Nerve Conduction Studies']"
-                                [nerveConductionStudiesData]="billingData?.nerveConduction"></nerve-conduction-studies> -->
                             <billing-nerve-conduction-studies-n
-                                (formReady)="setChildForm('nerveConductionStudies', $event)"></billing-nerve-conduction-studies-n>
+                                (formReady)="setChildForm('nerveConductionStudies', $event)"
+                                [nerveConductionStudiesData]="billingData?.nerveConductionStudies"></billing-nerve-conduction-studies-n>
                         </div>
                     </c-col>
 
@@ -201,11 +195,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Respiratory</h4>
                             </div>
-                            <!-- <respiratory (formReady)="setChildForm('respiratory', $event)"
-                                [fields]="fields['Respiratory']" [respiratoryData]="billingData?.respiratory">
-                            </respiratory> -->
                             <billing-respiratory-n
-                                (formReady)="setChildForm('respiratory', $event)"></billing-respiratory-n>
+                                (formReady)="setChildForm('respiratory', $event)"
+                                [respiratoryData]="billingData?.respiratory"></billing-respiratory-n>
                         </div>
                     </c-col>
 
@@ -221,11 +213,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Direct Timed Codes</h4>
                             </div>
-                            <!-- <direct-timed-codes (formReady)="setChildForm('directTimedCodes', $event)"
-                                [fields]="fields['Direct Timed Codes']"
-                                [directTimedCodesData]="billingData?.directTimedCodes"></direct-timed-codes> -->
                             <billing-direct-timed-code-n
-                                (formReady)="setChildForm('directTimedCodes', $event)"></billing-direct-timed-code-n>
+                                (formReady)="setChildForm('directTimedCodes', $event)"
+                                [directTimedCodesData]="billingData?.directTimedCodes"></billing-direct-timed-code-n>
                         </div>
                     </c-col>
                 </c-row>
@@ -248,7 +238,7 @@
                     <c-col xs="12">
                         <div class="plan-select-group">
                             <label class="plan-select-label"><strong>Pre-Treatment</strong></label>
-                            <textarea id="pre_Treatment" class="form-control" formControlName="pre_Treatment"
+                            <textarea id="pre_Treatment" class="form-control" formControlName="pre_treatment"
                                 rows="4"></textarea>
                         </div>
                     </c-col>
@@ -257,7 +247,7 @@
                     <c-col xs="12">
                         <div class="plan-select-group">
                             <label class="plan-select-label"><strong>Post-Treatment</strong></label>
-                            <textarea id="post_Treatment" class="form-control" formControlName="post_Treatment"
+                            <textarea id="post_Treatment" class="form-control" formControlName="post_treatment"
                                 rows="4"></textarea>
                         </div>
                     </c-col>
@@ -282,11 +272,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Other Treatment Procedures</h4>
                             </div>
-                            <!-- <other-treatment-procedures (formReady)="setChildForm('otherTreatmentProcedures', $event)"
-                                [fields]="fields['Other Treatment Procedures']"
-                                [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></other-treatment-procedures> -->
                             <billing-other-treatment-procedures-n
-                                (formReady)="setChildForm('otherTreatmentProcedures', $event)"></billing-other-treatment-procedures-n>
+                                (formReady)="setChildForm('otherTreatmentProcedures', $event)"
+                                [otherTreatmentProceduresData]="billingData?.otherTreatmentProcedures"></billing-other-treatment-procedures-n>
                         </div>
                     </c-col>
 
@@ -304,9 +292,8 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Supplies</h4>
                             </div>
-                            <!-- <supplies (formReady)="setChildForm('supplies', $event)" [fields]="fields['Supplies']"
-                                [SuppliesData]="billingData?.supplies"></supplies> -->
-                            <billing-supplies-n (formReady)="setChildForm('supplies', $event)"></billing-supplies-n>
+                            <billing-supplies-n (formReady)="setChildForm('supplies', $event)"
+                                [suppliesData]="billingData?.supplies"></billing-supplies-n>
                         </div>
                     </c-col>
 
@@ -321,11 +308,9 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Splints/Orthotics</h4>
                             </div>
-                            <!-- <splints-orthotics (formReady)="setChildForm('splintsorthotics', $event)"
-                                [fields]="fields['Splints Orthotics']"
-                                [SplintsOrthoticsData]="billingData?.splintsorthotics"></splints-orthotics> -->
                             <billing-splints-orthotics-n
-                                (formReady)="setChildForm('splintsorthotics', $event)"></billing-splints-orthotics-n>
+                                (formReady)="setChildForm('splintsorthotics', $event)"
+                                [splintsOrthoticsData]="billingData?.splintsorthotics"></billing-splints-orthotics-n>
                         </div>
                     </c-col>
 
@@ -341,9 +326,8 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Casts</h4>
                             </div>
-                            <!-- <casts (formReady)="setChildForm('casts', $event)" [fields]="fields['Casts']"
-                                [castsData]="billingData?.casts"></casts> -->
-                            <billing-casts-n (formReady)="setChildForm('casts', $event)"></billing-casts-n>
+                            <billing-casts-n (formReady)="setChildForm('casts', $event)"
+                                [castsData]="billingData?.casts"></billing-casts-n>
                         </div>
                     </c-col>
 
@@ -358,9 +342,8 @@
                                 </svg>
                                 <h4 class="treatment-section-title">Braces</h4>
                             </div>
-                            <!-- <braces (formReady)="setChildForm('braces', $event)" [fields]="fields['Braces']"
-                                [bracesData]="billingData?.braces"></braces> -->
-                            <billing-braces-n (formReady)="setChildForm('braces', $event)"></billing-braces-n>
+                            <billing-braces-n (formReady)="setChildForm('braces', $event)"
+                                [bracesData]="billingData?.braces"></billing-braces-n>
                         </div>
                     </c-col>
                 </c-row>

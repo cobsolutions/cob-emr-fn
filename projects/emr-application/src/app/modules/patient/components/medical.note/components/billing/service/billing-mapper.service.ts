@@ -18,13 +18,12 @@ export class BillingMapperService {
     if (!formValue) {
       return this.getEmptyBillingModel();
     }
-
     return {
       dailyNoteIncluded: formValue.get('dailyNoteIncluded')?.value ?? false,
       precautions: formValue.get('precautions')?.value ?? '',
       objectiveFindings: formValue.get('objective_findings')?.value ?? '',
-      pre_Treatment: formValue.get('pre_Treatment')?.value ?? '',
-      post_Treatment: formValue.get('post_Treatment')?.value ?? '',
+      preTreatment: formValue.get('pre_treatment')?.value ?? '',
+      postTreatment: formValue.get('post_treatment')?.value ?? '',
       untimedCodes: {
         codes: this.mapCheckCodesToModel(formValue.get('untimedCodes') as FormGroup)
       },
@@ -35,7 +34,7 @@ export class BillingMapperService {
         codes: this.mapQuantityCodesToModel(formValue.get('calendarMonth') as FormGroup)
       },
       nerveConductionStudies: {
-        codes: this.mapCheckCodesToModel(formValue.get('nerveConduction') as FormGroup)
+        codes: this.mapCheckCodesToModel(formValue.get('nerveConductionStudies') as FormGroup)
       },
       respiratory: {
         codes: this.mapQuantityCodesToModel(formValue.get('respiratory') as FormGroup)
@@ -73,8 +72,8 @@ export class BillingMapperService {
       dailyNoteIncluded: dto.dailyNoteIncluded ?? false,
       precautions: dto.precautions ?? '',
       objective_findings: dto.objectiveFindings ?? '',
-      pre_Treatment: dto.pre_Treatment ?? '',
-      post_Treatment: dto.post_Treatment ?? '',
+      pre_treatment: dto.preTreatment ?? '',
+      post_treatment: dto.postTreatment ?? '',
       untimedCodes: this.mapCheckCodesToDto(dto.untimedCodes?.codes),
       strapping: this.mapQuantityCodesToDto(dto.strapping?.codes),
       calendarMonth: this.mapQuantityCodesToDto(dto.calendarMonth?.codes),
@@ -205,8 +204,8 @@ export class BillingMapperService {
       dailyNoteIncluded: false,
       precautions: '',
       objectiveFindings: '',
-      pre_Treatment: '',
-      post_Treatment: '',
+      preTreatment: '',
+      postTreatment: '',
       untimedCodes: { codes: [] },
       strapping: { codes: [] },
       calendarMonth: { codes: [] },

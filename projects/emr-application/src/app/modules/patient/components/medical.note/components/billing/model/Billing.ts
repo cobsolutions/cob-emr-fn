@@ -14,8 +14,8 @@ export interface Billing {
   dailyNoteIncluded: boolean;
   precautions: string;
   objectiveFindings: string;
-  pre_Treatment: string;
-  post_Treatment: string;
+  preTreatment: string;
+  postTreatment: string;
   untimedCodes: untimedCodes;
   strapping: strapping;
   calendarMonth: calendarMonth;
