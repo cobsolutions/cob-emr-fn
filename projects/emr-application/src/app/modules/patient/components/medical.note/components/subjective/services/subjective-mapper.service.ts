@@ -372,7 +372,7 @@ export class SubjectiveMapperService {
       number_of_visit: basic.numberOfVisit,
       icdten_diagnosis: basic.icdtenDiagnosis,
       treatment_diagnosis: basic.treatmentDiagnosis,
-      treatment_side: Array.isArray(basic.treatmentSide) ? basic.treatmentSide : [],
+      treatment_side: this.mapTreatmentSide(basic.treatmentSide),
       specific_physician_rders: !!basic.specificPhysicianRders,
       specific_physician_rders_text: basic.specificPhysicianRdersText,
       injury_onset_date: basic.injuryOnsetDate,
@@ -392,6 +392,21 @@ export class SubjectiveMapperService {
     };
 
     return mapped;
+  }
+
+  /**
+   * Maps treatment side array - sets 'na' if both left and right are null/missing
+   */
+  private mapTreatmentSide(treatmentSide: any): string[] {
+    if (!Array.isArray(treatmentSide) || treatmentSide.length === 0) {
+      return ['na'];
+    }
+    const hasLeft = treatmentSide.includes('left');
+    const hasRight = treatmentSide.includes('right');
+    if (!hasLeft && !hasRight) {
+      return ['na'];
+    }
+    return treatmentSide;
   }
 
   /**

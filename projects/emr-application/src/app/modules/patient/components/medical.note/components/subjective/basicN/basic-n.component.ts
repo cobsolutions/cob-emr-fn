@@ -138,9 +138,17 @@ export class BasicNComponent implements OnInit {
 
   // Treatment Side checkbox array handling
   onTreatmentSideChange(value: string, isChecked: boolean): void {
-    const currentValues: string[] = this.basicForm.get('treatment_side')?.value || [];
+    let currentValues: string[] = this.basicForm.get('treatment_side')?.value || [];
 
     if (isChecked) {
+      // If N/A is checked, uncheck Left and Right
+      if (value === 'na') {
+        currentValues = currentValues.filter(v => v !== 'left' && v !== 'right');
+      }
+      // If Left or Right is checked, uncheck N/A
+      if (value === 'left' || value === 'right') {
+        currentValues = currentValues.filter(v => v !== 'na');
+      }
       // Add value if not already present
       if (!currentValues.includes(value)) {
         this.basicForm.patchValue({
