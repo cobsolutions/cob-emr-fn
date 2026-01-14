@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-option';
 
@@ -7,7 +7,7 @@ import { HierarchyCheckboxOption } from '../common/interface/hierarchy-checkbox-
   templateUrl: './modalities-n.component.html',
   styleUrls: ['./modalities-n.component.css']
 })
-export class ModalitiesNComponent implements OnInit {
+export class ModalitiesNComponent implements OnInit, AfterViewInit {
   ModalitiesForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   modalitiesOptions: HierarchyCheckboxOption[] = [{
@@ -493,8 +493,12 @@ export class ModalitiesNComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngAfterViewInit(): void {
     this.formReady.emit(this.ModalitiesForm);
   }
+
   initForm() {
     this.ModalitiesForm = this.fb.group({});
   }

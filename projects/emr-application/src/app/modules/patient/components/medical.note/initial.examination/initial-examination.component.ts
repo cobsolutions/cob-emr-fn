@@ -259,16 +259,36 @@ export class InitialExaminationComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     const formRawData = this.initialExaminationForm as FormGroup
     console.log('formRawData  ', formRawData.getRawValue())
+
+    // Get FormGroups and check if they have data
+    const subjectiveGroup = this.initialExaminationForm.get('subjective') as FormGroup;
+    const objectiveGroup = this.initialExaminationForm.get('objective') as FormGroup;
+    const assessmentGroup = this.initialExaminationForm.get('assessment') as FormGroup;
+    const planOfCareGroup = this.initialExaminationForm.get('planOfCare') as FormGroup;
+
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
       id: this.medicalNoteId,
-      subjective: this.subjectiveMapper.toModel(this.initialExaminationForm.get('subjective') as FormGroup),
-      objective: this.objectiveMapperService.toModel(this.initialExaminationForm.get('objective') as FormGroup),
-      assessment: this.assessmentMapper.toModel(this.initialExaminationForm.get('assessment') as FormGroup),
-      planOfCare: null,
+      subjective: (subjectiveGroup && !this.isFormGroupEmpty(subjectiveGroup))
+        ? this.subjectiveMapper.toModel(subjectiveGroup)
+        : null,
+      objective: (objectiveGroup && !this.isFormGroupEmpty(objectiveGroup))
+        ? this.objectiveMapperService.toModel(objectiveGroup)
+        : null,
+      assessment: (assessmentGroup && !this.isFormGroupEmpty(assessmentGroup))
+        ? this.assessmentMapper.toModel(assessmentGroup)
+        : null,
+      planOfCare: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
+        ? this.planOfCareMapper.toModel(planOfCareGroup)
+        : null,
       billing: null
     }
-    medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
+
+    // Only set dateOfService if subjective data exists
+    if (medicalNoteRequest.subjective?.basic?.dateOfInitialExamination) {
+      medicalNoteRequest.dateOfService = moment(medicalNoteRequest.subjective.basic.dateOfInitialExamination).endOf('day').valueOf();
+    }
+
     //Normalize Yes , No to true or false
     this.normalizeYesNoInObject(medicalNoteRequest);
     return medicalNoteRequest;
@@ -383,6 +403,33 @@ export class InitialExaminationComponent implements OnInit {
     }
 
     return false;
+  }
+
+  private isFormGroupEmpty(formGroup: FormGroup): boolean {
+    if (!formGroup) {
+      return true;
+    }
+
+    const values = formGroup.value;
+
+    // Check if all values in the form group are empty
+    const isEmpty = Object.values(values).every(val => {
+      // Handle nested objects/arrays
+      if (val && typeof val === 'object') {
+        if (Array.isArray(val)) {
+          return val.length === 0 || val.every(item =>
+            item === null || item === '' || item === undefined
+          );
+        }
+        // For nested objects, check if all values are empty
+        return Object.values(val).every(nestedVal =>
+          nestedVal === null || nestedVal === '' || nestedVal === undefined
+        );
+      }
+      return val === null || val === '' || val === undefined;
+    });
+
+    return isEmpty;
   }
 
   private normalizeYesNoInObject(obj: any): void {

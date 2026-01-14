@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
@@ -12,7 +12,7 @@ import { PlanStyles } from './styles/plan';
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.css']
 })
-export class PlanComponent implements OnInit {
+export class PlanComponent implements OnInit, AfterViewInit {
   planForm: FormGroup;
   fields: any
   styles: FieldControlStyles[] = PlanStyles;
@@ -87,6 +87,9 @@ export class PlanComponent implements OnInit {
       modalities: this.fb.group({}),
       specialties: this.fb.group({}),
     })
+  }
+
+  ngAfterViewInit(): void {
     this.formReady.emit(this.planForm);
   }
   next() {

@@ -9,16 +9,15 @@ export class AssessmentMapperService {
 
   constructor() { }
   toModel(formValue: FormGroup): AssessmentModel {
-    console.log(formValue.get('parent_patient_education').value)
     return {
-      assessmentDiagnosis: formValue.get('assessment_diagnosis').value,
-      patientClinicalPresentation: formValue.get('patient_clinical_presentation').value,
-      rehabPotential: formValue.get('rehab_potential').value,
-      contraindicationsTotherapy: formValue.get('contraindications_to_therapy').value === 'yes' || formValue.get('contraindications_to_therapy').value === true,
-      consentToCare: formValue.get('consent_to_care').value,
-      problems: formValue.get('problems').value || [],
-      parentPatientEducation: formValue.get('parent_patient_education').value,
-      goals: formValue.get('goals').value?.map((goal: any) => ({
+      assessmentDiagnosis: formValue.get('assessment_diagnosis')?.value,
+      patientClinicalPresentation: formValue.get('patient_clinical_presentation')?.value,
+      rehabPotential: formValue.get('rehab_potential')?.value,
+      contraindicationsTotherapy: formValue.get('contraindications_to_therapy')?.value === 'yes' || formValue.get('contraindications_to_therapy')?.value === true,
+      consentToCare: formValue.get('consent_to_care')?.value,
+      problems: formValue.get('problems')?.value || [],
+      parentPatientEducation: formValue.get('parent_patient_education')?.value,
+      goals: formValue.get('goals')?.value?.map((goal: any) => ({
         description: goal.description,
         term: goal.term,
         period: goal.period,
