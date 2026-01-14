@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Billing } from '../model/Billing';
 import { CheckCPTCode } from '../model/common/check.cpt.code';
 import { QuantityCPTCode } from '../model/common/quantity.cpt.code';
@@ -13,49 +14,49 @@ export class BillingMapperService {
   /**
    * Converts form value/DTO to Billing model
    */
-  toModel(formValue: any): Billing {
+  toModel(formValue: FormGroup): Billing {
     if (!formValue) {
       return this.getEmptyBillingModel();
     }
 
     return {
-      dailyNoteIncluded: formValue.dailyNoteIncluded ?? false,
-      precautions: formValue.precautions ?? '',
-      objectiveFindings: formValue.objective_findings ?? formValue.objectiveFindings ?? '',
-      pre_Treatment: formValue.pre_Treatment ?? '',
-      post_Treatment: formValue.post_Treatment ?? '',
+      dailyNoteIncluded: formValue.get('dailyNoteIncluded')?.value ?? false,
+      precautions: formValue.get('precautions')?.value ?? '',
+      objectiveFindings: formValue.get('objective_findings')?.value ?? '',
+      pre_Treatment: formValue.get('pre_Treatment')?.value ?? '',
+      post_Treatment: formValue.get('post_Treatment')?.value ?? '',
       untimedCodes: {
-        codes: this.mapCheckCodesToModel(formValue.untimedCodes)
+        codes: this.mapCheckCodesToModel(formValue.get('untimedCodes') as FormGroup)
       },
       strapping: {
-        codes: this.mapQuantityCodesToModel(formValue.strapping)
+        codes: this.mapQuantityCodesToModel(formValue.get('strapping') as FormGroup)
       },
       calendarMonth: {
-        codes: this.mapQuantityCodesToModel(formValue.calendarMonth)
+        codes: this.mapQuantityCodesToModel(formValue.get('calendarMonth') as FormGroup)
       },
       nerveConductionStudies: {
-        codes: this.mapCheckCodesToModel(formValue.nerveConductionStudies)
+        codes: this.mapCheckCodesToModel(formValue.get('nerveConduction') as FormGroup)
       },
       respiratory: {
-        codes: this.mapQuantityCodesToModel(formValue.respiratory)
+        codes: this.mapQuantityCodesToModel(formValue.get('respiratory') as FormGroup)
       },
       directTimedCodes: {
-        codes: this.mapQuantityCodesToModel(formValue.directTimedCodes)
+        codes: this.mapQuantityCodesToModel(formValue.get('directTimedCodes') as FormGroup)
       },
       otherTreatmentProcedures: {
-        codes: this.mapQuantityCodesToModel(formValue.otherTreatmentProcedures)
+        codes: this.mapQuantityCodesToModel(formValue.get('otherTreatmentProcedures') as FormGroup)
       },
       supplies: {
-        codes: this.mapQuantityCodesToModel(formValue.supplies)
+        codes: this.mapQuantityCodesToModel(formValue.get('supplies') as FormGroup)
       },
       splintsorthotics: {
-        codes: this.mapQuantityCodesToModel(formValue.splintsorthotics)
+        codes: this.mapQuantityCodesToModel(formValue.get('splintsorthotics') as FormGroup)
       },
       casts: {
-        codes: this.mapQuantityCodesToModel(formValue.casts)
+        codes: this.mapQuantityCodesToModel(formValue.get('casts') as FormGroup)
       },
       braces: {
-        codes: this.mapQuantityCodesToModel(formValue.braces)
+        codes: this.mapQuantityCodesToModel(formValue.get('braces') as FormGroup)
       }
     };
   }
@@ -89,18 +90,19 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps CheckCPTCode array from DTO format (code_checked, code_notes) to model format
+   * Maps CheckCPTCode array from FormGroup format (code_checked, code_notes) to model format
    */
-  private mapCheckCodesToModel(dtoSection: any): CheckCPTCode[] {
-    if (!dtoSection) {
+  private mapCheckCodesToModel(formGroup: FormGroup): CheckCPTCode[] {
+    if (!formGroup) {
       return [];
     }
 
     const codes: CheckCPTCode[] = [];
     const processedCodes = new Set<string>();
+    const controls = formGroup.controls;
 
-    // Iterate through all keys in the DTO section
-    Object.keys(dtoSection).forEach(key => {
+    // Iterate through all keys in the FormGroup
+    Object.keys(controls).forEach(key => {
       // Extract code from keys like "97161_checked" or "97161_notes"
       const codeMatch = key.match(/^(.+?)_(checked|notes)$/);
       if (codeMatch) {
@@ -111,8 +113,8 @@ export class BillingMapperService {
           processedCodes.add(code);
           codes.push({
             code: code,
-            isCheck: dtoSection[`${code}_checked`] ?? false,
-            note: dtoSection[`${code}_notes`] ?? ''
+            isCheck: formGroup.get(`${code}_checked`)?.value ?? false,
+            note: formGroup.get(`${code}_notes`)?.value ?? ''
           });
         }
       }
@@ -122,18 +124,19 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps QuantityCPTCode array from DTO format (code: quantity) to model format
+   * Maps QuantityCPTCode array from FormGroup format (code: quantity) to model format
    */
-  private mapQuantityCodesToModel(dtoSection: any): QuantityCPTCode[] {
-    if (!dtoSection) {
+  private mapQuantityCodesToModel(formGroup: FormGroup): QuantityCPTCode[] {
+    if (!formGroup) {
       return [];
     }
 
     const codes: QuantityCPTCode[] = [];
     const processedCodes = new Set<string>();
+    const controls = formGroup.controls;
 
-    // Iterate through all keys in the DTO section
-    Object.keys(dtoSection).forEach(key => {
+    // Iterate through all keys in the FormGroup
+    Object.keys(controls).forEach(key => {
       // Skip notes keys for now, we'll handle them when processing the code
       if (key.endsWith('_notes')) {
         return;
@@ -144,8 +147,8 @@ export class BillingMapperService {
         processedCodes.add(code);
         codes.push({
           code: code,
-          quantity: dtoSection[code] ?? 0,
-          note: dtoSection[`${code}_notes`] ?? ''
+          quantity: formGroup.get(code)?.value ?? 0,
+          note: formGroup.get(`${code}_notes`)?.value ?? ''
         });
       }
     });

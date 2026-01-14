@@ -264,6 +264,7 @@ export class InitialExaminationComponent implements OnInit {
     const objectiveGroup = this.initialExaminationForm.get('objective') as FormGroup;
     const assessmentGroup = this.initialExaminationForm.get('assessment') as FormGroup;
     const planOfCareGroup = this.initialExaminationForm.get('planOfCare') as FormGroup;
+    const billingeGroup = this.initialExaminationForm.get('billing') as FormGroup;
 
     var medicalNoteRequest: MedicalNoteRequest = {
       caseId: this.caseId,
@@ -280,7 +281,9 @@ export class InitialExaminationComponent implements OnInit {
       planOfCare: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
         ? this.planOfCareMapper.toModel(planOfCareGroup)
         : null,
-      billing: null
+      billing: (billingeGroup && !this.isFormGroupEmpty(billingeGroup))
+        ? this.billingMapperService.toModel(billingeGroup)
+        : null,
     }
 
     // Only set dateOfService if subjective data exists
