@@ -31,5 +31,10 @@ export const NERVECONDUCTIONSTUDIES_CODES_DATA: BillingCPTCode[] = [
 		"cpt": "95912",
 		"description": "Nerve conduction studies, 11-12 studies",
 		"quantity": 0
+	},
+	{
+		"cpt": "95913",
+		"description": "Nerve conduction studies, 13 or more studies",
+		"quantity": 0
 	}
 ]

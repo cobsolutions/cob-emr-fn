@@ -117,6 +117,11 @@ export const UNTIMED_CODES_DATA: BillingCPTCode[] = [
     "quantity": 0
   },
   {
+    "cpt": "0791T",
+    "description": "Virtual Reality facilitated Gait Training",
+    "quantity": 0
+  },
+  {
     "cpt": "97597",
     "description": "Debridement Area < 20 sq cm",
     "quantity": 0

@@ -121,6 +121,16 @@ export const DIRECT_TIMED_CODE_CODES_DATA: BillingCPTCode[] = [
         "quantity": 0
     },
     {
+        "cpt": "97034",
+        "description": "Contrast Baths (constant attendance required)",
+        "quantity": 0
+    },
+    {
+        "cpt": "97139",
+        "description": "Unlisted Therapeutic Procedure",
+        "quantity": 0
+    },
+    {
         "cpt": "97763",
         "description": "Orthotic/prosthetic management and/or training subsequent encounter",
         "quantity": 0
@@ -168,6 +178,26 @@ export const DIRECT_TIMED_CODE_CODES_DATA: BillingCPTCode[] = [
     {
         "cpt": "98980",
         "description": "Remote therapeutic monitoring treatment management services by physician or other qualified health care professional, first 20 minutes per calendar month",
+        "quantity": 0
+    },
+    {
+        "cpt": "97550",
+        "description": "Caregiver Training - First 30 Minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "97551",
+        "description": "Caregiver Training - Additional 15 Minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "G0541",
+        "description": "Caregiver Training (Patient Not Present) - First 30 Minutes",
+        "quantity": 0
+    },
+    {
+        "cpt": "G0542",
+        "description": "Caregiver Training (Patient Not Present) - Additional 15 Minutes",
         "quantity": 0
     }
 ]
