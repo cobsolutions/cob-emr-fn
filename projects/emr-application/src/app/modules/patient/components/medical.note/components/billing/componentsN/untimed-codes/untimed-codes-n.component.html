@@ -18,14 +18,35 @@
         </label>
       </c-form-check>
 
-      <div *ngIf="isChecked(code.cpt)" class="textarea-wrapper">
-        <textarea
-          [id]="'notes-' + code.cpt"
-          [formControlName]="code.cpt + '_notes'"
-          placeholder="Enter notes for {{ code.cpt }}"
-          rows="3"
-          class="form-control"
-        ></textarea>
+      <div *ngIf="isChecked(code.cpt)" class="sub-items-wrapper">
+        <!-- Sub-checkboxes for specific CPT codes -->
+        <div *ngIf="getSubItems(code.cpt).length > 0" class="sub-checkbox-list">
+          <c-form-check *ngFor="let subItem of getSubItems(code.cpt)">
+            <input
+              cFormCheckInput
+              type="checkbox"
+              [id]="'sub-' + code.cpt + '-' + subItem"
+              [formControlName]="code.cpt + '_sub_' + subItem"
+              (change)="onSubCheckboxChange(code.cpt, subItem, $event)"
+            />
+            <label
+              cFormCheckLabel
+              [for]="'sub-' + code.cpt + '-' + subItem"
+            >
+              {{ subItem }}
+            </label>
+          </c-form-check>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea
+            [id]="'notes-' + code.cpt"
+            [formControlName]="code.cpt + '_notes'"
+            placeholder="Enter notes for {{ code.cpt }}"
+            rows="3"
+            class="form-control"
+          ></textarea>
+        </div>
       </div>
     </div>
   </div>

@@ -33,6 +33,11 @@ export const UNTIMED_CODES_DATA: BillingCPTCode[] = [
   },
   {
     "cpt": "97014",
+    "description": "E-Stim Unattended",
+    "quantity": 0
+  },
+  {
+    "cpt": "97014",
     "description": "E-Stim Unattended  Pre-Modulated  High Volt  Interferential  Russian  Other",
     "quantity": 0
   },

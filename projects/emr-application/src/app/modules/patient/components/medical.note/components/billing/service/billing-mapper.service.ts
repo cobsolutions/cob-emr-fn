@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Billing } from '../model/Billing';
-import { CheckCPTCode } from '../model/common/check.cpt.code';
+import { CheckCPTCode, SubItem } from '../model/common/check.cpt.code';
 import { QuantityCPTCode } from '../model/common/quantity.cpt.code';
 
 @Injectable({
@@ -89,7 +89,7 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps CheckCPTCode array from FormGroup format (code_checked, code_notes) to model format
+   * Maps CheckCPTCode array from FormGroup format (code_checked, code_notes, code_sub_*) to model format
    */
   private mapCheckCodesToModel(formGroup: FormGroup): CheckCPTCode[] {
     if (!formGroup) {
@@ -99,9 +99,10 @@ export class BillingMapperService {
     const codes: CheckCPTCode[] = [];
     const processedCodes = new Set<string>();
     const controls = formGroup.controls;
+    const controlKeys = Object.keys(controls);
 
     // Iterate through all keys in the FormGroup
-    Object.keys(controls).forEach(key => {
+    controlKeys.forEach(key => {
       // Extract code from keys like "97161_checked" or "97161_notes"
       const codeMatch = key.match(/^(.+?)_(checked|notes)$/);
       if (codeMatch) {
@@ -110,10 +111,24 @@ export class BillingMapperService {
         // Only process each code once
         if (!processedCodes.has(code)) {
           processedCodes.add(code);
+
+          // Extract subItems for this code as array
+          const subItems: SubItem[] = [];
+          controlKeys.forEach(subKey => {
+            const subMatch = subKey.match(new RegExp(`^${code}_sub_(.+)$`));
+            if (subMatch) {
+              subItems.push({
+                name: subMatch[1],
+                isCheck: formGroup.get(subKey)?.value ?? false
+              });
+            }
+          });
+
           codes.push({
             code: code,
             isCheck: formGroup.get(`${code}_checked`)?.value ?? false,
-            note: formGroup.get(`${code}_notes`)?.value ?? ''
+            note: formGroup.get(`${code}_notes`)?.value ?? '',
+            subItems: subItems.length > 0 ? subItems : undefined
           });
         }
       }
@@ -156,7 +171,7 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps CheckCPTCode array to DTO format (code_checked, code_notes)
+   * Maps CheckCPTCode array to DTO format (code_checked, code_notes, code_sub_*)
    */
   private mapCheckCodesToDto(codes: CheckCPTCode[]): any {
     if (!codes || codes.length === 0) {
@@ -168,6 +183,12 @@ export class BillingMapperService {
       if (codeItem.code) {
         dto[`${codeItem.code}_checked`] = codeItem.isCheck ?? false;
         dto[`${codeItem.code}_notes`] = codeItem.note ?? '';
+        // Map subItems array
+        if (codeItem.subItems && codeItem.subItems.length > 0) {
+          codeItem.subItems.forEach(subItem => {
+            dto[`${codeItem.code}_sub_${subItem.name}`] = subItem.isCheck;
+          });
+        }
       }
     });
 
