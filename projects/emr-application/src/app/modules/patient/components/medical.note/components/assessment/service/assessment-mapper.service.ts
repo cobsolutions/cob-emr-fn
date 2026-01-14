@@ -15,6 +15,11 @@ export class AssessmentMapperService {
       rehabPotential: formValue.get('rehab_potential')?.value,
       contraindicationsTotherapy: formValue.get('contraindications_to_therapy')?.value === 'yes' || formValue.get('contraindications_to_therapy')?.value === true,
       consentToCare: formValue.get('consent_to_care')?.value,
+      patientComplianceHep: formValue.get('patient_compliance_hep')?.value,
+      patientConsultationMaintainOrResume: formValue.get('patient_consultation_maintain_or_resume')?.value,
+      patientConsultationMaintainOrResumeTxt: formValue.get('patient_consultation_maintain_or_resume_txt')?.value,
+      patientConsultationAgainstBedRest: formValue.get('patient_consultation_against_bed_rest')?.value,
+      patientConsultationAgainstBedRestTxt: formValue.get('patient_consultation_against_bed_rest_txt')?.value,
       problems: formValue.get('problems')?.value || [],
       parentPatientEducation: formValue.get('parent_patient_education')?.value,
       goals: formValue.get('goals')?.value?.map((goal: any) => ({
@@ -29,12 +34,18 @@ export class AssessmentMapperService {
   }
 
   fromDto(dto: AssessmentModel): any {
+    console.log('dto.patientConsultationMaintainOrResume', dto.patientConsultationMaintainOrResume)
     return {
       assessment_diagnosis: dto.assessmentDiagnosis || '',
       patient_clinical_presentation: dto.patientClinicalPresentation || '',
       rehab_potential: dto.rehabPotential || '',
       contraindications_to_therapy: dto.contraindicationsTotherapy ? 'yes' : 'no',
       consent_to_care: dto.consentToCare || '',
+      patient_compliance_hep: dto.patientComplianceHep ?? false,
+      patient_consultation_maintain_or_resume: dto.patientConsultationMaintainOrResume ?? false,
+      patient_consultation_maintain_or_resume_txt: dto.patientConsultationMaintainOrResumeTxt || null,
+      patient_consultation_against_bed_rest: dto.patientConsultationAgainstBedRest ?? false,
+      patient_consultation_against_bed_rest_txt: dto.patientConsultationAgainstBedRestTxt || null,
       parent_patient_education: dto.parentPatientEducation,
       problems: dto.problems || [],
       goals: dto.goals?.map(goal => ({

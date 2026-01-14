@@ -7,6 +7,11 @@ export interface AssessmentModel{
     rehabPotential?:string,
     contraindicationsTotherapy?:boolean,
     consentToCare?:string
+    patientComplianceHep?:boolean,
+    patientConsultationMaintainOrResume?:boolean,
+    patientConsultationMaintainOrResumeTxt?:string,
+    patientConsultationAgainstBedRest?:boolean,
+    patientConsultationAgainstBedRestTxt?:string,
     problems?:string[]
     goals?:AssessmentGoals[]
 

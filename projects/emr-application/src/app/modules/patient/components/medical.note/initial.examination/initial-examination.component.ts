@@ -117,13 +117,14 @@ export class InitialExaminationComponent implements OnInit {
 
         if (note.assessment) {
           const assessmentFormValue = this.assessmentMapper.fromDto(note.assessment);
-          // Denormalize true/false to yes/no
-          const assessmentFormGroup = this.initialExaminationForm.get('assessment') as FormGroup;
-          const denormalizedAssessment = this.denormalizeNote(assessmentFormValue, assessmentFormGroup);
-          this.pendingAssessmentData = denormalizedAssessment;
+          // Skip denormalizeNote for assessment - fromDto already handles yes/no for radio buttons
+          // and checkbox fields need to stay as booleans
+          this.pendingAssessmentData = assessmentFormValue;
+          // Update medicalNoteSOAP with mapped form values for the template
+          this.medicalNoteSOAP.assessment = assessmentFormValue;
           // Check if form is already set up
           if (Object.keys((this.initialExaminationForm.get('assessment') as FormGroup).controls).length > 0) {
-            this.initialExaminationForm.get('assessment')?.patchValue(denormalizedAssessment);
+            this.initialExaminationForm.get('assessment')?.patchValue(assessmentFormValue);
             this.pendingAssessmentData = null;
           }
         }

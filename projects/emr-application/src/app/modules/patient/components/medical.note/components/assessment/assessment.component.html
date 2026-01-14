@@ -9,20 +9,17 @@
         <label class="field-label">Patient Clinical Presentation</label>
         <div class="radio-group-vertical">
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
-                    value="Low" />
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="Low" />
                 <label cFormCheckLabel><strong>Low Complexity</strong> - The clinical presentation is stable and/or
                     uncomplicated.</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
-                    value="Moderate" />
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="Moderate" />
                 <label cFormCheckLabel><strong>Moderate Complexity</strong> - The clinical presentation is evolving with
                     changing characteristics.</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation"
-                    value="High" />
+                <input cFormCheckInput type="radio" formControlName="patient_clinical_presentation" value="High" />
                 <label cFormCheckLabel><strong>High Complexity</strong> - he clinical presentation is unstable with
                     unpredictable characteristics.</label>
             </c-form-check>
@@ -32,6 +29,37 @@
     <div class="form-row">
         <label class="field-label">Parent/Patient Education</label>
         <textarea formControlName="parent_patient_education" class="form-textarea" rows="10"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label"></label>
+        <div class="checkbox-group-vertical">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" formControlName="patient_compliance_hep" />
+                <label cFormCheckLabel>Patient Demonstrates Compliance with Prescribed HEP</label>
+            </c-form-check>
+            <div *ngIf="showPatientComplianceHEP" class="dependent-field-box">
+                <c-form-check>
+                    <input cFormCheckInput type="checkbox" formControlName="patient_consultation_maintain_or_resume" />
+                    <label cFormCheckLabel>Patient consulted during this visit to maintain or resume normal
+                        activities.</label>
+                </c-form-check>
+                <div *ngIf="showPatientConsultationMaintain" class="dependent-field-box">
+                    <div class="form-row">
+                        <input class="form-input " formControlName="patient_consultation_maintain_or_resume_txt" />
+                    </div>
+                </div>
+                <c-form-check>
+                    <input cFormCheckInput type="checkbox" formControlName="patient_consultation_against_bed_rest" />
+                    <label cFormCheckLabel>Patient consulted during this visit against bed rest lasting 4 days or
+                        longer.</label>
+                </c-form-check>
+                <div *ngIf="showPatientConsultationbedRest" class="dependent-field-box">
+                    <div class="form-row">
+                        <input class="form-input" formControlName="patient_consultation_against_bed_rest_txt" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Rehab Potential -->
     <div class="form-row">

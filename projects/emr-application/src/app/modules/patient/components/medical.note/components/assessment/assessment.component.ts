@@ -22,16 +22,48 @@ export class AssessmentComponent implements OnInit {
   @Input() noteType: string
   problemsArray: FormArray;
   goalsArray: FormArray;
+  showPatientComplianceHEP: boolean
+  showPatientConsultationMaintain: boolean
+  showPatientConsultationbedRest: boolean
+
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService
-    , private soapService:SoapService) { }
+    , private soapService: SoapService) { }
   ngOnInit(): void {
     this.buildForm();
-      this.formReady.emit(this.assessmentForm);
+    this.setupValueChangeListeners();
+    this.formReady.emit(this.assessmentForm);
     // this.soapService.findSoapFields('assessment', this.noteType).subscribe(fields => {
     //   this.fields = fields['assessment']
     //   this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
     // });
+  }
+  private setupValueChangeListeners() {
+    this.assessmentForm.get('patient_compliance_hep')?.valueChanges.subscribe(value => {
+      this.showPatientComplianceHEP = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_maintain_or_resume: false,
+          patient_consultation_against_bed_rest: false
+        })
+      }
+    })
+    this.assessmentForm.get('patient_consultation_maintain_or_resume')?.valueChanges.subscribe(value => {
+      this.showPatientConsultationMaintain = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_maintain_or_resume_txt: null
+        })
+      }
+    })
+    this.assessmentForm.get('patient_consultation_against_bed_rest')?.valueChanges.subscribe(value => {
+      this.showPatientConsultationbedRest = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_against_bed_rest_txt: null
+        })
+      }
+    })
   }
   get problems(): FormArray {
     return this.assessmentForm.get('problems') as FormArray;
@@ -113,12 +145,17 @@ export class AssessmentComponent implements OnInit {
 
   private buildForm() {
     this.assessmentForm = this.fb.group({
-      assessment_diagnosis:[''],
-      patient_clinical_presentation:[],
-      parent_patient_education:[],
-      rehab_potential:[''],
-      contraindications_to_therapy:['no'],
-      consent_to_care:[],
+      assessment_diagnosis: [''],
+      patient_clinical_presentation: [],
+      parent_patient_education: [],
+      rehab_potential: [''],
+      contraindications_to_therapy: ['no'],
+      consent_to_care: [],
+      patient_compliance_hep: [false],
+      patient_consultation_maintain_or_resume: [false],
+      patient_consultation_maintain_or_resume_txt: null,
+      patient_consultation_against_bed_rest: [false],
+      patient_consultation_against_bed_rest_txt: null,
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })
