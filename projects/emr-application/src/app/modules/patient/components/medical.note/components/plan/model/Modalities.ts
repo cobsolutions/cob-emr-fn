@@ -28,7 +28,9 @@ export interface Modalities {
   modalitiesLaserNotes: string;
   // Laser children
   modalitiesColdLaser?: boolean;
+  modalitiesColdLaserDuration?:string
   modalitiesClass4Laser?: boolean;
+  modalitiesClass4Laserduration?:string
   modalitiesInfraredLight: boolean;
   modalitiesInfraredLightNotes: string;
   // Infrared Light children

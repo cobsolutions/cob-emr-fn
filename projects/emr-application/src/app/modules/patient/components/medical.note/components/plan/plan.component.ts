@@ -172,7 +172,8 @@ export class PlanComponent implements OnInit, AfterViewInit, OnChanges {
 
     const modalitiesFields = {};
     Object.keys(data).forEach(key => {
-      if (key.startsWith('modalities_')) {
+      // Include both modalities_ and procedure_ prefixes since modalities children may use procedure_ prefix
+      if (key.startsWith('modalities_') || key.startsWith('procedure_')) {
         modalitiesFields[key] = data[key];
       }
     });
@@ -187,9 +188,9 @@ export class PlanComponent implements OnInit, AfterViewInit, OnChanges {
     // Based on the mapper, specialties include: modalities_orthotic_fabrication, modalities_tens_fitting, modalities_acupuncture, modalities_other
     const specialtiesFields = {};
     const specialtyKeys = ['modalities_orthotic_fabrication', 'modalities_orthotic_fabrication_notes',
-                           'modalities_tens_fitting', 'modalities_tens_fitting_notes',
-                           'modalities_acupuncture', 'modalities_acupuncture_notes',
-                           'modalities_other', 'modalities_other_notes'];
+      'modalities_tens_fitting', 'modalities_tens_fitting_notes',
+      'modalities_acupuncture', 'modalities_acupuncture_notes',
+      'modalities_other', 'modalities_other_notes'];
 
     specialtyKeys.forEach(key => {
       if (data.hasOwnProperty(key)) {

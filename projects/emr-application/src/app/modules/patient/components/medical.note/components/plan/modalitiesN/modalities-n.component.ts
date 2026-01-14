@@ -165,12 +165,58 @@ export class ModalitiesNComponent implements OnInit, AfterViewInit {
     "children": [{
       "label": "Cold Laser",
       "value": "cold_laser",
-      "formControlName": "procedure_cold_laser"
+      "formControlName": "modalities_cold_laser",
+      "children": [{
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_cold_laser_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: 'Select' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }]
     },
     {
       "label": "Class 4 Laser",
       "value": "class_4_laser",
-      "formControlName": "procedure_class_4_laser"
+      "formControlName": "modalities_class_4_laser",
+      "children": [{
+        label: 'Duration',
+        value: 'duration',
+        formControlName: 'modalities_class_4_laser_duration',
+        childType: 'select',
+        selectOptions: [
+          { value: '', label: 'Select' },
+          { value: '3_minutes', label: '3 minutes' },
+          { value: '4_minutes', label: '4 minutes' },
+          { value: '5_minutes', label: '5 minutes' },
+          { value: '6_minutes', label: '6 minutes' },
+          { value: '7_minutes', label: '7 minutes' },
+          { value: '8_minutes', label: '8 minutes' },
+          { value: '9_minutes', label: '9 minutes' },
+          { value: '10_minutes', label: '10 minutes' },
+          { value: '11_minutes', label: '11 minutes' },
+          { value: '12_minutes', label: '12 minutes' },
+          { value: '13_minutes', label: '13 minutes' },
+          { value: '14_minutes', label: '14 minutes' },
+          { value: '15_minutes', label: '15 minutes' },
+          { value: 'custom', label: 'Custom' }
+        ]
+      }]
     }]
   },
   {
@@ -494,6 +540,7 @@ export class ModalitiesNComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    console.log('modalitiesData', this.modalitiesData)
   }
 
   ngAfterViewInit(): void {

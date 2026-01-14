@@ -298,8 +298,10 @@ export class PlanOfCareMapperService {
       modalitiesLaser: formValue.get('modalities_laser')?.value || false,
       modalitiesLaserNotes: formValue.get('modalities_laser_notes')?.value || '',
       // Laser children
-      modalitiesColdLaser: formValue.get('procedure_cold_laser')?.value || false,
-      modalitiesClass4Laser: formValue.get('procedure_class_4_laser')?.value || false,
+      modalitiesColdLaser: formValue.get('modalities_cold_laser')?.value || false,
+      modalitiesColdLaserDuration: formValue.get('modalities_cold_laser_duration')?.value || '',
+      modalitiesClass4Laser: formValue.get('modalities_class_4_laser')?.value || false,
+      modalitiesClass4Laserduration: formValue.get('modalities_class_4_laser_duration')?.value || '',
       modalitiesInfraredLight: formValue.get('modalities_infrared_light')?.value || false,
       modalitiesInfraredLightNotes: formValue.get('modalities_infrared_light_notes')?.value || '',
       // Infrared Light children
@@ -355,7 +357,7 @@ export class PlanOfCareMapperService {
     if (!modalities) {
       return {};
     }
-
+    console.log('modalities.modalitiesColdLaser ', modalities.modalitiesColdLaser)
     return {
       modalities_pain_relief: modalities.modalitiesPainRelief || false,
       modalities_pain_relief_notes: modalities.modalitiesPainReliefNotes || '',
@@ -382,8 +384,10 @@ export class PlanOfCareMapperService {
       modalities_duration: modalities.modalitiesDuration || '',
       modalities_laser: modalities.modalitiesLaser || false,
       modalities_laser_notes: modalities.modalitiesLaserNotes || '',
-      procedure_cold_laser: modalities.modalitiesColdLaser || false,
-      procedure_class_4_laser: modalities.modalitiesClass4Laser || false,
+      modalities_cold_laser: modalities.modalitiesColdLaser || false,
+      modalities_cold_laser_duration: modalities.modalitiesColdLaserDuration || '',
+      modalities_class_4_laser: modalities.modalitiesClass4Laser || false,
+      modalities_class_4_laser_duration: modalities.modalitiesClass4Laserduration || '',
       modalities_infrared_light: modalities.modalitiesInfraredLight || false,
       modalities_infrared_light_notes: modalities.modalitiesInfraredLightNotes || '',
       modalities_lnfrared_light_duration: modalities.modalitiesInfraredLightDuration || '',

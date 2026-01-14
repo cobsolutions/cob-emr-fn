@@ -1,47 +1,53 @@
 <div [formGroup]="formGroup">
     <div class="checkbox-group-vertical">
         <div *ngFor="let option of options">
-            <c-form-check>
-                <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
-                <label cFormCheckLabel>{{ option.label }}</label>
-            </c-form-check>
-
-            <!-- Show children and textarea if option has children -->
-            <div *ngIf="option.showChildren && option.children && option.children.length > 0" class="child-checkbox-group">
-                <div *ngFor="let child of option.children">
-                    <!-- Render as checkbox if childType is 'checkbox' or not specified -->
-                    <c-form-check *ngIf="!child.childType || child.childType === 'checkbox'" class="child-checkbox">
-                        <input cFormCheckInput type="checkbox" [formControlName]="child.formControlName" />
-                        <label cFormCheckLabel>{{ child.label }}</label>
-                    </c-form-check>
-
-                    <!-- Render as select if childType is 'select' -->
-                    <div *ngIf="child.childType === 'select'" class="child-select-container">
-                        <label class="child-select-label">{{ child.label }}</label>
-                        <select class="child-select" [formControlName]="child.formControlName">
-                            <option value="">Select</option>
-                            <option *ngFor="let opt of child.selectOptions" [value]="opt.value">
-                                {{ opt.label }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <textarea
-                    class="child-textarea"
-                    [formControlName]="option.formControlName + '_notes'"
-                    rows="4"
-                    placeholder="Additional notes..."></textarea>
-            </div>
-
-            <!-- Show only textarea if option has no children -->
-            <div *ngIf="option.showChildren && (!option.children || option.children.length === 0)" class="child-textarea-only">
-                <textarea
-                    class="child-textarea"
-                    [formControlName]="option.formControlName + '_notes'"
-                    rows="4"
-                    placeholder="Additional notes..."></textarea>
-            </div>
+            <ng-container *ngTemplateOutlet="checkboxItem; context: { $implicit: option, depth: 0 }"></ng-container>
         </div>
     </div>
 </div>
+
+<!-- Recursive template for checkbox items -->
+<ng-template #checkboxItem let-option let-depth="depth">
+    <ng-container [formGroup]="formGroup">
+        <c-form-check>
+            <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+            <label cFormCheckLabel>{{ option.label }}</label>
+        </c-form-check>
+
+        <!-- Show children and textarea if option has children -->
+        <div *ngIf="isChecked(option) && option.children && option.children.length > 0" class="child-checkbox-group">
+            <div *ngFor="let child of option.children">
+                <!-- Render as checkbox if childType is 'checkbox' or not specified -->
+                <div *ngIf="!child.childType || child.childType === 'checkbox'" class="child-checkbox">
+                    <ng-container *ngTemplateOutlet="checkboxItem; context: { $implicit: child, depth: depth + 1 }"></ng-container>
+                </div>
+
+                <!-- Render as select if childType is 'select' -->
+                <div *ngIf="child.childType === 'select'" class="child-select-container">
+                    <label class="child-select-label">{{ child.label }}</label>
+                    <select class="child-select" [formControlName]="child.formControlName">
+                        <option value="">Select</option>
+                        <option *ngFor="let opt of child.selectOptions" [value]="opt.value">
+                            {{ opt.label }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <textarea *ngIf="depth === 0"
+                class="child-textarea"
+                [formControlName]="option.formControlName + '_notes'"
+                rows="4"
+                placeholder="Additional notes..."></textarea>
+        </div>
+
+        <!-- Show only textarea if option has no children (only at top level) -->
+        <div *ngIf="depth === 0 && isChecked(option) && (!option.children || option.children.length === 0)" class="child-textarea-only">
+            <textarea
+                class="child-textarea"
+                [formControlName]="option.formControlName + '_notes'"
+                rows="4"
+                placeholder="Additional notes..."></textarea>
+        </div>
+    </ng-container>
+</ng-template>
