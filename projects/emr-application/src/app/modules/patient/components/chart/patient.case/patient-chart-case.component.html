@@ -111,8 +111,8 @@
             <c-input-group class="mb-0">
                 <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
                     [componentRole]="componentRole">
-                    <option [value]="action" *ngFor="let action of patientCaseActions">
-                        {{ action }}
+                    <option [value]="action.key" *ngFor="let action of patientCaseActions">
+                        {{ action.label }}
                     </option>
                 </select>
                 <button cButton color="primary" variant="outline" size="sm"
@@ -232,17 +232,17 @@
 <span *ngIf="patientRecord ===false">
     <c-card class="mb-3 ustify-content-center">
         <!-- Initial Examination -->
-        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination' && noteId"
+        <initial-examination *ngIf="patientRecordAction ==='Initial_Examination' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
             [noteId]="noteId"></initial-examination>
         <!-- Daily Note -->
-        <daily-note *ngIf="patientRecordAction ==='Add Daily Note' && medicalNoteId" (back)="handleBackAction()"
+        <daily-note *ngIf="patientRecordAction ==='Daily_Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></daily-note>
         <!--Progress Note-->
-        <progress-note *ngIf="patientRecordAction ==='Progress Note' && medicalNoteId" (back)="handleBackAction()"
+        <progress-note *ngIf="patientRecordAction ==='Progress_Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></progress-note>
         <!--Quick Discharge Note-->
-        <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
+        <quick-discharge-note *ngIf="patientRecordAction ==='Quick_Discharge' && medicalNoteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [patientName]="patientName"
             (backToRecord)="handleBackAction()"></quick-discharge-note>
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"

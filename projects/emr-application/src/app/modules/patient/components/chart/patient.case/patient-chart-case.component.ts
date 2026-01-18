@@ -16,6 +16,7 @@ import { QuickDischargeRequest } from '../../../models/medical.note/quick.discha
 
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
+import { PatientCaseAction } from '../../../models/chart/patient.case.action';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
@@ -53,7 +54,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
-  patientCaseActions: string[]
+  patientCaseActions: PatientCaseAction[]
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -85,6 +86,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   private findPatientCaseActions(patientCaseId: string) {
     this.patientChartNoteService.find(patientCaseId).subscribe((actions: any) => {
+      console.log('actions', actions)
       this.patientCaseActions = actions;
     })
   }
@@ -145,43 +147,36 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   private getLoggedDoctor(): string {
     return this.loggedInService.getLoggedUser().uuid
   }
-  executeAction(val: string) {
-    this.patientRecordAction = val;
+  executeAction(key: string) {
+    this.patientRecordAction = key;
     let medicalNoteType: string;
     let caseId = this.case.id
 
-    if (val === 'Add Initial Examination') {
+    if (key === 'Initial_Examination') {
       medicalNoteType = "INITIAL_EVALUATION"
-      this.case.patientRecordActions = [
-        "Add Daily Note",
-        "Progress Note",
-        "Discharge",
-        "Quick Discharge",
-        "Case Note"
-      ]
       this.createInitialExamNote();
       this.medicalNoteId = undefined;
     }
 
-    if (val === 'Add Daily Note') {
+    if (key === 'Daily_Note') {
       medicalNoteType = "DAILY_NOTE"
       this.medicalNoteId = undefined;
     }
-    if (val === 'Progress Note') {
+    if (key === 'Progress_Note') {
       medicalNoteType = "PROGRESS_NOTE"
       this.medicalNoteId = undefined;
     }
 
-    if (val === 'Quick Discharge') {
+    if (key === 'Quick_Discharge') {
       medicalNoteType = "QUICK_DISCHARGE_NOTE"
       this.medicalNoteId = undefined;
     }
 
-    if (val === 'Discharge') {
+    if (key === 'Discharge') {
       medicalNoteType = "DISCHARGE_NOTE"
       this.medicalNoteId = undefined;
     }
-    if (val === 'Quick Discharge') {
+    if (key === 'Quick_Discharge') {
       var quickDischargeRequest: QuickDischargeRequest = {
         dischargeDate: 0,
         numberOfVisits: 0
@@ -190,7 +185,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   private createInitialExamNote() {
     var request: CreateNodeRequest = {
-      patient:this.patient,
+      patient: this.patient,
       noteType: 'INITIAL_EXAM',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate()
@@ -202,6 +197,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error.message;
@@ -225,6 +221,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   handleBackAction() {
     this.patientRecord = true;
+    this.getRecords();
+    this.findPatientCaseActions(this.case.uuid);
   }
   private getAppointment(id: number) {
     this.appointmentService.getAppointmentCancelNoShow(id).subscribe((appointmentCancelNoShowReason: any) => {
@@ -236,19 +234,20 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.medialNoteService.remove(id).subscribe((updatedCase: any) => {
       this.case = updatedCase;
       this.getRecords();
+      this.findPatientCaseActions(this.case.uuid);
     })
   }
   private completeMedicalNote(id: number, status: string) {
     this.patientRecord = false
     this.medicalNoteId = id;
     if (status === 'Initial Examination')
-      this.patientRecordAction = 'Add Initial Examination';
+      this.patientRecordAction = 'Initial_Examination';
     if (status === 'Daily Note')
-      this.patientRecordAction = 'Add Daily Note';
+      this.patientRecordAction = 'Daily_Note';
     if (status === 'Progress Note')
-      this.patientRecordAction = 'Progress Note';
+      this.patientRecordAction = 'Progress_Note';
     if (status === 'Quick Discharge')
-      this.patientRecordAction = 'Quick Discharge';
+      this.patientRecordAction = 'Quick_Discharge';
     if (status === 'Discharge Note')
       this.patientRecordAction = 'Discharge';
   }
