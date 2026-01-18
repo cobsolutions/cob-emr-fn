@@ -37,7 +37,7 @@ export class InitialExaminationComponent implements OnInit {
   @Input() noteId: string
   noteCreator: string
   noteFinalizr: string
-  @Input() caseId: number
+  @Input() caseId: string
   medicalNoteSOAP: any
   type: MedicalNoteType = MedicalNoteType.Initial_Examination;
   isLoaded: boolean = true;
@@ -273,7 +273,7 @@ export class InitialExaminationComponent implements OnInit {
     const billingeGroup = this.initialExaminationForm.get('billing') as FormGroup;
 
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       subjective: (subjectiveGroup && !this.isFormGroupEmpty(subjectiveGroup))
         ? this.subjectiveMapper.toModel(subjectiveGroup)

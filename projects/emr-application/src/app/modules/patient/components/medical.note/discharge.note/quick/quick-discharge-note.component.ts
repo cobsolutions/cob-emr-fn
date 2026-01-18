@@ -20,7 +20,7 @@ export class QuickDischargeNoteComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Output() backToRecord = new EventEmitter<void>();
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() caseId: string
   @Input() patientName: string
   creator: string
   noteFinalizr: string
@@ -84,7 +84,7 @@ export class QuickDischargeNoteComponent implements OnInit {
       comment: this.dischargeForm.get('reason').value
     }
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       quickDischargeRequest: quickDischargeRequest
     }

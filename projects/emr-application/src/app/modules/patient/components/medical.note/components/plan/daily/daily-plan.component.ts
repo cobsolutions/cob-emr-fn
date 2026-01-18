@@ -14,7 +14,7 @@ export class DailyPlanComponent implements OnInit {
   @Input() planData: any
   @Input() noteId: number
   @Input() noteType: MedicalNoteType
-  @Input() caseId: number
+  @Input() caseId: string
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
   @Input() creator: string

@@ -21,7 +21,7 @@ export class DailyNoteComponent implements OnInit {
   dailyNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
@@ -78,7 +78,7 @@ export class DailyNoteComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.dailyNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
       billing: Object.keys(createdNote.objective).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.objective),

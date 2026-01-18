@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { CreateNodeRequest } from '../../../models/medical.note/create.note.request';
+import { CreateNodeRequest } from '../../../models/medical.note/requester/create.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 
 @Injectable({

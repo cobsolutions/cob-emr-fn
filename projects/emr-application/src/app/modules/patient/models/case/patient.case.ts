@@ -21,5 +21,6 @@ export interface PatientCase {
     caseOtherInformation?: CaseOtherInformation;
     patientRecordActions?:string[]
     authorizationData?:PatientCaseAuthorizationData;
+    uuid?:string
     additionalInfo?:string;
 }

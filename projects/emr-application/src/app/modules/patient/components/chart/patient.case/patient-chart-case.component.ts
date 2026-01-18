@@ -10,7 +10,7 @@ import { Role } from '../../../../security/model/role';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 
 import { PatientCase } from '../../../models/case/patient.case';
-import { CreateNodeRequest } from '../../../models/medical.note/create.note.request';
+import { CreateNodeRequest } from '../../../models/medical.note/requester/create.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { QuickDischargeRequest } from '../../../models/medical.note/quick.discharge.request';
 
@@ -20,6 +20,7 @@ import { InitialExamNoteService } from '../../../services/medical.note/initial.e
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
+import { PatientRequest } from '../../../models/medical.note/requester/patient.request';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -35,6 +36,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   recordActionStauts: string;
   @Input() case: PatientCase;
   @Input() patientId: number;
+  @Input() patient: PatientRequest;
   @Input() patientName: string
   @Input() clinicId: number;
   appointments$!: Observable<Appointment[]>;
@@ -77,9 +79,11 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()
-    this.findPatientCaseActions(this.case.id);
+    this.findPatientCaseActions(this.case.uuid);
+    this.patient.patientCaseId = this.case.uuid
+    console.log('patient', this.patient)
   }
-  private findPatientCaseActions(patientCaseId: number) {
+  private findPatientCaseActions(patientCaseId: string) {
     this.patientChartNoteService.find(patientCaseId).subscribe((actions: any) => {
       this.patientCaseActions = actions;
     })
@@ -113,7 +117,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   private getRecords() {
     const patientRecordRequest: PatientRecordRequest = {
       patientId: this.patientId,
-      caseId: this.case.id,
+      caseId: this.case.uuid,
       loggedIn: this.loggedInService.getLoggedUser().uuid
     }
     this.patientRecords$ = this.patientRecordService.find(this.apiParams$, patientRecordRequest).pipe(
@@ -186,10 +190,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   }
   private createInitialExamNote() {
     var request: CreateNodeRequest = {
-      patientId: this.patientId,
-      caseId: this.case.id,
-      providerId: this.loggedInService.getLoggedUser().uuid,
+      patient:this.patient,
       noteType: 'INITIAL_EXAM',
+      providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate()
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {

@@ -4,10 +4,10 @@ import * as moment from 'moment';
 import { AddressUtil } from 'projects/emr-application/src/app/util/address.util';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
 import { filter, switchMap, tap } from 'rxjs';
-import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { PatientCase } from '../../models/case/patient.case';
 import { PatientChartInfo } from '../../models/chart/patient.chart.info';
+import { PatientRequest } from '../../models/medical.note/requester/patient.request';
 import { Patient } from '../../models/patient';
 import { PateintResponse } from '../../models/response/patient.response';
 import { PateintCaseService } from '../../services/patient/cases/pateint-case.service';
@@ -19,7 +19,7 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
   styleUrls: ['./patient-chart.component.css']
 })
 export class PatientChartComponent implements OnInit {
-  patient: Patient;
+  patient:PatientRequest
   patientChartInfo: PatientChartInfo = {
     id: 0,
     name: '',
@@ -61,6 +61,13 @@ export class PatientChartComponent implements OnInit {
         switchMap((clinicId) => this.patientFinderService.getPatient(this.patientId, clinicId)))
       .subscribe((response: PateintResponse) => {
         var patient: Patient = response.records
+        this.patient = {
+          firstName:patient.firstName,
+          middleName:patient.middleName,
+          lastName:patient.lastName,
+          patientId:patient.uuid,
+          dateOfBirth:new Date(patient.birthDate)
+        } 
         this.patientCases = patient.cases;
         this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
         this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");

@@ -20,7 +20,7 @@ export class ProgressNoteComponent implements OnInit {
   progressNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
   noteCreator: string
@@ -78,7 +78,7 @@ export class ProgressNoteComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.progressNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId +'',
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,

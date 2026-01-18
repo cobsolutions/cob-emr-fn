@@ -8,7 +8,7 @@ import { environment } from 'projects/emr-application/src/environments/environme
 export class PatientChartNoteService {
   private baseUrl = environment.baseURL + 'patient-chart-note'
   constructor(private httpClient: HttpClient) { }
-  public find(patientCaseId:number){
+  public find(patientCaseId:string){
     const headers = { 'content-type': 'application/json' }
     var url = this.baseUrl + '/find/actions/case-id/' +patientCaseId;
     return this.httpClient.get(`${url}`)

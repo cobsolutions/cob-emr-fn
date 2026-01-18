@@ -12,7 +12,7 @@ import { MedialNoteService } from '../../../services/medical.note/medial-note.se
   styleUrls: ['./finalize-medical-note.component.css']
 })
 export class FinalizeMedicalNoteComponent implements OnInit {
-  @Input() patientCaseId: number;
+  @Input() patientCaseId: string;
   @Input() medicalNoteId: number;
   @Input() noteType: MedicalNoteType
   @Output() changeVisibility = new EventEmitter<string>()

@@ -3,7 +3,7 @@ import { QuickDischargeRequest } from "./quick.discharge.request";
 export interface MedicalNoteRequest {
     id?: number,
     patientId?:number
-    caseId?: number;
+    patientCaseId?: string;
     noteType?: string
     createdBy?: string
     noteDate?: number

@@ -1,6 +1,6 @@
 export interface PatientRecordRequest {
     patientId: number
-    caseId: number
+    caseId: string
     clinicId?: number;
     loggedIn?:string
 }

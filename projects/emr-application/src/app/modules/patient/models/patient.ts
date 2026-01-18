@@ -32,6 +32,7 @@ export interface Patient {
     effectiveFromDate_Date?: Date | null;
     effectiveToDate?: number;
     effectiveToDate_Date?: Date | null;
+    uuid?:string,
     addresses?: Address[];
     contacts?: Contact[];
     emergencies?: Emergency[];

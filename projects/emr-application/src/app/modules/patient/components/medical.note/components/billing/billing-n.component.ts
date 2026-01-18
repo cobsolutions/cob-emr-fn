@@ -14,7 +14,7 @@ export class BillingNComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() noteTypeId: string
-  @Input() caseId: number
+  @Input() caseId: string
   @Input() medicalNoteId: number
   @Input() billingData: any;
   BillingForm: FormGroup;
