@@ -1,3 +1,4 @@
+import { ProviderInfo } from "../../../security/model/provider-info";
 import { QuickDischargeRequest } from "./quick.discharge.request";
 
 export interface MedicalNoteRequest {
@@ -14,4 +15,5 @@ export interface MedicalNoteRequest {
     billing?: any
     dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
+    finalizedBy?: ProviderInfo
 }

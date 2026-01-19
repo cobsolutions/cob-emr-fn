@@ -33,6 +33,11 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   }
   onYes() {
     this.finalizeMessageFlag = true
+    const loggedUser = this.loggedInService.getLoggedUser();
+    this.medicalNoteRequest.finalizedBy = {
+      ...loggedUser.providerInfo,
+      uuid: loggedUser.uuid
+    };
     this.initialExamNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
       next: (data) => {
         this.medialNoteService.notifyFinalize(true);
