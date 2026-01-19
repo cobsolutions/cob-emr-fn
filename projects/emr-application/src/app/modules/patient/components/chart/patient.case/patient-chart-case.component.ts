@@ -214,9 +214,16 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
       this.medialNoteService.medicalNoteID$.next(this.medicalNoteId)
     }
     if (val === 'View Pdf') {
-      this.viewPDFVisibility = true;
       this.recordActionEntityId = entityId
       this.recordActionStauts = status
+      this.initialExamNoteService.exportPDF(noteId).subscribe((blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `medical-note-${noteId}.pdf`;
+        link.click();
+        window.URL.revokeObjectURL(url);
+      });
     }
   }
   handleBackAction() {
