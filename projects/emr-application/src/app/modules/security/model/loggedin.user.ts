@@ -1,6 +1,7 @@
 import { UserRoleScope } from "../../administration/model/user/user.role.scope";
 import { IApiParams } from "../../common/interfaces/api.params";
 import { Clinic } from "../../patient/models/clinic";
+import { ProviderInfo } from "./provider-info";
 
 export interface LoggedInUser {
     uuid?: string,
@@ -12,4 +13,5 @@ export interface LoggedInUser {
     organizationId?: number
     params?: IApiParams
     userRoleScope?: UserRoleScope[]
+    providerInfo?:ProviderInfo
 }

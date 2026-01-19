@@ -74,6 +74,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     return info ? info.replace(/\n/g, '<br/>') : '';
   }
   ngOnInit(): void {
+    console.log('provider' , this.loggedInService.getLoggedUser())
     this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
 
