@@ -1170,6 +1170,6 @@
 <c-modal id="dashTest" [visible]="showDashTestModal" size="lg" backdrop="static" scrollable="true">
   <c-modal-body>
     <button (click)="toggleDashTestModal()" cButtonClose style="float: right;"></button>
-    <show-omttest [testName]="'dash'" *ngIf="showDashTestModal" (data)="onDashTestResult($event)"></show-omttest>
+    <dash-test *ngIf="showDashTestModal" (getResult)="onDashTestResult($event)"></dash-test>
   </c-modal-body>
 </c-modal>

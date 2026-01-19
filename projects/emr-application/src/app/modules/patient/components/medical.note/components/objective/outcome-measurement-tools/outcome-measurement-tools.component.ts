@@ -739,10 +739,9 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
 
   onDashTestResult(event: any): void {
     this.showDashTestModal = false;
-    if (event) {
-      const score = event.score ?? event.dashScore ?? event.totalScore ?? event;
+    if (event?.results?.total !== undefined) {
       this.omtForm.patchValue({
-        dash_score: score
+        dash_score: event.results.total
       });
     }
   }
