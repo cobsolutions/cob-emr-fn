@@ -399,6 +399,7 @@
     </c-modal-header>
     <c-modal-body>
         <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
-            [noteType]="noteType" (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+            [noteType]="noteType" [medicalNoteRequest]="medicalNoteRequest" [noteId]="noteId"
+            (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
     </c-modal-body>
 </c-modal>

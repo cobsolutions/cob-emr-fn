@@ -52,7 +52,8 @@
                 <billing-n [stepper]="stepper" [parentForm]="initialExaminationForm"
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4] "
                     [noteTypeId]="'InitialExamination'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
-                    [billingData]="medicalNoteSOAP?.billing"></billing-n>
+                    [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing"
+                    (backToRecords)="backtoPatientRecordActions()"></billing-n>
             </mat-step>
         </mat-stepper>
     </form>
