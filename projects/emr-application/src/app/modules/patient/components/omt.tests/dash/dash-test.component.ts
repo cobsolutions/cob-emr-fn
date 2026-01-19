@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OMTTestValues } from '../../../models/medical.note/omt.test/omt.test.values';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
-import { OmtTestService } from '../../../services/test/omt-test.service';
+import { OmtTestService } from '../../medical.note/components/objective/service/omt-test/omt-test.service';
 import { dashValidator } from '../validator/not.selected';
 
 @Component({
@@ -110,17 +109,17 @@ export class DashTestComponent implements OnInit {
     this.dashForm = this.createForm();
   }
   ngOnInit(): void {
-    this.medicalNotService.medicalNoteID$.subscribe(id => {
-      this.medicalNoteId = id
-      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
-        this.id = data?.id
-        setTimeout(() => {
-          this.dashForm.patchValue(data.values);
-        }, 10);
+    // this.medicalNotService.medicalNoteID$.subscribe(id => {
+    //   this.medicalNoteId = id
+    //   this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
+    //     this.id = data?.id
+    //     setTimeout(() => {
+    //       this.dashForm.patchValue(data.values);
+    //     }, 10);
 
-      })
-      console.log('medial Note ID ' + id)
-    })
+    //   })
+    //   console.log('medial Note ID ' + id)
+    // })
   }
   createForm(): FormGroup {
     const formGroup: any = {};
@@ -174,25 +173,18 @@ export class DashTestComponent implements OnInit {
     }
 
     // Calculate DASH score
-    const result: { [key: string]: number } = {};
+    const answers: { [key: string]: number } = {};
     for (let i = 1; i <= 30; i++) {
       const value = this.dashForm.get(`q${i}`)?.value;
       // Only include if not "Not Tested"
       if (value !== 'NT') {
-        result[`Q${i}`] = (parseInt(value, 10) - 1);
+        answers[`Q${i}`] = (parseInt(value, 10) - 1);
       }
     }
-    this.omtTestService.dashTest(result).subscribe(val => {
-      var omtTestValues: OMTTestValues = {
-        id: this.id,
-        medicalNoteId: this.medicalNoteId,
-        testName: this.testName,
-        values: this.dashForm.getRawValue()
-      };
-      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
-      })
-      this.getResult.emit(val)
-    })
+    this.omtTestService.calculate(this.testName, answers).subscribe(val => {
+      console.log('val', val)
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
