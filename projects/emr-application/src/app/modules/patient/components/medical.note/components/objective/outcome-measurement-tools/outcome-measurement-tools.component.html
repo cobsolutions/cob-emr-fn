@@ -268,7 +268,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="dash_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showDashTestPopup()">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1165,3 +1165,11 @@
   </div>
 
 </div>
+
+<!-- DASH Test Modal -->
+<c-modal id="dashTest" [visible]="showDashTestModal" size="lg" backdrop="static" scrollable="true">
+  <c-modal-body>
+    <button (click)="toggleDashTestModal()" cButtonClose style="float: right;"></button>
+    <show-omttest [testName]="'dash'" *ngIf="showDashTestModal" (data)="onDashTestResult($event)"></show-omttest>
+  </c-modal-body>
+</c-modal>

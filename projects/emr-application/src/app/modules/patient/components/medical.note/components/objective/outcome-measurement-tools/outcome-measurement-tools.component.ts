@@ -61,6 +61,9 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   showElderAbuseFields: boolean = false;
   showFotoPatientFields: boolean = false;
 
+  // Modal visibility flags
+  showDashTestModal: boolean = false;
+
   // Dropdown options for vestibular
   lossOfConsciousnessOptions = [
     { value: 'not_tested', label: 'Not Tested' },
@@ -724,5 +727,23 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         });
       }
     });
+  }
+
+  showDashTestPopup(): void {
+    this.showDashTestModal = true;
+  }
+
+  toggleDashTestModal(): void {
+    this.showDashTestModal = !this.showDashTestModal;
+  }
+
+  onDashTestResult(event: any): void {
+    this.showDashTestModal = false;
+    if (event) {
+      const score = event.score ?? event.dashScore ?? event.totalScore ?? event;
+      this.omtForm.patchValue({
+        dash_score: score
+      });
+    }
   }
 }
