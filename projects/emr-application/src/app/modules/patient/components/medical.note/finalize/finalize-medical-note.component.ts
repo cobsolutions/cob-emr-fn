@@ -36,7 +36,8 @@ export class FinalizeMedicalNoteComponent implements OnInit {
     const loggedUser = this.loggedInService.getLoggedUser();
     this.medicalNoteRequest.finalizedBy = {
       ...loggedUser.providerInfo,
-      uuid: loggedUser.uuid
+      uuid: loggedUser.uuid,
+      providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
     };
     this.initialExamNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
       next: (data) => {

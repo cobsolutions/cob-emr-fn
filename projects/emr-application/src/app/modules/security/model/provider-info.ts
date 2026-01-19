@@ -4,4 +4,5 @@ export interface ProviderInfo{
     credential?:string,
     license?:string,
     speciality?:string
+    providerName?:string;
 }
