@@ -30,6 +30,10 @@ export class InitialExamNoteService {
     var url = this.baseUrl
     return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
   }
+  exportPDF(noteId: string) {
+    var url = this.baseUrl + '/' + noteId + '/export/pdf';
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
  
   get(noteId: string) {
     var url = this.baseUrl + '/' + noteId;
