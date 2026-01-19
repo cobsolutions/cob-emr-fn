@@ -220,7 +220,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `medical-note-${noteId}.pdf`;
+        link.download = `medical-note-${this.patientName}.pdf`;
         link.click();
         window.URL.revokeObjectURL(url);
       });
