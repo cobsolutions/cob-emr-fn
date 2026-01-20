@@ -393,7 +393,7 @@
         <label class="field-label">Disability %:</label>
         <input cFormControl type="text" formControlName="modified_oswestry_disability_percent" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('molbp')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1176,6 +1176,7 @@
       <spadi-test *ngSwitchCase="'spadi'" [noteId]="noteId" (getResult)="onTestResult($event)"></spadi-test>
       <ndi-test *ngSwitchCase="'ndi'" [noteId]="noteId" (getResult)="onTestResult($event)"></ndi-test>
       <spine-olbp-test *ngSwitchCase="'olbp'" [noteId]="noteId" (getResult)="onTestResult($event)"></spine-olbp-test>
+      <spine-molbp-test *ngSwitchCase="'molbp'" [noteId]="noteId" (getResult)="onTestResult($event)"></spine-molbp-test>
     </ng-container>
   </c-modal-body>
 </c-modal>
