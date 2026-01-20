@@ -788,6 +788,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
           neck_disability_score: event.results.score,
           neck_disability_total_percent: event.results.total
         });
+      } else if (this.activeTest === 'olbp') {
+        // Special handling for OLBP which returns disability field
+        this.omtForm.patchValue({
+          oswestry_disability_percent: event.results.disability
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {
