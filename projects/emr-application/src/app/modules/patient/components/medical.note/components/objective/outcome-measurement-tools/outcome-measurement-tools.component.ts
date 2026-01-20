@@ -782,6 +782,12 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
           shoulder_pain_percent: event.results.pain,
           shoulder_disability_percent: event.results.disability
         });
+      } else if (this.activeTest === 'ndi') {
+        // Special handling for NDI which has score and total percent fields
+        this.omtForm.patchValue({
+          neck_disability_score: event.results.score,
+          neck_disability_total_percent: event.results.total
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {

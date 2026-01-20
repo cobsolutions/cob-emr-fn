@@ -335,13 +335,13 @@
     <!-- Neck Disability Index Fields (when Yes is selected) -->
     <div *ngIf="showNeckDisabilityFields" class="nested-dependent-field-box">
       <div class="form-row">
-        <label class="field-label">Score:</label>
+        <label class="field-label">Score %:</label>
         <input cFormControl type="text" formControlName="neck_disability_score" class="small-input" />
         <span class="me-2"></span>
-        <label class="field-label-inline">Total %:</label>
+        <label class="field-label-inline">Total:</label>
         <input cFormControl type="text" formControlName="neck_disability_total_percent" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('ndi')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1174,6 +1174,7 @@
       <dash-test *ngSwitchCase="'dash'" [noteId]="noteId" (getResult)="onTestResult($event)"></dash-test>
       <uefi-test *ngSwitchCase="'uefi'" [noteId]="noteId" (getResult)="onTestResult($event)"></uefi-test>
       <spadi-test *ngSwitchCase="'spadi'" [noteId]="noteId" (getResult)="onTestResult($event)"></spadi-test>
+      <ndi-test *ngSwitchCase="'ndi'" [noteId]="noteId" (getResult)="onTestResult($event)"></ndi-test>
     </ng-container>
   </c-modal-body>
 </c-modal>
