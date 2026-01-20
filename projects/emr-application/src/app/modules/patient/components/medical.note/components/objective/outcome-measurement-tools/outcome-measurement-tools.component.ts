@@ -798,6 +798,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         this.omtForm.patchValue({
           modified_oswestry_disability_percent: event.results.disability
         });
+      } else if (this.activeTest === 'lefs') {
+        // Special handling for LEFS which returns score field
+        this.omtForm.patchValue({
+          lower_extremity_functional_score: event.results.score
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {
