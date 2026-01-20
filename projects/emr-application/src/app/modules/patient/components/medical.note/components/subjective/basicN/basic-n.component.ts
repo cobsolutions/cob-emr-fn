@@ -45,6 +45,14 @@ export class BasicNComponent implements OnInit {
       }
       this.basicForm.patchValue(formData);
     }
+    // Set dos_date to current date if no data from backend
+    if (!this.basicFormData?.dosDate) {
+      const today = new Date();
+      const formattedDate = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+      this.basicForm.patchValue({
+        dos_date: formattedDate
+      });
+    }
   }
 
 
