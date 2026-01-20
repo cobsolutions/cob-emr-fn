@@ -13,6 +13,7 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   omtForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() omtData: Omt | null = null;
+  @Input() noteId: string;
 
   // Visibility flags for dependent fields
   showCustomOutcomeFields: boolean = false;

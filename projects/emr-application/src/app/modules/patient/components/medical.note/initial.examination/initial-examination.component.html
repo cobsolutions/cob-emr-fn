@@ -29,7 +29,7 @@
                 formGroupName="objective">
                 <ng-template matStepLabel>Objective</ng-template>
                 <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"
-                    [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'InitialExamination'"></objective>
+                    [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'InitialExamination'" [noteId]="noteId"></objective>
             </mat-step>
             <!-- Assessment Step -->
             <mat-step completed="true" formGroupName="objective"

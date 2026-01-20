@@ -34,6 +34,7 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   @Input() objectiveData: any
   @Input() isNotInitialExaminationNote: boolean = false
   @Input() noteType: string
+  @Input() noteId: string
   inspectionData: Inspection | null = null;
   omtData: Omt | null = null
   observationData: Observation | null = null
