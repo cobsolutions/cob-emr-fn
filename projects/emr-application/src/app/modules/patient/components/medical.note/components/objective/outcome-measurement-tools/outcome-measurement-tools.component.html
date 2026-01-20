@@ -583,10 +583,10 @@
     <!-- ABC Scale Fields (when Yes is selected) -->
     <div *ngIf="showAbcScaleFields" class="nested-dependent-field-box">
       <div class="form-row">
-        <label class="field-label"></label>
+        <label class="field-label">Score:</label>
         <input cFormControl type="text" formControlName="abc_scale_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('abc')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1260,6 +1260,7 @@
       <lower-extremity-faam-test *ngSwitchCase="'faam'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-faam-test>
       <lower-extremity-hoos-test *ngSwitchCase="'hoos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-hoos-test>
       <lower-extremity-koos-test *ngSwitchCase="'koos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-koos-test>
+      <balance-abc-test *ngSwitchCase="'abc'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-abc-test>
     </ng-container>
   </c-modal-body>
 </c-modal>

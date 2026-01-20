@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
-import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'balance-abc-test',
@@ -11,13 +9,10 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 })
 export class AbcTestComponent implements OnInit {
   abcForm: FormGroup;
-  totalScore: number | null = null;
-  interpretation: string = '';
   showInstructions = false;
-  medicalNoteId: number;
-  id: number
-  testName:string = 'balance-abc'
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'abc';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
   questions = [
     { id: 'Q1', text: '1. walk around the house?' },
     { id: 'Q2', text: '2. walk up or down stairs?' },
@@ -39,26 +34,26 @@ export class AbcTestComponent implements OnInit {
 
   options = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
-  constructor(private fb: FormBuilder
-    , private omtTestService: OmtTestService
-    , private medicalNotService: MedialNoteService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.abcForm = this.createForm();
   }
+
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            formValues[key] = value as number;
+          });
+          this.abcForm.patchValue(formValues);
+        }
+      });
+    }
+  }
+
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
-  }
-  ngOnInit(): void {
-    this.medicalNotService.medicalNoteID$.subscribe(id => {
-      this.medicalNoteId = id
-      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
-        this.id = data?.id
-        setTimeout(() => {
-          this.abcForm.patchValue(data.values);
-        }, 10);
-
-      })
-    })
-
   }
   createForm(): FormGroup {
     const formGroup = this.fb.group({});
@@ -70,11 +65,6 @@ export class AbcTestComponent implements OnInit {
     return formGroup;
   }
 
-  isFormComplete(): boolean {
-    return this.questions.every(question =>
-      this.abcForm.get(question.id)?.value !== null
-    );
-  }
   calculateScore(): void {
     if (this.abcForm.invalid) {
       // Mark all fields as touched to show validation errors
@@ -83,44 +73,33 @@ export class AbcTestComponent implements OnInit {
       });
       return;
     }
-    const result = this.fillAnswers()
-    this.omtTestService.balance(result).subscribe(val => {
-      var omtTestValues: OMTTestValues = {
-        id: this.id,
-        medicalNoteId: this.medicalNoteId,
-        testName: this.testName,
-        values: this.abcForm.getRawValue()
-      };
-      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
-      })
-      this.getResult.emit(val)
-    })
-  }
 
-  private fillAnswers() {
-    const answers: Record<string, number> = {};
-    for (var i = 1; i <= 16; i++) {
-      const key = `${'Q' + i}`
-      const value = this.abcForm.value[key];
-      answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-    }
-    return { answers, "testType": "abc" };
-  }
-  onSubmit(): void {
-    if (this.abcForm.valid) {
-      this.calculateScore();
-    } else {
-      // Mark all fields as touched to show validation messages
-      Object.keys(this.abcForm.controls).forEach(key => {
-        this.abcForm.get(key)?.markAsTouched();
-      });
-    }
+    // Build answers object for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.abcForm.controls).forEach(key => {
+      const value = this.abcForm.get(key)?.value;
+      if (value !== null) {
+        answers[key] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
     this.abcForm.reset();
-    this.totalScore = null;
-    this.interpretation = '';
+    this.abcForm.markAsUntouched();
   }
 
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.abcForm.controls);
+    return controls.filter(key => this.abcForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 16;
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }

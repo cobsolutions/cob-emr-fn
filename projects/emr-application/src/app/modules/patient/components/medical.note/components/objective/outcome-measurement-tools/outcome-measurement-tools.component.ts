@@ -866,6 +866,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         this.omtForm.patchValue({
           koos_total_score: event.results.score
         });
+      } else if (this.activeTest === 'abc') {
+        // Special handling for ABC Scale which returns score field
+        this.omtForm.patchValue({
+          abc_scale_score: event.results.score
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {
