@@ -684,7 +684,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="berg_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('berg')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1262,6 +1262,7 @@
       <lower-extremity-koos-test *ngSwitchCase="'koos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-koos-test>
       <balance-abc-test *ngSwitchCase="'abc'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-abc-test>
       <balance-tinetti *ngSwitchCase="'tinetti'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-tinetti>
+      <balance-berg-test *ngSwitchCase="'berg'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-berg-test>
     </ng-container>
   </c-modal-body>
 </c-modal>

@@ -877,6 +877,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         this.omtForm.patchValue({
           tinetti_score: event.results.score
         });
+      } else if (this.activeTest === 'berg') {
+        // Special handling for Berg which returns score field
+        this.omtForm.patchValue({
+          berg_score: event.results.score
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {

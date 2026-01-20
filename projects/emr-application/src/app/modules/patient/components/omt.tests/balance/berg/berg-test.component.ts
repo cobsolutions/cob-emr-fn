@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
-import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'balance-berg-test',
@@ -12,10 +10,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class BergTestComponent implements OnInit {
   bergForm: FormGroup;
   showInstructions = false;
-  medicalNoteId: number;
-  id: number
-  testName: string = 'balance-berg';
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'berg';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
   // Berg Balance Scale items
   bergItems = [
     {
@@ -187,9 +184,7 @@ export class BergTestComponent implements OnInit {
       ]
     }
   ];
-  constructor(private fb: FormBuilder
-    , private omtTestService: OmtTestService
-    , private medicalNotService: MedialNoteService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.bergForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -216,44 +211,47 @@ export class BergTestComponent implements OnInit {
       });
       return;
     }
-    const result = this.fillAnswers()
 
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.bergForm.controls).forEach(key => {
+      const value = this.bergForm.get(key)?.value;
+      if (value !== null) {
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
 
-    this.omtTestService.balance(result).subscribe(val => {
-      var omtTestValues: OMTTestValues = {
-        id: this.id,
-        medicalNoteId: this.medicalNoteId,
-        testName: this.testName,
-        values: this.bergForm.getRawValue()
-      };
-      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
-      })
-      this.getResult.emit(val)
-    })
-  }
-  private fillAnswers() {
-    const answers: Record<string, number> = {};
-    for (var i = 1; i <= 14; i++) {
-      const key = `${'Q' + i}`
-      const value = this.bergForm.value[key];
-      answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-    }
-    return { answers, "testType": "berg" };
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
   resetForm(): void {
     this.bergForm.reset();
+    this.bergForm.markAsUntouched();
   }
+
   ngOnInit(): void {
-    this.medicalNotService.medicalNoteID$.subscribe(id => {
-      this.medicalNoteId = id
-      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
-        this.id = data?.id
-        setTimeout(() => {
-          this.bergForm.patchValue(data.values);
-        }, 10);
-
-      })
-    })
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.bergForm.patchValue(formValues);
+        }
+      });
+    }
   }
 
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.bergForm.controls);
+    return controls.filter(key => this.bergForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 15; // 14 Berg items + 1 pain level
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }
