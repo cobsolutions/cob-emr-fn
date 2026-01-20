@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { OMTTestValues } from '../../../models/medical.note/omt.test/omt.test.values';
-import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
-import { OmtTestService } from '../../../services/test/omt-test.service';
+import { OmtTestService } from '../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'uefi-test',
@@ -14,110 +12,137 @@ export class UefiTestComponent implements OnInit {
   uefiForm: FormGroup;
   showInstructions = false;
   private testName: string = 'uefi';
-  medicalNoteId: number;
-  id: number
-  @Output() getResult = new EventEmitter<any>()
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService
-    , private medicalNotService: MedialNoteService) {
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
+
+  // Question labels for the form
+  questions = [
+    "Any of your usual work, housework, or school activities",
+    "Your usual hobbies, recreational or sporting activities",
+    "Lifting a bag of groceries to waist level",
+    "Lifting a bag of groceries above your head",
+    "Grooming your hair",
+    "Pushing up on your hands (eg from bathtub or chair)",
+    "Preparing food (eg peeling, cutting)",
+    "Driving",
+    "Vacuuming, sweeping or raking",
+    "Dressing",
+    "Doing up buttons",
+    "Using tools or appliances",
+    "Opening doors",
+    "Cleaning",
+    "Tying or lacing shoes",
+    "Sleeping",
+    "Laundering clothes (eg washing, ironing, folding)",
+    "Opening a jar",
+    "Throwing a ball",
+    "Carrying a small suitcase with your affected limb"
+  ];
+
+  // Options for difficulty level
+  difficultyOptions = [
+    { value: '0', text: 'Extreme Difficulty or Unable to Perform Activity' },
+    { value: '1', text: 'Quite a Bit of Difficulty' },
+    { value: '2', text: 'Moderate Difficulty' },
+    { value: '3', text: 'A Little Bit of Difficulty' },
+    { value: '4', text: 'No Difficulty' }
+  ];
+
+  constructor(
+    private fb: FormBuilder,
+    private omtTestService: OmtTestService
+  ) {
     this.uefiForm = this.createForm();
   }
 
   ngOnInit(): void {
-    this.medicalNotService.medicalNoteID$.subscribe(id => {
-      this.medicalNoteId = id
-      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
-        this.id = data?.id
-        setTimeout(() => {
-          this.uefiForm.patchValue(data.values);
-        }, 10);
-
-      })
-      console.log('medial Note ID ' + id)
-    })
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: string } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = String(value);
+          });
+          this.uefiForm.patchValue(formValues);
+        }
+      });
+    }
   }
+
   createForm(): FormGroup {
-    return this.fb.group({
-      // Create form controls for all 20 questions
-      q1: [null, Validators.required],
-      q2: [null, Validators.required],
-      q3: [null, Validators.required],
-      q4: [null, Validators.required],
-      q5: [null, Validators.required],
-      q6: [null, Validators.required],
-      q7: [null, Validators.required],
-      q8: [null, Validators.required],
-      q9: [null, Validators.required],
-      q10: [null, Validators.required],
-      q11: [null, Validators.required],
-      q12: [null, Validators.required],
-      q13: [null, Validators.required],
-      q14: [null, Validators.required],
-      q15: [null, Validators.required],
-      q16: [null, Validators.required],
-      q17: [null, Validators.required],
-      q18: [null, Validators.required],
-      q19: [null, Validators.required],
-      q20: [null, Validators.required]
-    });
+    const formGroup: any = {};
+
+    // Create form controls for all 20 questions
+    for (let i = 1; i <= 20; i++) {
+      formGroup[`q${i}`] = [null, Validators.required];
+    }
+
+    return this.fb.group(formGroup);
   }
 
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
+
   calculateScore(): void {
     if (this.uefiForm.invalid) {
       // Mark all fields as touched to show validation errors
-      console.log(this.findInvalidControlsRecursive(this.uefiForm))
       Object.keys(this.uefiForm.controls).forEach(key => {
         this.uefiForm.get(key)?.markAsTouched();
       });
       return;
     }
-    const result = {
-      "Q1": parseInt(this.uefiForm.value.q1, 10),
-      "Q2": parseInt(this.uefiForm.value.q2, 10),
-      "Q3": parseInt(this.uefiForm.value.q3, 10),
-      "Q4": parseInt(this.uefiForm.value.q4, 10),
-      "Q5": parseInt(this.uefiForm.value.q5, 10),
-      "Q6": parseInt(this.uefiForm.value.q6, 10),
-      "Q7": parseInt(this.uefiForm.value.q7, 10),
-      "Q8": parseInt(this.uefiForm.value.q8, 10),
-      "Q9": parseInt(this.uefiForm.value.q9, 10),
-      "Q10": parseInt(this.uefiForm.value.q10, 10),
-      "Q11": parseInt(this.uefiForm.value.q11, 10),
-      "Q12": parseInt(this.uefiForm.value.q12, 10),
-      "Q13": parseInt(this.uefiForm.value.q13, 10),
-      "Q14": parseInt(this.uefiForm.value.q14, 10),
-      "Q15": parseInt(this.uefiForm.value.q15, 10),
-      "Q16": parseInt(this.uefiForm.value.q16, 10),
-      "Q17": parseInt(this.uefiForm.value.q17, 10),
-      "Q18": parseInt(this.uefiForm.value.q18, 10),
-      "Q19": parseInt(this.uefiForm.value.q19, 10),
-      "Q20": parseInt(this.uefiForm.value.q20, 10),
-    };
-    this.omtTestService.uefiTest(result).subscribe(val => {
-      var omtTestValues: OMTTestValues = {
-        id: this.id,
-        medicalNoteId: this.medicalNoteId,
-        testName: this.testName,
-        values: this.uefiForm.getRawValue()
-      };
-      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
-      })
-      this.getResult.emit(val)
-    })
+
+    // Build answers object
+    const answers: { [key: string]: number } = {};
+    for (let i = 1; i <= 20; i++) {
+      const value = this.uefiForm.get(`q${i}`)?.value;
+      answers[`Q${i}`] = parseInt(value, 10);
+    }
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
-    this.uefiForm.reset();
+    // Reset all controls to null
+    const resetValues: { [key: string]: null } = {};
+    for (let i = 1; i <= 20; i++) {
+      resetValues[`q${i}`] = null;
+    }
+    this.uefiForm.patchValue(resetValues);
+    this.uefiForm.markAsUntouched();
   }
+
+  getAnsweredCount(): number {
+    let count = 0;
+    for (let i = 1; i <= 20; i++) {
+      const value = this.uefiForm.get(`q${i}`)?.value;
+      if (value !== null && value !== undefined && value !== '') {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  getCompletionPercentage(): number {
+    return (this.getAnsweredCount() / 20) * 100;
+  }
+
+  isAnswered(index: number): boolean {
+    const value = this.uefiForm.get(`q${index}`)?.value;
+    return value !== null && value !== undefined && value !== '';
+  }
+
   findInvalidControlsRecursive(formToInvestigate: FormGroup | FormArray): string[] {
     const invalidControls: string[] = [];
     const recursiveFunc = (form: FormGroup | FormArray) => {
       Object.keys(form.controls).forEach(field => {
         const control = form.get(field);
         if (control instanceof FormGroup || control instanceof FormArray) {
-          recursiveFunc(control); // Recursively check nested forms/arrays
+          recursiveFunc(control);
         } else if (control instanceof FormControl && control.invalid) {
           invalidControls.push(field);
         }
@@ -126,5 +151,4 @@ export class UefiTestComponent implements OnInit {
     recursiveFunc(formToInvestigate);
     return invalidControls;
   }
-
 }

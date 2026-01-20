@@ -64,6 +64,7 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
 
   // Modal visibility flags
   showDashTestModal: boolean = false;
+  showUefiTestModal: boolean = false;
 
   // Dropdown options for vestibular
   lossOfConsciousnessOptions = [
@@ -743,6 +744,23 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     if (event?.results?.total !== undefined) {
       this.omtForm.patchValue({
         dash_score: event.results.total
+      });
+    }
+  }
+
+  showUefiTestPopup(): void {
+    this.showUefiTestModal = true;
+  }
+
+  toggleUefiTestModal(): void {
+    this.showUefiTestModal = !this.showUefiTestModal;
+  }
+
+  onUefiTestResult(event: any): void {
+    this.showUefiTestModal = false;
+    if (event?.results?.total !== undefined) {
+      this.omtForm.patchValue({
+        upper_extremity_functional_score: event.results.total
       });
     }
   }

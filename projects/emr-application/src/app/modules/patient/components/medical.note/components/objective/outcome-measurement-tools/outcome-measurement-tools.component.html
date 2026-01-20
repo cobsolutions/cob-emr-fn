@@ -242,7 +242,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="upper_extremity_functional_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showUefiTestPopup()">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1171,5 +1171,13 @@
   <c-modal-body>
     <button (click)="toggleDashTestModal()" cButtonClose style="float: right;"></button>
     <dash-test *ngIf="showDashTestModal" [noteId]="noteId" (getResult)="onDashTestResult($event)"></dash-test>
+  </c-modal-body>
+</c-modal>
+
+<!-- UEFI Test Modal -->
+<c-modal id="uefiTest" [visible]="showUefiTestModal" size="lg" backdrop="static" scrollable="true">
+  <c-modal-body>
+    <button (click)="toggleUefiTestModal()" cButtonClose style="float: right;"></button>
+    <uefi-test *ngIf="showUefiTestModal" [noteId]="noteId" (getResult)="onUefiTestResult($event)"></uefi-test>
   </c-modal-body>
 </c-modal>
