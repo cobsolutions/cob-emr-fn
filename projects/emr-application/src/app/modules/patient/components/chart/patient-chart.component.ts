@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddressUtil } from 'projects/emr-application/src/app/util/address.util';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
-import { filter, switchMap, tap } from 'rxjs';
+import { filter, Subscription, switchMap, tap } from 'rxjs';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
+import { MedialNoteService } from '../../services/medical.note/medial-note.service';
 import { PatientCase } from '../../models/case/patient.case';
 import { PatientChartInfo } from '../../models/chart/patient.chart.info';
 import { PatientRequest } from '../../models/medical.note/requester/patient.request';
@@ -18,8 +19,9 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
   templateUrl: './patient-chart.component.html',
   styleUrls: ['./patient-chart.component.css']
 })
-export class PatientChartComponent implements OnInit {
+export class PatientChartComponent implements OnInit, OnDestroy {
   patient:PatientRequest
+  private draftSub!: Subscription;
   patientChartInfo: PatientChartInfo = {
     id: 0,
     name: '',
@@ -50,7 +52,8 @@ export class PatientChartComponent implements OnInit {
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
     , private loggedInService: LoggedInService
-    , private router: Router) { }
+    , private router: Router
+    , private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
@@ -60,28 +63,49 @@ export class PatientChartComponent implements OnInit {
         tap((clinicId) => this.clinicId = clinicId),
         switchMap((clinicId) => this.patientFinderService.getPatient(this.patientId, clinicId)))
       .subscribe((response: PateintResponse) => {
-        var patient: Patient = response.records
-        this.patient = {
-          firstName:patient.firstName,
-          middleName:patient.middleName,
-          lastName:patient.lastName,
-          patientId:patient.uuid,
-          dateOfBirth:new Date(patient.birthDate)
-        } 
-        this.patientCases = patient.cases;
-        this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
-        this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");
-        this.patientChartInfo.email = patient.contacts[0].email;
-        this.patientChartInfo.phone = patient.contacts[0].phoneNumber;
-        this.patientChartInfo.gender = patient.gender
-        for (var i = 0; i < patient.addresses.length; i++) {
-
-          this.patientChartInfo.address.push(AddressUtil.formatAddress(patient.addresses[i]))
-        }
-        this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
+        this.updatePatientData(response);
       }, error => {
         this.router.navigate(['/emr/patient/list']);
       })
+
+    this.draftSub = this.medialNoteService.draft$.subscribe(() => {
+      this.refreshPatientData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.draftSub?.unsubscribe();
+  }
+
+  private refreshPatientData(): void {
+    if (this.clinicId) {
+      this.patientFinderService.getPatient(this.patientId, this.clinicId)
+        .subscribe((response: PateintResponse) => {
+          this.updatePatientData(response);
+        });
+    }
+  }
+
+  private updatePatientData(response: PateintResponse): void {
+    var patient: Patient = response.records
+    this.patient = {
+      firstName: patient.firstName,
+      middleName: patient.middleName,
+      lastName: patient.lastName,
+      patientId: patient.uuid,
+      dateOfBirth: new Date(patient.birthDate)
+    }
+    this.patientCases = patient.cases;
+    this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
+    this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");
+    this.patientChartInfo.email = patient.contacts[0].email;
+    this.patientChartInfo.phone = patient.contacts[0].phoneNumber;
+    this.patientChartInfo.gender = patient.gender
+    this.patientChartInfo.address = [];
+    for (var i = 0; i < patient.addresses.length; i++) {
+      this.patientChartInfo.address.push(AddressUtil.formatAddress(patient.addresses[i]))
+    }
+    this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
   }
   selectTab(index: number) {
     this.selectedIndex = index;

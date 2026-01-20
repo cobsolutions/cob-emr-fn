@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import * as moment from 'moment';
-import { map, Observable, retry, tap } from 'rxjs';
+import { map, Observable, retry, Subscription, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
@@ -11,7 +11,6 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { CreateNodeRequest } from '../../../models/medical.note/requester/create.note.request';
-import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { QuickDischargeRequest } from '../../../models/medical.note/quick.discharge.request';
 
 import { PatientRecord } from '../../../models/patient.record/patient.record';
@@ -28,7 +27,7 @@ import { PatientRequest } from '../../../models/medical.note/requester/patient.r
   templateUrl: './patient-chart-case.component.html',
   styleUrls: ['./patient-chart-case.component.css']
 })
-export class PatientChartCaseComponent extends ListTemplate implements OnInit {
+export class PatientChartCaseComponent extends ListTemplate implements OnInit, OnDestroy {
   isExpired: boolean = false;
   treatingDoctor: string;
   referringDoctor: string;
@@ -55,6 +54,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
   patientCaseActions: PatientCaseAction[]
+  private draftSub!: Subscription;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -74,7 +74,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     return info ? info.replace(/\n/g, '<br/>') : '';
   }
   ngOnInit(): void {
-    console.log('provider' , this.loggedInService.getLoggedUser)
+    console.log('provider', this.loggedInService.getLoggedUser)
     this.initListComponent();
     this.columns = this.constructColumns(['record', 'date', 'actions'], true);
 
@@ -84,6 +84,16 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit {
     this.findPatientCaseActions(this.case.uuid);
     this.patient.patientCaseId = this.case.uuid
     console.log('patient', this.patient)
+
+    this.draftSub = this.medialNoteService.draft$.subscribe(() => {
+      console.log('draftSub')
+      this.getRecords();
+      this.findPatientCaseActions(this.case.uuid);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.draftSub?.unsubscribe();
   }
   private findPatientCaseActions(patientCaseId: string) {
     this.patientChartNoteService.find(patientCaseId).subscribe((actions: any) => {

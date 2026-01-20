@@ -14,13 +14,19 @@ export class MedialNoteService {
   private soapBaseUrl = environment.baseURL + 'soap'
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
   private finalizeSubject = new Subject<boolean>();
+  private draftSubject = new Subject<boolean>();
   public medicalNoteID$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   finalize$ = this.finalizeSubject.asObservable();
-  
+  draft$ = this.draftSubject.asObservable();
+
   constructor(private httpClient: HttpClient) { }
 
   notifyFinalize(status: boolean): void {
     this.finalizeSubject.next(status);
+  }
+
+  notifyDraft(status: boolean): void {
+    this.draftSubject.next(status);
   }
   find(section: string, type?: string) {
     var url: string = this.baseUrl + "/find/section/" + section + "/type/" + type;

@@ -303,6 +303,7 @@ export class InitialExaminationComponent implements OnInit {
   }
   draft() {
     this.draftAction().subscribe(data => {
+      this.medialNoteService.notifyDraft(true);
       this.backtoPatientRecordActions();
     })
   }
