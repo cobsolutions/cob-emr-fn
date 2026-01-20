@@ -34,6 +34,9 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     { key: 'olbp', scoreField: 'oswestry_disability_percent' },
     { key: 'molbp', scoreField: 'modified_oswestry_disability_percent' },
     { key: 'lefs', scoreField: 'lower_extremity_functional_score' },
+    { key: 'faam', scoreField: 'faam_sports_score' },
+    { key: 'hoos', scoreField: 'hoos_total_score' },
+    { key: 'koos', scoreField: 'koos_total_score' },
     { key: 'abc', scoreField: 'abc_scale_score' },
     { key: 'berg', scoreField: 'berg_score' },
     { key: 'fab', scoreField: 'fullerton_score' },
@@ -58,6 +61,9 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   showQuebecBackPainFields: boolean = false;
   showLowerExtremityFields: boolean = false;
   showLowerExtremityFunctionalFields: boolean = false;
+  showFaamSportsFields: boolean = false;
+  showHoosFields: boolean = false;
+  showKoosFields: boolean = false;
   showBalanceFields: boolean = false;
   showAbcScaleFields: boolean = false;
   showMctsibFields: boolean = false;
@@ -175,6 +181,12 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       lower_extremity: ['no'],
       lower_extremity_functional_scale: ['no'],
       lower_extremity_functional_score: [''],
+      faam_sports: ['no'],
+      faam_sports_score: [''],
+      hoos: ['no'],
+      hoos_total_score: [''],
+      koos: ['no'],
+      koos_total_score: [''],
       balance: ['no'],
       abc_scale: ['no'],
       abc_scale_score: [''],
@@ -436,9 +448,15 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       this.showLowerExtremityFields = value === 'yes';
       if (!this.showLowerExtremityFields) {
         this.omtForm.patchValue({
-          lower_extremity_functional_scale: 'no'
+          lower_extremity_functional_scale: 'no',
+          faam_sports: 'no',
+          hoos: 'no',
+          koos: 'no'
         });
         this.showLowerExtremityFunctionalFields = false;
+        this.showFaamSportsFields = false;
+        this.showHoosFields = false;
+        this.showKoosFields = false;
       }
     });
 
@@ -448,6 +466,36 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       if (!this.showLowerExtremityFunctionalFields) {
         this.omtForm.patchValue({
           lower_extremity_functional_score: ''
+        });
+      }
+    });
+
+    // FAAM Sports Subscale dependency
+    this.omtForm.get('faam_sports')?.valueChanges.subscribe(value => {
+      this.showFaamSportsFields = value === 'yes';
+      if (!this.showFaamSportsFields) {
+        this.omtForm.patchValue({
+          faam_sports_score: ''
+        });
+      }
+    });
+
+    // HOOS dependency
+    this.omtForm.get('hoos')?.valueChanges.subscribe(value => {
+      this.showHoosFields = value === 'yes';
+      if (!this.showHoosFields) {
+        this.omtForm.patchValue({
+          hoos_total_score: ''
+        });
+      }
+    });
+
+    // KOOS dependency
+    this.omtForm.get('koos')?.valueChanges.subscribe(value => {
+      this.showKoosFields = value === 'yes';
+      if (!this.showKoosFields) {
+        this.omtForm.patchValue({
+          koos_total_score: ''
         });
       }
     });
@@ -802,6 +850,21 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         // Special handling for LEFS which returns score field
         this.omtForm.patchValue({
           lower_extremity_functional_score: event.results.score
+        });
+      } else if (this.activeTest === 'faam') {
+        // Special handling for FAAM Sports which returns score field
+        this.omtForm.patchValue({
+          faam_sports_score: event.results.score
+        });
+      } else if (this.activeTest === 'hoos') {
+        // Special handling for HOOS which returns total score
+        this.omtForm.patchValue({
+          hoos_total_score: event.results.total
+        });
+      } else if (this.activeTest === 'koos') {
+        // Special handling for KOOS which returns total score
+        this.omtForm.patchValue({
+          koos_total_score: event.results.total
         });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);

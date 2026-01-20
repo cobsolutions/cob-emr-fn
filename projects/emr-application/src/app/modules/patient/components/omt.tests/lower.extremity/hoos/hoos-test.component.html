@@ -1,690 +1,457 @@
-<!-- hoos-survey.component.html -->
-<div class="container">
-  <div class="header">
-    <h2>Hip disability Osteoarthritis Outcomes Score</h2>
-
-    <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-      [Instructions]
-    </a>
+<div class="hoos-container">
+  <!-- Header -->
+  <div class="hoos-header">
+    <div class="header-content">
+      <h2 class="hoos-title">Hip disability Osteoarthritis Outcomes Score (HOOS)</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
 
     <div *ngIf="showInstructions" class="instructions-panel">
-      <p>This survey asks for your view about your hip. This information will help us
-        keep track of how you feel about your hip and how well you are able to do your usual activities.
-        Answer every question by selecting the appropriate option, only one option for each question.
-        If you are uncertain about how to answer a question, please give the best answer you can.</p>
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This survey asks for your view about your hip. This information will help us
+          keep track of how you feel about your hip and how well you are able to do your usual activities.
+          Answer every question by selecting the appropriate option, only one option for each question.
+          If you are uncertain about how to answer a question, please give the best answer you can.</p>
 
-      <strong>Scoring:</strong>
-      <p>To calculate the HOOS, score each question by assigning a zero to the left most answer, a one to the next
-        answer to the
-        right, two for the next, three for the next, and a four for the rightmost answer. Then each subscale is
-        calculated
-        separately:</p>
-      <ul>
-        <li>Pain = 100 - ((P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10) / 10) x 100 / 4</li>
-        <li>Symptoms = 100 - ((S1 + S2 + S3 + S4 + S5) / 5) x 100 / 4</li>
-        <li>ADL = 100 - ((A1 + A2 + A3 + A4 + A5 + A6 + A7 + A8 + A9 + A10 + A11 + A12 + A13 + A14 + A15 + A16 + A17) /
-          17) x 100 / 4</li>
-        <li>Sport/Rec = 100 - ((SP1 + SP2 + SP3 + SP4) / 4) x 100 / 4</li>
-        <li>QOL = 100 - ((Q1 + Q2 + Q3 + Q4) / 4) x 100 / 4</li>
-        <li>Pain + Symptoms + ADL + Sport/Rec + QOL / 5 = Composite Score (HOOS5)</li>
-      </ul>
+        <p><strong>Scoring:</strong></p>
+        <p>To calculate the HOOS, score each question by assigning a zero to the left most answer, a one to the next
+          answer to the right, two for the next, three for the next, and a four for the rightmost answer. Then each subscale is
+          calculated separately:</p>
+        <ul>
+          <li>Pain = 100 - ((P1 + P2 + P3 + P4 + P5 + P6 + P7 + P8 + P9 + P10) / 10) x 100 / 4</li>
+          <li>Symptoms = 100 - ((S1 + S2 + S3 + S4 + S5) / 5) x 100 / 4</li>
+          <li>ADL = 100 - ((A1 + ... + A17) / 17) x 100 / 4</li>
+          <li>Sport/Rec = 100 - ((SP1 + SP2 + SP3 + SP4) / 4) x 100 / 4</li>
+          <li>QOL = 100 - ((Q1 + Q2 + Q3 + Q4) / 4) x 100 / 4</li>
+          <li>Composite Score (HOOS5) = (Pain + Symptoms + ADL + Sport/Rec + QOL) / 5</li>
+        </ul>
 
-      <strong>Interpretation:</strong>
-      <p>G-Code Modifiers are assigned by the Composite Score as follows:</p>
-      <ul>
-        <li>100 = CH</li>
-        <li>81 - 99 = CI</li>
-        <li>61 - 80 = CJ</li>
-        <li>41 - 60 = CK</li>
-        <li>21 - 40 = CL</li>
-        <li>1 - 20 = CM</li>
-        <li>0 = CN</li>
-      </ul>
+        <p><strong>Interpretation:</strong></p>
+        <p>G-Code Modifiers are assigned by the Composite Score as follows:</p>
+        <ul>
+          <li>100 = CH</li>
+          <li>81 - 99 = CI</li>
+          <li>61 - 80 = CJ</li>
+          <li>41 - 60 = CK</li>
+          <li>21 - 40 = CL</li>
+          <li>1 - 20 = CM</li>
+          <li>0 = CN</li>
+        </ul>
+      </div>
     </div>
   </div>
 
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 41 questions answered</span>
+  </div>
+
   <form [formGroup]="hoosForm" (ngSubmit)="calculateScore()">
-    <!-- Patient Satisfaction Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Patient Satisfaction</strong>
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Pain Level</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
       </div>
 
-      <div class="question">
-        <label>
-          <strong><span class="asterisk">*</span></strong>
-          1. Please rate your pain level with activity
-        </label>
-      </div>
-
-      <div class="options-row">
-        <label *ngFor="let level of painLevelOptions" class="pain-level-label">
-          {{level}} <input type="radio" formControlName="T745PatientSatisfaction1" [value]="level">
-        </label>
-      </div>
-
-      <div class="scale-labels">
-        <span class="scale-start">NO PAIN</span>
-        <span class="scale-end">VERY SEVERE PAIN</span>
-      </div>
-
-      <div
-        *ngIf="hoosForm.get('T745PatientSatisfaction1')?.invalid && hoosForm.get('T745PatientSatisfaction1')?.touched"
-        class="error-message">
-        Please select a pain level
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="hoosForm.get('painlevel')?.value !== null"
+             [class.error]="hoosForm.get('painlevel')?.invalid && hoosForm.get('painlevel')?.touched">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="hoosForm.get('painlevel')?.invalid && hoosForm.get('painlevel')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Symptoms Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Symptoms</strong>
-      </div>
-
-      <div class="question">
-        These questions should be answered thinking of your hip symptoms and difficulties during the last week.
-      </div>
-
-      <!-- S1 -->
-      <div class="question">
-        <strong>S1. Do you feel grinding, hear clicking or any other type of noise from your hip?</strong>
-        <div class="options">
-          <label *ngFor="let option of frequencyOptions">
-            <input type="radio" formControlName="S1" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('S1')?.invalid && hoosForm.get('S1')?.touched"
-          class="error-message">
-          Please select an answer
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">S</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Symptoms</h3>
+          <p class="section-subtitle">Think about your hip symptoms during the last week</p>
         </div>
       </div>
 
-      <!-- S2 -->
-      <div class="question">
-        <strong>S2. Difficulties spreading legs wide apart</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="S2" [value]="option.value"> {{option.text}}
-          </label>
+      <div class="questions-container">
+        <!-- S1 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('S1')?.value !== null"
+             [class.error]="hoosForm.get('S1')?.invalid && hoosForm.get('S1')?.touched">
+          <div class="question-number">S1</div>
+          <div class="question-content">
+            <div class="question-text">Do you feel grinding, hear clicking or any other type of noise from your hip?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of frequencyOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="S1" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('S1')?.invalid && hoosForm.get('S1')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
-        <div *ngIf="hoosForm.get('S2')?.invalid && hoosForm.get('S2')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
 
-      <!-- S3 -->
-      <div class="question">
-        <strong>S3. Difficulties to stride out when walking</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="S3" [value]="option.value"> {{option.text}}
-          </label>
+        <!-- S2 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('S2')?.value !== null"
+             [class.error]="hoosForm.get('S2')?.invalid && hoosForm.get('S2')?.touched">
+          <div class="question-number">S2</div>
+          <div class="question-content">
+            <div class="question-text">Difficulties spreading legs wide apart</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="S2" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('S2')?.invalid && hoosForm.get('S2')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
-        <div *ngIf="hoosForm.get('S3')?.invalid && hoosForm.get('S3')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
 
-      <!-- S4 -->
-      <div class="question">
-        <strong>S4. How severe is your hip joint stiffness after first wakening in the morning?</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="S4" [value]="option.value"> {{option.text}}
-          </label>
+        <!-- S3 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('S3')?.value !== null"
+             [class.error]="hoosForm.get('S3')?.invalid && hoosForm.get('S3')?.touched">
+          <div class="question-number">S3</div>
+          <div class="question-content">
+            <div class="question-text">Difficulties to stride out when walking</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="S3" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('S3')?.invalid && hoosForm.get('S3')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
-        <div *ngIf="hoosForm.get('S4')?.invalid && hoosForm.get('S4')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
 
-      <!-- S5 -->
-      <div class="question">
-        <strong>S5. How severe is your hip stiffness after sitting, lying or resting later in the day?</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="S5" [value]="option.value"> {{option.text}}
-          </label>
+        <!-- S4 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('S4')?.value !== null"
+             [class.error]="hoosForm.get('S4')?.invalid && hoosForm.get('S4')?.touched">
+          <div class="question-number">S4</div>
+          <div class="question-content">
+            <div class="question-text">How severe is your hip joint stiffness after first wakening in the morning?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="S4" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('S4')?.invalid && hoosForm.get('S4')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
-        <div *ngIf="hoosForm.get('S5')?.invalid && hoosForm.get('S5')?.touched"
-          class="error-message">
-          Please select an answer
+
+        <!-- S5 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('S5')?.value !== null"
+             [class.error]="hoosForm.get('S5')?.invalid && hoosForm.get('S5')?.touched">
+          <div class="question-number">S5</div>
+          <div class="question-content">
+            <div class="question-text">How severe is your hip stiffness after sitting, lying or resting later in the day?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="S5" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('S5')?.invalid && hoosForm.get('S5')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <!-- Pain Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Pain</strong>
-      </div>
-
-      <!-- P1 -->
-      <div class="question">
-        <strong>P1. How often is your hip painful?</strong>
-        <div class="options">
-          <label *ngFor="let option of painFrequencyOptions">
-            <input type="radio" formControlName="P1" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P1')?.invalid && hoosForm.get('P1')?.touched"
-          class="error-message">
-          Please select an answer
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Pain</h3>
+          <p class="section-subtitle">What amount of hip pain have you experienced during the last week?</p>
         </div>
       </div>
 
-      <div class="question">
-        <strong>P2. Straightening your hip fully</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P2" [value]="option.value"> {{option.text}}
-          </label>
+      <div class="questions-container">
+        <!-- P1 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('P1')?.value !== null"
+             [class.error]="hoosForm.get('P1')?.invalid && hoosForm.get('P1')?.touched">
+          <div class="question-number">P1</div>
+          <div class="question-content">
+            <div class="question-text">How often is your hip painful?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of painFrequencyOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="P1" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('P1')?.invalid && hoosForm.get('P1')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
-        <div *ngIf="hoosForm.get('P2')?.invalid && hoosForm.get('P2')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
 
-      <div class="question">
-        <strong>P3. Bending your hip fully</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P3" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P3')?.invalid && hoosForm.get('P3')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P4. Walking on a flat surface</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P4" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P4')?.invalid && hoosForm.get('P4')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P5. Going up or down stairs</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P5" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P5')?.invalid && hoosForm.get('P5')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P6. At night while in bed</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P6" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P6')?.invalid && hoosForm.get('P6')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P7. Sitting or lying</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P7" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P7')?.invalid && hoosForm.get('P7')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P8. Standing upright</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P8" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P8')?.invalid && hoosForm.get('P8')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P9. Walking on a hard surface (asphalt, concrete, etc.)</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P9" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P9')?.invalid && hoosForm.get('P9')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>P10. Walking on an uneven surface</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="P10" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('P10')?.invalid && hoosForm.get('P10')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-    </div>
-    <!-- Function, daily living Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Function, daily living</strong>
-      </div>
-
-      <div class="question">
-        <strong>A1. Descending stairs</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A1" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A1')?.invalid && hoosForm.get('A1')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A2. Ascending stairs</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A2" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A2')?.invalid && hoosForm.get('A2')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-      <div class="question">
-        <strong>A3. Rising from sitting</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A3" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A3')?.invalid && hoosForm.get('A3')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A4. Standing</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A4" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A4')?.invalid && hoosForm.get('A4')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A5. Bending to the floor/pick up an object</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A5" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A5')?.invalid && hoosForm.get('A5')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A6. Walking on a flat surface</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A6" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A6')?.invalid && hoosForm.get('A6')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A7. Getting in/out of car</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A7" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A7')?.invalid && hoosForm.get('A7')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A8. Going shopping</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A8" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A8')?.invalid && hoosForm.get('A8')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A9. Putting on socks/stockings</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A9" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A9')?.invalid && hoosForm.get('A9')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A10. Rising from bed</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A10" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A10')?.invalid && hoosForm.get('A10')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A11. Taking off socks/stockings</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A11" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A11')?.invalid && hoosForm.get('A11')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A12. Lying in bed (turning over, maintaining hip position)</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A12" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A12')?.invalid && hoosForm.get('A12')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A13. Getting in/out of bath</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A13" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A13')?.invalid && hoosForm.get('A13')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A14. Sitting</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A14" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A14')?.invalid && hoosForm.get('A14')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A15. Getting on/off toilet</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A15" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A15')?.invalid && hoosForm.get('A15')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>A16. Heavy domestic duties (moving heavy boxes, scrubbing floors, etc)</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A16" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A16')?.invalid && hoosForm.get('A16')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-
-      <div class="question">
-        <strong>A17. Light domestic duties (cooking, dusting, etc)</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="A17" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('A17')?.invalid && hoosForm.get('A17')?.touched"
-          class="error-message">
-          Please select an answer
+        <!-- P2-P10 -->
+        <div *ngFor="let q of ['P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10']; let i = index"
+             class="question-card"
+             [class.answered]="hoosForm.get(q)?.value !== null"
+             [class.error]="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched">
+          <div class="question-number">{{ q }}</div>
+          <div class="question-content">
+            <div class="question-text">
+              {{ q === 'P2' ? 'Straightening your hip fully' :
+                 q === 'P3' ? 'Bending your hip fully' :
+                 q === 'P4' ? 'Walking on a flat surface' :
+                 q === 'P5' ? 'Going up or down stairs' :
+                 q === 'P6' ? 'At night while in bed' :
+                 q === 'P7' ? 'Sitting or lying' :
+                 q === 'P8' ? 'Standing upright' :
+                 q === 'P9' ? 'Walking on a hard surface (asphalt, concrete, etc.)' :
+                 'Walking on an uneven surface' }}
+            </div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" [formControlName]="q" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Function, sports and recreational activities-->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Function, sports and recreational activities</strong>
-      </div>
-      <div class="question">
-        <strong>SP1. Squatting</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="SP1" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('SP1')?.invalid && hoosForm.get('SP1')?.touched"
-          class="error-message">
-          Please select an answer
+
+    <!-- Function, Daily Living Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">A</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Function, Daily Living</h3>
+          <p class="section-subtitle">What difficulty have you experienced during the last week?</p>
         </div>
       </div>
 
-      <div class="question">
-        <strong>SP2. Running</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="SP2" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('SP2')?.invalid && hoosForm.get('SP2')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>SP3. Twisting/pivoting on loaded leg</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="SP3" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('SP3')?.invalid && hoosForm.get('SP3')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>SP4. Walking on uneven surface</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="SP4" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('SP4')?.invalid && hoosForm.get('SP4')?.touched"
-          class="error-message">
-          Please select an answer
+      <div class="questions-container">
+        <div *ngFor="let q of dailyLiving; let i = index"
+             class="question-card"
+             [class.answered]="hoosForm.get(q)?.value !== null"
+             [class.error]="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched">
+          <div class="question-number">{{ q }}</div>
+          <div class="question-content">
+            <div class="question-text">
+              {{ q === 'A1' ? 'Descending stairs' :
+                 q === 'A2' ? 'Ascending stairs' :
+                 q === 'A3' ? 'Rising from sitting' :
+                 q === 'A4' ? 'Standing' :
+                 q === 'A5' ? 'Bending to the floor/pick up an object' :
+                 q === 'A6' ? 'Walking on a flat surface' :
+                 q === 'A7' ? 'Getting in/out of car' :
+                 q === 'A8' ? 'Going shopping' :
+                 q === 'A9' ? 'Putting on socks/stockings' :
+                 q === 'A10' ? 'Rising from bed' :
+                 q === 'A11' ? 'Taking off socks/stockings' :
+                 q === 'A12' ? 'Lying in bed (turning over, maintaining hip position)' :
+                 q === 'A13' ? 'Getting in/out of bath' :
+                 q === 'A14' ? 'Sitting' :
+                 q === 'A15' ? 'Getting on/off toilet' :
+                 q === 'A16' ? 'Heavy domestic duties (moving heavy boxes, scrubbing floors, etc)' :
+                 'Light domestic duties (cooking, dusting, etc)' }}
+            </div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" [formControlName]="q" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Quality of life-->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Quality of life</strong>
-      </div>
 
-      <div class="question">
-        <strong>Q1. How often are you aware of your hip problem?</strong>
-        <div class="options">
-          <label *ngFor="let option of painFrequencyOptions">
-            <input type="radio" formControlName="Q1" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('Q1')?.invalid && hoosForm.get('Q1')?.touched"
-          class="error-message">
-          Please select an answer
+    <!-- Function, Sports and Recreational Activities Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">SP</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Function, Sports and Recreational Activities</h3>
+          <p class="section-subtitle">What difficulty have you experienced during the last week?</p>
         </div>
       </div>
 
-      <div class="question">
-        <strong>Q2. Have you modified your life style to avoid activities potentially damaging to your hip?</strong>
-        <div class="options">
-          <label *ngFor="let option of confidenceOptions">
-            <input type="radio" formControlName="Q2" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('Q2')?.invalid && hoosForm.get('Q2')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>Q3. How much are you troubled with lack of confidence in your hip?</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="Q3" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('Q3')?.invalid && hoosForm.get('Q3')?.touched"
-          class="error-message">
-          Please select an answer
-        </div>
-      </div>
-
-      <div class="question">
-        <strong>Q4. In general, how much difficulty do you have with your hip?</strong>
-        <div class="options">
-          <label *ngFor="let option of severityOptions">
-            <input type="radio" formControlName="Q4" [value]="option.value"> {{option.text}}
-          </label>
-        </div>
-        <div *ngIf="hoosForm.get('Q4')?.invalid && hoosForm.get('Q4')?.touched"
-          class="error-message">
-          Please select an answer
+      <div class="questions-container">
+        <div *ngFor="let q of sports; let i = index"
+             class="question-card"
+             [class.answered]="hoosForm.get(q)?.value !== null"
+             [class.error]="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched">
+          <div class="question-number">{{ q }}</div>
+          <div class="question-content">
+            <div class="question-text">
+              {{ q === 'SP1' ? 'Squatting' :
+                 q === 'SP2' ? 'Running' :
+                 q === 'SP3' ? 'Twisting/pivoting on loaded leg' :
+                 'Walking on uneven surface' }}
+            </div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" [formControlName]="q" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get(q)?.invalid && hoosForm.get(q)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
         </div>
       </div>
-
-
-    </div>
-    <!-- Results Section -->
-    <div *ngIf="calculatedScores" class="form-section results-section">
-      <div class="section-header">
-        <strong>Calculation Results</strong>
-      </div>
-
-      <table class="results-table">
-        <tr>
-          <th>Subscale</th>
-          <th>Score</th>
-        </tr>
-        <tr>
-          <td>Pain</td>
-          <td>{{calculatedScores.pain}}</td>
-        </tr>
-        <tr>
-          <td>Symptoms</td>
-          <td>{{calculatedScores.symptoms}}</td>
-        </tr>
-        <tr>
-          <td>ADL (Activities of Daily Living)</td>
-          <td>{{calculatedScores.adl}}</td>
-        </tr>
-        <tr>
-          <td>Sport/Recreation</td>
-          <td>{{calculatedScores.sports}}</td>
-        </tr>
-        <tr>
-          <td>Quality of Life</td>
-          <td>{{calculatedScores.qol}}</td>
-        </tr>
-        <tr class="composite-row">
-          <td><strong>Composite Score (HOOS5)</strong></td>
-          <td><strong>{{calculatedScores.composite}}</strong></td>
-        </tr>
-        <tr class="modifier-row">
-          <td><strong>G-Code Modifier</strong></td>
-          <td><strong>{{calculatedScores.gCodeModifier}}</strong></td>
-        </tr>
-      </table>
     </div>
 
+    <!-- Quality of Life Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">Q</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Quality of Life</h3>
+          <p class="section-subtitle">How has your hip affected your quality of life?</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <!-- Q1 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('Q1')?.value !== null"
+             [class.error]="hoosForm.get('Q1')?.invalid && hoosForm.get('Q1')?.touched">
+          <div class="question-number">Q1</div>
+          <div class="question-content">
+            <div class="question-text">How often are you aware of your hip problem?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of painFrequencyOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="Q1" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('Q1')?.invalid && hoosForm.get('Q1')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('Q2')?.value !== null"
+             [class.error]="hoosForm.get('Q2')?.invalid && hoosForm.get('Q2')?.touched">
+          <div class="question-number">Q2</div>
+          <div class="question-content">
+            <div class="question-text">Have you modified your life style to avoid activities potentially damaging to your hip?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of confidenceOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="Q2" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('Q2')?.invalid && hoosForm.get('Q2')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('Q3')?.value !== null"
+             [class.error]="hoosForm.get('Q3')?.invalid && hoosForm.get('Q3')?.touched">
+          <div class="question-number">Q3</div>
+          <div class="question-content">
+            <div class="question-text">How much are you troubled with lack of confidence in your hip?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="Q3" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('Q3')?.invalid && hoosForm.get('Q3')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-card"
+             [class.answered]="hoosForm.get('Q4')?.value !== null"
+             [class.error]="hoosForm.get('Q4')?.invalid && hoosForm.get('Q4')?.touched">
+          <div class="question-number">Q4</div>
+          <div class="question-content">
+            <div class="question-text">In general, how much difficulty do you have with your hip?</div>
+            <div class="radio-options-horizontal">
+              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+                <input type="radio" formControlName="Q4" [value]="option.value">
+                <span class="option-text">{{ option.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="hoosForm.get('Q4')?.invalid && hoosForm.get('Q4')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Calculate Total</button>
-      <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+      <div *ngIf="hoosForm.invalid && hoosForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
 
-      <div *ngIf="showCompletionError" class="error-message completion-error">
-        Please select an answer for all questions.
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
       </div>
     </div>
   </form>

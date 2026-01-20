@@ -468,6 +468,84 @@
         </span>
       </div>
     </div>
+
+    <!-- Foot and Ankle Ability Measure - Sports Subscale -->
+    <div class="form-row">
+      <label class="field-label">Foot and Ankle Ability Measure - Sports Subscale</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="faam_sports" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="faam_sports" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- FAAM Sports Fields (when Yes is selected) -->
+    <div *ngIf="showFaamSportsFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="faam_sports_score" class="small-input" />
+        <span class="ms-2">
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('faam')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Hip disability and Osteoarthritis Outcome Score (HOOS) -->
+    <div class="form-row">
+      <label class="field-label">Hip disability and Osteoarthritis Outcome Score</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="hoos" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="hoos" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- HOOS Fields (when Yes is selected) -->
+    <div *ngIf="showHoosFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="hoos_total_score" class="small-input" />
+        <span class="ms-2">
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('hoos')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Knee injury and Osteoarthritis Outcome Score (KOOS) -->
+    <div class="form-row">
+      <label class="field-label">Knee injury and Osteoarthritis Outcome Score</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="koos" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="koos" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- KOOS Fields (when Yes is selected) -->
+    <div *ngIf="showKoosFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="koos_total_score" class="small-input" />
+        <span class="ms-2">
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('koos')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+        </span>
+      </div>
+    </div>
   </div>
 
   <!-- Balance -->
@@ -1179,6 +1257,9 @@
       <spine-olbp-test *ngSwitchCase="'olbp'" [noteId]="noteId" (getResult)="onTestResult($event)"></spine-olbp-test>
       <spine-molbp-test *ngSwitchCase="'molbp'" [noteId]="noteId" (getResult)="onTestResult($event)"></spine-molbp-test>
       <lefs-test *ngSwitchCase="'lefs'" [noteId]="noteId" (getResult)="onTestResult($event)"></lefs-test>
+      <lower-extremity-faam-test *ngSwitchCase="'faam'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-faam-test>
+      <lower-extremity-hoos-test *ngSwitchCase="'hoos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-hoos-test>
+      <lower-extremity-koos-test *ngSwitchCase="'koos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-koos-test>
     </ng-container>
   </c-modal-body>
 </c-modal>

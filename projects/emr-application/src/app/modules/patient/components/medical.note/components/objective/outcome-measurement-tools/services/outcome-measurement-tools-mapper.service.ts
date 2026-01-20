@@ -95,6 +95,18 @@ export class OutcomeMeasurementToolsMapperService {
         lowerExtremityFunctionalScale: {
           lowerExtremityFunctionalScale: formValue.lower_extremity_functional_scale === 'yes',
           lowerExtremityFunctionalScore: formValue.lower_extremity_functional_score || ''
+        },
+        faamSports: {
+          faamSports: formValue.faam_sports === 'yes',
+          faamSportsScore: formValue.faam_sports_score || ''
+        },
+        hoos: {
+          hoos: formValue.hoos === 'yes',
+          hoosTotalScore: formValue.hoos_total_score || ''
+        },
+        koos: {
+          koos: formValue.koos === 'yes',
+          koosTotalScore: formValue.koos_total_score || ''
         }
       },
 
@@ -271,6 +283,12 @@ export class OutcomeMeasurementToolsMapperService {
       lower_extremity: dto.lowerExtremity?.lowerExtremity ? 'yes' : 'no',
       lower_extremity_functional_scale: dto.lowerExtremity?.lowerExtremityFunctionalScale?.lowerExtremityFunctionalScale ? 'yes' : 'no',
       lower_extremity_functional_score: dto.lowerExtremity?.lowerExtremityFunctionalScale?.lowerExtremityFunctionalScore || '',
+      faam_sports: dto.lowerExtremity?.faamSports?.faamSports ? 'yes' : 'no',
+      faam_sports_score: dto.lowerExtremity?.faamSports?.faamSportsScore || '',
+      hoos: dto.lowerExtremity?.hoos?.hoos ? 'yes' : 'no',
+      hoos_total_score: dto.lowerExtremity?.hoos?.hoosTotalScore || '',
+      koos: dto.lowerExtremity?.koos?.koos ? 'yes' : 'no',
+      koos_total_score: dto.lowerExtremity?.koos?.koosTotalScore || '',
 
       // Balance
       balance: dto.balance?.balance ? 'yes' : 'no',
