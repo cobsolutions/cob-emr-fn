@@ -111,8 +111,8 @@
           <div class="question-number">S1</div>
           <div class="question-content">
             <div class="question-text">Do you have swelling in your knee?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of frequencyOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of frequencyOptions" class="radio-option-label">
                 <input type="radio" formControlName="S1" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -138,8 +138,8 @@
                  q === 'S6' ? 'How severe is your knee joint stiffness after first wakening in the morning?' :
                  'How severe is your knee stiffness after sitting, lying or resting later in the day?' }}
             </div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" [formControlName]="q" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -170,8 +170,8 @@
           <div class="question-number">P1</div>
           <div class="question-content">
             <div class="question-text">How often do you experience knee pain?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of painFrequencyOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of painFrequencyOptions" class="radio-option-label">
                 <input type="radio" formControlName="P1" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -199,8 +199,8 @@
                  q === 'P8' ? 'Sitting or lying' :
                  'Standing upright' }}
             </div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" [formControlName]="q" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -249,8 +249,8 @@
                  q === 'A16' ? 'Heavy domestic duties (moving heavy boxes, scrubbing floors, etc)' :
                  'Light domestic duties (cooking, dusting, etc)' }}
             </div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" [formControlName]="q" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -287,8 +287,8 @@
                  q === 'SP4' ? 'Twisting/pivoting on your injured knee' :
                  'Kneeling' }}
             </div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" [formControlName]="q" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -319,8 +319,8 @@
           <div class="question-number">Q1</div>
           <div class="question-content">
             <div class="question-text">How often are you aware of your knee problem?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of painFrequencyOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of painFrequencyOptions" class="radio-option-label">
                 <input type="radio" formControlName="Q1" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -338,8 +338,8 @@
           <div class="question-number">Q2</div>
           <div class="question-content">
             <div class="question-text">Have you modified your life style to avoid activities potentially damaging to your knee?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of confidenceOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of confidenceOptions" class="radio-option-label">
                 <input type="radio" formControlName="Q2" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -357,8 +357,8 @@
           <div class="question-number">Q3</div>
           <div class="question-content">
             <div class="question-text">How much are you troubled with lack of confidence in your knee?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" formControlName="Q3" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>
@@ -376,8 +376,8 @@
           <div class="question-number">Q4</div>
           <div class="question-content">
             <div class="question-text">In general, how much difficulty do you have with your knee?</div>
-            <div class="radio-options-horizontal">
-              <label *ngFor="let option of severityOptions" class="radio-option-horizontal">
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of severityOptions" class="radio-option-label">
                 <input type="radio" formControlName="Q4" [value]="option.value">
                 <span class="option-text">{{ option.text }}</span>
               </label>

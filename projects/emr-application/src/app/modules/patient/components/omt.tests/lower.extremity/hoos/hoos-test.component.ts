@@ -86,7 +86,8 @@ export class HoosTestComponent implements OnInit {
         if (response?.answers) {
           const formValues: { [key: string]: number } = {};
           Object.entries(response.answers).forEach(([key, value]) => {
-            const formKey = key.toLowerCase();
+            // PAINLEVEL -> painlevel, but keep S1, P1, A1, etc. as-is
+            const formKey = key === 'PAINLEVEL' ? 'painlevel' : key;
             formValues[formKey] = value as number;
           });
           this.hoosForm.patchValue(formValues);

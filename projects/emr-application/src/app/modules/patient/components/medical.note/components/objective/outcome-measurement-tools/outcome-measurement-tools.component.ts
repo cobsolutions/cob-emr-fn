@@ -857,14 +857,14 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
           faam_sports_score: event.results.score
         });
       } else if (this.activeTest === 'hoos') {
-        // Special handling for HOOS which returns total score
+        // Special handling for HOOS which returns score field
         this.omtForm.patchValue({
-          hoos_total_score: event.results.total
+          hoos_total_score: event.results.score
         });
       } else if (this.activeTest === 'koos') {
-        // Special handling for KOOS which returns total score
+        // Special handling for KOOS which returns score field
         this.omtForm.patchValue({
-          koos_total_score: event.results.total
+          koos_total_score: event.results.score
         });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
