@@ -882,6 +882,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         this.omtForm.patchValue({
           berg_score: event.results.score
         });
+      } else if (this.activeTest === 'fab') {
+        // Special handling for FAB which returns score field
+        this.omtForm.patchValue({
+          fullerton_score: event.results.score
+        });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
         if (config) {

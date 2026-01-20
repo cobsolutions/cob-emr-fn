@@ -236,7 +236,17 @@ export class BergTestComponent implements OnInit {
         if (response?.answers) {
           const formValues: { [key: string]: number } = {};
           Object.entries(response.answers).forEach(([key, value]) => {
-            const formKey = key.toLowerCase();
+            // Map backend keys to form control names
+            // Backend returns PAINLEVEL, Q1, Q2, etc.
+            // Form uses painLevel, Q1, Q2, etc.
+            let formKey: string;
+            if (key.toUpperCase() === 'PAINLEVEL') {
+              formKey = 'painLevel';
+            } else if (key.toUpperCase().startsWith('Q')) {
+              formKey = key.toUpperCase(); // Q1, Q2, etc.
+            } else {
+              formKey = key;
+            }
             formValues[formKey] = value as number;
           });
           this.bergForm.patchValue(formValues);

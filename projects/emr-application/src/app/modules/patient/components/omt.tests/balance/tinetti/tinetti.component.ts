@@ -264,7 +264,10 @@ export class TinettiComponent implements OnInit {
         if (response?.answers) {
           const formValues: { [key: string]: number } = {};
           Object.entries(response.answers).forEach(([key, value]) => {
-            const formKey = key.toLowerCase();
+            // Map backend keys to form control names
+            // Backend returns B1, B2, G1, G2, etc.
+            // Form uses B1, B2, G1, G2, etc. (uppercase)
+            const formKey = key.toUpperCase();
             formValues[formKey] = value as number;
           });
           this.tinettiForm.patchValue(formValues);

@@ -710,7 +710,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="fullerton_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('fab')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1263,6 +1263,7 @@
       <balance-abc-test *ngSwitchCase="'abc'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-abc-test>
       <balance-tinetti *ngSwitchCase="'tinetti'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-tinetti>
       <balance-berg-test *ngSwitchCase="'berg'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-berg-test>
+      <balance-fab-test *ngSwitchCase="'fab'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-fab-test>
     </ng-container>
   </c-modal-body>
 </c-modal>
