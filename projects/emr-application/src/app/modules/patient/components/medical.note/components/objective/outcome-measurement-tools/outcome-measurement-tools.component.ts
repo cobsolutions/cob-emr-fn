@@ -3,6 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Omt } from './models/Omt';
 import { OutcomeMeasurementToolsMapperService } from './services/outcome-measurement-tools-mapper.service';
 
+// Interface for test configuration
+interface OmtTestConfig {
+  key: string;           // Unique identifier for the test
+  scoreField: string;    // Form control name for the score
+  resultPath?: string;   // Path to extract result (default: 'results.total')
+}
 
 @Component({
   selector: 'outcome-measurement-tools',
@@ -14,6 +20,24 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() omtData: Omt | null = null;
   @Input() noteId: string;
+
+  // Generic test modal state
+  activeTest: string | null = null;
+  showTestModal: boolean = false;
+
+  // Test configurations
+  testConfigs: OmtTestConfig[] = [
+    { key: 'dash', scoreField: 'dash_score' },
+    { key: 'uefi', scoreField: 'upper_extremity_functional_score' },
+    { key: 'spadi', scoreField: 'shoulder_total_percent' },
+    { key: 'ndi', scoreField: 'neck_disability_score' },
+    { key: 'olbp', scoreField: 'oswestry_disability_percent' },
+    { key: 'molbp', scoreField: 'modified_oswestry_disability_percent' },
+    { key: 'lefs', scoreField: 'lower_extremity_functional_score' },
+    { key: 'abc', scoreField: 'abc_scale_score' },
+    { key: 'berg', scoreField: 'berg_score' },
+    { key: 'fab', scoreField: 'fullerton_score' },
+  ];
 
   // Visibility flags for dependent fields
   showCustomOutcomeFields: boolean = false;
@@ -62,9 +86,6 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   showElderAbuseFields: boolean = false;
   showFotoPatientFields: boolean = false;
 
-  // Modal visibility flags
-  showDashTestModal: boolean = false;
-  showUefiTestModal: boolean = false;
 
   // Dropdown options for vestibular
   lossOfConsciousnessOptions = [
@@ -731,37 +752,36 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     });
   }
 
-  showDashTestPopup(): void {
-    this.showDashTestModal = true;
+  /**
+   * Opens the test modal for the specified test
+   * @param testKey - The unique identifier for the test (e.g., 'dash', 'uefi')
+   */
+  showTestPopup(testKey: string): void {
+    this.activeTest = testKey;
+    this.showTestModal = true;
   }
 
-  toggleDashTestModal(): void {
-    this.showDashTestModal = !this.showDashTestModal;
+  /**
+   * Closes the test modal
+   */
+  closeTestModal(): void {
+    this.showTestModal = false;
+    this.activeTest = null;
   }
 
-  onDashTestResult(event: any): void {
-    this.showDashTestModal = false;
-    if (event?.results?.total !== undefined) {
-      this.omtForm.patchValue({
-        dash_score: event.results.total
-      });
+  /**
+   * Handles the result from any test component
+   * @param event - The result event from the test component
+   */
+  onTestResult(event: any): void {
+    if (this.activeTest && event?.results?.total !== undefined) {
+      const config = this.testConfigs.find(c => c.key === this.activeTest);
+      if (config) {
+        this.omtForm.patchValue({
+          [config.scoreField]: event.results.total
+        });
+      }
     }
-  }
-
-  showUefiTestPopup(): void {
-    this.showUefiTestModal = true;
-  }
-
-  toggleUefiTestModal(): void {
-    this.showUefiTestModal = !this.showUefiTestModal;
-  }
-
-  onUefiTestResult(event: any): void {
-    this.showUefiTestModal = false;
-    if (event?.results?.total !== undefined) {
-      this.omtForm.patchValue({
-        upper_extremity_functional_score: event.results.total
-      });
-    }
+    this.closeTestModal();
   }
 }

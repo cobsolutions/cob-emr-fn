@@ -242,7 +242,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="upper_extremity_functional_score" class="small-input" />
         <span class="ms-2">
-          <a href="javascript:void(0)" class="text-primary" (click)="showUefiTestPopup()">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('uefi')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -268,7 +268,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="dash_score" class="small-input" />
         <span class="ms-2">
-          <a href="javascript:void(0)" class="text-primary" (click)="showDashTestPopup()">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('dash')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1166,18 +1166,13 @@
 
 </div>
 
-<!-- DASH Test Modal -->
-<c-modal id="dashTest" [visible]="showDashTestModal" size="lg" backdrop="static" scrollable="true">
+<!-- Generic OMT Test Modal -->
+<c-modal id="omtTest" [visible]="showTestModal" size="lg" backdrop="static" scrollable="true">
   <c-modal-body>
-    <button (click)="toggleDashTestModal()" cButtonClose style="float: right;"></button>
-    <dash-test *ngIf="showDashTestModal" [noteId]="noteId" (getResult)="onDashTestResult($event)"></dash-test>
-  </c-modal-body>
-</c-modal>
-
-<!-- UEFI Test Modal -->
-<c-modal id="uefiTest" [visible]="showUefiTestModal" size="lg" backdrop="static" scrollable="true">
-  <c-modal-body>
-    <button (click)="toggleUefiTestModal()" cButtonClose style="float: right;"></button>
-    <uefi-test *ngIf="showUefiTestModal" [noteId]="noteId" (getResult)="onUefiTestResult($event)"></uefi-test>
+    <button (click)="closeTestModal()" cButtonClose style="float: right;"></button>
+    <ng-container [ngSwitch]="activeTest">
+      <dash-test *ngSwitchCase="'dash'" [noteId]="noteId" (getResult)="onTestResult($event)"></dash-test>
+      <uefi-test *ngSwitchCase="'uefi'" [noteId]="noteId" (getResult)="onTestResult($event)"></uefi-test>
+    </ng-container>
   </c-modal-body>
 </c-modal>
