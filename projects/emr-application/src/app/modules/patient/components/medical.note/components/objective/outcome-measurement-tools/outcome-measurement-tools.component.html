@@ -658,7 +658,7 @@
         <label class="field-label"></label>
         <input cFormControl type="text" formControlName="tinetti_score" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('tinetti')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1261,6 +1261,7 @@
       <lower-extremity-hoos-test *ngSwitchCase="'hoos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-hoos-test>
       <lower-extremity-koos-test *ngSwitchCase="'koos'" [noteId]="noteId" (getResult)="onTestResult($event)"></lower-extremity-koos-test>
       <balance-abc-test *ngSwitchCase="'abc'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-abc-test>
+      <balance-tinetti *ngSwitchCase="'tinetti'" [noteId]="noteId" (getResult)="onTestResult($event)"></balance-tinetti>
     </ng-container>
   </c-modal-body>
 </c-modal>

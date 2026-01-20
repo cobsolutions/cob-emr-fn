@@ -1,8 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OMTTestValues } from '../../../../models/medical.note/omt.test/omt.test.values';
-import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'balance-tinetti',
@@ -12,10 +10,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class TinettiComponent implements OnInit {
   tinettiForm: FormGroup;
   showInstructions = false;
-  medicalNoteId: number;
-  id: number
-  testName: string = 'balance-tinetti';
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'tinetti';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
   // Balance test items
   balanceItems = [
     {
@@ -212,9 +209,7 @@ export class TinettiComponent implements OnInit {
     }
   ];
 
-  constructor(private fb: FormBuilder
-    , private omtTestService: OmtTestService
-    , private medicalNotService: MedialNoteService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.tinettiForm = this.createForm();
   }
   createForm(): FormGroup {
@@ -244,50 +239,47 @@ export class TinettiComponent implements OnInit {
       });
       return;
     }
-    const result = this.fillAnswers()
 
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.tinettiForm.controls).forEach(key => {
+      const value = this.tinettiForm.get(key)?.value;
+      if (value !== null) {
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
 
-    this.omtTestService.balance(result).subscribe(val => {
-      var omtTestValues: OMTTestValues = {
-        id: this.id,
-        medicalNoteId: this.medicalNoteId,
-        testName: this.testName,
-        values: this.tinettiForm.getRawValue()
-      };
-      this.omtTestService.saveValues(omtTestValues).subscribe(val => {
-      })
-      this.getResult.emit(val)
-    })
-  }
-  private fillAnswers() {
-    const answers: Record<string, number> = {};
-    for (var i = 1; i <= 10; i++) {
-      const key = `${'B' + i}`
-      const value = this.tinettiForm.value[key];
-      answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-    }
-    for (var i = 1; i <= 10; i++) {
-      const key = `${'G' + i}`
-      const value = this.tinettiForm.value[key];
-      answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-    }
-    return { answers, "testType": "tinetti" };
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
   resetForm(): void {
     this.tinettiForm.reset();
+    this.tinettiForm.markAsUntouched();
   }
+
   ngOnInit(): void {
-    this.medicalNotService.medicalNoteID$.subscribe(id => {
-      this.medicalNoteId = id
-      this.omtTestService.findValues(this.medicalNoteId, this.testName).subscribe((data: any) => {
-        this.id = data?.id
-        setTimeout(() => {
-          this.tinettiForm.patchValue(data.values);
-        }, 10);
-
-      })
-    })
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.tinettiForm.patchValue(formValues);
+        }
+      });
+    }
   }
 
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.tinettiForm.controls);
+    return controls.filter(key => this.tinettiForm.get(key)?.value !== null).length;
+  }
 
+  getCompletionPercentage(): number {
+    const totalQuestions = 20; // 10 balance items + 10 gait items
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }

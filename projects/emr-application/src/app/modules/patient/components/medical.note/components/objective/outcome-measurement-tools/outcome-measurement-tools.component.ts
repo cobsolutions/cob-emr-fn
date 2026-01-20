@@ -38,6 +38,7 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     { key: 'hoos', scoreField: 'hoos_total_score' },
     { key: 'koos', scoreField: 'koos_total_score' },
     { key: 'abc', scoreField: 'abc_scale_score' },
+    { key: 'tinetti', scoreField: 'tinetti_score' },
     { key: 'berg', scoreField: 'berg_score' },
     { key: 'fab', scoreField: 'fullerton_score' },
   ];
@@ -870,6 +871,11 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         // Special handling for ABC Scale which returns score field
         this.omtForm.patchValue({
           abc_scale_score: event.results.score
+        });
+      } else if (this.activeTest === 'tinetti') {
+        // Special handling for Tinetti which returns score field
+        this.omtForm.patchValue({
+          tinetti_score: event.results.score
         });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);
