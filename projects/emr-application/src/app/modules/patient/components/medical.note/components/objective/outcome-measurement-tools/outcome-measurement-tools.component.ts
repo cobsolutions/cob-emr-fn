@@ -774,12 +774,21 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
    * @param event - The result event from the test component
    */
   onTestResult(event: any): void {
-    if (this.activeTest && event?.results?.total !== undefined) {
-      const config = this.testConfigs.find(c => c.key === this.activeTest);
-      if (config) {
+    if (this.activeTest && event?.results) {
+      // Special handling for SPADI which has three result fields
+      if (this.activeTest === 'spadi') {
         this.omtForm.patchValue({
-          [config.scoreField]: event.results.total
+          shoulder_total_percent: event.results.total,
+          shoulder_pain_percent: event.results.pain,
+          shoulder_disability_percent: event.results.disability
         });
+      } else if (event.results.total !== undefined) {
+        const config = this.testConfigs.find(c => c.key === this.activeTest);
+        if (config) {
+          this.omtForm.patchValue({
+            [config.scoreField]: event.results.total
+          });
+        }
       }
     }
     this.closeTestModal();

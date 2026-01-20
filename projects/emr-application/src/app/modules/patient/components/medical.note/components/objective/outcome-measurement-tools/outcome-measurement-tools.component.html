@@ -216,7 +216,7 @@
         <label class="field-label-inline">Disability %:</label>
         <input cFormControl type="text" formControlName="shoulder_disability_percent" class="small-input" />
         <span class="ms-2">
-          <a href="#" class="text-primary">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
+          <a href="javascript:void(0)" class="text-primary" (click)="showTestPopup('spadi')">Show Test</a> | <a href="#" class="text-primary">Print Test</a>
         </span>
       </div>
     </div>
@@ -1173,6 +1173,7 @@
     <ng-container [ngSwitch]="activeTest">
       <dash-test *ngSwitchCase="'dash'" [noteId]="noteId" (getResult)="onTestResult($event)"></dash-test>
       <uefi-test *ngSwitchCase="'uefi'" [noteId]="noteId" (getResult)="onTestResult($event)"></uefi-test>
+      <spadi-test *ngSwitchCase="'spadi'" [noteId]="noteId" (getResult)="onTestResult($event)"></spadi-test>
     </ng-container>
   </c-modal-body>
 </c-modal>

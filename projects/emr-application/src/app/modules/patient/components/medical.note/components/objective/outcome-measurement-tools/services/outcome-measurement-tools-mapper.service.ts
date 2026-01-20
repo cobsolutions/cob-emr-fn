@@ -50,7 +50,8 @@ export class OutcomeMeasurementToolsMapperService {
         shoulderPainandDisabilityIndex: {
           shoulderPainDisability: formValue.shoulder_pain_disability === 'yes',
           shoulderTotalPercent: formValue.shoulder_total_percent || '',
-          shoulderPainPercent: formValue.shoulder_pain_percent || ''
+          shoulderPainPercent: formValue.shoulder_pain_percent || '',
+          shoulderDisabilityPercent: formValue.shoulder_disability_percent || ''
         },
         upperExtremityFunctionalIndex: {
           upperExtremityFunctional: formValue.upper_extremity_functional === 'yes',
@@ -246,7 +247,7 @@ export class OutcomeMeasurementToolsMapperService {
       shoulder_pain_disability: dto.upperExtremity?.shoulderPainandDisabilityIndex?.shoulderPainDisability ? 'yes' : 'no',
       shoulder_total_percent: dto.upperExtremity?.shoulderPainandDisabilityIndex?.shoulderTotalPercent || '',
       shoulder_pain_percent: dto.upperExtremity?.shoulderPainandDisabilityIndex?.shoulderPainPercent || '',
-      shoulder_disability_percent: '',
+      shoulder_disability_percent: dto.upperExtremity?.shoulderPainandDisabilityIndex?.shoulderDisabilityPercent || '',
       upper_extremity_functional: dto.upperExtremity?.upperExtremityFunctionalIndex?.upperExtremityFunctional ? 'yes' : 'no',
       upper_extremity_functional_score: dto.upperExtremity?.upperExtremityFunctionalIndex?.upperExtremityFunctionalScore || '',
       dash: dto.upperExtremity?.dASHDisabilitiesofArmShouldeHand?.dash ? 'yes' : 'no',
