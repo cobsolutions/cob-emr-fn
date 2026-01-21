@@ -179,6 +179,7 @@ import { SuppliesNComponent } from './components/medical.note/components/billing
 import { SplintsOrthoticsNComponent } from './components/medical.note/components/billing/componentsN/splints-orthotics/splints-orthotics-n.component';
 import { CastsNComponent } from './components/medical.note/components/billing/componentsN/casts/casts-n.component';
 import { BracesNComponent } from './components/medical.note/components/billing/componentsN/braces/braces-n.component';
+import { DailyNoteNComponent } from './components/medical.note/daily.note.n/daily-note-n.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -359,6 +360,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SplintsOrthoticsNComponent,
     CastsNComponent,
     BracesNComponent,
+    DailyNoteNComponent,
   ],
   imports: [
     CommonModule,
