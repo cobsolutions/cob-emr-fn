@@ -1,1 +1,103 @@
-<p>daily-note-n works!</p>
+<ngx-spinner></ngx-spinner>
+<c-container fluid="true" *ngIf="isLoaded">
+    <div class="button-container m-2">
+        <c-input-group #actionInputGroup class="action-input-group mb-3">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm" class="action-select">
+                <option value="back">Back to patient records</option>
+                <option value="draft">Save as draft</option>
+            </select>
+            <button cButton color="primary" size="sm" class="action-button" (click)="soapActions(soapActionList.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+                <span class="button-text">Go</span>
+            </button>
+        </c-input-group>
+    </div>
+    <form [formGroup]="dailyNoteForm" *ngIf="dailyNoteForm">
+        <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
+            <!-- subjective step -->
+            <mat-step [stepControl]="dailyNoteForm.get('subjective')!" completed="true"
+                formGroupName="subjective">
+                <ng-template matStepLabel>Subjective</ng-template>
+                <subjective [stepper]="stepper" (formReady)="setChildForm('subjective', $event)"
+                    [subjectiveData]="medicalNoteSOAP?.subjective" *ngIf="visitedSteps[0]"
+                    [noteType]="'DailyNote'">
+                </subjective>
+            </mat-step>
+            <!-- objective step -->
+            <mat-step completed="true" [stepControl]="dailyNoteForm.get('objective')!"
+                formGroupName="objective">
+                <ng-template matStepLabel>Objective</ng-template>
+                <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"
+                    [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'DailyNote'" [noteId]="noteId"></objective>
+            </mat-step>
+            <!-- Assessment Step -->
+            <mat-step completed="true" formGroupName="objective"
+                [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
+                <ng-template matStepLabel>Assessment</ng-template>
+                <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
+                    [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'DailyNote'"></assessment>
+            </mat-step>
+            <!-- Plan Step -->
+            <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!"
+                formGroupName="planOfCare">
+                <ng-template matStepLabel>Plan</ng-template>
+                <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="'DailyNote'">
+                </plan>
+            </mat-step>
+        </mat-stepper>
+    </form>
+
+    <!-- Scroll Arrows -->
+    <div class="scroll-arrow-container" *ngIf="showScrollArrow">
+        <!-- Scroll Up Group -->
+        <div class="arrow-group" *ngIf="showUpArrow">
+            <!-- Jump to Top Button (appears on hover) -->
+            <div class="jump-button jump-top" (click)="scrollToTop()" title="Jump to Top">
+                <div class="jump-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                        <polyline points="18 20 12 14 6 20"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Page Up Arrow -->
+            <div class="scroll-arrow scroll-up" (click)="scrollPageUp()" title="Scroll Up One Page">
+                <div class="arrow-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
+                </div>
+                <span class="arrow-label">Up</span>
+            </div>
+        </div>
+
+        <!-- Scroll Down Group -->
+        <div class="arrow-group" *ngIf="showDownArrow">
+            <!-- Page Down Arrow -->
+            <div class="scroll-arrow scroll-down" (click)="scrollPageDown()" title="Scroll Down One Page">
+                <div class="arrow-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <span class="arrow-label">Down</span>
+            </div>
+
+            <!-- Jump to Bottom Button (appears on hover) -->
+            <div class="jump-button jump-bottom" (click)="scrollToBottom()" title="Jump to Bottom">
+                <div class="jump-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 4 12 10 18 4"></polyline>
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</c-container>
