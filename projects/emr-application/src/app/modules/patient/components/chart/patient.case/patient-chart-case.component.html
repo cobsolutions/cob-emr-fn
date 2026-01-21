@@ -236,8 +236,8 @@
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
             [noteId]="noteId"></initial-examination>
         <!-- Daily Note -->
-        <daily-note *ngIf="patientRecordAction ==='Daily_Note' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></daily-note>
+        <daily-note-n *ngIf="patientRecordAction ==='Daily_Note'" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></daily-note-n>
         <!--Progress Note-->
         <progress-note *ngIf="patientRecordAction ==='Progress_Note' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></progress-note>

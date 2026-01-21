@@ -171,6 +171,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
 
     if (key === 'Daily_Note') {
       medicalNoteType = "DAILY_NOTE"
+      console.log('DAILY_NOTE')
+      this.createDailyNote();
       this.medicalNoteId = undefined;
     }
     if (key === 'Progress_Note') {
@@ -213,6 +215,16 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error.message;
     })
+  }
+  private createDailyNote() {
+    var request: CreateNodeRequest = {
+      patient: this.patient,
+      noteType: 'DAILY_NOTE',
+      providerId: this.loggedInService.getLoggedUser().uuid,
+      encounterDate: moment().toDate()
+    }
+    // Service call will be added here
+    this.patientRecord = false;
   }
   executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
     if (val === 'View Reason')
