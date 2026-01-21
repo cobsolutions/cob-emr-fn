@@ -16,6 +16,7 @@ import { QuickDischargeRequest } from '../../../models/medical.note/quick.discha
 import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { PatientCaseAction } from '../../../models/chart/patient.case.action';
+import { DailyNoteService } from '../../../services/medical.note/daily.note/daily-note.service';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
@@ -61,6 +62,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private appointmentService: AppointmentService,
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
+    private dailyNoteService: DailyNoteService,
     private patientChartNoteService: PatientChartNoteService) { super() }
 
   setActive(section: string) {
@@ -199,6 +201,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   private createInitialExamNote() {
     var request: CreateNodeRequest = {
       patient: this.patient,
+      patientCaseId: this.case.uuid,
       noteType: 'INITIAL_EXAM',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate()
@@ -212,19 +215,32 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
       this.findPatientCaseActions(this.case.uuid);
     }, error => {
+      this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
-      this.errorMessage = error.error.message;
+      this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the initial examination note';
     })
   }
   private createDailyNote() {
     var request: CreateNodeRequest = {
       patient: this.patient,
-      noteType: 'DAILY_NOTE',
+      patientCaseId: this.case.uuid,
+      noteType: 'DAILY',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate()
     }
-    // Service call will be added here
-    this.patientRecord = false;
+    this.dailyNoteService.create(request).subscribe((response: any) => {
+      console.log(JSON.stringify(response))
+      this.patientRecord = false;
+      this.noteId = response.noteId.value;
+      this.medicalNoteId = response.id;
+      this.errorMessage = undefined
+      this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.findPatientCaseActions(this.case.uuid);
+    }, error => {
+      this.patientRecord = false;
+      this.patientRecordAction = 'ERROR_FINALIZE';
+      this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the daily note';
+    })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
     if (val === 'View Reason')

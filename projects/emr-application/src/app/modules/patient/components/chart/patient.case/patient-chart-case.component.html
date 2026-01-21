@@ -236,7 +236,7 @@
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
             [noteId]="noteId"></initial-examination>
         <!-- Daily Note -->
-        <daily-note-n *ngIf="patientRecordAction ==='Daily_Note'" (back)="handleBackAction()"
+        <daily-note-n *ngIf="patientRecordAction ==='Daily_Note' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></daily-note-n>
         <!--Progress Note-->
         <progress-note *ngIf="patientRecordAction ==='Progress_Note' && medicalNoteId" (back)="handleBackAction()"
@@ -248,16 +248,38 @@
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></full-discharge-note>
     </c-card>
-    <span *ngIf=" patientRecordAction==='ERROR_FINALIZE'">
-        <c-callout color="danger">
-            {{errorMessage}}
-        </c-callout>
-        <div class="button-container m-2">
-            <button cButton color="primary" variant="outline" size="sm" (click)="handleBackAction()">
-                Back to patient records
+    <!-- Error State -->
+    <div class="error-card" *ngIf="patientRecordAction==='ERROR_FINALIZE'">
+        <div class="error-card-header">
+            <div class="error-header-content">
+                <div class="error-icon">
+                    <svg cIcon name="cilWarning"></svg>
+                </div>
+                <div class="error-header-text">
+                    <h6>Unable to Create Note</h6>
+                    <span class="error-subtitle">An error occurred while processing your request</span>
+                </div>
+            </div>
+            <div class="error-badge">Error</div>
+        </div>
+        <div class="error-card-body">
+            <p class="error-message">{{errorMessage}}</p>
+            <div class="error-suggestions">
+                <span class="suggestion-label">What you can try:</span>
+                <ul>
+                    <li>Check your network connection</li>
+                    <li>Verify patient case information is complete</li>
+                    <li>Contact support if the issue persists</li>
+                </ul>
+            </div>
+        </div>
+        <div class="error-card-footer">
+            <button cButton color="danger" variant="outline" size="sm" (click)="handleBackAction()">
+                <svg cIcon name="cilArrowLeft" class="me-1"></svg>
+                Back to Patient Records
             </button>
         </div>
-    </span>
+    </div>
 </span>
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
