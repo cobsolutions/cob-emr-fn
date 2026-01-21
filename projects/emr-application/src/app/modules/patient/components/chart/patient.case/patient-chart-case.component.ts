@@ -231,7 +231,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.dailyNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
       this.patientRecord = false;
-      this.noteId = response.noteId.value;
+      this.noteId = response.noteId;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)

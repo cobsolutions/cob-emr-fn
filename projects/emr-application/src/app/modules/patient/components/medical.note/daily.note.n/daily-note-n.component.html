@@ -29,9 +29,14 @@
                 <ng-template matStepLabel>Objective</ng-template>
                 <objective [stepper]="stepper" *ngIf="visitedSteps[1]" (formReady)="setChildForm('objective', $event)"
                     [objectiveData]="medicalNoteSOAP?.objective" [noteType]="'DailyNote'" [noteId]="noteId"></objective>
+                <!-- Billing inside Objective for Daily Note -->
+                <billing-n *ngIf="visitedSteps[1]" [stepper]="stepper" [parentForm]="dailyNoteForm"
+                    (formReady)="setChildForm('billing', $event)" [noteTypeId]="'DailyNote'" [caseId]="caseId"
+                    [medicalNoteId]="medicalNoteId" [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing">
+                </billing-n>
             </mat-step>
             <!-- Assessment Step -->
-            <mat-step completed="true" formGroupName="objective"
+            <mat-step completed="true"
                 [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
                 <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"

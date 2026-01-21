@@ -10,6 +10,7 @@ import { MedicalNoteType } from '../../../models/medical.note/medical.note.type'
 import { DailyNoteService } from '../../../services/medical.note/daily.note/daily-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { AssessmentMapperService } from '../components/assessment/service/assessment-mapper.service';
+import { BillingMapperService } from '../components/billing/service/billing-mapper.service';
 import { ObjectiveComponent } from '../components/objective/objective.component';
 import { ObjectiveMapperService } from '../components/objective/service/objective-mapper.service';
 import { PlanOfCareMapperService } from '../components/plan/service/plan-of-care-mapper.service';
@@ -51,13 +52,15 @@ export class DailyNoteNComponent implements OnInit {
     private subjectiveMapper: SubjectiveMapperService,
     private objectiveMapperService: ObjectiveMapperService,
     private assessmentMapper: AssessmentMapperService,
-    private planOfCareMapper: PlanOfCareMapperService) {
+    private planOfCareMapper: PlanOfCareMapperService,
+    private billingMapper: BillingMapperService) {
 
   }
   private pendingObjectiveData: any = null;
   private pendingSubjectiveData: any = null;
   private pendingAssessmentData: any = null;
   private pendingPlanOfCareData: any = null;
+  private pendingBillingData: any = null;
 
   ngOnInit(): void {
     this.visitedSteps = [true, false, false, false]
@@ -65,7 +68,8 @@ export class DailyNoteNComponent implements OnInit {
       subjective: this.fb.group({}),
       objective: this.fb.group({}),
       assessment: this.fb.group({}),
-      planOfCare: this.fb.group({})
+      planOfCare: this.fb.group({}),
+      billing: this.fb.group({})
     });
 
     // Add scroll event listener
@@ -134,6 +138,18 @@ export class DailyNoteNComponent implements OnInit {
           if (Object.keys((this.dailyNoteForm.get('planOfCare') as FormGroup).controls).length > 0) {
             this.dailyNoteForm.get('planOfCare')?.patchValue(planOfCareFormValue);
             this.pendingPlanOfCareData = null;
+          }
+        }
+
+        if (note.billing) {
+          const billingFormValue = this.billingMapper.fromDto(note.billing);
+          this.pendingBillingData = billingFormValue;
+          // Update medicalNoteSOAP with mapped form values for the template
+          this.medicalNoteSOAP.billing = billingFormValue;
+          // Check if form is already set up
+          if (Object.keys((this.dailyNoteForm.get('billing') as FormGroup).controls).length > 0) {
+            this.dailyNoteForm.get('billing')?.patchValue(billingFormValue);
+            this.pendingBillingData = null;
           }
         }
       }
@@ -228,6 +244,9 @@ export class DailyNoteNComponent implements OnInit {
     } else if (section === 'planOfCare' && this.pendingPlanOfCareData) {
       this.dailyNoteForm.get('planOfCare')?.patchValue(this.pendingPlanOfCareData);
       this.pendingPlanOfCareData = null;
+    } else if (section === 'billing' && this.pendingBillingData) {
+      this.dailyNoteForm.get('billing')?.patchValue(this.pendingBillingData);
+      this.pendingBillingData = null;
     }
   }
   soapActions(action: string) {
@@ -250,6 +269,7 @@ export class DailyNoteNComponent implements OnInit {
     const objectiveGroup = this.dailyNoteForm.get('objective') as FormGroup;
     const assessmentGroup = this.dailyNoteForm.get('assessment') as FormGroup;
     const planOfCareGroup = this.dailyNoteForm.get('planOfCare') as FormGroup;
+    const billingGroup = this.dailyNoteForm.get('billing') as FormGroup;
 
     var medicalNoteRequest: MedicalNoteRequest = {
       patientCaseId: this.caseId,
@@ -265,6 +285,9 @@ export class DailyNoteNComponent implements OnInit {
         : null,
       planOfCare: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
         ? this.planOfCareMapper.toModel(planOfCareGroup)
+        : null,
+      billing: (billingGroup && !this.isFormGroupEmpty(billingGroup))
+        ? this.billingMapper.toModel(billingGroup)
         : null
     }
 
