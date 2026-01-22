@@ -16,7 +16,12 @@ export class BasicNComponent implements OnInit {
   showSurgeryPperformed = false;
   showNewInjury = false;
   @Input() basicFormData: any;
+  @Input() noteType: string;
   @Output() formReady = new EventEmitter<FormGroup>();
+
+  get isDailyNote(): boolean {
+    return this.noteType === 'DailyNote' || this.noteType === '2';
+  }
 
   // ICD-10 Diagnosis configuration
   diagnosisFieldName = 'icdten_diagnosis';
@@ -93,7 +98,8 @@ export class BasicNComponent implements OnInit {
       to_date: [null], // Type Date
       pelvic_speech_profile: [''], // Type Select input
       history_of_present_condition_Mechanism_of_injury: [''],//Text Area
-      primary_concern_chief_complaint: [''] //Text Area
+      primary_concern_chief_complaint: [''], //Text Area,
+      current_complaints_gains:['']//Text Area,
     });
   }
   setupValueChangeListeners() {

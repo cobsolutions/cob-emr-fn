@@ -355,7 +355,8 @@ export class SubjectiveMapperService {
       toDate: basic.prior_hospitalization ? basic.to_date : undefined,
       pelvicSpeechProfile: basic.pelvic_speech_profile,
       historyOfPresentCondition_MechanismOfInjury: basic.history_of_present_condition_Mechanism_of_injury,
-      primaryConcernChiefComplaint: basic.primary_concern_chief_complaint
+      primaryConcernChiefComplaint: basic.primary_concern_chief_complaint,
+      currentComplaintsGains: basic.current_complaints_gains
     };
     return mapped;
   }
@@ -388,7 +389,8 @@ export class SubjectiveMapperService {
       to_date: basic.toDate,
       pelvic_speech_profile: basic.pelvicSpeechProfile,
       history_of_present_condition_Mechanism_of_injury: basic.historyOfPresentCondition_MechanismOfInjury,
-      primary_concern_chief_complaint: basic.primaryConcernChiefComplaint
+      primary_concern_chief_complaint: basic.primaryConcernChiefComplaint,
+      current_complaints_gains: basic.currentComplaintsGains
     };
 
     return mapped;

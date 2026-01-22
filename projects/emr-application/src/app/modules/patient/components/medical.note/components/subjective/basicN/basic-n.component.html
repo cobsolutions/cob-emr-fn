@@ -188,16 +188,21 @@
   </div>
 
   <!-- History of Present Condition/Mechanism of Injury -->
-  <div class="form-row-vertical">
+  <div class="form-row-vertical" *ngIf="!isDailyNote">
     <label class="field-label-vertical">History of Present Condition/Mechanism of Injury</label>
     <textarea formControlName="history_of_present_condition_Mechanism_of_injury" class="form-textarea" rows="4"
       placeholder="Enter history of present condition or mechanism of injury..."></textarea>
   </div>
 
   <!-- Primary Concern/Chief Complaint -->
-  <div class="form-row-vertical">
+  <div class="form-row-vertical" *ngIf="!isDailyNote">
     <label class="field-label-vertical">Primary Concern/Chief Complaint</label>
     <textarea formControlName="primary_concern_chief_complaint" class="form-textarea" rows="4"
+      placeholder="Enter primary concern or chief complaint..."></textarea>
+  </div>
+  <div class="form-row-vertical" *ngIf="isDailyNote">
+    <label class="field-label-vertical">Current Complaints / Gains</label>
+    <textarea formControlName="current_complaints_gains" class="form-textarea" rows="4"
       placeholder="Enter primary concern or chief complaint..."></textarea>
   </div>
 </div>

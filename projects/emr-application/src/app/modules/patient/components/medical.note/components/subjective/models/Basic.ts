@@ -26,4 +26,5 @@ export interface Basic {
     pelvicSpeechProfile?: string;
     historyOfPresentCondition_MechanismOfInjury?: string;
     primaryConcernChiefComplaint?: string;
+    currentComplaintsGains?: string;
 }
