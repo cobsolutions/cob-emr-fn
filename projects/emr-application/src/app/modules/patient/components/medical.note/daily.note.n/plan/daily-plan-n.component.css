@@ -338,6 +338,11 @@
   border-top: 1px solid #e9ecef;
 }
 
+.action-buttons-right {
+  display: flex;
+  gap: 12px;
+}
+
 .action-button {
   display: flex;
   align-items: center;
@@ -370,27 +375,40 @@
   transform: translateX(-4px);
 }
 
-.next-button {
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+.forward-button {
+  background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%);
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(23, 162, 184, 0.3);
 }
 
-.next-button:hover {
+.forward-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
 }
 
-.next-button svg {
-  transition: transform 0.3s ease;
+.finalize-button {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
 }
 
-.next-button:hover svg {
-  transform: translateX(4px);
+.finalize-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
 }
 
 .action-button:active {
   transform: translateY(0);
+}
+
+.action-button svg {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.forward-button:hover svg,
+.finalize-button:hover svg {
+  transform: translateX(4px);
 }
 
 /* Responsive Design */
@@ -398,6 +416,11 @@
   .action-buttons {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .action-buttons-right {
+    width: 100%;
+    flex-direction: column;
   }
 
   .action-button {

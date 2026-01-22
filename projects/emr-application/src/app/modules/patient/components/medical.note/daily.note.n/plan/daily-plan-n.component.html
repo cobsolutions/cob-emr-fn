@@ -43,12 +43,47 @@
             </svg>
             <span>Back</span>
         </button>
-        <button cButton matStepperNext class="action-button next-button">
-            <span>Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
+        <div class="action-buttons-right">
+            <button cButton class="action-button forward-button" hide-control
+                [componentRole]="['forward-medical-note-role']" (click)="showForwardModal()">
+                <span>Forward</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                </svg>
+            </button>
+            <button cButton class="action-button finalize-button" hide-control
+                [componentRole]="['finalize-medical-note-role']" (click)="showFinalizeNotePopup()">
+                <span>Finalize</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </button>
+        </div>
     </div>
 </form>
+
+<c-modal id="forwardModal" [visible]="forwardVisibility" backdrop="static">
+    <c-modal-header>
+        <strong>Forward Medical Note To :</strong>
+        <button (click)="forwardVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeForwardVisibility($event)"
+            [noteId]="medicalNoteId"></forward-modal>
+    </c-modal-body>
+</c-modal>
+
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="finalizeNoteVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
+            [noteType]="medicalNoteType" [medicalNoteRequest]="medicalNoteRequest" [noteId]="noteId"
+            (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+    </c-modal-body>
+</c-modal>
