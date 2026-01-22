@@ -19,7 +19,7 @@ export class BillingMapperService {
       return this.getEmptyBillingModel();
     }
     return {
-      dailyNoteIncluded: formValue.get('dailyNoteIncluded')?.value ?? false,
+      dailyNoteIncluded: formValue.get('dailyNoteIncluded')?.value,
       precautions: formValue.get('precautions')?.value ?? '',
       objectiveFindings: formValue.get('objective_findings')?.value ?? '',
       preTreatment: formValue.get('pre_treatment')?.value ?? '',
@@ -67,9 +67,9 @@ export class BillingMapperService {
     if (!dto) {
       return {};
     }
-
+    console.log('dto.dailyNoteIncluded', dto.dailyNoteIncluded)
     return {
-      dailyNoteIncluded: dto.dailyNoteIncluded ?? false,
+      dailyNoteIncluded: dto.dailyNoteIncluded,
       precautions: dto.precautions ?? '',
       objective_findings: dto.objectiveFindings ?? '',
       pre_treatment: dto.preTreatment ?? '',
@@ -171,50 +171,40 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps CheckCPTCode array to DTO format (code_checked, code_notes, code_sub_*)
+   * Maps CheckCPTCode array to DTO format with codes array for child components
    */
   private mapCheckCodesToDto(codes: CheckCPTCode[]): any {
     if (!codes || codes.length === 0) {
-      return {};
+      return { codes: [] };
     }
 
-    const dto: any = {};
-    codes.forEach(codeItem => {
-      if (codeItem.code) {
-        dto[`${codeItem.code}_checked`] = codeItem.isCheck ?? false;
-        dto[`${codeItem.code}_notes`] = codeItem.note ?? '';
-        // Map subItems array
-        if (codeItem.subItems && codeItem.subItems.length > 0) {
-          codeItem.subItems.forEach(subItem => {
-            dto[`${codeItem.code}_sub_${subItem.name}`] = subItem.isCheck;
-          });
-        }
-      }
-    });
-
-    return dto;
+    // Return format that child components expect: { codes: [...] }
+    return {
+      codes: codes.map(codeItem => ({
+        code: codeItem.code,
+        isCheck: codeItem.isCheck ?? false,
+        note: codeItem.note ?? '',
+        subItems: codeItem.subItems || []
+      }))
+    };
   }
 
   /**
-   * Maps QuantityCPTCode array to DTO format (code: quantity)
+   * Maps QuantityCPTCode array to DTO format with codes array for child components
    */
   private mapQuantityCodesToDto(codes: QuantityCPTCode[]): any {
     if (!codes || codes.length === 0) {
-      return {};
+      return { codes: [] };
     }
 
-    const dto: any = {};
-    codes.forEach(codeItem => {
-      if (codeItem.code) {
-        dto[codeItem.code] = codeItem.quantity ?? 0;
-        // Always map notes if they exist
-        if (codeItem.note) {
-          dto[`${codeItem.code}_notes`] = codeItem.note;
-        }
-      }
-    });
-
-    return dto;
+    // Return format that child components expect: { codes: [...] }
+    return {
+      codes: codes.map(codeItem => ({
+        code: codeItem.code,
+        quantity: codeItem.quantity ?? 0,
+        note: codeItem.note ?? ''
+      }))
+    };
   }
 
   /**

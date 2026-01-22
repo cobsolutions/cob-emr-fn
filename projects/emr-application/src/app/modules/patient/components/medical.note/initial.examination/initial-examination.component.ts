@@ -142,10 +142,11 @@ export class InitialExaminationComponent implements OnInit {
         }
 
         if (note.billing) {
-          const billingFormValue = this.billingMapperService.fromDto(note.billing);
+          const billingFormValue = this.billingMapperService.fromDto(note.billing);          
           // Denormalize true/false to yes/no
           const billingFormGroup = this.initialExaminationForm.get('billing') as FormGroup;
           const denormalizedBilling = this.denormalizeNote(billingFormValue, billingFormGroup);
+          console.log('denormalizedBilling', denormalizedBilling)
           this.pendingBillingData = denormalizedBilling;
           // Check if form is already set up
           if (Object.keys((this.initialExaminationForm.get('billing') as FormGroup).controls).length > 0) {

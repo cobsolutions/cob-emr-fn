@@ -100,21 +100,6 @@ export class DailyNoteNComponent implements OnInit {
           }
         }
 
-        if (note.objective) {
-          const objectiveFormGroup = this.dailyNoteForm.get('objective') as FormGroup;
-          let objectiveFormValue = this.objectiveMapperService.fromDto(note.objective, objectiveFormGroup)
-          const denormalizedObjective = this.denormalizeNote(objectiveFormValue, objectiveFormGroup);
-          this.pendingObjectiveData = denormalizedObjective;
-          // Patch now if form is already set, otherwise wait for formReady
-          // Check if both profile AND inspection forms are initialized
-          const profileExists = this.dailyNoteForm.get('objective')?.get('profile');
-          const inspectionInitialized = this.dailyNoteForm.get('objective')?.get('inspection')?.get('patient_consent');
-          if (profileExists && inspectionInitialized) {
-            this.dailyNoteForm.get('objective')?.patchValue(denormalizedObjective);
-            this.pendingObjectiveData = null;
-          }
-        }
-
         if (note.assessment) {
           const assessmentFormValue = this.assessmentMapper.fromDto(note.assessment);
           // Skip denormalizeNote for assessment - fromDto already handles yes/no for radio buttons
@@ -140,9 +125,10 @@ export class DailyNoteNComponent implements OnInit {
             this.pendingPlanOfCareData = null;
           }
         }
-
+        
         if (note.billing) {
           const billingFormValue = this.billingMapper.fromDto(note.billing);
+          console.log('billingFormValue', billingFormValue)
           this.pendingBillingData = billingFormValue;
           // Update medicalNoteSOAP with mapped form values for the template
           this.medicalNoteSOAP.billing = billingFormValue;

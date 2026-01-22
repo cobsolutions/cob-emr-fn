@@ -71,7 +71,7 @@ export class BillingNComponent implements OnInit {
     // Object.keys(formGroup.controls).forEach(key => {
     //   console.log(key, formGroup.get(key));
     // });
-    this.BillingForm.setControl(section, formGroup);
+    this.BillingForm.setControl(section, formGroup);  
   }
 
   showForwardModal() {

@@ -20,10 +20,15 @@
             <c-row>
                 <c-col xs="12">
                     <div class="plan-checkbox-group">
+                        {{BillingForm.get('dailyNoteIncluded').value}}
                         <c-form-check>
-                            <input cFormCheckInput id="dailyNoteIncluded" type="checkbox"
-                                formControlName="dailyNoteIncluded" />
-                            <label cFormCheckLabel for="dailyNoteIncluded">Include Daily Note with this Initial
+                            <input
+                                cFormCheckInput
+                                type="checkbox"
+                                [id]="'dailyNoteIncluded'"
+                                [formControlName]="'dailyNoteIncluded'"
+                            />
+                            <label cFormCheckLabel [for]="'dailyNoteIncluded'">Include Daily Note with this Initial
                                 Examination</label>
                         </c-form-check>
                     </div>
