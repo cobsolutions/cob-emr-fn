@@ -13,6 +13,10 @@ export interface MedicalNoteRequest {
     assessment?: any
     planOfCare?: any
     billing?: any
+    dailyNotePlan?: {
+        instruction?: string;
+        description?: string;
+    }
     dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
     finalizedBy?: ProviderInfo

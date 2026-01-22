@@ -15,6 +15,7 @@ import { ObjectiveComponent } from '../components/objective/objective.component'
 import { ObjectiveMapperService } from '../components/objective/service/objective-mapper.service';
 import { PlanOfCareMapperService } from '../components/plan/service/plan-of-care-mapper.service';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
+import { DailyNotePlanMapperService } from './plan/service/daily-note-plan-mapper.service';
 
 
 @Component({
@@ -53,7 +54,8 @@ export class DailyNoteNComponent implements OnInit {
     private objectiveMapperService: ObjectiveMapperService,
     private assessmentMapper: AssessmentMapperService,
     private planOfCareMapper: PlanOfCareMapperService,
-    private billingMapper: BillingMapperService) {
+    private billingMapper: BillingMapperService,
+    private dailyNotePlanMapper: DailyNotePlanMapperService) {
 
   }
   private pendingObjectiveData: any = null;
@@ -114,7 +116,17 @@ export class DailyNoteNComponent implements OnInit {
           }
         }
 
-        if (note.planOfCare) {
+        if (note.dailyNotePlan) {
+          const dailyNotePlanFormValue = this.dailyNotePlanMapper.fromDto(note.dailyNotePlan);
+          this.pendingPlanOfCareData = dailyNotePlanFormValue;
+          // Update medicalNoteSOAP with mapped form values for the template
+          this.medicalNoteSOAP.planOfCare = dailyNotePlanFormValue;
+          // Check if form is already set up
+          if (Object.keys((this.dailyNoteForm.get('planOfCare') as FormGroup).controls).length > 0) {
+            this.dailyNoteForm.get('planOfCare')?.patchValue(dailyNotePlanFormValue);
+            this.pendingPlanOfCareData = null;
+          }
+        } else if (note.planOfCare) {
           const planOfCareFormValue = this.planOfCareMapper.fromDto(note.planOfCare);
           this.pendingPlanOfCareData = planOfCareFormValue;
           // Update medicalNoteSOAP with mapped form values for the template
@@ -269,11 +281,12 @@ export class DailyNoteNComponent implements OnInit {
       assessment: (assessmentGroup && !this.isFormGroupEmpty(assessmentGroup))
         ? this.assessmentMapper.toModel(assessmentGroup)
         : null,
-      planOfCare: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
-        ? this.planOfCareMapper.toModel(planOfCareGroup)
-        : null,
+      planOfCare: null,
       billing: (billingGroup && !this.isFormGroupEmpty(billingGroup))
         ? this.billingMapper.toModel(billingGroup)
+        : null,
+      dailyNotePlan: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
+        ? this.dailyNotePlanMapper.toModel(planOfCareGroup)
         : null
     }
 
