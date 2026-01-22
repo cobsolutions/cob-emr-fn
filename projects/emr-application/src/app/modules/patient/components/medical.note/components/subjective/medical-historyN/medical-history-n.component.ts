@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CheckboxOption } from '../common/list-checkbox-with-child/list-checkbox-with-child.component';
 
@@ -9,7 +9,12 @@ import { CheckboxOption } from '../common/list-checkbox-with-child/list-checkbox
 })
 export class MedicalHistoryNComponent implements OnInit {
   medicalHistoryForm!: FormGroup;
+  @Input() noteType: string;
   @Output() formReady = new EventEmitter<FormGroup>();
+
+  get isDailyNote(): boolean {
+    return this.noteType === 'DailyNote' || this.noteType === '2';
+  }
   constructor(private fb: FormBuilder) { }
   years: number[] = [];
   showPreviousHistoryOfSimilarSymptoms: boolean = false

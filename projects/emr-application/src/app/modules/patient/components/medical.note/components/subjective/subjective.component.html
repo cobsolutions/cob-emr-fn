@@ -115,8 +115,8 @@
             <!-- <medical-history (formReady)="setChildForm('medicalHistory', $event)"
                 [fields]="subjectiveFormFields['Medical History']"
                 [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history> -->
-            <subjective-medical-history-n (formReady)="setChildForm('medicalHistory', $event)">
-
+            <subjective-medical-history-n (formReady)="setChildForm('medicalHistory', $event)"
+                [noteType]="noteType">
             </subjective-medical-history-n>
         </c-card-body>
     </c-card>

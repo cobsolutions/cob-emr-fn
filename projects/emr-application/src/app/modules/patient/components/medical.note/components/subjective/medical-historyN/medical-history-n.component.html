@@ -410,7 +410,7 @@
     <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Complicating/Personal Factors"
         [options]="complicatingPersonalFactorsOptions">
     </list-checkbox-with-child>
-    <div class="form-row">
+    <div class="form-row" *ngIf="!isDailyNote">
         <label class="field-label">Medical History Review</label>
         <div class="radio-group-vertical">
             <c-form-check>
@@ -455,7 +455,7 @@
         </div>
 
     </div>
-    <div class="form-row">
+    <div class="form-row" *ngIf="!isDailyNote">
         <label class="field-label">Unexplained Weight Loss</label>
         <div class="radio-group-primary">
             <c-form-check>
@@ -472,10 +472,10 @@
             </c-form-check>
         </div>
     </div>
-    <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Current Medications"
+    <list-checkbox-with-child *ngIf="!isDailyNote" [formGroup]="medicalHistoryForm" title="Current Medications"
         [options]="currentMedicationsOptions">
     </list-checkbox-with-child>
-    <div class="form-row">
+    <div class="form-row" *ngIf="!isDailyNote">
         <label class="field-label">Patient Goals</label>
         <textarea formControlName="patient_goals" class="form-textarea" rows="6"></textarea>
     </div>
