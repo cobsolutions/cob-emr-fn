@@ -1,0 +1,54 @@
+<form [formGroup]="planForm">
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header plan-config-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Plan</span>
+                </div>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <div class="centered-content">
+                <div class="plan-select-group mb-3">
+                    <label class="plan-select-label">Instructions</label>
+                    <select class="plan-select" formControlName="instructions">
+                        <option value="">Select Instructions</option>
+                        <option *ngFor="let instruction of instructionsList" [value]="instruction.value">
+                            {{ instruction.label }}
+                        </option>
+                    </select>
+                </div>
+                <div class="plan-textarea-group">
+                    <label class="plan-select-label"></label>
+                    <textarea class="plan-textarea" formControlName="free_area_text" rows="6"
+                        placeholder="Enter additional notes or instructions..."></textarea>
+                </div>
+            </div>
+        </c-card-body>
+    </c-card>
+
+    <div class="action-buttons">
+        <button cButton matStepperPrevious class="action-button back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+        <button cButton matStepperNext class="action-button next-button">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+</form>
