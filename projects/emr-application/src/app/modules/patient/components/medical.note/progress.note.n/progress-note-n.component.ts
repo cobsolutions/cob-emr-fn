@@ -74,7 +74,6 @@ export class ProgressNoteNComponent implements OnInit {
 
     // Add scroll event listener
     window.addEventListener('scroll', this.onScroll.bind(this));
-
     this.progressNoteService.get(this.noteId).subscribe((note: any) => {
       if (note) {
         this.medicalNoteSOAP = note;

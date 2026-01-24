@@ -232,7 +232,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       encounterDate: moment().toDate()
     }
     this.dailyNoteService.create(request).subscribe((response: any) => {
-      console.log(JSON.stringify(response))
       this.patientRecord = false;
       this.noteId = response.noteId;
       this.medicalNoteId = response.id;
@@ -256,7 +255,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.progressNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
       this.patientRecord = false;
-      this.noteId = response.noteId;
+      this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
