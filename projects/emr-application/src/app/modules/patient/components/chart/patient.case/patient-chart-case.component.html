@@ -239,8 +239,8 @@
         <daily-note-n *ngIf="patientRecordAction ==='Daily_Note' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></daily-note-n>
         <!--Progress Note-->
-        <progress-note *ngIf="patientRecordAction ==='Progress_Note' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></progress-note>
+        <progress-note-n *ngIf="patientRecordAction ==='Progress_Note' && noteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></progress-note-n>
         <!--Quick Discharge Note-->
         <quick-discharge-note *ngIf="patientRecordAction ==='Quick_Discharge' && medicalNoteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [patientName]="patientName"

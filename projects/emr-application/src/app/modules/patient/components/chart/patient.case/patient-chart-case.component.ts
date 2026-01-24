@@ -19,6 +19,7 @@ import { PatientCaseAction } from '../../../models/chart/patient.case.action';
 import { DailyNoteService } from '../../../services/medical.note/daily.note/daily-note.service';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { ProgressNoteService } from '../../../services/medical.note/progress.note/progress-note.service';
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
 import { PatientRequest } from '../../../models/medical.note/requester/patient.request';
@@ -63,6 +64,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private loggedInService: LoggedInService,
     private initialExamNoteService: InitialExamNoteService,
     private dailyNoteService: DailyNoteService,
+    private progressNoteService: ProgressNoteService,
     private patientChartNoteService: PatientChartNoteService) { super() }
 
   setActive(section: string) {
@@ -179,6 +181,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
     if (key === 'Progress_Note') {
       medicalNoteType = "PROGRESS_NOTE"
+      this.createProgressNote();
       this.medicalNoteId = undefined;
     }
 
@@ -240,6 +243,28 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the daily note';
+    })
+  }
+  private createProgressNote() {
+    var request: CreateNodeRequest = {
+      patient: this.patient,
+      patientCaseId: this.case.uuid,
+      noteType: 'PROGRESS',
+      providerId: this.loggedInService.getLoggedUser().uuid,
+      encounterDate: moment().toDate()
+    }
+    this.progressNoteService.create(request).subscribe((response: any) => {
+      console.log(JSON.stringify(response))
+      this.patientRecord = false;
+      this.noteId = response.noteId;
+      this.medicalNoteId = response.id;
+      this.errorMessage = undefined
+      this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.findPatientCaseActions(this.case.uuid);
+    }, error => {
+      this.patientRecord = false;
+      this.patientRecordAction = 'ERROR_FINALIZE';
+      this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the progress note';
     })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
