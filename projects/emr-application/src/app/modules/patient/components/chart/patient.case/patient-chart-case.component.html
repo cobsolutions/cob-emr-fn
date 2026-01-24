@@ -242,9 +242,9 @@
         <progress-note-n *ngIf="patientRecordAction ==='Progress_Note' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></progress-note-n>
         <!--Quick Discharge Note-->
-        <quick-discharge-note *ngIf="patientRecordAction ==='Quick_Discharge' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [patientName]="patientName"
-            (backToRecord)="handleBackAction()"></quick-discharge-note>
+        <quick-discharge-n *ngIf="patientRecordAction ==='Quick_Discharge' && noteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [noteId]="noteId" [caseId]="case.uuid"
+            [patientName]="patientName" (backToRecord)="handleBackAction()"></quick-discharge-n>
         <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></full-discharge-note>
     </c-card>
