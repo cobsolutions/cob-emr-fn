@@ -9,6 +9,7 @@ import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { QuickDischargeRequest } from '../../../../models/medical.note/quick.discharge.request';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { QuickDischargeNoteService } from '../../../../services/medical.note/quick.discharge/quick-discharge-note.service';
 
 @Component({
   selector: 'quick-discharge-n',
@@ -34,7 +35,8 @@ export class QuickDischargeNComponent implements OnInit {
     private fb: FormBuilder,
     private medialNoteService: MedialNoteService,
     private loggedInService: LoggedInService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private quickDischargeNoteService: QuickDischargeNoteService
   ) { }
 
   ngOnDestroy() {
@@ -42,37 +44,21 @@ export class QuickDischargeNComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
-      if (status) {
-        const finalizeRequest: FinalizeMedicalNoteRequest = {
-          caseId: this.caseId,
-          id: this.medicalNoteId,
-          noteType: MedicalNoteType.Quick_Discharge_Note,
-          finalizedBy: this.loggedInService.getLoggedUser().uuid
-        };
-        this.draftAction().subscribe(d => {
-          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-            this.backtoPatientRecordActions();
-          });
-        });
-      }
-    });
-
     this.dischargeForm = this.fb.group({
       dateOfDischarge: [null, Validators.required],
       numberOfVisit: [0, [Validators.required, Validators.min(0)]],
       description: ['', Validators.required]
     });
 
-    if (this.medicalNoteId !== undefined) {
-      this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
-        this.creator = data.createdBy;
+    if (this.noteId) {
+      this.quickDischargeNoteService.get(this.noteId).subscribe((data: any) => {
+        console.log('data', data)
+        this.creator = data.createdAt;
         this.noteFinalizr = data.finalizedBy;
-        this.dischargeForm.get('numberOfVisit').setValue(data.numberOfVisits);
-        this.dischargeForm.get('description').setValue(data.comment);
-        if (data.dischargeDate) {
-          const formattedDate = moment.unix(data.dischargeDate / 1000).format('YYYY-MM-DD');
-          this.dischargeForm.get('dateOfDischarge').setValue(formattedDate);
+        this.dischargeForm.get('numberOfVisit').setValue(data.visitNumber);
+        this.dischargeForm.get('description').setValue(data.description);
+        if (data.dateOfDischarge) {
+          this.dischargeForm.get('dateOfDischarge').setValue(data.dateOfDischarge);
         }
       });
     }
@@ -113,8 +99,12 @@ export class QuickDischargeNComponent implements OnInit {
   }
 
   draftAction(): Observable<any> {
-    const medicalNoteRequest: MedicalNoteRequest = this.buildMedicalNoteModel();
-    return this.medialNoteService.draft(medicalNoteRequest);
+    const request = {
+      patientCaseId: this.caseId,
+      dateOfDischarge: this.dischargeForm.get('dateOfDischarge').value,
+      description: this.dischargeForm.get('description').value
+    };
+    return this.quickDischargeNoteService.draft(request, this.noteId);
   }
 
   toggleFrowardModal() {

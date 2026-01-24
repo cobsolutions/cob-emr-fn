@@ -330,7 +330,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecordAction = 'Daily_Note';
     if (status === 'Progress Note')
       this.patientRecordAction = 'Progress_Note';
-    if (status === 'Quick Discharge')
+    if (status === 'Quick Discharge' || status === 'Quick_Discharge')
       this.patientRecordAction = 'Quick_Discharge';
     if (status === 'Discharge Note')
       this.patientRecordAction = 'Discharge';
