@@ -129,7 +129,10 @@ export class QuickDischargeNComponent implements OnInit {
     if (event === 'yes') {
       this.finalizeNoteVisibility = false;
       this.toastr.success('Medical note has been finalized');
-      this.backtoPatientRecordActions();
+      // Delay navigation to allow the modal to properly clean up and remove body scroll lock
+      setTimeout(() => {
+        this.backtoPatientRecordActions();
+      }, 100);
     }
   }
 

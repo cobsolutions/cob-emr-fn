@@ -113,7 +113,10 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
     if (event === 'yes') {
       this.finalizeNoteVisibility = false;
       this.toastr.success('Medical note has been finalized');
-      this.backToRecords.emit();
+      // Delay navigation to allow the modal to properly clean up and remove body scroll lock
+      setTimeout(() => {
+        this.backToRecords.emit();
+      }, 100);
     }
   }
 
