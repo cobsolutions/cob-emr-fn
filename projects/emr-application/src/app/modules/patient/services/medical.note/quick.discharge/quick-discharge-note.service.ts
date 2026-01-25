@@ -30,6 +30,11 @@ export class QuickDischargeNoteService {
     return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
 
+  exportPDF(noteId: string) {
+    var url = this.baseUrl + '/' + noteId + '/export/pdf';
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
+
   get(noteId: string) {
     var url = this.baseUrl + '/' + noteId;
     return this.httpClient.get(`${url}`)

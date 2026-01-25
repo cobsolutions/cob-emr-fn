@@ -318,7 +318,21 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     if (val === 'View Pdf') {
       this.recordActionEntityId = entityId
       this.recordActionStauts = status
-      this.initialExamNoteService.exportPDF(noteId).subscribe((blob: Blob) => {
+      let exportService$;
+      if (status === 'Initial Examination') {
+        exportService$ = this.initialExamNoteService.exportPDF(noteId);
+      } else if (status === 'Daily Note') {
+        exportService$ = this.dailyNoteService.exportPDF(noteId);
+      } else if (status === 'Progress Note') {
+        exportService$ = this.progressNoteService.exportPDF(noteId);
+      } else if (status === 'Quick Discharge' || status === 'Quick_Discharge') {
+        exportService$ = this.quickDischargeNoteService.exportPDF(noteId);
+      } else if (status === 'Discharge Note' || status === 'Discharge_Note' || status === 'Discharge') {
+        exportService$ = this.dischargeNoteService.exportPDF(noteId);
+      } else {
+        exportService$ = this.initialExamNoteService.exportPDF(noteId);
+      }
+      exportService$.subscribe((blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
