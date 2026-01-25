@@ -7,6 +7,7 @@ import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.re
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { QuickDischargeNoteService } from '../../../services/medical.note/quick.discharge/quick-discharge-note.service';
 
 @Component({
   selector: 'finalize-medical-note',
@@ -24,7 +25,8 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   finalizeMessageFlag: boolean = false
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
-    , private initialExamNoteService: InitialExamNoteService) { }
+    , private initialExamNoteService: InitialExamNoteService
+    , private quickDischargeNoteService: QuickDischargeNoteService) { }
   ngOnInit(): void {
   }
   onNo() {
@@ -34,21 +36,40 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   onYes() {
     this.finalizeMessageFlag = true
     const loggedUser = this.loggedInService.getLoggedUser();
-    this.medicalNoteRequest.finalizedBy = {
-      ...loggedUser.providerInfo,
-      uuid: loggedUser.uuid,
-      providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
-    };
-    this.initialExamNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
-      next: (data) => {
-        this.medialNoteService.notifyFinalize(true);
-        this.changeVisibility.emit('yes')
-      },
-      error: (error) => {
-        this.finalizeMessageFlag = false
-        console.error('Finalize failed:', error);
-      }
-    });
+
+    if (this.noteType === MedicalNoteType.Quick_Discharge_Note) {
+      this.medicalNoteRequest.finalizedBy = {
+        ...loggedUser.providerInfo,
+        uuid: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+      };
+      this.quickDischargeNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
+        next: (data) => {
+          this.medialNoteService.notifyFinalize(true);
+          this.changeVisibility.emit('yes')
+        },
+        error: (error) => {
+          this.finalizeMessageFlag = false
+          console.error('Finalize failed:', error);
+        }
+      });
+    } else {
+      this.medicalNoteRequest.finalizedBy = {
+        ...loggedUser.providerInfo,
+        uuid: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+      };
+      this.initialExamNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
+        next: (data) => {
+          this.medialNoteService.notifyFinalize(true);
+          this.changeVisibility.emit('yes')
+        },
+        error: (error) => {
+          this.finalizeMessageFlag = false
+          console.error('Finalize failed:', error);
+        }
+      });
+    }
   }
 
 }

@@ -29,6 +29,7 @@ export class QuickDischargeNComponent implements OnInit {
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
   noteType: MedicalNoteType = MedicalNoteType.Quick_Discharge_Note;
+  medicalNoteRequest: any;
   private finalizeSub!: Subscription;
 
   constructor(
@@ -128,10 +129,16 @@ export class QuickDischargeNComponent implements OnInit {
     if (event === 'yes') {
       this.finalizeNoteVisibility = false;
       this.toastr.success('Medical note has been finalized');
+      this.backtoPatientRecordActions();
     }
   }
 
   finalize() {
+    this.medicalNoteRequest = {
+      patientCaseId: this.caseId,
+      dateOfDischarge: this.dischargeForm.get('dateOfDischarge').value,
+      description: this.dischargeForm.get('description').value
+    };
     this.finalizeNoteVisibility = true;
   }
 }
