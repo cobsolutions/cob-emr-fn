@@ -245,8 +245,9 @@
         <quick-discharge-n *ngIf="patientRecordAction ==='Quick_Discharge' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [noteId]="noteId" [caseId]="case.uuid"
             [patientName]="patientName" (backToRecord)="handleBackAction()"></quick-discharge-n>
-        <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"></full-discharge-note>
+        <!--Discharge Note-->
+        <discharge-n *ngIf="patientRecordAction ==='Discharge' && noteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></discharge-n>
     </c-card>
     <!-- Error State -->
     <div class="error-card" *ngIf="patientRecordAction==='ERROR_FINALIZE'">

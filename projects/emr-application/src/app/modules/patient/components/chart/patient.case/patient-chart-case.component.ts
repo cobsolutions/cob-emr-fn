@@ -17,6 +17,7 @@ import { PatientRecord } from '../../../models/patient.record/patient.record';
 import { PatientRecordRequest } from '../../../models/patient.record/patient.record.request';
 import { PatientCaseAction } from '../../../models/chart/patient.case.action';
 import { DailyNoteService } from '../../../services/medical.note/daily.note/daily-note.service';
+import { DischargeNoteService } from '../../../services/medical.note/discharge.note/discharge-note.service';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { ProgressNoteService } from '../../../services/medical.note/progress.note/progress-note.service';
@@ -67,6 +68,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private dailyNoteService: DailyNoteService,
     private progressNoteService: ProgressNoteService,
     private quickDischargeNoteService: QuickDischargeNoteService,
+    private dischargeNoteService: DischargeNoteService,
     private patientChartNoteService: PatientChartNoteService) { super() }
 
   setActive(section: string) {
@@ -189,12 +191,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
 
     if (key === 'Quick_Discharge') {
       medicalNoteType = "QUICK_DISCHARGE_NOTE"
-      this.createDischargeNote();
+      this.createQuickDischargeNote();
       this.medicalNoteId = undefined;
     }
 
     if (key === 'Discharge') {
       medicalNoteType = "DISCHARGE_NOTE"
+      this.createDischargeNote();
       this.medicalNoteId = undefined;
     }
   }
@@ -263,7 +266,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the progress note';
     })
   }
-  private createDischargeNote() {
+  private createQuickDischargeNote() {
     var request = {
       patientCaseId: this.case.uuid
     }
@@ -278,6 +281,28 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the quick discharge note';
+    })
+  }
+  private createDischargeNote() {
+    var request: CreateNodeRequest = {
+      patient: this.patient,
+      patientCaseId: this.case.uuid,
+      noteType: 'DISCHARGE',
+      providerId: this.loggedInService.getLoggedUser().uuid,
+      encounterDate: moment().toDate()
+    }
+    this.dischargeNoteService.create(request).subscribe((response: any) => {
+      console.log(JSON.stringify(response))
+      this.patientRecord = false;
+      this.noteId = response.noteId.value;
+      this.medicalNoteId = response.id;
+      this.errorMessage = undefined
+      this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.findPatientCaseActions(this.case.uuid);
+    }, error => {
+      this.patientRecord = false;
+      this.patientRecordAction = 'ERROR_FINALIZE';
+      this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the discharge note';
     })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
