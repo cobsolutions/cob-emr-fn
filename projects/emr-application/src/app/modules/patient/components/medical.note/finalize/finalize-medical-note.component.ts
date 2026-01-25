@@ -5,6 +5,7 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
+import { DischargeNoteService } from '../../../services/medical.note/discharge.note/discharge-note.service';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
 import { QuickDischargeNoteService } from '../../../services/medical.note/quick.discharge/quick-discharge-note.service';
@@ -26,7 +27,8 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
     , private initialExamNoteService: InitialExamNoteService
-    , private quickDischargeNoteService: QuickDischargeNoteService) { }
+    , private quickDischargeNoteService: QuickDischargeNoteService
+    , private dischargeNoteService: DischargeNoteService) { }
   ngOnInit(): void {
   }
   onNo() {
@@ -44,6 +46,22 @@ export class FinalizeMedicalNoteComponent implements OnInit {
         providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
       };
       this.quickDischargeNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
+        next: (data) => {
+          this.medialNoteService.notifyFinalize(true);
+          this.changeVisibility.emit('yes')
+        },
+        error: (error) => {
+          this.finalizeMessageFlag = false
+          console.error('Finalize failed:', error);
+        }
+      });
+    } else if (this.noteType === MedicalNoteType.Discharge_Note) {
+      this.medicalNoteRequest.finalizedBy = {
+        ...loggedUser.providerInfo,
+        uuid: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+      };
+      this.dischargeNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
