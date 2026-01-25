@@ -186,7 +186,8 @@
                                                 'badge-initial': item.status === 'Initial Examination',
                                                 'badge-daily': item.status === 'Daily Note',
                                                 'badge-progress': item.status === 'Progress Note',
-                                                'badge-discharge': item.status === 'Discharge Note' || item.status === 'Quick Discharge'
+                                                'badge-quick-discharge': item.status === 'Quick Discharge' || item.status === 'Quick_Discharge',
+                                                'badge-discharge': item.status === 'Discharge Note' || item.status === 'Discharge' || item.status === 'Discharge_Note'
                                             }">
                                                 {{item.status}}
                                             </span>
