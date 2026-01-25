@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import * as moment from 'moment';
 import { map, Observable, retry, Subscription, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -46,7 +45,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   appointments$!: Observable<Appointment[]>;
   patientRecords$!: Observable<PatientRecord[]>
   reasonVisibility = false;
-  columns: (string | IColumn)[];
   patientRecordAction: string;
   patientRecord: boolean = true;
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
@@ -84,13 +82,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   ngOnInit(): void {
     console.log('provider', this.loggedInService.getLoggedUser)
     this.initListComponent();
-    this.columns = [
-      { key: 'record', label: 'Record' },
-      { key: 'date', label: 'Created Date' },
-      { key: 'dos', label: 'Date of Service' },
-      { key: 'actions', label: '', _style: { width: '10%' }, filter: false, sorter: false }
-    ];
-
+    
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()

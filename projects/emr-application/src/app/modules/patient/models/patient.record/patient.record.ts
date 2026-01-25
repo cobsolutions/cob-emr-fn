@@ -3,6 +3,7 @@ export interface PatientRecord{
     noteId?:string
     status?:string
     date?:string
+    dos?:string
     actions?:string[]
     note:boolean
 }

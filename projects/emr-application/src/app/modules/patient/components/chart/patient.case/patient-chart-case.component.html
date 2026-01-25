@@ -166,50 +166,78 @@
     <div class="case-content flex-grow-1 p-3">
         <!-- Records -->
         <div *ngIf="isActive('records')">
-            <h5>Patient Records</h5>
-            <ng-container *ngIf="props$ | async as props">
-                <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-                    [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-                    (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-                    [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small:true }"
-                    [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
-                    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
-                        let-tdContent="tdContent">
-                        <td>
-                            <ng-container [ngSwitch]="columnName">
-                                <ng-container *ngSwitchCase="'record'">
-                                    {{item.status}}
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'date'">
-                                    {{item.date| date:'MMM d, y, h:mm a'}}
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'dos'">
-                                    {{item.dos | date:'MMM d, y'}}
-                                </ng-container>
-                                <ng-container *ngSwitchDefault>
-                                    {{tdContent}}
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'actions'">
-                                    <c-input-group>
-                                        <select id="patientRecordLineAction" #patientRecordLineAction cSelect
-                                            sizing="sm">
-                                            <option [value]="action" *ngFor="let action of item.actions; let i = index">
-                                                {{ action }}
-                                            </option>
-                                        </select>
-                                        <button cButton color="primary" variant="outline" size="sm"
-                                            (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status,item.noteId)">
-                                            <svg cIcon name="cilArrowCircleRight"></svg>
-                                        </button>
-                                    </c-input-group>
-                                </ng-container>
-                            </ng-container>
-                        </td>
-                    </ng-template>
-                </c-smart-table>
-                <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
-                    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
-            </ng-container>
+            <div class="records-section-card">
+                <div class="records-section-body">
+                    <ng-container *ngIf="props$ | async as props">
+                        <div class="records-table-container">
+                            <table class="records-table">
+                                <thead>
+                                    <tr>
+                                        <th class="th-record">Record Type</th>
+                                        <th class="th-date">Created Date</th>
+                                        <th class="th-dos">Date of Service</th>
+                                        <th class="th-actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index" class="record-row">
+                                        <td class="td-record">
+                                            <span class="record-type-badge" [ngClass]="{
+                                                'badge-initial': item.status === 'Initial Examination',
+                                                'badge-daily': item.status === 'Daily Note',
+                                                'badge-progress': item.status === 'Progress Note',
+                                                'badge-discharge': item.status === 'Discharge Note' || item.status === 'Quick Discharge'
+                                            }">
+                                                {{item.status}}
+                                            </span>
+                                        </td>
+                                        <td class="td-date">
+                                            <div class="date-cell">
+                                                <svg cIcon name="cilCalendar" class="date-icon"></svg>
+                                                <span>{{item.date | date:'MMM d, y, h:mm a'}}</span>
+                                            </div>
+                                        </td>
+                                        <td class="td-dos">
+                                            <div class="date-cell" *ngIf="item.dos; else noDos">
+                                                <span>{{item.dos | date:'MMM d, y'}}</span>
+                                            </div>
+                                            <ng-template #noDos>
+                                                <span class="no-dos">-</span>
+                                            </ng-template>
+                                        </td>
+                                        <td class="td-actions">
+                                            <div class="action-group">
+                                                <select [id]="'actionSelect_' + i" #actionSelect class="action-select">
+                                                    <option [value]="action" *ngFor="let action of item.actions">
+                                                        {{ action }}
+                                                    </option>
+                                                </select>
+                                                <button class="action-btn"
+                                                    (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId)">
+                                                    <svg cIcon name="cilArrowCircleRight"></svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="(patientRecords$ | async)?.length === 0" class="empty-row">
+                                        <td colspan="4">
+                                            <div class="empty-state">
+                                                <svg cIcon name="cilNotes" class="empty-icon"></svg>
+                                                <span>No patient records found</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="records-pagination" *ngIf="props.totalPages > 1">
+                            <c-smart-pagination [activePage]="props.activePage" size="sm"
+                                (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
+                            </c-smart-pagination>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
         </div>
 
         <!-- Documents -->

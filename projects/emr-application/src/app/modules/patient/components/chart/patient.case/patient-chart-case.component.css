@@ -323,7 +323,7 @@ label {
     width: 250px;
     background: #fff;
   }
-  
+
   .nav-pills .nav-link {
     border-radius: 6px;
     padding: 0.5rem 0.75rem;
@@ -331,10 +331,306 @@ label {
     cursor: pointer;
     transition: background 0.2s;
   }
-  
+
   .nav-pills .nav-link.active {
     background: #0d6efd;
     color: #fff;
+  }
+
+  /* ============================================
+     Patient Records Table - Medical Note Style
+     ============================================ */
+
+  .records-section-card {
+    border: 1px solid #e3f2fd;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: cardFadeIn 0.3s ease-out;
+  }
+
+  .records-section-header {
+    background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+    padding: 1rem 1.25rem;
+    border-bottom: 2px solid #2196F3;
+    position: relative;
+  }
+
+  .records-section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #2196F3;
+  }
+
+  .records-section-header h6 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1565c0;
+    margin: 0;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+  }
+
+  .records-section-header h6::before {
+    content: '◆';
+    color: #2196F3;
+    margin-right: 10px;
+    font-size: 0.7rem;
+  }
+
+  .records-section-body {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .records-table-container {
+    overflow-x: auto;
+  }
+
+  /* Table Styles */
+  .records-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .records-table thead {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  }
+
+  .records-table thead tr th {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border: none;
+  }
+
+  .records-table thead tr th:first-child {
+    border-radius: 0;
+  }
+
+  .records-table thead tr th:last-child {
+    border-radius: 0;
+    text-align: center;
+  }
+
+  .th-record { width: 25%; }
+  .th-date { width: 28%; }
+  .th-dos { width: 22%; }
+  .th-actions { width: 25%; }
+
+  /* Table Body */
+  .records-table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #e3f2fd;
+  }
+
+  .records-table tbody tr:hover {
+    background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+  }
+
+  .records-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .records-table tbody td {
+    padding: 0.875rem 1rem;
+    vertical-align: middle;
+    color: #37474f;
+  }
+
+  /* Record Type Badge */
+  .record-type-badge {
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-initial {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+  }
+
+  .badge-daily {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #1565c0;
+    border: 1px solid #90caf9;
+  }
+
+  .badge-progress {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+    border: 1px solid #ffcc80;
+  }
+
+  .badge-discharge {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+    color: #c2185b;
+    border: 1px solid #f48fb1;
+  }
+
+  /* Date Cell */
+  .date-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #455a64;
+    font-weight: 500;
+  }
+
+  .date-icon {
+    width: 16px;
+    height: 16px;
+    color: #1976d2;
+  }
+
+  .no-dos {
+    color: #90a4ae;
+    font-style: italic;
+  }
+
+  /* Action Group */
+  .action-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .action-select {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #bbdefb;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #37474f;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+  }
+
+  .action-select:hover {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+  }
+
+  .action-select:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #1976d2;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    color: #1976d2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+  }
+
+  .action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Empty State */
+  .empty-row td {
+    padding: 2rem !important;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: #78909c;
+    padding: 1rem;
+  }
+
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: #b0bec5;
+  }
+
+  .empty-state span {
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* Pagination */
+  .records-pagination {
+    padding: 1rem;
+    border-top: 1px solid #e3f2fd;
+    background: #f8fbff;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .records-table thead tr th {
+      padding: 0.625rem 0.5rem;
+      font-size: 0.7rem;
+    }
+
+    .records-table tbody td {
+      padding: 0.625rem 0.5rem;
+    }
+
+    .record-type-badge {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.5rem;
+    }
+
+    .date-cell {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+
+    .date-cell svg {
+      display: none;
+    }
+
+    .action-select {
+      min-width: 90px;
+      font-size: 0.75rem;
+    }
+
+    .action-btn {
+      width: 28px;
+      height: 28px;
+    }
   }
 
   /* Error Card - Clinical Error Display */
