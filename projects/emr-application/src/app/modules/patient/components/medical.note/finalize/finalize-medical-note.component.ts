@@ -5,9 +5,11 @@ import { LoggedInService } from '../../../../security/service/loggedIn/logged-in
 import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
+import { DailyNoteService } from '../../../services/medical.note/daily.note/daily-note.service';
 import { DischargeNoteService } from '../../../services/medical.note/discharge.note/discharge-note.service';
 import { InitialExamNoteService } from '../../../services/medical.note/initial.exam/initial-exam-note.service';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { ProgressNoteService } from '../../../services/medical.note/progress.note/progress-note.service';
 import { QuickDischargeNoteService } from '../../../services/medical.note/quick.discharge/quick-discharge-note.service';
 
 @Component({
@@ -28,7 +30,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
     , private loggedInService: LoggedInService
     , private initialExamNoteService: InitialExamNoteService
     , private quickDischargeNoteService: QuickDischargeNoteService
-    , private dischargeNoteService: DischargeNoteService) { }
+    , private dischargeNoteService: DischargeNoteService
+    , private dailyNoteService: DailyNoteService
+    , private progressNoteService: ProgressNoteService) { }
   ngOnInit(): void {
   }
   onNo() {
@@ -71,7 +75,39 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           console.error('Finalize failed:', error);
         }
       });
-    } else {
+    } else if (this.noteType === MedicalNoteType.Daily_Note) {
+      this.medicalNoteRequest.finalizedBy = {
+        ...loggedUser.providerInfo,
+        uuid: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+      };
+      this.dailyNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
+        next: (data) => {
+          this.medialNoteService.notifyFinalize(true);
+          this.changeVisibility.emit('yes')
+        },
+        error: (error) => {
+          this.finalizeMessageFlag = false
+          console.error('Finalize failed:', error);
+        }
+      });
+    } else if (this.noteType === MedicalNoteType.Progress_Note) {
+      this.medicalNoteRequest.finalizedBy = {
+        ...loggedUser.providerInfo,
+        uuid: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+      };
+      this.progressNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
+        next: (data) => {
+          this.medialNoteService.notifyFinalize(true);
+          this.changeVisibility.emit('yes')
+        },
+        error: (error) => {
+          this.finalizeMessageFlag = false
+          console.error('Finalize failed:', error);
+        }
+      });
+    } else if (this.noteType === MedicalNoteType.Initial_Examination) {
       this.medicalNoteRequest.finalizedBy = {
         ...loggedUser.providerInfo,
         uuid: loggedUser.uuid,

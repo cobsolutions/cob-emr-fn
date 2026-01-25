@@ -81,7 +81,6 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
       effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
     }));
-    console.log(JSON.stringify(payload))
     this.authService.saveOrUpdate(payload, this.patientCase.id).subscribe({
       next: (updatedList) => {
         // backend returns saved records including generated ids; normalize dates to ms
