@@ -52,6 +52,9 @@ export class PlanOfCareMapperService {
    * Maps procedure fields from backend DTO to Procedures model
    */
   private mapProceduresToModel(formValue: FormGroup): Procedures {
+    if (!formValue) {
+      return {} as Procedures;
+    }
     return {
       procedureTherapeuticExercises: formValue.get('procedure_therapeutic_exercises')?.value || false,
       procedureTherapeuticExercisesNotes: formValue.get('procedure_therapeutic_exercises_notes')?.value || '',
@@ -269,6 +272,9 @@ export class PlanOfCareMapperService {
    * Maps modality fields from backend DTO to Modalities model
    */
   private mapModalitiesToModel(formValue: FormGroup): Modalities {
+    if (!formValue) {
+      return {} as Modalities;
+    }
     return {
       modalitiesPainRelief: formValue.get('modalities_pain_relief')?.value || false,
       modalitiesPainReliefNotes: formValue.get('modalities_pain_relief_notes')?.value || '',
@@ -430,6 +436,9 @@ export class PlanOfCareMapperService {
    * Maps specialty fields from backend DTO to Specialties model
    */
   private mapSpecialtiesToModel(formValue: FormGroup): Specialties {
+    if (!formValue) {
+      return {} as Specialties;
+    }
     return {
       modalitiesOrthoticFabrication: formValue.get('modalities_orthotic_fabrication')?.value || false,
       modalitiesOrthoticFabricationNotes: formValue.get('modalities_orthotic_fabrication_notes')?.value || '',

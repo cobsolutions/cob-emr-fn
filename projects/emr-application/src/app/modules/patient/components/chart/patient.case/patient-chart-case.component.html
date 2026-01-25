@@ -183,6 +183,9 @@
                                 <ng-container *ngSwitchCase="'date'">
                                     {{item.date| date:'MMM d, y, h:mm a'}}
                                 </ng-container>
+                                <ng-container *ngSwitchCase="'dos'">
+                                    {{item.dos | date:'MMM d, y'}}
+                                </ng-container>
                                 <ng-container *ngSwitchDefault>
                                     {{tdContent}}
                                 </ng-container>
