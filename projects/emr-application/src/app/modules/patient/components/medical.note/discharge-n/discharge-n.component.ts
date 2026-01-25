@@ -14,6 +14,7 @@ import { BillingMapperService } from '../components/billing/service/billing-mapp
 import { ObjectiveComponent } from '../components/objective/objective.component';
 import { ObjectiveMapperService } from '../components/objective/service/objective-mapper.service';
 import { SubjectiveMapperService } from '../components/subjective/services/subjective-mapper.service';
+import { DischargePlanMapperService } from './plan/service/discharge-plan-mapper.service';
 
 
 @Component({
@@ -51,13 +52,15 @@ export class DischargeNComponent implements OnInit {
     private subjectiveMapper: SubjectiveMapperService,
     private objectiveMapperService: ObjectiveMapperService,
     private billingMapperService: BillingMapperService,
-    private assessmentMapper: AssessmentMapperService) {
+    private assessmentMapper: AssessmentMapperService,
+    private dischargePlanMapper: DischargePlanMapperService) {
 
   }
   private pendingObjectiveData: any = null;
   private pendingSubjectiveData: any = null;
   private pendingAssessmentData: any = null;
   private pendingBillingData: any = null;
+  private pendingPlanData: any = null;
 
   ngOnInit(): void {
     this.visitedSteps = [true, false, false, false, false]
@@ -136,6 +139,18 @@ export class DischargeNComponent implements OnInit {
           if (Object.keys((this.dischargeNoteForm.get('billing') as FormGroup).controls).length > 0) {
             this.dischargeNoteForm.get('billing')?.patchValue(denormalizedBilling);
             this.pendingBillingData = null;
+          }
+        }
+
+        if (note.dischargePlan) {
+          const planFormValue = this.dischargePlanMapper.fromDto(note.dischargePlan);
+          this.pendingPlanData = planFormValue;
+          // Update medicalNoteSOAP with mapped form values for the template
+          this.medicalNoteSOAP.dischargePlan = planFormValue;
+          // Check if form is already set up
+          if (Object.keys((this.dischargeNoteForm.get('planOfCare') as FormGroup).controls).length > 0) {
+            this.dischargeNoteForm.get('planOfCare')?.patchValue(planFormValue);
+            this.pendingPlanData = null;
           }
         }
       }
@@ -230,6 +245,9 @@ export class DischargeNComponent implements OnInit {
     } else if (section === 'billing' && this.pendingBillingData) {
       this.dischargeNoteForm.get('billing')?.patchValue(this.pendingBillingData);
       this.pendingBillingData = null;
+    } else if (section === 'planOfCare' && this.pendingPlanData) {
+      this.dischargeNoteForm.get('planOfCare')?.patchValue(this.pendingPlanData);
+      this.pendingPlanData = null;
     }
   }
   soapActions(action: string) {
@@ -251,6 +269,7 @@ export class DischargeNComponent implements OnInit {
     const subjectiveGroup = this.dischargeNoteForm.get('subjective') as FormGroup;
     const objectiveGroup = this.dischargeNoteForm.get('objective') as FormGroup;
     const assessmentGroup = this.dischargeNoteForm.get('assessment') as FormGroup;
+    const planOfCareGroup = this.dischargeNoteForm.get('planOfCare') as FormGroup;
     const billingeGroup = this.dischargeNoteForm.get('billing') as FormGroup;
 
     var medicalNoteRequest: MedicalNoteRequest = {
@@ -268,6 +287,9 @@ export class DischargeNComponent implements OnInit {
       planOfCare: null,
       billing: (billingeGroup && !this.isFormGroupEmpty(billingeGroup))
         ? this.billingMapperService.toModel(billingeGroup)
+        : null,
+      dischargePlan: (planOfCareGroup && !this.isFormGroupEmpty(planOfCareGroup))
+        ? this.dischargePlanMapper.toModel(planOfCareGroup)
         : null,
     }
 

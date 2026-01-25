@@ -184,6 +184,7 @@ import { DailyPlanNComponent } from './components/medical.note/daily.note.n/plan
 import { ProgressNoteNComponent } from './components/medical.note/progress.note.n/progress-note-n.component';
 import { QuickDischargeNComponent } from './components/medical.note/quick.discharge.n/quick-discharge-n/quick-discharge-n.component';
 import { DischargeNComponent } from './components/medical.note/discharge-n/discharge-n.component';
+import { DischargePlanNComponent } from './components/medical.note/discharge-n/plan/discharge-plan.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -369,6 +370,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ProgressNoteNComponent,
     QuickDischargeNComponent,
     DischargeNComponent,
+    DischargePlanNComponent,
   ],
   imports: [
     CommonModule,

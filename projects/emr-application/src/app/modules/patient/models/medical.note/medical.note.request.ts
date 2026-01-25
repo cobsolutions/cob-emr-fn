@@ -17,6 +17,11 @@ export interface MedicalNoteRequest {
         instruction?: string;
         description?: string;
     }
+    dischargePlan?: {
+        reason?: string;
+        discharge?: string;
+        physicianSignature?: boolean;
+    }
     dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
     finalizedBy?: ProviderInfo

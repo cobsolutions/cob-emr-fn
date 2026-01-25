@@ -37,15 +37,15 @@
                 <assessment [stepper]="stepper" (formReady)="setChildForm('assessment', $event)" *ngIf="visitedSteps[2]"
                     [assessmentData]="medicalNoteSOAP?.assessment" [noteType]="'DischargeNote'"></assessment>
             </mat-step>
-            <!-- Plan Step (Empty - To be implemented later) -->
+            <!-- Plan Step -->
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('planOfCare')!"
                 formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
-                <div class="plan-placeholder" *ngIf="visitedSteps[3]">
-                    <div class="plan-placeholder-content">
-                        <p>Plan component will be implemented here.</p>
-                    </div>
-                </div>
+                <discharge-plan-n [stepper]="stepper" [parentForm]="dischargeNoteForm"
+                    (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
+                    [noteType]="'DischargeNote'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
+                    [noteId]="noteId" [planData]="medicalNoteSOAP?.dischargePlan"
+                    (backToRecords)="backtoPatientRecordActions()"></discharge-plan-n>
             </mat-step>
             <!-- Billing Step -->
             <mat-step completed="true" [stepControl]="dischargeNoteForm.get('billing')!" formGroupName="billing">

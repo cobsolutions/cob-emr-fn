@@ -1,1 +1,106 @@
-<p>discharge-plan works!</p>
+<form [formGroup]="planForm">
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header plan-config-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Discharge Plan</span>
+                </div>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <div class="centered-content">
+                <!-- Reason Select -->
+                <div class="plan-select-group mb-3">
+                    <label class="plan-select-label">Reason for Discharge</label>
+                    <select class="plan-select" formControlName="reason">
+                        <option value="">Select Reason</option>
+                        <option *ngFor="let reason of reasonList" [value]="reason">
+                            {{ reason }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Discharge Select -->
+                <div class="plan-select-group mb-3">
+                    <label class="plan-select-label">Discharge To</label>
+                    <select class="plan-select" formControlName="discharge">
+                        <option value="">Select Discharge Destination</option>
+                        <option *ngFor="let discharge of dischargeList" [value]="discharge">
+                            {{ discharge }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Physician Signature Checkbox -->
+                <div class="plan-checkbox-group">
+                    <c-form-check>
+                        <input cFormCheckInput type="checkbox" id="physicianSignature" formControlName="physicianSignature" />
+                        <label cFormCheckLabel for="physicianSignature">
+                            Physician Signature Required
+                        </label>
+                    </c-form-check>
+                </div>
+            </div>
+        </c-card-body>
+    </c-card>
+
+    <div class="action-buttons">
+        <button cButton matStepperPrevious class="action-button back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+        <div class="action-buttons-right">
+            <button cButton class="action-button forward-button" hide-control
+                [componentRole]="['forward-medical-note-role']" (click)="showForwardModal()">
+                <span>Forward</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                </svg>
+            </button>
+            <button cButton class="action-button finalize-button" hide-control
+                [componentRole]="['finalize-medical-note-role']" (click)="showFinalizeNotePopup()">
+                <span>Finalize</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+</form>
+
+<c-modal id="forwardModal" [visible]="forwardVisibility" backdrop="static">
+    <c-modal-header>
+        <strong>Forward Medical Note To :</strong>
+        <button (click)="forwardVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeForwardVisibility($event)"
+            [noteId]="medicalNoteId"></forward-modal>
+    </c-modal-body>
+</c-modal>
+
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Confirmation</h3>
+        <button (click)="finalizeNoteVisibility = false" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
+            [noteType]="medicalNoteType" [medicalNoteRequest]="medicalNoteRequest" [noteId]="noteId"
+            (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+    </c-modal-body>
+</c-modal>
