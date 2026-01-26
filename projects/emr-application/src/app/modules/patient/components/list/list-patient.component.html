@@ -10,13 +10,6 @@
       </h2>
       <p class="page-subtitle">Browse, edit, and manage patient records</p>
     </div>
-    <div class="page-actions">
-      <button cButton class="create-patient-btn" (click)="create()"
-        dispaly-input [componentRole]="componentRole">
-        <svg cIcon name="cilUserFollow" class="btn-icon"></svg>
-        Create Patient
-      </button>
-    </div>
   </div>
 </div>
 
@@ -135,3 +128,8 @@
     </app-create-patient>
   </c-modal-body>
 </c-modal>
+
+<!-- Floating Action Button -->
+<button class="fab-button" (click)="create()" dispaly-input [componentRole]="componentRole" title="Create New Patient">
+  <svg cIcon name="cilPlus" class="fab-icon"></svg>
+</button>

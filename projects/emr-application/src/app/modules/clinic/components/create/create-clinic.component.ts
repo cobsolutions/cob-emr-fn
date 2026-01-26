@@ -30,6 +30,18 @@ export class CreateClinicComponent implements OnInit {
     , private router: Router
     , private loggedInService: LoggedInService) { }
 
+  get isValidClinicName(): boolean {
+    return this.clinic.name !== null && this.clinic.name?.trim() !== '';
+  }
+
+  get isValidClinicAddress(): boolean {
+    return this.isAddressValid();
+  }
+
+  get valid(): boolean {
+    return this.isValidClinicName && this.isValidClinicAddress;
+  }
+
   ngOnInit(): void {
   }
   create() {

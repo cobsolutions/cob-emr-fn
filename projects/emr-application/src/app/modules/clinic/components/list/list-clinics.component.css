@@ -1,0 +1,448 @@
+/* ========================================
+   Clinic List Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Page Header Section --- */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+/* --- Floating Action Button --- */
+.fab-button {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(51, 65, 85, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.fab-button:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 6px 20px rgba(51, 65, 85, 0.5);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.fab-button:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 8px rgba(51, 65, 85, 0.4);
+}
+
+.fab-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+}
+
+/* --- Clinic Card --- */
+.clinic-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.clinic-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-bottom: 1px solid #1e293b;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+/* --- Table Styles --- */
+:host ::ng-deep .c-smart-table {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+:host ::ng-deep .c-smart-table thead th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #f8fafc;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.75rem 0.875rem;
+}
+
+:host ::ng-deep .c-smart-table tbody td {
+  font-size: 0.875rem;
+  color: #334155;
+  vertical-align: middle;
+  padding: 0.75rem 0.875rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+:host ::ng-deep .c-smart-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+:host ::ng-deep .c-smart-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* --- Clinic Name --- */
+.clinic-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.clinic-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: #64748b;
+}
+
+/* --- Address Info --- */
+.address-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.address-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #94a3b8;
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+  display: flex;
+  gap: 0.375rem;
+  justify-content: center;
+}
+
+.action-btn-edit,
+.action-btn-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn-edit:hover {
+  background: #334155;
+  border-color: #334155;
+  color: #ffffff;
+}
+
+.action-btn-delete:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+.action-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Pagination --- */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+:host ::ng-deep c-smart-pagination .page-link {
+  color: #475569;
+  border-color: #e2e8f0;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+}
+
+:host ::ng-deep c-smart-pagination .page-item.active .page-link {
+  background: #334155;
+  border-color: #334155;
+  color: #ffffff;
+}
+
+:host ::ng-deep c-smart-pagination .page-link:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* --- Error Alert --- */
+.error-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+  padding: 0.875rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #dc2626;
+  border-radius: 0.375rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.error-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #dc2626;
+}
+
+/* --- Modal Styles --- */
+.modal-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-bottom: none;
+}
+
+.modal-title-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.modal-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-close-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.modal-body-custom {
+  padding: 1.5rem;
+  background: #ffffff;
+}
+
+/* --- Items Per Page Select Styling --- */
+:host ::ng-deep .items-per-page select {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+  color: #334155;
+  transition: border-color 0.15s ease;
+}
+
+:host ::ng-deep .items-per-page select:focus {
+  border-color: #334155;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    padding-left: 0;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .address-info {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: 0.375rem;
+  }
+
+  .fab-button {
+    bottom: 4rem;
+    right: 1.5rem;
+    width: 60px;
+    height: 60px;
+  }
+
+  .fab-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .card-body-custom {
+    padding: 1rem;
+  }
+
+  .fab-button {
+    bottom: 3rem;
+    right: 1rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .fab-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
