@@ -12,7 +12,8 @@ export class DailyPlanComponent implements OnInit {
   dailyPlanForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() planData: any
-  @Input() noteId: number
+  @Input() noteId: string
+  @Input() medicalNoteId: number
   @Input() noteType: MedicalNoteType
   @Input() caseId: string
   forwardVisibility: boolean = false;

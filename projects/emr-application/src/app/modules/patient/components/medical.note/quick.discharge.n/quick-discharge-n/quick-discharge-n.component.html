@@ -90,7 +90,8 @@
         </c-modal-header>
         <c-modal-body>
             <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
-                [noteId]="medicalNoteId"></forward-modal>
+                [noteId]="noteId" [noteType]="noteType" [caseId]="caseId"
+                (backToRecords)="backtoPatientRecordActions()"></forward-modal>
         </c-modal-body>
     </c-modal>
 

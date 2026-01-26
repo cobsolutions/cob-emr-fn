@@ -369,7 +369,8 @@
     </c-modal-header>
     <c-modal-body>
         <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
-            [noteId]="noteId"></forward-modal>
+            [noteId]="noteId" [noteType]="noteType" [caseId]="caseId"
+            (backToRecords)="backToRecord.emit()"></forward-modal>
     </c-modal-body>
 </c-modal>
 <c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
@@ -378,7 +379,7 @@
         <button (click)="togglefinalize()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="noteId"
+        <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
             [noteType]="noteType" (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
     </c-modal-body>
 </c-modal>

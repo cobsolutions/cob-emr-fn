@@ -25,10 +25,10 @@ export class InitialExamNoteService {
     var url = this.baseUrl + '/' + noteId + '/finalize'
     return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
-  forward() {
+  forward(noteId: string, request: any) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl
-    return this.httpClient.post(`${url}`, JSON.stringify(null), { 'headers': headers })
+    var url = this.baseUrl + '/' + noteId + '/forward'
+    return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
   exportPDF(noteId: string) {
     var url = this.baseUrl + '/' + noteId + '/export/pdf';

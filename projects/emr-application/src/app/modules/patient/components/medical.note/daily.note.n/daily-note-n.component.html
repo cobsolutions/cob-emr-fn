@@ -45,7 +45,7 @@
                 formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
                 <daily-plan-n [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="'DailyNote'" [parentForm]="dailyNoteForm"
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteType]="type" [parentForm]="dailyNoteForm"
                     [caseId]="caseId" [medicalNoteId]="medicalNoteId" [noteId]="noteId"
                     (backToRecords)="backtoPatientRecordActions()">
                 </daily-plan-n>

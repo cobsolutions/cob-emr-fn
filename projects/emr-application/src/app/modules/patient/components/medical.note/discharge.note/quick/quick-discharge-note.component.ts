@@ -20,6 +20,7 @@ export class QuickDischargeNoteComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Output() backToRecord = new EventEmitter<void>();
   @Input() medicalNoteId: number
+  @Input() noteId: string
   @Input() caseId: string
   @Input() patientName: string
   creator: string

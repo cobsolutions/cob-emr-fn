@@ -20,6 +20,7 @@ export class ProgressNoteComponent implements OnInit {
   progressNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
+  @Input() noteId: string
   @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();

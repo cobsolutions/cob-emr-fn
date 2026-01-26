@@ -43,7 +43,7 @@
                 <ng-template matStepLabel>Plan</ng-template>
                 <discharge-plan-n [stepper]="stepper" [parentForm]="dischargeNoteForm"
                     (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [noteType]="'DischargeNote'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
+                    [noteType]="type" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
                     [noteId]="noteId" [planData]="medicalNoteSOAP?.dischargePlan"
                     (backToRecords)="backtoPatientRecordActions()"></discharge-plan-n>
             </mat-step>

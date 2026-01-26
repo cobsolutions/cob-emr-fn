@@ -22,7 +22,7 @@
                 <ng-template matStepLabel>Objective</ng-template>
                 <billing [stepper]="stepper" [parentForm]="dailyNoteForm"
                     (formReady)="setChildForm('objective', $event)" *ngIf="visitedSteps[1]"
-                    [billingData]="medicalNoteSOAP?.objective" [noteId]="medicalNoteId" [noteTypeId]="'2'"></billing>
+                    [billingData]="medicalNoteSOAP?.objective" [noteId]="noteId" [noteTypeId]="'2'"></billing>
             </mat-step>
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('assessment')!" formGroupName="assessment">
                 <ng-template matStepLabel>Assessment</ng-template>
@@ -32,12 +32,12 @@
             <mat-step completed="true" [stepControl]="dailyNoteForm.get('planOfCare')!" formGroupName="planOfCare">
                 <ng-template matStepLabel>Plan</ng-template>
                 <daily-plan (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
-                    [planData]="medicalNoteSOAP?.planOfCare" [noteId]="medicalNoteId" [creator]="noteCreator"
+                    [planData]="medicalNoteSOAP?.planOfCare" [noteId]="noteId" [creator]="noteCreator"
                     [noteFinalizr]="noteFinalizr" [caseId]="caseId" [noteType]="type"
                     (backToRecord)="backtoPatientRecordActions()"></daily-plan>
                 <!-- <plan [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare" [creator]="noteCreator" [noteFinalizr]="noteFinalizr"
-                    [noteId]="medicalNoteId" [noteType]="'2'">
+                    [noteId]="noteId" [noteType]="'2'">
                 </plan> -->
             </mat-step>
         </mat-stepper>

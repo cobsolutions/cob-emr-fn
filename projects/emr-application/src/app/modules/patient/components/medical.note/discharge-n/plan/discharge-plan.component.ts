@@ -22,7 +22,7 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
   @Output() backToRecords = new EventEmitter<void>();
   @Input() stepper!: MatStepper;
   @Input() planData: any;
-  @Input() noteType: string;
+  @Input() noteType: MedicalNoteType;
   @Input() parentForm: FormGroup;
   @Input() caseId: string;
   @Input() medicalNoteId: number;

@@ -20,7 +20,8 @@ export class BillingComponent implements OnInit {
   @Input() billingData: any
   @Input() creator: string
   @Input() noteFinalizr: string
-  @Input() noteId: number
+  @Input() noteId: string
+  @Input() medicalNoteId: number
   @Input() caseId: string
   @Input() noteType: MedicalNoteType
   @Input() noteTypeId: string

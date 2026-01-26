@@ -21,6 +21,7 @@ export class DailyNoteComponent implements OnInit {
   dailyNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
+  @Input() noteId: string
   @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
