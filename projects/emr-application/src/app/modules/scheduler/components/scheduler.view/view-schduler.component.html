@@ -1,98 +1,171 @@
-<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
-<div class="d-flex align-items-center justify-content-between p-3 border-bottom">
-  <div class="d-flex align-items-center">
-    <c-input-group class="mb-3">
-      <c-date-picker class="me-2" [(date)]="viewDate" (dateChange)="setView()"></c-date-picker>
-      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarPreviousView [view]="view"
-        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretLeft"></svg></button>
-      <button cButton color="dark" class="me-2" variant="outline" mwlCalendarNextView [view]="view"
-        [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()"><svg cIcon name="cilCaretRight"></svg></button>
-    </c-input-group>
-  </div>
-  <div class="d-flex align-items-center">
-    <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
-  </div>
-  <div class="d-flex align-items-center">
-    <select cSelect class="me-2" style="width: auto;" [(ngModel)]="view" (change)="setView()">
-      <option [value]="CalendarView.Month">Month</option>
-      <option [value]="CalendarView.Week">Week</option>
-      <option [value]="CalendarView.Day">Day</option>
-    </select>
-    <button cButton class="me-2" color="light" style="width: auto;" (click)="showNoShow()"
-      [ngClass]="{'noshowclicked': showNoShowAppointment}">No Show</button>
-    <button cButton class="me-2" color="light" style="width: auto;" (click)="showCancel()"
-      [ngClass]="{'cancelclicked': showCancelAppointment}">Cancelled</button>
-    <button cButton class="me-2" color="info" variant="outline" (click)="toggleCollapse()">
-      View/Hide Calendars
-    </button>
-  </div>
-  <div style="min-height: 130px;" *ngIf="visible">
-    <c-card [visible]="visible" cCollapse horizontal class="shadow" style="max-width: 260px;">
-      <c-card-header>
-        <strong>Calendars</strong>
-      </c-card-header>
-      <c-card-body style="width: 260px;">
-        <c-form-check *ngFor="let calendar of calendars">
-          <input cFormCheckInput [id]="calendar.id" type="checkbox" [checked]="calendar.selected" (change)="onChangeCalendarsd(calendar, $event)"/>
-          <label cFormCheckLabel for="calendar.id">{{calendar.name}}</label>
-        </c-form-check>
-      </c-card-body>
-    </c-card>
+<!-- Loading Spinner -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <c-spinner color="dark" variant="grow"></c-spinner>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilCalendar" class="page-icon"></svg>
+        Scheduler
+      </h2>
+      <p class="page-subtitle">Manage appointments and view calendars</p>
+    </div>
+    <div class="header-info">
+      <span class="calendar-count-badge">
+        <svg cIcon name="cilLayers" class="badge-icon"></svg>
+        {{ selectedCalendars.length }} Calendar{{ selectedCalendars.length !== 1 ? 's' : '' }} Active
+      </span>
+    </div>
   </div>
 </div>
-<br />
-<div [ngSwitch]="view" *ngIf="schedulerSettingsa">
-  <!--Month Module-->
-  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="flatEvent"
-    [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="monthClicked($event.day)"
-    [weekStartsOn]="schedulerSettingsa.dayOfWeek" (eventClicked)="handleEvent('month', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event,'month')">
-  </mwl-calendar-month-view>
-  <!--Week Module-->
-  <div *ngSwitchCase="CalendarView.Week">
-    <div class="horizontal-container" *ngIf="selectedCalendars.length > 0 ">
-      <div *ngFor="let calendar of selectedCalendars" class="resource-item" [ngClass]="{
-        'full-width': selectedCalendars.length === 1 && isSelected(calendar),
-        'even-width': selectedCalendars.length !== 1
-      }">
-        <div class="resource-header">
-          {{ calendar.name }}
+
+<!-- Toolbar Section -->
+<div class="toolbar-section">
+  <div class="toolbar-content">
+    <!-- Navigation Controls -->
+    <div class="toolbar-group navigation-group">
+      <c-date-picker class="date-picker-custom" [(date)]="viewDate" (dateChange)="setView()"></c-date-picker>
+      <div class="nav-buttons">
+        <button cButton class="nav-btn prev-btn" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()" cTooltip="Previous" cTooltipPlacement="bottom">
+          <svg cIcon name="cilChevronLeft" class="nav-icon"></svg>
+        </button>
+        <button cButton class="nav-btn today-btn" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()" cTooltip="Today" cTooltipPlacement="bottom">
+          <svg cIcon name="cilCalendar" class="nav-icon"></svg>
+          <span class="today-text">Today</span>
+        </button>
+        <button cButton class="nav-btn next-btn" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="clickNavigate()" cTooltip="Next" cTooltipPlacement="bottom">
+          <svg cIcon name="cilChevronRight" class="nav-icon"></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Current View Title -->
+    <div class="toolbar-group title-group">
+      <h3 class="view-title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+
+    <!-- View Controls -->
+    <div class="toolbar-group controls-group">
+      <div class="view-selector">
+        <select cSelect class="view-select" [(ngModel)]="view" (change)="setView()">
+          <option [value]="CalendarView.Month">Month</option>
+          <option [value]="CalendarView.Week">Week</option>
+          <option [value]="CalendarView.Day">Day</option>
+        </select>
+      </div>
+      <div class="filter-buttons">
+        <button cButton class="filter-btn" [ngClass]="{'active noshow': showNoShowAppointment}" (click)="showNoShow()">
+          <svg cIcon name="cilBan" class="filter-icon"></svg>
+          No Show
+        </button>
+        <button cButton class="filter-btn" [ngClass]="{'active cancelled': showCancelAppointment}" (click)="showCancel()">
+          <svg cIcon name="cilXCircle" class="filter-icon"></svg>
+          Cancelled
+        </button>
+      </div>
+      <button cButton class="calendar-toggle-btn" (click)="toggleCollapse()">
+        <svg cIcon [name]="visible ? 'cilChevronTop' : 'cilChevronBottom'" class="toggle-icon"></svg>
+        {{ visible ? 'Hide' : 'Show' }} Calendars
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Calendars Panel -->
+<div class="calendars-panel" *ngIf="visible">
+  <c-card class="calendars-card">
+    <div class="calendars-card-header">
+      <div class="calendars-header-title">
+        <svg cIcon name="cilCalendarCheck" class="calendars-icon"></svg>
+        <span>Available Calendars</span>
+      </div>
+      <span class="calendars-badge">{{ calendars?.length || 0 }} Total</span>
+    </div>
+    <c-card-body class="calendars-card-body">
+      <div class="calendars-grid">
+        <div class="calendar-checkbox-item" *ngFor="let calendar of calendars">
+          <c-form-check>
+            <input cFormCheckInput [id]="calendar.id" type="checkbox" [checked]="calendar.selected" (change)="onChangeCalendarsd(calendar, $event)"/>
+            <label cFormCheckLabel [for]="calendar.id" class="calendar-label">
+              <svg cIcon name="cilCalendar" class="calendar-item-icon"></svg>
+              {{ calendar.name }}
+            </label>
+          </c-form-check>
         </div>
-        <mwl-calendar-week-view [viewDate]="viewDate" [events]="events.get(calendar.id)" [refresh]="refresh"
-          (eventClicked)="handleEvent('week', $event.event)" (eventTimesChanged)="eventTimesChanged($event,'week')"
-          (hourSegmentClicked)="weekClicked($event.date , calendar)" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
-          [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
-          [hourSegments]='schedulerSettingsa.timeInterval'>
+      </div>
+    </c-card-body>
+  </c-card>
+</div>
+
+<!-- Calendar View Container -->
+<div class="calendar-container" [ngSwitch]="view" *ngIf="schedulerSettingsa">
+  <!-- Month View -->
+  <div class="calendar-view month-view" *ngSwitchCase="CalendarView.Month">
+    <mwl-calendar-month-view
+      [viewDate]="viewDate"
+      [events]="flatEvent"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="monthClicked($event.day)"
+      [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+      (eventClicked)="handleEvent('month', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event,'month')">
+    </mwl-calendar-month-view>
+  </div>
+
+  <!-- Week View -->
+  <div class="calendar-view week-view" *ngSwitchCase="CalendarView.Week">
+    <div class="multi-calendar-container" *ngIf="selectedCalendars.length > 0">
+      <div *ngFor="let calendar of selectedCalendars" class="calendar-column" [ngClass]="{
+        'full-width': selectedCalendars.length === 1 && isSelected(calendar),
+        'multi-column': selectedCalendars.length !== 1
+      }">
+        <div class="calendar-column-header">
+          <svg cIcon name="cilCalendar" class="column-header-icon"></svg>
+          <span>{{ calendar.name }}</span>
+        </div>
+        <mwl-calendar-week-view
+          [viewDate]="viewDate"
+          [events]="events.get(calendar.id)"
+          [refresh]="refresh"
+          (eventClicked)="handleEvent('week', $event.event)"
+          (eventTimesChanged)="eventTimesChanged($event,'week')"
+          (hourSegmentClicked)="weekClicked($event.date, calendar)"
+          [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+          [dayStartHour]="schedulerSettingsa.startOfDay"
+          [dayEndHour]="schedulerSettingsa.endOfDay"
+          [hourSegments]="schedulerSettingsa.timeInterval">
         </mwl-calendar-week-view>
       </div>
     </div>
-    <div *ngIf="selectedCalendars.length ===0 ">
-      <mwl-calendar-week-view [viewDate]="viewDate" [refresh]="refresh" [weekStartsOn]="schedulerSettingsa.dayOfWeek"
-        [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
-        [hourSegments]='schedulerSettingsa.timeInterval'>
+    <div class="empty-calendar-container" *ngIf="selectedCalendars.length === 0">
+      <mwl-calendar-week-view
+        [viewDate]="viewDate"
+        [refresh]="refresh"
+        [weekStartsOn]="schedulerSettingsa.dayOfWeek"
+        [dayStartHour]="schedulerSettingsa.startOfDay"
+        [dayEndHour]="schedulerSettingsa.endOfDay"
+        [hourSegments]="schedulerSettingsa.timeInterval">
       </mwl-calendar-week-view>
     </div>
   </div>
-  <!--Day Module-->
-  <mwl-day-view-scheduler *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh"
-    (eventTimesChanged)="eventTimesChanged($event,'day')" (eventClicked)="handleEvent('day', $event.event)"
-    (hourSegmentClicked)="dayClicked($event)" [calendars]="selectedCalendars" [calendarEvents]="events"
-    [dayStartHour]="schedulerSettingsa.startOfDay" [dayEndHour]="schedulerSettingsa.endOfDay"
-    [hourSegments]='schedulerSettingsa.timeInterval'>
-  </mwl-day-view-scheduler>
+
+  <!-- Day View -->
+  <div class="calendar-view day-view" *ngSwitchCase="CalendarView.Day">
+    <mwl-day-view-scheduler
+      [viewDate]="viewDate"
+      [refresh]="refresh"
+      (eventTimesChanged)="eventTimesChanged($event,'day')"
+      (eventClicked)="handleEvent('day', $event.event)"
+      (hourSegmentClicked)="dayClicked($event)"
+      [calendars]="selectedCalendars"
+      [calendarEvents]="events"
+      [dayStartHour]="schedulerSettingsa.startOfDay"
+      [dayEndHour]="schedulerSettingsa.endOfDay"
+      [hourSegments]="schedulerSettingsa.timeInterval">
+    </mwl-day-view-scheduler>
+  </div>
 </div>
-<!-- <c-modal id="editClinic" [visible]="visible" size="lg">
-  <c-modal-header>
-    <h3 cModalTitle><strong>Calendars</strong></h3>
-  </c-modal-header>
-  <c-modal-body>
-    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
-      [cleaner]="false" (valueChange)="onChangeCalendars($event)" *ngIf="calendars && selected">
-      <c-multi-select-option *ngFor="let calendar of calendars" [value]="calendar.id.toString()"
-        [selected]="calendar.selected">{{calendar.name}}</c-multi-select-option>
-    </c-multi-select>
-    <c-multi-select multiple size="sm" cSelect name="calendars" id="selectedClinic" class="my-2" placeholder="Calendars"
-      *ngIf="!selected">
-    </c-multi-select>
-  </c-modal-body>
-</c-modal> -->
