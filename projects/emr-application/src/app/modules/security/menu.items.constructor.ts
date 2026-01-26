@@ -1,6 +1,7 @@
 import { INavData } from "@coreui/angular-pro";
 import { NavItems } from "../../core/layout/_nav";
 import { MenuItem } from "./model/nav.item";
+import { Role } from "./model/role";
 import { AdministrationRoleItemConverter } from "./role.item.converter/administration.role.item.converter";
 import { ClientRoleItemConverter } from "./role.item.converter/client.role.item.converter";
 import { ClinicsRoleItemConverter } from "./role.item.converter/clinics.role.item.converter";
@@ -12,6 +13,10 @@ import { UsersRoleItemConverter } from "./role.item.converter/users.role.item.co
 export class MenuItemsConstructor{
     public static construct(roles: string[]) {
         var menuItems: MenuItem[] = []
+        // Dashboard is available for all authenticated users except admin
+        if (!roles.includes(Role.ADMIN_ROLE)) {
+            menuItems.push({ parent: 'Dashboard' });
+        }
         ClientRoleItemConverter.convert(roles, menuItems);
         UsersRoleItemConverter.convert(roles, menuItems)
         ClinicsRoleItemConverter.convert(roles, menuItems);

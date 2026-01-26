@@ -8,7 +8,7 @@ import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'emr/dashboard',
+    redirectTo: 'emr',
     pathMatch: 'full',
   },
   {
@@ -37,7 +37,24 @@ const routes: Routes = [
     },
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        canActivate: [KcAuthGuard],
+        data: {
+          defaultRedirect: true,
+          adminRedirect: '/emr/organization/list',
+          normalRedirect: '/emr/dashboard'
+        },
+        children: []
+      },
+      {
         path: 'dashboard',
+        data: {
+          title: 'Dashboard',
+          excludeRoles: [Role.ADMIN_ROLE],
+          excludeRedirect: '/emr/organization/list'
+        },
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },

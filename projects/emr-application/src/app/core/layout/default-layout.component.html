@@ -1,5 +1,20 @@
+<!-- Loading Overlay -->
+<div class="app-loading-overlay" *ngIf="isLoading">
+  <div class="app-loading-content">
+    <div class="app-loading-spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+    </div>
+    <div class="app-loading-text">
+      <span class="loading-title">Loading Application</span>
+      <span class="loading-subtitle">Please wait while we prepare your workspace...</span>
+    </div>
+  </div>
+</div>
+
 <!--sidebar-->
-<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" visible>
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" visible *ngIf="!isLoading">
   <c-sidebar-brand [brandNarrow]="{
       src: 'assets/img/brand/coreui-signet-white.svg',
       width: 46,
@@ -10,21 +25,21 @@
 
 
     <c-sidebar-nav *ngIf="navItems" [navItems]="navItems!"></c-sidebar-nav>
-  
+
 
   <c-sidebar-toggler *ngIf="!sidebar1.narrow" toggle="unfoldable" cSidebarToggle="sidebar1"></c-sidebar-toggler>
 </c-sidebar>
 
 <!--aside-->
 <!--main-->
-<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent" *ngIf="!isLoading">
   <!--app-header-->
-  <app-header class="mb-4 d-print-none header header-sticky" position="sticky" *ngIf="!this.isLoading"
+  <app-header class="mb-4 d-print-none header header-sticky" position="sticky"
     sidebarId="sidebar1"></app-header>
   <!--app-body-->
   <div class="body flex-grow-1 px-3">
     <div class="container-fluid">
-     
+
       <router-outlet></router-outlet>
     </div>
   </div>

@@ -14,6 +14,9 @@ import { EncryptService } from '../../common/service/encyrption/encrypt.service'
   providedIn: 'root'
 })
 export class KcAuthGuard extends KeycloakAuthGuard {
+  private initialized = false;
+  private userSubscribed = false;
+
   constructor(protected override router: Router
     , protected override keycloakAngular: KeycloakService
     , private renderNavItemsService: RenderNavItemsService
@@ -22,25 +25,57 @@ export class KcAuthGuard extends KeycloakAuthGuard {
     , private encryptService: EncryptService) {
     super(router, keycloakAngular);
   }
+
   async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
     if (!this.authenticated) {
       await this.keycloakAngular.login({
         redirectUri: window.location.origin + state.url,
       });
-    } else
+    } else if (!(this.roles.some(role => Role.roles.includes(role)))) {
+      this.keycloakAngular.logout();
+    }
 
-      if (!(this.roles.some(role => Role.roles.includes(role)))) {
-        this.keycloakAngular.logout();
-      }
     var type = route.data['type'];
     if (type === 'requester' && !this.roles.includes(Role.ORGANIZATION_REQUEST_ROLE)) {
       this.keycloakAngular.logout();
     }
-    var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles)
-    this.renderNavItemsService.renderItems$.next(filteredList)
-    this.loggedInService.getObservableLoggedUser().subscribe((loggedInUser: any) => {
-      this.roleScopeFinderService.find();
-    })
+
+    // Only initialize menu items once per session
+    if (!this.initialized) {
+      var filteredList: INavData[] = MenuItemsConstructor.construct(this.roles);
+      this.renderNavItemsService.renderItems$.next(filteredList);
+      this.initialized = true;
+    }
+
+    // Only subscribe to user once
+    if (!this.userSubscribed) {
+      this.userSubscribed = true;
+      this.loggedInService.getObservableLoggedUser().subscribe((loggedInUser: any) => {
+        this.roleScopeFinderService.find();
+      });
+    }
+
+    // Handle default redirect based on role
+    const defaultRedirect = route.data['defaultRedirect'];
+    if (defaultRedirect) {
+      const isAdmin = this.roles.includes(Role.ADMIN_ROLE);
+      const redirectUrl = isAdmin
+        ? (route.data['adminRedirect'] || '/emr/organization/list')
+        : (route.data['normalRedirect'] || '/emr/dashboard');
+      return this.router.parseUrl(redirectUrl);
+    }
+
+    // Check for excluded roles first
+    const excludeRoles = route.data['excludeRoles'];
+    if (excludeRoles instanceof Array && excludeRoles.length > 0) {
+      const hasExcludedRole = excludeRoles.some(role => this.roles.includes(role));
+      if (hasExcludedRole) {
+        // Redirect to a default page for excluded users
+        const redirectUrl = route.data['excludeRedirect'] || '/emr/organization/list';
+        return this.router.parseUrl(redirectUrl);
+      }
+    }
+
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
     // Allow the user to to proceed if no additional roles are required to access the route.

@@ -1,45 +1,87 @@
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<c-row>
-    <c-col xs="12" class="mb-2">
-        <h1>Organizations</h1>
-    </c-col>
-</c-row>
-<hr />
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Organization</button>
+<!-- Loading Overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="loading-content">
+    <span class="loading-text">Loading organizations...</span>
+  </div>
 </div>
-<ng-container fluid="true">
-    <c-smart-table #smartTable="cSmartTable" clickableRows [columnSorter]="true" [columns]="columns" header
-        [items]="organiztions" [sorterValue]="{ column: 'name', state: 'asc' }"
-        [tableProps]="{ hover: true, striped: true , small:true}">
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilBuilding" class="page-icon"></svg>
+        Organizations
+      </h2>
+      <p class="page-subtitle">Manage your organization settings and details</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-create" (click)="create()">
+        <svg cIcon name="cilPlus" class="btn-icon"></svg>
+        <span>Create Organization</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-container" *ngIf="!isLoading">
+  <c-card class="table-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>Organization List</span>
+      </div>
+      <span class="card-status" *ngIf="organiztions?.length > 0">
+        <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+        {{ organiztions?.length }} Organization(s)
+      </span>
+      <span class="card-status empty" *ngIf="!organiztions?.length">
+        <svg cIcon name="cilInfo" class="status-icon"></svg>
+        No organizations found
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-smart-table #smartTable="cSmartTable"
+        clickableRows
+        [columnSorter]="true"
+        [columns]="columns"
+        header
+        [items]="organiztions"
+        [sorterValue]="{ column: 'name', state: 'asc' }"
+        [tableProps]="{ hover: true, striped: true, small: true }">
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-            <td [cAlign]="smartTable.tableDataCellProps(item, columnName)?.align"
-                [ngClass]="smartTable.tableDataCellClasses(item, columnName)">
-                <ng-container [ngSwitch]="columnName">
-                    <ng-container *ngSwitchDefault>
-                        {{tdContent}}
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'action'" class="py-2">
-                        <div class="btn-group " role="group" aria-label="Basic example">
-                            <button cButton color="primary" size="sm" variant="outline" (click)="edit(item)">
-                                <svg cIcon name="cilInfo"></svg>
-                            </button>
-                            <button cButton color="primary" size="sm" variant="outline">
-                                <svg cIcon name="cilTrash"></svg>
-                            </button>
-                        </div>
-                    </ng-container>
-                </ng-container>
-            </td>
+          <td [cAlign]="smartTable.tableDataCellProps(item, columnName)?.align"
+              [ngClass]="smartTable.tableDataCellClasses(item, columnName)">
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
+              <ng-container *ngSwitchCase="'action'">
+                <div class="action-buttons">
+                  <button class="btn-action btn-edit" (click)="edit(item)" title="Edit Organization">
+                    <svg cIcon name="cilPencil"></svg>
+                  </button>
+                  <button class="btn-action btn-delete" title="Delete Organization">
+                    <svg cIcon name="cilTrash"></svg>
+                  </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
         </ng-template>
-    </c-smart-table>
-</ng-container>
+      </c-smart-table>
+    </c-card-body>
+  </c-card>
+</div>
+
+<!-- Edit Organization Modal -->
 <c-modal id="editOrg" [visible]="editOrganizationVisibility" size="xl">
-    <c-modal-header>
-        <h3 cModalTitle>Organization</h3>
-        <button (click)="toggleEditOrganization()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-        <edit-organization [organization]="selectedOrganization" *ngIf="editOrganizationVisibility"></edit-organization>
-    </c-modal-body>
+  <c-modal-header>
+    <h3 cModalTitle>Organization</h3>
+    <button (click)="toggleEditOrganization()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <edit-organization [organization]="selectedOrganization" *ngIf="editOrganizationVisibility"></edit-organization>
+  </c-modal-body>
 </c-modal>
