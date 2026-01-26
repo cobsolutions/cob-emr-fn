@@ -22,6 +22,11 @@ export class CreateOrganizationComponent extends BasicComponent implements OnIni
   basicInvalidFields: string[] = [];
   valid: boolean = true;
   isCreated: boolean = true;
+
+  get isValidEssentialInfo(): boolean {
+    return !!(this.organization?.name && this.organization?.dba &&
+              this.organization?.groupNPI && this.organization?.taxID);
+  }
   organization: Organization = {
     name: '',
     dba: '',

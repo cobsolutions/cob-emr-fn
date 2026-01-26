@@ -1,118 +1,189 @@
 <ngx-spinner></ngx-spinner>
-<c-row>
-    <c-col xs="12" class="mb-2">
-        <h1>Organization Creation</h1>
-    </c-col>
-</c-row>
-<hr />
-<div class="row alert alert-danger" *ngIf="!valid" role="alert">
-    <h3>Messing Fields</h3><br>
-    <!-- <span *ngIf="basicInvalidFields.length > 0">
-        <strong>Essentials Inforamtion Messing Fields</strong>
-        <br>
-        <ul>
-            <li *ngFor="let invalidField of basicInvalidFields; let i = index">
-                {{invalidField }}
-            </li>
-        </ul>
-    </span>
-    <br>
-    <span *ngIf="!isvalidAddress">
-        <strong>Organization Addresses</strong>
-    </span>
-    <br><br> -->
-    <span *ngIf="!isvalidClinics">
-        <strong>Organization Clinics</strong>
-    </span>
 
-
+<!-- Page Header -->
+<div class="page-header" *ngIf="isCreated">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilBuilding" class="page-icon"></svg>
+        Organization Creation
+      </h2>
+      <p class="page-subtitle">Complete all required sections to register a new organization</p>
+    </div>
+    <div class="header-progress">
+      <span class="progress-badge" [ngClass]="{'valid': valid, 'invalid': !valid}">
+        <svg cIcon [name]="valid ? 'cilCheckCircle' : 'cilWarning'" class="progress-icon"></svg>
+        {{ valid ? 'Ready to Submit' : 'Incomplete' }}
+      </span>
+    </div>
+  </div>
 </div>
-<c-container fluid>
-    <form cForm #organizationForm="ngForm">
-        <c-row class="justify-content-center">
-            <c-col class="col">
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <h3>essential information</h3>
-                    </c-card-header>
-                    <c-card-body>
-                        <div class="form-group" class="mb-3">
-                            <small
-                                *ngIf="submitted   && (organizationname.errors) || organizationname.invalid && (organizationname.dirty || organizationname.touched)"
-                                class="form-text text-danger">
-                                Organization Name is required
-                            </small>
-                            <c-input-group>
-                                <input cFormControl id="organizationname" name="organization name" sizing="sm"
-                                    placeholder="Organization Name" required [(ngModel)]="organization!.name"
-                                    #organizationname="ngModel" />
-                            </c-input-group>
-                        </div>
-                        <div class="form-group" class="mb-3">
-                            <small *ngIf="submitted   && (dba.errors) ||  dba.invalid && (dba.dirty || dba.touched)"
-                                class="form-text text-danger">
-                                Organization dba is required
-                            </small>
-                            <c-input-group>
-                                <input cFormControl id="dba" name="dba" placeholder="Organization dba" sizing="sm"
-                                    required [(ngModel)]="organization!.dba" #dba="ngModel" />
-                            </c-input-group>
-                        </div>
-                        <div class="form-group" class="mb-3">
-                            <small
-                                *ngIf="submitted   && (groupNPI.errors) || groupNPI.invalid && (groupNPI.dirty || groupNPI.touched)"
-                                class="form-text text-danger">
-                                Organization Group-NPI is required
-                            </small>
-                            <c-input-group>
-                                <input cFormControl id="groupNPI" name="Group-NPI" placeholder="Organization Group-NPI"
-                                    sizing="sm" required [(ngModel)]="organization!.groupNPI" #groupNPI="ngModel" />
-                            </c-input-group>
-                        </div>
-                        <div class="form-group" class="mb-3">
-                            <small
-                                *ngIf="submitted   && (taxID.errors) ||  taxID.invalid && (taxID.dirty || taxID.touched)"
-                                class="form-text text-danger">
-                                Organization tax-ID is required
-                            </small>
-                            <c-input-group>
-                                <input cFormControl id="taxID" name="tax-ID" placeholder="Organization tax-ID"
-                                    sizing="sm" required [(ngModel)]="organization!.taxID" #taxID="ngModel" />
-                            </c-input-group>
-                        </div>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-    </form>
-    <c-row class="justify-content-center">
-        <c-col class="col">
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <h3>Address information</h3>
-                </c-card-header>
-                <c-card-body>
-                    <app-single-address #organizationBillingAddress [address]="organization.billingAddress"
-                        [submitted]="submitted"></app-single-address>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <c-row class="justify-content-center">
-        <c-col class="col">
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <h3>Clinic information</h3>
-                </c-card-header>
-                <c-card-body>
-                    <app-organization-clinics-creation></app-organization-clinics-creation>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-</c-container>
 
-<div class="d-grid gap-2 col-2 mx-auto mb-5">
-    <button *ngIf="isCreated" cButton color="primary" variant="outline" (click)="create()">Create</button>
-    <button *ngIf="!isCreated" cButton color="primary" variant="outline" (click)="update()">Update</button>
+<!-- Update Header -->
+<div class="page-header" *ngIf="!isCreated">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilBuilding" class="page-icon"></svg>
+        Update Organization
+      </h2>
+      <p class="page-subtitle">Modify organization details</p>
+    </div>
+    <div class="header-progress">
+      <span class="progress-badge" [ngClass]="{'valid': valid, 'invalid': !valid}">
+        <svg cIcon [name]="valid ? 'cilCheckCircle' : 'cilWarning'" class="progress-icon"></svg>
+        {{ valid ? 'Ready to Submit' : 'Incomplete' }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Layout with Progress Sidebar -->
+<div class="page-layout">
+  <!-- Progress Indicator Sidebar -->
+  <aside class="progress-sidebar">
+    <div class="progress-sidebar-content">
+      <div class="progress-title">Sections</div>
+      <ul class="progress-list">
+        <li class="progress-item" [ngClass]="{'completed': isValidEssentialInfo}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidEssentialInfo ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Essential Info</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': isvalidAddress}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isvalidAddress ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Address</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': isvalidClinics}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isvalidClinics ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Clinics</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Form Content -->
+  <div class="form-container">
+    <!-- Essential Information -->
+    <c-card class="section-card" id="section-essential">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isValidEssentialInfo}">
+        <div class="card-header-title">
+          <svg cIcon name="cilNotes" class="card-icon"></svg>
+          <span>Essential Information</span>
+        </div>
+        <span class="card-status" *ngIf="!isValidEssentialInfo">
+          <svg cIcon name="cilWarning" class="status-icon"></svg>
+          Required
+        </span>
+        <span class="card-status valid" *ngIf="isValidEssentialInfo">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <form cForm #organizationForm="ngForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="organizationname">Organization Name <span class="required">*</span></label>
+              <input cFormControl id="organizationname" name="organization name"
+                placeholder="Enter organization name" required [(ngModel)]="organization!.name"
+                #organizationname="ngModel" />
+              <small *ngIf="submitted && organizationname.invalid" class="form-text text-danger">
+                Organization Name is required
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dba">DBA <span class="required">*</span></label>
+              <input cFormControl id="dba" name="dba" placeholder="Enter DBA"
+                required [(ngModel)]="organization!.dba" #dba="ngModel" />
+              <small *ngIf="submitted && dba.invalid" class="form-text text-danger">
+                Organization DBA is required
+              </small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="groupNPI">Group NPI <span class="required">*</span></label>
+              <input cFormControl id="groupNPI" name="Group-NPI" placeholder="Enter Group NPI"
+                required [(ngModel)]="organization!.groupNPI" #groupNPI="ngModel" />
+              <small *ngIf="submitted && groupNPI.invalid" class="form-text text-danger">
+                Organization Group NPI is required
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="taxID">Tax ID <span class="required">*</span></label>
+              <input cFormControl id="taxID" name="tax-ID" placeholder="Enter Tax ID"
+                required [(ngModel)]="organization!.taxID" #taxID="ngModel" />
+              <small *ngIf="submitted && taxID.invalid" class="form-text text-danger">
+                Organization Tax ID is required
+              </small>
+            </div>
+          </div>
+        </form>
+      </c-card-body>
+    </c-card>
+
+    <!-- Address Information -->
+    <c-card class="section-card" id="section-address">
+      <div class="card-header-custom optional">
+        <div class="card-header-title">
+          <svg cIcon name="cilLocationPin" class="card-icon"></svg>
+          <span>Address Information</span>
+        </div>
+        <span class="card-badge-optional">Optional</span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <app-single-address #organizationBillingAddress [address]="organization.billingAddress"
+          [submitted]="submitted"></app-single-address>
+      </c-card-body>
+    </c-card>
+
+    <!-- Clinic Information -->
+    <c-card class="section-card" id="section-clinics">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isvalidClinics}">
+        <div class="card-header-title">
+          <svg cIcon name="cilHospital" class="card-icon"></svg>
+          <span>Clinic Information</span>
+        </div>
+        <span class="card-status" *ngIf="!isvalidClinics">
+          <svg cIcon name="cilWarning" class="status-icon"></svg>
+          Required
+        </span>
+        <span class="card-status valid" *ngIf="isvalidClinics">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <app-organization-clinics-creation></app-organization-clinics-creation>
+      </c-card-body>
+    </c-card>
+
+    <!-- Action Section -->
+    <div class="action-section">
+      <button *ngIf="isCreated"
+        cButton
+        class="create-btn"
+        [ngClass]="{'disabled': !valid}"
+        type="button"
+        (click)="create()">
+        <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
+        Create Organization
+      </button>
+      <button *ngIf="!isCreated"
+        cButton
+        class="create-btn"
+        [ngClass]="{'disabled': !valid}"
+        type="button"
+        (click)="update()">
+        <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
+        Update Organization
+      </button>
+    </div>
+  </div>
 </div>

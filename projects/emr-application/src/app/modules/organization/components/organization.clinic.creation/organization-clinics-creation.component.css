@@ -1,0 +1,444 @@
+/* ========================================
+   Organization Clinics Creation Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Main Container --- */
+.clinic-creation-container {
+  padding: 0;
+}
+
+/* --- Form Sections --- */
+.form-section {
+  margin-bottom: 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.form-section:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.section-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.section-content {
+  padding: 1rem;
+  background: #ffffff;
+}
+
+/* --- Form Elements --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.text-danger {
+  color: #dc2626;
+  font-size: 0.75rem;
+}
+
+:host ::ng-deep .form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  transition: all 0.15s ease;
+}
+
+:host ::ng-deep .form-control:focus {
+  border-color: #334155;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+  outline: none;
+}
+
+:host ::ng-deep .form-control::placeholder {
+  color: #94a3b8;
+}
+
+/* --- Doctor Action Container --- */
+.doctor-action-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  background: rgba(5, 150, 105, 0.1);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+  border-radius: 0.375rem;
+}
+
+.doctor-info.warning {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+.doctor-check-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #059669;
+}
+
+.doctor-warning-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #dc2626;
+}
+
+.doctor-assigned {
+  font-size: 0.8125rem;
+  color: #059669;
+  font-weight: 500;
+}
+
+.doctor-required {
+  font-size: 0.8125rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.doctor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.doctor-btn:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.btn-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* --- Form Actions --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+.add-clinic-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.25rem;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.add-clinic-btn:hover {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+/* --- Clinics Table Container --- */
+.clinics-table-container {
+  margin-top: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.table-header-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* --- Clinics Table --- */
+.clinics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.clinics-table thead {
+  background: #f1f5f9;
+}
+
+.clinics-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.clinics-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.clinics-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.clinics-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Table Columns --- */
+.col-number {
+  width: 50px;
+  text-align: center;
+}
+
+.col-name {
+  min-width: 150px;
+}
+
+.col-address {
+  min-width: 200px;
+}
+
+.col-actions {
+  width: 80px;
+  text-align: center;
+}
+
+/* --- Clinic Name Cell --- */
+.clinic-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clinic-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #64748b;
+}
+
+/* --- Delete Button --- */
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+.delete-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Empty State --- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #cbd5e1;
+  margin-bottom: 0.75rem;
+}
+
+.empty-text {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* --- Modal Styles --- */
+.modal-header-custom {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-bottom: none;
+}
+
+.modal-title-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.modal-title-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+:host ::ng-deep .modal-header-custom .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+:host ::ng-deep .modal-header-custom .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body-custom {
+  padding: 1.5rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .doctor-action-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .doctor-info {
+    justify-content: center;
+  }
+
+  .doctor-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .add-clinic-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .clinics-table th,
+  .clinics-table td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .col-address {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-header {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+  }
+
+  .section-content {
+    padding: 0.875rem;
+  }
+
+  .table-header {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .clinics-table {
+    font-size: 0.8125rem;
+  }
+
+  .clinics-table th,
+  .clinics-table td {
+    padding: 0.5rem;
+  }
+
+  .clinic-name-cell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .clinic-icon {
+    display: none;
+  }
+}

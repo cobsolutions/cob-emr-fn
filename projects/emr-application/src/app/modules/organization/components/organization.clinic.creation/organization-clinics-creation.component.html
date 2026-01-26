@@ -1,57 +1,126 @@
-<form cForm #clinicForm="ngForm" (ngSubmit)="add()" *ngIf="!selectedclinics">
-    <small
-        *ngIf="submitted   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
-        class="form-text text-danger">
-        Clinic Name is required
-    </small>
-    <c-input-group class="mb-3">
-        <input autoComplete="name" cFormControl id="firstAddress" name="firstAddress" sizing="sm"
-            placeholder="Clinic Name" required [(ngModel)]="createdClinic.name" #clinicname="ngModel" />
-    </c-input-group>
-    <app-single-address #clinicAddress [address]="createdClinic.address" [submitted]="submitted"></app-single-address>
-    <small *ngIf="submitted" class="form-text text-danger">
-        Administrator Doctor data is required
-    </small>
-    <c-input-group class="mb-3">
-        <button cButton color="primary" class="mx-2" variant="outline" size="sm"
-            (click)="openCreateDoctorModal()">CreateClinic's Doctor</button>
-    </c-input-group>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button cButton color="primary" variant="outline" (click)="add()" size="sm">Add</button>
+<!-- Clinic Creation Form -->
+<div class="clinic-creation-container" *ngIf="!selectedclinics">
+  <form cForm #clinicForm="ngForm" (ngSubmit)="add()">
+    <!-- Clinic Name Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <svg cIcon name="cilHospital" class="section-icon"></svg>
+        <span>Clinic Details</span>
+      </div>
+      <div class="section-content">
+        <div class="form-group">
+          <label class="form-label" for="clinicName">Clinic Name <span class="required">*</span></label>
+          <input cFormControl id="clinicName" name="clinicName"
+            placeholder="Enter clinic name" required [(ngModel)]="createdClinic.name"
+            #clinicname="ngModel" />
+          <small *ngIf="submitted && clinicname.invalid" class="form-text text-danger">
+            Clinic Name is required
+          </small>
+        </div>
+      </div>
     </div>
-</form>
-<table class="table table-sm table-striped table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col" style="width: 5%;" *ngIf="!selectedclinics">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let clinic of clinicDataHolders;let i=index;" scope="row">
-            <th scope="row">1</th>
-            <td>{{clinic.clinicModel.name}}</td>
-            <td><app-view-address [address]="clinic.clinicModel.address" [addressView]="'row'"></app-view-address></td>
 
-            <td *ngIf="!selectedclinics">
-                <div class="btn-group " role="group" aria-label="Basic example">
-                    <button cButton color="primary" size="sm" variant="outline" (click)="remove(i)">
-                        <svg cIcon name="cilTrash"></svg>
-                    </button>
-                </div>
-            </td>
+    <!-- Address Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <svg cIcon name="cilLocationPin" class="section-icon"></svg>
+        <span>Clinic Address</span>
+      </div>
+      <div class="section-content">
+        <app-single-address #clinicAddress [address]="createdClinic.address" [submitted]="submitted"></app-single-address>
+      </div>
+    </div>
+
+    <!-- Administrator Doctor Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <svg cIcon name="cilUser" class="section-icon"></svg>
+        <span>Administrator Doctor</span>
+      </div>
+      <div class="section-content">
+        <div class="doctor-action-container">
+          <div class="doctor-info" *ngIf="createdClinic.administratorDoctor">
+            <svg cIcon name="cilCheckCircle" class="doctor-check-icon"></svg>
+            <span class="doctor-assigned">Doctor assigned</span>
+          </div>
+          <div class="doctor-info warning" *ngIf="!createdClinic.administratorDoctor && submitted">
+            <svg cIcon name="cilWarning" class="doctor-warning-icon"></svg>
+            <span class="doctor-required">Administrator Doctor is required</span>
+          </div>
+          <button type="button" cButton class="doctor-btn" (click)="openCreateDoctorModal()">
+            <svg cIcon name="cilUserPlus" class="btn-icon"></svg>
+            {{ createdClinic.administratorDoctor ? 'Change Doctor' : 'Add Doctor' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Button -->
+    <div class="form-actions">
+      <button type="button" cButton class="add-clinic-btn" (click)="add()">
+        <svg cIcon name="cilPlus" class="btn-icon"></svg>
+        Add Clinic
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Clinics Table -->
+<div class="clinics-table-container" *ngIf="clinicDataHolders.length > 0">
+  <div class="table-header">
+    <svg cIcon name="cilList" class="table-header-icon"></svg>
+    <span>Added Clinics ({{ clinicDataHolders.length }})</span>
+  </div>
+  <div class="table-responsive">
+    <table class="clinics-table">
+      <thead>
+        <tr>
+          <th class="col-number">#</th>
+          <th class="col-name">Clinic Name</th>
+          <th class="col-address">Address</th>
+          <th class="col-actions" *ngIf="!selectedclinics">Actions</th>
         </tr>
-    </tbody>
-</table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clinic of clinicDataHolders; let i = index">
+          <td class="col-number">{{ i + 1 }}</td>
+          <td class="col-name">
+            <div class="clinic-name-cell">
+              <svg cIcon name="cilHospital" class="clinic-icon"></svg>
+              <span>{{ clinic.clinicModel.name }}</span>
+            </div>
+          </td>
+          <td class="col-address">
+            <app-view-address [address]="clinic.clinicModel.address" [addressView]="'row'"></app-view-address>
+          </td>
+          <td class="col-actions" *ngIf="!selectedclinics">
+            <button type="button" cButton class="delete-btn" (click)="remove(i)">
+              <svg cIcon name="cilTrash"></svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="clinicDataHolders.length === 0 && selectedclinics">
+  <svg cIcon name="cilHospital" class="empty-icon"></svg>
+  <p class="empty-text">No clinics added yet</p>
+</div>
+
+<!-- Doctor Creation Modal -->
 <c-modal size="xl" [visible]="createDoctorVisible" (visibleChange)="handleCreateDoctorChange($event)">
-    <c-modal-header>
-        <h5 cModalTitle>Doctor Creation</h5>
-        <button (click)="closeCreateDoctorModal()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-        <app-create-administrator-doctor #createAdministratorDoctorComponent *ngIf="createDoctorVisible"
-            (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
-    </c-modal-body>
+  <c-modal-header class="modal-header-custom">
+    <h5 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilUserPlus" class="modal-title-icon"></svg>
+      Doctor Creation
+    </h5>
+    <button (click)="closeCreateDoctorModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body class="modal-body-custom">
+    <app-create-administrator-doctor #createAdministratorDoctorComponent *ngIf="createDoctorVisible"
+      (closeModal)="handleCloseDoctorModal($event)"></app-create-administrator-doctor>
+  </c-modal-body>
 </c-modal>
