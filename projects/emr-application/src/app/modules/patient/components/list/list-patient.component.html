@@ -1,60 +1,86 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
-<!-- Page Header -->
-<c-row class="align-items-center mb-4">
-  <c-col>
-    <h2 class="fw-bold d-flex align-items-center gap-3">
-      <!-- Larger, neutral-colored patient list icon -->
-      <svg cIcon name="cilAddressBook" class="icon-large text-dark"></svg>
-      Patient List
-    </h2>
-    <p class="text-muted mb-0">Browse, edit, and manage patient records</p>
-  </c-col>
-  <c-col class="text-end">
-    <button cButton color="primary" class="shadow-sm px-4 py-2 rounded-pill" variant="outline" (click)="create()"
-      dispaly-input [componentRole]="componentRole">
-      <svg cIcon name="cilUserFollow" class="me-2"></svg>
-      Create Patient
-    </button>
-  </c-col>
-</c-row>
+<!-- Page Header Section -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilAddressBook" class="page-icon"></svg>
+        Patient List
+      </h2>
+      <p class="page-subtitle">Browse, edit, and manage patient records</p>
+    </div>
+    <div class="page-actions">
+      <button cButton class="create-patient-btn" (click)="create()"
+        dispaly-input [componentRole]="componentRole">
+        <svg cIcon name="cilUserFollow" class="btn-icon"></svg>
+        Create Patient
+      </button>
+    </div>
+  </div>
+</div>
 
-<!-- Search & Filters -->
-
-
-<!-- Patient Table -->
+<!-- Patient Table Card -->
 <ng-container *ngIf="props$ | async as props">
-  <c-card class="shadow-lg border-0 rounded-4 overflow-hidden">
-    <c-card-body>
-      <c-smart-table [columnSorter]="{ resetable: true }" [columns]="columns" [items]="(patient$ | async) ?? []"
-        [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-        [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-        [tableProps]="{ hover: true, striped: true, small:true, borderless: true }"
-        [columnFilterValue]="props.columnFilterValue ?? []" [sorterValue]="props.sorterValue"
-        [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
+  <c-card class="patient-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>All Patients</span>
+      </div>
+      <span class="card-badge">
+        {{ (patient$ | async)?.length || 0 }} Records
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-smart-table
+        [columnSorter]="{ resetable: true }"
+        [columns]="columns"
+        [items]="(patient$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage"
+        (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]"
+        [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
+        [columnFilterValue]="props.columnFilterValue ?? []"
+        [sorterValue]="props.sorterValue"
+        [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)"
+        header>
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
           <td>
             <ng-container [ngSwitch]="columnName">
               <ng-container *ngSwitchCase="'patientName'">
-                <button cButton color="link" (click)="chart(item.id)">{{item.lastName + ',' + item.firstName}}</button>
+                <button cButton class="patient-name-link" (click)="chart(item.id)">
+                  <svg cIcon name="cilUser" class="patient-icon"></svg>
+                  {{item.lastName + ', ' + item.firstName}}
+                </button>
               </ng-container>
               <ng-container *ngSwitchCase="'gender'">
-                {{item.gender}}
+                <span class="gender-badge" [ngClass]="item.gender?.toLowerCase()">
+                  {{item.gender}}
+                </span>
               </ng-container>
               <ng-container *ngSwitchCase="'email'">
-                {{item.contacts[0].email}}
+                <span class="contact-info">
+                  <svg cIcon name="cilEnvelopeClosed" class="contact-icon"></svg>
+                  {{item.contacts[0]?.email || '-'}}
+                </span>
               </ng-container>
               <ng-container *ngSwitchCase="'phone'">
-                {{item.contacts[0].phoneNumber}}
+                <span class="contact-info">
+                  <svg cIcon name="cilPhone" class="contact-icon"></svg>
+                  {{item.contacts[0]?.phoneNumber || '-'}}
+                </span>
               </ng-container>
               <ng-container *ngSwitchCase="'dateOfBirth'">
-                {{item.birthDate | date :'MM/dd/yyyy'}}
+                <span class="dob-info">
+                  {{item.birthDate | date :'MM/dd/yyyy'}}
+                </span>
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
-                <div class="d-flex gap-3 justify-content-center">
-                  <!-- Edit -->
-                  <button cButton variant="ghost" color="info" (click)="edit(item)" class="action-btn-lg"
-                    title="Edit Patient">
+                <div class="action-buttons">
+                  <button cButton class="action-btn-edit" (click)="edit(item)" title="Edit Patient">
                     <svg cIcon name="cilPen" class="action-icon"></svg>
                   </button>
                 </div>
@@ -69,9 +95,12 @@
       </c-smart-table>
 
       <!-- Pagination -->
-      <div class="d-flex justify-content-center mt-4">
-        <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
-          (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
+      <div class="pagination-container">
+        <c-smart-pagination
+          *ngIf="props.totalPages"
+          [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)"
+          [pages]="props.totalPages">
         </c-smart-pagination>
       </div>
     </c-card-body>
@@ -80,23 +109,29 @@
 
 <!-- Error Alert -->
 <ng-container *ngIf="errorMessage$ | async as errorMessage">
-  <c-alert color="danger" class="mt-4 shadow-sm rounded-pill text-center fw-semibold">
-    {{ errorMessage }}
-  </c-alert>
+  <div class="error-alert">
+    <svg cIcon name="cilWarning" class="error-icon"></svg>
+    <span>{{ errorMessage }}</span>
+  </div>
 </ng-container>
 
 <!-- Edit Patient Modal -->
-<c-modal id="editPateint" [visible]="editPatientVisibility" size="xl" [backdrop]="'static'">
-  <c-modal-header>
-    <h3 cModalTitle class="fw-bold text-primary d-flex align-items-center gap-2">
-      <svg cIcon name="cilUser"></svg>
+<c-modal id="editPatient" [visible]="editPatientVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilUser" class="modal-icon"></svg>
       Edit Patient
     </h3>
-    <button (click)="toggleEditPatient()" cButtonClose></button>
+    <button (click)="toggleEditPatient()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>
-    <app-create-patient [selectedPatient]="selectedPatient" *ngIf="editPatientVisibility"
-      (changeVisibility)="changeFacilityVisibility($event)" [mode]="'update'">
+  <c-modal-body class="modal-body-custom">
+    <app-create-patient
+      [selectedPatient]="selectedPatient"
+      *ngIf="editPatientVisibility"
+      (changeVisibility)="changeFacilityVisibility($event)"
+      [mode]="'update'">
     </app-create-patient>
   </c-modal-body>
 </c-modal>
