@@ -26,6 +26,7 @@ export class FinalizeMedicalNoteComponent implements OnInit {
   @Output() changeVisibility = new EventEmitter<string>()
   finalizeMessage: string = 'The medical note is being finalized. Please be patient.';
   finalizeMessageFlag: boolean = false
+  errorMessage: string = undefined
   constructor(private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
     , private initialExamNoteService: InitialExamNoteService
@@ -54,9 +55,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
         },
-        error: (error) => {
+        error: (err) => {
           this.finalizeMessageFlag = false
-          console.error('Finalize failed:', error);
+          this.errorMessage = err.error?.message || 'Failed to finalize the note. Please try again.';
         }
       });
     } else if (this.noteType === MedicalNoteType.Discharge_Note) {
@@ -70,9 +71,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
         },
-        error: (error) => {
+        error: (err) => {
           this.finalizeMessageFlag = false
-          console.error('Finalize failed:', error);
+          this.errorMessage = err.error?.message || 'Failed to finalize the note. Please try again.';
         }
       });
     } else if (this.noteType === MedicalNoteType.Daily_Note) {
@@ -86,9 +87,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
         },
-        error: (error) => {
+        error: (err) => {
           this.finalizeMessageFlag = false
-          console.error('Finalize failed:', error);
+          this.errorMessage = err.error?.message || 'Failed to finalize the note. Please try again.';
         }
       });
     } else if (this.noteType === MedicalNoteType.Progress_Note) {
@@ -102,9 +103,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
         },
-        error: (error) => {
+        error: (err) => {
           this.finalizeMessageFlag = false
-          console.error('Finalize failed:', error);
+          this.errorMessage = err.error?.message || 'Failed to finalize the note. Please try again.';
         }
       });
     } else if (this.noteType === MedicalNoteType.Initial_Examination) {
@@ -118,9 +119,9 @@ export class FinalizeMedicalNoteComponent implements OnInit {
           this.medialNoteService.notifyFinalize(true);
           this.changeVisibility.emit('yes')
         },
-        error: (error) => {
+        error: (err) => {
           this.finalizeMessageFlag = false
-          console.error('Finalize failed:', error);
+          this.errorMessage = err.error?.message || 'Failed to finalize the note. Please try again.';
         }
       });
     }
