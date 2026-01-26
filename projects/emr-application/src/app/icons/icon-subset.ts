@@ -127,7 +127,8 @@ import {
   cibKeybase,
   cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cibMailRu
   ,cilChevronCircleDownAlt
-  ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight
+  ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight,
+  cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -274,7 +275,8 @@ export const iconSubset = {
   cilInfinity,
   cilMedicalCross,
   cilPhone,
-  cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight
+  cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight,
+  cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital
 };
 
 export enum IconSubset {

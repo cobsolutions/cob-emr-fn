@@ -1,117 +1,184 @@
 <form cForm #insuranceForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
-    <small *ngIf="insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)"
-        class="form-text text-danger">
-        Insurance Company is required
-    </small>
-    <select cFormControl cSelect class="mb-2" sizing="sm" id="insuranceCompany" name="insuranceCompany"
-        [ngClass]="{'is-invalid': insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)}"
-        [(ngModel)]="patientInsurance.insuranceCompany" #insuranceCompany="ngModel">
-        <option [ngValue]="null" disabled selected>Select Insurance Company</option>
-        <option *ngFor="let insuranceCompany of insuranceCompanies | async" [ngValue]="insuranceCompany">
-            {{insuranceCompany.name}}</option>
-    </select>
 
-    <small *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)"
-        class="form-text text-danger">
-        Insurance Number is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <input placeholder="Enter Insurance Number" cFormControl id="insuranceNumber" name="insuranceNumber" sizing="sm"
-            required
-            [ngClass]="{'is-invalid': insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)}"
-            #insuranceNumber="ngModel" [(ngModel)]="patientInsurance.insuranceNumber" />
-    </c-input-group>
+    <!-- Insurance Company Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Insurance Company</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="12">
+                <label cLabel for="insuranceCompany" class="form-label">Company <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="insuranceCompany" name="insuranceCompany" required
+                    [ngClass]="{'is-invalid': insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)}"
+                    [(ngModel)]="patientInsurance.insuranceCompany" #insuranceCompany="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Insurance Company</option>
+                    <option *ngFor="let insuranceCompany of insuranceCompanies | async" [ngValue]="insuranceCompany">
+                        {{insuranceCompany.name}}
+                    </option>
+                </select>
+                <small *ngIf="insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="groupNumber.invalid && (groupNumber.dirty || groupNumber.touched)" class="form-text text-danger">
-        Group Number is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <input placeholder="Enter Group Number" cFormControl id="groupNumber" name="groupNumber" sizing="sm" required
-            [ngClass]="{'is-invalid': groupNumber.invalid && (groupNumber.dirty || groupNumber.touched)}"
-            #groupNumber="ngModel" [(ngModel)]="patientInsurance.groupNumber" />
-    </c-input-group>
+    <!-- Policy Details Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Policy Details</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="6">
+                <label cLabel for="insuranceNumber" class="form-label">Insurance Number <span class="text-danger">*</span></label>
+                <input cFormControl id="insuranceNumber" name="insuranceNumber" sizing="sm"
+                    placeholder="Enter insurance number" required
+                    [ngClass]="{'is-invalid': insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)}"
+                    [(ngModel)]="patientInsurance.insuranceNumber" #insuranceNumber="ngModel" />
+                <small *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="6">
+                <label cLabel for="groupNumber" class="form-label">Group Number <span class="text-danger">*</span></label>
+                <input cFormControl id="groupNumber" name="groupNumber" sizing="sm"
+                    placeholder="Enter group number" required
+                    [ngClass]="{'is-invalid': groupNumber.invalid && (groupNumber.dirty || groupNumber.touched)}"
+                    [(ngModel)]="patientInsurance.groupNumber" #groupNumber="ngModel" />
+                <small *ngIf="groupNumber.invalid && (groupNumber.dirty || groupNumber.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="paymentType.invalid && (paymentType.dirty || paymentType.touched)" class="form-text text-danger">
-        Phone Type Type is required
-    </small>
-    <c-input-group class="mb-3">
-        <select cFormControl cSelect sizing="sm" id="paymentType" name="paymentType" required
-            [ngClass]="{'is-invalid': paymentType.invalid && (paymentType.dirty || paymentType.touched)}"
-            [(ngModel)]="patientInsurance.paymentType" #paymentType="ngModel">
-            <option [ngValue]="null" disabled selected>Select Phone Type</option>
-            <option *ngFor="let paymentType of PaymentTypes | keyvalue" [ngValue]="paymentType.key">
-                {{paymentType.value}}
-            </option>
-        </select>
-    </c-input-group>
-    <small *ngIf="paymentValue.invalid && (paymentValue.dirty || paymentValue.touched)" class="form-text text-danger">
-        Payment Value is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <input placeholder="Enter Payment Value" cFormControl id="paymentValue" name="paymentValue" sizing="sm" required
-            [ngClass]="{'is-invalid': paymentValue.invalid && (paymentValue.dirty || paymentValue.touched)}"
-            #paymentValue="ngModel" [(ngModel)]="patientInsurance.paymentValue" />
-    </c-input-group>
+    <!-- Payment Information Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Payment Information</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="4">
+                <label cLabel for="paymentType" class="form-label">Payment Type <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="paymentType" name="paymentType" required
+                    [ngClass]="{'is-invalid': paymentType.invalid && (paymentType.dirty || paymentType.touched)}"
+                    [(ngModel)]="patientInsurance.paymentType" #paymentType="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Type</option>
+                    <option *ngFor="let paymentType of PaymentTypes | keyvalue" [ngValue]="paymentType.key">
+                        {{paymentType.value}}
+                    </option>
+                </select>
+                <small *ngIf="paymentType.invalid && (paymentType.dirty || paymentType.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4">
+                <label cLabel for="paymentValue" class="form-label">Payment Value <span class="text-danger">*</span></label>
+                <div class="currency-input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input cFormControl id="paymentValue" name="paymentValue" sizing="sm"
+                        placeholder="0.00" required
+                        [ngClass]="{'is-invalid': paymentValue.invalid && (paymentValue.dirty || paymentValue.touched)}"
+                        [(ngModel)]="patientInsurance.paymentValue" #paymentValue="ngModel"
+                        class="prefixed-input" />
+                </div>
+                <small *ngIf="paymentValue.invalid && (paymentValue.dirty || paymentValue.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4">
+                <label cLabel for="totalDeductible" class="form-label">Total Deductible <span class="text-danger">*</span></label>
+                <div class="currency-input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input cFormControl id="totalDeductible" name="totalDeductible" sizing="sm"
+                        placeholder="0.00" required
+                        [ngClass]="{'is-invalid': totalDeductible.invalid && (totalDeductible.dirty || totalDeductible.touched)}"
+                        [(ngModel)]="patientInsurance.totalDeductible" #totalDeductible="ngModel"
+                        class="prefixed-input" />
+                </div>
+                <small *ngIf="totalDeductible.invalid && (totalDeductible.dirty || totalDeductible.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="totalDeductible.invalid && (totalDeductible.dirty || totalDeductible.touched)"
-        class="form-text text-danger">
-        Total Deductible is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <input placeholder="Enter Total Deductible" cFormControl id="totalDeductible" name="totalDeductible" sizing="sm"
-            required
-            [ngClass]="{'is-invalid': totalDeductible.invalid && (totalDeductible.dirty || totalDeductible.touched)}"
-            #totalDeductible="ngModel" [(ngModel)]="patientInsurance.totalDeductible" />
-    </c-input-group>
-
-    <small *ngIf="visitAllowed.invalid && (visitAllowed.dirty || visitAllowed.touched)" class="form-text text-danger">
-        Visit Allowed is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <input type="number" placeholder="Enter Visit Allowed" cFormControl id="visitAllowed" name="visitAllowed"
-            sizing="sm" required
-            [ngClass]="{'is-invalid': visitAllowed.invalid && (visitAllowed.dirty || visitAllowed.touched)}"
-            #visitAllowed="ngModel" [(ngModel)]="patientInsurance.visitAllowed" />
-    </c-input-group>
-
-    <c-col xs="auto" class="mb-2">
-        <c-date-picker cFormControl closeOnSelect size="sm" placeholder="Expiration Date" FormControl
-            id="expirationDate_Date" name="expirationDate_Date" required disable-date-picker [componentRole]="componentRole"
-            [ngClass]="{'is-invalid': expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)}"
-            [(ngModel)]="patientInsurance.expirationDate_Date" #expirationDate="ngModel"></c-date-picker>
-    </c-col>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" aria-describedby="emailHelp" cButton color="primary" variant="outline"
-            (click)="add()" dispaly-input [componentRole]="componentRole" size="sm">Add</button>
+    <!-- Coverage Details Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Coverage Details</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="6">
+                <label cLabel for="visitAllowed" class="form-label">Visits Allowed <span class="text-danger">*</span></label>
+                <input type="number" cFormControl id="visitAllowed" name="visitAllowed" sizing="sm"
+                    placeholder="Number of visits" required
+                    [ngClass]="{'is-invalid': visitAllowed.invalid && (visitAllowed.dirty || visitAllowed.touched)}"
+                    [(ngModel)]="patientInsurance.visitAllowed" #visitAllowed="ngModel" />
+                <small *ngIf="visitAllowed.invalid && (visitAllowed.dirty || visitAllowed.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="6">
+                <label cLabel for="expirationDate_Date" class="form-label">Expiration Date <span class="text-danger">*</span></label>
+                <c-date-picker cFormControl closeOnSelect size="sm" placeholder="Select date"
+                    id="expirationDate_Date" name="expirationDate_Date" required disable-date-picker [componentRole]="componentRole"
+                    [ngClass]="{'is-invalid': expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)}"
+                    [(ngModel)]="patientInsurance.expirationDate_Date" #expirationDate="ngModel"></c-date-picker>
+                <small *ngIf="expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+        <div class="action-row">
+            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+                <svg cIcon name="cilPlus" class="btn-icon"></svg>
+                Add Insurance
+            </button>
+        </div>
     </div>
 </form>
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Insurance #</th>
-            <th scope="col">Insurance Name</th>
-            <th scope="col">Group #</th>
-            <th scope="col">Payment Type</th>
-            <th scope="col">Payment Value</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let pateintInsurance of patient.patientInsuranceModels;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{pateintInsurance.insuranceNumber}}</td>
-            <td>{{pateintInsurance.insuranceCompany?.name}}</td>
-            <td>{{pateintInsurance.groupNumber}}</td>
-            <td>{{pateintInsurance.paymentType}}</td>
-            <td>{{pateintInsurance.paymentValue}}</td>
-            <td>
-                <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
-                        <svg cIcon name="cilTrash"></svg>
-                    </button>
-                </c-button-group>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<!-- Added Insurance Table -->
+<div class="insurance-list" *ngIf="patient.patientInsuranceModels && patient.patientInsuranceModels.length > 0">
+    <div class="list-header">
+        <span class="list-title">Insurance Plans</span>
+        <span class="list-count">{{patient.patientInsuranceModels.length}} plan(s)</span>
+    </div>
+    <div class="table-responsive">
+        <table class="insurance-table">
+            <thead>
+                <tr>
+                    <th class="col-index">#</th>
+                    <th class="col-company">Company</th>
+                    <th class="col-number">Insurance #</th>
+                    <th class="col-group">Group #</th>
+                    <th class="col-payment">Payment</th>
+                    <th class="col-deductible">Deductible</th>
+                    <th class="col-visits">Visits</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pateintInsurance of patient.patientInsuranceModels; let i = index;">
+                    <td class="col-index">{{i + 1}}</td>
+                    <td class="col-company">
+                        <div class="company-display">
+                            <svg cIcon name="cilShieldAlt" class="insurance-icon"></svg>
+                            {{pateintInsurance.insuranceCompany?.name}}
+                        </div>
+                    </td>
+                    <td class="col-number">
+                        <span class="number-badge">{{pateintInsurance.insuranceNumber}}</span>
+                    </td>
+                    <td class="col-group">{{pateintInsurance.groupNumber}}</td>
+                    <td class="col-payment">
+                        <div class="payment-display">
+                            <span class="type-badge">{{pateintInsurance.paymentType}}</span>
+                            <span class="payment-value">${{pateintInsurance.paymentValue}}</span>
+                        </div>
+                    </td>
+                    <td class="col-deductible">${{pateintInsurance.totalDeductible}}</td>
+                    <td class="col-visits">
+                        <span class="visits-badge">{{pateintInsurance.visitAllowed}}</span>
+                    </td>
+                    <td class="col-actions">
+                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                            <svg cIcon name="cilTrash"></svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="!patient.patientInsuranceModels || patient.patientInsuranceModels.length === 0">
+    <svg cIcon name="cilShieldAlt" class="empty-icon"></svg>
+    <p class="empty-text">No insurance plans added yet</p>
+</div>

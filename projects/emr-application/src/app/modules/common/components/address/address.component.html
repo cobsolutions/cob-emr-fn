@@ -1,131 +1,160 @@
 <form cForm #addressForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
-    <small *ngIf="addresstype.invalid && (addresstype.dirty || addresstype.touched)" class="form-text text-danger">
-        Address Type is required
-    </small>
-    <c-input-group class="mb-3">
-        <select cFormControl cSelect sizing="sm" id="addresstype" name="addresstype" required
-            [ngClass]="{'is-invalid': addresstype.invalid && (addresstype.dirty || addresstype.touched)}"
-            [(ngModel)]="address.addressType" #addresstype="ngModel">
-            <option [ngValue]="null" disabled selected>Select Address Type</option>
-            <option *ngFor="let addresstype of addressKeys(addressTypes)" [ngValue]="addresstype">
-                {{addressTypes[addresstype]}}
-            </option>
-        </select>
-    </c-input-group>
 
-    <span *ngIf="address.addressType ==='Other'">
-        <small *ngIf="other.invalid && (other.dirty || other.touched)" class="form-text text-danger">
-            Other Address is required
-        </small>
-        <c-input-group class="mb-3">
-            <input autoComplete="name" cFormControl id="name" name="name" sizing="sm" placeholder="Other Address"
-                required [ngClass]="{'is-invalid': other.invalid && (other.dirty || other.touched)}"
-                [(ngModel)]="address.other" #other="ngModel" />
-        </c-input-group>
-    </span>
+    <!-- Address Type Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Address Type</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="4">
+                <label cLabel for="addresstype" class="form-label">Type <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="addresstype" name="addresstype" required
+                    [ngClass]="{'is-invalid': addresstype.invalid && (addresstype.dirty || addresstype.touched)}"
+                    [(ngModel)]="address.addressType" #addresstype="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Type</option>
+                    <option *ngFor="let addresstype of addressKeys(addressTypes)" [ngValue]="addresstype">
+                        {{addressTypes[addresstype]}}
+                    </option>
+                </select>
+                <small *ngIf="addresstype.invalid && (addresstype.dirty || addresstype.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="8" *ngIf="address.addressType === 'Other'">
+                <label cLabel for="other" class="form-label">Other Type <span class="text-danger">*</span></label>
+                <input cFormControl id="other" name="other" sizing="sm" placeholder="Specify address type"
+                    required [ngClass]="{'is-invalid': other.invalid && (other.dirty || other.touched)}"
+                    [(ngModel)]="address.other" #other="ngModel" />
+                <small *ngIf="other.invalid && (other.dirty || other.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="firstAddress.invalid && (firstAddress.dirty || firstAddress.touched)" class="form-text text-danger">
-        FirstAddress is required
-    </small>
-    <c-input-group class="mb-3">
-        <input autoComplete="name" cFormControl id="firstAddress" name="firstAddress" sizing="sm"
-            placeholder="First Address" required
-            [ngClass]="{'is-invalid': firstAddress.invalid && (firstAddress.dirty || firstAddress.touched)}"
-            [(ngModel)]="address.firstAddress" #firstAddress="ngModel" />
-    </c-input-group>
+    <!-- Street Address Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Street Address</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="6">
+                <label cLabel for="firstAddress" class="form-label">Address Line 1 <span class="text-danger">*</span></label>
+                <input cFormControl id="firstAddress" name="firstAddress" sizing="sm" placeholder="Street address"
+                    required [ngClass]="{'is-invalid': firstAddress.invalid && (firstAddress.dirty || firstAddress.touched)}"
+                    [(ngModel)]="address.firstAddress" #firstAddress="ngModel" />
+                <small *ngIf="firstAddress.invalid && (firstAddress.dirty || firstAddress.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="6">
+                <label cLabel for="secondAddress" class="form-label">Address Line 2</label>
+                <input cFormControl id="secondAddress" name="secondAddress" sizing="sm" placeholder="Apt, suite, unit, etc."
+                    [ngClass]="{'is-invalid': secondAddress.invalid && (secondAddress.dirty || secondAddress.touched)}"
+                    [(ngModel)]="address.secondAddress" #secondAddress="ngModel" />
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="secondAddress.invalid && (secondAddress.dirty || secondAddress.touched)"
-        class="form-text text-danger">
-        SecondAddress is required
-    </small>
-    <c-input-group class="mb-3">
-        <input cFormControl id="secondAddress" name="secondAddress" sizing="sm" placeholder="Second Address"
-            [ngClass]="{'is-invalid': secondAddress.invalid && (secondAddress.dirty || secondAddress.touched)}"
-            [(ngModel)]="address.secondAddress" #secondAddress="ngModel" />
-    </c-input-group>
-
-    <small *ngIf="country.invalid && (country.dirty || country.touched)" class="form-text text-danger">
-        Country Address is required
-    </small>
-    <c-input-group class="mb-3">
-        <select cFormControl cSelect sizing="sm" id="country" name="country" required
-            [ngClass]="{'is-invalid': country.invalid && (country.dirty || country.touched)}"
-            [(ngModel)]="address.country" #country="ngModel">
-            <option [ngValue]="null" disabled selected>Select Country</option>
-            <option *ngFor="let country of countries" [value]="country.name">
-                {{country.name}}
-            </option>
-        </select>
-    </c-input-group>
-    <span *ngIf="address.country !== 'United States of America' && (address.country !== null)">
-        <small *ngIf="province.invalid && (province.dirty || province.touched)" class="form-text text-danger">
-            Province is required
-        </small>
-        <c-input-group class="mb-3">
-            <input cFormControl id="province" name="province" sizing="sm" placeholder="Province" required
-                [ngClass]="{'is-invalid': province.invalid && (province.dirty || province.touched)}"
-                [(ngModel)]="address.province" #province="ngModel" />
-        </c-input-group>
-    </span>
-
-    <span *ngIf="address.country == 'United States of America'">
-        <small *ngIf="state.invalid && (state.dirty || state.touched)" class="form-text text-danger">
-            State is required
-        </small>
-        <c-input-group class="mb-3">
-            <input cFormControl id="state" name="state" sizing="sm" placeholder="State" required
-                [ngClass]="{'is-invalid': state.invalid && (state.dirty || state.touched)}" [(ngModel)]="address.state"
-                #state="ngModel" />
-        </c-input-group>
-    </span>
-    <small *ngIf="city.invalid && (city.dirty || city.touched)" class="form-text text-danger">
-        City is required
-    </small>
-    <c-input-group class="mb-3">
-        <input cFormControl id="state" name="state" sizing="sm" placeholder="City" required
-            [ngClass]="{'is-invalid': city.invalid && (city.dirty || city.touched)}" [(ngModel)]="address.city"
-            #city="ngModel" />
-    </c-input-group>
-
-    <small *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="form-text text-danger">
-        ZipCode is required
-    </small>
-    <c-input-group class="mb-3">
-        <input zipcode cFormControl id="zipCode" name="zipCode" sizing="sm" placeholder="Zip-Code" required
-            [ngClass]="{'is-invalid': zipCode.invalid && (zipCode.dirty || zipCode.touched)}"
-            [(ngModel)]="address.zipCode" #zipCode="ngModel" />
-    </c-input-group>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button cButton color="primary" variant="outline"  size="sm" (click)="add()" dispaly-input [componentRole]="componentRole">Add</button>
+    <!-- Location Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Location</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="4">
+                <label cLabel for="country" class="form-label">Country <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="country" name="country" required
+                    [ngClass]="{'is-invalid': country.invalid && (country.dirty || country.touched)}"
+                    [(ngModel)]="address.country" #country="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Country</option>
+                    <option *ngFor="let country of countries" [value]="country.name">
+                        {{country.name}}
+                    </option>
+                </select>
+                <small *ngIf="country.invalid && (country.dirty || country.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4" *ngIf="address.country === 'United States of America'">
+                <label cLabel for="state" class="form-label">State <span class="text-danger">*</span></label>
+                <input cFormControl id="state" name="state" sizing="sm" placeholder="State" required
+                    [ngClass]="{'is-invalid': state.invalid && (state.dirty || state.touched)}"
+                    [(ngModel)]="address.state" #state="ngModel" />
+                <small *ngIf="state.invalid && (state.dirty || state.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4" *ngIf="address.country !== 'United States of America' && address.country !== null">
+                <label cLabel for="province" class="form-label">Province <span class="text-danger">*</span></label>
+                <input cFormControl id="province" name="province" sizing="sm" placeholder="Province" required
+                    [ngClass]="{'is-invalid': province.invalid && (province.dirty || province.touched)}"
+                    [(ngModel)]="address.province" #province="ngModel" />
+                <small *ngIf="province.invalid && (province.dirty || province.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4">
+                <label cLabel for="city" class="form-label">City <span class="text-danger">*</span></label>
+                <input cFormControl id="city" name="city" sizing="sm" placeholder="City" required
+                    [ngClass]="{'is-invalid': city.invalid && (city.dirty || city.touched)}"
+                    [(ngModel)]="address.city" #city="ngModel" />
+                <small *ngIf="city.invalid && (city.dirty || city.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="4" *ngIf="!address.country || (address.country !== 'United States of America' && address.country === null)">
+                <!-- Placeholder for alignment -->
+            </c-col>
+            <c-col md="4">
+                <label cLabel for="zipCode" class="form-label">Zip Code <span class="text-danger">*</span></label>
+                <input zipcode cFormControl id="zipCode" name="zipCode" sizing="sm" placeholder="Zip/Postal code" required
+                    [ngClass]="{'is-invalid': zipCode.invalid && (zipCode.dirty || zipCode.touched)}"
+                    [(ngModel)]="address.zipCode" #zipCode="ngModel" />
+                <small *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+        <div class="action-row">
+            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+                <svg cIcon name="cilPlus" class="btn-icon"></svg>
+                Add Address
+            </button>
+        </div>
     </div>
 </form>
-<table  class="table table-sm">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Type</th>
-            <th scope="col">First</th>
-            <th scope="col">Second</th>
-            <th scope="col">Country</th>
-            <th scope="col">Zip-Code</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let address of addresses;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{address.addressType}}</td>
-            <td>{{address.firstAddress}}</td>
-            <td>{{address.secondAddress}}</td>
-            <td>{{address.country}}</td>
-            <td>{{address.zipCode}}</td>
-            <td>
-                <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
-                        <svg cIcon name="cilTrash"></svg>
-                    </button>
-                </c-button-group>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<!-- Added Addresses Table -->
+<div class="addresses-list" *ngIf="addresses && addresses.length > 0">
+    <div class="list-header">
+        <span class="list-title">Added Addresses</span>
+        <span class="list-count">{{addresses.length}} address(es)</span>
+    </div>
+    <div class="table-responsive">
+        <table class="addresses-table">
+            <thead>
+                <tr>
+                    <th class="col-index">#</th>
+                    <th class="col-type">Type</th>
+                    <th class="col-address">Address</th>
+                    <th class="col-location">Location</th>
+                    <th class="col-zip">Zip Code</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let address of addresses; let i = index;">
+                    <td class="col-index">{{i + 1}}</td>
+                    <td class="col-type">
+                        <span class="type-badge">{{address.addressType}}</span>
+                    </td>
+                    <td class="col-address">
+                        <div class="address-line">{{address.firstAddress}}</div>
+                        <div class="address-line secondary" *ngIf="address.secondAddress">{{address.secondAddress}}</div>
+                    </td>
+                    <td class="col-location">
+                        <span>{{address.city}}<span *ngIf="address.state">, {{address.state}}</span><span *ngIf="address.province">, {{address.province}}</span></span>
+                        <div class="country-text">{{address.country}}</div>
+                    </td>
+                    <td class="col-zip">{{address.zipCode}}</td>
+                    <td class="col-actions">
+                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                            <svg cIcon name="cilTrash"></svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="!addresses || addresses.length === 0">
+    <svg cIcon name="cilLocationPin" class="empty-icon"></svg>
+    <p class="empty-text">No addresses added yet</p>
+</div>

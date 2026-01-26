@@ -1,72 +1,130 @@
 <form cForm #contactForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
-    <small *ngIf="phoneType.invalid && (phoneType.dirty || phoneType.touched)" class="form-text text-danger">
-        Phone Type Type is required
-    </small>
-    <c-input-group class="mb-3">
-        <select cFormControl cSelect sizing="sm" id="phoneType" name="phoneType" required
-            [ngClass]="{'is-invalid': phoneType.invalid && (phoneType.dirty || phoneType.touched)}"
-            [(ngModel)]="contact.phoneType" #phoneType="ngModel">
-            <option [ngValue]="null" disabled selected>Select Phone Type</option>
-            <option *ngFor="let phoneType of phoneTypes | keyvalue" [ngValue]="phoneType.key">
-                {{phoneType.value}}
-            </option>
-        </select>
-    </c-input-group>
 
-    <small *ngIf="contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)" class="form-text text-danger">
-        Phone is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <span cInputGroupText id="basic-addon1">+1</span>
-        <input placeholder="Enter Contact Phone" cFormControl id="contactPhone" name="contactPhone" sizing="sm" required
-            [ngClass]="{'is-invalid': contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)}"
-            #contactPhone="ngModel" [ngModel]="contact.phoneNumber| phone" (ngModelChange)="contact.phoneNumber=$event"
-            maxlength="15" />
-    </c-input-group>
+    <!-- Phone Information Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Phone Information</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="4">
+                <label cLabel for="phoneType" class="form-label">Phone Type <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="phoneType" name="phoneType" required
+                    [ngClass]="{'is-invalid': phoneType.invalid && (phoneType.dirty || phoneType.touched)}"
+                    [(ngModel)]="contact.phoneType" #phoneType="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Type</option>
+                    <option *ngFor="let phoneType of phoneTypes | keyvalue" [ngValue]="phoneType.key">
+                        {{phoneType.value}}
+                    </option>
+                </select>
+                <small *ngIf="phoneType.invalid && (phoneType.dirty || phoneType.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="8">
+                <label cLabel for="contactPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <div class="phone-input-wrapper">
+                    <span class="input-prefix">+1</span>
+                    <input cFormControl id="contactPhone" name="contactPhone" sizing="sm"
+                        placeholder="(000) 000-0000" required
+                        [ngClass]="{'is-invalid': contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)}"
+                        #contactPhone="ngModel" [ngModel]="contact.phoneNumber | phone"
+                        (ngModelChange)="contact.phoneNumber=$event" maxlength="15"
+                        class="prefixed-input" />
+                </div>
+                <small *ngIf="contactPhone.invalid && (contactPhone.dirty || contactPhone.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="form-text text-danger">
-        Email is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <span cInputGroupText id="basic-addon1">&#64;</span>
-        <input type="email" placeholder="Enter Contact Email" cFormControl id="contactEmail" name="contactEmail"
-            sizing="sm" required
-            [ngClass]="{'is-invalid': contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)}"
-            #contactEmail="ngModel" [(ngModel)]="contact.email" />
-    </c-input-group>
+    <!-- Email Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Email Address</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="12">
+                <label cLabel for="contactEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                <div class="email-input-wrapper">
+                    <span class="input-prefix">@</span>
+                    <input type="email" cFormControl id="contactEmail" name="contactEmail" sizing="sm"
+                        placeholder="email@example.com" required
+                        [ngClass]="{'is-invalid': contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)}"
+                        #contactEmail="ngModel" [(ngModel)]="contact.email"
+                        class="prefixed-input" />
+                </div>
+                <small *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-
-    <textarea class="mb-3" placeholder="Additional Information" cFormControl id="contactAddInfo" name="contactAddInfo"
-        sizing="sm" #contactAddInfo="ngModel" [(ngModel)]="contact.additionalInfo"> </textarea>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit" aria-describedby="emailHelp" cButton color="primary" variant="outline" size="sm" dispaly-input [componentRole]="componentRole"
-            (click)="add()">Add</button>
+    <!-- Additional Info Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Additional Information</span>
+            <span class="section-optional">Optional</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="12">
+                <textarea cFormControl id="contactAddInfo" name="contactAddInfo" sizing="sm" rows="2"
+                    placeholder="Enter any additional contact notes..."
+                    #contactAddInfo="ngModel" [(ngModel)]="contact.additionalInfo"></textarea>
+            </c-col>
+        </c-row>
+        <div class="action-row">
+            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+                <svg cIcon name="cilPlus" class="btn-icon"></svg>
+                Add Contact
+            </button>
+        </div>
     </div>
 </form>
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">PhoneType</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let address of contacts;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{address.phoneType}}</td>
-            <td>{{address.phoneNumber}}</td>
-            <td>{{address.email}}</td>
-            <td>
-                <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
-                        <svg cIcon name="cilTrash"></svg>
-                    </button>
-                </c-button-group>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<!-- Added Contacts Table -->
+<div class="contacts-list" *ngIf="contacts && contacts.length > 0">
+    <div class="list-header">
+        <span class="list-title">Added Contacts</span>
+        <span class="list-count">{{contacts.length}} contact(s)</span>
+    </div>
+    <div class="table-responsive">
+        <table class="contacts-table">
+            <thead>
+                <tr>
+                    <th class="col-index">#</th>
+                    <th class="col-type">Type</th>
+                    <th class="col-phone">Phone</th>
+                    <th class="col-email">Email</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contact of contacts; let i = index;">
+                    <td class="col-index">{{i + 1}}</td>
+                    <td class="col-type">
+                        <span class="type-badge">{{contact.phoneType}}</span>
+                    </td>
+                    <td class="col-phone">
+                        <div class="phone-display">
+                            <svg cIcon name="cilPhone" class="contact-icon"></svg>
+                            {{contact.phoneNumber}}
+                        </div>
+                    </td>
+                    <td class="col-email">
+                        <div class="email-display">
+                            <svg cIcon name="cilEnvelopeClosed" class="contact-icon"></svg>
+                            {{contact.email}}
+                        </div>
+                    </td>
+                    <td class="col-actions">
+                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                            <svg cIcon name="cilTrash"></svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="!contacts || contacts.length === 0">
+    <svg cIcon name="cilPhone" class="empty-icon"></svg>
+    <p class="empty-text">No contacts added yet</p>
+</div>

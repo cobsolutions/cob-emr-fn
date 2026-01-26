@@ -1,0 +1,123 @@
+/* Patient Basic Info Component Styles */
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+}
+
+.section-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-optional {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.125rem 0.5rem;
+  background: #f8fafc;
+  border-radius: 0.25rem;
+}
+
+.section-toggle {
+  margin: 0;
+}
+
+/* Form Labels */
+.form-label {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: #475569;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.text-danger {
+  color: #dc2626;
+  font-size: 0.6875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Dependent Fields */
+.dependent-fields {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* Phone Input with Prefix */
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.phone-input-wrapper:focus-within {
+  border-color: #334155;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.625rem;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-right: 1px solid #e2e8f0;
+  min-width: 40px;
+  justify-content: center;
+}
+
+.phone-input {
+  flex: 1;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.phone-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .dependent-fields {
+    padding: 0.75rem;
+  }
+}

@@ -1,72 +1,125 @@
 <form cForm #emergencyContactForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
-    <small *ngIf="emergencyName.invalid && (emergencyName.dirty || emergencyName.touched)"
-        class="form-text text-danger">
-        Emergenct Name is required
-    </small>
-    <c-input-group class="mb-3">
-        <input cFormControl id="emergencyName" name="emergencyName" sizing="sm" placeholder="Emergenct Name" required
-            [ngClass]="{'is-invalid': emergencyName.invalid && (emergencyName.dirty || emergencyName.touched)}"
-            [(ngModel)]="emergency.contactName" #emergencyName="ngModel" />
-    </c-input-group>
 
+    <!-- Contact Details Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Emergency Contact Details</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="12">
+                <label cLabel for="emergencyName" class="form-label">Contact Name <span class="text-danger">*</span></label>
+                <input cFormControl id="emergencyName" name="emergencyName" sizing="sm" placeholder="Full name of emergency contact"
+                    required [ngClass]="{'is-invalid': emergencyName.invalid && (emergencyName.dirty || emergencyName.touched)}"
+                    [(ngModel)]="emergency.contactName" #emergencyName="ngModel" />
+                <small *ngIf="emergencyName.invalid && (emergencyName.dirty || emergencyName.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="emergencyPhoneType.invalid && (emergencyPhoneType.dirty || emergencyPhoneType.touched)"
-        class="form-text text-danger">
-        Phone Type Type is required
-    </small>
-    <c-input-group class="mb-3">
-        <select cFormControl cSelect sizing="sm" id="emergencyPhoneType" name="emergencyPhoneType" required
-            [ngClass]="{'is-invalid': emergencyPhoneType.invalid && (emergencyPhoneType.dirty || emergencyPhoneType.touched)}"
-            [(ngModel)]="emergency.phoneType" #emergencyPhoneType="ngModel">
-            <option [ngValue]="null" disabled selected>Select Phone Type</option>
-            <option *ngFor="let phoneType of phoneTypes | keyvalue" [ngValue]="phoneType.key">
-                {{phoneType.value}}
-            </option>
-        </select>
-    </c-input-group>
+    <!-- Phone Information Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Phone Information</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="4">
+                <label cLabel for="emergencyPhoneType" class="form-label">Phone Type <span class="text-danger">*</span></label>
+                <select cFormControl cSelect sizing="sm" id="emergencyPhoneType" name="emergencyPhoneType" required
+                    [ngClass]="{'is-invalid': emergencyPhoneType.invalid && (emergencyPhoneType.dirty || emergencyPhoneType.touched)}"
+                    [(ngModel)]="emergency.phoneType" #emergencyPhoneType="ngModel">
+                    <option [ngValue]="null" disabled selected>Select Type</option>
+                    <option *ngFor="let phoneType of phoneTypes | keyvalue" [ngValue]="phoneType.key">
+                        {{phoneType.value}}
+                    </option>
+                </select>
+                <small *ngIf="emergencyPhoneType.invalid && (emergencyPhoneType.dirty || emergencyPhoneType.touched)" class="text-danger">Required</small>
+            </c-col>
+            <c-col md="8">
+                <label cLabel for="emergencyPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <div class="phone-input-wrapper">
+                    <span class="input-prefix">+1</span>
+                    <input cFormControl id="emergencyPhone" name="emergencyPhone" sizing="sm"
+                        placeholder="(000) 000-0000" required
+                        [ngClass]="{'is-invalid': emergencyPhone.invalid && (emergencyPhone.dirty || emergencyPhone.touched)}"
+                        #emergencyPhone="ngModel" [ngModel]="emergency.phoneNumber | phone"
+                        (ngModelChange)="emergency.phoneNumber=$event" maxlength="15"
+                        class="prefixed-input" />
+                </div>
+                <small *ngIf="emergencyPhone.invalid && (emergencyPhone.dirty || emergencyPhone.touched)" class="text-danger">Required</small>
+            </c-col>
+        </c-row>
+    </div>
 
-    <small *ngIf="emergencyPhone.invalid && (emergencyPhone.dirty || emergencyPhone.touched)"
-        class="form-text text-danger">
-        Phone is required
-    </small>
-    <c-input-group class="mb-3" sizing="sm">
-        <span cInputGroupText id="basic-addon1">+1</span>
-        <input placeholder="Enter Contact Phone" cFormControl id="contactPhone" name="contactPhone" sizing="sm" required
-            [ngClass]="{'is-invalid': emergencyPhone.invalid && (emergencyPhone.dirty || emergencyPhone.touched)}"
-            #emergencyPhone="ngModel" [ngModel]="emergency.phoneNumber| phone"
-            (ngModelChange)="emergency.phoneNumber=$event" maxlength="15" />
-    </c-input-group>
-
-    <textarea class="mb-3" placeholder="Additional Information" cFormControl id="contactAddInfo" name="contactAddInfo"
-        sizing="sm" #contactAddInfo="ngModel" [(ngModel)]="emergency.additionalInfo"> </textarea>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button type="submit"  cButton color="primary" variant="outline"
-            (click)="add()" dispaly-input [componentRole]="componentRole" size="sm">Add</button>
+    <!-- Additional Info Section -->
+    <div class="form-section">
+        <div class="section-header">
+            <span class="section-title">Additional Information</span>
+            <span class="section-optional">Optional</span>
+        </div>
+        <c-row class="mb-3">
+            <c-col md="12">
+                <textarea cFormControl id="contactAddInfo" name="contactAddInfo" sizing="sm" rows="2"
+                    placeholder="Relationship, special instructions, alternate contact times..."
+                    #contactAddInfo="ngModel" [(ngModel)]="emergency.additionalInfo"></textarea>
+            </c-col>
+        </c-row>
+        <div class="action-row">
+            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+                <svg cIcon name="cilPlus" class="btn-icon"></svg>
+                Add Emergency Contact
+            </button>
+        </div>
     </div>
 </form>
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">PhoneType</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let emergenctContact of patient.emergencies;let i=index;">
-            <td>{{i+1}}</td>
-            <td>{{emergenctContact.contactName}}</td>
-            <td>{{emergenctContact.phoneType}}</td>
-            <td>{{emergenctContact.phoneNumber}}</td>
-            <td>
-                <c-button-group aria-label="First group" class="me-2" role="group">
-                    <button cButton color="primary" variant="outline" size="sm" (click)="remove(i)" dispaly-input [componentRole]="componentRole">
-                        <svg cIcon name="cilTrash"></svg>
-                    </button>
-                </c-button-group>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<!-- Added Emergency Contacts Table -->
+<div class="contacts-list" *ngIf="patient.emergencies && patient.emergencies.length > 0">
+    <div class="list-header">
+        <span class="list-title">Emergency Contacts</span>
+        <span class="list-count">{{patient.emergencies.length}} contact(s)</span>
+    </div>
+    <div class="table-responsive">
+        <table class="contacts-table">
+            <thead>
+                <tr>
+                    <th class="col-index">#</th>
+                    <th class="col-name">Name</th>
+                    <th class="col-type">Type</th>
+                    <th class="col-phone">Phone</th>
+                    <th class="col-actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let emergencyContact of patient.emergencies; let i = index;">
+                    <td class="col-index">{{i + 1}}</td>
+                    <td class="col-name">
+                        <div class="name-display">
+                            <svg cIcon name="cilUser" class="contact-icon"></svg>
+                            {{emergencyContact.contactName}}
+                        </div>
+                    </td>
+                    <td class="col-type">
+                        <span class="type-badge">{{emergencyContact.phoneType}}</span>
+                    </td>
+                    <td class="col-phone">
+                        <div class="phone-display">
+                            <svg cIcon name="cilPhone" class="contact-icon"></svg>
+                            {{emergencyContact.phoneNumber}}
+                        </div>
+                    </td>
+                    <td class="col-actions">
+                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                            <svg cIcon name="cilTrash"></svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="!patient.emergencies || patient.emergencies.length === 0">
+    <svg cIcon name="cilMedicalCross" class="empty-icon"></svg>
+    <p class="empty-text">No emergency contacts added yet</p>
+</div>
