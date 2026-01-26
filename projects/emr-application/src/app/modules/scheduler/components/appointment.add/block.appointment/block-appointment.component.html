@@ -1,130 +1,276 @@
-<c-spinner color="dark" variant="grow" *ngIf="isLoading"></c-spinner>
-<c-container fluid *ngIf="!isLoading">
-    <c-row class="justify-content-center">
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <strong *ngIf="isValidTitle">Appointment for</strong>
-                    <strong *ngIf="!isValidTitle" class="text-danger">Appointment for</strong>
-                </c-card-header>
-                <c-card-body>
-                    <div *ngIf="!isValidTitle">
-                        <div class="text-danger">
-                            Field is required;
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label cLabel for="appointmentWhat">What <strong class="text-danger">*</strong></label>
-                        <input cFormControl id="appointmentWhat" sizing="sm" [(ngModel)]="appointment.title" />
-                    </div>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <c-row>
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <strong *ngIf="isValidDate">Appointment at</strong>
-                    <strong *ngIf="!isValidDate" class="text-danger">Appointment at</strong>
-                </c-card-header>
-                <c-card-body>
-                    <div *ngIf="!isValidDate">
-                        <div class="text-danger">
-                            Appointment start time cant greater than appointment end date
-                        </div>
-                    </div>
-                    <div class="mb-1">
-                        <c-row>
-                            <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.startDate"
-                                    name="startDate" [(ngModel)]="appointment.appointmentDate.startDate"
-                                    (dateChange)="changestartDate($event)"></c-date-picker></c-col>
-                            <c-col xs="4"><c-time-picker size="sm" id="startTime" name="startTime"
-                                    [(ngModel)]="appointment.appointmentDate.startTime"
-                                    (timeChange)="changeStartTime($event)"></c-time-picker></c-col>
-                        </c-row>
-                    </div>
-                    <c-row>
-                        <c-col xs="8"><c-date-picker size="sm" [date]="appointment.appointmentDate.endDate"
-                                name="endDate" (dateChange)="changeEndDate($event)"
-                                [(ngModel)]="appointment.appointmentDate.endDate"></c-date-picker></c-col>
-                        <c-col xs="4"><c-time-picker size="sm" id="endTime" name="endTime"
-                                [(ngModel)]="appointment.appointmentDate.endTime"></c-time-picker></c-col>
-                    </c-row>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <!-- Calendar-->
-    <c-row *ngIf="module ==='month' && calendars">
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header>
-                    <strong>Calendar</strong>
-                </c-card-header>
-                <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="calendar" name="calendar" required
-                        [(ngModel)]="appointment.calendarId">
-                        <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
-                            {{calendar.name}}
-                        </option>
-                    </select>
+<!-- Loading State -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <c-spinner color="dark" variant="grow"></c-spinner>
+</div>
 
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <c-row class="justify-content-center" *ngIf="selectedClinic">
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header><strong>Clinic</strong></c-card-header>
-                <c-card-body>
-                    <div class="mb-1">
-                        <input cFormControl [value]="selectedClinic.name" sizing="sm" disabled="true">
-                    </div>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <!-- Appointment Type-->
-    <c-row>
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header><strong>Appointment Type</strong></c-card-header>
-                <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="apptype" name="apptype"
-                        [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
-                        [(ngModel)]="appointment.appointmentTypeId" #apptype="ngModel" required>
-                        <option *ngFor="let type of appointmentTypes
-                        " [value]="type.id">
-                            {{type.name}}
-                        </option>
-                    </select>
-                    <textarea cFormControl id="exampleFormControlTextarea1" rows="2" id="appointmentnote"
-                        name="appointmentnote" [(ngModel)]="appointment.note" placeholder="Appointment Note"></textarea>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <!--Appointment Repetition-->
-    <c-row>
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header><strong>Appointment Repetition</strong></c-card-header>
-                <c-card-body>
-                    <select cFormControl cSelect class="mb-2" sizing="sm" id="repetition" name="repetition" (change)="changeAppointmentRepetition()"
-                        [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
-                        #repetition="ngModel">
-                        <option [ngValue]="null" selected>Don't Repeat</option>
-                        <option [ngValue]="'Daily'" selected>Daily</option>
-                        <option [ngValue]="'Weekly'" selected>Weekly</option>
-                        <option [ngValue]="'Monthly'" selected>Monthly</option>
-                        <option [ngValue]="'Yearly'" selected>Yearly</option>
-                    </select>
-                    <repeat-appointment #repeatAppointmentComponent
-                        [configuration]="appointment.appointmentRepetitionConfiguration"></repeat-appointment>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-</c-container>
+<!-- Main Content -->
+<div class="appointment-layout" *ngIf="!isLoading">
+  <!-- Progress Indicator Sidebar -->
+  <aside class="progress-sidebar">
+    <div class="progress-sidebar-content">
+      <div class="progress-title">Sections</div>
+      <ul class="progress-list">
+        <li class="progress-item" [ngClass]="{'completed': isValidTitleSection}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidTitleSection ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Title</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': isValidAppointmentDate}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidAppointmentDate ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Date & Time</span>
+        </li>
+        <li class="progress-item" *ngIf="module === 'month' && calendars" [ngClass]="{'completed': appointment.calendarId}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="appointment.calendarId ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Calendar</span>
+        </li>
+        <li class="progress-item" *ngIf="selectedClinic" [ngClass]="{'completed': isValidClinic}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidClinic ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Clinic</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': isValidAppointmentType}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidAppointmentType ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Type</span>
+        </li>
+        <li class="progress-item optional">
+          <span class="progress-indicator">
+            <svg cIcon name="cilMinus" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Repetition</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <!-- Appointment For Section -->
+    <c-card class="section-card">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isValidTitleSection}">
+        <div class="card-header-title">
+          <svg cIcon name="cilTextSquare" class="card-icon"></svg>
+          <span>Appointment For</span>
+        </div>
+        <span class="card-status" *ngIf="!isValidTitleSection">
+          <svg cIcon name="cilWarning" class="status-icon"></svg>
+          Required
+        </span>
+        <span class="card-status valid" *ngIf="isValidTitleSection">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="title-error-alert" *ngIf="!isValidTitle">
+          <svg cIcon name="cilWarning" class="alert-icon"></svg>
+          <span>This field is required</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">
+            <svg cIcon name="cilDescription" class="label-icon"></svg>
+            What <span class="required-marker">*</span>
+          </label>
+          <input cFormControl id="appointmentWhat" name="appointmentWhat"
+            [ngClass]="{'is-invalid': !isValidTitle}"
+            [(ngModel)]="appointment.title"
+            placeholder="Enter appointment title or description..." />
+        </div>
+      </c-card-body>
+    </c-card>
+
+    <!-- Appointment Date Section -->
+    <c-card class="section-card">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isValidAppointmentDate}">
+        <div class="card-header-title">
+          <svg cIcon name="cilClock" class="card-icon"></svg>
+          <span>Appointment Date & Time</span>
+        </div>
+        <span class="card-status" *ngIf="!isValidAppointmentDate">
+          <svg cIcon name="cilWarning" class="status-icon"></svg>
+          Required
+        </span>
+        <span class="card-status valid" *ngIf="isValidAppointmentDate">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="date-error-alert" *ngIf="!isValidDate">
+          <svg cIcon name="cilWarning" class="alert-icon"></svg>
+          <span>Appointment start date cannot be greater than appointment end date</span>
+        </div>
+        <div class="datetime-grid">
+          <div class="datetime-group">
+            <label class="form-label">
+              <svg cIcon name="cilCalendar" class="label-icon"></svg>
+              Start Date
+            </label>
+            <c-date-picker name="startDate"
+              [date]="appointment.appointmentDate.startDate"
+              [(ngModel)]="appointment.appointmentDate.startDate"
+              (dateChange)="changestartDate($event)">
+            </c-date-picker>
+          </div>
+          <div class="datetime-group">
+            <label class="form-label">
+              <svg cIcon name="cilClock" class="label-icon"></svg>
+              Start Time
+            </label>
+            <c-time-picker id="startTime" name="startTime"
+              [(ngModel)]="appointment.appointmentDate.startTime"
+              (timeChange)="changeStartTime($event)">
+            </c-time-picker>
+          </div>
+          <div class="datetime-group">
+            <label class="form-label">
+              <svg cIcon name="cilCalendar" class="label-icon"></svg>
+              End Date
+            </label>
+            <c-date-picker name="endDate"
+              [date]="appointment.appointmentDate.endDate"
+              [(ngModel)]="appointment.appointmentDate.endDate"
+              (dateChange)="changeEndDate($event)">
+            </c-date-picker>
+          </div>
+          <div class="datetime-group">
+            <label class="form-label">
+              <svg cIcon name="cilClock" class="label-icon"></svg>
+              End Time
+            </label>
+            <c-time-picker id="endTime" name="endTime"
+              [(ngModel)]="appointment.appointmentDate.endTime">
+            </c-time-picker>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+
+    <!-- Calendar Section (conditional) -->
+    <c-card class="section-card" *ngIf="module === 'month' && calendars">
+      <div class="card-header-custom">
+        <div class="card-header-title">
+          <svg cIcon name="cilCalendarCheck" class="card-icon"></svg>
+          <span>Calendar</span>
+        </div>
+        <span class="card-status valid" *ngIf="appointment.calendarId">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Selected
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="form-group">
+          <label class="form-label">Select Calendar <span class="required-marker">*</span></label>
+          <select cFormControl cSelect id="calendar" name="calendar" required
+            [(ngModel)]="appointment.calendarId">
+            <option *ngFor="let calendar of calendars" [ngValue]="calendar.id">
+              {{ calendar.name }}
+            </option>
+          </select>
+        </div>
+      </c-card-body>
+    </c-card>
+
+    <!-- Clinic Section -->
+    <c-card class="section-card" *ngIf="selectedClinic">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isValidClinic}">
+        <div class="card-header-title">
+          <svg cIcon name="cilHospital" class="card-icon"></svg>
+          <span>Clinic</span>
+        </div>
+        <span class="card-status valid" *ngIf="isValidClinic">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="clinic-single">
+          <div class="clinic-badge">
+            <svg cIcon name="cilHospital" class="clinic-icon"></svg>
+            <span>{{ selectedClinic?.name }}</span>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+
+    <!-- Appointment Type Section -->
+    <c-card class="section-card">
+      <div class="card-header-custom" [ngClass]="{'invalid': !isValidAppointmentType}">
+        <div class="card-header-title">
+          <svg cIcon name="cilTags" class="card-icon"></svg>
+          <span>Appointment Type</span>
+        </div>
+        <span class="card-status" *ngIf="!isValidAppointmentType">
+          <svg cIcon name="cilWarning" class="status-icon"></svg>
+          Required
+        </span>
+        <span class="card-status valid" *ngIf="isValidAppointmentType">
+          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+          Complete
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Type <span class="required-marker">*</span></label>
+            <select cFormControl cSelect id="apptype" name="apptype"
+              [ngClass]="{'is-invalid': apptype.invalid && (apptype.dirty || apptype.touched)}"
+              [(ngModel)]="appointment.appointmentTypeId" #apptype="ngModel" required>
+              <option *ngFor="let type of appointmentTypes" [value]="type.id">
+                {{ type.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">
+              <svg cIcon name="cilNotes" class="label-icon"></svg>
+              Appointment Note
+            </label>
+            <textarea cFormControl id="appointmentnote" name="appointmentnote" rows="3"
+              [(ngModel)]="appointment.note"
+              placeholder="Add any notes about this appointment...">
+            </textarea>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+
+    <!-- Appointment Repetition Section -->
+    <c-card class="section-card">
+      <div class="card-header-custom optional">
+        <div class="card-header-title">
+          <svg cIcon name="cilSync" class="card-icon"></svg>
+          <span>Appointment Repetition</span>
+        </div>
+        <span class="card-badge-optional">Optional</span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <div class="form-group">
+          <label class="form-label">Repeat Pattern</label>
+          <select cFormControl cSelect id="repetition" name="repetition"
+            (change)="changeAppointmentRepetition()"
+            [(ngModel)]="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType"
+            #repetition="ngModel">
+            <option [ngValue]="null" selected>Don't Repeat</option>
+            <option [ngValue]="'Daily'">Daily</option>
+            <option [ngValue]="'Weekly'">Weekly</option>
+            <option [ngValue]="'Monthly'">Monthly</option>
+            <option [ngValue]="'Yearly'">Yearly</option>
+          </select>
+        </div>
+        <div class="repetition-config" *ngIf="appointment.appointmentRepetitionConfiguration.appointmentRepetitionType">
+          <repeat-appointment #repeatAppointmentComponent
+            [configuration]="appointment.appointmentRepetitionConfiguration">
+          </repeat-appointment>
+        </div>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

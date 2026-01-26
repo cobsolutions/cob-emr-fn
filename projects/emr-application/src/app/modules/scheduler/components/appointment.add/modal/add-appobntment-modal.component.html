@@ -1,10 +1,44 @@
-<h2 mat-dialog-title>Add Appointment</h2>
-<mat-dialog-content class="mat-typography">
+<!-- Modal Header -->
+<div class="modal-header">
+  <div class="modal-title-section">
+    <div class="modal-icon-wrapper">
+      <svg cIcon name="cilCalendarCheck" class="modal-icon"></svg>
+    </div>
+    <div class="modal-title-content">
+      <h2 class="modal-title">Add Appointment</h2>
+      <p class="modal-subtitle">Create a new appointment entry</p>
+    </div>
+  </div>
+  <button class="close-btn" (click)="cancel()" type="button">
+    <svg cIcon name="cilX" class="close-icon"></svg>
+  </button>
+</div>
 
-  <app-appointment-add #appointmentAddComponent [startDate]="data.startDate" [calendarId]="data.calendarId"
-    [module]="module" [schedulerSettings]="data.schedulerSettings"></app-appointment-add>
+<!-- Modal Content -->
+<mat-dialog-content class="modal-content">
+  <app-appointment-add #appointmentAddComponent
+    [startDate]="data.startDate"
+    [calendarId]="data.calendarId"
+    [module]="module"
+    [showHeader]="false"
+    [schedulerSettings]="data.schedulerSettings">
+  </app-appointment-add>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button cButton (click)="create()" class="mx-3" variant="outline">Create</button>
-  <button cButton (click)="cancel()" variant="outline">Cancel</button>
+
+<!-- Modal Footer -->
+<mat-dialog-actions class="modal-footer">
+  <div class="footer-hint">
+    <svg cIcon name="cilInfo" class="hint-icon"></svg>
+    <span>Fill in all required fields to create the appointment</span>
+  </div>
+  <div class="footer-actions">
+    <button class="btn-cancel" (click)="cancel()" type="button">
+      <svg cIcon name="cilX" class="btn-icon"></svg>
+      <span>Cancel</span>
+    </button>
+    <button class="btn-create" (click)="create()" type="button">
+      <svg cIcon name="cilCheck" class="btn-icon"></svg>
+      <span>Create Appointment</span>
+    </button>
+  </div>
 </mat-dialog-actions>

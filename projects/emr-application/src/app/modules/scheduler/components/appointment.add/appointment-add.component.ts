@@ -24,6 +24,7 @@ import { FullAppointmentComponent } from './full.appointment/full-appointment.co
 })
 export class AppointmentAddComponent implements OnInit {
   @Input() module: string
+  @Input() showHeader: boolean = true;
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
   @ViewChild('fullAppointment') fullAppointmentComponent: FullAppointmentComponent;
   @ViewChild('blockAppointment') blockAppointmentComponent: BlockAppointmentComponent;
