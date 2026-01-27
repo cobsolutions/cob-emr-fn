@@ -100,6 +100,24 @@
   </c-card>
 </div>
 
+<!-- Missing Settings Message -->
+<div class="settings-required-container" *ngIf="!isLoading && !isSchedulerSetting">
+  <c-card class="settings-required-card">
+    <c-card-body class="settings-required-body">
+      <svg cIcon name="cilSettings" size="3xl" class="settings-required-icon"></svg>
+      <h3 class="settings-required-title">Scheduler Not Configured</h3>
+      <p class="settings-required-text">
+        The scheduler settings for this clinic have not been configured yet.
+        Please set up the working hours, time intervals, and appointment duration before using the scheduler.
+      </p>
+      <a cButton color="primary" routerLink="/emr/scheduler/settings" class="settings-required-btn">
+        <svg cIcon name="cilSettings" class="btn-icon"></svg>
+        Go to Scheduler Settings
+      </a>
+    </c-card-body>
+  </c-card>
+</div>
+
 <!-- Calendar View Container -->
 <div class="calendar-container" [ngSwitch]="view" *ngIf="schedulerSettingsa">
   <!-- Month View -->

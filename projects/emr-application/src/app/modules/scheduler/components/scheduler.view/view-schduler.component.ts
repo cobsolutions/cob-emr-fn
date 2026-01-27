@@ -103,10 +103,15 @@ export class ViewSchdulerComponent implements OnInit {
           // result[] : [0] calendars , [1] scheduler settings , [2] scheduler user setting for calendars selections
           this.userSelectedCalendars = result[2]
           this.calendars = result[0];
+          this.isLoading = false;
+          if (!FetchSchedulerSettings.isValid(result[1])) {
+            this.isSchedulerSetting = false;
+            return;
+          }
+          this.isSchedulerSetting = true;
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
           this.handleEditableAppointmentService.schedulerSettings = this.schedulerSettingsa;
-          this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
           if (this.userSelectedCalendars.length !== 0)
