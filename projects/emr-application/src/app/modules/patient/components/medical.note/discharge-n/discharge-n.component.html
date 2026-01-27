@@ -52,7 +52,7 @@
                 <ng-template matStepLabel>Billing</ng-template>
                 <billing-n [stepper]="stepper" [parentForm]="dischargeNoteForm"
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4] "
-                    [noteTypeId]="'DischargeNote'" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
+                    [noteTypeId]="'DischargeNote'" [noteType]="type" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
                     [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing"
                     (backToRecords)="backtoPatientRecordActions()"></billing-n>
             </mat-step>

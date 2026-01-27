@@ -29,7 +29,7 @@
                 <ng-template matStepLabel>Objective</ng-template>
                 <!-- Billing inside Objective for Daily Note -->
                 <billing-n *ngIf="visitedSteps[1]" [stepper]="stepper" [parentForm]="dailyNoteForm"
-                    (formReady)="setChildForm('billing', $event)" [noteTypeId]="'DailyNote'" [caseId]="caseId"
+                    (formReady)="setChildForm('billing', $event)" [noteTypeId]="'DailyNote'" [noteType]="type" [caseId]="caseId"
                     [medicalNoteId]="medicalNoteId" [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing">
                 </billing-n>
             </mat-step>

@@ -29,7 +29,7 @@ export class BillingNComponent implements OnInit {
   BillingForm: FormGroup;
   finalizeNoteVisibility: boolean = false;
   forwardVisibility: boolean = false;
-  noteType: MedicalNoteType = MedicalNoteType.Initial_Examination;
+  @Input() noteType: MedicalNoteType;
   medicalNoteRequest: MedicalNoteRequest;
   constructor(
     private fb: FormBuilder,
