@@ -1,87 +1,136 @@
-<c-container fluid>
+<!-- Main Layout with Progress Sidebar -->
+<div class="page-layout">
+  <!-- Progress Indicator Sidebar -->
+  <aside class="progress-sidebar">
+    <div class="progress-sidebar-content">
+      <div class="progress-title">Sections</div>
+      <ul class="progress-list">
+        <li class="progress-item" [ngClass]="{'completed': name?.valid && type?.valid && phone?.valid && fax?.valid}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="name?.valid && type?.valid && phone?.valid && fax?.valid ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Essential Info</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': insuranceCompany.addresses?.length > 0}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="insuranceCompany.addresses?.length > 0 ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Address</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Form Content -->
+  <div class="form-container">
     <form cForm #editInsuranceCompanyForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
-        <c-row class="justify-content-center">
-            <c-col class="col">
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <h3>
-                            essential information</h3>
-                    </c-card-header>
-                    <c-card-body>
 
-                        <small *ngIf="validForm   && name.invalid && (name.dirty || name.touched)"
-                            class="form-text text-danger">
-                            Insurance Company Name is required
-                        </small>
-                        <c-input-group class="mb-3">
-                            <input autoComplete="name" cFormControl id="name" name="name" sizing="sm"
-                                placeholder="Enter Insurance Company Name" required
-                                [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
-                                [(ngModel)]="insuranceCompany.name" #name="ngModel" />
-                        </c-input-group>
-                        <small *ngIf="validForm   && type.invalid && (type.dirty || type.touched)"
-                            class="form-text text-danger">
-                            Insurance Company type is required
-                        </small>
-                        <c-input-group class="mb-3">
-                            <select cFormControl cSelect sizing="sm" id="type" name="type"
-                                placeholder="Enter Insurance Company Name" required
-                                [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
-                                [(ngModel)]="insuranceCompany.insuranceType" #type="ngModel">
-                                <option [ngValue]="null" disabled selected>Select insurance Company Type</option>
-                                <option *ngFor="let insuranceCompanytype of insuranceCompanytypes | keyvalue"
-                                    [ngValue]="insuranceCompanytype.key">
-                                    {{insuranceCompanytype.value}}
-                                </option>
-                            </select>
-                        </c-input-group>
-                        <small *ngIf="validForm   && phone.invalid && (phone.dirty || phone.touched)"
-                            class="form-text text-danger">
-                            Insurance Company Phone is required
-                        </small>
-                        <c-input-group class="mb-3" sizing="sm">
-                            <span cInputGroupText id="basic-addon1">+1</span>
-                            <input placeholder="Enter Insurance Company Phone" cFormControl id="phone" name="phone"
-                                sizing="sm" required
-                                [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}"
-                                #phone="ngModel" [ngModel]="insuranceCompany.phone| phone"
-                                (ngModelChange)="insuranceCompany.phone=$event" maxlength="15" />
-                        </c-input-group>
-                        <small *ngIf="validForm   && fax.invalid && (fax.dirty || fax.touched)"
-                            class="form-text text-danger">
-                            Insurance Company Fax is required
-                        </small>
-                        <c-input-group class="mb-3" sizing="sm">
-                            <span cInputGroupText id="basic-addon1">+1</span>
-                            <input placeholder="Enter Insurance Company Fax" cFormControl id="fax" name="fax"
-                                sizing="sm" required
-                                [ngClass]="{'is-invalid': phone.invalid && (fax.dirty || fax.touched)}" #fax="ngModel"
-                                [ngModel]="insuranceCompany.fax| phone" (ngModelChange)="insuranceCompany.fax=$event"
-                                maxlength="15" />
-                        </c-input-group>
-
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-        <c-row class="justify-content-center">
-            <c-col class="col">
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <h3>Address information</h3>
-                    </c-card-header>
-                    <c-card-body>
-                        <small *ngIf="!validAddress" class="form-text text-danger">
-                            Add one address
-                        </small>
-                        <app-address #editAddresInsuranceCompany [addresses]="insuranceCompany.addresses"
-                            (pushedAddresses)="getInsuranceCompanyAddresses($event)"></app-address>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-        <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit">Update</button>
+      <!-- Essential Information -->
+      <c-card class="section-card" id="section-essential">
+        <div class="card-header-custom" [ngClass]="{'invalid': name?.invalid || type?.invalid || phone?.invalid || fax?.invalid}">
+          <div class="card-header-title">
+            <svg cIcon name="cilBuilding" class="card-icon"></svg>
+            <span>Essential Information</span>
+          </div>
+          <span class="card-status" *ngIf="name?.invalid || type?.invalid || phone?.invalid || fax?.invalid">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="name?.valid && type?.valid && phone?.valid && fax?.valid">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
         </div>
+        <c-card-body class="card-body-custom">
+          <small *ngIf="validForm && name.invalid && (name.dirty || name.touched)"
+            class="form-text text-danger">
+            Insurance Company Name is required
+          </small>
+          <c-input-group class="mb-3">
+            <input autoComplete="name" cFormControl id="name" name="name" sizing="sm"
+              placeholder="Enter Insurance Company Name" required
+              [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
+              [(ngModel)]="insuranceCompany.name" #name="ngModel" />
+          </c-input-group>
+          <small *ngIf="validForm && type.invalid && (type.dirty || type.touched)"
+            class="form-text text-danger">
+            Insurance Company type is required
+          </small>
+          <c-input-group class="mb-3">
+            <select cFormControl cSelect sizing="sm" id="type" name="type"
+              placeholder="Enter Insurance Company Name" required
+              [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
+              [(ngModel)]="insuranceCompany.insuranceType" #type="ngModel">
+              <option [ngValue]="null" disabled selected>Select insurance Company Type</option>
+              <option *ngFor="let insuranceCompanytype of insuranceCompanytypes | keyvalue"
+                [ngValue]="insuranceCompanytype.key">
+                {{insuranceCompanytype.value}}
+              </option>
+            </select>
+          </c-input-group>
+          <small *ngIf="validForm && phone.invalid && (phone.dirty || phone.touched)"
+            class="form-text text-danger">
+            Insurance Company Phone is required
+          </small>
+          <c-input-group class="mb-3" sizing="sm">
+            <span cInputGroupText id="basic-addon1">+1</span>
+            <input placeholder="Enter Insurance Company Phone" cFormControl id="phone" name="phone"
+              sizing="sm" required
+              [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}"
+              #phone="ngModel" [ngModel]="insuranceCompany.phone| phone"
+              (ngModelChange)="insuranceCompany.phone=$event" maxlength="15" />
+          </c-input-group>
+          <small *ngIf="validForm && fax.invalid && (fax.dirty || fax.touched)"
+            class="form-text text-danger">
+            Insurance Company Fax is required
+          </small>
+          <c-input-group class="mb-3" sizing="sm">
+            <span cInputGroupText id="basic-addon1">+1</span>
+            <input placeholder="Enter Insurance Company Fax" cFormControl id="fax" name="fax"
+              sizing="sm" required
+              [ngClass]="{'is-invalid': phone.invalid && (fax.dirty || fax.touched)}" #fax="ngModel"
+              [ngModel]="insuranceCompany.fax| phone" (ngModelChange)="insuranceCompany.fax=$event"
+              maxlength="15" />
+          </c-input-group>
+        </c-card-body>
+      </c-card>
+
+      <!-- Address Information -->
+      <c-card class="section-card" id="section-address">
+        <div class="card-header-custom" [ngClass]="{'invalid': !insuranceCompany.addresses?.length}">
+          <div class="card-header-title">
+            <svg cIcon name="cilLocationPin" class="card-icon"></svg>
+            <span>Address Information</span>
+          </div>
+          <span class="card-status" *ngIf="!insuranceCompany.addresses?.length">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="insuranceCompany.addresses?.length > 0">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
+        </div>
+        <c-card-body class="card-body-custom">
+          <small *ngIf="!validAddress" class="form-text text-danger">
+            Add one address
+          </small>
+          <app-address #editAddresInsuranceCompany [addresses]="insuranceCompany.addresses"
+            (pushedAddresses)="getInsuranceCompanyAddresses($event)"></app-address>
+        </c-card-body>
+      </c-card>
+
+      <!-- Action Section -->
+      <div class="action-section">
+        <button
+          cButton
+          class="create-btn"
+          [ngClass]="{'disabled': !editInsuranceCompanyForm.valid || !insuranceCompany.addresses?.length}"
+          type="submit">
+          <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
+          Update Insurance Company
+        </button>
+      </div>
     </form>
-</c-container>
+  </div>
+</div>
