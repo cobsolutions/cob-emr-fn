@@ -129,7 +129,8 @@ import {
   ,cilChevronCircleDownAlt
   ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
-  cilBan, cilChevronBottom
+  cilBan, cilChevronBottom,
+  cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -278,7 +279,8 @@ export const iconSubset = {
   cilPhone,
   cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
-  cilBan, cilChevronBottom
+  cilBan, cilChevronBottom,
+  cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare
 };
 
 export enum IconSubset {

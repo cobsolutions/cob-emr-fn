@@ -28,6 +28,7 @@ interface SearchCriteria {
 export class CalendarListComponent extends ListTemplate implements OnInit {
 
   searchCriteria: SearchCriteria = {};
+  searchCollapsed: boolean = false;
   calendars$!: Observable<CalendarsListModel[]>;
   columns: (string | IColumn)[];
   createCalendarVisibility: boolean = false;
