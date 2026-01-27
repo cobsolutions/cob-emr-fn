@@ -14,13 +14,21 @@
 </div>
 
 <!--sidebar-->
-<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" visible *ngIf="!isLoading">
-  <c-sidebar-brand [brandNarrow]="{
-      src: 'assets/img/brand/coreui-signet-white.svg',
-      width: 46,
-      height: 46,
-      alt: 'CoreUI Logo'
-    }" [routerLink]="[]">
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" colorScheme="light" visible *ngIf="!isLoading">
+  <c-sidebar-brand [routerLink]="['/emr/dashboard']" class="sidebar-brand-custom">
+    <div class="sidebar-brand-full">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+           stroke="#0891B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+      <span class="brand-text">EMR<span class="brand-text-light">System</span></span>
+    </div>
+    <div class="sidebar-brand-narrow">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+           stroke="#0891B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+    </div>
   </c-sidebar-brand>
 
 

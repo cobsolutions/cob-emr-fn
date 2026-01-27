@@ -125,7 +125,7 @@ import {
   cilMedicalCross,
   cibHockeyapp,
   cibKeybase,
-  cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cibMailRu
+  cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cilFax,cibMailRu
   ,cilChevronCircleDownAlt
   ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
@@ -277,6 +277,7 @@ export const iconSubset = {
   cilInfinity,
   cilMedicalCross,
   cilPhone,
+  cilFax,
   cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
   cilBan, cilChevronBottom,
