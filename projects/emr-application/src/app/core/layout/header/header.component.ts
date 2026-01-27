@@ -14,6 +14,7 @@ import { LoggedInService } from '../../../modules/security/service/loggedIn/logg
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
 export class DefaultHeaderComponent extends HeaderComponent {
   clinics: Clinic[] = new Array();

@@ -131,6 +131,7 @@
       margin: 0;
       border-radius: 0;
       border-left: 3px solid transparent;
+      position: relative;
     }
 
     .nav-group-items .nav-link.active {
@@ -140,6 +141,69 @@
 
     .nav-group-items .nav-link:hover {
       border-left-color: #CBD5E1;
+    }
+
+    // ----- Tree-view connectors for child items -----
+    .nav-group-items {
+      position: relative;
+
+      // Vertical line segment on each child wrapper
+      > * {
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 1.75rem;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: #CBD5E1;
+          pointer-events: none;
+        }
+
+        // Last child: vertical line stops at center (└ style)
+        &:last-child::before {
+          bottom: auto;
+          height: 50%;
+        }
+      }
+
+      // Horizontal branch connector on each child link
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        left: calc(1.75rem - 3px);
+        top: 50%;
+        width: 0.625rem;
+        height: 1px;
+        background: #CBD5E1;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      // Leaf-node dot indicator
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: calc(1.75rem - 3px + 0.625rem);
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #CBD5E1;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .nav-link.active::after {
+        background: #0891B2;
+      }
+
+      .nav-link:hover::after {
+        background: #94A3B8;
+      }
     }
 
     // Group toggle arrow transition
@@ -229,6 +293,27 @@
     border-left-color: rgba(255, 255, 255, 0.2);
   }
 
+  // Dark-theme tree connector colors
+  .sidebar-nav .nav-group-items > *::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link::after {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link.active::after {
+    background: #5EEAD4;
+  }
+
+  .sidebar-nav .nav-group-items .nav-link:hover::after {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
   .sidebar-toggler {
     border-top-color: rgba(255, 255, 255, 0.1);
   }
@@ -243,5 +328,17 @@
     &::-webkit-scrollbar-thumb:hover {
       background-color: rgba(255, 255, 255, 0.3);
     }
+  }
+}
+
+// ===========================================================================
+// Hide tree connectors when sidebar is collapsed (narrow mode)
+// ===========================================================================
+.sidebar.sidebar-narrow,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-nav .nav-group-items > *::before,
+  .sidebar-nav .nav-group-items .nav-link::before,
+  .sidebar-nav .nav-group-items .nav-link::after {
+    display: none;
   }
 }
