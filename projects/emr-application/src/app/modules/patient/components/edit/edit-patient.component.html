@@ -3,6 +3,53 @@
     <!-- Patient Header -->
 
     <div class="d-flex align-items-center justify-content-between border-bottom pb-2 mb-3">
+        <!-- Progress Sidebar -->
+        <aside class="progress-sidebar">
+            <div class="progress-sidebar-content">
+                <div class="progress-title">Sections</div>
+                <ul class="progress-list">
+                    <li class="progress-item" [ngClass]="{'completed': hasAddress}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasAddress ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Address</span>
+                    </li>
+                    <li class="progress-item" [ngClass]="{'completed': hasContact}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasContact ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Contact</span>
+                    </li>
+                    <li class="progress-item" [ngClass]="{'completed': hasIdentification}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasIdentification ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Identification</span>
+                    </li>
+                    <li class="progress-item" [ngClass]="{'completed': hasInsurance}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasInsurance ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Insurance</span>
+                    </li>
+                    <li class="progress-item" [ngClass]="{'completed': hasCase}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasCase ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Case</span>
+                    </li>
+                    <li class="progress-item" [ngClass]="{'completed': hasClinic}">
+                        <span class="progress-indicator">
+                            <svg cIcon [name]="hasClinic ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+                        </span>
+                        <span class="progress-label">Clinic</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between border-bottom pb-2 mb-3">
         <!-- Left side: avatar + patient info -->
         <div class="d-flex align-items-center">
             <div class="me-3">

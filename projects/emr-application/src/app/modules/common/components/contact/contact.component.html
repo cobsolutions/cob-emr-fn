@@ -38,19 +38,18 @@
     <div class="form-section">
         <div class="section-header">
             <span class="section-title">Email Address</span>
+            <span class="section-optional">Optional</span>
         </div>
         <c-row class="mb-3">
             <c-col md="12">
-                <label cLabel for="contactEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                <label cLabel for="contactEmail" class="form-label">Email</label>
                 <div class="email-input-wrapper">
                     <span class="input-prefix">@</span>
                     <input type="email" cFormControl id="contactEmail" name="contactEmail" sizing="sm"
-                        placeholder="email@example.com" required
-                        [ngClass]="{'is-invalid': contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)}"
+                        placeholder="email@example.com"
                         #contactEmail="ngModel" [(ngModel)]="contact.email"
                         class="prefixed-input" />
                 </div>
-                <small *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="text-danger">Required</small>
             </c-col>
         </c-row>
     </div>

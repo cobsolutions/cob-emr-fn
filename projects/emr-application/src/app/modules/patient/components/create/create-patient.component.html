@@ -10,19 +10,13 @@
       </h2>
       <p class="page-subtitle">Complete all required sections to register a new patient</p>
     </div>
-    <div class="header-progress">
-      <span class="progress-badge" [ngClass]="{'valid': valid, 'invalid': !valid}">
-        <svg cIcon [name]="valid ? 'cilCheckCircle' : 'cilWarning'" class="progress-icon"></svg>
-        {{ valid ? 'Ready to Submit' : 'Incomplete' }}
-      </span>
-    </div>
   </div>
 </div>
 
 <!-- Main Layout with Progress Sidebar -->
 <div class="page-layout">
   <!-- Progress Indicator Sidebar -->
-  <aside class="progress-sidebar">
+  <aside class="progress-sidebar" *ngIf="!selectedPatient">
     <div class="progress-sidebar-content">
       <div class="progress-title">Sections</div>
       <ul class="progress-list">
@@ -32,15 +26,15 @@
           </span>
           <span class="progress-label">Essential Info</span>
         </li>
-        <li class="progress-item" [ngClass]="{'completed': isValidPatientIdentification}">
+        <li class="progress-item optional">
           <span class="progress-indicator">
-            <svg cIcon [name]="isValidPatientIdentification ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+            <svg cIcon name="cilMinus" class="indicator-icon"></svg>
           </span>
           <span class="progress-label">Identification</span>
         </li>
-        <li class="progress-item" [ngClass]="{'completed': isValidPatientAddress}">
+        <li class="progress-item optional">
           <span class="progress-indicator">
-            <svg cIcon [name]="isValidPatientAddress ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+            <svg cIcon name="cilMinus" class="indicator-icon"></svg>
           </span>
           <span class="progress-label">Address</span>
         </li>
@@ -56,9 +50,9 @@
           </span>
           <span class="progress-label">Emergency</span>
         </li>
-        <li class="progress-item" [ngClass]="{'completed': isValidPatientInsurance}">
+        <li class="progress-item optional">
           <span class="progress-indicator">
-            <svg cIcon [name]="isValidPatientInsurance ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+            <svg cIcon name="cilMinus" class="indicator-icon"></svg>
           </span>
           <span class="progress-label">Insurance</span>
         </li>
@@ -68,9 +62,9 @@
           </span>
           <span class="progress-label">Clinics</span>
         </li>
-        <li class="progress-item" [ngClass]="{'completed': isValidPatientCase}">
+        <li class="progress-item optional">
           <span class="progress-indicator">
-            <svg cIcon [name]="isValidPatientCase ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+            <svg cIcon name="cilMinus" class="indicator-icon"></svg>
           </span>
           <span class="progress-label">Case Info</span>
         </li>
@@ -80,221 +74,150 @@
 
   <!-- Main Form Content -->
   <div class="form-container">
-    <!-- Essential Information -->
-    <c-card class="section-card" id="section-essential">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientInformation}">
-        <div class="card-header-title">
-          <svg cIcon name="cilUser" class="card-icon"></svg>
-          <span>Essential Information</span>
-        </div>
-        <span class="card-status" *ngIf="!isValidPatientInformation">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientInformation">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-basic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-basic-info>
-      </c-card-body>
-    </c-card>
+    <form cForm #patientCreateForm="ngForm" (ngSubmit)="create()">
 
-    <!-- Identification Information -->
-    <c-card class="section-card" id="section-identification">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientIdentification}">
-        <div class="card-header-title">
-          <svg cIcon name="cilCreditCard" class="card-icon"></svg>
-          <span>Identification Information</span>
+      <!-- Essential Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientInformation}">
+          <div class="card-header-title">
+            <svg cIcon name="cilUser" class="card-icon"></svg>
+            <span>Essential Information</span>
+          </div>
+          <span class="card-status" *ngIf="!isValidPatientInformation">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="isValidPatientInformation">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientIdentification">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientIdentification">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-id-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-id-info>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-patient-basic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-basic-info>
+        </c-card-body>
+      </c-card>
 
-    <!-- Address Information -->
-    <c-card class="section-card" id="section-address">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientAddress}">
-        <div class="card-header-title">
-          <svg cIcon name="cilLocationPin" class="card-icon"></svg>
-          <span>Address Information</span>
+      <!-- Identification Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom optional">
+          <div class="card-header-title">
+            <svg cIcon name="cilCreditCard" class="card-icon"></svg>
+            <span>Identification Information</span>
+          </div>
+          <span class="card-badge-optional">Optional</span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientAddress">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientAddress">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-address #component [addresses]="patient.addresses" [componentRole]="componentRole"></app-address>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-patient-id-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-id-info>
+        </c-card-body>
+      </c-card>
 
-    <!-- Contact Information -->
-    <c-card class="section-card" id="section-contact">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientContact}">
-        <div class="card-header-title">
-          <svg cIcon name="cilPhone" class="card-icon"></svg>
-          <span>Contact Information</span>
+      <!-- Address Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom optional">
+          <div class="card-header-title">
+            <svg cIcon name="cilLocationPin" class="card-icon"></svg>
+            <span>Address Information</span>
+          </div>
+          <span class="card-badge-optional">Optional</span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientContact">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientContact">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-contact #component [contacts]="patient.contacts" [componentRole]="componentRole"></app-contact>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-address #component [addresses]="patient.addresses" [componentRole]="componentRole"></app-address>
+        </c-card-body>
+      </c-card>
 
-    <!-- Emergency Information -->
-    <c-card class="section-card" id="section-emergency">
-      <div class="card-header-custom optional">
-        <div class="card-header-title">
-          <svg cIcon name="cilMedicalCross" class="card-icon"></svg>
-          <span>Emergency Information</span>
+      <!-- Contact Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientContact}">
+          <div class="card-header-title">
+            <svg cIcon name="cilPhone" class="card-icon"></svg>
+            <span>Contact Information</span>
+          </div>
+          <span class="card-status" *ngIf="!isValidPatientContact">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="isValidPatientContact">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
         </div>
-        <span class="card-badge-optional">Optional</span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-emergency-info [patient]="patient" [componentRole]="componentRole"></app-patient-emergency-info>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-contact #component [contacts]="patient.contacts" [componentRole]="componentRole"></app-contact>
+        </c-card-body>
+      </c-card>
 
-    <!-- Insurance Information -->
-    <c-card class="section-card" id="section-insurance">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientInsurance}">
-        <div class="card-header-title">
-          <svg cIcon name="cilShieldAlt" class="card-icon"></svg>
-          <span>Insurance Information</span>
+      <!-- Emergency Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom optional">
+          <div class="card-header-title">
+            <svg cIcon name="cilMedicalCross" class="card-icon"></svg>
+            <span>Emergency Information</span>
+          </div>
+          <span class="card-badge-optional">Optional</span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientInsurance">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientInsurance">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-insurance-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-insurance-info>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-patient-emergency-info [patient]="patient" [componentRole]="componentRole"></app-patient-emergency-info>
+        </c-card-body>
+      </c-card>
 
-    <!-- Clinics -->
-    <c-card class="section-card" id="section-clinics">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientClinic}">
-        <div class="card-header-title">
-          <svg cIcon name="cilHospital" class="card-icon"></svg>
-          <span>Clinics</span>
+      <!-- Insurance Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom optional">
+          <div class="card-header-title">
+            <svg cIcon name="cilShieldAlt" class="card-icon"></svg>
+            <span>Insurance Information</span>
+          </div>
+          <span class="card-badge-optional">Optional</span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientClinic">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientClinic">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-clinic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-clinic-info>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-patient-insurance-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-insurance-info>
+        </c-card-body>
+      </c-card>
 
-    <!-- Case Information -->
-    <c-card class="section-card" id="section-case">
-      <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientCase}">
-        <div class="card-header-title">
-          <svg cIcon name="cilFolder" class="card-icon"></svg>
-          <span>Case Information</span>
+      <!-- Clinics -->
+      <c-card class="section-card">
+        <div class="card-header-custom" [ngClass]="{'invalid': !isValidPatientClinic}">
+          <div class="card-header-title">
+            <svg cIcon name="cilHospital" class="card-icon"></svg>
+            <span>Clinics</span>
+          </div>
+          <span class="card-status" *ngIf="!isValidPatientClinic">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="isValidPatientClinic">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
         </div>
-        <span class="card-status" *ngIf="!isValidPatientCase">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="isValidPatientCase">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
-      </div>
-      <c-card-body class="card-body-custom">
-        <app-patient-case-info #component [pateint]="patient" [componentRole]="componentRole"></app-patient-case-info>
-      </c-card-body>
-    </c-card>
+        <c-card-body class="card-body-custom">
+          <app-patient-clinic-info #component [patient]="patient" [componentRole]="componentRole"></app-patient-clinic-info>
+        </c-card-body>
+      </c-card>
 
-    <!-- Action Section -->
-    <div class="action-section">
-      <button
-        cButton
-        class="create-btn"
-        [ngClass]="{'disabled': !valid}"
-        type="button"
-        (click)="create()"
-        [cPopover]="popoverHtml"
-        cPopoverPlacement="top"
-        [cPopoverTrigger]="'click'">
-        <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
-        {{ selectedPatient ? 'Update Patient' : 'Create Patient' }}
-      </button>
-    </div>
+      <!-- Case Information -->
+      <c-card class="section-card">
+        <div class="card-header-custom optional">
+          <div class="card-header-title">
+            <svg cIcon name="cilFolder" class="card-icon"></svg>
+            <span>Case Information</span>
+          </div>
+          <span class="card-badge-optional">Optional</span>
+        </div>
+        <c-card-body class="card-body-custom">
+          <app-patient-case-info #component [pateint]="patient" [componentRole]="componentRole"></app-patient-case-info>
+        </c-card-body>
+      </c-card>
+
+      <!-- Action Section -->
+      <div class="action-section">
+        <button cButton class="create-btn" type="button" (click)="create()">
+          <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
+          <span *ngIf="!selectedPatient">Create Patient</span>
+          <span *ngIf="selectedPatient">Update Patient</span>
+        </button>
+      </div>
+
+    </form>
   </div>
 </div>
-
-<!-- Validation Popover Template -->
-<ng-template #popoverHtml>
-  <div class="validation-popover" *ngIf="!valid">
-    <div class="popover-header-custom">
-      <svg cIcon name="cilWarning" class="popover-icon"></svg>
-      <span>Please Complete Required Fields</span>
-    </div>
-    <div class="popover-body-custom">
-      <div class="validation-item" *ngIf="!isValidPatientInformation">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Essential Information</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientIdentification">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Identification Information</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientContact">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Contact Information</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientAddress">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Address Information</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientInsurance">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Insurance Information</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientClinic">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Clinics</span>
-      </div>
-      <div class="validation-item" *ngIf="!isValidPatientCase">
-        <svg cIcon name="cilXCircle" class="validation-icon"></svg>
-        <span>Case Information</span>
-      </div>
-    </div>
-  </div>
-</ng-template>

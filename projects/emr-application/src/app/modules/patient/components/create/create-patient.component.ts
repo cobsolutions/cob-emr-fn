@@ -184,7 +184,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit, DoCheck {
       }
     });
     this.isValidPatientClinic = this.patient.clinicsId.length > 0;
-    this.valid = this.isValidPatientCase && this.isValidPatientInsurance && this.isValidPatientClinic && this.isValidPatientAddress && this.isValidPatientContact && this.isValidPatientInformation && this.isValidPatientIdentification;
+    this.valid = this.isValidPatientClinic && this.isValidPatientContact && this.isValidPatientInformation;
   }
 
   isPatientFeildsAreValid() {

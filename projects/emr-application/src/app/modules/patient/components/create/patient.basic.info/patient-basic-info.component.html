@@ -7,42 +7,35 @@
         </div>
         <c-row class="mb-3">
             <c-col md="2">
-                <label cLabel for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                <select cFormControl cSelect sizing="sm" id="title" name="title" required
-                    [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched)}"
+                <label cLabel for="title" class="form-label">Title</label>
+                <select cFormControl cSelect sizing="sm" id="title" name="title"
                     [(ngModel)]="patient.title" #title="ngModel">
                     <option [ngValue]="null" disabled selected>Select</option>
                     <option *ngFor="let titleValue of titles | keyvalue" [value]="titleValue.key">
                         {{titleValue.value}}
                     </option>
                 </select>
-                <small *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="3">
-                <label cLabel for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                <label cLabel for="firstName" class="form-label">First Name <span class="text-danger">*</span> <small *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-danger">Required</small></label>
                 <input cFormControl id="firstName" name="firstName" sizing="sm" placeholder="First name" required
                     [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}"
                     [(ngModel)]="patient.firstName" #firstName="ngModel" />
-                <small *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="3">
-                <label cLabel for="middleName" class="form-label">Middle Name <span class="text-danger">*</span></label>
-                <input cFormControl id="middleName" name="middleName" sizing="sm" placeholder="Middle name" required
-                    [ngClass]="{'is-invalid': middleName.invalid && (middleName.dirty || middleName.touched)}"
+                <label cLabel for="middleName" class="form-label">Middle Name</label>
+                <input cFormControl id="middleName" name="middleName" sizing="sm" placeholder="Middle name"
                     [(ngModel)]="patient.middleName" #middleName="ngModel" />
-                <small *ngIf="middleName.invalid && (middleName.dirty || middleName.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="3">
-                <label cLabel for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                <label cLabel for="lastName" class="form-label">Last Name <span class="text-danger">*</span> <small *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">Required</small></label>
                 <input cFormControl id="lastName" name="lastName" sizing="sm" placeholder="Last name" required
                     [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
                     [(ngModel)]="patient.lastName" #lastName="ngModel" />
-                <small *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="1">
-                <label cLabel for="suffix" class="form-label">Suffix <span class="text-danger">*</span></label>
-                <select cFormControl cSelect sizing="sm" id="suffix" name="suffix" required
-                    [ngClass]="{'is-invalid': suffix.invalid && (suffix.dirty || suffix.touched)}"
+                <label cLabel for="suffix" class="form-label">Suffix</label>
+                <select cFormControl cSelect sizing="sm" id="suffix" name="suffix"
                     [(ngModel)]="patient.suffix" #suffix="ngModel">
                     <option [ngValue]="null" disabled selected>-</option>
                     <option *ngFor="let suffixValue of suffixes | keyvalue" [value]="suffixValue.key">
@@ -65,7 +58,7 @@
                     name="birthDate" required [(date)]="patient.birthDate_date"></c-date-picker>
             </c-col>
             <c-col md="3">
-                <label cLabel for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                <label cLabel for="gender" class="form-label">Gender <span class="text-danger">*</span> <small *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="text-danger">Required</small></label>
                 <select cFormControl cSelect sizing="sm" id="gender" name="gender" required
                     [ngClass]="{'is-invalid': gender.invalid && (gender.dirty || gender.touched)}"
                     [(ngModel)]="patient.gender" #gender="ngModel">
@@ -74,26 +67,21 @@
                         {{genders[ddd]}}
                     </option>
                 </select>
-                <small *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="3">
-                <label cLabel for="MaritalStatus" class="form-label">Marital Status <span class="text-danger">*</span></label>
-                <select cFormControl cSelect sizing="sm" id="MaritalStatus" name="MaritalStatus" required
-                    [ngClass]="{'is-invalid': maritalStatus.invalid && (maritalStatus.dirty || maritalStatus.touched)}"
+                <label cLabel for="MaritalStatus" class="form-label">Marital Status</label>
+                <select cFormControl cSelect sizing="sm" id="MaritalStatus" name="MaritalStatus"
                     [(ngModel)]="patient.maritalStatus" #maritalStatus="ngModel">
                     <option [ngValue]="null" disabled selected>Select Status</option>
                     <option *ngFor="let maritalStatusValue of maritalStatusKeys(maritalStatuses)" [ngValue]="maritalStatusValue">
                         {{maritalStatuses[maritalStatusValue]}}
                     </option>
                 </select>
-                <small *ngIf="maritalStatus.invalid && (maritalStatus.dirty || maritalStatus.touched)" class="text-danger">Required</small>
             </c-col>
             <c-col md="3">
-                <label cLabel for="employerName" class="form-label">Employer <span class="text-danger">*</span></label>
+                <label cLabel for="employerName" class="form-label">Employer</label>
                 <input cFormControl id="employerName" name="employerName" sizing="sm" placeholder="Employer name"
-                    required [ngClass]="{'is-invalid': employerName.invalid && (employerName.dirty || employerName.touched)}"
                     #employerName="ngModel" [(ngModel)]="patient.employerName" />
-                <small *ngIf="employerName.invalid && (employerName.dirty || employerName.touched)" class="text-danger">Required</small>
             </c-col>
         </c-row>
     </div>
@@ -111,14 +99,13 @@
         <div *ngIf="patient.isDependent" class="dependent-fields">
             <c-row class="mb-3">
                 <c-col md="6">
-                    <label cLabel for="dependentName" class="form-label">Dependent Name <span class="text-danger">*</span></label>
+                    <label cLabel for="dependentName" class="form-label">Dependent Name <span class="text-danger">*</span> <small *ngIf="dependentName.invalid && (dependentName.dirty || dependentName.touched)" class="text-danger">Required</small></label>
                     <input cFormControl id="dependentName" name="dependentName" sizing="sm" placeholder="Full name"
                         required [ngClass]="{'is-invalid': dependentName.invalid && (dependentName.dirty || dependentName.touched)}"
                         #dependentName="ngModel" [(ngModel)]="patient.dependent.name" />
-                    <small *ngIf="dependentName.invalid && (dependentName.dirty || dependentName.touched)" class="text-danger">Required</small>
                 </c-col>
                 <c-col md="6">
-                    <label cLabel for="dependentPhone" class="form-label">Dependent Phone <span class="text-danger">*</span></label>
+                    <label cLabel for="dependentPhone" class="form-label">Dependent Phone <span class="text-danger">*</span> <small *ngIf="dependentPhone.invalid && (dependentPhone.dirty || dependentPhone.touched)" class="text-danger">Required</small></label>
                     <div class="phone-input-wrapper">
                         <span class="phone-prefix">+1</span>
                         <input cFormControl id="dependentPhone" name="dependentPhone" sizing="sm"
@@ -128,7 +115,6 @@
                             (ngModelChange)="patient.dependent.phone=$event" maxlength="15"
                             class="phone-input" />
                     </div>
-                    <small *ngIf="dependentPhone.invalid && (dependentPhone.dirty || dependentPhone.touched)" class="text-danger">Required</small>
                 </c-col>
             </c-row>
             <app-single-address [address]="patient.dependent.address"></app-single-address>

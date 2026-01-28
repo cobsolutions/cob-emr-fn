@@ -18,6 +18,14 @@ export class EditPatientComponent implements OnInit {
   patient: any
   selectedCase: PatientCase;
   editAuthVisibility: boolean = false
+
+  // Progress tracking
+  get hasAddress(): boolean { return this.patient?.addresses?.length > 0; }
+  get hasContact(): boolean { return this.patient?.contacts?.length > 0; }
+  get hasIdentification(): boolean { return !!this.patient?.patientId; }
+  get hasInsurance(): boolean { return this.patient?.patientInsuranceModels?.length > 0; }
+  get hasCase(): boolean { return this.patient?.cases?.length > 0; }
+  get hasClinic(): boolean { return this.patient?.clinicsId?.length > 0; }
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     ,private loggedInService: LoggedInService
