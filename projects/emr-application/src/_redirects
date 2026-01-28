@@ -205,5 +205,10 @@
 /emr/api/user/scope/find/uuid/:uuid/roles/:roles http://161.97.126.192:7070/emr/api/user/scope/find/uuid/:uuid/roles/:roles 200
 /emr/api/user/find/doctors http://161.97.126.192:7070/emr/api/user/find/doctors 200
 /emr/api/user/find/all/doctors/clinicId/:clinicId http://161.97.126.192:7070/emr/api/user/find/all/doctors/clinicId/:clinicId 200
+/emr/api/patient/document/upload http://161.97.126.192:7070/emr/api/patient/document/upload 200
+/emr/api/patient/document/find/patient/:patientId/case/:caseId http://161.97.126.192:7070/emr/api/patient/document/find/patient/:patientId/case/:caseId 200
+/emr/api/patient/document/download/:documentId http://161.97.126.192:7070/emr/api/patient/document/download/:documentId 200
+/emr/api/patient/document/update/:documentId http://161.97.126.192:7070/emr/api/patient/document/update/:documentId 200
+/emr/api/patient/document/:documentId http://161.97.126.192:7070/emr/api/patient/document/:documentId 200
 
 /*  /index.html   200
