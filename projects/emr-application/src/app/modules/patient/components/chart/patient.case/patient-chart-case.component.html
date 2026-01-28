@@ -267,12 +267,18 @@
                 </div>
 
                 <!-- E-Document Form -->
-                <patient-case-e-document *ngIf="showEDocumentForm"
-                    [caseName]="case.title"
-                    [caseId]="case.uuid"
-                    (documentSubmitted)="onDocumentSubmitted($event)"
-                    (cancel)="onCancelEDocument()">
-                </patient-case-e-document>
+                <div class="upload-container" *ngIf="showEDocumentForm">
+                    <div class="upload-overlay" *ngIf="isUploadingDocument">
+                        <c-spinner color="primary"></c-spinner>
+                        <span class="upload-text">Uploading document...</span>
+                    </div>
+                    <patient-case-e-document
+                        [caseName]="case.title"
+                        [caseId]="case.uuid"
+                        (documentSubmitted)="onDocumentSubmitted($event)"
+                        (cancel)="onCancelEDocument()">
+                    </patient-case-e-document>
+                </div>
 
                 <!-- E-Document List -->
                 <patient-case-e-document-list

@@ -26,6 +26,7 @@ import { PatientRecordService } from '../../../services/patient/record/patient-r
 import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
 import { PatientRequest } from '../../../models/medical.note/requester/patient.request';
 import { EDocument, EDocumentFormData } from './e-document/patient-case-e-document.component';
+import { PatientEDocumentService, EDocumentUploadRequest } from '../../../services/patient/e-document/patient-e-document.service';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -65,6 +66,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   // E-Document properties
   showEDocumentForm: boolean = false;
   eDocuments: EDocument[] = [];
+  isUploadingDocument: boolean = false;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -76,7 +78,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private quickDischargeNoteService: QuickDischargeNoteService,
     private dischargeNoteService: DischargeNoteService,
     private patientChartNoteService: PatientChartNoteService,
-    private permissionService: PermissionService) { super() }
+    private permissionService: PermissionService,
+    private patientEDocumentService: PatientEDocumentService) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -400,15 +403,40 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
 
   onDocumentSubmitted(formData: EDocumentFormData): void {
-    const newDocument: EDocument = {
-      ...formData,
-      id: Date.now(),
-      documentTypeName: this.getDocumentTypeName(formData.documentType),
-      assignedCaseName: formData.assignedCase === 'all' ? 'All' : this.case.title,
-      fileName: formData.file?.name
+    if (!formData.file) {
+      return;
+    }
+
+    this.isUploadingDocument = true;
+
+    const uploadRequest: EDocumentUploadRequest = {
+      documentType: formData.documentType,
+      nameOfDocument: formData.nameOfDocument,
+      dateOfReceipt: formData.dateOfReceipt,
+      assignedCase: formData.assignedCase,
+      patientId: this.patientId,
+      caseId: this.case.uuid,
+      file: formData.file
     };
-    this.eDocuments = [...this.eDocuments, newDocument];
-    this.showEDocumentForm = false;
+
+    this.patientEDocumentService.upload(uploadRequest).subscribe({
+      next: (response) => {
+        const newDocument: EDocument = {
+          ...formData,
+          id: response.id,
+          documentTypeName: this.getDocumentTypeName(formData.documentType),
+          assignedCaseName: formData.assignedCase === 'all' ? 'All' : this.case.title,
+          fileName: formData.file?.name
+        };
+        this.eDocuments = [...this.eDocuments, newDocument];
+        this.showEDocumentForm = false;
+        this.isUploadingDocument = false;
+      },
+      error: (error) => {
+        console.error('Error uploading document:', error);
+        this.isUploadingDocument = false;
+      }
+    });
   }
 
   private getDocumentTypeName(value: string): string {
@@ -435,14 +463,42 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
 
   onViewDocument(document: EDocument): void {
-    console.log('View document:', document);
+    this.patientEDocumentService.download(document.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error) => {
+        console.error('Error viewing document:', error);
+      }
+    });
   }
 
   onDeleteDocument(document: EDocument): void {
-    this.eDocuments = this.eDocuments.filter(d => d.id !== document.id);
+    this.patientEDocumentService.delete(document.id).subscribe({
+      next: () => {
+        this.eDocuments = this.eDocuments.filter(d => d.id !== document.id);
+      },
+      error: (error) => {
+        console.error('Error deleting document:', error);
+      }
+    });
   }
 
-  onDownloadDocument(document: EDocument): void {
-    console.log('Download document:', document);
+  onDownloadDocument(doc: EDocument): void {
+    this.patientEDocumentService.download(doc.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = doc.fileName || doc.nameOfDocument;
+        link.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error) => {
+        console.error('Error downloading document:', error);
+      }
+    });
   }
 }

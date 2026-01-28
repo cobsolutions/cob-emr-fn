@@ -490,6 +490,33 @@
   height: 0.875rem;
 }
 
+/* Upload Container */
+.upload-container {
+  position: relative;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  z-index: 10;
+  border-radius: 0.5rem;
+}
+
+.upload-overlay .upload-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+}
+
 /* --- Records Card --- */
 .records-card {
   border: 1px solid #e2e8f0;
