@@ -1,65 +1,134 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<c-row>
-  <c-col xs="12" class="mb-2">
-    <h1>Clinics</h1>
-  </c-col>
-</c-row>
-<hr />
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton color="primary" class="me-md-2" variant="outline" (click)="create()">Create Referring
-    Provider</button>
+
+<!-- Page Header Section -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilHospital" class="page-icon"></svg>
+        Referring Providers
+      </h2>
+      <p class="page-subtitle">Browse, edit, and manage referring provider records</p>
+    </div>
+  </div>
 </div>
 
-<ng-container *ngIf="props$ | async as props" fluid="true">
-  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(referringProvider$ | async) ?? []"
-    [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-    [tableProps]="{ hover: true, striped: true, responsive: true , small:true }"
-    [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
-    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
-    (sorterValueChange)="handleSorterValueChange($event)" header>
-    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-      <td>
-        <ng-container [ngSwitch]="columnName">
-          <ng-container *ngSwitchCase="'actions'" class="py-2">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton variant="outline" (click)="remove(item)" size="sm">
-                <svg cIcon name="cilTrash"></svg>
-              </button>
-              <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton variant="outline" (click)="edit(item)" size="sm">
-                <svg cIcon name="cilPen"></svg>
-              </button>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            {{tdContent}}
-          </ng-container>
-        </ng-container>
-      </td>
-    </ng-template>
-  </c-smart-table>
-  <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
-    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+<!-- Referring Provider Table Card -->
+<ng-container *ngIf="props$ | async as props">
+  <c-card class="provider-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>All Referring Providers</span>
+      </div>
+      <span class="card-badge">
+        {{ (referringProvider$ | async)?.length || 0 }} Records
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-smart-table
+        [columnSorter]="{ resetable: true }"
+        [columns]="columns"
+        [items]="(referringProvider$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage"
+        (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]"
+        [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
+        [columnFilterValue]="props.columnFilterValue ?? []"
+        [sorterValue]="props.sorterValue"
+        [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)"
+        header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchCase="'name'">
+                <span class="provider-name">
+                  <svg cIcon name="cilUser" class="provider-icon"></svg>
+                  {{ item.name }}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'npi'">
+                <span class="npi-info">
+                  {{ item.npi || '-' }}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'actions'">
+                <div class="action-buttons">
+                  <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton class="action-btn action-btn-edit" (click)="edit(item)" title="Edit Provider">
+                    <svg cIcon name="cilPen" class="action-icon"></svg>
+                  </button>
+                  <!-- <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton class="action-btn action-btn-delete" (click)="remove(item)" title="Delete Provider">
+                    <svg cIcon name="cilTrash" class="action-icon"></svg>
+                  </button> -->
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-template>
+      </c-smart-table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <c-smart-pagination
+          *ngIf="props.totalPages"
+          [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)"
+          [pages]="props.totalPages">
+        </c-smart-pagination>
+      </div>
+    </c-card-body>
+  </c-card>
 </ng-container>
-<c-modal id="addReferringProvider" [visible]="addReferringProviderVisibility" size="xl">
-  <c-modal-header>
-    <h3 cModalTitle>Add Referring Provider</h3>
-    <button (click)="toggleReferringProvider()" cButtonClose></button>
+
+<!-- Error Alert -->
+<ng-container *ngIf="errorMessage$ | async as errorMessage">
+  <div class="error-alert">
+    <svg cIcon name="cilWarning" class="error-icon"></svg>
+    <span>{{ errorMessage }}</span>
+  </div>
+</ng-container>
+
+<!-- Add Referring Provider Modal -->
+<c-modal id="addReferringProvider" [visible]="addReferringProviderVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilHospital" class="modal-icon"></svg>
+      Add Referring Provider
+    </h3>
+    <button (click)="toggleReferringProvider()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>
+  <c-modal-body class="modal-body-custom">
     <create-referring-provider [mode]="'create'" (changeVisibility)="changeVisibility($event)"
       *ngIf="addReferringProviderVisibility"></create-referring-provider>
   </c-modal-body>
 </c-modal>
 
-<c-modal id="editReferringProvider" [visible]="editReferringProviderVisibility" size="xl">
-  <c-modal-header>
-    <h3 cModalTitle>Edit Referring Provider</h3>
-    <button (click)="toggleEditReferringProvvider()" cButtonClose></button>
+<!-- Edit Referring Provider Modal -->
+<c-modal id="editReferringProvider" [visible]="editReferringProviderVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilHospital" class="modal-icon"></svg>
+      Edit Referring Provider
+    </h3>
+    <button (click)="toggleEditReferringProvvider()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>
+  <c-modal-body class="modal-body-custom">
     <create-referring-provider [mode]="'update'" (changeVisibility)="changeVisibility($event)" [componentRole]="componentRole"
       [selectedreferringProvider]="selectedreferringProvider"
       *ngIf="editReferringProviderVisibility"></create-referring-provider>
   </c-modal-body>
 </c-modal>
+
+<!-- Floating Action Button -->
+<button *appRoleScope="'emr-referring-provider-role'; requireModify: true" class="fab-button" (click)="create()" title="Create New Referring Provider">
+  <svg cIcon name="cilPlus" class="fab-icon"></svg>
+</button>
