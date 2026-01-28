@@ -282,9 +282,11 @@
 
                 <!-- E-Document List -->
                 <patient-case-e-document-list
-                    [documents]="eDocuments"
+                    [caseDocuments]="caseDocuments"
+                    [allCasesDocuments]="allCasesDocuments"
                     [caseName]="case.title"
                     (viewDocument)="onViewDocument($event)"
+                    (editDocument)="onEditDocument($event)"
                     (deleteDocument)="onDeleteDocument($event)"
                     (downloadDocument)="onDownloadDocument($event)">
                 </patient-case-e-document-list>
@@ -401,4 +403,87 @@
         <initial-examination-summary *ngIf="recordActionStauts ==='Initial Evaluation'"
             [id]="recordActionEntityId"></initial-examination-summary>
     </c-modal-body>
+</c-modal>
+
+<!-- E-Document Preview Modal -->
+<c-modal id="eDocumentPreview" [visible]="previewVisible" [fullscreen]="true" backdrop="static" scrollable="true">
+    <c-modal-header>
+        <h5 cModalTitle>{{ previewFileName }}</h5>
+        <button (click)="closePreview()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <div class="preview-loading" *ngIf="isLoadingPreview">
+            <c-spinner color="primary"></c-spinner>
+            <span>Loading document...</span>
+        </div>
+        <div class="preview-content" *ngIf="!isLoadingPreview && previewUrl">
+            <!-- Image Preview -->
+            <img *ngIf="isPreviewImage" [src]="previewSafeUrl" [alt]="previewFileName" class="preview-image" />
+            <!-- PDF Preview -->
+            <iframe *ngIf="isPreviewPdf" [src]="previewSafeUrl" class="preview-pdf"></iframe>
+            <!-- Unsupported Format -->
+            <div class="preview-unsupported" *ngIf="!isPreviewImage && !isPreviewPdf">
+                <svg cIcon name="cilFile" class="unsupported-icon"></svg>
+                <p>Preview not available for this file type.</p>
+                <p class="unsupported-hint">Use the download button to view this document.</p>
+            </div>
+        </div>
+    </c-modal-body>
+</c-modal>
+
+<!-- E-Document Edit Modal -->
+<c-modal id="eDocumentEdit" [visible]="editVisible" size="lg" backdrop="static" scrollable="true">
+    <div class="edit-modal-header">
+        <div class="edit-modal-title">
+            <svg cIcon name="cilPencil" class="edit-header-icon"></svg>
+            <span>Edit Document</span>
+        </div>
+        <button type="button" class="edit-close-btn" (click)="closeEdit()">
+            <svg cIcon name="cilX"></svg>
+        </button>
+    </div>
+    <c-modal-body class="edit-modal-body">
+        <form *ngIf="editForm" [formGroup]="editForm">
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label for="editDocumentType" class="edit-form-label">Document Type <span class="edit-required">*</span></label>
+                    <select id="editDocumentType" formControlName="documentType" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('documentType')?.invalid && editForm.get('documentType')?.touched">
+                        <option *ngFor="let type of documentTypes" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="edit-form-group">
+                    <label for="editNameOfDocument" class="edit-form-label">Name of Document <span class="edit-required">*</span></label>
+                    <input type="text" id="editNameOfDocument" formControlName="nameOfDocument" class="edit-form-control"
+                        placeholder="Enter document name"
+                        [class.is-invalid]="editForm.get('nameOfDocument')?.invalid && editForm.get('nameOfDocument')?.touched" />
+                </div>
+            </div>
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label for="editDateOfReceipt" class="edit-form-label">Date of Receipt <span class="edit-required">*</span></label>
+                    <input type="date" id="editDateOfReceipt" formControlName="dateOfReceipt" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('dateOfReceipt')?.invalid && editForm.get('dateOfReceipt')?.touched" />
+                </div>
+                <div class="edit-form-group">
+                    <label for="editAssignedCase" class="edit-form-label">Assigned Case <span class="edit-required">*</span></label>
+                    <select id="editAssignedCase" formControlName="assignedCase" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('assignedCase')?.invalid && editForm.get('assignedCase')?.touched">
+                        <option *ngFor="let caseOption of editAssignedCaseOptions" [value]="caseOption.value">{{ caseOption.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </c-modal-body>
+    <div class="edit-modal-footer">
+        <button type="button" class="edit-btn-cancel" (click)="closeEdit()">
+            <svg cIcon name="cilX"></svg>
+            Cancel
+        </button>
+        <button type="button" class="edit-btn-save" [disabled]="editForm?.invalid || isSavingEdit" (click)="onSaveEdit()">
+            <c-spinner *ngIf="isSavingEdit" size="sm"></c-spinner>
+            <svg *ngIf="!isSavingEdit" cIcon name="cilSave"></svg>
+            Save Changes
+        </button>
+    </div>
 </c-modal>

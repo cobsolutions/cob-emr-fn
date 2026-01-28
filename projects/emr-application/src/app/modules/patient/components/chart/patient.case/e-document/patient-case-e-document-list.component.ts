@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EDocument } from './patient-case-e-document.component';
+import { EDocumentRecord } from '../../../../services/patient/e-document/patient-e-document.service';
 
 @Component({
   selector: 'patient-case-e-document-list',
@@ -7,29 +7,47 @@ import { EDocument } from './patient-case-e-document.component';
   styleUrls: ['./patient-case-e-document-list.component.css']
 })
 export class PatientCaseEDocumentListComponent {
-  @Input() documents: EDocument[] = [];
+  @Input() caseDocuments: EDocumentRecord[] = [];
+  @Input() allCasesDocuments: EDocumentRecord[] = [];
   @Input() caseName: string = '';
-  @Output() viewDocument = new EventEmitter<EDocument>();
-  @Output() deleteDocument = new EventEmitter<EDocument>();
-  @Output() downloadDocument = new EventEmitter<EDocument>();
+  @Output() viewDocument = new EventEmitter<EDocumentRecord>();
+  @Output() editDocument = new EventEmitter<EDocumentRecord>();
+  @Output() deleteDocument = new EventEmitter<EDocumentRecord>();
+  @Output() downloadDocument = new EventEmitter<EDocumentRecord>();
 
-  get caseDocuments(): EDocument[] {
-    return this.documents.filter(doc => doc.assignedCase !== 'all');
+  private documentTypeMap: { [key: string]: string } = {
+    'blood_work_results_labs': 'Blood Work Results/Labs',
+    "driver's_license": "Driver's License",
+    'hep': 'HEP',
+    'insurance_card': 'Insurance Card',
+    'medication_listing': 'Medication Listing',
+    'mri': 'MRI',
+    'other': 'Other',
+    'past_medical_history': 'Past Medical History',
+    'patient_intake': 'Patient Intake',
+    "physician's_notes": "Physician's Notes",
+    'plan_of_care': 'Plan of Care',
+    'script': 'Script',
+    'xray': 'XRay'
+  };
+
+  getDocumentTypeName(value: string): string {
+    return this.documentTypeMap[value] || value;
   }
 
-  get allCasesDocuments(): EDocument[] {
-    return this.documents.filter(doc => doc.assignedCase === 'all');
+  onEdit(document: EDocumentRecord): void {
+    this.editDocument.emit(document);
   }
 
-  onView(document: EDocument): void {
+  onView(document: EDocumentRecord): void {
     this.viewDocument.emit(document);
   }
 
-  onDelete(document: EDocument): void {
+  onDelete(document: EDocumentRecord): void {
     this.deleteDocument.emit(document);
   }
 
-  onDownload(document: EDocument): void {
+  onDownload(document: EDocumentRecord): void {
     this.downloadDocument.emit(document);
   }
 }

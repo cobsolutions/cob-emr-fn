@@ -1,4 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { map, Observable, retry, Subscription, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -25,8 +27,8 @@ import { QuickDischargeNoteService } from '../../../services/medical.note/quick.
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
 import { PatientRequest } from '../../../models/medical.note/requester/patient.request';
-import { EDocument, EDocumentFormData } from './e-document/patient-case-e-document.component';
-import { PatientEDocumentService, EDocumentUploadRequest } from '../../../services/patient/e-document/patient-e-document.service';
+import { EDocumentFormData, DocumentTypeOption, CaseOption } from './e-document/patient-case-e-document.component';
+import { PatientEDocumentService, EDocumentUploadRequest, EDocumentRecord } from '../../../services/patient/e-document/patient-e-document.service';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -65,8 +67,36 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
 
   // E-Document properties
   showEDocumentForm: boolean = false;
-  eDocuments: EDocument[] = [];
+  caseDocuments: EDocumentRecord[] = [];
+  allCasesDocuments: EDocumentRecord[] = [];
   isUploadingDocument: boolean = false;
+  // Edit E-Document properties
+  editVisible: boolean = false;
+  editForm: FormGroup;
+  editingDocument: EDocumentRecord | null = null;
+  isSavingEdit: boolean = false;
+  documentTypes: DocumentTypeOption[] = [
+    { name: 'Blood Work Results/Labs', value: 'blood_work_results_labs' },
+    { name: "Driver's License", value: "driver's_license" },
+    { name: 'HEP', value: 'hep' },
+    { name: 'Insurance Card', value: 'insurance_card' },
+    { name: 'Medication Listing', value: 'medication_listing' },
+    { name: 'MRI', value: 'mri' },
+    { name: 'Other', value: 'other' },
+    { name: 'Past Medical History', value: 'past_medical_history' },
+    { name: 'Patient Intake', value: 'patient_intake' },
+    { name: "Physician's Notes", value: "physician's_notes" },
+    { name: 'Plan of Care', value: 'plan_of_care' },
+    { name: 'Script', value: 'script' },
+    { name: 'XRay', value: 'xray' }
+  ];
+
+  previewVisible: boolean = false;
+  previewUrl: string = '';
+  previewSafeUrl: SafeResourceUrl = '';
+  previewFileName: string = '';
+  previewContentType: string = '';
+  isLoadingPreview: boolean = false;
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -79,7 +109,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private dischargeNoteService: DischargeNoteService,
     private patientChartNoteService: PatientChartNoteService,
     private permissionService: PermissionService,
-    private patientEDocumentService: PatientEDocumentService) { super() }
+    private patientEDocumentService: PatientEDocumentService,
+    private sanitizer: DomSanitizer,
+    private fb: FormBuilder) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -101,6 +133,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.findPatientCaseActions(this.case.uuid);
     this.patient.patientCaseId = this.case.uuid
     console.log('patient', this.patient)
+    this.loadEDocuments();
 
     this.draftSub = this.medialNoteService.draft$.subscribe(() => {
       console.log('draftSub')
@@ -398,6 +431,18 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
 
   // E-Document methods
+  private loadEDocuments(): void {
+    this.patientEDocumentService.find(this.patientId, this.case.uuid).subscribe({
+      next: (response) => {
+        this.caseDocuments = response.records.caseList;
+        this.allCasesDocuments = response.records.allList;
+      },
+      error: (error) => {
+        console.error('Error loading e-documents:', error);
+      }
+    });
+  }
+
   toggleEDocumentForm(): void {
     this.showEDocumentForm = !this.showEDocumentForm;
   }
@@ -420,17 +465,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     };
 
     this.patientEDocumentService.upload(uploadRequest).subscribe({
-      next: (response) => {
-        const newDocument: EDocument = {
-          ...formData,
-          id: response.id,
-          documentTypeName: this.getDocumentTypeName(formData.documentType),
-          assignedCaseName: formData.assignedCase === 'all' ? 'All' : this.case.title,
-          fileName: formData.file?.name
-        };
-        this.eDocuments = [...this.eDocuments, newDocument];
+      next: () => {
         this.showEDocumentForm = false;
         this.isUploadingDocument = false;
+        this.loadEDocuments();
       },
       error: (error) => {
         console.error('Error uploading document:', error);
@@ -439,46 +477,97 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     });
   }
 
-  private getDocumentTypeName(value: string): string {
-    const typeMap: { [key: string]: string } = {
-      'blood_work_results_labs': 'Blood Work Results/Labs',
-      "driver's_license": "Driver's License",
-      'hep': 'HEP',
-      'insurance_card': 'Insurance Card',
-      'medication_listing': 'Medication Listing',
-      'mri': 'MRI',
-      'other': 'Other',
-      'past_medical_history': 'Past Medical History',
-      'patient_intake': 'Patient Intake',
-      "physician's_notes": "Physician's Notes",
-      'plan_of_care': 'Plan of Care',
-      'script': 'Script',
-      'xray': 'XRay'
-    };
-    return typeMap[value] || value;
-  }
-
   onCancelEDocument(): void {
     this.showEDocumentForm = false;
   }
 
-  onViewDocument(document: EDocument): void {
-    this.patientEDocumentService.download(document.id).subscribe({
+  onViewDocument(doc: EDocumentRecord): void {
+    this.isLoadingPreview = true;
+    this.previewFileName = doc.fileName;
+    this.previewContentType = doc.contentType;
+    this.previewVisible = true;
+
+    this.patientEDocumentService.download(doc.id).subscribe({
       next: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url, '_blank');
-        window.URL.revokeObjectURL(url);
+        if (this.previewUrl) {
+          window.URL.revokeObjectURL(this.previewUrl);
+        }
+        this.previewUrl = window.URL.createObjectURL(blob);
+        this.previewSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.previewUrl);
+        this.isLoadingPreview = false;
       },
       error: (error) => {
         console.error('Error viewing document:', error);
+        this.isLoadingPreview = false;
+        this.previewVisible = false;
       }
     });
   }
 
-  onDeleteDocument(document: EDocument): void {
-    this.patientEDocumentService.delete(document.id).subscribe({
+  closePreview(): void {
+    this.previewVisible = false;
+    if (this.previewUrl) {
+      window.URL.revokeObjectURL(this.previewUrl);
+      this.previewUrl = '';
+    }
+    this.previewFileName = '';
+    this.previewContentType = '';
+  }
+
+  get isPreviewImage(): boolean {
+    return this.previewContentType?.startsWith('image/');
+  }
+
+  get isPreviewPdf(): boolean {
+    return this.previewContentType === 'application/pdf';
+  }
+
+  // Edit E-Document methods
+  onEditDocument(doc: EDocumentRecord): void {
+    this.editingDocument = doc;
+    this.editForm = this.fb.group({
+      documentType: [doc.documentType, Validators.required],
+      nameOfDocument: [doc.nameOfDocument, Validators.required],
+      dateOfReceipt: [doc.dateOfReceipt, Validators.required],
+      assignedCase: [doc.assignedCase, Validators.required]
+    });
+    this.editVisible = true;
+  }
+
+  get editAssignedCaseOptions(): CaseOption[] {
+    return [
+      { name: this.case.title || 'Current Case', value: this.case.uuid },
+      { name: 'All', value: 'all' }
+    ];
+  }
+
+  onSaveEdit(): void {
+    if (this.editForm.valid && this.editingDocument) {
+      this.isSavingEdit = true;
+      this.patientEDocumentService.updateDocument(this.editingDocument.id, this.editForm.value).subscribe({
+        next: () => {
+          this.isSavingEdit = false;
+          this.editVisible = false;
+          this.editingDocument = null;
+          this.loadEDocuments();
+        },
+        error: (error) => {
+          console.error('Error updating document:', error);
+          this.isSavingEdit = false;
+        }
+      });
+    }
+  }
+
+  closeEdit(): void {
+    this.editVisible = false;
+    this.editingDocument = null;
+  }
+
+  onDeleteDocument(doc: EDocumentRecord): void {
+    this.patientEDocumentService.delete(doc.id).subscribe({
       next: () => {
-        this.eDocuments = this.eDocuments.filter(d => d.id !== document.id);
+        this.loadEDocuments();
       },
       error: (error) => {
         console.error('Error deleting document:', error);
@@ -486,7 +575,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     });
   }
 
-  onDownloadDocument(doc: EDocument): void {
+  onDownloadDocument(doc: EDocumentRecord): void {
     this.patientEDocumentService.download(doc.id).subscribe({
       next: (blob) => {
         const url = window.URL.createObjectURL(blob);

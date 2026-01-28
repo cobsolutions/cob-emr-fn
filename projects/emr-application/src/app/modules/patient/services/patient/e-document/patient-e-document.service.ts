@@ -13,7 +13,34 @@ export interface EDocumentUploadRequest {
   assignedCase: string;
   patientId: number;
   caseId: string;
+  documentId?: number;
   file: File;
+}
+
+export interface EDocumentRecord {
+  id: number;
+  uuid: string;
+  documentType: string;
+  nameOfDocument: string;
+  dateOfReceipt: string;
+  assignedCase: string;
+  patientId: number;
+  caseId: string;
+  fileName: string;
+  fileSize: number;
+  contentType: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface EDocumentFindResponse {
+  'time-stamp': number;
+  records: {
+    allList: EDocumentRecord[];
+    caseList: EDocumentRecord[];
+  };
+  message: string;
+  status: number;
 }
 
 export interface EDocumentResponse {
@@ -32,7 +59,7 @@ export interface EDocumentResponse {
   providedIn: 'root'
 })
 export class PatientEDocumentService extends BasePaginationService {
-  private baseUrl = environment.baseURL + 'patient/e-document';
+  private baseUrl = environment.baseURL + 'patient/document';
 
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) {
     super(httpClient, loggedInService);
@@ -50,6 +77,9 @@ export class PatientEDocumentService extends BasePaginationService {
     formData.append('assignedCase', request.assignedCase);
     formData.append('patientId', request.patientId.toString());
     formData.append('caseId', request.caseId);
+    if (request.documentId != null) {
+      formData.append('documentId', request.documentId.toString());
+    }
 
     return this.httpClient.post<EDocumentResponse>(this.baseUrl + '/upload', formData);
   }
@@ -66,6 +96,9 @@ export class PatientEDocumentService extends BasePaginationService {
     formData.append('assignedCase', request.assignedCase);
     formData.append('patientId', request.patientId.toString());
     formData.append('caseId', request.caseId);
+    if (request.documentId != null) {
+      formData.append('documentId', request.documentId.toString());
+    }
 
     return this.httpClient.post<EDocumentResponse>(this.baseUrl + '/upload', formData, {
       reportProgress: true,
@@ -74,24 +107,12 @@ export class PatientEDocumentService extends BasePaginationService {
   }
 
   /**
-   * Find e-documents for a patient case
+   * Find e-documents for a patient case (returns allList and caseList)
    */
-  findByPatientCase(
-    config$: BehaviorSubject<IApiParams>,
-    patientId: number,
-    caseId: string
-  ): Observable<any> {
-    return this._get(config$, `${this.baseUrl}/find/patientId/${patientId}/caseId/${caseId}`);
-  }
-
-  /**
-   * Find all e-documents for a patient (across all cases)
-   */
-  findByPatient(
-    config$: BehaviorSubject<IApiParams>,
-    patientId: number
-  ): Observable<any> {
-    return this._get(config$, `${this.baseUrl}/find/patientId/${patientId}`);
+  find(patientId: number, caseId: string): Observable<EDocumentFindResponse> {
+    return this.httpClient.get<EDocumentFindResponse>(
+      `${this.baseUrl}/find/patient/${patientId}/case/${caseId}`
+    );
   }
 
   /**
@@ -118,9 +139,19 @@ export class PatientEDocumentService extends BasePaginationService {
   }
 
   /**
-   * Update e-document metadata (not the file)
+   * Update e-document metadata
    */
-  update(documentId: number, request: Partial<EDocumentUploadRequest>): Observable<EDocumentResponse> {
-    return this.httpClient.put<EDocumentResponse>(`${this.baseUrl}/${documentId}`, request);
+  updateDocument(documentId: number, request: {
+    documentType: string;
+    nameOfDocument: string;
+    dateOfReceipt: string;
+    assignedCase: string;
+  }): Observable<any> {
+    const formData = new FormData();
+    formData.append('documentType', request.documentType);
+    formData.append('nameOfDocument', request.nameOfDocument);
+    formData.append('dateOfReceipt', request.dateOfReceipt);
+    formData.append('assignedCase', request.assignedCase);
+    return this.httpClient.put(`${this.baseUrl}/update/${documentId}`, formData);
   }
 }

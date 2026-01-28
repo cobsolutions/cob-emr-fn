@@ -197,6 +197,16 @@
     color: #ffffff;
 }
 
+.edit-btn {
+    color: #d97706;
+}
+
+.edit-btn:hover {
+    background: #d97706;
+    border-color: #d97706;
+    color: #ffffff;
+}
+
 .download-btn {
     color: #059669;
 }

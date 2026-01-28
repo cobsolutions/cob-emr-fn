@@ -19,7 +19,7 @@
                 <tbody>
                     <tr *ngFor="let doc of caseDocuments" class="document-row">
                         <td>
-                            <span class="document-type-badge">{{ doc.documentTypeName || doc.documentType }}</span>
+                            <span class="document-type-badge">{{ getDocumentTypeName(doc.documentType) }}</span>
                         </td>
                         <td>
                             <div class="document-name">
@@ -36,7 +36,10 @@
                         <td>
                             <div class="action-buttons">
                                 <button class="action-btn view-btn" (click)="onView(doc)" title="View">
-                                    <svg cIcon name="cilZoom"></svg>
+                                    <svg cIcon name="cilNotes"></svg>
+                                </button>
+                                <button class="action-btn edit-btn" (click)="onEdit(doc)" title="Edit">
+                                    <svg cIcon name="cilPencil"></svg>
                                 </button>
                                 <button class="action-btn download-btn" (click)="onDownload(doc)" title="Download">
                                     <svg cIcon name="cilCloudDownload"></svg>
@@ -82,7 +85,7 @@
                 <tbody>
                     <tr *ngFor="let doc of allCasesDocuments" class="document-row">
                         <td>
-                            <span class="document-type-badge">{{ doc.documentTypeName || doc.documentType }}</span>
+                            <span class="document-type-badge">{{ getDocumentTypeName(doc.documentType) }}</span>
                         </td>
                         <td>
                             <div class="document-name">
@@ -99,7 +102,10 @@
                         <td>
                             <div class="action-buttons">
                                 <button class="action-btn view-btn" (click)="onView(doc)" title="View">
-                                    <svg cIcon name="cilZoom"></svg>
+                                    <svg cIcon name="cilNotes"></svg>
+                                </button>
+                                <button class="action-btn edit-btn" (click)="onEdit(doc)" title="Edit">
+                                    <svg cIcon name="cilPencil"></svg>
                                 </button>
                                 <button class="action-btn download-btn" (click)="onDownload(doc)" title="Download">
                                     <svg cIcon name="cilCloudDownload"></svg>
