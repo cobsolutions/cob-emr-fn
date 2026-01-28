@@ -1,63 +1,128 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<c-row>
-  <c-col xs="auto" class="mb-2">
-    <h1>Clinical Users</h1>
-  </c-col>
-</c-row>
-<hr />
-<ng-container *ngIf="props$ | async as props" fluid="true">
-  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(users$ | async) ?? []"
-    [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true" [columnFilterValue]="props.columnFilterValue?? []"
-    [sorterValue]="props.sorterValue" [tableProps]="{ hover: true, striped: true, small:true }"
-    [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
-    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-      <td>
-        <ng-container [ngSwitch]="columnName">
-          <ng-container *ngSwitchCase="'name'" class="py-2">
-            {{item.lastName +"," + item.firstName}}
-          </ng-container>
-          <ng-container *ngSwitchCase="'actions'" class="py-2">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" size="sm" (click)="edit(item)">
-                <svg cIcon name="cilPen"></svg>
-              </button>
-              <button cButton variant="outline" size="sm" (click)="toggleLiveDemo(item)" dispaly-input
-                [componentRole]="componentRole">
-                <svg cIcon name="cilTrash"></svg>
-              </button>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            {{tdContent}}
-          </ng-container>
-        </ng-container>
-      </td>
-    </ng-template>
-  </c-smart-table>
-  <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
-    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+
+<!-- Page Header Section -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilMedicalCross" class="page-icon"></svg>
+        Clinical Users
+      </h2>
+      <p class="page-subtitle">Browse, edit, and manage clinical user accounts</p>
+    </div>
+  </div>
+</div>
+
+<!-- Clinical Users Table Card -->
+<ng-container *ngIf="props$ | async as props">
+  <c-card class="user-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>All Clinical Users</span>
+      </div>
+      <span class="card-badge">
+        {{ (users$ | async)?.length || 0 }} Records
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-smart-table
+        [columnSorter]="{ resetable: true }"
+        [columns]="columns"
+        [items]="(users$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage"
+        (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]"
+        [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
+        [columnFilterValue]="props.columnFilterValue ?? []"
+        [sorterValue]="props.sorterValue"
+        [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)"
+        header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchCase="'name'">
+                <span class="user-name">
+                  <svg cIcon name="cilUser" class="user-icon"></svg>
+                  {{item.lastName + ', ' + item.firstName}}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'email'">
+                <span class="contact-info">
+                  <svg cIcon name="cilEnvelopeClosed" class="contact-icon"></svg>
+                  {{item.email || '-'}}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'actions'">
+                <div class="action-buttons">
+                  <button cButton class="action-btn-edit" (click)="edit(item)" title="Edit User">
+                    <svg cIcon name="cilPen" class="action-icon"></svg>
+                  </button>
+                  <button cButton class="action-btn-delete" (click)="toggleLiveDemo(item)" title="Delete User" dispaly-input [componentRole]="componentRole">
+                    <svg cIcon name="cilTrash" class="action-icon"></svg>
+                  </button>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-template>
+      </c-smart-table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <c-smart-pagination
+          *ngIf="props.totalPages"
+          [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)"
+          [pages]="props.totalPages">
+        </c-smart-pagination>
+      </div>
+    </c-card-body>
+  </c-card>
 </ng-container>
+
+<!-- Error Alert -->
 <ng-container *ngIf="errorMessage$ | async as errorMessage">
-  <hr>
-  <c-alert>{{errorMessage}}</c-alert>
+  <div class="error-alert">
+    <svg cIcon name="cilWarning" class="error-icon"></svg>
+    <span>{{ errorMessage }}</span>
+  </div>
 </ng-container>
+
+<!-- Delete Confirmation Modal -->
 <c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
-  <c-modal-header>
-    <h5 cModalTitle>Modal title</h5>
-    <button (click)="close()" cButtonClose></button>
+  <c-modal-header class="modal-header-custom">
+    <h5 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilWarning" class="modal-icon"></svg>
+      Delete Confirmation
+    </h5>
+    <button (click)="close()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>Are you sure to delete doctor.?</c-modal-body>
+  <c-modal-body class="modal-body-custom">Are you sure to delete doctor?</c-modal-body>
   <c-modal-footer>
     <button cButton color="primary" (click)="delete()">Delete</button>
   </c-modal-footer>
 </c-modal>
-<c-modal id="editClinicalUser" [visible]="editUserVisibility" size="xl" backdrop="static">
-  <c-modal-header>
-    <h3 cModalTitle>Edit User Account</h3>
-    <button (click)="toggleEditUser()" cButtonClose></button>
+
+<!-- Edit User Modal -->
+<c-modal id="editClinicalUser" [visible]="editUserVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilMedicalCross" class="modal-icon"></svg>
+      Edit User Account
+    </h3>
+    <button (click)="toggleEditUser()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>
+  <c-modal-body class="modal-body-custom">
     <app-edit-user *ngIf="editUserVisibility" [uuid]="selecteUserUUID" [userType]="'Clinical'"
       [componentRole]="componentRole" (changeVisibility)="changeFacilityVisibility($event)"></app-edit-user>
   </c-modal-body>

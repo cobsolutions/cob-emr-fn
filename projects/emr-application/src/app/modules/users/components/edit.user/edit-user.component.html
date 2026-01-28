@@ -1,160 +1,270 @@
-<c-container fluid>
-
-    <c-card class="mb-2">
-        <c-card-header>
-            <h5>Basic Information</h5>
-        </c-card-header>
-        <c-card-body>
-            <c-row *ngIf="user">
-                <c-col xs="12">
-                    <form cForm #userUpdateForm="ngForm" readonly-form [componentRole]="componentRole">
-                        <c-input-group class="mb-3" sizing="sm">
-                            <span cInputGroupText>First Middle Last</span>
-                            <input readonly cFormControl id="firstName" name="firstName" sizing="sm"
-                                placeholder="First Name" required
-                                [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}"
-                                [(ngModel)]="user.firstName" #firstName="ngModel" />
-
-                            <input readonly cFormControl id="middleName" name="middleName" sizing="sm"
-                                placeholder="Middle Name"
-                                [ngClass]="{'is-invalid': middleName.invalid && (middleName.dirty || middleName.touched)}"
-                                [(ngModel)]="user.middleName" #middleName="ngModel" />
-
-                            <input readonly cFormControl id="lastName" name="lastName" sizing="sm"
-                                placeholder="Last Name" required
-                                [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
-                                [(ngModel)]="user.lastName" #lastName="ngModel" />
-                        </c-input-group>
-                        <c-input-group class="mb-3" sizing="sm">
-                            <span cInputGroupText id="basic-addon1">&#64;</span>
-                            <input readonly aria-describedby="basic-addon1" id="email" name="email" cFormControl
-                                required placeholder="email" #email="ngModel" [(ngModel)]="user.email" />
-                        </c-input-group>
-                        <c-input-group class="mb-3" sizing="sm">
-                            <span cInputGroupText id="basic-addon1">
-                                <svg cIcon name="cilUser"></svg>
-                            </span>
-                            <input aria-describedby="basic-addon1" id="username" name="username" cFormControl required
-                                readonly placeholder="username" #username="ngModel" [(ngModel)]="user.accountName" />
-                        </c-input-group>
-                    </form>
-                </c-col>
-            </c-row>
-        </c-card-body>
-    </c-card>
-    <c-card class="mb-2">
-        <c-card-header>
-            <h5>Permissions</h5>
-        </c-card-header>
-        <c-card-body>
-            <!-- <small *ngIf="!isValidRoles" class="form-text text-danger">
-                Permissions required
-            </small> -->
-            <c-row>
-                <c-col class="col">
-                    <c-smart-table [items]="roles$ | async" [columns]="columns" #editUserRoles
-                        [tableProps]="{ hover: true, striped: true }" header #table="cSmartTable">
-                        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
-                            let-tdContent="tdContent">
-                            <td>
-                                <ng-container [ngSwitch]="columnName">
-                                    <ng-container *ngSwitchDefault>
-                                        {{tdContent}}
-                                    </ng-container>
-                                    <ng-container *ngSwitchCase="'scope'" class="py-2">
-                                        <span *ngIf="checkNonMedical(item.name)">
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="hidden" [(ngModel)]="item.scope" disable-input
-                                                    [componentRole]="componentRole" />
-                                                <label cFormCheckLabel>Hidden</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="view" [(ngModel)]="item.scope" disable-input
-                                                    [componentRole]="componentRole" />
-                                                <label cFormCheckLabel>View</label>
-                                            </c-form-check>
-                                            <c-form-check [inline]="true" [switch]="true">
-                                                <input cFormCheckInput type="radio" [name]="'rolescope_'+item.role"
-                                                    value="modify" [(ngModel)]="item.scope" disable-input
-                                                    [componentRole]="componentRole" />
-                                                <label cFormCheckLabel>edit</label>
-                                            </c-form-check>
-                                        </span>
-                                        <span *ngIf="checkMedical(item.name)">
-                                            <c-form-check [inline]="true">
-                                                <input cFormCheckInput [name]="'rolescope_'+item.role" type="checkbox"
-                                                    [(ngModel)]="item.scope" />
-                                                <label cFormCheckLabel>edit</label>
-                                            </c-form-check>
-                                        </span>
-                                    </ng-container>
-                                </ng-container>
-                            </td>
-                        </ng-template>
-                    </c-smart-table>
-                </c-col>
-            </c-row>
-        </c-card-body>
-    </c-card>
-    <c-card *ngIf="user && userType ==='Clinical'">
-        <c-card-header>
-            <h5>Clinical User Details</h5>
-        </c-card-header>
-        <c-card-body>
-            <c-input-group class="mb-3">
-                <input autoComplete="name" cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter Doctor npi"
-                    readonly-input [componentRole]="componentRole" required
-                    [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}" [(ngModel)]="user.npi"
-                    #npi="ngModel" />
-            </c-input-group>
-            <c-input-group class="mb-3">
-                <input autoComplete="name" cFormControl id="licence" name="licence" sizing="sm"
-                    placeholder="Enter Doctor Licence" required readonly-input [componentRole]="componentRole"
-                    [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
-                    [(ngModel)]="user.licence" #licence="ngModel" />
-            </c-input-group>
-            <select cFormControl cSelect class="mb-2" sizing="sm" id="speciality" name="speciality" required
-                disable-input [componentRole]="componentRole"
-                [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
-                [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
-                <option [ngValue]="null" disabled selected>Select Doctor Speciality</option>
-                <option *ngFor="let specialty of specialties | keyvalue" [value]="specialty.key">
-                    {{specialty.value}}
-                </option>
-            </select>
-            <select cFormControl cSelect class="mb-2" sizing="sm" id="credential" name="credential" required
-                disable-input [componentRole]="componentRole"
-                [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
-                [(ngModel)]="user.credential" #credential="ngModel" (ngModelChange)="changeCredential($event)">
-                <option [ngValue]="null" disabled selected>Select Doctor Credential</option>
-                <option *ngFor="let credential of credentials" [value]="credential">
-                    {{credential}}
-                </option>
-            </select>
-        </c-card-body>
-    </c-card>
-    <c-card>
-        <c-card-header>
-            <h5>Clinics</h5>
-        </c-card-header>
-        <c-card-body>
-            <small *ngIf="!isValidClinic" class="form-text text-danger">
-                Clinics is required
-            </small>
-            <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
-                disable-multi-select [componentRole]="componentRole" *ngIf="clinics && user" [selectAll]="false"
-                [(ngModel)]="user!.clinicIds" #selectedClinic="ngModel" (valueChange)="isClinicTouched($event)">
-                <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
-                    [value]="clinic.id">{{clinic.name}}</c-multi-select-option>
-            </c-multi-select>
-        </c-card-body>
-    </c-card>
-    <div class="d-grid gap-2 col-2 mx-auto mt-2">
-        <button cButton color="primary" variant="outline" type="button" (click)="update()" dispaly-input
-            [componentRole]="componentRole">
-            Update
-        </button>
+<!-- Basic Information -->
+<c-card class="section-card">
+  <div class="card-header-custom">
+    <div class="card-header-title">
+      <svg cIcon name="cilUser" class="card-icon"></svg>
+      <span>Basic Information</span>
     </div>
-</c-container>
+  </div>
+  <c-card-body class="card-body-custom">
+    <form cForm #userUpdateForm="ngForm" readonly-form [componentRole]="componentRole">
+      <div class="basic-info-grid" *ngIf="user">
+        <!-- Row 1: Name Fields -->
+        <div class="basic-info-row three-col">
+          <div class="basic-field">
+            <label class="basic-field-label" for="firstName">First Name</label>
+            <c-input-group sizing="sm">
+              <span cInputGroupText>
+                <svg cIcon name="cilUser"></svg>
+              </span>
+              <input readonly cFormControl id="firstName" name="firstName" sizing="sm"
+                placeholder="First Name" required
+                [ngClass]="{'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched)}"
+                [(ngModel)]="user.firstName" #firstName="ngModel" />
+            </c-input-group>
+          </div>
+          <div class="basic-field">
+            <label class="basic-field-label" for="middleName">Middle Name</label>
+            <c-input-group sizing="sm">
+              <span cInputGroupText>
+                <svg cIcon name="cilUser"></svg>
+              </span>
+              <input readonly cFormControl id="middleName" name="middleName" sizing="sm"
+                placeholder="Middle Name"
+                [ngClass]="{'is-invalid': middleName.invalid && (middleName.dirty || middleName.touched)}"
+                [(ngModel)]="user.middleName" #middleName="ngModel" />
+            </c-input-group>
+          </div>
+          <div class="basic-field">
+            <label class="basic-field-label" for="lastName">Last Name</label>
+            <c-input-group sizing="sm">
+              <span cInputGroupText>
+                <svg cIcon name="cilUser"></svg>
+              </span>
+              <input readonly cFormControl id="lastName" name="lastName" sizing="sm"
+                placeholder="Last Name" required
+                [ngClass]="{'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched)}"
+                [(ngModel)]="user.lastName" #lastName="ngModel" />
+            </c-input-group>
+          </div>
+        </div>
+        <!-- Row 2: Email & Username -->
+        <div class="basic-info-row two-col">
+          <div class="basic-field">
+            <label class="basic-field-label" for="email">Email</label>
+            <c-input-group sizing="sm">
+              <span cInputGroupText>
+                <svg cIcon name="cilEnvelopeClosed"></svg>
+              </span>
+              <input readonly cFormControl id="email" name="email" required
+                placeholder="Email" #email="ngModel" [(ngModel)]="user.email" />
+            </c-input-group>
+          </div>
+          <div class="basic-field">
+            <label class="basic-field-label" for="username">Username</label>
+            <c-input-group sizing="sm">
+              <span cInputGroupText>&#64;</span>
+              <input readonly cFormControl id="username" name="username" required
+                placeholder="Username" #username="ngModel" [(ngModel)]="user.accountName" />
+            </c-input-group>
+          </div>
+        </div>
+      </div>
+    </form>
+  </c-card-body>
+</c-card>
+
+<!-- Permissions -->
+<c-card class="section-card">
+  <div class="card-header-custom">
+    <div class="card-header-title">
+      <svg cIcon name="cilShieldAlt" class="card-icon"></svg>
+      <span>Permissions</span>
+    </div>
+  </div>
+  <c-card-body class="card-body-custom">
+    <!-- General Permissions Group -->
+    <div class="permissions-group">
+      <div class="permissions-group-header">
+        <svg cIcon name="cilSettings" class="permissions-group-icon"></svg>
+        <span>General Permissions</span>
+      </div>
+      <c-smart-table [items]="generalRoles$ | async" [columns]="columns" #generalRolesTable
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }" header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+          let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchDefault>
+                {{tdContent}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'scope'" class="py-2">
+                <div class="scope-group">
+                  <span class="scope-option" [ngClass]="{'active': item.scope === 'hidden'}"
+                    (click)="item.scope = 'hidden'">
+                    <svg cIcon name="cilBan" class="scope-option-icon"></svg>
+                    Hidden
+                  </span>
+                  <span class="scope-option" [ngClass]="{'active': item.scope === 'view'}"
+                    (click)="item.scope = 'view'">
+                    <svg cIcon name="cilSearch" class="scope-option-icon"></svg>
+                    View
+                  </span>
+                  <span class="scope-option" [ngClass]="{'active': item.scope === 'modify'}"
+                    (click)="item.scope = 'modify'">
+                    <svg cIcon name="cilPen" class="scope-option-icon"></svg>
+                    Edit
+                  </span>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-template>
+      </c-smart-table>
+    </div>
+
+    <!-- Medical Permissions Group -->
+    <div class="permissions-group medical-group" *ngIf="showMedicalPermissions">
+      <div class="permissions-group-header">
+        <svg cIcon name="cilMedicalCross" class="permissions-group-icon"></svg>
+        <span>Medical Note Permissions</span>
+        <span class="permissions-group-badge">Clinical Only</span>
+      </div>
+      <c-smart-table [items]="medicalRoles$ | async" [columns]="columns" #medicalRolesTable
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }" header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+          let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchDefault>
+                {{tdContent}}
+              </ng-container>
+              <ng-container *ngSwitchCase="'scope'" class="py-2">
+                <div class="scope-group">
+                  <span class="scope-toggle" [ngClass]="{'active': item.scope}"
+                    (click)="item.scope = !item.scope">
+                    <svg cIcon [name]="item.scope ? 'cilCheckCircle' : 'cilCircle'" class="scope-toggle-icon"></svg>
+                    Edit
+                  </span>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-template>
+      </c-smart-table>
+    </div>
+  </c-card-body>
+</c-card>
+
+<!-- Clinical User Details -->
+<c-card class="section-card" *ngIf="user && userType === 'Clinical'">
+  <div class="card-header-custom">
+    <div class="card-header-title">
+      <svg cIcon name="cilMedicalCross" class="card-icon"></svg>
+      <span>Clinical Details</span>
+    </div>
+  </div>
+  <c-card-body class="card-body-custom">
+    <div class="clinical-panel-body">
+      <div class="clinical-fields-row">
+        <div class="clinical-field">
+          <label class="clinical-field-label" for="npi">NPI</label>
+          <c-input-group sizing="sm">
+            <span cInputGroupText>
+              <svg cIcon name="cilFingerprint"></svg>
+            </span>
+            <input cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter NPI number"
+              readonly-input [componentRole]="componentRole" required
+              [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}"
+              [(ngModel)]="user.npi" #npi="ngModel" />
+          </c-input-group>
+        </div>
+        <div class="clinical-field">
+          <label class="clinical-field-label" for="licence">Licence</label>
+          <c-input-group sizing="sm">
+            <span cInputGroupText>
+              <svg cIcon name="cilDescription"></svg>
+            </span>
+            <input cFormControl id="licence" name="licence" sizing="sm" placeholder="Enter licence number"
+              readonly-input [componentRole]="componentRole" required
+              [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
+              [(ngModel)]="user.licence" #licence="ngModel" />
+          </c-input-group>
+        </div>
+      </div>
+      <div class="clinical-fields-row">
+        <div class="clinical-field">
+          <label class="clinical-field-label" for="speciality">Speciality</label>
+          <select cFormControl cSelect sizing="sm" id="speciality" name="speciality" required
+            disable-input [componentRole]="componentRole"
+            [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
+            [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
+            <option [ngValue]="null" disabled selected>Select Speciality</option>
+            <option *ngFor="let specialty of specialties | keyvalue" [value]="specialty.key">
+              {{specialty.value}}
+            </option>
+          </select>
+        </div>
+        <div class="clinical-field">
+          <label class="clinical-field-label" for="credential">Credential</label>
+          <select cFormControl cSelect sizing="sm" id="credential" name="credential" required
+            disable-input [componentRole]="componentRole"
+            [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
+            [(ngModel)]="user.credential" #credential="ngModel" (ngModelChange)="changeCredential($event)">
+            <option [ngValue]="null" disabled selected>Select Credential</option>
+            <option *ngFor="let credential of credentials" [value]="credential">
+              {{credential}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </c-card-body>
+</c-card>
+
+<!-- Clinics -->
+<c-card class="section-card">
+  <div class="card-header-custom">
+    <div class="card-header-title">
+      <svg cIcon name="cilHospital" class="card-icon"></svg>
+      <span>Clinics</span>
+    </div>
+  </div>
+  <c-card-body class="card-body-custom">
+    <div class="clinics-section">
+      <div class="clinics-hint">
+        <svg cIcon name="cilInfo" class="clinics-hint-icon"></svg>
+        <span>Manage clinic assignments for this user</span>
+      </div>
+      <div class="clinics-field">
+        <label class="basic-field-label" for="selectedClinic">
+          Assigned Clinics <span class="field-required">*</span>
+        </label>
+        <small *ngIf="!isValidClinic" class="form-text text-danger">
+          At least one clinic is required
+        </small>
+        <div class="clinics-select-wrapper">
+          <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
+            disable-multi-select [componentRole]="componentRole" *ngIf="clinics && user" [selectAll]="false"
+            [(ngModel)]="user!.clinicIds" #selectedClinic="ngModel" (valueChange)="isClinicTouched($event)">
+            <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
+              [value]="clinic.id">{{clinic.name}}</c-multi-select-option>
+          </c-multi-select>
+        </div>
+      </div>
+      <div class="clinics-count" *ngIf="user?.clinicIds?.length > 0">
+        <svg cIcon name="cilCheckCircle" class="clinics-count-icon"></svg>
+        <span>{{ user.clinicIds.length }} clinic{{ user.clinicIds.length > 1 ? 's' : '' }} assigned</span>
+      </div>
+    </div>
+  </c-card-body>
+</c-card>
+
+<!-- Action Section -->
+<div class="action-section">
+  <button cButton class="update-btn" type="button" (click)="update()" dispaly-input
+    [componentRole]="componentRole">
+    <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
+    Update
+  </button>
+</div>
