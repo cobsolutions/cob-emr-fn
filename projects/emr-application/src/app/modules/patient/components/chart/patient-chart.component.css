@@ -1,513 +1,527 @@
-/* Patient Header Layout */
+/* ========================================
+   Patient Chart Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
 
-
-/* Avatar */
-.patient-avatar {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* --- Page Header --- */
+.page-header {
+  margin-bottom: 1.5rem;
 }
 
-.patient-avatar svg {
-    width: 80px;
-    height: 80px;
-    color: #0d6efd;
-    /* healthcare blue */
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-/* Info Grid */
-.patient-info-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-/* Info Card */
-.info-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.5rem;
-    border: 1px solid #dee2e6;
-    border-radius: 0.75rem;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
 }
 
-/* Icon inside card */
-.info-card .icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #e7f1ff;
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
 }
 
-.info-card .icon svg {
-    width: 20px;
-    height: 20px;
-    color: #0d6efd;
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding-left: 2.5rem;
 }
 
-/* Text details */
-.info-card .details {
-    display: flex;
-    flex-direction: column;
+/* --- Header Actions --- */
+.header-actions {
+  display: flex;
+  align-items: center;
 }
 
-.info-card .label {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #6c757d;
-    margin-bottom: 0.25rem;
+.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.info-card .value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #212529;
-    white-space: normal;
-    word-wrap: break-word;
+.edit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-decoration: none;
 }
 
-.info-card .value .age {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #495057;
-    margin-left: 0.5rem;
+.edit-btn .btn-icon {
+  width: 1rem;
+  height: 1rem;
 }
 
-.info-card[data-type="contact"] .icon {
-    background: #e6f7f1;
+/* --- Chart Container --- */
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
 }
 
-.info-card[data-type="contact"] .icon svg {
-    color: #198754;
-}
-
-.info-card.address .toggle {
-    font-size: 0.8rem;
-    color: #0d6efd;
-    cursor: pointer;
-    margin-top: 0.25rem;
-}
-
+/* --- Section Cards --- */
 .section-card {
-    background: #ffffff;
-    padding: 1.2rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto;
-    /* makes table scrollable if too wide */
-}
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  transition: all 0.2s ease;
 }
 
-.section-card h3 {
-    margin: 0;
-    color: #1565c0;
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-/* Enhanced Full Width Card - Clinical EMR Design */
-.card.full-width-card {
-    width: 100%;
-    border: 1px solid #e3f2fd;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  /* Enhanced Card Header - Medical Blue Theme */
-  .card.full-width-card .card-header {
-    background: linear-gradient(to right, #f8fbff 0%, #ffffff 100%);
-    padding: 0.75rem 1.25rem;
-    border-bottom: 2px solid #e3f2fd;
-    position: relative;
-  }
-
-  .card.full-width-card .card-header::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #2196F3 0%, #1976d2 50%, #2196F3 100%);
-    opacity: 0.3;
-  }
-
-  /* Enhanced Nav Tabs - Clinical Professional */
-  .card.full-width-card .nav-tabs {
-    border-bottom: none;
-    gap: 0.5rem;
-  }
-
-  .card.full-width-card .nav-tabs .nav-link {
-    border: none;
-    color: #546e7a;
-    font-weight: 500;
-    padding: 0.625rem 1.25rem;
-    transition: all 0.25s ease;
-    border-radius: 6px 6px 0 0;
-    position: relative;
-    background: transparent;
-    margin-bottom: -2px;
-  }
-
-  .card.full-width-card .nav-tabs .nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: #2196F3;
-    transition: width 0.3s ease;
-  }
-
-  .card.full-width-card .nav-tabs .nav-link:hover {
-    color: #1976d2;
-    background: rgba(33, 150, 243, 0.05);
-  }
-
-  .card.full-width-card .nav-tabs .nav-link:hover::before {
-    width: 70%;
-  }
-
-  .card.full-width-card .nav-tabs .nav-link.active {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    color: #1565c0;
-    font-weight: 600;
-    box-shadow: 0 -2px 8px rgba(33, 150, 243, 0.15);
-  }
-
-  .card.full-width-card .nav-tabs .nav-link.active::before {
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #2196F3 0%, #1976d2 100%);
-  }
-
-  .card.full-width-card .nav-tabs .nav-link.active::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0.5rem;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 60%;
-    background: #2196F3;
-    border-radius: 0 2px 2px 0;
-  }
-
-  /* Card body */
-  .card.full-width-card .card-body {
-    padding: 1.25rem;
-    background: #ffffff;
-  }
-
-  .card.full-width-card .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  /* Enhanced Case Selector */
-  .card.full-width-card .case-select {
-    max-width: 220px;
-    border: 1px solid #bbdefb;
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-    background: #ffffff;
-    color: #37474f;
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-
-  .card.full-width-card .case-select:focus {
-    border-color: #2196F3;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
-  }
-
-  .card.full-width-card .case-select:hover {
-    border-color: #2196F3;
-    background: #f8fbff;
-  }
-
-
-  /* patient-basic.component.css or scss */
-
-.patient-basic {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  .section-header {
-    margin-bottom: 0.75rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }  
-  .basic-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .basic-left .name-group {
-    margin-top: 0.5rem;
-  }
-  
-  .patient-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1f2937;
-  }
-  
-  .demographics-small {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-top: 0.25rem;
-  }
-  
-  .demographics-small .sep {
-    margin: 0 0.3rem;
-  }
-  
-  .basic-center {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 0.75rem;
-  }
-  
-  .info-card {
-    display: flex;
-    align-items: center;
-    background: #f8fafc;
-    border-radius: 6px;
-    padding: 0.5rem;
-  }
-  
-  .info-card .icon {
-    margin-right: 0.6rem;
-    color: #3b82f6;
-  }
-  
-  .info-card .details .label {
-    font-size: 0.9rem;
-    color: #4b5563;
-  }
-  
-  .info-card .details .value {
-    font-size: 0.95rem;
-    color: #111827;
-    margin-top: 0.1rem;
-  }
-  
-  .address-card .value.truncated {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  
-  .toggle-btn {
-    background: none;
-    border: none;
-    color: #3b82f6;
-    font-size: 0.75rem;
-    padding: 0;
-    margin-top: 0.3rem;
-    cursor: pointer;
-  }
-  
-  .basic-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: start;
-  }
-  
-  .status-pill {
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    color: #fff;
-    background-color: #10b981; /* green for active */
-  }
-  
-  .status-pill.inactive {
-    background-color: #9ca3af; /* gray for inactive */
-  }
-  
-  /* Responsive: smaller screens */
-  @media (max-width: 800px) {
-    .patient-basic-grid {
-      grid-template-columns: 80px 1fr;
-    }
-    .basic-right {
-      align-items: flex-start;
-      margin-top: 0.75rem;
-    }
-  }
-  .patient-basic-grid {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-  
-  .basic-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .basic-center {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-  }
-  /* make sure flex children can shrink so long content doesn't force the parent wider */
-.info-card,
-.info-card .details {
-  min-width: 0;            /* critical: allow inner content to shrink/wrap */
+.section-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
 
-/* Address card content (collapsed by default) */
-.info-card.address .value.content,
-.info-card.address-card .value.content {
-  display: -webkit-box;            /* required for -webkit-line-clamp */
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.125rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  transition: all 0.2s ease;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+/* --- Card Status Badges --- */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.5rem;
+  background: rgba(217, 119, 6, 0.25);
+  color: #fef3c7;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+.card-status.active {
+  background: rgba(5, 150, 105, 0.25);
+  color: #d1fae5;
+}
+
+.card-status.inactive {
+  background: rgba(156, 163, 175, 0.25);
+  color: #e5e7eb;
+}
+
+.status-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+.card-body-custom.p-0 {
+  padding: 0;
+}
+
+/* --- Patient Info Layout --- */
+.patient-info-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.patient-identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.patient-name-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.patient-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.patient-demographics {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.patient-demographics .sep {
+  margin: 0 0.375rem;
+  color: #cbd5e1;
+}
+
+.patient-demographics strong {
+  color: #334155;
+}
+
+/* --- Info Cards Grid --- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+
+.info-card:hover {
+  background: #f1f5f9;
+}
+
+.info-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.info-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.info-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.info-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.125rem;
+}
+
+.info-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.age-tag {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-left: 0.25rem;
+}
+
+/* --- Address Card --- */
+.info-card.address .info-value.content {
+  display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;           /* show ~3 lines collapsed */
+  -webkit-line-clamp: 1;
   overflow: hidden;
   white-space: normal;
-  word-break: break-word;          /* break long words */
-  overflow-wrap: anywhere;         /* modern fallback */
+  word-break: break-word;
+  overflow-wrap: anywhere;
   line-height: 1.4;
-  transition: max-height 0.28s ease, -webkit-line-clamp 0.28s ease;
-  max-height: calc(1.4em * 3 + 6px); /* roughly clamps height for 3 lines; +6 for safety */
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-/* Expanded state: remove clamp and let it grow */
-.info-card.address.expanded .value.content,
-.info-card.address-card.expanded .value.content {
-  display: block;                  /* show full content */
+.info-card.address.expanded .info-value.content {
+  display: block;
   -webkit-line-clamp: unset;
-  max-height: none;
   overflow: visible;
 }
 
-/* Toggle button (inline, subtle) */
 .toggle-btn {
-  margin-top: 0.375rem;
+  margin-top: 0.25rem;
   background: transparent;
   border: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #0d6efd;
+  gap: 4px;
+  color: #334155;
   cursor: pointer;
   padding: 0;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
+  transition: color 0.15s ease;
 }
 
-/* rotate the chevron when expanded */
-.info-card.address.expanded .toggle-chevron,
-.info-card.address-card.expanded .toggle-chevron {
-  transform: rotate(180deg);
+.toggle-btn:hover {
+  color: #1e293b;
 }
+
+.toggle-btn:focus {
+  outline: 2px solid rgba(51, 65, 85, 0.15);
+  border-radius: 4px;
+}
+
 .toggle-chevron {
   transition: transform 0.22s ease;
   color: currentColor;
 }
 
-/* Optional: make truncated collapsed text show ellipsis when there's overflow (non-webkit fallback) */
-.info-card.address .value.content {
-  text-overflow: ellipsis;
+.info-card.address.expanded .toggle-chevron {
+  transform: rotate(180deg);
 }
 
-/* Small accessibility tweak: keep visual focus outline on button */
-.toggle-btn:focus {
-  outline: 3px solid rgba(13,110,253,0.15);
-  border-radius: 6px;
+/* --- Case Selector in Header --- */
+.case-select {
+  max-width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-.info-card.address .value {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;      /* show max 2 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;        /* allow wrapping */
+
+.case-select:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.case-select option {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* --- Chart Tabs --- */
+.chart-tabs {
+  padding: 0 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.chart-tabs .nav-link {
+  border: none;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  border-radius: 0;
+  position: relative;
+  background: transparent;
+}
+
+.chart-tabs .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #334155;
+  transition: width 0.25s ease;
+}
+
+.chart-tabs .nav-link:hover {
+  color: #334155;
+  background: rgba(51, 65, 85, 0.05);
+}
+
+.chart-tabs .nav-link:hover::after {
+  width: 60%;
+}
+
+.chart-tabs .nav-link.active {
+  color: #1e293b;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.chart-tabs .nav-link.active::after {
+  width: 100%;
+  height: 2px;
+  background: #334155;
+}
+
+/* --- Tab Pane Content --- */
+.tab-pane-content {
+  padding: 1.25rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    padding-left: 0;
+  }
+
+  .header-actions {
+    justify-content: center;
+  }
+
+  .patient-identity {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .patient-demographics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .patient-demographics .sep {
+    display: none;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .card-header-title {
+    justify-content: center;
+  }
+
+  .case-select {
     max-width: 100%;
   }
-  
-  .info-card.address .value.expanded {
-    -webkit-line-clamp: unset;  /* show full when expanded */
-    overflow: visible;
+
+  .card-body-custom {
+    padding: 1rem;
   }
-  
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 1.4rem;
-    font-weight: 600;
+
+  .tab-pane-content {
+    padding: 1rem;
   }
-  
-  .edit-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #fff;
-    background: linear-gradient(90deg, #4b86b4, #2a4d69);
-    border-radius: 20px;
-    text-decoration: none;
-    transition: 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .page-header-content {
+    padding: 0.875rem;
   }
-  
-  .edit-link:hover {
-    background: linear-gradient(90deg, #2a4d69, #4b86b4);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+  .page-title {
+    font-size: 1.125rem;
   }
-  
-  .edit-link .icon {
-    width: 16px;
-    height: 16px;
-    stroke-width: 2;
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  
+
+  .chart-container {
+    gap: 0.875rem;
+  }
+
+  .section-card {
+    border-radius: 0.375rem !important;
+  }
+
+  .card-header-title {
+    font-size: 0.875rem;
+  }
+
+  .card-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .card-body-custom {
+    padding: 0.875rem;
+  }
+
+  .edit-btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .tab-pane-content {
+    padding: 0.875rem;
+  }
+}

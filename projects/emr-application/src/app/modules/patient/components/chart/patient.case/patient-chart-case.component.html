@@ -1,9 +1,12 @@
 <ngx-spinner></ngx-spinner>
 
 <!-- Case Information Section -->
-<div class="section-card shadow-sm mb-3">
+<div class="section-card">
     <div class="section-header">
-        <h6 class="mb-0">Case Information</h6>
+        <div class="section-header-title">
+            <svg cIcon name="cilFolder" class="header-icon"></svg>
+            <span>Case Information</span>
+        </div>
     </div>
     <div class="section-body">
         <!-- Referring Doctor -->
@@ -49,6 +52,8 @@
                 <span class="info-value text-capitalize">{{ case.injuryCase }}</span>
             </div>
         </div>
+
+        <!-- Additional Info -->
         <div class="info-row">
             <div class="info-icon">
                 <svg cIcon name="cilNotes"></svg>
@@ -64,205 +69,218 @@
         </div>
 
         <!-- Authorization Row -->
-        <div class="info-row authorization-row mb-3" *ngIf="case.authorizationData">
-            <span class="info-label">Authorization</span>
-            <span class="value">
-                <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-primary'">
-                    {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
+        <div class="authorization-row" *ngIf="case.authorizationData">
+            <div class="auth-header">
+                <svg cIcon name="cilShieldAlt" class="auth-icon"></svg>
+                <span class="info-label">Authorization</span>
+            </div>
+            <div class="auth-content">
+                <span class="auth-value">
+                    <span class="auth-count" [ngClass]="isExpired ? 'expired' : 'current'">
+                        {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
+                    </span>
+                    of
+                    <span class="auth-total" [ngClass]="isExpired ? 'expired' : 'valid'">
+                        {{ case.authorizationData.numberAuthorized }}
+                    </span>
+                    Authorized
+                    <span class="auth-date" [ngClass]="isExpired ? 'expired' : ''">
+                        (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
+                    </span>
+                    <span *ngIf="isExpired" class="expired-badge">Expired</span>
                 </span>
-                of
-                <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-success'">
-                    {{ case.authorizationData.numberAuthorized }}
-                </span>
-                Authorized
-                <span class="ms-2" [ngClass]="isExpired ? 'text-danger fw-bold' : 'text-muted'">
-                    (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
-                </span>
-                <span *ngIf="isExpired" class="badge bg-danger ms-2">Expired</span>
-            </span>
-
-            <!-- Icon -->
-            <i class="ms-2" [ngClass]="isExpired 
-         ? 'bi bi-exclamation-triangle-fill text-danger fs-5' 
-         : 'bi bi-check-circle-fill text-success fs-5'">
-            </i>
+            </div>
         </div>
 
         <!-- If Authorization is not set -->
-        <div class="info-row mb-3" *ngIf="case.authorizationData === null">
-            <span class="info-label">Authorization</span>
-            <span class="info-value text-capitalize text-danger">Authorization is not set</span>
-        </div>
-        <div class="section-card shadow-sm mb-3">
-            <div class="section-header">
-                <h6 class="mb-0">Case Diagnosis</h6>
+        <div class="authorization-row not-set" *ngIf="case.authorizationData === null">
+            <div class="auth-header">
+                <svg cIcon name="cilShieldAlt" class="auth-icon"></svg>
+                <span class="info-label">Authorization</span>
             </div>
-            <div class="section-body">
+            <div class="auth-content">
+                <span class="auth-warning">Authorization is not set</span>
+            </div>
+        </div>
+
+        <!-- Case Diagnosis -->
+        <div class="diagnosis-section">
+            <div class="diagnosis-header">
+                <div class="section-header-title">
+                    <svg cIcon name="cilMedicalCross" class="header-icon"></svg>
+                    <span>Case Diagnosis</span>
+                </div>
+            </div>
+            <div class="diagnosis-body">
                 <div *ngFor="let diagnosis of case.caseDiagnosis" class="diagnosis-item">
-                    <span class="badge bg-primary me-2">{{ diagnosis.diagnosisCode }}</span>
+                    <span class="diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
                     <span class="diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
                 </div>
             </div>
         </div>
-        <div class="actions-footer d-flex justify-content-end align-items-center gap-2 mt-3" *ngIf="patientCaseActions">
-            <label for="patientRecordAction" class="mx-0 text-nowrap fw-semibold">
+
+        <!-- Actions Footer -->
+        <div class="actions-footer" *ngIf="patientCaseActions">
+            <label for="patientRecordAction" class="action-label">
                 Patient Record Actions:
             </label>
-            <c-input-group class="mb-0">
-                <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
+            <div class="action-controls">
+                <select id="patientRecordAction" #patientActionSelect class="action-select" hide-control
                     [componentRole]="componentRole">
                     <option [value]="action.key" *ngFor="let action of patientCaseActions">
                         {{ action.label }}
                     </option>
                 </select>
-                <button cButton color="primary" variant="outline" size="sm"
+                <button class="action-btn"
                     (click)="executeAction(patientActionSelect.value)" hide-control [componentRole]="componentRole">
                     <svg cIcon name="cilArrowCircleRight"></svg>
                 </button>
-            </c-input-group>
+            </div>
         </div>
-
     </div>
 </div>
 
-<!--Case Details-->
-<div class="case-details-container d-flex" *ngIf="patientRecord ===true">
-
+<!-- Case Details -->
+<div class="case-details-container" *ngIf="patientRecord === true">
     <!-- Sidebar -->
-    <div class="case-sidebar p-3 border-end">
-        <h6 class="fw-bold mb-3">Case Details</h6>
-        <ul class="nav flex-column nav-pills">
-
-            <li class="nav-item mb-2">
-                <a class="nav-link d-flex align-items-center" [class.active]="isActive('records')"
+    <aside class="case-sidebar">
+        <div class="sidebar-header">Case Details</div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('records')"
                     (click)="setActive('records')">
-                    <svg cIcon class="me-2" name="cilNotes"></svg>
+                    <svg cIcon name="cilNotes" class="nav-icon"></svg>
                     Patient Records
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link d-flex align-items-center" [class.active]="isActive('documents')"
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('documents')"
                     (click)="setActive('documents')">
-                    <svg cIcon class="me-2" name="cilPaperclip"></svg>
+                    <svg cIcon name="cilPaperclip" class="nav-icon"></svg>
                     E-Documents
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link d-flex align-items-center" [class.active]="isActive('payments')"
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('payments')"
                     (click)="setActive('payments')">
-                    <svg cIcon class="me-2" name="cilMoney"></svg>
+                    <svg cIcon name="cilMoney" class="nav-icon"></svg>
                     Patient Payment
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link d-flex align-items-center" [class.active]="isActive('home-program')"
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('home-program')"
                     (click)="setActive('home-program')">
-                    <svg cIcon class="me-2" name="cilHome"></svg>
+                    <svg cIcon name="cilHome" class="nav-icon"></svg>
                     Home Exercise Program
                 </a>
             </li>
         </ul>
-    </div>
-    <div class="case-content flex-grow-1 p-3">
+    </aside>
+
+    <!-- Main Content -->
+    <div class="case-content">
         <!-- Records -->
         <div *ngIf="isActive('records')">
-            <div class="records-section-card">
-                <div class="records-section-body">
-                    <ng-container *ngIf="props$ | async as props">
-                        <div class="records-table-container">
-                            <table class="records-table">
-                                <thead>
-                                    <tr>
-                                        <th class="th-record">Record Type</th>
-                                        <th class="th-date">Created Date</th>
-                                        <th class="th-dos">Date of Service</th>
-                                        <th class="th-actions">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index" class="record-row">
-                                        <td class="td-record">
-                                            <span class="record-type-badge" [ngClass]="{
-                                                'badge-initial': item.status === 'Initial Examination',
-                                                'badge-daily': item.status === 'Daily Note',
-                                                'badge-progress': item.status === 'Progress Note',
-                                                'badge-quick-discharge': item.status === 'Quick Discharge' || item.status === 'Quick_Discharge',
-                                                'badge-discharge': item.status === 'Discharge Note' || item.status === 'Discharge' || item.status === 'Discharge_Note'
-                                            }">
-                                                {{item.status}}
-                                            </span>
-                                        </td>
-                                        <td class="td-date">
-                                            <div class="date-cell">
-                                                <svg cIcon name="cilCalendar" class="date-icon"></svg>
-                                                <span>{{item.date | date:'MMM d, y, h:mm a'}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="td-dos">
-                                            <div class="date-cell" *ngIf="item.dos; else noDos">
-                                                <span>{{item.dos | date:'MMM d, y'}}</span>
-                                            </div>
-                                            <ng-template #noDos>
-                                                <span class="no-dos">-</span>
-                                            </ng-template>
-                                        </td>
-                                        <td class="td-actions">
-                                            <div class="action-group">
-                                                <select [id]="'actionSelect_' + i" #actionSelect class="action-select">
-                                                    <option [value]="action" *ngFor="let action of item.actions">
-                                                        {{ action }}
-                                                    </option>
-                                                </select>
-                                                <button class="action-btn"
-                                                    (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId)">
-                                                    <svg cIcon name="cilArrowCircleRight"></svg>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="(patientRecords$ | async)?.length === 0" class="empty-row">
-                                        <td colspan="4">
-                                            <div class="empty-state">
-                                                <svg cIcon name="cilNotes" class="empty-icon"></svg>
-                                                <span>No patient records found</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="records-pagination" *ngIf="props.totalPages > 1">
-                            <c-smart-pagination [activePage]="props.activePage" size="sm"
-                                (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
-                            </c-smart-pagination>
-                        </div>
-                    </ng-container>
-                </div>
+            <div class="records-card">
+                <ng-container *ngIf="props$ | async as props">
+                    <div class="records-table-container">
+                        <table class="records-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-record">Record Type</th>
+                                    <th class="th-date">Created Date</th>
+                                    <th class="th-dos">Date of Service</th>
+                                    <th class="th-actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index" class="record-row">
+                                    <td>
+                                        <span class="record-type-badge" [ngClass]="{
+                                            'badge-initial': item.status === 'Initial Examination',
+                                            'badge-daily': item.status === 'Daily Note',
+                                            'badge-progress': item.status === 'Progress Note',
+                                            'badge-quick-discharge': item.status === 'Quick Discharge' || item.status === 'Quick_Discharge',
+                                            'badge-discharge': item.status === 'Discharge Note' || item.status === 'Discharge' || item.status === 'Discharge_Note'
+                                        }">
+                                            {{item.status}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="date-cell">
+                                            <svg cIcon name="cilCalendar" class="date-icon"></svg>
+                                            <span>{{item.date | date:'MMM d, y, h:mm a'}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="date-cell" *ngIf="item.dos; else noDos">
+                                            <span>{{item.dos | date:'MMM d, y'}}</span>
+                                        </div>
+                                        <ng-template #noDos>
+                                            <span class="no-dos">-</span>
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <div class="record-action-group">
+                                            <select [id]="'actionSelect_' + i" #actionSelect class="record-action-select">
+                                                <option [value]="action" *ngFor="let action of item.actions">
+                                                    {{ action }}
+                                                </option>
+                                            </select>
+                                            <button class="record-action-btn"
+                                                (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId)">
+                                                <svg cIcon name="cilArrowCircleRight"></svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="(patientRecords$ | async)?.length === 0" class="empty-row">
+                                    <td colspan="4">
+                                        <div class="empty-state">
+                                            <svg cIcon name="cilNotes" class="empty-icon"></svg>
+                                            <span>No patient records found</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="records-pagination" *ngIf="props.totalPages > 1">
+                        <c-smart-pagination [activePage]="props.activePage" size="sm"
+                            (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
+                        </c-smart-pagination>
+                    </div>
+                </ng-container>
             </div>
         </div>
 
         <!-- Documents -->
         <div *ngIf="isActive('documents')">
-            <h5>E-Documents</h5>
-            <!-- put your Documents content here -->
+            <div class="content-placeholder">
+                <h5 class="content-title">E-Documents</h5>
+            </div>
         </div>
 
         <!-- Payments -->
         <div *ngIf="isActive('payments')">
-            <h5>Patient Payment</h5>
+            <div class="content-placeholder">
+                <h5 class="content-title">Patient Payment</h5>
+            </div>
             <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
         </div>
 
         <!-- Home Program -->
         <div *ngIf="isActive('home-program')">
-            <h5>Home Exercise Program</h5>
-            <!-- put your Home Program content here -->
+            <div class="content-placeholder">
+                <h5 class="content-title">Home Exercise Program</h5>
+            </div>
         </div>
     </div>
 </div>
-<!--SOAP -->
-<span *ngIf="patientRecord ===false">
-    <c-card class="mb-3 ustify-content-center">
+
+<!-- SOAP Notes -->
+<span *ngIf="patientRecord === false">
+    <div class="note-container">
         <!-- Initial Examination -->
         <initial-examination *ngIf="patientRecordAction ==='Initial_Examination' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
@@ -270,22 +288,23 @@
         <!-- Daily Note -->
         <daily-note-n *ngIf="patientRecordAction ==='Daily_Note' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></daily-note-n>
-        <!--Progress Note-->
+        <!-- Progress Note -->
         <progress-note-n *ngIf="patientRecordAction ==='Progress_Note' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></progress-note-n>
-        <!--Quick Discharge Note-->
+        <!-- Quick Discharge Note -->
         <quick-discharge-n *ngIf="patientRecordAction ==='Quick_Discharge' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [noteId]="noteId" [caseId]="case.uuid"
             [patientName]="patientName" (backToRecord)="handleBackAction()"></quick-discharge-n>
-        <!--Discharge Note-->
+        <!-- Discharge Note -->
         <discharge-n *ngIf="patientRecordAction ==='Discharge' && noteId" (back)="handleBackAction()"
             [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></discharge-n>
-    </c-card>
+    </div>
+
     <!-- Error State -->
     <div class="error-card" *ngIf="patientRecordAction==='ERROR_FINALIZE'">
         <div class="error-card-header">
             <div class="error-header-content">
-                <div class="error-icon">
+                <div class="error-icon-wrapper">
                     <svg cIcon name="cilWarning"></svg>
                 </div>
                 <div class="error-header-text">
@@ -314,6 +333,8 @@
         </div>
     </div>
 </span>
+
+<!-- Appointment Reason Modal -->
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
         <h5 cModalTitle>Appointment {{appointmentCancelNoShowReason?.status}} Reason</h5>
@@ -338,6 +359,8 @@
             [value]="appointmentCancelNoShowReason?.comment"></textarea>
     </c-modal-body>
 </c-modal>
+
+<!-- View PDF Modal -->
 <c-modal id="viewPDF" [visible]="viewPDFVisibility" size="lg" backdrop="static" scrollable="true">
     <c-modal-body>
         <button (click)="toggleviewPDFVisibility()" cButtonClose style="float: right;"></button>

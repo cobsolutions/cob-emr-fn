@@ -1,31 +1,36 @@
-<ng-container *ngIf="props$ | async as props">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-        [items]="(patientPaymentRecordResponse$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-        (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-        [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small:true }"
-        [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
-        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-            <td>
-                <ng-container [ngSwitch]="columnName">
-                    <ng-container *ngSwitchCase="'appointmentStatus'">
-                        {{tdContent}}
+<div class="table-container">
+    <ng-container *ngIf="props$ | async as props">
+        <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
+            [items]="(patientPaymentRecordResponse$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+            (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+            [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small: true }"
+            [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
+            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
+                let-tdContent="tdContent">
+                <td>
+                    <ng-container [ngSwitch]="columnName">
+                        <ng-container *ngSwitchCase="'appointmentStatus'">
+                            <span class="status-badge">{{ tdContent }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'amount'">
+                            <span class="amount-text">{{ tdContent | currency: 'USD' }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'createdAt'">
+                            <span class="date-text">{{ tdContent | date:'MMM d, y, h:mm a' }}</span>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'Actions'">
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            {{ tdContent }}
+                        </ng-container>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'amount'">
-                        {{tdContent| currency: 'USD'  }}
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'createdAt'">
-                        {{tdContent| date:'MMM d, y, h:mm a'}}
-                    </ng-container>
-                    <ng-container *ngSwitchDefault>
-                        {{tdContent}}
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'Actions'">
-
-                    </ng-container>
-                </ng-container>
-            </td>
-        </ng-template>
-    </c-smart-table>
-    <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
-        (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
-</ng-container>
+                </td>
+            </ng-template>
+        </c-smart-table>
+        <div class="pagination-wrapper" *ngIf="props.totalPages">
+            <c-smart-pagination [activePage]="props.activePage" size="sm"
+                (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
+            </c-smart-pagination>
+        </div>
+    </ng-container>
+</div>
