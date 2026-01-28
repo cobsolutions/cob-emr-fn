@@ -1,0 +1,146 @@
+/* EMR Footer - Healthcare Theme */
+
+.emr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(180deg, #F8FAFB 0%, #F1F5F9 100%);
+  border-top: 1px solid #E2E8F0;
+  min-height: 3rem;
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #0891B2;
+}
+
+.footer-brand-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0E7490;
+  letter-spacing: -0.01em;
+}
+
+.footer-brand-light {
+  font-weight: 400;
+  color: #64748B;
+}
+
+.footer-divider {
+  width: 1px;
+  height: 1rem;
+  background-color: #CBD5E1;
+}
+
+.footer-copyright {
+  color: #64748B;
+}
+
+.footer-version {
+  padding: 0.125rem 0.5rem;
+  background-color: #F0FDFA;
+  border: 1px solid #99F6E4;
+  border-radius: 4px;
+  color: #0E7490;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.footer-powered {
+  color: #94A3B8;
+}
+
+.footer-link {
+  color: #0891B2;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #0E7490;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .emr-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .footer-left,
+  .footer-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-divider {
+    display: none;
+  }
+}
+
+/* Dark theme support */
+:host-context(.dark-theme) .emr-footer {
+  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+  border-top-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:host-context(.dark-theme) .footer-logo {
+  color: #5EEAD4;
+}
+
+:host-context(.dark-theme) .footer-brand-text {
+  color: #5EEAD4;
+}
+
+:host-context(.dark-theme) .footer-brand-light {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:host-context(.dark-theme) .footer-divider {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+:host-context(.dark-theme) .footer-copyright {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:host-context(.dark-theme) .footer-version {
+  background-color: rgba(94, 234, 212, 0.1);
+  border-color: rgba(94, 234, 212, 0.3);
+  color: #5EEAD4;
+}
+
+:host-context(.dark-theme) .footer-powered {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:host-context(.dark-theme) .footer-link {
+  color: #5EEAD4;
+}
+
+:host-context(.dark-theme) .footer-link:hover {
+  color: #99F6E4;
+}
