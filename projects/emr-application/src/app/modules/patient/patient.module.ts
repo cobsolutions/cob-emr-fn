@@ -185,6 +185,8 @@ import { ProgressNoteNComponent } from './components/medical.note/progress.note.
 import { QuickDischargeNComponent } from './components/medical.note/quick.discharge.n/quick-discharge-n/quick-discharge-n.component';
 import { DischargeNComponent } from './components/medical.note/discharge-n/discharge-n.component';
 import { DischargePlanNComponent } from './components/medical.note/discharge-n/plan/discharge-plan.component';
+import { PatientCaseEDocumentComponent } from './components/chart/patient.case/e-document/patient-case-e-document.component';
+import { PatientCaseEDocumentListComponent } from './components/chart/patient.case/e-document/patient-case-e-document-list.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -371,6 +373,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     QuickDischargeNComponent,
     DischargeNComponent,
     DischargePlanNComponent,
+    PatientCaseEDocumentComponent,
+    PatientCaseEDocumentListComponent,
   ],
   imports: [
     CommonModule,

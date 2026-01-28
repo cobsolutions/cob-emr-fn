@@ -257,8 +257,31 @@
 
         <!-- Documents -->
         <div *ngIf="isActive('documents')">
-            <div class="content-placeholder">
-                <h5 class="content-title">E-Documents</h5>
+            <div class="e-documents-section">
+                <div class="section-toolbar">
+                    <h5 class="content-title">E-Documents</h5>
+                    <button class="add-document-btn" (click)="toggleEDocumentForm()" *ngIf="!showEDocumentForm">
+                        <svg cIcon name="cilPlus"></svg>
+                        Add Document
+                    </button>
+                </div>
+
+                <!-- E-Document Form -->
+                <patient-case-e-document *ngIf="showEDocumentForm"
+                    [caseName]="case.title"
+                    [caseId]="case.uuid"
+                    (documentSubmitted)="onDocumentSubmitted($event)"
+                    (cancel)="onCancelEDocument()">
+                </patient-case-e-document>
+
+                <!-- E-Document List -->
+                <patient-case-e-document-list
+                    [documents]="eDocuments"
+                    [caseName]="case.title"
+                    (viewDocument)="onViewDocument($event)"
+                    (deleteDocument)="onDeleteDocument($event)"
+                    (downloadDocument)="onDownloadDocument($event)">
+                </patient-case-e-document-list>
             </div>
         </div>
 

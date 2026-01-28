@@ -445,6 +445,51 @@
   margin: 0 0 1rem 0;
 }
 
+/* --- E-Documents Section --- */
+.e-documents-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.section-toolbar .content-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+}
+
+.add-document-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border: 1px solid #334155;
+  color: #ffffff;
+}
+
+.add-document-btn:hover {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.add-document-btn svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 /* --- Records Card --- */
 .records-card {
   border: 1px solid #e2e8f0;

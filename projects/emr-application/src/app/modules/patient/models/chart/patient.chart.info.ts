@@ -7,5 +7,5 @@ export interface PatientChartInfo {
     address: string[] ;
     email:string
     phone:string
-
+    insurance: string;
 }

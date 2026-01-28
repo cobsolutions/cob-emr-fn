@@ -1,5 +1,4 @@
 <ngx-spinner></ngx-spinner>
-
 <!-- Page Header -->
 <div class="page-header">
   <div class="page-header-content">
@@ -46,8 +45,6 @@
               <span>DOB: <strong>{{ patientChartInfo.dateOfBirth | date:'MM/dd/yyyy' }}</strong></span>
               <span class="sep">|</span>
               <span>Age: <strong>{{ patientChartInfo.age }}</strong></span>
-              <span class="sep">|</span>
-              <span>Gender: <strong>{{ patientChartInfo.gender }}</strong></span>
             </div>
           </div>
         </div>
@@ -93,15 +90,6 @@
               </div>
             </div>
           </div>
-
-          <div class="info-card">
-            <div class="info-icon"><svg cIcon name="cibMailRu"></svg></div>
-            <div class="info-details">
-              <div class="info-label">Email</div>
-              <div class="info-value">{{ patientChartInfo.email }}</div>
-            </div>
-          </div>
-
           <div class="info-card">
             <div class="info-icon"><svg cIcon name="cilPhone"></svg></div>
             <div class="info-details">
@@ -111,17 +99,13 @@
           </div>
 
           <div class="info-card">
-            <div class="info-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-            </div>
+            <div class="info-icon"><svg cIcon name="cilShieldAlt"></svg></div>
             <div class="info-details">
-              <div class="info-label">Gender</div>
-              <div class="info-value">{{ patientChartInfo.gender }}</div>
+              <div class="info-label">Insurance</div>
+              <div class="info-value">{{ patientChartInfo.insurance || '—' }}</div>
             </div>
           </div>
+
         </div>
       </div>
     </c-card-body>

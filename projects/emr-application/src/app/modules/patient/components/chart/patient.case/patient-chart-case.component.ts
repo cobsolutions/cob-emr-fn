@@ -25,6 +25,7 @@ import { QuickDischargeNoteService } from '../../../services/medical.note/quick.
 import { PatientRecordService } from '../../../services/patient/record/patient-record.service';
 import { PatientChartNoteService } from '../../../services/revamp/patient.chart.note/patient-chart-note.service';
 import { PatientRequest } from '../../../models/medical.note/requester/patient.request';
+import { EDocument, EDocumentFormData } from './e-document/patient-case-e-document.component';
 
 @Component({
   selector: 'app-patient-chart-case',
@@ -60,6 +61,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   isClinicalUser: boolean = false;
   canInitializeMedicalNote: boolean = false;
   private draftSub!: Subscription;
+
+  // E-Document properties
+  showEDocumentForm: boolean = false;
+  eDocuments: EDocument[] = [];
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -387,5 +392,57 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecordAction = 'Quick_Discharge';
     if (status === 'Discharge Note' || status === 'Discharge_Note' || status === 'Discharge')
       this.patientRecordAction = 'Discharge';
+  }
+
+  // E-Document methods
+  toggleEDocumentForm(): void {
+    this.showEDocumentForm = !this.showEDocumentForm;
+  }
+
+  onDocumentSubmitted(formData: EDocumentFormData): void {
+    const newDocument: EDocument = {
+      ...formData,
+      id: Date.now(),
+      documentTypeName: this.getDocumentTypeName(formData.documentType),
+      assignedCaseName: formData.assignedCase === 'all' ? 'All' : this.case.title,
+      fileName: formData.file?.name
+    };
+    this.eDocuments = [...this.eDocuments, newDocument];
+    this.showEDocumentForm = false;
+  }
+
+  private getDocumentTypeName(value: string): string {
+    const typeMap: { [key: string]: string } = {
+      'blood_work_results_labs': 'Blood Work Results/Labs',
+      "driver's_license": "Driver's License",
+      'hep': 'HEP',
+      'insurance_card': 'Insurance Card',
+      'medication_listing': 'Medication Listing',
+      'mri': 'MRI',
+      'other': 'Other',
+      'past_medical_history': 'Past Medical History',
+      'patient_intake': 'Patient Intake',
+      "physician's_notes": "Physician's Notes",
+      'plan_of_care': 'Plan of Care',
+      'script': 'Script',
+      'xray': 'XRay'
+    };
+    return typeMap[value] || value;
+  }
+
+  onCancelEDocument(): void {
+    this.showEDocumentForm = false;
+  }
+
+  onViewDocument(document: EDocument): void {
+    console.log('View document:', document);
+  }
+
+  onDeleteDocument(document: EDocument): void {
+    this.eDocuments = this.eDocuments.filter(d => d.id !== document.id);
+  }
+
+  onDownloadDocument(document: EDocument): void {
+    console.log('Download document:', document);
   }
 }
