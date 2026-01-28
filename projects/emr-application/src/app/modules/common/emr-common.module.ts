@@ -44,6 +44,7 @@ import { ReadonlyInputDirective } from './directives/permissions/readonly-input.
 import { MultiSelectDisableDirective } from './directives/permissions/multi-select-disable.directive';
 import { HideControlDirective } from './directives/permissions/hide.input/hide-control.directive';
 import { HideDivDirective } from './directives/permissions/hide.div/hide-div.directive';
+import { RoleScopeDirective } from './directives/permissions/role-scope.directive';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
@@ -68,7 +69,8 @@ const APP_COMMON_DIRECTIVES = [
   ReadonlyInputDirective,
   MultiSelectDisableDirective,
   HideControlDirective,
-  HideDivDirective
+  HideDivDirective,
+  RoleScopeDirective
 ]
 const COREUI_MODULES = [
   AvatarModule,

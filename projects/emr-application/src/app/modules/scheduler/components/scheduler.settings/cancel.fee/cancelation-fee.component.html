@@ -1,9 +1,10 @@
 <div class="cancel-fee-container">
+  <form cForm #cancelFeeForm="ngForm" readonly-form [componentRole]="componentRole">
     <!-- Toggle Switch -->
     <div class="toggle-row">
         <div class="toggle-content">
             <c-form-check [switch]="true">
-                <input cFormCheckInput type="checkbox" id="enableCancelFee"
+                <input cFormCheckInput type="checkbox" id="enableCancelFee" name="enableCancelFee"
                     [(ngModel)]="patientCancellationFee.isEnabled" />
                 <label cFormCheckLabel for="enableCancelFee" class="toggle-label">Apply cancellation fee</label>
             </c-form-check>
@@ -18,7 +19,7 @@
             <label class="field-label">Fee Amount</label>
             <div class="input-with-prefix">
                 <span class="input-prefix">$</span>
-                <input cFormControl type="number" placeholder="0.00"
+                <input cFormControl type="number" placeholder="0.00" name="amount"
                     [disabled]="!patientCancellationFee.isEnabled"
                     [(ngModel)]="patientCancellationFee.amount" />
             </div>
@@ -28,10 +29,10 @@
         <div class="form-field">
             <label class="field-label">Cancellation Window</label>
             <div class="input-with-suffix">
-                <input cFormControl type="number" placeholder="0"
+                <input cFormControl type="number" placeholder="0" name="duration"
                     [disabled]="!patientCancellationFee.isEnabled"
                     [(ngModel)]="patientCancellationFee.duration" />
-                <select cSelect class="duration-unit-select"
+                <select cSelect class="duration-unit-select" name="feeDurationUnit"
                     [disabled]="!patientCancellationFee.isEnabled"
                     [(ngModel)]="patientCancellationFee.feeDurationUnit">
                     <option>Day</option>
@@ -42,10 +43,11 @@
     </div>
 
     <!-- Save Action -->
-    <div class="form-actions">
-        <button cButton class="save-btn" (click)="save()">
+    <div class="form-actions" *appRoleScope="'patient-payment-role'; requireModify: true">
+        <button cButton class="save-btn" type="button" (click)="save()">
             <svg cIcon name="cilDollar" class="save-icon"></svg>
             Save Fee Settings
         </button>
     </div>
+  </form>
 </div>

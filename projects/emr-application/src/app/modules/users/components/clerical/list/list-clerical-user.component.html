@@ -51,10 +51,10 @@
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <div class="action-buttons">
-                  <button cButton class="action-btn-edit" (click)="edit(item)" title="Edit User">
+                  <button *appRoleScope="'user-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit User">
                     <svg cIcon name="cilPen" class="action-icon"></svg>
                   </button>
-                  <button cButton class="action-btn-delete" (click)="toggleLiveDemo(item)" title="Delete User" dispaly-input [componentRole]="componentRole">
+                  <button *appRoleScope="'user-role'; requireModify: true" cButton class="action-btn-delete" (click)="toggleLiveDemo(item)" title="Delete User">
                     <svg cIcon name="cilTrash" class="action-icon"></svg>
                   </button>
                 </div>

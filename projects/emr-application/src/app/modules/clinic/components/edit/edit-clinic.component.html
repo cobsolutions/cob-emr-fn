@@ -108,12 +108,11 @@
       <!-- Action Section -->
       <div class="action-section">
         <button
+          *appRoleScope="'clinic-role'; requireModify: true"
           cButton
           class="create-btn"
           [ngClass]="{'disabled': !valid}"
-          type="submit"
-          dispaly-input
-          [componentRole]="componentRole">
+          type="submit">
           <svg cIcon name="cilPencil" class="btn-icon"></svg>
           Update Clinic
         </button>

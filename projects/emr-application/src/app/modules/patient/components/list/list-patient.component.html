@@ -73,7 +73,7 @@
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <div class="action-buttons">
-                  <button cButton class="action-btn-edit" (click)="edit(item)" title="Edit Patient">
+                  <button *appRoleScope="'emr-patient-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit Patient">
                     <svg cIcon name="cilPen" class="action-icon"></svg>
                   </button>
                 </div>
@@ -130,6 +130,6 @@
 </c-modal>
 
 <!-- Floating Action Button -->
-<button class="fab-button" (click)="create()" dispaly-input [componentRole]="componentRole" title="Create New Patient">
+<button *appRoleScope="'emr-patient-role'; requireModify: true" class="fab-button" (click)="create()" title="Create New Patient">
   <svg cIcon name="cilPlus" class="fab-icon"></svg>
 </button>

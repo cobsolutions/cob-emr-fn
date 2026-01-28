@@ -89,7 +89,7 @@
         </div>
 
         <!-- Save Action -->
-        <div class="form-actions">
+        <div class="form-actions" *appRoleScope="'calendar-role'; requireModify: true">
             <button cButton class="save-btn" (click)="save()">
                 <svg cIcon name="cilSettings" class="save-icon"></svg>
                 Save Settings

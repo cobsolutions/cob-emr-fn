@@ -4,7 +4,7 @@
         <div class="toolbar-info">
             <span class="toolbar-label">Appointment Types</span>
         </div>
-        <button cButton class="create-btn" (click)="openCreateModal()">
+        <button cButton class="create-btn" (click)="openCreateModal()" *appRoleScope="'calendar-role'; requireModify: true">
             <svg cIcon name="cilPlus" class="btn-icon"></svg>
             Create Type
         </button>
@@ -36,7 +36,7 @@
                             <span class="color-value">{{ type.fontColor }}</span>
                         </div>
                     </td>
-                    <td class="actions-col">
+                    <td class="actions-col" *appRoleScope="'calendar-role'; requireModify: true">
                         <button cButton class="edit-btn" (click)="openEditModal(type)" cTooltip="Edit" cTooltipPlacement="left">
                             <svg cIcon name="cilPen" class="edit-icon"></svg>
                         </button>

@@ -7,6 +7,7 @@ import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appo
 import { AppointmentService } from '../../../../scheduler/service/appointment.service';
 import { Role } from '../../../../security/model/role';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { PermissionService } from '../../../../security/service/permission.service';
 
 import { PatientCase } from '../../../models/case/patient.case';
 import { CreateNodeRequest } from '../../../models/medical.note/requester/create.note.request';
@@ -56,6 +57,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
   patientCaseActions: PatientCaseAction[]
+  isClinicalUser: boolean = false;
+  canInitializeMedicalNote: boolean = false;
   private draftSub!: Subscription;
   constructor(
     private patientRecordService: PatientRecordService,
@@ -67,7 +70,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private progressNoteService: ProgressNoteService,
     private quickDischargeNoteService: QuickDischargeNoteService,
     private dischargeNoteService: DischargeNoteService,
-    private patientChartNoteService: PatientChartNoteService) { super() }
+    private patientChartNoteService: PatientChartNoteService,
+    private permissionService: PermissionService) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
@@ -82,7 +86,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   ngOnInit(): void {
     console.log('provider', this.loggedInService.getLoggedUser)
     this.initListComponent();
-    
+    this.checkClinicalUserRole();
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()
@@ -112,6 +116,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       const endDate = new Date(this.case.authorizationData.effectiveEndtDate);
       this.isExpired = endDate < today;
     }
+  }
+  private checkClinicalUserRole() {
+    this.isClinicalUser = this.permissionService.canView(Role.INITIALIZE_MEDICAL_NOTE_ROLE)
+      || this.permissionService.canView(Role.FORWARD_MEDICAL_NOTE_ROLE)
+      || this.permissionService.canView(Role.FINALIZE_MEDICAL_NOTE_ROLE);
+    this.canInitializeMedicalNote = this.permissionService.canModify(Role.INITIALIZE_MEDICAL_NOTE_ROLE);
+  }
+  getFilteredRecordActions(actions: string[]): string[] {
+    if (this.isClinicalUser) {
+      return actions;
+    }
+    // Non-clinical users can only View Pdf
+    return actions.filter(action => action === 'View Pdf' || action === 'View Reason');
   }
   toggleOMTVisibility() {
     this.showTest = !this.showTest;

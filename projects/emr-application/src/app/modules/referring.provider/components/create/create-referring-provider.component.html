@@ -42,10 +42,12 @@
             </c-col>
         </c-row>
         <div class="mb-3 d-grid gap-2 d-md-flex justify-content-md-center">
-            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid" *ngIf="mode ==='create'"
-                dispaly-input [componentRole]="componentRole">Create</button>
-            <button cButton type="submit" [disabled]="!referringProviderCreateForm.valid" *ngIf="mode ==='update'"
-                dispaly-input [componentRole]="componentRole">Update</button>
+            <ng-container *ngIf="mode ==='create'">
+                <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton type="submit" [disabled]="!referringProviderCreateForm.valid">Create</button>
+            </ng-container>
+            <ng-container *ngIf="mode ==='update'">
+                <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton type="submit" [disabled]="!referringProviderCreateForm.valid">Update</button>
+            </ng-container>
         </div>
     </form>
 </c-container>

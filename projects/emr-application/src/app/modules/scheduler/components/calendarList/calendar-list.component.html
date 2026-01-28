@@ -8,7 +8,7 @@
       </h2>
       <p class="page-subtitle">Manage and configure clinic calendars</p>
     </div>
-    <div class="header-actions">
+    <div class="header-actions" *appRoleScope="'calendar-role'; requireModify: true">
       <button cButton class="action-btn save-btn" (click)="updateCalendar()">
         <svg cIcon name="cilSave" class="btn-icon"></svg>
         Save Changes
@@ -100,7 +100,7 @@
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="'actions'" class="py-2">
-              <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit" cTooltipPlacement="left">
+              <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit" cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
                 <svg cIcon name="cilPen" class="edit-icon"></svg>
               </button>
             </ng-container>

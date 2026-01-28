@@ -14,7 +14,9 @@ import { WeekDay } from "calendar-utils";
 import { ToastrService } from "ngx-toastr";
 import { filter, forkJoin, Observable, Subject } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
+import { Role } from "../../../security/model/role";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
+import { PermissionService } from "../../../security/service/permission.service";
 import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
 import { Appointment } from "../../models/appointment";
 import { CalendarEvents } from "../../models/calendar/calendars";
@@ -74,7 +76,8 @@ export class ViewSchdulerComponent implements OnInit {
     private eventsCalendarService: EventsCalendarService,
     private handleDragableAppointmentService: HandleDragableAppointmentService,
     private handleEditableAppointmentService: HandleEditableAppointmentService,
-    private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService
+    private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService,
+    private permissionService: PermissionService
   ) {
     this.handleDragableAppointmentService.refresh = this.refresh;
     this.handleDragableAppointmentService.dialog = this.dialog
@@ -136,17 +139,23 @@ export class ViewSchdulerComponent implements OnInit {
     }));
   }
   dayClicked(segment: any) {
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     if (this.selectedCalendars.length === 0)
       return
     this.viewDate = segment.date.date;
     this.AddAppointment(segment.date.calendar);
   }
   weekClicked(date: Date, calendar: any): void {
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     this.viewDate = date;
     this.AddAppointment(calendar);
   }
   monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     this.checkOpenEvent(date, events);
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     this.AddAppointment(null, 'month');
   }
   eventTimesChanged({

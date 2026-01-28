@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { INavData } from '@coreui/angular-pro';
-import { AnyKindOfDictionary } from 'lodash';
-import { combineLatest, map, switchMap, tap, filter, Subscription, catchError, of, timeout, take } from 'rxjs';
-import { UserRoleScope } from '../../modules/administration/model/user/user.role.scope';
-import { LoggedInUser } from '../../modules/security/model/loggedin.user';
+import { combineLatest, map, filter, Subscription, catchError, of, timeout, take } from 'rxjs';
 import { LoggedInService } from '../../modules/security/service/loggedIn/logged-in.service';
 import { RenderNavItemsService } from '../../modules/security/service/render-nav-items.service';
-import { NavItems } from './_nav';
+import { PermissionService } from '../../modules/security/service/permission.service';
+import { ROLE_MENU_MAP } from '../../modules/security/model/role-menu-map';
 @Component({
   selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
@@ -17,7 +15,11 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   private subscription: Subscription;
 
-  constructor(private renderNavItemsService: RenderNavItemsService, private loggedInService: LoggedInService) { }
+  constructor(
+    private renderNavItemsService: RenderNavItemsService,
+    private loggedInService: LoggedInService,
+    private permissionService: PermissionService
+  ) { }
 
   ngOnInit(): void {
     // Get logged user observable with error handling and timeout
@@ -44,25 +46,28 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
             return result[1];
           }
 
-          var userRoleScope: UserRoleScope[] = result[0].userRoleScope;
           var renderItems: INavData[] = result[1];
-          if (userRoleScope !== undefined)
-            var hasViewUserPermissions = userRoleScope.some(item => item.scope === 'view' && item.role === 'user-role');
-          if (hasViewUserPermissions) {
-            return renderItems.map(renderItem => {
-              if (renderItem.name === 'Users') {
-                renderItem.children = renderItem.children.filter(
-                  child => !(child.name === "Create User" && child.url === "users/create")
-                );
-                return renderItem;
-              } else {
-                return renderItem
-              }
 
-            })
-          } else {
-            return result[1];
-          }
+          return renderItems.filter(renderItem => {
+            const mapping = ROLE_MENU_MAP.find(m => m.menuName === renderItem.name);
+            if (!mapping) {
+              return true;
+            }
+
+            if (this.permissionService.isHidden(mapping.role)) {
+              return false;
+            }
+
+            if (this.permissionService.canView(mapping.role) && !this.permissionService.canModify(mapping.role)) {
+              if (renderItem.children && mapping.modifyOnlyChildren.length > 0) {
+                renderItem.children = renderItem.children.filter(
+                  child => !mapping.modifyOnlyChildren.includes(child.name)
+                );
+              }
+            }
+
+            return true;
+          });
         }),
         catchError(error => {
           console.error('Timeout or error in layout initialization:', error);

@@ -90,6 +90,7 @@ export class CreateUserComponent implements OnInit, DoCheck {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
+    console.log('USER', this.loggedInService.getLoggedUser())
     this.generalRoles$ = of(this.generalRoles);
     this.filteredMedicalRoles = [...this.medicalRoles];
     this.medicalRoles$ = of(this.filteredMedicalRoles);

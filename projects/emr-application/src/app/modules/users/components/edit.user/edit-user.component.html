@@ -262,8 +262,7 @@
 
 <!-- Action Section -->
 <div class="action-section">
-  <button cButton class="update-btn" type="button" (click)="update()" dispaly-input
-    [componentRole]="componentRole">
+  <button *appRoleScope="'user-role'; requireModify: true" cButton class="update-btn" type="button" (click)="update()">
     <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
     Update
   </button>

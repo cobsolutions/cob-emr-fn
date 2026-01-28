@@ -120,12 +120,8 @@ export class EditUserComponent implements OnInit {
     if (this.showMedicalPermissions) {
       this.medicalRolesTable.items.forEach((item: any) => {
         var scope: any = this.user.roleScope.find(roleScope => roleScope.role === item.name)?.scope;
-        if (scope === 'true')
-          item.scope = true
-        else if (scope === 'false')
-          item.scope = false
-        else if (scope)
-          item.scope = scope
+        // Medical roles use 'modify'/'hidden' values - convert to boolean for toggle
+        item.scope = scope === 'modify';
       });
     }
   }

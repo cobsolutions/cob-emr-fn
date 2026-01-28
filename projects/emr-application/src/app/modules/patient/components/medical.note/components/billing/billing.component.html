@@ -341,8 +341,7 @@
             <span>Back</span>
         </button>
         <div class="action-buttons-right">
-            <button cButton class="action-button forward-button" hide-control
-                [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">
+            <button cButton class="action-button forward-button" *appRoleScope="'forward-medical-note-role'; requireModify: true" (click)="toggleFrowardModal()">
                 <span>Forward</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -350,8 +349,7 @@
                     <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
                 </svg>
             </button>
-            <button cButton class="action-button finalize-button" hide-control (click)="finalize()"
-                [componentRole]="['finalize-medical-note-role']">
+            <button cButton class="action-button finalize-button" *appRoleScope="'finalize-medical-note-role'; requireModify: true" (click)="finalize()">
                 <span>Finalize</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

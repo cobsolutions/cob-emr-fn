@@ -119,8 +119,8 @@
             </div>
         </div>
 
-        <!-- Actions Footer -->
-        <div class="actions-footer" *ngIf="patientCaseActions">
+        <!-- Actions Footer - Only visible for users with initialize-medical-note-role modify scope -->
+        <div class="actions-footer" *ngIf="patientCaseActions && canInitializeMedicalNote">
             <label for="patientRecordAction" class="action-label">
                 Patient Record Actions:
             </label>
@@ -221,9 +221,9 @@
                                         </ng-template>
                                     </td>
                                     <td>
-                                        <div class="record-action-group">
+                                        <div class="record-action-group" *ngIf="getFilteredRecordActions(item.actions).length > 0">
                                             <select [id]="'actionSelect_' + i" #actionSelect class="record-action-select">
-                                                <option [value]="action" *ngFor="let action of item.actions">
+                                                <option [value]="action" *ngFor="let action of getFilteredRecordActions(item.actions)">
                                                     {{ action }}
                                                 </option>
                                             </select>
@@ -232,6 +232,9 @@
                                                 <svg cIcon name="cilArrowCircleRight"></svg>
                                             </button>
                                         </div>
+                                        <span class="badge bg-warning text-dark" *ngIf="getFilteredRecordActions(item.actions).length === 0">
+                                            Incomplete
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr *ngIf="(patientRecords$ | async)?.length === 0" class="empty-row">
