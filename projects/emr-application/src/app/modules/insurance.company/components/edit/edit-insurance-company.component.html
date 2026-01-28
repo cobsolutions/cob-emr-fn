@@ -127,8 +127,7 @@
           class="create-btn"
           [ngClass]="{'disabled': !editInsuranceCompanyForm.valid || !insuranceCompany.addresses?.length}"
           type="submit"
-          dispaly-input
-          [componentRole]="componentRole">
+          *appRoleScope="'insurance-company-role'; requireModify: true">
           <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
           Update Insurance Company
         </button>

@@ -174,7 +174,7 @@
               <svg cIcon name="cilFingerprint"></svg>
             </span>
             <input cFormControl id="npi" name="npi" sizing="sm" placeholder="Enter NPI number"
-              readonly-input [componentRole]="componentRole" required
+              required
               [ngClass]="{'is-invalid': npi.invalid && (npi.dirty || npi.touched)}"
               [(ngModel)]="user.npi" #npi="ngModel" />
           </c-input-group>
@@ -186,7 +186,7 @@
               <svg cIcon name="cilDescription"></svg>
             </span>
             <input cFormControl id="licence" name="licence" sizing="sm" placeholder="Enter licence number"
-              readonly-input [componentRole]="componentRole" required
+              required
               [ngClass]="{'is-invalid': licence.invalid && (licence.dirty || licence.touched)}"
               [(ngModel)]="user.licence" #licence="ngModel" />
           </c-input-group>
@@ -196,7 +196,6 @@
         <div class="clinical-field">
           <label class="clinical-field-label" for="speciality">Speciality</label>
           <select cFormControl cSelect sizing="sm" id="speciality" name="speciality" required
-            disable-input [componentRole]="componentRole"
             [ngClass]="{'is-invalid': speciality.invalid && (speciality.dirty || speciality.touched)}"
             [(ngModel)]="user.speciality" #speciality="ngModel" (change)="getDoctorCredentials()">
             <option [ngValue]="null" disabled selected>Select Speciality</option>
@@ -208,7 +207,6 @@
         <div class="clinical-field">
           <label class="clinical-field-label" for="credential">Credential</label>
           <select cFormControl cSelect sizing="sm" id="credential" name="credential" required
-            disable-input [componentRole]="componentRole"
             [ngClass]="{'is-invalid': credential.invalid && (credential.dirty || credential.touched)}"
             [(ngModel)]="user.credential" #credential="ngModel" (ngModelChange)="changeCredential($event)">
             <option [ngValue]="null" disabled selected>Select Credential</option>
@@ -245,7 +243,7 @@
         </small>
         <div class="clinics-select-wrapper">
           <c-multi-select multiple size="sm" cSelect name="selectedClinic" id="selectedClinic" required
-            disable-multi-select [componentRole]="componentRole" *ngIf="clinics && user" [selectAll]="false"
+            *ngIf="clinics && user" [selectAll]="false"
             [(ngModel)]="user!.clinicIds" #selectedClinic="ngModel" (valueChange)="isClinicTouched($event)">
             <c-multi-select-option *ngFor="let clinic of clinics" [selected]="clinic.selected"
               [value]="clinic.id">{{clinic.name}}</c-multi-select-option>

@@ -125,14 +125,12 @@
                 Patient Record Actions:
             </label>
             <div class="action-controls">
-                <select id="patientRecordAction" #patientActionSelect class="action-select" hide-control
-                    [componentRole]="componentRole">
+                <select id="patientRecordAction" #patientActionSelect class="action-select">
                     <option [value]="action.key" *ngFor="let action of patientCaseActions">
                         {{ action.label }}
                     </option>
                 </select>
-                <button class="action-btn"
-                    (click)="executeAction(patientActionSelect.value)" hide-control [componentRole]="componentRole">
+                <button class="action-btn" (click)="executeAction(patientActionSelect.value)">
                     <svg cIcon name="cilArrowCircleRight"></svg>
                 </button>
             </div>

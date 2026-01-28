@@ -21,9 +21,8 @@
     </div>
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control
-            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()">Finalize</button>
+        <button cButton variant="outline" size="sm" class="mx-2" *appRoleScope="'forward-medical-note-role'; requireModify: true" (click)="toggleFrowardModal()">Forward</button>
+        <button cButton variant="outline" size="sm" class="mx-2" *appRoleScope="'finalize-medical-note-role'; requireModify: true" (click)="finalize()">Finalize</button>
     </div>
 </form>
 <c-modal id="foDMN" [visible]="forwardVisibility" backdrop="static">

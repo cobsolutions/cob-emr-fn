@@ -68,7 +68,7 @@
               </ng-container>
               <ng-container *ngSwitchCase="'actions'">
                 <div class="action-buttons">
-                  <button *appRoleScope="'insurance-company-role'; requireModify: true" cButton class="action-btn-delete" (click)="remove(item)" dispaly-input [componentRole]="componentRole" title="Delete">
+                  <button *appRoleScope="'insurance-company-role'; requireModify: true" cButton class="action-btn-delete" (click)="remove(item)" title="Delete">
                     <svg cIcon name="cilTrash" class="action-icon"></svg>
                   </button>
                   <button *appRoleScope="'insurance-company-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit">
@@ -127,6 +127,6 @@
 </c-modal>
 
 <!-- Floating Action Button -->
-<button *appRoleScope="'clinic-role'; requireModify: true" class="fab-button" (click)="create()" dispaly-input [componentRole]="componentRole" title="Create New Insurance Company">
+<button *appRoleScope="'insurance-company-role'; requireModify: true" class="fab-button" (click)="create()" title="Create New Insurance Company">
   <svg cIcon name="cilPlus" class="fab-icon"></svg>
 </button>

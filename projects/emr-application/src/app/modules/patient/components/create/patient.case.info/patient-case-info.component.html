@@ -53,8 +53,7 @@
                 <div class="toggle-wrapper">
                     <c-form-check [switch]="true">
                         <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseInsuranceInformation.isSelfPay"
-                            #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" disable-input
-                            [componentRole]="componentRole" />
+                            #isSelfPay="ngModel" id="isselfPayAmount" name="isselfPayAmount" />
                         <label cFormCheckLabel class="toggle-label">Self-Pay Patient</label>
                     </c-form-check>
                 </div>
@@ -227,8 +226,7 @@
                 <div class="toggle-wrapper">
                     <c-form-check [switch]="true">
                         <input cFormCheckInput type="checkbox" [(ngModel)]="case.caseOtherInformation.isAuthorized"
-                            #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" disable-input
-                            [componentRole]="componentRole" />
+                            #isAuthorized="ngModel" id="isAuthorized" name="isAuthorized" />
                         <label cFormCheckLabel class="toggle-label">Authorization Required</label>
                     </c-form-check>
                 </div>
@@ -256,7 +254,7 @@
             </c-col>
         </c-row>
         <div class="action-row">
-            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+            <button cButton class="add-btn" type="button" (click)="add()">
                 <svg cIcon name="cilPlus" class="btn-icon"></svg>
                 Add Case
             </button>
@@ -297,7 +295,7 @@
                         <span class="injury-badge">{{caseItem.injuryCase}}</span>
                     </td>
                     <td class="col-actions">
-                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                        <button cButton class="delete-btn" (click)="remove(i)" title="Remove">
                             <svg cIcon name="cilTrash"></svg>
                         </button>
                     </td>

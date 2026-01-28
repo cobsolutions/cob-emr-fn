@@ -115,7 +115,7 @@
             </c-col>
         </c-row>
         <div class="action-row">
-            <button cButton class="add-btn" type="button" (click)="add()" dispaly-input [componentRole]="componentRole">
+            <button cButton class="add-btn" type="button" (click)="add()">
                 <svg cIcon name="cilPlus" class="btn-icon"></svg>
                 Add Insurance
             </button>
@@ -167,7 +167,7 @@
                         <span class="visits-badge">{{pateintInsurance.visitAllowed}}</span>
                     </td>
                     <td class="col-actions">
-                        <button cButton class="delete-btn" (click)="remove(i)" dispaly-input [componentRole]="componentRole" title="Remove">
+                        <button cButton class="delete-btn" (click)="remove(i)" title="Remove">
                             <svg cIcon name="cilTrash"></svg>
                         </button>
                     </td>
