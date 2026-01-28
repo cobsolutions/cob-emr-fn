@@ -1,4 +1,4 @@
-<form cForm #insuranceForm="ngForm" (ngSubmit)="add()" readonly-form [componentRole]="componentRole">
+<form cForm #insuranceForm="ngForm" (ngSubmit)="add()">
 
     <!-- Insurance Company Section -->
     <div class="form-section">
@@ -108,7 +108,7 @@
             <c-col md="6">
                 <label cLabel for="expirationDate_Date" class="form-label">Expiration Date <span class="text-danger">*</span></label>
                 <c-date-picker cFormControl closeOnSelect size="sm" placeholder="Select date"
-                    id="expirationDate_Date" name="expirationDate_Date" required disable-date-picker [componentRole]="componentRole"
+                    id="expirationDate_Date" name="expirationDate_Date" required
                     [ngClass]="{'is-invalid': expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)}"
                     [(ngModel)]="patientInsurance.expirationDate_Date" #expirationDate="ngModel"></c-date-picker>
                 <small *ngIf="expirationDate.invalid && (expirationDate.dirty || expirationDate.touched)" class="text-danger">Required</small>

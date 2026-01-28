@@ -44,7 +44,7 @@
 
   <!-- Main Form Content -->
   <div class="form-container">
-    <form cForm #clinicEditForm="ngForm" (ngSubmit)="update()" (change)="resetError()" readonly-form [componentRole]="componentRole">
+    <form cForm #clinicEditForm="ngForm" (ngSubmit)="update()" (change)="resetError()">
       <!-- Clinic Name Section -->
       <c-card class="section-card" id="section-clinic-name">
         <div class="card-header-custom" [ngClass]="{'invalid': !isValidClinicName}">

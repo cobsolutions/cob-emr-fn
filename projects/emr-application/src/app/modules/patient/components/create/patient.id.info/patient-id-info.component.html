@@ -1,4 +1,4 @@
-<form cForm #patientIdForm="ngForm" readonly-form [componentRole]="componentRole">
+<form cForm #patientIdForm="ngForm">
 
     <!-- Identification Details Section -->
     <div class="form-section">
@@ -39,8 +39,7 @@
                 <c-date-range-picker cFormControl [(startDate)]="patient.effectiveFromDate_Date" size="sm"
                     name="Effective From-Effective To"
                     [(endDate)]="patient.effectiveToDate_Date"
-                    [placeholder]="['From Date', 'To Date']"
-                    disable-date-range-picker [componentRole]="componentRole">
+                    [placeholder]="['From Date', 'To Date']">
                 </c-date-range-picker>
             </c-col>
         </c-row>

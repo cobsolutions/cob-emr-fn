@@ -77,7 +77,10 @@ export class EditUserComponent implements OnInit {
       .subscribe((response: any) => {
         console.log(response.records)
         this.clinics = response.records;
+        this.fetchUser();
       })
+  }
+  private fetchUser() {
     switch (this.userType) {
       case 'Clinical':
         this.fetchClinicalUser();
