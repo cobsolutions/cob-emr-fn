@@ -1,169 +1,599 @@
-<!-- dashboard.component.html -->
-<div class="dashboard-root">
-    <header class="header">
-      <div class="brand">
-        <div class="logo">EMR</div>
-        <div class="brand-text">
-          <h1>Clinic Panel</h1>
-          <p class="muted">Overview of your system at a glance</p>
-        </div>
+<!-- Dashboard Component - Professional EMR Dashboard -->
+<div class="dashboard-container">
+
+  <!-- Welcome Header -->
+  <header class="welcome-header">
+    <div class="welcome-content">
+      <div class="welcome-text">
+        <h1 class="welcome-title">Welcome back!</h1>
+        <p class="welcome-subtitle">Here's what's happening at your clinic today</p>
       </div>
-  
       <div class="header-actions">
-        <button class="btn ghost">Export</button>
-        <button class="btn primary">New Report</button>
-      </div>
-    </header>
-  
-    <section class="stats-grid">
-      <article class="stat-card">
-        <div class="stat-meta">Total Patients</div>
-        <div class="stat-value">1,240</div>
-        <div class="stat-foot">Updated 5 min ago</div>
-      </article>
-  
-      <article class="stat-card">
-        <div class="stat-meta">Appointments Today</div>
-        <div class="stat-value">35</div>
-        <div class="stat-foot">Next at 11:00</div>
-      </article>
-  
-      <article class="stat-card">
-        <div class="stat-meta">Revenue</div>
-        <div class="stat-value success">$12,400</div>
-        <div class="stat-foot">Monthly target: $20k</div>
-      </article>
-  
-      <article class="stat-card">
-        <div class="stat-meta">Pending Reports</div>
-        <div class="stat-value danger">8</div>
-        <div class="stat-foot">2 urgent</div>
-      </article>
-    </section>
-  
-    <section class="main-area">
-      <div class="panel trends-card">
-        <div class="panel-header">
-          <h3>Monthly Trends</h3>
-          <div class="panel-actions">Patients vs Appointments</div>
-        </div>
-  
-        <!-- SVG Line Chart (static visual) -->
-        <div class="chart-wrap">
-          <svg viewBox="0 0 800 240" preserveAspectRatio="xMidYMid meet" class="line-chart">
-            <!-- grid -->
-            <g class="grid">
-              <line x1="60" y1="20" x2="760" y2="20"></line>
-              <line x1="60" y1="60" x2="760" y2="60"></line>
-              <line x1="60" y1="100" x2="760" y2="100"></line>
-              <line x1="60" y1="140" x2="760" y2="140"></line>
-              <line x1="60" y1="180" x2="760" y2="180"></line>
-            </g>
-  
-            <!-- labels -->
-            <g class="labels">
-              <text x="60"  y="210">Jan</text>
-              <text x="170" y="210">Feb</text>
-              <text x="280" y="210">Mar</text>
-              <text x="390" y="210">Apr</text>
-              <text x="500" y="210">May</text>
-              <text x="610" y="210">Jun</text>
-              <text x="720" y="210">Jul</text>
-            </g>
-  
-            <!-- Patients area (blue, semi-transparent) -->
-            <path class="area patients-area" d="M60,160 L170,140 L280,120 L390,150 L500,100 L610,70 L720,40 L760,40 L760,200 L60,200 Z" />
-  
-            <!-- Patients line -->
-            <path class="line patients-line" d="M60,160 L170,140 L280,120 L390,150 L500,100 L610,70 L720,40" />
-  
-            <!-- Appointments area (green) -->
-            <path class="area appts-area" d="M60,180 L170,160 L280,140 L390,150 L500,120 L610,90 L720,70 L760,70 L760,200 L60,200 Z" />
-  
-            <!-- Appointments line -->
-            <path class="line appts-line" d="M60,180 L170,160 L280,140 L390,150 L500,120 L610,90 L720,70" />
-  
-            <!-- points (patients) -->
-            <g class="points patients-points">
-              <circle cx="60"  cy="160" r="3.5"></circle>
-              <circle cx="170" cy="140" r="3.5"></circle>
-              <circle cx="280" cy="120" r="3.5"></circle>
-              <circle cx="390" cy="150" r="3.5"></circle>
-              <circle cx="500" cy="100" r="3.5"></circle>
-              <circle cx="610" cy="70"  r="3.5"></circle>
-              <circle cx="720" cy="40"  r="3.5"></circle>
-            </g>
-  
-            <!-- points (appointments) -->
-            <g class="points appts-points">
-              <circle cx="60"  cy="180" r="3.5"></circle>
-              <circle cx="170" cy="160" r="3.5"></circle>
-              <circle cx="280" cy="140" r="3.5"></circle>
-              <circle cx="390" cy="150" r="3.5"></circle>
-              <circle cx="500" cy="120" r="3.5"></circle>
-              <circle cx="610" cy="90"  r="3.5"></circle>
-              <circle cx="720" cy="70"  r="3.5"></circle>
-            </g>
+        <button class="btn-secondary">
+          <svg viewBox="0 0 24 24" class="btn-icon">
+            <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          Reports
+        </button>
+        <button class="btn-primary">
+          <svg viewBox="0 0 24 24" class="btn-icon">
+            <path d="M12 4v16m8-8H4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          New Appointment
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Cards Row -->
+  <section class="stats-grid">
+    <article class="stat-card">
+      <div class="stat-icon patients">
+        <svg viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Total Patients</span>
+        <div class="stat-value-row">
+          <span class="stat-value">1,248</span>
+          <span class="stat-trend up">
+            <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +12%
+          </span>
         </div>
-  
-        <div class="legend">
-          <span class="legend-item"><span class="swatch blue"></span>Patients</span>
-          <span class="legend-item"><span class="swatch green"></span>Appointments</span>
+        <span class="stat-period">vs last month</span>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon appointments">
+        <svg viewBox="0 0 24 24">
+          <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Today's Appointments</span>
+        <div class="stat-value-row">
+          <span class="stat-value">24</span>
+          <span class="stat-badge">8 remaining</span>
+        </div>
+        <span class="stat-period">Next at 2:30 PM</span>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon revenue">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Monthly Revenue</span>
+        <div class="stat-value-row">
+          <span class="stat-value">$48,520</span>
+          <span class="stat-trend up">
+            <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +8.2%
+          </span>
+        </div>
+        <span class="stat-period">Target: $55,000</span>
+      </div>
+    </article>
+
+    <article class="stat-card">
+      <div class="stat-icon pending">
+        <svg viewBox="0 0 24 24">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Pending Tasks</span>
+        <div class="stat-value-row">
+          <span class="stat-value">12</span>
+          <span class="stat-badge urgent">3 urgent</span>
+        </div>
+        <span class="stat-period">5 due today</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- Charts Grid - 4 columns -->
+  <section class="charts-grid">
+
+    <!-- Weekly Visits Bar Chart -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Weekly Visits</h3>
+          <p class="card-subtitle">This week's patient visits</p>
         </div>
       </div>
-  
-      <aside class="panel side-panel">
-        <div class="panel-header">
-          <h3>Revenue Breakdown</h3>
-          <div class="panel-actions">Last month</div>
+      <div class="card-body">
+        <div class="bar-chart-container">
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar" style="height: 65%;">
+                  <span class="bar-value">32</span>
+                </div>
+              </div>
+              <span class="bar-label">Mon</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar" style="height: 85%;">
+                  <span class="bar-value">42</span>
+                </div>
+              </div>
+              <span class="bar-label">Tue</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar high" style="height: 95%;">
+                  <span class="bar-value">48</span>
+                </div>
+              </div>
+              <span class="bar-label">Wed</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar" style="height: 75%;">
+                  <span class="bar-value">38</span>
+                </div>
+              </div>
+              <span class="bar-label">Thu</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar" style="height: 55%;">
+                  <span class="bar-value">28</span>
+                </div>
+              </div>
+              <span class="bar-label">Fri</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar low" style="height: 30%;">
+                  <span class="bar-value">15</span>
+                </div>
+              </div>
+              <span class="bar-label">Sat</span>
+            </div>
+            <div class="bar-item">
+              <div class="bar-wrapper">
+                <div class="bar low" style="height: 20%;">
+                  <span class="bar-value">10</span>
+                </div>
+              </div>
+              <span class="bar-label">Sun</span>
+            </div>
+          </div>
         </div>
-  
-        <!-- SVG Doughnut (static) -->
-        <div class="doughnut-wrap">
-          <svg viewBox="0 0 200 200" class="doughnut-chart" preserveAspectRatio="xMidYMid meet">
-            <!-- outer circle background -->
-            <circle cx="100" cy="100" r="80" class="donut-bg"></circle>
-  
-            <!-- segments (use stroke-dasharray to simulate parts) -->
-            <!-- Consultations 50% -->
-            <circle class="donut seg1" cx="100" cy="100" r="60" stroke-dasharray="188 188" stroke-dashoffset="0"></circle>
-            <!-- Therapy 28% -->
-            <circle class="donut seg2" cx="100" cy="100" r="60" stroke-dasharray="105 188" stroke-dashoffset="-188"></circle>
-            <!-- Medication 14% -->
-            <circle class="donut seg3" cx="100" cy="100" r="60" stroke-dasharray="26 188" stroke-dashoffset="-293"></circle>
-            <!-- Other 8% -->
-            <circle class="donut seg4" cx="100" cy="100" r="60" stroke-dasharray="15 188" stroke-dashoffset="-319"></circle>
-  
-            <!-- center label -->
-            <g class="donut-center">
-              <text x="100" y="96" text-anchor="middle" class="donut-total">$7.5k</text>
-              <text x="100" y="116" text-anchor="middle" class="donut-sub">Revenue</text>
-            </g>
+        <div class="chart-summary">
+          <div class="summary-item">
+            <span class="summary-value">213</span>
+            <span class="summary-label">Total Visits</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">30.4</span>
+            <span class="summary-label">Daily Avg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appointment Status Donut -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Appointment Status</h3>
+          <p class="card-subtitle">Today's breakdown</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="donut-chart-container">
+          <svg viewBox="0 0 200 200" class="donut-chart">
+            <circle cx="100" cy="100" r="70" class="donut-bg"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment completed"
+              stroke-dasharray="264 440" stroke-dashoffset="110"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment in-progress"
+              stroke-dasharray="110 440" stroke-dashoffset="-154"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment cancelled"
+              stroke-dasharray="35 440" stroke-dashoffset="-264"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment no-show"
+              stroke-dasharray="31 440" stroke-dashoffset="-299"/>
+            <text x="100" y="92" class="donut-center-value">24</text>
+            <text x="100" y="112" class="donut-center-label">Total</text>
           </svg>
-  
-          <ul class="donut-legend">
-            <li><span class="swatch blue"></span>Consultations — 50%</li>
-            <li><span class="swatch green"></span>Therapy — 28%</li>
-            <li><span class="swatch gold"></span>Medication — 14%</li>
-            <li><span class="swatch red"></span>Other — 8%</li>
-          </ul>
+          <div class="donut-legend">
+            <div class="donut-legend-item">
+              <span class="donut-dot completed"></span>
+              <span class="donut-legend-text">Completed</span>
+              <span class="donut-legend-value">14</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot in-progress"></span>
+              <span class="donut-legend-text">Scheduled</span>
+              <span class="donut-legend-value">6</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot cancelled"></span>
+              <span class="donut-legend-text">Cancelled</span>
+              <span class="donut-legend-value">2</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot no-show"></span>
+              <span class="donut-legend-text">No Show</span>
+              <span class="donut-legend-value">2</span>
+            </div>
+          </div>
         </div>
-  
-        <div class="recent card-activity">
-          <h4>Recent Activity</h4>
-          <ul>
-            <li><span>New patient registered</span><time>2 min</time></li>
-            <li><span>Appointment confirmed</span><time>15 min</time></li>
-            <li><span>Lab report uploaded</span><time>1 hr</time></li>
-            <li><span>Invoice paid</span><time>3 hr</time></li>
-          </ul>
+      </div>
+    </div>
+
+    <!-- Revenue Breakdown -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Revenue by Service</h3>
+          <p class="card-subtitle">This month</p>
         </div>
-      </aside>
-    </section>
-  
-    <footer class="footer">
-      <small>Dashboard preview • Static HTML/CSS • Replace with live data when ready</small>
-    </footer>
-  </div>
-  
+      </div>
+      <div class="card-body">
+        <div class="donut-chart-container">
+          <svg viewBox="0 0 200 200" class="donut-chart">
+            <circle cx="100" cy="100" r="70" class="donut-bg"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment therapy"
+              stroke-dasharray="198 440" stroke-dashoffset="110"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment consultation"
+              stroke-dasharray="123 440" stroke-dashoffset="-88"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment procedures"
+              stroke-dasharray="75 440" stroke-dashoffset="-211"/>
+            <circle cx="100" cy="100" r="70" class="donut-segment other"
+              stroke-dasharray="44 440" stroke-dashoffset="-286"/>
+            <text x="100" y="92" class="donut-center-value">$48.5k</text>
+            <text x="100" y="112" class="donut-center-label">Revenue</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="donut-legend-item">
+              <span class="donut-dot therapy"></span>
+              <span class="donut-legend-text">Therapy</span>
+              <span class="donut-legend-value">$21.8k</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot consultation"></span>
+              <span class="donut-legend-text">Consultations</span>
+              <span class="donut-legend-value">$13.6k</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot procedures"></span>
+              <span class="donut-legend-text">Procedures</span>
+              <span class="donut-legend-value">$8.2k</span>
+            </div>
+            <div class="donut-legend-item">
+              <span class="donut-dot other"></span>
+              <span class="donut-legend-text">Other</span>
+              <span class="donut-legend-value">$4.9k</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patient Demographics -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Patient Demographics</h3>
+          <p class="card-subtitle">Age distribution</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="demographics-chart">
+          <div class="demo-bar-item">
+            <span class="demo-label">18-25</span>
+            <div class="demo-bar-track">
+              <div class="demo-bar-fill" style="width: 15%;"></div>
+            </div>
+            <span class="demo-value">15%</span>
+          </div>
+          <div class="demo-bar-item">
+            <span class="demo-label">26-35</span>
+            <div class="demo-bar-track">
+              <div class="demo-bar-fill" style="width: 28%;"></div>
+            </div>
+            <span class="demo-value">28%</span>
+          </div>
+          <div class="demo-bar-item">
+            <span class="demo-label">36-45</span>
+            <div class="demo-bar-track">
+              <div class="demo-bar-fill high" style="width: 32%;"></div>
+            </div>
+            <span class="demo-value">32%</span>
+          </div>
+          <div class="demo-bar-item">
+            <span class="demo-label">46-55</span>
+            <div class="demo-bar-track">
+              <div class="demo-bar-fill" style="width: 18%;"></div>
+            </div>
+            <span class="demo-value">18%</span>
+          </div>
+          <div class="demo-bar-item">
+            <span class="demo-label">55+</span>
+            <div class="demo-bar-track">
+              <div class="demo-bar-fill low" style="width: 7%;"></div>
+            </div>
+            <span class="demo-value">7%</span>
+          </div>
+        </div>
+        <div class="chart-summary">
+          <div class="summary-item">
+            <span class="summary-value">1,248</span>
+            <span class="summary-label">Total Patients</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-value">38</span>
+            <span class="summary-label">Avg Age</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Bottom Grid - Appointments & Activity -->
+  <section class="bottom-grid">
+
+    <!-- Upcoming Appointments -->
+    <div class="card appointments-card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Upcoming Appointments</h3>
+          <p class="card-subtitle">Today's schedule</p>
+        </div>
+        <a href="#" class="view-all-link">View All</a>
+      </div>
+      <div class="card-body appointments-list">
+        <div class="appointment-item">
+          <div class="appointment-time">
+            <span class="time">2:30 PM</span>
+            <span class="duration">30 min</span>
+          </div>
+          <div class="appointment-info">
+            <div class="patient-avatar">JD</div>
+            <div class="appointment-details">
+              <span class="patient-name">John Doe</span>
+              <span class="appointment-type">Physical Therapy - Follow-up</span>
+            </div>
+          </div>
+          <span class="appointment-status confirmed">Confirmed</span>
+        </div>
+
+        <div class="appointment-item">
+          <div class="appointment-time">
+            <span class="time">3:00 PM</span>
+            <span class="duration">45 min</span>
+          </div>
+          <div class="appointment-info">
+            <div class="patient-avatar female">SM</div>
+            <div class="appointment-details">
+              <span class="patient-name">Sarah Miller</span>
+              <span class="appointment-type">Initial Evaluation</span>
+            </div>
+          </div>
+          <span class="appointment-status pending">Pending</span>
+        </div>
+
+        <div class="appointment-item">
+          <div class="appointment-time">
+            <span class="time">3:45 PM</span>
+            <span class="duration">30 min</span>
+          </div>
+          <div class="appointment-info">
+            <div class="patient-avatar">RJ</div>
+            <div class="appointment-details">
+              <span class="patient-name">Robert Johnson</span>
+              <span class="appointment-type">Occupational Therapy</span>
+            </div>
+          </div>
+          <span class="appointment-status confirmed">Confirmed</span>
+        </div>
+
+        <div class="appointment-item">
+          <div class="appointment-time">
+            <span class="time">4:30 PM</span>
+            <span class="duration">60 min</span>
+          </div>
+          <div class="appointment-info">
+            <div class="patient-avatar female">EW</div>
+            <div class="appointment-details">
+              <span class="patient-name">Emily Watson</span>
+              <span class="appointment-type">Re-evaluation</span>
+            </div>
+          </div>
+          <span class="appointment-status confirmed">Confirmed</span>
+        </div>
+
+        <div class="appointment-item">
+          <div class="appointment-time">
+            <span class="time">5:30 PM</span>
+            <span class="duration">30 min</span>
+          </div>
+          <div class="appointment-info">
+            <div class="patient-avatar">MK</div>
+            <div class="appointment-details">
+              <span class="patient-name">Michael Kim</span>
+              <span class="appointment-type">Physical Therapy</span>
+            </div>
+          </div>
+          <span class="appointment-status confirmed">Confirmed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Column: Quick Actions + Performance -->
+    <div class="middle-column">
+      <!-- Quick Actions -->
+      <div class="card quick-actions-card">
+        <div class="card-header">
+          <h3 class="card-title">Quick Actions</h3>
+        </div>
+        <div class="card-body">
+          <div class="actions-grid">
+            <button class="action-btn">
+              <div class="action-icon new-patient">
+                <svg viewBox="0 0 24 24">
+                  <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8.5 11a4 4 0 100-8 4 4 0 000 8zM20 8v6M23 11h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>New Patient</span>
+            </button>
+
+            <button class="action-btn">
+              <div class="action-icon schedule">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>Schedule</span>
+            </button>
+
+            <button class="action-btn">
+              <div class="action-icon notes">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>Clinical Note</span>
+            </button>
+
+            <button class="action-btn">
+              <div class="action-icon billing">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span>Billing</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Summary -->
+      <div class="card performance-card">
+        <div class="card-header">
+          <h3 class="card-title">Performance</h3>
+        </div>
+        <div class="card-body">
+          <div class="performance-list">
+            <div class="performance-item">
+              <div class="performance-info">
+                <span class="performance-label">Patient Satisfaction</span>
+                <span class="performance-value">94%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill success" style="width: 94%"></div>
+              </div>
+            </div>
+
+            <div class="performance-item">
+              <div class="performance-info">
+                <span class="performance-label">Appointment Completion</span>
+                <span class="performance-value">87%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill primary" style="width: 87%"></div>
+              </div>
+            </div>
+
+            <div class="performance-item">
+              <div class="performance-info">
+                <span class="performance-label">Revenue Target</span>
+                <span class="performance-value">78%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill warning" style="width: 78%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card activity-card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3 class="card-title">Recent Activity</h3>
+          <p class="card-subtitle">Latest updates</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon success">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">Appointment completed for <strong>Michael Brown</strong></span>
+              <span class="activity-time">5 minutes ago</span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon info">
+              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M8.5 11a4 4 0 100-8 4 4 0 000 8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">New patient registered: <strong>Anna Thompson</strong></span>
+              <span class="activity-time">15 minutes ago</span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon warning">
+              <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">Clinical note pending for <strong>David Lee</strong></span>
+              <span class="activity-time">32 minutes ago</span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon success">
+              <svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">Payment received from <strong>Jessica Martinez</strong></span>
+              <span class="activity-time">1 hour ago</span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon info">
+              <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">Appointment rescheduled: <strong>Chris Anderson</strong></span>
+              <span class="activity-time">2 hours ago</span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon danger">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="activity-content">
+              <span class="activity-text">Appointment cancelled by <strong>Tom Wilson</strong></span>
+              <span class="activity-time">3 hours ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
