@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { debounceTime, EMPTY, filter, Observable, switchMap, tap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
@@ -25,6 +25,8 @@ import { FullAppointmentComponent } from './full.appointment/full-appointment.co
 export class AppointmentAddComponent implements OnInit {
   @Input() module: string
   @Input() showHeader: boolean = true;
+  @Output() createClicked = new EventEmitter<void>();
+  @Output() cancelClicked = new EventEmitter<void>();
   @ViewChild('createAppointmentForm') createAppointmentForm: NgForm;
   @ViewChild('fullAppointment') fullAppointmentComponent: FullAppointmentComponent;
   @ViewChild('blockAppointment') blockAppointmentComponent: BlockAppointmentComponent;

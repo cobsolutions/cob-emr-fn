@@ -263,6 +263,118 @@
   }
 }
 
+/* --- Action Buttons Bar --- */
+.form-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  gap: 1rem;
+}
+
+.actions-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.actions-hint-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: #94a3b8;
+}
+
+.actions-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #475569;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.action-btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn-cancel:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.action-btn-cancel .action-btn-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: #64748b;
+}
+
+.action-btn-cancel:hover .action-btn-icon {
+  color: #475569;
+}
+
+.action-btn-create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border: 1px solid #1e293b;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 2px 4px rgba(30, 41, 59, 0.2),
+    0 1px 2px rgba(30, 41, 59, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.action-btn-create:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 8px rgba(30, 41, 59, 0.25),
+    0 2px 4px rgba(30, 41, 59, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.action-btn-create:active {
+  transform: translateY(0);
+  box-shadow:
+    0 1px 2px rgba(30, 41, 59, 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-create .action-btn-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: #ffffff;
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
   .page-header-content {

@@ -79,4 +79,22 @@
       [module]="module">
     </block-appointment>
   </div>
+
+  <!-- Action Buttons (shown in modal mode) -->
+  <div class="form-actions-bar" *ngIf="!showHeader">
+    <div class="actions-hint">
+      <svg cIcon name="cilInfo" class="actions-hint-icon"></svg>
+      <span>Fill in all required fields to create the appointment</span>
+    </div>
+    <div class="actions-buttons">
+      <button class="action-btn-cancel" (click)="cancelClicked.emit()" type="button">
+        <svg cIcon name="cilX" class="action-btn-icon"></svg>
+        <span>Cancel</span>
+      </button>
+      <button class="action-btn-create" (click)="createClicked.emit()" type="button">
+        <svg cIcon name="cilCheck" class="action-btn-icon"></svg>
+        <span>Create Appointment</span>
+      </button>
+    </div>
+  </div>
 </div>

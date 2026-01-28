@@ -21,24 +21,8 @@
     [calendarId]="data.calendarId"
     [module]="module"
     [showHeader]="false"
-    [schedulerSettings]="data.schedulerSettings">
+    [schedulerSettings]="data.schedulerSettings"
+    (createClicked)="create()"
+    (cancelClicked)="cancel()">
   </app-appointment-add>
 </mat-dialog-content>
-
-<!-- Modal Footer -->
-<mat-dialog-actions class="modal-footer">
-  <div class="footer-hint">
-    <svg cIcon name="cilInfo" class="hint-icon"></svg>
-    <span>Fill in all required fields to create the appointment</span>
-  </div>
-  <div class="footer-actions">
-    <button class="btn-cancel" (click)="cancel()" type="button">
-      <svg cIcon name="cilX" class="btn-icon"></svg>
-      <span>Cancel</span>
-    </button>
-    <button class="btn-create" (click)="create()" type="button">
-      <svg cIcon name="cilCheck" class="btn-icon"></svg>
-      <span>Create Appointment</span>
-    </button>
-  </div>
-</mat-dialog-actions>
