@@ -97,8 +97,10 @@
 .modal-content {
   flex: 1;
   min-height: 0;
-  padding: 1.25rem;
-  background: #f8fafc;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-height: none !important;
+  background: #ffffff;
   overflow-y: auto;
 }
 
@@ -127,7 +129,7 @@
   }
 
   .modal-content {
-    padding: 0.875rem;
+    padding: 0;
   }
 }
 
@@ -169,6 +171,6 @@
   }
 
   .modal-content {
-    padding: 0.625rem;
+    padding: 0;
   }
 }

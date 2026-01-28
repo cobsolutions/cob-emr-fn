@@ -263,6 +263,84 @@
   }
 }
 
+/* --- Modal Mode Overrides (flatten cards when inside modal) --- */
+.modal-mode {
+  gap: 0;
+  padding: 1rem;
+}
+
+.modal-mode .section-card {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.modal-mode .section-card:hover {
+  box-shadow: none !important;
+}
+
+.modal-mode .card-header-custom {
+  background: none;
+  padding: 0 0 0.5rem 0;
+  border-bottom: none;
+}
+
+.modal-mode .card-header-title {
+  color: #475569;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-mode .card-icon {
+  color: #64748b;
+  opacity: 1;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.modal-mode .card-status {
+  background: none;
+  color: #94a3b8;
+  padding: 0;
+  font-size: 0.6875rem;
+}
+
+.modal-mode .card-status.valid {
+  background: none;
+  color: #059669;
+}
+
+.modal-mode .card-body-custom {
+  padding: 0;
+  background: transparent;
+}
+
+.modal-mode .search-input {
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border-width: 1px;
+}
+
+.modal-mode .search-hint {
+  border: none;
+  background: none;
+  padding: 0.375rem 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.modal-mode .appointment-form-section {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-mode .form-actions-bar {
+  margin-top: 0.75rem;
+}
+
 /* --- Action Buttons Bar --- */
 .form-actions-bar {
   display: flex;
