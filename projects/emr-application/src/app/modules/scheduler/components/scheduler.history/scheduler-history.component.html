@@ -32,18 +32,27 @@
         <!-- User (Performed By) Autocomplete -->
         <div class="search-field">
           <label class="field-label">User</label>
-          <div class="autocomplete-wrapper">
-            <ng-autocomplete
-              [data]="users$ | async"
-              [searchKeyword]="'accountName'"
-              placeholder="Search by user name"
-              [itemTemplate]="userItemTemplate"
-              [notFoundTemplate]="userNotFoundTemplate"
-              [(ngModel)]="selectedUser"
-              [ngModelOptions]="{standalone: true}"
-              (selected)="onUserSelected($event)"
-              (inputCleared)="onUserCleared()">
-            </ng-autocomplete>
+          <div class="patient-autocomplete-wrapper">
+            <div class="patient-input-container">
+              <input
+                cFormControl
+                [formControl]="userSearchControl"
+                placeholder="Search by user name (min. 2 characters)"
+                class="patient-search-input" />
+              <div class="patient-loader" *ngIf="isUserLoading">
+                <div class="loader-spinner"></div>
+              </div>
+              <button *ngIf="selectedUser" type="button" class="clear-btn-inline"
+                (click)="clearUser()" cTooltip="Clear" cTooltipPlacement="top">
+                <svg cIcon name="cilX" class="clear-icon"></svg>
+              </button>
+            </div>
+            <div class="patient-dropdown" *ngIf="filteredUsers.length > 0 && !selectedUser">
+              <div class="patient-dropdown-item" *ngFor="let user of filteredUsers"
+                (click)="onUserSelect(user)">
+                {{ user.accountName }}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -104,14 +113,6 @@
     </form>
   </div>
 </div>
-
-<!-- User autocomplete templates -->
-<ng-template #userItemTemplate let-item>
-  <a [innerHTML]="item.accountName"></a>
-</ng-template>
-<ng-template #userNotFoundTemplate let-notFound>
-  <div>No users found</div>
-</ng-template>
 
 <!-- Initial State - Before Search -->
 <div class="empty-state" *ngIf="!searched && !isSearching">

@@ -36,7 +36,10 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   isSearching: boolean = false;
 
   // User autocomplete
-  users$!: Observable<User[]>;
+  userSearchControl = new FormControl();
+  allUsers: User[] = [];
+  filteredUsers: User[] = [];
+  isUserLoading = false;
   selectedUser: any;
 
   // Patient autocomplete
@@ -58,6 +61,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     this.catchSelectedClinic();
     this.initListComponent();
     this.columns = this.constructColumns(['entityName', 'clinicName', 'calendarName', 'action', 'changes', 'performedByName', 'performedAt']);
+    this.initUserAutocomplete();
     this.initPatientAutocomplete();
   }
 
@@ -84,14 +88,18 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   }
 
   // User autocomplete handlers
-  onUserSelected(event: any) {
-    this.selectedUser = event;
-    this.searchCriteria.performedByUuid = event.uuid;
+  onUserSelect(user: User) {
+    this.selectedUser = user;
+    this.searchCriteria.performedByUuid = user.uuid;
+    this.userSearchControl.setValue(user.accountName, { emitEvent: false });
+    this.filteredUsers = [];
   }
 
-  onUserCleared() {
+  clearUser() {
     this.selectedUser = undefined;
     this.searchCriteria.performedByUuid = undefined;
+    this.userSearchControl.setValue('', { emitEvent: false });
+    this.filteredUsers = [];
   }
 
   // Patient autocomplete handlers
@@ -110,7 +118,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   }
 
   clearFilter(filter: string) {
-    if (filter === 'user') this.onUserCleared();
+    if (filter === 'user') this.clearUser();
     if (filter === 'patient') this.clearPatient();
     if (filter === 'date') {
       this.searchCriteria.searchStartDate = undefined;
@@ -134,6 +142,34 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     } else {
       this.expandedChanges.add(recordId);
     }
+  }
+
+  private initUserAutocomplete() {
+    this.userSearchControl.valueChanges
+      .pipe(
+        tap(text => {
+          if (text && text.length > 1) {
+            this.isUserLoading = true;
+            this.filteredUsers = [];
+          }
+        }),
+        filter(text => {
+          if (!text || text.length <= 1) {
+            this.filteredUsers = [];
+            this.isUserLoading = false;
+            return false;
+          }
+          return true;
+        }),
+        debounceTime(300)
+      )
+      .subscribe(value => {
+        const search = value.toLowerCase();
+        this.filteredUsers = this.allUsers.filter(u =>
+          u.accountName?.toLowerCase().includes(search)
+        );
+        this.isUserLoading = false;
+      });
   }
 
   private initPatientAutocomplete() {
@@ -170,7 +206,10 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
 
   private loadUsersForClinic() {
     if (!this.clinicId) return;
-    this.users$ = this.doctorUserService.getAllClinicalsUsersByClinic(this.clinicId);
+    this.doctorUserService.getAllClinicalsUsersByClinic(this.clinicId).subscribe(
+      (users: User[]) => this.allUsers = users || [],
+      () => this.allUsers = []
+    );
   }
 
   private catchSelectedClinic() {
