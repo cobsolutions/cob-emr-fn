@@ -122,6 +122,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.selectedCalendars = this.calendars
             .filter(cal => cal.selected)
             .map(cal => cal);
+          this.clickNavigate();
         });
     });
     this.days = this.utils.getWeekViewHeader({
@@ -375,17 +376,9 @@ export class ViewSchdulerComponent implements OnInit {
     this.loadDefaultCalendars();
   }
   private loadDefaultCalendars() {
-    if (this.calendars.length > 1)
-      this.calendars.forEach(calendar => {
-        this.selectedCalendars.push(calendar)
-        this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-          this.events.push(Number(calendar.id), events)
-          this.flatEvent = this.events.getAll();
-          this.refresh.next();
-        })
-      })
-    else
-      this.selectedCalendars = []
+    this.calendars.forEach(calendar => {
+      calendar.selected = true;
+    });
   }
   showCancel() {
     this.showCancelAppointment = !this.showCancelAppointment
