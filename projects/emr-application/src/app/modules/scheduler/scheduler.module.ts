@@ -32,6 +32,7 @@ import { ApdAppointmentTypeComponent } from './components/scheduler.settings/sch
 import { ListAppointmentTypeComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/list/list-appointment-type.component';
 import { SchedulerAppointmentSettingsComponent } from './components/scheduler.settings/scheduler.appointment.type.settings/scheduler.appointment.settings.component';
 import { SchedulerDateSettingsComponent } from './components/scheduler.settings/scheduler.date.settings/scheduler.date.settings.component';
+import { SchedulerHistoryComponent } from './components/scheduler.history/scheduler-history.component';
 import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
 import { DayViewSchedulerComponent } from './components/scheduler.view/custom.day/day-view-scheduler.component';
 import { CustomWeekViewComponent } from './components/scheduler.view/custom.week/custom-week-view.component';
@@ -81,7 +82,8 @@ import { CancelationFeeComponent } from './components/scheduler.settings/cancel.
         EditAppointmentSeriesModalComponent,
         DragableSeriesAppointmetModalComponent,
         EditableSeriesAppointmentModalComponent,
-        CancelationFeeComponent        
+        CancelationFeeComponent,
+        SchedulerHistoryComponent
     ],
     imports: [
         CommonModule,
