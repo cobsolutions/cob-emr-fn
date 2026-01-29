@@ -1,26 +1,63 @@
-<ngx-spinner></ngx-spinner>
-<c-callout color="danger" *ngIf="isValidForm">
-    <span class="text-danger fw-bold">Please fill in all the required fields before submitting Calendar</span>
-</c-callout>
-<form [formGroup]="createCalendarForm">
-    <c-row class="mb-2">
-        <c-col xl="12">
-            <label style="width: 150px;">Name <span class="text-danger">*</span></label>
-        </c-col>
-        <c-col xl="12">
-            <input class="form-control" placeholder formControlName="calendar-name" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.createCalendarForm.get('calendar-name')?.invalid
-                && this.createCalendarForm.get('calendar-name')?.touched}" maxlength="60" input-trimmer required>
-        </c-col>
-        <c-col xl="12">
-            <c-col xl="12">
-                <label style="width: 150px;">Public</label>
-            </c-col>
-            <c-col xl="12">
-                <input class="form-control" formControlName="is-public" cFormCheckInput type="checkbox"  class="form-check-input">
-            </c-col>
-        </c-col>
-    </c-row>
-    <div class="mt-3 text-center">
-        <button cButton size="sm" variant="outline" class="mx-2" (click)="create()">Create</button>
+<div class="create-calendar-wrapper">
+  <!-- Validation Banner -->
+  <div class="validation-banner" *ngIf="isValidForm">
+    <div class="validation-banner-content">
+      <svg cIcon name="cilWarning" class="validation-icon"></svg>
+      <span>Please fill in all required fields before creating the calendar.</span>
     </div>
-</form>
+    <button class="validation-dismiss" (click)="isValidForm = false">
+      <svg cIcon name="cilX" class="validation-dismiss-icon"></svg>
+    </button>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="createCalendarForm" class="create-form">
+    <!-- Calendar Name Field -->
+    <div class="form-field">
+      <label class="field-label">
+        Calendar Name
+        <span class="field-required">*</span>
+      </label>
+      <div class="field-input-wrapper" [class.field-error]="createCalendarForm.get('calendar-name')?.invalid
+            && createCalendarForm.get('calendar-name')?.touched">
+        <svg cIcon name="cilTextSquare" class="field-input-icon"></svg>
+        <input class="field-input" placeholder="Enter calendar name" formControlName="calendar-name"
+          maxlength="60" input-trimmer />
+      </div>
+      <div class="field-hint" *ngIf="!(createCalendarForm.get('calendar-name')?.invalid
+            && createCalendarForm.get('calendar-name')?.touched)">
+        <span>Give your calendar a descriptive name (max 60 characters)</span>
+      </div>
+      <div class="field-error-text" *ngIf="createCalendarForm.get('calendar-name')?.invalid
+            && createCalendarForm.get('calendar-name')?.touched">
+        <svg cIcon name="cilWarning" class="field-error-icon"></svg>
+        <span>Calendar name is required</span>
+      </div>
+    </div>
+
+    <!-- Public Toggle Field -->
+    <div class="form-field">
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <label class="field-label toggle-label">Public Calendar</label>
+          <p class="toggle-description">Public calendars are visible to all users in the clinic</p>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" formControlName="is-public" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+  </form>
+
+  <!-- Footer -->
+  <div class="create-footer">
+    <button class="footer-btn footer-btn-cancel" (click)="cancel()" [disabled]="isCreating">
+      Cancel
+    </button>
+    <button class="footer-btn footer-btn-create" (click)="create()" [disabled]="isCreating">
+      <svg cIcon name="cilPlus" class="footer-btn-icon" *ngIf="!isCreating"></svg>
+      {{ isCreating ? 'Creating...' : 'Create Calendar' }}
+    </button>
+  </div>
+</div>

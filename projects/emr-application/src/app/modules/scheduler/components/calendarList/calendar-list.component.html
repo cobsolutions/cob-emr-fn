@@ -9,10 +9,6 @@
       <p class="page-subtitle">Manage and configure clinic calendars</p>
     </div>
     <div class="header-actions" *appRoleScope="'calendar-role'; requireModify: true">
-      <button cButton class="action-btn save-btn" (click)="updateCalendar()">
-        <svg cIcon name="cilSave" class="btn-icon"></svg>
-        Save Changes
-      </button>
       <button cButton class="action-btn create-btn" (click)="openAddCalendarModal()">
         <svg cIcon name="cilPlus" class="btn-icon"></svg>
         Add Calendar
@@ -78,69 +74,128 @@
 
 <!-- Table -->
 <ng-container *ngIf="props$ | async as props" fluid="true">
-  <div class="table-card">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
-      #calendarsItems [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-      [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-      [tableProps]="{ hover: true, striped: false, small: false }" [columnFilterValue]="props.columnFilterValue ?? []"
-      [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle' }"
-      (sorterValueChange)="handleSorterValueChange($event)" header>
-      <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-        <td>
-          <ng-container [ngSwitch]="columnName">
-            <ng-container *ngSwitchCase="'isPublic'" class="py-2">
-              <div class="checkbox-cell">
-                <input cFormCheckInput [(ngModel)]="item.isPublic" type="checkbox"
-                  [disabled]="!(item.createdBy === loggedInUserUUID)" />
-              </div>
+  <div class="table-section">
+    <!-- Table Toolbar -->
+    <div class="table-toolbar">
+      <div class="table-toolbar-left">
+        <svg cIcon name="cilList" class="toolbar-icon"></svg>
+        <span class="toolbar-title">Calendar List</span>
+        <span class="toolbar-count" *ngIf="totalItems$ | async as totalItems">{{ totalItems }}</span>
+      </div>
+      <div class="table-toolbar-right" *appRoleScope="'calendar-role'; requireModify: true">
+        <div class="toolbar-hint">
+          <svg cIcon name="cilInfo" class="toolbar-hint-icon"></svg>
+          <span>Changes are saved automatically</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="table-card">
+      <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: false, small: false }" [columnFilterValue]="props.columnFilterValue ?? []"
+        [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)" header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <!-- Calendar Name -->
+              <ng-container *ngSwitchCase="'name'">
+                <div class="calendar-name-cell">
+                  <div class="calendar-avatar">
+                    <svg cIcon name="cilCalendar" class="calendar-avatar-icon"></svg>
+                  </div>
+                  <div class="calendar-name-info">
+                    <span class="calendar-name-text">{{ item.name }}</span>
+                    <div class="calendar-name-meta">
+                      <span class="calendar-id-badge">#{{ item.calendarId }}</span>
+                      <span class="calendar-owner-badge" *ngIf="item.createdBy === loggedInUserUUID">
+                        <svg cIcon name="cilUser" class="owner-badge-icon"></svg>
+                        Owner
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Public Toggle -->
+              <ng-container *ngSwitchCase="'isPublic'">
+                <div class="toggle-cell">
+                  <label class="table-toggle" [class.toggle-disabled]="!(item.createdBy === loggedInUserUUID)">
+                    <input type="checkbox" [(ngModel)]="item.isPublic"
+                      [disabled]="!(item.createdBy === loggedInUserUUID)"
+                      (ngModelChange)="onPublicToggle(item)" />
+                    <span class="table-toggle-slider"></span>
+                  </label>
+                  <span class="toggle-label" [class.toggle-label-active]="item.isPublic">
+                    {{ item.isPublic ? 'Public' : 'Private' }}
+                  </span>
+                </div>
+              </ng-container>
+
+              <!-- Attached Toggle -->
+              <ng-container *ngSwitchCase="'attached'">
+                <div class="toggle-cell">
+                  <label class="table-toggle">
+                    <input type="checkbox" [(ngModel)]="item.isAttach"
+                      (ngModelChange)="onAttachToggle(item)" />
+                    <span class="table-toggle-slider"></span>
+                  </label>
+                  <span class="toggle-label" [class.toggle-label-active]="item.isAttach">
+                    {{ item.isAttach ? 'Attached' : 'Detached' }}
+                  </span>
+                </div>
+              </ng-container>
+
+              <!-- Actions -->
+              <ng-container *ngSwitchCase="'actions'">
+                <div class="actions-cell">
+                  <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit Calendar"
+                    cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
+                    <svg cIcon name="cilPen" class="edit-icon"></svg>
+                  </button>
+                  <button cButton class="delete-btn" (click)="confirmDeleteCalendar(item)" cTooltip="Delete Calendar"
+                    cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
+                    <svg cIcon name="cilTrash" class="delete-icon"></svg>
+                  </button>
+                </div>
+              </ng-container>
+
+              <!-- Default -->
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
             </ng-container>
-            <ng-container *ngSwitchCase="'attached'" class="py-2">
-              <div class="checkbox-cell">
-                <input cFormCheckInput [(ngModel)]="item.isAttach" type="checkbox" />
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'actions'" class="py-2">
-              <div class="actions-cell">
-                <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit" cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
-                  <svg cIcon name="cilPen" class="edit-icon"></svg>
-                </button>
-                <button cButton class="delete-btn" (click)="confirmDeleteCalendar(item)" cTooltip="Delete" cTooltipPlacement="left"
-                  *appRoleScope="'calendar-role'; requireModify: true">
-                  <svg cIcon name="cilTrash" class="delete-icon"></svg>
-                </button>
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              {{ tdContent }}
-            </ng-container>
-          </ng-container>
-        </td>
-      </ng-template>
-    </c-smart-table>
-    <div class="pagination-wrapper" *ngIf="props.totalPages">
-      <c-smart-pagination [activePage]="props.activePage"
-        (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+          </td>
+        </ng-template>
+      </c-smart-table>
+      <div class="pagination-wrapper" *ngIf="props.totalPages">
+        <c-smart-pagination [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+      </div>
     </div>
   </div>
 </ng-container>
 
 <!-- Create Calendar Modal -->
-<c-modal id="createCalendar" [visible]="createCalendarVisibility" size="lg" backdrop="static" scrollable>
+<c-modal id="createCalendar" [visible]="createCalendarVisibility" backdrop="static" alignment="center">
   <c-modal-header class="modal-header-custom">
     <h3 cModalTitle class="modal-title-custom">
-      <svg cIcon name="cilPlus" class="modal-title-icon"></svg>
+      <svg cIcon name="cilCalendar" class="modal-title-icon"></svg>
       Create Calendar
     </h3>
     <button (click)="toggleCreate()" cButtonClose></button>
   </c-modal-header>
-  <c-modal-body>
+  <c-modal-body class="create-modal-body">
     <create-calendar *ngIf="createCalendarVisibility"
       (changeCreateVisibility)="changeCreateVisibility($event)" [clinicId]="clinicId"></create-calendar>
   </c-modal-body>
 </c-modal>
 
 <!-- Edit Calendar Modal -->
-<c-modal id="editClinic" [visible]="editCalendarVisibility" size="sm" backdrop="static">
+<c-modal id="editCalendar" [visible]="editCalendarVisibility" backdrop="static" alignment="center">
   <c-modal-header class="modal-header-custom">
     <h3 cModalTitle class="modal-title-custom">
       <svg cIcon name="cilPen" class="modal-title-icon"></svg>
@@ -148,7 +203,7 @@
     </h3>
     <button (click)="toggleEdit()" cButtonClose></button>
   </c-modal-header>
-  <c-modal-body>
+  <c-modal-body class="edit-modal-body">
     <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar"
       (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
   </c-modal-body>

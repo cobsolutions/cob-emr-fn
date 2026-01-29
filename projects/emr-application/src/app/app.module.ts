@@ -80,9 +80,15 @@ const APP_CONTAINERS = [
     FormsModule,
     DateRangePickerModule,
     ToastrModule.forRoot({
-      timeOut: 15000, // 15 seconds
+      timeOut: 4000,
       closeButton: true,
       progressBar: true,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      newestOnTop: true,
+      maxOpened: 3,
+      autoDismiss: true,
+      easeTime: 250,
     }),
     SecurityModule
   ],

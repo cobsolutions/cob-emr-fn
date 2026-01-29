@@ -1,14 +1,45 @@
-<ngx-spinner></ngx-spinner>
-<c-row class="mb-2">
-    <c-col xl="12">
-        <label style="width: 150px;">Name <span class="text-danger">*</span></label>
-    </c-col>
-    <c-col xl="12">
-        <input class="form-control" placeholder sizing="sm" maxlength="60" input-trimmer name="claendar-name" required
-            [value]="calendar.name" #claendarName>
-    </c-col>
-</c-row>
-<div class="mt-3 text-center">
-    <button cButton size="sm" variant="outline" class="mx-2" (click)="edit()"
-        [disabled]="calendar.name === ''">Edit</button>
+<div class="edit-calendar-wrapper">
+  <!-- Current Calendar Info -->
+  <div class="current-info">
+    <svg cIcon name="cilCalendar" class="current-info-icon"></svg>
+    <div class="current-info-details">
+      <span class="current-info-label">Current Name</span>
+      <span class="current-info-value">{{ calendar.name }}</span>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="edit-form">
+    <!-- Calendar Name Field -->
+    <div class="form-field">
+      <label class="field-label">
+        New Calendar Name
+        <span class="field-required">*</span>
+      </label>
+      <div class="field-input-wrapper" [class.field-error]="nameEmpty">
+        <svg cIcon name="cilTextSquare" class="field-input-icon"></svg>
+        <input class="field-input" placeholder="Enter new calendar name"
+          [value]="calendar.name" #claendarName maxlength="60" input-trimmer
+          (input)="onNameInput()" />
+      </div>
+      <div class="field-hint" *ngIf="!nameEmpty">
+        <span>Rename your calendar (max 60 characters)</span>
+      </div>
+      <div class="field-error-text" *ngIf="nameEmpty">
+        <svg cIcon name="cilWarning" class="field-error-icon"></svg>
+        <span>Calendar name cannot be empty</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="edit-footer">
+    <button class="footer-btn footer-btn-cancel" (click)="cancel()" [disabled]="isEditing">
+      Cancel
+    </button>
+    <button class="footer-btn footer-btn-save" (click)="edit()" [disabled]="isEditing">
+      <svg cIcon name="cilSave" class="footer-btn-icon" *ngIf="!isEditing"></svg>
+      {{ isEditing ? 'Saving...' : 'Save Changes' }}
+    </button>
+  </div>
 </div>
