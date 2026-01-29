@@ -33,6 +33,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   readonly CHANGES_PREVIEW_COUNT = 2;
   searched: boolean = false;
   noResults: boolean = false;
+  isSearching: boolean = false;
 
   // User autocomplete
   users$!: Observable<User[]>;
@@ -68,16 +69,18 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   }
 
   search() {
+    if (this.isSearching) return;
     this.searched = true;
     this.noResults = false;
+    this.isSearching = true;
     this.setActivePage(1);
-    this.find();
     this.apiParams = {
       performedByUuid: this.searchCriteria.performedByUuid || undefined,
       patientId: this.searchCriteria.patientId || undefined,
       startDate: this.searchCriteria.searchStartDate || undefined,
       endDate: this.searchCriteria.searchEndDate || undefined
     };
+    this.find();
   }
 
   // User autocomplete handlers
@@ -136,18 +139,21 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   private initPatientAutocomplete() {
     this.patientSearchControl.valueChanges
       .pipe(
+        tap(text => {
+          if (text && text.length > 3) {
+            this.isPatientLoading = true;
+            this.filteredPatients = [];
+          }
+        }),
         filter(text => {
           if (!text || text.length <= 3) {
             this.filteredPatients = [];
+            this.isPatientLoading = false;
             return false;
           }
           return true;
         }),
         debounceTime(1000),
-        tap(() => {
-          this.filteredPatients = [];
-          this.isPatientLoading = true;
-        }),
         switchMap(value => this.patientFinderService.getPatientsByName(value))
       )
       .subscribe(
@@ -183,6 +189,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
         const total = response.records?.totalElements || 0;
         this.totalItems$.next(total);
         this.noResults = total === 0;
+        this.isSearching = false;
         this.errorMessage$.next('');
         this.loadingData$.next(false);
       }),

@@ -95,9 +95,10 @@
 
       <div class="search-actions">
         <span class="search-hint" *ngIf="!isSearchValid">Please fill in all filters before searching</span>
-        <button type="button" cButton class="search-btn" [disabled]="!isSearchValid" (click)="search()">
-          <svg cIcon name="cilSearch" class="btn-icon"></svg>
-          Search
+        <button type="button" cButton class="search-btn" [disabled]="!isSearchValid || isSearching" (click)="search()">
+          <div class="btn-spinner" *ngIf="isSearching"></div>
+          <svg cIcon name="cilSearch" class="btn-icon" *ngIf="!isSearching"></svg>
+          {{ isSearching ? 'Searching...' : 'Search' }}
         </button>
       </div>
     </form>
@@ -113,14 +114,21 @@
 </ng-template>
 
 <!-- Initial State - Before Search -->
-<div class="empty-state" *ngIf="!searched">
+<div class="empty-state" *ngIf="!searched && !isSearching">
   <svg cIcon name="cilSearch" class="empty-state-icon"></svg>
   <h4 class="empty-state-title">Search Scheduler History</h4>
   <p class="empty-state-text">Select a user, patient, and date range above, then click Search to view audit records.</p>
 </div>
 
+<!-- Loading State -->
+<div class="empty-state" *ngIf="isSearching">
+  <div class="search-spinner"></div>
+  <h4 class="empty-state-title">Searching...</h4>
+  <p class="empty-state-text">Fetching audit records, please wait.</p>
+</div>
+
 <!-- No Results State -->
-<div class="empty-state" *ngIf="searched && noResults">
+<div class="empty-state" *ngIf="searched && noResults && !isSearching">
   <svg cIcon name="cilInfo" class="empty-state-icon empty-state-icon-warn"></svg>
   <h4 class="empty-state-title">No Results Found</h4>
   <p class="empty-state-text">No audit records match your search criteria. Try adjusting your filters and search again.</p>
