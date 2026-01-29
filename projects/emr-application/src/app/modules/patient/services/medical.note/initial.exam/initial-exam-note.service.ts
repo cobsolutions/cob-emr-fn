@@ -39,4 +39,8 @@ export class InitialExamNoteService {
     var url = this.baseUrl + '/' + noteId;
     return this.httpClient.get(`${url}`)
   }
+  remove(noteId: string) {
+    var url = this.baseUrl + '/' + noteId;
+    return this.httpClient.delete(`${url}`)
+  }
 }

@@ -364,7 +364,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     if (val === 'View Reason')
       this.getAppointment(entityId)
     if (val === 'Remove')
-      this.removeMedicalNote(entityId);
+      this.removeMedicalNote(noteId);
     if (val === 'Complete') {
       this.noteId = noteId;
       this.completeMedicalNote(entityId, status)
@@ -408,9 +408,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.reasonVisibility = true;
     })
   }
-  private removeMedicalNote(id: number) {
-    this.medialNoteService.remove(id).subscribe((updatedCase: any) => {
-      this.case = updatedCase;
+  private removeMedicalNote(noteId: string) {
+    this.initialExamNoteService.remove(noteId).subscribe(() => {
       this.getRecords();
       this.findPatientCaseActions(this.case.uuid);
     })
