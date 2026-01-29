@@ -23,7 +23,7 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
 
   ngOnInit(): void {
     this.initListComponent();
-    this.columns = this.constructColumns(['name', 'npi', 'actions']);
+    this.columns = this.constructColumns(['provider', 'npi', 'status']);
     this.find();
   }
   toggleReferringProvider() {
@@ -63,11 +63,12 @@ export class ListReferringProviderComponent extends ListTemplate implements OnIn
         this.loadingData$.next(false);
       }),
       map((response: any) => {
-        for (var i = 0; i < response.records.length; i++) {
-          var ss = response.records[i];
-          ss.name = ss.lastName + ',' + ss.firstName;
-        }
-        return response.records;
+        return response.records.map((record: any) => ({
+          ...record,
+          name: `${record.lastName}, ${record.firstName}`,
+          initials: `${(record.firstName?.[0] || '').toUpperCase()}${(record.lastName?.[0] || '').toUpperCase()}`,
+          status: record.status || 'Active'
+        }));
       })
     );
   }

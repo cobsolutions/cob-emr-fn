@@ -156,6 +156,414 @@
   color: #dc2626;
 }
 
+/* --- Read-only Fields --- */
+.readonly-field {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+/* --- Hide number input spinners --- */
+:host ::ng-deep input[type="number"]::-webkit-outer-spin-button,
+:host ::ng-deep input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+:host ::ng-deep input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* --- Search Section --- */
+.search-header {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+}
+
+.search-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.search-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+}
+
+.search-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.clear-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+  border-color: #94a3b8;
+}
+
+/* --- Results Filter --- */
+.results-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.filter-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .filter-input {
+  flex: 1;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.375rem !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.8125rem !important;
+  background: #ffffff !important;
+}
+
+:host ::ng-deep .filter-input:focus {
+  border-color: #334155 !important;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1) !important;
+}
+
+.filter-count {
+  font-size: 0.75rem;
+  color: #64748b;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* --- Results Section --- */
+.results-card {
+  border-color: #cbd5e1 !important;
+}
+
+.results-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1875rem 0.625rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+.results-body {
+  padding: 0 !important;
+}
+
+.results-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item:hover {
+  background: #f8fafc;
+}
+
+.result-item.selected {
+  background: #f0f9ff;
+  border-left: 3px solid #334155;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.result-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.result-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #64748b;
+}
+
+.result-npi {
+  font-size: 0.75rem;
+  color: #64748b;
+  padding-left: 1.5rem;
+}
+
+.result-taxonomy {
+  font-size: 0.75rem;
+  color: #475569;
+  padding-left: 1.5rem;
+  font-style: italic;
+}
+
+.result-address {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  padding-left: 1.5rem;
+}
+
+.result-select-indicator {
+  display: flex;
+  align-items: center;
+  min-width: 1.25rem;
+}
+
+.check-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #059669;
+}
+
+/* --- No Results --- */
+.no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.no-results-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #94a3b8;
+}
+
+/* --- Detail Sections (Taxonomies & Addresses) --- */
+.detail-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.section-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.625rem;
+}
+
+.detail-label-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #64748b;
+}
+
+/* --- Taxonomy List --- */
+.taxonomy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taxonomy-item {
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+}
+
+.taxonomy-item.primary {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.taxonomy-desc {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.primary-badge {
+  display: inline-block;
+  padding: 0.0625rem 0.375rem;
+  background: #059669;
+  color: #ffffff;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+.taxonomy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* --- Address List --- */
+.address-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.address-item {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.625rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+}
+
+.address-purpose {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.375rem;
+}
+
+.address-line {
+  font-size: 0.8125rem;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.address-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.contact-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #94a3b8;
+}
+
+/* --- Submit Error Banner --- */
+.submit-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #dc2626;
+  border-radius: 0.375rem;
+}
+
+.submit-error-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #991b1b;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.submit-error-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.submit-error-dismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: #991b1b;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+  flex-shrink: 0;
+}
+
+.submit-error-dismiss:hover {
+  opacity: 1;
+}
+
+.submit-error-dismiss-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
 /* --- Action Section --- */
 .action-section {
   display: flex;
@@ -205,6 +613,24 @@
   height: 1.125rem;
 }
 
+/* --- Scrollbar for Results --- */
+.results-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.results-list::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.results-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.results-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
   .card-header-custom {
@@ -222,6 +648,16 @@
     padding: 1rem;
   }
 
+  .search-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-btn,
+  .clear-btn {
+    justify-content: center;
+  }
+
   .action-section {
     padding: 1rem 0;
   }
@@ -229,6 +665,10 @@
   .create-btn {
     width: 100%;
     max-width: 280px;
+  }
+
+  .result-item {
+    padding: 0.75rem 1rem;
   }
 }
 
@@ -258,5 +698,9 @@
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
     min-width: unset;
+  }
+
+  .results-list {
+    max-height: 220px;
   }
 }

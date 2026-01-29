@@ -180,71 +180,171 @@
   background-color: #f8fafc;
 }
 
-/* --- Provider Name --- */
-.provider-name {
-  display: inline-flex;
+/* --- Clickable Row Cells --- */
+.clickable-cell {
+  cursor: pointer;
+}
+
+/* --- Provider Cell (Avatar + Name + Meta) --- */
+.provider-cell {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
+  gap: 0.75rem;
+}
+
+.provider-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #334155 0%, #475569 100%);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.provider-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.provider-full-name {
+  font-weight: 600;
+  font-size: 0.875rem;
   color: #1e293b;
 }
 
-.provider-icon {
-  width: 0.9375rem;
-  height: 0.9375rem;
-  color: #64748b;
-}
-
-/* --- NPI Info --- */
-.npi-info {
-  color: #475569;
-  font-size: 0.875rem;
-}
-
-/* --- Action Buttons --- */
-.action-buttons {
-  display: flex;
-  gap: 0.375rem;
-  justify-content: center;
-}
-
-.action-btn {
-  display: flex;
+.provider-meta {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  background: #f8fafc;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.meta-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #94a3b8;
+}
+
+/* --- NPI Cell --- */
+.npi-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.npi-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.1875rem 0.5rem;
+  background: #f1f5f9;
   border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  color: #334155;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
 }
 
-.action-btn-edit {
-  color: #475569;
+.npi-label {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.action-btn-edit:hover {
-  background: #334155;
-  border-color: #334155;
-  color: #ffffff;
+/* --- Status Badge --- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.action-btn-delete {
+.status-active {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.status-inactive {
+  background: #fef2f2;
   color: #dc2626;
+  border: 1px solid #fecaca;
 }
 
-.action-btn-delete:hover {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: #ffffff;
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
-.action-icon {
-  width: 1rem;
-  height: 1rem;
+/* --- Phone Cell --- */
+.phone-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #334155;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Address Cell --- */
+.address-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #475569;
+  font-size: 0.8125rem;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Specialty Badge --- */
+.specialty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.5rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 0.25rem;
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* --- Shared Cell Icon --- */
+.cell-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: inherit;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* --- No Data Placeholder --- */
+.no-data {
+  color: #cbd5e1;
+  font-size: 0.8125rem;
 }
 
 /* --- Pagination --- */
@@ -392,11 +492,6 @@
     gap: 0.5rem;
     text-align: center;
     padding: 0.75rem 1rem;
-  }
-
-  .action-buttons {
-    flex-direction: row;
-    gap: 0.375rem;
   }
 
   .fab-button {

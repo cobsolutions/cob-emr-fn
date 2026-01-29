@@ -41,33 +41,39 @@
         (sorterValueChange)="handleSorterValueChange($event)"
         header>
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-          <td>
+          <td [class.clickable-cell]="columnName !== 'status' && columnName !== 'npi'" (click)="columnName !== 'status' && columnName !== 'npi' && edit(item)">
             <ng-container [ngSwitch]="columnName">
-              <ng-container *ngSwitchCase="'name'">
-                <span class="provider-name">
-                  <svg cIcon name="cilUser" class="provider-icon"></svg>
-                  {{ item.name }}
-                </span>
+              <ng-container *ngSwitchCase="'provider'">
+                <div class="provider-cell">
+                  <div class="provider-avatar">{{ item.initials }}</div>
+                  <div class="provider-details">
+                    <span class="provider-full-name">{{ item.lastName }}, {{ item.firstName }}</span>
+                    <span class="provider-meta">
+                      <svg cIcon name="cilTag" class="meta-icon"></svg>
+                      ID: {{ item.id }}
+                    </span>
+                  </div>
+                </div>
               </ng-container>
               <ng-container *ngSwitchCase="'npi'">
-                <span class="npi-info">
-                  {{ item.npi || '-' }}
-                </span>
-              </ng-container>
-              <ng-container *ngSwitchCase="'actions'">
-                <div class="action-buttons">
-                  <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton class="action-btn action-btn-edit" (click)="edit(item)" title="Edit Provider">
-                    <svg cIcon name="cilPen" class="action-icon"></svg>
-                  </button>
-                  <!-- <button *appRoleScope="'emr-referring-provider-role'; requireModify: true" cButton class="action-btn action-btn-delete" (click)="remove(item)" title="Delete Provider">
-                    <svg cIcon name="cilTrash" class="action-icon"></svg>
-                  </button> -->
+                <div class="npi-cell">
+                  <span class="npi-badge">{{ item.npi || '-' }}</span>
+                  <span class="npi-label">National Provider ID</span>
                 </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'status'">
+                <span class="status-badge" [ngClass]="item.status === 'Active' ? 'status-active' : 'status-inactive'">
+                  <span class="status-dot"></span>
+                  {{ item.status }}
+                </span>
               </ng-container>
               <ng-container *ngSwitchDefault>
                 {{ tdContent }}
               </ng-container>
             </ng-container>
+            <ng-template #noData>
+              <span class="no-data">-</span>
+            </ng-template>
           </td>
         </ng-template>
       </c-smart-table>

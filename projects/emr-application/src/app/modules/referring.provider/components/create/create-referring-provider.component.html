@@ -1,74 +1,201 @@
 <ngx-spinner></ngx-spinner>
 
-<!-- Main Form Content -->
 <div class="form-container">
-  <form cForm #referringProviderCreateForm="ngForm" (ngSubmit)="submit()">
 
-    <!-- Provider Information -->
-    <c-card class="section-card">
-      <div class="card-header-custom" [ngClass]="{'invalid': !referringProviderCreateForm.valid}">
-        <div class="card-header-title">
-          <svg cIcon name="cilUser" class="card-icon"></svg>
-          <span>Provider Information</span>
-        </div>
-        <span class="card-status" *ngIf="!referringProviderCreateForm.valid">
-          <svg cIcon name="cilWarning" class="status-icon"></svg>
-          Required
-        </span>
-        <span class="card-status valid" *ngIf="referringProviderCreateForm.valid">
-          <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-          Complete
-        </span>
+  <!-- Submit Error -->
+  <div class="submit-error-banner" *ngIf="submitError" #errorBanner>
+    <div class="submit-error-content">
+      <svg cIcon name="cilWarning" class="submit-error-icon"></svg>
+      <span>{{ submitError }}</span>
+    </div>
+    <button class="submit-error-dismiss" type="button" (click)="dismissError()">
+      <svg cIcon name="cilX" class="submit-error-dismiss-icon"></svg>
+    </button>
+  </div>
+
+  <!-- Search Provider Section -->
+  <c-card class="section-card">
+    <div class="card-header-custom search-header">
+      <div class="card-header-title">
+        <svg cIcon name="cilSearch" class="card-icon"></svg>
+        <span>Search Provider</span>
       </div>
-      <c-card-body class="card-body-custom">
-        <c-row>
-          <c-col xs="12" sm="6" class="mb-3">
-            <label class="form-label" for="fname">
-              First Name <span class="required-mark">*</span>
-            </label>
-            <input cFormControl id="fname" name="fname" placeholder="Enter first name" required
-              [ngClass]="{'is-invalid': fname.invalid && (fname.dirty || fname.touched)}"
-              #fname="ngModel" [(ngModel)]="referringProvider.firstName" />
-            <small *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="field-error">
-              <svg cIcon name="cilWarning" class="field-error-icon"></svg>
-              First Name is required
-            </small>
-          </c-col>
-          <c-col xs="12" sm="6" class="mb-3">
-            <label class="form-label" for="lname">
-              Last Name <span class="required-mark">*</span>
-            </label>
-            <input cFormControl id="lname" name="lname" placeholder="Enter last name" required
-              [ngClass]="{'is-invalid': lname.invalid && (lname.dirty || lname.touched)}"
-              #lname="ngModel" [(ngModel)]="referringProvider.lastName" />
-            <small *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="field-error">
-              <svg cIcon name="cilWarning" class="field-error-icon"></svg>
-              Last Name is required
-            </small>
-          </c-col>
-        </c-row>
-        <c-row>
-          <c-col xs="12" sm="6" class="mb-3">
-            <label class="form-label" for="referringProvidernpi">
-              NPI
-              <span class="optional-mark">Optional</span>
-            </label>
-            <input cFormControl id="referringProvidernpi" name="npi" placeholder="Enter NPI number"
-              [(ngModel)]="referringProvider.npi" #npi="ngModel" />
-          </c-col>
-        </c-row>
-      </c-card-body>
-    </c-card>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-row>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label" for="searchFirstName">First Name</label>
+          <input cFormControl id="searchFirstName" placeholder="Enter first name"
+            [(ngModel)]="searchCriteria.firstName" [ngModelOptions]="{standalone: true}"
+            (keyup.enter)="searchProviders()" />
+        </c-col>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label" for="searchLastName">Last Name</label>
+          <input cFormControl id="searchLastName" placeholder="Enter last name"
+            [(ngModel)]="searchCriteria.lastName" [ngModelOptions]="{standalone: true}"
+            (keyup.enter)="searchProviders()" />
+        </c-col>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label" for="searchNpi">NPI</label>
+          <input cFormControl id="searchNpi" placeholder="Enter NPI number" type="number"
+            [(ngModel)]="searchCriteria.npi" [ngModelOptions]="{standalone: true}"
+            (keyup.enter)="searchProviders()" (keydown)="onNpiKeyDown($event)" />
+        </c-col>
+      </c-row>
+      <div class="search-actions">
+        <button cButton class="search-btn" type="button" (click)="searchProviders()"
+          [disabled]="isSearching || (!searchCriteria.firstName && !searchCriteria.lastName && !searchCriteria.npi)">
+          <svg cIcon name="cilSearch" class="btn-icon"></svg>
+          {{ isSearching ? 'Searching...' : 'Search' }}
+        </button>
+        <button cButton class="clear-btn" type="button" (click)="clearSearch()"
+          *ngIf="hasSearched">
+          <svg cIcon name="cilReload" class="btn-icon"></svg>
+          Clear
+        </button>
+      </div>
+    </c-card-body>
+  </c-card>
 
-    <!-- Action Section -->
-    <div class="action-section">
-      <button *appRoleScope="'emr-referring-provider-role'; requireModify: true"
-        cButton class="create-btn" type="submit" [disabled]="!referringProviderCreateForm.valid">
-        <svg cIcon name="cilCheckCircle" class="btn-icon"></svg>
-        <span *ngIf="mode === 'create'">Create Referring Provider</span>
-        <span *ngIf="mode === 'update'">Update Referring Provider</span>
-      </button>
+  <!-- Search Results -->
+  <c-card class="section-card results-card" *ngIf="hasSearched">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>Results</span>
+      </div>
+      <span class="results-badge">{{ searchResults.length }} found</span>
     </div>
 
-  </form>
+    <!-- Filter + Results List -->
+    <c-card-body class="card-body-custom results-body" *ngIf="searchResults.length > 0">
+      <div class="results-filter">
+        <svg cIcon name="cilFilter" class="filter-icon"></svg>
+        <input cFormControl class="filter-input" placeholder="Filter results by name or NPI..."
+          [(ngModel)]="filterText" [ngModelOptions]="{standalone: true}" />
+        <span class="filter-count">{{ filteredResults.length }} of {{ searchResults.length }}</span>
+      </div>
+      <div class="results-list">
+        <div class="result-item" *ngFor="let provider of filteredResults; let i = index"
+          [class.selected]="selectedIndex === i" (click)="selectProvider(provider, i)">
+          <div class="result-info">
+            <span class="result-name">
+              <svg cIcon name="cilUser" class="result-icon"></svg>
+              {{ provider.lastName }}, {{ provider.firstName }}
+            </span>
+            <span class="result-npi" *ngIf="provider.npi">NPI: {{ provider.npi }}</span>
+            <span class="result-taxonomy" *ngIf="getPrimaryTaxonomy(provider) as tax">
+              {{ tax.desc }}
+            </span>
+            <span class="result-address" *ngIf="getLocationAddress(provider) as addr">
+              {{ addr.city }}, {{ addr.state }}
+            </span>
+          </div>
+          <div class="result-select-indicator">
+            <svg cIcon name="cilCheckCircle" class="check-icon" *ngIf="selectedIndex === i"></svg>
+          </div>
+        </div>
+        <div class="no-results" *ngIf="filteredResults.length === 0">
+          <svg cIcon name="cilFilter" class="no-results-icon"></svg>
+          <span>No results match your filter</span>
+        </div>
+      </div>
+    </c-card-body>
+
+    <!-- No Results -->
+    <c-card-body class="card-body-custom" *ngIf="searchResults.length === 0">
+      <div class="no-results">
+        <svg cIcon name="cilMagnifyingGlass" class="no-results-icon"></svg>
+        <span>No providers found matching your criteria</span>
+      </div>
+    </c-card-body>
+  </c-card>
+
+  <!-- Selected Provider Information -->
+  <c-card class="section-card" *ngIf="selectedProvider">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilUser" class="card-icon"></svg>
+        <span>Provider Information</span>
+      </div>
+      <span class="card-status valid">
+        <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+        Selected
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <!-- Basic Info -->
+      <c-row>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label">First Name</label>
+          <div class="readonly-field">{{ selectedProvider.firstName }}</div>
+        </c-col>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label">Last Name</label>
+          <div class="readonly-field">{{ selectedProvider.lastName }}</div>
+        </c-col>
+        <c-col xs="12" sm="4" class="mb-3">
+          <label class="form-label">NPI</label>
+          <div class="readonly-field">{{ selectedProvider.npi || '-' }}</div>
+        </c-col>
+      </c-row>
+
+      <!-- Taxonomies -->
+      <div class="detail-section" *ngIf="selectedProvider.taxonomies?.length">
+        <label class="form-label section-label">
+          <svg cIcon name="cilMedicalCross" class="detail-label-icon"></svg>
+          Specialties
+        </label>
+        <div class="taxonomy-list">
+          <div class="taxonomy-item" *ngFor="let tax of selectedProvider.taxonomies"
+            [class.primary]="tax.primary">
+            <div class="taxonomy-desc">
+              {{ tax.desc }}
+              <span class="primary-badge" *ngIf="tax.primary">Primary</span>
+            </div>
+            <div class="taxonomy-meta">
+              <span *ngIf="tax.code">Code: {{ tax.code }}</span>
+              <span *ngIf="tax.state">State: {{ tax.state }}</span>
+              <span *ngIf="tax.license">License: {{ tax.license }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Addresses -->
+      <div class="detail-section" *ngIf="selectedProvider.addresses?.length">
+        <label class="form-label section-label">
+          <svg cIcon name="cilLocationPin" class="detail-label-icon"></svg>
+          Addresses
+        </label>
+        <div class="address-list">
+          <div class="address-item" *ngFor="let addr of selectedProvider.addresses">
+            <div class="address-purpose">{{ addr.purpose }}</div>
+            <div class="address-line">{{ addr.address1 }}</div>
+            <div class="address-line" *ngIf="addr.address2">{{ addr.address2 }}</div>
+            <div class="address-line">{{ addr.city }}, {{ addr.state }} {{ addr.postalCode }}</div>
+            <div class="address-contact" *ngIf="addr.phone">
+              <svg cIcon name="cilPhone" class="contact-icon"></svg>
+              {{ addr.phone }}
+            </div>
+            <div class="address-contact" *ngIf="addr.fax">
+              <svg cIcon name="cilFax" class="contact-icon"></svg>
+              Fax: {{ addr.fax }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </c-card-body>
+  </c-card>
+
+  <!-- Action Section -->
+  <div class="action-section" *ngIf="selectedProvider">
+    <button *appRoleScope="'emr-referring-provider-role'; requireModify: true"
+      cButton class="create-btn" type="button" (click)="submit()"
+      [disabled]="isSubmitting">
+      <svg cIcon name="cilCheckCircle" class="btn-icon" *ngIf="!isSubmitting"></svg>
+      <span *ngIf="mode === 'create'">{{ isSubmitting ? 'Creating...' : 'Create Referring Provider' }}</span>
+      <span *ngIf="mode === 'update'">{{ isSubmitting ? 'Updating...' : 'Update Referring Provider' }}</span>
+    </button>
+  </div>
 </div>

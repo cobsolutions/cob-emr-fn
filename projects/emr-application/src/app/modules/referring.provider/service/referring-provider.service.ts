@@ -21,6 +21,7 @@ const httpOptions = {
 })
 export class ReferringProviderService {
   baseURL: string = environment.baseURL + 'referring/provider'
+  nppesURL: string = environment.baseURL + 'nppes'
   constructor(private httpClient: HttpClient
     , private loggedInService: LoggedInService) { }
 
@@ -45,6 +46,22 @@ export class ReferringProviderService {
       switchMap((config) => this.fetchData(config))
     );
   }
+  searchByFirstName(firstName: string): Observable<any> {
+    return this.httpClient.get(`${this.nppesURL}/search/first-name/${firstName}`);
+  }
+
+  searchByLastName(lastName: string): Observable<any> {
+    return this.httpClient.get(`${this.nppesURL}/search/last-name/${lastName}`);
+  }
+
+  searchByFirstAndLastName(firstName: string, lastName: string): Observable<any> {
+    return this.httpClient.get(`${this.nppesURL}/search/first-name/${firstName}/last-name/${lastName}`);
+  }
+
+  searchByNpi(npi: string): Observable<any> {
+    return this.httpClient.get(`${this.nppesURL}/search/npi/${npi}`);
+  }
+
   private fetchData(params: IApiParams): Observable<IData> {
     const apiParams = {
       ...params

@@ -4,5 +4,11 @@ export interface ReferringProvider {
     lastName?: string
     name?: string
     npi?: string,
-    organizationId?: number
+    organizationId?: number,
+    status?: string,
+    createdDate?: string,
+    initials?: string,
+    phone?: string,
+    address?: string,
+    specialty?: string
 }
