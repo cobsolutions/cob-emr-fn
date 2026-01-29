@@ -210,5 +210,13 @@
 /emr/api/patient/document/download/:documentId http://161.97.126.192:7070/emr/api/patient/document/download/:documentId 200
 /emr/api/patient/document/update/:documentId http://161.97.126.192:7070/emr/api/patient/document/update/:documentId 200
 /emr/api/patient/document/:documentId http://161.97.126.192:7070/emr/api/patient/document/:documentId 200
+/emr/api/nppes/search/first-name/:firstName http://161.97.126.192:7070/emr/api/nppes/search/first-name/:firstName 200
+/emr/api/nppes/search/last-name/:lastName http://161.97.126.192:7070/emr/api/nppes/search/last-name/:lastName 200
+/emr/api/nppes/search/first-name/:firstName/last-name/:lastName http://161.97.126.192:7070/emr/api/nppes/search/first-name/:firstName/last-name/:lastName 200
+/emr/api/nppes/search/npi/:npi http://161.97.126.192:7070/emr/api/nppes/search/npi/:npi 200
+/emr/api/audit/clinic/:clinicId http://161.97.126.192:7070/emr/api/audit/clinic/:clinicId 200
+/emr/api/appointment/delete/:appointmentId/clinic/:clinicId http://161.97.126.192:7070/emr/api/appointment/delete/:appointmentId/clinic/:clinicId 200
+/emr/api/calendar/delete/:calendarId http://161.97.126.192:7070/emr/api/calendar/delete/:calendarId 200
+/emr/api/appointment/type http://161.97.126.192:7070/emr/api/appointment/type 200
 
 /*  /index.html   200
