@@ -54,6 +54,161 @@
   }
 }
 
+// Header avatar toggle
+.header-avatar-toggle {
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover .header-avatar-wrapper {
+    background: #F1F5F9;
+    border-color: #E2E8F0;
+  }
+}
+
+.header-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.header-avatar {
+  flex-shrink: 0;
+
+  ::ng-deep .avatar,
+  ::ng-deep .avatar-info,
+  ::ng-deep [class*="avatar"] {
+    background: #DBEAFE !important;
+    color: #1E3A5F !important;
+    width: 38px;
+    height: 38px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid #BFDBFE;
+  }
+}
+
+.header-user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.header-user-name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1E293B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.header-user-clinic {
+  font-size: 0.6875rem;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.header-caret {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+// Dropdown menu
+.dropdown-menu-user {
+  min-width: 240px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.dropdown-user-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #F8FAFC;
+}
+
+.dropdown-avatar {
+  flex-shrink: 0;
+
+  ::ng-deep .avatar,
+  ::ng-deep .avatar-info,
+  ::ng-deep [class*="avatar"] {
+    background: #DBEAFE !important;
+    color: #1E3A5F !important;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid #BFDBFE;
+  }
+}
+
+.dropdown-user-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dropdown-user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1E293B;
+  line-height: 1.3;
+}
+
+.dropdown-user-email {
+  font-size: 0.75rem;
+  color: #64748B;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-menu-item {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  color: #334155;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #F1F5F9;
+  }
+
+  svg {
+    color: #64748B;
+  }
+}
+
+.dropdown-logout {
+  color: #DC2626;
+
+  &:hover {
+    background: #FEF2F2;
+  }
+
+  svg {
+    color: #DC2626;
+  }
+}
+
 // Dark theme
 :host-context(.dark-theme) {
   .clinic-select-wrapper {
@@ -83,6 +238,76 @@
     option {
       color: #1E293B;
       background: #1E293B;
+    }
+  }
+
+  .header-avatar-toggle:hover .header-avatar-wrapper {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .header-avatar,
+  .dropdown-avatar {
+    ::ng-deep .avatar,
+    ::ng-deep .avatar-info,
+    ::ng-deep [class*="avatar"] {
+      background: rgba(147, 197, 253, 0.15) !important;
+      color: #93C5FD !important;
+      border-color: rgba(147, 197, 253, 0.25);
+    }
+  }
+
+  .header-user-name {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  .header-user-clinic {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .header-caret {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .dropdown-menu-user {
+    background: #1E293B;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .dropdown-user-header {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .dropdown-user-name {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  .dropdown-user-email {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .dropdown-menu-item {
+    color: rgba(255, 255, 255, 0.75);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    svg {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .dropdown-logout {
+    color: #F87171;
+
+    &:hover {
+      background: rgba(220, 38, 38, 0.1);
+    }
+
+    svg {
+      color: #F87171;
     }
   }
 }

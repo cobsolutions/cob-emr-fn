@@ -20,6 +20,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
   userName: string | undefined;
+  fullName: string;
+  selectedClinicName: string;
   loggedIn: string
   @Input() sidebarId: string = "sidebar1";
   selectedValue: string | null = null;
@@ -74,13 +76,17 @@ export class DefaultHeaderComponent extends HeaderComponent {
     if (result.clinics && result.clinics.length > 0) {
       this.clinics = result.clinics;
       this.selectedValue = result.clinics[0].id;
+      this.selectedClinicName = result.clinics[0].name || '';
       this.loggedInService.selectedClinic$.next(Number(result.clinics[0].id));
     }
 
-    // Handle user initials display - fallback to username or 'U' if no name
-    const lastName = result.lastName || '';
+    // Handle full name display
     const firstName = result.firstName || '';
-    const initials = this.capitalizeFirstLetter(lastName) + this.capitalizeFirstLetter(firstName);
+    const lastName = result.lastName || '';
+    this.fullName = [firstName, lastName].filter(Boolean).join(' ') || result.userName || '';
+
+    // Handle user initials display - fallback to username or 'U' if no name
+    const initials = this.capitalizeFirstLetter(firstName) + this.capitalizeFirstLetter(lastName);
     this.loggedIn = initials || (result.userName ? result.userName.charAt(0).toUpperCase() : 'U');
   }
   private capitalizeFirstLetter(str: string): string {
@@ -95,6 +101,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.ksAuthService.logout()
   }
   setSelectedClinic(event: any) {
-    this.loggedInService.selectedClinic$.next(event.target.value)
+    this.loggedInService.selectedClinic$.next(event.target.value);
+    const clinic = this.clinics.find(c => c.id == event.target.value);
+    this.selectedClinicName = clinic?.name || '';
   }
 }
