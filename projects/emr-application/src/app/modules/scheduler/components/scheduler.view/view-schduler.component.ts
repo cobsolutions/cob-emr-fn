@@ -253,25 +253,36 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   setView() {
-    this.selectedCalendars.forEach(calendars => {
-      this.enrichStatues()
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-        this.isLoading = false;
-        this.events.push(calendars.id, events)
-        this.flatEvent = this.events.getAll();
-        this.refresh.next();
-      })
-    })
+    if (this.selectedCalendars.length === 0) return;
+    this.isLoading = true;
+    this.enrichStatues();
+    const requests = this.selectedCalendars.map(calendar =>
+      this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view, this.statuses)
+    );
+    forkJoin(requests).subscribe(results => {
+      results.forEach((events, index) => {
+        this.events.push(this.selectedCalendars[index].id, events);
+      });
+      this.flatEvent = this.events.getAll();
+      this.refresh.next();
+      this.isLoading = false;
+    });
   }
 
   clickNavigate() {
-    this.selectedCalendars.forEach(calendars => {
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-        this.events.push(calendars.id, events)
-        this.flatEvent = this.events.getAll();
-        this.refresh.next();
-      })
-    })
+    if (this.selectedCalendars.length === 0) return;
+    this.isLoading = true;
+    const requests = this.selectedCalendars.map(calendar =>
+      this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view, this.statuses)
+    );
+    forkJoin(requests).subscribe(results => {
+      results.forEach((events, index) => {
+        this.events.push(this.selectedCalendars[index].id, events);
+      });
+      this.flatEvent = this.events.getAll();
+      this.refresh.next();
+      this.isLoading = false;
+    });
   }
   getCalendars(clinicId: any): Observable<any> {
     return this.calendarServiceService.getAttachedCalendars(clinicId)
