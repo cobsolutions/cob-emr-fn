@@ -100,9 +100,15 @@
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="'actions'" class="py-2">
-              <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit" cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
-                <svg cIcon name="cilPen" class="edit-icon"></svg>
-              </button>
+              <div class="actions-cell">
+                <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit" cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
+                  <svg cIcon name="cilPen" class="edit-icon"></svg>
+                </button>
+                <button cButton class="delete-btn" (click)="confirmDeleteCalendar(item)" cTooltip="Delete" cTooltipPlacement="left"
+                  *appRoleScope="'calendar-role'; requireModify: true">
+                  <svg cIcon name="cilTrash" class="delete-icon"></svg>
+                </button>
+              </div>
             </ng-container>
             <ng-container *ngSwitchDefault>
               {{ tdContent }}
@@ -146,4 +152,60 @@
     <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar"
       (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
   </c-modal-body>
+</c-modal>
+
+<!-- Delete Confirmation Modal -->
+<c-modal id="deleteCalendarConfirm" [visible]="deleteConfirmCalendar !== null" backdrop="static" alignment="center">
+  <div class="delete-modal-container">
+    <!-- Left: Icon -->
+    <div class="delete-modal-icon-section">
+      <div class="delete-icon-circle">
+        <svg cIcon name="cilTrash" class="delete-modal-icon"></svg>
+      </div>
+    </div>
+
+    <!-- Right: Content -->
+    <div class="delete-modal-content-section">
+      <div class="delete-modal-header">
+        <h3 class="delete-modal-title">Delete Calendar</h3>
+        <p class="delete-modal-subtitle">This action is permanent and cannot be undone</p>
+      </div>
+
+      <div class="delete-modal-body">
+        <!-- Calendar Info -->
+        <div class="delete-calendar-info">
+          <svg cIcon name="cilCalendar" class="delete-info-icon"></svg>
+          <div class="delete-info-details">
+            <span class="delete-info-label">Calendar</span>
+            <span class="delete-info-name">{{ deleteConfirmCalendar?.name }}</span>
+          </div>
+        </div>
+
+        <p class="delete-modal-message">
+          Are you sure you want to delete this calendar? All associated appointments and configurations will be permanently removed.
+        </p>
+
+        <!-- Inline Error -->
+        <div class="delete-error-banner" *ngIf="deleteError">
+          <div class="delete-error-content">
+            <svg cIcon name="cilWarning" class="delete-error-icon"></svg>
+            <span>{{ deleteError }}</span>
+          </div>
+          <button class="delete-error-dismiss" (click)="dismissDeleteError()">
+            <svg cIcon name="cilX" class="delete-error-dismiss-icon"></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="delete-modal-footer">
+        <button class="delete-modal-btn delete-modal-btn-cancel" (click)="cancelDelete()" [disabled]="isDeleting">
+          Cancel
+        </button>
+        <button class="delete-modal-btn delete-modal-btn-confirm" (click)="deleteCalendar()" [disabled]="isDeleting">
+          <svg cIcon name="cilTrash" class="delete-modal-btn-icon" *ngIf="!isDeleting"></svg>
+          {{ isDeleting ? 'Deleting...' : 'Delete Calendar' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </c-modal>

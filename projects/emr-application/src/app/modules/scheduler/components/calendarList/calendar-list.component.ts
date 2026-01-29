@@ -35,7 +35,10 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
   clinicId: number;
   editCalendarVisibility: boolean = false;
   selectedCalednar: Calendar;
-  loggedInUserUUID: string
+  loggedInUserUUID: string;
+  deleteConfirmCalendar: CalendarsListModel | null = null;
+  isDeleting: boolean = false;
+  deleteError: string = '';
   @ViewChild('calendarsItems') calendarsItems: SmartTableComponent;
   constructor(private calendarServiceService: CalendarServiceService
     , private loggedInService: LoggedInService
@@ -112,6 +115,35 @@ export class CalendarListComponent extends ListTemplate implements OnInit {
       this.editCalendarVisibility = false;
       this.find()
     }
+  }
+  confirmDeleteCalendar(calendar: CalendarsListModel) {
+    this.deleteError = '';
+    this.deleteConfirmCalendar = calendar;
+  }
+  cancelDelete() {
+    this.deleteConfirmCalendar = null;
+    this.deleteError = '';
+  }
+  dismissDeleteError() {
+    this.deleteError = '';
+  }
+  deleteCalendar() {
+    if (!this.deleteConfirmCalendar) return;
+    this.isDeleting = true;
+    this.deleteError = '';
+    this.calendarServiceService.deleteCalendar(this.deleteConfirmCalendar.calendarId).subscribe({
+      next: () => {
+        this.isDeleting = false;
+        this.toastrService.success('Calendar deleted successfully');
+        this.deleteConfirmCalendar = null;
+        this.deleteError = '';
+        this.find();
+      },
+      error: (err) => {
+        this.isDeleting = false;
+        this.deleteError = err?.error?.message || 'Failed to delete calendar. Please try again.';
+      }
+    });
   }
   private fillModel(): CalendarUpdateAttributeModel {
     var calendarAttachmentAttributes: CalendarAttachmentAttributesModel[] = []

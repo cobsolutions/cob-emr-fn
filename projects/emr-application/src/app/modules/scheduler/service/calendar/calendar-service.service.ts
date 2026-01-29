@@ -40,4 +40,8 @@ export class CalendarServiceService extends BasePaginationService {
     const url = this.baseUrl + "/update/calendar"
     return this.httpClient.put(`${url}`, JSON.stringify(model), { 'headers': headers })
   }
+  public deleteCalendar(calendarId: number) {
+    const url = environment.baseURL + 'calendar/delete/' + calendarId;
+    return this.httpClient.delete(url);
+  }
 }

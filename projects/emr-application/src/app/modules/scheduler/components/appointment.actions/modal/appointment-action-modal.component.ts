@@ -7,6 +7,7 @@ import { Clinic } from '../../../../patient/models/clinic';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PatientChartAccessibilityModelResponse } from '../../../model/patient.chart.accessibility.model.response';
 import { AppointmentActionsService } from '../../../service/actions/appointment-actions.service';
+import { AppointmentService } from '../../../service/appointment.service';
 import { PatientChartCheckerService } from '../../../service/patient.chart.checker/patient-chart-checker.service';
 import { AppointmentEditModalComponent } from '../../appintment.edit/modal/appointment-edit-modal.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
@@ -27,13 +28,15 @@ export class AppointmentActionModalComponent implements OnInit {
   appointmentStructure: string;
   patientChartAccessibilityModelResponse: PatientChartAccessibilityModelResponse
   isAppointmetSeries: boolean;
+  isDeleting: boolean = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Observable<Settings> }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private loggedInService: LoggedInService
     , private patientChartCheckerService: PatientChartCheckerService
     , private router: Router
     , private dialog: MatDialog
-    , private appointmentActionsService: AppointmentActionsService) { }
+    , private appointmentActionsService: AppointmentActionsService
+    , private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
     this.initAppointmentPatientInfo();
@@ -51,6 +54,21 @@ export class AppointmentActionModalComponent implements OnInit {
   public openAppointmentStatus() {
     this.data.action = 'status'
     this.dialogRef.close(this.data);
+  }
+  public deleteAppointment() {
+    this.isDeleting = true;
+    const appointmentId = this.data.event.id;
+    const clinicId = this.loggedInService.selectedClinic$.value;
+    this.appointmentService.deleteAppointmentByClinic(appointmentId, clinicId).subscribe({
+      next: () => {
+        this.isDeleting = false;
+        this.data.action = 'delete';
+        this.dialogRef.close(this.data);
+      },
+      error: () => {
+        this.isDeleting = false;
+      }
+    });
   }
   public close() {
     this.dialogRef.close(null);

@@ -186,6 +186,21 @@ export class ViewSchdulerComponent implements OnInit {
         return;
       if (result.action)
         var boundreiesScheduler: any = BoundreiesScheduler.getBoundreies(this.view, this.viewDate, this.schedulerSettingsa)
+      if (result.action === 'delete') {
+        switch (module) {
+          case 'month':
+            RefreshSchedulerEvents.refresh(this.flatEvent, result.event, AppointmentAction.REMVOE_APPOINTMENT);
+            break;
+          case 'week':
+          case 'day':
+            RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.REMVOE_APPOINTMENT);
+            break;
+        }
+        this.flatEvent = this.events.getAll();
+        this.refresh.next();
+        this.toastr.success('Appointment deleted successfully');
+        return;
+      }
       switch (module) {
         case 'month':
           if (result.action === 'edit')
