@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { from, map, of } from 'rxjs';
+import { from, map, Observable, of } from 'rxjs';
 import { User } from '../../model/user/user';
 
 @Injectable({
@@ -86,6 +86,11 @@ export class UserService {
 
   getLoggedInUser(uuid: string) {
     var url = environment.baseURL + 'loggedIn/user/cache/' + uuid
+    return this.httpClient.get(url);
+  }
+
+  findAllByOrganization(organizationId: number): Observable<any> {
+    var url = this.userUrl + '/find/all/' + organizationId;
     return this.httpClient.get(url);
   }
 }

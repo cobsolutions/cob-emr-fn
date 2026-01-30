@@ -4,7 +4,7 @@ import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
 import { User } from '../../../administration/model/user/user';
-import { DotorUserService } from '../../../administration/services/user/doctor.user/dotor-user.service';
+import { UserService } from '../../../administration/services/user/user.service';
 import { PatientFinderService } from '../../../patient/services/patient/patient-finder.service';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { AuditRecord } from '../../models/audit-record';
@@ -51,7 +51,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   constructor(
     private schedulerAuditService: SchedulerAuditService,
     private loggedInService: LoggedInService,
-    private doctorUserService: DotorUserService,
+    private userService: UserService,
     private patientFinderService: PatientFinderService
   ) {
     super();
@@ -66,8 +66,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   }
 
   get isSearchValid(): boolean {
-    return !!this.searchCriteria.performedByUuid
-      && !!this.searchCriteria.patientId
+    return !!this.searchCriteria.patientId
       && !!this.searchCriteria.searchStartDate
       && !!this.searchCriteria.searchEndDate;
   }
@@ -154,7 +153,13 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
           }
         }),
         filter(text => {
-          if (!text || text.length <= 1) {
+          if (!text || text.trim().length === 0) {
+            this.filteredUsers = [];
+            this.isUserLoading = false;
+            this.clearUser();
+            return false;
+          }
+          if (text.length <= 1) {
             this.filteredUsers = [];
             this.isUserLoading = false;
             return false;
@@ -206,8 +211,14 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
 
   private loadUsersForClinic() {
     if (!this.clinicId) return;
-    this.doctorUserService.getAllClinicalsUsersByClinic(this.clinicId).subscribe(
-      (users: User[]) => this.allUsers = users || [],
+    const organizationId = this.loggedInService.getLoggedUser().organizationId;
+    if (!organizationId) return;
+    this.userService.findAllByOrganization(organizationId).subscribe(
+      (users: any[]) => {
+        this.allUsers = (users || [])
+          .filter(u => u.clinicIds?.includes(this.clinicId))
+          .map(u => ({ ...u, accountName: u.userName } as User));
+      },
       () => this.allUsers = []
     );
   }
