@@ -37,7 +37,6 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
 
   // User autocomplete
   userSearchControl = new FormControl();
-  allUsers: User[] = [];
   filteredUsers: User[] = [];
   isUserLoading = false;
   selectedUser: any;
@@ -144,6 +143,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   }
 
   private initUserAutocomplete() {
+    const organizationId = this.loggedInService.getLoggedUser().organizationId;
     this.userSearchControl.valueChanges
       .pipe(
         tap(text => {
@@ -166,15 +166,26 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
           }
           return true;
         }),
-        debounceTime(300)
+        debounceTime(300),
+        switchMap(value => this.userService.findAllByOrganization(organizationId).pipe(
+          map((users: any[]) => {
+            const search = value.toLowerCase();
+            return (users || [])
+              .filter(u => u.clinicIds?.includes(this.clinicId) && u.userName?.toLowerCase().includes(search))
+              .map(u => ({ ...u, accountName: u.userName } as User));
+          })
+        ))
       )
-      .subscribe(value => {
-        const search = value.toLowerCase();
-        this.filteredUsers = this.allUsers.filter(u =>
-          u.accountName?.toLowerCase().includes(search)
-        );
-        this.isUserLoading = false;
-      });
+      .subscribe(
+        users => {
+          this.filteredUsers = users;
+          this.isUserLoading = false;
+        },
+        () => {
+          this.isUserLoading = false;
+          this.filteredUsers = [];
+        }
+      );
   }
 
   private initPatientAutocomplete() {
@@ -209,25 +220,10 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
       );
   }
 
-  private loadUsersForClinic() {
-    if (!this.clinicId) return;
-    const organizationId = this.loggedInService.getLoggedUser().organizationId;
-    if (!organizationId) return;
-    this.userService.findAllByOrganization(organizationId).subscribe(
-      (users: any[]) => {
-        this.allUsers = (users || [])
-          .filter(u => u.clinicIds?.includes(this.clinicId))
-          .map(u => ({ ...u, accountName: u.userName } as User));
-      },
-      () => this.allUsers = []
-    );
-  }
-
   private catchSelectedClinic() {
     this.loggedInService.selectedClinic$.subscribe(clinicId => {
       if (clinicId) {
         this.clinicId = clinicId;
-        this.loadUsersForClinic();
       }
     });
   }
