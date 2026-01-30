@@ -10,6 +10,7 @@ import { CheckboxOption } from '../common/list-checkbox-with-child/list-checkbox
 export class MedicalHistoryNComponent implements OnInit {
   medicalHistoryForm!: FormGroup;
   @Input() noteType: string;
+  @Input() showPelvicProfile = false;
   @Output() formReady = new EventEmitter<FormGroup>();
 
   get isDailyNote(): boolean {
@@ -32,6 +33,18 @@ export class MedicalHistoryNComponent implements OnInit {
   showHistoryOfFallsNO: boolean = false;
   showHistoryOfFallsdocument: boolean = false;
   showMentalStatusCognitiveFunctionAppearsImpaired: boolean = false;
+  pelvicProfileOptions: CheckboxOption[] = [
+    { label: 'Dysmenorrhea', value: 'dysmenorrhea', childType: 'text', checkboxOnly: true },
+    { label: 'Endometriosis', value: 'endometriosis', childType: 'text', checkboxOnly: true },
+    { label: 'Fibroids', value: 'fibroids', childType: 'text', checkboxOnly: true },
+    { label: 'Menopause', value: 'menopause', childType: 'text', checkboxOnly: true },
+    { label: 'Pelvic Congestion', value: 'pelvic_congestion', childType: 'text', checkboxOnly: true },
+    { label: 'PID', value: 'pid', childType: 'text', checkboxOnly: true },
+    { label: 'Prostate CA', value: 'prostate_ca', childType: 'text', checkboxOnly: true },
+    { label: 'Pudendal Neuralgia', value: 'pudendal_neuralgia', childType: 'text', checkboxOnly: true },
+    { label: 'Vestibulitis', value: 'vestibulitis', childType: 'text', checkboxOnly: true },
+    { label: 'Vulvodynia', value: 'vulvodynia', childType: 'text', checkboxOnly: true }
+  ];
   medicalHistoryOptions: CheckboxOption[] = [
     { label: 'No Known Significant PMH To Affect Treatment', value: 'no_known_significant_pmh_to_affect_treatment', childType: 'text', childPlaceholder: 'Enter details' },
     { label: "Alzheimer's", value: 'alzheimers', childType: 'text', childPlaceholder: 'Enter details' },
@@ -205,7 +218,19 @@ export class MedicalHistoryNComponent implements OnInit {
       mental_status_cognitive_function_appears_impaired_text: [''],
       unexplained_weight_loss: ['na'],
       diagnostic_testing_Imaging: [''],
-      patient_goals: []
+      patient_goals: [],
+
+      // Pelvic profile checkboxes (pre-created so patchValue can restore them)
+      pelvic_profile_dysmenorrhea_checkbox: [false],
+      pelvic_profile_endometriosis_checkbox: [false],
+      pelvic_profile_fibroids_checkbox: [false],
+      pelvic_profile_menopause_checkbox: [false],
+      pelvic_profile_pelvic_congestion_checkbox: [false],
+      pelvic_profile_pid_checkbox: [false],
+      pelvic_profile_prostate_ca_checkbox: [false],
+      pelvic_profile_pudendal_neuralgia_checkbox: [false],
+      pelvic_profile_vestibulitis_checkbox: [false],
+      pelvic_profile_vulvodynia_checkbox: [false]
     })
   }
   setupValueChangeListeners() {

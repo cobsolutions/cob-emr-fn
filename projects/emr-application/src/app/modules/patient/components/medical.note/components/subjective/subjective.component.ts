@@ -13,6 +13,7 @@ export class SubjectiveComponent implements OnInit {
   @Input() stepper!: MatStepper
   @Input() subjectiveData: any
   @Input() noteType: string
+  isPelvicProfile = false;
   subjectiveFormFields: any
   constructor(private fb: FormBuilder,
     private soapService: SoapService) {

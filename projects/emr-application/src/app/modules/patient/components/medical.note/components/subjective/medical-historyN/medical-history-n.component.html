@@ -401,7 +401,9 @@
         </div>
     </div>
     <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Medical History"
-        [options]="medicalHistoryOptions">
+        [options]="medicalHistoryOptions"
+        [extraOptions]="showPelvicProfile ? pelvicProfileOptions : []"
+        [extraTitle]="'Pelvic Profile'">
     </list-checkbox-with-child>
     <div class="form-row">
         <label class="field-label">Diagnostic Testing/Imaging:</label>

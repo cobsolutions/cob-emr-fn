@@ -8,7 +8,7 @@
                         <input cFormCheckInput type="checkbox" [formControlName]="option.checkboxControlName" />
                         <label cFormCheckLabel>{{ option.label }}</label>
                     </c-form-check>
-                    <div *ngIf="isCheckboxChecked(option.checkboxControlName)" class="child-input-container">
+                    <div *ngIf="!option.checkboxOnly && isCheckboxChecked(option.checkboxControlName)" class="child-input-container">
                         <input *ngIf="option.childType === 'text'"
                                cFormInput
                                [formControlName]="option.childControlName"

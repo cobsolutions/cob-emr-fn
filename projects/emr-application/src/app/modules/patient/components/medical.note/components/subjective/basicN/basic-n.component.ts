@@ -18,6 +18,7 @@ export class BasicNComponent implements OnInit {
   @Input() basicFormData: any;
   @Input() noteType: string;
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Output() pelvicProfileChange = new EventEmitter<boolean>();
 
   get isDailyNote(): boolean {
     return this.noteType === 'DailyNote' || this.noteType === '2';
@@ -147,6 +148,10 @@ export class BasicNComponent implements OnInit {
           to_date: null
         })
       }
+    });
+
+    this.basicForm.get('pelvic_speech_profile')?.valueChanges.subscribe(value => {
+      this.pelvicProfileChange.emit(value === 'pelvic');
     });
   }
 

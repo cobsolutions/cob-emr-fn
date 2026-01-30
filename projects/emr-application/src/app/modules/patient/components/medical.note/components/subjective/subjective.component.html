@@ -19,7 +19,8 @@
                 [fields]="subjectiveFormFields['Basic Information']"
                 [basicFormData]="subjectiveData?.basic"></basic-information> -->
             <subjective-basic-n (formReady)="setChildForm('basic', $event)"
-                [basicFormData]="subjectiveData?.basic" [noteType]="noteType"></subjective-basic-n>
+                [basicFormData]="subjectiveData?.basic" [noteType]="noteType"
+                (pelvicProfileChange)="isPelvicProfile = $event"></subjective-basic-n>
         </c-card-body>
     </c-card>
     <c-card class="mb-3 enhanced-card">
@@ -116,7 +117,7 @@
                 [fields]="subjectiveFormFields['Medical History']"
                 [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history> -->
             <subjective-medical-history-n (formReady)="setChildForm('medicalHistory', $event)"
-                [noteType]="noteType">
+                [noteType]="noteType" [showPelvicProfile]="isPelvicProfile">
             </subjective-medical-history-n>
         </c-card-body>
     </c-card>

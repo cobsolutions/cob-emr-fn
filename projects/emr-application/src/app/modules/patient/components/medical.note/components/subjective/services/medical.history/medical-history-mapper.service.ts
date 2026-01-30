@@ -13,6 +13,19 @@ import { HistoryFall } from '../../models/medical.history/history.falls';
 })
 export class MedicalHistoryMapperService {
 
+  private pelvicProfileFields = [
+    'Dysmenorrhea',
+    'Endometriosis',
+    'Fibroids',
+    'Menopause',
+    'PelvicCongestion',
+    'Pid',
+    'ProstateCa',
+    'PudendalNeuralgia',
+    'Vestibulitis',
+    'Vulvodynia'
+  ];
+
   constructor() { }
 
   /**
@@ -175,6 +188,20 @@ export class MedicalHistoryMapperService {
         medicalHistoryDiseaseList.push({
           diseaseName: field,
           diseaseDescription: formGroup.get(textKey)?.value
+        });
+      }
+    });
+
+    // Pelvic profile items use prefix "pelvic_profile_" and have no description
+    this.pelvicProfileFields.forEach(field => {
+      const snakeCaseField = this.toSnakeCase(field).substring(1);
+      const checkboxKey = `pelvic_profile_${snakeCaseField}_checkbox`;
+      const isChecked = formGroup.get(checkboxKey)?.value;
+
+      if (isChecked) {
+        medicalHistoryDiseaseList.push({
+          diseaseName: field,
+          diseaseDescription: null
         });
       }
     });
@@ -355,8 +382,12 @@ export class MedicalHistoryMapperService {
       dto.medicalHistoryDisease.forEach(disease => {
         if (disease.diseaseName) {
           const snakeCaseField = this.toSnakeCase(disease.diseaseName).substring(1);
-          mapped[`medical_history_${snakeCaseField}_checkbox`] = true;
-          mapped[`medical_history_${snakeCaseField}_text`] = disease.diseaseDescription;
+          if (this.pelvicProfileFields.includes(disease.diseaseName)) {
+            mapped[`pelvic_profile_${snakeCaseField}_checkbox`] = true;
+          } else {
+            mapped[`medical_history_${snakeCaseField}_checkbox`] = true;
+            mapped[`medical_history_${snakeCaseField}_text`] = disease.diseaseDescription;
+          }
         }
       });
     }
