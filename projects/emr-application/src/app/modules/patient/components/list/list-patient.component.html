@@ -1,5 +1,4 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-
 <!-- Page Header Section -->
 <div class="page-header">
   <div class="page-header-content">
@@ -13,91 +12,165 @@
   </div>
 </div>
 
-<!-- Patient Table Card -->
-<ng-container *ngIf="props$ | async as props">
-  <c-card class="patient-card">
-    <div class="card-header-custom">
-      <div class="card-header-title">
-        <svg cIcon name="cilList" class="card-icon"></svg>
-        <span>All Patients</span>
-      </div>
-      <span class="card-badge">
-        {{ (patient$ | async)?.length || 0 }} Records
-      </span>
+<!-- Search Panel -->
+<c-card class="search-panel-card">
+  <div class="search-panel-header" (click)="toggleSearchPanel()">
+    <div class="search-panel-title">
+      <svg cIcon name="cilSearch" class="search-panel-icon"></svg>
+      <span>Search Patients</span>
     </div>
-    <c-card-body class="card-body-custom">
-      <c-smart-table
-        [columnSorter]="{ resetable: true }"
-        [columns]="columns"
-        [items]="(patient$ | async) ?? []"
-        [itemsPerPage]="props.itemsPerPage"
-        (itemsPerPageChange)="handleItemsPerPageChange($event)"
-        [itemsPerPageOptions]="[5,10,20]"
-        [itemsPerPageSelect]="true"
-        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
-        [columnFilterValue]="props.columnFilterValue ?? []"
-        [sorterValue]="props.sorterValue"
-        [tableBodyProps]="{ align: 'middle' }"
-        (sorterValueChange)="handleSorterValueChange($event)"
-        header>
-        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-          <td>
-            <ng-container [ngSwitch]="columnName">
-              <ng-container *ngSwitchCase="'patientName'">
-                <button cButton class="patient-name-link" (click)="chart(item.id)">
-                  <svg cIcon name="cilUser" class="patient-icon"></svg>
-                  {{item.lastName + ', ' + item.firstName}}
-                </button>
-              </ng-container>
-              <ng-container *ngSwitchCase="'gender'">
-                <span class="gender-badge" [ngClass]="item.gender?.toLowerCase()">
-                  {{item.gender}}
-                </span>
-              </ng-container>
-              <ng-container *ngSwitchCase="'email'">
-                <span class="contact-info">
-                  <svg cIcon name="cilEnvelopeClosed" class="contact-icon"></svg>
-                  {{item.contacts[0]?.email || '-'}}
-                </span>
-              </ng-container>
-              <ng-container *ngSwitchCase="'phone'">
-                <span class="contact-info">
-                  <svg cIcon name="cilPhone" class="contact-icon"></svg>
-                  {{item.contacts[0]?.phoneNumber || '-'}}
-                </span>
-              </ng-container>
-              <ng-container *ngSwitchCase="'dateOfBirth'">
-                <span class="dob-info">
-                  {{item.birthDate | date :'MM/dd/yyyy'}}
-                </span>
-              </ng-container>
-              <ng-container *ngSwitchCase="'actions'">
-                <div class="action-buttons">
-                  <button *appRoleScope="'emr-patient-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit Patient">
-                    <svg cIcon name="cilPen" class="action-icon"></svg>
-                  </button>
-                </div>
-              </ng-container>
-
-              <ng-container *ngSwitchDefault>
-                {{ tdContent }}
-              </ng-container>
-            </ng-container>
-          </td>
-        </ng-template>
-      </c-smart-table>
-
-      <!-- Pagination -->
-      <div class="pagination-container">
-        <c-smart-pagination
-          *ngIf="props.totalPages"
-          [activePage]="props.activePage"
-          (activePageChange)="handleActivePageChange($event)"
-          [pages]="props.totalPages">
-        </c-smart-pagination>
+    <svg cIcon [name]="searchPanelOpen ? 'cilChevronTop' : 'cilChevronBottom'" class="search-toggle-icon"></svg>
+  </div>
+  <c-card-body *ngIf="searchPanelOpen" class="search-panel-body">
+    <div class="search-grid">
+      <!-- Row 1: First Name, Last Name, Phone -->
+      <div class="search-field">
+        <label class="search-label">First Name</label>
+        <input cFormControl sizing="sm" placeholder="Enter first name"
+               [(ngModel)]="searchFirstName" (keyup.enter)="search()" />
       </div>
-    </c-card-body>
-  </c-card>
+      <div class="search-field">
+        <label class="search-label">Last Name</label>
+        <input cFormControl sizing="sm" placeholder="Enter last name"
+               [(ngModel)]="searchLastName" (keyup.enter)="search()" />
+      </div>
+      <div class="search-field">
+        <label class="search-label">Phone Number</label>
+        <div class="phone-input-wrapper">
+          <svg cIcon name="cilPhone" class="phone-input-icon"></svg>
+          <input cFormControl sizing="sm" placeholder="(XXX) XXX-XXXX"
+                 [(ngModel)]="searchPhone" (input)="onPhoneInput()"
+                 (keyup.enter)="search()" maxlength="14" class="phone-input" />
+        </div>
+      </div>
+
+      <!-- Row 2: DOB -->
+      <div class="search-field">
+        <label class="search-label">Date of Birth</label>
+        <c-date-picker cFormControl closeOnSelect size="sm"
+                       placeholder="MM/DD/YYYY"
+                       [(date)]="searchDateOfBirth"></c-date-picker>
+      </div>
+      <!-- Row 3: Search Type, Buttons -->
+      <div class="search-field">
+        <label class="search-label">Search Type</label>
+        <select cFormControl cSelect sizing="sm" [(ngModel)]="searchType">
+          <option value="ALL_CLINIC_PATIENT">All Clinic Patients</option>
+          <option value="ALL_CLINIC_PATIENTS">All Company Patients</option>
+        </select>
+      </div>
+      <div class="search-field search-actions">
+        <label class="search-label">&nbsp;</label>
+        <div class="search-buttons">
+          <button cButton color="dark" size="sm" (click)="search()" [disabled]="isSearchEmpty"
+                  [class.search-btn-disabled]="isSearchEmpty">
+            <svg cIcon name="cilSearch" class="btn-icon"></svg> Search
+          </button>
+          <button cButton color="secondary" variant="outline" size="sm" (click)="clearSearch()">
+            <svg cIcon name="cilReload" class="btn-icon"></svg> Clear
+          </button>
+        </div>
+      </div>
+    </div>
+  </c-card-body>
+</c-card>
+
+<!-- Empty State: Before Search -->
+<div class="empty-state-card" *ngIf="!hasSearched">
+  <div class="empty-state-content">
+    <svg cIcon name="cilSearch" class="empty-state-icon"></svg>
+    <h3 class="empty-state-title">Search for Patients</h3>
+    <p class="empty-state-text">Use the search panel above to find patients. Enter your criteria and click Search to view results.</p>
+  </div>
+</div>
+
+<!-- Patient Table Card (only after search) -->
+<ng-container *ngIf="hasSearched">
+  <ng-container *ngIf="props$ | async as props">
+    <c-card class="patient-card">
+      <div class="card-header-custom">
+        <div class="card-header-title">
+          <svg cIcon name="cilList" class="card-icon"></svg>
+          <span>All Patients</span>
+        </div>
+        <span class="card-badge">
+          {{ (patient$ | async)?.length || 0 }} Records
+        </span>
+      </div>
+      <c-card-body class="card-body-custom">
+        <c-smart-table
+          [columnSorter]="{ resetable: true }"
+          [columns]="columns"
+          [items]="(patient$ | async) ?? []"
+          [itemsPerPage]="props.itemsPerPage"
+          (itemsPerPageChange)="handleItemsPerPageChange($event)"
+          [itemsPerPageOptions]="[5,10,20]"
+          [itemsPerPageSelect]="true"
+          [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
+          [columnFilterValue]="props.columnFilterValue ?? []"
+          [sorterValue]="props.sorterValue"
+          [tableBodyProps]="{ align: 'middle' }"
+          (sorterValueChange)="handleSorterValueChange($event)"
+          header>
+          <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+            <td>
+              <ng-container [ngSwitch]="columnName">
+                <ng-container *ngSwitchCase="'patientName'">
+                  <button cButton class="patient-name-link" (click)="chart(item.id)">
+                    <svg cIcon name="cilUser" class="patient-icon"></svg>
+                    {{item.lastName + ', ' + item.firstName}}
+                  </button>
+                </ng-container>
+                <ng-container *ngSwitchCase="'gender'">
+                  <span class="gender-badge" [ngClass]="item.gender?.toLowerCase()">
+                    {{item.gender}}
+                  </span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'email'">
+                  <span class="contact-info">
+                    <svg cIcon name="cilEnvelopeClosed" class="contact-icon"></svg>
+                    {{item.contacts[0]?.email || '-'}}
+                  </span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'phone'">
+                  <span class="contact-info">
+                    <svg cIcon name="cilPhone" class="contact-icon"></svg>
+                    {{item.contacts[0]?.phoneNumber || '-'}}
+                  </span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'dateOfBirth'">
+                  <span class="dob-info">
+                    {{item.birthDate | date :'MM/dd/yyyy'}}
+                  </span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'actions'">
+                  <div class="action-buttons">
+                    <button *appRoleScope="'emr-patient-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit Patient">
+                      <svg cIcon name="cilPen" class="action-icon"></svg>
+                    </button>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                  {{ tdContent }}
+                </ng-container>
+              </ng-container>
+            </td>
+          </ng-template>
+        </c-smart-table>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <c-smart-pagination
+            *ngIf="props.totalPages"
+            [activePage]="props.activePage"
+            (activePageChange)="handleActivePageChange($event)"
+            [pages]="props.totalPages">
+          </c-smart-pagination>
+        </div>
+      </c-card-body>
+    </c-card>
+  </ng-container>
 </ng-container>
 
 <!-- Error Alert -->

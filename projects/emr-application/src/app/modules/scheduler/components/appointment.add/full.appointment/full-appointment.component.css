@@ -119,7 +119,7 @@
   border: 1px solid #e2e8f0 !important;
   border-radius: 0.5rem !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow: visible;
   transition: all 0.2s ease;
 }
 
@@ -134,6 +134,7 @@
   justify-content: space-between;
   padding: 0.625rem 1rem;
   background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem 0.5rem 0 0;
   transition: all 0.2s ease;
 }
 
@@ -203,6 +204,7 @@
 .card-body-custom {
   padding: 1rem;
   background: #ffffff;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 /* --- Form Elements --- */
@@ -247,6 +249,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  position: relative;
+  z-index: 20;
 }
 
 .datetime-group {
@@ -368,6 +372,15 @@
 :host ::ng-deep c-time-picker .form-control:focus {
   border-color: #334155;
   box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+}
+
+:host ::ng-deep c-date-picker .dropdown-menu,
+:host ::ng-deep c-date-picker .datepicker-dropdown,
+:host ::ng-deep c-time-picker .dropdown-menu,
+:host ::ng-deep c-time-picker .time-picker-dropdown,
+:host ::ng-deep .datepicker.show,
+:host ::ng-deep .timepicker.show {
+  z-index: 1050;
 }
 
 /* --- Responsive Design --- */

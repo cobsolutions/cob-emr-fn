@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
@@ -10,6 +11,7 @@ import { LoggedInUser } from '../../../modules/security/model/loggedin.user';
 
 import { KcAuthService } from '../../../modules/security/service/kc-auth.service';
 import { LoggedInService } from '../../../modules/security/service/loggedIn/logged-in.service';
+import { PatientFinderPaginationService } from '../../../modules/patient/services/patient/patient-finder-pagination.service';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +27,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   loggedIn: string
   @Input() sidebarId: string = "sidebar1";
   selectedValue: string | null = null;
+  headerSearchName = '';
   public newMessages = new Array(4)
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
@@ -35,7 +38,9 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   constructor(private classToggler: ClassToggleService
     , private ksAuthService: KcAuthService
-    , private loggedInService: LoggedInService) {
+    , private loggedInService: LoggedInService
+    , private router: Router
+    , private patientFinderPaginationService: PatientFinderPaginationService) {
     super();
   }
   ngOnInit(): void {
@@ -104,5 +109,22 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.loggedInService.selectedClinic$.next(event.target.value);
     const clinic = this.clinics.find(c => c.id == event.target.value);
     this.selectedClinicName = clinic?.name || '';
+  }
+
+  searchPatient() {
+    const name = this.headerSearchName.trim();
+    if (!name) return;
+    const clinicId = this.loggedInService.selectedClinic$.value;
+    if (!clinicId) return;
+    this.patientFinderPaginationService.searchByName(name, clinicId).subscribe({
+      next: (response: any) => {
+        this.patientFinderPaginationService.headerSearchResults$.next(response);
+        this.headerSearchName = '';
+        this.router.navigateByUrl('/emr/patient/list');
+      },
+      error: (err) => {
+        console.error('Header patient search failed:', err);
+      }
+    });
   }
 }

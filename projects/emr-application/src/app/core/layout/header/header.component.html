@@ -33,6 +33,19 @@
 
     <!-- todo: header nav dropdown menus  -->
 
+    <div class="header-patient-search">
+      <div class="header-search-wrapper">
+        <svg cIcon name="cilSearch" class="header-search-icon"></svg>
+        <input type="text" class="header-search-input"
+               placeholder="Search patient by name..."
+               [(ngModel)]="headerSearchName"
+               (keyup.enter)="searchPatient()" />
+        <button class="header-search-btn" (click)="searchPatient()" [disabled]="!headerSearchName.trim()">
+          Search
+        </button>
+      </div>
+    </div>
+
     <c-header-nav class="ms-3 me-sm-4">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </c-header-nav>

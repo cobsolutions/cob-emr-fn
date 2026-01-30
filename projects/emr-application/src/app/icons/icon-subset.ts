@@ -129,7 +129,7 @@ import {
   ,cilChevronCircleDownAlt
   ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
-  cilBan, cilChevronBottom,
+  cilBan, cilChevronBottom, cilChevronTop,
   cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilFingerprint, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare,
   cilSwapHorizontal, cilExternalLink, cilLoopCircular, cilTag
 } from '@coreui/icons';
@@ -281,7 +281,7 @@ export const iconSubset = {
   cilFax,
   cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight,
   cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
-  cilBan, cilChevronBottom,
+  cilBan, cilChevronBottom, cilChevronTop,
   cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilFingerprint, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare,
   cilSwapHorizontal, cilExternalLink, cilLoopCircular, cilTag
 };
