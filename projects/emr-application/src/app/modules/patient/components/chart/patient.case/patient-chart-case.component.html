@@ -186,7 +186,6 @@
                             <thead>
                                 <tr>
                                     <th class="th-record">Record Type</th>
-                                    <th class="th-date">Created Date</th>
                                     <th class="th-dos">Date of Service</th>
                                     <th class="th-actions">Actions</th>
                                 </tr>
@@ -203,12 +202,6 @@
                                         }">
                                             {{item.status}}
                                         </span>
-                                    </td>
-                                    <td>
-                                        <div class="date-cell">
-                                            <svg cIcon name="cilCalendar" class="date-icon"></svg>
-                                            <span>{{item.date | date:'MMM d, y, h:mm a'}}</span>
-                                        </div>
                                     </td>
                                     <td>
                                         <div class="date-cell" *ngIf="item.dos; else noDos">
