@@ -14,9 +14,6 @@ export class PatientFinderPaginationService extends BasePaginationService {
 
   private baseUrl = environment.baseURL + 'patient'
 
-  // Shared subject for header search results
-  headerSearchResults$ = new BehaviorSubject<any>(null);
-
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
   searchByName(name: string, clinicId: number): Observable<any> {

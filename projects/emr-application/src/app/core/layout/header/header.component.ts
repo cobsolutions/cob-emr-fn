@@ -11,7 +11,6 @@ import { LoggedInUser } from '../../../modules/security/model/loggedin.user';
 
 import { KcAuthService } from '../../../modules/security/service/kc-auth.service';
 import { LoggedInService } from '../../../modules/security/service/loggedIn/logged-in.service';
-import { PatientFinderPaginationService } from '../../../modules/patient/services/patient/patient-finder-pagination.service';
 
 @Component({
   selector: 'app-header',
@@ -39,8 +38,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   constructor(private classToggler: ClassToggleService
     , private ksAuthService: KcAuthService
     , private loggedInService: LoggedInService
-    , private router: Router
-    , private patientFinderPaginationService: PatientFinderPaginationService) {
+    , private router: Router) {
     super();
   }
   ngOnInit(): void {
@@ -114,17 +112,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   searchPatient() {
     const name = this.headerSearchName.trim();
     if (!name) return;
-    const clinicId = this.loggedInService.selectedClinic$.value;
-    if (!clinicId) return;
-    this.patientFinderPaginationService.searchByName(name, clinicId).subscribe({
-      next: (response: any) => {
-        this.patientFinderPaginationService.headerSearchResults$.next(response);
-        this.headerSearchName = '';
-        this.router.navigateByUrl('/emr/patient/list');
-      },
-      error: (err) => {
-        console.error('Header patient search failed:', err);
-      }
-    });
+    this.router.navigate(['/emr/patient/list'], { queryParams: { name } });
+    this.headerSearchName = '';
   }
 }
