@@ -262,7 +262,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       patientCaseId: this.case.uuid,
       noteType: 'INITIAL_EXAM',
       providerId: this.loggedInService.getLoggedUser().uuid,
-      encounterDate: moment().toDate()
+      encounterDate: moment().toDate(),
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
@@ -284,7 +285,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       patientCaseId: this.case.uuid,
       noteType: 'DAILY',
       providerId: this.loggedInService.getLoggedUser().uuid,
-      encounterDate: moment().toDate()
+      encounterDate: moment().toDate(),
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.dailyNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
@@ -305,7 +307,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       patientCaseId: this.case.uuid,
       noteType: 'PROGRESS',
       providerId: this.loggedInService.getLoggedUser().uuid,
-      encounterDate: moment().toDate()
+      encounterDate: moment().toDate(),
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.progressNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
@@ -323,7 +326,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
   private createQuickDischargeNote() {
     var request = {
-      patientCaseId: this.case.uuid
+      patientCaseId: this.case.uuid,
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.quickDischargeNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
@@ -344,7 +348,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       patientCaseId: this.case.uuid,
       noteType: 'DISCHARGE',
       providerId: this.loggedInService.getLoggedUser().uuid,
-      encounterDate: moment().toDate()
+      encounterDate: moment().toDate(),
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.dischargeNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
