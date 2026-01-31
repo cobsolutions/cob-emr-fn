@@ -219,5 +219,8 @@
 /emr/api/calendar/delete/:calendarId http://161.97.126.192:7070/emr/api/calendar/delete/:calendarId 200
 /emr/api/appointment/type http://161.97.126.192:7070/emr/api/appointment/type 200
 /emr/api/user/find/all/:organizationId http://161.97.126.192:7070/emr/api/user/find/all/:organizationId 200
+/emr/api/patient/search/name/:name/clinic-id/:clinicId http://161.97.126.192:7070/emr/api/patient/search/name/:name/clinic-id/:clinicId 200
+/emr/api/patient/search/clinic-id/:clinicId/organization-id/:organizationId http://161.97.126.192:7070/emr/api/patient/search/clinic-id/:clinicId/organization-id/:organizationId 200
+/emr/api/audit/clinic/:clinicId/entity/:entityName/:entityId http://161.97.126.192:7070/emr/api/audit/clinic/:clinicId/entity/:entityName/:entityId 200
 
 /*  /index.html   200
