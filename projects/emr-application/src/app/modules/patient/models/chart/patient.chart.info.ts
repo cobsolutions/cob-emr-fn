@@ -8,4 +8,6 @@ export interface PatientChartInfo {
     email:string
     phone:string
     insurance: string;
+    emrId: string;
+    patientStatus: string;
 }

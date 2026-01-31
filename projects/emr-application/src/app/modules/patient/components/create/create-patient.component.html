@@ -97,6 +97,33 @@
         </c-card-body>
       </c-card>
 
+      <!-- Patient Status (Edit Mode Only) -->
+      <c-card class="section-card" *ngIf="selectedPatient">
+        <div class="card-header-custom">
+          <div class="card-header-title">
+            <svg cIcon name="cilShieldAlt" class="card-icon"></svg>
+            <span>Patient Status</span>
+          </div>
+        </div>
+        <c-card-body class="card-body-custom">
+          <div class="status-field-row">
+            <div class="status-field">
+              <label cLabel class="status-label">Current Status</label>
+              <select cFormControl cSelect [(ngModel)]="patient.patientStatus" name="patientStatus">
+                <option value="" disabled>Select Status</option>
+                <option *ngFor="let status of patientStatuses" [value]="status">{{ status }}</option>
+              </select>
+            </div>
+            <div class="status-preview" *ngIf="patient.patientStatus">
+              <span class="status-badge"
+                    [ngClass]="patient.patientStatus?.toLowerCase()">
+                {{ patient.patientStatus }}
+              </span>
+            </div>
+          </div>
+        </c-card-body>
+      </c-card>
+
       <!-- Identification Information -->
       <c-card class="section-card">
         <div class="card-header-custom optional">

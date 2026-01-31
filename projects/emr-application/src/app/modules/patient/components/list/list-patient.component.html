@@ -44,12 +44,27 @@
         </div>
       </div>
 
-      <!-- Row 2: DOB -->
+      <!-- Row 1b: EMR ID -->
+      <div class="search-field">
+        <label class="search-label">EMR ID</label>
+        <input cFormControl sizing="sm" type="number" placeholder="Enter EMR ID"
+               [(ngModel)]="searchEmrId" (keyup.enter)="search()" maxlength="8"
+               oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8)" />
+      </div>
+
+      <!-- Row 2: DOB, Patient Status -->
       <div class="search-field">
         <label class="search-label">Date of Birth</label>
         <c-date-picker cFormControl closeOnSelect size="sm"
                        placeholder="MM/DD/YYYY"
                        [(date)]="searchDateOfBirth"></c-date-picker>
+      </div>
+      <div class="search-field">
+        <label class="search-label">Patient Status</label>
+        <select cFormControl cSelect sizing="sm" [(ngModel)]="searchPatientStatus">
+          <option value="">All</option>
+          <option *ngFor="let status of patientStatuses" [value]="status">{{ status }}</option>
+        </select>
       </div>
       <!-- Row 3: Search Type, Buttons -->
       <div class="search-field">

@@ -29,6 +29,9 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
   searchPhone = '';
   searchType = 'ALL_CLINIC_PATIENT';
   searchDateOfBirth: Date | null = null;
+  searchEmrId: number | null = null;
+  searchPatientStatus = '';
+  patientStatuses: string[] = ['Active', 'Inactive', 'Discharged', 'Pending'];
 
   // Search body stream — null means no search triggered yet
   searchBody$ = new BehaviorSubject<any>(null);
@@ -122,7 +125,9 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
     return !this.searchFirstName.trim()
       && !this.searchLastName.trim()
       && !this.searchPhone.replace(/\D/g, '')
-      && this.searchDateOfBirth === null;
+      && this.searchDateOfBirth === null
+      && this.searchEmrId === null
+      && !this.searchPatientStatus;
   }
 
   search() {
@@ -134,7 +139,9 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
       firstName: this.searchFirstName.trim() || null,
       lastName: this.searchLastName.trim() || null,
       phoneNumber: phoneDigits || null,
-      dateOfBirth: this.searchDateOfBirth ? this.searchDateOfBirth.getTime() : null
+      dateOfBirth: this.searchDateOfBirth ? this.searchDateOfBirth.getTime() : null,
+      emrId: this.searchEmrId ?? null,
+      patientStatus: this.searchPatientStatus || null
     };
 
     this.hasSearched = true;
@@ -148,6 +155,8 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
     this.searchPhone = '';
     this.searchType = 'ALL_CLINIC_PATIENT';
     this.searchDateOfBirth = null;
+    this.searchEmrId = null;
+    this.searchPatientStatus = '';
     this.hasSearched = false;
     this.searchBody$.next(null);
     this.totalItems$.next(0);

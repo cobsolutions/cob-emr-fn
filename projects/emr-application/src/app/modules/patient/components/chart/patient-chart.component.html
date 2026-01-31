@@ -7,7 +7,18 @@
         <svg cIcon name="cilUser" class="page-icon"></svg>
         Patient Chart
       </h2>
-      <p class="page-subtitle">{{ patientChartInfo.name }}</p>
+      <div class="page-subtitle-row">
+        <span class="page-subtitle">{{ patientChartInfo.name }}</span>
+        <span *ngIf="patientChartInfo.emrId" class="header-emr-badge">
+          <span class="header-emr-label">EMR</span>
+          <span class="header-emr-value">{{ patientChartInfo.emrId }}</span>
+        </span>
+        <span class="header-status-badge"
+              [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+          <span class="header-status-dot"></span>
+          {{ patientChartInfo.patientStatus || 'Unknown' }}
+        </span>
+      </div>
     </div>
     <div class="header-actions">
       <a [routerLink]="['/emr/patient/edit/patientId', patientId]" class="edit-btn">
@@ -28,9 +39,10 @@
         <svg cIcon name="cilUser" class="card-icon"></svg>
         <span>Patient Information</span>
       </div>
-      <span class="card-status active">
-        <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
-        Active
+      <span class="card-status"
+            [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+        <span class="card-status-dot"></span>
+        {{ patientChartInfo.patientStatus || 'Unknown' }}
       </span>
     </div>
     <c-card-body class="card-body-custom">
@@ -40,7 +52,18 @@
           <patient-avatar [gender]="patientChartInfo.gender" [size]="80" [initials]="patientChartInfo.name">
           </patient-avatar>
           <div class="patient-name-group">
-            <div class="patient-name">{{ patientChartInfo.name }}</div>
+            <div class="patient-name-row">
+              <div class="patient-name">{{ patientChartInfo.name }}</div>
+              <div *ngIf="patientChartInfo.emrId" class="emr-badge">
+                <span class="emr-badge-label">EMR</span>
+                <span class="emr-badge-value">{{ patientChartInfo.emrId }}</span>
+              </div>
+              <div class="status-pill"
+                   [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+                <span class="status-pill-dot"></span>
+                <span class="status-pill-text">{{ patientChartInfo.patientStatus || 'Unknown' }}</span>
+              </div>
+            </div>
             <div class="patient-demographics">
               <span>DOB: <strong>{{ patientChartInfo.dateOfBirth | date:'MM/dd/yyyy' }}</strong></span>
               <span class="sep">|</span>
@@ -51,6 +74,30 @@
 
         <!-- Info Cards Grid -->
         <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon emr-id-icon"><svg cIcon name="cilFingerprint"></svg></div>
+            <div class="info-details">
+              <div class="info-label">EMR ID</div>
+              <div class="info-value emr-id-value">{{ patientChartInfo.emrId || '—' }}</div>
+            </div>
+          </div>
+
+          <div class="info-card status-card"
+               [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+            <div class="info-icon status-bg"
+                 [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+              <svg cIcon [name]="patientChartInfo.patientStatus === 'Active' ? 'cilCheckCircle' : patientChartInfo.patientStatus === 'Pending' ? 'cilClock' : patientChartInfo.patientStatus === 'Discharged' ? 'cilAccountLogout' : 'cilBan'"></svg>
+            </div>
+            <div class="info-details">
+              <div class="info-label">Status</div>
+              <div class="info-value">
+                <span class="status-text" [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+                  {{ patientChartInfo.patientStatus || '—' }}
+                </span>
+              </div>
+            </div>
+          </div>
+
           <div class="info-card">
             <div class="info-icon"><svg cIcon name="cilUser"></svg></div>
             <div class="info-details">

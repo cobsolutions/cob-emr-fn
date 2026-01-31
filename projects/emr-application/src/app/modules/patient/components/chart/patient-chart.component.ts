@@ -31,7 +31,9 @@ export class PatientChartComponent implements OnInit, OnDestroy {
     address: [],
     email: '',
     phone: '',
-    insurance: ''
+    insurance: '',
+    emrId: '',
+    patientStatus: ''
   };
   patientCases: PatientCase[];
   patientId: number;
@@ -107,6 +109,8 @@ export class PatientChartComponent implements OnInit, OnDestroy {
     }
     this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
     this.patientChartInfo.insurance = patient.patientInsuranceModels?.[0]?.insuranceCompany?.name || '';
+    this.patientChartInfo.emrId = patient.emrId || '';
+    this.patientChartInfo.patientStatus = patient.patientStatus || '';
   }
   selectTab(index: number) {
     this.selectedIndex = index;

@@ -81,6 +81,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit, DoCheck {
     cases: [],
     patientInsuranceModels: []
   };
+  patientStatuses: string[] = ['Active', 'Inactive', 'Discharged', 'Pending'];
   componentRole: string[] = [Role.PATIENT_ROLE ];
   constructor(private toastr: ToastrService,
     private patientCreationService: PatientCreationService,

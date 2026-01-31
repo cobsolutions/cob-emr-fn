@@ -41,6 +41,8 @@ export interface Patient {
     clinicsId?: number[];
     clinicModels?: Clinic[]
     cases?: PatientCase[];
+    emrId?:string,
+    patientStatus?:string
     patientInsuranceModels?: PatientInsurance[];
 
 }
