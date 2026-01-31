@@ -87,6 +87,10 @@ export class AppointmentActionModalComponent implements OnInit {
     this.appointmentType = this.data.event.meta.type
     this.appointmentStructure = this.data.event.meta.structure
   }
+  showAppointmentHistory() {
+    this.data.action = 'history';
+    this.dialogRef.close(this.data);
+  }
   redirectToPatientChart() {
     this.router.navigate([]).then((result) => {
       window.open('emr/patient/chart/patientId/' + this.patientId, '_blank');

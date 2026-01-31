@@ -108,6 +108,12 @@
           </span>
         </div>
       </div>
+      <div class="history-link-row" *ngIf="appointmentStructure === 'Full'">
+        <a class="history-link" (click)="showAppointmentHistory()">
+          <svg cIcon name="cilHistory" class="history-link-icon"></svg>
+          Show Appointment History
+        </a>
+      </div>
     </div>
   </div>
 

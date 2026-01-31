@@ -18,7 +18,7 @@
 </div>
 
 <!-- Search Panel -->
-<div class="search-panel">
+<div class="search-panel" *ngIf="!isEntityMode">
   <div class="search-panel-header" (click)="searchCollapsed = !searchCollapsed">
     <div class="search-header-title">
       <svg cIcon name="cilSearch" class="search-icon"></svg>
@@ -115,7 +115,7 @@
 </div>
 
 <!-- Initial State - Before Search -->
-<div class="empty-state" *ngIf="!searched && !isSearching">
+<div class="empty-state" *ngIf="!searched && !isSearching && !isEntityMode">
   <svg cIcon name="cilSearch" class="empty-state-icon"></svg>
   <h4 class="empty-state-title">Search Scheduler History</h4>
   <p class="empty-state-text">Select a user, patient, and date range above, then click Search to view audit records.</p>

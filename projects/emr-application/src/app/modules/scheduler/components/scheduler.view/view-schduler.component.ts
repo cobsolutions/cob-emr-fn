@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import {
   CalendarEvent, CalendarEventTimesChangedEvent,
   CalendarUtils,
@@ -77,7 +78,8 @@ export class ViewSchdulerComponent implements OnInit {
     private handleDragableAppointmentService: HandleDragableAppointmentService,
     private handleEditableAppointmentService: HandleEditableAppointmentService,
     private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private router: Router
   ) {
     this.handleDragableAppointmentService.refresh = this.refresh;
     this.handleDragableAppointmentService.dialog = this.dialog
@@ -187,6 +189,12 @@ export class ViewSchdulerComponent implements OnInit {
         return;
       if (result.action)
         var boundreiesScheduler: any = BoundreiesScheduler.getBoundreies(this.view, this.viewDate, this.schedulerSettingsa)
+      if (result.action === 'history') {
+        this.router.navigate(['emr', 'scheduler', 'history'], {
+          queryParams: { entityName: 'Appointment', entityId: result.event.id }
+        });
+        return;
+      }
       if (result.action === 'delete') {
         switch (module) {
           case 'month':

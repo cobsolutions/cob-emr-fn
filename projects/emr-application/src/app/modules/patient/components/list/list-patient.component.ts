@@ -35,6 +35,7 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
 
   // Search body stream — null means no search triggered yet
   searchBody$ = new BehaviorSubject<any>(null);
+  private searchPatientsPipeline$!: Observable<Patient[]>;
 
   constructor(
     private router: Router,
@@ -50,7 +51,7 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
     this.initListComponent();
 
     // Patient data only flows when searchBody$ emits a non-null value
-    this.patient$ = this.patientFinderPaginationService.searchPatients(this.apiParams$, this.searchBody$).pipe(
+    this.searchPatientsPipeline$ = this.patientFinderPaginationService.searchPatients(this.apiParams$, this.searchBody$).pipe(
       retry({
         delay: (error) => {
           console.warn('Retry: ', error);
@@ -71,6 +72,7 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
         return response.records;
       })
     );
+    this.patient$ = this.searchPatientsPipeline$;
 
     // Listen for header search via query params (works on navigation & same-route)
     this.route.queryParams.pipe(
@@ -144,6 +146,8 @@ export class ListPatientComponent extends ListTemplate implements OnInit {
       patientStatus: this.searchPatientStatus || null
     };
 
+    // Restore the search pipeline in case it was overwritten by header/query-param search
+    this.patient$ = this.searchPatientsPipeline$;
     this.hasSearched = true;
     this.setActivePage(1);
     this.searchBody$.next(body);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { debounceTime, filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
 import { User } from '../../../administration/model/user/user';
 import { UserService } from '../../../administration/services/user/user.service';
@@ -43,6 +44,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   searched: boolean = false;
   noResults: boolean = false;
   isSearching: boolean = false;
+  isEntityMode: boolean = false;
 
   // User autocomplete
   userSearchControl = new FormControl();
@@ -60,7 +62,8 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     private schedulerAuditService: SchedulerAuditService,
     private loggedInService: LoggedInService,
     private userService: UserService,
-    private patientFinderService: PatientFinderService
+    private patientFinderService: PatientFinderService,
+    private route: ActivatedRoute
   ) {
     super();
   }
@@ -69,6 +72,7 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     this.catchSelectedClinic();
     this.initUserAutocomplete();
     this.initPatientAutocomplete();
+    this.checkEntityParams();
   }
 
   get isSearchValid(): boolean {
@@ -192,6 +196,48 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   onGroupItemsPerPageChange(value: number) {
     this.groupItemsPerPage = value;
     this.groupCurrentPage = new Map();
+  }
+
+  private checkEntityParams() {
+    this.route.queryParams.subscribe(params => {
+      const entityName = params['entityName'];
+      const entityId = params['entityId'];
+      if (entityName && entityId) {
+        this.isEntityMode = true;
+        this.searchCollapsed = true;
+        this.findByEntity(entityName, Number(entityId));
+      }
+    });
+  }
+
+  private findByEntity(entityName: string, entityId: number) {
+    if (!this.clinicId) return;
+    this.searched = true;
+    this.noResults = false;
+    this.isSearching = true;
+    this.schedulerAuditService.findByEntity(this.clinicId, entityName, entityId).subscribe({
+      next: (response: any) => {
+        this.isSearching = false;
+        const records: AuditRecord[] = response?.records?.content || [];
+        if (records.length === 0) {
+          this.noResults = true;
+          return;
+        }
+        this.auditRecords$ = of(records);
+        this.groupedRecords$ = this.auditRecords$.pipe(
+          map(recs => {
+            const groups = this.groupByEntityId(recs);
+            this.expandedGroups = new Set(groups.map(g => g.entityId));
+            this.groupCurrentPage = new Map();
+            return groups;
+          })
+        );
+      },
+      error: () => {
+        this.isSearching = false;
+        this.noResults = true;
+      }
+    });
   }
 
   private groupByEntityId(records: AuditRecord[]): EntityGroup[] {
