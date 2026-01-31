@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { debounceTime, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { ListTemplate } from '../../../common/template/list.template';
 import { User } from '../../../administration/model/user/user';
@@ -17,6 +16,12 @@ interface SearchCriteria {
   searchEndDate?: string;
 }
 
+interface EntityGroup {
+  entityId: number;
+  entityName: string;
+  records: AuditRecord[];
+}
+
 @Component({
   selector: 'app-scheduler-history',
   templateUrl: './scheduler-history.component.html',
@@ -27,10 +32,14 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
   searchCriteria: SearchCriteria = {};
   searchCollapsed: boolean = false;
   auditRecords$!: Observable<AuditRecord[]>;
-  columns: (string | IColumn)[];
+  groupedRecords$!: Observable<EntityGroup[]>;
   clinicId: number;
   expandedChanges: Set<number> = new Set();
+  expandedGroups: Set<number> = new Set();
+  groupCurrentPage: Map<number, number> = new Map();
+  groupItemsPerPage: number = 5;
   readonly CHANGES_PREVIEW_COUNT = 2;
+  readonly itemsPerPageOptions = [5, 10, 20];
   searched: boolean = false;
   noResults: boolean = false;
   isSearching: boolean = false;
@@ -58,8 +67,6 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
 
   ngOnInit(): void {
     this.catchSelectedClinic();
-    this.initListComponent();
-    this.columns = this.constructColumns(['entityName', 'clinicName', 'calendarName', 'action', 'changes', 'performedByName', 'performedAt']);
     this.initUserAutocomplete();
     this.initPatientAutocomplete();
   }
@@ -75,12 +82,14 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     this.searched = true;
     this.noResults = false;
     this.isSearching = true;
-    this.setActivePage(1);
+    this.groupCurrentPage = new Map();
     this.apiParams = {
       performedByUuid: this.searchCriteria.performedByUuid || undefined,
       patientId: this.searchCriteria.patientId || undefined,
       startDate: this.searchCriteria.searchStartDate || undefined,
-      endDate: this.searchCriteria.searchEndDate || undefined
+      endDate: this.searchCriteria.searchEndDate || undefined,
+      limit: 9999,
+      offset: 0
     };
     this.find();
   }
@@ -140,6 +149,68 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
     } else {
       this.expandedChanges.add(recordId);
     }
+  }
+
+  isGroupExpanded(entityId: number): boolean {
+    return this.expandedGroups.has(entityId);
+  }
+
+  toggleGroup(entityId: number) {
+    if (this.expandedGroups.has(entityId)) {
+      this.expandedGroups.delete(entityId);
+    } else {
+      this.expandedGroups.add(entityId);
+    }
+  }
+
+  expandAllGroups(groups: EntityGroup[]) {
+    this.expandedGroups = new Set(groups.map(g => g.entityId));
+  }
+
+  collapseAllGroups() {
+    this.expandedGroups = new Set();
+  }
+
+  getGroupCurrentPage(entityId: number): number {
+    return this.groupCurrentPage.get(entityId) || 1;
+  }
+
+  getGroupTotalPages(group: EntityGroup): number {
+    return Math.ceil(group.records.length / this.groupItemsPerPage);
+  }
+
+  getGroupVisibleRecords(group: EntityGroup): AuditRecord[] {
+    const page = this.getGroupCurrentPage(group.entityId);
+    const start = (page - 1) * this.groupItemsPerPage;
+    return group.records.slice(start, start + this.groupItemsPerPage);
+  }
+
+  handleGroupPageChange(entityId: number, page: number) {
+    this.groupCurrentPage.set(entityId, page);
+  }
+
+  onGroupItemsPerPageChange(value: number) {
+    this.groupItemsPerPage = value;
+    this.groupCurrentPage = new Map();
+  }
+
+  private groupByEntityId(records: AuditRecord[]): EntityGroup[] {
+    const groupMap = new Map<number, EntityGroup>();
+    const groupOrder: number[] = [];
+
+    for (const record of records) {
+      if (!groupMap.has(record.entityId)) {
+        groupOrder.push(record.entityId);
+        groupMap.set(record.entityId, {
+          entityId: record.entityId,
+          entityName: record.entityName,
+          records: []
+        });
+      }
+      groupMap.get(record.entityId)!.records.push(record);
+    }
+
+    return groupOrder.map(id => groupMap.get(id)!);
   }
 
   private initUserAutocomplete() {
@@ -241,6 +312,14 @@ export class SchedulerHistoryComponent extends ListTemplate implements OnInit {
       }),
       map((response: any) => {
         return response.records?.content || [];
+      })
+    );
+    this.groupedRecords$ = this.auditRecords$.pipe(
+      map(records => {
+        const groups = this.groupByEntityId(records);
+        this.expandedGroups = new Set(groups.map(g => g.entityId));
+        this.groupCurrentPage = new Map();
+        return groups;
       })
     );
   }

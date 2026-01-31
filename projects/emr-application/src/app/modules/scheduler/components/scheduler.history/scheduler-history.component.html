@@ -135,54 +135,104 @@
   <p class="empty-state-text">No audit records match your search criteria. Try adjusting your filters and search again.</p>
 </div>
 
-<!-- Table -->
+<!-- Grouped Results -->
 <ng-container *ngIf="searched && !noResults">
-<ng-container *ngIf="props$ | async as props" fluid="true">
-  <div class="table-card">
-    <c-smart-table [columnSorter]="{resetable: true}" [columns]="columns"
-      [items]="(auditRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-      (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-      [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small: false }"
-      [columnFilterValue]="props.columnFilterValue ?? []" [sorterValue]="props.sorterValue"
-      [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
+<ng-container *ngIf="groupedRecords$ | async as groups">
 
-      <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-        <td>
-          <ng-container [ngSwitch]="columnName">
-            <ng-container *ngSwitchCase="'action'">
-              <span class="action-badge" [ngClass]="{
-                'badge-insert': item.action === 'INSERT',
-                'badge-update': item.action === 'UPDATE',
-                'badge-delete': item.action === 'DELETE'
-              }">{{ item.action }}</span>
-            </ng-container>
-            <ng-container *ngSwitchCase="'changes'">
-              <div class="changes-list" *ngIf="item.changes?.length">
-                <div *ngFor="let change of (isExpanded(item.id) ? item.changes : item.changes.slice(0, CHANGES_PREVIEW_COUNT))"
-                  class="change-item">
-                  {{ formatChange(change) }}
-                </div>
-                <button *ngIf="item.changes.length > CHANGES_PREVIEW_COUNT" type="button" class="toggle-changes-btn"
-                  (click)="toggleChanges(item.id)">
-                  {{ isExpanded(item.id) ? 'Show less' : '+ ' + (item.changes.length - CHANGES_PREVIEW_COUNT) + ' more' }}
-                </button>
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'performedAt'">
-              {{ item.performedAt | date:'yyyy-MM-dd HH:mm' }}
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              {{ tdContent }}
-            </ng-container>
-          </ng-container>
-        </td>
-      </ng-template>
-    </c-smart-table>
-
-    <div class="pagination-wrapper" *ngIf="props.totalPages">
-      <c-smart-pagination [activePage]="props.activePage" (activePageChange)="handleActivePageChange($event)"
-        [pages]="props.totalPages"></c-smart-pagination>
+  <!-- Results Toolbar -->
+  <div class="results-toolbar">
+    <div class="toolbar-left">
+      <span class="toolbar-label">Show</span>
+      <select class="toolbar-select"
+        [ngModel]="groupItemsPerPage"
+        [ngModelOptions]="{standalone: true}"
+        (ngModelChange)="onGroupItemsPerPageChange($event)">
+        <option *ngFor="let opt of itemsPerPageOptions" [ngValue]="opt">{{ opt }}</option>
+      </select>
+      <span class="toolbar-label">records per group</span>
+    </div>
+    <div class="toolbar-right">
+      <button type="button" class="toolbar-btn" (click)="expandAllGroups(groups)">
+        Expand All
+      </button>
+      <button type="button" class="toolbar-btn" (click)="collapseAllGroups()">
+        Collapse All
+      </button>
     </div>
   </div>
+
+  <!-- Entity Groups -->
+  <div class="entity-groups">
+    <div class="entity-group" *ngFor="let group of groups">
+
+      <!-- Group Header -->
+      <div class="entity-group-header" (click)="toggleGroup(group.entityId)">
+        <div class="entity-header-identity">
+          <svg cIcon name="cilChevronBottom" class="group-chevron"
+            [class.expanded]="isGroupExpanded(group.entityId)"></svg>
+          <span class="entity-type-badge">{{ group.entityName }}</span>
+          <span class="entity-id-label">#{{ group.entityId }}</span>
+        </div>
+        <span class="record-count-badge">
+          {{ group.records.length }} {{ group.records.length === 1 ? 'record' : 'records' }}
+        </span>
+      </div>
+
+      <!-- Group Body -->
+      <div class="entity-group-body" *ngIf="isGroupExpanded(group.entityId)">
+        <table class="audit-table">
+          <thead>
+            <tr>
+              <th class="col-action">Action</th>
+              <th class="col-clinic">Clinic</th>
+              <th class="col-calendar">Calendar</th>
+              <th class="col-changes">Changes</th>
+              <th class="col-performer">Performed By</th>
+              <th class="col-date">Date &amp; Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of getGroupVisibleRecords(group)">
+              <td>
+                <span class="action-badge" [ngClass]="{
+                  'badge-insert': record.action === 'INSERT',
+                  'badge-update': record.action === 'UPDATE',
+                  'badge-delete': record.action === 'DELETE'
+                }">{{ record.action }}</span>
+              </td>
+              <td>{{ record.clinicName }}</td>
+              <td>{{ record.calendarName }}</td>
+              <td>
+                <div class="changes-list" *ngIf="record.changes?.length">
+                  <div *ngFor="let change of (isExpanded(record.id) ? record.changes : record.changes.slice(0, CHANGES_PREVIEW_COUNT))"
+                    class="change-item">
+                    {{ formatChange(change) }}
+                  </div>
+                  <button *ngIf="record.changes.length > CHANGES_PREVIEW_COUNT" type="button" class="toggle-changes-btn"
+                    (click)="toggleChanges(record.id); $event.stopPropagation()">
+                    {{ isExpanded(record.id) ? 'Show less' : '+ ' + (record.changes.length - CHANGES_PREVIEW_COUNT) + ' more' }}
+                  </button>
+                </div>
+                <span class="no-changes" *ngIf="!record.changes?.length">—</span>
+              </td>
+              <td>{{ record.performedByName }}</td>
+              <td>{{ record.performedAt | date:'yyyy-MM-dd HH:mm' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Per-group Pagination -->
+        <div class="group-pagination" *ngIf="getGroupTotalPages(group) > 1">
+          <c-smart-pagination
+            [activePage]="getGroupCurrentPage(group.entityId)"
+            (activePageChange)="handleGroupPageChange(group.entityId, $event)"
+            [pages]="getGroupTotalPages(group)">
+          </c-smart-pagination>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </ng-container>
 </ng-container>
