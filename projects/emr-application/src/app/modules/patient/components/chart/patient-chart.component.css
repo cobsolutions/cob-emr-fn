@@ -54,7 +54,7 @@
   align-items: center;
 }
 
-.edit-btn {
+.back-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -70,13 +70,13 @@
   cursor: pointer;
 }
 
-.edit-btn:hover {
+.back-btn:hover {
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   text-decoration: none;
 }
 
-.edit-btn .btn-icon {
+.back-btn .btn-icon {
   width: 1rem;
   height: 1rem;
 }
@@ -895,7 +895,7 @@
     padding: 0.875rem;
   }
 
-  .edit-btn {
+  .back-btn {
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
   }
