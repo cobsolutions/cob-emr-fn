@@ -120,6 +120,11 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   isActive(section: string): boolean {
     return this.activeSection === section;
   }
+  onAuthVisibilityChange(event: string): void {
+    if (event === 'close') {
+      this.setActive('records');
+    }
+  }
   formatInfo(info: string): string {
     return info ? info.replace(/\n/g, '<br/>') : '';
   }

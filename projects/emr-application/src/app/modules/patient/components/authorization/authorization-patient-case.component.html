@@ -1,101 +1,153 @@
-<ngx-spinner></ngx-spinner>
-
-<form [formGroup]="authForm" (ngSubmit)="onAdd()">
-  <div class="card p-3">
-
-    <h5 class="card-title">Authorization</h5>
-    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
-      <span><strong>Insurance:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName
-        }}</span>
-      <span><strong>Insurance ID:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber
-        }}</span>
-      <span><strong>Insurance Group:</strong> {{ patientCase.caseInsuranceInformation?.primaryInsurance?.groupNumber
-        }}</span>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Authorization #</label>
-      <input type="text" class="form-control" formControlName="authName">
-      <div *ngIf="authForm.get('authName')?.touched && authForm.get('authName')?.invalid" class="invalid-feedback">
-        Authorization # is required.
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label class="form-label">Effective Start</label>
-        <input type="date" class="form-control" formControlName="effectiveStart">
-        <div *ngIf="authForm.get('effectiveStart')?.touched && authForm.get('effectiveStart')?.invalid"
-          class="invalid-feedback">
-          effectiveStart is required.
-        </div>
-      </div>
-      <div class="col">
-        <label class="form-label">Effective End</label>
-        <input type="date" class="form-control" formControlName="effectiveEnd">
-        <div *ngIf="authForm.get('effectiveEnd')?.touched && authForm.get('effectiveEnd')?.invalid"
-          class="invalid-feedback">
-          control is required.
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <label for="authType" class="form-label">Authorization Type</label>
-      <input class="form-control" formControlName="authType" readonly>
-      <!-- <div *ngIf="authForm.get('authType')?.touched && authForm.get('authType')?.invalid" class="invalid-feedback">
-        Auth Type is required.
-      </div> -->
-    </div>
-
-    <div class="mt-3">
-      <label class="form-label">Number Authorized</label>
-      <input type="number" class="form-control" formControlName="authNumber">
-      <div *ngIf="authForm.get('authNumber')?.touched && authForm.get('authNumber')?.invalid"
-        class="invalid-feedback">
-        Number Authorization is required.
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-end mt-4">
-      <button type="submit" class="btn btn-primary me-2">
-        {{ editingIndex !== null ? 'Update' : 'Add' }}
-      </button>
-    </div>
+<!-- Insurance Summary -->
+<div class="auth-insurance-bar">
+  <div class="insurance-item">
+    <svg cIcon name="cilShieldAlt" class="insurance-icon"></svg>
+    <span class="insurance-label">Insurance</span>
+    <span class="insurance-value">{{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName || '—' }}</span>
   </div>
-</form>
-<!-- Auth List Table (inline, no title or buttons) -->
-<div class="auth-list">
-  <table>
-    <thead>
-      <tr>
-        <th>Auth Type</th>
-        <th>Auth Number</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let auth of authList; let i = index">
-        <td>{{ auth.authType }}</td>
-        <td>{{ auth.authNumber }}</td>
-        <td>{{ auth.effectiveStart | date:'MM/dd/yyyy' }}</td>
-        <td>{{ auth.effectiveEnd | date:'MM/dd/yyyy' }}</td>
-        <td class="text-right">
-          <div class="btn-group no-gap">
-            <button class="btn btn-sm btn-light btn-edit" (click)="onEditAuth(auth, i)">
-              <svg cIcon name="cilPen"></svg>
-            </button>
-            <button class="btn btn-sm btn-light btn-delete" (click)="onRemoveAuth(i)">
-              <svg cIcon name="cilTrash"></svg>
-            </button>
+  <div class="insurance-item">
+    <span class="insurance-label">ID</span>
+    <span class="insurance-value mono">{{ patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber || '—' }}</span>
+  </div>
+  <div class="insurance-item">
+    <span class="insurance-label">Group</span>
+    <span class="insurance-value mono">{{ patientCase.caseInsuranceInformation?.primaryInsurance?.groupNumber || '—' }}</span>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="auth-toolbar">
+  <h5 class="auth-section-title">Authorizations</h5>
+  <button class="auth-btn-add-toolbar" (click)="openAddModal()">
+    <svg cIcon name="cilPlus" class="auth-btn-icon"></svg>
+    Add Authorization
+  </button>
+</div>
+
+<!-- Authorization List Table -->
+<div class="auth-table-card">
+  <div class="auth-table-container">
+    <table class="auth-table">
+      <thead>
+        <tr>
+          <th>Auth #</th>
+          <th>Type</th>
+          <th>Number</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th class="th-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let auth of authList; let i = index" class="auth-row">
+          <td>
+            <span class="auth-name-badge">{{ auth.authName }}</span>
+          </td>
+          <td>
+            <span class="auth-type-badge">{{ auth.authType }}</span>
+          </td>
+          <td>
+            <span class="auth-number-value">{{ auth.authNumber }}</span>
+          </td>
+          <td>
+            <span class="auth-date-value">{{ auth.effectiveStart | date:'MM/dd/yyyy' }}</span>
+          </td>
+          <td>
+            <span class="auth-date-value">{{ auth.effectiveEnd | date:'MM/dd/yyyy' }}</span>
+          </td>
+          <td class="td-actions">
+            <div class="auth-action-group">
+              <button class="auth-action-btn edit" (click)="onEditAuth(auth, i)" title="Edit">
+                <svg cIcon name="cilPen"></svg>
+              </button>
+              <button class="auth-action-btn delete" (click)="onRemoveAuth(i)" title="Remove">
+                <svg cIcon name="cilTrash"></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="authList.length === 0" class="auth-empty-row">
+          <td colspan="6">
+            <div class="auth-empty-state">
+              <svg cIcon name="cilShieldAlt" class="auth-empty-icon"></svg>
+              <span>No authorizations yet</span>
+              <button class="auth-empty-add-btn" (click)="openAddModal()">
+                <svg cIcon name="cilPlus" class="auth-btn-icon"></svg>
+                Add your first authorization
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Authorization Modal -->
+<c-modal id="authModal" [visible]="showModal" [backdrop]="'static'" size="lg">
+  <div class="auth-modal-header">
+    <div class="auth-modal-title">
+      <svg cIcon [name]="editingIndex !== null ? 'cilPen' : 'cilPlus'" class="auth-modal-icon"></svg>
+      <span>{{ editingIndex !== null ? 'Edit Authorization' : 'New Authorization' }}</span>
+    </div>
+    <button class="auth-modal-close" (click)="closeModal()">
+      <svg cIcon name="cilX"></svg>
+    </button>
+  </div>
+  <c-modal-body class="auth-modal-body">
+    <form [formGroup]="authForm" (ngSubmit)="onSave()">
+      <div class="auth-form-grid">
+        <div class="auth-field">
+          <label class="auth-label">Authorization # <span class="required">*</span></label>
+          <input type="text" class="auth-input" formControlName="authName" placeholder="Enter authorization #"
+                 [class.is-invalid]="authForm.get('authName')?.touched && authForm.get('authName')?.invalid">
+          <div class="auth-error" *ngIf="authForm.get('authName')?.touched && authForm.get('authName')?.invalid">
+            Authorization # is required.
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="d-flex justify-content-end mt-4">
-  <button type="submit" class="btn btn-primary me-2" (click)="onSave()">Save</button>
-  <button type="button" class="btn btn-secondary" (click)="onCancel()">Close</button>
-</div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label">Authorization Type</label>
+          <input type="text" class="auth-input readonly" formControlName="authType" readonly>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label">Number Authorized <span class="required">*</span></label>
+          <input type="number" class="auth-input" formControlName="authNumber" placeholder="Enter number"
+                 [class.is-invalid]="authForm.get('authNumber')?.touched && authForm.get('authNumber')?.invalid">
+          <div class="auth-error" *ngIf="authForm.get('authNumber')?.touched && authForm.get('authNumber')?.invalid">
+            Number authorized is required.
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label">Effective Start <span class="required">*</span></label>
+          <input type="date" class="auth-input" formControlName="effectiveStart"
+                 [class.is-invalid]="authForm.get('effectiveStart')?.touched && authForm.get('effectiveStart')?.invalid">
+          <div class="auth-error" *ngIf="authForm.get('effectiveStart')?.touched && authForm.get('effectiveStart')?.invalid">
+            Effective start is required.
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label">Effective End <span class="required">*</span></label>
+          <input type="date" class="auth-input" formControlName="effectiveEnd"
+                 [class.is-invalid]="authForm.get('effectiveEnd')?.touched && authForm.get('effectiveEnd')?.invalid">
+          <div class="auth-error" *ngIf="authForm.get('effectiveEnd')?.touched && authForm.get('effectiveEnd')?.invalid">
+            Effective end is required.
+          </div>
+        </div>
+      </div>
+    </form>
+  </c-modal-body>
+  <div class="auth-modal-footer">
+    <button type="button" class="auth-btn-cancel" (click)="closeModal()">
+      <svg cIcon name="cilX" class="auth-btn-icon"></svg>
+      Close
+    </button>
+    <button type="button" class="auth-btn-save" (click)="onSave()">
+      <svg cIcon name="cilSave" class="auth-btn-icon"></svg>
+      Save
+    </button>
+  </div>
+</c-modal>

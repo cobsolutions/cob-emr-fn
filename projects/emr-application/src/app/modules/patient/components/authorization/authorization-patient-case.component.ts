@@ -16,6 +16,7 @@ export class AuthorizationPatientCaseComponent implements OnInit {
   @Output() changeVisibility = new EventEmitter<string>()
   editingIndex: number | null = null;
   authList: PatientCaseAuthorization[] = [];
+  showModal = false;
 
   constructor(private fb: FormBuilder, private authService: PatientCaseAuthorizationService) { }
 
@@ -31,10 +32,10 @@ export class AuthorizationPatientCaseComponent implements OnInit {
     });
     this.loadAuths();
   }
+
   private loadAuths(): void {
     this.authService.list(this.patientCase.id).subscribe({
       next: (data) => {
-        // convert millis back to Date objects for the form
         this.authList = data.map(auth => ({
           ...auth,
           effectiveStart: moment(auth.effectiveStart).endOf('day').valueOf(),
@@ -44,64 +45,19 @@ export class AuthorizationPatientCaseComponent implements OnInit {
       error: (err) => console.error('Failed to load auths', err)
     });
   }
-  onAdd(): void {
-    if (this.authForm.valid) {
-      const raw = this.authForm.getRawValue();
 
-      const record: PatientCaseAuthorization = {
-        id: raw.id ?? null,              // <-- preserve id when editing
-        authName: raw.authName,
-        authType: raw.authType,
-        authNumber: raw.authNumber,
-        effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(),
-        effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(),
-        insuranceName: this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName,
-        insuranceId: Number(this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber)
-      };
-
-      if (this.editingIndex !== null) {
-        // update local list in-place (keeps id)
-        this.authList[this.editingIndex] = record;
-        this.editingIndex = null;
-      } else {
-        // push new (id will be null until persisted)
-        this.authList.push(record);
-      }
-
-      // clear form — important: reset id to null to avoid accidental reuse
-      this.authForm.reset({ id: null });
-    } else {
-      this.authForm.markAllAsTouched();
-    }
+  openAddModal(): void {
+    this.authForm.reset({ id: null, authType: 'visit' });
+    this.editingIndex = null;
+    this.showModal = true;
   }
-  onSave(): void {
-    // Normalize dates and ensure id fields are present (or null)
-    const payload = this.authList.map(a => ({
-      ...a,
-      effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
-      effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
-    }));
-    this.authService.saveOrUpdate(payload, this.patientCase.id).subscribe({
-      next: (updatedList) => {
-        // backend returns saved records including generated ids; normalize dates to ms
-        this.authList = updatedList.map(a => ({
-          ...a,
-          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
-          effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
-        }));
 
-        // reset UI state
-        this.authForm.reset({ id: null });
-        this.editingIndex = null;
-        this.changeVisibility.emit('close');
-      },
-      error: (err) => console.error('Failed to save auths', err)
-    });
+  closeModal(): void {
+    this.authForm.reset({ id: null, authType: 'visit' });
+    this.editingIndex = null;
+    this.showModal = false;
   }
-  onCancel(): void {
-    this.authForm.reset();
-    this.changeVisibility.emit('close');
-  }
+
   onEditAuth(auth: PatientCaseAuthorization, index: number): void {
     this.authForm.patchValue({
       id: auth.id ?? null,
@@ -119,10 +75,72 @@ export class AuthorizationPatientCaseComponent implements OnInit {
     });
 
     this.editingIndex = index;
+    this.showModal = true;
+  }
+
+  onSave(): void {
+    if (!this.authForm.valid) {
+      this.authForm.markAllAsTouched();
+      return;
+    }
+
+    const raw = this.authForm.getRawValue();
+    const record: PatientCaseAuthorization = {
+      id: raw.id ?? null,
+      authName: raw.authName,
+      authType: raw.authType,
+      authNumber: raw.authNumber,
+      effectiveStart: moment(raw.effectiveStart).endOf('day').valueOf(),
+      effectiveEnd: moment(raw.effectiveEnd).endOf('day').valueOf(),
+      insuranceName: this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName,
+      insuranceId: Number(this.patientCase.caseInsuranceInformation?.primaryInsurance?.insuranceIdNumber)
+    };
+
+    if (this.editingIndex !== null) {
+      this.authList[this.editingIndex] = record;
+    } else {
+      this.authList.push(record);
+    }
+
+    // Persist full list to backend
+    const payload = this.authList.map(a => ({
+      ...a,
+      effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
+      effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
+    }));
+
+    this.authService.saveOrUpdate(payload, this.patientCase.id).subscribe({
+      next: (updatedList) => {
+        this.authList = updatedList.map(a => ({
+          ...a,
+          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
+          effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
+        }));
+        this.closeModal();
+      },
+      error: (err) => console.error('Failed to save auths', err)
+    });
   }
 
   onRemoveAuth(index: number): void {
     this.authList.splice(index, 1);
-  }
 
+    // Persist the updated list
+    const payload = this.authList.map(a => ({
+      ...a,
+      effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
+      effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
+    }));
+
+    this.authService.saveOrUpdate(payload, this.patientCase.id).subscribe({
+      next: (updatedList) => {
+        this.authList = updatedList.map(a => ({
+          ...a,
+          effectiveStart: moment(a.effectiveStart).endOf('day').valueOf(),
+          effectiveEnd: moment(a.effectiveEnd).endOf('day').valueOf()
+        }));
+      },
+      error: (err) => console.error('Failed to remove auth', err)
+    });
+  }
 }

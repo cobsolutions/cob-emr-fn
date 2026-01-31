@@ -152,6 +152,13 @@
                 </a>
             </li>
             <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('authorization')"
+                    (click)="setActive('authorization')">
+                    <svg cIcon name="cilShieldAlt" class="nav-icon"></svg>
+                    Authorization
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
                 <a class="sidebar-nav-link" [class.active]="isActive('documents')"
                     (click)="setActive('documents')">
                     <svg cIcon name="cilPaperclip" class="nav-icon"></svg>
@@ -246,6 +253,14 @@
                     </div>
                 </ng-container>
             </div>
+        </div>
+
+        <!-- Authorization -->
+        <div *ngIf="isActive('authorization')">
+            <authorization-patient-case
+                [patientCase]="case"
+                (changeVisibility)="onAuthVisibilityChange($event)">
+            </authorization-patient-case>
         </div>
 
         <!-- Documents -->
