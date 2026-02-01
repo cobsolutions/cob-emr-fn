@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { BehaviorSubject, from, map, Observable, of, switchMap, tap, shareReplay, catchError, timeout } from 'rxjs';
+import { BehaviorSubject, from, map, Observable, of, switchMap, tap, shareReplay, catchError, timeout, throwError } from 'rxjs';
 import { UserService } from '../../../administration/services/user/user.service';
 import { EncryptService } from '../../../common/service/encyrption/encrypt.service';
 import { LoggedInUser } from '../../model/loggedin.user';
@@ -38,6 +38,9 @@ export class LoggedInService {
         return this.userService.getLoggedInUser(user.sub).pipe(
           timeout(10000), // 10 second timeout for user service
           catchError(error => {
+            if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN') {
+              throw error;
+            }
             console.error('Error fetching user from service:', error);
             // Return a minimal user object for admin users who may not have a user record
             return of(this.createMinimalUser(user));
@@ -55,6 +58,9 @@ export class LoggedInService {
       catchError(error => {
         console.error('Error loading user info:', error);
         this.loggedUserCache$ = null;
+        if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN') {
+          return throwError(() => error);
+        }
         // Return minimal user from keycloak token
         return from(this.keycloakService.getKeycloakInstance().loadUserProfile()).pipe(
           map(profile => this.createMinimalUserFromProfile(profile)),
@@ -115,5 +121,10 @@ export class LoggedInService {
       console.error('Error decrypting user:', error);
       return this.createEmptyUser();
     }
+  }
+
+  public clearCache(): void {
+    this.loggedUserCache$ = null;
+    localStorage.removeItem('LOGGEDINUSR');
   }
 }

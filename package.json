@@ -58,6 +58,7 @@
     "ngx-toastr": "^15.0.0",
     "positioning": "^2.0.1",
     "rxjs": "~7.5.0",
+    "signature_pad": "^4.2.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

@@ -4,6 +4,7 @@ import { DefaultLayoutComponent } from './core';
 import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
 import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
+import { PendingActivationGuard } from './modules/security/service/pending-activation.guard';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     path: 'emr',
     component: DefaultLayoutComponent,
     canActivate: [KcAuthGuard],
+    canActivateChild: [PendingActivationGuard],
     data: {
       title: 'Home',
       type: 'user'
@@ -119,6 +121,18 @@ const routes: Routes = [
         path: 'referring/provider',
         loadChildren: () =>
           import('./modules/referring.provider/refering-provider.module').then((m) => m.ReferingProviderModule)
+      },
+      {
+        path: 'pending-activation',
+        data: { title: 'Pending Activation' },
+        loadChildren: () =>
+          import('./modules/activation/activation.module').then((m) => m.ActivationModule)
+      },
+      {
+        path: 'pending-account',
+        data: { title: 'Account Pending' },
+        loadChildren: () =>
+          import('./modules/activation/pending-doctor.module').then((m) => m.PendingDoctorModule)
       }
     ]
 

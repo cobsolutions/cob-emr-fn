@@ -14,7 +14,7 @@
 </div>
 
 <!--sidebar-->
-<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" colorScheme="light" visible *ngIf="!isLoading">
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" colorScheme="light" visible *ngIf="!isLoading && !isPendingActivation">
   <c-sidebar-brand [routerLink]="['/emr/dashboard']" class="sidebar-brand-custom">
     <div class="sidebar-brand-full">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { INavData } from '@coreui/angular-pro';
-import { combineLatest, map, filter, Subscription, catchError, of, timeout, take } from 'rxjs';
+import { combineLatest, map, filter, Subscription, catchError, of, timeout, take, merge } from 'rxjs';
 import { LoggedInService } from '../../modules/security/service/loggedIn/logged-in.service';
 import { RenderNavItemsService } from '../../modules/security/service/render-nav-items.service';
 import { PermissionService } from '../../modules/security/service/permission.service';
 import { ROLE_MENU_MAP } from '../../modules/security/model/role-menu-map';
+import { PendingActivationService } from '../../modules/security/service/pending-activation.service';
 @Component({
   selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
@@ -14,12 +15,18 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   navItems: INavData[] | null | undefined;
   isLoading: boolean = true;
   private subscription: Subscription;
+  private pendingSub: Subscription;
 
   constructor(
     private renderNavItemsService: RenderNavItemsService,
     private loggedInService: LoggedInService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private pendingActivationService: PendingActivationService
   ) { }
+
+  get isPendingActivation(): boolean {
+    return this.pendingActivationService.isBlocked;
+  }
 
   ngOnInit(): void {
     // Get logged user observable with error handling and timeout
@@ -36,6 +43,17 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       filter((items): items is INavData[] => items !== null && items.length > 0),
       take(1) // Only take the first valid emission
     );
+
+    // If a pending/blocked state is set (by the interceptor), stop waiting and show the page
+    this.pendingSub = merge(
+      this.pendingActivationService.isPendingActivation$,
+      this.pendingActivationService.isPendingDoctor$
+    ).pipe(
+      filter(v => v === true),
+      take(1)
+    ).subscribe(() => {
+      this.isLoading = false;
+    });
 
     this.subscription = combineLatest([loggedUser$, renderItems$])
       .pipe(
@@ -92,6 +110,9 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.pendingSub) {
+      this.pendingSub.unsubscribe();
     }
   }
 }
