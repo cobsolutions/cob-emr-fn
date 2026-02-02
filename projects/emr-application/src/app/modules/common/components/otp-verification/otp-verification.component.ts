@@ -264,6 +264,10 @@ export class OtpVerificationComponent implements OnInit, OnDestroy {
     });
   }
 
+  trackByIndex(index: number): number {
+    return index;
+  }
+
   cancel(): void {
     this.otpCancel.emit();
   }

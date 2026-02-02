@@ -222,5 +222,12 @@
 /emr/api/patient/search/name/:name/clinic-id/:clinicId http://161.97.126.192:7070/emr/api/patient/search/name/:name/clinic-id/:clinicId 200
 /emr/api/patient/search/clinic-id/:clinicId/organization-id/:organizationId http://161.97.126.192:7070/emr/api/patient/search/clinic-id/:clinicId/organization-id/:organizationId 200
 /emr/api/audit/clinic/:clinicId/entity/:entityName/:entityId http://161.97.126.192:7070/emr/api/audit/clinic/:clinicId/entity/:entityName/:entityId 200
+/emr/api/signature/validate-token/:token http://161.97.126.192:7070/emr/api/signature/validate-token/:token 200
+/emr/api/signature/submit http://161.97.126.192:7070/emr/api/signature/submit 200
+/emr/api/signature/send-otp http://161.97.126.192:7070/emr/api/signature/send-otp 200
+/emr/api/signature/verify-otp http://161.97.126.192:7070/emr/api/signature/verify-otp 200
+/emr/api/signature/consent/current http://161.97.126.192:7070/emr/api/signature/consent/current 200
+/emr/api/signature-audit/find/user/:uuid http://161.97.126.192:7070/emr/api/signature-audit/find/user/:uuid 200
+/emr/api/user/update/status/uuid/:uuid http://161.97.126.192:7070/emr/api/user/update/status/uuid/:uuid 200
 
 /*  /index.html   200

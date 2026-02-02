@@ -28,7 +28,7 @@
   <!-- 6-digit input -->
   <div class="digit-inputs" [class.shake]="shake" [class.error-state]="errorMessage && !locked" [class.locked-state]="locked">
     <input
-      *ngFor="let d of digits; let i = index"
+      *ngFor="let d of digits; let i = index; trackBy: trackByIndex"
       #digitInput
       type="text"
       inputmode="numeric"
