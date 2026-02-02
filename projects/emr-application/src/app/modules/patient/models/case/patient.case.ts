@@ -23,4 +23,5 @@ export interface PatientCase {
     authorizationData?:PatientCaseAuthorizationData;
     uuid?:string
     additionalInfo?:string;
+    order ?:number;
 }

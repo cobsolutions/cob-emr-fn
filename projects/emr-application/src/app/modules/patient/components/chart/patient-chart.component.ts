@@ -106,7 +106,7 @@ export class PatientChartComponent implements OnInit, OnDestroy {
       patientId: patient.uuid,
       dateOfBirth: new Date(patient.birthDate)
     }
-    this.patientCases = patient.cases;
+    this.patientCases = (patient.cases || []).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
     this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");
     this.patientChartInfo.email = patient.contacts[0].email;
