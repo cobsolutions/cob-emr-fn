@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class PendingActivationService {
   isPendingActivation$ = new BehaviorSubject<boolean>(false);
   isPendingDoctor$ = new BehaviorSubject<boolean>(false);
+  isAccountInactive$ = new BehaviorSubject<boolean>(false);
 
   setPendingActivation(): void {
     this.isPendingActivation$.next(true);
@@ -24,6 +25,14 @@ export class PendingActivationService {
     this.isPendingDoctor$.next(false);
   }
 
+  setAccountInactive(): void {
+    this.isAccountInactive$.next(true);
+  }
+
+  clearAccountInactive(): void {
+    this.isAccountInactive$.next(false);
+  }
+
   get isPending(): boolean {
     return this.isPendingActivation$.value;
   }
@@ -32,7 +41,11 @@ export class PendingActivationService {
     return this.isPendingDoctor$.value;
   }
 
+  get isInactive(): boolean {
+    return this.isAccountInactive$.value;
+  }
+
   get isBlocked(): boolean {
-    return this.isPendingActivation$.value || this.isPendingDoctor$.value;
+    return this.isPendingActivation$.value || this.isPendingDoctor$.value || this.isAccountInactive$.value;
   }
 }

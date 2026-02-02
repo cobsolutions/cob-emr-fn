@@ -149,6 +149,12 @@ const routes: Routes = [
         data: { title: 'Account Pending' },
         loadChildren: () =>
           import('./modules/activation/pending-doctor.module').then((m) => m.PendingDoctorModule)
+      },
+      {
+        path: 'account-inactive',
+        data: { title: 'Account Inactive' },
+        loadChildren: () =>
+          import('./modules/activation/account-inactive.module').then((m) => m.AccountInactiveModule)
       }
     ]
 

@@ -13,6 +13,14 @@ export class PendingActivationGuard implements CanActivateChild {
   ) {}
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    // Account inactive — block everything except the inactive page
+    if (this.pendingActivationService.isInactive) {
+      if (state.url === '/emr/account-inactive') {
+        return true;
+      }
+      return this.router.parseUrl('/emr/account-inactive');
+    }
+
     // Pending doctor — block everything except the pending-account page
     if (this.pendingActivationService.isPendingDoctorStatus) {
       if (state.url === '/emr/pending-account') {

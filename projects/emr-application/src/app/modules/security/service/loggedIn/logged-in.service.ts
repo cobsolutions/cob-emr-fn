@@ -38,7 +38,7 @@ export class LoggedInService {
         return this.userService.getLoggedInUser(user.sub).pipe(
           timeout(10000), // 10 second timeout for user service
           catchError(error => {
-            if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN') {
+            if (error.status === 403) {
               throw error;
             }
             console.error('Error fetching user from service:', error);
@@ -58,7 +58,7 @@ export class LoggedInService {
       catchError(error => {
         console.error('Error loading user info:', error);
         this.loggedUserCache$ = null;
-        if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN') {
+        if (error.status === 403) {
           return throwError(() => error);
         }
         // Return minimal user from keycloak token

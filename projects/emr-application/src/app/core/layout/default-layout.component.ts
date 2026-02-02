@@ -47,7 +47,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     // If a pending/blocked state is set (by the interceptor), stop waiting and show the page
     this.pendingSub = merge(
       this.pendingActivationService.isPendingActivation$,
-      this.pendingActivationService.isPendingDoctor$
+      this.pendingActivationService.isPendingDoctor$,
+      this.pendingActivationService.isAccountInactive$
     ).pipe(
       filter(v => v === true),
       take(1)

@@ -40,25 +40,40 @@ export class AuthInterceptor implements HttpInterceptor {
           this.spinner.hide();
 
           // Handle 403 FORBIDDEN responses
-          // Skip pending-activation redirects when on the signature capture page
+          // Skip redirects when on the signature capture page
           const isOnSignaturePage = window.location.pathname.startsWith('/emr-signature');
-          if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN' && !isOnSignaturePage) {
-            const message: string = error.error?.message || '';
+          if (error.status === 403 && !isOnSignaturePage) {
+            const errorBody = error.error || {};
+            const message: string = (typeof errorBody === 'string' ? errorBody : errorBody.message) || '';
+            const errorCode: string = errorBody.errorCode || '';
+            const statusText: string = error.statusText || '';
 
-            // Case 1: Pending activation — signature required (sent by email)
-            if (message.includes('pending activation')) {
-              if (this.pendingActivationService.isPending) return EMPTY;
-              this.pendingActivationService.setPendingActivation();
-              this.router.navigate(['/emr/pending-activation']);
+            // Case 1: Account inactive — user has been deactivated
+            const inactiveMatch = message.toLowerCase().includes('inactive')
+                               || statusText.toLowerCase().includes('inactive');
+            if (inactiveMatch) {
+              if (this.pendingActivationService.isInactive) return EMPTY;
+              this.pendingActivationService.setAccountInactive();
+              this.router.navigate(['/emr/account-inactive']);
               return EMPTY;
             }
 
-            // Case 2: Pending doctor — account data incomplete
-            if (message.includes('account is pending')) {
-              if (this.pendingActivationService.isPendingDoctorStatus) return EMPTY;
-              this.pendingActivationService.setPendingDoctor();
-              this.router.navigate(['/emr/pending-account']);
-              return EMPTY;
+            if (errorCode === 'FORBIDDEN') {
+              // Case 2: Pending activation — signature required (sent by email)
+              if (message.includes('pending activation')) {
+                if (this.pendingActivationService.isPending) return EMPTY;
+                this.pendingActivationService.setPendingActivation();
+                this.router.navigate(['/emr/pending-activation']);
+                return EMPTY;
+              }
+
+              // Case 3: Pending doctor — account data incomplete
+              if (message.includes('account is pending')) {
+                if (this.pendingActivationService.isPendingDoctorStatus) return EMPTY;
+                this.pendingActivationService.setPendingDoctor();
+                this.router.navigate(['/emr/pending-account']);
+                return EMPTY;
+              }
             }
           }
 
