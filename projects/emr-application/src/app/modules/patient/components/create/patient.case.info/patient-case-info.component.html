@@ -101,19 +101,34 @@
                     <span class="input-prefix">
                         <svg cIcon name="cilSearch" class="search-icon"></svg>
                     </span>
-                    <input cFormControl name="icd10diagnosis" [formControl]="diagnosisCtrl"
+                    <input cFormControl [formControl]="diagnosisCtrl"
                         placeholder="Search by code or description..." class="prefixed-input" sizing="sm" />
                 </div>
             </c-col>
         </c-row>
         <c-row class="mb-3">
             <c-col md="12">
-                <label cLabel class="form-label">Selected Diagnoses</label>
-                <c-multi-select (valueChange)="addICD10diagnosis($event)" multiple="true" visibleItems="20" sizing="sm">
+                <label cLabel class="form-label">Select Diagnoses</label>
+                <c-multi-select ngDefaultControl [ngModel]="[]" [ngModelOptions]="{standalone: true}"
+                    (valueChange)="addICD10diagnosis($event)" multiple="true" visibleItems="20" sizing="sm">
                     <c-multi-select-option *ngFor="let option of filteredDiagnosis">
                         {{ option }}
                     </c-multi-select-option>
                 </c-multi-select>
+            </c-col>
+        </c-row>
+        <c-row class="mb-3" *ngIf="case.caseDiagnosis && case.caseDiagnosis.length > 0">
+            <c-col md="12">
+                <label cLabel class="form-label">Selected Diagnoses</label>
+                <div class="diagnosis-chips">
+                    <span class="diagnosis-chip" *ngFor="let diag of case.caseDiagnosis; let di = index">
+                        <span class="chip-code">{{diag.diagnosisCode}}</span>
+                        <span class="chip-desc">{{diag.diagnosisDescription}}</span>
+                        <button type="button" class="chip-remove" (click)="removeDiagnosis(di)">
+                            <svg cIcon name="cilX"></svg>
+                        </button>
+                    </span>
+                </div>
             </c-col>
         </c-row>
     </div>
@@ -235,7 +250,7 @@
         <c-row class="mb-3">
             <c-col md="12">
                 <label cLabel for="caseaddtionalInfo" class="form-label">Additional Information for Chart</label>
-                <textarea cFormControl id="caseaddtionalInfo" name="caseaddtionalInfo" sizing="sm" rows="2"
+                <textarea cFormControl id="caseaddtionalInfo" name="caseaddtionalInfo" sizing="sm" rows="8"
                     placeholder="Enter any additional notes for the patient chart..."
                     [(ngModel)]="case.additionalInfo" #caseaddtionalInfo="ngModel"></textarea>
             </c-col>
@@ -255,8 +270,11 @@
         </c-row>
         <div class="action-row">
             <button cButton class="add-btn" type="button" (click)="add()">
-                <svg cIcon name="cilPlus" class="btn-icon"></svg>
-                Add Case
+                <svg cIcon [name]="editIndex !== null ? 'cilSave' : 'cilPlus'" class="btn-icon"></svg>
+                {{ editIndex !== null ? 'Update Case' : 'Add Case' }}
+            </button>
+            <button *ngIf="editIndex !== null" cButton class="cancel-btn" type="button" (click)="cancelEdit()">
+                Cancel
             </button>
         </div>
     </div>
@@ -295,6 +313,9 @@
                         <span class="injury-badge">{{caseItem.injuryCase}}</span>
                     </td>
                     <td class="col-actions">
+                        <button cButton class="edit-btn" (click)="edit(i)" title="Edit">
+                            <svg cIcon name="cilPencil"></svg>
+                        </button>
                         <button cButton class="delete-btn" (click)="remove(i)" title="Remove">
                             <svg cIcon name="cilTrash"></svg>
                         </button>
