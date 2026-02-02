@@ -91,4 +91,7 @@ export class ListOrganizationComponent implements OnInit {
   toggleEditOrganization() {
     this.editOrganizationVisibility = !this.editOrganizationVisibility
   }
+  manageUsers(item: any) {
+    this.router.navigate(['/emr/organization/' + item.id + '/users']);
+  }
 }

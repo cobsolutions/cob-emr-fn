@@ -93,4 +93,9 @@ export class UserService {
     var url = this.userUrl + '/find/all/' + organizationId;
     return this.httpClient.get(url);
   }
+
+  updateStatus(uuid: string, status: string) {
+    var url = this.userUrl + '/update/status/uuid/' + uuid;
+    return this.httpClient.put(url, null, { params: { status } });
+  }
 }

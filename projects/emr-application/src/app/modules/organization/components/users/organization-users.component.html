@@ -1,0 +1,238 @@
+<!-- Loading Overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="loading-content">
+    <span class="loading-text">Loading users...</span>
+  </div>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilPeople" class="page-icon"></svg>
+        User Control Panel
+      </h2>
+      <p class="page-subtitle">{{ organization?.name }}</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-back" (click)="goBack()">
+        <svg cIcon name="cilArrowLeft" class="btn-icon"></svg>
+        <span>Back to Organizations</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-container" *ngIf="!isLoading">
+
+  <!-- Search & Filter Panel -->
+  <div class="search-panel">
+    <div class="search-row">
+      <div class="search-input-wrapper">
+        <svg cIcon name="cilSearch" class="search-icon"></svg>
+        <input type="text"
+               class="search-input"
+               placeholder="Search by name, username, email or UUID..."
+               [(ngModel)]="searchTerm"
+               (input)="applyFilters()">
+        <button class="search-clear-btn" *ngIf="searchTerm" (click)="clearSearch()">
+          <svg cIcon name="cilX" class="search-clear-icon"></svg>
+        </button>
+      </div>
+      <div class="status-filter-group">
+        <button class="filter-btn" [ngClass]="{'filter-active': statusFilter === 'all'}" (click)="setStatusFilter('all')">
+          All
+          <span class="filter-count">{{ users.length }}</span>
+        </button>
+        <button class="filter-btn filter-btn-active" [ngClass]="{'filter-active': statusFilter === 'ACTIVE'}" (click)="setStatusFilter('ACTIVE')">
+          Active
+          <span class="filter-count">{{ activeCount }}</span>
+        </button>
+        <button class="filter-btn filter-btn-inactive" [ngClass]="{'filter-active': statusFilter === 'INACTIVE'}" (click)="setStatusFilter('INACTIVE')">
+          Inactive
+          <span class="filter-count">{{ inactiveCount }}</span>
+        </button>
+      </div>
+    </div>
+    <div class="search-results-bar">
+      <span class="results-text" *ngIf="filteredUsers.length > 0">
+        <svg cIcon name="cilPeople" class="results-icon"></svg>
+        Showing {{ filteredUsers.length }} of {{ users.length }} user(s)
+      </span>
+      <span class="results-text results-empty" *ngIf="filteredUsers.length === 0 && users.length > 0">
+        <svg cIcon name="cilInfo" class="results-icon"></svg>
+        No users match your filters
+      </span>
+      <span class="results-text results-empty" *ngIf="users.length === 0">
+        <svg cIcon name="cilInfo" class="results-icon"></svg>
+        No users found
+      </span>
+      <button class="clear-filters-btn" *ngIf="hasActiveFilters" (click)="clearAllFilters()">
+        <svg cIcon name="cilXCircle" class="clear-filters-icon"></svg>
+        Clear filters
+      </button>
+    </div>
+  </div>
+
+  <!-- User Cards Grid -->
+  <div class="user-grid" *ngIf="filteredUsers.length > 0">
+    <div class="user-card"
+         *ngFor="let user of filteredUsers"
+         [ngClass]="{
+           'card-inactive': !isActive(user),
+           'card-clinical': user.userType === 'clinical',
+           'card-clerical': user.userType !== 'clinical'
+         }">
+
+      <!-- Accent Bar -->
+      <div class="card-accent"></div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+
+        <!-- Identity Section -->
+        <div class="card-identity">
+          <div class="avatar-wrapper">
+            <div class="user-avatar">{{ getUserInitials(user) }}</div>
+            <span class="avatar-status" [ngClass]="{ 'online': isActive(user), 'offline': !isActive(user) }"></span>
+          </div>
+          <div class="user-info">
+            <div class="name-row">
+              <span class="user-name">{{ getUserDisplayName(user) }}</span>
+              <span class="type-badge" [ngClass]="{ 'badge-clinical': user.userType === 'clinical', 'badge-clerical': user.userType !== 'clinical' }">
+                {{ user.userType === 'clinical' ? 'Clinical' : 'Clerical' }}
+              </span>
+            </div>
+            <span class="user-email">{{ user.email }}</span>
+            <span class="user-uuid" *ngIf="user.uuid" (click)="copyUuid(user.uuid, $event)" title="Click to copy full UUID">
+              <svg cIcon name="cilCopy" class="uuid-icon" *ngIf="copiedUuid !== user.uuid"></svg>
+              <svg cIcon name="cilCheckCircle" class="uuid-icon copied" *ngIf="copiedUuid === user.uuid"></svg>
+              <span *ngIf="copiedUuid !== user.uuid">{{ user.uuid | slice:0:8 }}...</span>
+              <span class="copied-text" *ngIf="copiedUuid === user.uuid">Copied!</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="card-controls">
+          <button class="status-chip"
+                  [ngClass]="isActive(user) ? 'chip-active' : 'chip-inactive'"
+                  (click)="requestToggle(user, $event)">
+            <span class="chip-dot"></span>
+            <span class="chip-text">{{ isActive(user) ? 'Active' : 'Inactive' }}</span>
+            <svg cIcon name="cilSwapHorizontal" class="chip-swap-icon"></svg>
+          </button>
+
+          <!-- Account Setup Link (clinical users only) -->
+          <div class="setup-link" *ngIf="user.userType === 'clinical'" (click)="openTimeline(user)">
+            <svg cIcon name="cilHistory" class="setup-link-icon"></svg>
+            <span>Account Creation Progress</span>
+            <svg cIcon name="cilArrowRight" class="setup-link-arrow"></svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Status Change Confirmation -->
+<div class="confirm-backdrop" *ngIf="confirmVisible" (click)="cancelToggle()"></div>
+<div class="confirm-popup" *ngIf="confirmVisible">
+  <div class="confirm-header">
+    <svg cIcon name="cilWarning" class="confirm-header-icon"></svg>
+    <div class="confirm-header-text">
+      <span class="confirm-header-title">Confirm Status Change</span>
+      <span class="confirm-header-subtitle">This action will change user access permissions</span>
+    </div>
+    <button class="confirm-close-btn" (click)="cancelToggle()">
+      <svg cIcon name="cilX" class="confirm-close-icon"></svg>
+    </button>
+  </div>
+  <div class="confirm-body" *ngIf="confirmUser">
+    <div class="confirm-user-card">
+      <div class="confirm-avatar">{{ getUserInitials(confirmUser) }}</div>
+      <div class="confirm-user-info">
+        <span class="confirm-user-name">{{ getUserDisplayName(confirmUser) }}</span>
+        <span class="confirm-user-email">{{ confirmUser.email }}</span>
+      </div>
+    </div>
+
+    <div class="confirm-status-change">
+      <div class="confirm-status-from">
+        <span class="confirm-status-label">Current</span>
+        <span class="status-pill" [ngClass]="isActive(confirmUser) ? 'pill-active' : 'pill-inactive'">
+          <span class="pill-dot"></span>
+          {{ isActive(confirmUser) ? 'Active' : 'Inactive' }}
+        </span>
+      </div>
+      <svg cIcon name="cilArrowRight" class="confirm-arrow"></svg>
+      <div class="confirm-status-to">
+        <span class="confirm-status-label">New Status</span>
+        <span class="status-pill" [ngClass]="confirmNewStatus === 'ACTIVE' ? 'pill-active' : 'pill-inactive'">
+          <span class="pill-dot"></span>
+          {{ confirmNewStatus === 'ACTIVE' ? 'Active' : 'Inactive' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="confirm-warning" *ngIf="confirmNewStatus === 'INACTIVE'">
+      <div class="warning-icon-wrapper">
+        <svg cIcon name="cilWarning" class="warning-icon"></svg>
+      </div>
+      <div class="warning-content">
+        <span class="warning-title">This user will be unable to log in</span>
+        <span class="warning-text">The user will immediately lose access to the system and will not be able to sign in. All existing data, records, and history associated with this account will be preserved.</span>
+      </div>
+    </div>
+
+    <div class="confirm-info" *ngIf="confirmNewStatus === 'ACTIVE'">
+      <div class="info-icon-wrapper">
+        <svg cIcon name="cilCheckCircle" class="info-icon"></svg>
+      </div>
+      <div class="info-content">
+        <span class="info-title">This user will regain system access</span>
+        <span class="info-text">The user will be able to log in and resume normal activity. All previously saved data, records, and history will remain available.</span>
+      </div>
+    </div>
+  </div>
+  <div class="confirm-footer">
+    <button class="confirm-btn-cancel" (click)="cancelToggle()">Cancel</button>
+    <button class="confirm-btn-action"
+            [ngClass]="confirmNewStatus === 'ACTIVE' ? 'btn-activate' : 'btn-deactivate'"
+            [disabled]="statusUpdating"
+            (click)="confirmToggle()">
+      <span *ngIf="!statusUpdating">{{ confirmNewStatus === 'ACTIVE' ? 'Activate User' : 'Deactivate User' }}</span>
+      <span *ngIf="statusUpdating">Updating...</span>
+    </button>
+  </div>
+</div>
+
+<!-- Account Creation Progress Modal -->
+<c-modal id="doctorTimeline" [visible]="timelineVisible" size="lg">
+  <div class="modal-header-custom">
+    <div class="modal-header-left">
+      <svg cIcon name="cilHistory" class="modal-header-icon"></svg>
+      <div class="modal-header-text">
+        <h3 class="modal-title">Account Creation Progress</h3>
+        <p class="modal-subtitle" *ngIf="selectedUser">{{ getUserDisplayName(selectedUser) }}</p>
+      </div>
+    </div>
+    <button class="modal-close-btn" (click)="closeTimeline()">
+      <svg cIcon name="cilX" class="modal-close-icon"></svg>
+    </button>
+  </div>
+  <c-modal-body>
+    <div class="modal-loading" *ngIf="timelineLoading">
+      <span class="loading-text">Loading audit records...</span>
+    </div>
+    <app-doctor-timeline
+      [user]="selectedUser"
+      [auditRecords]="auditRecords"
+      *ngIf="timelineVisible && !timelineLoading">
+    </app-doctor-timeline>
+  </c-modal-body>
+</c-modal>

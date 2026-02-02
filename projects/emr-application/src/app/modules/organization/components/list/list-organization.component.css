@@ -264,6 +264,18 @@
   box-shadow: 0 2px 4px rgba(3, 105, 161, 0.2);
 }
 
+.btn-users {
+  color: #0891b2;
+}
+
+.btn-users:hover {
+  background: #0891b2;
+  border-color: #0891b2;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(8, 145, 178, 0.2);
+}
+
 .btn-delete {
   color: #dc2626;
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateOrganizationComponent } from './components/create/create-organization.component';
 import { ListOrganizationComponent } from './components/list/list-organization.component';
+import { OrganizationUsersComponent } from './components/users/organization-users.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,13 @@ const routes: Routes = [
           title: 'Organizations',
         },
 
+      },
+      {
+        path: ':id/users',
+        component: OrganizationUsersComponent,
+        data: {
+          title: 'Users',
+        },
       }
     ]
   }
