@@ -1,0 +1,80 @@
+<div class="signature-pad-container">
+  <c-nav variant="tabs" class="signature-tabs" role="tablist">
+    <c-nav-item>
+      <a cNavLink
+         [active]="activeTab === CaptureMethod.DRAW"
+         (click)="setActiveTab(CaptureMethod.DRAW)"
+         role="tab"
+         [attr.aria-selected]="activeTab === CaptureMethod.DRAW"
+         aria-controls="tab-draw"
+         tabindex="0"
+         (keydown.enter)="setActiveTab(CaptureMethod.DRAW)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+        </svg>
+        Draw
+      </a>
+    </c-nav-item>
+    <c-nav-item>
+      <a cNavLink
+         [active]="activeTab === CaptureMethod.UPLOAD"
+         (click)="setActiveTab(CaptureMethod.UPLOAD)"
+         role="tab"
+         [attr.aria-selected]="activeTab === CaptureMethod.UPLOAD"
+         aria-controls="tab-upload"
+         tabindex="0"
+         (keydown.enter)="setActiveTab(CaptureMethod.UPLOAD)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        Upload
+      </a>
+    </c-nav-item>
+    <c-nav-item>
+      <a cNavLink
+         [active]="activeTab === CaptureMethod.TYPE"
+         (click)="setActiveTab(CaptureMethod.TYPE)"
+         role="tab"
+         [attr.aria-selected]="activeTab === CaptureMethod.TYPE"
+         aria-controls="tab-type"
+         tabindex="0"
+         (keydown.enter)="setActiveTab(CaptureMethod.TYPE)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tab-icon">
+          <polyline points="4 7 4 4 20 4 20 7"></polyline>
+          <line x1="9" y1="20" x2="15" y2="20"></line>
+          <line x1="12" y1="4" x2="12" y2="20"></line>
+        </svg>
+        Type
+      </a>
+    </c-nav-item>
+  </c-nav>
+
+  <div class="tab-content-area">
+    <div id="tab-draw" role="tabpanel" *ngIf="activeTab === CaptureMethod.DRAW">
+      <app-signature-pad-draw
+        [config]="config"
+        (signatureChange)="onDrawChange($event)">
+      </app-signature-pad-draw>
+    </div>
+
+    <div id="tab-upload" role="tabpanel" *ngIf="activeTab === CaptureMethod.UPLOAD">
+      <app-signature-pad-upload
+        [config]="config"
+        (signatureChange)="onUploadChange($event)"
+        (fileInfoChange)="onUploadFileInfo($event)">
+      </app-signature-pad-upload>
+    </div>
+
+    <div id="tab-type" role="tabpanel" *ngIf="activeTab === CaptureMethod.TYPE">
+      <app-signature-pad-type
+        [config]="config"
+        (signatureChange)="onTypeChange($event)">
+      </app-signature-pad-type>
+    </div>
+  </div>
+</div>

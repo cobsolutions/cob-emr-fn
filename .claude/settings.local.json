@@ -12,7 +12,8 @@
       "Bash(npx ng build)",
       "Bash(cat:*)",
       "Bash(npx ng build:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(ls:*)"
     ]
   }
 }

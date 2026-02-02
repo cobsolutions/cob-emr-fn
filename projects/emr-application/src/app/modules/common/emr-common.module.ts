@@ -36,12 +36,24 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ViewAddressComponent } from './components/view.address/view-address.component';
 import { ReadonlyFormDirective } from './directives/permissions/readonly-form.directive';
 import { RoleScopeDirective } from './directives/permissions/role-scope.directive';
+import { SignaturePadComponent } from './components/signature-pad/signature-pad.component';
+import { SignaturePadDrawComponent } from './components/signature-pad/signature-pad-draw.component';
+import { SignaturePadUploadComponent } from './components/signature-pad/signature-pad-upload.component';
+import { SignaturePadTypeComponent } from './components/signature-pad/signature-pad-type.component';
+import { SigningCeremonyComponent } from './components/signing-ceremony/signing-ceremony.component';
+import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
   SingleAddressComponent,
   ContactComponent,
-  ViewAddressComponent
+  ViewAddressComponent,
+  SignaturePadComponent,
+  SignaturePadDrawComponent,
+  SignaturePadUploadComponent,
+  SignaturePadTypeComponent,
+  SigningCeremonyComponent,
+  OtpVerificationComponent
 ]
 
 const APP_COMMON_PIPES = [
@@ -97,6 +109,8 @@ const COREUI_MODULES = [
     UtilitiesModule,
     IconModule,
     ButtonGroupModule,
+    NavModule,
+    TabsModule,
   ],
   exports: [
     APP_COMMON_COMPONENTS,

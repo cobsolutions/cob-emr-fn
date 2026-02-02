@@ -1,0 +1,28 @@
+<div class="signature-draw-container">
+  <div class="canvas-wrapper" role="img" aria-label="Signature drawing area">
+    <canvas #signatureCanvas class="signature-canvas"></canvas>
+    <div class="canvas-placeholder" *ngIf="isEmpty">
+      Sign here
+    </div>
+  </div>
+  <div class="draw-actions">
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="undo()" [disabled]="isEmpty"
+            aria-label="Undo last stroke">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1 4 1 10 7 10"></polyline>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+      </svg>
+      Undo
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="clear()" [disabled]="isEmpty"
+            aria-label="Clear signature">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      </svg>
+      Clear
+    </button>
+  </div>
+</div>

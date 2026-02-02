@@ -1,0 +1,66 @@
+.signature-draw-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  border: 2px dashed #c4c9d0;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.canvas-wrapper:focus-within {
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+}
+
+.signature-canvas {
+  display: block;
+  width: 100%;
+  touch-action: none;
+}
+
+.canvas-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #9da5b1;
+  font-size: 1.1rem;
+  font-style: italic;
+  pointer-events: none;
+  user-select: none;
+}
+
+.draw-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.draw-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (prefers-contrast: high) {
+  .canvas-wrapper {
+    border-color: #000;
+    border-width: 3px;
+  }
+
+  .canvas-placeholder {
+    color: #555;
+  }
+}
+
+@media (max-width: 576px) {
+  .draw-actions {
+    justify-content: center;
+  }
+}

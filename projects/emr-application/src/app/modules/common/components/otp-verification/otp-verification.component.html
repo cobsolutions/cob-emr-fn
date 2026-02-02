@@ -1,0 +1,96 @@
+<div class="otp-card">
+  <!-- Header -->
+  <div class="otp-header">
+    <div class="otp-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+           stroke="#0891b2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+    <h2 class="otp-title">Verify Your Identity</h2>
+    <p class="otp-subtitle">
+      A 6-digit verification code has been sent to
+      <strong>{{ maskedPhone }}</strong>
+    </p>
+  </div>
+
+  <!-- Expiry countdown -->
+  <div class="expiry-bar" *ngIf="!expired && !locked">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    Code expires in <strong>{{ expiryDisplay }}</strong>
+  </div>
+
+  <!-- 6-digit input -->
+  <div class="digit-inputs" [class.shake]="shake" [class.error-state]="errorMessage && !locked" [class.locked-state]="locked">
+    <input
+      *ngFor="let d of digits; let i = index"
+      #digitInput
+      type="text"
+      inputmode="numeric"
+      maxlength="1"
+      class="digit-input"
+      [value]="digits[i]"
+      [disabled]="verifying || locked || expired"
+      (input)="onDigitInput($event, i)"
+      (keydown)="onDigitKeydown($event, i)"
+      (paste)="onPaste($event)"
+      autocomplete="one-time-code"
+    >
+  </div>
+
+  <!-- Verifying spinner -->
+  <div class="verifying-indicator" *ngIf="verifying">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Verifying...
+  </div>
+
+  <!-- Error message -->
+  <div class="otp-error" *ngIf="errorMessage && !verifying" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="15" y1="9" x2="9" y2="15"></line>
+      <line x1="9" y1="9" x2="15" y2="15"></line>
+    </svg>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <!-- Lockout countdown -->
+  <div class="lockout-notice" *ngIf="locked">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+    </svg>
+    Account temporarily locked. Try again in <strong>{{ lockoutDisplay }}</strong>
+  </div>
+
+  <!-- Resend / Actions -->
+  <div class="otp-actions">
+    <div class="resend-row">
+      <span class="resend-label">Didn't receive the code?</span>
+      <button
+        type="button"
+        class="btn btn-link resend-btn"
+        [class.highlighted]="expired && resendCooldown === 0"
+        [disabled]="resendCooldown > 0 || locked"
+        (click)="resendOtp()">
+        <span *ngIf="resendCooldown > 0">Resend in {{ resendCooldown }}s</span>
+        <span *ngIf="resendCooldown === 0">Resend Code</span>
+      </button>
+    </div>
+    <button type="button" class="btn btn-outline-secondary btn-sm cancel-btn" (click)="cancel()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back
+    </button>
+  </div>
+</div>

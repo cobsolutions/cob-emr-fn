@@ -109,13 +109,14 @@ export class CreateUserComponent implements OnInit, DoCheck {
     const controls = this.userCreateForm?.form?.controls;
     if (!controls) return;
 
-    // Basic Info: firstName, lastName, email, password, username
+    // Basic Info: firstName, lastName, email, password, username, phone
     const firstNameValid = controls['firstName']?.valid ?? false;
     const lastNameValid = controls['lastName']?.valid ?? false;
     const passwordValid = controls['password']?.valid ?? false;
+    const phoneValid = controls['phone']?.valid ?? false;
     const emailFilled = !!this.user.email;
     const usernameFilled = !!this.user.accountName;
-    this.isValidBasicInfo = firstNameValid && lastNameValid && passwordValid && emailFilled && usernameFilled;
+    this.isValidBasicInfo = firstNameValid && lastNameValid && passwordValid && phoneValid && emailFilled && usernameFilled;
 
     // User Type: role selected, and if Clinical all clinical fields valid
     const roleValid = controls['role']?.valid ?? false;

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core';
 import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
+import { SignatureLayoutComponent } from './core/signature.layout/signature-layout.component';
 import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
 import { PendingActivationGuard } from './modules/security/service/pending-activation.guard';
@@ -25,6 +26,21 @@ const routes: Routes = [
         path:'signup',
         loadChildren: () =>
           import('./modules/signup/signup.module').then((m) => m.SignupModule)
+      }
+    ]
+  },
+  {
+    path: 'emr-signature',
+    component: SignatureLayoutComponent,
+    canActivate: [KcAuthGuard],
+    data: {
+      title: 'Signature Capture'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/doctor-signature/doctor-signature.module').then((m) => m.DoctorSignatureModule)
       }
     ]
   },

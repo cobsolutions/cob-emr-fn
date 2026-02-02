@@ -1,0 +1,28 @@
+.signature-pad-container {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.signature-tabs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tab-icon {
+  flex-shrink: 0;
+}
+
+.tab-content-area {
+  padding: 16px;
+}
+
+@media (max-width: 576px) {
+  .tab-content-area {
+    padding: 12px 8px;
+  }
+}

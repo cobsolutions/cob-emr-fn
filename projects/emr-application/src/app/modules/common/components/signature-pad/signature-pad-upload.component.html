@@ -1,0 +1,61 @@
+<div class="signature-upload-container">
+  <!-- Drop zone (shown when no preview) -->
+  <div class="drop-zone" *ngIf="!previewUrl"
+       [class.drag-over]="isDragOver"
+       (dragover)="onDragOver($event)"
+       (dragleave)="onDragLeave($event)"
+       (drop)="onDrop($event)"
+       (click)="fileInput.click()"
+       (keydown.enter)="fileInput.click()"
+       (keydown.space)="fileInput.click()"
+       tabindex="0"
+       role="button"
+       aria-label="Upload signature image. Click or drag and drop a file here.">
+    <input #fileInput type="file"
+           accept="image/png,image/jpeg,image/svg+xml"
+           (change)="onFileSelected($event)"
+           class="file-input"
+           aria-hidden="true">
+    <div class="drop-zone-content">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+           stroke="#9da5b1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <p class="drop-zone-text">Drag & drop your signature image here</p>
+      <p class="drop-zone-hint">or click to browse files</p>
+      <p class="drop-zone-formats">PNG, JPEG, SVG (max {{ config.maxUploadSizeMB || 5 }}MB)</p>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div class="upload-error" *ngIf="errorMessage" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="15" y1="9" x2="9" y2="15"></line>
+      <line x1="9" y1="9" x2="15" y2="15"></line>
+    </svg>
+    {{ errorMessage }}
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-container" *ngIf="previewUrl">
+    <div class="preview-wrapper">
+      <img [src]="previewUrl" alt="Uploaded signature preview" class="preview-image">
+    </div>
+    <div class="preview-info">
+      <span class="file-name">{{ fileName }}</span>
+      <span class="file-size">{{ (fileSize / 1024).toFixed(1) }} KB</span>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="clear()" aria-label="Remove uploaded image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      </svg>
+      Remove
+    </button>
+  </div>
+</div>

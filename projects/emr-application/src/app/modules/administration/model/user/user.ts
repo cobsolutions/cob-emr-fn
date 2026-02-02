@@ -20,5 +20,6 @@ export interface User {
     licence?:string
     speciality?:string
     credential?:string
+    phone?:string
     isClinicChanged?:boolean
 }

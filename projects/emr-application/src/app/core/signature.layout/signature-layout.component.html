@@ -1,0 +1,38 @@
+<div class="signature-layout">
+  <!-- Header -->
+  <header class="signature-header">
+    <div class="signature-header-content">
+      <div class="signature-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+             stroke="#0891B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+        <span class="brand-text">EMR<span class="brand-light">System</span></span>
+      </div>
+      <div class="signature-header-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        Secure Signing
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="signature-main">
+    <div class="signature-content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="signature-footer">
+    <div class="signature-footer-content">
+      <span>EMR System &copy; {{ currentYear }}</span>
+      <span class="footer-separator">|</span>
+      <span>Secure Digital Signature Capture</span>
+    </div>
+  </footer>
+</div>

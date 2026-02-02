@@ -1,0 +1,37 @@
+<div class="signature-type-container">
+  <div class="type-input-group">
+    <label for="signatureTextInput" class="type-label">Type your full name</label>
+    <input id="signatureTextInput"
+           type="text"
+           class="form-control type-input"
+           placeholder="Your full name"
+           [ngModel]="signatureText"
+           (ngModelChange)="onTextChange($event)"
+           maxlength="100"
+           autocomplete="off"
+           aria-label="Type your signature">
+  </div>
+
+  <div class="font-selector" role="radiogroup" aria-label="Signature font style">
+    <button *ngFor="let font of fonts; let i = index"
+            type="button"
+            class="font-option"
+            [class.active]="i === selectedFontIndex"
+            (click)="selectFont(i)"
+            [attr.aria-checked]="i === selectedFontIndex"
+            role="radio"
+            [attr.aria-label]="'Font style: ' + font.name">
+      <span class="font-preview" [style.fontFamily]="font.family">
+        {{ signatureText || 'Signature' }}
+      </span>
+      <span class="font-name">{{ font.name }}</span>
+    </button>
+  </div>
+
+  <div class="type-canvas-wrapper">
+    <canvas #typeCanvas class="type-canvas"></canvas>
+    <div class="canvas-placeholder" *ngIf="!signatureText">
+      Your signature will appear here
+    </div>
+  </div>
+</div>

@@ -31,8 +31,6 @@ export class KcAuthGuard extends KeycloakAuthGuard {
       await this.keycloakAngular.login({
         redirectUri: window.location.origin + state.url,
       });
-    } else if (!(this.roles.some(role => Role.roles.includes(role)))) {
-      this.keycloakAngular.logout();
     }
 
     var type = route.data['type'];

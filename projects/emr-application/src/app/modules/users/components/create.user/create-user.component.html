@@ -170,8 +170,8 @@
               </div>
             </div>
 
-            <!-- Row 3: Password -->
-            <div class="basic-info-row one-col">
+            <!-- Row 3: Password & Phone -->
+            <div class="basic-info-row two-col">
               <div class="basic-field">
                 <label class="basic-field-label" for="password">
                   Password <span class="field-required">*</span>
@@ -189,6 +189,32 @@
                     [disabled]="!isCreated" placeholder="Enter password" #password="ngModel"
                     [(ngModel)]="user.password" type="password" />
                 </c-input-group>
+              </div>
+              <div class="basic-field">
+                <label class="basic-field-label" for="phone">
+                  Phone Number <span class="field-required">*</span>
+                </label>
+                <small
+                  *ngIf="submitted && (phoneField.errors) || (phoneField.invalid && (phoneField.dirty || phoneField.touched))"
+                  class="form-text text-danger">
+                  <span *ngIf="phoneField.errors?.['required']">Phone number is required</span>
+                  <span *ngIf="phoneField.errors?.['minlength'] || phoneField.errors?.['maxlength']">Phone number must be 10 digits</span>
+                  <span *ngIf="phoneField.errors?.['pattern']">Phone number must be 10 digits</span>
+                </small>
+                <c-input-group sizing="sm">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilPhone"></svg>
+                  </span>
+                  <span cInputGroupText>+1</span>
+                  <input cFormControl id="phone" name="phone" sizing="sm"
+                    placeholder="(555) 123-4567" required numbers
+                    minlength="10" maxlength="10" pattern="[0-9]{10}"
+                    [ngClass]="{'is-invalid': phoneField.invalid && (phoneField.dirty || phoneField.touched)}"
+                    [(ngModel)]="user.phone" #phoneField="ngModel" />
+                </c-input-group>
+                <small class="form-text text-muted" *ngIf="user.phone && user.phone.length === 10">
+                  {{ user.phone | phone }}
+                </small>
               </div>
             </div>
 

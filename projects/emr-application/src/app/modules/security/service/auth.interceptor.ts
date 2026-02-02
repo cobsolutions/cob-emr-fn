@@ -40,7 +40,9 @@ export class AuthInterceptor implements HttpInterceptor {
           this.spinner.hide();
 
           // Handle 403 FORBIDDEN responses
-          if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN') {
+          // Skip pending-activation redirects when on the signature capture page
+          const isOnSignaturePage = window.location.pathname.startsWith('/emr-signature');
+          if (error.status === 403 && error.error?.errorCode === 'FORBIDDEN' && !isOnSignaturePage) {
             const message: string = error.error?.message || '';
 
             // Case 1: Pending activation — signature required (sent by email)
