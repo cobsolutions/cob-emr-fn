@@ -129,9 +129,10 @@
         </div>
         <c-row>
             <c-col md="12">
-                <textarea cFormControl id="addtionalInfo" name="addtionalInfo" sizing="sm" rows="2"
+                {{patient.additionalInfo}}
+                <textarea cFormControl id="additionalInfo" name="additionalInfo" sizing="sm" rows="2"
                     placeholder="Enter any additional information or notes about the patient..."
-                    #addtionalInfo="ngModel" [(ngModel)]="patient.addtionalInfo"></textarea>
+                [(ngModel)]="patient.additionalInfo"></textarea>
             </c-col>
         </c-row>
     </div>

@@ -25,7 +25,7 @@ export interface Patient {
     suffix?: Suffix | null;
     employerName?: string;
     title?: Title | null;
-    addtionalInfo?: string;
+    additionalInfo?: string;
     idType?: IdType | null;
     patientId?: string;
     effectiveFromDate?: number;

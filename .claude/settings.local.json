@@ -16,7 +16,9 @@
       "Bash(ls:*)",
       "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" log --oneline -20)",
       "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" diff HEAD~5..HEAD --stat)",
-      "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" show cb354ea1 --stat)"
+      "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" show cb354ea1 --stat)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

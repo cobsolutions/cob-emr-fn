@@ -237,7 +237,7 @@
                 <label cLabel for="caseaddtionalInfo" class="form-label">Additional Information for Chart</label>
                 <textarea cFormControl id="caseaddtionalInfo" name="caseaddtionalInfo" sizing="sm" rows="2"
                     placeholder="Enter any additional notes for the patient chart..."
-                    [(ngModel)]="case.caseOtherInformation.addInfoForChart" #caseaddtionalInfo="ngModel"></textarea>
+                    [(ngModel)]="case.additionalInfo" #caseaddtionalInfo="ngModel"></textarea>
             </c-col>
         </c-row>
         <c-row class="mb-3">

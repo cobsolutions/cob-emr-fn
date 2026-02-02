@@ -51,7 +51,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit, DoCheck {
     suffix: null,
     employerName: '',
     title: null,
-    addtionalInfo: '',
+    additionalInfo: '',
     idType: null,
     patientId: '',
     effectiveFromDate: 0,
