@@ -5,7 +5,7 @@
     <div class="page-title-section">
       <h2 class="page-title">
         <svg cIcon name="cilUser" class="page-icon"></svg>
-        Patient Chart
+       Patient Chart
       </h2>
       <div class="page-subtitle-row">
         <span class="page-subtitle">{{ patientChartInfo.name }}</span>
@@ -32,102 +32,37 @@
 <!-- Main Content -->
 <div class="chart-container">
 
-  <!-- Patient Information Section -->
-  <c-card class="section-card">
-    <div class="card-header-custom">
-      <div class="card-header-title">
-        <svg cIcon name="cilUser" class="card-icon"></svg>
-        <span>Patient Information</span>
+  <!-- LEFT: Sidebar — Patient Information -->
+  <aside class="chart-sidebar">
+    <c-card class="section-card sidebar-card">
+      <div class="card-header-custom">
+        <div class="card-header-title">
+          <svg cIcon name="cilUser" class="card-icon"></svg>
+          <span>Patient Information</span>
+        </div>
       </div>
-      <span class="card-status"
-            [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
-        <span class="card-status-dot"></span>
-        {{ patientChartInfo.patientStatus || 'Unknown' }}
-      </span>
-    </div>
-    <c-card-body class="card-body-custom">
-      <div class="patient-info-layout">
-        <!-- Avatar + Name -->
-        <div class="patient-identity">
-          <patient-avatar [gender]="patientChartInfo.gender" [size]="80" [initials]="patientChartInfo.name">
+      <c-card-body class="card-body-custom">
+        <!-- Avatar + Name + Badges (centered) -->
+        <div class="sidebar-patient-identity">
+          <patient-avatar [gender]="patientChartInfo.gender" [size]="60" [initials]="patientChartInfo.name">
           </patient-avatar>
-          <div class="patient-name-group">
-            <div class="patient-name-row">
-              <div class="patient-name">{{ patientChartInfo.name }}</div>
-              <div *ngIf="patientChartInfo.emrId" class="emr-badge">
-                <span class="emr-badge-label">EMR</span>
-                <span class="emr-badge-value">{{ patientChartInfo.emrId }}</span>
-              </div>
-              <div class="status-pill"
-                   [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
-                <span class="status-pill-dot"></span>
-                <span class="status-pill-text">{{ patientChartInfo.patientStatus || 'Unknown' }}</span>
-              </div>
+          <div class="sidebar-patient-name">{{ patientChartInfo.name }}</div>
+          <div class="sidebar-badges">
+            <div *ngIf="patientChartInfo.emrId" class="emr-badge">
+              <span class="emr-badge-label">EMR</span>
+              <span class="emr-badge-value">{{ patientChartInfo.emrId }}</span>
             </div>
-            <div class="patient-demographics">
-              <span>DOB: <strong>{{ patientChartInfo.dateOfBirth | date:'MM/dd/yyyy' }}</strong></span>
-              <span class="sep">|</span>
-              <span>Age: <strong>{{ patientChartInfo.age }}</strong></span>
+            <div class="status-pill"
+                 [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
+              <span class="status-pill-dot"></span>
+              <span class="status-pill-text">{{ patientChartInfo.patientStatus || 'Unknown' }}</span>
             </div>
           </div>
         </div>
 
-        <!-- Info Cards Grid -->
-        <div class="info-grid">
-          <div class="info-card">
-            <div class="info-icon emr-id-icon"><svg cIcon name="cilFingerprint"></svg></div>
-            <div class="info-details">
-              <div class="info-label">EMR ID</div>
-              <div class="info-value emr-id-value">{{ patientChartInfo.emrId || '—' }}</div>
-            </div>
-          </div>
-
-          <div class="info-card status-card"
-               [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
-            <div class="info-icon status-bg"
-                 [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
-              <svg cIcon [name]="patientChartInfo.patientStatus === 'Active' ? 'cilCheckCircle' : patientChartInfo.patientStatus === 'Pending' ? 'cilClock' : patientChartInfo.patientStatus === 'Discharged' ? 'cilAccountLogout' : 'cilBan'"></svg>
-            </div>
-            <div class="info-details">
-              <div class="info-label">Status</div>
-              <div class="info-value">
-                <span class="status-text" [ngClass]="patientChartInfo.patientStatus?.toLowerCase()">
-                  {{ patientChartInfo.patientStatus || '—' }}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <div class="info-icon"><svg cIcon name="cilUser"></svg></div>
-            <div class="info-details">
-              <div class="info-label">Name</div>
-              <div class="info-value">{{ patientChartInfo.name }}</div>
-            </div>
-          </div>
-
-          <div class="info-card address" [class.expanded]="showFullAddress" role="group"
-            aria-label="Patient address">
-            <div class="info-icon"><svg cIcon name="cilAddressBook"></svg></div>
-            <div class="info-details">
-              <div class="info-label">Address</div>
-              <div id="addr-{{ patientId }}" class="info-value content"
-                [attr.aria-hidden]="!showFullAddress ? 'false' : 'false'">
-                {{ (patientChartInfo.address && patientChartInfo.address.length) ?
-                (patientChartInfo.address[0]) : '—' }}
-              </div>
-              <button class="toggle-btn" (click)="toggleAddress()" [attr.aria-expanded]="showFullAddress"
-                [attr.aria-controls]="'addr-' + patientId" type="button">
-                <span class="toggle-text">{{ showFullAddress ? 'Show less' : 'Show more' }}</span>
-                <svg class="toggle-chevron" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="info-card">
+        <!-- Info List (vertical stacked) -->
+        <div class="sidebar-info-list">
+          <div class="sidebar-info-item">
             <div class="info-icon"><svg cIcon name="cilBirthdayCake"></svg></div>
             <div class="info-details">
               <div class="info-label">Date of Birth</div>
@@ -137,7 +72,8 @@
               </div>
             </div>
           </div>
-          <div class="info-card">
+
+          <div class="sidebar-info-item">
             <div class="info-icon"><svg cIcon name="cilPhone"></svg></div>
             <div class="info-details">
               <div class="info-label">Phone</div>
@@ -145,82 +81,130 @@
             </div>
           </div>
 
-          <div class="info-card">
-            <div class="info-icon"><svg cIcon name="cilShieldAlt"></svg></div>
-            <div class="info-details">
-              <div class="info-label">Insurance</div>
-              <div class="info-value">{{ patientChartInfo.insurance || '—' }}</div>
+          <!-- Address Section -->
+          <div class="sidebar-address-section" [class.expanded]="showFullAddress" role="group"
+            aria-label="Patient address">
+            <div class="sidebar-address-header" (click)="toggleAddress()">
+              <div class="info-icon"><svg cIcon name="cilLocationPin"></svg></div>
+              <div class="sidebar-address-header-text">
+                <div class="info-label">
+                  Address
+                  <span *ngIf="patientChartInfo.address?.length > 1" class="address-count">
+                    {{ patientChartInfo.address.length }}
+                  </span>
+                </div>
+                <div *ngIf="!showFullAddress && patientChartInfo.address?.length" class="address-preview">
+                  {{ patientChartInfo.address[0] }}
+                </div>
+                <div *ngIf="!patientChartInfo.address?.length" class="info-value">—</div>
+              </div>
+              <button *ngIf="patientChartInfo.address?.length" class="toggle-btn"
+                [attr.aria-expanded]="showFullAddress" type="button"
+                (click)="toggleAddress(); $event.stopPropagation()">
+                <svg class="toggle-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Expanded address list -->
+            <div *ngIf="showFullAddress && patientChartInfo.address?.length" class="address-list">
+              <div *ngFor="let addr of patientChartInfo.address; let i = index" class="address-entry">
+                <div class="address-entry-label">
+                  <svg cIcon name="cilHome" class="address-entry-icon"></svg>
+                  {{ patientChartInfo.address.length > 1 ? 'Address ' + (i + 1) : 'Address' }}
+                </div>
+                <div class="address-entry-value">{{ addr }}</div>
+                <div class="address-entry-actions">
+                  <button class="address-action-btn" type="button" (click)="copyAddress(addr, i)"
+                    [title]="copiedAddressIndex === i ? 'Copied!' : 'Copy address'">
+                    <svg *ngIf="copiedAddressIndex !== i" viewBox="0 0 24 24" width="14" height="14">
+                      <rect x="9" y="9" width="13" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <svg *ngIf="copiedAddressIndex === i" viewBox="0 0 24 24" width="14" height="14" class="check-icon">
+                      <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="address-action-label">{{ copiedAddressIndex === i ? 'Copied' : 'Copy' }}</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </aside>
 
+  <!-- RIGHT: Main Content -->
+  <div class="chart-main">
+
+    <!-- Patient Cases Section (primary — shown first) -->
+    <c-card class="section-card">
+      <div class="card-header-custom">
+        <div class="card-header-title">
+          <svg cIcon name="cilFolder" class="card-icon"></svg>
+          <span>Cases</span>
         </div>
       </div>
-    </c-card-body>
-  </c-card>
+      <c-card-body class="card-body-custom p-0">
+        <c-nav variant="tabs" class="chart-tabs">
+          <span *ngFor="let case of patientCases; let i = index">
+            <a [active]="i===activeTabIndex" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i"
+              cNavLink (click)="setActiveTab(i)">
+              {{case.title}}
+            </a>
+          </span>
+        </c-nav>
 
-  <!-- Patient Appointments Section -->
-  <c-card class="section-card">
-    <div class="card-header-custom">
-      <div class="card-header-title">
-        <svg cIcon name="cilCalendar" class="card-icon"></svg>
-        <span>Appointments</span>
-      </div>
-      <select cFormControl cSelect class="case-select" id="cases" name="cases" sizing="sm"
-        (change)="changeCase($event)">
-        <option selected value="0">All Cases</option>
-        <option *ngFor="let case of patientCases" [value]="case.id">
-          {{case.title}}
-        </option>
-      </select>
-    </div>
-    <c-card-body class="card-body-custom p-0">
-      <c-nav variant="tabs" class="chart-tabs">
-        <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>
-          Upcoming Appointment
-        </a>
-        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
-          Previous Appointment
-        </a>
-      </c-nav>
+        <c-tab-content #caseContent="cTabContent">
+          <c-tab-pane *ngFor="let case of patientCases; let i = index" class="tab-pane-content">
+            <div *ngIf="i === activeTabIndex">
+              <app-patient-chart-case [case]="case" [patientId]="patientId" [patient]="patient"
+                [patientName]="patientChartInfo.name"></app-patient-chart-case>
+            </div>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
 
-      <c-tab-content #tabContent="cTabContent">
-        <c-tab-pane class="tab-pane-content">
-          <app-upcoming-appointment [patientId]="patientId" [caseId]="caseId"></app-upcoming-appointment>
-        </c-tab-pane>
-        <c-tab-pane class="tab-pane-content">
-          <app-previous-appointment [patientId]="patientId" [caseId]="caseId"></app-previous-appointment>
-        </c-tab-pane>
-      </c-tab-content>
-    </c-card-body>
-  </c-card>
-
-  <!-- Patient Cases Section -->
-  <c-card class="section-card">
-    <div class="card-header-custom">
-      <div class="card-header-title">
-        <svg cIcon name="cilFolder" class="card-icon"></svg>
-        <span>Cases</span>
-      </div>
-    </div>
-    <c-card-body class="card-body-custom p-0">
-      <c-nav variant="tabs" class="chart-tabs">
-        <span *ngFor="let case of patientCases; let i = index">
-          <a [active]="i===activeTabIndex" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i"
-            cNavLink (click)="setActiveTab(i)">
+    <!-- Patient Appointments Section -->
+    <c-card class="section-card">
+      <div class="card-header-custom">
+        <div class="card-header-title">
+          <svg cIcon name="cilCalendar" class="card-icon"></svg>
+          <span>Appointments</span>
+        </div>
+        <select cFormControl cSelect class="case-select" id="cases" name="cases" sizing="sm"
+          (change)="changeCase($event)">
+          <option selected value="0">All Cases</option>
+          <option *ngFor="let case of patientCases" [value]="case.id">
             {{case.title}}
+          </option>
+        </select>
+      </div>
+      <c-card-body class="card-body-custom p-0">
+        <c-nav variant="tabs" class="chart-tabs">
+          <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>
+            Upcoming Appointment
           </a>
-        </span>
-      </c-nav>
+          <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>
+            Previous Appointment
+          </a>
+        </c-nav>
 
-      <c-tab-content #caseContent="cTabContent">
-        <c-tab-pane *ngFor="let case of patientCases; let i = index" class="tab-pane-content">
-          <div *ngIf="i === activeTabIndex">
-            <app-patient-chart-case [case]="case" [patientId]="patientId" [patient]="patient"
-              [patientName]="patientChartInfo.name"></app-patient-chart-case>
-          </div>
-        </c-tab-pane>
-      </c-tab-content>
-    </c-card-body>
-  </c-card>
+        <c-tab-content #tabContent="cTabContent">
+          <c-tab-pane class="tab-pane-content">
+            <app-upcoming-appointment [patientId]="patientId" [caseId]="caseId"></app-upcoming-appointment>
+          </c-tab-pane>
+          <c-tab-pane class="tab-pane-content">
+            <app-previous-appointment [patientId]="patientId" [caseId]="caseId"></app-previous-appointment>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+
+  </div>
 
 </div>

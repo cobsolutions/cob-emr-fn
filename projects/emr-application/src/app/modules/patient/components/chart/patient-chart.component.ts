@@ -41,6 +41,7 @@ export class PatientChartComponent implements OnInit, OnDestroy {
   clinicId: number;
   selectedIndex = 0;  // Default to first tab
   showFullAddress = false;
+  copiedAddressIndex: number | null = null;
   activeTabIndex = 0;
 
   setActiveTab(index: number) {
@@ -50,6 +51,14 @@ export class PatientChartComponent implements OnInit, OnDestroy {
   toggleAddress() {
     this.showFullAddress = !this.showFullAddress;
   }
+
+  copyAddress(address: string, index: number) {
+    navigator.clipboard.writeText(address).then(() => {
+      this.copiedAddressIndex = index;
+      setTimeout(() => this.copiedAddressIndex = null, 2000);
+    });
+  }
+
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
