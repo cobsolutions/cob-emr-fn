@@ -297,6 +297,11 @@
   color: #94a3b8;
 }
 
+.results-breakdown {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
 .results-icon {
   width: 0.8125rem;
   height: 0.8125rem;
@@ -328,11 +333,145 @@
   height: 0.6875rem;
 }
 
+/* ========================================
+   USER SECTIONS (Grouped Layout)
+   ======================================== */
+.user-section {
+  margin-bottom: 1.5rem;
+}
+
+.user-section:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Section Header --- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.section-header:hover {
+  filter: brightness(0.97);
+}
+
+.section-header-clinical {
+  background: linear-gradient(135deg, #ecfeff 0%, #f0fdfa 100%);
+  border: 1px solid #cffafe;
+}
+
+.section-header-clerical {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+}
+
+.section-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.section-icon-wrapper {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon-clinical {
+  background: #0891b2;
+}
+
+.section-icon-clerical {
+  background: #475569;
+}
+
+.section-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #ffffff;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: 0.01em;
+}
+
+.section-count {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  min-width: 1.375rem;
+  text-align: center;
+}
+
+.section-count-clinical {
+  background: #0891b2;
+  color: #ffffff;
+}
+
+.section-count-clerical {
+  background: #475569;
+  color: #ffffff;
+}
+
+.section-chevron {
+  width: 1rem;
+  height: 1rem;
+  color: #94a3b8;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.section-chevron.chevron-collapsed {
+  transform: rotate(-90deg);
+}
+
+/* --- Empty Sections --- */
+.empty-sections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  color: #94a3b8;
+}
+
+.empty-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.empty-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 /* --- User Cards Grid --- */
 .user-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  animation: sectionExpand 0.25s ease-out;
+}
+
+@keyframes sectionExpand {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ========================================

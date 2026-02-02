@@ -60,6 +60,9 @@
       <span class="results-text" *ngIf="filteredUsers.length > 0">
         <svg cIcon name="cilPeople" class="results-icon"></svg>
         Showing {{ filteredUsers.length }} of {{ users.length }} user(s)
+        <span class="results-breakdown" *ngIf="clinicalUsers.length > 0 || clericalUsers.length > 0">
+          &mdash; {{ clinicalUsers.length }} clinical, {{ clericalUsers.length }} clerical
+        </span>
       </span>
       <span class="results-text results-empty" *ngIf="filteredUsers.length === 0 && users.length > 0">
         <svg cIcon name="cilInfo" class="results-icon"></svg>
@@ -76,65 +79,117 @@
     </div>
   </div>
 
-  <!-- User Cards Grid -->
-  <div class="user-grid" *ngIf="filteredUsers.length > 0">
-    <div class="user-card"
-         *ngFor="let user of filteredUsers"
-         [ngClass]="{
-           'card-inactive': !isActive(user),
-           'card-clinical': user.userType === 'clinical',
-           'card-clerical': user.userType !== 'clinical'
-         }">
-
-      <!-- Accent Bar -->
-      <div class="card-accent"></div>
-
-      <!-- Card Body -->
-      <div class="card-body">
-
-        <!-- Identity Section -->
-        <div class="card-identity">
-          <div class="avatar-wrapper">
-            <div class="user-avatar">{{ getUserInitials(user) }}</div>
-            <span class="avatar-status" [ngClass]="{ 'online': isActive(user), 'offline': !isActive(user) }"></span>
-          </div>
-          <div class="user-info">
-            <div class="name-row">
-              <span class="user-name">{{ getUserDisplayName(user) }}</span>
-              <span class="type-badge" [ngClass]="{ 'badge-clinical': user.userType === 'clinical', 'badge-clerical': user.userType !== 'clinical' }">
-                {{ user.userType === 'clinical' ? 'Clinical' : 'Clerical' }}
+  <!-- Clinical Users Section -->
+  <div class="user-section" *ngIf="clinicalUsers.length > 0">
+    <div class="section-header section-header-clinical" (click)="toggleSection('clinical')">
+      <div class="section-header-left">
+        <div class="section-icon-wrapper section-icon-clinical">
+          <svg cIcon name="cilMedicalCross" class="section-icon"></svg>
+        </div>
+        <h3 class="section-title">Clinical Users</h3>
+        <span class="section-count section-count-clinical">{{ clinicalUsers.length }}</span>
+      </div>
+      <svg cIcon name="cilChevronBottom" class="section-chevron" [ngClass]="{ 'chevron-collapsed': clinicalCollapsed }"></svg>
+    </div>
+    <div class="user-grid" *ngIf="!clinicalCollapsed">
+      <div class="user-card card-clinical"
+           *ngFor="let user of clinicalUsers"
+           [ngClass]="{ 'card-inactive': !isActive(user) }">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <div class="card-identity">
+            <div class="avatar-wrapper">
+              <div class="user-avatar">{{ getUserInitials(user) }}</div>
+              <span class="avatar-status" [ngClass]="{ 'online': isActive(user), 'offline': !isActive(user) }"></span>
+            </div>
+            <div class="user-info">
+              <div class="name-row">
+                <span class="user-name">{{ getUserDisplayName(user) }}</span>
+                <span class="type-badge badge-clinical">Clinical</span>
+              </div>
+              <span class="user-email">{{ user.email }}</span>
+              <span class="user-uuid" *ngIf="user.uuid" (click)="copyUuid(user.uuid, $event)" title="Click to copy full UUID">
+                <svg cIcon name="cilCopy" class="uuid-icon" *ngIf="copiedUuid !== user.uuid"></svg>
+                <svg cIcon name="cilCheckCircle" class="uuid-icon copied" *ngIf="copiedUuid === user.uuid"></svg>
+                <span *ngIf="copiedUuid !== user.uuid">{{ user.uuid | slice:0:8 }}...</span>
+                <span class="copied-text" *ngIf="copiedUuid === user.uuid">Copied!</span>
               </span>
             </div>
-            <span class="user-email">{{ user.email }}</span>
-            <span class="user-uuid" *ngIf="user.uuid" (click)="copyUuid(user.uuid, $event)" title="Click to copy full UUID">
-              <svg cIcon name="cilCopy" class="uuid-icon" *ngIf="copiedUuid !== user.uuid"></svg>
-              <svg cIcon name="cilCheckCircle" class="uuid-icon copied" *ngIf="copiedUuid === user.uuid"></svg>
-              <span *ngIf="copiedUuid !== user.uuid">{{ user.uuid | slice:0:8 }}...</span>
-              <span class="copied-text" *ngIf="copiedUuid === user.uuid">Copied!</span>
-            </span>
+          </div>
+          <div class="card-controls">
+            <button class="status-chip"
+                    [ngClass]="isActive(user) ? 'chip-active' : 'chip-inactive'"
+                    (click)="requestToggle(user, $event)">
+              <span class="chip-dot"></span>
+              <span class="chip-text">{{ isActive(user) ? 'Active' : 'Inactive' }}</span>
+              <svg cIcon name="cilSwapHorizontal" class="chip-swap-icon"></svg>
+            </button>
+            <div class="setup-link" (click)="openTimeline(user)">
+              <svg cIcon name="cilHistory" class="setup-link-icon"></svg>
+              <span>Account Creation Progress</span>
+              <svg cIcon name="cilArrowRight" class="setup-link-arrow"></svg>
+            </div>
           </div>
         </div>
-
-        <!-- Controls Section -->
-        <div class="card-controls">
-          <button class="status-chip"
-                  [ngClass]="isActive(user) ? 'chip-active' : 'chip-inactive'"
-                  (click)="requestToggle(user, $event)">
-            <span class="chip-dot"></span>
-            <span class="chip-text">{{ isActive(user) ? 'Active' : 'Inactive' }}</span>
-            <svg cIcon name="cilSwapHorizontal" class="chip-swap-icon"></svg>
-          </button>
-
-          <!-- Account Setup Link (clinical users only) -->
-          <div class="setup-link" *ngIf="user.userType === 'clinical'" (click)="openTimeline(user)">
-            <svg cIcon name="cilHistory" class="setup-link-icon"></svg>
-            <span>Account Creation Progress</span>
-            <svg cIcon name="cilArrowRight" class="setup-link-arrow"></svg>
-          </div>
-        </div>
-
       </div>
     </div>
+  </div>
+
+  <!-- Clerical Users Section -->
+  <div class="user-section" *ngIf="clericalUsers.length > 0">
+    <div class="section-header section-header-clerical" (click)="toggleSection('clerical')">
+      <div class="section-header-left">
+        <div class="section-icon-wrapper section-icon-clerical">
+          <svg cIcon name="cilClipboard" class="section-icon"></svg>
+        </div>
+        <h3 class="section-title">Clerical Users</h3>
+        <span class="section-count section-count-clerical">{{ clericalUsers.length }}</span>
+      </div>
+      <svg cIcon name="cilChevronBottom" class="section-chevron" [ngClass]="{ 'chevron-collapsed': clericalCollapsed }"></svg>
+    </div>
+    <div class="user-grid" *ngIf="!clericalCollapsed">
+      <div class="user-card card-clerical"
+           *ngFor="let user of clericalUsers"
+           [ngClass]="{ 'card-inactive': !isActive(user) }">
+        <div class="card-accent"></div>
+        <div class="card-body">
+          <div class="card-identity">
+            <div class="avatar-wrapper">
+              <div class="user-avatar">{{ getUserInitials(user) }}</div>
+              <span class="avatar-status" [ngClass]="{ 'online': isActive(user), 'offline': !isActive(user) }"></span>
+            </div>
+            <div class="user-info">
+              <div class="name-row">
+                <span class="user-name">{{ getUserDisplayName(user) }}</span>
+                <span class="type-badge badge-clerical">Clerical</span>
+              </div>
+              <span class="user-email">{{ user.email }}</span>
+              <span class="user-uuid" *ngIf="user.uuid" (click)="copyUuid(user.uuid, $event)" title="Click to copy full UUID">
+                <svg cIcon name="cilCopy" class="uuid-icon" *ngIf="copiedUuid !== user.uuid"></svg>
+                <svg cIcon name="cilCheckCircle" class="uuid-icon copied" *ngIf="copiedUuid === user.uuid"></svg>
+                <span *ngIf="copiedUuid !== user.uuid">{{ user.uuid | slice:0:8 }}...</span>
+                <span class="copied-text" *ngIf="copiedUuid === user.uuid">Copied!</span>
+              </span>
+            </div>
+          </div>
+          <div class="card-controls">
+            <button class="status-chip"
+                    [ngClass]="isActive(user) ? 'chip-active' : 'chip-inactive'"
+                    (click)="requestToggle(user, $event)">
+              <span class="chip-dot"></span>
+              <span class="chip-text">{{ isActive(user) ? 'Active' : 'Inactive' }}</span>
+              <svg cIcon name="cilSwapHorizontal" class="chip-swap-icon"></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state when both sections are empty after filtering -->
+  <div class="empty-sections" *ngIf="filteredUsers.length === 0 && users.length > 0">
+    <svg cIcon name="cilInfo" class="empty-icon"></svg>
+    <span class="empty-text">No users match your current filters</span>
   </div>
 
 </div>

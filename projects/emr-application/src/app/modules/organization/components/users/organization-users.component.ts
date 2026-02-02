@@ -18,6 +18,10 @@ export class OrganizationUsersComponent implements OnInit {
   organization: Organization;
   users: OrganizationUser[] = [];
   filteredUsers: OrganizationUser[] = [];
+  clinicalUsers: OrganizationUser[] = [];
+  clericalUsers: OrganizationUser[] = [];
+  clinicalCollapsed: boolean = false;
+  clericalCollapsed: boolean = false;
   isLoading: boolean = true;
   timelineVisible: boolean = false;
   timelineLoading: boolean = false;
@@ -94,6 +98,16 @@ export class OrganizationUsersComponent implements OnInit {
     }
 
     this.filteredUsers = result;
+    this.clinicalUsers = result.filter(u => u.userType === 'clinical');
+    this.clericalUsers = result.filter(u => u.userType !== 'clinical');
+  }
+
+  toggleSection(section: 'clinical' | 'clerical'): void {
+    if (section === 'clinical') {
+      this.clinicalCollapsed = !this.clinicalCollapsed;
+    } else {
+      this.clericalCollapsed = !this.clericalCollapsed;
+    }
   }
 
   setStatusFilter(filter: string): void {
