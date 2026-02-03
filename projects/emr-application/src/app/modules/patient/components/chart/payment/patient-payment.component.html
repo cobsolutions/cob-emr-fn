@@ -2,40 +2,48 @@
     <div class="d-flex justify-content-end mb-3">
         <button cButton class="add-payment-btn" (click)="openPaymentModal()">Add Payment</button>
     </div>
-    <ng-container *ngIf="props$ | async as props">
-        <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-            [items]="(patientPaymentRecordResponse$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-            (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-            [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: false, small: true }"
-            [tableBodyProps]="{ align: 'middle' }" (sorterValueChange)="handleSorterValueChange($event)" header>
-            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
-                let-tdContent="tdContent">
-                <td>
-                    <ng-container [ngSwitch]="columnName">
-                        <ng-container *ngSwitchCase="'appointmentStatus'">
-                            <span class="status-badge">{{ tdContent }}</span>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'amount'">
-                            <span class="amount-text">{{ tdContent | currency: 'USD' }}</span>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'createdAt'">
-                            <span class="date-text">{{ tdContent | date:'MMM d, y, h:mm a' }}</span>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'Actions'">
-                        </ng-container>
-                        <ng-container *ngSwitchDefault>
-                            {{ tdContent }}
-                        </ng-container>
-                    </ng-container>
-                </td>
-            </ng-template>
-        </c-smart-table>
-        <div class="pagination-wrapper" *ngIf="props.totalPages">
-            <c-smart-pagination [activePage]="props.activePage" size="sm"
-                (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
-            </c-smart-pagination>
-        </div>
-    </ng-container>
+    <div class="table-responsive">
+        <table cTable [hover]="true" class="payments-table">
+            <thead>
+                <tr>
+                    <th>Date of Transaction</th>
+                    <th>Date of Service</th>
+                    <th>Payment Method</th>
+                    <th>Charge Type</th>
+                    <th>Amount Due</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let payment of payments">
+                    <td>
+                        <span class="date-text">{{ payment.dateOfTransaction | date:'MMM d, y' }}</span>
+                    </td>
+                    <td>
+                        <span class="date-text">{{ payment.dateOfService | date:'MMM d, y' }}</span>
+                    </td>
+                    <td>{{ payment.paymentMethod }}</td>
+                    <td>
+                        <span class="status-badge">{{ formatChargeType(payment.chargeType) }}</span>
+                    </td>
+                    <td>
+                        <span class="amount-text">{{ payment.amountDue | currency: 'USD' }}</span>
+                    </td>
+                    <td>{{ payment.description }}</td>
+                    <td class="text-center">
+                        <button cButton color="danger" variant="ghost" size="sm" class="delete-btn"
+                            (click)="deletePayment(payment.id)">
+                            <svg cIcon name="cilTrash" size="sm"></svg>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="payments.length === 0">
+                    <td colspan="7" class="empty-state">No payments found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Add Payment Modal -->
@@ -52,5 +60,23 @@
         <button cButton class="save-btn" [disabled]="casePayment.isSaving" (click)="casePayment.savePayment()">
             {{ casePayment.isSaving ? 'Saving...' : 'Save Payment' }}
         </button>
+    </c-modal-footer>
+</c-modal>
+
+<!-- Delete Confirmation Modal -->
+<c-modal id="deleteConfirm" [visible]="showDeleteConfirmModal" (visibleChange)="!$event && closeDeleteConfirmModal()">
+    <c-modal-header>
+        <h5 cModalTitle>
+            <svg cIcon name="cilWarning" class="me-2"></svg>
+            Delete Confirmation
+        </h5>
+        <button cButtonClose (click)="closeDeleteConfirmModal()"></button>
+    </c-modal-header>
+    <c-modal-body>
+        Are you sure you want to delete this payment? This action cannot be undone.
+    </c-modal-body>
+    <c-modal-footer>
+        <button cButton class="cancel-btn" (click)="closeDeleteConfirmModal()">Cancel</button>
+        <button cButton class="delete-confirm-btn" (click)="confirmDelete()">Delete</button>
     </c-modal-footer>
 </c-modal>

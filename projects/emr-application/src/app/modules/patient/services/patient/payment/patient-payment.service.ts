@@ -28,4 +28,12 @@ export class PatientPaymentService extends BasePaginationService {
     return this.httpClient.post(`${this.casePaymentUrl}/create/caseId/${caseId}`, JSON.stringify(payments), { headers });
   }
 
+  public findCasePayments(caseId: number): Observable<any> {
+    return this.httpClient.get(`${this.casePaymentUrl}/find/caseId/${caseId}`);
+  }
+
+  public deleteCasePayment(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.casePaymentUrl}/delete/${id}`);
+  }
+
 }

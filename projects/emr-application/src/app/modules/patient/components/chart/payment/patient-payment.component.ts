@@ -1,25 +1,25 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { PatientCasePaymentComponent } from './patient-case-payment.component';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { map, Observable, retry, tap } from 'rxjs';
-import { ListTemplate } from '../../../../common/template/list.template';
-import { PatientPaymentRecordResponse } from '../../../models/chart/patient.payment/patient.payment.record.response';
 import { PatientPaymentService } from '../../../services/patient/payment/patient-payment.service';
+import { PatientCasePayment } from '../../../models/chart/patient.payment/patient-case-payment.request';
 
 @Component({
   selector: 'patient-payment',
   templateUrl: './patient-payment.component.html',
   styleUrls: ['./patient-payment.component.css']
 })
-export class PatientPaymentComponent extends ListTemplate implements OnInit {
-  patientPaymentRecordResponse$!: Observable<PatientPaymentRecordResponse[]>;
+export class PatientPaymentComponent implements OnInit {
+  payments: PatientCasePayment[] = [];
   columns: (string | IColumn)[];
   @Input() patientId: number;
   @Input() caseId: number;
   @ViewChild(PatientCasePaymentComponent) casePaymentComponent: PatientCasePaymentComponent;
   showPaymentModal = false;
+  showDeleteConfirmModal = false;
+  paymentToDelete: number | null = null;
 
-  constructor(private patientPaymentService: PatientPaymentService) { super(); }
+  constructor(private patientPaymentService: PatientPaymentService) {}
 
   openPaymentModal(): void {
     this.showPaymentModal = true;
@@ -32,35 +32,52 @@ export class PatientPaymentComponent extends ListTemplate implements OnInit {
 
   onPaymentSaved(): void {
     this.closePaymentModal();
-    this.getPatientPayments();
+    this.loadPayments();
   }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['amount', 'reason', 'createdAt', 'Actions']);
-    this.getPatientPayments();
+    this.loadPayments();
   }
 
-  private getPatientPayments() {
-    this.patientPaymentRecordResponse$ = this.patientPaymentService.findPatientPayments(this.apiParams$, this.patientId , this.caseId).pipe(
-      retry({
-        delay: (error) => {
-          console.warn('Retry: ', error);
-          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
-          this.loadingData$.next(false);
-          return this.retry$;
-        }
-      }),
-      tap((response: any) => {
-        this.totalItems$.next(response.number_of_matching_records);
-        if (response.number_of_records) {
-          this.errorMessage$.next('');
-        }
-        this.retry$.next(false);
-        this.loadingData$.next(false);
-      }),
-      map((response: any) => {
-        return response.records;
-      })
-    )
+  private loadPayments(): void {
+    this.patientPaymentService.findCasePayments(this.caseId).subscribe({
+      next: (response: any) => {
+        this.payments = response || [];
+      },
+      error: (err) => {
+        console.error('Error loading payments:', err);
+        this.payments = [];
+      }
+    });
+  }
+
+  formatChargeType(type: string): string {
+    if (!type) return '';
+    return type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).toLowerCase().replace(/^\w/, c => c.toUpperCase());
+  }
+
+  deletePayment(id: number): void {
+    this.paymentToDelete = id;
+    this.showDeleteConfirmModal = true;
+  }
+
+  confirmDelete(): void {
+    if (this.paymentToDelete === null) return;
+
+    this.patientPaymentService.deleteCasePayment(this.paymentToDelete).subscribe({
+      next: () => {
+        this.loadPayments();
+        this.closeDeleteConfirmModal();
+      },
+      error: (err) => {
+        console.error('Error deleting payment:', err);
+        this.closeDeleteConfirmModal();
+      }
+    });
+  }
+
+  closeDeleteConfirmModal(): void {
+    this.showDeleteConfirmModal = false;
+    this.paymentToDelete = null;
   }
 }

@@ -29,14 +29,19 @@
   color: #ffffff;
 }
 
-/* --- Smart Table Overrides --- */
-:host ::ng-deep .table {
+/* --- Table Styles --- */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.payments-table {
+  width: 100%;
   margin-bottom: 0;
   font-size: 0.8125rem;
   color: #334155;
 }
 
-:host ::ng-deep .table thead th {
+.payments-table thead th {
   background: #f8fafc;
   color: #475569;
   font-weight: 600;
@@ -49,23 +54,59 @@
   white-space: nowrap;
 }
 
-:host ::ng-deep .table tbody td {
+.payments-table tbody td {
   padding: 0.625rem 0.875rem;
   border-bottom: 1px solid #f1f5f9;
   vertical-align: middle;
   color: #334155;
 }
 
-:host ::ng-deep .table tbody tr {
+.payments-table tbody tr {
   transition: background 0.15s ease;
 }
 
-:host ::ng-deep .table tbody tr:hover {
+.payments-table tbody tr:hover {
   background: #f8fafc;
 }
 
-:host ::ng-deep .table tbody tr:last-child td {
+.payments-table tbody tr:last-child td {
   border-bottom: none;
+}
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 2rem !important;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* --- Delete Button --- */
+.delete-btn {
+  padding: 0.25rem;
+  min-width: auto;
+}
+
+.delete-btn:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+/* --- Delete Confirm Button --- */
+.delete-confirm-btn {
+  padding: 0.375rem 0.875rem;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-confirm-btn:hover {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
 }
 
 /* --- Items Per Page Select --- */
