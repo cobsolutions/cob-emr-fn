@@ -5,29 +5,27 @@
     <div class="section-header">
         <div class="section-header-title">
             <svg cIcon name="cilFolder" class="header-icon"></svg>
-            <span>Case Information</span>
+            <span>case information</span>
         </div>
     </div>
     <div class="section-body">
-        <!-- Referring Doctor -->
-        <div class="info-row">
-            <div class="info-icon">
-                <svg cIcon name="cilUser"></svg>
+        <!-- Referring Info Group -->
+        <div class="info-group referring-info-group">
+            <div class="info-group-header">
+                <svg cIcon name="cilUserPlus" class="group-icon"></svg>
+                <span class="group-title">Referring Info</span>
             </div>
-            <div class="info-content">
-                <span class="info-label">Referring Doctor</span>
-                <span class="info-value">{{ referringDoctor }}</span>
-            </div>
-        </div>
-
-        <!-- Referring NPI -->
-        <div class="info-row">
-            <div class="info-icon">
-                <svg cIcon name="cilBadge"></svg>
-            </div>
-            <div class="info-content">
-                <span class="info-label">Referring NPI</span>
-                <span class="info-value">{{ referringNPI }}</span>
+            <div class="info-group-content">
+                <div class="info-grid">
+                    <div class="info-cell">
+                        <span class="info-label">doctor</span>
+                        <span class="info-value">{{ referringDoctor || '-' }}</span>
+                    </div>
+                    <div class="info-cell">
+                        <span class="info-label">npi</span>
+                        <span class="info-value">{{ referringNPI || '-' }}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -37,7 +35,7 @@
                 <svg cIcon name="cilLocationPin"></svg>
             </div>
             <div class="info-content">
-                <span class="info-label">Place Of Service</span>
+                <span class="info-label">place of service</span>
                 <span class="info-value text-capitalize">{{ case.placeOfService }}</span>
             </div>
         </div>
@@ -48,23 +46,53 @@
                 <svg cIcon name="cilMedicalCross"></svg>
             </div>
             <div class="info-content">
-                <span class="info-label">Injury Case</span>
+                <span class="info-label">injury case</span>
                 <span class="info-value text-capitalize">{{ case.injuryCase }}</span>
             </div>
         </div>
 
-        <!-- Additional Info -->
-        <div class="info-row">
-            <div class="info-icon">
-                <svg cIcon name="cilNotes"></svg>
+        <!-- Additional Info Section -->
+        <div class="info-group additional-info-group">
+            <div class="info-group-header">
+                <svg cIcon name="cilNotes" class="group-icon"></svg>
+                <span class="group-title">Additional Info</span>
             </div>
-            <div class="info-content">                
-                <span class="info-label">Additional Info</span>
-                <span class="info-value">
-                    <p style="white-space: pre-line; margin: 0;">
-                        {{case.additionalInfo}}
-                    </p>
-                </span>
+            <div class="info-group-content">
+                <div class="additional-info-text" [class.empty]="!case.additionalInfo">
+                    {{ case.additionalInfo || 'No additional information' }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Diagnosis Section -->
+        <div class="info-group diagnosis-info-group">
+            <div class="info-group-header">
+                <svg cIcon name="cilMedicalCross" class="group-icon"></svg>
+                <span class="group-title">Case Diagnosis</span>
+            </div>
+            <div class="info-group-content">
+                <div class="diagnosis-list" *ngIf="case.caseDiagnosis?.length > 0; else noDiagnosis">
+                    <div *ngFor="let diagnosis of case.caseDiagnosis" class="diagnosis-item">
+                        <span class="diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
+                        <span class="diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
+                    </div>
+                </div>
+                <ng-template #noDiagnosis>
+                    <div class="diagnosis-empty">No diagnosis assigned</div>
+                </ng-template>
+            </div>
+        </div>
+
+        <!-- Insurance Section -->
+        <div class="info-group insurance-info-group">
+            <div class="info-group-header">
+                <svg cIcon name="cilCreditCard" class="group-icon"></svg>
+                <span class="group-title">Insurance</span>
+            </div>
+            <div class="info-group-content">
+                <div class="insurance-text" [class.empty]="!case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName">
+                    {{ case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName || 'No insurance assigned' }}
+                </div>
             </div>
         </div>
 
@@ -100,22 +128,6 @@
             </div>
             <div class="auth-content">
                 <span class="auth-warning">Authorization is not set</span>
-            </div>
-        </div>
-
-        <!-- Case Diagnosis -->
-        <div class="diagnosis-section">
-            <div class="diagnosis-header">
-                <div class="section-header-title">
-                    <svg cIcon name="cilMedicalCross" class="header-icon"></svg>
-                    <span>Case Diagnosis</span>
-                </div>
-            </div>
-            <div class="diagnosis-body">
-                <div *ngFor="let diagnosis of case.caseDiagnosis" class="diagnosis-item">
-                    <span class="diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
-                    <span class="diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
-                </div>
             </div>
         </div>
 

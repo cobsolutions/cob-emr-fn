@@ -119,6 +119,104 @@
   font-size: 0.875rem;
 }
 
+/* --- Info Group (Referring Info) --- */
+.info-group {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+.info-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.125rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+}
+
+.group-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.group-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.info-group-content {
+  padding: 0.875rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.625rem 0.75rem;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.15s ease;
+}
+
+.info-cell:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.info-cell .info-label {
+  flex: none;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+
+.info-cell .info-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+@media (max-width: 576px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Additional Info Section --- */
+.additional-info-group {
+  margin-top: 0.75rem;
+}
+
+.additional-info-text {
+  white-space: pre-line;
+  font-size: 0.875rem;
+  color: #334155;
+  line-height: 1.6;
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+.additional-info-text.empty {
+  color: #94a3b8;
+  font-style: italic;
+}
+
 /* --- Authorization Row --- */
 .authorization-row {
   display: flex;
@@ -210,40 +308,21 @@
 }
 
 /* --- Diagnosis Section --- */
-.diagnosis-section {
-  margin-top: 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
-  overflow: hidden;
+.diagnosis-info-group {
+  margin-top: 0.75rem;
 }
 
-.diagnosis-header {
-  background: #f1f5f9;
-  padding: 0.625rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.diagnosis-header .section-header-title {
-  color: #334155;
-  font-size: 0.8125rem;
-}
-
-.diagnosis-header .header-icon {
-  color: #475569;
-  width: 1rem;
-  height: 1rem;
-}
-
-.diagnosis-body {
-  padding: 0.75rem 1rem;
+.diagnosis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .diagnosis-item {
   display: flex;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
-  background: #f8fafc;
+  background: #ffffff;
   border-radius: 0.25rem;
   border: 1px solid #e2e8f0;
   border-left: 3px solid #334155;
@@ -251,12 +330,8 @@
 }
 
 .diagnosis-item:hover {
-  background: #f1f5f9;
+  background: #f8fafc;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.diagnosis-item:last-child {
-  margin-bottom: 0;
 }
 
 .diagnosis-code {
@@ -281,6 +356,37 @@
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
+}
+
+.diagnosis-empty {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- Insurance Section --- */
+.insurance-info-group {
+  margin-top: 0.75rem;
+}
+
+.insurance-text {
+  font-size: 0.875rem;
+  color: #334155;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+}
+
+.insurance-text.empty {
+  color: #94a3b8;
+  font-style: italic;
+  font-weight: 400;
 }
 
 /* --- Actions Footer --- */
