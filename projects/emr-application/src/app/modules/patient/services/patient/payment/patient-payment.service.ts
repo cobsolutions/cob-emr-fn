@@ -5,12 +5,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiParams } from '../../../../common/interfaces/api.params';
 import { BasePaginationService } from '../../../../common/service/base-pagination.service';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { PatientCasePayment } from '../../../models/chart/patient.payment/patient-case-payment.request';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientPaymentService extends BasePaginationService {
   private baseUrl = environment.baseURL + 'patient/payment'
+  private casePaymentUrl = environment.baseURL + 'patient/case/payment'
 
   constructor(httpClient: HttpClient, loggedInService: LoggedInService) { super(httpClient, loggedInService) }
 
@@ -19,6 +21,11 @@ export class PatientPaymentService extends BasePaginationService {
     caseId: number,
   ): Observable<any> {
     return this._get(config$, this.baseUrl + '/find/patientId/' + pateintId + '/caseId/' + caseId);
+  }
+
+  public createCasePayments(caseId: number, payments: PatientCasePayment[]): Observable<any> {
+    const headers = { 'content-type': 'application/json' };
+    return this.httpClient.post(`${this.casePaymentUrl}/create/caseId/${caseId}`, JSON.stringify(payments), { headers });
   }
 
 }

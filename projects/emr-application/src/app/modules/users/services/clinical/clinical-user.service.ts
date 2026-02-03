@@ -29,6 +29,10 @@ export class ClinicalUserService extends BasePaginationService  {
     var url = this.baseUrl + '/find-all'
     return this.httpClient.get(url);
   }
+  getAllClinicalUsersByOrganization(organizationId: number): Observable<any> {
+    var url = this.baseUrl + '/find-all/organizationId/' + organizationId;
+    return this.httpClient.get(url);
+  }
   updateClinicalUser(user: User) {
     const headers = { 'content-type': 'application/json' }
     var createURL = this.baseUrl + '/update'

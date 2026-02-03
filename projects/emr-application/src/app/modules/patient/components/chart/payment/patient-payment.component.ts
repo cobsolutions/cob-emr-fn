@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PatientCasePaymentComponent } from './patient-case-payment.component';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -15,7 +16,24 @@ export class PatientPaymentComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   @Input() patientId: number;
   @Input() caseId: number;
+  @ViewChild(PatientCasePaymentComponent) casePaymentComponent: PatientCasePaymentComponent;
+  showPaymentModal = false;
+
   constructor(private patientPaymentService: PatientPaymentService) { super(); }
+
+  openPaymentModal(): void {
+    this.showPaymentModal = true;
+  }
+
+  closePaymentModal(): void {
+    this.showPaymentModal = false;
+    this.casePaymentComponent?.resetForm();
+  }
+
+  onPaymentSaved(): void {
+    this.closePaymentModal();
+    this.getPatientPayments();
+  }
 
   ngOnInit(): void {
     this.columns = this.constructColumns(['amount', 'reason', 'createdAt', 'Actions']);

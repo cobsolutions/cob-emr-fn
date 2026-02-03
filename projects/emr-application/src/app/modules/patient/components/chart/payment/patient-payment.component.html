@@ -1,4 +1,7 @@
 <div class="table-container">
+    <div class="d-flex justify-content-end mb-3">
+        <button cButton class="add-payment-btn" (click)="openPaymentModal()">Add Payment</button>
+    </div>
     <ng-container *ngIf="props$ | async as props">
         <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
             [items]="(patientPaymentRecordResponse$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
@@ -34,3 +37,20 @@
         </div>
     </ng-container>
 </div>
+
+<!-- Add Payment Modal -->
+<c-modal [visible]="showPaymentModal" (visibleChange)="!$event && closePaymentModal()" size="xl" alignment="center">
+    <c-modal-header>
+        <h5 cModalTitle>Add Payment</h5>
+        <button cButtonClose (click)="closePaymentModal()"></button>
+    </c-modal-header>
+    <c-modal-body>
+        <patient-case-payment #casePayment [patientId]="patientId" [caseId]="caseId" (paymentSaved)="onPaymentSaved()"></patient-case-payment>
+    </c-modal-body>
+    <c-modal-footer>
+        <button cButton class="cancel-btn" (click)="closePaymentModal()">Cancel</button>
+        <button cButton class="save-btn" [disabled]="casePayment.isSaving" (click)="casePayment.savePayment()">
+            {{ casePayment.isSaving ? 'Saving...' : 'Save Payment' }}
+        </button>
+    </c-modal-footer>
+</c-modal>

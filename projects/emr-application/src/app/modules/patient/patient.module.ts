@@ -23,6 +23,7 @@ import {
 } from './components/create';
 import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule, SpinnerModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
+import { PatientCasePaymentComponent } from './components/chart/payment/patient-case-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -216,6 +217,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ...APP_PATIENTS_DEPENDENCIES_COMPONENTS,
     ...APP_PATIENT_CHART_COMPONENTS,
     PatientPaymentComponent,
+    PatientCasePaymentComponent,
     InitialExaminationComponent,
     SubjectiveComponent,
     BasicInformationComponent,

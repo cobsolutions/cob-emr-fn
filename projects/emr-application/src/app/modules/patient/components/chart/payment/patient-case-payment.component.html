@@ -1,0 +1,97 @@
+<div class="case-payment-container">
+  <form [formGroup]="paymentForm">
+    <!-- Section 1: Transaction Info -->
+    <div class="transaction-section">
+      <c-row>
+        <c-col md="4">
+          <div class="form-group">
+            <label class="form-label">Date of Transaction</label>
+            <c-date-picker formControlName="dateOfTransaction" [locale]="'en-US'" placeholder="Select date">
+            </c-date-picker>
+          </div>
+        </c-col>
+        <c-col md="4">
+          <div class="form-group">
+            <label class="form-label">Payment Method</label>
+            <select cSelect formControlName="paymentMethod">
+              <option value="">Select Payment Method</option>
+              <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+            </select>
+          </div>
+        </c-col>
+        <c-col md="4">
+          <div class="form-group">
+            <label class="form-label">Provider</label>
+            <select cSelect formControlName="provider">
+              <option value="">Select Provider</option>
+              <option *ngFor="let prov of providers" [value]="prov.id">{{ prov.firstName }} {{ prov.lastName }}</option>
+            </select>
+          </div>
+        </c-col>
+      </c-row>
+    </div>
+
+    <!-- Section 2: Charges Table -->
+    <div class="charges-section">
+      <div class="section-header">
+        <h6 class="section-title">Charges</h6>
+        <button type="button" cButton class="add-charge-btn" (click)="addCharge()">
+          Add Charge
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table cTable [hover]="true" class="charges-table">
+          <thead>
+            <tr>
+              <th>Date of Service</th>
+              <th>Charge Type</th>
+              <th>Amount Due</th>
+              <th>Description</th>
+              <th>Paid</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="charges">
+            <tr *ngFor="let charge of charges.controls; let i = index" [formGroupName]="i">
+              <td>
+                <c-date-picker formControlName="dateOfService" [locale]="'en-US'" placeholder="Select date" size="sm">
+                </c-date-picker>
+              </td>
+              <td>
+                <select cSelect formControlName="chargeType" size="sm">
+                  <option value="">Select Type</option>
+                  <option *ngFor="let type of chargeTypes" [value]="type">{{ formatChargeType(type) }}</option>
+                </select>
+              </td>
+              <td>
+                <div class="currency-input">
+                  <span class="currency-symbol">$</span>
+                  <input cFormControl type="number" formControlName="amountDue" placeholder="0.00" step="0.01"
+                    min="0" />
+                </div>
+              </td>
+              <td>
+                <input cFormControl type="text" formControlName="description" placeholder="Enter description" />
+              </td>
+              <td class="text-center">
+                <input type="checkbox" formControlName="paid" class="paid-checkbox" />
+              </td>
+              <td class="text-center">
+                <button type="button" cButton color="danger" variant="ghost" size="sm" (click)="removeCharge(i)"
+                  class="delete-btn">
+                  <svg cIcon name="cilTrash" size="sm"></svg>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="charges.length === 0">
+              <td colspan="6" class="empty-state">
+                No charges added. Click "Add Charge" to add a new charge.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
