@@ -229,5 +229,10 @@
 /emr/api/signature/consent/current http://161.97.126.192:7070/emr/api/signature/consent/current 200
 /emr/api/signature-audit/find/user/:uuid http://161.97.126.192:7070/emr/api/signature-audit/find/user/:uuid 200
 /emr/api/user/update/status/uuid/:uuid http://161.97.126.192:7070/emr/api/user/update/status/uuid/:uuid 200
+/emr/api/patient/case/chart-note/:caseId http://161.97.126.192:7070/emr/api/patient/case/chart-note/:caseId 200
+/emr/api/patient/case/payment/create/caseId/:caseId http://161.97.126.192:7070/emr/api/patient/case/payment/create/caseId/:caseId 200
+/emr/api/patient/case/payment/find/caseId/:caseId http://161.97.126.192:7070/emr/api/patient/case/payment/find/caseId/:caseId 200
+/emr/api/patient/case/payment/delete/:id http://161.97.126.192:7070/emr/api/patient/case/payment/delete/:id 200
+/emr/api/patient/case/payment/find/unpaid/caseId/:caseId http://161.97.126.192:7070/emr/api/patient/case/payment/find/unpaid/caseId/:caseId 200
 
 /*  /index.html   200
