@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { INavData } from '@coreui/angular-pro';
 import { combineLatest, map, filter, Subscription, catchError, of, timeout, take, merge } from 'rxjs';
 import { LoggedInService } from '../../modules/security/service/loggedIn/logged-in.service';
@@ -21,7 +22,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
     private renderNavItemsService: RenderNavItemsService,
     private loggedInService: LoggedInService,
     private permissionService: PermissionService,
-    private pendingActivationService: PendingActivationService
+    private pendingActivationService: PendingActivationService,
+    private router: Router
   ) { }
 
   get isPendingActivation(): boolean {
@@ -44,7 +46,8 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       take(1) // Only take the first valid emission
     );
 
-    // If a pending/blocked state is set (by the interceptor), stop waiting and show the page
+    // If a pending/blocked state is set (by the interceptor), navigate to appropriate page
+    // This handles mid-session 403s when user is already on dashboard
     this.pendingSub = merge(
       this.pendingActivationService.isPendingActivation$,
       this.pendingActivationService.isPendingDoctor$,
@@ -54,6 +57,15 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
       take(1)
     ).subscribe(() => {
       this.isLoading = false;
+      // Navigate to appropriate pending page if not already there
+      const currentUrl = this.router.url;
+      if (this.pendingActivationService.isInactive && currentUrl !== '/emr/account-inactive') {
+        this.router.navigate(['/emr/account-inactive']);
+      } else if (this.pendingActivationService.isPendingDoctorStatus && currentUrl !== '/emr/pending-account') {
+        this.router.navigate(['/emr/pending-account']);
+      } else if (this.pendingActivationService.isPending && currentUrl !== '/emr/pending-activation') {
+        this.router.navigate(['/emr/pending-activation']);
+      }
     });
 
     this.subscription = combineLatest([loggedUser$, renderItems$])

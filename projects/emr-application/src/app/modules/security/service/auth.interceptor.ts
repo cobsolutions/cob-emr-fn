@@ -54,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
             if (inactiveMatch) {
               if (this.pendingActivationService.isInactive) return EMPTY;
               this.pendingActivationService.setAccountInactive();
-              this.router.navigate(['/emr/account-inactive']);
+              // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
               return EMPTY;
             }
 
@@ -63,7 +63,7 @@ export class AuthInterceptor implements HttpInterceptor {
               if (message.includes('pending activation')) {
                 if (this.pendingActivationService.isPending) return EMPTY;
                 this.pendingActivationService.setPendingActivation();
-                this.router.navigate(['/emr/pending-activation']);
+                // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
                 return EMPTY;
               }
 
@@ -71,7 +71,7 @@ export class AuthInterceptor implements HttpInterceptor {
               if (message.includes('account is pending')) {
                 if (this.pendingActivationService.isPendingDoctorStatus) return EMPTY;
                 this.pendingActivationService.setPendingDoctor();
-                this.router.navigate(['/emr/pending-account']);
+                // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
                 return EMPTY;
               }
             }

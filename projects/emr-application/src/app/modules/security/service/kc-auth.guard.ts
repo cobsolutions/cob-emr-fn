@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EmptyError, firstValueFrom, Observable } from 'rxjs';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 import { INavData } from '@coreui/angular-pro';
 import { MenuItemsConstructor } from '../menu.items.constructor';
@@ -9,6 +9,7 @@ import { RoleScopeFinderService } from './role-scope-finder.service';
 import { Role } from '../model/role';
 import { LoggedInService } from './loggedIn/logged-in.service';
 import { EncryptService } from '../../common/service/encyrption/encrypt.service';
+import { PendingActivationService } from './pending-activation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class KcAuthGuard extends KeycloakAuthGuard {
     , private renderNavItemsService: RenderNavItemsService
     , private roleScopeFinderService: RoleScopeFinderService
     , private loggedInService: LoggedInService
-    , private encryptService: EncryptService) {
+    , private encryptService: EncryptService
+    , private pendingActivationService: PendingActivationService) {
     super(router, keycloakAngular);
   }
 
@@ -45,12 +47,35 @@ export class KcAuthGuard extends KeycloakAuthGuard {
       this.initialized = true;
     }
 
-    // Only subscribe to user once
+    // Await user fetch to ensure status check (403 for pending) happens before navigation
     if (!this.userSubscribed) {
       this.userSubscribed = true;
-      this.loggedInService.getObservableLoggedUser().subscribe((loggedInUser: any) => {
+      // Clear cache to ensure fresh status check from backend
+      this.loggedInService.clearCache();
+      try {
+        const loggedInUser = await firstValueFrom(this.loggedInService.getObservableLoggedUser());
         this.roleScopeFinderService.find();
-      });
+      } catch (error: any) {
+        // EmptyError occurs when interceptor returns EMPTY (for 403 responses)
+        // Check if pending status was set by interceptor and redirect accordingly
+        if (error instanceof EmptyError || error.status === 403) {
+          if (this.pendingActivationService.isInactive) {
+            return this.router.parseUrl('/emr/account-inactive');
+          }
+          if (this.pendingActivationService.isPendingDoctorStatus) {
+            return this.router.parseUrl('/emr/pending-account');
+          }
+          if (this.pendingActivationService.isPending) {
+            return this.router.parseUrl('/emr/pending-activation');
+          }
+          // If no status set but we got EmptyError/403, something unexpected happened
+          if (error instanceof EmptyError) {
+            console.error('EmptyError but no pending status set');
+          }
+          return false;
+        }
+        throw error;
+      }
     }
 
     // Handle default redirect based on role
