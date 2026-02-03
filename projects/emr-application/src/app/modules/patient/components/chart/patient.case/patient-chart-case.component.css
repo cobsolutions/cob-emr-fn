@@ -1,264 +1,248 @@
 /* ========================================
    Patient Chart Case Component Styles
    Professional Slate Theme for EMR
+   Tree View Design
    ======================================== */
 
-/* --- Section Card --- */
-.section-card {
+/* --- Tree View Container --- */
+.tree-container {
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
-  background: #ffffff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   margin-bottom: 1rem;
-  transition: all 0.2s ease;
 }
 
-.section-card:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-}
-
-/* --- Section Header --- */
-.section-header {
+/* --- Tree Root (Parent Header) --- */
+.tree-root {
   background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-  padding: 0.75rem 1.125rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
 }
 
-.section-header-title {
+.tree-root-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
+}
+
+.tree-root-icon {
+  width: 1.25rem;
+  height: 1.25rem;
   color: #ffffff;
-  font-size: 0.9375rem;
-  font-weight: 500;
+  opacity: 0.9;
 }
 
-.header-icon {
-  width: 1.125rem;
-  height: 1.125rem;
+.tree-root-title {
+  font-size: 1rem;
+  font-weight: 600;
   color: #ffffff;
-  opacity: 0.85;
-}
-
-/* --- Section Body --- */
-.section-body {
-  padding: 1.25rem;
-  background: #ffffff;
-}
-
-/* --- Info Row --- */
-.info-row {
-  display: flex;
-  align-items: flex-start;
-  padding: 0.625rem 0.5rem;
-  border-bottom: 1px solid #f1f5f9;
-  font-size: 0.875rem;
-  transition: background 0.15s ease;
-  border-radius: 0.25rem;
-}
-
-.info-row:hover {
-  background: #f8fafc;
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-/* --- Info Icon --- */
-.info-icon {
-  flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e2e8f0;
-  border-radius: 0.25rem;
-  margin-right: 0.75rem;
-  color: #475569;
-  transition: all 0.15s ease;
-}
-
-.info-icon svg {
-  width: 1.125rem;
-  height: 1.125rem;
-}
-
-.info-row:hover .info-icon {
-  background: #334155;
-  color: #ffffff;
-}
-
-/* --- Info Content --- */
-.info-content {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #475569;
-  flex: 0 0 160px;
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.info-value {
-  flex: 1;
-  text-align: left;
-  color: #1e293b;
-  font-weight: 500;
-  font-size: 0.875rem;
-}
-
-/* --- Info Group (Referring Info) --- */
-.info-group {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-.info-group-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 0.875rem;
-  background: #f1f5f9;
-  border-bottom: 1px solid #e2e8f0;
-  border-left: 3px solid #475569;
-}
-
-.group-icon {
-  width: 1rem;
-  height: 1rem;
-  color: #475569;
-}
-
-.group-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #334155;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.info-group-content {
-  padding: 0.875rem;
-  background: #fafbfc;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-.info-cell {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.625rem 0.75rem;
-  background: #ffffff;
-  border-radius: 0.25rem;
-  border: 1px solid #e2e8f0;
-  transition: all 0.15s ease;
-}
-
-.info-cell:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.info-cell .info-label {
-  flex: none;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  color: #64748b;
-  text-transform: lowercase;
   letter-spacing: 0.02em;
 }
 
-.info-cell .info-value {
+/* --- Tree Children Container --- */
+.tree-children {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  background: #fafbfc;
+}
+
+/* --- Tree Node --- */
+.tree-node {
+  position: relative;
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+/* --- Tree Connector Lines --- */
+.tree-connector {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+}
+
+/* Vertical line */
+.tree-connector::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #cbd5e1;
+}
+
+/* Horizontal line */
+.tree-connector::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 1.375rem;
+  width: 1rem;
+  height: 2px;
+  background: #cbd5e1;
+}
+
+/* Last node - stop vertical line at connector */
+.tree-node-last .tree-connector::before {
+  bottom: calc(100% - 1.375rem);
+}
+
+/* --- Tree Node Content --- */
+.tree-node-content {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.tree-node-content:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Tree Node Header --- */
+.tree-node-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tree-node-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: #475569;
+  flex-shrink: 0;
+}
+
+.tree-node-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* --- Tree Node Body --- */
+.tree-node-body {
+  padding: 0.625rem 0.75rem;
+}
+
+/* Simple nodes (single value) */
+.tree-node-simple .tree-node-body {
+  padding: 0.5rem 0.75rem;
+}
+
+/* --- Tree Data Grid --- */
+.tree-data-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.tree-data-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.5rem 0.625rem;
+  background: #f8fafc;
+  border-radius: 0.25rem;
+  border: 1px solid #f1f5f9;
+}
+
+.tree-data-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tree-data-value {
   font-size: 0.875rem;
   font-weight: 500;
   color: #1e293b;
 }
 
-@media (max-width: 576px) {
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* --- Additional Info Section --- */
-.additional-info-group {
-  margin-top: 0.75rem;
-}
-
-.additional-info-text {
-  white-space: pre-line;
+/* --- Tree Text Content --- */
+.tree-text-content {
   font-size: 0.875rem;
   color: #334155;
-  line-height: 1.6;
-  padding: 0.5rem 0.75rem;
-  background: #ffffff;
-  border-radius: 0.25rem;
-  border: 1px solid #e2e8f0;
+  line-height: 1.5;
 }
 
-.additional-info-text.empty {
+.tree-text-content.empty {
   color: #94a3b8;
   font-style: italic;
 }
 
-/* --- Authorization Row --- */
-.authorization-row {
+/* --- Tree Diagnosis List --- */
+.tree-diagnosis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.tree-diagnosis-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
+  padding: 0.375rem 0.5rem;
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #334155;
   border-radius: 0.25rem;
-  margin-top: 0.75rem;
+  border: 1px solid #f1f5f9;
+  transition: all 0.15s ease;
 }
 
-.authorization-row.not-set {
-  border-left-color: #dc2626;
+.tree-diagnosis-item:hover {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
 }
 
-.auth-header {
+.tree-diagnosis-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1875rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 0.1875rem;
+  background: #334155;
+  color: #ffffff;
+  margin-right: 0.625rem;
+  min-width: 60px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.5px;
+}
+
+.tree-diagnosis-desc {
+  color: #334155;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* --- Tree Authorization --- */
+.tree-auth-content {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-.auth-icon {
-  width: 1.125rem;
-  height: 1.125rem;
-  color: #475569;
-}
-
-.auth-content {
-  flex: 1;
-}
-
-.auth-value {
+  flex-wrap: wrap;
+  gap: 0.25rem;
   font-size: 0.875rem;
   color: #334155;
+}
+
+.auth-separator {
+  color: #64748b;
+}
+
+.auth-label-text {
+  color: #475569;
   font-weight: 500;
 }
 
@@ -284,125 +268,166 @@
 
 .auth-date {
   color: #64748b;
-  margin-left: 0.25rem;
 }
 
 .auth-date.expired {
   color: #dc2626;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .expired-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.125rem 0.4375rem;
-  font-size: 0.625rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.5625rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  border-radius: 0.25rem;
+  border-radius: 0.1875rem;
   background: rgba(220, 38, 38, 0.1);
   color: #dc2626;
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
 }
 
-.auth-warning {
+/* --- Warning Node --- */
+.tree-node-warning .tree-node-header {
+  background: #fef2f2;
+  border-bottom-color: #fecaca;
+}
+
+.tree-node-warning .tree-node-icon {
+  color: #dc2626;
+}
+
+.tree-node-warning .tree-node-content {
+  border-color: #fecaca;
+}
+
+.tree-warning-text {
   color: #dc2626;
   font-weight: 600;
   font-size: 0.875rem;
 }
 
-/* --- Diagnosis Section --- */
-.diagnosis-info-group {
-  margin-top: 0.75rem;
-}
-
-.diagnosis-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.diagnosis-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: #ffffff;
-  border-radius: 0.25rem;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #334155;
-  transition: all 0.15s ease;
-}
-
-.diagnosis-item:hover {
-  background: #f8fafc;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.diagnosis-code {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border-radius: 0.25rem;
-  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-  color: #ffffff;
-  margin-right: 0.75rem;
-  min-width: 70px;
-  text-align: center;
-  font-family: 'Courier New', monospace;
-  letter-spacing: 0.5px;
-}
-
-.diagnosis-desc {
-  color: #334155;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.diagnosis-empty {
-  color: #94a3b8;
-  font-style: italic;
-  font-size: 0.875rem;
-  padding: 0.5rem 0.75rem;
-  background: #ffffff;
-  border-radius: 0.25rem;
-  border: 1px solid #e2e8f0;
-}
-
-/* --- Insurance Section --- */
-.insurance-info-group {
-  margin-top: 0.75rem;
-}
-
-.insurance-text {
-  font-size: 0.875rem;
-  color: #334155;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  background: #ffffff;
-  border-radius: 0.25rem;
-  border: 1px solid #e2e8f0;
-}
-
-.insurance-text.empty {
-  color: #94a3b8;
-  font-style: italic;
-  font-weight: 400;
-}
-
-/* --- Actions Footer --- */
-.actions-footer {
+/* --- Tree Actions Footer --- */
+.tree-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  background: #ffffff;
   border-top: 1px solid #e2e8f0;
-  padding-top: 1rem;
-  margin-top: 1rem;
+}
+
+/* --- Chart Note Section --- */
+.chart-note-container {
+  margin-bottom: 1rem;
+}
+
+.chart-note-container .tree-root {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+}
+
+.chart-note-content {
+  border-color: #d1fae5;
+}
+
+.chart-note-content:hover {
+  border-color: #a7f3d0;
+}
+
+.chart-note-content .tree-node-header {
+  background: #ecfdf5;
+  border-bottom-color: #d1fae5;
+}
+
+.chart-note-content .tree-node-icon {
+  color: #0f766e;
+}
+
+.chart-note-body {
+  padding: 1rem !important;
+}
+
+.chart-note-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #334155;
+  background: #ffffff;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.15s ease;
+  line-height: 1.5;
+}
+
+.chart-note-textarea:hover {
+  border-color: #cbd5e1;
+}
+
+.chart-note-textarea:focus {
+  outline: none;
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.chart-note-textarea::placeholder {
+  color: #94a3b8;
+}
+
+.chart-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.chart-note-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chart-note-btn svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.chart-note-btn-save {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+  border: 1px solid #0f766e;
+  color: #ffffff;
+}
+
+.chart-note-btn-save:hover:not(:disabled) {
+  background: linear-gradient(135deg, #115e59 0%, #134e4a 100%);
+}
+
+.chart-note-btn-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chart-note-btn-clear {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.chart-note-btn-clear:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #475569;
 }
 
 .action-label {
@@ -1287,39 +1312,42 @@
 }
 
 @media (max-width: 768px) {
-  .info-content {
+  /* Tree View Responsive */
+  .tree-children {
+    padding-left: 1rem;
+  }
+
+  .tree-node {
+    padding-left: 1.25rem;
+  }
+
+  .tree-connector::after {
+    width: 0.75rem;
+  }
+
+  .tree-data-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Chart Note Responsive */
+  .chart-note-actions {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
   }
 
-  .info-label {
-    flex: none;
-    font-size: 0.75rem;
-  }
-
-  .info-value {
-    font-size: 0.8125rem;
-  }
-
-  .authorization-row {
-    flex-direction: column;
-    align-items: flex-start;
+  .chart-note-btn {
+    width: 100%;
+    justify-content: center;
     gap: 0.5rem;
   }
 
-  .actions-footer {
+  .tree-actions {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
 
-  .action-controls {
-    width: 100%;
-  }
-
-  .action-select {
-    flex: 1;
+  .tree-auth-content {
+    font-size: 0.8125rem;
   }
 
   .records-table thead tr th,
@@ -1376,28 +1404,68 @@
     width: 100%;
     justify-content: center;
   }
+
+  .action-controls {
+    width: 100%;
+  }
+
+  .action-select {
+    flex: 1;
+  }
 }
 
 @media (max-width: 576px) {
-  .section-header {
-    padding: 0.625rem 0.875rem;
+  /* Tree View Small Screen */
+  .tree-root {
+    padding: 0.75rem 1rem;
   }
 
-  .section-header-title {
-    font-size: 0.875rem;
+  .tree-root-title {
+    font-size: 0.9375rem;
   }
 
-  .section-body {
-    padding: 1rem;
+  .tree-children {
+    padding-left: 0.75rem;
   }
 
-  .diagnosis-code {
-    min-width: 60px;
-    font-size: 0.6875rem;
+  .tree-node {
+    padding-left: 1rem;
   }
 
-  .diagnosis-desc {
-    font-size: 0.8125rem;
+  .tree-connector::before {
+    left: 0.375rem;
+  }
+
+  .tree-connector::after {
+    left: 0.375rem;
+    width: 0.625rem;
+    top: 1.25rem;
+  }
+
+  .tree-node-last .tree-connector::before {
+    bottom: calc(100% - 1.25rem);
+  }
+
+  .tree-node-header {
+    padding: 0.375rem 0.625rem;
+  }
+
+  .tree-node-title {
+    font-size: 0.75rem;
+  }
+
+  .tree-node-body {
+    padding: 0.5rem 0.625rem;
+  }
+
+  .tree-diagnosis-code {
+    min-width: 50px;
+    font-size: 0.625rem;
+    padding: 0.125rem 0.375rem;
+  }
+
+  .tree-diagnosis-desc {
+    font-size: 0.75rem;
   }
 
   .case-content {

@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { map, Observable, retry, Subscription, tap } from 'rxjs';
 import { ListTemplate } from '../../../../common/template/list.template';
@@ -97,6 +98,11 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   previewFileName: string = '';
   previewContentType: string = '';
   isLoadingPreview: boolean = false;
+
+  // Chart Note properties
+  chartNote: string = '';
+  isSavingChartNote: boolean = false;
+
   constructor(
     private patientRecordService: PatientRecordService,
     private medialNoteService: MedialNoteService,
@@ -111,6 +117,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private permissionService: PermissionService,
     private patientEDocumentService: PatientEDocumentService,
     private sanitizer: DomSanitizer,
+    private toastr: ToastrService,
     private fb: FormBuilder) { super() }
 
   setActive(section: string) {
@@ -135,26 +142,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()
-    this.findPatientCaseActions(this.case.uuid);
     this.patient.patientCaseId = this.case.uuid
+    this.chartNote = this.case.chartNote || '';
     console.log('patient', this.patient)
     this.loadEDocuments();
 
     this.draftSub = this.medialNoteService.draft$.subscribe(() => {
       console.log('draftSub')
       this.getRecords();
-      this.findPatientCaseActions(this.case.uuid);
     });
   }
 
   ngOnDestroy(): void {
     this.draftSub?.unsubscribe();
-  }
-  private findPatientCaseActions(patientCaseId: string) {
-    this.patientChartNoteService.find(patientCaseId).subscribe((actions: any) => {
-      console.log('actions', actions)
-      this.patientCaseActions = actions;
-    })
   }
   checkAuthExpiration() {
     if (this.case.authorizationData !== null) {
@@ -277,7 +277,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
-      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
@@ -299,7 +298,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
-      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
@@ -322,7 +320,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
-      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
@@ -340,7 +337,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined;
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId);
-      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
@@ -363,7 +359,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
-      this.findPatientCaseActions(this.case.uuid);
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
@@ -410,7 +405,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   handleBackAction() {
     this.patientRecord = true;
     this.getRecords();
-    this.findPatientCaseActions(this.case.uuid);
   }
   private getAppointment(id: number) {
     this.appointmentService.getAppointmentCancelNoShow(id).subscribe((appointmentCancelNoShowReason: any) => {
@@ -421,7 +415,6 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   private removeMedicalNote(noteId: string) {
     this.initialExamNoteService.remove(noteId).subscribe(() => {
       this.getRecords();
-      this.findPatientCaseActions(this.case.uuid);
     })
   }
   private completeMedicalNote(id: number, status: string) {
@@ -598,5 +591,30 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         console.error('Error downloading document:', error);
       }
     });
+  }
+
+  // Chart Note methods
+  saveChartNote(): void {
+    if (!this.chartNote?.trim()) {
+      return;
+    }
+
+    this.isSavingChartNote = true;
+
+    this.patientChartNoteService.saveChartNote(this.case.id, this.chartNote.trim()).subscribe({
+      next: () => {
+        this.isSavingChartNote = false;
+        this.toastr.success('Chart note saved');
+      },
+      error: (error) => {
+        console.error('Error saving chart note:', error);
+        this.isSavingChartNote = false;
+        this.toastr.error('Error saving chart note');
+      }
+    });
+  }
+
+  clearChartNote(): void {
+    this.chartNote = '';
   }
 }

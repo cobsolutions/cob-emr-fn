@@ -24,4 +24,6 @@ export interface PatientCase {
     uuid?:string
     additionalInfo?:string;
     order ?:number;
+    chartNote?:string
+
 }

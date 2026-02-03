@@ -1,151 +1,221 @@
 <ngx-spinner></ngx-spinner>
 
-<!-- Case Information Section -->
-<div class="section-card">
-    <div class="section-header">
-        <div class="section-header-title">
-            <svg cIcon name="cilFolder" class="header-icon"></svg>
-            <span>case information</span>
+<!-- Chart Note Section - Tree View -->
+<div class="tree-container chart-note-container">
+    <!-- Root Node -->
+    <div class="tree-root">
+        <div class="tree-root-header">
+            <svg cIcon name="cilDescription" class="tree-root-icon"></svg>
+            <span class="tree-root-title">Chart Note</span>
         </div>
     </div>
-    <div class="section-body">
-        <!-- Referring Info Group -->
-        <div class="info-group referring-info-group">
-            <div class="info-group-header">
-                <svg cIcon name="cilUserPlus" class="group-icon"></svg>
-                <span class="group-title">Referring Info</span>
-            </div>
-            <div class="info-group-content">
-                <div class="info-grid">
-                    <div class="info-cell">
-                        <span class="info-label">doctor</span>
-                        <span class="info-value">{{ referringDoctor || '-' }}</span>
-                    </div>
-                    <div class="info-cell">
-                        <span class="info-label">npi</span>
-                        <span class="info-value">{{ referringNPI || '-' }}</span>
-                    </div>
+
+    <!-- Tree Children -->
+    <div class="tree-children">
+        <!-- Note Entry Node -->
+        <div class="tree-node tree-node-last">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content chart-note-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilPencil" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Add Note</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Place Of Service -->
-        <div class="info-row">
-            <div class="info-icon">
-                <svg cIcon name="cilLocationPin"></svg>
-            </div>
-            <div class="info-content">
-                <span class="info-label">place of service</span>
-                <span class="info-value text-capitalize">{{ case.placeOfService }}</span>
-            </div>
-        </div>
-
-        <!-- Injury Case -->
-        <div class="info-row">
-            <div class="info-icon">
-                <svg cIcon name="cilMedicalCross"></svg>
-            </div>
-            <div class="info-content">
-                <span class="info-label">injury case</span>
-                <span class="info-value text-capitalize">{{ case.injuryCase }}</span>
-            </div>
-        </div>
-
-        <!-- Additional Info Section -->
-        <div class="info-group additional-info-group">
-            <div class="info-group-header">
-                <svg cIcon name="cilNotes" class="group-icon"></svg>
-                <span class="group-title">Additional Info</span>
-            </div>
-            <div class="info-group-content">
-                <div class="additional-info-text" [class.empty]="!case.additionalInfo">
-                    {{ case.additionalInfo || 'No additional information' }}
-                </div>
-            </div>
-        </div>
-
-        <!-- Case Diagnosis Section -->
-        <div class="info-group diagnosis-info-group">
-            <div class="info-group-header">
-                <svg cIcon name="cilMedicalCross" class="group-icon"></svg>
-                <span class="group-title">Case Diagnosis</span>
-            </div>
-            <div class="info-group-content">
-                <div class="diagnosis-list" *ngIf="case.caseDiagnosis?.length > 0; else noDiagnosis">
-                    <div *ngFor="let diagnosis of case.caseDiagnosis" class="diagnosis-item">
-                        <span class="diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
-                        <span class="diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
+                <div class="tree-node-body chart-note-body">
+                    <textarea
+                        class="chart-note-textarea"
+                        [(ngModel)]="chartNote"
+                        placeholder="Enter chart note here..."
+                        rows="4">
+                    </textarea>
+                    <div class="chart-note-actions">
+                        <button class="chart-note-btn chart-note-btn-save" (click)="saveChartNote()" [disabled]="!chartNote?.trim()">
+                            <svg cIcon name="cilSave"></svg>
+                            Save Note
+                        </button>
+                        <button class="chart-note-btn chart-note-btn-clear" (click)="clearChartNote()" *ngIf="chartNote?.trim()">
+                            <svg cIcon name="cilX"></svg>
+                            Clear
+                        </button>
                     </div>
                 </div>
-                <ng-template #noDiagnosis>
-                    <div class="diagnosis-empty">No diagnosis assigned</div>
-                </ng-template>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Insurance Section -->
-        <div class="info-group insurance-info-group">
-            <div class="info-group-header">
-                <svg cIcon name="cilCreditCard" class="group-icon"></svg>
-                <span class="group-title">Insurance</span>
-            </div>
-            <div class="info-group-content">
-                <div class="insurance-text" [class.empty]="!case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName">
-                    {{ case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName || 'No insurance assigned' }}
+<!-- Case Information Section - Tree View -->
+<div class="tree-container">
+    <!-- Root Node -->
+    <div class="tree-root">
+        <div class="tree-root-header">
+            <svg cIcon name="cilFolder" class="tree-root-icon"></svg>
+            <span class="tree-root-title">Case Information</span>
+        </div>
+    </div>
+
+    <!-- Tree Children -->
+    <div class="tree-children">
+        <!-- Referring Info Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilUserPlus" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Referring Info</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-data-grid">
+                        <div class="tree-data-item">
+                            <span class="tree-data-label">Doctor</span>
+                            <span class="tree-data-value">{{ referringDoctor || '-' }}</span>
+                        </div>
+                        <div class="tree-data-item">
+                            <span class="tree-data-label">NPI</span>
+                            <span class="tree-data-value">{{ referringNPI || '-' }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Authorization Row -->
-        <div class="authorization-row" *ngIf="case.authorizationData">
-            <div class="auth-header">
-                <svg cIcon name="cilShieldAlt" class="auth-icon"></svg>
-                <span class="info-label">Authorization</span>
-            </div>
-            <div class="auth-content">
-                <span class="auth-value">
-                    <span class="auth-count" [ngClass]="isExpired ? 'expired' : 'current'">
-                        {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
-                    </span>
-                    of
-                    <span class="auth-total" [ngClass]="isExpired ? 'expired' : 'valid'">
-                        {{ case.authorizationData.numberAuthorized }}
-                    </span>
-                    Authorized
-                    <span class="auth-date" [ngClass]="isExpired ? 'expired' : ''">
-                        (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
-                    </span>
-                    <span *ngIf="isExpired" class="expired-badge">Expired</span>
-                </span>
+        <!-- Place Of Service Node -->
+        <div class="tree-node tree-node-simple">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilLocationPin" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Place of Service</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-data-value text-capitalize">{{ case.placeOfService || '-' }}</span>
+                </div>
             </div>
         </div>
 
-        <!-- If Authorization is not set -->
-        <div class="authorization-row not-set" *ngIf="case.authorizationData === null">
-            <div class="auth-header">
-                <svg cIcon name="cilShieldAlt" class="auth-icon"></svg>
-                <span class="info-label">Authorization</span>
-            </div>
-            <div class="auth-content">
-                <span class="auth-warning">Authorization is not set</span>
+        <!-- Injury Case Node -->
+        <div class="tree-node tree-node-simple">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilMedicalCross" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Injury Case</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-data-value text-capitalize">{{ case.injuryCase || '-' }}</span>
+                </div>
             </div>
         </div>
 
-        <!-- Actions Footer - Only visible for users with initialize-medical-note-role modify scope -->
-        <div class="actions-footer" *ngIf="patientCaseActions && canInitializeMedicalNote">
-            <label for="patientRecordAction" class="action-label">
-                Patient Record Actions:
-            </label>
-            <div class="action-controls">
-                <select id="patientRecordAction" #patientActionSelect class="action-select">
-                    <option [value]="action.key" *ngFor="let action of patientCaseActions">
-                        {{ action.label }}
-                    </option>
-                </select>
-                <button class="action-btn" (click)="executeAction(patientActionSelect.value)">
-                    <svg cIcon name="cilArrowCircleRight"></svg>
-                </button>
+        <!-- Additional Info Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilNotes" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Additional Info</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-text-content" [class.empty]="!case.additionalInfo">
+                        {{ case.additionalInfo || 'No additional information' }}
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Case Diagnosis Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilMedicalCross" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Case Diagnosis</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-diagnosis-list" *ngIf="case.caseDiagnosis?.length > 0; else noDiagnosis">
+                        <div *ngFor="let diagnosis of case.caseDiagnosis" class="tree-diagnosis-item">
+                            <span class="tree-diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
+                            <span class="tree-diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
+                        </div>
+                    </div>
+                    <ng-template #noDiagnosis>
+                        <div class="tree-text-content empty">No diagnosis assigned</div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilCreditCard" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Insurance</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-text-content" [class.empty]="!case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName">
+                        {{ case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName || 'No insurance assigned' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authorization Node -->
+        <div class="tree-node tree-node-last" *ngIf="case.authorizationData">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilShieldAlt" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Authorization</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-auth-content">
+                        <span class="auth-count" [ngClass]="isExpired ? 'expired' : 'current'">
+                            {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
+                        </span>
+                        <span class="auth-separator">of</span>
+                        <span class="auth-total" [ngClass]="isExpired ? 'expired' : 'valid'">
+                            {{ case.authorizationData.numberAuthorized }}
+                        </span>
+                        <span class="auth-label-text">Authorized</span>
+                        <span class="auth-date" [ngClass]="isExpired ? 'expired' : ''">
+                            (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
+                        </span>
+                        <span *ngIf="isExpired" class="expired-badge">Expired</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authorization Not Set Node -->
+        <div class="tree-node tree-node-last tree-node-warning" *ngIf="case.authorizationData === null">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilShieldAlt" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Authorization</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-warning-text">Authorization is not set</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions Footer -->
+    <div class="tree-actions" *ngIf="patientCaseActions && canInitializeMedicalNote">
+        <label for="patientRecordAction" class="action-label">
+            Patient Record Actions:
+        </label>
+        <div class="action-controls">
+            <select id="patientRecordAction" #patientActionSelect class="action-select">
+                <option [value]="action.key" *ngFor="let action of patientCaseActions">
+                    {{ action.label }}
+                </option>
+            </select>
+            <button class="action-btn" (click)="executeAction(patientActionSelect.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+            </button>
         </div>
     </div>
 </div>
