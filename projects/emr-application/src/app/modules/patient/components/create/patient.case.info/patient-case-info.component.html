@@ -87,6 +87,18 @@
                 <small *ngIf="primaryInsurance.invalid && (primaryInsurance.dirty || primaryInsurance.touched)" class="text-danger">Required</small>
             </c-col>
         </c-row>
+        <c-row class="mb-3" *ngIf="!case.caseInsuranceInformation.isSelfPay">
+            <c-col md="12">
+                <label cLabel for="secondaryInsurance" class="form-label">Secondary Insurance</label>
+                <select cFormControl cSelect sizing="sm" id="secondaryInsurance" name="secondaryInsurance"
+                    [(ngModel)]="selectedSecondaryPatientInsurance" #secondaryInsurance="ngModel">
+                    <option [ngValue]="null" selected>Select Secondary Insurance</option>
+                    <option *ngFor="let insurance of pateint.patientInsuranceModels" [ngValue]="insurance">
+                        {{insurance.insuranceCompany?.name}}
+                    </option>
+                </select>
+            </c-col>
+        </c-row>
     </div>
 
     <!-- Case Diagnosis Information Section -->
