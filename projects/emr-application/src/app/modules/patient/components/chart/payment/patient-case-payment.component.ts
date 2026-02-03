@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClinicalUserService } from '../../../../users/services/clinical/clinical-user.service';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PatientPaymentService } from '../../../services/patient/payment/patient-payment.service';
@@ -13,6 +13,7 @@ import { ChargeType, PatientCasePayment } from '../../../models/chart/patient.pa
 export class PatientCasePaymentComponent implements OnInit {
   @Input() patientId: number;
   @Input() caseId: number;
+  @Input() commonData: any
   @Output() paymentSaved = new EventEmitter<void>();
 
   paymentForm: FormGroup;
@@ -26,11 +27,14 @@ export class PatientCasePaymentComponent implements OnInit {
     private clinicalUserService: ClinicalUserService,
     private loggedInService: LoggedInService,
     private patientPaymentService: PatientPaymentService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.loadProviders();
+    this.loadUnpaidPayments();
+    this.loadHeaderData();
+
   }
 
   private loadProviders(): void {
@@ -47,11 +51,53 @@ export class PatientCasePaymentComponent implements OnInit {
     }
   }
 
+  private loadUnpaidPayments(): void {
+    this.patientPaymentService.findUnpaidCasePayments(this.caseId).subscribe({
+      next: (response: PatientCasePayment[]) => {
+        const unpaidPayments = response || [];
+        if (unpaidPayments.length > 0) {
+          const firstPayment = unpaidPayments[0];
+          this.paymentForm.patchValue({
+            dateOfTransaction: firstPayment.dateOfTransaction ? new Date(firstPayment.dateOfTransaction) : new Date(),
+            paymentMethod: firstPayment.paymentMethod || '',
+            provider: firstPayment.providerId || ''
+          });
+        }
+        unpaidPayments.forEach(payment => {
+          this.addChargeFromPayment(payment);
+        });
+      },
+      error: (err) => {
+        console.error('Error loading unpaid payments:', err);
+      }
+    });
+  }
+  private loadHeaderData() {
+    if (this.commonData.dateOfTransaction !== null)
+      this.paymentForm.get('dateOfTransaction').setValue(this.commonData.dateOfTransaction)
+    if (this.commonData.paymentMethod !== null)
+      this.paymentForm.get('paymentMethod').setValue(this.commonData.paymentMethod)
+    if (this.commonData.providerId !== null)
+      this.paymentForm.get('provider').setValue(this.commonData.providerId)
+  }
+
+  private addChargeFromPayment(payment: PatientCasePayment): void {
+    const chargeGroup = this.fb.group({
+      id: [payment.id],
+      dateOfService: [payment.dateOfService ? new Date(payment.dateOfService) : new Date(), Validators.required],
+      chargeType: [payment.chargeType || '', Validators.required],
+      amountDue: [payment.amountDue || 0, [Validators.required, Validators.min(0.01)]],
+      description: [payment.description || ''],
+      paid: [payment.paid || false]
+    });
+    this.charges.push(chargeGroup);
+  }
+
   private initForm(): void {
     this.paymentForm = this.fb.group({
-      dateOfTransaction: [new Date()],
-      paymentMethod: [''],
-      provider: [''],
+      dateOfTransaction: [new Date(), Validators.required],
+      paymentMethod: ['', Validators.required],
+      provider: ['', Validators.required],
       charges: this.fb.array([])
     });
   }
@@ -62,9 +108,10 @@ export class PatientCasePaymentComponent implements OnInit {
 
   addCharge(): void {
     const chargeGroup = this.fb.group({
-      dateOfService: [new Date()],
-      chargeType: [''],
-      amountDue: [0],
+      id: [null],
+      dateOfService: [new Date(), Validators.required],
+      chargeType: ['', Validators.required],
+      amountDue: [0, [Validators.required, Validators.min(0.01)]],
       description: [''],
       paid: [false]
     });
@@ -93,9 +140,15 @@ export class PatientCasePaymentComponent implements OnInit {
       return;
     }
 
+    this.paymentForm.markAllAsTouched();
+    if (this.paymentForm.invalid) {
+      return;
+    }
+
     this.isSaving = true;
     const formValue = this.paymentForm.value;
     const payments: PatientCasePayment[] = formValue.charges.map((charge: any) => ({
+      id: charge.id,
       dateOfTransaction: this.formatDate(formValue.dateOfTransaction),
       paymentMethod: formValue.paymentMethod,
       providerId: formValue.provider,
@@ -103,7 +156,8 @@ export class PatientCasePaymentComponent implements OnInit {
       chargeType: charge.chargeType,
       amountDue: charge.amountDue,
       description: charge.description,
-      patientCaseId: this.caseId
+      patientCaseId: this.caseId,
+      paid: charge.paid
     }));
 
     this.patientPaymentService.createCasePayments(this.caseId, payments).subscribe({

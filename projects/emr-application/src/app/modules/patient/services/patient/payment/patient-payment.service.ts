@@ -36,4 +36,8 @@ export class PatientPaymentService extends BasePaginationService {
     return this.httpClient.delete(`${this.casePaymentUrl}/delete/${id}`);
   }
 
+  public findUnpaidCasePayments(caseId: number): Observable<any> {
+    return this.httpClient.get(`${this.casePaymentUrl}/find/unpaid/caseId/${caseId}`);
+  }
+
 }

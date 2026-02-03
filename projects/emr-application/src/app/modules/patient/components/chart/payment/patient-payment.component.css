@@ -8,6 +8,51 @@
   width: 100%;
 }
 
+/* --- Payment Summary --- */
+.payment-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 200px;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.summary-value {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  text-align: right;
+}
+
+.summary-value.paid {
+  color: #16a34a;
+}
+
+.summary-value.balance {
+  color: #dc2626;
+}
+
 /* --- Add Payment Button --- */
 .add-payment-btn {
   display: inline-flex;
@@ -79,6 +124,24 @@
   padding: 2rem !important;
   color: #94a3b8;
   font-style: italic;
+}
+
+/* --- Paid Badge --- */
+.paid-badge {
+  display: inline-block;
+  padding: 0.1875rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 0.25rem;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.paid-badge.paid {
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
 }
 
 /* --- Delete Button --- */

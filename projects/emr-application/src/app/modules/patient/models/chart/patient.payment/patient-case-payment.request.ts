@@ -9,6 +9,14 @@ export interface PatientCasePayment {
   amountDue?: number;
   description?: string;
   patientCaseId?: number;
+  paid?: boolean;
+}
+
+export interface PatientCasePaymentResponse {
+  payments: PatientCasePayment[];
+  totalCharge: number;
+  totalPaid: number;
+  balance: number;
 }
 
 export enum ChargeType {

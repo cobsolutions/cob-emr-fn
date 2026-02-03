@@ -12,6 +12,7 @@
                     <th>Charge Type</th>
                     <th>Amount Due</th>
                     <th>Description</th>
+                    <th>Paid</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,7 +24,7 @@
                     <td>
                         <span class="date-text">{{ payment.dateOfService | date:'MMM d, y' }}</span>
                     </td>
-                    <td>{{ payment.paymentMethod }}</td>
+                    <td>{{ payment.paid ? payment.paymentMethod : '' }}</td>
                     <td>
                         <span class="status-badge">{{ formatChargeType(payment.chargeType) }}</span>
                     </td>
@@ -32,6 +33,9 @@
                     </td>
                     <td>{{ payment.description }}</td>
                     <td class="text-center">
+                        <span class="paid-badge" [class.paid]="payment.paid">{{ payment.paid ? 'Yes' : 'No' }}</span>
+                    </td>
+                    <td class="text-center">
                         <button cButton color="danger" variant="ghost" size="sm" class="delete-btn"
                             (click)="deletePayment(payment.id)">
                             <svg cIcon name="cilTrash" size="sm"></svg>
@@ -39,10 +43,24 @@
                     </td>
                 </tr>
                 <tr *ngIf="payments.length === 0">
-                    <td colspan="7" class="empty-state">No payments found.</td>
+                    <td colspan="8" class="empty-state">No payments found.</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="payment-summary">
+        <div class="summary-item">
+            <span class="summary-label">Total Charge</span>
+            <span class="summary-value">{{ totalCharge | currency: 'USD' }}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Total Paid</span>
+            <span class="summary-value paid">{{ totalPaid | currency: 'USD' }}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Balance</span>
+            <span class="summary-value balance">{{ balance | currency: 'USD' }}</span>
+        </div>
     </div>
 </div>
 
@@ -53,12 +71,13 @@
         <button cButtonClose (click)="closePaymentModal()"></button>
     </c-modal-header>
     <c-modal-body>
-        <patient-case-payment #casePayment [patientId]="patientId" [caseId]="caseId" (paymentSaved)="onPaymentSaved()"></patient-case-payment>
+        <patient-case-payment *ngIf="showPaymentModal" [patientId]="patientId" [caseId]="caseId" (paymentSaved)="onPaymentSaved()"
+        [commonData] = "commonData"></patient-case-payment>
     </c-modal-body>
     <c-modal-footer>
         <button cButton class="cancel-btn" (click)="closePaymentModal()">Cancel</button>
-        <button cButton class="save-btn" [disabled]="casePayment.isSaving" (click)="casePayment.savePayment()">
-            {{ casePayment.isSaving ? 'Saving...' : 'Save Payment' }}
+        <button cButton class="save-btn" [disabled]="savingState" (click)="savePayment()">
+            {{ savingState ? 'Saving...' : 'Save Payment' }}
         </button>
     </c-modal-footer>
 </c-modal>

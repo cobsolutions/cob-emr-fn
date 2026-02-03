@@ -5,27 +5,39 @@
       <c-row>
         <c-col md="4">
           <div class="form-group">
-            <label class="form-label">Date of Transaction</label>
-            <c-date-picker formControlName="dateOfTransaction" [locale]="'en-US'" placeholder="Select date">
+            <label class="form-label">Date of Transaction <span class="text-danger">*</span></label>
+            <c-date-picker formControlName="dateOfTransaction" [locale]="'en-US'" placeholder="Select date"
+              [ngClass]="{'is-invalid': paymentForm.get('dateOfTransaction').touched && paymentForm.get('dateOfTransaction').invalid}">
             </c-date-picker>
+            <div *ngIf="paymentForm.get('dateOfTransaction').touched && paymentForm.get('dateOfTransaction').invalid" class="text-danger small">
+              Date of Transaction is required
+            </div>
           </div>
         </c-col>
         <c-col md="4">
           <div class="form-group">
-            <label class="form-label">Payment Method</label>
-            <select cSelect formControlName="paymentMethod">
+            <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+            <select cSelect formControlName="paymentMethod"
+              [valid]="paymentForm.get('paymentMethod').touched ? paymentForm.get('paymentMethod').valid : undefined">
               <option value="">Select Payment Method</option>
               <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
             </select>
+            <div *ngIf="paymentForm.get('paymentMethod').touched && paymentForm.get('paymentMethod').invalid" class="text-danger small">
+              Payment Method is required
+            </div>
           </div>
         </c-col>
         <c-col md="4">
           <div class="form-group">
-            <label class="form-label">Provider</label>
-            <select cSelect formControlName="provider">
+            <label class="form-label">Provider <span class="text-danger">*</span></label>
+            <select cSelect formControlName="provider"
+              [valid]="paymentForm.get('provider').touched ? paymentForm.get('provider').valid : undefined">
               <option value="">Select Provider</option>
               <option *ngFor="let prov of providers" [value]="prov.id">{{ prov.firstName }} {{ prov.lastName }}</option>
             </select>
+            <div *ngIf="paymentForm.get('provider').touched && paymentForm.get('provider').invalid" class="text-danger small">
+              Provider is required
+            </div>
           </div>
         </c-col>
       </c-row>
@@ -55,11 +67,13 @@
           <tbody formArrayName="charges">
             <tr *ngFor="let charge of charges.controls; let i = index" [formGroupName]="i">
               <td>
-                <c-date-picker formControlName="dateOfService" [locale]="'en-US'" placeholder="Select date" size="sm">
+                <c-date-picker formControlName="dateOfService" [locale]="'en-US'" placeholder="Select date" size="sm"
+                  [ngClass]="{'is-invalid': charge.get('dateOfService').touched && charge.get('dateOfService').invalid}">
                 </c-date-picker>
               </td>
               <td>
-                <select cSelect formControlName="chargeType" size="sm">
+                <select cSelect formControlName="chargeType" size="sm"
+                  [valid]="charge.get('chargeType').touched ? charge.get('chargeType').valid : undefined">
                   <option value="">Select Type</option>
                   <option *ngFor="let type of chargeTypes" [value]="type">{{ formatChargeType(type) }}</option>
                 </select>
@@ -68,7 +82,7 @@
                 <div class="currency-input">
                   <span class="currency-symbol">$</span>
                   <input cFormControl type="number" formControlName="amountDue" placeholder="0.00" step="0.01"
-                    min="0" />
+                    min="0" [valid]="charge.get('amountDue').touched ? charge.get('amountDue').valid : undefined" />
                 </div>
               </td>
               <td>
