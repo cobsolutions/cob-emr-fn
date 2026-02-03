@@ -178,10 +178,11 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
     };
     this.editIndex = index;
     setTimeout(() => {
+      console.log('caseItem.therapist',caseItem.therapist)
       this.selectedTherapist = caseItem.therapist;
       if (caseItem.caseInsuranceInformation?.primaryInsurance) {
         this.selectedPrimaryPatientInsurance = this.pateint.patientInsuranceModels?.find(
-          ins => ins.id === caseItem.caseInsuranceInformation.primaryInsurance.id
+          ins => ins.insuranceCompany.name === caseItem.caseInsuranceInformation.primaryInsurance.insuranceCompanyName
         );
       }
     });
