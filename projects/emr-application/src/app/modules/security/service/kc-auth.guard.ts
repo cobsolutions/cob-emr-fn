@@ -48,6 +48,9 @@ export class KcAuthGuard extends KeycloakAuthGuard {
     }
 
     // Await user fetch to ensure status check (403 for pending) happens before navigation
+    // Skip for signature page - doctors with pending status need to access it to upload signature
+    const isSignaturePage = state.url.startsWith('/emr-signature');
+
     if (!this.userSubscribed) {
       this.userSubscribed = true;
       // Clear cache to ensure fresh status check from backend
@@ -56,9 +59,18 @@ export class KcAuthGuard extends KeycloakAuthGuard {
         const loggedInUser = await firstValueFrom(this.loggedInService.getObservableLoggedUser());
         this.roleScopeFinderService.find();
       } catch (error: any) {
+        // Handle errors from user fetch - could be EmptyError (from EMPTY observable) or HTTP errors
+        // Allow access to signature page regardless of error - pending doctors need it
+        if (isSignaturePage) {
+          return true;
+        }
+
         // EmptyError occurs when interceptor returns EMPTY (for 403 responses)
         // Check if pending status was set by interceptor and redirect accordingly
-        if (error instanceof EmptyError || error.status === 403) {
+        const isEmptyError = error instanceof EmptyError || error?.name === 'EmptyError';
+        const is403Error = error?.status === 403;
+
+        if (isEmptyError || is403Error) {
           if (this.pendingActivationService.isInactive) {
             return this.router.parseUrl('/emr/account-inactive');
           }
@@ -69,7 +81,7 @@ export class KcAuthGuard extends KeycloakAuthGuard {
             return this.router.parseUrl('/emr/pending-activation');
           }
           // If no status set but we got EmptyError/403, something unexpected happened
-          if (error instanceof EmptyError) {
+          if (isEmptyError) {
             console.error('EmptyError but no pending status set');
           }
           return false;
