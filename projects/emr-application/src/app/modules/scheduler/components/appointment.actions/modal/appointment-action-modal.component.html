@@ -117,6 +117,30 @@
     </div>
   </div>
 
+  <!-- Patient Payment Card -->
+  <div class="info-card" *ngIf="appointmentStructure === 'Full' && patientPayment">
+    <div class="info-card-header">
+      <svg cIcon name="cilCreditCard" class="info-card-icon"></svg>
+      <span>Patient Payment</span>
+    </div>
+    <div class="info-card-body">
+      <div class="details-grid">
+        <div class="detail-item" *ngIf="patientPayment.insuranceName">
+          <span class="info-label">Insurance</span>
+          <span class="info-value">{{ patientPayment.insuranceName }}</span>
+        </div>
+        <div class="detail-item" *ngIf="patientPayment.paymentType">
+          <span class="info-label">Payment Type</span>
+          <span class="info-value">{{ patientPayment.paymentType | lowercase }}</span>
+        </div>
+        <div class="detail-item" *ngIf="patientPayment.payment">
+          <span class="info-label">Payment</span>
+          <span class="info-value">{{ patientPayment.payment | currency }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </mat-dialog-content>
 
 <!-- Modal Footer -->

@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
-  max-height: 65vh;
+  max-height: calc(70vh - 120px);
   overflow-y: auto;
 }
 
@@ -79,7 +79,8 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
-  overflow: hidden;
+  overflow: visible;
+  flex-shrink: 0;
 }
 
 .info-card-header {

@@ -2,8 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CalendarEvent } from 'calendar-utils';
-import { combineLatest, map, Observable, switchMap } from 'rxjs';
+import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { Clinic } from '../../../../patient/models/clinic';
+import { PaymentType } from '../../../../common/models/enums/payment.type';
+import { Patient } from '../../../../patient/models/patient';
+import { PatientCase } from '../../../../patient/models/case/patient.case';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PatientChartAccessibilityModelResponse } from '../../../model/patient.chart.accessibility.model.response';
 import { AppointmentActionsService } from '../../../service/actions/appointment-actions.service';
@@ -11,6 +14,12 @@ import { AppointmentService } from '../../../service/appointment.service';
 import { PatientChartCheckerService } from '../../../service/patient.chart.checker/patient-chart-checker.service';
 import { AppointmentEditModalComponent } from '../../appintment.edit/modal/appointment-edit-modal.component';
 import { Settings } from '../../scheduler.view/util/fetch.scheduler.settings';
+
+export interface PatientPayment {
+  insuranceName: string | null;
+  paymentType: PaymentType | null;
+  payment: string | null;
+}
 
 @Component({
   selector: 'app-appointment-action-modal',
@@ -29,6 +38,7 @@ export class AppointmentActionModalComponent implements OnInit {
   patientChartAccessibilityModelResponse: PatientChartAccessibilityModelResponse
   isAppointmetSeries: boolean;
   isDeleting: boolean = false;
+  patientPayment: PatientPayment | null = null;
   constructor(@Inject(MAT_DIALOG_DATA) public data: { event: CalendarEvent, action: string, schedulerSettings: Observable<Settings> }
     , private dialogRef: MatDialogRef<AppointmentEditModalComponent>
     , private loggedInService: LoggedInService
@@ -40,8 +50,10 @@ export class AppointmentActionModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initAppointmentPatientInfo();
-    if (this.data.event.meta.structure !== 'Block')
+    if (this.data.event.meta.structure !== 'Block') {
       this.checkPatientChartAccessibility();
+      this.loadPatientCaseInsurance();
+    }
     if (this.data.event.id !== this.data.event.meta.seriesId)
       this.isAppointmetSeries = true
     else
@@ -118,5 +130,29 @@ export class AppointmentActionModalComponent implements OnInit {
     ).subscribe((result: any) => {
       this.patientChartAccessibilityModelResponse = result
     })
+  }
+
+  private loadPatientCaseInsurance() {
+    const appointmentId = this.data.event.id as number;
+    forkJoin({
+      patientCase: this.appointmentService.findAppointmentPatientCase(appointmentId),
+      patient: this.appointmentService.findAppointmentPatient(appointmentId)
+    }).subscribe({
+      next: ({ patientCase, patient }: { patientCase: PatientCase, patient: Patient }) => {
+        const primaryInsuranceName = patientCase?.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName;
+        if (primaryInsuranceName && patient?.patientInsuranceModels) {
+          const matchedInsurance = patient.patientInsuranceModels.find(
+            insurance => insurance.insuranceCompany?.name === primaryInsuranceName
+          );
+          if (matchedInsurance) {
+            this.patientPayment = {
+              insuranceName: primaryInsuranceName,
+              paymentType: matchedInsurance.paymentType,
+              payment: matchedInsurance.paymentValue
+            };
+          }
+        }
+      }
+    });
   }
 }
