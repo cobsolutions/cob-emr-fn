@@ -139,6 +139,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     console.log('provider', this.loggedInService.getLoggedUser)
     this.initListComponent();
     this.checkClinicalUserRole();
+    this.initPatientCaseActions();
     this.getReferringCaseData();
     this.getRecords();
     this.checkAuthExpiration()
@@ -168,6 +169,16 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       || this.permissionService.canView(Role.FORWARD_MEDICAL_NOTE_ROLE)
       || this.permissionService.canView(Role.FINALIZE_MEDICAL_NOTE_ROLE);
     this.canInitializeMedicalNote = this.permissionService.canModify(Role.INITIALIZE_MEDICAL_NOTE_ROLE);
+  }
+
+  private initPatientCaseActions() {
+    this.patientCaseActions = [
+      { key: 'Initial_Examination', label: 'Initial Examination' },
+      { key: 'Daily_Note', label: 'Daily Note' },
+      { key: 'Progress_Note', label: 'Progress Note' },
+      { key: 'Quick_Discharge', label: 'Quick Discharge' },
+      { key: 'Discharge', label: 'Discharge' }
+    ];
   }
   getFilteredRecordActions(actions: string[]): string[] {
     if (this.isClinicalUser) {
