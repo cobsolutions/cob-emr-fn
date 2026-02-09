@@ -1,5 +1,5 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import * as moment from 'moment';
@@ -20,7 +20,8 @@ import { SubjectiveMapperService } from '../components/subjective/services/subje
 @Component({
   selector: 'initial-examination',
   templateUrl: './initial-examination.component.html',
-  styleUrls: ['./initial-examination.component.css']
+  styleUrls: ['./initial-examination.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InitialExaminationComponent implements OnInit {
 
@@ -53,7 +54,8 @@ export class InitialExaminationComponent implements OnInit {
     private objectiveMapperService: ObjectiveMapperService,
     private billingMapperService: BillingMapperService,
     private assessmentMapper: AssessmentMapperService,
-    private planOfCareMapper: PlanOfCareMapperService) {
+    private planOfCareMapper: PlanOfCareMapperService,
+    private cdr: ChangeDetectorRef) {
 
   }
   private pendingObjectiveData: any = null;
@@ -142,7 +144,7 @@ export class InitialExaminationComponent implements OnInit {
         }
 
         if (note.billing) {
-          const billingFormValue = this.billingMapperService.fromDto(note.billing);          
+          const billingFormValue = this.billingMapperService.fromDto(note.billing);
           // Denormalize true/false to yes/no
           const billingFormGroup = this.initialExaminationForm.get('billing') as FormGroup;
           const denormalizedBilling = this.denormalizeNote(billingFormValue, billingFormGroup);
@@ -154,6 +156,8 @@ export class InitialExaminationComponent implements OnInit {
             this.pendingBillingData = null;
           }
         }
+
+        this.cdr.markForCheck();
       }
     })
   }
@@ -176,6 +180,8 @@ export class InitialExaminationComponent implements OnInit {
     // Show down arrow if there's more content below (not near bottom)
     const isNearBottom = (scrollTop + clientHeight) >= (scrollHeight - 150);
     this.showDownArrow = !isNearBottom && this.showScrollArrow;
+
+    this.cdr.markForCheck();
   }
 
   scrollPageUp(): void {
@@ -229,6 +235,7 @@ export class InitialExaminationComponent implements OnInit {
     this.activeStepIndex = event.selectedIndex;
     event.selectedIndex
     this.visitedSteps[event.selectedIndex] = true;
+    this.cdr.markForCheck();
   }
   setChildForm(section: string, formGroup: FormGroup) {
     this.initialExaminationForm.setControl(section, formGroup);

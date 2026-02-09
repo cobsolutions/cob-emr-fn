@@ -5,23 +5,23 @@
     <select
       cSelect
       class="select-input"
-      [formControlName]="getApplyToAllFieldName()">
+      [formControlName]="computedApplyToAllFieldName">
       <option value=""></option>
-      <option *ngFor="let option of getApplyToAllOptions()" [value]="option.value">
+      <option *ngFor="let option of computedApplyToAllOptions; trackBy: trackByValue" [value]="option.value">
         {{ option.label }}
       </option>
     </select>
   </div>
 
   <!-- Single Column Fields -->
-  <div *ngFor="let label of labels" class="field-row">
-    <label class="field-label">{{ label }}</label>
+  <div *ngFor="let mapping of labelMappings; trackBy: trackByLabel" class="field-row">
+    <label class="field-label">{{ mapping.label }}</label>
     <select
       cSelect
       class="select-input"
-      [formControlName]="getFieldName(label)">
+      [formControlName]="mapping.fieldName">
       <option value=""></option>
-      <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+      <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
         {{ option.label }}
       </option>
     </select>
@@ -34,7 +34,7 @@
       cFormControl
       class="form-textarea"
       rows="3"
-      [formControlName]="getCommentsFieldName()">
+      [formControlName]="computedCommentsFieldName">
     </textarea>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InspectionMapperService } from './services/inspection-mapper.service';
 import { Inspection } from './models/Inspection';
@@ -6,7 +6,8 @@ import { Inspection } from './models/Inspection';
 @Component({
   selector: 'inspectionN',
   templateUrl: './inspectionN.component.html',
-  styleUrls: ['./inspectionN.component.css']
+  styleUrls: ['./inspectionN.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InspectionNComponent implements OnInit {
   inspectionNForm: FormGroup;
@@ -68,7 +69,8 @@ export class InspectionNComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private inspectionMapper: InspectionMapperService
+    private inspectionMapper: InspectionMapperService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -170,16 +172,18 @@ export class InspectionNComponent implements OnInit {
     this.inspectionNForm.get('patient_consent')?.valueChanges.subscribe(value => {
       this.showPatientParentGuardianConsent = value === 'yes';
       if (!this.showPatientParentGuardianConsent) {
-        this.inspectionNForm.get('patient_parent_guardian_consent')?.setValue('no');
+        this.inspectionNForm.get('patient_parent_guardian_consent')?.setValue('no', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Chaperone Present dependency
     this.inspectionNForm.get('chaperone')?.valueChanges.subscribe(value => {
       this.showChaperonePresent = value === 'yes';
       if (!this.showChaperonePresent) {
-        this.inspectionNForm.get('chaperone_present')?.setValue(null);
+        this.inspectionNForm.get('chaperone_present')?.setValue(null, { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Girth Measurement Upper dependency
@@ -188,6 +192,7 @@ export class InspectionNComponent implements OnInit {
       if (!this.showGirthUpper) {
         this.clearGirthUpper();
       }
+      this.cdr.markForCheck();
     });
 
     // Girth Measurement Lower dependency
@@ -196,6 +201,7 @@ export class InspectionNComponent implements OnInit {
       if (!this.showGirthLower) {
         this.clearGirthLower();
       }
+      this.cdr.markForCheck();
     });
 
     // Post Operative/Wound Healing dependency
@@ -216,7 +222,7 @@ export class InspectionNComponent implements OnInit {
           wound_measurements: 'no',
           wound_length: '',
           wound_width: ''
-        });
+        }, { emitEvent: false });
         // Reset nested visibility flags
         this.showIncisionSites = false;
         this.showSurgicalPrecautions = false;
@@ -225,6 +231,7 @@ export class InspectionNComponent implements OnInit {
         this.showWoundDescription = false;
         this.showWoundMeasurements = false;
       }
+      this.cdr.markForCheck();
     });
 
     // Incision Sites dependency (nested under Post Operative)
@@ -236,48 +243,53 @@ export class InspectionNComponent implements OnInit {
     this.inspectionNForm.get('surgical_precautions')?.valueChanges.subscribe(value => {
       this.showSurgicalPrecautions = value === 'yes';
       if (!this.showSurgicalPrecautions) {
-        this.inspectionNForm.get('surgical_precautions_select')?.setValue(null);
+        this.inspectionNForm.get('surgical_precautions_select')?.setValue(null, { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Scar Mobility dependency (nested under Post Operative)
     this.inspectionNForm.get('scar_mobility')?.valueChanges.subscribe(value => {
       this.showScarMobility = value === 'yes';
       if (!this.showScarMobility) {
-        this.inspectionNForm.get('scar_mobility_text')?.setValue('');
+        this.inspectionNForm.get('scar_mobility_text')?.setValue('', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Scar Type dependency (nested under Post Operative)
     this.inspectionNForm.get('scar_type')?.valueChanges.subscribe(value => {
       this.showScarType = value === 'yes';
       if (!this.showScarType) {
-        this.inspectionNForm.get('scar_type_select')?.setValue(null);
+        this.inspectionNForm.get('scar_type_select')?.setValue(null, { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Wound Description dependency (nested under Post Operative)
     this.inspectionNForm.get('wound_description')?.valueChanges.subscribe(value => {
       this.showWoundDescription = value === 'yes';
       if (!this.showWoundDescription) {
-        this.inspectionNForm.get('wound_description_text')?.setValue('');
+        this.inspectionNForm.get('wound_description_text')?.setValue('', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Wound Measurements dependency (nested under Post Operative)
     this.inspectionNForm.get('wound_measurements')?.valueChanges.subscribe(value => {
       this.showWoundMeasurements = value === 'yes';
       if (!this.showWoundMeasurements) {
-        this.inspectionNForm.get('wound_length')?.setValue('');
-        this.inspectionNForm.get('wound_width')?.setValue('');
+        this.inspectionNForm.get('wound_length')?.setValue('', { emitEvent: false });
+        this.inspectionNForm.get('wound_width')?.setValue('', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Wound Care dependency
     this.inspectionNForm.get('wound_care')?.valueChanges.subscribe(value => {
       this.showWoundCareFields = value === 'yes';
       if (!this.showWoundCareFields) {
-        this.inspectionNForm.get('surface_culture_used')?.setValue('na');
+        this.inspectionNForm.get('surface_culture_used')?.setValue('na', { emitEvent: false });
         this.showSurfaceCultureFields = false;
         this.showSurfaceCultureTechnique = false;
         this.inspectionNForm.patchValue({
@@ -287,8 +299,9 @@ export class InspectionNComponent implements OnInit {
           surface_culture_quantitative: false,
           surface_culture_reasoning: '',
           surface_culture_technique: ''
-        });
+        }, { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Surface Culture Used dependency
@@ -302,19 +315,21 @@ export class InspectionNComponent implements OnInit {
           surface_culture_semiquantitative: false,
           surface_culture_quantitative: false,
           surface_culture_reasoning: ''
-        });
+        }, { emitEvent: false });
       }
       if (!this.showSurfaceCultureTechnique) {
-        this.inspectionNForm.get('surface_culture_technique')?.setValue('');
+        this.inspectionNForm.get('surface_culture_technique')?.setValue('', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Surgical Scarring dependency
     this.inspectionNForm.get('surgical_scarring')?.valueChanges.subscribe(value => {
       this.showSurgicalScarringSelect = value === 'yes';
       if (!this.showSurgicalScarringSelect) {
-        this.inspectionNForm.get('surgical_scarring_select')?.setValue([]);
+        this.inspectionNForm.get('surgical_scarring_select')?.setValue([], { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Body Mass Index dependency
@@ -327,16 +342,18 @@ export class InspectionNComponent implements OnInit {
           bmi_units: 'lbs_in',
           bmi_index: '',
           bmi_followup_plan: ''
-        });
+        }, { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
 
     // Additional Comments dependency
     this.inspectionNForm.get('additional_comments')?.valueChanges.subscribe(value => {
       this.showAdditionalCommentsText = value === 'yes';
       if (!this.showAdditionalCommentsText) {
-        this.inspectionNForm.get('additional_comments_text')?.setValue('');
+        this.inspectionNForm.get('additional_comments_text')?.setValue('', { emitEvent: false });
       }
+      this.cdr.markForCheck();
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
@@ -21,7 +21,8 @@ import { Palpation } from './palpationN/model/Palpation';
 @Component({
   selector: 'objective',
   templateUrl: './objective.component.html',
-  styleUrls: ['./objective.component.css']
+  styleUrls: ['./objective.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectiveComponent implements OnInit, AfterViewInit {
   objectiveForm: FormGroup;

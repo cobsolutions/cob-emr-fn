@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -34,7 +34,8 @@ import { PatientEDocumentService, EDocumentUploadRequest, EDocumentRecord } from
 @Component({
   selector: 'app-patient-chart-case',
   templateUrl: './patient-chart-case.component.html',
-  styleUrls: ['./patient-chart-case.component.css']
+  styleUrls: ['./patient-chart-case.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatientChartCaseComponent extends ListTemplate implements OnInit, OnDestroy {
   isExpired: boolean = false;
@@ -118,10 +119,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     private patientEDocumentService: PatientEDocumentService,
     private sanitizer: DomSanitizer,
     private toastr: ToastrService,
-    private fb: FormBuilder) { super() }
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef) { super() }
 
   setActive(section: string) {
     this.activeSection = section;
+    this.cdr.markForCheck();
   }
 
   isActive(section: string): boolean {
@@ -134,6 +137,23 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
   formatInfo(info: string): string {
     return info ? info.replace(/\n/g, '<br/>') : '';
+  }
+
+  // TrackBy functions for better ngFor performance
+  trackByDiagnosis(index: number, diagnosis: any): string {
+    return diagnosis.diagnosisCode;
+  }
+
+  trackByAction(index: number, action: PatientCaseAction): string {
+    return action.key;
+  }
+
+  trackByRecord(index: number, record: PatientRecord): number {
+    return record.entityId;
+  }
+
+  trackByDocType(index: number, docType: DocumentTypeOption): string {
+    return docType.value;
   }
   ngOnInit(): void {
     console.log('provider', this.loggedInService.getLoggedUser)
@@ -198,6 +218,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   }
   toggleReasonVisibility(data: any) {
     this.reasonVisibility = !this.reasonVisibility;
+    this.cdr.markForCheck();
   }
 
 
@@ -288,10 +309,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.cdr.markForCheck();
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the initial examination note';
+      this.cdr.markForCheck();
     })
   }
   private createDailyNote() {
@@ -309,10 +332,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.cdr.markForCheck();
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the daily note';
+      this.cdr.markForCheck();
     })
   }
   private createProgressNote() {
@@ -331,10 +356,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.cdr.markForCheck();
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the progress note';
+      this.cdr.markForCheck();
     })
   }
   private createQuickDischargeNote() {
@@ -348,10 +375,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined;
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId);
+      this.cdr.markForCheck();
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the quick discharge note';
+      this.cdr.markForCheck();
     })
   }
   private createDischargeNote() {
@@ -370,10 +399,12 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
+      this.cdr.markForCheck();
     }, error => {
       this.patientRecord = false;
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the discharge note';
+      this.cdr.markForCheck();
     })
   }
   executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
@@ -416,11 +447,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   handleBackAction() {
     this.patientRecord = true;
     this.getRecords();
+    this.cdr.markForCheck();
   }
   private getAppointment(id: number) {
     this.appointmentService.getAppointmentCancelNoShow(id).subscribe((appointmentCancelNoShowReason: any) => {
       this.appointmentCancelNoShowReason = appointmentCancelNoShowReason
       this.reasonVisibility = true;
+      this.cdr.markForCheck();
     })
   }
   private removeMedicalNote(noteId: string) {
@@ -441,6 +474,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.patientRecordAction = 'Quick_Discharge';
     if (status === 'Discharge Note' || status === 'Discharge_Note' || status === 'Discharge')
       this.patientRecordAction = 'Discharge';
+    this.cdr.markForCheck();
   }
 
   // E-Document methods
@@ -449,15 +483,18 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       next: (response) => {
         this.caseDocuments = response.records.caseList;
         this.allCasesDocuments = response.records.allList;
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error loading e-documents:', error);
+        this.cdr.markForCheck();
       }
     });
   }
 
   toggleEDocumentForm(): void {
     this.showEDocumentForm = !this.showEDocumentForm;
+    this.cdr.markForCheck();
   }
 
   onDocumentSubmitted(formData: EDocumentFormData): void {
@@ -466,6 +503,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
 
     this.isUploadingDocument = true;
+    this.cdr.markForCheck();
 
     const uploadRequest: EDocumentUploadRequest = {
       documentType: formData.documentType,
@@ -482,16 +520,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         this.showEDocumentForm = false;
         this.isUploadingDocument = false;
         this.loadEDocuments();
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error uploading document:', error);
         this.isUploadingDocument = false;
+        this.cdr.markForCheck();
       }
     });
   }
 
   onCancelEDocument(): void {
     this.showEDocumentForm = false;
+    this.cdr.markForCheck();
   }
 
   onViewDocument(doc: EDocumentRecord): void {
@@ -499,6 +540,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.previewFileName = doc.fileName;
     this.previewContentType = doc.contentType;
     this.previewVisible = true;
+    this.cdr.markForCheck();
 
     this.patientEDocumentService.download(doc.id).subscribe({
       next: (blob) => {
@@ -508,11 +550,13 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         this.previewUrl = window.URL.createObjectURL(blob);
         this.previewSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.previewUrl);
         this.isLoadingPreview = false;
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error viewing document:', error);
         this.isLoadingPreview = false;
         this.previewVisible = false;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -525,6 +569,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
     this.previewFileName = '';
     this.previewContentType = '';
+    this.cdr.markForCheck();
   }
 
   get isPreviewImage(): boolean {
@@ -545,6 +590,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       assignedCase: [doc.assignedCase, Validators.required]
     });
     this.editVisible = true;
+    this.cdr.markForCheck();
   }
 
   get editAssignedCaseOptions(): CaseOption[] {
@@ -557,16 +603,19 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   onSaveEdit(): void {
     if (this.editForm.valid && this.editingDocument) {
       this.isSavingEdit = true;
+      this.cdr.markForCheck();
       this.patientEDocumentService.updateDocument(this.editingDocument.id, this.editForm.value).subscribe({
         next: () => {
           this.isSavingEdit = false;
           this.editVisible = false;
           this.editingDocument = null;
           this.loadEDocuments();
+          this.cdr.markForCheck();
         },
         error: (error) => {
           console.error('Error updating document:', error);
           this.isSavingEdit = false;
+          this.cdr.markForCheck();
         }
       });
     }
@@ -575,6 +624,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   closeEdit(): void {
     this.editVisible = false;
     this.editingDocument = null;
+    this.cdr.markForCheck();
   }
 
   onDeleteDocument(doc: EDocumentRecord): void {
@@ -611,21 +661,25 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
 
     this.isSavingChartNote = true;
+    this.cdr.markForCheck();
 
     this.patientChartNoteService.saveChartNote(this.case.id, this.chartNote.trim()).subscribe({
       next: () => {
         this.isSavingChartNote = false;
         this.toastr.success('Chart note saved');
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error saving chart note:', error);
         this.isSavingChartNote = false;
         this.toastr.error('Error saving chart note');
+        this.cdr.markForCheck();
       }
     });
   }
 
   clearChartNote(): void {
     this.chartNote = '';
+    this.cdr.markForCheck();
   }
 }

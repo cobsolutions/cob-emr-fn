@@ -2,9 +2,9 @@
   <!-- Apply to All -->
   <div *ngIf="showApplyToAll" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
     <label style="min-width: 150px; text-align: right; font-weight: 500; color: #5c4742;">{{ applyToAllLabel }}</label>
-    <select cSelect style="max-width: 200px;" [formControlName]="getApplyToAllFieldName()">
+    <select cSelect style="max-width: 200px;" [formControlName]="computedApplyToAllFieldName">
       <option value="" selected>Select...</option>
-      <option *ngFor="let option of getApplyToAllOptions()" [value]="option.value">
+      <option *ngFor="let option of computedApplyToAllOptions; trackBy: trackByValue" [value]="option.value">
         {{ option.label }}
       </option>
     </select>
@@ -20,18 +20,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let label of labels">
-        <td>{{ label }}</td>
+      <tr *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <td>{{ mapping.label }}</td>
         <td>
-          <select cSelect class="table-input" [formControlName]="getFieldName(label, 'right')">
-            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+          <select cSelect class="table-input" [formControlName]="mapping.rightField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
         </td>
         <td>
-          <select cSelect class="table-input" [formControlName]="getFieldName(label, 'left')">
-            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+          <select cSelect class="table-input" [formControlName]="mapping.leftField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
@@ -45,7 +45,7 @@
     <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
     <textarea
       class="form-textarea"
-      [formControlName]="getCommentsFieldName()"
+      [formControlName]="computedCommentsFieldName"
       rows="3"
       placeholder="Enter any comments...">
     </textarea>

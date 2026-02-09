@@ -1,13 +1,21 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { generateMeasurementFieldName } from '../form-field-utils';
 
+interface LabelFieldMapping {
+  label: string;
+  rightField: string;
+  leftField: string;
+  options: any[];
+}
+
 @Component({
   selector: 'measurement-table',
   templateUrl: './measurement-table.component.html',
-  styleUrls: ['./measurement-table.component.css']
+  styleUrls: ['./measurement-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
@@ -24,11 +32,38 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
   @Input() commentsFieldName?: string; // Optional custom comments field name
   @Input() initialData?: any; // Initial values for controls
 
+  // Pre-computed field mappings to avoid function calls in template
+  labelMappings: LabelFieldMapping[] = [];
+  computedApplyToAllFieldName: string = '';
+  computedCommentsFieldName: string = '';
+  computedApplyToAllOptions: any[] = [];
+
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
+
+  trackByLabel(index: number, item: LabelFieldMapping): string {
+    return item.label;
+  }
+
+  trackByValue(index: number, item: any): string {
+    return item.value;
+  }
 
   ngOnInit(): void {
+    // Pre-compute field names to avoid function calls in template
+    this.computedApplyToAllFieldName = this.getApplyToAllFieldName();
+    this.computedCommentsFieldName = this.getCommentsFieldName();
+    this.computedApplyToAllOptions = this.getApplyToAllOptions();
+
+    // Pre-compute label mappings
+    this.labelMappings = this.labels.map(label => ({
+      label,
+      rightField: this.getFieldName(label, 'right'),
+      leftField: this.getFieldName(label, 'left'),
+      options: this.getOptionsForLabel(label)
+    }));
+
     this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();

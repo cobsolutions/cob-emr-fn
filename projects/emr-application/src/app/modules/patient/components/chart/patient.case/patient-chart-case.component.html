@@ -132,7 +132,7 @@
                 </div>
                 <div class="tree-node-body">
                     <div class="tree-diagnosis-list" *ngIf="case.caseDiagnosis?.length > 0; else noDiagnosis">
-                        <div *ngFor="let diagnosis of case.caseDiagnosis" class="tree-diagnosis-item">
+                        <div *ngFor="let diagnosis of case.caseDiagnosis; trackBy: trackByDiagnosis" class="tree-diagnosis-item">
                             <span class="tree-diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
                             <span class="tree-diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
                         </div>
@@ -209,7 +209,7 @@
         </label>
         <div class="action-controls">
             <select id="patientRecordAction" #patientActionSelect class="action-select">
-                <option [value]="action.key" *ngFor="let action of patientCaseActions">
+                <option [value]="action.key" *ngFor="let action of patientCaseActions; trackBy: trackByAction">
                     {{ action.label }}
                 </option>
             </select>
@@ -280,7 +280,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index" class="record-row">
+                                <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index; trackBy: trackByRecord" class="record-row">
                                     <td>
                                         <span class="record-type-badge" [ngClass]="{
                                             'badge-initial': item.status === 'Initial Examination',
@@ -539,7 +539,7 @@
                     <label for="editDocumentType" class="edit-form-label">Document Type <span class="edit-required">*</span></label>
                     <select id="editDocumentType" formControlName="documentType" class="edit-form-control"
                         [class.is-invalid]="editForm.get('documentType')?.invalid && editForm.get('documentType')?.touched">
-                        <option *ngFor="let type of documentTypes" [value]="type.value">{{ type.name }}</option>
+                        <option *ngFor="let type of documentTypes; trackBy: trackByDocType" [value]="type.value">{{ type.name }}</option>
                     </select>
                 </div>
                 <div class="edit-form-group">

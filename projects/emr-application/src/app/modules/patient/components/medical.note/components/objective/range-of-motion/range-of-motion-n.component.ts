@@ -501,10 +501,10 @@ export class RangeOfMotionNComponent implements OnInit {
           prom_ankle: false,
           prom_feet: false,
           prom_comments: ''
-        });
+        }, { emitEvent: false });
         this.showPromFields = false;
       }
-    });
+          });
 
     // PROM nested dependency
     this.romForm.get('prom')?.valueChanges.subscribe(value => {
@@ -523,9 +523,9 @@ export class RangeOfMotionNComponent implements OnInit {
           prom_ankle: false,
           prom_feet: false,
           prom_comments: ''
-        });
+        }, { emitEvent: false });
       }
-    });
+          });
 
 
 
@@ -535,7 +535,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetSingleColumnFields(this.romConfig.cervicalArom);
       }
-    });
+          });
 
     this.romForm.get('costovertebral_expansion')?.valueChanges.subscribe(value => {
       this.showCostovertebralExpansionFields = value === 'yes';
@@ -543,7 +543,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetSingleColumnFields(this.romConfig.costovertebralExpansion);
       }
-    });
+          });
 
 
     this.romForm.get('shoulder_arrom')?.valueChanges.subscribe(value => {
@@ -552,7 +552,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementFields(this.romConfig.shoulderArom);
       }
-    });
+          });
 
     // Shoulder AROM Apply to All
     this.romForm.get('shoulder_apply_to_all')?.valueChanges.subscribe(value => {
@@ -588,7 +588,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementEndfeelFields(this.romConfig.shoulderProm);
       }
-    });
+          });
 
     // Shoulder PROM Apply to All
     this.romForm.get('shoulder_prom_apply_to_all')?.valueChanges.subscribe(value => {
@@ -630,7 +630,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementFields(this.romConfig.elbowArom);
       }
-    });
+          });
 
     // Elbow AROM Apply to All
     this.romForm.get('elbow_arrom_apply_to_all')?.valueChanges.subscribe(value => {
@@ -654,7 +654,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementEndfeelFields(this.romConfig.elbowProm);
       }
-    });
+          });
 
     // Elbow PROM Apply to All
     this.romForm.get('elbow_prom_apply_to_all')?.valueChanges.subscribe(value => {
@@ -678,7 +678,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementFields(this.romConfig.wristArom);
       }
-    });
+          });
 
     this.romForm.get('wrist_arrom_apply_to_all')?.valueChanges.subscribe(value => {
       if (value) {
@@ -700,7 +700,7 @@ export class RangeOfMotionNComponent implements OnInit {
         // Use generic reset helper with config
         this.resetMeasurementEndfeelFields(this.romConfig.wristProm);
       }
-    });
+          });
 
     this.romForm.get('wrist_prom_apply_to_all')?.valueChanges.subscribe(value => {
       if (value) {
@@ -728,7 +728,7 @@ export class RangeOfMotionNComponent implements OnInit {
           small_finger_arrom_prom: false
         }, { emitEvent: false });
       }
-    });
+          });
 
     this.romForm.get('thumb_arrom_prom')?.valueChanges.subscribe(value => {
       this.showThumbAromPromFields = value === true;
@@ -785,7 +785,7 @@ export class RangeOfMotionNComponent implements OnInit {
           thumb_comments: ''
         }, { emitEvent: false });
       }
-    });
+          });
 
     this.romForm.get('index_finger_arrom_prom')?.valueChanges.subscribe(value => {
       this.showIndexFingerAromPromFields = value === true;

@@ -1,13 +1,20 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { generateSingleColumnFieldName } from '../form-field-utils';
 
+interface LabelFieldMapping {
+  label: string;
+  fieldName: string;
+  options: any[];
+}
+
 @Component({
   selector: 'single-column-table',
   templateUrl: './single-column-table.component.html',
-  styleUrls: ['./single-column-table.component.css']
+  styleUrls: ['./single-column-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SingleColumnTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
@@ -24,11 +31,37 @@ export class SingleColumnTableComponent implements OnInit, OnDestroy {
   @Input() commentsFieldName?: string;
   @Input() initialData?: any; // Initial values for controls
 
+  // Pre-computed field mappings to avoid function calls in template
+  labelMappings: LabelFieldMapping[] = [];
+  computedApplyToAllFieldName: string = '';
+  computedCommentsFieldName: string = '';
+  computedApplyToAllOptions: any[] = [];
+
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+
+  trackByLabel(index: number, item: LabelFieldMapping): string {
+    return item.label;
+  }
+
+  trackByValue(index: number, item: any): string {
+    return item.value;
+  }
 
   ngOnInit(): void {
+    // Pre-compute field names to avoid function calls in template
+    this.computedApplyToAllFieldName = this.getApplyToAllFieldName();
+    this.computedCommentsFieldName = this.getCommentsFieldName();
+    this.computedApplyToAllOptions = this.getApplyToAllOptions();
+
+    // Pre-compute label mappings
+    this.labelMappings = this.labels.map(label => ({
+      label,
+      fieldName: this.getFieldName(label),
+      options: this.getOptionsForLabel(label)
+    }));
+
     this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();

@@ -1,13 +1,23 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { generateMeasurementFieldName, generateEndfeelFieldName } from '../form-field-utils';
 
+interface LabelFieldMapping {
+  label: string;
+  rightMeasurementField: string;
+  leftMeasurementField: string;
+  rightEndfeelField: string;
+  leftEndfeelField: string;
+  measurementOptions: any[];
+}
+
 @Component({
   selector: 'measurement-endfeel-table',
   templateUrl: './measurement-endfeel-table.component.html',
-  styleUrls: ['./measurement-endfeel-table.component.css']
+  styleUrls: ['./measurement-endfeel-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   @Input() labels: string[] = [];
@@ -25,11 +35,40 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   @Input() commentsFieldName?: string;
   @Input() initialData?: any; // Initial values for controls
 
+  // Pre-computed field mappings to avoid function calls in template
+  labelMappings: LabelFieldMapping[] = [];
+  computedApplyToAllFieldName: string = '';
+  computedCommentsFieldName: string = '';
+  computedApplyToAllMeasurementOptions: any[] = [];
+
   private destroy$ = new Subject<void>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+
+  trackByLabel(index: number, item: LabelFieldMapping): string {
+    return item.label;
+  }
+
+  trackByValue(index: number, item: any): string {
+    return item.value;
+  }
 
   ngOnInit(): void {
+    // Pre-compute field names to avoid function calls in template
+    this.computedApplyToAllFieldName = this.getApplyToAllFieldName();
+    this.computedCommentsFieldName = this.getCommentsFieldName();
+    this.computedApplyToAllMeasurementOptions = this.getApplyToAllMeasurementOptions();
+
+    // Pre-compute label mappings
+    this.labelMappings = this.labels.map(label => ({
+      label,
+      rightMeasurementField: this.getMeasurementFieldName(label, 'right'),
+      leftMeasurementField: this.getMeasurementFieldName(label, 'left'),
+      rightEndfeelField: this.getEndfeelFieldName(label, 'right'),
+      leftEndfeelField: this.getEndfeelFieldName(label, 'left'),
+      measurementOptions: this.getMeasurementOptionsForLabel(label)
+    }));
+
     this.ensureFormControlsExist();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
