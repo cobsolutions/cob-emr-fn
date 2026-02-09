@@ -10,10 +10,18 @@ export interface CurrentFunction {
     changingMaintainingBodyPosition?:ChangingMaintainingBodyPosition;
     carryingMovingHandlingObjects?:CarryingMovingHandlingObjects
 
-    priorLevelFunctionOther?: boolean;
-    priorLevelFunctionOtherText?: string;
-    priorLevelFunctionSelfCareComment?: string;
-    priorLevelFunctionMobilityWalkingMovingAroundComment?: string;
-    priorLevelFunctionChangingMaintainingBodyPositionComment?: string;
-    priorLevelFunctionCarryingMovingHandlingObjectsComment?: string;
+    currentFunctionalLimitationsOther?: boolean;
+    currentFunctionalLimitationsOtherText?: string;
+    currentFunctionalLimitationsSelfCareComment?: string;
+    currentFunctionalLimitationsMobilityWalkingMovingAroundComment?: string;
+    currentFunctionalLimitationsChangingMaintainingBodyPositionComment?: string;
+    currentFunctionalLimitationsCarryingMovingHandlingObjectsComment?: string;
+
+    // Additional specialty fields
+    currentFunctionalLimitationsLymphedema?: boolean;
+    currentFunctionalLimitationsLymphedemaText?: string;
+    currentFunctionalLimitationsWoundHealing?: boolean;
+    currentFunctionalLimitationsWoundHealingText?: string;
+    currentFunctionalLimitationsPelvicHealth?: boolean;
+    currentFunctionalLimitationsPelvicHealthText?: string;
 }

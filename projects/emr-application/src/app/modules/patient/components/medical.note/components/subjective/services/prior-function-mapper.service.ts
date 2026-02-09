@@ -44,32 +44,32 @@ export class PriorFunctionMapperService {
   private mapPriorFunctionComments(formGroup: FormGroup, mapped: PriorFunction, getValue: (controlName: string) => any): void {
     // ========== COMMENTS ==========
 
-    const priorLevelFunctionOther = getValue('priorLevelFunctionOther');
+    const priorLevelFunctionOther = getValue('prior_level_function_other');
     if (priorLevelFunctionOther !== undefined) {
       mapped.priorLevelFunctionOther = priorLevelFunctionOther;
     }
 
-    const priorLevelFunctionOtherText = getValue('priorLevelFunctionOtherText');
+    const priorLevelFunctionOtherText = getValue('prior_level_function_other_text');
     if (priorLevelFunctionOtherText !== undefined && priorLevelFunctionOtherText !== '') {
       mapped.priorLevelFunctionOtherText = priorLevelFunctionOtherText;
     }
 
-    const priorLevelFunctionSelfCareComment = getValue('priorLevelFunctionSelfCareComment');
+    const priorLevelFunctionSelfCareComment = getValue('prior-level-function_self-care_comment');
     if (priorLevelFunctionSelfCareComment !== undefined && priorLevelFunctionSelfCareComment !== '') {
       mapped.priorLevelFunctionSelfCareComment = priorLevelFunctionSelfCareComment;
     }
 
-    const priorLevelFunctionMobilityComment = getValue('priorLevelFunctionMobilityWalkingMovingAroundComment');
+    const priorLevelFunctionMobilityComment = getValue('prior-level-function_mobility-walking-moving-around_comment');
     if (priorLevelFunctionMobilityComment !== undefined && priorLevelFunctionMobilityComment !== '') {
       mapped.priorLevelFunctionMobilityWalkingMovingAroundComment = priorLevelFunctionMobilityComment;
     }
 
-    const priorLevelFunctionChangingComment = getValue('priorLevelFunctionChangingMaintainingBodyPositionComment');
+    const priorLevelFunctionChangingComment = getValue('prior-level-function_changing-maintaining-body-position_comment');
     if (priorLevelFunctionChangingComment !== undefined && priorLevelFunctionChangingComment !== '') {
       mapped.priorLevelFunctionChangingMaintainingBodyPositionComment = priorLevelFunctionChangingComment;
     }
 
-    const priorLevelFunctionCarryingComment = getValue('priorLevelFunctionCarryingMovingHandlingObjectsComment');
+    const priorLevelFunctionCarryingComment = getValue('prior-level-function_carrying-moving-handling-objects_comment');
     if (priorLevelFunctionCarryingComment !== undefined && priorLevelFunctionCarryingComment !== '') {
       mapped.priorLevelFunctionCarryingMovingHandlingObjectsComment = priorLevelFunctionCarryingComment;
     }
@@ -107,11 +107,11 @@ export class PriorFunctionMapperService {
   }
   
   private mapCommentsFromDto(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
-    setValue('priorLevelFunctionOther', priorFunction.priorLevelFunctionOther);
-    setValue('priorLevelFunctionOtherText', priorFunction.priorLevelFunctionOtherText);
-    setValue('priorLevelFunctionSelfCareComment', priorFunction.priorLevelFunctionSelfCareComment);
-    setValue('priorLevelFunctionMobilityWalkingMovingAroundComment', priorFunction.priorLevelFunctionMobilityWalkingMovingAroundComment);
-    setValue('priorLevelFunctionChangingMaintainingBodyPositionComment', priorFunction.priorLevelFunctionChangingMaintainingBodyPositionComment);
-    setValue('priorLevelFunctionCarryingMovingHandlingObjectsComment', priorFunction.priorLevelFunctionCarryingMovingHandlingObjectsComment);
+    setValue('prior_level_function_other', priorFunction.priorLevelFunctionOther);
+    setValue('prior_level_function_other_text', priorFunction.priorLevelFunctionOtherText);
+    setValue('prior-level-function_self-care_comment', priorFunction.priorLevelFunctionSelfCareComment);
+    setValue('prior-level-function_mobility-walking-moving-around_comment', priorFunction.priorLevelFunctionMobilityWalkingMovingAroundComment);
+    setValue('prior-level-function_changing-maintaining-body-position_comment', priorFunction.priorLevelFunctionChangingMaintainingBodyPositionComment);
+    setValue('prior-level-function_carrying-moving-handling-objects_comment', priorFunction.priorLevelFunctionCarryingMovingHandlingObjectsComment);
   }
 }

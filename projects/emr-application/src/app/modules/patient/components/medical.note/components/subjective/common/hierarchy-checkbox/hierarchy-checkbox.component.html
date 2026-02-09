@@ -1,19 +1,19 @@
 <div class="checkbox-container">
   <div class="columns-wrapper">
-    <div *ngFor="let columnData of getColumnData(); let colIndex = index" class="column">
-      <div *ngFor="let category of columnData" class="category-section">
+    <div *ngFor="let column of columnData; let colIndex = index; trackBy: trackByColumnIndex" class="column">
+      <div *ngFor="let category of column; trackBy: trackByCategory" class="category-section">
         <div class="category-header">
           <button class="expand-category-btn" (click)="toggleCategoryCollapse(category)">
             {{ getCategoryArrowIcon(category) }}
           </button>
-          <label class="main-checkbox" (click)="onCategoryCheckboxClick(category, $event)">
-            <input 
-              type="checkbox" 
-              [checked]="isCategoryChecked(category)"
+          <label class="main-checkbox" [class.checked]="category.checked">
+            <input
+              type="checkbox"
+              [checked]="category.checked"
               [indeterminate]="isCategoryIndeterminate(category)"
-              readonly
+              (change)="onCategoryCheckboxChange(category, $event)"
             />
-            <span class="checkmark"></span>
+            <span class="checkmark" [class.checked]="category.checked"></span>
             <span class="category-title">{{ category.title }}</span>
           </label>
           <!-- Category level Add/Remove All button - show when category is checked and expanded -->
@@ -29,7 +29,7 @@
         <!-- Category content - collapsible -->
         <div *ngIf="!category.collapsed" class="category-content">
           <div class="items-list">
-            <div *ngFor="let item of category.items" class="item-level-1">
+            <div *ngFor="let item of category.items; trackBy: trackByItem" class="item-level-1">
               <div class="item-row">
                 <div class="item-controls">
                   <button 
@@ -62,7 +62,7 @@
               
               <!-- Level 2 - Collapsible -->
               <div *ngIf="item.children && !item.collapsed" class="level-2">
-                <div *ngFor="let child of item.children" class="item-level-2">
+                <div *ngFor="let child of item.children; trackBy: trackByItem" class="item-level-2">
                   <div class="item-row">
                     <div class="item-controls">
                       <button 
@@ -95,7 +95,7 @@
                   
                   <!-- Level 3 - Collapsible -->
                   <div *ngIf="child.children && !child.collapsed" class="level-3">
-                    <div *ngFor="let grandChild of child.children" class="item-level-3">
+                    <div *ngFor="let grandChild of child.children; trackBy: trackByItem" class="item-level-3">
                       <label>
                         <input 
                           type="checkbox" 

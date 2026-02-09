@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CheckboxHierarchy } from '../common/hierarchy-checkbox/interface/checkbox-hierarchy';
 import { PriorFunctionMapperService } from '../services/prior-function-mapper.service';
@@ -7,7 +7,8 @@ import { HierarchyCheckboxComponent } from '../common/hierarchy-checkbox/hierarc
 @Component({
   selector: 'subjective-prior-level-function-n',
   templateUrl: './prior-level-function-n.component.html',
-  styleUrls: ['./prior-level-function-n.component.css']
+  styleUrls: ['./prior-level-function-n.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
   @Input() priorLevelFunctionFormData: any;
@@ -439,7 +440,8 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
   showHoOther:boolean = false
   constructor(
     private fb: FormBuilder,
-    private priorFunctionMapper: PriorFunctionMapperService
+    private priorFunctionMapper: PriorFunctionMapperService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -453,6 +455,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
     // React to changes in priorLevelFunctionFormData
     if (changes['priorLevelFunctionFormData'] && !changes['priorLevelFunctionFormData'].firstChange && this.priorLevelFunctionForm) {
       this.patchFormData();
+      this.cdr.markForCheck();
     }
   }
   initForm() {
@@ -479,6 +482,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
         if (this.hierarchyCheckbox) {
           this.hierarchyCheckbox.expandCheckedItems();
         }
+        this.cdr.markForCheck();
       }, 0);
     }
   }
@@ -573,6 +577,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
 
     this.priorLevelFunctionForm.get('prior_level_function_other')?.valueChanges.subscribe(value => {
       this.showHoOther = value;
+      this.cdr.markForCheck();
     });
   }
 

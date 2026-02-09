@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CheckboxHierarchy } from './interface/checkbox-hierarchy';
 import { CheckboxItem } from './interface/checkbox-item';
@@ -6,7 +6,8 @@ import { CheckboxItem } from './interface/checkbox-item';
 @Component({
   selector: 'hierarchy-checkbox',
   templateUrl: './hierarchy-checkbox.component.html',
-  styleUrls: ['./hierarchy-checkbox.component.css']
+  styleUrls: ['./hierarchy-checkbox.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HierarchyCheckboxComponent implements OnInit {
   @Input() data: CheckboxHierarchy[] = [];
@@ -28,10 +29,43 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Map to store the unique form control names for category checkboxes
   private categoryFormControlNames: Map<CheckboxHierarchy, string> = new Map();
 
+  // Cached column data to avoid recalculating on every change detection
+  columnData: CheckboxHierarchy[][] = [];
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
     this.initializeCollapsedState();
     this.initializeFormControls();
     this.expandCheckedItems();
+    this.updateColumnData();
+  }
+
+  // Update cached column data
+  private updateColumnData(): void {
+    const result: CheckboxHierarchy[][] = [];
+    const itemsPerColumn = Math.ceil(this.data.length / this.columns);
+
+    for (let i = 0; i < this.columns; i++) {
+      const startIndex = i * itemsPerColumn;
+      const endIndex = startIndex + itemsPerColumn;
+      result.push(this.data.slice(startIndex, endIndex));
+    }
+
+    this.columnData = result;
+  }
+
+  // TrackBy functions to optimize *ngFor rendering
+  trackByColumnIndex(index: number): number {
+    return index;
+  }
+
+  trackByCategory(index: number, category: CheckboxHierarchy): string {
+    return category.title;
+  }
+
+  trackByItem(index: number, item: CheckboxItem): string {
+    return item.id;
   }
 
   // Initialize form controls for all hierarchy items
@@ -223,6 +257,10 @@ export class HierarchyCheckboxComponent implements OnInit {
         this.expandCheckedItemRecursive(item);
       });
     });
+
+    // Update column data and trigger change detection
+    this.updateColumnData();
+    this.detectChanges();
   }
 
   // Recursively expand items that are checked
@@ -277,13 +315,13 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.categoryIndeterminateStates.set(category.title, hasCheckedChildren && !allChildrenChecked || hasIndeterminate);
   }
 
-  // Toggle category checkbox - check the category and expand without checking children
-  onCategoryCheckboxClick(category: CheckboxHierarchy, event: MouseEvent): void {
-    event.preventDefault(); // Prevent default checkbox behavior
-    event.stopPropagation();
+  // Toggle category checkbox - using change event like item checkboxes
+  onCategoryCheckboxChange(category: CheckboxHierarchy, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
 
-    // Toggle checked state for UX
-    category.checked = !category.checked;
+    // Set checked state from the native checkbox
+    category.checked = checked;
 
     // Update form control for category
     this.updateCategoryFormControl(category);
@@ -300,6 +338,7 @@ export class HierarchyCheckboxComponent implements OnInit {
     }
 
     this.selectionChange.emit(this.data);
+    this.detectChanges();
   }
 
   // Toggle regular item checkbox
@@ -316,6 +355,7 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.updateAllCategoryStates();
 
     this.selectionChange.emit(this.data);
+    this.detectChanges();
   }
 
   // Expand first level children
@@ -362,6 +402,7 @@ export class HierarchyCheckboxComponent implements OnInit {
       this.updateAllCategoryStates();
 
       this.selectionChange.emit(this.data);
+      this.detectChanges();
     }
   }
 
@@ -387,6 +428,7 @@ export class HierarchyCheckboxComponent implements OnInit {
       this.updateAllCategoryStates();
 
       this.selectionChange.emit(this.data);
+      this.detectChanges();
     }
   }
 
@@ -413,6 +455,7 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.updateAllCategoryStates();
 
     this.selectionChange.emit(this.data);
+    this.detectChanges();
   }
 
   // Remove All for entire category
@@ -432,6 +475,7 @@ export class HierarchyCheckboxComponent implements OnInit {
     this.updateAllCategoryStates();
 
     this.selectionChange.emit(this.data);
+    this.detectChanges();
   }
 
   // Check if all direct items in category are checked
@@ -477,6 +521,7 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Toggle item collapse
   toggleItemCollapse(item: CheckboxItem): void {
     item.collapsed = !item.collapsed;
+    this.detectChanges();
   }
 
   // Get arrow icon for categories
@@ -576,17 +621,9 @@ export class HierarchyCheckboxComponent implements OnInit {
     return item.children.every(child => this.isItemChecked(child));
   }
 
-  getColumnData(): CheckboxHierarchy[][] {
-    const result: CheckboxHierarchy[][] = [];
-    const itemsPerColumn = Math.ceil(this.data.length / this.columns);
-
-    for (let i = 0; i < this.columns; i++) {
-      const startIndex = i * itemsPerColumn;
-      const endIndex = startIndex + itemsPerColumn;
-      result.push(this.data.slice(startIndex, endIndex));
-    }
-
-    return result;
+  // Trigger change detection manually when needed
+  private detectChanges(): void {
+    this.cdr.detectChanges();
   }
 
   hasChildren(item: CheckboxItem): boolean {
@@ -606,6 +643,7 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Toggle category collapse (for arrow button)
   toggleCategoryCollapse(category: CheckboxHierarchy): void {
     category.collapsed = !category.collapsed;
+    this.detectChanges();
   }
 
   // Handle category comment change

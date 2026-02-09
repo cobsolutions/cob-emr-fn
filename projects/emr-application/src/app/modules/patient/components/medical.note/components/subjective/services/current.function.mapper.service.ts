@@ -34,7 +34,74 @@ export class CurrentFunctionMapperService {
     MobilityWalkingMovingAroundMapper.map(formGroup, mapped, getValue);
     ChangingMaintainingBodyPositionMapper.map(formGroup, mapped, getValue);
     CarryingMovingHandlingObjectsMapper.map(formGroup, mapped, getValue);
+    this.mapCurrentFunctionComments(formGroup, mapped, getValue);
     return mapped;
+  }
+
+  private mapCurrentFunctionComments(formGroup: FormGroup, mapped: CurrentFunction, getValue: (controlName: string) => any): void {
+    // ========== OTHER & COMMENTS ==========
+
+    const currentFunctionalLimitationsOther = getValue('current_functional_limitations_other');
+    if (currentFunctionalLimitationsOther !== undefined) {
+      mapped.currentFunctionalLimitationsOther = currentFunctionalLimitationsOther;
+    }
+
+    const currentFunctionalLimitationsOtherText = getValue('current_functional_limitations_function_other_text');
+    if (currentFunctionalLimitationsOtherText !== undefined && currentFunctionalLimitationsOtherText !== '') {
+      mapped.currentFunctionalLimitationsOtherText = currentFunctionalLimitationsOtherText;
+    }
+
+    // Category comments
+    const selfCareComment = getValue('current-level-function_self-care_comment');
+    if (selfCareComment !== undefined && selfCareComment !== '') {
+      mapped.currentFunctionalLimitationsSelfCareComment = selfCareComment;
+    }
+
+    const mobilityComment = getValue('current-level-function_mobility-walking-moving-around_comment');
+    if (mobilityComment !== undefined && mobilityComment !== '') {
+      mapped.currentFunctionalLimitationsMobilityWalkingMovingAroundComment = mobilityComment;
+    }
+
+    const changingComment = getValue('current-level-function_changing-maintaining-body-position_comment');
+    if (changingComment !== undefined && changingComment !== '') {
+      mapped.currentFunctionalLimitationsChangingMaintainingBodyPositionComment = changingComment;
+    }
+
+    const carryingComment = getValue('current-level-function_carrying-moving-handling-objects_comment');
+    if (carryingComment !== undefined && carryingComment !== '') {
+      mapped.currentFunctionalLimitationsCarryingMovingHandlingObjectsComment = carryingComment;
+    }
+
+    // Specialty fields - convert "yes"/"no" radio values to boolean
+    const lymphedema = getValue('current_functional_limitations_function_other_lymphedema');
+    if (lymphedema !== undefined) {
+      mapped.currentFunctionalLimitationsLymphedema = lymphedema === 'yes';
+    }
+
+    const lymphedemaText = getValue('current_functional_limitations_function_other_lymphedema_text');
+    if (lymphedemaText !== undefined && lymphedemaText !== '') {
+      mapped.currentFunctionalLimitationsLymphedemaText = lymphedemaText;
+    }
+
+    const woundHealing = getValue('current_functional_limitations_function_other_wound_healing');
+    if (woundHealing !== undefined) {
+      mapped.currentFunctionalLimitationsWoundHealing = woundHealing === 'yes';
+    }
+
+    const woundHealingText = getValue('current_functional_limitations_function_other_wound_healing_text');
+    if (woundHealingText !== undefined && woundHealingText !== '') {
+      mapped.currentFunctionalLimitationsWoundHealingText = woundHealingText;
+    }
+
+    const pelvicHealth = getValue('current_functional_limitations_function_other_pelvic_health');
+    if (pelvicHealth !== undefined) {
+      mapped.currentFunctionalLimitationsPelvicHealth = pelvicHealth === 'yes';
+    }
+
+    const pelvicHealthText = getValue('current_functional_limitations_function_other_pelvic_health_text');
+    if (pelvicHealthText !== undefined && pelvicHealthText !== '') {
+      mapped.currentFunctionalLimitationsPelvicHealthText = pelvicHealthText;
+    }
   }
   /**
    * Maps CurrentFunction section from DTO to form values
@@ -42,8 +109,8 @@ export class CurrentFunctionMapperService {
    * @param formGroup - Optional FormGroup to set values directly
    * @returns Object that can be used with formGroup.patchValue()
    */
-  fromDto(priorFunction: CurrentFunction, formGroup?: FormGroup): any {
-    if (!priorFunction) return {};
+  fromDto(currentFunction: CurrentFunction, formGroup?: FormGroup): any {
+    if (!currentFunction) return {};
 
     const formValue: any = {};
 
@@ -56,10 +123,36 @@ export class CurrentFunctionMapperService {
         }
       }
     };
-    SelfCareDTOMapper.map(priorFunction, setValue);
-    MobilityWalkingMovingAroundDTOMapper.map(priorFunction, setValue)
-    ChangingMaintainingBodyPositionDTOMapper.map(priorFunction, setValue);
-    CarryingMovingHandlingObjectsDTOMapper.map(priorFunction, setValue);
+    SelfCareDTOMapper.map(currentFunction, setValue);
+    MobilityWalkingMovingAroundDTOMapper.map(currentFunction, setValue)
+    ChangingMaintainingBodyPositionDTOMapper.map(currentFunction, setValue);
+    CarryingMovingHandlingObjectsDTOMapper.map(currentFunction, setValue);
+    this.mapCommentsFromDto(currentFunction, setValue);
     return formValue;
+  }
+
+  private mapCommentsFromDto(currentFunction: CurrentFunction, setValue: (controlName: string, value: any) => void): void {
+    setValue('current_functional_limitations_other', currentFunction.currentFunctionalLimitationsOther);
+    setValue('current_functional_limitations_function_other_text', currentFunction.currentFunctionalLimitationsOtherText);
+    setValue('current-level-function_self-care_comment', currentFunction.currentFunctionalLimitationsSelfCareComment);
+    setValue('current-level-function_mobility-walking-moving-around_comment', currentFunction.currentFunctionalLimitationsMobilityWalkingMovingAroundComment);
+    setValue('current-level-function_changing-maintaining-body-position_comment', currentFunction.currentFunctionalLimitationsChangingMaintainingBodyPositionComment);
+    setValue('current-level-function_carrying-moving-handling-objects_comment', currentFunction.currentFunctionalLimitationsCarryingMovingHandlingObjectsComment);
+
+    // Specialty fields - convert boolean to "yes"/"no" for radio buttons
+    if (currentFunction.currentFunctionalLimitationsLymphedema !== undefined) {
+      setValue('current_functional_limitations_function_other_lymphedema', currentFunction.currentFunctionalLimitationsLymphedema ? 'yes' : 'no');
+    }
+    setValue('current_functional_limitations_function_other_lymphedema_text', currentFunction.currentFunctionalLimitationsLymphedemaText);
+
+    if (currentFunction.currentFunctionalLimitationsWoundHealing !== undefined) {
+      setValue('current_functional_limitations_function_other_wound_healing', currentFunction.currentFunctionalLimitationsWoundHealing ? 'yes' : 'no');
+    }
+    setValue('current_functional_limitations_function_other_wound_healing_text', currentFunction.currentFunctionalLimitationsWoundHealingText);
+
+    if (currentFunction.currentFunctionalLimitationsPelvicHealth !== undefined) {
+      setValue('current_functional_limitations_function_other_pelvic_health', currentFunction.currentFunctionalLimitationsPelvicHealth ? 'yes' : 'no');
+    }
+    setValue('current_functional_limitations_function_other_pelvic_health_text', currentFunction.currentFunctionalLimitationsPelvicHealthText);
   }
 }

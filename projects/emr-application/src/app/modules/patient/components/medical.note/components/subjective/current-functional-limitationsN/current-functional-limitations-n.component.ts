@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HierarchyCheckboxComponent } from '../common/hierarchy-checkbox/hierarchy-checkbox.component';
 import { CheckboxHierarchy } from '../common/hierarchy-checkbox/interface/checkbox-hierarchy';
@@ -7,7 +7,8 @@ import { CurrentFunctionMapperService } from '../services/current.function.mappe
 @Component({
   selector: 'subjective-current-functional-limitations-n',
   templateUrl: './current-functional-limitations-n.component.html',
-  styleUrls: ['./current-functional-limitations-n.component.css']
+  styleUrls: ['./current-functional-limitations-n.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges {
 
@@ -19,7 +20,11 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
   showHoOtherWoundhealing: boolean = false
   showHoOtherPelvicHealth: boolean = false
   @ViewChild('hierarchyCheckbox') hierarchyCheckbox!: HierarchyCheckboxComponent;
-  constructor(private fb: FormBuilder,private currentFunctionMapperService: CurrentFunctionMapperService) { }
+  constructor(
+    private fb: FormBuilder,
+    private currentFunctionMapperService: CurrentFunctionMapperService,
+    private cdr: ChangeDetectorRef
+  ) { }
   checkboxData: CheckboxHierarchy[] = [
     {
       title: 'Self Care',
@@ -452,6 +457,7 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
     // React to changes in currentFunctionFormData
     if (changes['currentFunctionFormData'] && !changes['currentFunctionFormData'].firstChange && this.currentFunctionalLimitationsForm) {
       this.patchFormData();
+      this.cdr.markForCheck();
     }
   }
   patchFormData() {
@@ -470,6 +476,7 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
         if (this.hierarchyCheckbox) {
           this.hierarchyCheckbox.expandCheckedItems();
         }
+        this.cdr.markForCheck();
       }, 0);
     }
   }
@@ -524,15 +531,19 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
 
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_other')?.valueChanges.subscribe(value => {
       this.showHoOther = value;
+      this.cdr.markForCheck();
     });
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_function_other_lymphedema')?.valueChanges.subscribe(value => {
       this.showHoOtherlymphedema = value === 'yes';
+      this.cdr.markForCheck();
     });
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_function_other_wound_healing')?.valueChanges.subscribe(value => {
       this.showHoOtherWoundhealing = value === 'yes';
+      this.cdr.markForCheck();
     });
     this.currentFunctionalLimitationsForm.get('current_functional_limitations_function_other_pelvic_health')?.valueChanges.subscribe(value => {
       this.showHoOtherPelvicHealth = value === 'yes';
+      this.cdr.markForCheck();
     });
   }
 
