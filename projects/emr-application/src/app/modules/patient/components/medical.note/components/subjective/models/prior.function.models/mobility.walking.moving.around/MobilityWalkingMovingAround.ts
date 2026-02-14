@@ -12,6 +12,7 @@ export interface MobilityWalkingMovingAround {
 
   // "prior-level-function_mobility-walking-moving-around_assistive_device": false,
   useOfAnAssistiveDevice: boolean;
+  assistiveDeviceText?: string;
   walking: Walking;
 
   

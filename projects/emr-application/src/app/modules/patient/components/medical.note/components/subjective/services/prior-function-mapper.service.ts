@@ -54,6 +54,14 @@ export class PriorFunctionMapperService {
       mapped.priorLevelFunctionOtherText = priorLevelFunctionOtherText;
     }
 
+    const assistiveDeviceText = getValue('prior-level-function_mobility-walking-moving-around_assistive_device_input');
+    if (assistiveDeviceText !== undefined && assistiveDeviceText !== '') {
+      if (!mapped.mobilityWalkingMovingAround) {
+        mapped.mobilityWalkingMovingAround = {} as any;
+      }
+      mapped.mobilityWalkingMovingAround.assistiveDeviceText = assistiveDeviceText;
+    }
+
     const priorLevelFunctionSelfCareComment = getValue('prior-level-function_self-care_comment');
     if (priorLevelFunctionSelfCareComment !== undefined && priorLevelFunctionSelfCareComment !== '') {
       mapped.priorLevelFunctionSelfCareComment = priorLevelFunctionSelfCareComment;
@@ -109,6 +117,7 @@ export class PriorFunctionMapperService {
   private mapCommentsFromDto(priorFunction: PriorFunction, setValue: (controlName: string, value: any) => void): void {
     setValue('prior_level_function_other', priorFunction.priorLevelFunctionOther);
     setValue('prior_level_function_other_text', priorFunction.priorLevelFunctionOtherText);
+    setValue('prior-level-function_mobility-walking-moving-around_assistive_device_input', priorFunction.mobilityWalkingMovingAround?.assistiveDeviceText);
     setValue('prior-level-function_self-care_comment', priorFunction.priorLevelFunctionSelfCareComment);
     setValue('prior-level-function_mobility-walking-moving-around_comment', priorFunction.priorLevelFunctionMobilityWalkingMovingAroundComment);
     setValue('prior-level-function_changing-maintaining-body-position_comment', priorFunction.priorLevelFunctionChangingMaintainingBodyPositionComment);

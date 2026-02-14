@@ -194,7 +194,8 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
           label: 'Use of an Assistive Device',
           checked: false,
           indeterminate: false,
-          collapsed: true
+          collapsed: true,
+          hasInput: true
         },
         {
           id: 'walking',
@@ -437,7 +438,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
 
   priorLevelFunctionForm!: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
-  showHoOther:boolean = false
+  showHoOther:boolean = false;
   constructor(
     private fb: FormBuilder,
     private priorFunctionMapper: PriorFunctionMapperService,
@@ -462,7 +463,6 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
     this.priorLevelFunctionForm = this.fb.group({
       prior_level_function_other: [],
       prior_level_function_other_text: [],
-
     })
   }
 
@@ -498,6 +498,14 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
 
       if (formValues[formControlName] !== undefined) {
         item.checked = formValues[formControlName];
+      }
+
+      // Update inputValue for items with hasInput
+      if (item.hasInput) {
+        const inputFormControlName = `${formControlName}_input`;
+        if (formValues[inputFormControlName] !== undefined) {
+          item.inputValue = formValues[inputFormControlName];
+        }
       }
 
       // Recursively update children

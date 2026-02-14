@@ -206,7 +206,8 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
           label: 'Use of an Assistive Device',
           checked: false,
           indeterminate: false,
-          collapsed: true
+          collapsed: true,
+          hasInput: true
         },
         {
           id: 'walking',
@@ -572,6 +573,14 @@ export class CurrentFunctionalLimitationsNComponent implements OnInit, OnChanges
 
       if (formValues[formControlName] !== undefined) {
         item.checked = formValues[formControlName];
+      }
+
+      // Update inputValue for items with hasInput
+      if (item.hasInput) {
+        const inputFormControlName = `${formControlName}_input`;
+        if (formValues[inputFormControlName] !== undefined) {
+          item.inputValue = formValues[inputFormControlName];
+        }
       }
 
       // Recursively update children

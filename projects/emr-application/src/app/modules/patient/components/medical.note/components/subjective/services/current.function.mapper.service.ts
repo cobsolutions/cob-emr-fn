@@ -51,6 +51,14 @@ export class CurrentFunctionMapperService {
       mapped.currentFunctionalLimitationsOtherText = currentFunctionalLimitationsOtherText;
     }
 
+    const assistiveDeviceText = getValue('current-level-function_mobility-walking-moving-around_assistive_device_input');
+    if (assistiveDeviceText !== undefined && assistiveDeviceText !== '') {
+      if (!mapped.mobilityWalkingMovingAround) {
+        mapped.mobilityWalkingMovingAround = {} as any;
+      }
+      mapped.mobilityWalkingMovingAround.assistiveDeviceText = assistiveDeviceText;
+    }
+
     // Category comments
     const selfCareComment = getValue('current-level-function_self-care_comment');
     if (selfCareComment !== undefined && selfCareComment !== '') {
@@ -134,6 +142,7 @@ export class CurrentFunctionMapperService {
   private mapCommentsFromDto(currentFunction: CurrentFunction, setValue: (controlName: string, value: any) => void): void {
     setValue('current_functional_limitations_other', currentFunction.currentFunctionalLimitationsOther);
     setValue('current_functional_limitations_function_other_text', currentFunction.currentFunctionalLimitationsOtherText);
+    setValue('current-level-function_mobility-walking-moving-around_assistive_device_input', currentFunction.mobilityWalkingMovingAround?.assistiveDeviceText);
     setValue('current-level-function_self-care_comment', currentFunction.currentFunctionalLimitationsSelfCareComment);
     setValue('current-level-function_mobility-walking-moving-around_comment', currentFunction.currentFunctionalLimitationsMobilityWalkingMovingAroundComment);
     setValue('current-level-function_changing-maintaining-body-position_comment', currentFunction.currentFunctionalLimitationsChangingMaintainingBodyPositionComment);

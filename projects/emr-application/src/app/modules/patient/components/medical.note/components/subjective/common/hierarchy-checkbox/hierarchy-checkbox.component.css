@@ -320,3 +320,35 @@
     color: #adb5bd;
     font-style: italic;
   }
+
+  /* Item Input Field */
+  .item-input-container {
+    margin-left: 28px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .item-input-field {
+    width: 100%;
+    max-width: 450px;
+    padding: 8px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #495057;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+  }
+
+  .item-input-field:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  }
+
+  .item-input-field::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+  }

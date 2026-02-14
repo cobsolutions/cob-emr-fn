@@ -23,6 +23,9 @@ export class HierarchyCheckboxComponent implements OnInit {
   // Map to store the unique form control names for each item
   private itemFormControlNames: Map<CheckboxItem, string> = new Map();
 
+  // Map to store the unique form control names for item inputs
+  private itemInputFormControlNames: Map<CheckboxItem, string> = new Map();
+
   // Map to store the unique form control names for category comments
   private categoryCommentFormControlNames: Map<CheckboxHierarchy, string> = new Map();
 
@@ -178,6 +181,13 @@ export class HierarchyCheckboxComponent implements OnInit {
 
     // Add form control for this item
     this.formGroup.addControl(formControlName, new FormControl(item.checked || false));
+
+    // Add input form control if item has hasInput property
+    if (item.hasInput) {
+      const inputFormControlName = `${formControlName}_input`;
+      this.itemInputFormControlNames.set(item, inputFormControlName);
+      this.formGroup.addControl(inputFormControlName, new FormControl(item.inputValue || ''));
+    }
 
     // Recursively add children
     if (item.children) {
@@ -531,7 +541,7 @@ export class HierarchyCheckboxComponent implements OnInit {
 
   // Get arrow icon for items
   getItemArrowIcon(item: CheckboxItem): string {
-    if (!item.children || item.children.length === 0) {
+    if (!this.hasExpandableContent(item)) {
       return '';
     }
     return item.collapsed ? '▶' : '▼';
@@ -628,6 +638,35 @@ export class HierarchyCheckboxComponent implements OnInit {
 
   hasChildren(item: CheckboxItem): boolean {
     return !!item.children && item.children.length > 0;
+  }
+
+  // Check if item has expandable content (children or input)
+  hasExpandableContent(item: CheckboxItem): boolean {
+    return this.hasChildren(item) || !!item.hasInput;
+  }
+
+  // Get the input form control name for an item
+  getItemInputFormControlName(item: CheckboxItem): string {
+    return this.itemInputFormControlNames.get(item) || '';
+  }
+
+  // Handle item input change
+  onItemInputChange(item: CheckboxItem, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    item.inputValue = target.value;
+
+    // Update form control
+    if (this.formGroup) {
+      const formControlName = this.itemInputFormControlNames.get(item);
+      if (formControlName) {
+        const control = this.formGroup.get(formControlName);
+        if (control) {
+          control.setValue(target.value);
+        }
+      }
+    }
+
+    this.selectionChange.emit(this.data);
   }
 
   // Check if category is checked (for visual state)

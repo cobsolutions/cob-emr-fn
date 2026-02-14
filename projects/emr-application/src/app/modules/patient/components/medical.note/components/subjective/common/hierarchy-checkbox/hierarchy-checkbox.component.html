@@ -32,8 +32,8 @@
             <div *ngFor="let item of category.items; trackBy: trackByItem" class="item-level-1">
               <div class="item-row">
                 <div class="item-controls">
-                  <button 
-                    *ngIf="hasChildren(item)" 
+                  <button
+                    *ngIf="hasExpandableContent(item)"
                     class="expand-btn"
                     (click)="toggleItemCollapse(item)"
                   >
@@ -60,6 +60,16 @@
                 </button>
               </div>
               
+              <!-- Input field for items with hasInput -->
+              <div *ngIf="item.hasInput && item.checked && !item.collapsed" class="item-input-container">
+                <input
+                  type="text"
+                  class="item-input-field"
+                  [value]="item.inputValue || ''"
+                  (input)="onItemInputChange(item, $event)"
+                />
+              </div>
+
               <!-- Level 2 - Collapsible -->
               <div *ngIf="item.children && !item.collapsed" class="level-2">
                 <div *ngFor="let child of item.children; trackBy: trackByItem" class="item-level-2">
