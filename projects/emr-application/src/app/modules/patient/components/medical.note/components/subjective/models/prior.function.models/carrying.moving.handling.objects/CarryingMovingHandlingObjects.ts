@@ -21,8 +21,11 @@ export interface CarryingMovingHandlingObjects {
 
   // "prior-level-function_carrying-moving-handling-objects_community_integration": false,
   communityIntegrationAccess: boolean;
+  communityIntegrationText?: string;
 
   // "prior-level-function_carrying-moving-handling-objects_work_vocation": false,
-  workVocationOccupation: boolean;  
+  workVocationOccupation: boolean;
+  workVocationText?: string;
   recreation: Recreation;
+  recreationText?: string;
 }

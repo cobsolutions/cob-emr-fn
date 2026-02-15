@@ -59,6 +59,41 @@ export class CurrentFunctionMapperService {
       mapped.mobilityWalkingMovingAround.assistiveDeviceText = assistiveDeviceText;
     }
 
+    const lowerExtremitiesText = getValue('current-level-function_carrying-moving-handling-objects_lower_extremities_input');
+    if (lowerExtremitiesText !== undefined && lowerExtremitiesText !== '') {
+      if (!mapped.carryingMovingHandlingObjects) {
+        mapped.carryingMovingHandlingObjects = {} as any;
+      }
+      if (!mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities) {
+        mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities = {} as any;
+      }
+      mapped.carryingMovingHandlingObjects.movingObjectsWithLowerExtremities.lowerExtremitiesText = lowerExtremitiesText;
+    }
+
+    const communityIntegrationText = getValue('current-level-function_carrying-moving-handling-objects_community_integration_input');
+    if (communityIntegrationText !== undefined && communityIntegrationText !== '') {
+      if (!mapped.carryingMovingHandlingObjects) {
+        mapped.carryingMovingHandlingObjects = {} as any;
+      }
+      mapped.carryingMovingHandlingObjects.communityIntegrationText = communityIntegrationText;
+    }
+
+    const workVocationText = getValue('current-level-function_carrying-moving-handling-objects_work_vocation_input');
+    if (workVocationText !== undefined && workVocationText !== '') {
+      if (!mapped.carryingMovingHandlingObjects) {
+        mapped.carryingMovingHandlingObjects = {} as any;
+      }
+      mapped.carryingMovingHandlingObjects.workVocationText = workVocationText;
+    }
+
+    const recreationText = getValue('current-level-function_carrying-moving-handling-objects_recreation_input');
+    if (recreationText !== undefined && recreationText !== '') {
+      if (!mapped.carryingMovingHandlingObjects) {
+        mapped.carryingMovingHandlingObjects = {} as any;
+      }
+      mapped.carryingMovingHandlingObjects.recreationText = recreationText;
+    }
+
     // Category comments
     const selfCareComment = getValue('current-level-function_self-care_comment');
     if (selfCareComment !== undefined && selfCareComment !== '') {
@@ -143,6 +178,10 @@ export class CurrentFunctionMapperService {
     setValue('current_functional_limitations_other', currentFunction.currentFunctionalLimitationsOther);
     setValue('current_functional_limitations_function_other_text', currentFunction.currentFunctionalLimitationsOtherText);
     setValue('current-level-function_mobility-walking-moving-around_assistive_device_input', currentFunction.mobilityWalkingMovingAround?.assistiveDeviceText);
+    setValue('current-level-function_carrying-moving-handling-objects_lower_extremities_input', currentFunction.carryingMovingHandlingObjects?.movingObjectsWithLowerExtremities?.lowerExtremitiesText);
+    setValue('current-level-function_carrying-moving-handling-objects_community_integration_input', currentFunction.carryingMovingHandlingObjects?.communityIntegrationText);
+    setValue('current-level-function_carrying-moving-handling-objects_work_vocation_input', currentFunction.carryingMovingHandlingObjects?.workVocationText);
+    setValue('current-level-function_carrying-moving-handling-objects_recreation_input', currentFunction.carryingMovingHandlingObjects?.recreationText);
     setValue('current-level-function_self-care_comment', currentFunction.currentFunctionalLimitationsSelfCareComment);
     setValue('current-level-function_mobility-walking-moving-around_comment', currentFunction.currentFunctionalLimitationsMobilityWalkingMovingAroundComment);
     setValue('current-level-function_changing-maintaining-body-position_comment', currentFunction.currentFunctionalLimitationsChangingMaintainingBodyPositionComment);

@@ -6,4 +6,5 @@ export interface MovingObjectsWithLowerExtremities {
   movingObjectsWithLowerExtremitiesFlag:boolean;
   kicking: boolean;
   pushingWithLowerExtremities: boolean;
+  lowerExtremitiesText?: string;
 }

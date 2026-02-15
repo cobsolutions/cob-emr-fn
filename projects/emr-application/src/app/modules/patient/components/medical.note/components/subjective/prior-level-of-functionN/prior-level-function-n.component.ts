@@ -403,6 +403,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
           checked: false,
           indeterminate: false,
           collapsed: true,
+          hasInput: true,
           children: [
             { id: 'kicking', label: 'Kicking', checked: false, indeterminate: false, collapsed: true },
             { id: 'pushing-lower-extremities', label: 'Pushing with Lower Extremities', checked: false, indeterminate: false, collapsed: true }
@@ -413,14 +414,16 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
           label: 'Community Integration/Access',
           checked: false,
           indeterminate: false,
-          collapsed: true
+          collapsed: true,
+          hasInput: true
         },
         {
           id: 'work-vocation',
           label: 'Work/Vocation/Occupation',
           checked: false,
           indeterminate: false,
-          collapsed: true
+          collapsed: true,
+          hasInput: true
         },
         {
           id: 'recreation',
@@ -428,6 +431,7 @@ export class PriorLevelFunctionNComponent implements OnInit, OnChanges {
           checked: false,
           indeterminate: false,
           collapsed: true,
+          hasInput: true,
           children: [
             { id: 'sports', label: 'Sports', checked: false, indeterminate: false, collapsed: true }
           ]

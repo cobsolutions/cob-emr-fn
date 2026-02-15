@@ -25,11 +25,14 @@ export interface CarryingMovingHandlingObjects {
 
   // current_functional_limitations_carrying-moving-handling-objects_community_integration
   communityIntegrationAccess: boolean;
+  communityIntegrationText?: string;
 
   // current_functional_limitations_carrying-moving-handling-objects_work_vocation
   workVocationOccupation: boolean;
+  workVocationText?: string;
   
   // current_functional_limitations_carrying-moving-handling-objects_recreation
   recreationFlag:boolean
   recreation: Recreation;
+  recreationText?: string;
 }

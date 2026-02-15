@@ -60,8 +60,8 @@
                 </button>
               </div>
               
-              <!-- Input field for items with hasInput -->
-              <div *ngIf="item.hasInput && item.checked && !item.collapsed" class="item-input-container">
+              <!-- Input field for items with hasInput but NO children (show before level-2 area) -->
+              <div *ngIf="item.hasInput && !item.children && item.checked && !item.collapsed" class="item-input-container">
                 <input
                   type="text"
                   class="item-input-field"
@@ -75,16 +75,16 @@
                 <div *ngFor="let child of item.children; trackBy: trackByItem" class="item-level-2">
                   <div class="item-row">
                     <div class="item-controls">
-                      <button 
-                        *ngIf="hasChildren(child)" 
+                      <button
+                        *ngIf="hasChildren(child)"
                         class="expand-btn"
                         (click)="toggleItemCollapse(child)"
                       >
                         {{ getItemArrowIcon(child) }}
                       </button>
                       <label>
-                        <input 
-                          type="checkbox" 
+                        <input
+                          type="checkbox"
                           [checked]="child.checked"
                           [indeterminate]="child.indeterminate"
                           (change)="onItemCheckboxChange(child, $event)"
@@ -102,13 +102,13 @@
                       {{ areAllFirstLevelChildrenChecked(child) ? 'Remove All' : 'Add All' }}
                     </button>
                   </div>
-                  
+
                   <!-- Level 3 - Collapsible -->
                   <div *ngIf="child.children && !child.collapsed" class="level-3">
                     <div *ngFor="let grandChild of child.children; trackBy: trackByItem" class="item-level-3">
                       <label>
-                        <input 
-                          type="checkbox" 
+                        <input
+                          type="checkbox"
                           [checked]="grandChild.checked"
                           [indeterminate]="grandChild.indeterminate"
                           (change)="onItemCheckboxChange(grandChild, $event)"
@@ -118,6 +118,16 @@
                       </label>
                     </div>
                   </div>
+                </div>
+
+                <!-- Input field for items with hasInput AND children (show after children) -->
+                <div *ngIf="item.hasInput && item.checked" class="item-input-container">
+                  <input
+                    type="text"
+                    class="item-input-field"
+                    [value]="item.inputValue || ''"
+                    (input)="onItemInputChange(item, $event)"
+                  />
                 </div>
               </div>
             </div>
