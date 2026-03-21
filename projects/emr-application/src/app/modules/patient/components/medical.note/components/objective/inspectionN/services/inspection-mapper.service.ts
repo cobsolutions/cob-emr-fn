@@ -69,7 +69,8 @@ export class InspectionMapperService {
         woundWidth: formValue.wound_width || '',
         surgicalPrecautions: {
           surgicalPrecautions: formValue.surgical_precautions === 'yes',
-          surgicalPrecautionSelection: formValue.surgical_precautions_select
+          surgicalPrecautionSelection: formValue.surgical_precautions_select,
+          surgicalPrecautionCustomText: formValue.surgical_precautions_custom_text || ''
         },
         scarType: {
           scarType: formValue.scar_type === 'yes',
@@ -179,6 +180,7 @@ export class InspectionMapperService {
       wound_width: dto.postOperativeWoundHealing?.woundWidth || '',
       surgical_precautions: dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautions ? 'yes' : 'no',
       surgical_precautions_select: dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautionSelection,
+      surgical_precautions_custom_text: dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautionCustomText || '',
 
       scar_type: dto.postOperativeWoundHealing?.scarType?.scarType ? 'yes' : 'no',
       scar_type_select: dto.postOperativeWoundHealing?.scarType?.scarTypeSelection,

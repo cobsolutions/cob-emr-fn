@@ -22,6 +22,7 @@ export class InspectionNComponent implements OnInit {
   showPostOperativeFields: boolean = false;
   showIncisionSites: boolean = false;
   showSurgicalPrecautions: boolean = false;
+  showSurgicalPrecautionsCustom: boolean = false;
   showScarMobility: boolean = false;
   showScarType: boolean = false;
   showWoundDescription: boolean = false;
@@ -48,7 +49,8 @@ export class InspectionNComponent implements OnInit {
   surgicalPrecautionsOptions = [
     { value: 'prom_only', label: 'PROM Only' },
     { value: 'no_weight_bearing', label: 'No Weight Bearing' },
-    { value: 'partial_weight_bearing', label: 'Partial Weight Bearing' }
+    { value: 'partial_weight_bearing', label: 'Partial Weight Bearing' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   scarTypeOptions = [
@@ -137,6 +139,7 @@ export class InspectionNComponent implements OnInit {
       incision_sites: [null],
       surgical_precautions: ['no'],
       surgical_precautions_select: [null],
+      surgical_precautions_custom_text: [''],
       scar_mobility: ['no'],
       scar_mobility_text: [''],
       scar_type: ['no'],
@@ -213,6 +216,7 @@ export class InspectionNComponent implements OnInit {
           incision_sites: null,
           surgical_precautions: 'no',
           surgical_precautions_select: null,
+          surgical_precautions_custom_text: '',
           scar_mobility: 'no',
           scar_mobility_text: '',
           scar_type: 'no',
@@ -226,6 +230,7 @@ export class InspectionNComponent implements OnInit {
         // Reset nested visibility flags
         this.showIncisionSites = false;
         this.showSurgicalPrecautions = false;
+        this.showSurgicalPrecautionsCustom = false;
         this.showScarMobility = false;
         this.showScarType = false;
         this.showWoundDescription = false;
@@ -244,6 +249,17 @@ export class InspectionNComponent implements OnInit {
       this.showSurgicalPrecautions = value === 'yes';
       if (!this.showSurgicalPrecautions) {
         this.inspectionNForm.get('surgical_precautions_select')?.setValue(null, { emitEvent: false });
+        this.inspectionNForm.get('surgical_precautions_custom_text')?.setValue('', { emitEvent: false });
+        this.showSurgicalPrecautionsCustom = false;
+      }
+      this.cdr.markForCheck();
+    });
+
+    // Surgical Precautions Select dependency (for custom option)
+    this.inspectionNForm.get('surgical_precautions_select')?.valueChanges.subscribe(value => {
+      this.showSurgicalPrecautionsCustom = value === 'custom';
+      if (!this.showSurgicalPrecautionsCustom) {
+        this.inspectionNForm.get('surgical_precautions_custom_text')?.setValue('', { emitEvent: false });
       }
       this.cdr.markForCheck();
     });

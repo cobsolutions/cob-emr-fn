@@ -239,6 +239,11 @@
           </option>
         </select>
       </div>
+      <!-- Custom Text Input (shown when Custom is selected) -->
+      <div class="form-row" *ngIf="showSurgicalPrecautionsCustom">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="surgical_precautions_custom_text" class="full-width-input" placeholder="Enter custom surgical precaution" />
+      </div>
     </div>
 
     <!-- Scar Mobility -->
