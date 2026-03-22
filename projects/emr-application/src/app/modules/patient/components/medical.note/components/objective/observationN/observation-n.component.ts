@@ -38,6 +38,7 @@ export class ObservationNComponent implements OnInit {
   showMuscleGuardingFields: boolean = false;
   showMuscleAtrophyFields: boolean = false;
   showEdemaFields: boolean = false;
+  showEdemaPittingFields: boolean = false;
   showApprehensionOfMovementFields: boolean = false;
   showAdditionalCommentsFields: boolean = false;
 
@@ -417,6 +418,7 @@ export class ObservationNComponent implements OnInit {
       edema: ['no'],
       edema_description: [''],
       edema_pitting: ['no'],
+      edema_pitting_text: [''],
 
       // Apprehension of Movement
       apprehension_of_movement: ['no'],
@@ -841,8 +843,18 @@ export class ObservationNComponent implements OnInit {
       if (!this.showEdemaFields) {
         this.omtForm.patchValue({
           edema_description: '',
-          edema_pitting: 'no'
+          edema_pitting: 'no',
+          edema_pitting_text: ''
         });
+        this.showEdemaPittingFields = false;
+      }
+    });
+
+    // Edema Pitting dependency
+    this.omtForm.get('edema_pitting')?.valueChanges.subscribe(value => {
+      this.showEdemaPittingFields = value === 'yes';
+      if (!this.showEdemaPittingFields) {
+        this.omtForm.get('edema_pitting_text')?.setValue('', { emitEvent: false });
       }
     });
 

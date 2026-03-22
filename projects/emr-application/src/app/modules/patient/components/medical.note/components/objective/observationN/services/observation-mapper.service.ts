@@ -214,7 +214,8 @@ export class ObservationMapperService {
       edema: {
         edema: formValue.edema,
         edemaDescription: formValue.edema_description ?? '',
-        edemaPitting: formValue.edema_pitting || false
+        edemaPitting: formValue.edema_pitting || false,
+        edemaPittingText: formValue.edema_pitting_text || ''
       },
       apprehensionofMovement: {
         apprehensionOfMovement: formValue.apprehension_of_movement || false,
@@ -436,6 +437,7 @@ export class ObservationMapperService {
       edema: dto?.edema ? 'yes' : 'no',
       edema_description: dto.edema?.edemaDescription || '',
       edema_pitting: dto.edema?.edemaPitting ? 'yes' : 'no',
+      edema_pitting_text: dto.edema?.edemaPittingText || '',
 
       // Apprehension of Movement
       apprehension_of_movement: dto.apprehensionofMovement?.apprehensionOfMovement ? 'yes' : 'no',
