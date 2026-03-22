@@ -203,13 +203,13 @@
     </div>
 
     <!-- Actions Footer -->
-    <div class="tree-actions" *ngIf="patientCaseActions && canInitializeMedicalNote">
+    <div class="tree-actions" *ngIf="filteredPatientCaseActions.length && canInitializeMedicalNote">
         <label for="patientRecordAction" class="action-label">
             Patient Record Actions:
         </label>
         <div class="action-controls">
             <select id="patientRecordAction" #patientActionSelect class="action-select">
-                <option [value]="action.key" *ngFor="let action of patientCaseActions; trackBy: trackByAction">
+                <option [value]="action.key" *ngFor="let action of filteredPatientCaseActions; trackBy: trackByAction">
                     {{ action.label }}
                 </option>
             </select>

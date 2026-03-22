@@ -63,6 +63,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   viewPDFVisibility: boolean = false;
   activeSection: string = 'records';
   patientCaseActions: PatientCaseAction[]
+  filteredPatientCaseActions: PatientCaseAction[] = []
   isClinicalUser: boolean = false;
   canInitializeMedicalNote: boolean = false;
   private draftSub!: Subscription;
@@ -251,10 +252,39 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         this.loadingData$.next(false);
       }),
       map((response: any) => {
+        this.filterActionsByRecords(response.records);
         return response.records;
       })
     )
   }
+  private filterActionsByRecords(records: PatientRecord[]) {
+    const statuses = records.map(r => r.status);
+    const hasInitialExam = statuses.some(s => s === 'Initial Examination' || s === 'Initial_Examination');
+    const hasDischarged = statuses.some(s => s === 'Discharge' || s === 'Discharge Note' || s === 'Discharge_Note');
+    const hasQuickDischarged = statuses.some(s => s === 'Quick Discharge' || s === 'Quick_Discharge');
+
+    this.filteredPatientCaseActions = this.patientCaseActions.filter(action => {
+      // If patient is discharged, no more actions allowed
+      if (hasDischarged || hasQuickDischarged) {
+        return false;
+      }
+      // Initial Examination can only be created once
+      if (action.key === 'Initial_Examination' && hasInitialExam) {
+        return false;
+      }
+      // Daily Note and Progress Note require Initial Examination first
+      if ((action.key === 'Daily_Note' || action.key === 'Progress_Note') && !hasInitialExam) {
+        return false;
+      }
+      // Quick Discharge and Discharge require Initial Examination first
+      if ((action.key === 'Quick_Discharge' || action.key === 'Discharge') && !hasInitialExam) {
+        return false;
+      }
+      return true;
+    });
+    this.cdr.markForCheck();
+  }
+
   private getLoggedDoctor(): string {
     return this.loggedInService.getLoggedUser().uuid
   }
