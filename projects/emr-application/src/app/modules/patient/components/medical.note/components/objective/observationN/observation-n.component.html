@@ -1027,6 +1027,11 @@
         </option>
       </select>
     </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showAssistiveDeviceCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="assistive_device_custom_text" class="full-width-input" placeholder="Enter custom assistive device type" />
+    </div>
     <div class="form-row">
       <label class="field-label">Hand Used</label>
       <select cSelect formControlName="assistive_device_hand" class="form-select-custom">
@@ -1036,6 +1041,7 @@
       </select>
     </div>
     <div class="form-row">
+      <label class="field-label"></label>
       <textarea formControlName="assistive_device_comments" class="form-textarea" rows="3"></textarea>
     </div>
   </div>

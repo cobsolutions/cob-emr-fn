@@ -190,6 +190,7 @@ export class ObservationMapperService {
       assistiveDevice: {
         assistiveDevice: formValue.assistive_device || false,
         assistiveDeviceType: formValue.assistive_device_type ?? '',
+        assistiveDeviceCustomText: formValue.assistive_device_custom_text || '',
         assistiveDeviceHand: formValue.assistive_device_hand ?? '',
         assistiveDeviceComments: formValue.assistive_device_comments ?? ''
       },
@@ -410,6 +411,7 @@ export class ObservationMapperService {
       // Assistive Device
       assistive_device: dto.assistiveDevice?.assistiveDevice ? 'yes' : 'no',
       assistive_device_type: dto.assistiveDevice?.assistiveDeviceType || '',
+      assistive_device_custom_text: dto.assistiveDevice?.assistiveDeviceCustomText || '',
       assistive_device_hand: dto.assistiveDevice?.assistiveDeviceHand || '',
       assistive_device_comments: dto.assistiveDevice?.assistiveDeviceComments || '',
 

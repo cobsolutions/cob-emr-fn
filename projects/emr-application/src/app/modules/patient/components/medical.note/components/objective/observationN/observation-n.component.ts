@@ -32,6 +32,7 @@ export class ObservationNComponent implements OnInit {
   showGaitFields: boolean = false;
   show6MinuteWalkTestFields: boolean = false;
   showAssistiveDeviceFields: boolean = false;
+  showAssistiveDeviceCustom: boolean = false;
   showImmobilizerFields: boolean = false;
   showMuscularAsymmetriesFields: boolean = false;
   showMuscleGuardingFields: boolean = false;
@@ -167,7 +168,8 @@ export class ObservationNComponent implements OnInit {
     { value: 'cane', label: 'Cane' },
     { value: 'quad_cane', label: 'Quad Cane' },
     { value: 'walker', label: 'Walker' },
-    { value: 'rolling_walker', label: 'Rolling Walker' }
+    { value: 'rolling_walker', label: 'Rolling Walker' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   handUsedOptions = [
@@ -391,6 +393,7 @@ export class ObservationNComponent implements OnInit {
       assistive_device: ['no'],
       assistive_device_type: ['2_axillary_crutches'],
       assistive_device_hand: ['bilateral'],
+      assistive_device_custom_text: [''],
       assistive_device_comments: [''],
 
       // Immobilizer
@@ -781,9 +784,19 @@ export class ObservationNComponent implements OnInit {
       if (!this.showAssistiveDeviceFields) {
         this.omtForm.patchValue({
           assistive_device_type: '2_axillary_crutches',
+          assistive_device_custom_text: '',
           assistive_device_hand: 'bilateral',
           assistive_device_comments: ''
         });
+        this.showAssistiveDeviceCustom = false;
+      }
+    });
+
+    // Assistive Device Type custom dependency
+    this.omtForm.get('assistive_device_type')?.valueChanges.subscribe(value => {
+      this.showAssistiveDeviceCustom = value === 'custom';
+      if (!this.showAssistiveDeviceCustom) {
+        this.omtForm.get('assistive_device_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 
