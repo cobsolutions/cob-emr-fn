@@ -212,6 +212,11 @@
         </option>
       </select>
     </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showIncisionSitesCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="incision_sites_custom_text" class="full-width-input" placeholder="Enter custom incision site" />
+    </div>
 
     <!-- Surgical Precautions -->
     <div class="form-row">
@@ -294,6 +299,11 @@
             {{ option.label }}
           </option>
         </select>
+      </div>
+      <!-- Custom Text Input (shown when Custom is selected) -->
+      <div class="form-row" *ngIf="showScarTypeCustom">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="scar_type_custom_text" class="full-width-input" placeholder="Enter custom scar type" />
       </div>
     </div>
 
@@ -449,6 +459,11 @@
         </select>
         <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
       </div>
+    </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showSurgicalScarringCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="surgical_scarring_custom_text" class="full-width-input" placeholder="Enter custom surgical scarring" />
     </div>
   </div>
 

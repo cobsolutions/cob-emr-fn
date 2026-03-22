@@ -62,6 +62,7 @@ export class InspectionMapperService {
       // Post Operative Wound Healing
       postOperativeWoundHealing: {
         incisionSites: formValue.incision_sites || '',
+        incisionSitesCustomText: formValue.incision_sites_custom_text || '',
         woundDescription: formValue.wound_description === 'yes',
         woundDescriptionText: formValue.wound_description_text || '',
         woundMeasurements: formValue.wound_measurements === 'yes',
@@ -74,7 +75,8 @@ export class InspectionMapperService {
         },
         scarType: {
           scarType: formValue.scar_type === 'yes',
-          scarTypeSelection: formValue.scar_type_select
+          scarTypeSelection: formValue.scar_type_select,
+          scarTypeCustomText: formValue.scar_type_custom_text || ''
         },
         scarMobility: {
           scarMobility: formValue.scar_mobility === 'yes',
@@ -100,7 +102,8 @@ export class InspectionMapperService {
       // Surgical Scarring
       surgicalScarring: {
         surgicalScarring: formValue.surgical_scarring === 'yes',
-        surgicalScarringSelect: formValue.surgical_scarring_select || []
+        surgicalScarringSelect: formValue.surgical_scarring_select || [],
+        surgicalScarringCustomText: formValue.surgical_scarring_custom_text || ''
       },
 
       // Body Mass Index
@@ -173,6 +176,7 @@ export class InspectionMapperService {
         dto.postOperativeWoundHealing?.surgicalPrecautions?.surgicalPrecautions ||
         dto.postOperativeWoundHealing?.scarMobility?.scarMobility ? 'yes' : 'no',
       incision_sites: dto.postOperativeWoundHealing?.incisionSites || null,
+      incision_sites_custom_text: dto.postOperativeWoundHealing?.incisionSitesCustomText || '',
       wound_description: dto.postOperativeWoundHealing?.woundDescription ? 'yes' : 'no',
       wound_description_text: dto.postOperativeWoundHealing?.woundDescriptionText || '',
       wound_measurements: dto.postOperativeWoundHealing?.woundMeasurements ? 'yes' : 'no',
@@ -184,6 +188,7 @@ export class InspectionMapperService {
 
       scar_type: dto.postOperativeWoundHealing?.scarType?.scarType ? 'yes' : 'no',
       scar_type_select: dto.postOperativeWoundHealing?.scarType?.scarTypeSelection,
+      scar_type_custom_text: dto.postOperativeWoundHealing?.scarType?.scarTypeCustomText || '',
       scar_mobility: dto.postOperativeWoundHealing?.scarMobility?.scarMobility ? 'yes' : 'no',
       scar_mobility_text: dto.postOperativeWoundHealing?.scarMobility?.scarMobilityText || '',
 
@@ -202,6 +207,7 @@ export class InspectionMapperService {
       // Surgical Scarring
       surgical_scarring: dto.surgicalScarring?.surgicalScarring ? 'yes' : 'no',
       surgical_scarring_select: dto.surgicalScarring?.surgicalScarringSelect || [],
+      surgical_scarring_custom_text: dto.surgicalScarring?.surgicalScarringCustomText || '',
 
       // Body Mass Index
       body_mass_index: dto.bodyMassIndex?.bodyMassIndex ? 'yes' : 'no',

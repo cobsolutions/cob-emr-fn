@@ -21,16 +21,19 @@ export class InspectionNComponent implements OnInit {
   showGirthLower: boolean = false;
   showPostOperativeFields: boolean = false;
   showIncisionSites: boolean = false;
+  showIncisionSitesCustom: boolean = false;
   showSurgicalPrecautions: boolean = false;
   showSurgicalPrecautionsCustom: boolean = false;
   showScarMobility: boolean = false;
   showScarType: boolean = false;
+  showScarTypeCustom: boolean = false;
   showWoundDescription: boolean = false;
   showWoundMeasurements: boolean = false;
   showWoundCareFields: boolean = false;
   showSurfaceCultureFields: boolean = false;
   showSurfaceCultureTechnique: boolean = false;
   showSurgicalScarringSelect: boolean = false;
+  showSurgicalScarringCustom: boolean = false;
   showBodyMassIndexFields: boolean = false;
   showAdditionalCommentsText: boolean = false;
 
@@ -43,7 +46,8 @@ export class InspectionNComponent implements OnInit {
   incisionSitesOptions = [
     { value: 'clean_healing_well', label: 'Clean and healing well' },
     { value: 'infected', label: 'Infected' },
-    { value: 'dehisced', label: 'Dehisced' }
+    { value: 'dehisced', label: 'Dehisced' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   surgicalPrecautionsOptions = [
@@ -56,7 +60,8 @@ export class InspectionNComponent implements OnInit {
   scarTypeOptions = [
     { value: 'normal', label: 'Normal' },
     { value: 'hypertrophic', label: 'Hypertrophic' },
-    { value: 'keloid', label: 'Keloid' }
+    { value: 'keloid', label: 'Keloid' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   surgicalScarringOptions = [
@@ -137,6 +142,7 @@ export class InspectionNComponent implements OnInit {
       metatarsal_heads_left: [''],
       post_operative_wound_healing: ['no'],
       incision_sites: [null],
+      incision_sites_custom_text: [''],
       surgical_precautions: ['no'],
       surgical_precautions_select: [null],
       surgical_precautions_custom_text: [''],
@@ -144,6 +150,7 @@ export class InspectionNComponent implements OnInit {
       scar_mobility_text: [''],
       scar_type: ['no'],
       scar_type_select: [null],
+      scar_type_custom_text: [''],
       wound_description: ['no'],
       wound_description_text: [''],
       wound_measurements: ['no'],
@@ -159,6 +166,7 @@ export class InspectionNComponent implements OnInit {
       surface_culture_technique: [''],
       surgical_scarring: ['no'],
       surgical_scarring_select: [[]],
+      surgical_scarring_custom_text: [''],
       body_mass_index: ['no'],
       bmi_weight: [''],
       bmi_height: [''],
@@ -214,6 +222,7 @@ export class InspectionNComponent implements OnInit {
         // Reset all child fields
         this.inspectionNForm.patchValue({
           incision_sites: null,
+          incision_sites_custom_text: '',
           surgical_precautions: 'no',
           surgical_precautions_select: null,
           surgical_precautions_custom_text: '',
@@ -221,6 +230,7 @@ export class InspectionNComponent implements OnInit {
           scar_mobility_text: '',
           scar_type: 'no',
           scar_type_select: null,
+          scar_type_custom_text: '',
           wound_description: 'no',
           wound_description_text: '',
           wound_measurements: 'no',
@@ -229,10 +239,12 @@ export class InspectionNComponent implements OnInit {
         }, { emitEvent: false });
         // Reset nested visibility flags
         this.showIncisionSites = false;
+        this.showIncisionSitesCustom = false;
         this.showSurgicalPrecautions = false;
         this.showSurgicalPrecautionsCustom = false;
         this.showScarMobility = false;
         this.showScarType = false;
+        this.showScarTypeCustom = false;
         this.showWoundDescription = false;
         this.showWoundMeasurements = false;
       }
@@ -241,7 +253,11 @@ export class InspectionNComponent implements OnInit {
 
     // Incision Sites dependency (nested under Post Operative)
     this.inspectionNForm.get('incision_sites')?.valueChanges.subscribe(value => {
-      // This is just for the select value, no additional children
+      this.showIncisionSitesCustom = value === 'custom';
+      if (!this.showIncisionSitesCustom) {
+        this.inspectionNForm.get('incision_sites_custom_text')?.setValue('', { emitEvent: false });
+      }
+      this.cdr.markForCheck();
     });
 
     // Surgical Precautions dependency (nested under Post Operative)
@@ -278,6 +294,17 @@ export class InspectionNComponent implements OnInit {
       this.showScarType = value === 'yes';
       if (!this.showScarType) {
         this.inspectionNForm.get('scar_type_select')?.setValue(null, { emitEvent: false });
+        this.inspectionNForm.get('scar_type_custom_text')?.setValue('', { emitEvent: false });
+        this.showScarTypeCustom = false;
+      }
+      this.cdr.markForCheck();
+    });
+
+    // Scar Type Select dependency (for custom option)
+    this.inspectionNForm.get('scar_type_select')?.valueChanges.subscribe(value => {
+      this.showScarTypeCustom = value === 'custom';
+      if (!this.showScarTypeCustom) {
+        this.inspectionNForm.get('scar_type_custom_text')?.setValue('', { emitEvent: false });
       }
       this.cdr.markForCheck();
     });
@@ -344,6 +371,17 @@ export class InspectionNComponent implements OnInit {
       this.showSurgicalScarringSelect = value === 'yes';
       if (!this.showSurgicalScarringSelect) {
         this.inspectionNForm.get('surgical_scarring_select')?.setValue([], { emitEvent: false });
+        this.inspectionNForm.get('surgical_scarring_custom_text')?.setValue('', { emitEvent: false });
+        this.showSurgicalScarringCustom = false;
+      }
+      this.cdr.markForCheck();
+    });
+
+    // Surgical Scarring Select dependency (for custom option)
+    this.inspectionNForm.get('surgical_scarring_select')?.valueChanges.subscribe(value => {
+      this.showSurgicalScarringCustom = Array.isArray(value) && value.includes('custom');
+      if (!this.showSurgicalScarringCustom) {
+        this.inspectionNForm.get('surgical_scarring_custom_text')?.setValue('', { emitEvent: false });
       }
       this.cdr.markForCheck();
     });

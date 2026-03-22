@@ -4,6 +4,7 @@ import { SurgicalPrecautions } from "./SurgicalPrecautions";
 
 export interface PostOperativeWoundHealing {
   incisionSites: string;
+  incisionSitesCustomText: string;
   woundDescription: boolean;
   woundDescriptionText: string;
   woundMeasurements: boolean;
