@@ -1168,8 +1168,26 @@
     <!-- Pitting Dependent Field -->
     <div class="nested-dependent-field-box" *ngIf="showEdemaPittingFields">
       <div class="form-row">
-        <label class="field-label"></label>
-        <input cFormControl type="text" formControlName="edema_pitting_text" class="full-width-input" placeholder="Describe pitting" />
+        <label class="field-label">Pitting Description</label>
+        <select cSelect formControlName="edema_pitting_grade" class="form-select-custom">
+          <option [value]="null" disabled>Select...</option>
+          <option *ngFor="let option of edemaPittingGradeOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Joint Effusion</label>
+        <div class="radio-group-primary">
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="edema_joint_effusion" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="edema_joint_effusion" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
       </div>
     </div>
   </div>

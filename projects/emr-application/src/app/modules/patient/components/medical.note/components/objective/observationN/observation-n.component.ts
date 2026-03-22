@@ -183,6 +183,13 @@ export class ObservationNComponent implements OnInit {
     { value: 'none', label: 'None' }
   ];
 
+  edemaPittingGradeOptions = [
+    { value: '1+', label: '1+ (mild with slight indentation)' },
+    { value: '2+', label: '2+ (moderate with indentation subsiding rapidly)' },
+    { value: '3+', label: '3+ (deep with indentation remaining >15 secs)' },
+    { value: '4+', label: '4+ (deep with extreme indentation)' }
+  ];
+
   apprehensionOptions = [
     { value: 'none', label: 'None' }
   ];
@@ -418,7 +425,8 @@ export class ObservationNComponent implements OnInit {
       edema: ['no'],
       edema_description: [''],
       edema_pitting: ['no'],
-      edema_pitting_text: [''],
+      edema_pitting_grade: [null],
+      edema_joint_effusion: ['no'],
 
       // Apprehension of Movement
       apprehension_of_movement: ['no'],
@@ -844,7 +852,8 @@ export class ObservationNComponent implements OnInit {
         this.omtForm.patchValue({
           edema_description: '',
           edema_pitting: 'no',
-          edema_pitting_text: ''
+          edema_pitting_grade: null,
+          edema_joint_effusion: 'no'
         });
         this.showEdemaPittingFields = false;
       }
@@ -854,7 +863,8 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('edema_pitting')?.valueChanges.subscribe(value => {
       this.showEdemaPittingFields = value === 'yes';
       if (!this.showEdemaPittingFields) {
-        this.omtForm.get('edema_pitting_text')?.setValue('', { emitEvent: false });
+        this.omtForm.get('edema_pitting_grade')?.setValue(null, { emitEvent: false });
+        this.omtForm.get('edema_joint_effusion')?.setValue('no', { emitEvent: false });
       }
     });
 
