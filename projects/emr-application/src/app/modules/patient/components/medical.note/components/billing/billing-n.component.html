@@ -20,7 +20,6 @@
             <c-row>
                 <c-col xs="12">
                     <div class="plan-checkbox-group">
-                        {{BillingForm.get('dailyNoteIncluded').value}}
                         <c-form-check>
                             <input
                                 cFormCheckInput
@@ -384,7 +383,7 @@
     </div>
 </form>
 
-<c-modal id="forwardModal" [visible]="forwardVisibility" backdrop="static">
+<c-modal id="forwardModal" [visible]="forwardVisibility" backdrop="static" [transition]="false">
     <c-modal-header>
         <strong>Forward Medical Note To :</strong>
         <button (click)="forwardVisibility = false" cButtonClose></button>
@@ -396,7 +395,7 @@
     </c-modal-body>
 </c-modal>
 
-<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+<c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static" [transition]="false">
     <c-modal-header>
         <h3 cModalTitle>Confirmation</h3>
         <button (click)="finalizeNoteVisibility = false" cButtonClose></button>
