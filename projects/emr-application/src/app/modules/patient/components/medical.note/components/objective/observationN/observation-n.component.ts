@@ -47,6 +47,13 @@ export class ObservationNComponent implements OnInit {
   showGroomingStatus: boolean = false;
   showEatingStatus: boolean = false;
 
+  // ADL Custom text visibility flags
+  showBathingCustom: boolean = false;
+  showToiletingCustom: boolean = false;
+  showDressingCustom: boolean = false;
+  showGroomingCustom: boolean = false;
+  showEatingCustom: boolean = false;
+
   // Transfers nested visibility flags
   showSupineToSitFields: boolean = false;
   showSitToStandFields: boolean = false;
@@ -85,7 +92,8 @@ export class ObservationNComponent implements OnInit {
   adlStatusOptions = [
     { value: 'independent', label: 'Independent' },
     { value: 'requires_assistance', label: 'Requires Assistance' },
-    { value: 'dependent', label: 'Dependent' }
+    { value: 'dependent', label: 'Dependent' },
+    { value: 'custom', label: 'Custom' }
   ];
 
   transferStatusOptions = [
@@ -240,14 +248,19 @@ export class ObservationNComponent implements OnInit {
       adl_management: ['no'],
       adl_bathing: ['no'],
       adl_bathing_status: ['independent'],
+      adl_bathing_custom_text: [''],
       adl_toileting: ['no'],
       adl_toileting_status: ['independent'],
+      adl_toileting_custom_text: [''],
       adl_dressing: ['no'],
       adl_dressing_status: ['independent'],
+      adl_dressing_custom_text: [''],
       adl_grooming: ['no'],
       adl_grooming_status: ['independent'],
+      adl_grooming_custom_text: [''],
       adl_eating: ['no'],
       adl_eating_status: ['independent'],
+      adl_eating_custom_text: [''],
 
       // Breathing at Rest
       breathing_at_rest: ['no'],
@@ -501,20 +514,30 @@ export class ObservationNComponent implements OnInit {
         this.omtForm.patchValue({
           adl_bathing: 'no',
           adl_bathing_status: 'independent',
+          adl_bathing_custom_text: '',
           adl_toileting: 'no',
           adl_toileting_status: 'independent',
+          adl_toileting_custom_text: '',
           adl_dressing: 'no',
           adl_dressing_status: 'independent',
+          adl_dressing_custom_text: '',
           adl_grooming: 'no',
           adl_grooming_status: 'independent',
+          adl_grooming_custom_text: '',
           adl_eating: 'no',
-          adl_eating_status: 'independent'
+          adl_eating_status: 'independent',
+          adl_eating_custom_text: ''
         });
         this.showBathingStatus = false;
         this.showToiletingStatus = false;
         this.showDressingStatus = false;
         this.showGroomingStatus = false;
         this.showEatingStatus = false;
+        this.showBathingCustom = false;
+        this.showToiletingCustom = false;
+        this.showDressingCustom = false;
+        this.showGroomingCustom = false;
+        this.showEatingCustom = false;
       }
     });
 
@@ -522,7 +545,16 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('adl_bathing')?.valueChanges.subscribe(value => {
       this.showBathingStatus = value === 'yes';
       if (!this.showBathingStatus) {
-        this.omtForm.patchValue({ adl_bathing_status: 'independent' });
+        this.omtForm.patchValue({ adl_bathing_status: 'independent', adl_bathing_custom_text: '' });
+        this.showBathingCustom = false;
+      }
+    });
+
+    // ADL Bathing Status custom dependency
+    this.omtForm.get('adl_bathing_status')?.valueChanges.subscribe(value => {
+      this.showBathingCustom = value === 'custom';
+      if (!this.showBathingCustom) {
+        this.omtForm.get('adl_bathing_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 
@@ -530,7 +562,16 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('adl_toileting')?.valueChanges.subscribe(value => {
       this.showToiletingStatus = value === 'yes';
       if (!this.showToiletingStatus) {
-        this.omtForm.patchValue({ adl_toileting_status: 'independent' });
+        this.omtForm.patchValue({ adl_toileting_status: 'independent', adl_toileting_custom_text: '' });
+        this.showToiletingCustom = false;
+      }
+    });
+
+    // ADL Toileting Status custom dependency
+    this.omtForm.get('adl_toileting_status')?.valueChanges.subscribe(value => {
+      this.showToiletingCustom = value === 'custom';
+      if (!this.showToiletingCustom) {
+        this.omtForm.get('adl_toileting_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 
@@ -538,7 +579,16 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('adl_dressing')?.valueChanges.subscribe(value => {
       this.showDressingStatus = value === 'yes';
       if (!this.showDressingStatus) {
-        this.omtForm.patchValue({ adl_dressing_status: 'independent' });
+        this.omtForm.patchValue({ adl_dressing_status: 'independent', adl_dressing_custom_text: '' });
+        this.showDressingCustom = false;
+      }
+    });
+
+    // ADL Dressing Status custom dependency
+    this.omtForm.get('adl_dressing_status')?.valueChanges.subscribe(value => {
+      this.showDressingCustom = value === 'custom';
+      if (!this.showDressingCustom) {
+        this.omtForm.get('adl_dressing_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 
@@ -546,7 +596,16 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('adl_grooming')?.valueChanges.subscribe(value => {
       this.showGroomingStatus = value === 'yes';
       if (!this.showGroomingStatus) {
-        this.omtForm.patchValue({ adl_grooming_status: 'independent' });
+        this.omtForm.patchValue({ adl_grooming_status: 'independent', adl_grooming_custom_text: '' });
+        this.showGroomingCustom = false;
+      }
+    });
+
+    // ADL Grooming Status custom dependency
+    this.omtForm.get('adl_grooming_status')?.valueChanges.subscribe(value => {
+      this.showGroomingCustom = value === 'custom';
+      if (!this.showGroomingCustom) {
+        this.omtForm.get('adl_grooming_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 
@@ -554,7 +613,16 @@ export class ObservationNComponent implements OnInit {
     this.omtForm.get('adl_eating')?.valueChanges.subscribe(value => {
       this.showEatingStatus = value === 'yes';
       if (!this.showEatingStatus) {
-        this.omtForm.patchValue({ adl_eating_status: 'independent' });
+        this.omtForm.patchValue({ adl_eating_status: 'independent', adl_eating_custom_text: '' });
+        this.showEatingCustom = false;
+      }
+    });
+
+    // ADL Eating Status custom dependency
+    this.omtForm.get('adl_eating_status')?.valueChanges.subscribe(value => {
+      this.showEatingCustom = value === 'custom';
+      if (!this.showEatingCustom) {
+        this.omtForm.get('adl_eating_custom_text')?.setValue('', { emitEvent: false });
       }
     });
 

@@ -270,6 +270,9 @@
           {{ option.label }}
         </option>
       </select>
+      <div class="form-row" *ngIf="showBathingCustom">
+        <input cFormControl type="text" formControlName="adl_bathing_custom_text" class="full-width-input" placeholder="Enter custom bathing status" />
+      </div>
     </div>
 
     <div class="form-row">
@@ -291,6 +294,9 @@
           {{ option.label }}
         </option>
       </select>
+      <div class="form-row" *ngIf="showToiletingCustom">
+        <input cFormControl type="text" formControlName="adl_toileting_custom_text" class="full-width-input" placeholder="Enter custom toileting status" />
+      </div>
     </div>
 
     <div class="form-row">
@@ -312,6 +318,9 @@
           {{ option.label }}
         </option>
       </select>
+      <div class="form-row" *ngIf="showDressingCustom">
+        <input cFormControl type="text" formControlName="adl_dressing_custom_text" class="full-width-input" placeholder="Enter custom dressing status" />
+      </div>
     </div>
 
     <div class="form-row">
@@ -333,6 +342,9 @@
           {{ option.label }}
         </option>
       </select>
+      <div class="form-row" *ngIf="showGroomingCustom">
+        <input cFormControl type="text" formControlName="adl_grooming_custom_text" class="full-width-input" placeholder="Enter custom grooming status" />
+      </div>
     </div>
 
     <div class="form-row">
@@ -354,6 +366,9 @@
           {{ option.label }}
         </option>
       </select>
+      <div class="form-row" *ngIf="showEatingCustom">
+        <input cFormControl type="text" formControlName="adl_eating_custom_text" class="full-width-input" placeholder="Enter custom eating status" />
+      </div>
     </div>
   </div>
 
