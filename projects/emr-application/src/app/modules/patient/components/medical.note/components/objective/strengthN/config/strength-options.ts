@@ -198,6 +198,15 @@ export const Tripod_Pinch_Grip_OPTION: RomOption[] = [
     { value: '29.5', label: '29.5' },
     { value: '30', label: '30' }
 ]
+export const Selective_Tissue_Tension_Upper_Cervical_OPTION: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'strong_and_painless', label: 'Strong and Painless' },
+    { value: 'weak_and_painless', label: 'Weak and Painless' },
+    { value: 'strong_and_painful', label: 'Strong and Painful' },
+    { value: 'weak_and_painful', label: 'Weak and Painful' },
+    { value: 'Custom', label: 'Custom' }
+]
+
 export const Gross_Muscle_Tests_Trunk_OPTION: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
     { value: '5/5', label: '5/5' },
