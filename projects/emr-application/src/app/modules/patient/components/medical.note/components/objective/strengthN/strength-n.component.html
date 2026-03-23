@@ -639,6 +639,9 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showHipGrossMuscleTestsLowerFields" class="dependent-field-box">
+        </div>
+
         <div class="form-row">
             <label class="field-label">Knee</label>
             <div class="radio-group-primary">
@@ -652,6 +655,9 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showKneeGrossMuscleTestsLowerFields" class="dependent-field-box">
+        </div>
+
         <div class="form-row">
             <label class="field-label">Ankle</label>
             <div class="radio-group-primary">
@@ -664,6 +670,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showAnkleGrossMuscleTestsLowerFields" class="dependent-field-box">
         </div>
     </div>
     <!-- Core Strength -->

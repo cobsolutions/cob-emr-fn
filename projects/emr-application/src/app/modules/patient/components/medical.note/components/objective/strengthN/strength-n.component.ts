@@ -44,6 +44,9 @@ export class StrengthNComponent implements OnInit {
   showShoulderGrossMuscleTestsUpperFields: boolean = false;
   showElbowGrossMuscleTestsUpperFields: boolean = false;
   showWristGrossMuscleTestsUpperFields: boolean = false;
+  showHipGrossMuscleTestsLowerFields: boolean = false;
+  showKneeGrossMuscleTestsLowerFields: boolean = false;
+  showAnkleGrossMuscleTestsLowerFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -393,6 +396,18 @@ export class StrengthNComponent implements OnInit {
           ankle_gross_muscle_tests_lower: 'no'
         })
       }
+    });
+
+    this.strengthForm.get('hip_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
+      this.showHipGrossMuscleTestsLowerFields = value === 'yes';
+    });
+
+    this.strengthForm.get('knee_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
+      this.showKneeGrossMuscleTestsLowerFields = value === 'yes';
+    });
+
+    this.strengthForm.get('ankle_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
+      this.showAnkleGrossMuscleTestsLowerFields = value === 'yes';
     });
 
     this.strengthForm.get('core_strength')?.valueChanges.subscribe(value => {
