@@ -26,15 +26,30 @@ export class StrengthMapperService {
    */
   fromDto(dto: Strength): any {
     return {
-      // No Limitations Noted
+      ...this.mapNoLimitationsNoted(dto),
+      ...this.mapSelectiveTissueTensionUpper(dto),
+      ...this.mapSelectiveTissueTensionLower(dto),
+      ...this.mapGripPinch(dto),
+      ...this.mapGrossMuscleTestsUpper(dto),
+      ...this.mapRedcordAndTrunk(dto),
+      ...this.mapGrossMuscleTestsLowerAndCore(dto),
+      ...this.mapManualMuscleTests(dto),
+      ...this.mapAdditionalComments(dto)
+    };
+  }
+
+  private mapNoLimitationsNoted(dto: Strength): any {
+    return {
       no_limitations_noted: dto.noLimitationsNoted?.noLimitationsNoted ? 'yes' : 'no',
       uper_extremity: dto.noLimitationsNoted?.uperExtremity || false,
       lower_extremity: dto.noLimitationsNoted?.lowerExtremity || false,
+    };
+  }
 
-      // Selective Tissue Tension Upper
+  private mapSelectiveTissueTensionUpper(dto: Strength): any {
+    return {
       selective_tissue_tension_upper: dto.selectiveTissueTensionUpper?.selectiveTissueTensionUpper ? 'yes' : 'no',
       cervical: dto.selectiveTissueTensionUpper?.cervical ? 'yes' : 'no',
-      // Cervical measurement-table-with-selects fields
       cervical_stt_flexion: dto.selectiveTissueTensionUpper?.cervicalStt?.cervicalSttFlexion || '',
       cervical_stt_flexion_custom: dto.selectiveTissueTensionUpper?.cervicalStt?.cervicalSttFlexionCustom || '',
       cervical_stt_extension: dto.selectiveTissueTensionUpper?.cervicalStt?.cervicalSttExtension || '',
@@ -188,8 +203,11 @@ export class StrengthMapperService {
       hand_stt_opposition_of_1st_to_5th_finger_left: dto.selectiveTissueTensionUpper?.handStt?.handSttOppositionOf1stTo5thFingerLeft || '',
       hand_stt_opposition_of_1st_to_5th_finger_left_custom: dto.selectiveTissueTensionUpper?.handStt?.handSttOppositionOf1stTo5thFingerLeftCustom || '',
       hand_stt_comments: dto.selectiveTissueTensionUpper?.handStt?.handSttComments || '',
+    };
+  }
 
-      // Selective Tissue Tension Lower
+  private mapSelectiveTissueTensionLower(dto: Strength): any {
+    return {
       selective_tissue_tension_lower: dto.selectiveTissueTensionLower?.selectiveTissueTensionLower ? 'yes' : 'no',
       hip: dto.selectiveTissueTensionLower?.hip ? 'yes' : 'no',
       hip_stt_hip_flexion_right: dto.selectiveTissueTensionLower?.hipStt?.hipSttHipFlexionRight || '',
@@ -287,8 +305,11 @@ export class StrengthMapperService {
       foot_stt_5th_toe_flexion_left: dto.selectiveTissueTensionLower?.footStt?.footStt5thToeFlexionLeft || '',
       foot_stt_5th_toe_flexion_left_custom: dto.selectiveTissueTensionLower?.footStt?.footStt5thToeFlexionLeftCustom || '',
       foot_stt_comments: dto.selectiveTissueTensionLower?.footStt?.footSttComments || '',
+    };
+  }
 
-      // Grip Pinch
+  private mapGripPinch(dto: Strength): any {
+    return {
       grip_pinch: dto.gripPinch?.gripPinch ? 'yes' : 'no',
       grip_pinch_power_grip_right: dto.gripPinch?.gripPinchPowerGripRight || '',
       grip_pinch_power_grip_right_custom: dto.gripPinch?.gripPinchPowerGripRightCustom || '',
@@ -318,15 +339,105 @@ export class StrengthMapperService {
       rapid_exchange: dto.gripPinch?.rapidExchange ? 'yes' : 'no',
       repeated_grip: dto.gripPinch?.repeatedGrip ? 'yes' : 'no',
       five_level_grip: dto.gripPinch?.fiveLevelGrip ? 'yes' : 'no',
+    };
+  }
 
-      // Gross Muscle Tests Upper
+  private mapGrossMuscleTestsUpper(dto: Strength): any {
+    return {
       gross_muscle_tests_upper: dto.grossMuscleTestsUpper?.grossMuscleTestsUpper ? 'yes' : 'no',
       cervical_gross_muscle_tests_upper: dto.grossMuscleTestsUpper?.cervicalGrossMuscleTestsUpper ? 'yes' : 'no',
+      cervical_gmt_upper_flexion: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperFlexion || '',
+      cervical_gmt_upper_flexion_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperFlexionCustom || '',
+      cervical_gmt_upper_extension: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperExtension || '',
+      cervical_gmt_upper_extension_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperExtensionCustom || '',
+      cervical_gmt_upper_cervical_sidebending_right: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalSidebendingRight || '',
+      cervical_gmt_upper_cervical_sidebending_right_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalSidebendingRightCustom || '',
+      cervical_gmt_upper_cervical_sidebending_left: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalSidebendingLeft || '',
+      cervical_gmt_upper_cervical_sidebending_left_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalSidebendingLeftCustom || '',
+      cervical_gmt_upper_cervical_rotation_right: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalRotationRight || '',
+      cervical_gmt_upper_cervical_rotation_right_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalRotationRightCustom || '',
+      cervical_gmt_upper_cervical_rotation_left: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalRotationLeft || '',
+      cervical_gmt_upper_cervical_rotation_left_custom: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperCervicalRotationLeftCustom || '',
+      cervical_gmt_upper_comments: dto.grossMuscleTestsUpper?.cervicalGmtUpper?.cervicalGmtUpperComments || '',
       shoulder_gross_muscle_tests_upper: dto.grossMuscleTestsUpper?.shoulderGrossMuscleTestsUpper ? 'yes' : 'no',
+      shoulder_gmt_upper_shoulder_flexion_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderFlexionRight || '',
+      shoulder_gmt_upper_shoulder_flexion_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderFlexionRightCustom || '',
+      shoulder_gmt_upper_shoulder_flexion_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderFlexionLeft || '',
+      shoulder_gmt_upper_shoulder_flexion_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderFlexionLeftCustom || '',
+      shoulder_gmt_upper_shoulder_extension_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExtensionRight || '',
+      shoulder_gmt_upper_shoulder_extension_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExtensionRightCustom || '',
+      shoulder_gmt_upper_shoulder_extension_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExtensionLeft || '',
+      shoulder_gmt_upper_shoulder_extension_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExtensionLeftCustom || '',
+      shoulder_gmt_upper_shoulder_abduction_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAbductionRight || '',
+      shoulder_gmt_upper_shoulder_abduction_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAbductionRightCustom || '',
+      shoulder_gmt_upper_shoulder_abduction_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAbductionLeft || '',
+      shoulder_gmt_upper_shoulder_abduction_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAbductionLeftCustom || '',
+      shoulder_gmt_upper_shoulder_adduction_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAdductionRight || '',
+      shoulder_gmt_upper_shoulder_adduction_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAdductionRightCustom || '',
+      shoulder_gmt_upper_shoulder_adduction_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAdductionLeft || '',
+      shoulder_gmt_upper_shoulder_adduction_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderAdductionLeftCustom || '',
+      shoulder_gmt_upper_shoulder_internal_rotation_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderInternalRotationRight || '',
+      shoulder_gmt_upper_shoulder_internal_rotation_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderInternalRotationRightCustom || '',
+      shoulder_gmt_upper_shoulder_internal_rotation_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderInternalRotationLeft || '',
+      shoulder_gmt_upper_shoulder_internal_rotation_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderInternalRotationLeftCustom || '',
+      shoulder_gmt_upper_shoulder_external_rotation_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExternalRotationRight || '',
+      shoulder_gmt_upper_shoulder_external_rotation_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExternalRotationRightCustom || '',
+      shoulder_gmt_upper_shoulder_external_rotation_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExternalRotationLeft || '',
+      shoulder_gmt_upper_shoulder_external_rotation_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderExternalRotationLeftCustom || '',
+      shoulder_gmt_upper_shoulder_scaption_right: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderScaptionRight || '',
+      shoulder_gmt_upper_shoulder_scaption_right_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderScaptionRightCustom || '',
+      shoulder_gmt_upper_shoulder_scaption_left: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderScaptionLeft || '',
+      shoulder_gmt_upper_shoulder_scaption_left_custom: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderScaptionLeftCustom || '',
+      'shoulder_gmt_upper_shoulder_er_@_90_abduction_right': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderEr90AbductionRight || '',
+      'shoulder_gmt_upper_shoulder_er_@_90_abduction_right_custom': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderEr90AbductionRightCustom || '',
+      'shoulder_gmt_upper_shoulder_er_@_90_abduction_left': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderEr90AbductionLeft || '',
+      'shoulder_gmt_upper_shoulder_er_@_90_abduction_left_custom': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderEr90AbductionLeftCustom || '',
+      'shoulder_gmt_upper_shoulder_ir_@_90_abduction_right': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderIr90AbductionRight || '',
+      'shoulder_gmt_upper_shoulder_ir_@_90_abduction_right_custom': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderIr90AbductionRightCustom || '',
+      'shoulder_gmt_upper_shoulder_ir_@_90_abduction_left': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderIr90AbductionLeft || '',
+      'shoulder_gmt_upper_shoulder_ir_@_90_abduction_left_custom': dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperShoulderIr90AbductionLeftCustom || '',
+      shoulder_gmt_upper_comments: dto.grossMuscleTestsUpper?.shoulderGmtUpper?.shoulderGmtUpperComments || '',
       elbow_gross_muscle_tests_upper: dto.grossMuscleTestsUpper?.elbowGrossMuscleTestsUpper ? 'yes' : 'no',
+      elbow_gmt_upper_elbow_flexion_right: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowFlexionRight || '',
+      elbow_gmt_upper_elbow_flexion_right_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowFlexionRightCustom || '',
+      elbow_gmt_upper_elbow_flexion_left: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowFlexionLeft || '',
+      elbow_gmt_upper_elbow_flexion_left_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowFlexionLeftCustom || '',
+      elbow_gmt_upper_elbow_extension_right: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowExtensionRight || '',
+      elbow_gmt_upper_elbow_extension_right_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowExtensionRightCustom || '',
+      elbow_gmt_upper_elbow_extension_left: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowExtensionLeft || '',
+      elbow_gmt_upper_elbow_extension_left_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowExtensionLeftCustom || '',
+      elbow_gmt_upper_elbow_supination_right: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowSupinationRight || '',
+      elbow_gmt_upper_elbow_supination_right_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowSupinationRightCustom || '',
+      elbow_gmt_upper_elbow_supination_left: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowSupinationLeft || '',
+      elbow_gmt_upper_elbow_supination_left_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowSupinationLeftCustom || '',
+      elbow_gmt_upper_elbow_pronation_right: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowPronationRight || '',
+      elbow_gmt_upper_elbow_pronation_right_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowPronationRightCustom || '',
+      elbow_gmt_upper_elbow_pronation_left: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowPronationLeft || '',
+      elbow_gmt_upper_elbow_pronation_left_custom: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperElbowPronationLeftCustom || '',
+      elbow_gmt_upper_comments: dto.grossMuscleTestsUpper?.elbowGmtUpper?.elbowGmtUpperComments || '',
       wrist_gross_muscle_tests_upper: dto.grossMuscleTestsUpper?.wristGrossMuscleTestsUpper ? 'yes' : 'no',
+      wrist_gmt_upper_wrist_flexion_right: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristFlexionRight || '',
+      wrist_gmt_upper_wrist_flexion_right_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristFlexionRightCustom || '',
+      wrist_gmt_upper_wrist_flexion_left: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristFlexionLeft || '',
+      wrist_gmt_upper_wrist_flexion_left_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristFlexionLeftCustom || '',
+      wrist_gmt_upper_wrist_extension_right: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristExtensionRight || '',
+      wrist_gmt_upper_wrist_extension_right_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristExtensionRightCustom || '',
+      wrist_gmt_upper_wrist_extension_left: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristExtensionLeft || '',
+      wrist_gmt_upper_wrist_extension_left_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperWristExtensionLeftCustom || '',
+      wrist_gmt_upper_radial_deviation_right: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperRadialDeviationRight || '',
+      wrist_gmt_upper_radial_deviation_right_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperRadialDeviationRightCustom || '',
+      wrist_gmt_upper_radial_deviation_left: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperRadialDeviationLeft || '',
+      wrist_gmt_upper_radial_deviation_left_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperRadialDeviationLeftCustom || '',
+      wrist_gmt_upper_ulnar_deviation_right: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperUlnarDeviationRight || '',
+      wrist_gmt_upper_ulnar_deviation_right_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperUlnarDeviationRightCustom || '',
+      wrist_gmt_upper_ulnar_deviation_left: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperUlnarDeviationLeft || '',
+      wrist_gmt_upper_ulnar_deviation_left_custom: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperUlnarDeviationLeftCustom || '',
+      wrist_gmt_upper_comments: dto.grossMuscleTestsUpper?.wristGmtUpper?.wristGmtUpperComments || '',
+    };
+  }
 
-      // Redcord Neurac Stability Tests
+  private mapRedcordAndTrunk(dto: Strength): any {
+    return {
       redcord_neurac_stability_tests: dto.redcordNeuracStabilityTests?.redcordNeuracStabilityTests ? 'yes' : 'no',
       upper_body_myofascial_tests: dto.redcordNeuracStabilityTests?.upperBodyMyofascialTests ? 'yes' : 'no',
       lower_body_myofascial_tests: dto.redcordNeuracStabilityTests?.lowerBodyMyofascialTests ? 'yes' : 'no',
@@ -350,8 +461,11 @@ export class StrengthMapperService {
       gross_muscle_tests_trunk_extensors_left: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsLeft || '',
       gross_muscle_tests_trunk_extensors_left_custom: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsLeftCustom || '',
       gross_muscle_comments: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkComment || '',
+    };
+  }
 
-      // Gross Muscle Tests Lower
+  private mapGrossMuscleTestsLowerAndCore(dto: Strength): any {
+    return {
       gross_muscle_tests_lower: dto.grossMuscleTestsLower?.grossMuscleTestsLower ? 'yes' : 'no',
       hip_gross_muscle_tests_lower: dto.grossMuscleTestsLower?.hipGrossMuscleTestsLower ? 'yes' : 'no',
       knee_gross_muscle_tests_lower: dto.grossMuscleTestsLower?.kneeGrossMuscleTestsLower ? 'yes' : 'no',
@@ -363,8 +477,11 @@ export class StrengthMapperService {
       supine_flexion_core_strength: dto.coreStrength?.supineFlexionCoreStrength ? 'yes' : 'no',
       situps_core_strength: dto.coreStrength?.situpsCoreStrength ? 'yes' : 'no',
       pushup_core_strength: dto.coreStrength?.pushupCoreStrength ? 'yes' : 'no',
+    };
+  }
 
-      // Manual Muscle Tests
+  private mapManualMuscleTests(dto: Strength): any {
+    return {
       manual_muscle_tests: dto.manualMuscleTests?.manualMuscleTests ? 'yes' : 'no',
       manual_muscle_tests_deep_neck_flexors: dto.manualMuscleTests?.manualMuscleTestsDeepNeckFlexors || '',
       manual_muscle_tests_deep_neck_flexors_custom: dto.manualMuscleTests?.manualMuscleTestsDeepNeckFlexorsCustom || '',
@@ -517,8 +634,11 @@ export class StrengthMapperService {
       manual_muscle_testsflexor_digitorum_longus_left: dto.manualMuscleTests?.manualMuscleTestsflexorDigitorumLongusLeft || '',
       manual_muscle_testsflexor_digitorum_longus_left_custom: dto.manualMuscleTests?.manualMuscleTestsflexorDigitorumLongusLeftCustom || '',
       manual_muscle_tests_comments: dto.manualMuscleTests?.manualMuscleTestsComments || '',
+    };
+  }
 
-      // Additional Comments
+  private mapAdditionalComments(dto: Strength): any {
+    return {
       additional_comments: dto.additionalComments?.additionalComments ? 'yes' : 'no',
       additional_comments_text: dto.additionalComments?.additionalCommentsText || ''
     };
@@ -845,9 +965,101 @@ export class StrengthMapperService {
     const grossMuscleTestsUpper: GrossMuscleTestsUpper = {
       grossMuscleTestsUpper: formValue.gross_muscle_tests_upper === 'yes',
       cervicalGrossMuscleTestsUpper: formValue.cervical_gross_muscle_tests_upper === 'yes',
+      cervicalGmtUpper: {
+        cervicalGmtUpperFlexion: formValue.cervical_gmt_upper_flexion || '',
+        cervicalGmtUpperFlexionCustom: formValue.cervical_gmt_upper_flexion_custom || '',
+        cervicalGmtUpperExtension: formValue.cervical_gmt_upper_extension || '',
+        cervicalGmtUpperExtensionCustom: formValue.cervical_gmt_upper_extension_custom || '',
+        cervicalGmtUpperCervicalSidebendingRight: formValue.cervical_gmt_upper_cervical_sidebending_right || '',
+        cervicalGmtUpperCervicalSidebendingRightCustom: formValue.cervical_gmt_upper_cervical_sidebending_right_custom || '',
+        cervicalGmtUpperCervicalSidebendingLeft: formValue.cervical_gmt_upper_cervical_sidebending_left || '',
+        cervicalGmtUpperCervicalSidebendingLeftCustom: formValue.cervical_gmt_upper_cervical_sidebending_left_custom || '',
+        cervicalGmtUpperCervicalRotationRight: formValue.cervical_gmt_upper_cervical_rotation_right || '',
+        cervicalGmtUpperCervicalRotationRightCustom: formValue.cervical_gmt_upper_cervical_rotation_right_custom || '',
+        cervicalGmtUpperCervicalRotationLeft: formValue.cervical_gmt_upper_cervical_rotation_left || '',
+        cervicalGmtUpperCervicalRotationLeftCustom: formValue.cervical_gmt_upper_cervical_rotation_left_custom || '',
+        cervicalGmtUpperComments: formValue.cervical_gmt_upper_comments || '',
+      },
       shoulderGrossMuscleTestsUpper: formValue.shoulder_gross_muscle_tests_upper === 'yes',
+      shoulderGmtUpper: {
+        shoulderGmtUpperShoulderFlexionRight: formValue.shoulder_gmt_upper_shoulder_flexion_right || '',
+        shoulderGmtUpperShoulderFlexionRightCustom: formValue.shoulder_gmt_upper_shoulder_flexion_right_custom || '',
+        shoulderGmtUpperShoulderFlexionLeft: formValue.shoulder_gmt_upper_shoulder_flexion_left || '',
+        shoulderGmtUpperShoulderFlexionLeftCustom: formValue.shoulder_gmt_upper_shoulder_flexion_left_custom || '',
+        shoulderGmtUpperShoulderExtensionRight: formValue.shoulder_gmt_upper_shoulder_extension_right || '',
+        shoulderGmtUpperShoulderExtensionRightCustom: formValue.shoulder_gmt_upper_shoulder_extension_right_custom || '',
+        shoulderGmtUpperShoulderExtensionLeft: formValue.shoulder_gmt_upper_shoulder_extension_left || '',
+        shoulderGmtUpperShoulderExtensionLeftCustom: formValue.shoulder_gmt_upper_shoulder_extension_left_custom || '',
+        shoulderGmtUpperShoulderAbductionRight: formValue.shoulder_gmt_upper_shoulder_abduction_right || '',
+        shoulderGmtUpperShoulderAbductionRightCustom: formValue.shoulder_gmt_upper_shoulder_abduction_right_custom || '',
+        shoulderGmtUpperShoulderAbductionLeft: formValue.shoulder_gmt_upper_shoulder_abduction_left || '',
+        shoulderGmtUpperShoulderAbductionLeftCustom: formValue.shoulder_gmt_upper_shoulder_abduction_left_custom || '',
+        shoulderGmtUpperShoulderAdductionRight: formValue.shoulder_gmt_upper_shoulder_adduction_right || '',
+        shoulderGmtUpperShoulderAdductionRightCustom: formValue.shoulder_gmt_upper_shoulder_adduction_right_custom || '',
+        shoulderGmtUpperShoulderAdductionLeft: formValue.shoulder_gmt_upper_shoulder_adduction_left || '',
+        shoulderGmtUpperShoulderAdductionLeftCustom: formValue.shoulder_gmt_upper_shoulder_adduction_left_custom || '',
+        shoulderGmtUpperShoulderInternalRotationRight: formValue.shoulder_gmt_upper_shoulder_internal_rotation_right || '',
+        shoulderGmtUpperShoulderInternalRotationRightCustom: formValue.shoulder_gmt_upper_shoulder_internal_rotation_right_custom || '',
+        shoulderGmtUpperShoulderInternalRotationLeft: formValue.shoulder_gmt_upper_shoulder_internal_rotation_left || '',
+        shoulderGmtUpperShoulderInternalRotationLeftCustom: formValue.shoulder_gmt_upper_shoulder_internal_rotation_left_custom || '',
+        shoulderGmtUpperShoulderExternalRotationRight: formValue.shoulder_gmt_upper_shoulder_external_rotation_right || '',
+        shoulderGmtUpperShoulderExternalRotationRightCustom: formValue.shoulder_gmt_upper_shoulder_external_rotation_right_custom || '',
+        shoulderGmtUpperShoulderExternalRotationLeft: formValue.shoulder_gmt_upper_shoulder_external_rotation_left || '',
+        shoulderGmtUpperShoulderExternalRotationLeftCustom: formValue.shoulder_gmt_upper_shoulder_external_rotation_left_custom || '',
+        shoulderGmtUpperShoulderScaptionRight: formValue.shoulder_gmt_upper_shoulder_scaption_right || '',
+        shoulderGmtUpperShoulderScaptionRightCustom: formValue.shoulder_gmt_upper_shoulder_scaption_right_custom || '',
+        shoulderGmtUpperShoulderScaptionLeft: formValue.shoulder_gmt_upper_shoulder_scaption_left || '',
+        shoulderGmtUpperShoulderScaptionLeftCustom: formValue.shoulder_gmt_upper_shoulder_scaption_left_custom || '',
+        shoulderGmtUpperShoulderEr90AbductionRight: formValue['shoulder_gmt_upper_shoulder_er_@_90_abduction_right'] || '',
+        shoulderGmtUpperShoulderEr90AbductionRightCustom: formValue['shoulder_gmt_upper_shoulder_er_@_90_abduction_right_custom'] || '',
+        shoulderGmtUpperShoulderEr90AbductionLeft: formValue['shoulder_gmt_upper_shoulder_er_@_90_abduction_left'] || '',
+        shoulderGmtUpperShoulderEr90AbductionLeftCustom: formValue['shoulder_gmt_upper_shoulder_er_@_90_abduction_left_custom'] || '',
+        shoulderGmtUpperShoulderIr90AbductionRight: formValue['shoulder_gmt_upper_shoulder_ir_@_90_abduction_right'] || '',
+        shoulderGmtUpperShoulderIr90AbductionRightCustom: formValue['shoulder_gmt_upper_shoulder_ir_@_90_abduction_right_custom'] || '',
+        shoulderGmtUpperShoulderIr90AbductionLeft: formValue['shoulder_gmt_upper_shoulder_ir_@_90_abduction_left'] || '',
+        shoulderGmtUpperShoulderIr90AbductionLeftCustom: formValue['shoulder_gmt_upper_shoulder_ir_@_90_abduction_left_custom'] || '',
+        shoulderGmtUpperComments: formValue.shoulder_gmt_upper_comments || '',
+      },
       elbowGrossMuscleTestsUpper: formValue.elbow_gross_muscle_tests_upper === 'yes',
-      wristGrossMuscleTestsUpper: formValue.wrist_gross_muscle_tests_upper === 'yes'
+      elbowGmtUpper: {
+        elbowGmtUpperElbowFlexionRight: formValue.elbow_gmt_upper_elbow_flexion_right || '',
+        elbowGmtUpperElbowFlexionRightCustom: formValue.elbow_gmt_upper_elbow_flexion_right_custom || '',
+        elbowGmtUpperElbowFlexionLeft: formValue.elbow_gmt_upper_elbow_flexion_left || '',
+        elbowGmtUpperElbowFlexionLeftCustom: formValue.elbow_gmt_upper_elbow_flexion_left_custom || '',
+        elbowGmtUpperElbowExtensionRight: formValue.elbow_gmt_upper_elbow_extension_right || '',
+        elbowGmtUpperElbowExtensionRightCustom: formValue.elbow_gmt_upper_elbow_extension_right_custom || '',
+        elbowGmtUpperElbowExtensionLeft: formValue.elbow_gmt_upper_elbow_extension_left || '',
+        elbowGmtUpperElbowExtensionLeftCustom: formValue.elbow_gmt_upper_elbow_extension_left_custom || '',
+        elbowGmtUpperElbowSupinationRight: formValue.elbow_gmt_upper_elbow_supination_right || '',
+        elbowGmtUpperElbowSupinationRightCustom: formValue.elbow_gmt_upper_elbow_supination_right_custom || '',
+        elbowGmtUpperElbowSupinationLeft: formValue.elbow_gmt_upper_elbow_supination_left || '',
+        elbowGmtUpperElbowSupinationLeftCustom: formValue.elbow_gmt_upper_elbow_supination_left_custom || '',
+        elbowGmtUpperElbowPronationRight: formValue.elbow_gmt_upper_elbow_pronation_right || '',
+        elbowGmtUpperElbowPronationRightCustom: formValue.elbow_gmt_upper_elbow_pronation_right_custom || '',
+        elbowGmtUpperElbowPronationLeft: formValue.elbow_gmt_upper_elbow_pronation_left || '',
+        elbowGmtUpperElbowPronationLeftCustom: formValue.elbow_gmt_upper_elbow_pronation_left_custom || '',
+        elbowGmtUpperComments: formValue.elbow_gmt_upper_comments || '',
+      },
+      wristGrossMuscleTestsUpper: formValue.wrist_gross_muscle_tests_upper === 'yes',
+      wristGmtUpper: {
+        wristGmtUpperWristFlexionRight: formValue.wrist_gmt_upper_wrist_flexion_right || '',
+        wristGmtUpperWristFlexionRightCustom: formValue.wrist_gmt_upper_wrist_flexion_right_custom || '',
+        wristGmtUpperWristFlexionLeft: formValue.wrist_gmt_upper_wrist_flexion_left || '',
+        wristGmtUpperWristFlexionLeftCustom: formValue.wrist_gmt_upper_wrist_flexion_left_custom || '',
+        wristGmtUpperWristExtensionRight: formValue.wrist_gmt_upper_wrist_extension_right || '',
+        wristGmtUpperWristExtensionRightCustom: formValue.wrist_gmt_upper_wrist_extension_right_custom || '',
+        wristGmtUpperWristExtensionLeft: formValue.wrist_gmt_upper_wrist_extension_left || '',
+        wristGmtUpperWristExtensionLeftCustom: formValue.wrist_gmt_upper_wrist_extension_left_custom || '',
+        wristGmtUpperRadialDeviationRight: formValue.wrist_gmt_upper_radial_deviation_right || '',
+        wristGmtUpperRadialDeviationRightCustom: formValue.wrist_gmt_upper_radial_deviation_right_custom || '',
+        wristGmtUpperRadialDeviationLeft: formValue.wrist_gmt_upper_radial_deviation_left || '',
+        wristGmtUpperRadialDeviationLeftCustom: formValue.wrist_gmt_upper_radial_deviation_left_custom || '',
+        wristGmtUpperUlnarDeviationRight: formValue.wrist_gmt_upper_ulnar_deviation_right || '',
+        wristGmtUpperUlnarDeviationRightCustom: formValue.wrist_gmt_upper_ulnar_deviation_right_custom || '',
+        wristGmtUpperUlnarDeviationLeft: formValue.wrist_gmt_upper_ulnar_deviation_left || '',
+        wristGmtUpperUlnarDeviationLeftCustom: formValue.wrist_gmt_upper_ulnar_deviation_left_custom || '',
+        wristGmtUpperComments: formValue.wrist_gmt_upper_comments || '',
+      }
     };
 
     const redcordNeuracStabilityTests: RedcordNeuracStabilityTests = {

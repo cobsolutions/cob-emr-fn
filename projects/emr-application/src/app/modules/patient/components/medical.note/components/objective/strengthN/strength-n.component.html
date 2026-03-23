@@ -420,6 +420,14 @@
             </div>
         </div>
         <div *ngIf="showCervicalGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table-with-selects [labels]="strengthConfig.cervicalGmtUpper.labels"
+                [options]="strengthConfig.cervicalGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalGmtUpper.fieldPrefix"
+                [topSelects]="strengthConfig.cervicalGmtUpper.topSelects"
+                [commentsFieldName]="strengthConfig.cervicalGmtUpper.commentsFieldName"
+                [showComments]="strengthConfig.cervicalGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
         </div>
 
         <div class="form-row">
@@ -438,6 +446,15 @@
             </div>
         </div>
         <div *ngIf="showShoulderGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.shoulderGmtUpper.labels"
+                [options]="strengthConfig.shoulderGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.shoulderGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.shoulderGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.shoulderGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.shoulderGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.shoulderGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -454,6 +471,15 @@
             </div>
         </div>
         <div *ngIf="showElbowGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.elbowGmtUpper.labels"
+                [options]="strengthConfig.elbowGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.elbowGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.elbowGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.elbowGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.elbowGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.elbowGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Wrist</label>
@@ -469,6 +495,15 @@
             </div>
         </div>
         <div *ngIf="showWristGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.wristGmtUpper.labels"
+                [options]="strengthConfig.wristGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.wristGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.wristGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.wristGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.wristGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.wristGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
     </div>
     <!-- Redcord Neurac Stability Tests -->

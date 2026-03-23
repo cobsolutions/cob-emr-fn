@@ -8,6 +8,10 @@ import { Knee } from "./knee-config";
 import { Ankle } from "./ankle-config";
 import { Foot } from "./foot-config";
 import { GrossMuscleTestsTrunk } from "./gross-muscle-tests-trunk-config";
+import { GrossMuscleTestsUpperCervical } from "./gross-muscle-tests-upper-cervical-config";
+import { GrossMuscleTestsUpperElbow } from "./gross-muscle-tests-upper-elbow-config";
+import { GrossMuscleTestsUpperShoulder } from "./gross-muscle-tests-upper-shoulder-config";
+import { GrossMuscleTestsUpperWrist } from "./gross-muscle-tests-upper-wrist-config";
 import { ManualMuscleTests } from "./manual-muscle-tests-config";
 import { Shoulder } from "./shoulder-config";
 import { Trunk } from "./trunk-config";
@@ -49,6 +53,18 @@ export class StrengthSectionsConfig {
 
     //Grip / Pinch
     static readonly gripPinch = GripPinch.gripPinch;
+
+    //Gross Muscle Tests Upper - Cervical
+    static readonly cervicalGmtUpper = GrossMuscleTestsUpperCervical.cervicalGmtUpper;
+
+    //Gross Muscle Tests Upper - Shoulder
+    static readonly shoulderGmtUpper = GrossMuscleTestsUpperShoulder.shoulderGmtUpper;
+
+    //Gross Muscle Tests Upper - Elbow
+    static readonly elbowGmtUpper = GrossMuscleTestsUpperElbow.elbowGmtUpper;
+
+    //Gross Muscle Tests Upper - Wrist
+    static readonly wristGmtUpper = GrossMuscleTestsUpperWrist.wristGmtUpper;
 
     //GrossMuscleTestsTrunk
     static readonly grossMuscleTestsTrunk = GrossMuscleTestsTrunk.grossMuscleTestsTrunk;
