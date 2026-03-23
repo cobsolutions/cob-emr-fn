@@ -1,14 +1,17 @@
 <div [formGroup]="formGroup">
   <!-- Top Selects Section -->
   <div class="top-selects-container">
-    <div class="select-item" *ngFor="let select of topSelects">
+    <div class="select-item" *ngFor="let select of topSelectMappings; trackBy: trackBySelect">
       <label class="select-label">{{ select.label }}</label>
       <select cSelect class="select-input" [formControlName]="select.fieldName">
         <option value="" selected>Select...</option>
-        <option *ngFor="let option of select.options" [value]="option.value">
+        <option *ngFor="let option of select.options; trackBy: trackByValue" [value]="option.value">
           {{ option.label }}
         </option>
       </select>
+      <input *ngIf="customFieldVisible[select.customField]" cFormControl type="text"
+        [formControlName]="select.customField" class="select-input custom-text-input"
+        placeholder="Enter custom value" />
     </div>
   </div>
 
@@ -22,21 +25,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let label of labels">
-        <td>{{ label }}</td>
+      <tr *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <td>{{ mapping.label }}</td>
         <td>
-          <select cSelect class="table-input" [formControlName]="getFieldName(label, 'right')">
-            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+          <select cSelect class="table-input" [formControlName]="mapping.rightField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
+          <input *ngIf="customFieldVisible[mapping.rightCustomField]" cFormControl type="text"
+            [formControlName]="mapping.rightCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
         </td>
         <td>
-          <select cSelect class="table-input" [formControlName]="getFieldName(label, 'left')">
-            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+          <select cSelect class="table-input" [formControlName]="mapping.leftField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
+          <input *ngIf="customFieldVisible[mapping.leftCustomField]" cFormControl type="text"
+            [formControlName]="mapping.leftCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
         </td>
       </tr>
     </tbody>
@@ -47,7 +56,7 @@
     <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
     <textarea
       class="form-textarea"
-      [formControlName]="getCommentsFieldName()"
+      [formControlName]="computedCommentsFieldName"
       rows="3"
       placeholder="Enter any comments...">
     </textarea>
