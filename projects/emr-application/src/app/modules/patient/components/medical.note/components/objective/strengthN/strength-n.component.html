@@ -58,6 +58,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showCervicalFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Trunk</label>
             <div class="radio-group-primary">
@@ -70,6 +72,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showTrunkFields" class="dependent-field-box">
         </div>
         <div class="form-row">
             <label class="field-label">Back Ribs</label>
@@ -84,6 +88,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showBackRibsFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Shoulder</label>
             <div class="radio-group-primary">
@@ -96,6 +102,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showShoulderFields" class="dependent-field-box">
         </div>
         <div class="form-row">
             <label class="field-label">Elbow</label>
@@ -110,6 +118,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showElbowFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Wrist</label>
             <div class="radio-group-primary">
@@ -123,6 +133,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showWristFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Hand</label>
             <div class="radio-group-primary">
@@ -135,6 +147,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showHandFields" class="dependent-field-box">
         </div>
     </div>
 

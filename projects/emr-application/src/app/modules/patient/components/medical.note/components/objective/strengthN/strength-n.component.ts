@@ -29,6 +29,13 @@ export class StrengthNComponent implements OnInit {
   showCoreStrengthFields: boolean = false;
   showManualMuscleTestsFields: boolean = false;
   showAdditionalCommentsFields: boolean = false;
+  showCervicalFields: boolean = false;
+  showTrunkFields: boolean = false;
+  showBackRibsFields: boolean = false;
+  showShoulderFields: boolean = false;
+  showElbowFields: boolean = false;
+  showWristFields: boolean = false;
+  showHandFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -166,6 +173,34 @@ export class StrengthNComponent implements OnInit {
           hand: 'no',
         });
       }
+    });
+
+    this.strengthForm.get('cervical')?.valueChanges.subscribe(value => {
+      this.showCervicalFields = value === 'yes';
+    });
+
+    this.strengthForm.get('trunk')?.valueChanges.subscribe(value => {
+      this.showTrunkFields = value === 'yes';
+    });
+
+    this.strengthForm.get('back_ribs')?.valueChanges.subscribe(value => {
+      this.showBackRibsFields = value === 'yes';
+    });
+
+    this.strengthForm.get('shoulder')?.valueChanges.subscribe(value => {
+      this.showShoulderFields = value === 'yes';
+    });
+
+    this.strengthForm.get('elbow')?.valueChanges.subscribe(value => {
+      this.showElbowFields = value === 'yes';
+    });
+
+    this.strengthForm.get('wrist')?.valueChanges.subscribe(value => {
+      this.showWristFields = value === 'yes';
+    });
+
+    this.strengthForm.get('hand')?.valueChanges.subscribe(value => {
+      this.showHandFields = value === 'yes';
     });
 
     this.strengthForm.get('selective_tissue_tension_lower')?.valueChanges.subscribe(value => {
