@@ -419,6 +419,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showCervicalGrossMuscleTestsUpperFields" class="dependent-field-box">
+        </div>
 
         <div class="form-row">
             <label class="field-label">Shoulder</label>
@@ -435,6 +437,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showShoulderGrossMuscleTestsUpperFields" class="dependent-field-box">
+        </div>
 
         <div class="form-row">
             <label class="field-label">Elbow</label>
@@ -449,6 +453,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showElbowGrossMuscleTestsUpperFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Wrist</label>
             <div class="radio-group-primary">
@@ -461,6 +467,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showWristGrossMuscleTestsUpperFields" class="dependent-field-box">
         </div>
     </div>
     <!-- Redcord Neurac Stability Tests -->

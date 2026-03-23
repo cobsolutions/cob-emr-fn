@@ -40,6 +40,10 @@ export class StrengthNComponent implements OnInit {
   showKneeFields: boolean = false;
   showAnkleFields: boolean = false;
   showFootFields: boolean = false;
+  showCervicalGrossMuscleTestsUpperFields: boolean = false;
+  showShoulderGrossMuscleTestsUpperFields: boolean = false;
+  showElbowGrossMuscleTestsUpperFields: boolean = false;
+  showWristGrossMuscleTestsUpperFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -257,6 +261,22 @@ export class StrengthNComponent implements OnInit {
           wrist_gross_muscle_tests_upper: 'no'
         })
       }
+    });
+
+    this.strengthForm.get('cervical_gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
+      this.showCervicalGrossMuscleTestsUpperFields = value === 'yes';
+    });
+
+    this.strengthForm.get('shoulder_gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
+      this.showShoulderGrossMuscleTestsUpperFields = value === 'yes';
+    });
+
+    this.strengthForm.get('elbow_gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
+      this.showElbowGrossMuscleTestsUpperFields = value === 'yes';
+    });
+
+    this.strengthForm.get('wrist_gross_muscle_tests_upper')?.valueChanges.subscribe(value => {
+      this.showWristGrossMuscleTestsUpperFields = value === 'yes';
     });
 
     this.strengthForm.get('redcord_neurac_stability_tests')?.valueChanges.subscribe(value => {
