@@ -229,8 +229,59 @@ export class StrengthNComponent implements OnInit {
 
       gross_muscle_tests_lower: ['no'],
       hip_gross_muscle_tests_lower: ['no'],
+      hip_gmt_lower_hip_flexion_right: [''],
+      hip_gmt_lower_hip_flexion_right_custom: [''],
+      hip_gmt_lower_hip_flexion_left: [''],
+      hip_gmt_lower_hip_flexion_left_custom: [''],
+      hip_gmt_lower_hip_extension_right: [''],
+      hip_gmt_lower_hip_extension_right_custom: [''],
+      hip_gmt_lower_hip_extension_left: [''],
+      hip_gmt_lower_hip_extension_left_custom: [''],
+      hip_gmt_lower_hip_abduction_right: [''],
+      hip_gmt_lower_hip_abduction_right_custom: [''],
+      hip_gmt_lower_hip_abduction_left: [''],
+      hip_gmt_lower_hip_abduction_left_custom: [''],
+      hip_gmt_lower_hip_adduction_right: [''],
+      hip_gmt_lower_hip_adduction_right_custom: [''],
+      hip_gmt_lower_hip_adduction_left: [''],
+      hip_gmt_lower_hip_adduction_left_custom: [''],
+      hip_gmt_lower_hip_internal_rotation_right: [''],
+      hip_gmt_lower_hip_internal_rotation_right_custom: [''],
+      hip_gmt_lower_hip_internal_rotation_left: [''],
+      hip_gmt_lower_hip_internal_rotation_left_custom: [''],
+      hip_gmt_lower_hip_external_rotation_right: [''],
+      hip_gmt_lower_hip_external_rotation_right_custom: [''],
+      hip_gmt_lower_hip_external_rotation_left: [''],
+      hip_gmt_lower_hip_external_rotation_left_custom: [''],
+      hip_gmt_lower_comments: [''],
       knee_gross_muscle_tests_lower: ['no'],
+      knee_gmt_lower_knee_flexion_right: [''],
+      knee_gmt_lower_knee_flexion_right_custom: [''],
+      knee_gmt_lower_knee_flexion_left: [''],
+      knee_gmt_lower_knee_flexion_left_custom: [''],
+      knee_gmt_lower_knee_extension_right: [''],
+      knee_gmt_lower_knee_extension_right_custom: [''],
+      knee_gmt_lower_knee_extension_left: [''],
+      knee_gmt_lower_knee_extension_left_custom: [''],
+      knee_gmt_lower_comments: [''],
       ankle_gross_muscle_tests_lower: ['no'],
+      ankle_gmt_lower_ankle_dorsiflexion_right: [''],
+      ankle_gmt_lower_ankle_dorsiflexion_right_custom: [''],
+      ankle_gmt_lower_ankle_dorsiflexion_left: [''],
+      ankle_gmt_lower_ankle_dorsiflexion_left_custom: [''],
+      ankle_gmt_lower_ankle_plantarflexion_right: [''],
+      ankle_gmt_lower_ankle_plantarflexion_right_custom: [''],
+      ankle_gmt_lower_ankle_plantarflexion_left: [''],
+      ankle_gmt_lower_ankle_plantarflexion_left_custom: [''],
+      ankle_gmt_lower_ankle_inversion_right: [''],
+      ankle_gmt_lower_ankle_inversion_right_custom: [''],
+      ankle_gmt_lower_ankle_inversion_left: [''],
+      ankle_gmt_lower_ankle_inversion_left_custom: [''],
+      ankle_gmt_lower_ankle_eversion_right: [''],
+      ankle_gmt_lower_ankle_eversion_right_custom: [''],
+      ankle_gmt_lower_ankle_eversion_left: [''],
+      ankle_gmt_lower_ankle_eversion_left_custom: [''],
+      ankle_gmt_lower_comments: [''],
 
       core_strength: ['no'],
       prone_extensioncore_strength: ['no'],
@@ -400,14 +451,23 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('hip_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
       this.showHipGrossMuscleTestsLowerFields = value === 'yes';
+      if (!this.showHipGrossMuscleTestsLowerFields) {
+        this.resetMeasurementFields(this.strengthConfig.hipGmtLower);
+      }
     });
 
     this.strengthForm.get('knee_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
       this.showKneeGrossMuscleTestsLowerFields = value === 'yes';
+      if (!this.showKneeGrossMuscleTestsLowerFields) {
+        this.resetMeasurementFields(this.strengthConfig.kneeGmtLower);
+      }
     });
 
     this.strengthForm.get('ankle_gross_muscle_tests_lower')?.valueChanges.subscribe(value => {
       this.showAnkleGrossMuscleTestsLowerFields = value === 'yes';
+      if (!this.showAnkleGrossMuscleTestsLowerFields) {
+        this.resetMeasurementFields(this.strengthConfig.ankleGmtLower);
+      }
     });
 
     this.strengthForm.get('core_strength')?.valueChanges.subscribe(value => {

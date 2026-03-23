@@ -7,6 +7,9 @@ import { Hip } from "./hip-config";
 import { Knee } from "./knee-config";
 import { Ankle } from "./ankle-config";
 import { Foot } from "./foot-config";
+import { GrossMuscleTestsLowerAnkle } from "./gross-muscle-tests-lower-ankle-config";
+import { GrossMuscleTestsLowerHip } from "./gross-muscle-tests-lower-hip-config";
+import { GrossMuscleTestsLowerKnee } from "./gross-muscle-tests-lower-knee-config";
 import { GrossMuscleTestsTrunk } from "./gross-muscle-tests-trunk-config";
 import { GrossMuscleTestsUpperCervical } from "./gross-muscle-tests-upper-cervical-config";
 import { GrossMuscleTestsUpperElbow } from "./gross-muscle-tests-upper-elbow-config";
@@ -68,6 +71,15 @@ export class StrengthSectionsConfig {
 
     //GrossMuscleTestsTrunk
     static readonly grossMuscleTestsTrunk = GrossMuscleTestsTrunk.grossMuscleTestsTrunk;
+
+    //Gross Muscle Tests Lower - Hip
+    static readonly hipGmtLower = GrossMuscleTestsLowerHip.hipGmtLower;
+
+    //Gross Muscle Tests Lower - Knee
+    static readonly kneeGmtLower = GrossMuscleTestsLowerKnee.kneeGmtLower;
+
+    //Gross Muscle Tests Lower - Ankle
+    static readonly ankleGmtLower = GrossMuscleTestsLowerAnkle.ankleGmtLower;
 
     //Manual Muscle Tests
     static readonly manualMuscleTests = ManualMuscleTests.manualMuscleTests;

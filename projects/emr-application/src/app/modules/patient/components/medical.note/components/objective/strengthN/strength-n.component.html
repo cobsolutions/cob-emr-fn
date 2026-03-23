@@ -640,6 +640,15 @@
             </div>
         </div>
         <div *ngIf="showHipGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.hipGmtLower.labels"
+                [options]="strengthConfig.hipGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.hipGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.hipGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.hipGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.hipGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.hipGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -656,6 +665,15 @@
             </div>
         </div>
         <div *ngIf="showKneeGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.kneeGmtLower.labels"
+                [options]="strengthConfig.kneeGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.kneeGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.kneeGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.kneeGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.kneeGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.kneeGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
 
         <div class="form-row">
@@ -672,6 +690,15 @@
             </div>
         </div>
         <div *ngIf="showAnkleGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.ankleGmtLower.labels"
+                [options]="strengthConfig.ankleGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.ankleGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.ankleGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.ankleGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.ankleGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.ankleGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
     </div>
     <!-- Core Strength -->
