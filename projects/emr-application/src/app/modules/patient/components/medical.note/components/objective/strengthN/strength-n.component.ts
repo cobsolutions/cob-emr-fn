@@ -47,6 +47,10 @@ export class StrengthNComponent implements OnInit {
   showHipGrossMuscleTestsLowerFields: boolean = false;
   showKneeGrossMuscleTestsLowerFields: boolean = false;
   showAnkleGrossMuscleTestsLowerFields: boolean = false;
+  showProneExtensionCoreStrengthFields: boolean = false;
+  showSupineFlexionCoreStrengthFields: boolean = false;
+  showSitupsCoreStrengthFields: boolean = false;
+  showPushupCoreStrengthFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -480,6 +484,22 @@ export class StrengthNComponent implements OnInit {
           pushup_core_strength: 'no',
         })
       }
+    });
+
+    this.strengthForm.get('prone_extensioncore_strength')?.valueChanges.subscribe(value => {
+      this.showProneExtensionCoreStrengthFields = value === 'yes';
+    });
+
+    this.strengthForm.get('supine_flexion_core_strength')?.valueChanges.subscribe(value => {
+      this.showSupineFlexionCoreStrengthFields = value === 'yes';
+    });
+
+    this.strengthForm.get('situps_core_strength')?.valueChanges.subscribe(value => {
+      this.showSitupsCoreStrengthFields = value === 'yes';
+    });
+
+    this.strengthForm.get('pushup_core_strength')?.valueChanges.subscribe(value => {
+      this.showPushupCoreStrengthFields = value === 'yes';
     });
 
     this.strengthForm.get('manual_muscle_tests')?.valueChanges.subscribe(value => {
