@@ -68,6 +68,14 @@ export function generateTextFieldName(fieldPrefix: string, label: string | null,
 }
 
 /**
+ * Generate field name for multi-column measurement table (with column name)
+ * Example: generateMultiColumnFieldName('grip_', 'Grip', 'Trial 1') => 'grip_grip_trial_1'
+ */
+export function generateMultiColumnFieldName(fieldPrefix: string, label: string, column: string): string {
+  return `${fieldPrefix}${normalizeLabel(label)}_${normalizeLabel(column)}`;
+}
+
+/**
  * Convert snake_case to camelCase
  * Example: "shoulder_flexion_right_custom" => "shoulderFlexionRightCustom"
  */

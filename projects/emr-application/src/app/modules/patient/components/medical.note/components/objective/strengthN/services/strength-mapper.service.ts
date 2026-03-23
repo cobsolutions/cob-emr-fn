@@ -6,6 +6,11 @@ import { SelectiveTissueTensionLower } from '../models/SelectiveTissueTensionLow
 import { GripPinch } from '../models/GripPinch';
 import { GrossMuscleTestsUpper } from '../models/GrossMuscleTestsUpper';
 import { RedcordNeuracStabilityTests } from '../models/RedcordNeuracStabilityTests';
+import { CervicalMovements } from '../models/CervicalMovements';
+import { CervicalMotorControlTestsData } from '../models/CervicalMotorControlTests';
+import { LumbarMotorControlTestsData } from '../models/LumbarMotorControlTests';
+import { UpperBodyMyofascialTestsData } from '../models/UpperBodyMyofascialTests';
+import { LowerBodyMyofascialTestsData } from '../models/LowerBodyMyofascialTests';
 import { GrossMuscleTestsTrunk } from '../models/GrossMuscleTestsTrunk';
 import { GrossMuscleTestsLower } from '../models/GrossMuscleTestsLower';
 import { CoreStrength } from '../models/CoreStrength';
@@ -440,10 +445,15 @@ export class StrengthMapperService {
     return {
       redcord_neurac_stability_tests: dto.redcordNeuracStabilityTests?.redcordNeuracStabilityTests ? 'yes' : 'no',
       upper_body_myofascial_tests: dto.redcordNeuracStabilityTests?.upperBodyMyofascialTests ? 'yes' : 'no',
+      ...this.mapUpperBodyMyofascialTestsFromDto(dto),
       lower_body_myofascial_tests: dto.redcordNeuracStabilityTests?.lowerBodyMyofascialTests ? 'yes' : 'no',
+      ...this.mapLowerBodyMyofascialTestsFromDto(dto),
       cervical_movements: dto.redcordNeuracStabilityTests?.cervicalMovements ? 'yes' : 'no',
+      ...this.mapCervicalMovementsFromDto(dto),
       cervical_motor_control_tests: dto.redcordNeuracStabilityTests?.cervicalMotorControlTests ? 'yes' : 'no',
+      ...this.mapCervicalMotorControlTestsFromDto(dto),
       lumbar_motor_control_tests: dto.redcordNeuracStabilityTests?.lumbarMotorControlTests ? 'yes' : 'no',
+      ...this.mapLumbarMotorControlTestsFromDto(dto),
 
       // Gross Muscle Tests Trunk
       gross_muscle_tests_trunk: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunk ? 'yes' : 'no',
@@ -461,6 +471,281 @@ export class StrengthMapperService {
       gross_muscle_tests_trunk_extensors_left: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsLeft || '',
       gross_muscle_tests_trunk_extensors_left_custom: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkExtensorsLeftCustom || '',
       gross_muscle_comments: dto.grossMuscleTestsTrunk?.grossMuscleTestsTrunkComment || '',
+    };
+  }
+
+  private mapUpperBodyMyofascialTestsFromDto(dto: Strength): any {
+    const d = dto.redcordNeuracStabilityTests?.upperBodyMyofascialTestsData;
+    return {
+      upper_body_mft_kneeling_scapular_protraction_right: d?.upperBodyMftKneelingScapularProtractionRight || '',
+      upper_body_mft_kneeling_scapular_protraction_right_custom: d?.upperBodyMftKneelingScapularProtractionRightCustom || '',
+      upper_body_mft_kneeling_scapular_protraction_left: d?.upperBodyMftKneelingScapularProtractionLeft || '',
+      upper_body_mft_kneeling_scapular_protraction_left_custom: d?.upperBodyMftKneelingScapularProtractionLeftCustom || '',
+
+      upper_body_mft_kneeling_push_up_right: d?.upperBodyMftKneelingPushUpRight || '',
+      upper_body_mft_kneeling_push_up_right_custom: d?.upperBodyMftKneelingPushUpRightCustom || '',
+      upper_body_mft_kneeling_push_up_left: d?.upperBodyMftKneelingPushUpLeft || '',
+      upper_body_mft_kneeling_push_up_left_custom: d?.upperBodyMftKneelingPushUpLeftCustom || '',
+
+      upper_body_mft_kneeling_shoulder_extension_right: d?.upperBodyMftKneelingShoulderExtensionRight || '',
+      upper_body_mft_kneeling_shoulder_extension_right_custom: d?.upperBodyMftKneelingShoulderExtensionRightCustom || '',
+      upper_body_mft_kneeling_shoulder_extension_left: d?.upperBodyMftKneelingShoulderExtensionLeft || '',
+      upper_body_mft_kneeling_shoulder_extension_left_custom: d?.upperBodyMftKneelingShoulderExtensionLeftCustom || '',
+
+      upper_body_mft_supine_scapular_retraction_right: d?.upperBodyMftSupineScapularRetractionRight || '',
+      upper_body_mft_supine_scapular_retraction_right_custom: d?.upperBodyMftSupineScapularRetractionRightCustom || '',
+      upper_body_mft_supine_scapular_retraction_left: d?.upperBodyMftSupineScapularRetractionLeft || '',
+      upper_body_mft_supine_scapular_retraction_left_custom: d?.upperBodyMftSupineScapularRetractionLeftCustom || '',
+
+      upper_body_mft_supine_pull_up_right: d?.upperBodyMftSupinePullUpRight || '',
+      upper_body_mft_supine_pull_up_right_custom: d?.upperBodyMftSupinePullUpRightCustom || '',
+      upper_body_mft_supine_pull_up_left: d?.upperBodyMftSupinePullUpLeft || '',
+      upper_body_mft_supine_pull_up_left_custom: d?.upperBodyMftSupinePullUpLeftCustom || '',
+
+      upper_body_mft_comments: d?.upperBodyMftComments || '',
+    };
+  }
+
+  private mapLowerBodyMyofascialTestsFromDto(dto: Strength): any {
+    const d = dto.redcordNeuracStabilityTests?.lowerBodyMyofascialTestsData;
+    return {
+      lower_body_mft_supine_pelvic_lift_right: d?.lowerBodyMftSupinePelvicLiftRight || '',
+      lower_body_mft_supine_pelvic_lift_right_custom: d?.lowerBodyMftSupinePelvicLiftRightCustom || '',
+      lower_body_mft_supine_pelvic_lift_left: d?.lowerBodyMftSupinePelvicLiftLeft || '',
+      lower_body_mft_supine_pelvic_lift_left_custom: d?.lowerBodyMftSupinePelvicLiftLeftCustom || '',
+
+      lower_body_mft_supine_bridge_right: d?.lowerBodyMftSupineBridgeRight || '',
+      lower_body_mft_supine_bridge_right_custom: d?.lowerBodyMftSupineBridgeRightCustom || '',
+      lower_body_mft_supine_bridge_left: d?.lowerBodyMftSupineBridgeLeft || '',
+      lower_body_mft_supine_bridge_left_custom: d?.lowerBodyMftSupineBridgeLeftCustom || '',
+
+      lower_body_mft_supine_knee_flexion_right: d?.lowerBodyMftSupineKneeFlexionRight || '',
+      lower_body_mft_supine_knee_flexion_right_custom: d?.lowerBodyMftSupineKneeFlexionRightCustom || '',
+      lower_body_mft_supine_knee_flexion_left: d?.lowerBodyMftSupineKneeFlexionLeft || '',
+      lower_body_mft_supine_knee_flexion_left_custom: d?.lowerBodyMftSupineKneeFlexionLeftCustom || '',
+
+      lower_body_mft_side_lying_hip_abduction_right: d?.lowerBodyMftSideLyingHipAbductionRight || '',
+      lower_body_mft_side_lying_hip_abduction_right_custom: d?.lowerBodyMftSideLyingHipAbductionRightCustom || '',
+      lower_body_mft_side_lying_hip_abduction_left: d?.lowerBodyMftSideLyingHipAbductionLeft || '',
+      lower_body_mft_side_lying_hip_abduction_left_custom: d?.lowerBodyMftSideLyingHipAbductionLeftCustom || '',
+
+      lower_body_mft_side_lying_hip_adduction_right: d?.lowerBodyMftSideLyingHipAdductionRight || '',
+      lower_body_mft_side_lying_hip_adduction_right_custom: d?.lowerBodyMftSideLyingHipAdductionRightCustom || '',
+      lower_body_mft_side_lying_hip_adduction_left: d?.lowerBodyMftSideLyingHipAdductionLeft || '',
+      lower_body_mft_side_lying_hip_adduction_left_custom: d?.lowerBodyMftSideLyingHipAdductionLeftCustom || '',
+
+      lower_body_mft_prone_bridge_right: d?.lowerBodyMftProneBridgeRight || '',
+      lower_body_mft_prone_bridge_right_custom: d?.lowerBodyMftProneBridgeRightCustom || '',
+      lower_body_mft_prone_bridge_left: d?.lowerBodyMftProneBridgeLeft || '',
+      lower_body_mft_prone_bridge_left_custom: d?.lowerBodyMftProneBridgeLeftCustom || '',
+
+      lower_body_mft_prone_hip_flexion_right: d?.lowerBodyMftProneHipFlexionRight || '',
+      lower_body_mft_prone_hip_flexion_right_custom: d?.lowerBodyMftProneHipFlexionRightCustom || '',
+      lower_body_mft_prone_hip_flexion_left: d?.lowerBodyMftProneHipFlexionLeft || '',
+      lower_body_mft_prone_hip_flexion_left_custom: d?.lowerBodyMftProneHipFlexionLeftCustom || '',
+
+      lower_body_mft_prone_knee_extension_right: d?.lowerBodyMftProneKneeExtensionRight || '',
+      lower_body_mft_prone_knee_extension_right_custom: d?.lowerBodyMftProneKneeExtensionRightCustom || '',
+      lower_body_mft_prone_knee_extension_left: d?.lowerBodyMftProneKneeExtensionLeft || '',
+      lower_body_mft_prone_knee_extension_left_custom: d?.lowerBodyMftProneKneeExtensionLeftCustom || '',
+
+      lower_body_mft_comments: d?.lowerBodyMftComments || '',
+    };
+  }
+
+  private mapCervicalMovementsFromDto(dto: Strength): any {
+    const d = dto.redcordNeuracStabilityTests?.cervicalMovementsData;
+    return {
+      cervical_mvmt_retraction_rom_select: d?.cervicalMvmtRetractionRomSelect || '',
+      cervical_mvmt_retraction_rom_select_custom: d?.cervicalMvmtRetractionRomSelectCustom || '',
+      cervical_mvmt_retraction_rom_input: d?.cervicalMvmtRetractionRomInput || '',
+      cervical_mvmt_retraction_movement_quality_select: d?.cervicalMvmtRetractionMovementQualitySelect || '',
+      cervical_mvmt_retraction_movement_quality_select_custom: d?.cervicalMvmtRetractionMovementQualitySelectCustom || '',
+      cervical_mvmt_retraction_movement_quality_input: d?.cervicalMvmtRetractionMovementQualityInput || '',
+      cervical_mvmt_retraction_pain_free_movement_select: d?.cervicalMvmtRetractionPainFreeMovementSelect || '',
+      cervical_mvmt_retraction_pain_free_movement_select_custom: d?.cervicalMvmtRetractionPainFreeMovementSelectCustom || '',
+      cervical_mvmt_retraction_pain_free_movement_input: d?.cervicalMvmtRetractionPainFreeMovementInput || '',
+
+      cervical_mvmt_right_rotation_rom_select: d?.cervicalMvmtRightRotationRomSelect || '',
+      cervical_mvmt_right_rotation_rom_select_custom: d?.cervicalMvmtRightRotationRomSelectCustom || '',
+      cervical_mvmt_right_rotation_rom_input: d?.cervicalMvmtRightRotationRomInput || '',
+      cervical_mvmt_right_rotation_movement_quality_select: d?.cervicalMvmtRightRotationMovementQualitySelect || '',
+      cervical_mvmt_right_rotation_movement_quality_select_custom: d?.cervicalMvmtRightRotationMovementQualitySelectCustom || '',
+      cervical_mvmt_right_rotation_movement_quality_input: d?.cervicalMvmtRightRotationMovementQualityInput || '',
+      cervical_mvmt_right_rotation_pain_free_movement_select: d?.cervicalMvmtRightRotationPainFreeMovementSelect || '',
+      cervical_mvmt_right_rotation_pain_free_movement_select_custom: d?.cervicalMvmtRightRotationPainFreeMovementSelectCustom || '',
+      cervical_mvmt_right_rotation_pain_free_movement_input: d?.cervicalMvmtRightRotationPainFreeMovementInput || '',
+
+      cervical_mvmt_left_rotation_rom_select: d?.cervicalMvmtLeftRotationRomSelect || '',
+      cervical_mvmt_left_rotation_rom_select_custom: d?.cervicalMvmtLeftRotationRomSelectCustom || '',
+      cervical_mvmt_left_rotation_rom_input: d?.cervicalMvmtLeftRotationRomInput || '',
+      cervical_mvmt_left_rotation_movement_quality_select: d?.cervicalMvmtLeftRotationMovementQualitySelect || '',
+      cervical_mvmt_left_rotation_movement_quality_select_custom: d?.cervicalMvmtLeftRotationMovementQualitySelectCustom || '',
+      cervical_mvmt_left_rotation_movement_quality_input: d?.cervicalMvmtLeftRotationMovementQualityInput || '',
+      cervical_mvmt_left_rotation_pain_free_movement_select: d?.cervicalMvmtLeftRotationPainFreeMovementSelect || '',
+      cervical_mvmt_left_rotation_pain_free_movement_select_custom: d?.cervicalMvmtLeftRotationPainFreeMovementSelectCustom || '',
+      cervical_mvmt_left_rotation_pain_free_movement_input: d?.cervicalMvmtLeftRotationPainFreeMovementInput || '',
+
+      cervical_mvmt_right_lateral_flexion_rom_select: d?.cervicalMvmtRightLateralFlexionRomSelect || '',
+      cervical_mvmt_right_lateral_flexion_rom_select_custom: d?.cervicalMvmtRightLateralFlexionRomSelectCustom || '',
+      cervical_mvmt_right_lateral_flexion_rom_input: d?.cervicalMvmtRightLateralFlexionRomInput || '',
+      cervical_mvmt_right_lateral_flexion_movement_quality_select: d?.cervicalMvmtRightLateralFlexionMovementQualitySelect || '',
+      cervical_mvmt_right_lateral_flexion_movement_quality_select_custom: d?.cervicalMvmtRightLateralFlexionMovementQualitySelectCustom || '',
+      cervical_mvmt_right_lateral_flexion_movement_quality_input: d?.cervicalMvmtRightLateralFlexionMovementQualityInput || '',
+      cervical_mvmt_right_lateral_flexion_pain_free_movement_select: d?.cervicalMvmtRightLateralFlexionPainFreeMovementSelect || '',
+      cervical_mvmt_right_lateral_flexion_pain_free_movement_select_custom: d?.cervicalMvmtRightLateralFlexionPainFreeMovementSelectCustom || '',
+      cervical_mvmt_right_lateral_flexion_pain_free_movement_input: d?.cervicalMvmtRightLateralFlexionPainFreeMovementInput || '',
+
+      cervical_mvmt_left_lateral_flexion_rom_select: d?.cervicalMvmtLeftLateralFlexionRomSelect || '',
+      cervical_mvmt_left_lateral_flexion_rom_select_custom: d?.cervicalMvmtLeftLateralFlexionRomSelectCustom || '',
+      cervical_mvmt_left_lateral_flexion_rom_input: d?.cervicalMvmtLeftLateralFlexionRomInput || '',
+      cervical_mvmt_left_lateral_flexion_movement_quality_select: d?.cervicalMvmtLeftLateralFlexionMovementQualitySelect || '',
+      cervical_mvmt_left_lateral_flexion_movement_quality_select_custom: d?.cervicalMvmtLeftLateralFlexionMovementQualitySelectCustom || '',
+      cervical_mvmt_left_lateral_flexion_movement_quality_input: d?.cervicalMvmtLeftLateralFlexionMovementQualityInput || '',
+      cervical_mvmt_left_lateral_flexion_pain_free_movement_select: d?.cervicalMvmtLeftLateralFlexionPainFreeMovementSelect || '',
+      cervical_mvmt_left_lateral_flexion_pain_free_movement_select_custom: d?.cervicalMvmtLeftLateralFlexionPainFreeMovementSelectCustom || '',
+      cervical_mvmt_left_lateral_flexion_pain_free_movement_input: d?.cervicalMvmtLeftLateralFlexionPainFreeMovementInput || '',
+
+      cervical_mvmt_extension_rom_select: d?.cervicalMvmtExtensionRomSelect || '',
+      cervical_mvmt_extension_rom_select_custom: d?.cervicalMvmtExtensionRomSelectCustom || '',
+      cervical_mvmt_extension_rom_input: d?.cervicalMvmtExtensionRomInput || '',
+      cervical_mvmt_extension_movement_quality_select: d?.cervicalMvmtExtensionMovementQualitySelect || '',
+      cervical_mvmt_extension_movement_quality_select_custom: d?.cervicalMvmtExtensionMovementQualitySelectCustom || '',
+      cervical_mvmt_extension_movement_quality_input: d?.cervicalMvmtExtensionMovementQualityInput || '',
+      cervical_mvmt_extension_pain_free_movement_select: d?.cervicalMvmtExtensionPainFreeMovementSelect || '',
+      cervical_mvmt_extension_pain_free_movement_select_custom: d?.cervicalMvmtExtensionPainFreeMovementSelectCustom || '',
+      cervical_mvmt_extension_pain_free_movement_input: d?.cervicalMvmtExtensionPainFreeMovementInput || '',
+
+      cervical_mvmt_comments: d?.cervicalMvmtComments || '',
+    };
+  }
+
+  private mapCervicalMotorControlTestsFromDto(dto: Strength): any {
+    const d = dto.redcordNeuracStabilityTests?.cervicalMotorControlTestsData;
+    return {
+      cervical_mct_supine_cervical_setting_global_compensation_select: d?.cervicalMctSupineCervicalSettingGlobalCompensationSelect || '',
+      cervical_mct_supine_cervical_setting_global_compensation_select_custom: d?.cervicalMctSupineCervicalSettingGlobalCompensationSelectCustom || '',
+      cervical_mct_supine_cervical_setting_global_compensation_input: d?.cervicalMctSupineCervicalSettingGlobalCompensationInput || '',
+      cervical_mct_supine_cervical_setting_position_select: d?.cervicalMctSupineCervicalSettingPositionSelect || '',
+      cervical_mct_supine_cervical_setting_position_select_custom: d?.cervicalMctSupineCervicalSettingPositionSelectCustom || '',
+      cervical_mct_supine_cervical_setting_position_input: d?.cervicalMctSupineCervicalSettingPositionInput || '',
+      cervical_mct_supine_cervical_setting_hold_time_select: d?.cervicalMctSupineCervicalSettingHoldTimeSelect || '',
+      cervical_mct_supine_cervical_setting_hold_time_select_custom: d?.cervicalMctSupineCervicalSettingHoldTimeSelectCustom || '',
+      cervical_mct_supine_cervical_setting_hold_time_input: d?.cervicalMctSupineCervicalSettingHoldTimeInput || '',
+
+      cervical_mct_prone_cervical_setting_global_compensation_select: d?.cervicalMctProneCervicalSettingGlobalCompensationSelect || '',
+      cervical_mct_prone_cervical_setting_global_compensation_select_custom: d?.cervicalMctProneCervicalSettingGlobalCompensationSelectCustom || '',
+      cervical_mct_prone_cervical_setting_global_compensation_input: d?.cervicalMctProneCervicalSettingGlobalCompensationInput || '',
+      cervical_mct_prone_cervical_setting_position_select: d?.cervicalMctProneCervicalSettingPositionSelect || '',
+      cervical_mct_prone_cervical_setting_position_select_custom: d?.cervicalMctProneCervicalSettingPositionSelectCustom || '',
+      cervical_mct_prone_cervical_setting_position_input: d?.cervicalMctProneCervicalSettingPositionInput || '',
+      cervical_mct_prone_cervical_setting_hold_time_select: d?.cervicalMctProneCervicalSettingHoldTimeSelect || '',
+      cervical_mct_prone_cervical_setting_hold_time_select_custom: d?.cervicalMctProneCervicalSettingHoldTimeSelectCustom || '',
+      cervical_mct_prone_cervical_setting_hold_time_input: d?.cervicalMctProneCervicalSettingHoldTimeInput || '',
+
+      cervical_mct_inclined_sitting_cervical_setting_global_compensation_select: d?.cervicalMctInclinedSittingCervicalSettingGlobalCompensationSelect || '',
+      cervical_mct_inclined_sitting_cervical_setting_global_compensation_select_custom: d?.cervicalMctInclinedSittingCervicalSettingGlobalCompensationSelectCustom || '',
+      cervical_mct_inclined_sitting_cervical_setting_global_compensation_input: d?.cervicalMctInclinedSittingCervicalSettingGlobalCompensationInput || '',
+      cervical_mct_inclined_sitting_cervical_setting_position_select: d?.cervicalMctInclinedSittingCervicalSettingPositionSelect || '',
+      cervical_mct_inclined_sitting_cervical_setting_position_select_custom: d?.cervicalMctInclinedSittingCervicalSettingPositionSelectCustom || '',
+      cervical_mct_inclined_sitting_cervical_setting_position_input: d?.cervicalMctInclinedSittingCervicalSettingPositionInput || '',
+      cervical_mct_inclined_sitting_cervical_setting_hold_time_select: d?.cervicalMctInclinedSittingCervicalSettingHoldTimeSelect || '',
+      cervical_mct_inclined_sitting_cervical_setting_hold_time_select_custom: d?.cervicalMctInclinedSittingCervicalSettingHoldTimeSelectCustom || '',
+      cervical_mct_inclined_sitting_cervical_setting_hold_time_input: d?.cervicalMctInclinedSittingCervicalSettingHoldTimeInput || '',
+
+      cervical_mct_left_side_lying_cervical_setting_global_compensation_select: d?.cervicalMctLeftSideLyingCervicalSettingGlobalCompensationSelect || '',
+      cervical_mct_left_side_lying_cervical_setting_global_compensation_select_custom: d?.cervicalMctLeftSideLyingCervicalSettingGlobalCompensationSelectCustom || '',
+      cervical_mct_left_side_lying_cervical_setting_global_compensation_input: d?.cervicalMctLeftSideLyingCervicalSettingGlobalCompensationInput || '',
+      cervical_mct_left_side_lying_cervical_setting_position_select: d?.cervicalMctLeftSideLyingCervicalSettingPositionSelect || '',
+      cervical_mct_left_side_lying_cervical_setting_position_select_custom: d?.cervicalMctLeftSideLyingCervicalSettingPositionSelectCustom || '',
+      cervical_mct_left_side_lying_cervical_setting_position_input: d?.cervicalMctLeftSideLyingCervicalSettingPositionInput || '',
+      cervical_mct_left_side_lying_cervical_setting_hold_time_select: d?.cervicalMctLeftSideLyingCervicalSettingHoldTimeSelect || '',
+      cervical_mct_left_side_lying_cervical_setting_hold_time_select_custom: d?.cervicalMctLeftSideLyingCervicalSettingHoldTimeSelectCustom || '',
+      cervical_mct_left_side_lying_cervical_setting_hold_time_input: d?.cervicalMctLeftSideLyingCervicalSettingHoldTimeInput || '',
+
+      cervical_mct_right_side_lying_cervical_setting_global_compensation_select: d?.cervicalMctRightSideLyingCervicalSettingGlobalCompensationSelect || '',
+      cervical_mct_right_side_lying_cervical_setting_global_compensation_select_custom: d?.cervicalMctRightSideLyingCervicalSettingGlobalCompensationSelectCustom || '',
+      cervical_mct_right_side_lying_cervical_setting_global_compensation_input: d?.cervicalMctRightSideLyingCervicalSettingGlobalCompensationInput || '',
+      cervical_mct_right_side_lying_cervical_setting_position_select: d?.cervicalMctRightSideLyingCervicalSettingPositionSelect || '',
+      cervical_mct_right_side_lying_cervical_setting_position_select_custom: d?.cervicalMctRightSideLyingCervicalSettingPositionSelectCustom || '',
+      cervical_mct_right_side_lying_cervical_setting_position_input: d?.cervicalMctRightSideLyingCervicalSettingPositionInput || '',
+      cervical_mct_right_side_lying_cervical_setting_hold_time_select: d?.cervicalMctRightSideLyingCervicalSettingHoldTimeSelect || '',
+      cervical_mct_right_side_lying_cervical_setting_hold_time_select_custom: d?.cervicalMctRightSideLyingCervicalSettingHoldTimeSelectCustom || '',
+      cervical_mct_right_side_lying_cervical_setting_hold_time_input: d?.cervicalMctRightSideLyingCervicalSettingHoldTimeInput || '',
+
+      cervical_mct_comments: d?.cervicalMctComments || '',
+    };
+  }
+
+  private mapLumbarMotorControlTestsFromDto(dto: Strength): any {
+    const d = dto.redcordNeuracStabilityTests?.lumbarMotorControlTestsData;
+    return {
+      lumbar_mct_supine_lumbar_setting_global_compensation_select: d?.lumbarMctSupineLumbarSettingGlobalCompensationSelect || '',
+      lumbar_mct_supine_lumbar_setting_global_compensation_select_custom: d?.lumbarMctSupineLumbarSettingGlobalCompensationSelectCustom || '',
+      lumbar_mct_supine_lumbar_setting_global_compensation_input: d?.lumbarMctSupineLumbarSettingGlobalCompensationInput || '',
+      lumbar_mct_supine_lumbar_setting_position_select: d?.lumbarMctSupineLumbarSettingPositionSelect || '',
+      lumbar_mct_supine_lumbar_setting_position_select_custom: d?.lumbarMctSupineLumbarSettingPositionSelectCustom || '',
+      lumbar_mct_supine_lumbar_setting_position_input: d?.lumbarMctSupineLumbarSettingPositionInput || '',
+      lumbar_mct_supine_lumbar_setting_pain_select: d?.lumbarMctSupineLumbarSettingPainSelect || '',
+      lumbar_mct_supine_lumbar_setting_pain_select_custom: d?.lumbarMctSupineLumbarSettingPainSelectCustom || '',
+      lumbar_mct_supine_lumbar_setting_pain_input: d?.lumbarMctSupineLumbarSettingPainInput || '',
+      lumbar_mct_supine_lumbar_setting_hold_time_select: d?.lumbarMctSupineLumbarSettingHoldTimeSelect || '',
+      lumbar_mct_supine_lumbar_setting_hold_time_select_custom: d?.lumbarMctSupineLumbarSettingHoldTimeSelectCustom || '',
+      lumbar_mct_supine_lumbar_setting_hold_time_input: d?.lumbarMctSupineLumbarSettingHoldTimeInput || '',
+
+      lumbar_mct_prone_lumbar_setting_global_compensation_select: d?.lumbarMctProneLumbarSettingGlobalCompensationSelect || '',
+      lumbar_mct_prone_lumbar_setting_global_compensation_select_custom: d?.lumbarMctProneLumbarSettingGlobalCompensationSelectCustom || '',
+      lumbar_mct_prone_lumbar_setting_global_compensation_input: d?.lumbarMctProneLumbarSettingGlobalCompensationInput || '',
+      lumbar_mct_prone_lumbar_setting_position_select: d?.lumbarMctProneLumbarSettingPositionSelect || '',
+      lumbar_mct_prone_lumbar_setting_position_select_custom: d?.lumbarMctProneLumbarSettingPositionSelectCustom || '',
+      lumbar_mct_prone_lumbar_setting_position_input: d?.lumbarMctProneLumbarSettingPositionInput || '',
+      lumbar_mct_prone_lumbar_setting_pain_select: d?.lumbarMctProneLumbarSettingPainSelect || '',
+      lumbar_mct_prone_lumbar_setting_pain_select_custom: d?.lumbarMctProneLumbarSettingPainSelectCustom || '',
+      lumbar_mct_prone_lumbar_setting_pain_input: d?.lumbarMctProneLumbarSettingPainInput || '',
+      lumbar_mct_prone_lumbar_setting_hold_time_select: d?.lumbarMctProneLumbarSettingHoldTimeSelect || '',
+      lumbar_mct_prone_lumbar_setting_hold_time_select_custom: d?.lumbarMctProneLumbarSettingHoldTimeSelectCustom || '',
+      lumbar_mct_prone_lumbar_setting_hold_time_input: d?.lumbarMctProneLumbarSettingHoldTimeInput || '',
+
+      lumbar_mct_kneeling_lumbar_setting_global_compensation_select: d?.lumbarMctKneelingLumbarSettingGlobalCompensationSelect || '',
+      lumbar_mct_kneeling_lumbar_setting_global_compensation_select_custom: d?.lumbarMctKneelingLumbarSettingGlobalCompensationSelectCustom || '',
+      lumbar_mct_kneeling_lumbar_setting_global_compensation_input: d?.lumbarMctKneelingLumbarSettingGlobalCompensationInput || '',
+      lumbar_mct_kneeling_lumbar_setting_position_select: d?.lumbarMctKneelingLumbarSettingPositionSelect || '',
+      lumbar_mct_kneeling_lumbar_setting_position_select_custom: d?.lumbarMctKneelingLumbarSettingPositionSelectCustom || '',
+      lumbar_mct_kneeling_lumbar_setting_position_input: d?.lumbarMctKneelingLumbarSettingPositionInput || '',
+      lumbar_mct_kneeling_lumbar_setting_pain_select: d?.lumbarMctKneelingLumbarSettingPainSelect || '',
+      lumbar_mct_kneeling_lumbar_setting_pain_select_custom: d?.lumbarMctKneelingLumbarSettingPainSelectCustom || '',
+      lumbar_mct_kneeling_lumbar_setting_pain_input: d?.lumbarMctKneelingLumbarSettingPainInput || '',
+      lumbar_mct_kneeling_lumbar_setting_hold_time_select: d?.lumbarMctKneelingLumbarSettingHoldTimeSelect || '',
+      lumbar_mct_kneeling_lumbar_setting_hold_time_select_custom: d?.lumbarMctKneelingLumbarSettingHoldTimeSelectCustom || '',
+      lumbar_mct_kneeling_lumbar_setting_hold_time_input: d?.lumbarMctKneelingLumbarSettingHoldTimeInput || '',
+
+      lumbar_mct_left_side_lying_lumbar_setting_global_compensation_select: d?.lumbarMctLeftSideLyingLumbarSettingGlobalCompensationSelect || '',
+      lumbar_mct_left_side_lying_lumbar_setting_global_compensation_select_custom: d?.lumbarMctLeftSideLyingLumbarSettingGlobalCompensationSelectCustom || '',
+      lumbar_mct_left_side_lying_lumbar_setting_global_compensation_input: d?.lumbarMctLeftSideLyingLumbarSettingGlobalCompensationInput || '',
+      lumbar_mct_left_side_lying_lumbar_setting_position_select: d?.lumbarMctLeftSideLyingLumbarSettingPositionSelect || '',
+      lumbar_mct_left_side_lying_lumbar_setting_position_select_custom: d?.lumbarMctLeftSideLyingLumbarSettingPositionSelectCustom || '',
+      lumbar_mct_left_side_lying_lumbar_setting_position_input: d?.lumbarMctLeftSideLyingLumbarSettingPositionInput || '',
+      lumbar_mct_left_side_lying_lumbar_setting_pain_select: d?.lumbarMctLeftSideLyingLumbarSettingPainSelect || '',
+      lumbar_mct_left_side_lying_lumbar_setting_pain_select_custom: d?.lumbarMctLeftSideLyingLumbarSettingPainSelectCustom || '',
+      lumbar_mct_left_side_lying_lumbar_setting_pain_input: d?.lumbarMctLeftSideLyingLumbarSettingPainInput || '',
+      lumbar_mct_left_side_lying_lumbar_setting_hold_time_select: d?.lumbarMctLeftSideLyingLumbarSettingHoldTimeSelect || '',
+      lumbar_mct_left_side_lying_lumbar_setting_hold_time_select_custom: d?.lumbarMctLeftSideLyingLumbarSettingHoldTimeSelectCustom || '',
+      lumbar_mct_left_side_lying_lumbar_setting_hold_time_input: d?.lumbarMctLeftSideLyingLumbarSettingHoldTimeInput || '',
+
+      lumbar_mct_right_side_lying_lumbar_setting_global_compensation_select: d?.lumbarMctRightSideLyingLumbarSettingGlobalCompensationSelect || '',
+      lumbar_mct_right_side_lying_lumbar_setting_global_compensation_select_custom: d?.lumbarMctRightSideLyingLumbarSettingGlobalCompensationSelectCustom || '',
+      lumbar_mct_right_side_lying_lumbar_setting_global_compensation_input: d?.lumbarMctRightSideLyingLumbarSettingGlobalCompensationInput || '',
+      lumbar_mct_right_side_lying_lumbar_setting_position_select: d?.lumbarMctRightSideLyingLumbarSettingPositionSelect || '',
+      lumbar_mct_right_side_lying_lumbar_setting_position_select_custom: d?.lumbarMctRightSideLyingLumbarSettingPositionSelectCustom || '',
+      lumbar_mct_right_side_lying_lumbar_setting_position_input: d?.lumbarMctRightSideLyingLumbarSettingPositionInput || '',
+      lumbar_mct_right_side_lying_lumbar_setting_pain_select: d?.lumbarMctRightSideLyingLumbarSettingPainSelect || '',
+      lumbar_mct_right_side_lying_lumbar_setting_pain_select_custom: d?.lumbarMctRightSideLyingLumbarSettingPainSelectCustom || '',
+      lumbar_mct_right_side_lying_lumbar_setting_pain_input: d?.lumbarMctRightSideLyingLumbarSettingPainInput || '',
+      lumbar_mct_right_side_lying_lumbar_setting_hold_time_select: d?.lumbarMctRightSideLyingLumbarSettingHoldTimeSelect || '',
+      lumbar_mct_right_side_lying_lumbar_setting_hold_time_select_custom: d?.lumbarMctRightSideLyingLumbarSettingHoldTimeSelectCustom || '',
+      lumbar_mct_right_side_lying_lumbar_setting_hold_time_input: d?.lumbarMctRightSideLyingLumbarSettingHoldTimeInput || '',
+
+      lumbar_mct_comments: d?.lumbarMctComments || '',
     };
   }
 
@@ -1123,13 +1408,278 @@ export class StrengthMapperService {
       }
     };
 
+    const upperBodyMyofascialTestsData: UpperBodyMyofascialTestsData = {
+      upperBodyMftKneelingScapularProtractionRight: formValue.upper_body_mft_kneeling_scapular_protraction_right || '',
+      upperBodyMftKneelingScapularProtractionRightCustom: formValue.upper_body_mft_kneeling_scapular_protraction_right_custom || '',
+      upperBodyMftKneelingScapularProtractionLeft: formValue.upper_body_mft_kneeling_scapular_protraction_left || '',
+      upperBodyMftKneelingScapularProtractionLeftCustom: formValue.upper_body_mft_kneeling_scapular_protraction_left_custom || '',
+
+      upperBodyMftKneelingPushUpRight: formValue.upper_body_mft_kneeling_push_up_right || '',
+      upperBodyMftKneelingPushUpRightCustom: formValue.upper_body_mft_kneeling_push_up_right_custom || '',
+      upperBodyMftKneelingPushUpLeft: formValue.upper_body_mft_kneeling_push_up_left || '',
+      upperBodyMftKneelingPushUpLeftCustom: formValue.upper_body_mft_kneeling_push_up_left_custom || '',
+
+      upperBodyMftKneelingShoulderExtensionRight: formValue.upper_body_mft_kneeling_shoulder_extension_right || '',
+      upperBodyMftKneelingShoulderExtensionRightCustom: formValue.upper_body_mft_kneeling_shoulder_extension_right_custom || '',
+      upperBodyMftKneelingShoulderExtensionLeft: formValue.upper_body_mft_kneeling_shoulder_extension_left || '',
+      upperBodyMftKneelingShoulderExtensionLeftCustom: formValue.upper_body_mft_kneeling_shoulder_extension_left_custom || '',
+
+      upperBodyMftSupineScapularRetractionRight: formValue.upper_body_mft_supine_scapular_retraction_right || '',
+      upperBodyMftSupineScapularRetractionRightCustom: formValue.upper_body_mft_supine_scapular_retraction_right_custom || '',
+      upperBodyMftSupineScapularRetractionLeft: formValue.upper_body_mft_supine_scapular_retraction_left || '',
+      upperBodyMftSupineScapularRetractionLeftCustom: formValue.upper_body_mft_supine_scapular_retraction_left_custom || '',
+
+      upperBodyMftSupinePullUpRight: formValue.upper_body_mft_supine_pull_up_right || '',
+      upperBodyMftSupinePullUpRightCustom: formValue.upper_body_mft_supine_pull_up_right_custom || '',
+      upperBodyMftSupinePullUpLeft: formValue.upper_body_mft_supine_pull_up_left || '',
+      upperBodyMftSupinePullUpLeftCustom: formValue.upper_body_mft_supine_pull_up_left_custom || '',
+
+      upperBodyMftComments: formValue.upper_body_mft_comments || '',
+    };
+
+    const lowerBodyMyofascialTestsData: LowerBodyMyofascialTestsData = {
+      lowerBodyMftSupinePelvicLiftRight: formValue.lower_body_mft_supine_pelvic_lift_right || '',
+      lowerBodyMftSupinePelvicLiftRightCustom: formValue.lower_body_mft_supine_pelvic_lift_right_custom || '',
+      lowerBodyMftSupinePelvicLiftLeft: formValue.lower_body_mft_supine_pelvic_lift_left || '',
+      lowerBodyMftSupinePelvicLiftLeftCustom: formValue.lower_body_mft_supine_pelvic_lift_left_custom || '',
+
+      lowerBodyMftSupineBridgeRight: formValue.lower_body_mft_supine_bridge_right || '',
+      lowerBodyMftSupineBridgeRightCustom: formValue.lower_body_mft_supine_bridge_right_custom || '',
+      lowerBodyMftSupineBridgeLeft: formValue.lower_body_mft_supine_bridge_left || '',
+      lowerBodyMftSupineBridgeLeftCustom: formValue.lower_body_mft_supine_bridge_left_custom || '',
+
+      lowerBodyMftSupineKneeFlexionRight: formValue.lower_body_mft_supine_knee_flexion_right || '',
+      lowerBodyMftSupineKneeFlexionRightCustom: formValue.lower_body_mft_supine_knee_flexion_right_custom || '',
+      lowerBodyMftSupineKneeFlexionLeft: formValue.lower_body_mft_supine_knee_flexion_left || '',
+      lowerBodyMftSupineKneeFlexionLeftCustom: formValue.lower_body_mft_supine_knee_flexion_left_custom || '',
+
+      lowerBodyMftSideLyingHipAbductionRight: formValue.lower_body_mft_side_lying_hip_abduction_right || '',
+      lowerBodyMftSideLyingHipAbductionRightCustom: formValue.lower_body_mft_side_lying_hip_abduction_right_custom || '',
+      lowerBodyMftSideLyingHipAbductionLeft: formValue.lower_body_mft_side_lying_hip_abduction_left || '',
+      lowerBodyMftSideLyingHipAbductionLeftCustom: formValue.lower_body_mft_side_lying_hip_abduction_left_custom || '',
+
+      lowerBodyMftSideLyingHipAdductionRight: formValue.lower_body_mft_side_lying_hip_adduction_right || '',
+      lowerBodyMftSideLyingHipAdductionRightCustom: formValue.lower_body_mft_side_lying_hip_adduction_right_custom || '',
+      lowerBodyMftSideLyingHipAdductionLeft: formValue.lower_body_mft_side_lying_hip_adduction_left || '',
+      lowerBodyMftSideLyingHipAdductionLeftCustom: formValue.lower_body_mft_side_lying_hip_adduction_left_custom || '',
+
+      lowerBodyMftProneBridgeRight: formValue.lower_body_mft_prone_bridge_right || '',
+      lowerBodyMftProneBridgeRightCustom: formValue.lower_body_mft_prone_bridge_right_custom || '',
+      lowerBodyMftProneBridgeLeft: formValue.lower_body_mft_prone_bridge_left || '',
+      lowerBodyMftProneBridgeLeftCustom: formValue.lower_body_mft_prone_bridge_left_custom || '',
+
+      lowerBodyMftProneHipFlexionRight: formValue.lower_body_mft_prone_hip_flexion_right || '',
+      lowerBodyMftProneHipFlexionRightCustom: formValue.lower_body_mft_prone_hip_flexion_right_custom || '',
+      lowerBodyMftProneHipFlexionLeft: formValue.lower_body_mft_prone_hip_flexion_left || '',
+      lowerBodyMftProneHipFlexionLeftCustom: formValue.lower_body_mft_prone_hip_flexion_left_custom || '',
+
+      lowerBodyMftProneKneeExtensionRight: formValue.lower_body_mft_prone_knee_extension_right || '',
+      lowerBodyMftProneKneeExtensionRightCustom: formValue.lower_body_mft_prone_knee_extension_right_custom || '',
+      lowerBodyMftProneKneeExtensionLeft: formValue.lower_body_mft_prone_knee_extension_left || '',
+      lowerBodyMftProneKneeExtensionLeftCustom: formValue.lower_body_mft_prone_knee_extension_left_custom || '',
+
+      lowerBodyMftComments: formValue.lower_body_mft_comments || '',
+    };
+
+    const cervicalMovementsData: CervicalMovements = {
+      cervicalMvmtRetractionRomSelect: formValue.cervical_mvmt_retraction_rom_select || '',
+      cervicalMvmtRetractionRomSelectCustom: formValue.cervical_mvmt_retraction_rom_select_custom || '',
+      cervicalMvmtRetractionRomInput: formValue.cervical_mvmt_retraction_rom_input || '',
+      cervicalMvmtRetractionMovementQualitySelect: formValue.cervical_mvmt_retraction_movement_quality_select || '',
+      cervicalMvmtRetractionMovementQualitySelectCustom: formValue.cervical_mvmt_retraction_movement_quality_select_custom || '',
+      cervicalMvmtRetractionMovementQualityInput: formValue.cervical_mvmt_retraction_movement_quality_input || '',
+      cervicalMvmtRetractionPainFreeMovementSelect: formValue.cervical_mvmt_retraction_pain_free_movement_select || '',
+      cervicalMvmtRetractionPainFreeMovementSelectCustom: formValue.cervical_mvmt_retraction_pain_free_movement_select_custom || '',
+      cervicalMvmtRetractionPainFreeMovementInput: formValue.cervical_mvmt_retraction_pain_free_movement_input || '',
+
+      cervicalMvmtRightRotationRomSelect: formValue.cervical_mvmt_right_rotation_rom_select || '',
+      cervicalMvmtRightRotationRomSelectCustom: formValue.cervical_mvmt_right_rotation_rom_select_custom || '',
+      cervicalMvmtRightRotationRomInput: formValue.cervical_mvmt_right_rotation_rom_input || '',
+      cervicalMvmtRightRotationMovementQualitySelect: formValue.cervical_mvmt_right_rotation_movement_quality_select || '',
+      cervicalMvmtRightRotationMovementQualitySelectCustom: formValue.cervical_mvmt_right_rotation_movement_quality_select_custom || '',
+      cervicalMvmtRightRotationMovementQualityInput: formValue.cervical_mvmt_right_rotation_movement_quality_input || '',
+      cervicalMvmtRightRotationPainFreeMovementSelect: formValue.cervical_mvmt_right_rotation_pain_free_movement_select || '',
+      cervicalMvmtRightRotationPainFreeMovementSelectCustom: formValue.cervical_mvmt_right_rotation_pain_free_movement_select_custom || '',
+      cervicalMvmtRightRotationPainFreeMovementInput: formValue.cervical_mvmt_right_rotation_pain_free_movement_input || '',
+
+      cervicalMvmtLeftRotationRomSelect: formValue.cervical_mvmt_left_rotation_rom_select || '',
+      cervicalMvmtLeftRotationRomSelectCustom: formValue.cervical_mvmt_left_rotation_rom_select_custom || '',
+      cervicalMvmtLeftRotationRomInput: formValue.cervical_mvmt_left_rotation_rom_input || '',
+      cervicalMvmtLeftRotationMovementQualitySelect: formValue.cervical_mvmt_left_rotation_movement_quality_select || '',
+      cervicalMvmtLeftRotationMovementQualitySelectCustom: formValue.cervical_mvmt_left_rotation_movement_quality_select_custom || '',
+      cervicalMvmtLeftRotationMovementQualityInput: formValue.cervical_mvmt_left_rotation_movement_quality_input || '',
+      cervicalMvmtLeftRotationPainFreeMovementSelect: formValue.cervical_mvmt_left_rotation_pain_free_movement_select || '',
+      cervicalMvmtLeftRotationPainFreeMovementSelectCustom: formValue.cervical_mvmt_left_rotation_pain_free_movement_select_custom || '',
+      cervicalMvmtLeftRotationPainFreeMovementInput: formValue.cervical_mvmt_left_rotation_pain_free_movement_input || '',
+
+      cervicalMvmtRightLateralFlexionRomSelect: formValue.cervical_mvmt_right_lateral_flexion_rom_select || '',
+      cervicalMvmtRightLateralFlexionRomSelectCustom: formValue.cervical_mvmt_right_lateral_flexion_rom_select_custom || '',
+      cervicalMvmtRightLateralFlexionRomInput: formValue.cervical_mvmt_right_lateral_flexion_rom_input || '',
+      cervicalMvmtRightLateralFlexionMovementQualitySelect: formValue.cervical_mvmt_right_lateral_flexion_movement_quality_select || '',
+      cervicalMvmtRightLateralFlexionMovementQualitySelectCustom: formValue.cervical_mvmt_right_lateral_flexion_movement_quality_select_custom || '',
+      cervicalMvmtRightLateralFlexionMovementQualityInput: formValue.cervical_mvmt_right_lateral_flexion_movement_quality_input || '',
+      cervicalMvmtRightLateralFlexionPainFreeMovementSelect: formValue.cervical_mvmt_right_lateral_flexion_pain_free_movement_select || '',
+      cervicalMvmtRightLateralFlexionPainFreeMovementSelectCustom: formValue.cervical_mvmt_right_lateral_flexion_pain_free_movement_select_custom || '',
+      cervicalMvmtRightLateralFlexionPainFreeMovementInput: formValue.cervical_mvmt_right_lateral_flexion_pain_free_movement_input || '',
+
+      cervicalMvmtLeftLateralFlexionRomSelect: formValue.cervical_mvmt_left_lateral_flexion_rom_select || '',
+      cervicalMvmtLeftLateralFlexionRomSelectCustom: formValue.cervical_mvmt_left_lateral_flexion_rom_select_custom || '',
+      cervicalMvmtLeftLateralFlexionRomInput: formValue.cervical_mvmt_left_lateral_flexion_rom_input || '',
+      cervicalMvmtLeftLateralFlexionMovementQualitySelect: formValue.cervical_mvmt_left_lateral_flexion_movement_quality_select || '',
+      cervicalMvmtLeftLateralFlexionMovementQualitySelectCustom: formValue.cervical_mvmt_left_lateral_flexion_movement_quality_select_custom || '',
+      cervicalMvmtLeftLateralFlexionMovementQualityInput: formValue.cervical_mvmt_left_lateral_flexion_movement_quality_input || '',
+      cervicalMvmtLeftLateralFlexionPainFreeMovementSelect: formValue.cervical_mvmt_left_lateral_flexion_pain_free_movement_select || '',
+      cervicalMvmtLeftLateralFlexionPainFreeMovementSelectCustom: formValue.cervical_mvmt_left_lateral_flexion_pain_free_movement_select_custom || '',
+      cervicalMvmtLeftLateralFlexionPainFreeMovementInput: formValue.cervical_mvmt_left_lateral_flexion_pain_free_movement_input || '',
+
+      cervicalMvmtExtensionRomSelect: formValue.cervical_mvmt_extension_rom_select || '',
+      cervicalMvmtExtensionRomSelectCustom: formValue.cervical_mvmt_extension_rom_select_custom || '',
+      cervicalMvmtExtensionRomInput: formValue.cervical_mvmt_extension_rom_input || '',
+      cervicalMvmtExtensionMovementQualitySelect: formValue.cervical_mvmt_extension_movement_quality_select || '',
+      cervicalMvmtExtensionMovementQualitySelectCustom: formValue.cervical_mvmt_extension_movement_quality_select_custom || '',
+      cervicalMvmtExtensionMovementQualityInput: formValue.cervical_mvmt_extension_movement_quality_input || '',
+      cervicalMvmtExtensionPainFreeMovementSelect: formValue.cervical_mvmt_extension_pain_free_movement_select || '',
+      cervicalMvmtExtensionPainFreeMovementSelectCustom: formValue.cervical_mvmt_extension_pain_free_movement_select_custom || '',
+      cervicalMvmtExtensionPainFreeMovementInput: formValue.cervical_mvmt_extension_pain_free_movement_input || '',
+
+      cervicalMvmtComments: formValue.cervical_mvmt_comments || '',
+    };
+
+    const cervicalMotorControlTestsData: CervicalMotorControlTestsData = {
+      cervicalMctSupineCervicalSettingGlobalCompensationSelect: formValue.cervical_mct_supine_cervical_setting_global_compensation_select || '',
+      cervicalMctSupineCervicalSettingGlobalCompensationSelectCustom: formValue.cervical_mct_supine_cervical_setting_global_compensation_select_custom || '',
+      cervicalMctSupineCervicalSettingGlobalCompensationInput: formValue.cervical_mct_supine_cervical_setting_global_compensation_input || '',
+      cervicalMctSupineCervicalSettingPositionSelect: formValue.cervical_mct_supine_cervical_setting_position_select || '',
+      cervicalMctSupineCervicalSettingPositionSelectCustom: formValue.cervical_mct_supine_cervical_setting_position_select_custom || '',
+      cervicalMctSupineCervicalSettingPositionInput: formValue.cervical_mct_supine_cervical_setting_position_input || '',
+      cervicalMctSupineCervicalSettingHoldTimeSelect: formValue.cervical_mct_supine_cervical_setting_hold_time_select || '',
+      cervicalMctSupineCervicalSettingHoldTimeSelectCustom: formValue.cervical_mct_supine_cervical_setting_hold_time_select_custom || '',
+      cervicalMctSupineCervicalSettingHoldTimeInput: formValue.cervical_mct_supine_cervical_setting_hold_time_input || '',
+
+      cervicalMctProneCervicalSettingGlobalCompensationSelect: formValue.cervical_mct_prone_cervical_setting_global_compensation_select || '',
+      cervicalMctProneCervicalSettingGlobalCompensationSelectCustom: formValue.cervical_mct_prone_cervical_setting_global_compensation_select_custom || '',
+      cervicalMctProneCervicalSettingGlobalCompensationInput: formValue.cervical_mct_prone_cervical_setting_global_compensation_input || '',
+      cervicalMctProneCervicalSettingPositionSelect: formValue.cervical_mct_prone_cervical_setting_position_select || '',
+      cervicalMctProneCervicalSettingPositionSelectCustom: formValue.cervical_mct_prone_cervical_setting_position_select_custom || '',
+      cervicalMctProneCervicalSettingPositionInput: formValue.cervical_mct_prone_cervical_setting_position_input || '',
+      cervicalMctProneCervicalSettingHoldTimeSelect: formValue.cervical_mct_prone_cervical_setting_hold_time_select || '',
+      cervicalMctProneCervicalSettingHoldTimeSelectCustom: formValue.cervical_mct_prone_cervical_setting_hold_time_select_custom || '',
+      cervicalMctProneCervicalSettingHoldTimeInput: formValue.cervical_mct_prone_cervical_setting_hold_time_input || '',
+
+      cervicalMctInclinedSittingCervicalSettingGlobalCompensationSelect: formValue.cervical_mct_inclined_sitting_cervical_setting_global_compensation_select || '',
+      cervicalMctInclinedSittingCervicalSettingGlobalCompensationSelectCustom: formValue.cervical_mct_inclined_sitting_cervical_setting_global_compensation_select_custom || '',
+      cervicalMctInclinedSittingCervicalSettingGlobalCompensationInput: formValue.cervical_mct_inclined_sitting_cervical_setting_global_compensation_input || '',
+      cervicalMctInclinedSittingCervicalSettingPositionSelect: formValue.cervical_mct_inclined_sitting_cervical_setting_position_select || '',
+      cervicalMctInclinedSittingCervicalSettingPositionSelectCustom: formValue.cervical_mct_inclined_sitting_cervical_setting_position_select_custom || '',
+      cervicalMctInclinedSittingCervicalSettingPositionInput: formValue.cervical_mct_inclined_sitting_cervical_setting_position_input || '',
+      cervicalMctInclinedSittingCervicalSettingHoldTimeSelect: formValue.cervical_mct_inclined_sitting_cervical_setting_hold_time_select || '',
+      cervicalMctInclinedSittingCervicalSettingHoldTimeSelectCustom: formValue.cervical_mct_inclined_sitting_cervical_setting_hold_time_select_custom || '',
+      cervicalMctInclinedSittingCervicalSettingHoldTimeInput: formValue.cervical_mct_inclined_sitting_cervical_setting_hold_time_input || '',
+
+      cervicalMctLeftSideLyingCervicalSettingGlobalCompensationSelect: formValue.cervical_mct_left_side_lying_cervical_setting_global_compensation_select || '',
+      cervicalMctLeftSideLyingCervicalSettingGlobalCompensationSelectCustom: formValue.cervical_mct_left_side_lying_cervical_setting_global_compensation_select_custom || '',
+      cervicalMctLeftSideLyingCervicalSettingGlobalCompensationInput: formValue.cervical_mct_left_side_lying_cervical_setting_global_compensation_input || '',
+      cervicalMctLeftSideLyingCervicalSettingPositionSelect: formValue.cervical_mct_left_side_lying_cervical_setting_position_select || '',
+      cervicalMctLeftSideLyingCervicalSettingPositionSelectCustom: formValue.cervical_mct_left_side_lying_cervical_setting_position_select_custom || '',
+      cervicalMctLeftSideLyingCervicalSettingPositionInput: formValue.cervical_mct_left_side_lying_cervical_setting_position_input || '',
+      cervicalMctLeftSideLyingCervicalSettingHoldTimeSelect: formValue.cervical_mct_left_side_lying_cervical_setting_hold_time_select || '',
+      cervicalMctLeftSideLyingCervicalSettingHoldTimeSelectCustom: formValue.cervical_mct_left_side_lying_cervical_setting_hold_time_select_custom || '',
+      cervicalMctLeftSideLyingCervicalSettingHoldTimeInput: formValue.cervical_mct_left_side_lying_cervical_setting_hold_time_input || '',
+
+      cervicalMctRightSideLyingCervicalSettingGlobalCompensationSelect: formValue.cervical_mct_right_side_lying_cervical_setting_global_compensation_select || '',
+      cervicalMctRightSideLyingCervicalSettingGlobalCompensationSelectCustom: formValue.cervical_mct_right_side_lying_cervical_setting_global_compensation_select_custom || '',
+      cervicalMctRightSideLyingCervicalSettingGlobalCompensationInput: formValue.cervical_mct_right_side_lying_cervical_setting_global_compensation_input || '',
+      cervicalMctRightSideLyingCervicalSettingPositionSelect: formValue.cervical_mct_right_side_lying_cervical_setting_position_select || '',
+      cervicalMctRightSideLyingCervicalSettingPositionSelectCustom: formValue.cervical_mct_right_side_lying_cervical_setting_position_select_custom || '',
+      cervicalMctRightSideLyingCervicalSettingPositionInput: formValue.cervical_mct_right_side_lying_cervical_setting_position_input || '',
+      cervicalMctRightSideLyingCervicalSettingHoldTimeSelect: formValue.cervical_mct_right_side_lying_cervical_setting_hold_time_select || '',
+      cervicalMctRightSideLyingCervicalSettingHoldTimeSelectCustom: formValue.cervical_mct_right_side_lying_cervical_setting_hold_time_select_custom || '',
+      cervicalMctRightSideLyingCervicalSettingHoldTimeInput: formValue.cervical_mct_right_side_lying_cervical_setting_hold_time_input || '',
+
+      cervicalMctComments: formValue.cervical_mct_comments || '',
+    };
+
+    const lumbarMotorControlTestsData: LumbarMotorControlTestsData = {
+      lumbarMctSupineLumbarSettingGlobalCompensationSelect: formValue.lumbar_mct_supine_lumbar_setting_global_compensation_select || '',
+      lumbarMctSupineLumbarSettingGlobalCompensationSelectCustom: formValue.lumbar_mct_supine_lumbar_setting_global_compensation_select_custom || '',
+      lumbarMctSupineLumbarSettingGlobalCompensationInput: formValue.lumbar_mct_supine_lumbar_setting_global_compensation_input || '',
+      lumbarMctSupineLumbarSettingPositionSelect: formValue.lumbar_mct_supine_lumbar_setting_position_select || '',
+      lumbarMctSupineLumbarSettingPositionSelectCustom: formValue.lumbar_mct_supine_lumbar_setting_position_select_custom || '',
+      lumbarMctSupineLumbarSettingPositionInput: formValue.lumbar_mct_supine_lumbar_setting_position_input || '',
+      lumbarMctSupineLumbarSettingPainSelect: formValue.lumbar_mct_supine_lumbar_setting_pain_select || '',
+      lumbarMctSupineLumbarSettingPainSelectCustom: formValue.lumbar_mct_supine_lumbar_setting_pain_select_custom || '',
+      lumbarMctSupineLumbarSettingPainInput: formValue.lumbar_mct_supine_lumbar_setting_pain_input || '',
+      lumbarMctSupineLumbarSettingHoldTimeSelect: formValue.lumbar_mct_supine_lumbar_setting_hold_time_select || '',
+      lumbarMctSupineLumbarSettingHoldTimeSelectCustom: formValue.lumbar_mct_supine_lumbar_setting_hold_time_select_custom || '',
+      lumbarMctSupineLumbarSettingHoldTimeInput: formValue.lumbar_mct_supine_lumbar_setting_hold_time_input || '',
+
+      lumbarMctProneLumbarSettingGlobalCompensationSelect: formValue.lumbar_mct_prone_lumbar_setting_global_compensation_select || '',
+      lumbarMctProneLumbarSettingGlobalCompensationSelectCustom: formValue.lumbar_mct_prone_lumbar_setting_global_compensation_select_custom || '',
+      lumbarMctProneLumbarSettingGlobalCompensationInput: formValue.lumbar_mct_prone_lumbar_setting_global_compensation_input || '',
+      lumbarMctProneLumbarSettingPositionSelect: formValue.lumbar_mct_prone_lumbar_setting_position_select || '',
+      lumbarMctProneLumbarSettingPositionSelectCustom: formValue.lumbar_mct_prone_lumbar_setting_position_select_custom || '',
+      lumbarMctProneLumbarSettingPositionInput: formValue.lumbar_mct_prone_lumbar_setting_position_input || '',
+      lumbarMctProneLumbarSettingPainSelect: formValue.lumbar_mct_prone_lumbar_setting_pain_select || '',
+      lumbarMctProneLumbarSettingPainSelectCustom: formValue.lumbar_mct_prone_lumbar_setting_pain_select_custom || '',
+      lumbarMctProneLumbarSettingPainInput: formValue.lumbar_mct_prone_lumbar_setting_pain_input || '',
+      lumbarMctProneLumbarSettingHoldTimeSelect: formValue.lumbar_mct_prone_lumbar_setting_hold_time_select || '',
+      lumbarMctProneLumbarSettingHoldTimeSelectCustom: formValue.lumbar_mct_prone_lumbar_setting_hold_time_select_custom || '',
+      lumbarMctProneLumbarSettingHoldTimeInput: formValue.lumbar_mct_prone_lumbar_setting_hold_time_input || '',
+
+      lumbarMctKneelingLumbarSettingGlobalCompensationSelect: formValue.lumbar_mct_kneeling_lumbar_setting_global_compensation_select || '',
+      lumbarMctKneelingLumbarSettingGlobalCompensationSelectCustom: formValue.lumbar_mct_kneeling_lumbar_setting_global_compensation_select_custom || '',
+      lumbarMctKneelingLumbarSettingGlobalCompensationInput: formValue.lumbar_mct_kneeling_lumbar_setting_global_compensation_input || '',
+      lumbarMctKneelingLumbarSettingPositionSelect: formValue.lumbar_mct_kneeling_lumbar_setting_position_select || '',
+      lumbarMctKneelingLumbarSettingPositionSelectCustom: formValue.lumbar_mct_kneeling_lumbar_setting_position_select_custom || '',
+      lumbarMctKneelingLumbarSettingPositionInput: formValue.lumbar_mct_kneeling_lumbar_setting_position_input || '',
+      lumbarMctKneelingLumbarSettingPainSelect: formValue.lumbar_mct_kneeling_lumbar_setting_pain_select || '',
+      lumbarMctKneelingLumbarSettingPainSelectCustom: formValue.lumbar_mct_kneeling_lumbar_setting_pain_select_custom || '',
+      lumbarMctKneelingLumbarSettingPainInput: formValue.lumbar_mct_kneeling_lumbar_setting_pain_input || '',
+      lumbarMctKneelingLumbarSettingHoldTimeSelect: formValue.lumbar_mct_kneeling_lumbar_setting_hold_time_select || '',
+      lumbarMctKneelingLumbarSettingHoldTimeSelectCustom: formValue.lumbar_mct_kneeling_lumbar_setting_hold_time_select_custom || '',
+      lumbarMctKneelingLumbarSettingHoldTimeInput: formValue.lumbar_mct_kneeling_lumbar_setting_hold_time_input || '',
+
+      lumbarMctLeftSideLyingLumbarSettingGlobalCompensationSelect: formValue.lumbar_mct_left_side_lying_lumbar_setting_global_compensation_select || '',
+      lumbarMctLeftSideLyingLumbarSettingGlobalCompensationSelectCustom: formValue.lumbar_mct_left_side_lying_lumbar_setting_global_compensation_select_custom || '',
+      lumbarMctLeftSideLyingLumbarSettingGlobalCompensationInput: formValue.lumbar_mct_left_side_lying_lumbar_setting_global_compensation_input || '',
+      lumbarMctLeftSideLyingLumbarSettingPositionSelect: formValue.lumbar_mct_left_side_lying_lumbar_setting_position_select || '',
+      lumbarMctLeftSideLyingLumbarSettingPositionSelectCustom: formValue.lumbar_mct_left_side_lying_lumbar_setting_position_select_custom || '',
+      lumbarMctLeftSideLyingLumbarSettingPositionInput: formValue.lumbar_mct_left_side_lying_lumbar_setting_position_input || '',
+      lumbarMctLeftSideLyingLumbarSettingPainSelect: formValue.lumbar_mct_left_side_lying_lumbar_setting_pain_select || '',
+      lumbarMctLeftSideLyingLumbarSettingPainSelectCustom: formValue.lumbar_mct_left_side_lying_lumbar_setting_pain_select_custom || '',
+      lumbarMctLeftSideLyingLumbarSettingPainInput: formValue.lumbar_mct_left_side_lying_lumbar_setting_pain_input || '',
+      lumbarMctLeftSideLyingLumbarSettingHoldTimeSelect: formValue.lumbar_mct_left_side_lying_lumbar_setting_hold_time_select || '',
+      lumbarMctLeftSideLyingLumbarSettingHoldTimeSelectCustom: formValue.lumbar_mct_left_side_lying_lumbar_setting_hold_time_select_custom || '',
+      lumbarMctLeftSideLyingLumbarSettingHoldTimeInput: formValue.lumbar_mct_left_side_lying_lumbar_setting_hold_time_input || '',
+
+      lumbarMctRightSideLyingLumbarSettingGlobalCompensationSelect: formValue.lumbar_mct_right_side_lying_lumbar_setting_global_compensation_select || '',
+      lumbarMctRightSideLyingLumbarSettingGlobalCompensationSelectCustom: formValue.lumbar_mct_right_side_lying_lumbar_setting_global_compensation_select_custom || '',
+      lumbarMctRightSideLyingLumbarSettingGlobalCompensationInput: formValue.lumbar_mct_right_side_lying_lumbar_setting_global_compensation_input || '',
+      lumbarMctRightSideLyingLumbarSettingPositionSelect: formValue.lumbar_mct_right_side_lying_lumbar_setting_position_select || '',
+      lumbarMctRightSideLyingLumbarSettingPositionSelectCustom: formValue.lumbar_mct_right_side_lying_lumbar_setting_position_select_custom || '',
+      lumbarMctRightSideLyingLumbarSettingPositionInput: formValue.lumbar_mct_right_side_lying_lumbar_setting_position_input || '',
+      lumbarMctRightSideLyingLumbarSettingPainSelect: formValue.lumbar_mct_right_side_lying_lumbar_setting_pain_select || '',
+      lumbarMctRightSideLyingLumbarSettingPainSelectCustom: formValue.lumbar_mct_right_side_lying_lumbar_setting_pain_select_custom || '',
+      lumbarMctRightSideLyingLumbarSettingPainInput: formValue.lumbar_mct_right_side_lying_lumbar_setting_pain_input || '',
+      lumbarMctRightSideLyingLumbarSettingHoldTimeSelect: formValue.lumbar_mct_right_side_lying_lumbar_setting_hold_time_select || '',
+      lumbarMctRightSideLyingLumbarSettingHoldTimeSelectCustom: formValue.lumbar_mct_right_side_lying_lumbar_setting_hold_time_select_custom || '',
+      lumbarMctRightSideLyingLumbarSettingHoldTimeInput: formValue.lumbar_mct_right_side_lying_lumbar_setting_hold_time_input || '',
+
+      lumbarMctComments: formValue.lumbar_mct_comments || '',
+    };
+
     const redcordNeuracStabilityTests: RedcordNeuracStabilityTests = {
       redcordNeuracStabilityTests: formValue.redcord_neurac_stability_tests === 'yes',
       upperBodyMyofascialTests: formValue.upper_body_myofascial_tests === 'yes',
+      upperBodyMyofascialTestsData: upperBodyMyofascialTestsData,
       lowerBodyMyofascialTests: formValue.lower_body_myofascial_tests === 'yes',
+      lowerBodyMyofascialTestsData: lowerBodyMyofascialTestsData,
       cervicalMovements: formValue.cervical_movements === 'yes',
+      cervicalMovementsData: cervicalMovementsData,
       cervicalMotorControlTests: formValue.cervical_motor_control_tests === 'yes',
-      lumbarMotorControlTests: formValue.lumbar_motor_control_tests === 'yes'
+      cervicalMotorControlTestsData: cervicalMotorControlTestsData,
+      lumbarMotorControlTests: formValue.lumbar_motor_control_tests === 'yes',
+      lumbarMotorControlTestsData: lumbarMotorControlTestsData
     };
 
     const grossMuscleTestsTrunk: GrossMuscleTestsTrunk = {

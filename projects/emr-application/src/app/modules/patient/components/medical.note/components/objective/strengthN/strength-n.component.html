@@ -535,6 +535,16 @@
             </div>
         </div>
         <div *ngIf="showUpperBodyMyofascialTestsFields" class="dependent-field-box">
+            <measurement-table-with-selects
+                [labels]="strengthConfig.upperBodyMyofascialTests.labels"
+                [options]="strengthConfig.upperBodyMyofascialTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.upperBodyMyofascialTests.fieldPrefix"
+                [topSelects]="strengthConfig.upperBodyMyofascialTests.topSelects"
+                [commentsFieldName]="strengthConfig.upperBodyMyofascialTests.commentsFieldName"
+                [showComments]="strengthConfig.upperBodyMyofascialTests.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
         </div>
         <div class="form-row">
             <label class="field-label">Lower Body Myofascial Tests</label>
@@ -550,6 +560,16 @@
             </div>
         </div>
         <div *ngIf="showLowerBodyMyofascialTestsFields" class="dependent-field-box">
+            <measurement-table-with-selects
+                [labels]="strengthConfig.lowerBodyMyofascialTests.labels"
+                [options]="strengthConfig.lowerBodyMyofascialTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.lowerBodyMyofascialTests.fieldPrefix"
+                [topSelects]="strengthConfig.lowerBodyMyofascialTests.topSelects"
+                [commentsFieldName]="strengthConfig.lowerBodyMyofascialTests.commentsFieldName"
+                [showComments]="strengthConfig.lowerBodyMyofascialTests.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
         </div>
         <div class="form-row">
             <label class="field-label">Cervical Movements</label>
@@ -565,6 +585,18 @@
             </div>
         </div>
         <div *ngIf="showCervicalMovementsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.cervicalMovements.labels"
+                [columns]="strengthConfig.cervicalMovements.columns"
+                [options]="strengthConfig.cervicalMovements.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalMovements.fieldPrefix"
+                [cellType]="strengthConfig.cervicalMovements.cellType"
+                [showComments]="strengthConfig.cervicalMovements.showComments"
+                [commentsFieldName]="strengthConfig.cervicalMovements.commentsFieldName"
+                [showApplyToAll]="strengthConfig.cervicalMovements.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
         </div>
         <div class="form-row">
             <label class="field-label">Cervical Motor Control Tests</label>
@@ -580,6 +612,18 @@
             </div>
         </div>
         <div *ngIf="showCervicalMotorControlTestsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.cervicalMotorControlTests.labels"
+                [columns]="strengthConfig.cervicalMotorControlTests.columns"
+                [options]="strengthConfig.cervicalMotorControlTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalMotorControlTests.fieldPrefix"
+                [cellType]="strengthConfig.cervicalMotorControlTests.cellType"
+                [showComments]="strengthConfig.cervicalMotorControlTests.showComments"
+                [commentsFieldName]="strengthConfig.cervicalMotorControlTests.commentsFieldName"
+                [showApplyToAll]="strengthConfig.cervicalMotorControlTests.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
         </div>
         <div class="form-row">
             <label class="field-label">Lumbar Motor Control Tests</label>
@@ -595,6 +639,18 @@
             </div>
         </div>
         <div *ngIf="showLumbarMotorControlTestsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.lumbarMotorControlTests.labels"
+                [columns]="strengthConfig.lumbarMotorControlTests.columns"
+                [options]="strengthConfig.lumbarMotorControlTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.lumbarMotorControlTests.fieldPrefix"
+                [cellType]="strengthConfig.lumbarMotorControlTests.cellType"
+                [showComments]="strengthConfig.lumbarMotorControlTests.showComments"
+                [commentsFieldName]="strengthConfig.lumbarMotorControlTests.commentsFieldName"
+                [showApplyToAll]="strengthConfig.lumbarMotorControlTests.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
         </div>
     </div>
     <div class="form-row">

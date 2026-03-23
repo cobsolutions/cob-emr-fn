@@ -153,6 +153,7 @@ import { MeasurementTableWithSelectsComponent } from './components/medical.note/
 import { SingleColumnTableComponent } from './components/medical.note/components/objective/common/single-column-table/single-column-table.component';
 import { MeasurementInputTableComponent } from './components/medical.note/components/objective/common/measurement-table-inputs/measurement-input-table.component';
 import { MeasurementCheckTableComponent } from './components/medical.note/components/objective/common/measurement-table-check/measurement-check-table.component';
+import { MeasurementTableMultipleColumnsComponent } from './components/medical.note/components/objective/common/measurement-table-multiple-columns/measurement-table-multiple-columns.component';
 import { MaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/material-handling/material-handling-work-condition.component';
 import { NonMaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/non-material-handling/non-material-handling-work-condition.component';
 import { TitleCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-list/title-checkbox-list.component';
@@ -342,6 +343,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     SingleColumnTableComponent,
     MeasurementInputTableComponent,
     MeasurementCheckTableComponent,
+    MeasurementTableMultipleColumnsComponent,
     MaterialHandlingWorkConditionComponent,
     NonMaterialHandlingWorkConditionComponent,
     TitleCheckboxListComponent,

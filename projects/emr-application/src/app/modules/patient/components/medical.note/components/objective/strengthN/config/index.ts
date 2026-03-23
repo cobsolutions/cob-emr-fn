@@ -1,3 +1,8 @@
+import { CervicalMovementsConfig } from "./cervical-movements-config";
+import { CervicalMotorControlTestsConfig } from "./cervical-motor-control-tests-config";
+import { LumbarMotorControlTestsConfig } from "./lumbar-motor-control-tests-config";
+import { UpperBodyMyofascialTestsConfig } from "./upper-body-myofascial-tests-config";
+import { LowerBodyMyofascialTestsConfig } from "./lower-body-myofascial-tests-config";
 import { BackRibs } from "./back-ribs-config";
 import { Cervical } from "./cervical-config";
 import { Elbow } from "./elbow-config";
@@ -83,4 +88,19 @@ export class StrengthSectionsConfig {
 
     //Manual Muscle Tests
     static readonly manualMuscleTests = ManualMuscleTests.manualMuscleTests;
+
+    //Cervical Movements (Redcord Neurac Stability Tests)
+    static readonly cervicalMovements = CervicalMovementsConfig.cervicalMovements;
+
+    //Cervical Motor Control Tests (Redcord Neurac Stability Tests)
+    static readonly cervicalMotorControlTests = CervicalMotorControlTestsConfig.cervicalMotorControlTests;
+
+    //Lumbar Motor Control Tests (Redcord Neurac Stability Tests)
+    static readonly lumbarMotorControlTests = LumbarMotorControlTestsConfig.lumbarMotorControlTests;
+
+    //Upper Body Myofascial Tests (Redcord Neurac Stability Tests)
+    static readonly upperBodyMyofascialTests = UpperBodyMyofascialTestsConfig.upperBodyMyofascialTests;
+
+    //Lower Body Myofascial Tests (Redcord Neurac Stability Tests)
+    static readonly lowerBodyMyofascialTests = LowerBodyMyofascialTestsConfig.lowerBodyMyofascialTests;
 }
