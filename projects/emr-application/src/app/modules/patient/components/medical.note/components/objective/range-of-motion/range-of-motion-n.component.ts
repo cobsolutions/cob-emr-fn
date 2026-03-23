@@ -476,8 +476,8 @@ export class RangeOfMotionNComponent implements OnInit {
       fst_ip_prom: ['no'],
       toe_arrom: ['no'],
       toe_prom: ['no'],
-
-      additional_comments: ['no']
+      additional_comments: ['no'],
+      additional_comments_text: ['']
     });
   }
 

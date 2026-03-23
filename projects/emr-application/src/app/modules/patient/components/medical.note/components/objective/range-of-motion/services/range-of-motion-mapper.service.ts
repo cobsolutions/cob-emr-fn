@@ -111,7 +111,8 @@ export class RangeOfMotionMapperService {
       toePROM: withCustomFields(this.mapToePROM(formValue), formValue, 'toe_', ['toe_arom_']),
 
       additionalComments: {
-        additionalComments: formValue.additional_comments === 'yes'
+        additionalComments: formValue.additional_comments === 'yes',
+        additionalCommentsText: formValue.additional_comments_text || ''
       }
     };
   }
@@ -190,7 +191,8 @@ export class RangeOfMotionMapperService {
       ...this.unmapToePROM(dto.toePROM),
       ...spreadCustomFieldsFromDto(dto.toePROM),
 
-      additional_comments: dto.additionalComments.additionalComments ? 'yes' : 'no'
+      additional_comments: dto.additionalComments.additionalComments ? 'yes' : 'no',
+      additional_comments_text: dto.additionalComments.additionalCommentsText || ''
     };
   }
 
