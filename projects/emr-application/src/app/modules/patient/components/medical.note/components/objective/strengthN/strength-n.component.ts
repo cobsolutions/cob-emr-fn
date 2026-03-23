@@ -289,9 +289,19 @@ export class StrengthNComponent implements OnInit {
 
       core_strength: ['no'],
       prone_extensioncore_strength: ['no'],
+      prone_extension_cs_seconds: [''],
+      prone_extension_cs_value: [''],
       supine_flexion_core_strength: ['no'],
+      supine_flexion_cs_seconds: [''],
+      supine_flexion_cs_value: [''],
       situps_core_strength: ['no'],
+      situps_cs_completed: [''],
+      situps_cs_value: [''],
       pushup_core_strength: ['no'],
+      pushup_cs_completed: [''],
+      pushup_cs_value1: [''],
+      pushup_cs_knee_completed: [''],
+      pushup_cs_value2: [''],
 
       manual_muscle_tests: ['no'],
 
@@ -488,18 +498,44 @@ export class StrengthNComponent implements OnInit {
 
     this.strengthForm.get('prone_extensioncore_strength')?.valueChanges.subscribe(value => {
       this.showProneExtensionCoreStrengthFields = value === 'yes';
+      if (!this.showProneExtensionCoreStrengthFields) {
+        this.strengthForm.patchValue({
+          prone_extension_cs_seconds: '',
+          prone_extension_cs_value: '',
+        });
+      }
     });
 
     this.strengthForm.get('supine_flexion_core_strength')?.valueChanges.subscribe(value => {
       this.showSupineFlexionCoreStrengthFields = value === 'yes';
+      if (!this.showSupineFlexionCoreStrengthFields) {
+        this.strengthForm.patchValue({
+          supine_flexion_cs_seconds: '',
+          supine_flexion_cs_value: '',
+        });
+      }
     });
 
     this.strengthForm.get('situps_core_strength')?.valueChanges.subscribe(value => {
       this.showSitupsCoreStrengthFields = value === 'yes';
+      if (!this.showSitupsCoreStrengthFields) {
+        this.strengthForm.patchValue({
+          situps_cs_completed: '',
+          situps_cs_value: '',
+        });
+      }
     });
 
     this.strengthForm.get('pushup_core_strength')?.valueChanges.subscribe(value => {
       this.showPushupCoreStrengthFields = value === 'yes';
+      if (!this.showPushupCoreStrengthFields) {
+        this.strengthForm.patchValue({
+          pushup_cs_completed: '',
+          pushup_cs_value1: '',
+          pushup_cs_knee_completed: '',
+          pushup_cs_value2: '',
+        });
+      }
     });
 
     this.strengthForm.get('manual_muscle_tests')?.valueChanges.subscribe(value => {

@@ -525,9 +525,19 @@ export class StrengthMapperService {
       // Core Strength
       core_strength: dto.coreStrength?.coreStrength ? 'yes' : 'no',
       prone_extensioncore_strength: dto.coreStrength?.proneExtensioncoreStrength ? 'yes' : 'no',
+      prone_extension_cs_seconds: dto.coreStrength?.proneExtensionCs?.proneExtensionCsSeconds || '',
+      prone_extension_cs_value: dto.coreStrength?.proneExtensionCs?.proneExtensionCsValue || '',
       supine_flexion_core_strength: dto.coreStrength?.supineFlexionCoreStrength ? 'yes' : 'no',
+      supine_flexion_cs_seconds: dto.coreStrength?.supineFlexionCs?.supineFlexionCsSeconds || '',
+      supine_flexion_cs_value: dto.coreStrength?.supineFlexionCs?.supineFlexionCsValue || '',
       situps_core_strength: dto.coreStrength?.situpsCoreStrength ? 'yes' : 'no',
+      situps_cs_completed: dto.coreStrength?.situpsCs?.situpsCsCompleted || '',
+      situps_cs_value: dto.coreStrength?.situpsCs?.situpsCsValue || '',
       pushup_core_strength: dto.coreStrength?.pushupCoreStrength ? 'yes' : 'no',
+      pushup_cs_completed: dto.coreStrength?.pushupCs?.pushupCsCompleted || '',
+      pushup_cs_value1: dto.coreStrength?.pushupCs?.pushupCsValue1 || '',
+      pushup_cs_knee_completed: dto.coreStrength?.pushupCs?.pushupCsKneeCompleted || '',
+      pushup_cs_value2: dto.coreStrength?.pushupCs?.pushupCsValue2 || '',
     };
   }
 
@@ -1207,9 +1217,27 @@ export class StrengthMapperService {
     const coreStrength: CoreStrength = {
       coreStrength: formValue.core_strength === 'yes',
       proneExtensioncoreStrength: formValue.prone_extensioncore_strength === 'yes',
+      proneExtensionCs: {
+        proneExtensionCsSeconds: formValue.prone_extension_cs_seconds || '',
+        proneExtensionCsValue: formValue.prone_extension_cs_value || '',
+      },
       supineFlexionCoreStrength: formValue.supine_flexion_core_strength === 'yes',
+      supineFlexionCs: {
+        supineFlexionCsSeconds: formValue.supine_flexion_cs_seconds || '',
+        supineFlexionCsValue: formValue.supine_flexion_cs_value || '',
+      },
       situpsCoreStrength: formValue.situps_core_strength === 'yes',
-      pushupCoreStrength: formValue.pushup_core_strength === 'yes'
+      situpsCs: {
+        situpsCsCompleted: formValue.situps_cs_completed || '',
+        situpsCsValue: formValue.situps_cs_value || '',
+      },
+      pushupCoreStrength: formValue.pushup_core_strength === 'yes',
+      pushupCs: {
+        pushupCsCompleted: formValue.pushup_cs_completed || '',
+        pushupCsValue1: formValue.pushup_cs_value1 || '',
+        pushupCsKneeCompleted: formValue.pushup_cs_knee_completed || '',
+        pushupCsValue2: formValue.pushup_cs_value2 || '',
+      }
     };
 
     const manualMuscleTests: ManualMuscleTests = {
