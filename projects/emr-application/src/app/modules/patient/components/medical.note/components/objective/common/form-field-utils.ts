@@ -66,3 +66,62 @@ export function generateTextFieldName(fieldPrefix: string, label: string | null,
     return `${fieldPrefix}${normalizedColumn}_text`;
   }
 }
+
+/**
+ * Convert snake_case to camelCase
+ * Example: "shoulder_flexion_right_custom" => "shoulderFlexionRightCustom"
+ */
+export function snakeToCamel(str: string): string {
+  return str.replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase());
+}
+
+/**
+ * Convert camelCase to snake_case
+ * Example: "shoulderFlexionRightCustom" => "shoulder_flexion_right_custom"
+ */
+export function camelToSnake(str: string): string {
+  return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+}
+
+/**
+ * Merge _custom fields from formValue into a mapped section object, filtered by prefix.
+ * Scans formValue for keys starting with prefix and ending with _custom,
+ * converts them to camelCase and adds them to the mapped object.
+ * Use excludePrefixes to avoid matching fields that belong to a nested/related section.
+ *
+ * Example: withCustomFields({ elbowArrom: true }, formValue, 'elbow_arrom_')
+ *   picks up elbow_arrom_flexion_right_custom => elbowArromFlexionRightCustom
+ *
+ * Example: withCustomFields({ ... }, formValue, 'hip_', ['hip_prom_'])
+ *   picks up hip_flexion_right_custom but NOT hip_prom_flexion_right_custom
+ */
+export function withCustomFields(mapped: any, formValue: any, prefix: string, excludePrefixes?: string[]): any {
+  const result = { ...mapped };
+  for (const key of Object.keys(formValue)) {
+    if (key.startsWith(prefix) && key.endsWith('_custom')) {
+      if (excludePrefixes && excludePrefixes.some(ep => key.startsWith(ep))) {
+        continue;
+      }
+      result[snakeToCamel(key)] = formValue[key] || '';
+    }
+  }
+  return result;
+}
+
+/**
+ * Extract _custom fields from a DTO (camelCase keys ending with Custom) and return as snake_case form values.
+ * Used in fromDto/unmap methods to restore custom text values into the form.
+ *
+ * Example: spreadCustomFieldsFromDto({ shoulderFlexionRightCustom: 'test' })
+ *   => { shoulder_flexion_right_custom: 'test' }
+ */
+export function spreadCustomFieldsFromDto(dto: any): { [key: string]: string } {
+  if (!dto) return {};
+  const result: { [key: string]: string } = {};
+  for (const key of Object.keys(dto)) {
+    if (key.endsWith('Custom')) {
+      result[camelToSnake(key)] = dto[key] || '';
+    }
+  }
+  return result;
+}

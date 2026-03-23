@@ -8,8 +8,12 @@ interface LabelFieldMapping {
   label: string;
   rightMeasurementField: string;
   leftMeasurementField: string;
+  rightMeasurementCustomField: string;
+  leftMeasurementCustomField: string;
   rightEndfeelField: string;
   leftEndfeelField: string;
+  rightEndfeelCustomField: string;
+  leftEndfeelCustomField: string;
   measurementOptions: any[];
 }
 
@@ -41,6 +45,9 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
   computedCommentsFieldName: string = '';
   computedApplyToAllMeasurementOptions: any[] = [];
 
+  // Track which fields currently have 'custom' selected
+  customFieldVisible: { [fieldName: string]: boolean } = {};
+
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
@@ -64,12 +71,17 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
       label,
       rightMeasurementField: this.getMeasurementFieldName(label, 'right'),
       leftMeasurementField: this.getMeasurementFieldName(label, 'left'),
+      rightMeasurementCustomField: this.getMeasurementFieldName(label, 'right') + '_custom',
+      leftMeasurementCustomField: this.getMeasurementFieldName(label, 'left') + '_custom',
       rightEndfeelField: this.getEndfeelFieldName(label, 'right'),
       leftEndfeelField: this.getEndfeelFieldName(label, 'left'),
+      rightEndfeelCustomField: this.getEndfeelFieldName(label, 'right') + '_custom',
+      leftEndfeelCustomField: this.getEndfeelFieldName(label, 'left') + '_custom',
       measurementOptions: this.getMeasurementOptionsForLabel(label)
     }));
 
     this.ensureFormControlsExist();
+    this.setupCustomFieldListeners();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
@@ -112,6 +124,38 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
       if (!this.formGroup.get(leftEndfeel)) {
         this.formGroup.addControl(leftEndfeel, this.fb.control(leftEndfeelValue));
       }
+
+      // Add custom text controls for measurement fields
+      const rightMeasurementCustomField = rightMeasurement + '_custom';
+      const leftMeasurementCustomField = leftMeasurement + '_custom';
+      const rightMeasurementCustomValue = this.initialData?.[rightMeasurementCustomField] || '';
+      const leftMeasurementCustomValue = this.initialData?.[leftMeasurementCustomField] || '';
+
+      if (!this.formGroup.get(rightMeasurementCustomField)) {
+        this.formGroup.addControl(rightMeasurementCustomField, this.fb.control(rightMeasurementCustomValue));
+      }
+      if (!this.formGroup.get(leftMeasurementCustomField)) {
+        this.formGroup.addControl(leftMeasurementCustomField, this.fb.control(leftMeasurementCustomValue));
+      }
+
+      // Add custom text controls for endfeel fields
+      const rightEndfeelCustomField = rightEndfeel + '_custom';
+      const leftEndfeelCustomField = leftEndfeel + '_custom';
+      const rightEndfeelCustomValue = this.initialData?.[rightEndfeelCustomField] || '';
+      const leftEndfeelCustomValue = this.initialData?.[leftEndfeelCustomField] || '';
+
+      if (!this.formGroup.get(rightEndfeelCustomField)) {
+        this.formGroup.addControl(rightEndfeelCustomField, this.fb.control(rightEndfeelCustomValue));
+      }
+      if (!this.formGroup.get(leftEndfeelCustomField)) {
+        this.formGroup.addControl(leftEndfeelCustomField, this.fb.control(leftEndfeelCustomValue));
+      }
+
+      // Initialize visibility based on initial values
+      this.customFieldVisible[rightMeasurementCustomField] = this.isCustomValue(rightMeasurementValue);
+      this.customFieldVisible[leftMeasurementCustomField] = this.isCustomValue(leftMeasurementValue);
+      this.customFieldVisible[rightEndfeelCustomField] = this.isCustomValue(rightEndfeelValue);
+      this.customFieldVisible[leftEndfeelCustomField] = this.isCustomValue(leftEndfeelValue);
     });
 
     // Add comments control if needed
@@ -122,6 +166,58 @@ export class MeasurementEndfeelTableComponent implements OnInit, OnDestroy {
         this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
+  }
+
+  private isCustomValue(value: string): boolean {
+    return value?.toLowerCase() === 'custom';
+  }
+
+  private setupCustomFieldListeners(): void {
+    this.labelMappings.forEach(mapping => {
+      // Listen to right measurement select
+      this.formGroup.get(mapping.rightMeasurementField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.rightMeasurementCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.rightMeasurementCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+
+      // Listen to left measurement select
+      this.formGroup.get(mapping.leftMeasurementField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.leftMeasurementCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.leftMeasurementCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+
+      // Listen to right endfeel select
+      this.formGroup.get(mapping.rightEndfeelField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.rightEndfeelCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.rightEndfeelCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+
+      // Listen to left endfeel select
+      this.formGroup.get(mapping.leftEndfeelField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.leftEndfeelCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.leftEndfeelCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+    });
   }
 
   ngOnDestroy(): void {

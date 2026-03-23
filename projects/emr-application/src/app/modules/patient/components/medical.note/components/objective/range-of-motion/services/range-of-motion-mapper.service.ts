@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RangeOfMotion } from '../models/RangeOfMotion';
 import { ShoulderAROMMapper } from './shoulder/shoulderAROMMapper';
+import { withCustomFields, spreadCustomFieldsFromDto } from '../../common/form-field-utils';
 
 @Injectable({
   providedIn: 'root'
@@ -38,17 +39,17 @@ export class RangeOfMotionMapperService {
         cervicalArrom: formValue.cervical_arrom === 'yes'
       },
 
-      shoulderAROM: ShoulderAROMMapper.toModel(formValue),
+      shoulderAROM: withCustomFields(ShoulderAROMMapper.toModel(formValue), formValue, 'shoulder_', ['shoulder_prom_']),
 
-      shoulderPROM: this.mapShoulderPROM(formValue),
+      shoulderPROM: withCustomFields(this.mapShoulderPROM(formValue), formValue, 'shoulder_prom_'),
 
-      elbowAROM: this.mapElbowAROM(formValue),
+      elbowAROM: withCustomFields(this.mapElbowAROM(formValue), formValue, 'elbow_arrom_'),
 
-      elbowPROM: this.mapElbowPROM(formValue),
+      elbowPROM: withCustomFields(this.mapElbowPROM(formValue), formValue, 'elbow_prom_'),
 
       wristAROM: this.mapWristAROM(formValue),
 
-      wristPROM: this.mapWristPROM(formValue),
+      wristPROM: withCustomFields(this.mapWristPROM(formValue), formValue, 'wrist_prom_'),
 
       handAROMPROM: this.mapHandAROMPROM(formValue),
 
@@ -64,21 +65,21 @@ export class RangeOfMotionMapperService {
         lumbarArrom: formValue.lumbar_arrom === 'yes'
       },
 
-      hipAROM: this.mapHipAROM(formValue),
+      hipAROM: withCustomFields(this.mapHipAROM(formValue), formValue, 'hip_', ['hip_prom_']),
 
-      hipPROM: this.mapHipPROM(formValue),
+      hipPROM: withCustomFields(this.mapHipPROM(formValue), formValue, 'hip_prom_'),
 
-      kneeAROM: this.mapKneeAROM(formValue),
+      kneeAROM: withCustomFields(this.mapKneeAROM(formValue), formValue, 'knee_', ['knee_prom_']),
 
       kneePROM: {
         kneeProm: formValue.knee_prom === 'yes'
       },
 
-      ankleAROM: this.mapAnkleAROM(formValue),
+      ankleAROM: withCustomFields(this.mapAnkleAROM(formValue), formValue, 'ankle_', ['ankle_prom_']),
 
-      anklePROM: this.mapAnklePROM(formValue),
+      anklePROM: withCustomFields(this.mapAnklePROM(formValue), formValue, 'ankle_prom_'),
 
-      fstMTPAROM: this.mapFstMTPAROM(formValue),
+      fstMTPAROM: withCustomFields(this.mapFstMTPAROM(formValue), formValue, 'fst_mtp_', ['fst_mtp_prom_']),
 
       fstMTPPROM: {
         fstMtpArrom: formValue.fst_mtp_prom === 'yes',
@@ -91,7 +92,7 @@ export class RangeOfMotionMapperService {
         fstMtpArromComments: ''
       },
 
-      fstIPAROM: this.mapFstIPAROM(formValue),
+      fstIPAROM: withCustomFields(this.mapFstIPAROM(formValue), formValue, 'fst_ip_', ['fst_ip_prom_']),
 
       fstIPPROM: {
         fstIpArrom: formValue.fst_ip_prom === 'yes',
@@ -105,9 +106,9 @@ export class RangeOfMotionMapperService {
         fstIpComments: ''
       },
 
-      toeAROM: this.mapToeAROM(formValue),
+      toeAROM: withCustomFields(this.mapToeAROM(formValue), formValue, 'toe_arom_'),
 
-      toePROM: this.mapToePROM(formValue),
+      toePROM: withCustomFields(this.mapToePROM(formValue), formValue, 'toe_', ['toe_arom_']),
 
       additionalComments: {
         additionalComments: formValue.additional_comments === 'yes'
@@ -142,11 +143,17 @@ export class RangeOfMotionMapperService {
       cervical_arrom: dto.cervicalAROM.cervicalArrom ? 'yes' : 'no',
 
       ...ShoulderAROMMapper.fromDto(dto.shoulderAROM),
+      ...spreadCustomFieldsFromDto(dto.shoulderAROM),
       ...this.unmapShoulderPROM(dto.shoulderPROM),
+      ...spreadCustomFieldsFromDto(dto.shoulderPROM),
       ...this.unmapElbowAROM(dto.elbowAROM),
+      ...spreadCustomFieldsFromDto(dto.elbowAROM),
       ...this.unmapElbowPROM(dto.elbowPROM),
+      ...spreadCustomFieldsFromDto(dto.elbowPROM),
       ...this.unmapWristAROM(dto.wristAROM),
+      ...spreadCustomFieldsFromDto(dto.wristAROM),
       ...this.unmapWristPROM(dto.wristPROM),
+      ...spreadCustomFieldsFromDto(dto.wristPROM),
       ...this.unmapHandAROMPROM(dto.handAROMPROM),
 
       thoracic_arrom_sitting_with_passive_overpressure: dto.thoracicAROMSittingwithPassiveOverpressure.thoracicArromSittingWithPassiveOverpressure ? 'yes' : 'no',
@@ -156,23 +163,32 @@ export class RangeOfMotionMapperService {
       lumbar_arrom: dto.lumbarAROM.lumbarArrom ? 'yes' : 'no',
 
       ...this.unmapHipAROM(dto.hipAROM),
+      ...spreadCustomFieldsFromDto(dto.hipAROM),
       ...this.unmapHipPROM(dto.hipPROM),
+      ...spreadCustomFieldsFromDto(dto.hipPROM),
       ...this.unmapKneeAROM(dto.kneeAROM),
+      ...spreadCustomFieldsFromDto(dto.kneeAROM),
 
       knee_prom: dto.kneePROM.kneeProm ? 'yes' : 'no',
 
       ...this.unmapAnkleAROM(dto.ankleAROM),
+      ...spreadCustomFieldsFromDto(dto.ankleAROM),
       ...this.unmapAnklePROM(dto.anklePROM),
+      ...spreadCustomFieldsFromDto(dto.anklePROM),
       ...this.unmapFstMTPAROM(dto.fstMTPAROM),
+      ...spreadCustomFieldsFromDto(dto.fstMTPAROM),
 
       fst_mtp_prom: dto.fstMTPPROM.fstMtpArrom ? 'yes' : 'no',
 
       ...this.unmapFstIPAROM(dto.fstIPAROM),
+      ...spreadCustomFieldsFromDto(dto.fstIPAROM),
 
       fst_ip_prom: dto.fstIPPROM.fstIpArrom ? 'yes' : 'no',
 
       ...this.unmapToeAROM(dto.toeAROM),
+      ...spreadCustomFieldsFromDto(dto.toeAROM),
       ...this.unmapToePROM(dto.toePROM),
+      ...spreadCustomFieldsFromDto(dto.toePROM),
 
       additional_comments: dto.additionalComments.additionalComments ? 'yes' : 'no'
     };
@@ -280,13 +296,21 @@ export class RangeOfMotionMapperService {
       wristArrom: formValue.wrist_arrom === 'yes',
       wristArromApplyToAll: formValue.wrist_arrom_apply_to_all || '',
       extensionRight: formValue.extension_right || '',
+      extensionRightCustom: formValue.extension_right_custom || '',
       extensionLeft: formValue.extension_left || '',
+      extensionLeftCustom: formValue.extension_left_custom || '',
       flexionRight: formValue.flexion_right || '',
+      flexionRightCustom: formValue.flexion_right_custom || '',
       flexionLeft: formValue.flexion_left || '',
+      flexionLeftCustom: formValue.flexion_left_custom || '',
       radialDeviationRight: formValue.radial_deviation_right || '',
+      radialDeviationRightCustom: formValue.radial_deviation_right_custom || '',
       radialDeviationLeft: formValue.radial_deviation_left || '',
+      radialDeviationLeftCustom: formValue.radial_deviation_left_custom || '',
       ulnarDeviationRight: formValue.ulnar_deviation_right || '',
-      ulnarDeviationLeft: formValue.ulnar_deviation_left || ''
+      ulnarDeviationRightCustom: formValue.ulnar_deviation_right_custom || '',
+      ulnarDeviationLeft: formValue.ulnar_deviation_left || '',
+      ulnarDeviationLeftCustom: formValue.ulnar_deviation_left_custom || ''
     };
   }
 

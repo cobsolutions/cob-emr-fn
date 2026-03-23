@@ -28,6 +28,9 @@
               {{ option.label }}
             </option>
           </select>
+          <input *ngIf="customFieldVisible[mapping.rightCustomField]" cFormControl type="text"
+            [formControlName]="mapping.rightCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
         </td>
         <td>
           <select cSelect class="table-input" [formControlName]="mapping.leftField">
@@ -35,6 +38,9 @@
               {{ option.label }}
             </option>
           </select>
+          <input *ngIf="customFieldVisible[mapping.leftCustomField]" cFormControl type="text"
+            [formControlName]="mapping.leftCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
         </td>
       </tr>
     </tbody>

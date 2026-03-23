@@ -28,7 +28,8 @@ export const ENDFEEL_OPTIONS: RomOption[] = [
   { value: 'soft', label: 'Soft' },
   { value: 'firm', label: 'Firm' },
   { value: 'hard', label: 'Hard' },
-  { value: 'empty', label: 'Empty' }
+  { value: 'empty', label: 'Empty' },
+  { value: 'custom', label: 'Custom' }
 ];
 
 

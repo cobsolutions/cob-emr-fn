@@ -31,6 +31,10 @@
   border-radius: 0.25rem;
 }
 
+.custom-text-input {
+  margin-top: 0.35rem;
+}
+
 .form-textarea {
   width: 100%;
   max-width: 800px;

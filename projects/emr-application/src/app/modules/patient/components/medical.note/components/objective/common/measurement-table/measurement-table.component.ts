@@ -8,6 +8,8 @@ interface LabelFieldMapping {
   label: string;
   rightField: string;
   leftField: string;
+  rightCustomField: string;
+  leftCustomField: string;
   options: any[];
 }
 
@@ -38,6 +40,9 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
   computedCommentsFieldName: string = '';
   computedApplyToAllOptions: any[] = [];
 
+  // Track which fields currently have 'custom' selected
+  customFieldVisible: { [fieldName: string]: boolean } = {};
+
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
@@ -61,10 +66,13 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
       label,
       rightField: this.getFieldName(label, 'right'),
       leftField: this.getFieldName(label, 'left'),
+      rightCustomField: this.getFieldName(label, 'right') + '_custom',
+      leftCustomField: this.getFieldName(label, 'left') + '_custom',
       options: this.getOptionsForLabel(label)
     }));
 
     this.ensureFormControlsExist();
+    this.setupCustomFieldListeners();
     if (this.showApplyToAll) {
       this.setupApplyToAllListener();
     }
@@ -97,6 +105,23 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
       if (!this.formGroup.get(leftField)) {
         this.formGroup.addControl(leftField, this.fb.control(leftValue));
       }
+
+      // Add custom text controls
+      const rightCustomField = rightField + '_custom';
+      const leftCustomField = leftField + '_custom';
+      const rightCustomValue = this.initialData?.[rightCustomField] || '';
+      const leftCustomValue = this.initialData?.[leftCustomField] || '';
+
+      if (!this.formGroup.get(rightCustomField)) {
+        this.formGroup.addControl(rightCustomField, this.fb.control(rightCustomValue));
+      }
+      if (!this.formGroup.get(leftCustomField)) {
+        this.formGroup.addControl(leftCustomField, this.fb.control(leftCustomValue));
+      }
+
+      // Initialize visibility based on initial values
+      this.customFieldVisible[rightCustomField] = this.isCustomValue(rightValue);
+      this.customFieldVisible[leftCustomField] = this.isCustomValue(leftValue);
     });
 
     // Add comments control if needed
@@ -107,6 +132,36 @@ export class MeasurementTableComponent implements OnInit, OnDestroy {
         this.formGroup.addControl(commentsFieldName, this.fb.control(initialValue));
       }
     }
+  }
+
+  private isCustomValue(value: string): boolean {
+    return value?.toLowerCase() === 'custom';
+  }
+
+  private setupCustomFieldListeners(): void {
+    this.labelMappings.forEach(mapping => {
+      // Listen to right select
+      this.formGroup.get(mapping.rightField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.rightCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.rightCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+
+      // Listen to left select
+      this.formGroup.get(mapping.leftField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[mapping.leftCustomField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(mapping.leftCustomField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+    });
   }
 
   ngOnDestroy(): void {

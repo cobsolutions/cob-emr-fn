@@ -30,6 +30,9 @@
                 {{ option.label }}
               </option>
             </select>
+            <input *ngIf="customFieldVisible[mapping.rightMeasurementCustomField]" cFormControl type="text"
+              [formControlName]="mapping.rightMeasurementCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
           </td>
           <td>
             <select cSelect class="table-input" [formControlName]="mapping.rightEndfeelField">
@@ -37,6 +40,9 @@
                 {{ option.label }}
               </option>
             </select>
+            <input *ngIf="customFieldVisible[mapping.rightEndfeelCustomField]" cFormControl type="text"
+              [formControlName]="mapping.rightEndfeelCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
           </td>
         </tr>
         <!-- Left side -->
@@ -48,6 +54,9 @@
                 {{ option.label }}
               </option>
             </select>
+            <input *ngIf="customFieldVisible[mapping.leftMeasurementCustomField]" cFormControl type="text"
+              [formControlName]="mapping.leftMeasurementCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
           </td>
           <td>
             <select cSelect class="table-input" [formControlName]="mapping.leftEndfeelField">
@@ -55,6 +64,9 @@
                 {{ option.label }}
               </option>
             </select>
+            <input *ngIf="customFieldVisible[mapping.leftEndfeelCustomField]" cFormControl type="text"
+              [formControlName]="mapping.leftEndfeelCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
           </td>
         </tr>
       </ng-container>
