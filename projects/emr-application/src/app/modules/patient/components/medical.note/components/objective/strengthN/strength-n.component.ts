@@ -47,6 +47,11 @@ export class StrengthNComponent implements OnInit {
   showHipGrossMuscleTestsLowerFields: boolean = false;
   showKneeGrossMuscleTestsLowerFields: boolean = false;
   showAnkleGrossMuscleTestsLowerFields: boolean = false;
+  showUpperBodyMyofascialTestsFields: boolean = false;
+  showLowerBodyMyofascialTestsFields: boolean = false;
+  showCervicalMovementsFields: boolean = false;
+  showCervicalMotorControlTestsFields: boolean = false;
+  showLumbarMotorControlTestsFields: boolean = false;
   showProneExtensionCoreStrengthFields: boolean = false;
   showSupineFlexionCoreStrengthFields: boolean = false;
   showSitupsCoreStrengthFields: boolean = false;
@@ -442,6 +447,26 @@ export class StrengthNComponent implements OnInit {
           lumbar_motor_control_tests: 'no'
         })
       }
+    });
+
+    this.strengthForm.get('upper_body_myofascial_tests')?.valueChanges.subscribe(value => {
+      this.showUpperBodyMyofascialTestsFields = value === 'yes';
+    });
+
+    this.strengthForm.get('lower_body_myofascial_tests')?.valueChanges.subscribe(value => {
+      this.showLowerBodyMyofascialTestsFields = value === 'yes';
+    });
+
+    this.strengthForm.get('cervical_movements')?.valueChanges.subscribe(value => {
+      this.showCervicalMovementsFields = value === 'yes';
+    });
+
+    this.strengthForm.get('cervical_motor_control_tests')?.valueChanges.subscribe(value => {
+      this.showCervicalMotorControlTestsFields = value === 'yes';
+    });
+
+    this.strengthForm.get('lumbar_motor_control_tests')?.valueChanges.subscribe(value => {
+      this.showLumbarMotorControlTestsFields = value === 'yes';
     });
 
     this.strengthForm.get('gross_muscle_tests_trunk')?.valueChanges.subscribe(value => {
