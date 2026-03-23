@@ -88,6 +88,10 @@
   background-color: #e7f3ff;
 }
 
+.custom-text-input {
+  margin-top: 0.35rem;
+}
+
 .form-textarea {
   width: 100%;
   max-width: 800px;

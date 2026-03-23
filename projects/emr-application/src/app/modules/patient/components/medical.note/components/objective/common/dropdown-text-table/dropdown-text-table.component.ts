@@ -1,13 +1,35 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { generateDropdownFieldName, generateTextFieldName } from '../form-field-utils';
+
+interface LabelColumnMapping {
+  label: string;
+  columns: {
+    column: string;
+    dropdownField: string;
+    textField: string;
+    customField: string;
+    options: any[];
+  }[];
+}
+
+interface ColumnMapping {
+  column: string;
+  dropdownField: string;
+  textField: string;
+  customField: string;
+  options: any[];
+}
 
 @Component({
   selector: 'dropdown-text-table',
   templateUrl: './dropdown-text-table.component.html',
-  styleUrls: ['./dropdown-text-table.component.css']
+  styleUrls: ['./dropdown-text-table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownTextTableComponent implements OnInit {
+export class DropdownTextTableComponent implements OnInit, OnDestroy {
   @Input() columns: string[] = []; // e.g., ['ROM', 'Movement Quality', 'Pain Free Movement'] or ['Right', 'Left']
   @Input() labels: string[] = []; // e.g., ['Retraction', 'Right Rotation', ...] - empty for no labels
   @Input() options: any[] = []; // Default dropdown options for all columns
@@ -22,11 +44,51 @@ export class DropdownTextTableComponent implements OnInit {
 
   hasLabels: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  // Pre-computed field mappings
+  labelMappings: LabelColumnMapping[] = [];
+  columnMappings: ColumnMapping[] = [];
+  computedCommentsFieldName: string = '';
+
+  // Track which fields currently have 'custom' selected
+  customFieldVisible: { [fieldName: string]: boolean } = {};
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.hasLabels = this.labels && this.labels.length > 0;
+    this.computedCommentsFieldName = this.getCommentsFieldName();
+
+    // Pre-compute field mappings
+    if (this.hasLabels) {
+      this.labelMappings = this.labels.map(label => ({
+        label,
+        columns: this.columns.map(column => ({
+          column,
+          dropdownField: this.getDropdownFieldName(label, column),
+          textField: this.getTextFieldName(label, column),
+          customField: this.getDropdownFieldName(label, column) + '_custom',
+          options: this.getOptionsForLabel(label)
+        }))
+      }));
+    } else {
+      this.columnMappings = this.columns.map(column => ({
+        column,
+        dropdownField: this.getDropdownFieldName(null, column),
+        textField: this.getTextFieldName(null, column),
+        customField: this.getDropdownFieldName(null, column) + '_custom',
+        options: this.getOptionsForLabel(null)
+      }));
+    }
+
     this.ensureFormControlsExist();
+    this.setupCustomFieldListeners();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -36,38 +98,46 @@ export class DropdownTextTableComponent implements OnInit {
     console.log('fieldPrefix , ' + this.fieldPrefix)
     if (this.hasLabels) {
       console.log('this.hasLabels , ' + this.fieldPrefix)
-      // With labels: create dropdown and text for each label-column combination
-      this.labels.forEach(label => {
-        this.columns.forEach(column => {
-          const dropdownFieldName = this.getDropdownFieldName(label, column);
-          const textFieldName = this.getTextFieldName(label, column);
+      // With labels: create dropdown, text, and custom for each label-column combination
+      this.labelMappings.forEach(mapping => {
+        mapping.columns.forEach(col => {
+          const dropdownValue = this.initialData?.[col.dropdownField] || 'not_tested';
+          const textValue = this.initialData?.[col.textField] || '';
+          const customValue = this.initialData?.[col.customField] || '';
 
-          const dropdownValue = this.initialData?.[dropdownFieldName] || 'not_tested';
-          const textValue = this.initialData?.[textFieldName] || '';
+          if (!this.formGroup.get(col.dropdownField)) {
+            this.formGroup.addControl(col.dropdownField, this.fb.control(dropdownValue));
+          }
+          if (!this.formGroup.get(col.textField) && this.hasTextInput) {
+            this.formGroup.addControl(col.textField, this.fb.control(textValue));
+          }
+          if (!this.formGroup.get(col.customField)) {
+            this.formGroup.addControl(col.customField, this.fb.control(customValue));
+          }
 
-          if (!this.formGroup.get(dropdownFieldName)) {
-            this.formGroup.addControl(dropdownFieldName, this.fb.control(dropdownValue));
-          }
-          if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
-            this.formGroup.addControl(textFieldName, this.fb.control(textValue));
-          }
+          // Initialize visibility based on initial values
+          this.customFieldVisible[col.customField] = this.isCustomValue(dropdownValue);
         });
       });
     } else {
-      // Without labels: create dropdown and text for each column
-      this.columns.forEach(column => {
-        const dropdownFieldName = this.getDropdownFieldName(null, column);
-        const textFieldName = this.getTextFieldName(null, column);
+      // Without labels: create dropdown, text, and custom for each column
+      this.columnMappings.forEach(col => {
+        const dropdownValue = this.initialData?.[col.dropdownField] || 'not_tested';
+        const textValue = this.initialData?.[col.textField] || '';
+        const customValue = this.initialData?.[col.customField] || '';
 
-        const dropdownValue = this.initialData?.[dropdownFieldName] || 'not_tested';
-        const textValue = this.initialData?.[textFieldName] || '';
+        if (!this.formGroup.get(col.dropdownField)) {
+          this.formGroup.addControl(col.dropdownField, this.fb.control(dropdownValue));
+        }
+        if (!this.formGroup.get(col.textField) && this.hasTextInput) {
+          this.formGroup.addControl(col.textField, this.fb.control(textValue));
+        }
+        if (!this.formGroup.get(col.customField)) {
+          this.formGroup.addControl(col.customField, this.fb.control(customValue));
+        }
 
-        if (!this.formGroup.get(dropdownFieldName)) {
-          this.formGroup.addControl(dropdownFieldName, this.fb.control(dropdownValue));
-        }
-        if (!this.formGroup.get(textFieldName) && this.hasTextInput) {
-          this.formGroup.addControl(textFieldName, this.fb.control(textValue));
-        }
+        // Initialize visibility based on initial values
+        this.customFieldVisible[col.customField] = this.isCustomValue(dropdownValue);
       });
     }
 
@@ -81,10 +151,30 @@ export class DropdownTextTableComponent implements OnInit {
     }
   }
 
+  private isCustomValue(value: string): boolean {
+    return value?.toLowerCase() === 'custom';
+  }
+
+  private setupCustomFieldListeners(): void {
+    const allColumns = this.hasLabels
+      ? this.labelMappings.flatMap(m => m.columns)
+      : this.columnMappings;
+
+    allColumns.forEach(col => {
+      this.formGroup.get(col.dropdownField)?.valueChanges
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(value => {
+          this.customFieldVisible[col.customField] = this.isCustomValue(value);
+          if (!this.isCustomValue(value)) {
+            this.formGroup.get(col.customField)?.setValue('', { emitEvent: false });
+          }
+          this.cdr.markForCheck();
+        });
+    });
+  }
+
   /**
    * Generate form control name for a dropdown field
-   * With labels: fieldPrefix_labelName_columnName (e.g., shoulder_arom_retraction_rom)
-   * Without labels: fieldPrefix_columnName (e.g., shoulder_arom_right)
    */
   getDropdownFieldName(label: string | null, column: string): string {
     return generateDropdownFieldName(this.fieldPrefix, label, column);
@@ -92,8 +182,6 @@ export class DropdownTextTableComponent implements OnInit {
 
   /**
    * Generate form control name for a text input field
-   * With labels: fieldPrefix_labelName_columnName_text
-   * Without labels: fieldPrefix_columnName_text
    */
   getTextFieldName(label: string | null, column: string): string {
     return generateTextFieldName(this.fieldPrefix, label, column);
@@ -108,12 +196,23 @@ export class DropdownTextTableComponent implements OnInit {
 
   /**
    * Get options for a specific label
-   * Returns specialOptions[label] if provided, otherwise falls back to options
    */
   getOptionsForLabel(label: string | null): any[] {
     if (label && this.specialOptions && this.specialOptions[label]) {
       return this.specialOptions[label];
     }
     return this.options;
+  }
+
+  trackByLabel(index: number, item: LabelColumnMapping): string {
+    return item.label;
+  }
+
+  trackByColumn(index: number, item: ColumnMapping | { column: string }): string {
+    return item.column;
+  }
+
+  trackByValue(index: number, item: any): string {
+    return item.value;
   }
 }

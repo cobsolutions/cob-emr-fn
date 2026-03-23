@@ -8,18 +8,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let label of labels">
-        <td class="label-cell">{{ label }}</td>
-        <td *ngFor="let column of columns" class="input-cell">
-          <select cSelect class="dropdown-input" [formControlName]="getDropdownFieldName(label, column)">
-            <option *ngFor="let option of getOptionsForLabel(label)" [value]="option.value">
+      <tr *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <td class="label-cell">{{ mapping.label }}</td>
+        <td *ngFor="let col of mapping.columns; trackBy: trackByColumn" class="input-cell">
+          <select cSelect class="dropdown-input" [formControlName]="col.dropdownField">
+            <option *ngFor="let option of col.options; trackBy: trackByValue" [value]="option.value">
               {{ option.label }}
             </option>
           </select>
+          <input *ngIf="customFieldVisible[col.customField]" cFormControl type="text"
+            [formControlName]="col.customField" class="dropdown-input custom-text-input"
+            placeholder="Enter custom value" />
           <input *ngIf="hasTextInput"
             type="text"
             class="text-input"
-            [formControlName]="getTextFieldName(label, column)"
+            [formControlName]="col.textField"
             placeholder="">
         </td>
       </tr>
@@ -28,17 +31,20 @@
 
   <!-- Layout without Labels (Side by Side) -->
   <div *ngIf="!hasLabels" class="no-labels-layout">
-    <div class="column-container" *ngFor="let column of columns">
-      <label class="column-header">{{ column }}</label>
-      <select cSelect class="dropdown-input-full" [formControlName]="getDropdownFieldName(null, column)">
-        <option *ngFor="let option of getOptionsForLabel(null)" [value]="option.value">
+    <div class="column-container" *ngFor="let col of columnMappings; trackBy: trackByColumn">
+      <label class="column-header">{{ col.column }}</label>
+      <select cSelect class="dropdown-input-full" [formControlName]="col.dropdownField">
+        <option *ngFor="let option of col.options; trackBy: trackByValue" [value]="option.value">
           {{ option.label }}
         </option>
       </select>
+      <input *ngIf="customFieldVisible[col.customField]" cFormControl type="text"
+        [formControlName]="col.customField" class="dropdown-input-full custom-text-input"
+        placeholder="Enter custom value" />
       <input *ngIf="hasTextInput"
         type="text"
         class="text-input-full"
-        [formControlName]="getTextFieldName(null, column)"
+        [formControlName]="col.textField"
         placeholder="">
     </div>
   </div>
@@ -48,7 +54,7 @@
     <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
     <textarea
       class="form-textarea"
-      [formControlName]="getCommentsFieldName()"
+      [formControlName]="computedCommentsFieldName"
       rows="3"
       placeholder="Enter any comments...">
     </textarea>
