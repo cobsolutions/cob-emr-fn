@@ -243,6 +243,15 @@
             </div>
         </div>
         <div *ngIf="showHipFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.hip.labels"
+                [options]="strengthConfig.hip.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.hip.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.hip.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.hip.commentsFieldName"
+                [showApplyToAll]="strengthConfig.hip.showApplyToAll"
+                [showComments]="strengthConfig.hip.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Knee</label>
@@ -258,6 +267,15 @@
             </div>
         </div>
         <div *ngIf="showKneeFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.knee.labels"
+                [options]="strengthConfig.knee.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.knee.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.knee.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.knee.commentsFieldName"
+                [showApplyToAll]="strengthConfig.knee.showApplyToAll"
+                [showComments]="strengthConfig.knee.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Ankle</label>
@@ -273,6 +291,15 @@
             </div>
         </div>
         <div *ngIf="showAnkleFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.ankle.labels"
+                [options]="strengthConfig.ankle.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.ankle.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.ankle.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.ankle.commentsFieldName"
+                [showApplyToAll]="strengthConfig.ankle.showApplyToAll"
+                [showComments]="strengthConfig.ankle.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
         <div class="form-row">
             <label class="field-label">Foot</label>
@@ -288,6 +315,15 @@
             </div>
         </div>
         <div *ngIf="showFootFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.foot.labels"
+                [options]="strengthConfig.foot.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.foot.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.foot.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.foot.commentsFieldName"
+                [showApplyToAll]="strengthConfig.foot.showApplyToAll"
+                [showComments]="strengthConfig.foot.showComments"
+                [initialData]="formData">
+            </measurement-table>
         </div>
     </div>
     <div class="form-row">

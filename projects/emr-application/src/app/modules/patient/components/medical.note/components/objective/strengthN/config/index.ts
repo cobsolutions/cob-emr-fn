@@ -3,6 +3,10 @@ import { Cervical } from "./cervical-config";
 import { Elbow } from "./elbow-config";
 import { GripPinch } from "./grip-pinch-config";
 import { Hand } from "./hand-config";
+import { Hip } from "./hip-config";
+import { Knee } from "./knee-config";
+import { Ankle } from "./ankle-config";
+import { Foot } from "./foot-config";
 import { GrossMuscleTestsTrunk } from "./gross-muscle-tests-trunk-config";
 import { ManualMuscleTests } from "./manual-muscle-tests-config";
 import { Shoulder } from "./shoulder-config";
@@ -30,6 +34,18 @@ export class StrengthSectionsConfig {
 
     //Wrist (Selective Tissue Tension Upper)
     static readonly wrist = Wrist.wrist;
+
+    //Hip (Selective Tissue Tension Lower)
+    static readonly hip = Hip.hip;
+
+    //Knee (Selective Tissue Tension Lower)
+    static readonly knee = Knee.knee;
+
+    //Ankle (Selective Tissue Tension Lower)
+    static readonly ankle = Ankle.ankle;
+
+    //Foot (Selective Tissue Tension Lower)
+    static readonly foot = Foot.foot;
 
     //Grip / Pinch
     static readonly gripPinch = GripPinch.gripPinch;
