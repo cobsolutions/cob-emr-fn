@@ -242,6 +242,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showHipFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Knee</label>
             <div class="radio-group-primary">
@@ -254,6 +256,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showKneeFields" class="dependent-field-box">
         </div>
         <div class="form-row">
             <label class="field-label">Ankle</label>
@@ -268,6 +272,8 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showAnkleFields" class="dependent-field-box">
+        </div>
         <div class="form-row">
             <label class="field-label">Foot</label>
             <div class="radio-group-primary">
@@ -280,6 +286,8 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showFootFields" class="dependent-field-box">
         </div>
     </div>
     <div class="form-row">

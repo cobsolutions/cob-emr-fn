@@ -36,6 +36,10 @@ export class StrengthNComponent implements OnInit {
   showElbowFields: boolean = false;
   showWristFields: boolean = false;
   showHandFields: boolean = false;
+  showHipFields: boolean = false;
+  showKneeFields: boolean = false;
+  showAnkleFields: boolean = false;
+  showFootFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -214,6 +218,22 @@ export class StrengthNComponent implements OnInit {
         })
       }
 
+    });
+
+    this.strengthForm.get('hip')?.valueChanges.subscribe(value => {
+      this.showHipFields = value === 'yes';
+    });
+
+    this.strengthForm.get('knee')?.valueChanges.subscribe(value => {
+      this.showKneeFields = value === 'yes';
+    });
+
+    this.strengthForm.get('ankle')?.valueChanges.subscribe(value => {
+      this.showAnkleFields = value === 'yes';
+    });
+
+    this.strengthForm.get('foot')?.valueChanges.subscribe(value => {
+      this.showFootFields = value === 'yes';
     });
 
     this.strengthForm.get('grip_pinch')?.valueChanges.subscribe(value => {
