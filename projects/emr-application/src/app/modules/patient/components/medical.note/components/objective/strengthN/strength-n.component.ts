@@ -56,6 +56,9 @@ export class StrengthNComponent implements OnInit {
   showSupineFlexionCoreStrengthFields: boolean = false;
   showSitupsCoreStrengthFields: boolean = false;
   showPushupCoreStrengthFields: boolean = false;
+  showRapidExchangeFields: boolean = false;
+  showRepeatedGripFields: boolean = false;
+  showFiveLevelGripFields: boolean = false;
 
   // Strength Sections Configuration
   readonly strengthConfig = StrengthSectionsConfig;
@@ -406,6 +409,18 @@ export class StrengthNComponent implements OnInit {
           five_level_grip: 'no'
         })
       }
+    });
+
+    this.strengthForm.get('rapid_exchange')?.valueChanges.subscribe(value => {
+      this.showRapidExchangeFields = value === 'yes';
+    });
+
+    this.strengthForm.get('repeated_grip')?.valueChanges.subscribe(value => {
+      this.showRepeatedGripFields = value === 'yes';
+    });
+
+    this.strengthForm.get('five_level_grip')?.valueChanges.subscribe(value => {
+      this.showFiveLevelGripFields = value === 'yes';
     });
 
     this.strengthForm.get('gross_muscle_tests_upper')?.valueChanges.subscribe(value => {

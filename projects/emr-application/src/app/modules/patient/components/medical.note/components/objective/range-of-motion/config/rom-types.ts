@@ -57,6 +57,13 @@ export interface TopSelect {
   options: RomOption[];
 }
 
+export interface RomRlInputColumnsConfig {
+  rows: { label: string; inputCount: number; type: 'input' | 'textarea' }[];
+  fieldPrefix: string;
+  commentsFieldName: string;
+  showComments?: boolean;
+}
+
 export interface RomSectionWithSelectsConfig {
   labels: string[];
   options: RomOption[]; // Default options for all measurement selects

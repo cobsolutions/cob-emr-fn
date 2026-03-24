@@ -1,3 +1,7 @@
+import { FiveLevelGripData } from './FiveLevelGripData';
+import { RapidExchangeData } from './RapidExchangeData';
+import { RepeatedGripData } from './RepeatedGripData';
+
 export interface GripPinch {
   gripPinch: boolean;
   gripPinchPowerGripRight: string;
@@ -26,6 +30,9 @@ export interface GripPinch {
   gripPinchTripodPinchLeftText: string;
   gripPinchComments: string;
   rapidExchange: boolean;
+  rapidExchangeData: RapidExchangeData;
   repeatedGrip: boolean;
+  repeatedGripData: RepeatedGripData;
   fiveLevelGrip: boolean;
+  fiveLevelGripData: FiveLevelGripData;
 }

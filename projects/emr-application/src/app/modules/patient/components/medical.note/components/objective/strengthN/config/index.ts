@@ -21,6 +21,9 @@ import { GrossMuscleTestsUpperElbow } from "./gross-muscle-tests-upper-elbow-con
 import { GrossMuscleTestsUpperShoulder } from "./gross-muscle-tests-upper-shoulder-config";
 import { GrossMuscleTestsUpperWrist } from "./gross-muscle-tests-upper-wrist-config";
 import { ManualMuscleTests } from "./manual-muscle-tests-config";
+import { RapidExchange } from "./rapid-exchange-config";
+import { RepeatedGrip } from "./repeated-grip-config";
+import { FiveLevelGrip } from "./five-level-grip-config";
 import { Shoulder } from "./shoulder-config";
 import { Trunk } from "./trunk-config";
 import { Wrist } from "./wrist-config";
@@ -61,6 +64,15 @@ export class StrengthSectionsConfig {
 
     //Grip / Pinch
     static readonly gripPinch = GripPinch.gripPinch;
+
+    //Rapid Exchange (Grip / Pinch)
+    static readonly rapidExchange = RapidExchange.rapidExchange;
+
+    //Repeated Grip (Grip / Pinch)
+    static readonly repeatedGrip = RepeatedGrip.repeatedGrip;
+
+    //Five Level Grip (Grip / Pinch)
+    static readonly fiveLevelGrip = FiveLevelGrip.fiveLevelGrip;
 
     //Gross Muscle Tests Upper - Cervical
     static readonly cervicalGmtUpper = GrossMuscleTestsUpperCervical.cervicalGmtUpper;

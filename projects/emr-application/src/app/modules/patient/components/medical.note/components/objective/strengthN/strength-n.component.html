@@ -360,6 +360,15 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showRapidExchangeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.rapidExchange.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.rapidExchange.fieldPrefix"
+                [showComments]="strengthConfig.rapidExchange.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
 
         <div class="form-row">
             <label class="field-label">Repeated Grip</label>
@@ -374,6 +383,16 @@
                 </c-form-check>
             </div>
         </div>
+        <div *ngIf="showRepeatedGripFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.repeatedGrip.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.repeatedGrip.fieldPrefix"
+                [showComments]="strengthConfig.repeatedGrip.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+
         <div class="form-row">
             <label class="field-label">Five Level Grip</label>
             <div class="radio-group-primary">
@@ -386,6 +405,15 @@
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </div>
+        </div>
+        <div *ngIf="showFiveLevelGripFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.fiveLevelGrip.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.fiveLevelGrip.fieldPrefix"
+                [showComments]="strengthConfig.fiveLevelGrip.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
         </div>
 
     </div>
