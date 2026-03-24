@@ -10,6 +10,11 @@ export class NeuroVascularMapperService {
 
   private readonly formToDto: Record<string, string> = {
     'complaints_of_any_radicular_symptoms_in_either_extremity': 'complaintsOfAnyRadicularSymptomsInEitherExtremity',
+    'complaints_radicular_input': 'complaintsRadicularInput',
+    'extremity_reflexes_equal_normal_bilateral': 'extremityReflexesEqualNormalBilateral',
+    'extremity_reflexes_equal_normal_bilateral_text': 'extremityReflexesEqualNormalBilateralText',
+    'sensory_or_vascular_deficits_noted': 'sensoryOrVascularDeficitsNoted',
+    'sensory_or_vascular_deficits_noted_text': 'sensoryOrVascularDeficitsNotedText',
     'cranial_nerve_screen': 'cranialNerveScreen',
     'myotomes_upper': 'myotomesUpper',
     'myotomes_lower': 'myotomesLower',
@@ -291,7 +296,6 @@ export class NeuroVascularMapperService {
   };
 
   private readonly booleanFields = new Set([
-    'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'cranialNerveScreen',
     'myotomesUpper',
     'myotomesLower',
@@ -334,14 +338,42 @@ export class NeuroVascularMapperService {
     'additionalComments'
   ]);
 
+  private readonly triStateFields = new Set([
+    'complaintsOfAnyRadicularSymptomsInEitherExtremity',
+    'extremityReflexesEqualNormalBilateral',
+    'sensoryOrVascularDeficitsNoted'
+  ]);
+
+  private mapTriStateToModel(value: any): string {
+    if (typeof value === 'boolean') {
+      return value ? 'yes' : 'no';
+    }
+    if (value === 'yes' || value === 'no' || value === 'na') {
+      return value;
+    }
+    return 'no';
+  }
+
+  private mapTriStateFromDto(value: any): string {
+    if (typeof value === 'boolean') {
+      return value ? 'yes' : 'no';
+    }
+    if (value === 'yes' || value === 'no' || value === 'na') {
+      return value;
+    }
+    return 'no';
+  }
+
   toModel(formValue: any): NeuroVascular {
     const model: any = {};
 
     for (const [formKey, dtoKey] of Object.entries(this.formToDto)) {
-      if (formValue.hasOwnProperty(formKey)) {
+      if (formKey in formValue) {
         const value = formValue[formKey];
 
-        if (this.booleanFields.has(dtoKey)) {
+        if (this.triStateFields.has(dtoKey)) {
+          model[dtoKey] = this.mapTriStateToModel(value);
+        } else if (this.booleanFields.has(dtoKey)) {
           model[dtoKey] = value === 'yes';
         } else {
           model[dtoKey] = value || '';
@@ -356,10 +388,12 @@ export class NeuroVascularMapperService {
     const formValue: any = {};
 
     for (const [formKey, dtoKey] of Object.entries(this.formToDto)) {
-      if (dto.hasOwnProperty(dtoKey)) {
+      if (dtoKey in dto) {
         const value = (dto as any)[dtoKey];
 
-        if (this.booleanFields.has(dtoKey)) {
+        if (this.triStateFields.has(dtoKey)) {
+          formValue[formKey] = this.mapTriStateFromDto(value);
+        } else if (this.booleanFields.has(dtoKey)) {
           formValue[formKey] = value ? 'yes' : 'no';
         } else {
           formValue[formKey] = value || '';

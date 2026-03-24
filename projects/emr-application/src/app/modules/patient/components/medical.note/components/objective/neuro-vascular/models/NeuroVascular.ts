@@ -1,5 +1,10 @@
 export interface NeuroVascular {
-  complaintsOfAnyRadicularSymptomsInEitherExtremity: boolean;
+  complaintsOfAnyRadicularSymptomsInEitherExtremity: string;
+  complaintsRadicularInput: string;
+  extremityReflexesEqualNormalBilateral: string;
+  extremityReflexesEqualNormalBilateralText: string;
+  sensoryOrVascularDeficitsNoted: string;
+  sensoryOrVascularDeficitsNotedText: string;
   cranialNerveScreen: boolean;
   myotomesUpper: boolean;
   myotomesLower: boolean;

@@ -176,10 +176,17 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
     });
   }
 
+  private readonly triStateFields = new Set([
+    'complaintsOfAnyRadicularSymptomsInEitherExtremity',
+    'extremityReflexesEqualNormalBilateral',
+    'sensoryOrVascularDeficitsNoted'
+  ]);
+
   private normalizeYesNoInObject(obj: any): void {
     if (obj === null || obj === undefined) {
       return;
     }
+
     if (Array.isArray(obj)) {
       obj.forEach((item, index) => {
         if (typeof item === 'string') {
@@ -191,6 +198,9 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
     } else if (typeof obj === 'object') {
       Object.keys(obj).forEach(key => {
         const value = obj[key];
+        if (this.triStateFields.has(key)) {
+          return;
+        }
         if (typeof value === 'string') {
           obj[key] = this.normalizeValue(value);
         } else if (typeof value === 'object') {
@@ -201,9 +211,9 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   private normalizeValue(val: any): any {
+    if (val === 'na' || val === 'N/A') return val;
     if (val === 'yes') return true;
     if (val === 'no') return false;
-    if (val === 'na' || val === 'N/A') return null;
     return val;
   }
 }

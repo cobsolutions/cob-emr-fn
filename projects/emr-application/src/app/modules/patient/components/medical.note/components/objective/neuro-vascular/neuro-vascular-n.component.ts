@@ -17,6 +17,8 @@ export class NeuroVascularNComponent implements OnInit {
   formData: any = {}; 
 
   showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields: boolean = false;
+  showExtremityReflexesFields: boolean = false;
+  showSensoryOrVascularDeficitsFields: boolean = false;
   showCranialNerveScreenFields: boolean = false;
   showMyotomesUpperFields: boolean = false;
   showMyotomesLowerFields: boolean = false;
@@ -77,6 +79,11 @@ export class NeuroVascularNComponent implements OnInit {
   initForm() {
     this.neuroVascularForm = this.fb.group({
       complaints_of_any_radicular_symptoms_in_either_extremity: ['no'],
+      complaints_radicular_input: [''],
+      extremity_reflexes_equal_normal_bilateral: ['no'],
+      extremity_reflexes_equal_normal_bilateral_text: [''],
+      sensory_or_vascular_deficits_noted: ['no'],
+      sensory_or_vascular_deficits_noted_text: [''],
       cranial_nerve_screen: ['no'],
       myotomes_upper: ['no'],
       myotomes_lower: ['no'],
@@ -126,7 +133,28 @@ export class NeuroVascularNComponent implements OnInit {
   }
   setupValueChangeListeners() {
     this.neuroVascularForm.get('complaints_of_any_radicular_symptoms_in_either_extremity')?.valueChanges.subscribe(value => {
-      this.showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields = value === 'yes';
+      this.showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields = value !== 'na';
+      if (value === 'na') {
+        this.neuroVascularForm.get('complaints_radicular_input')?.setValue('');
+        this.neuroVascularForm.get('extremity_reflexes_equal_normal_bilateral')?.setValue('no');
+        this.neuroVascularForm.get('extremity_reflexes_equal_normal_bilateral_text')?.setValue('');
+        this.neuroVascularForm.get('sensory_or_vascular_deficits_noted')?.setValue('no');
+        this.neuroVascularForm.get('sensory_or_vascular_deficits_noted_text')?.setValue('');
+      }
+    });
+
+    this.neuroVascularForm.get('extremity_reflexes_equal_normal_bilateral')?.valueChanges.subscribe(value => {
+      this.showExtremityReflexesFields = value !== 'na';
+      if (value === 'na') {
+        this.neuroVascularForm.get('extremity_reflexes_equal_normal_bilateral_text')?.setValue('');
+      }
+    });
+
+    this.neuroVascularForm.get('sensory_or_vascular_deficits_noted')?.valueChanges.subscribe(value => {
+      this.showSensoryOrVascularDeficitsFields = value !== 'na';
+      if (value === 'na') {
+        this.neuroVascularForm.get('sensory_or_vascular_deficits_noted_text')?.setValue('');
+      }
     });
 
     this.neuroVascularForm.get('cranial_nerve_screen')?.valueChanges.subscribe(value => {

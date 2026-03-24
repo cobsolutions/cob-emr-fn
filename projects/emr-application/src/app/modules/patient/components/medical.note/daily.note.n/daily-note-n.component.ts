@@ -336,9 +336,9 @@ export class DailyNoteNComponent implements OnInit {
     return values;
   }
   private normalizeValue(val: any): any {
+    if (val === 'na' || val === 'N/A') return val;
     if (val === 'yes') return true;
     if (val === 'no') return false;
-    if (val === 'na' || val === 'N/A') return null;
     return val;
   }
 
@@ -439,6 +439,12 @@ export class DailyNoteNComponent implements OnInit {
     return isEmpty;
   }
 
+  private readonly triStateFields = new Set([
+    'complaintsOfAnyRadicularSymptomsInEitherExtremity',
+    'extremityReflexesEqualNormalBilateral',
+    'sensoryOrVascularDeficitsNoted'
+  ]);
+
   private normalizeYesNoInObject(obj: any): void {
     if (obj === null || obj === undefined) {
       return;
@@ -455,6 +461,9 @@ export class DailyNoteNComponent implements OnInit {
     } else if (typeof obj === 'object') {
       Object.keys(obj).forEach(key => {
         const value = obj[key];
+        if (this.triStateFields.has(key)) {
+          return;
+        }
         if (typeof value === 'string') {
           obj[key] = this.normalizeValue(value);
         } else if (typeof value === 'object') {

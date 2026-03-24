@@ -4,6 +4,11 @@
         <div class="radio-group-primary">
             <c-form-check class="me-3">
                 <input cFormCheckInput type="radio"
+                    formControlName="complaints_of_any_radicular_symptoms_in_either_extremity" value="na" />
+                <label cFormCheckLabel>N/A</label>
+            </c-form-check>
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio"
                     formControlName="complaints_of_any_radicular_symptoms_in_either_extremity" value="yes" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
@@ -15,6 +20,58 @@
         </div>
     </div>
     <div *ngIf="showComplaintsOfAnyRadicularSymptomsInEitherExtremityFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <input type="text" class="form-control" formControlName="complaints_radicular_input" />
+        </div>
+        <div class="form-row">
+            <label class="field-label">Extremity reflexes are equal and normal bilateral</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio"
+                        formControlName="extremity_reflexes_equal_normal_bilateral" value="na" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio"
+                        formControlName="extremity_reflexes_equal_normal_bilateral" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="extremity_reflexes_equal_normal_bilateral" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showExtremityReflexesFields" class="form-row">
+            <label class="field-label"></label>
+            <input type="text" class="form-control" formControlName="extremity_reflexes_equal_normal_bilateral_text" />
+        </div>
+        <div class="form-row">
+            <label class="field-label">Sensory or vascular deficits noted</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio"
+                        formControlName="sensory_or_vascular_deficits_noted" value="na" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio"
+                        formControlName="sensory_or_vascular_deficits_noted" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="sensory_or_vascular_deficits_noted" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSensoryOrVascularDeficitsFields" class="form-row">
+            <label class="field-label"></label>
+            <input type="text" class="form-control" formControlName="sensory_or_vascular_deficits_noted_text" />
+        </div>
     </div>
 
     <div class="form-row">
