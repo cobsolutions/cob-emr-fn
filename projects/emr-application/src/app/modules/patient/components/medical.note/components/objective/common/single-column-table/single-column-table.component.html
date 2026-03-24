@@ -6,7 +6,6 @@
       cSelect
       class="select-input"
       [formControlName]="computedApplyToAllFieldName">
-      <option value=""></option>
       <option *ngFor="let option of computedApplyToAllOptions; trackBy: trackByValue" [value]="option.value">
         {{ option.label }}
       </option>
@@ -20,7 +19,6 @@
       cSelect
       class="select-input"
       [formControlName]="mapping.fieldName">
-      <option value=""></option>
       <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
         {{ option.label }}
       </option>

@@ -42,9 +42,13 @@ export const DEFAULT_APPLY_TO_ALL_OPTIONS: RomOption[] = [
     { value: 'wfl', label: 'WFL' }
 ]
 export const MyotomesLower_OPTIONS: RomOption[] = [
-    { value: 'not_tested', label: 'Not Tested' },
-    { value: 'wnl', label: 'WNL' },
-    { value: 'wfl', label: 'WFL' },
+    { value: 'Normal', label: 'Normal' },
+    { value: 'Good', label: 'Good' },
+    { value: 'Fair', label: 'Fair' },
+    { value: 'Poor', label: 'Poor' },
+    { value: 'Trace', label: 'Trace' },
+    { value: 'No Contraction', label: 'No Contraction' },
+    { value: 'not_tested', label: 'Not Tested' }
 ]
 export const dermatomesUpper_OPTIONS: RomOption[] = [
     { value: 'Normal', label: 'Normal' },
