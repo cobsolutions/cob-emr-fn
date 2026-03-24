@@ -445,7 +445,8 @@ export class DischargeNComponent implements OnInit {
   private readonly triStateFields = new Set([
     'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'extremityReflexesEqualNormalBilateral',
-    'sensoryOrVascularDeficitsNoted'
+    'sensoryOrVascularDeficitsNoted',
+    'vertebralArteryDetails'
   ]);
 
   private normalizeYesNoInObject(obj: any): void {

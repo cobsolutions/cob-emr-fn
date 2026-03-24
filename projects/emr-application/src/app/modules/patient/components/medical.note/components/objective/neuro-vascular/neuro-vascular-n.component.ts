@@ -95,6 +95,7 @@ export class NeuroVascularNComponent implements OnInit {
       neural_tissue_tension_lower: ['no'],
       vascular: ['no'],
       vertebral_artery: ['no'],
+      vertebral_artery_details: [null],
       allen_s_test_circulation: ['no'],
       capillary_refill: ['no'],
       homan_s_sign: ['no'],

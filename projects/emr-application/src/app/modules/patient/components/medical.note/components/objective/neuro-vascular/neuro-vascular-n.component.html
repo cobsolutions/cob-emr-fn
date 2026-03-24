@@ -327,6 +327,11 @@
         </div>
     </div>
     <div *ngIf="showVertebralArteryFields" class="dependent-field-box">
+        <vertebral-artery [parentForm]="neuroVascularForm"
+            [topSelect]="['Extension']"
+            [bodySelect]="['Extension with Rotation']"
+            [parentFieldName]="'vertebral_artery_details'">
+        </vertebral-artery>
     </div>
     <div class="form-row">
         <label class="field-label">Allen's Test (Circulation)</label>

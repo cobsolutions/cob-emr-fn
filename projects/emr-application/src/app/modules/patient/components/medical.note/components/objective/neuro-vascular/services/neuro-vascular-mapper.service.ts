@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NeuroVascular } from '../models/NeuroVascular';
+import { NeuroVascular, VertebralArteryDetails } from '../models/NeuroVascular';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,7 @@ export class NeuroVascularMapperService {
     'neural_tissue_tension_lower': 'neuralTissueTensionLower',
     'vascular': 'vascular',
     'vertebral_artery': 'vertebralArtery',
+    'vertebral_artery_details': 'vertebralArteryDetails',
     'allen_s_test_circulation': 'allenSTestCirculation',
     'capillary_refill': 'capillaryRefill',
     'homan_s_sign': 'homanSSign',
@@ -338,6 +339,34 @@ export class NeuroVascularMapperService {
     'additionalComments'
   ]);
 
+  private readonly objectFields = new Set([
+    'vertebralArteryDetails'
+  ]);
+
+  private readonly defaultVertebralArteryDetails: VertebralArteryDetails = {
+    extension: [],
+    rightExtensionWithRotation: [],
+    leftExtensionWithRotation: []
+  };
+
+  private mapVertebralArteryToModel(value: any): VertebralArteryDetails {
+    if (!value) return { ...this.defaultVertebralArteryDetails };
+    return {
+      extension: value.Extension || value.extension || [],
+      rightExtensionWithRotation: value.right_ExtensionWithRotation || value.rightExtensionWithRotation || [],
+      leftExtensionWithRotation: value.left_ExtensionWithRotation || value.leftExtensionWithRotation || []
+    };
+  }
+
+  private mapVertebralArteryFromDto(value: any): any {
+    if (!value) return null;
+    return {
+      Extension: value.extension || value.Extension || [],
+      right_ExtensionWithRotation: value.rightExtensionWithRotation || value.right_ExtensionWithRotation || [],
+      left_ExtensionWithRotation: value.leftExtensionWithRotation || value.left_ExtensionWithRotation || []
+    };
+  }
+
   private readonly triStateFields = new Set([
     'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'extremityReflexesEqualNormalBilateral',
@@ -371,7 +400,9 @@ export class NeuroVascularMapperService {
       if (formKey in formValue) {
         const value = formValue[formKey];
 
-        if (this.triStateFields.has(dtoKey)) {
+        if (this.objectFields.has(dtoKey)) {
+          model[dtoKey] = this.mapVertebralArteryToModel(value);
+        } else if (this.triStateFields.has(dtoKey)) {
           model[dtoKey] = this.mapTriStateToModel(value);
         } else if (this.booleanFields.has(dtoKey)) {
           model[dtoKey] = value === 'yes';
@@ -391,7 +422,9 @@ export class NeuroVascularMapperService {
       if (dtoKey in dto) {
         const value = (dto as any)[dtoKey];
 
-        if (this.triStateFields.has(dtoKey)) {
+        if (this.objectFields.has(dtoKey)) {
+          formValue[formKey] = this.mapVertebralArteryFromDto(value);
+        } else if (this.triStateFields.has(dtoKey)) {
           formValue[formKey] = this.mapTriStateFromDto(value);
         } else if (this.booleanFields.has(dtoKey)) {
           formValue[formKey] = value ? 'yes' : 'no';

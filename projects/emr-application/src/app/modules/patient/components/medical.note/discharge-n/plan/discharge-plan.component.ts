@@ -179,7 +179,8 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
   private readonly triStateFields = new Set([
     'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'extremityReflexesEqualNormalBilateral',
-    'sensoryOrVascularDeficitsNoted'
+    'sensoryOrVascularDeficitsNoted',
+    'vertebralArteryDetails'
   ]);
 
   private normalizeYesNoInObject(obj: any): void {

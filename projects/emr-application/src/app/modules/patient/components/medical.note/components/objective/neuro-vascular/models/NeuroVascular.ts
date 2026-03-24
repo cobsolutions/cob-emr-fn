@@ -1,3 +1,9 @@
+export interface VertebralArteryDetails {
+  extension: string[];
+  rightExtensionWithRotation: string[];
+  leftExtensionWithRotation: string[];
+}
+
 export interface NeuroVascular {
   complaintsOfAnyRadicularSymptomsInEitherExtremity: string;
   complaintsRadicularInput: string;
@@ -16,6 +22,7 @@ export interface NeuroVascular {
   neuralTissueTensionLower: boolean;
   vascular: boolean;
   vertebralArtery: boolean;
+  vertebralArteryDetails: VertebralArteryDetails;
   allenSTestCirculation: boolean;
   capillaryRefill: boolean;
   homanSSign: boolean;
