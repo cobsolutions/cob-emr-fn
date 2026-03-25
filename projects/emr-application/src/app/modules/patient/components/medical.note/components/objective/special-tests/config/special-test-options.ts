@@ -13,8 +13,20 @@ export const ober_OPTIONS: RomOption[] = [
   
   export const ninetynineHamstringFlexibility_OPTIONS: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
-    { value: 'Positive', label: 'Positive' },
-    { value: 'Negative', label: 'Negative' }
+    { value: 'custom', label: 'Custom' },
+    { value: '0', label: '0 °' },
+    { value: '5', label: '(5) °' },
+    { value: '10', label: '(10) °' },
+    { value: '15', label: '(15) °' },
+    { value: '20', label: '(20) °' },
+    { value: '25', label: '(25) °' },
+    { value: '30', label: '(30) °' },
+    { value: '35', label: '(35) °' },
+    { value: '40', label: '(40) °' },
+    { value: '45', label: '(45) °' },
+    { value: '50', label: '(50) °' },
+    { value: '55', label: '(55) °' },
+    { value: '60', label: '(60) °' },
   ];
   export const craigsTest_OPTIONS: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
@@ -87,8 +99,10 @@ export const ober_OPTIONS: RomOption[] = [
   
   export const patellarBallottement_OPTIONS: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
-    { value: 'Positive', label: 'Positive' },
-    { value: 'Negative', label: 'Negative' }
+    { value: 'Negative', label: 'Negative' },
+    { value: 'positive_for_max_effusion', label: 'Positive for Max Effusion' },
+    { value: 'moderate_effusion', label: 'Moderate Effusion' },
+    { value: 'minimal_effusion', label: 'Minimal Effusion' }
   ];
   
   export const patellarCompression_OPTIONS: RomOption[] = [

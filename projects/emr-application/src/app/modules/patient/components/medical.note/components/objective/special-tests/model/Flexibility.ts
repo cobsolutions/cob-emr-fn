@@ -19,6 +19,8 @@ export interface Flexibility {
   oberLeft: string;
   ninetynineHamstringFlexibilityRight: string;
   ninetynineHamstringFlexibilityLeft: string;
+  ninetynineHamstringFlexibilityRightCustom: string;
+  ninetynineHamstringFlexibilityLeftCustom: string;
   gastrocnemiusLengthTestApplyToAll: string;
   gastrocnemiusLengthTestGastrocnemiusLengthRight: string;
   gastrocnemiusLengthTestGastrocnemiusLengthLeft: string;
