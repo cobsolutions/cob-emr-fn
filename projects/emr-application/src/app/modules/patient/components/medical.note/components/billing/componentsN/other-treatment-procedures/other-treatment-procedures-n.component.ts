@@ -37,7 +37,7 @@ export class OtherTreatmentProceduresNComponent implements OnInit, OnChanges {
       const quantityControl = this.OtherTreatmentProceduresForm.get(item.code);
       const notesControl = this.OtherTreatmentProceduresForm.get(item.code + '_notes');
       if (quantityControl) {
-        quantityControl.setValue(item.quantity || 0);
+        quantityControl.setValue(item.quantity || null);
       }
       if (notesControl) {
         notesControl.setValue(item.note || '');
@@ -49,7 +49,7 @@ export class OtherTreatmentProceduresNComponent implements OnInit, OnChanges {
     const formControls: any = {};
 
     this.billingCPTCodeList.forEach(code => {
-      formControls[code.cpt] = [0];
+      formControls[code.cpt] = [null];
       formControls[code.cpt + '_notes'] = [''];
     });
 
