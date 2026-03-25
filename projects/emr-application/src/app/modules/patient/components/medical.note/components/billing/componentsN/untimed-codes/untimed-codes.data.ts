@@ -37,10 +37,25 @@ export const UNTIMED_CODES_DATA: BillingCPTCode[] = [
     "quantity": 0
   },
   {
-    "cpt": "97014",
-    "description": "E-Stim Unattended  Pre-Modulated  High Volt  Interferential  Russian  Other",
+    "cpt": "G0283",
+    "description": "E-Stim Medicare Non-Wound Unattended",
     "quantity": 0
   },
+  {
+    "cpt": "G0282",
+    "description": "E-Stim Medicare Wounds Unattended",
+    "quantity": 0
+  },
+  {
+    "cpt": "G0281",
+    "description": "E-Stim Medicare Chronic Wounds Unattended",
+    "quantity": 0
+  },
+  // {
+  //   "cpt": "97014",
+  //   "description": "E-Stim Unattended  Pre-Modulated  High Volt  Interferential  Russian  Other",
+  //   "quantity": 0
+  // },
   {
     "cpt": "90901",
     "description": "Biofeedback Training",
