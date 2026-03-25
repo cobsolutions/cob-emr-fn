@@ -10,6 +10,10 @@ export interface Patellofemoral {
   patellarBallottementPatellarBallottementLeft: string;
   patellarCompressionPatellarCompressionRight: string;
   patellarCompressionPatellarCompressionLeft: string;
-  patellarPassiveMobilityPatellarPassiveMobilityRight: string;
-  patellarPassiveMobilityPatellarPassiveMobilityLeft: string;
+  patellarPassiveMobilityMedialRight: string;
+  patellarPassiveMobilityMedialLeft: string;
+  patellarPassiveMobilityLateralRight: string;
+  patellarPassiveMobilityLateralLeft: string;
+  patellarPassiveMobilitySuperiorRight: string;
+  patellarPassiveMobilitySuperiorLeft: string;
 }

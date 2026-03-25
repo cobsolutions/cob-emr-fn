@@ -127,8 +127,12 @@ export class SpecialTestsMapperService {
       patellar_compression_left_normal: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Normal'),
       patellar_compression_left_crepitus: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Crepitus'),
       patellar_compression_left_painful: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Painful'),
-      patellar_passive_mobility_patellar_passive_mobility_right: dto.patellofemoral?.patellarPassiveMobilityPatellarPassiveMobilityRight || '',
-      patellar_passive_mobility_patellar_passive_mobility_left: dto.patellofemoral?.patellarPassiveMobilityPatellarPassiveMobilityLeft || '',
+      patellar_passive_mobility_medial_right: dto.patellofemoral?.patellarPassiveMobilityMedialRight || 'not_tested',
+      patellar_passive_mobility_medial_left: dto.patellofemoral?.patellarPassiveMobilityMedialLeft || 'not_tested',
+      patellar_passive_mobility_lateral_right: dto.patellofemoral?.patellarPassiveMobilityLateralRight || 'not_tested',
+      patellar_passive_mobility_lateral_left: dto.patellofemoral?.patellarPassiveMobilityLateralLeft || 'not_tested',
+      patellar_passive_mobility_superior_right: dto.patellofemoral?.patellarPassiveMobilitySuperiorRight || 'not_tested',
+      patellar_passive_mobility_superior_left: dto.patellofemoral?.patellarPassiveMobilitySuperiorLeft || 'not_tested',
 
       // Functional
       functional: this.boolToYesNo(dto.functional?.functional),
@@ -397,8 +401,12 @@ export class SpecialTestsMapperService {
       patellarBallottementPatellarBallottementLeft: formValue.patellar_ballottement_patellar_ballottement_left || '',
       patellarCompressionPatellarCompressionRight: this.buildCheckboxString(formValue, 'patellar_compression_right'),
       patellarCompressionPatellarCompressionLeft: this.buildCheckboxString(formValue, 'patellar_compression_left'),
-      patellarPassiveMobilityPatellarPassiveMobilityRight: formValue.patellar_passive_mobility_patellar_passive_mobility_right || '',
-      patellarPassiveMobilityPatellarPassiveMobilityLeft: formValue.patellar_passive_mobility_patellar_passive_mobility_left || ''
+      patellarPassiveMobilityMedialRight: formValue.patellar_passive_mobility_medial_right || 'not_tested',
+      patellarPassiveMobilityMedialLeft: formValue.patellar_passive_mobility_medial_left || 'not_tested',
+      patellarPassiveMobilityLateralRight: formValue.patellar_passive_mobility_lateral_right || 'not_tested',
+      patellarPassiveMobilityLateralLeft: formValue.patellar_passive_mobility_lateral_left || 'not_tested',
+      patellarPassiveMobilitySuperiorRight: formValue.patellar_passive_mobility_superior_right || 'not_tested',
+      patellarPassiveMobilitySuperiorLeft: formValue.patellar_passive_mobility_superior_left || 'not_tested'
     };
   }
 

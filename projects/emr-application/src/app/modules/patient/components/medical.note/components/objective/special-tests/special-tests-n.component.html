@@ -586,15 +586,67 @@
             </div>
         </div>
         <div *ngIf="showPatellofemoralPatellarPassiveMobilityFields" class="dependent-field-box">
-            <measurement-table [labels]="specialTestConfig.patellarPassiveMobility.labels"
-                [options]="specialTestConfig.patellarPassiveMobility.options" [formGroup]="specialTestForm"
-                [fieldPrefix]="specialTestConfig.patellarPassiveMobility.fieldPrefix"
-                [applyToAllFieldName]="specialTestConfig.patellarPassiveMobility.applyToAllFieldName"
-                [commentsFieldName]="specialTestConfig.patellarPassiveMobility.commentsFieldName"
-                [showApplyToAll]="specialTestConfig.patellarPassiveMobility.showApplyToAll"
-                [showComments]="specialTestConfig.patellarPassiveMobility.showComments"
-                [initialData]="formData">
-            </measurement-table>
+            <table class="walk-test-table" [formGroup]="specialTestForm">
+                <tbody>
+                    <tr>
+                        <td>Medial</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_medial_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_medial_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lateral</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_lateral_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_lateral_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Superior</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_superior_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_superior_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="form-row">

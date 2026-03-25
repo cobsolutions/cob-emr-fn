@@ -125,6 +125,12 @@ export class SpecialTestsNComponent implements OnInit {
       patellar_compression_left_crepitus: [false],
       patellar_compression_left_painful: [false],
       patellar_passive_mobility: ['no'],
+      patellar_passive_mobility_medial_right: ['not_tested'],
+      patellar_passive_mobility_medial_left: ['not_tested'],
+      patellar_passive_mobility_lateral_right: ['not_tested'],
+      patellar_passive_mobility_lateral_left: ['not_tested'],
+      patellar_passive_mobility_superior_right: ['not_tested'],
+      patellar_passive_mobility_superior_left: ['not_tested'],
 
       functional: ['no'],
       core_stabilization: ['no'],
