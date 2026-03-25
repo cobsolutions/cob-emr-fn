@@ -6,6 +6,7 @@ export interface AssessmentModel{
     parentPatientEducation?:string
     rehabPotential?:string,
     contraindicationsTotherapy?:boolean,
+    contraindicationsToTherapyConsent?:boolean,
     consentToCare?:string
     patientComplianceHep?:boolean,
     patientConsultationMaintainOrResume?:boolean,

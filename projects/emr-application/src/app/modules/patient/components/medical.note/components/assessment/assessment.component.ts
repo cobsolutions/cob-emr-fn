@@ -25,6 +25,7 @@ export class AssessmentComponent implements OnInit {
   showPatientComplianceHEP: boolean
   showPatientConsultationMaintain: boolean
   showPatientConsultationbedRest: boolean
+  showContraindicationsToTherapy: boolean
 
   constructor(private fb: FormBuilder
     , private fieldDependentsService: FieldDependentsService
@@ -56,6 +57,14 @@ export class AssessmentComponent implements OnInit {
         })
       }
     })
+    this.assessmentForm.get('contraindications_to_therapy')?.valueChanges.subscribe(value => {
+      this.showContraindicationsToTherapy = value === 'yes';
+      if (value !== 'yes') {
+        this.assessmentForm.patchValue({
+          contraindications_to_therapy_consent: false
+        });
+      }
+    });
     this.assessmentForm.get('patient_consultation_against_bed_rest')?.valueChanges.subscribe(value => {
       this.showPatientConsultationbedRest = value
       if (value === false) {
@@ -150,6 +159,7 @@ export class AssessmentComponent implements OnInit {
       parent_patient_education: [],
       rehab_potential: [''],
       contraindications_to_therapy: ['no'],
+      contraindications_to_therapy_consent: [false],
       consent_to_care: [],
       patient_compliance_hep: [false],
       patient_consultation_maintain_or_resume: [false],

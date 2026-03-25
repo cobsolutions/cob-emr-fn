@@ -85,6 +85,12 @@
             </c-form-check>
         </div>
     </div>
+    <div *ngIf="showContraindicationsToTherapy" class="dependent-field-box">
+        <c-form-check>
+            <input cFormCheckInput type="checkbox" formControlName="contraindications_to_therapy_consent" />
+            <label cFormCheckLabel>Following the evaluation and extensive patient education regarding diagnosis, prognosis, and treatment goals, the patient (parent/guardian, power of attorney holder) actively participated in the creation of the current goals and agrees to the current treatment plan.</label>
+        </c-form-check>
+    </div>
     <!-- Consent to care -->
     <div class="form-row">
         <label class="field-label">Consent to care</label>
