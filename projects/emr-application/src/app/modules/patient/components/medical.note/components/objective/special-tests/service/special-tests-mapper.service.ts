@@ -121,8 +121,12 @@ export class SpecialTestsMapperService {
       j_sign_j_sign_left: dto.patellofemoral?.jSignJSignLeft || '',
       patellar_ballottement_patellar_ballottement_right: dto.patellofemoral?.patellarBallottementPatellarBallottementRight || '',
       patellar_ballottement_patellar_ballottement_left: dto.patellofemoral?.patellarBallottementPatellarBallottementLeft || '',
-      patellar_compression_patellar_compression_right: dto.patellofemoral?.patellarCompressionPatellarCompressionRight || '',
-      patellar_compression_patellar_compression_left: dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '',
+      patellar_compression_right_normal: (dto.patellofemoral?.patellarCompressionPatellarCompressionRight || '').includes('Normal'),
+      patellar_compression_right_crepitus: (dto.patellofemoral?.patellarCompressionPatellarCompressionRight || '').includes('Crepitus'),
+      patellar_compression_right_painful: (dto.patellofemoral?.patellarCompressionPatellarCompressionRight || '').includes('Painful'),
+      patellar_compression_left_normal: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Normal'),
+      patellar_compression_left_crepitus: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Crepitus'),
+      patellar_compression_left_painful: (dto.patellofemoral?.patellarCompressionPatellarCompressionLeft || '').includes('Painful'),
       patellar_passive_mobility_patellar_passive_mobility_right: dto.patellofemoral?.patellarPassiveMobilityPatellarPassiveMobilityRight || '',
       patellar_passive_mobility_patellar_passive_mobility_left: dto.patellofemoral?.patellarPassiveMobilityPatellarPassiveMobilityLeft || '',
 
@@ -391,8 +395,8 @@ export class SpecialTestsMapperService {
       jSignJSignLeft: formValue.j_sign_j_sign_left || '',
       patellarBallottementPatellarBallottementRight: formValue.patellar_ballottement_patellar_ballottement_right || '',
       patellarBallottementPatellarBallottementLeft: formValue.patellar_ballottement_patellar_ballottement_left || '',
-      patellarCompressionPatellarCompressionRight: formValue.patellar_compression_patellar_compression_right || '',
-      patellarCompressionPatellarCompressionLeft: formValue.patellar_compression_patellar_compression_left || '',
+      patellarCompressionPatellarCompressionRight: this.buildCheckboxString(formValue, 'patellar_compression_right'),
+      patellarCompressionPatellarCompressionLeft: this.buildCheckboxString(formValue, 'patellar_compression_left'),
       patellarPassiveMobilityPatellarPassiveMobilityRight: formValue.patellar_passive_mobility_patellar_passive_mobility_right || '',
       patellarPassiveMobilityPatellarPassiveMobilityLeft: formValue.patellar_passive_mobility_patellar_passive_mobility_left || ''
     };
@@ -584,5 +588,17 @@ export class SpecialTestsMapperService {
 
   private boolToYesNo(value: boolean | undefined): string {
     return value ? 'yes' : 'no';
+  }
+
+  private buildCheckboxString(formValue: any, prefix: string): string {
+    const options = [
+      { key: `${prefix}_normal`, label: 'Normal' },
+      { key: `${prefix}_crepitus`, label: 'Crepitus' },
+      { key: `${prefix}_painful`, label: 'Painful' }
+    ];
+    return options
+      .filter(opt => formValue[opt.key])
+      .map(opt => opt.label)
+      .join(', ');
   }
 }

@@ -118,6 +118,12 @@ export class SpecialTestsNComponent implements OnInit {
       j_sign: ['no'],
       patellar_ballottement: ['no'],
       patellar_compression: ['no'],
+      patellar_compression_right_normal: [false],
+      patellar_compression_right_crepitus: [false],
+      patellar_compression_right_painful: [false],
+      patellar_compression_left_normal: [false],
+      patellar_compression_left_crepitus: [false],
+      patellar_compression_left_painful: [false],
       patellar_passive_mobility: ['no'],
 
       functional: ['no'],
