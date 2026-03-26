@@ -346,7 +346,7 @@ export class MedicalHistoryNComponent implements OnInit {
       this.showHistoryOfFallsYES = value === 'yes';
       this.showHistoryOfFallsNO = value === 'no';
       console.log(value)
-      if (value === null)
+      if (value === 'na')
         this.medicalHistoryForm.patchValue({
           history_of_falls_document: 'no',
           history_of_falls_document_text: null,

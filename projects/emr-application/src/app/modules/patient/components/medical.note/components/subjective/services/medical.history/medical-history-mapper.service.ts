@@ -130,9 +130,9 @@ export class MedicalHistoryMapperService {
 
     // historyOfFalls
     const isHistoryOfFalls = formGroup.get('history_of_falls')?.value;
-    medicalHistory.isHistoryOfFalls = isHistoryOfFalls;
+    medicalHistory.isHistoryOfFalls = isHistoryOfFalls || 'na';
 
-    if (isHistoryOfFalls) {
+    if (isHistoryOfFalls === 'yes') {
       const historyFall: HistoryFall = {};
 
       // historyOfFallsDocument
@@ -300,7 +300,8 @@ export class MedicalHistoryMapperService {
       medicalHistory.mentalStatusDescription = formGroup.get('mental_status_cognitive_function_appears_impaired_text')?.value;
     }
     // unexplainedWeightLoss
-    medicalHistory.weightLoss = formGroup.get('unexplained_weight_loss')?.value;
+    const weightLossValue = formGroup.get('unexplained_weight_loss')?.value;
+    medicalHistory.weightLoss = weightLossValue || 'na';
 
     return medicalHistory;
   }
@@ -362,7 +363,7 @@ export class MedicalHistoryMapperService {
     mapped.home_health_care_text = dto.homeHealthCareDescription;
 
     // historyOfFalls
-    mapped.history_of_falls = dto.isHistoryOfFalls;
+    mapped.history_of_falls = (dto.isHistoryOfFalls as any) === true ? 'yes' : (dto.isHistoryOfFalls as any) === false ? 'no' : (dto.isHistoryOfFalls || 'na');
 
     if (dto.historyFall) {
       const fall = dto.historyFall;
@@ -421,7 +422,7 @@ export class MedicalHistoryMapperService {
     mapped.medical_history_review = dto.medicalHistoryReview;
     mapped.mental_status_cognitive_function_appears_impaired = dto.isMentalStatus;
     mapped.mental_status_cognitive_function_appears_impaired_text = dto.mentalStatusDescription;
-    mapped.unexplained_weight_loss = dto.weightLoss;
+    mapped.unexplained_weight_loss = (dto.weightLoss as any) === true ? 'yes' : (dto.weightLoss as any) === false ? 'no' : (dto.weightLoss || 'na');
 
     return mapped;
   }

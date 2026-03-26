@@ -180,7 +180,9 @@ export class DischargePlanNComponent implements OnInit, AfterViewInit, OnChanges
     'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'extremityReflexesEqualNormalBilateral',
     'sensoryOrVascularDeficitsNoted',
-    'vertebralArteryDetails'
+    'vertebralArteryDetails',
+    'isHistoryOfFalls',
+    'weightLoss'
   ]);
 
   private normalizeYesNoInObject(obj: any): void {

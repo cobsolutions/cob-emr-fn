@@ -162,7 +162,9 @@ export class BillingNComponent implements OnInit {
     'complaintsOfAnyRadicularSymptomsInEitherExtremity',
     'extremityReflexesEqualNormalBilateral',
     'sensoryOrVascularDeficitsNoted',
-    'vertebralArteryDetails'
+    'vertebralArteryDetails',
+    'isHistoryOfFalls',
+    'weightLoss'
   ]);
 
   private normalizeYesNoInObject(obj: any): void {

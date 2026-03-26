@@ -19,7 +19,7 @@ export interface MedicalHistory {
     homeHealthCareDescription?: string,
 
     //historyOfFalls
-    isHistoryOfFalls?: boolean,
+    isHistoryOfFalls?: string,
     historyFall?: HistoryFall,
 
     // medicalHistoryAlzheimersCheckbox?: boolean;
@@ -113,7 +113,7 @@ export interface MedicalHistory {
     // mentalStatusCognitiveFunctionAppearsImpairedText
     mentalStatusDescription?: string,
     //unexplainedWeightLoss
-    weightLoss?: boolean
+    weightLoss?: string
 
 
 
