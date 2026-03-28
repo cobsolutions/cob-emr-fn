@@ -993,11 +993,11 @@ export class RangeOfMotionMapperService {
   }
 
   private unmapHandAROMPROM(handAROMPROM: any) {
-    const thumb = handAROMPROM.thumbAROMPROM;
-    const index = handAROMPROM.indexFingerAROMPROM;
-    const middle = handAROMPROM.middleFingerAROMPROM;
-    const ring = handAROMPROM.ringFingerAROMPROM;
-    const small = handAROMPROM.smallFingerAROMPROM;
+    const thumb = handAROMPROM.thumbAROMPROM || {};
+    const index = handAROMPROM.indexFingerAROMPROM || {};
+    const middle = handAROMPROM.middleFingerAROMPROM || {};
+    const ring = handAROMPROM.ringFingerAROMPROM || {};
+    const small = handAROMPROM.smallFingerAROMPROM || {};
 
     return {
       hand_arrom_prom: handAROMPROM.handArromProm ? 'yes' : 'no',
