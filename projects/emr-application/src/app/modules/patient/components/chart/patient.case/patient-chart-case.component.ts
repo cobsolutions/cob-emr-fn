@@ -472,11 +472,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = status === 'Initial Exam Plan'
-          ? `${this.patientName}-medical-note-plan-of-care-${noteId}.pdf`
-          : status === 'Initial Exam Score'
-          ? `${this.patientName}-medical-note-score-test-${noteId}.pdf`
-          : `medical-note-${this.patientName}.pdf`;
+        const noteType = (status || 'medical-note').toLowerCase().replace(/[\s_]+/g, '-');
+        link.download = `${noteType}_${noteId}.pdf`;
         link.click();
         window.URL.revokeObjectURL(url);
       });
