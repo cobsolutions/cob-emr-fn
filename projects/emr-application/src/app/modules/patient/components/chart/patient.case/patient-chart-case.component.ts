@@ -3,7 +3,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { map, Observable, retry, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, retry, Subscription, take, tap } from 'rxjs';
+import { IApiParams } from '../../../../common/interfaces/api.params';
 import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
@@ -67,6 +68,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   isClinicalUser: boolean = false;
   canInitializeMedicalNote: boolean = false;
   private draftSub!: Subscription;
+  private allRecordsParams$ = new BehaviorSubject<IApiParams>({ limit: 1000, offset: 0 });
 
   // E-Document properties
   showEDocumentForm: boolean = false;
@@ -163,6 +165,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.initPatientCaseActions();
     this.getReferringCaseData();
     this.getRecords();
+    this.refreshRecordActions();
     this.checkAuthExpiration()
     this.patient.patientCaseId = this.case.uuid
     this.chartNote = this.case.chartNote || '';
@@ -172,6 +175,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     this.draftSub = this.medialNoteService.draft$.subscribe(() => {
       console.log('draftSub')
       this.getRecords();
+      this.refreshRecordActions();
     });
   }
 
@@ -252,11 +256,23 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         this.loadingData$.next(false);
       }),
       map((response: any) => {
-        this.filterActionsByRecords(response.records);
         return response.records;
       })
     )
   }
+  private refreshRecordActions() {
+    const patientRecordRequest: PatientRecordRequest = {
+      patientId: this.patientId,
+      caseId: this.case.uuid,
+      loggedIn: this.loggedInService.getLoggedUser().uuid
+    };
+    this.patientRecordService.find(this.allRecordsParams$, patientRecordRequest).pipe(
+      take(1)
+    ).subscribe((response: any) => {
+      this.filterActionsByRecords(response.records);
+    });
+  }
+
   private filterActionsByRecords(records: PatientRecord[]) {
     const statuses = records.map(r => r.status);
     const hasInitialExam = statuses.some(s => s === 'Initial Examination' || s === 'Initial_Examination');
@@ -482,6 +498,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   handleBackAction() {
     this.patientRecord = true;
     this.getRecords();
+    this.refreshRecordActions();
     this.cdr.markForCheck();
   }
   private getAppointment(id: number) {
@@ -494,6 +511,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   private removeMedicalNote(noteId: string) {
     this.initialExamNoteService.remove(noteId).subscribe(() => {
       this.getRecords();
+      this.refreshRecordActions();
     })
   }
   private completeMedicalNote(id: number, status: string) {
