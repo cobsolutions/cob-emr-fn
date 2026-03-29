@@ -453,6 +453,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       let exportService$;
       if (status === 'Initial Examination') {
         exportService$ = this.initialExamNoteService.exportPDF(noteId);
+      } else if (status === 'Initial Exam Plan') {
+        exportService$ = this.initialExamNoteService.exportPlanOfCarePDF(noteId);
       } else if (status === 'Daily Note') {
         exportService$ = this.dailyNoteService.exportPDF(noteId);
       } else if (status === 'Progress Note') {
@@ -468,7 +470,9 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `medical-note-${this.patientName}.pdf`;
+        link.download = status === 'Initial Exam Plan'
+          ? `${this.patientName}-medical-note-plan-of-care-${noteId}.pdf`
+          : `medical-note-${this.patientName}.pdf`;
         link.click();
         window.URL.revokeObjectURL(url);
       });
