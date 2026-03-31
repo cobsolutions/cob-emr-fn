@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'projects/emr-application/src/app/modules/administration/model/user/user';
 import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { filter, switchMap } from 'rxjs';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { InitialExamNoteService } from '../../../../services/medical.note/initial.exam/initial-exam-note.service';
@@ -17,6 +16,7 @@ export class ForwardModalComponent implements OnInit {
   clinicalUsers: User[]
   selectedUserUuid: string;
   errorMessage: string = undefined
+  loading: boolean = true;
   @Output() changeVisibility = new EventEmitter<string>()
   @Output() backToRecords = new EventEmitter<void>()
   @Input() noteId: string
@@ -26,25 +26,24 @@ export class ForwardModalComponent implements OnInit {
   constructor(private loggedInService: LoggedInService
     , private dotorUserService: DotorUserService
     , private medialNoteService: MedialNoteService
-    , private initialExamNoteService: InitialExamNoteService) { }
+    , private initialExamNoteService: InitialExamNoteService
+    , private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.loggedInService.selectedClinic$.pipe(
-      filter(clinicId => clinicId !== null),
-      switchMap(clinicId => {
-        this.clinicId = clinicId;
-        const logged: string = this.loggedInService.getLoggedUser().uuid;
-        return this.dotorUserService.findAuthProviderToFinalize(clinicId, logged)
+    this.clinicId = this.loggedInService.selectedClinic$.value;
+    const logged: string = this.loggedInService.getLoggedUser().uuid;
+    this.dotorUserService.findAuthProviderToFinalize(this.clinicId, logged)
+      .subscribe((users: any) => {
+        this.clinicalUsers = users
+        this.loading = false;
+        if (this.clinicalUsers.length > 0) {
+          this.selectedUserUuid = this.clinicalUsers[0].uuid
+          this.errorMessage = undefined
+        } else {
+          this.errorMessage = "Sorry There is no available provider to forward."
+        }
+        this.cdr.detectChanges();
       })
-    ).subscribe((users: any) => {
-      this.clinicalUsers = users
-      if (this.clinicalUsers.length > 0) {
-        this.selectedUserUuid = this.clinicalUsers[0].uuid
-        this.errorMessage = undefined
-      } else {
-        this.errorMessage = "Sorry There is no available provider to forward."
-      }
-    })
   }
   forward() {
     if (this.noteType === MedicalNoteType.Initial_Examination) {
@@ -77,6 +76,7 @@ export class ForwardModalComponent implements OnInit {
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to forward the note. Please try again.';
+          this.cdr.detectChanges();
         }
       });
     } else {
@@ -90,6 +90,7 @@ export class ForwardModalComponent implements OnInit {
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to forward the note. Please try again.';
+          this.cdr.detectChanges();
         }
       });
     }

@@ -1,4 +1,7 @@
-<div class="forward-modal-container" *ngIf="clinicalUsers">
+<div *ngIf="loading" class="forward-modal-container" style="display: flex; justify-content: center; align-items: center; padding: 2rem;">
+    <c-spinner color="primary"></c-spinner>
+</div>
+<div class="forward-modal-container" *ngIf="!loading && clinicalUsers">
     <div *ngIf="!errorMessage" class="forward-content">
         <!-- Info Section -->
         <div class="info-section">
@@ -58,7 +61,7 @@
             </svg>
         </div>
         <div class="error-content">
-            <p class="error-title">No Providers Available</p>
+            <p class="error-title">Error Forwarding Note</p>
             <p class="error-text">{{errorMessage}}</p>
         </div>
     </div>
