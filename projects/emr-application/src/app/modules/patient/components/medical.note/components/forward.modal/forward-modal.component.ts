@@ -52,6 +52,7 @@ export class ForwardModalComponent implements OnInit {
       const request = {
         patientCaseId: this.caseId,
         forwardedBy: {
+          providerId: loggedUser?.uuid,
           providerName: loggedUser?.lastName + ', ' + loggedUser?.firstName,
           npi: loggedUser.providerInfo?.npi,
           credential: loggedUser.providerInfo?.credential,
@@ -59,6 +60,7 @@ export class ForwardModalComponent implements OnInit {
           speciality: loggedUser.providerInfo?.speciality
         },
         forwardedTo: {
+          providerId: selectedUser?.uuid,
           providerName: selectedUser?.lastName + ', ' + selectedUser?.firstName,
           npi: selectedUser?.npi,
           credential: selectedUser?.credential,

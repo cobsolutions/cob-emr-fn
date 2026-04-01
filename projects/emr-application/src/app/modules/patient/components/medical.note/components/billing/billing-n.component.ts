@@ -30,6 +30,7 @@ export class BillingNComponent implements OnInit {
   finalizeNoteVisibility: boolean = false;
   forwardVisibility: boolean = false;
   @Input() noteType: MedicalNoteType;
+  @Input() disableFinalize: boolean = false;
   medicalNoteRequest: MedicalNoteRequest;
   constructor(
     private fb: FormBuilder,

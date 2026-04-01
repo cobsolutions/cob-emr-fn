@@ -25,4 +25,6 @@ export interface MedicalNoteRequest {
     dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
     finalizedBy?: ProviderInfo
+    isForwarded?: boolean
+    coSigner?: string
 }

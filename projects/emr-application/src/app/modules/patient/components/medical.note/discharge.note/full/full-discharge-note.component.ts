@@ -26,6 +26,8 @@ export class FullDischargeNoteComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   noteCreator: string
   noteFinalizr: string
+  noteCoSigner: string
+  disableFinalize: boolean = false
   type: MedicalNoteType = MedicalNoteType.Discharge_Note;
   private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
@@ -60,6 +62,8 @@ export class FullDischargeNoteComponent implements OnInit {
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
+        this.noteCoSigner = data.coSigner;
+        this.disableFinalize = !!data.isForwarded && data.coSigner === this.loggedInService.getLoggedUser().uuid;
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()

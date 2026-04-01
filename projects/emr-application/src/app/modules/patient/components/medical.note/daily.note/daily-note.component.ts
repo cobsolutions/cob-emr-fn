@@ -28,6 +28,8 @@ export class DailyNoteComponent implements OnInit {
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
   noteCreator: string
   noteFinalizr: string
+  noteCoSigner: string
+  disableFinalize: boolean = false
   private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
@@ -60,6 +62,8 @@ export class DailyNoteComponent implements OnInit {
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
+        this.noteCoSigner = data.coSigner;
+        this.disableFinalize = !!data.isForwarded && data.coSigner === this.loggedInService.getLoggedUser().uuid;
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()

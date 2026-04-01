@@ -12,6 +12,9 @@
             </button>
         </c-input-group>
     </div>
+    <div *ngIf="noteCoSigner" class="signer-info m-2" style="display: flex; gap: 24px; font-size: 0.9em; color: #555;">
+        <span *ngIf="noteCoSigner"><strong>Co-signer:</strong> {{ noteCoSigner }}</span>
+    </div>
     <form [formGroup]="dailyNoteForm" *ngIf="dailyNoteForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
             <!-- subjective step -->
@@ -30,7 +33,8 @@
                 <!-- Billing inside Objective for Daily Note -->
                 <billing-n *ngIf="visitedSteps[1]" [stepper]="stepper" [parentForm]="dailyNoteForm"
                     (formReady)="setChildForm('billing', $event)" [noteTypeId]="'DailyNote'" [noteType]="type" [caseId]="caseId"
-                    [medicalNoteId]="medicalNoteId" [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing">
+                    [medicalNoteId]="medicalNoteId" [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing"
+                    [disableFinalize]="disableFinalize">
                 </billing-n>
             </mat-step>
             <!-- Assessment Step -->
@@ -47,6 +51,7 @@
                 <daily-plan-n [stepper]="stepper" (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [planData]="medicalNoteSOAP?.planOfCare" [noteType]="type" [parentForm]="dailyNoteForm"
                     [caseId]="caseId" [medicalNoteId]="medicalNoteId" [noteId]="noteId"
+                    [disableFinalize]="disableFinalize"
                     (backToRecords)="backtoPatientRecordActions()">
                 </daily-plan-n>
             </mat-step>

@@ -20,6 +20,7 @@ export class DailyPlanComponent implements OnInit {
   finalizeNoteVisibility: boolean = false;
   @Input() creator: string
   @Input() noteFinalizr: string
+  @Input() disableFinalize: boolean = false
   @Output() backToRecord = new EventEmitter<void>();
   constructor(private fb: FormBuilder, private toastr: ToastrService) { }
 

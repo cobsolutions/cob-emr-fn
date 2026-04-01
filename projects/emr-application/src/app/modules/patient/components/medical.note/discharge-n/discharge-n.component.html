@@ -12,6 +12,9 @@
             </button>
         </c-input-group>
     </div>
+    <div *ngIf="noteCoSigner" class="signer-info m-2" style="display: flex; gap: 24px; font-size: 0.9em; color: #555;">
+        <span *ngIf="noteCoSigner"><strong>Co-signer:</strong> {{ noteCoSigner }}</span>
+    </div>
     <form [formGroup]="dischargeNoteForm" *ngIf="dischargeNoteForm">
         <mat-stepper linear="true" #stepper [orientation]="stepperOrientation" (selectionChange)="onStepChange($event)">
             <!-- subjective step -->
@@ -45,6 +48,7 @@
                     (formReady)="setChildForm('planOfCare', $event)" *ngIf="visitedSteps[3]"
                     [noteType]="type" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
                     [noteId]="noteId" [planData]="medicalNoteSOAP?.dischargePlan"
+                    [disableFinalize]="disableFinalize"
                     (backToRecords)="backtoPatientRecordActions()"></discharge-plan-n>
             </mat-step>
             <!-- Billing Step -->
@@ -54,6 +58,7 @@
                     (formReady)="setChildForm('billing', $event)" *ngIf="visitedSteps[4] "
                     [noteTypeId]="'DischargeNote'" [noteType]="type" [caseId]="caseId" [medicalNoteId]="medicalNoteId"
                     [noteId]="noteId" [billingData]="medicalNoteSOAP?.billing"
+                    [disableFinalize]="disableFinalize"
                     (backToRecords)="backtoPatientRecordActions()"></billing-n>
             </mat-step>
         </mat-stepper>

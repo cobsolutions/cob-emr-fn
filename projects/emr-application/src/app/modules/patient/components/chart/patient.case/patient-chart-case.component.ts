@@ -58,6 +58,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   appointmentCancelNoShowReason: AppointmentCancelNoShowReason
   medicalNoteId: number
   noteId: string
+  noteIsForwarded: boolean
+  noteCoSigner: string
   errorMessage: string;
   showTest: boolean = false;
   componentRole: string[] = [Role.INITIALIZE_MEDICAL_NOTE_ROLE];
@@ -453,13 +455,15 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.cdr.markForCheck();
     })
   }
-  executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string) {
+  executeRecordLineAction(val: string, entityId: number, status?: string, noteId?: string, isForwarded?: boolean, coSigner?: string) {
     if (val === 'View Reason')
       this.getAppointment(entityId)
     if (val === 'Remove')
       this.removeMedicalNote(noteId);
     if (val === 'Complete') {
       this.noteId = noteId;
+      this.noteIsForwarded = isForwarded;
+      this.noteCoSigner = coSigner;
       this.completeMedicalNote(entityId, status)
       this.medialNoteService.medicalNoteID$.next(this.medicalNoteId)
     }

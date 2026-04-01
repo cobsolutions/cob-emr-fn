@@ -25,6 +25,7 @@ export class BillingComponent implements OnInit {
   @Input() caseId: string
   @Input() noteType: MedicalNoteType
   @Input() noteTypeId: string
+  @Input() disableFinalize: boolean = false
   fields: any
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;

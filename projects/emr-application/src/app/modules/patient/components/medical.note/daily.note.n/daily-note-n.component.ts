@@ -36,8 +36,10 @@ export class DailyNoteNComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Input() medicalNoteId: number
   @Input() noteId: string
-  noteCreator: string
-  noteFinalizr: string
+  @Input() isForwarded: boolean
+  @Input() coSigner: string
+  noteCoSigner: string
+  disableFinalize: boolean = false
   @Input() caseId: string
   medicalNoteSOAP: any
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
@@ -76,6 +78,9 @@ export class DailyNoteNComponent implements OnInit {
 
     // Add scroll event listener
     window.addEventListener('scroll', this.onScroll.bind(this));
+
+    this.noteCoSigner = this.coSigner;
+    this.disableFinalize = !!this.isForwarded && this.coSigner === this.loggedInService.getLoggedUser().uuid;
 
     this.dailyNoteService.get(this.noteId).subscribe((note: any) => {
       if (note) {

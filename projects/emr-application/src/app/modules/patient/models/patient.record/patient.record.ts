@@ -6,4 +6,6 @@ export interface PatientRecord{
     dos?:string
     actions?:string[]
     note:boolean
+    isForwarded?:boolean
+    coSigner?:string
 }

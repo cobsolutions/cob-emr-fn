@@ -308,7 +308,7 @@
                                                 </option>
                                             </select>
                                             <button class="record-action-btn"
-                                                (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId)">
+                                                (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId, item.isForwarded, item.coSigner)">
                                                 <svg cIcon name="cilArrowCircleRight"></svg>
                                             </button>
                                         </div>
@@ -406,20 +406,23 @@
         <!-- Initial Examination -->
         <initial-examination *ngIf="patientRecordAction ==='Initial_Examination' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
-            [noteId]="noteId"></initial-examination>
+            [noteId]="noteId" [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></initial-examination>
         <!-- Daily Note -->
         <daily-note-n *ngIf="patientRecordAction ==='Daily_Note' && noteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></daily-note-n>
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></daily-note-n>
         <!-- Progress Note -->
         <progress-note-n *ngIf="patientRecordAction ==='Progress_Note' && noteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></progress-note-n>
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></progress-note-n>
         <!-- Quick Discharge Note -->
         <quick-discharge-n *ngIf="patientRecordAction ==='Quick_Discharge' && noteId"
             (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [noteId]="noteId" [caseId]="case.uuid"
             [patientName]="patientName" (backToRecord)="handleBackAction()"></quick-discharge-n>
         <!-- Discharge Note -->
         <discharge-n *ngIf="patientRecordAction ==='Discharge' && noteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"></discharge-n>
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></discharge-n>
     </div>
 
     <!-- Error State -->

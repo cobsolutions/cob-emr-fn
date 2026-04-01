@@ -27,6 +27,7 @@ export class DailyPlanNComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() caseId: string;
   @Input() medicalNoteId: number;
   @Input() noteId: string;
+  @Input() disableFinalize: boolean = false;
 
   finalizeNoteVisibility: boolean = false;
   forwardVisibility: boolean = false;
