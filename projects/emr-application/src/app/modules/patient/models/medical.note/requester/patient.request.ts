@@ -4,5 +4,6 @@ export interface PatientRequest{
     lastName:string,
     patientId:string,
     dateOfBirth:Date,
-    patientCaseId?:string
+    patientCaseId?:string,
+    clinicIds?:number[]
 }

@@ -128,6 +128,7 @@ import { ShowOMTTestComponent } from './components/medical.note/components/objec
 import { InitialExaminationScoreSummaryComponent } from './components/medical.note/summary/initial.examination.score.summary/initial-examination-score-summary.component';
 import { InitialExaminationPlanSummaryComponent } from './components/medical.note/summary/initial.examination.plan.summary/initial-examination-plan-summary.component';
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
+import { CosignNoteReviewComponent } from './components/cosign-note-review/cosign-note-review.component';
 import { EditPatientComponent } from './components/edit/edit-patient.component';
 import { AuthorizationPatientCaseComponent } from './components/authorization/authorization-patient-case.component';
 import { PatientAvatarComponent } from './patient.avatar/patient-avatar.component';
@@ -381,6 +382,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     DischargePlanNComponent,
     PatientCaseEDocumentComponent,
     PatientCaseEDocumentListComponent,
+    CosignNoteReviewComponent,
   ],
   imports: [
     CommonModule,

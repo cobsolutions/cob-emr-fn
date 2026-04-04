@@ -63,7 +63,7 @@ export class FullDischargeNoteComponent implements OnInit {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
         this.noteCoSigner = data.coSigner;
-        this.disableFinalize = !!data.isForwarded && data.coSigner === this.loggedInService.getLoggedUser().uuid;
+        this.disableFinalize = false;
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()

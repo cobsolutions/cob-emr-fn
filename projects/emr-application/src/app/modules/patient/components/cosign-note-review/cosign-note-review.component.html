@@ -1,0 +1,41 @@
+<div class="cosign-review-container">
+
+  <!-- Header -->
+  <div class="review-header">
+    <div class="review-header-content">
+      <div class="header-left">
+        <button class="back-btn" (click)="goBack()">
+          <svg cIcon name="cilArrowLeft" class="btn-icon"></svg>
+          Back to Incoming Cosign Docs
+        </button>
+      </div>
+      <div class="header-title">
+        <h2 class="review-title">Cosign Document Review</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Component -->
+  <div class="note-wrapper">
+    <initial-examination *ngIf="noteAction === 'Initial_Examination' && noteId"
+        (back)="goBack()" [caseId]="caseId"
+        [noteId]="noteId" [isForwarded]="true" [coSigner]="coSigner"></initial-examination>
+
+    <daily-note-n *ngIf="noteAction === 'Daily_Note' && noteId"
+        (back)="goBack()" [caseId]="caseId" [noteId]="noteId"
+        [isForwarded]="true" [coSigner]="coSigner"></daily-note-n>
+
+    <progress-note-n *ngIf="noteAction === 'Progress_Note' && noteId"
+        (back)="goBack()" [caseId]="caseId" [noteId]="noteId"
+        [isForwarded]="true" [coSigner]="coSigner"></progress-note-n>
+
+    <quick-discharge-n *ngIf="noteAction === 'Quick_Discharge' && noteId"
+        (back)="goBack()" [noteId]="noteId" [caseId]="caseId"
+        (backToRecord)="goBack()"></quick-discharge-n>
+
+    <discharge-n *ngIf="noteAction === 'Discharge' && noteId"
+        (back)="goBack()" [caseId]="caseId" [noteId]="noteId"
+        [isForwarded]="true" [coSigner]="coSigner"></discharge-n>
+  </div>
+
+</div>

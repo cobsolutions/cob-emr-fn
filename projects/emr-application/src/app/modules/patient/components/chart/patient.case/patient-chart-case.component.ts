@@ -372,7 +372,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'DAILY',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
-      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
+      clinicIds: this.patient?.clinicIds
     }
     this.dailyNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
@@ -395,7 +396,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'PROGRESS',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
-      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
+      clinicIds: this.patient?.clinicIds
     }
     this.progressNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
@@ -415,7 +417,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   private createQuickDischargeNote() {
     var request = {
       patientCaseId: this.case.uuid,
-      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
+      clinicIds: this.patient?.clinicIds
     }
     this.quickDischargeNoteService.create(request).subscribe((response: any) => {
       this.patientRecord = false;
@@ -438,7 +441,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'DISCHARGE',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
-      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
+      caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
+      clinicIds: this.patient?.clinicIds
     }
     this.dischargeNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))

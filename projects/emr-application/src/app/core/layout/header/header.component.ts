@@ -104,7 +104,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.ksAuthService.logout()
   }
   setSelectedClinic(event: any) {
-    this.loggedInService.selectedClinic$.next(event.target.value);
+    this.loggedInService.selectedClinic$.next(Number(event.target.value));
     const clinic = this.clinics.find(c => c.id == event.target.value);
     this.selectedClinicName = clinic?.name || '';
   }

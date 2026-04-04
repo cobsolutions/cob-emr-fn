@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoggedInService } from '../../security/service/loggedIn/logged-in.service';
 import { IncomingCosignDocsService } from '../services/incoming-cosign-docs.service';
 
@@ -7,19 +9,30 @@ import { IncomingCosignDocsService } from '../services/incoming-cosign-docs.serv
   templateUrl: './incoming-cosign-docs.component.html',
   styleUrls: ['./incoming-cosign-docs.component.css']
 })
-export class IncomingCosignDocsComponent implements OnInit {
+export class IncomingCosignDocsComponent implements OnInit, OnDestroy {
 
   cosignDocs: any[] = [];
   loading = false;
   errorMessage: string | null = null;
 
+  private allDocs: any[] = [];
+  private clinicSub: Subscription;
+
   constructor(
     private cosignDocsService: IncomingCosignDocsService,
-    private loggedInService: LoggedInService
+    private loggedInService: LoggedInService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.loadForwardedDocs();
+    this.clinicSub = this.loggedInService.selectedClinic$.subscribe(clinicId => {
+      this.filterByClinic(clinicId);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.clinicSub?.unsubscribe();
   }
 
   loadForwardedDocs(): void {
@@ -34,7 +47,8 @@ export class IncomingCosignDocsComponent implements OnInit {
 
     this.cosignDocsService.getForwardedDocs(providerId).subscribe({
       next: (data) => {
-        this.cosignDocs = data;
+        this.allDocs = data;
+        this.filterByClinic(this.loggedInService.selectedClinic$.value);
         this.loading = false;
       },
       error: () => {
@@ -44,8 +58,23 @@ export class IncomingCosignDocsComponent implements OnInit {
     });
   }
 
+  private filterByClinic(clinicId: number | null): void {
+    if (!clinicId) {
+      this.cosignDocs = this.allDocs;
+      return;
+    }
+    this.cosignDocs = this.allDocs.filter(doc =>
+      doc.patient?.clinicIds?.includes(clinicId)
+    );
+  }
+
   onDocClick(doc: any): void {
-    // TODO: Navigate to review/finalize component
+    this.router.navigate([
+      'emr/patient/cosign-review',
+      doc.noteId,
+      doc.noteType,
+      doc.patientCaseId
+    ]);
   }
 
 }

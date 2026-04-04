@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientChartComponent } from './components/chart/patient-chart.component';
+import { CosignNoteReviewComponent } from './components/cosign-note-review/cosign-note-review.component';
 import { CreatePatientComponent } from './components/create/create-patient.component';
 import { EditPatientComponent } from './components/edit/edit-patient.component';
 import { ListPatientComponent } from './components/list/list-patient.component';
@@ -41,6 +42,16 @@ const routes: Routes = [
         canActivate: [ScopeGuard],
         data: {
           title: 'chart',
+          scopeRole: Role.PATIENT_ROLE,
+          requiredScope: Scope.VIEWSCOPE,
+        },
+      },
+      {
+        path: 'cosign-review/:noteId/:noteType/:caseId',
+        component: CosignNoteReviewComponent,
+        canActivate: [ScopeGuard],
+        data: {
+          title: 'Cosign Review',
           scopeRole: Role.PATIENT_ROLE,
           requiredScope: Scope.VIEWSCOPE,
         },

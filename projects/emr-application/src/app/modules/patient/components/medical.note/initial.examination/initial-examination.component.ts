@@ -80,7 +80,7 @@ export class InitialExaminationComponent implements OnInit {
     window.addEventListener('scroll', this.onScroll.bind(this));
 
     this.noteCoSigner = this.coSigner;
-    this.disableFinalize = !!this.isForwarded && this.coSigner === this.loggedInService.getLoggedUser().uuid;
+    this.disableFinalize = false;
 
     this.initialExamNoteService.get(this.noteId).subscribe((note: any) => {
       if (note) {

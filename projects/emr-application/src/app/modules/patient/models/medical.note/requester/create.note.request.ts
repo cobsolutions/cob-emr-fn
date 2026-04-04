@@ -9,4 +9,5 @@ export interface CreateNodeRequest{
     encounterDate:Date
     providerId:string
     caseDiagnosis?:IcdtenDiagnosi[]
+    clinicIds?:number[]
 }
