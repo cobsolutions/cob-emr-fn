@@ -1,0 +1,73 @@
+<div class="cosign-docs-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="page-title-section">
+        <h2 class="page-title">
+          <svg cIcon name="cilTask" class="page-icon"></svg>
+          Incoming Cosign Documents
+        </h2>
+        <p class="page-subtitle">The following are incomplete cosign documents forwarded to you. Click on any item to review and finalize.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div class="error-alert" *ngIf="errorMessage">
+    <svg cIcon name="cilWarning" class="error-icon"></svg>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <!-- Table Card -->
+  <div class="card-wrapper">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>Pending Documents</span>
+      </div>
+      <span class="card-badge">{{ cosignDocs.length }} Records</span>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-container" *ngIf="loading">
+      <c-spinner color="primary" size="sm"></c-spinner>
+      <span class="loading-text">Loading documents...</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper" *ngIf="!loading">
+      <table cTable class="cosign-table">
+        <thead>
+          <tr>
+            <th scope="col">Date of Service</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Case</th>
+            <th scope="col">Note Type</th>
+            <th scope="col">Forwarded By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doc of cosignDocs" class="clickable-row" (click)="onDocClick(doc)">
+            <td class="date-cell">{{ doc.dos | date: 'MM/dd/yyyy' }}</td>
+            <td class="patient-cell">{{ doc.patient?.lastName }}, {{ doc.patient?.firstName }}</td>
+            <td>{{ doc.patientCaseId }}</td>
+            <td>
+              <span class="note-type-badge">{{ doc.noteType | titlecase }}</span>
+            </td>
+            <td class="forwarded-by-cell">{{ doc.forwardedBy?.providerName }}</td>
+          </tr>
+          <tr *ngIf="cosignDocs.length === 0">
+            <td colspan="5" class="empty-state">
+              <div class="empty-content">
+                <svg cIcon name="cilTask" class="empty-icon"></svg>
+                <span>No pending cosign documents</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

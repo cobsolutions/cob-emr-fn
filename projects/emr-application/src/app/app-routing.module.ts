@@ -139,6 +139,17 @@ const routes: Routes = [
           import('./modules/referring.provider/refering-provider.module').then((m) => m.ReferingProviderModule)
       },
       {
+        path: 'incoming-cosign-docs',
+        data: {
+          title: 'Incoming Cosign Docs',
+          excludeRoles: [Role.ADMIN_ROLE],
+          excludeRedirect: '/emr/organization/list'
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () =>
+          import('./modules/incoming-cosign-docs/incoming-cosign-docs.module').then((m) => m.IncomingCosignDocsModule)
+      },
+      {
         path: 'pending-activation',
         data: { title: 'Pending Activation' },
         loadChildren: () =>
