@@ -69,6 +69,42 @@ export class SpecialTestsNComponent implements OnInit {
   showWorkConditioningNonMaterialHandlingFields: boolean = false;
 
   showTmrFab4WorksheetFields: boolean = false;
+
+  showCervicalPassiveVertebralMobilityFields: boolean = false;
+  showCpvmC2_3Fields: boolean = false;
+  showCpvmC3_4Fields: boolean = false;
+  showCpvmC4_5Fields: boolean = false;
+  showCpvmC5_6Fields: boolean = false;
+  showCpvmC6_7Fields: boolean = false;
+  showCpvmC7T1Fields: boolean = false;
+  cpvmOptions: string[] = ['Not Tested', 'Normal', 'Hypomobile', 'Hypermobile', 'Ankylosed', 'Unstable'];
+
+  showPassiveVertebralMobilityThoracicFields: boolean = false;
+  showCervicalQuadrantFields: boolean = false;
+  showCervicalCompDistFields: boolean = false;
+  showJawCrepitusFields: boolean = false;
+  showSpurlingsManeuverFields: boolean = false;
+  showAlarLigamentTestManualFields: boolean = false;
+  showAlarLigamentStressManualFields: boolean = false;
+  showSubcranialPassiveVertebralMobilityFields: boolean = false;
+  showPassiveJointMobilityShoulderFields: boolean = false;
+  showScJointFields: boolean = false;
+  showAcJointFields: boolean = false;
+  showImpingementFields: boolean = false;
+  showGhjStabilityFields: boolean = false;
+  showLabrumFields: boolean = false;
+  showRotatorCuffFields: boolean = false;
+  showSpeedsTestFields: boolean = false;
+  showLigamentIntegrityElbowFields: boolean = false;
+  showUlnarNerveSubluxationFields: boolean = false;
+  showKempsTestFields: boolean = false;
+  showSiCompressionFields: boolean = false;
+  showSiDistractionFields: boolean = false;
+  showLegLengthFields: boolean = false;
+  showProprioceptionBalanceFields: boolean = false;
+  showPelvicClockIntroitusClockFields: boolean = false;
+  showLaseguesSlrFields: boolean = false;
+
   additionalCommentsFields: boolean = false;
 
   readonly specialTestConfig = SpecialTestConfig;
@@ -164,6 +200,101 @@ export class SpecialTestsNComponent implements OnInit {
 
       tmr_fab_4_worksheet: ['no'],
       tmr_fab_4_worksheet_comments_text: [''],
+
+      cervical_passive_vertebral_mobility: ['no'],
+      cpvm_c2_3: ['no'],
+      cpvm_c2_3_forward_bending: ['Not Tested'],
+      cpvm_c2_3_backward_bending: ['Not Tested'],
+      cpvm_c2_3_right_side_bending: ['Not Tested'],
+      cpvm_c2_3_left_side_bending: ['Not Tested'],
+      cpvm_c2_3_right_rotation: ['Not Tested'],
+      cpvm_c2_3_left_rotation: ['Not Tested'],
+      cpvm_c3_4: ['no'],
+      cpvm_c3_4_forward_bending: ['Not Tested'],
+      cpvm_c3_4_backward_bending: ['Not Tested'],
+      cpvm_c3_4_right_side_bending: ['Not Tested'],
+      cpvm_c3_4_left_side_bending: ['Not Tested'],
+      cpvm_c3_4_right_rotation: ['Not Tested'],
+      cpvm_c3_4_left_rotation: ['Not Tested'],
+      cpvm_c4_5: ['no'],
+      cpvm_c4_5_forward_bending: ['Not Tested'],
+      cpvm_c4_5_backward_bending: ['Not Tested'],
+      cpvm_c4_5_right_side_bending: ['Not Tested'],
+      cpvm_c4_5_left_side_bending: ['Not Tested'],
+      cpvm_c4_5_right_rotation: ['Not Tested'],
+      cpvm_c4_5_left_rotation: ['Not Tested'],
+      cpvm_c5_6: ['no'],
+      cpvm_c5_6_forward_bending: ['Not Tested'],
+      cpvm_c5_6_backward_bending: ['Not Tested'],
+      cpvm_c5_6_right_side_bending: ['Not Tested'],
+      cpvm_c5_6_left_side_bending: ['Not Tested'],
+      cpvm_c5_6_right_rotation: ['Not Tested'],
+      cpvm_c5_6_left_rotation: ['Not Tested'],
+      cpvm_c6_7: ['no'],
+      cpvm_c6_7_forward_bending: ['Not Tested'],
+      cpvm_c6_7_backward_bending: ['Not Tested'],
+      cpvm_c6_7_right_side_bending: ['Not Tested'],
+      cpvm_c6_7_left_side_bending: ['Not Tested'],
+      cpvm_c6_7_right_rotation: ['Not Tested'],
+      cpvm_c6_7_left_rotation: ['Not Tested'],
+      cpvm_c7_t1: ['no'],
+      cpvm_c7_t1_forward_bending: ['Not Tested'],
+      cpvm_c7_t1_backward_bending: ['Not Tested'],
+      cpvm_c7_t1_right_side_bending: ['Not Tested'],
+      cpvm_c7_t1_left_side_bending: ['Not Tested'],
+      cpvm_c7_t1_right_rotation: ['Not Tested'],
+      cpvm_c7_t1_left_rotation: ['Not Tested'],
+      passive_vertebral_mobility_thoracic: ['no'],
+      passive_vertebral_mobility_thoracic_comments_text: [''],
+      cervical_quadrant: ['no'],
+      cervical_quadrant_comments_text: [''],
+      cervical_comp_dist: ['no'],
+      cervical_comp_dist_comments_text: [''],
+      jaw_crepitus: ['no'],
+      jaw_crepitus_comments_text: [''],
+      spurlings_maneuver: ['no'],
+      spurlings_maneuver_comments_text: [''],
+      alar_ligament_test_manual: ['no'],
+      alar_ligament_test_manual_comments_text: [''],
+      alar_ligament_stress_manual: ['no'],
+      alar_ligament_stress_manual_comments_text: [''],
+      subcranial_passive_vertebral_mobility: ['no'],
+      subcranial_passive_vertebral_mobility_comments_text: [''],
+      passive_joint_mobility_shoulder: ['no'],
+      passive_joint_mobility_shoulder_comments_text: [''],
+      sc_joint: ['no'],
+      sc_joint_comments_text: [''],
+      ac_joint: ['no'],
+      ac_joint_comments_text: [''],
+      impingement: ['no'],
+      impingement_comments_text: [''],
+      ghj_stability: ['no'],
+      ghj_stability_comments_text: [''],
+      labrum: ['no'],
+      labrum_comments_text: [''],
+      rotator_cuff: ['no'],
+      rotator_cuff_comments_text: [''],
+      speeds_test: ['no'],
+      speeds_test_comments_text: [''],
+      ligament_integrity_elbow: ['no'],
+      ligament_integrity_elbow_comments_text: [''],
+      ulnar_nerve_subluxation: ['no'],
+      ulnar_nerve_subluxation_comments_text: [''],
+      kemps_test: ['no'],
+      kemps_test_comments_text: [''],
+      si_compression: ['no'],
+      si_compression_comments_text: [''],
+      si_distraction: ['no'],
+      si_distraction_comments_text: [''],
+      leg_length: ['no'],
+      leg_length_comments_text: [''],
+      proprioception_balance: ['no'],
+      proprioception_balance_comments_text: [''],
+      pelvic_clock_introitus_clock: ['no'],
+      pelvic_clock_introitus_clock_comments_text: [''],
+      lasegues_slr: ['no'],
+      lasegues_slr_comments_text: [''],
+
       additional_comments: ['no'],
       additional_comments_text: ['']
     })
@@ -320,6 +451,103 @@ export class SpecialTestsNComponent implements OnInit {
 
     this.specialTestForm.get('tmr_fab_4_worksheet')?.valueChanges.subscribe(value => {
       this.showTmrFab4WorksheetFields = value === 'yes';
+    });
+
+    this.specialTestForm.get('cervical_passive_vertebral_mobility')?.valueChanges.subscribe(value => {
+      this.showCervicalPassiveVertebralMobilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c2_3')?.valueChanges.subscribe(value => {
+      this.showCpvmC2_3Fields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c3_4')?.valueChanges.subscribe(value => {
+      this.showCpvmC3_4Fields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c4_5')?.valueChanges.subscribe(value => {
+      this.showCpvmC4_5Fields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c5_6')?.valueChanges.subscribe(value => {
+      this.showCpvmC5_6Fields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c6_7')?.valueChanges.subscribe(value => {
+      this.showCpvmC6_7Fields = value === 'yes';
+    });
+    this.specialTestForm.get('cpvm_c7_t1')?.valueChanges.subscribe(value => {
+      this.showCpvmC7T1Fields = value === 'yes';
+    });
+    this.specialTestForm.get('passive_vertebral_mobility_thoracic')?.valueChanges.subscribe(value => {
+      this.showPassiveVertebralMobilityThoracicFields = value === 'yes';
+    });
+    this.specialTestForm.get('cervical_quadrant')?.valueChanges.subscribe(value => {
+      this.showCervicalQuadrantFields = value === 'yes';
+    });
+    this.specialTestForm.get('cervical_comp_dist')?.valueChanges.subscribe(value => {
+      this.showCervicalCompDistFields = value === 'yes';
+    });
+    this.specialTestForm.get('jaw_crepitus')?.valueChanges.subscribe(value => {
+      this.showJawCrepitusFields = value === 'yes';
+    });
+    this.specialTestForm.get('spurlings_maneuver')?.valueChanges.subscribe(value => {
+      this.showSpurlingsManeuverFields = value === 'yes';
+    });
+    this.specialTestForm.get('alar_ligament_test_manual')?.valueChanges.subscribe(value => {
+      this.showAlarLigamentTestManualFields = value === 'yes';
+    });
+    this.specialTestForm.get('alar_ligament_stress_manual')?.valueChanges.subscribe(value => {
+      this.showAlarLigamentStressManualFields = value === 'yes';
+    });
+    this.specialTestForm.get('subcranial_passive_vertebral_mobility')?.valueChanges.subscribe(value => {
+      this.showSubcranialPassiveVertebralMobilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('passive_joint_mobility_shoulder')?.valueChanges.subscribe(value => {
+      this.showPassiveJointMobilityShoulderFields = value === 'yes';
+    });
+    this.specialTestForm.get('sc_joint')?.valueChanges.subscribe(value => {
+      this.showScJointFields = value === 'yes';
+    });
+    this.specialTestForm.get('ac_joint')?.valueChanges.subscribe(value => {
+      this.showAcJointFields = value === 'yes';
+    });
+    this.specialTestForm.get('impingement')?.valueChanges.subscribe(value => {
+      this.showImpingementFields = value === 'yes';
+    });
+    this.specialTestForm.get('ghj_stability')?.valueChanges.subscribe(value => {
+      this.showGhjStabilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('labrum')?.valueChanges.subscribe(value => {
+      this.showLabrumFields = value === 'yes';
+    });
+    this.specialTestForm.get('rotator_cuff')?.valueChanges.subscribe(value => {
+      this.showRotatorCuffFields = value === 'yes';
+    });
+    this.specialTestForm.get('speeds_test')?.valueChanges.subscribe(value => {
+      this.showSpeedsTestFields = value === 'yes';
+    });
+    this.specialTestForm.get('ligament_integrity_elbow')?.valueChanges.subscribe(value => {
+      this.showLigamentIntegrityElbowFields = value === 'yes';
+    });
+    this.specialTestForm.get('ulnar_nerve_subluxation')?.valueChanges.subscribe(value => {
+      this.showUlnarNerveSubluxationFields = value === 'yes';
+    });
+    this.specialTestForm.get('kemps_test')?.valueChanges.subscribe(value => {
+      this.showKempsTestFields = value === 'yes';
+    });
+    this.specialTestForm.get('si_compression')?.valueChanges.subscribe(value => {
+      this.showSiCompressionFields = value === 'yes';
+    });
+    this.specialTestForm.get('si_distraction')?.valueChanges.subscribe(value => {
+      this.showSiDistractionFields = value === 'yes';
+    });
+    this.specialTestForm.get('leg_length')?.valueChanges.subscribe(value => {
+      this.showLegLengthFields = value === 'yes';
+    });
+    this.specialTestForm.get('proprioception_balance')?.valueChanges.subscribe(value => {
+      this.showProprioceptionBalanceFields = value === 'yes';
+    });
+    this.specialTestForm.get('pelvic_clock_introitus_clock')?.valueChanges.subscribe(value => {
+      this.showPelvicClockIntroitusClockFields = value === 'yes';
+    });
+    this.specialTestForm.get('lasegues_slr')?.valueChanges.subscribe(value => {
+      this.showLaseguesSlrFields = value === 'yes';
     });
 
     this.specialTestForm.get('additional_comments')?.valueChanges.subscribe(value => {
