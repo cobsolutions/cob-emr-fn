@@ -2519,20 +2519,36 @@
         <textarea formControlName="proprioception_balance_comments_text" class="form-textarea" rows="4"></textarea>
     </div>
     <div class="form-row">
-        <label class="field-label">Pelvic Clock/Introitus Clock</label>
+        <label class="field-label">Pelvic Clock</label>
         <div class="radio-group-primary">
             <c-form-check class="me-3">
-                <input cFormCheckInput type="radio" formControlName="pelvic_clock_introitus_clock" value="yes" />
+                <input cFormCheckInput type="radio" formControlName="pelvic_clock" value="yes" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" formControlName="pelvic_clock_introitus_clock" value="no" />
+                <input cFormCheckInput type="radio" formControlName="pelvic_clock" value="no" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </div>
     </div>
-    <div *ngIf="showPelvicClockIntroitusClockFields" class="dependent-field-box">
-        <textarea formControlName="pelvic_clock_introitus_clock_comments_text" class="form-textarea" rows="4"></textarea>
+    <div *ngIf="showPelvicClockFields" class="dependent-field-box">
+        <textarea formControlName="pelvic_clock_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Introitus Clock</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="introitus_clock" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="introitus_clock" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showIntroitusClockFields" class="dependent-field-box">
+        <textarea formControlName="introitus_clock_comments_text" class="form-textarea" rows="4"></textarea>
     </div>
     <div class="form-row">
         <label class="field-label">Lasegue's SLR</label>

@@ -31,7 +31,8 @@ import { SiCompression } from "./SiCompression";
 import { SiDistraction } from "./SiDistraction";
 import { LegLength } from "./LegLength";
 import { ProprioceptionBalance } from "./ProprioceptionBalance";
-import { PelvicClockIntroitusClock } from "./PelvicClockIntroitusClock";
+import { PelvicClock } from "./PelvicClock";
+import { IntroitusClock } from "./IntroitusClock";
 import { LaseguesSlr } from "./LaseguesSlr";
 
 export interface SpecialTest {
@@ -67,7 +68,8 @@ export interface SpecialTest {
   siDistraction: SiDistraction;
   legLength: LegLength;
   proprioceptionBalance: ProprioceptionBalance;
-  pelvicClockIntroitusClock: PelvicClockIntroitusClock;
+  pelvicClock: PelvicClock;
+  introitusClock: IntroitusClock;
   laseguesSlr: LaseguesSlr;
   additionalComments: AdditionalComments;
 }

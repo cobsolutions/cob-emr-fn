@@ -32,7 +32,8 @@ import { SiCompression } from '../model/SiCompression';
 import { SiDistraction } from '../model/SiDistraction';
 import { LegLength } from '../model/LegLength';
 import { ProprioceptionBalance } from '../model/ProprioceptionBalance';
-import { PelvicClockIntroitusClock } from '../model/PelvicClockIntroitusClock';
+import { PelvicClock } from '../model/PelvicClock';
+import { IntroitusClock } from '../model/IntroitusClock';
 import { LaseguesSlr } from '../model/LaseguesSlr';
 import { AdditionalComments } from '../model/AdditionalComments';
 
@@ -77,7 +78,8 @@ export class SpecialTestsMapperService {
       siDistraction: this.mapSiDistraction(formValue),
       legLength: this.mapLegLength(formValue),
       proprioceptionBalance: this.mapProprioceptionBalance(formValue),
-      pelvicClockIntroitusClock: this.mapPelvicClockIntroitusClock(formValue),
+      pelvicClock: this.mapPelvicClock(formValue),
+      introitusClock: this.mapIntroitusClock(formValue),
       laseguesSlr: this.mapLaseguesSlr(formValue),
       additionalComments: this.mapAdditionalComments(formValue)
     };
@@ -608,8 +610,12 @@ export class SpecialTestsMapperService {
       proprioception_balance: this.boolToYesNo(dto.proprioceptionBalance?.proprioceptionBalance),
       proprioception_balance_comments_text: dto.proprioceptionBalance?.proprioceptionBalanceCommentsText || '',
       // Pelvic Clock/Introitus Clock
-      pelvic_clock_introitus_clock: this.boolToYesNo(dto.pelvicClockIntroitusClock?.pelvicClockIntroitusClock),
-      pelvic_clock_introitus_clock_comments_text: dto.pelvicClockIntroitusClock?.pelvicClockIntroitusClockCommentsText || '',
+      // Pelvic Clock
+      pelvic_clock: this.boolToYesNo(dto.pelvicClock?.pelvicClock),
+      pelvic_clock_comments_text: dto.pelvicClock?.pelvicClockCommentsText || '',
+      // Introitus Clock
+      introitus_clock: this.boolToYesNo(dto.introitusClock?.introitusClock),
+      introitus_clock_comments_text: dto.introitusClock?.introitusClockCommentsText || '',
       // Lasegue's SLR
       lasegues_slr: this.boolToYesNo(dto.laseguesSlr?.laseguesSlr),
       lasegues_slr_lasegues_slr_right: dto.laseguesSlr?.laseguesSlrLaseguesSlrRight || 'not_tested',
@@ -1252,10 +1258,17 @@ export class SpecialTestsMapperService {
     };
   }
 
-  private mapPelvicClockIntroitusClock(formValue: any): PelvicClockIntroitusClock {
+  private mapPelvicClock(formValue: any): PelvicClock {
     return {
-      pelvicClockIntroitusClock: this.yesNoToBool(formValue.pelvic_clock_introitus_clock),
-      pelvicClockIntroitusClockCommentsText: formValue.pelvic_clock_introitus_clock_comments_text || ''
+      pelvicClock: this.yesNoToBool(formValue.pelvic_clock),
+      pelvicClockCommentsText: formValue.pelvic_clock_comments_text || ''
+    };
+  }
+
+  private mapIntroitusClock(formValue: any): IntroitusClock {
+    return {
+      introitusClock: this.yesNoToBool(formValue.introitus_clock),
+      introitusClockCommentsText: formValue.introitus_clock_comments_text || ''
     };
   }
 

@@ -117,7 +117,8 @@ export class SpecialTestsNComponent implements OnInit {
   showSiDistractionFields: boolean = false;
   showLegLengthFields: boolean = false;
   showProprioceptionBalanceFields: boolean = false;
-  showPelvicClockIntroitusClockFields: boolean = false;
+  showPelvicClockFields: boolean = false;
+  showIntroitusClockFields: boolean = false;
   showLaseguesSlrFields: boolean = false;
 
   additionalCommentsFields: boolean = false;
@@ -378,8 +379,10 @@ export class SpecialTestsNComponent implements OnInit {
       leg_length: ['no'],
       proprioception_balance: ['no'],
       proprioception_balance_comments_text: [''],
-      pelvic_clock_introitus_clock: ['no'],
-      pelvic_clock_introitus_clock_comments_text: [''],
+      pelvic_clock: ['no'],
+      pelvic_clock_comments_text: [''],
+      introitus_clock: ['no'],
+      introitus_clock_comments_text: [''],
       lasegues_slr: ['no'],
 
       additional_comments: ['no'],
@@ -666,8 +669,11 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('proprioception_balance')?.valueChanges.subscribe(value => {
       this.showProprioceptionBalanceFields = value === 'yes';
     });
-    this.specialTestForm.get('pelvic_clock_introitus_clock')?.valueChanges.subscribe(value => {
-      this.showPelvicClockIntroitusClockFields = value === 'yes';
+    this.specialTestForm.get('pelvic_clock')?.valueChanges.subscribe(value => {
+      this.showPelvicClockFields = value === 'yes';
+    });
+    this.specialTestForm.get('introitus_clock')?.valueChanges.subscribe(value => {
+      this.showIntroitusClockFields = value === 'yes';
     });
     this.specialTestForm.get('lasegues_slr')?.valueChanges.subscribe(value => {
       this.showLaseguesSlrFields = value === 'yes';
