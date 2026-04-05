@@ -1,4 +1,5 @@
 export interface SiDistraction {
   siDistraction: boolean;
-  siDistractionCommentsText: string;
+  siDistractionSiDistractionRight: string;
+  siDistractionSiDistractionLeft: string;
 }

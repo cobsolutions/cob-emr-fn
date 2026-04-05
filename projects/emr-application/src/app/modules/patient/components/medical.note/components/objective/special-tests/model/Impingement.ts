@@ -1,4 +1,7 @@
 export interface Impingement {
   impingement: boolean;
-  impingementCommentsText: string;
+  impingementHawkinsKennedyRight: string;
+  impingementHawkinsKennedyLeft: string;
+  impingementNeerTestRight: string;
+  impingementNeerTestLeft: string;
 }

@@ -1,4 +1,5 @@
 export interface CervicalQuadrant {
   cervicalQuadrant: boolean;
-  cervicalQuadrantCommentsText: string;
+  cervicalQuadrantCervicalQuadrantRight: string;
+  cervicalQuadrantCervicalQuadrantLeft: string;
 }

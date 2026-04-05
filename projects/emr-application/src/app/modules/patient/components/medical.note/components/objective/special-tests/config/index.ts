@@ -29,6 +29,21 @@ import { TwoLegSquatWithOverheadReach } from "./functional/2-leg-squat-with-over
 import { OneLegSquatWithOverheadReach } from "./functional/1-leg-squat-with-overhead-reach";
 import { MaterialHandlingBilateralLifting } from "./work-conditioning/material-handling-bilateral-lifting";
 import { NonMaterialHandling } from "./work-conditioning/non-material-handling";
+import { CervicalQuadrantConfig } from "./cervical-quadrant/cervical-quadrant";
+import { JawCrepitusConfig } from "./jaw-crepitus/jaw-crepitus";
+import { SpurlingsManeuverConfig } from "./spurlings-maneuver/spurlings-maneuver";
+import { AlarLigamentTestManualConfig } from "./alar-ligament-test-manual/alar-ligament-test-manual";
+import { PassiveJointMobilityShoulderConfig } from "./passive-joint-mobility-shoulder/passive-joint-mobility-shoulder";
+import { ImpingementConfig } from "./impingement/impingement";
+import { GhjStabilityConfig } from "./ghj-stability/ghj-stability";
+import { LabrumConfig } from "./labrum/labrum";
+import { RotatorCuffConfig } from "./rotator-cuff/rotator-cuff";
+import { LigamentIntegrityElbowConfig } from "./ligament-integrity-elbow/ligament-integrity-elbow";
+import { UlnarNerveSubluxationConfig } from "./ulnar-nerve-subluxation/ulnar-nerve-subluxation";
+import { SiCompressionConfig } from "./si-compression/si-compression";
+import { SiDistractionConfig } from "./si-distraction/si-distraction";
+import { LegLengthConfig } from "./leg-length/leg-length";
+import { LaseguesSlrConfig } from "./lasegues-slr/lasegues-slr";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -93,4 +108,19 @@ export class SpecialTestConfig {
     static readonly liftingTest = MaterialHandlingBilateralLifting.liftingTest;
     static readonly nonMaterialHandling = NonMaterialHandling.nonMaterialHandling;
 
+    static readonly cervicalQuadrant = CervicalQuadrantConfig.cervicalQuadrant;
+    static readonly jawCrepitus = JawCrepitusConfig.jawCrepitus;
+    static readonly spurlingsManeuver = SpurlingsManeuverConfig.spurlingsManeuver;
+    static readonly alarLigamentTestManual = AlarLigamentTestManualConfig.alarLigamentTestManual;
+    static readonly passiveJointMobilityShoulder = PassiveJointMobilityShoulderConfig.passiveJointMobilityShoulder;
+    static readonly impingementConfig = ImpingementConfig.impingement;
+    static readonly ghjStability = GhjStabilityConfig.ghjStability;
+    static readonly labrumConfig = LabrumConfig.labrum;
+    static readonly rotatorCuff = RotatorCuffConfig.rotatorCuff;
+    static readonly ligamentIntegrityElbow = LigamentIntegrityElbowConfig.ligamentIntegrityElbow;
+    static readonly ulnarNerveSubluxation = UlnarNerveSubluxationConfig.ulnarNerveSubluxation;
+    static readonly siCompression = SiCompressionConfig.siCompression;
+    static readonly siDistraction = SiDistractionConfig.siDistraction;
+    static readonly legLengthConfig = LegLengthConfig.legLength;
+    static readonly laseguesSlr = LaseguesSlrConfig.laseguesSlr;
 }

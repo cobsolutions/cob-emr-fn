@@ -1,4 +1,9 @@
 export interface RotatorCuff {
   rotatorCuff: boolean;
-  rotatorCuffCommentsText: string;
+  rotatorCuffEmptyCanRight: string;
+  rotatorCuffEmptyCanLeft: string;
+  rotatorCuffSubscapularisLiftOffRight: string;
+  rotatorCuffSubscapularisLiftOffLeft: string;
+  rotatorCuffDropArmRight: string;
+  rotatorCuffDropArmLeft: string;
 }

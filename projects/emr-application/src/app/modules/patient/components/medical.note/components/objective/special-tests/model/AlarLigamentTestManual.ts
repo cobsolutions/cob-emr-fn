@@ -1,4 +1,5 @@
 export interface AlarLigamentTestManual {
   alarLigamentTestManual: boolean;
-  alarLigamentTestManualCommentsText: string;
+  alarLigamentTestManualAlarLigamentTestRight: string;
+  alarLigamentTestManualAlarLigamentTestLeft: string;
 }

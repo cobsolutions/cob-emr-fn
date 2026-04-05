@@ -131,6 +131,50 @@ export const ober_OPTIONS: RomOption[] = [
     { value: 'Glut Dominant', label: 'Glut Dominant' },
     { value: 'custom', label: 'Custom' }
   ];
+  export const jawCrepitus_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'No', label: 'No' },
+    { value: 'Yes', label: 'Yes' }
+  ];
+  export const positiveNegative_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Positive', label: 'Positive' },
+    { value: 'Negative', label: 'Negative' }
+  ];
+  export const passiveJointMobilityShoulder_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Normal', label: 'Normal' },
+    { value: 'Slight Restriction', label: 'Slight Restriction' },
+    { value: 'Moderate Restriction', label: 'Moderate Restriction' },
+    { value: 'Considerable Restriction', label: 'Considerable Restriction' },
+    { value: 'Slight Laxity', label: 'Slight Laxity' },
+    { value: 'Moderate Laxity', label: 'Moderate Laxity' },
+    { value: 'Considerable Laxity', label: 'Considerable Laxity' },
+    { value: 'Unstable', label: 'Unstable' }
+  ];
+  export const legLength_OPTIONS: RomOption[] = [
+    { value: 'None', label: 'None' },
+    { value: '.25 cm', label: '.25 cm' },
+    { value: '.5 cm', label: '.5 cm' },
+    { value: '.75 cm', label: '.75 cm' },
+    { value: '1 cm', label: '1 cm' },
+    { value: '1.25 cm', label: '1.25 cm' },
+    { value: '1.5 cm', label: '1.5 cm' },
+    { value: '1.75 cm', label: '1.75 cm' },
+    { value: '2 cm', label: '2 cm' },
+    { value: '2.25 cm', label: '2.25 cm' },
+    { value: '2.5 cm', label: '2.5 cm' },
+    { value: '2.75 cm', label: '2.75 cm' },
+    { value: '3 cm', label: '3 cm' },
+    { value: '3.25 cm', label: '3.25 cm' },
+    { value: '3.5 cm', label: '3.5 cm' },
+    { value: '3.75 cm', label: '3.75 cm' },
+    { value: '4 cm', label: '4 cm' }
+  ];
+  export const cervicalQuadrant_OPTIONS: RomOption[] = [
+    { value: 'Negative', label: 'Negative' },
+    { value: 'Positive', label: 'Positive' }
+  ];
   export const AlarLigamentTest_OPTIONS: RomOption[] = [
     { value: 'Normal', label: 'Normal' },
   { value: 'Abnormal', label: 'Abnormal' },

@@ -1,4 +1,5 @@
 export interface SpurlingsManeuver {
   spurlingsManeuver: boolean;
-  spurlingsManeuverCommentsText: string;
+  spurlingsManeuverSpurlingsManeuverRight: string;
+  spurlingsManeuverSpurlingsManeuverLeft: string;
 }

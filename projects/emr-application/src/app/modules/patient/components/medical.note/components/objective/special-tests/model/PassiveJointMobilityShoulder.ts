@@ -1,4 +1,9 @@
 export interface PassiveJointMobilityShoulder {
   passiveJointMobilityShoulder: boolean;
-  passiveJointMobilityShoulderCommentsText: string;
+  passiveJointMobilityShoulderPosteriorCapsuleRight: string;
+  passiveJointMobilityShoulderPosteriorCapsuleLeft: string;
+  passiveJointMobilityShoulderAnteriorCapsuleRight: string;
+  passiveJointMobilityShoulderAnteriorCapsuleLeft: string;
+  passiveJointMobilityShoulderInferiorCapsuleRight: string;
+  passiveJointMobilityShoulderInferiorCapsuleLeft: string;
 }

@@ -481,20 +481,24 @@ export class SpecialTestsMapperService {
       pvmt_t12_l1_left_rotation: dto.passiveVertebralMobilityThoracic?.pvmtT12L1LeftRotation || 'Not Tested',
       // Cervical Quadrant
       cervical_quadrant: this.boolToYesNo(dto.cervicalQuadrant?.cervicalQuadrant),
-      cervical_quadrant_comments_text: dto.cervicalQuadrant?.cervicalQuadrantCommentsText || '',
+      cervical_quadrant_cervical_quadrant_right: dto.cervicalQuadrant?.cervicalQuadrantCervicalQuadrantRight || 'not_tested',
+      cervical_quadrant_cervical_quadrant_left: dto.cervicalQuadrant?.cervicalQuadrantCervicalQuadrantLeft || 'not_tested',
       // Cervical Comp/Dist
       cervical_comp_dist: this.boolToYesNo(dto.cervicalCompDist?.cervicalCompDist),
       cervical_comp_dist_compression: dto.cervicalCompDist?.cervicalCompDistCompression || 'Not Tested',
       cervical_comp_dist_distraction: dto.cervicalCompDist?.cervicalCompDistDistraction || 'Not Tested',
       // Jaw Crepitus
       jaw_crepitus: this.boolToYesNo(dto.jawCrepitus?.jawCrepitus),
-      jaw_crepitus_comments_text: dto.jawCrepitus?.jawCrepitusCommentsText || '',
+      jaw_crepitus_jaw_crepitus_right: dto.jawCrepitus?.jawCrepitusJawCrepitusRight || 'not_tested',
+      jaw_crepitus_jaw_crepitus_left: dto.jawCrepitus?.jawCrepitusJawCrepitusLeft || 'not_tested',
       // Spurling's Maneuver
       spurlings_maneuver: this.boolToYesNo(dto.spurlingsManeuver?.spurlingsManeuver),
-      spurlings_maneuver_comments_text: dto.spurlingsManeuver?.spurlingsManeuverCommentsText || '',
+      spurlings_maneuver_spurlings_maneuver_right: dto.spurlingsManeuver?.spurlingsManeuverSpurlingsManeuverRight || 'not_tested',
+      spurlings_maneuver_spurlings_maneuver_left: dto.spurlingsManeuver?.spurlingsManeuverSpurlingsManeuverLeft || 'not_tested',
       // Alar Ligament Test Manual
       alar_ligament_test_manual: this.boolToYesNo(dto.alarLigamentTestManual?.alarLigamentTestManual),
-      alar_ligament_test_manual_comments_text: dto.alarLigamentTestManual?.alarLigamentTestManualCommentsText || '',
+      alar_ligament_test_manual_alar_ligament_test_right: dto.alarLigamentTestManual?.alarLigamentTestManualAlarLigamentTestRight || 'not_tested',
+      alar_ligament_test_manual_alar_ligament_test_left: dto.alarLigamentTestManual?.alarLigamentTestManualAlarLigamentTestLeft || 'not_tested',
       // Alar Ligament Stress Manual
       alar_ligament_stress_manual: this.boolToYesNo(dto.alarLigamentStressManual?.alarLigamentStressManual),
       alar_ligament_stress_manual_comments_text: dto.alarLigamentStressManual?.alarLigamentStressManualCommentsText || '',
@@ -512,7 +516,12 @@ export class SpecialTestsMapperService {
       spvm_aa_left_side_bending: dto.subcranialPassiveVertebralMobility?.spvmAaLeftSideBending || 'Not Tested',
       // Passive Joint Mobility Shoulder
       passive_joint_mobility_shoulder: this.boolToYesNo(dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulder),
-      passive_joint_mobility_shoulder_comments_text: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderCommentsText || '',
+      passive_joint_mobility_shoulder_posterior_capsule_right: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderPosteriorCapsuleRight || 'not_tested',
+      passive_joint_mobility_shoulder_posterior_capsule_left: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderPosteriorCapsuleLeft || 'not_tested',
+      passive_joint_mobility_shoulder_anterior_capsule_right: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderAnteriorCapsuleRight || 'not_tested',
+      passive_joint_mobility_shoulder_anterior_capsule_left: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderAnteriorCapsuleLeft || 'not_tested',
+      passive_joint_mobility_shoulder_inferior_capsule_right: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderInferiorCapsuleRight || 'not_tested',
+      passive_joint_mobility_shoulder_inferior_capsule_left: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderInferiorCapsuleLeft || 'not_tested',
       // SC Joint
       sc_joint: this.boolToYesNo(dto.scJoint?.scJoint),
       sc_joint_comments_text: dto.scJoint?.scJointCommentsText || '',
@@ -521,37 +530,68 @@ export class SpecialTestsMapperService {
       ac_joint_comments_text: dto.acJoint?.acJointCommentsText || '',
       // Impingement
       impingement: this.boolToYesNo(dto.impingement?.impingement),
-      impingement_comments_text: dto.impingement?.impingementCommentsText || '',
+      'impingement_hawkins/kennedy_right': dto.impingement?.impingementHawkinsKennedyRight || 'not_tested',
+      'impingement_hawkins/kennedy_left': dto.impingement?.impingementHawkinsKennedyLeft || 'not_tested',
+      impingement_neer_test_right: dto.impingement?.impingementNeerTestRight || 'not_tested',
+      impingement_neer_test_left: dto.impingement?.impingementNeerTestLeft || 'not_tested',
       // GHJ Stability
       ghj_stability: this.boolToYesNo(dto.ghjStability?.ghjStability),
-      ghj_stability_comments_text: dto.ghjStability?.ghjStabilityCommentsText || '',
+      ghj_stability_load_and_shift_right: dto.ghjStability?.ghjStabilityLoadAndShiftRight || 'not_tested',
+      ghj_stability_load_and_shift_left: dto.ghjStability?.ghjStabilityLoadAndShiftLeft || 'not_tested',
+      ghj_stability_apprehension_right: dto.ghjStability?.ghjStabilityApprehensionRight || 'not_tested',
+      ghj_stability_apprehension_left: dto.ghjStability?.ghjStabilityApprehensionLeft || 'not_tested',
+      ghj_stability_relocation_right: dto.ghjStability?.ghjStabilityRelocationRight || 'not_tested',
+      ghj_stability_relocation_left: dto.ghjStability?.ghjStabilityRelocationLeft || 'not_tested',
+      ghj_stability_sulcus_sign_right: dto.ghjStability?.ghjStabilitySulcusSignRight || 'not_tested',
+      ghj_stability_sulcus_sign_left: dto.ghjStability?.ghjStabilitySulcusSignLeft || 'not_tested',
       // Labrum
       labrum: this.boolToYesNo(dto.labrum?.labrum),
-      labrum_comments_text: dto.labrum?.labrumCommentsText || '',
+      labrum_grind_test_right: dto.labrum?.labrumGrindTestRight || 'not_tested',
+      labrum_grind_test_left: dto.labrum?.labrumGrindTestLeft || 'not_tested',
+      labrum_obriens_right: dto.labrum?.labrumObriensRight || 'not_tested',
+      labrum_obriens_left: dto.labrum?.labrumObriensLeft || 'not_tested',
+      labrum_clunk_test_right: dto.labrum?.labrumClunkTestRight || 'not_tested',
+      labrum_clunk_test_left: dto.labrum?.labrumClunkTestLeft || 'not_tested',
+      labrum_crank_test_right: dto.labrum?.labrumCrankTestRight || 'not_tested',
+      labrum_crank_test_left: dto.labrum?.labrumCrankTestLeft || 'not_tested',
       // Rotator Cuff
       rotator_cuff: this.boolToYesNo(dto.rotatorCuff?.rotatorCuff),
-      rotator_cuff_comments_text: dto.rotatorCuff?.rotatorCuffCommentsText || '',
+      rotator_cuff_empty_can_right: dto.rotatorCuff?.rotatorCuffEmptyCanRight || 'not_tested',
+      rotator_cuff_empty_can_left: dto.rotatorCuff?.rotatorCuffEmptyCanLeft || 'not_tested',
+      rotator_cuff_subscapularis_lift_off_right: dto.rotatorCuff?.rotatorCuffSubscapularisLiftOffRight || 'not_tested',
+      rotator_cuff_subscapularis_lift_off_left: dto.rotatorCuff?.rotatorCuffSubscapularisLiftOffLeft || 'not_tested',
+      rotator_cuff_drop_arm_right: dto.rotatorCuff?.rotatorCuffDropArmRight || 'not_tested',
+      rotator_cuff_drop_arm_left: dto.rotatorCuff?.rotatorCuffDropArmLeft || 'not_tested',
       // Speed's Test
       speeds_test: this.boolToYesNo(dto.speedsTest?.speedsTest),
       speeds_test_comments_text: dto.speedsTest?.speedsTestCommentsText || '',
       // Ligament Integrity Elbow
       ligament_integrity_elbow: this.boolToYesNo(dto.ligamentIntegrityElbow?.ligamentIntegrityElbow),
-      ligament_integrity_elbow_comments_text: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowCommentsText || '',
+      ligament_integrity_elbow_valgus_overload_right: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowValgusOverloadRight || 'not_tested',
+      ligament_integrity_elbow_valgus_overload_left: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowValgusOverloadLeft || 'not_tested',
+      ligament_integrity_elbow_valgus_stress_right: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowValgusStressRight || 'not_tested',
+      ligament_integrity_elbow_valgus_stress_left: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowValgusStressLeft || 'not_tested',
+      ligament_integrity_elbow_varus_stress_right: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowVarusStressRight || 'not_tested',
+      ligament_integrity_elbow_varus_stress_left: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowVarusStressLeft || 'not_tested',
       // Ulnar Nerve Subluxation
       ulnar_nerve_subluxation: this.boolToYesNo(dto.ulnarNerveSubluxation?.ulnarNerveSubluxation),
-      ulnar_nerve_subluxation_comments_text: dto.ulnarNerveSubluxation?.ulnarNerveSubluxationCommentsText || '',
+      ulnar_nerve_subluxation_ulnar_nerve_subluxation_right: dto.ulnarNerveSubluxation?.ulnarNerveSubluxationUlnarNerveSubluxationRight || 'not_tested',
+      ulnar_nerve_subluxation_ulnar_nerve_subluxation_left: dto.ulnarNerveSubluxation?.ulnarNerveSubluxationUlnarNerveSubluxationLeft || 'not_tested',
       // Kemp's Test
       kemps_test: this.boolToYesNo(dto.kempsTest?.kempsTest),
       kemps_test_result: dto.kempsTest?.kempsTestResult || 'Negative',
       // SI Compression
       si_compression: this.boolToYesNo(dto.siCompression?.siCompression),
-      si_compression_comments_text: dto.siCompression?.siCompressionCommentsText || '',
+      si_compression_si_compression_right: dto.siCompression?.siCompressionSiCompressionRight || 'not_tested',
+      si_compression_si_compression_left: dto.siCompression?.siCompressionSiCompressionLeft || 'not_tested',
       // SI Distraction
       si_distraction: this.boolToYesNo(dto.siDistraction?.siDistraction),
-      si_distraction_comments_text: dto.siDistraction?.siDistractionCommentsText || '',
+      si_distraction_si_distraction_right: dto.siDistraction?.siDistractionSiDistractionRight || 'not_tested',
+      si_distraction_si_distraction_left: dto.siDistraction?.siDistractionSiDistractionLeft || 'not_tested',
       // Leg Length
       leg_length: this.boolToYesNo(dto.legLength?.legLength),
-      leg_length_comments_text: dto.legLength?.legLengthCommentsText || '',
+      leg_length_shortage_right: dto.legLength?.legLengthShortageRight || 'None',
+      leg_length_shortage_left: dto.legLength?.legLengthShortageLeft || 'None',
       // Proprioception/Balance
       proprioception_balance: this.boolToYesNo(dto.proprioceptionBalance?.proprioceptionBalance),
       proprioception_balance_comments_text: dto.proprioceptionBalance?.proprioceptionBalanceCommentsText || '',
@@ -560,7 +600,8 @@ export class SpecialTestsMapperService {
       pelvic_clock_introitus_clock_comments_text: dto.pelvicClockIntroitusClock?.pelvicClockIntroitusClockCommentsText || '',
       // Lasegue's SLR
       lasegues_slr: this.boolToYesNo(dto.laseguesSlr?.laseguesSlr),
-      lasegues_slr_comments_text: dto.laseguesSlr?.laseguesSlrCommentsText || '',
+      lasegues_slr_lasegues_slr_right: dto.laseguesSlr?.laseguesSlrLaseguesSlrRight || 'not_tested',
+      lasegues_slr_lasegues_slr_left: dto.laseguesSlr?.laseguesSlrLaseguesSlrLeft || 'not_tested',
 
       // Additional Comments
       additional_comments: this.boolToYesNo(dto.additionalComments?.additionalComments),
@@ -990,7 +1031,8 @@ export class SpecialTestsMapperService {
   private mapCervicalQuadrant(formValue: any): CervicalQuadrant {
     return {
       cervicalQuadrant: this.yesNoToBool(formValue.cervical_quadrant),
-      cervicalQuadrantCommentsText: formValue.cervical_quadrant_comments_text || ''
+      cervicalQuadrantCervicalQuadrantRight: formValue.cervical_quadrant_cervical_quadrant_right || 'not_tested',
+      cervicalQuadrantCervicalQuadrantLeft: formValue.cervical_quadrant_cervical_quadrant_left || 'not_tested'
     };
   }
 
@@ -1005,21 +1047,24 @@ export class SpecialTestsMapperService {
   private mapJawCrepitus(formValue: any): JawCrepitus {
     return {
       jawCrepitus: this.yesNoToBool(formValue.jaw_crepitus),
-      jawCrepitusCommentsText: formValue.jaw_crepitus_comments_text || ''
+      jawCrepitusJawCrepitusRight: formValue.jaw_crepitus_jaw_crepitus_right || 'not_tested',
+      jawCrepitusJawCrepitusLeft: formValue.jaw_crepitus_jaw_crepitus_left || 'not_tested'
     };
   }
 
   private mapSpurlingsManeuver(formValue: any): SpurlingsManeuver {
     return {
       spurlingsManeuver: this.yesNoToBool(formValue.spurlings_maneuver),
-      spurlingsManeuverCommentsText: formValue.spurlings_maneuver_comments_text || ''
+      spurlingsManeuverSpurlingsManeuverRight: formValue.spurlings_maneuver_spurlings_maneuver_right || 'not_tested',
+      spurlingsManeuverSpurlingsManeuverLeft: formValue.spurlings_maneuver_spurlings_maneuver_left || 'not_tested'
     };
   }
 
   private mapAlarLigamentTestManual(formValue: any): AlarLigamentTestManual {
     return {
       alarLigamentTestManual: this.yesNoToBool(formValue.alar_ligament_test_manual),
-      alarLigamentTestManualCommentsText: formValue.alar_ligament_test_manual_comments_text || ''
+      alarLigamentTestManualAlarLigamentTestRight: formValue.alar_ligament_test_manual_alar_ligament_test_right || 'not_tested',
+      alarLigamentTestManualAlarLigamentTestLeft: formValue.alar_ligament_test_manual_alar_ligament_test_left || 'not_tested'
     };
   }
 
@@ -1049,7 +1094,12 @@ export class SpecialTestsMapperService {
   private mapPassiveJointMobilityShoulder(formValue: any): PassiveJointMobilityShoulder {
     return {
       passiveJointMobilityShoulder: this.yesNoToBool(formValue.passive_joint_mobility_shoulder),
-      passiveJointMobilityShoulderCommentsText: formValue.passive_joint_mobility_shoulder_comments_text || ''
+      passiveJointMobilityShoulderPosteriorCapsuleRight: formValue.passive_joint_mobility_shoulder_posterior_capsule_right || 'not_tested',
+      passiveJointMobilityShoulderPosteriorCapsuleLeft: formValue.passive_joint_mobility_shoulder_posterior_capsule_left || 'not_tested',
+      passiveJointMobilityShoulderAnteriorCapsuleRight: formValue.passive_joint_mobility_shoulder_anterior_capsule_right || 'not_tested',
+      passiveJointMobilityShoulderAnteriorCapsuleLeft: formValue.passive_joint_mobility_shoulder_anterior_capsule_left || 'not_tested',
+      passiveJointMobilityShoulderInferiorCapsuleRight: formValue.passive_joint_mobility_shoulder_inferior_capsule_right || 'not_tested',
+      passiveJointMobilityShoulderInferiorCapsuleLeft: formValue.passive_joint_mobility_shoulder_inferior_capsule_left || 'not_tested'
     };
   }
 
@@ -1070,28 +1120,50 @@ export class SpecialTestsMapperService {
   private mapImpingement(formValue: any): Impingement {
     return {
       impingement: this.yesNoToBool(formValue.impingement),
-      impingementCommentsText: formValue.impingement_comments_text || ''
+      impingementHawkinsKennedyRight: formValue['impingement_hawkins/kennedy_right'] || 'not_tested',
+      impingementHawkinsKennedyLeft: formValue['impingement_hawkins/kennedy_left'] || 'not_tested',
+      impingementNeerTestRight: formValue.impingement_neer_test_right || 'not_tested',
+      impingementNeerTestLeft: formValue.impingement_neer_test_left || 'not_tested'
     };
   }
 
   private mapGhjStability(formValue: any): GhjStability {
     return {
       ghjStability: this.yesNoToBool(formValue.ghj_stability),
-      ghjStabilityCommentsText: formValue.ghj_stability_comments_text || ''
+      ghjStabilityLoadAndShiftRight: formValue.ghj_stability_load_and_shift_right || 'not_tested',
+      ghjStabilityLoadAndShiftLeft: formValue.ghj_stability_load_and_shift_left || 'not_tested',
+      ghjStabilityApprehensionRight: formValue.ghj_stability_apprehension_right || 'not_tested',
+      ghjStabilityApprehensionLeft: formValue.ghj_stability_apprehension_left || 'not_tested',
+      ghjStabilityRelocationRight: formValue.ghj_stability_relocation_right || 'not_tested',
+      ghjStabilityRelocationLeft: formValue.ghj_stability_relocation_left || 'not_tested',
+      ghjStabilitySulcusSignRight: formValue.ghj_stability_sulcus_sign_right || 'not_tested',
+      ghjStabilitySulcusSignLeft: formValue.ghj_stability_sulcus_sign_left || 'not_tested'
     };
   }
 
   private mapLabrum(formValue: any): Labrum {
     return {
       labrum: this.yesNoToBool(formValue.labrum),
-      labrumCommentsText: formValue.labrum_comments_text || ''
+      labrumGrindTestRight: formValue.labrum_grind_test_right || 'not_tested',
+      labrumGrindTestLeft: formValue.labrum_grind_test_left || 'not_tested',
+      labrumObriensRight: formValue.labrum_obriens_right || 'not_tested',
+      labrumObriensLeft: formValue.labrum_obriens_left || 'not_tested',
+      labrumClunkTestRight: formValue.labrum_clunk_test_right || 'not_tested',
+      labrumClunkTestLeft: formValue.labrum_clunk_test_left || 'not_tested',
+      labrumCrankTestRight: formValue.labrum_crank_test_right || 'not_tested',
+      labrumCrankTestLeft: formValue.labrum_crank_test_left || 'not_tested'
     };
   }
 
   private mapRotatorCuff(formValue: any): RotatorCuff {
     return {
       rotatorCuff: this.yesNoToBool(formValue.rotator_cuff),
-      rotatorCuffCommentsText: formValue.rotator_cuff_comments_text || ''
+      rotatorCuffEmptyCanRight: formValue.rotator_cuff_empty_can_right || 'not_tested',
+      rotatorCuffEmptyCanLeft: formValue.rotator_cuff_empty_can_left || 'not_tested',
+      rotatorCuffSubscapularisLiftOffRight: formValue.rotator_cuff_subscapularis_lift_off_right || 'not_tested',
+      rotatorCuffSubscapularisLiftOffLeft: formValue.rotator_cuff_subscapularis_lift_off_left || 'not_tested',
+      rotatorCuffDropArmRight: formValue.rotator_cuff_drop_arm_right || 'not_tested',
+      rotatorCuffDropArmLeft: formValue.rotator_cuff_drop_arm_left || 'not_tested'
     };
   }
 
@@ -1105,14 +1177,20 @@ export class SpecialTestsMapperService {
   private mapLigamentIntegrityElbow(formValue: any): LigamentIntegrityElbow {
     return {
       ligamentIntegrityElbow: this.yesNoToBool(formValue.ligament_integrity_elbow),
-      ligamentIntegrityElbowCommentsText: formValue.ligament_integrity_elbow_comments_text || ''
+      ligamentIntegrityElbowValgusOverloadRight: formValue.ligament_integrity_elbow_valgus_overload_right || 'not_tested',
+      ligamentIntegrityElbowValgusOverloadLeft: formValue.ligament_integrity_elbow_valgus_overload_left || 'not_tested',
+      ligamentIntegrityElbowValgusStressRight: formValue.ligament_integrity_elbow_valgus_stress_right || 'not_tested',
+      ligamentIntegrityElbowValgusStressLeft: formValue.ligament_integrity_elbow_valgus_stress_left || 'not_tested',
+      ligamentIntegrityElbowVarusStressRight: formValue.ligament_integrity_elbow_varus_stress_right || 'not_tested',
+      ligamentIntegrityElbowVarusStressLeft: formValue.ligament_integrity_elbow_varus_stress_left || 'not_tested'
     };
   }
 
   private mapUlnarNerveSubluxation(formValue: any): UlnarNerveSubluxation {
     return {
       ulnarNerveSubluxation: this.yesNoToBool(formValue.ulnar_nerve_subluxation),
-      ulnarNerveSubluxationCommentsText: formValue.ulnar_nerve_subluxation_comments_text || ''
+      ulnarNerveSubluxationUlnarNerveSubluxationRight: formValue.ulnar_nerve_subluxation_ulnar_nerve_subluxation_right || 'not_tested',
+      ulnarNerveSubluxationUlnarNerveSubluxationLeft: formValue.ulnar_nerve_subluxation_ulnar_nerve_subluxation_left || 'not_tested'
     };
   }
 
@@ -1126,21 +1204,24 @@ export class SpecialTestsMapperService {
   private mapSiCompression(formValue: any): SiCompression {
     return {
       siCompression: this.yesNoToBool(formValue.si_compression),
-      siCompressionCommentsText: formValue.si_compression_comments_text || ''
+      siCompressionSiCompressionRight: formValue.si_compression_si_compression_right || 'not_tested',
+      siCompressionSiCompressionLeft: formValue.si_compression_si_compression_left || 'not_tested'
     };
   }
 
   private mapSiDistraction(formValue: any): SiDistraction {
     return {
       siDistraction: this.yesNoToBool(formValue.si_distraction),
-      siDistractionCommentsText: formValue.si_distraction_comments_text || ''
+      siDistractionSiDistractionRight: formValue.si_distraction_si_distraction_right || 'not_tested',
+      siDistractionSiDistractionLeft: formValue.si_distraction_si_distraction_left || 'not_tested'
     };
   }
 
   private mapLegLength(formValue: any): LegLength {
     return {
       legLength: this.yesNoToBool(formValue.leg_length),
-      legLengthCommentsText: formValue.leg_length_comments_text || ''
+      legLengthShortageRight: formValue.leg_length_shortage_right || 'None',
+      legLengthShortageLeft: formValue.leg_length_shortage_left || 'None'
     };
   }
 
@@ -1161,7 +1242,8 @@ export class SpecialTestsMapperService {
   private mapLaseguesSlr(formValue: any): LaseguesSlr {
     return {
       laseguesSlr: this.yesNoToBool(formValue.lasegues_slr),
-      laseguesSlrCommentsText: formValue.lasegues_slr_comments_text || ''
+      laseguesSlrLaseguesSlrRight: formValue.lasegues_slr_lasegues_slr_right || 'not_tested',
+      laseguesSlrLaseguesSlrLeft: formValue.lasegues_slr_lasegues_slr_left || 'not_tested'
     };
   }
 

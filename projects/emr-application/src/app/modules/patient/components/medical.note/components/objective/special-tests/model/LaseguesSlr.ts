@@ -1,4 +1,5 @@
 export interface LaseguesSlr {
   laseguesSlr: boolean;
-  laseguesSlrCommentsText: string;
+  laseguesSlrLaseguesSlrRight: string;
+  laseguesSlrLaseguesSlrLeft: string;
 }

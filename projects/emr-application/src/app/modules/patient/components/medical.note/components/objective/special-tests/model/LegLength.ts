@@ -1,4 +1,5 @@
 export interface LegLength {
   legLength: boolean;
-  legLengthCommentsText: string;
+  legLengthShortageRight: string;
+  legLengthShortageLeft: string;
 }

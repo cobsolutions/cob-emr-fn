@@ -1998,7 +1998,15 @@
         </div>
     </div>
     <div *ngIf="showCervicalQuadrantFields" class="dependent-field-box">
-        <textarea formControlName="cervical_quadrant_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.cervicalQuadrant.columns"
+            [labels]="specialTestConfig.cervicalQuadrant.labels"
+            [options]="specialTestConfig.cervicalQuadrant.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.cervicalQuadrant.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.cervicalQuadrant.commentsFieldName"
+            [hasTextInput]="specialTestConfig.cervicalQuadrant.hasTextInput"
+            [showComments]="specialTestConfig.cervicalQuadrant.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Cervical Comp/Dist</label>
@@ -2041,7 +2049,15 @@
         </div>
     </div>
     <div *ngIf="showJawCrepitusFields" class="dependent-field-box">
-        <textarea formControlName="jaw_crepitus_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.jawCrepitus.columns"
+            [labels]="specialTestConfig.jawCrepitus.labels"
+            [options]="specialTestConfig.jawCrepitus.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.jawCrepitus.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.jawCrepitus.commentsFieldName"
+            [hasTextInput]="specialTestConfig.jawCrepitus.hasTextInput"
+            [showComments]="specialTestConfig.jawCrepitus.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Spurling's Maneuver</label>
@@ -2057,7 +2073,15 @@
         </div>
     </div>
     <div *ngIf="showSpurlingsManeuverFields" class="dependent-field-box">
-        <textarea formControlName="spurlings_maneuver_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.spurlingsManeuver.columns"
+            [labels]="specialTestConfig.spurlingsManeuver.labels"
+            [options]="specialTestConfig.spurlingsManeuver.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.spurlingsManeuver.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.spurlingsManeuver.commentsFieldName"
+            [hasTextInput]="specialTestConfig.spurlingsManeuver.hasTextInput"
+            [showComments]="specialTestConfig.spurlingsManeuver.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Test</label>
@@ -2073,7 +2097,15 @@
         </div>
     </div>
     <div *ngIf="showAlarLigamentTestManualFields" class="dependent-field-box">
-        <textarea formControlName="alar_ligament_test_manual_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.alarLigamentTestManual.columns"
+            [labels]="specialTestConfig.alarLigamentTestManual.labels"
+            [options]="specialTestConfig.alarLigamentTestManual.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.alarLigamentTestManual.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.alarLigamentTestManual.commentsFieldName"
+            [hasTextInput]="specialTestConfig.alarLigamentTestManual.hasTextInput"
+            [showComments]="specialTestConfig.alarLigamentTestManual.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Alar Ligament Stress</label>
@@ -2198,7 +2230,15 @@
         </div>
     </div>
     <div *ngIf="showPassiveJointMobilityShoulderFields" class="dependent-field-box">
-        <textarea formControlName="passive_joint_mobility_shoulder_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.passiveJointMobilityShoulder.columns"
+            [labels]="specialTestConfig.passiveJointMobilityShoulder.labels"
+            [options]="specialTestConfig.passiveJointMobilityShoulder.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.passiveJointMobilityShoulder.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.passiveJointMobilityShoulder.commentsFieldName"
+            [hasTextInput]="specialTestConfig.passiveJointMobilityShoulder.hasTextInput"
+            [showComments]="specialTestConfig.passiveJointMobilityShoulder.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">SC Joint</label>
@@ -2246,7 +2286,15 @@
         </div>
     </div>
     <div *ngIf="showImpingementFields" class="dependent-field-box">
-        <textarea formControlName="impingement_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.impingementConfig.columns"
+            [labels]="specialTestConfig.impingementConfig.labels"
+            [options]="specialTestConfig.impingementConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.impingementConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.impingementConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.impingementConfig.hasTextInput"
+            [showComments]="specialTestConfig.impingementConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">GHJ Stability</label>
@@ -2262,7 +2310,15 @@
         </div>
     </div>
     <div *ngIf="showGhjStabilityFields" class="dependent-field-box">
-        <textarea formControlName="ghj_stability_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.ghjStability.columns"
+            [labels]="specialTestConfig.ghjStability.labels"
+            [options]="specialTestConfig.ghjStability.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ghjStability.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ghjStability.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ghjStability.hasTextInput"
+            [showComments]="specialTestConfig.ghjStability.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Labrum</label>
@@ -2278,7 +2334,15 @@
         </div>
     </div>
     <div *ngIf="showLabrumFields" class="dependent-field-box">
-        <textarea formControlName="labrum_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.labrumConfig.columns"
+            [labels]="specialTestConfig.labrumConfig.labels"
+            [options]="specialTestConfig.labrumConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.labrumConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.labrumConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.labrumConfig.hasTextInput"
+            [showComments]="specialTestConfig.labrumConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Rotator Cuff</label>
@@ -2294,7 +2358,15 @@
         </div>
     </div>
     <div *ngIf="showRotatorCuffFields" class="dependent-field-box">
-        <textarea formControlName="rotator_cuff_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.rotatorCuff.columns"
+            [labels]="specialTestConfig.rotatorCuff.labels"
+            [options]="specialTestConfig.rotatorCuff.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.rotatorCuff.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.rotatorCuff.commentsFieldName"
+            [hasTextInput]="specialTestConfig.rotatorCuff.hasTextInput"
+            [showComments]="specialTestConfig.rotatorCuff.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Speed's Test</label>
@@ -2326,7 +2398,15 @@
         </div>
     </div>
     <div *ngIf="showLigamentIntegrityElbowFields" class="dependent-field-box">
-        <textarea formControlName="ligament_integrity_elbow_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.ligamentIntegrityElbow.columns"
+            [labels]="specialTestConfig.ligamentIntegrityElbow.labels"
+            [options]="specialTestConfig.ligamentIntegrityElbow.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ligamentIntegrityElbow.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ligamentIntegrityElbow.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ligamentIntegrityElbow.hasTextInput"
+            [showComments]="specialTestConfig.ligamentIntegrityElbow.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Ulnar Nerve Subluxation</label>
@@ -2342,7 +2422,15 @@
         </div>
     </div>
     <div *ngIf="showUlnarNerveSubluxationFields" class="dependent-field-box">
-        <textarea formControlName="ulnar_nerve_subluxation_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.ulnarNerveSubluxation.columns"
+            [labels]="specialTestConfig.ulnarNerveSubluxation.labels"
+            [options]="specialTestConfig.ulnarNerveSubluxation.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ulnarNerveSubluxation.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ulnarNerveSubluxation.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ulnarNerveSubluxation.hasTextInput"
+            [showComments]="specialTestConfig.ulnarNerveSubluxation.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Kemp's Test</label>
@@ -2378,7 +2466,15 @@
         </div>
     </div>
     <div *ngIf="showSiCompressionFields" class="dependent-field-box">
-        <textarea formControlName="si_compression_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.siCompression.columns"
+            [labels]="specialTestConfig.siCompression.labels"
+            [options]="specialTestConfig.siCompression.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.siCompression.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.siCompression.commentsFieldName"
+            [hasTextInput]="specialTestConfig.siCompression.hasTextInput"
+            [showComments]="specialTestConfig.siCompression.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">SI Distraction</label>
@@ -2394,7 +2490,15 @@
         </div>
     </div>
     <div *ngIf="showSiDistractionFields" class="dependent-field-box">
-        <textarea formControlName="si_distraction_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.siDistraction.columns"
+            [labels]="specialTestConfig.siDistraction.labels"
+            [options]="specialTestConfig.siDistraction.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.siDistraction.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.siDistraction.commentsFieldName"
+            [hasTextInput]="specialTestConfig.siDistraction.hasTextInput"
+            [showComments]="specialTestConfig.siDistraction.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Leg Length</label>
@@ -2410,7 +2514,15 @@
         </div>
     </div>
     <div *ngIf="showLegLengthFields" class="dependent-field-box">
-        <textarea formControlName="leg_length_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.legLengthConfig.columns"
+            [labels]="specialTestConfig.legLengthConfig.labels"
+            [options]="specialTestConfig.legLengthConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.legLengthConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.legLengthConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.legLengthConfig.hasTextInput"
+            [showComments]="specialTestConfig.legLengthConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Proprioception/Balance</label>
@@ -2458,7 +2570,15 @@
         </div>
     </div>
     <div *ngIf="showLaseguesSlrFields" class="dependent-field-box">
-        <textarea formControlName="lasegues_slr_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.laseguesSlr.columns"
+            [labels]="specialTestConfig.laseguesSlr.labels"
+            [options]="specialTestConfig.laseguesSlr.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.laseguesSlr.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.laseguesSlr.commentsFieldName"
+            [hasTextInput]="specialTestConfig.laseguesSlr.hasTextInput"
+            [showComments]="specialTestConfig.laseguesSlr.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Additional Comments</label>

@@ -1,4 +1,9 @@
 export interface LigamentIntegrityElbow {
   ligamentIntegrityElbow: boolean;
-  ligamentIntegrityElbowCommentsText: string;
+  ligamentIntegrityElbowValgusOverloadRight: string;
+  ligamentIntegrityElbowValgusOverloadLeft: string;
+  ligamentIntegrityElbowValgusStressRight: string;
+  ligamentIntegrityElbowValgusStressLeft: string;
+  ligamentIntegrityElbowVarusStressRight: string;
+  ligamentIntegrityElbowVarusStressLeft: string;
 }

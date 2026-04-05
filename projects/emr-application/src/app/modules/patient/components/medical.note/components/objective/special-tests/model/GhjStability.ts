@@ -1,4 +1,11 @@
 export interface GhjStability {
   ghjStability: boolean;
-  ghjStabilityCommentsText: string;
+  ghjStabilityLoadAndShiftRight: string;
+  ghjStabilityLoadAndShiftLeft: string;
+  ghjStabilityApprehensionRight: string;
+  ghjStabilityApprehensionLeft: string;
+  ghjStabilityRelocationRight: string;
+  ghjStabilityRelocationLeft: string;
+  ghjStabilitySulcusSignRight: string;
+  ghjStabilitySulcusSignLeft: string;
 }
