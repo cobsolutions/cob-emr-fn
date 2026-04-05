@@ -6,7 +6,7 @@ export interface MedicalNoteRequest {
     patientId?:number
     patientCaseId?: string;
     noteType?: string
-    createdBy?: string
+    createdBy?: ProviderInfo
     noteDate?: number
     subjective?: any
     objective?: any
@@ -25,6 +25,8 @@ export interface MedicalNoteRequest {
     dateOfService?:number
     quickDischargeRequest?: QuickDischargeRequest
     finalizedBy?: ProviderInfo
+    forwardedBy?: ProviderInfo
+    forwardedTo?: ProviderInfo
     isForwarded?: boolean
     coSigner?: string
 }

@@ -1,8 +1,8 @@
 export interface ProviderInfo{
-    uuid?:string
+    providerId?:string
+    providerName?:string;
     npi?:string,
     credential?:string,
     license?:string,
     speciality?:string
-    providerName?:string;
 }

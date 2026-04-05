@@ -9,6 +9,7 @@ import { ListTemplate } from '../../../../common/template/list.template';
 import { Appointment } from '../../../../scheduler/models/appointment';
 import { AppointmentCancelNoShowReason } from '../../../../scheduler/models/appointment.cancel.no.show.reason';
 import { AppointmentService } from '../../../../scheduler/service/appointment.service';
+import { ProviderInfo } from '../../../../security/model/provider-info';
 import { Role } from '../../../../security/model/role';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
 import { PermissionService } from '../../../../security/service/permission.service';
@@ -341,6 +342,17 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       this.medicalNoteId = undefined;
     }
   }
+  private buildCreatedBy(): ProviderInfo {
+    const loggedUser = this.loggedInService.getLoggedUser();
+    return {
+      providerId: loggedUser.uuid,
+      providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+      npi: loggedUser.providerInfo?.npi,
+      credential: loggedUser.providerInfo?.credential,
+      license: loggedUser.providerInfo?.license,
+      speciality: loggedUser.providerInfo?.speciality
+    };
+  }
   private createInitialExamNote() {
     var request: CreateNodeRequest = {
       patient: this.patient,
@@ -348,6 +360,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'INITIAL_EXAM',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
+      createdBy: this.buildCreatedBy(),
       caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription }))
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {
@@ -372,6 +385,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'DAILY',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
+      createdBy: this.buildCreatedBy(),
       caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
       clinicIds: this.patient?.clinicIds
     }
@@ -396,6 +410,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'PROGRESS',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
+      createdBy: this.buildCreatedBy(),
       caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
       clinicIds: this.patient?.clinicIds
     }
@@ -417,6 +432,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   private createQuickDischargeNote() {
     var request = {
       patientCaseId: this.case.uuid,
+      createdBy: this.buildCreatedBy(),
       caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
       clinicIds: this.patient?.clinicIds
     }
@@ -441,6 +457,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       noteType: 'DISCHARGE',
       providerId: this.loggedInService.getLoggedUser().uuid,
       encounterDate: moment().toDate(),
+      createdBy: this.buildCreatedBy(),
       caseDiagnosis: this.case.caseDiagnosis?.map(d => ({ code: d.diagnosisCode, description: d.diagnosisDescription })),
       clinicIds: this.patient?.clinicIds
     }

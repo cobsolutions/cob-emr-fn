@@ -63,7 +63,6 @@ export class CreateUserComponent implements OnInit, DoCheck {
   showMedicalPermissions: boolean = true;
   user: User = {
     userType: null,
-    role: null,
     clinicIds: [],
     roleScope: [],
     speciality: null,
@@ -305,7 +304,7 @@ export class CreateUserComponent implements OnInit, DoCheck {
           this.router.navigateByUrl('emr/users/list/clinical/users')
         }, (error) => {
           console.log(error);
-          this.toastr.error(error.error.message, 'Error In Creation');
+          this.handleCreateError(error);
         })
       }
       if (this.user.userType === 'Clerical') {
@@ -314,7 +313,7 @@ export class CreateUserComponent implements OnInit, DoCheck {
           this.router.navigateByUrl('emr/users/list/clerical/users')
         }, (error) => {
           console.log(error);
-          this.toastr.error(error.error.message, 'Error In Creation');
+          this.handleCreateError(error);
         })
       }
     } else {
@@ -325,6 +324,22 @@ export class CreateUserComponent implements OnInit, DoCheck {
         console.log(error);
         this.toastr.error(error.error.message, 'Error In update');
       })
+    }
+  }
+  private handleCreateError(error: any) {
+    if (error.status === 409) {
+      const message: string = error.error?.message || '';
+      if (message.startsWith('User')) {
+        this.validUserName = false;
+        this.validUserNameMessage = 'Username is already taken';
+        this.toastr.error('Username is already taken', 'Error In Creation');
+      } else if (message.startsWith('email')) {
+        this.validEmail = false;
+        this.validEmailMessage = 'Email is already registered';
+        this.toastr.error('Email is already registered', 'Error In Creation');
+      }
+    } else {
+      this.toastr.error(error.error.message, 'Error In Creation');
     }
   }
   changeCredential(value: any) {

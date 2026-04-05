@@ -1,10 +1,15 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'projects/emr-application/src/app/modules/administration/model/user/user';
 import { DotorUserService } from 'projects/emr-application/src/app/modules/administration/services/user/doctor.user/dotor-user.service';
+import { ProviderInfo } from 'projects/emr-application/src/app/modules/security/model/provider-info';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { InitialExamNoteService } from '../../../../services/medical.note/initial.exam/initial-exam-note.service';
+import { DailyNoteService } from '../../../../services/medical.note/daily.note/daily-note.service';
+import { ProgressNoteService } from '../../../../services/medical.note/progress.note/progress-note.service';
+import { DischargeNoteService } from '../../../../services/medical.note/discharge.note/discharge-note.service';
+import { QuickDischargeNoteService } from '../../../../services/medical.note/quick.discharge/quick-discharge-note.service';
 
 @Component({
   selector: 'forward-modal',
@@ -27,6 +32,10 @@ export class ForwardModalComponent implements OnInit {
     , private dotorUserService: DotorUserService
     , private medialNoteService: MedialNoteService
     , private initialExamNoteService: InitialExamNoteService
+    , private dailyNoteService: DailyNoteService
+    , private progressNoteService: ProgressNoteService
+    , private dischargeNoteService: DischargeNoteService
+    , private quickDischargeNoteService: QuickDischargeNoteService
     , private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -45,56 +54,60 @@ export class ForwardModalComponent implements OnInit {
         this.cdr.detectChanges();
       })
   }
+  private buildForwardedBy(): ProviderInfo {
+    const loggedUser = this.loggedInService.getLoggedUser();
+    return {
+      providerId: loggedUser?.uuid,
+      providerName: loggedUser?.lastName + ', ' + loggedUser?.firstName,
+      npi: loggedUser.providerInfo?.npi,
+      credential: loggedUser.providerInfo?.credential,
+      license: loggedUser.providerInfo?.license,
+      speciality: loggedUser.providerInfo?.speciality
+    };
+  }
+  private buildForwardedTo(): ProviderInfo {
+    const selectedUser = this.clinicalUsers.find(user => user.uuid === this.selectedUserUuid);
+    return {
+      providerId: selectedUser?.uuid,
+      providerName: selectedUser?.lastName + ', ' + selectedUser?.firstName,
+      npi: selectedUser?.npi,
+      credential: selectedUser?.credential,
+      license: selectedUser?.licence,
+      speciality: selectedUser?.speciality
+    };
+  }
   forward() {
+    const request = {
+      patientCaseId: this.caseId,
+      forwardedBy: this.buildForwardedBy(),
+      forwardedTo: this.buildForwardedTo()
+    };
+    let forward$;
     if (this.noteType === MedicalNoteType.Initial_Examination) {
-      const loggedUser = this.loggedInService.getLoggedUser();
-      const selectedUser = this.clinicalUsers.find(user => user.uuid === this.selectedUserUuid);
-      const request = {
-        patientCaseId: this.caseId,
-        forwardedBy: {
-          providerId: loggedUser?.uuid,
-          providerName: loggedUser?.lastName + ', ' + loggedUser?.firstName,
-          npi: loggedUser.providerInfo?.npi,
-          credential: loggedUser.providerInfo?.credential,
-          license: loggedUser.providerInfo?.license,
-          speciality: loggedUser.providerInfo?.speciality
-        },
-        forwardedTo: {
-          providerId: selectedUser?.uuid,
-          providerName: selectedUser?.lastName + ', ' + selectedUser?.firstName,
-          npi: selectedUser?.npi,
-          credential: selectedUser?.credential,
-          license: selectedUser?.licence,
-          speciality: selectedUser?.speciality
-        }
-      };
-      this.initialExamNoteService.forward(this.noteId, request).subscribe({
-        next: () => {
-          document.body.classList.remove('modal-open');
-          document.body.style.removeProperty('overflow');
-          document.body.style.removeProperty('padding-right');
-          this.changeVisibility.emit('close');
-          this.backToRecords.emit();
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'Failed to forward the note. Please try again.';
-          this.cdr.detectChanges();
-        }
-      });
+      forward$ = this.initialExamNoteService.forward(this.noteId, request);
+    } else if (this.noteType === MedicalNoteType.Daily_Note) {
+      forward$ = this.dailyNoteService.forward(this.noteId, request);
+    } else if (this.noteType === MedicalNoteType.Progress_Note) {
+      forward$ = this.progressNoteService.forward(this.noteId, request);
+    } else if (this.noteType === MedicalNoteType.Discharge_Note) {
+      forward$ = this.dischargeNoteService.forward(this.noteId, request);
+    } else if (this.noteType === MedicalNoteType.Quick_Discharge_Note) {
+      forward$ = this.quickDischargeNoteService.forward(this.noteId, request);
     } else {
-      this.medialNoteService.forward(this.noteId, this.selectedUserUuid).subscribe({
-        next: () => {
-          document.body.classList.remove('modal-open');
-          document.body.style.removeProperty('overflow');
-          document.body.style.removeProperty('padding-right');
-          this.changeVisibility.emit('close');
-          this.backToRecords.emit();
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'Failed to forward the note. Please try again.';
-          this.cdr.detectChanges();
-        }
-      });
+      forward$ = this.medialNoteService.forward(this.noteId, this.selectedUserUuid);
     }
+    forward$.subscribe({
+      next: () => {
+        document.body.classList.remove('modal-open');
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('padding-right');
+        this.changeVisibility.emit('close');
+        this.backToRecords.emit();
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Failed to forward the note. Please try again.';
+        this.cdr.detectChanges();
+      }
+    });
   }
 }

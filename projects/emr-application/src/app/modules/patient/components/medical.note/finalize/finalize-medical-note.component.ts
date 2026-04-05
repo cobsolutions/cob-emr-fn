@@ -46,9 +46,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
 
     if (this.noteType === MedicalNoteType.Quick_Discharge_Note) {
       this.medicalNoteRequest.finalizedBy = {
-        ...loggedUser.providerInfo,
-        uuid: loggedUser.uuid,
-        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+        providerId: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+        npi: loggedUser.providerInfo?.npi,
+        credential: loggedUser.providerInfo?.credential,
+        license: loggedUser.providerInfo?.license,
+        speciality: loggedUser.providerInfo?.speciality
       };
       this.quickDischargeNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {
@@ -62,9 +65,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       });
     } else if (this.noteType === MedicalNoteType.Discharge_Note) {
       this.medicalNoteRequest.finalizedBy = {
-        ...loggedUser.providerInfo,
-        uuid: loggedUser.uuid,
-        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+        providerId: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+        npi: loggedUser.providerInfo?.npi,
+        credential: loggedUser.providerInfo?.credential,
+        license: loggedUser.providerInfo?.license,
+        speciality: loggedUser.providerInfo?.speciality
       };
       this.dischargeNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {
@@ -78,9 +84,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       });
     } else if (this.noteType === MedicalNoteType.Daily_Note) {
       this.medicalNoteRequest.finalizedBy = {
-        ...loggedUser.providerInfo,
-        uuid: loggedUser.uuid,
-        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+        providerId: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+        npi: loggedUser.providerInfo?.npi,
+        credential: loggedUser.providerInfo?.credential,
+        license: loggedUser.providerInfo?.license,
+        speciality: loggedUser.providerInfo?.speciality
       };
       this.dailyNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {
@@ -94,9 +103,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       });
     } else if (this.noteType === MedicalNoteType.Progress_Note) {
       this.medicalNoteRequest.finalizedBy = {
-        ...loggedUser.providerInfo,
-        uuid: loggedUser.uuid,
-        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+        providerId: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+        npi: loggedUser.providerInfo?.npi,
+        credential: loggedUser.providerInfo?.credential,
+        license: loggedUser.providerInfo?.license,
+        speciality: loggedUser.providerInfo?.speciality
       };
       this.progressNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {
@@ -110,9 +122,12 @@ export class FinalizeMedicalNoteComponent implements OnInit {
       });
     } else if (this.noteType === MedicalNoteType.Initial_Examination) {
       this.medicalNoteRequest.finalizedBy = {
-        ...loggedUser.providerInfo,
-        uuid: loggedUser.uuid,
-        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`
+        providerId: loggedUser.uuid,
+        providerName: `${loggedUser.lastName}, ${loggedUser.firstName}`,
+        npi: loggedUser.providerInfo?.npi,
+        credential: loggedUser.providerInfo?.credential,
+        license: loggedUser.providerInfo?.license,
+        speciality: loggedUser.providerInfo?.speciality
       };
       this.initialExamNoteService.finalize(this.medicalNoteRequest, this.noteId).subscribe({
         next: (data) => {

@@ -25,6 +25,11 @@ export class DailyNoteService {
     var url = this.baseUrl + '/' + noteId + '/finalize'
     return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
+  forward(noteId: string, request: any) {
+    const headers = { 'content-type': 'application/json' }
+    var url = this.baseUrl + '/' + noteId + '/forward'
+    return this.httpClient.put(`${url}`, JSON.stringify(request), { 'headers': headers })
+  }
   exportPDF(noteId: string) {
     var url = this.baseUrl + '/' + noteId + '/export/pdf';
     return this.httpClient.get(url, { responseType: 'blob' });
