@@ -44,6 +44,8 @@ import { SiCompressionConfig } from "./si-compression/si-compression";
 import { SiDistractionConfig } from "./si-distraction/si-distraction";
 import { LegLengthConfig } from "./leg-length/leg-length";
 import { LaseguesSlrConfig } from "./lasegues-slr/lasegues-slr";
+import { ScJointConfig } from "./sc-joint/sc-joint";
+import { AcJointConfig } from "./ac-joint/ac-joint";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -123,4 +125,6 @@ export class SpecialTestConfig {
     static readonly siDistraction = SiDistractionConfig.siDistraction;
     static readonly legLengthConfig = LegLengthConfig.legLength;
     static readonly laseguesSlr = LaseguesSlrConfig.laseguesSlr;
+    static readonly scJoint = ScJointConfig.scJoint;
+    static readonly acJoint = AcJointConfig.acJoint;
 }

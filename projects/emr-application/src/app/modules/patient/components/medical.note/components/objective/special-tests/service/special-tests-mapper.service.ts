@@ -524,10 +524,32 @@ export class SpecialTestsMapperService {
       passive_joint_mobility_shoulder_inferior_capsule_left: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderInferiorCapsuleLeft || 'not_tested',
       // SC Joint
       sc_joint: this.boolToYesNo(dto.scJoint?.scJoint),
-      sc_joint_comments_text: dto.scJoint?.scJointCommentsText || '',
+      sc_joint_normal_right: !!dto.scJoint?.scJointNormalRight,
+      sc_joint_normal_left: !!dto.scJoint?.scJointNormalLeft,
+      sc_joint_hypermobile_right: !!dto.scJoint?.scJointHypermobileRight,
+      sc_joint_hypermobile_left: !!dto.scJoint?.scJointHypermobileLeft,
+      sc_joint_hypomobile_right: !!dto.scJoint?.scJointHypomobileRight,
+      sc_joint_hypomobile_left: !!dto.scJoint?.scJointHypomobileLeft,
+      sc_joint_capsular_right: !!dto.scJoint?.scJointCapsularRight,
+      sc_joint_capsular_left: !!dto.scJoint?.scJointCapsularLeft,
+      sc_joint_non_capsular_right: !!dto.scJoint?.scJointNonCapsularRight,
+      sc_joint_non_capsular_left: !!dto.scJoint?.scJointNonCapsularLeft,
+      sc_joint_painful_right: !!dto.scJoint?.scJointPainfulRight,
+      sc_joint_painful_left: !!dto.scJoint?.scJointPainfulLeft,
       // AC Joint
       ac_joint: this.boolToYesNo(dto.acJoint?.acJoint),
-      ac_joint_comments_text: dto.acJoint?.acJointCommentsText || '',
+      ac_joint_normal_right: !!dto.acJoint?.acJointNormalRight,
+      ac_joint_normal_left: !!dto.acJoint?.acJointNormalLeft,
+      ac_joint_hypermobile_right: !!dto.acJoint?.acJointHypermobileRight,
+      ac_joint_hypermobile_left: !!dto.acJoint?.acJointHypermobileLeft,
+      ac_joint_hypomobile_right: !!dto.acJoint?.acJointHypomobileRight,
+      ac_joint_hypomobile_left: !!dto.acJoint?.acJointHypomobileLeft,
+      ac_joint_capsular_right: !!dto.acJoint?.acJointCapsularRight,
+      ac_joint_capsular_left: !!dto.acJoint?.acJointCapsularLeft,
+      ac_joint_non_capsular_right: !!dto.acJoint?.acJointNonCapsularRight,
+      ac_joint_non_capsular_left: !!dto.acJoint?.acJointNonCapsularLeft,
+      ac_joint_painful_right: !!dto.acJoint?.acJointPainfulRight,
+      ac_joint_painful_left: !!dto.acJoint?.acJointPainfulLeft,
       // Impingement
       impingement: this.boolToYesNo(dto.impingement?.impingement),
       'impingement_hawkins/kennedy_right': dto.impingement?.impingementHawkinsKennedyRight || 'not_tested',
@@ -1106,14 +1128,36 @@ export class SpecialTestsMapperService {
   private mapScJoint(formValue: any): ScJoint {
     return {
       scJoint: this.yesNoToBool(formValue.sc_joint),
-      scJointCommentsText: formValue.sc_joint_comments_text || ''
+      scJointNormalRight: !!formValue.sc_joint_normal_right,
+      scJointNormalLeft: !!formValue.sc_joint_normal_left,
+      scJointHypermobileRight: !!formValue.sc_joint_hypermobile_right,
+      scJointHypermobileLeft: !!formValue.sc_joint_hypermobile_left,
+      scJointHypomobileRight: !!formValue.sc_joint_hypomobile_right,
+      scJointHypomobileLeft: !!formValue.sc_joint_hypomobile_left,
+      scJointCapsularRight: !!formValue.sc_joint_capsular_right,
+      scJointCapsularLeft: !!formValue.sc_joint_capsular_left,
+      scJointNonCapsularRight: !!formValue.sc_joint_non_capsular_right,
+      scJointNonCapsularLeft: !!formValue.sc_joint_non_capsular_left,
+      scJointPainfulRight: !!formValue.sc_joint_painful_right,
+      scJointPainfulLeft: !!formValue.sc_joint_painful_left
     };
   }
 
   private mapAcJoint(formValue: any): AcJoint {
     return {
       acJoint: this.yesNoToBool(formValue.ac_joint),
-      acJointCommentsText: formValue.ac_joint_comments_text || ''
+      acJointNormalRight: !!formValue.ac_joint_normal_right,
+      acJointNormalLeft: !!formValue.ac_joint_normal_left,
+      acJointHypermobileRight: !!formValue.ac_joint_hypermobile_right,
+      acJointHypermobileLeft: !!formValue.ac_joint_hypermobile_left,
+      acJointHypomobileRight: !!formValue.ac_joint_hypomobile_right,
+      acJointHypomobileLeft: !!formValue.ac_joint_hypomobile_left,
+      acJointCapsularRight: !!formValue.ac_joint_capsular_right,
+      acJointCapsularLeft: !!formValue.ac_joint_capsular_left,
+      acJointNonCapsularRight: !!formValue.ac_joint_non_capsular_right,
+      acJointNonCapsularLeft: !!formValue.ac_joint_non_capsular_left,
+      acJointPainfulRight: !!formValue.ac_joint_painful_right,
+      acJointPainfulLeft: !!formValue.ac_joint_painful_left
     };
   }
 

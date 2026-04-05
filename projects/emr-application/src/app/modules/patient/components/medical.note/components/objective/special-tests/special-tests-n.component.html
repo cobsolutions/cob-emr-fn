@@ -2254,7 +2254,12 @@
         </div>
     </div>
     <div *ngIf="showScJointFields" class="dependent-field-box">
-        <textarea formControlName="sc_joint_comments_text" class="form-textarea" rows="4"></textarea>
+        <title-multiple-columns-checkbox-list [title]="specialTestConfig.scJoint.title"
+            [labels]="specialTestConfig.scJoint.labels" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.scJoint.fieldPrefix"
+            [showNormalCheckbox]="false" [showComments]="false"
+            [initialData]="formData">
+        </title-multiple-columns-checkbox-list>
     </div>
     <div class="form-row">
         <label class="field-label">AC Joint</label>
@@ -2270,7 +2275,12 @@
         </div>
     </div>
     <div *ngIf="showAcJointFields" class="dependent-field-box">
-        <textarea formControlName="ac_joint_comments_text" class="form-textarea" rows="4"></textarea>
+        <title-multiple-columns-checkbox-list [title]="specialTestConfig.acJoint.title"
+            [labels]="specialTestConfig.acJoint.labels" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.acJoint.fieldPrefix"
+            [showNormalCheckbox]="false" [showComments]="false"
+            [initialData]="formData">
+        </title-multiple-columns-checkbox-list>
     </div>
     <div class="form-row">
         <label class="field-label">Impingement</label>
