@@ -500,7 +500,16 @@ export class SpecialTestsMapperService {
       alar_ligament_stress_manual_comments_text: dto.alarLigamentStressManual?.alarLigamentStressManualCommentsText || '',
       // Subcranial Passive Vertebral Mobility
       subcranial_passive_vertebral_mobility: this.boolToYesNo(dto.subcranialPassiveVertebralMobility?.subcranialPassiveVertebralMobility),
-      subcranial_passive_vertebral_mobility_comments_text: dto.subcranialPassiveVertebralMobility?.subcranialPassiveVertebralMobilityCommentsText || '',
+      spvm_oa: this.boolToYesNo(dto.subcranialPassiveVertebralMobility?.spvmOa),
+      spvm_oa_forward_bending: dto.subcranialPassiveVertebralMobility?.spvmOaForwardBending || 'Not Tested',
+      spvm_oa_backward_bending: dto.subcranialPassiveVertebralMobility?.spvmOaBackwardBending || 'Not Tested',
+      spvm_oa_right_side_bending: dto.subcranialPassiveVertebralMobility?.spvmOaRightSideBending || 'Not Tested',
+      spvm_oa_left_side_bending: dto.subcranialPassiveVertebralMobility?.spvmOaLeftSideBending || 'Not Tested',
+      spvm_aa: this.boolToYesNo(dto.subcranialPassiveVertebralMobility?.spvmAa),
+      spvm_aa_forward_bending: dto.subcranialPassiveVertebralMobility?.spvmAaForwardBending || 'Not Tested',
+      spvm_aa_backward_bending: dto.subcranialPassiveVertebralMobility?.spvmAaBackwardBending || 'Not Tested',
+      spvm_aa_right_side_bending: dto.subcranialPassiveVertebralMobility?.spvmAaRightSideBending || 'Not Tested',
+      spvm_aa_left_side_bending: dto.subcranialPassiveVertebralMobility?.spvmAaLeftSideBending || 'Not Tested',
       // Passive Joint Mobility Shoulder
       passive_joint_mobility_shoulder: this.boolToYesNo(dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulder),
       passive_joint_mobility_shoulder_comments_text: dto.passiveJointMobilityShoulder?.passiveJointMobilityShoulderCommentsText || '',
@@ -533,7 +542,7 @@ export class SpecialTestsMapperService {
       ulnar_nerve_subluxation_comments_text: dto.ulnarNerveSubluxation?.ulnarNerveSubluxationCommentsText || '',
       // Kemp's Test
       kemps_test: this.boolToYesNo(dto.kempsTest?.kempsTest),
-      kemps_test_comments_text: dto.kempsTest?.kempsTestCommentsText || '',
+      kemps_test_result: dto.kempsTest?.kempsTestResult || 'Negative',
       // SI Compression
       si_compression: this.boolToYesNo(dto.siCompression?.siCompression),
       si_compression_comments_text: dto.siCompression?.siCompressionCommentsText || '',
@@ -1024,7 +1033,16 @@ export class SpecialTestsMapperService {
   private mapSubcranialPassiveVertebralMobility(formValue: any): SubcranialPassiveVertebralMobility {
     return {
       subcranialPassiveVertebralMobility: this.yesNoToBool(formValue.subcranial_passive_vertebral_mobility),
-      subcranialPassiveVertebralMobilityCommentsText: formValue.subcranial_passive_vertebral_mobility_comments_text || ''
+      spvmOa: this.yesNoToBool(formValue.spvm_oa),
+      spvmOaForwardBending: formValue.spvm_oa_forward_bending || 'Not Tested',
+      spvmOaBackwardBending: formValue.spvm_oa_backward_bending || 'Not Tested',
+      spvmOaRightSideBending: formValue.spvm_oa_right_side_bending || 'Not Tested',
+      spvmOaLeftSideBending: formValue.spvm_oa_left_side_bending || 'Not Tested',
+      spvmAa: this.yesNoToBool(formValue.spvm_aa),
+      spvmAaForwardBending: formValue.spvm_aa_forward_bending || 'Not Tested',
+      spvmAaBackwardBending: formValue.spvm_aa_backward_bending || 'Not Tested',
+      spvmAaRightSideBending: formValue.spvm_aa_right_side_bending || 'Not Tested',
+      spvmAaLeftSideBending: formValue.spvm_aa_left_side_bending || 'Not Tested'
     };
   }
 
@@ -1101,7 +1119,7 @@ export class SpecialTestsMapperService {
   private mapKempsTest(formValue: any): KempsTest {
     return {
       kempsTest: this.yesNoToBool(formValue.kemps_test),
-      kempsTestCommentsText: formValue.kemps_test_comments_text || ''
+      kempsTestResult: formValue.kemps_test_result || 'Negative'
     };
   }
 

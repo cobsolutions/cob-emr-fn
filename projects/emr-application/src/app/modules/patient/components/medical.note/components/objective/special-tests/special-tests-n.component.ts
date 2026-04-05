@@ -101,6 +101,8 @@ export class SpecialTestsNComponent implements OnInit {
   showAlarLigamentTestManualFields: boolean = false;
   showAlarLigamentStressManualFields: boolean = false;
   showSubcranialPassiveVertebralMobilityFields: boolean = false;
+  showSpvmOaFields: boolean = false;
+  showSpvmAaFields: boolean = false;
   showPassiveJointMobilityShoulderFields: boolean = false;
   showScJointFields: boolean = false;
   showAcJointFields: boolean = false;
@@ -112,6 +114,7 @@ export class SpecialTestsNComponent implements OnInit {
   showLigamentIntegrityElbowFields: boolean = false;
   showUlnarNerveSubluxationFields: boolean = false;
   showKempsTestFields: boolean = false;
+  kempsTestOptions: string[] = ['Negative', 'Positive Right', 'Positive Left', 'Positive Bilateral'];
   showSiCompressionFields: boolean = false;
   showSiDistractionFields: boolean = false;
   showLegLengthFields: boolean = false;
@@ -357,7 +360,16 @@ export class SpecialTestsNComponent implements OnInit {
       alar_ligament_stress_manual: ['no'],
       alar_ligament_stress_manual_comments_text: [''],
       subcranial_passive_vertebral_mobility: ['no'],
-      subcranial_passive_vertebral_mobility_comments_text: [''],
+      spvm_oa: ['no'],
+      spvm_oa_forward_bending: ['Not Tested'],
+      spvm_oa_backward_bending: ['Not Tested'],
+      spvm_oa_right_side_bending: ['Not Tested'],
+      spvm_oa_left_side_bending: ['Not Tested'],
+      spvm_aa: ['no'],
+      spvm_aa_forward_bending: ['Not Tested'],
+      spvm_aa_backward_bending: ['Not Tested'],
+      spvm_aa_right_side_bending: ['Not Tested'],
+      spvm_aa_left_side_bending: ['Not Tested'],
       passive_joint_mobility_shoulder: ['no'],
       passive_joint_mobility_shoulder_comments_text: [''],
       sc_joint: ['no'],
@@ -379,7 +391,7 @@ export class SpecialTestsNComponent implements OnInit {
       ulnar_nerve_subluxation: ['no'],
       ulnar_nerve_subluxation_comments_text: [''],
       kemps_test: ['no'],
-      kemps_test_comments_text: [''],
+      kemps_test_result: ['Negative'],
       si_compression: ['no'],
       si_compression_comments_text: [''],
       si_distraction: ['no'],
@@ -631,6 +643,12 @@ export class SpecialTestsNComponent implements OnInit {
     });
     this.specialTestForm.get('subcranial_passive_vertebral_mobility')?.valueChanges.subscribe(value => {
       this.showSubcranialPassiveVertebralMobilityFields = value === 'yes';
+    });
+    this.specialTestForm.get('spvm_oa')?.valueChanges.subscribe(value => {
+      this.showSpvmOaFields = value === 'yes';
+    });
+    this.specialTestForm.get('spvm_aa')?.valueChanges.subscribe(value => {
+      this.showSpvmAaFields = value === 'yes';
     });
     this.specialTestForm.get('passive_joint_mobility_shoulder')?.valueChanges.subscribe(value => {
       this.showPassiveJointMobilityShoulderFields = value === 'yes';

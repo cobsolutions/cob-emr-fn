@@ -2105,7 +2105,84 @@
         </div>
     </div>
     <div *ngIf="showSubcranialPassiveVertebralMobilityFields" class="dependent-field-box">
-        <textarea formControlName="subcranial_passive_vertebral_mobility_comments_text" class="form-textarea" rows="4"></textarea>
+        <div class="form-row">
+            <label class="field-label">OA</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="spvm_oa" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="spvm_oa" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSpvmOaFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="spvm_oa_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="spvm_oa_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="spvm_oa_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="spvm_oa_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">AA</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="spvm_aa" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="spvm_aa" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSpvmAaFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="spvm_aa_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="spvm_aa_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="spvm_aa_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="spvm_aa_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Passive Joint Mobility Shoulder</label>
@@ -2281,7 +2358,11 @@
         </div>
     </div>
     <div *ngIf="showKempsTestFields" class="dependent-field-box">
-        <textarea formControlName="kemps_test_comments_text" class="form-textarea" rows="4"></textarea>
+        <div class="form-row">
+            <select formControlName="kemps_test_result" class="form-select">
+                <option *ngFor="let opt of kempsTestOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">SI Compression</label>
