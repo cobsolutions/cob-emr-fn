@@ -1,7 +1,7 @@
 <ngx-spinner></ngx-spinner>
 
 <!-- Chart Note Section - Tree View -->
-<div class="tree-container chart-note-container">
+<div class="tree-container chart-note-container" *ngIf="patientRecord">
     <!-- Root Node -->
     <div class="tree-root">
         <div class="tree-root-header">
@@ -44,7 +44,7 @@
 </div>
 
 <!-- Case Information Section - Tree View -->
-<div class="tree-container">
+<div class="tree-container" *ngIf="patientRecord">
     <!-- Root Node -->
     <div class="tree-root">
         <div class="tree-root-header">

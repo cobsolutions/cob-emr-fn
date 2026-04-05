@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -51,6 +51,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
   @Input() patient: PatientRequest;
   @Input() patientName: string
   @Input() clinicId: number;
+  @Output() noteVisibilityChange = new EventEmitter<boolean>();
   appointments$!: Observable<Appointment[]>;
   patientRecords$!: Observable<PatientRecord[]>
   reasonVisibility = false;
@@ -365,14 +366,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
     this.initialExamNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
       this.cdr.markForCheck();
     }, error => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the initial examination note';
       this.cdr.markForCheck();
@@ -390,14 +391,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       clinicIds: this.patient?.clinicIds
     }
     this.dailyNoteService.create(request).subscribe((response: any) => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.noteId = response.noteId;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
       this.cdr.markForCheck();
     }, error => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the daily note';
       this.cdr.markForCheck();
@@ -416,14 +417,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
     this.progressNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
       this.cdr.markForCheck();
     }, error => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the progress note';
       this.cdr.markForCheck();
@@ -437,14 +438,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       clinicIds: this.patient?.clinicIds
     }
     this.quickDischargeNoteService.create(request).subscribe((response: any) => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined;
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId);
       this.cdr.markForCheck();
     }, error => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the quick discharge note';
       this.cdr.markForCheck();
@@ -463,14 +464,14 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     }
     this.dischargeNoteService.create(request).subscribe((response: any) => {
       console.log(JSON.stringify(response))
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.noteId = response.noteId.value;
       this.medicalNoteId = response.id;
       this.errorMessage = undefined
       this.medialNoteService.medicalNoteID$.next(response.medicalNotId)
       this.cdr.markForCheck();
     }, error => {
-      this.patientRecord = false;
+      this.setNoteOpen(true);
       this.patientRecordAction = 'ERROR_FINALIZE';
       this.errorMessage = error.error?.message || error.message || 'An error occurred while creating the discharge note';
       this.cdr.markForCheck();
@@ -520,8 +521,16 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
       });
     }
   }
+  private setNoteOpen(open: boolean) {
+    this.patientRecord = !open;
+    this.noteVisibilityChange.emit(open);
+    if (open) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
   handleBackAction() {
-    this.patientRecord = true;
+    this.setNoteOpen(false);
     this.getRecords();
     this.refreshRecordActions();
     this.cdr.markForCheck();
@@ -540,7 +549,7 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     })
   }
   private completeMedicalNote(id: number, status: string) {
-    this.patientRecord = false
+    this.setNoteOpen(true);
     this.medicalNoteId = id;
     if (status === 'Initial Examination')
       this.patientRecordAction = 'Initial_Examination';

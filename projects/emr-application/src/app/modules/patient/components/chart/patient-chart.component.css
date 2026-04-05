@@ -121,6 +121,16 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
 }
 
+.note-open-card {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.note-open-card:hover {
+  box-shadow: none !important;
+}
+
 /* --- Card Header --- */
 .card-header-custom {
   display: flex;

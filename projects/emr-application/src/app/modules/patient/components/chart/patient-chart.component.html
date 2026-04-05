@@ -4,8 +4,8 @@
   <div class="page-header-content">
     <div class="page-title-section">
       <h2 class="page-title">
-        <svg cIcon name="cilUser" class="page-icon"></svg>
-       Patient Chart
+        <svg cIcon [name]="isNoteOpen ? 'cilNotes' : 'cilUser'" class="page-icon"></svg>
+        {{ isNoteOpen ? 'Medical Note' : 'Patient Chart' }}
       </h2>
       <div class="page-subtitle-row">
         <span class="page-subtitle">{{ patientChartInfo.name }}</span>
@@ -33,7 +33,7 @@
 <div class="chart-container">
 
   <!-- LEFT: Sidebar — Patient Information -->
-  <aside class="chart-sidebar">
+  <aside class="chart-sidebar" [hidden]="isNoteOpen">
     <c-card class="section-card sidebar-card">
       <div class="card-header-custom">
         <div class="card-header-title">
@@ -141,15 +141,15 @@
   <div class="chart-main">
 
     <!-- Patient Cases Section (primary — shown first) -->
-    <c-card class="section-card">
-      <div class="card-header-custom">
+    <c-card class="section-card" [ngClass]="{'note-open-card': isNoteOpen}">
+      <div class="card-header-custom" [hidden]="isNoteOpen">
         <div class="card-header-title">
           <svg cIcon name="cilFolder" class="card-icon"></svg>
           <span>Cases</span>
         </div>
       </div>
-      <c-card-body class="card-body-custom p-0">
-        <c-nav variant="tabs" class="chart-tabs">
+      <c-card-body [ngClass]="{'card-body-custom p-0': !isNoteOpen, 'p-0': isNoteOpen}">
+        <c-nav variant="tabs" class="chart-tabs" [hidden]="isNoteOpen">
           <span *ngFor="let case of patientCases; let i = index">
             <a [active]="i===activeTabIndex" [cTabContent]="caseContent" [routerLink] [tabPaneIdx]="i"
               cNavLink (click)="setActiveTab(i)">
@@ -162,7 +162,8 @@
           <c-tab-pane *ngFor="let case of patientCases; let i = index" class="tab-pane-content">
             <div *ngIf="i === activeTabIndex">
               <app-patient-chart-case [case]="case" [patientId]="patientId" [patient]="patient"
-                [patientName]="patientChartInfo.name"></app-patient-chart-case>
+                [patientName]="patientChartInfo.name"
+                (noteVisibilityChange)="isNoteOpen = $event"></app-patient-chart-case>
             </div>
           </c-tab-pane>
         </c-tab-content>
@@ -170,7 +171,7 @@
     </c-card>
 
     <!-- Patient Appointments Section -->
-    <c-card class="section-card">
+    <c-card class="section-card" [hidden]="isNoteOpen">
       <div class="card-header-custom">
         <div class="card-header-title">
           <svg cIcon name="cilCalendar" class="card-icon"></svg>

@@ -43,6 +43,7 @@ export class PatientChartComponent implements OnInit, OnDestroy {
   showFullAddress = false;
   copiedAddressIndex: number | null = null;
   activeTabIndex = 0;
+  isNoteOpen = false;
 
   setActiveTab(index: number) {
     this.activeTabIndex = index;
