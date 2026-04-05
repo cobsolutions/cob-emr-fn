@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
@@ -44,6 +44,10 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   neuroVascularData: NeuroVascular | null = null;
   specialTestData: SpecialTest | null = null;
   palpationData:Palpation | null = null;
+
+  // Track which sections are expanded (visible) and which have been rendered at least once
+  expandedSections: { [key: string]: boolean } = {};
+  renderedSections: { [key: string]: boolean } = {};
   objectiveCategories: string[] = [
     'inspection', "omt", 'observation', 'range_of_motion', 'strength', 'neuro_vascular', 'special_tests', 'palpation'
   ]
@@ -68,7 +72,8 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
   objectiveCategoriesfields: { [key: string]: any } = {};
   constructor(private fb: FormBuilder
     , private medicalService: MedialNoteService
-    , private soapService: SoapService) { }
+    , private soapService: SoapService
+    , private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.objectiveForm = this.fb.group({
@@ -148,6 +153,22 @@ export class ObjectiveComponent implements OnInit, AfterViewInit {
     this.isProfileSelected = true;
     this.formReady.emit(this.objectiveForm);
   }
+  toggleSection(section: string) {
+    this.expandedSections[section] = !this.expandedSections[section];
+    if (this.expandedSections[section]) {
+      this.renderedSections[section] = true;
+    }
+    this.cdr.markForCheck();
+  }
+
+  isSectionExpanded(section: string): boolean {
+    return !!this.expandedSections[section];
+  }
+
+  isSectionRendered(section: string): boolean {
+    return !!this.renderedSections[section];
+  }
+
   private fillFieldsMap(data: any) {
     for (let i = 0; i < this.objectiveCategories.length; i++) {
       const foundKey = Object.keys(data).find(key => key.includes(this.objectiveCategories[i]));

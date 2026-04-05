@@ -32,7 +32,7 @@
 <div [formGroup]="objectiveForm" *ngIf="isProfileSelected">
     <!--Inspection-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header inspection-header">
+        <c-card-header class="enhanced-card-header inspection-header collapsible-header" (click)="toggleSection('inspection')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -43,18 +43,24 @@
                     </svg>
                     <span>Inspection</span>
                 </div>
-                <span class="card-badge">Visual</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Visual</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('inspection')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <inspectionN [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)">
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('inspection')">
+            <inspectionN *ngIf="isSectionRendered('inspection')" [inspectionData]="inspectionData" (formReady)="setChildForm('inspection', $event)">
             </inspectionN>
         </c-card-body>
     </c-card>
 
     <!--Outcome Measurement Tools-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header omt-header">
+        <c-card-header class="enhanced-card-header omt-header collapsible-header" (click)="toggleSection('omt')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -66,18 +72,24 @@
                     </svg>
                     <span>Outcome Measurement Tools</span>
                 </div>
-                <span class="card-badge">Metrics</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Metrics</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('omt')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <outcome-measurement-tools (formReady)="setChildForm('omt', $event)"
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('omt')">
+            <outcome-measurement-tools *ngIf="isSectionRendered('omt')" (formReady)="setChildForm('omt', $event)"
                 [omtData]="omtData" [noteId]="noteId"></outcome-measurement-tools>
         </c-card-body>
     </c-card>
 
     <!--Observation-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header observation-header">
+        <c-card-header class="enhanced-card-header observation-header collapsible-header" (click)="toggleSection('observation')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -88,18 +100,24 @@
                     </svg>
                     <span>Observation</span>
                 </div>
-                <span class="card-badge">Clinical</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Clinical</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('observation')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <observation-n (formReady)="setChildForm('observation', $event)"
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('observation')">
+            <observation-n *ngIf="isSectionRendered('observation')" (formReady)="setChildForm('observation', $event)"
                 [observationData]="observationData"></observation-n>
         </c-card-body>
     </c-card>
 
     <!--Range of Motion-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header rom-header">
+        <c-card-header class="enhanced-card-header rom-header collapsible-header" (click)="toggleSection('rangeOfMotion')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -109,18 +127,24 @@
                     </svg>
                     <span>Range of Motion</span>
                 </div>
-                <span class="card-badge">ROM</span>
+                <div class="card-header-right">
+                    <span class="card-badge">ROM</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('rangeOfMotion')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <range-of-motion-n (formReady)="setChildForm('rangeOfMotion', $event)"
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('rangeOfMotion')">
+            <range-of-motion-n *ngIf="isSectionRendered('rangeOfMotion')" (formReady)="setChildForm('rangeOfMotion', $event)"
                 [rangeOfMotionData]="romData"></range-of-motion-n>
         </c-card-body>
     </c-card>
 
     <!--Strength-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header strength-header">
+        <c-card-header class="enhanced-card-header strength-header collapsible-header" (click)="toggleSection('strength')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -133,17 +157,23 @@
                     </svg>
                     <span>Strength</span>
                 </div>
-                <span class="card-badge">MMT</span>
+                <div class="card-header-right">
+                    <span class="card-badge">MMT</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('strength')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <strength-n (formReady)="setChildForm('strength', $event)" [strengthData]="strengthData"></strength-n>
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('strength')">
+            <strength-n *ngIf="isSectionRendered('strength')" (formReady)="setChildForm('strength', $event)" [strengthData]="strengthData"></strength-n>
         </c-card-body>
     </c-card>
 
     <!--Neuro-Vascular-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header neuro-header">
+        <c-card-header class="enhanced-card-header neuro-header collapsible-header" (click)="toggleSection('neuroVascular')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -153,18 +183,24 @@
                     </svg>
                     <span>Neuro-Vascular</span>
                 </div>
-                <span class="card-badge">Neuro</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Neuro</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('neuroVascular')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <neuro-vascular-n (formReady)="setChildForm('neuroVascular', $event)"
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('neuroVascular')">
+            <neuro-vascular-n *ngIf="isSectionRendered('neuroVascular')" (formReady)="setChildForm('neuroVascular', $event)"
                 [neuroVascularData]="neuroVascularData"></neuro-vascular-n>
         </c-card-body>
     </c-card>
 
     <!--Special Tests-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header tests-header">
+        <c-card-header class="enhanced-card-header tests-header collapsible-header" (click)="toggleSection('specialTest')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -176,18 +212,24 @@
                     </svg>
                     <span>Special Tests</span>
                 </div>
-                <span class="card-badge">Tests</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Tests</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('specialTest')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <special-tests-n (formReady)="setChildForm('specialTest', $event)"
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('specialTest')">
+            <special-tests-n *ngIf="isSectionRendered('specialTest')" (formReady)="setChildForm('specialTest', $event)"
             [specialTestData]="specialTestData"></special-tests-n>
         </c-card-body>
     </c-card>
 
     <!--Palpation-->
     <c-card class="mb-3 enhanced-card">
-        <c-card-header class="enhanced-card-header palpation-header">
+        <c-card-header class="enhanced-card-header palpation-header collapsible-header" (click)="toggleSection('palpation')">
             <div class="card-header-content">
                 <div class="card-header-title">
                     <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -202,11 +244,17 @@
                     </svg>
                     <span>Palpation</span>
                 </div>
-                <span class="card-badge">Touch</span>
+                <div class="card-header-right">
+                    <span class="card-badge">Touch</span>
+                    <svg class="collapse-icon" [class.expanded]="isSectionExpanded('palpation')" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </c-card-header>
-        <c-card-body class="enhanced-card-body">
-            <palpation-n (formReady)="setChildForm('palpation', $event)" [palpationData]="palpationData"></palpation-n>
+        <c-card-body class="enhanced-card-body" [class.section-hidden]="!isSectionExpanded('palpation')">
+            <palpation-n *ngIf="isSectionRendered('palpation')" (formReady)="setChildForm('palpation', $event)" [palpationData]="palpationData"></palpation-n>
         </c-card-body>
     </c-card>
     <div class="action-buttons">
