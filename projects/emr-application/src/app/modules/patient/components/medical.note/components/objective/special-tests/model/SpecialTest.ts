@@ -15,8 +15,6 @@ import { CervicalQuadrant } from "./CervicalQuadrant";
 import { CervicalCompDist } from "./CervicalCompDist";
 import { JawCrepitus } from "./JawCrepitus";
 import { SpurlingsManeuver } from "./SpurlingsManeuver";
-import { AlarLigamentTestManual } from "./AlarLigamentTestManual";
-import { AlarLigamentStressManual } from "./AlarLigamentStressManual";
 import { SubcranialPassiveVertebralMobility } from "./SubcranialPassiveVertebralMobility";
 import { PassiveJointMobilityShoulder } from "./PassiveJointMobilityShoulder";
 import { ScJoint } from "./ScJoint";
@@ -53,8 +51,6 @@ export interface SpecialTest {
   cervicalCompDist: CervicalCompDist;
   jawCrepitus: JawCrepitus;
   spurlingsManeuver: SpurlingsManeuver;
-  alarLigamentTestManual: AlarLigamentTestManual;
-  alarLigamentStressManual: AlarLigamentStressManual;
   subcranialPassiveVertebralMobility: SubcranialPassiveVertebralMobility;
   passiveJointMobilityShoulder: PassiveJointMobilityShoulder;
   scJoint: ScJoint;

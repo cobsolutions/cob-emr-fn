@@ -32,7 +32,6 @@ import { NonMaterialHandling } from "./work-conditioning/non-material-handling";
 import { CervicalQuadrantConfig } from "./cervical-quadrant/cervical-quadrant";
 import { JawCrepitusConfig } from "./jaw-crepitus/jaw-crepitus";
 import { SpurlingsManeuverConfig } from "./spurlings-maneuver/spurlings-maneuver";
-import { AlarLigamentTestManualConfig } from "./alar-ligament-test-manual/alar-ligament-test-manual";
 import { PassiveJointMobilityShoulderConfig } from "./passive-joint-mobility-shoulder/passive-joint-mobility-shoulder";
 import { ImpingementConfig } from "./impingement/impingement";
 import { GhjStabilityConfig } from "./ghj-stability/ghj-stability";
@@ -114,7 +113,7 @@ export class SpecialTestConfig {
     static readonly cervicalQuadrant = CervicalQuadrantConfig.cervicalQuadrant;
     static readonly jawCrepitus = JawCrepitusConfig.jawCrepitus;
     static readonly spurlingsManeuver = SpurlingsManeuverConfig.spurlingsManeuver;
-    static readonly alarLigamentTestManual = AlarLigamentTestManualConfig.alarLigamentTestManual;
+
     static readonly passiveJointMobilityShoulder = PassiveJointMobilityShoulderConfig.passiveJointMobilityShoulder;
     static readonly impingementConfig = ImpingementConfig.impingement;
     static readonly ghjStability = GhjStabilityConfig.ghjStability;

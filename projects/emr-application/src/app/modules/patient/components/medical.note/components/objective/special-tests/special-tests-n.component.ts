@@ -98,8 +98,6 @@ export class SpecialTestsNComponent implements OnInit {
   cervicalCompDistOptions: string[] = ['Not Tested', 'Positive', 'Negative'];
   showJawCrepitusFields: boolean = false;
   showSpurlingsManeuverFields: boolean = false;
-  showAlarLigamentTestManualFields: boolean = false;
-  showAlarLigamentStressManualFields: boolean = false;
   showSubcranialPassiveVertebralMobilityFields: boolean = false;
   showSpvmOaFields: boolean = false;
   showSpvmAaFields: boolean = false;
@@ -352,9 +350,6 @@ export class SpecialTestsNComponent implements OnInit {
       cervical_comp_dist_distraction: ['Not Tested'],
       jaw_crepitus: ['no'],
       spurlings_maneuver: ['no'],
-      alar_ligament_test_manual: ['no'],
-      alar_ligament_stress_manual: ['no'],
-      alar_ligament_stress_manual_comments_text: [''],
       subcranial_passive_vertebral_mobility: ['no'],
       spvm_oa: ['no'],
       spvm_oa_forward_bending: ['Not Tested'],
@@ -616,12 +611,6 @@ export class SpecialTestsNComponent implements OnInit {
     });
     this.specialTestForm.get('spurlings_maneuver')?.valueChanges.subscribe(value => {
       this.showSpurlingsManeuverFields = value === 'yes';
-    });
-    this.specialTestForm.get('alar_ligament_test_manual')?.valueChanges.subscribe(value => {
-      this.showAlarLigamentTestManualFields = value === 'yes';
-    });
-    this.specialTestForm.get('alar_ligament_stress_manual')?.valueChanges.subscribe(value => {
-      this.showAlarLigamentStressManualFields = value === 'yes';
     });
     this.specialTestForm.get('subcranial_passive_vertebral_mobility')?.valueChanges.subscribe(value => {
       this.showSubcranialPassiveVertebralMobilityFields = value === 'yes';

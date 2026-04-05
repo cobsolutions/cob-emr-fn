@@ -16,8 +16,6 @@ import { CervicalQuadrant } from '../model/CervicalQuadrant';
 import { CervicalCompDist } from '../model/CervicalCompDist';
 import { JawCrepitus } from '../model/JawCrepitus';
 import { SpurlingsManeuver } from '../model/SpurlingsManeuver';
-import { AlarLigamentTestManual } from '../model/AlarLigamentTestManual';
-import { AlarLigamentStressManual } from '../model/AlarLigamentStressManual';
 import { SubcranialPassiveVertebralMobility } from '../model/SubcranialPassiveVertebralMobility';
 import { PassiveJointMobilityShoulder } from '../model/PassiveJointMobilityShoulder';
 import { ScJoint } from '../model/ScJoint';
@@ -63,8 +61,6 @@ export class SpecialTestsMapperService {
       cervicalCompDist: this.mapCervicalCompDist(formValue),
       jawCrepitus: this.mapJawCrepitus(formValue),
       spurlingsManeuver: this.mapSpurlingsManeuver(formValue),
-      alarLigamentTestManual: this.mapAlarLigamentTestManual(formValue),
-      alarLigamentStressManual: this.mapAlarLigamentStressManual(formValue),
       subcranialPassiveVertebralMobility: this.mapSubcranialPassiveVertebralMobility(formValue),
       passiveJointMobilityShoulder: this.mapPassiveJointMobilityShoulder(formValue),
       scJoint: this.mapScJoint(formValue),
@@ -495,13 +491,6 @@ export class SpecialTestsMapperService {
       spurlings_maneuver: this.boolToYesNo(dto.spurlingsManeuver?.spurlingsManeuver),
       spurlings_maneuver_spurlings_maneuver_right: dto.spurlingsManeuver?.spurlingsManeuverSpurlingsManeuverRight || 'not_tested',
       spurlings_maneuver_spurlings_maneuver_left: dto.spurlingsManeuver?.spurlingsManeuverSpurlingsManeuverLeft || 'not_tested',
-      // Alar Ligament Test Manual
-      alar_ligament_test_manual: this.boolToYesNo(dto.alarLigamentTestManual?.alarLigamentTestManual),
-      alar_ligament_test_manual_alar_ligament_test_right: dto.alarLigamentTestManual?.alarLigamentTestManualAlarLigamentTestRight || 'not_tested',
-      alar_ligament_test_manual_alar_ligament_test_left: dto.alarLigamentTestManual?.alarLigamentTestManualAlarLigamentTestLeft || 'not_tested',
-      // Alar Ligament Stress Manual
-      alar_ligament_stress_manual: this.boolToYesNo(dto.alarLigamentStressManual?.alarLigamentStressManual),
-      alar_ligament_stress_manual_comments_text: dto.alarLigamentStressManual?.alarLigamentStressManualCommentsText || '',
       // Subcranial Passive Vertebral Mobility
       subcranial_passive_vertebral_mobility: this.boolToYesNo(dto.subcranialPassiveVertebralMobility?.subcranialPassiveVertebralMobility),
       spvm_oa: this.boolToYesNo(dto.subcranialPassiveVertebralMobility?.spvmOa),
@@ -1080,21 +1069,6 @@ export class SpecialTestsMapperService {
       spurlingsManeuver: this.yesNoToBool(formValue.spurlings_maneuver),
       spurlingsManeuverSpurlingsManeuverRight: formValue.spurlings_maneuver_spurlings_maneuver_right || 'not_tested',
       spurlingsManeuverSpurlingsManeuverLeft: formValue.spurlings_maneuver_spurlings_maneuver_left || 'not_tested'
-    };
-  }
-
-  private mapAlarLigamentTestManual(formValue: any): AlarLigamentTestManual {
-    return {
-      alarLigamentTestManual: this.yesNoToBool(formValue.alar_ligament_test_manual),
-      alarLigamentTestManualAlarLigamentTestRight: formValue.alar_ligament_test_manual_alar_ligament_test_right || 'not_tested',
-      alarLigamentTestManualAlarLigamentTestLeft: formValue.alar_ligament_test_manual_alar_ligament_test_left || 'not_tested'
-    };
-  }
-
-  private mapAlarLigamentStressManual(formValue: any): AlarLigamentStressManual {
-    return {
-      alarLigamentStressManual: this.yesNoToBool(formValue.alar_ligament_stress_manual),
-      alarLigamentStressManualCommentsText: formValue.alar_ligament_stress_manual_comments_text || ''
     };
   }
 
