@@ -1371,7 +1371,618 @@
         </div>
     </div>
     <div *ngIf="showPassiveVertebralMobilityThoracicFields" class="dependent-field-box">
-        <textarea formControlName="passive_vertebral_mobility_thoracic_comments_text" class="form-textarea" rows="4"></textarea>
+        <div class="form-row">
+            <label class="field-label">T1-T2</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t1_t2" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t1_t2" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT1T2Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t1_t2_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t1_t2_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t1_t2_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t1_t2_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t1_t2_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t1_t2_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T2-T3</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t2_t3" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t2_t3" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT2T3Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t2_t3_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t2_t3_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t2_t3_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t2_t3_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t2_t3_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t2_t3_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T3-T4</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t3_t4" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t3_t4" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT3T4Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t3_t4_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t3_t4_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t3_t4_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t3_t4_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t3_t4_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t3_t4_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T4-T5</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t4_t5" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t4_t5" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT4T5Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t4_t5_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t4_t5_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t4_t5_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t4_t5_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t4_t5_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t4_t5_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T5-T6</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t5_t6" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t5_t6" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT5T6Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t5_t6_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t5_t6_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t5_t6_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t5_t6_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t5_t6_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t5_t6_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T6-T7</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t6_t7" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t6_t7" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT6T7Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t6_t7_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t6_t7_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t6_t7_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t6_t7_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t6_t7_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t6_t7_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T7-T8</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t7_t8" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t7_t8" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT7T8Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t7_t8_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t7_t8_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t7_t8_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t7_t8_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t7_t8_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t7_t8_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T8-T9</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t8_t9" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t8_t9" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT8T9Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t8_t9_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t8_t9_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t8_t9_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t8_t9_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t8_t9_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t8_t9_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T9-T10</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t9_t10" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t9_t10" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT9T10Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t9_t10_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t9_t10_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t9_t10_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t9_t10_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t9_t10_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t9_t10_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T10-T11</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t10_t11" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t10_t11" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT10T11Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t10_t11_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t10_t11_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t10_t11_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t10_t11_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t10_t11_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t10_t11_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T11-T12</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t11_t12" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t11_t12" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT11T12Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t11_t12_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t11_t12_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t11_t12_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t11_t12_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t11_t12_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t11_t12_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T12-L1</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t12_l1" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t12_l1" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT12L1Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t12_l1_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t12_l1_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t12_l1_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t12_l1_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t12_l1_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t12_l1_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Cervical Quadrant</label>

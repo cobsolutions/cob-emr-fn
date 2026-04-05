@@ -80,6 +80,19 @@ export class SpecialTestsNComponent implements OnInit {
   cpvmOptions: string[] = ['Not Tested', 'Normal', 'Hypomobile', 'Hypermobile', 'Ankylosed', 'Unstable'];
 
   showPassiveVertebralMobilityThoracicFields: boolean = false;
+  showPvmtT1T2Fields: boolean = false;
+  showPvmtT2T3Fields: boolean = false;
+  showPvmtT3T4Fields: boolean = false;
+  showPvmtT4T5Fields: boolean = false;
+  showPvmtT5T6Fields: boolean = false;
+  showPvmtT6T7Fields: boolean = false;
+  showPvmtT7T8Fields: boolean = false;
+  showPvmtT8T9Fields: boolean = false;
+  showPvmtT9T10Fields: boolean = false;
+  showPvmtT10T11Fields: boolean = false;
+  showPvmtT11T12Fields: boolean = false;
+  showPvmtT12L1Fields: boolean = false;
+
   showCervicalQuadrantFields: boolean = false;
   showCervicalCompDistFields: boolean = false;
   showJawCrepitusFields: boolean = false;
@@ -245,7 +258,90 @@ export class SpecialTestsNComponent implements OnInit {
       cpvm_c7_t1_right_rotation: ['Not Tested'],
       cpvm_c7_t1_left_rotation: ['Not Tested'],
       passive_vertebral_mobility_thoracic: ['no'],
-      passive_vertebral_mobility_thoracic_comments_text: [''],
+      pvmt_t1_t2: ['no'],
+      pvmt_t1_t2_forward_bending: ['Not Tested'],
+      pvmt_t1_t2_backward_bending: ['Not Tested'],
+      pvmt_t1_t2_right_side_bending: ['Not Tested'],
+      pvmt_t1_t2_left_side_bending: ['Not Tested'],
+      pvmt_t1_t2_right_rotation: ['Not Tested'],
+      pvmt_t1_t2_left_rotation: ['Not Tested'],
+      pvmt_t2_t3: ['no'],
+      pvmt_t2_t3_forward_bending: ['Not Tested'],
+      pvmt_t2_t3_backward_bending: ['Not Tested'],
+      pvmt_t2_t3_right_side_bending: ['Not Tested'],
+      pvmt_t2_t3_left_side_bending: ['Not Tested'],
+      pvmt_t2_t3_right_rotation: ['Not Tested'],
+      pvmt_t2_t3_left_rotation: ['Not Tested'],
+      pvmt_t3_t4: ['no'],
+      pvmt_t3_t4_forward_bending: ['Not Tested'],
+      pvmt_t3_t4_backward_bending: ['Not Tested'],
+      pvmt_t3_t4_right_side_bending: ['Not Tested'],
+      pvmt_t3_t4_left_side_bending: ['Not Tested'],
+      pvmt_t3_t4_right_rotation: ['Not Tested'],
+      pvmt_t3_t4_left_rotation: ['Not Tested'],
+      pvmt_t4_t5: ['no'],
+      pvmt_t4_t5_forward_bending: ['Not Tested'],
+      pvmt_t4_t5_backward_bending: ['Not Tested'],
+      pvmt_t4_t5_right_side_bending: ['Not Tested'],
+      pvmt_t4_t5_left_side_bending: ['Not Tested'],
+      pvmt_t4_t5_right_rotation: ['Not Tested'],
+      pvmt_t4_t5_left_rotation: ['Not Tested'],
+      pvmt_t5_t6: ['no'],
+      pvmt_t5_t6_forward_bending: ['Not Tested'],
+      pvmt_t5_t6_backward_bending: ['Not Tested'],
+      pvmt_t5_t6_right_side_bending: ['Not Tested'],
+      pvmt_t5_t6_left_side_bending: ['Not Tested'],
+      pvmt_t5_t6_right_rotation: ['Not Tested'],
+      pvmt_t5_t6_left_rotation: ['Not Tested'],
+      pvmt_t6_t7: ['no'],
+      pvmt_t6_t7_forward_bending: ['Not Tested'],
+      pvmt_t6_t7_backward_bending: ['Not Tested'],
+      pvmt_t6_t7_right_side_bending: ['Not Tested'],
+      pvmt_t6_t7_left_side_bending: ['Not Tested'],
+      pvmt_t6_t7_right_rotation: ['Not Tested'],
+      pvmt_t6_t7_left_rotation: ['Not Tested'],
+      pvmt_t7_t8: ['no'],
+      pvmt_t7_t8_forward_bending: ['Not Tested'],
+      pvmt_t7_t8_backward_bending: ['Not Tested'],
+      pvmt_t7_t8_right_side_bending: ['Not Tested'],
+      pvmt_t7_t8_left_side_bending: ['Not Tested'],
+      pvmt_t7_t8_right_rotation: ['Not Tested'],
+      pvmt_t7_t8_left_rotation: ['Not Tested'],
+      pvmt_t8_t9: ['no'],
+      pvmt_t8_t9_forward_bending: ['Not Tested'],
+      pvmt_t8_t9_backward_bending: ['Not Tested'],
+      pvmt_t8_t9_right_side_bending: ['Not Tested'],
+      pvmt_t8_t9_left_side_bending: ['Not Tested'],
+      pvmt_t8_t9_right_rotation: ['Not Tested'],
+      pvmt_t8_t9_left_rotation: ['Not Tested'],
+      pvmt_t9_t10: ['no'],
+      pvmt_t9_t10_forward_bending: ['Not Tested'],
+      pvmt_t9_t10_backward_bending: ['Not Tested'],
+      pvmt_t9_t10_right_side_bending: ['Not Tested'],
+      pvmt_t9_t10_left_side_bending: ['Not Tested'],
+      pvmt_t9_t10_right_rotation: ['Not Tested'],
+      pvmt_t9_t10_left_rotation: ['Not Tested'],
+      pvmt_t10_t11: ['no'],
+      pvmt_t10_t11_forward_bending: ['Not Tested'],
+      pvmt_t10_t11_backward_bending: ['Not Tested'],
+      pvmt_t10_t11_right_side_bending: ['Not Tested'],
+      pvmt_t10_t11_left_side_bending: ['Not Tested'],
+      pvmt_t10_t11_right_rotation: ['Not Tested'],
+      pvmt_t10_t11_left_rotation: ['Not Tested'],
+      pvmt_t11_t12: ['no'],
+      pvmt_t11_t12_forward_bending: ['Not Tested'],
+      pvmt_t11_t12_backward_bending: ['Not Tested'],
+      pvmt_t11_t12_right_side_bending: ['Not Tested'],
+      pvmt_t11_t12_left_side_bending: ['Not Tested'],
+      pvmt_t11_t12_right_rotation: ['Not Tested'],
+      pvmt_t11_t12_left_rotation: ['Not Tested'],
+      pvmt_t12_l1: ['no'],
+      pvmt_t12_l1_forward_bending: ['Not Tested'],
+      pvmt_t12_l1_backward_bending: ['Not Tested'],
+      pvmt_t12_l1_right_side_bending: ['Not Tested'],
+      pvmt_t12_l1_left_side_bending: ['Not Tested'],
+      pvmt_t12_l1_right_rotation: ['Not Tested'],
+      pvmt_t12_l1_left_rotation: ['Not Tested'],
       cervical_quadrant: ['no'],
       cervical_quadrant_comments_text: [''],
       cervical_comp_dist: ['no'],
@@ -476,6 +572,42 @@ export class SpecialTestsNComponent implements OnInit {
     });
     this.specialTestForm.get('passive_vertebral_mobility_thoracic')?.valueChanges.subscribe(value => {
       this.showPassiveVertebralMobilityThoracicFields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t1_t2')?.valueChanges.subscribe(value => {
+      this.showPvmtT1T2Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t2_t3')?.valueChanges.subscribe(value => {
+      this.showPvmtT2T3Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t3_t4')?.valueChanges.subscribe(value => {
+      this.showPvmtT3T4Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t4_t5')?.valueChanges.subscribe(value => {
+      this.showPvmtT4T5Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t5_t6')?.valueChanges.subscribe(value => {
+      this.showPvmtT5T6Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t6_t7')?.valueChanges.subscribe(value => {
+      this.showPvmtT6T7Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t7_t8')?.valueChanges.subscribe(value => {
+      this.showPvmtT7T8Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t8_t9')?.valueChanges.subscribe(value => {
+      this.showPvmtT8T9Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t9_t10')?.valueChanges.subscribe(value => {
+      this.showPvmtT9T10Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t10_t11')?.valueChanges.subscribe(value => {
+      this.showPvmtT10T11Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t11_t12')?.valueChanges.subscribe(value => {
+      this.showPvmtT11T12Fields = value === 'yes';
+    });
+    this.specialTestForm.get('pvmt_t12_l1')?.valueChanges.subscribe(value => {
+      this.showPvmtT12L1Fields = value === 'yes';
     });
     this.specialTestForm.get('cervical_quadrant')?.valueChanges.subscribe(value => {
       this.showCervicalQuadrantFields = value === 'yes';
