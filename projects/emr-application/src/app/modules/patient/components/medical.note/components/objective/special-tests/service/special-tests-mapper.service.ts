@@ -586,7 +586,8 @@ export class SpecialTestsMapperService {
       rotator_cuff_drop_arm_left: dto.rotatorCuff?.rotatorCuffDropArmLeft || 'not_tested',
       // Speed's Test
       speeds_test: this.boolToYesNo(dto.speedsTest?.speedsTest),
-      speeds_test_comments_text: dto.speedsTest?.speedsTestCommentsText || '',
+      speeds_test_right: dto.speedsTest?.speedsTestRight || 'not_tested',
+      speeds_test_left: dto.speedsTest?.speedsTestLeft || 'not_tested',
       // Ligament Integrity Elbow
       ligament_integrity_elbow: this.boolToYesNo(dto.ligamentIntegrityElbow?.ligamentIntegrityElbow),
       ligament_integrity_elbow_valgus_overload_right: dto.ligamentIntegrityElbow?.ligamentIntegrityElbowValgusOverloadRight || 'not_tested',
@@ -1214,7 +1215,8 @@ export class SpecialTestsMapperService {
   private mapSpeedsTest(formValue: any): SpeedsTest {
     return {
       speedsTest: this.yesNoToBool(formValue.speeds_test),
-      speedsTestCommentsText: formValue.speeds_test_comments_text || ''
+      speedsTestRight: formValue.speeds_test_right || 'not_tested',
+      speedsTestLeft: formValue.speeds_test_left || 'not_tested'
     };
   }
 

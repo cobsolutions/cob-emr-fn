@@ -46,6 +46,7 @@ import { LegLengthConfig } from "./leg-length/leg-length";
 import { LaseguesSlrConfig } from "./lasegues-slr/lasegues-slr";
 import { ScJointConfig } from "./sc-joint/sc-joint";
 import { AcJointConfig } from "./ac-joint/ac-joint";
+import { SpeedsTestConfig } from "./speeds-test/speeds-test";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -127,4 +128,5 @@ export class SpecialTestConfig {
     static readonly laseguesSlr = LaseguesSlrConfig.laseguesSlr;
     static readonly scJoint = ScJointConfig.scJoint;
     static readonly acJoint = AcJointConfig.acJoint;
+    static readonly speedsTest = SpeedsTestConfig.speedsTest;
 }

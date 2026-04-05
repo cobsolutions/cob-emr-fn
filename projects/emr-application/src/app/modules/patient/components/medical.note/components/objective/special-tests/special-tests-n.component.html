@@ -2392,7 +2392,15 @@
         </div>
     </div>
     <div *ngIf="showSpeedsTestFields" class="dependent-field-box">
-        <textarea formControlName="speeds_test_comments_text" class="form-textarea" rows="4"></textarea>
+        <dropdown-text-table [columns]="specialTestConfig.speedsTest.columns"
+            [labels]="specialTestConfig.speedsTest.labels"
+            [options]="specialTestConfig.speedsTest.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.speedsTest.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.speedsTest.commentsFieldName"
+            [hasTextInput]="specialTestConfig.speedsTest.hasTextInput"
+            [showComments]="specialTestConfig.speedsTest.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
     </div>
     <div class="form-row">
         <label class="field-label">Ligament Integrity Elbow</label>

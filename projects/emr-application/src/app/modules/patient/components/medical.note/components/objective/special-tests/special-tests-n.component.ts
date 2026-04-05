@@ -374,7 +374,6 @@ export class SpecialTestsNComponent implements OnInit {
       labrum: ['no'],
       rotator_cuff: ['no'],
       speeds_test: ['no'],
-      speeds_test_comments_text: [''],
       ligament_integrity_elbow: ['no'],
       ulnar_nerve_subluxation: ['no'],
       kemps_test: ['no'],
