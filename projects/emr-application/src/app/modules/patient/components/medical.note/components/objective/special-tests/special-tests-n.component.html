@@ -2516,7 +2516,160 @@
         </div>
     </div>
     <div *ngIf="showProprioceptionBalanceFields" class="dependent-field-box">
-        <textarea formControlName="proprioception_balance_comments_text" class="form-textarea" rows="4"></textarea>
+        <div class="form-row">
+            <label class="field-label">Past Pointing</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_past_pointing" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_past_pointing" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbPastPointingFields" class="dependent-field-box">
+            <div class="form-row">
+                <select formControlName="pb_past_pointing_result" class="form-select">
+                    <option *ngFor="let opt of pbPastPointingOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Fukuda Stepping</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_fukuda_stepping" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_fukuda_stepping" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFukudaSteppingFields" class="dependent-field-box">
+            <div class="form-row">
+                <select formControlName="pb_fukuda_stepping_result" class="form-select">
+                    <option *ngFor="let opt of pbFukudaSteppingOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">SL Balance</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_sl_balance" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_sl_balance" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbSlBalanceFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.slBalance.columns"
+                [labels]="specialTestConfig.slBalance.labels"
+                [options]="specialTestConfig.slBalance.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.slBalance.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.slBalance.commentsFieldName"
+                [hasTextInput]="specialTestConfig.slBalance.hasTextInput"
+                [showComments]="specialTestConfig.slBalance.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Romberg</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_romberg" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_romberg" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbRombergFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Eyes Open</label>
+                <select formControlName="pb_romberg_eyes_open" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Eyes Closed</label>
+                <select formControlName="pb_romberg_eyes_closed" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Comments</label>
+                <textarea formControlName="pb_romberg_comments_text" class="form-textarea" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Sharpened Romberg</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_sharpened_romberg" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_sharpened_romberg" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbSharpenedRombergFields" class="dependent-field-box">
+        </div>
+        <div class="form-row">
+            <label class="field-label">Functional Reach UE</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_ue" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_ue" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFunctionalReachUeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="specialTestConfig.functionalReachUe.rows"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.functionalReachUe.fieldPrefix"
+                [showComments]="specialTestConfig.functionalReachUe.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Functional Reach LE</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_le" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_le" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFunctionalReachLeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="specialTestConfig.functionalReachLe.rows"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.functionalReachLe.fieldPrefix"
+                [showComments]="specialTestConfig.functionalReachLe.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Pelvic Clock</label>

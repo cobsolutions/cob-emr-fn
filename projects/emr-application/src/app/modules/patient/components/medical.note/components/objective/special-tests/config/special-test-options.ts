@@ -171,6 +171,13 @@ export const ober_OPTIONS: RomOption[] = [
     { value: '3.75 cm', label: '3.75 cm' },
     { value: '4 cm', label: '4 cm' }
   ];
+  export const slBalance_OPTIONS: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: 'Good', label: 'Good' },
+    { value: 'Fair', label: 'Fair' },
+    { value: 'Poor', label: 'Poor' },
+    { value: 'custom', label: 'Custom' }
+  ];
   export const cervicalQuadrant_OPTIONS: RomOption[] = [
     { value: 'Negative', label: 'Negative' },
     { value: 'Positive', label: 'Positive' }

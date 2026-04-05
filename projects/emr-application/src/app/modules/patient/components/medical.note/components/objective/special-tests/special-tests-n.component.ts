@@ -117,6 +117,16 @@ export class SpecialTestsNComponent implements OnInit {
   showSiDistractionFields: boolean = false;
   showLegLengthFields: boolean = false;
   showProprioceptionBalanceFields: boolean = false;
+  showPbPastPointingFields: boolean = false;
+  pbPastPointingOptions: string[] = ['Normal', 'Mild Deviation', 'Moderate Deviation', 'Extreme Deviation'];
+  showPbFukudaSteppingFields: boolean = false;
+  pbFukudaSteppingOptions: string[] = ['Normal', 'Veers Left', 'Veers Right', 'Unable To Complete'];
+  showPbSlBalanceFields: boolean = false;
+  showPbRombergFields: boolean = false;
+  pbRombergOptions: string[] = ['Not Tested', 'Good', 'Fair', 'Poor', 'Custom'];
+  showPbSharpenedRombergFields: boolean = false;
+  showPbFunctionalReachUeFields: boolean = false;
+  showPbFunctionalReachLeFields: boolean = false;
   showPelvicClockFields: boolean = false;
   showIntroitusClockFields: boolean = false;
   showLaseguesSlrFields: boolean = false;
@@ -378,7 +388,18 @@ export class SpecialTestsNComponent implements OnInit {
       si_distraction: ['no'],
       leg_length: ['no'],
       proprioception_balance: ['no'],
-      proprioception_balance_comments_text: [''],
+      pb_past_pointing: ['no'],
+      pb_past_pointing_result: ['Normal'],
+      pb_fukuda_stepping: ['no'],
+      pb_fukuda_stepping_result: ['Normal'],
+      pb_sl_balance: ['no'],
+      pb_romberg: ['no'],
+      pb_romberg_eyes_open: ['Not Tested'],
+      pb_romberg_eyes_closed: ['Not Tested'],
+      pb_romberg_comments_text: [''],
+      pb_sharpened_romberg: ['no'],
+      pb_functional_reach_ue: ['no'],
+      pb_functional_reach_le: ['no'],
       pelvic_clock: ['no'],
       pelvic_clock_comments_text: [''],
       introitus_clock: ['no'],
@@ -668,6 +689,27 @@ export class SpecialTestsNComponent implements OnInit {
     });
     this.specialTestForm.get('proprioception_balance')?.valueChanges.subscribe(value => {
       this.showProprioceptionBalanceFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_past_pointing')?.valueChanges.subscribe(value => {
+      this.showPbPastPointingFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_fukuda_stepping')?.valueChanges.subscribe(value => {
+      this.showPbFukudaSteppingFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_sl_balance')?.valueChanges.subscribe(value => {
+      this.showPbSlBalanceFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_romberg')?.valueChanges.subscribe(value => {
+      this.showPbRombergFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_sharpened_romberg')?.valueChanges.subscribe(value => {
+      this.showPbSharpenedRombergFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_functional_reach_ue')?.valueChanges.subscribe(value => {
+      this.showPbFunctionalReachUeFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_functional_reach_le')?.valueChanges.subscribe(value => {
+      this.showPbFunctionalReachLeFields = value === 'yes';
     });
     this.specialTestForm.get('pelvic_clock')?.valueChanges.subscribe(value => {
       this.showPelvicClockFields = value === 'yes';

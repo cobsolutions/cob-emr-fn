@@ -46,6 +46,8 @@ import { LaseguesSlrConfig } from "./lasegues-slr/lasegues-slr";
 import { ScJointConfig } from "./sc-joint/sc-joint";
 import { AcJointConfig } from "./ac-joint/ac-joint";
 import { SpeedsTestConfig } from "./speeds-test/speeds-test";
+import { SlBalanceConfig } from "./sl-balance/sl-balance";
+import { FunctionalReachConfig } from "./functional-reach/functional-reach";
 
 export class SpecialTestConfig {
     static readonly oberTestNoLabels = OberTest.oberTestNoLabels;
@@ -128,4 +130,7 @@ export class SpecialTestConfig {
     static readonly scJoint = ScJointConfig.scJoint;
     static readonly acJoint = AcJointConfig.acJoint;
     static readonly speedsTest = SpeedsTestConfig.speedsTest;
+    static readonly slBalance = SlBalanceConfig.slBalance;
+    static readonly functionalReachUe = FunctionalReachConfig.functionalReachUe;
+    static readonly functionalReachLe = FunctionalReachConfig.functionalReachLe;
 }
