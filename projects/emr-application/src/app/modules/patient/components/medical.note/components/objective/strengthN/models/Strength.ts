@@ -2,6 +2,7 @@ import { AdditionalComments } from "./AdditionalComments";
 import { CoreStrength } from "./CoreStrength";
 import { GripPinch } from "./GripPinch";
 import { GrossMuscleTestsLower } from "./GrossMuscleTestsLower";
+import { GrossMuscleTestsPelvicFloor } from "./GrossMuscleTestsPelvicFloor";
 import { GrossMuscleTestsTrunk } from "./GrossMuscleTestsTrunk";
 import { GrossMuscleTestsUpper } from "./GrossMuscleTestsUpper";
 import { ManualMuscleTests } from "./ManualMuscleTests";
@@ -20,6 +21,7 @@ export interface Strength {
   grossMuscleTestsTrunk: GrossMuscleTestsTrunk;
   grossMuscleTestsLower: GrossMuscleTestsLower;
   coreStrength: CoreStrength;
+  grossMuscleTestsPelvicFloor: GrossMuscleTestsPelvicFloor;
   manualMuscleTests: ManualMuscleTests;
   additionalComments: AdditionalComments;
 }

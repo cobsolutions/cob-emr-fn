@@ -56,6 +56,9 @@ export class StrengthNComponent implements OnInit {
   showSupineFlexionCoreStrengthFields: boolean = false;
   showSitupsCoreStrengthFields: boolean = false;
   showPushupCoreStrengthFields: boolean = false;
+  showGrossMuscleTestsPelvicFloorFields: boolean = false;
+  showGrossMuscleTestsPelvicFloorValueFields: boolean = false;
+  showFirstLayerSuperficialMusclesCustom: boolean = false;
   showRapidExchangeFields: boolean = false;
   showRepeatedGripFields: boolean = false;
   showFiveLevelGripFields: boolean = false;
@@ -310,6 +313,11 @@ export class StrengthNComponent implements OnInit {
       pushup_cs_value1: [''],
       pushup_cs_knee_completed: [''],
       pushup_cs_value2: [''],
+
+      gross_muscle_tests_pelvic_floor: ['no'],
+      gross_muscle_tests_pelvic_floor_value: ['no'],
+      first_layer_superficial_muscles: [''],
+      first_layer_superficial_muscles_custom: [''],
 
       manual_muscle_tests: ['no'],
 
@@ -574,6 +582,34 @@ export class StrengthNComponent implements OnInit {
           pushup_cs_value1: '',
           pushup_cs_knee_completed: '',
           pushup_cs_value2: '',
+        });
+      }
+    });
+
+    this.strengthForm.get('gross_muscle_tests_pelvic_floor')?.valueChanges.subscribe(value => {
+      this.showGrossMuscleTestsPelvicFloorFields = value === 'yes';
+      if (!this.showGrossMuscleTestsPelvicFloorFields) {
+        this.strengthForm.patchValue({
+          gross_muscle_tests_pelvic_floor_value: 'no',
+        })
+      }
+    });
+
+    this.strengthForm.get('gross_muscle_tests_pelvic_floor_value')?.valueChanges.subscribe(value => {
+      this.showGrossMuscleTestsPelvicFloorValueFields = value === 'yes';
+      if (!this.showGrossMuscleTestsPelvicFloorValueFields) {
+        this.strengthForm.patchValue({
+          first_layer_superficial_muscles: '',
+          first_layer_superficial_muscles_custom: '',
+        })
+      }
+    });
+
+    this.strengthForm.get('first_layer_superficial_muscles')?.valueChanges.subscribe(value => {
+      this.showFirstLayerSuperficialMusclesCustom = value === 'custom';
+      if (!this.showFirstLayerSuperficialMusclesCustom) {
+        this.strengthForm.patchValue({
+          first_layer_superficial_muscles_custom: '',
         });
       }
     });

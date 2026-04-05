@@ -14,6 +14,7 @@ import { LowerBodyMyofascialTestsData } from '../models/LowerBodyMyofascialTests
 import { GrossMuscleTestsTrunk } from '../models/GrossMuscleTestsTrunk';
 import { GrossMuscleTestsLower } from '../models/GrossMuscleTestsLower';
 import { CoreStrength } from '../models/CoreStrength';
+import { GrossMuscleTestsPelvicFloor } from '../models/GrossMuscleTestsPelvicFloor';
 import { ManualMuscleTests } from '../models/ManualMuscleTests';
 import { AdditionalComments } from '../models/AdditionalComments';
 
@@ -38,6 +39,7 @@ export class StrengthMapperService {
       ...this.mapGrossMuscleTestsUpper(dto),
       ...this.mapRedcordAndTrunk(dto),
       ...this.mapGrossMuscleTestsLowerAndCore(dto),
+      ...this.mapGrossMuscleTestsPelvicFloor(dto),
       ...this.mapManualMuscleTests(dto),
       ...this.mapAdditionalComments(dto)
     };
@@ -871,6 +873,15 @@ export class StrengthMapperService {
       pushup_cs_value1: dto.coreStrength?.pushupCs?.pushupCsValue1 || '',
       pushup_cs_knee_completed: dto.coreStrength?.pushupCs?.pushupCsKneeCompleted || '',
       pushup_cs_value2: dto.coreStrength?.pushupCs?.pushupCsValue2 || '',
+    };
+  }
+
+  private mapGrossMuscleTestsPelvicFloor(dto: Strength): any {
+    return {
+      gross_muscle_tests_pelvic_floor: dto.grossMuscleTestsPelvicFloor?.grossMuscleTestsPelvicFloor ? 'yes' : 'no',
+      gross_muscle_tests_pelvic_floor_value: dto.grossMuscleTestsPelvicFloor?.grossMuscleTestsPelvicFloorValue ? 'yes' : 'no',
+      first_layer_superficial_muscles: dto.grossMuscleTestsPelvicFloor?.firstLayerSuperficialMuscles || '',
+      first_layer_superficial_muscles_custom: dto.grossMuscleTestsPelvicFloor?.firstLayerSuperficialMusclesCustom || '',
     };
   }
 
@@ -1892,6 +1903,13 @@ export class StrengthMapperService {
       }
     };
 
+    const grossMuscleTestsPelvicFloor: GrossMuscleTestsPelvicFloor = {
+      grossMuscleTestsPelvicFloor: formValue.gross_muscle_tests_pelvic_floor === 'yes',
+      grossMuscleTestsPelvicFloorValue: formValue.gross_muscle_tests_pelvic_floor_value === 'yes',
+      firstLayerSuperficialMuscles: formValue.first_layer_superficial_muscles || '',
+      firstLayerSuperficialMusclesCustom: formValue.first_layer_superficial_muscles_custom || '',
+    };
+
     const manualMuscleTests: ManualMuscleTests = {
       manualMuscleTests: formValue.manual_muscle_tests === 'yes',
       manualMuscleTestsDeepNeckFlexors: formValue.manual_muscle_tests_deep_neck_flexors || '',
@@ -2062,6 +2080,7 @@ export class StrengthMapperService {
       grossMuscleTestsTrunk,
       grossMuscleTestsLower,
       coreStrength,
+      grossMuscleTestsPelvicFloor,
       manualMuscleTests,
       additionalComments
     };

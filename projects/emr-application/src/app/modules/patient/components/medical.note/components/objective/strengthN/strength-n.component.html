@@ -911,6 +911,64 @@
             </div>
         </div>
     </div>
+    <!-- Gross Muscle Tests Pelvic Floor -->
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Pelvic Floor</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsPelvicFloorFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">1st Layer Superficial Muscles</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor_value" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor_value" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showGrossMuscleTestsPelvicFloorValueFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">1st Layer Superficial Muscles</label>
+                <select class="form-control" formControlName="first_layer_superficial_muscles">
+                    <option value="">Select</option>
+                    <option value="not_tested">Not Tested</option>
+                    <option value="5/5">5/5</option>
+                    <option value="5-/5">5-/5</option>
+                    <option value="4+/5">4+/5</option>
+                    <option value="4/5">4/5</option>
+                    <option value="4-/5">4-/5</option>
+                    <option value="3+/5">3+/5</option>
+                    <option value="3/5">3/5</option>
+                    <option value="3-/5">3-/5</option>
+                    <option value="2+/5">2+/5</option>
+                    <option value="2/5">2/5</option>
+                    <option value="2-/5">2-/5</option>
+                    <option value="1+/5">1+/5</option>
+                    <option value="1/5">1/5</option>
+                    <option value="1-/5">1-/5</option>
+                    <option value="0/5">0/5</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            <div class="form-row" *ngIf="showFirstLayerSuperficialMusclesCustom">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="first_layer_superficial_muscles_custom" placeholder="Enter custom value" />
+            </div>
+        </div>
+    </div>
     <div class="form-row">
         <label class="field-label">Manual Muscle Tests</label>
         <div class="radio-group-primary">
