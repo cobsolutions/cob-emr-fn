@@ -2014,7 +2014,18 @@
         </div>
     </div>
     <div *ngIf="showCervicalCompDistFields" class="dependent-field-box">
-        <textarea formControlName="cervical_comp_dist_comments_text" class="form-textarea" rows="4"></textarea>
+        <div class="form-row">
+            <label class="field-label">Compression</label>
+            <select formControlName="cervical_comp_dist_compression" class="form-select">
+                <option *ngFor="let opt of cervicalCompDistOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Distraction</label>
+            <select formControlName="cervical_comp_dist_distraction" class="form-select">
+                <option *ngFor="let opt of cervicalCompDistOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
     </div>
     <div class="form-row">
         <label class="field-label">Jaw Crepitus</label>

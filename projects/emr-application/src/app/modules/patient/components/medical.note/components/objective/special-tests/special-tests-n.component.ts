@@ -95,6 +95,7 @@ export class SpecialTestsNComponent implements OnInit {
 
   showCervicalQuadrantFields: boolean = false;
   showCervicalCompDistFields: boolean = false;
+  cervicalCompDistOptions: string[] = ['Not Tested', 'Positive', 'Negative'];
   showJawCrepitusFields: boolean = false;
   showSpurlingsManeuverFields: boolean = false;
   showAlarLigamentTestManualFields: boolean = false;
@@ -345,7 +346,8 @@ export class SpecialTestsNComponent implements OnInit {
       cervical_quadrant: ['no'],
       cervical_quadrant_comments_text: [''],
       cervical_comp_dist: ['no'],
-      cervical_comp_dist_comments_text: [''],
+      cervical_comp_dist_compression: ['Not Tested'],
+      cervical_comp_dist_distraction: ['Not Tested'],
       jaw_crepitus: ['no'],
       jaw_crepitus_comments_text: [''],
       spurlings_maneuver: ['no'],

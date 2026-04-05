@@ -1,4 +1,5 @@
 export interface CervicalCompDist {
   cervicalCompDist: boolean;
-  cervicalCompDistCommentsText: string;
+  cervicalCompDistCompression: string;
+  cervicalCompDistDistraction: string;
 }

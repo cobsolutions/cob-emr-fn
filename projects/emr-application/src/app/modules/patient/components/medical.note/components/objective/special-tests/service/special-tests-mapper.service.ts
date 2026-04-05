@@ -484,7 +484,8 @@ export class SpecialTestsMapperService {
       cervical_quadrant_comments_text: dto.cervicalQuadrant?.cervicalQuadrantCommentsText || '',
       // Cervical Comp/Dist
       cervical_comp_dist: this.boolToYesNo(dto.cervicalCompDist?.cervicalCompDist),
-      cervical_comp_dist_comments_text: dto.cervicalCompDist?.cervicalCompDistCommentsText || '',
+      cervical_comp_dist_compression: dto.cervicalCompDist?.cervicalCompDistCompression || 'Not Tested',
+      cervical_comp_dist_distraction: dto.cervicalCompDist?.cervicalCompDistDistraction || 'Not Tested',
       // Jaw Crepitus
       jaw_crepitus: this.boolToYesNo(dto.jawCrepitus?.jawCrepitus),
       jaw_crepitus_comments_text: dto.jawCrepitus?.jawCrepitusCommentsText || '',
@@ -987,7 +988,8 @@ export class SpecialTestsMapperService {
   private mapCervicalCompDist(formValue: any): CervicalCompDist {
     return {
       cervicalCompDist: this.yesNoToBool(formValue.cervical_comp_dist),
-      cervicalCompDistCommentsText: formValue.cervical_comp_dist_comments_text || ''
+      cervicalCompDistCompression: formValue.cervical_comp_dist_compression || 'Not Tested',
+      cervicalCompDistDistraction: formValue.cervical_comp_dist_distraction || 'Not Tested'
     };
   }
 
