@@ -284,8 +284,12 @@
                                     <td>
                                         <span class="record-type-badge" [ngClass]="{
                                             'badge-initial': item.status === 'Initial Examination',
+                                            'badge-initial-plan': item.status === 'Initial Exam Plan',
+                                            'badge-initial-score': item.status === 'Initial Exam Score',
                                             'badge-daily': item.status === 'Daily Note',
                                             'badge-progress': item.status === 'Progress Note',
+                                            'badge-progress-plan': item.status === 'Progress Note Plan',
+                                            'badge-progress-rom': item.status === 'Progress Note Score',
                                             'badge-quick-discharge': item.status === 'Quick Discharge' || item.status === 'Quick_Discharge',
                                             'badge-discharge': item.status === 'Discharge Note' || item.status === 'Discharge' || item.status === 'Discharge_Note'
                                         }">

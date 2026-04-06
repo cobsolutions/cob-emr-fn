@@ -499,6 +499,10 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
         exportService$ = this.initialExamNoteService.exportPlanOfCarePDF(noteId);
       } else if (status === 'Initial Exam Score') {
         exportService$ = this.initialExamNoteService.exportScoreTestPDF(noteId);
+      } else if (status === 'Progress Note Plan') {
+        exportService$ = this.progressNoteService.exportPlanOfCarePDF(noteId);
+      } else if (status === 'Progress Note Score') {
+        exportService$ = this.progressNoteService.exportScoreTestPDF(noteId);
       } else if (status === 'Daily Note') {
         exportService$ = this.dailyNoteService.exportPDF(noteId);
       } else if (status === 'Progress Note') {
@@ -556,6 +560,8 @@ export class PatientChartCaseComponent extends ListTemplate implements OnInit, O
     if (status === 'Daily Note')
       this.patientRecordAction = 'Daily_Note';
     if (status === 'Progress Note')
+      this.patientRecordAction = 'Progress_Note';
+    if (status === 'Progress Note Plan' || status === 'Progress Note Score')
       this.patientRecordAction = 'Progress_Note';
     if (status === 'Quick Discharge' || status === 'Quick_Discharge')
       this.patientRecordAction = 'Quick_Discharge';

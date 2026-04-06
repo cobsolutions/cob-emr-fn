@@ -34,6 +34,14 @@ export class ProgressNoteService {
     var url = this.baseUrl + '/' + noteId + '/export/pdf';
     return this.httpClient.get(url, { responseType: 'blob' });
   }
+  exportPlanOfCarePDF(noteId: string) {
+    var url = this.baseUrl + '/' + noteId + '/export/plan-of-care/pdf';
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
+  exportScoreTestPDF(noteId: string) {
+    var url = this.baseUrl + '/' + noteId + '/export/score/test/pdf';
+    return this.httpClient.get(url, { responseType: 'blob' });
+  }
 
   get(noteId: string) {
     var url = this.baseUrl + '/' + noteId;
