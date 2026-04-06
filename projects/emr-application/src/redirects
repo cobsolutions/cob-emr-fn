@@ -244,4 +244,4 @@
 /emr/api/patient/case/payment/delete/:id http://161.97.126.192:7070/emr/api/patient/case/payment/delete/:id 200
 /emr/api/patient/case/payment/find/unpaid/caseId/:caseId http://161.97.126.192:7070/emr/api/patient/case/payment/find/unpaid/caseId/:caseId 200
 /emr/api/clinical/user/find-all/organizationId/:organizationId http://161.97.126.192:7070/emr/api/clinical/user/find-all/organizationId/:organizationId 200
-/*  /index.html   200
+/*  /index.html   200/*  /index.html   200
