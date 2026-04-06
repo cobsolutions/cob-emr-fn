@@ -1,0 +1,34 @@
+export interface LigamentIntegrityKnee {
+  ligamentIntegrityKnee: boolean;
+  valgusStressAt_0KneeFlex: boolean;
+  valgusStressAt_30KneeFlex: boolean;
+  varusStressAt_0KneeFlex: boolean;
+  varusStressAt_30KneeFlex: boolean;
+  anteriorDrawer: boolean;
+  posteriorDrawer: boolean;
+  lachmans: boolean;
+  pivotShift: boolean;
+  sagSign: boolean;
+  craigsTestRight: string;
+  craigsTestLeft: string;
+  tibialTorsionRight: string;
+  tibialTorsionLeft: string;
+  valgusStressAt_0KneeFlexValgusStressAt_0KneeFlexRight: string;
+  valgusStressAt_0KneeFlexValgusStressAt_0KneeFlexLeft: string;
+  valgusStressAt_30KneeFlexValgusStressAt_30KneeFlexRight: string;
+  valgusStressAt_30KneeFlexValgusStressAt_30KneeFlexLeft: string;
+  varusStressAt_0KneeFlexVarusStressAt_0KneeFlexRight: string;
+  varusStressAt_0KneeFlexVarusStressAt_0KneeFlexLeft: string;
+  varusStressAt_30KneeFlexVarusStressAt_30KneeFlexRight: string;
+  varusStressAt_30KneeFlexVarusStressAt_30KneeFlexLeft: string;
+  anteriorDrawerAnteriorDrawerRight: string;
+  anteriorDrawerAnteriorDrawerLeft: string;
+  posteriorDrawerPosteriorDrawerRight: string;
+  posteriorDrawerPosteriorDrawerLeft: string;
+  lachmansLachmansRight: string;
+  lachmansLachmansLeft: string;
+  pivotShiftPivotShiftRight: string;
+  pivotShiftPivotShiftLeft: string;
+  sagSignSagSignRight: string;
+  sagSignSagSignLeft: string;
+}

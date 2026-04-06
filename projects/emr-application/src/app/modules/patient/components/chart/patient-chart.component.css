@@ -1,0 +1,1215 @@
+/* ========================================
+   Patient Chart Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Page Header --- */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* --- Header Actions --- */
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.back-btn .btn-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Chart Container (two-column layout) --- */
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  align-items: flex-start;
+}
+
+/* --- Sidebar --- */
+.chart-sidebar {
+  width: 320px;
+  min-width: 320px;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
+
+/* --- Main Content --- */
+.chart-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- Section Cards --- */
+.section-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  transition: all 0.2s ease;
+}
+
+.section-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.note-open-card {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.note-open-card:hover {
+  box-shadow: none !important;
+}
+
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.125rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  transition: all 0.2s ease;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+/* --- Card Status Badges --- */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: rgba(217, 119, 6, 0.25);
+  color: #fef3c7;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 1rem;
+}
+
+.card-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #fbbf24;
+  flex-shrink: 0;
+}
+
+.card-status.active {
+  background: rgba(5, 150, 105, 0.3);
+  color: #d1fae5;
+}
+
+.card-status.active .card-status-dot {
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.card-status.inactive {
+  background: rgba(156, 163, 175, 0.25);
+  color: #e5e7eb;
+}
+
+.card-status.inactive .card-status-dot {
+  background: #9ca3af;
+}
+
+.card-status.discharged {
+  background: rgba(217, 119, 6, 0.25);
+  color: #fef3c7;
+}
+
+.card-status.discharged .card-status-dot {
+  background: #fbbf24;
+}
+
+.card-status.pending {
+  background: rgba(59, 130, 246, 0.25);
+  color: #dbeafe;
+}
+
+.card-status.pending .card-status-dot {
+  background: #60a5fa;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+.card-body-custom.p-0 {
+  padding: 0;
+}
+
+/* --- Patient Info Layout --- */
+.patient-info-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.patient-identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.patient-name-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.patient-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.patient-demographics {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.patient-demographics .sep {
+  margin: 0 0.375rem;
+  color: #cbd5e1;
+}
+
+.patient-demographics strong {
+  color: #334155;
+}
+
+/* --- Sidebar Patient Identity --- */
+.sidebar-patient-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sidebar-patient-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.sidebar-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- Sidebar Info List --- */
+.sidebar-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 0.75rem;
+}
+
+.sidebar-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.625rem 0.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+.sidebar-info-item:last-child {
+  border-bottom: none;
+}
+
+.sidebar-info-item:hover {
+  background: #f8fafc;
+  border-radius: 0.25rem;
+}
+
+/* --- Sidebar Address Section --- */
+.sidebar-address-section {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.sidebar-address-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sidebar-address-header:hover {
+  background: #f8fafc;
+}
+
+.sidebar-address-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-address-header-text .info-label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.address-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.3rem;
+  border-radius: 1rem;
+  background: #334155;
+  color: #ffffff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.address-preview {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin-top: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-address-header .toggle-btn {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.sidebar-address-header .toggle-btn:hover {
+  background: #e2e8f0;
+}
+
+.sidebar-address-section.expanded .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Address List (expanded) --- */
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem 0.25rem;
+  animation: addressSlideIn 0.2s ease-out;
+}
+
+@keyframes addressSlideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.address-entry {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 0.625rem 0.75rem;
+}
+
+.address-entry-label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.address-entry-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #94a3b8;
+}
+
+.address-entry-value {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1e293b;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.address-entry-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.375rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.address-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.address-action-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.address-action-btn .check-icon {
+  color: #059669;
+}
+
+.address-action-label {
+  line-height: 1;
+}
+
+/* --- Sidebar Card --- */
+.sidebar-card .card-body-custom {
+  padding: 1rem;
+}
+
+/* --- Info Cards Grid --- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+
+.info-card:hover {
+  background: #f1f5f9;
+}
+
+.info-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.info-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.info-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.info-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.125rem;
+}
+
+.info-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* --- Patient Name Row --- */
+.patient-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+}
+
+/* --- EMR Badge (next to patient name) --- */
+.emr-badge {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  border: 2px solid #1d4ed8;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(29, 78, 216, 0.2);
+}
+
+.emr-badge-label {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.emr-badge-value {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  background: #eff6ff;
+  color: #1e40af;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* --- Status Pill (next to patient name) --- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3125rem 0.875rem;
+  border-radius: 2rem;
+  font-size: 0;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.status-pill-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: #94a3b8;
+  flex-shrink: 0;
+}
+
+.status-pill-text {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.status-pill.active {
+  border-color: #059669;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+.status-pill.active .status-pill-dot {
+  background: #059669;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2), 0 0 8px rgba(5, 150, 105, 0.3);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.status-pill.active .status-pill-text {
+  color: #047857;
+}
+
+.status-pill.inactive {
+  border-color: #9ca3af;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+.status-pill.inactive .status-pill-dot {
+  background: #9ca3af;
+}
+
+.status-pill.inactive .status-pill-text {
+  color: #6b7280;
+}
+
+.status-pill.discharged {
+  border-color: #d97706;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.status-pill.discharged .status-pill-dot {
+  background: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
+.status-pill.discharged .status-pill-text {
+  color: #b45309;
+}
+
+.status-pill.pending {
+  border-color: #2563eb;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.status-pill.pending .status-pill-dot {
+  background: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.status-pill.pending .status-pill-text {
+  color: #1d4ed8;
+}
+
+/* Pulse animation for active/pending dots */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* --- Page Header Subtitle Row --- */
+.page-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* --- EMR Badge in Page Header --- */
+.header-emr-badge {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}
+
+.header-emr-label {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.4375rem;
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.header-emr-value {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* --- Header Status Badge --- */
+.header-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-status-dot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.header-status-badge.active {
+  background: rgba(52, 211, 153, 0.25);
+  color: #a7f3d0;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.header-status-badge.active .header-status-dot {
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.header-status-badge.inactive {
+  background: rgba(156, 163, 175, 0.25);
+  color: #d1d5db;
+  border-color: rgba(156, 163, 175, 0.3);
+}
+
+.header-status-badge.inactive .header-status-dot {
+  background: #9ca3af;
+}
+
+.header-status-badge.discharged {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fde68a;
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+.header-status-badge.discharged .header-status-dot {
+  background: #fbbf24;
+}
+
+.header-status-badge.pending {
+  background: rgba(96, 165, 250, 0.2);
+  color: #bfdbfe;
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+.header-status-badge.pending .header-status-dot {
+  background: #60a5fa;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* --- EMR ID Tag (in demographics line) --- */
+.emr-id-tag {
+  font-weight: 600;
+  color: #334155;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* --- EMR ID Info Card --- */
+.emr-id-icon {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.emr-id-value {
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* --- Status Info Card (enhanced) --- */
+.info-card.status-card {
+  border-left: 3px solid #94a3b8;
+  position: relative;
+}
+
+.info-card.status-card.active {
+  border-left-color: #059669;
+  background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
+}
+
+.info-card.status-card.inactive {
+  border-left-color: #9ca3af;
+  background: linear-gradient(135deg, #f9fafb 0%, #f8fafc 100%);
+}
+
+.info-card.status-card.discharged {
+  border-left-color: #d97706;
+  background: linear-gradient(135deg, #fffbeb 0%, #f8fafc 100%);
+}
+
+.info-card.status-card.pending {
+  border-left-color: #2563eb;
+  background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+}
+
+.info-icon.status-bg {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.info-icon.status-bg.active {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.info-icon.status-bg.inactive {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.info-icon.status-bg.discharged {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.info-icon.status-bg.pending {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.status-text {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.status-text.active {
+  color: #059669;
+}
+
+.status-text.inactive {
+  color: #6b7280;
+}
+
+.status-text.discharged {
+  color: #d97706;
+}
+
+.status-text.pending {
+  color: #2563eb;
+}
+
+.age-tag {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-left: 0.25rem;
+}
+
+/* --- Address Card --- */
+.info-card.address .info-value.content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.info-card.address.expanded .info-value.content {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.toggle-btn {
+  margin-top: 0.25rem;
+  background: transparent;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #334155;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.toggle-btn:hover {
+  color: #1e293b;
+}
+
+.toggle-btn:focus {
+  outline: 2px solid rgba(51, 65, 85, 0.15);
+  border-radius: 4px;
+}
+
+.toggle-chevron {
+  transition: transform 0.22s ease;
+  color: currentColor;
+}
+
+.info-card.address.expanded .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Case Selector in Header --- */
+.case-select {
+  max-width: 200px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.case-select:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.case-select option {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* --- Chart Tabs --- */
+.chart-tabs {
+  padding: 0 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.chart-tabs .nav-link {
+  border: none;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+  border-radius: 0;
+  position: relative;
+  background: transparent;
+}
+
+.chart-tabs .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #334155;
+  transition: width 0.25s ease;
+}
+
+.chart-tabs .nav-link:hover {
+  color: #334155;
+  background: rgba(51, 65, 85, 0.05);
+}
+
+.chart-tabs .nav-link:hover::after {
+  width: 60%;
+}
+
+.chart-tabs .nav-link.active {
+  color: #1e293b;
+  font-weight: 600;
+  background: #ffffff;
+}
+
+.chart-tabs .nav-link.active::after {
+  width: 100%;
+  height: 2px;
+  background: #334155;
+}
+
+/* --- Tab Pane Content --- */
+.tab-pane-content {
+  padding: 1.25rem;
+}
+
+/* --- Responsive Design --- */
+
+/* Collapse sidebar to single column at ≤992px */
+@media (max-width: 992px) {
+  .chart-container {
+    flex-direction: column;
+  }
+
+  .chart-sidebar {
+    width: 100%;
+    min-width: unset;
+    position: static;
+  }
+
+  .sidebar-patient-identity {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .sidebar-patient-name {
+    text-align: left;
+  }
+
+  .sidebar-badges {
+    justify-content: flex-start;
+  }
+
+  .sidebar-info-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .sidebar-info-item {
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .address-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle-row {
+    padding-left: 0;
+    justify-content: center;
+  }
+
+  .header-actions {
+    justify-content: center;
+  }
+
+  .patient-identity {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .patient-demographics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .patient-demographics .sep {
+    display: none;
+  }
+
+  .patient-name-row {
+    justify-content: center;
+  }
+
+  .status-pill {
+    padding: 0.25rem 0.75rem;
+  }
+
+  .status-pill-text {
+    font-size: 0.75rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .card-header-title {
+    justify-content: center;
+  }
+
+  .case-select {
+    max-width: 100%;
+  }
+
+  .card-body-custom {
+    padding: 1rem;
+  }
+
+  .tab-pane-content {
+    padding: 1rem;
+  }
+
+  .sidebar-patient-identity {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sidebar-patient-name {
+    text-align: center;
+  }
+
+  .sidebar-badges {
+    justify-content: center;
+  }
+
+  .sidebar-info-list {
+    grid-template-columns: 1fr;
+  }
+
+  .address-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header-content {
+    padding: 0.875rem;
+  }
+
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .chart-container {
+    gap: 0.875rem;
+  }
+
+  .section-card {
+    border-radius: 0.375rem !important;
+  }
+
+  .card-header-title {
+    font-size: 0.875rem;
+  }
+
+  .card-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .card-body-custom {
+    padding: 0.875rem;
+  }
+
+  .back-btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .tab-pane-content {
+    padding: 0.875rem;
+  }
+}

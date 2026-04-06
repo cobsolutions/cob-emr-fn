@@ -1,48 +1,56 @@
-<c-container fluid="true" class="my-3">
-    <c-card>
-        <c-card-body>
-            <c-callout color="danger" *ngIf="isValidForm">
-                <span class="text-danger fw-bold">Please fill in all the required fields save</span>
-            </c-callout>
-            <form [formGroup]="appointmentTypeForm">
-                <c-row>
-                    <c-col xl="1">
-                        <label style="width: 150px;">Name<span class="text-danger">*</span></label>
-                    </c-col>
-                    <c-col xl="6">
-                        <input class="form-control" placeholder formControlName="appointment-name" sizing="sm"
-                            cFormControl [ngClass]="{'is-invalid': this.appointmentTypeForm.get('appointment-name')?.invalid
-                        && this.appointmentTypeForm.get('appointment-name')?.touched}" maxlength="60" input-trimmer>
-                    </c-col>
-                </c-row>
-                <c-row class="my-2">
-                    <c-col xl="2">
-                        <label style="width: 150px;">Color<span class="text-danger">*</span></label>
-                    </c-col>
-                    <c-col xs="10">
-                        <input [(colorPicker)]="color" cFormControl formControlName="appointment-color" sizing="sm"
-                            [style.background]="appointmentTypeForm.get('appointment-color').value"
-                            style="height: 40px;width: 40px;border-radius: 50%;display: inline-block;"
-                            (cpSliderDragStart)="onCahngeColor('cpSliderDragStart', $event)" />
-                    </c-col>
-                </c-row>
-                <c-row class="my-2">
-                    <c-col xl="2">
-                        <label style="width: 150px;">Font Color<span class="text-danger">*</span></label>
-                    </c-col>
-                    <c-col xs="10">
-                        <input [(colorPicker)]="color" cFormControl formControlName="appointment-font-color" sizing="sm"
-                            [style.background]="appointmentTypeForm.get('appointment-font-color').value"
-                            style="height: 40px;width: 40px;border-radius: 50%;display: inline-block;"
-                            (cpSliderDragStart)="onCahngeFontColor('cpSliderDragStart', $event)" />
-                    </c-col>
-                </c-row>
-                <div class="mt-3 text-center">
-                    <button cButton size="sm" variant="outline" class="mx-2" (click)="save()">
-                        <span>Save</span>
-                    </button>
+<div class="appt-type-form-container">
+    <!-- Validation Alert -->
+    <div class="validation-alert" *ngIf="isValidForm">
+        <svg cIcon name="cilBan" class="alert-icon"></svg>
+        <span>Please fill in all the required fields before saving.</span>
+    </div>
+
+    <form [formGroup]="appointmentTypeForm">
+        <div class="form-grid">
+            <!-- Name -->
+            <div class="form-field">
+                <label class="field-label">
+                    Name <span class="required-mark">*</span>
+                </label>
+                <input cFormControl placeholder="Enter appointment type name"
+                    formControlName="appointment-name" maxlength="60" input-trimmer
+                    [ngClass]="{'field-invalid': appointmentTypeForm.get('appointment-name')?.invalid
+                    && appointmentTypeForm.get('appointment-name')?.touched}" />
+            </div>
+
+            <!-- Color -->
+            <div class="form-field color-field">
+                <label class="field-label">
+                    Color <span class="required-mark">*</span>
+                </label>
+                <div class="color-picker-row">
+                    <input class="color-swatch-input"
+                        [(colorPicker)]="color" formControlName="appointment-color"
+                        [style.background]="appointmentTypeForm.get('appointment-color').value"
+                        (cpSliderDragStart)="onCahngeColor('cpSliderDragStart', $event)" readonly />
+                    <span class="color-hex">{{ appointmentTypeForm.get('appointment-color').value || 'Select' }}</span>
                 </div>
-            </form>
-        </c-card-body>
-    </c-card>
-</c-container>
+            </div>
+
+            <!-- Font Color -->
+            <div class="form-field color-field">
+                <label class="field-label">Font Color</label>
+                <div class="color-picker-row">
+                    <input class="color-swatch-input"
+                        [(colorPicker)]="color" formControlName="appointment-font-color"
+                        [style.background]="appointmentTypeForm.get('appointment-font-color').value"
+                        (cpSliderDragStart)="onCahngeFontColor('cpSliderDragStart', $event)" readonly />
+                    <span class="color-hex">{{ appointmentTypeForm.get('appointment-font-color').value || '#000000' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Action -->
+        <div class="form-actions">
+            <button cButton class="save-btn" (click)="save()">
+                <svg cIcon name="cilPlus" class="save-icon"></svg>
+                Save
+            </button>
+        </div>
+    </form>
+</div>

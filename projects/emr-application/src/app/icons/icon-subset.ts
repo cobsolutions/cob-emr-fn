@@ -23,6 +23,7 @@ import {
   cilArrowBottom,
   cilArrowRight,
   cilArrowTop,
+  cilBadge,
   cilBasket,
   cilBell,
   cilBold,
@@ -124,9 +125,13 @@ import {
   cilMedicalCross,
   cibHockeyapp,
   cibKeybase,
-  cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cibMailRu
+  cibKeycdn,cilKeyboard,cilInfo,cilFolder,cilFlip,cilHandPointDown,cilThumbDown,cilExpandDown,cilPhone,cilFax,cibMailRu
   ,cilChevronCircleDownAlt
-  ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight
+  ,cilHistory,cilViewQuilt,cilUserPlus,cilMinus,cilBellExclamation,cilFilter, cilArrowLeft, cilBorderLeft, cilCaretLeft, cilCaretRight,
+  cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
+  cilBan, cilChevronBottom, cilChevronTop,
+  cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilFingerprint, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare,
+  cilSwapHorizontal, cilExternalLink, cilLoopCircular, cilTag, cilCopy, cilClipboard
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -172,6 +177,7 @@ export const iconSubset = {
   cilArrowBottom,
   cilArrowRight,
   cilArrowTop,
+  cilBadge,
   cilBasket,
   cilBell,
   cilBold,
@@ -272,7 +278,12 @@ export const iconSubset = {
   cilInfinity,
   cilMedicalCross,
   cilPhone,
-  cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight
+  cilFax,
+  cibMailRu,cilFilter,cilBorderLeft,cilCaretLeft,cilCaretRight,
+  cilX, cilXCircle, cilCheckCircle, cilWarning, cilCircle, cilShieldAlt, cilHospital, cilBuilding,
+  cilBan, cilChevronBottom, cilChevronTop,
+  cilCalendarCheck, cilCheckAlt, cilClock, cilDescription, cilFingerprint, cilLightbulb, cilListRich, cilReload, cilSync, cilTextSquare,
+  cilSwapHorizontal, cilExternalLink, cilLoopCircular, cilTag, cilCopy, cilClipboard
 };
 
 export enum IconSubset {

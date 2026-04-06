@@ -1,0 +1,375 @@
+/* Allow modals to escape from this container */
+.basic-form {
+  overflow: visible !important;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .dependent-field-box {
+      margin-left: 50px;
+      padding: 0.75rem;
+      background-color: #f8f9fa;
+      border-left: 3px solid #6c757d;
+      margin-bottom: 0.5rem;
+      border-radius: 0.25rem;
+      /* Removed position: relative to allow modal to break out */
+    }
+
+    /* Ensure pain-evaluation component has proper spacing */
+    .dependent-field-box pain-evaluation {
+      display: block;
+      width: 100%;
+    }
+
+    /* Allow pain-evaluation modal to escape parent boundaries */
+    .dependent-field-box pain-evaluation .modal {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 9999 !important;
+    }
+    .form-input {
+      width: 100%;
+      max-width: 800px;
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+    }
+    
+    .small-input {
+      width: 200px;
+      max-width: 200px;
+    }
+    .form-textarea:focus{
+      outline: none;
+      border-color: #5c4742;
+      box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
+    }
+    .form-textarea {
+      width: 100%;
+      max-width: 800px;
+      resize: vertical;
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .field-label {
+      min-width: 360px;
+      text-align: right;
+      font-weight: 500;
+      color: #5c4742;
+      margin-bottom: 0;
+      margin-right: 9px;
+    }
+    .field-label-vertical {
+      font-weight: 500;
+      color: #5c4742;
+      margin-bottom: 0.5rem;
+    }
+    /* Enhanced primary radio button styling */
+  .radio-group-primary {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .radio-group-primary c-form-check {
+    padding: 0.75rem 1.25rem;
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 100px;
+    justify-content: center;
+  }
+  
+  .radio-group-primary c-form-check:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"]:checked + label {
+    color: #5c4742;
+    font-weight: 600;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"]:checked) {
+    border-color: #5c4742;
+    background-color: #e8e3e1;
+    box-shadow: 0 3px 6px rgba(92, 71, 66, 0.2);
+  }
+  
+  .radio-group-primary c-form-check label {
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin-left: 0;
+  }
+  
+  /* Color coding for Yes/No options (Medical Safety) */
+  
+  /* YES option - Green theme */
+  .radio-group-primary c-form-check:has(input[type="radio"][value="yes"]) {
+    border-color: #d4edda;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="yes"]):hover {
+    border-color: #28a745;
+    background-color: #f1f9f3;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="yes"]:checked) {
+    border-color: #28a745;
+    background-color: #d4edda;
+    box-shadow: 0 3px 6px rgba(40, 167, 69, 0.3);
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"][value="yes"]:checked + label {
+    color: #155724;
+    font-weight: 600;
+  }
+  
+  /* NO option - Red theme */
+  .radio-group-primary c-form-check:has(input[type="radio"][value="no"]) {
+    border-color: #f8d7da;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="no"]):hover {
+    border-color: #dc3545;
+    background-color: #fef5f6;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="no"]:checked) {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+    box-shadow: 0 3px 6px rgba(220, 53, 69, 0.3);
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"][value="no"]:checked + label {
+    color: #721c24;
+    font-weight: 600;
+  }
+  
+  /* IN/OUT options - Blue theme for Time In/Out */
+  .radio-group-primary c-form-check:has(input[type="radio"][value="in"]) {
+    border-color: #cce5ff;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="in"]):hover {
+    border-color: #007bff;
+    background-color: #e7f3ff;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="in"]:checked) {
+    border-color: #007bff;
+    background-color: #cce5ff;
+    box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"][value="in"]:checked + label {
+    color: #004085;
+    font-weight: 600;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="out"]) {
+    border-color: #d1ecf1;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="out"]):hover {
+    border-color: #17a2b8;
+    background-color: #e8f6f8;
+  }
+  
+  .radio-group-primary c-form-check:has(input[type="radio"][value="out"]:checked) {
+    border-color: #17a2b8;
+    background-color: #d1ecf1;
+    box-shadow: 0 3px 6px rgba(23, 162, 184, 0.3);
+  }
+  
+  .radio-group-primary c-form-check input[type="radio"][value="out"]:checked + label {
+    color: #0c5460;
+    font-weight: 600;
+  }
+  .form-select-custom {
+    width: 100%;
+    max-width: 800px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    font-size: 1rem;
+  }
+  .form-select-custom:focus {
+    outline: none;
+    border-color: #5c4742;
+    box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
+  }
+
+  .form-multiselect-custom {
+    width: 100%;
+    max-width: 800px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #ced4da;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    font-size: 1rem;
+    min-height: 200px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .form-multiselect-custom:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+  }
+
+  .form-multiselect-custom:focus {
+    outline: none;
+    border-color: #5c4742;
+    box-shadow: 0 0 0 0.3rem rgba(92, 71, 66, 0.2);
+    background-color: #ffffff;
+  }
+
+  .form-multiselect-custom option {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    margin: 0.125rem 0;
+    cursor: pointer;
+  }
+
+  .form-multiselect-custom option:hover {
+    background-color: #e8e3e1;
+  }
+
+  .form-multiselect-custom option:checked {
+    background-color: #5c4742;
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  /* Vertical checkbox group styling */
+  .checkbox-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .checkbox-group-vertical c-form-check {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .checkbox-group-vertical c-form-check:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .checkbox-group-vertical c-form-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+  }
+
+  .checkbox-group-vertical c-form-check label {
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .checkbox-group-vertical c-form-check:has(input[type="checkbox"]:checked) {
+    border-color: #5c4742;
+    background-color: #e8e3e1;
+    box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+  }
+
+  .checkbox-group-vertical c-form-check input[type="checkbox"]:checked + label {
+    color: #5c4742;
+    font-weight: 500;
+  }
+
+  /* Vertical radio button group styling */
+  .radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .radio-group-vertical c-form-check {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .radio-group-vertical c-form-check:hover {
+    border-color: #5c4742;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .radio-group-vertical c-form-check input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+  }
+
+  .radio-group-vertical c-form-check label {
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .radio-group-vertical c-form-check:has(input[type="radio"]:checked) {
+    border-color: #5c4742;
+    background-color: #e8e3e1;
+    box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+  }
+
+  .radio-group-vertical c-form-check input[type="radio"]:checked + label {
+    color: #5c4742;
+    font-weight: 500;
+  }

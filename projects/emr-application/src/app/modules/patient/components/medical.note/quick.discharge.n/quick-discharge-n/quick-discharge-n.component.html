@@ -1,0 +1,108 @@
+<c-container fluid="true">
+    <!-- Action Bar -->
+    <div class="button-container m-2">
+        <c-input-group class="action-input-group mb-3">
+            <select id="soapActionList" #soapActionList cSelect sizing="sm" class="action-select">
+                <option value="back">Back to patient records</option>
+                <option value="draft">Save as draft</option>
+            </select>
+            <button cButton color="primary" size="sm" class="action-button" (click)="soapActions(soapActionList.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
+                <span class="button-text">Go</span>
+            </button>
+        </c-input-group>
+    </div>
+
+    <!-- Note Header -->
+    <div class="note-header">
+        <div class="header-icon">
+            <svg cIcon name="cilMedicalCross"></svg>
+        </div>
+        <div class="header-content">
+            <h4 class="header-title">Quick Discharge Note</h4>
+            <span class="header-subtitle">Complete the discharge information below</span>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="form-card">
+        <form [formGroup]="dischargeForm">
+            <!-- Date of Discharge -->
+            <div class="form-field">
+                <label for="dateOfDischarge" class="field-label">
+                    <svg cIcon name="cilCalendar" class="label-icon"></svg>
+                    Date of Discharge
+                </label>
+                <input cFormControl type="date" formControlName="dateOfDischarge" sizing="sm" class="date-input" />
+            </div>
+
+            <!-- Number of Visits -->
+            <div class="form-field">
+                <label for="numberOfVisit" class="field-label">
+                    <svg cIcon name="cilList" class="label-icon"></svg>
+                    Number of Visits
+                </label>
+                <input type="number" formControlName="numberOfVisit" class="number-input" min="0" />
+            </div>
+
+            <!-- Description -->
+            <div class="form-field description-field">
+                <label for="description" class="field-label">
+                    <svg cIcon name="cilNotes" class="label-icon"></svg>
+                    Discharge Reason
+                </label>
+                <span class="patient-context">{{patientName}} has been discharged from our care for the following reasons:</span>
+                <textarea formControlName="description" rows="8" class="description-textarea"
+                    placeholder="Enter discharge reason..."></textarea>
+                <span class="required-badge">Required</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- Action Footer -->
+    <div class="action-buttons">
+        <div class="action-buttons-right">
+            <button cButton class="action-button forward-button" *appRoleScope="'forward-medical-note-role'; requireModify: true" (click)="toggleFrowardModal()">
+                <span>Forward</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                </svg>
+            </button>
+            <button cButton class="action-button finalize-button" *appRoleScope="'finalize-medical-note-role'; requireModify: true" (click)="finalize()">
+                <span>Finalize</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Forward Modal -->
+    <c-modal id="foQMN" [visible]="forwardVisibility" backdrop="static">
+        <c-modal-header>
+            <strong>Forward Medical Note To:</strong>
+            <button (click)="toggleFrowardModal()" cButtonClose></button>
+        </c-modal-header>
+        <c-modal-body>
+            <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
+                [noteId]="noteId" [noteType]="noteType" [caseId]="caseId"
+                (backToRecords)="backtoPatientRecordActions()"></forward-modal>
+        </c-modal-body>
+    </c-modal>
+
+    <!-- Finalize Modal -->
+    <c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
+        <c-modal-header>
+            <h3 cModalTitle>Confirmation</h3>
+            <button (click)="togglefinalize()" cButtonClose></button>
+        </c-modal-header>
+        <c-modal-body>
+            <finalize-medical-note *ngIf="finalizeNoteVisibility" [patientCaseId]="caseId" [medicalNoteId]="medicalNoteId"
+                [noteType]="noteType" [medicalNoteRequest]="medicalNoteRequest" [noteId]="noteId"
+                (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
+        </c-modal-body>
+    </c-modal>
+</c-container>

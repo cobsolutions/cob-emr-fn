@@ -5,19 +5,21 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { catchError, finalize, from, mergeMap, Observable, throwError } from 'rxjs';
+import { catchError, EMPTY, finalize, from, mergeMap, Observable, throwError } from 'rxjs';
 import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { KcAuthService } from './kc-auth.service';
 import { UserService } from '../../administration/services/user/user.service';
+import { PendingActivationService } from './pending-activation.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private spinner: NgxSpinnerService
     , private keycloakAngular: KeycloakService
-    , private userService: UserService) { }
+    , private userService: UserService
+    , private pendingActivationService: PendingActivationService
+    , private router: Router) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.spinner.show();
@@ -36,6 +38,45 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError(error => {
           console.log(JSON.stringify(error))
           this.spinner.hide();
+
+          // Handle 403 FORBIDDEN responses
+          // Skip redirects when on the signature capture page
+          const isOnSignaturePage = window.location.pathname.startsWith('/emr-signature');
+          if (error.status === 403 && !isOnSignaturePage) {
+            const errorBody = error.error || {};
+            const message: string = (typeof errorBody === 'string' ? errorBody : errorBody.message) || '';
+            const errorCode: string = errorBody.errorCode || '';
+            const statusText: string = error.statusText || '';
+
+            // Case 1: Account inactive — user has been deactivated
+            const inactiveMatch = message.toLowerCase().includes('inactive')
+                               || statusText.toLowerCase().includes('inactive');
+            if (inactiveMatch) {
+              if (this.pendingActivationService.isInactive) return EMPTY;
+              this.pendingActivationService.setAccountInactive();
+              // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
+              return EMPTY;
+            }
+
+            if (errorCode === 'FORBIDDEN') {
+              // Case 2: Pending activation — signature required (sent by email)
+              if (message.includes('pending activation')) {
+                if (this.pendingActivationService.isPending) return EMPTY;
+                this.pendingActivationService.setPendingActivation();
+                // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
+                return EMPTY;
+              }
+
+              // Case 3: Pending doctor — account data incomplete
+              if (message.includes('account is pending')) {
+                if (this.pendingActivationService.isPendingDoctorStatus) return EMPTY;
+                this.pendingActivationService.setPendingDoctor();
+                // Navigation handled by guards (KcAuthGuard, PendingActivationGuard) or layout watcher
+                return EMPTY;
+              }
+            }
+          }
+
           if (error.status === 401) {
             this.keycloakAngular.logout();
           }

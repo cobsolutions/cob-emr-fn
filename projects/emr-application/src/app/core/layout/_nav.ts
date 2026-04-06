@@ -3,7 +3,7 @@ import { INavData } from '@coreui/angular-pro';
 export const NavItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '',
+    url: '/emr/dashboard',
     iconComponent: { name: 'cil-speedometer' }
   },
   {
@@ -44,6 +44,10 @@ export const NavItems: INavData[] = [
       {
         name: 'Manage Calendars',
         url: 'scheduler/calendar'
+      },
+      {
+        name: 'Scheduler History',
+        url: 'scheduler/history'
       }
     ]
   },

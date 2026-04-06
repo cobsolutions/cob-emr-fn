@@ -1,0 +1,38 @@
+<div [formGroup]="formGroup">
+  <!-- Apply to All -->
+  <div *ngIf="showApplyToAll" class="apply-to-all-row">
+    <label class="field-label">{{ applyToAllLabel }}</label>
+    <select
+      cSelect
+      class="select-input"
+      [formControlName]="computedApplyToAllFieldName">
+      <option *ngFor="let option of computedApplyToAllOptions; trackBy: trackByValue" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Single Column Fields -->
+  <div *ngFor="let mapping of labelMappings; trackBy: trackByLabel" class="field-row">
+    <label class="field-label">{{ mapping.label }}</label>
+    <select
+      cSelect
+      class="select-input"
+      [formControlName]="mapping.fieldName">
+      <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" class="comments-section">
+    <label class="field-label">{{ commentsLabel }}</label>
+    <textarea
+      cFormControl
+      class="form-textarea"
+      rows="3"
+      [formControlName]="computedCommentsFieldName">
+    </textarea>
+  </div>
+</div>

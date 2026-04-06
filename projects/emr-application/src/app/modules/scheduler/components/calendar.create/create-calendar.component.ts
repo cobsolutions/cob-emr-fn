@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { filter, switchMap } from 'rxjs';
 import { Calendar } from '../../../administration/model/calendar/calendar';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
 import { CalendarServiceService } from '../../service/calendar/calendar-service.service';
@@ -15,42 +14,53 @@ export class CreateCalendarComponent implements OnInit, OnDestroy {
 
   createCalendarForm: FormGroup
   isValidForm: boolean = false;
+  isCreating: boolean = false;
   @Output() changeCreateVisibility = new EventEmitter<string>()
   @Input() clinicId: number;
   constructor(private toastrService: ToastrService, private calendarServiceService: CalendarServiceService, private loggedInService: LoggedInService) { }
   ngOnDestroy(): void {
-    console.log('Create Calendar component is destoried ')
   }
 
   ngOnInit(): void {
-    console.log('open CreateCalendarComponent')
     this.createClinicForm()
   }
   private createClinicForm() {
     this.createCalendarForm = new FormGroup({
       'calendar-name': new FormControl(null, [Validators.required]),
-      'is-public': new FormControl(null),
+      'is-public': new FormControl(false),
     })
   }
   create() {
-    var model: Calendar;
     if (this.createCalendarForm?.valid) {
       this.isValidForm = false;
-      model = this.buildCalendarModel();
+      this.isCreating = true;
+      var model: Calendar = this.buildCalendarModel();
       model.createdBy = this.loggedInService.getLoggedUser().uuid;
-      model.clinicId = this.clinicId
+      model.clinicId = this.clinicId;
       this.calendarServiceService.create(model)
-        .subscribe(result => {
-          this.changeCreateVisibility.emit('close');
-        })
+        .subscribe({
+          next: () => {
+            this.isCreating = false;
+            this.toastrService.success('Calendar created successfully');
+            this.changeCreateVisibility.emit('close');
+          },
+          error: () => {
+            this.isCreating = false;
+            this.toastrService.error('Failed to create calendar');
+          }
+        });
     } else {
       this.isValidForm = true;
+      this.createCalendarForm.markAllAsTouched();
     }
+  }
+  cancel() {
+    this.changeCreateVisibility.emit('close');
   }
   private buildCalendarModel(): Calendar {
     var calendar: Calendar = {
       name: this.createCalendarForm.controls['calendar-name'].value,
-      isPublic: this.createCalendarForm.controls['is-public'].value,
+      isPublic: this.createCalendarForm.controls['is-public'].value ?? false,
     }
     return calendar;
   }

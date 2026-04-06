@@ -1,47 +1,81 @@
-<!-- dash.component.html -->
-<div class="container">
-    <div class="header">
-      <h2>DASH: Disabilities of Arm, Shoulder, Hand</h2>
-      
-      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-        [Instructions]
-      </a>
-      
-      <div *ngIf="showInstructions" class="instructions-panel">
-        <strong>DASH: Disabilities of Arm, Shoulder, Hand</strong>
-        <hr>
-        <p>
-          This questionnaire asks about your symptoms as well as your ability to perform certain activities.<br>
-          Please answer every question, based on your condition in the last week, by selecting the appropriate option.<br>
-          If you did not have the opportunity to perform an activity in the past week, please make your best estimate
-          of which response would be the most accurate.<br>
-          It does not matter which hand or arm you use to perform the activity;
-          please answer based on your ability regardless of how you perform the task.
-        </p>
+<div class="dash-container">
+  <!-- Header -->
+  <div class="dash-header">
+    <div class="header-content">
+      <h2 class="dash-title">DASH: Disabilities of Arm, Shoulder, Hand</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This questionnaire asks about your symptoms as well as your ability to perform certain activities.</p>
+        <ul>
+          <li>Please answer every question based on your condition in the <strong>last week</strong></li>
+          <li>If you did not have the opportunity to perform an activity, please make your best estimate</li>
+          <li>It does not matter which hand or arm you use to perform the activity</li>
+        </ul>
       </div>
     </div>
-  
-    <form [formGroup]="dashForm" (ngSubmit)="calculateScore()">
-      <!-- Questions 1-30 -->
-      <div *ngFor="let question of questions; let i = index" class="question">
-        <strong>{{i + 1}}. {{question}}</strong>
-        <select [formControlName]="'q' + (i + 1)" class="form-select">
-          <option *ngFor="let option of getOptionsForQuestion(i + 1)" [value]="option.value">
-            {{option.text}}
-          </option>
-        </select>
-        <div *ngIf="dashForm.get('q' + (i + 1))?.invalid && dashForm.get('q' + (i + 1))?.touched" class="error-message">
-          Please select an answer
-        </div>
-      </div>
-  
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Calculate Total</button>
-        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
-        
-        <div *ngIf="dashForm.invalid && dashForm.touched" class="error-message completion-error">
-          Please select an answer for all questions.
-        </div>
-      </div>
-    </form>
   </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 30 questions answered</span>
+  </div>
+
+  <form [formGroup]="dashForm" (ngSubmit)="calculateScore()">
+    <!-- Questions -->
+    <div class="questions-container">
+      <div *ngFor="let question of questions; let i = index"
+           class="question-card"
+           [class.answered]="dashForm.get('q' + (i + 1))?.value !== 'NT'"
+           [class.error]="dashForm.get('q' + (i + 1))?.invalid && dashForm.get('q' + (i + 1))?.touched">
+
+        <div class="question-number">{{ i + 1 }}</div>
+
+        <div class="question-content">
+          <div class="question-text">{{ question }}</div>
+
+          <div class="select-wrapper">
+            <select [formControlName]="'q' + (i + 1)" class="question-select">
+              <option *ngFor="let option of getOptionsForQuestion(i + 1)" [value]="option.value">
+                {{ option.text }}
+              </option>
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+
+          <div *ngIf="dashForm.get('q' + (i + 1))?.invalid && dashForm.get('q' + (i + 1))?.touched"
+               class="error-message">
+            Please select an answer
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="dashForm.invalid && dashForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

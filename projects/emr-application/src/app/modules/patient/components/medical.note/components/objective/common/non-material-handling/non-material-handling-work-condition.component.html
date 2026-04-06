@@ -1,0 +1,61 @@
+<div [formGroup]="formGroup"> 
+    <!-- Demonstrated Table -->
+    <table class="demonstrated-table">
+      <thead>
+        <tr>
+          <th style="width: 250px;"></th>
+          <th *ngFor="let column of columnHeaders; let i = index" [style.width.px]="getColumnWidth(i)">
+            {{ column }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td style="font-weight: 500; background-color: #f8f9fa; color: #5c4742;">
+            <div class="item-with-unit" *ngIf="item.unit; else noUnitTemplate">
+              <span class="item-label">{{ item.label }}</span>
+              <span class="item-unit">({{ item.unit }})</span>
+            </div>
+            <ng-template #noUnitTemplate>
+              {{ item.label }}
+            </ng-template>
+          </td>
+          
+          <!-- Occasional, Frequent, Constant columns - Checkboxes -->
+          <td *ngFor="let column of frequencyColumns; let colIndex = index">
+            <div class="checkbox-container">
+              <label class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  class="table-checkbox"
+                  [checked]="isCheckboxChecked(item, colIndex)"
+                  (change)="onCheckboxChange($event, item, colIndex)">
+              </label>
+            </div>
+          </td>
+          
+          <!-- Adequate For Job column - Select -->
+          <td>
+            <select 
+              class="table-select"
+              [formControlName]="getAdequateFieldName(item)">
+              <option value="">N/A</option>
+              <option value="YES">YES</option>
+              <option value="NO">NO</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Comments -->
+    <div *ngIf="showComments" style="margin-top: 1rem;">
+      <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+      <textarea
+        class="form-textarea"
+        [formControlName]="getCommentsFieldName()"
+        rows="3"
+        placeholder="Enter any comments...">
+      </textarea>
+    </div>
+  </div>

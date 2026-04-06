@@ -1,0 +1,43 @@
+import { AdditionalComments } from "./AdditionalComments";
+import { ADLManagement } from "./ADLManagement";
+import { ApprehensionofMovement } from "./ApprehensionofMovement";
+import { AssistiveDevice } from "./AssistiveDevice";
+import { BreathingatRest } from "./BreathingatRest";
+import { CastSplint } from "./CastSplint";
+import { Edema } from "./Edema";
+import { Gait } from "./Gait";
+import { Immobilizer } from "./Immobilizer";
+import { IndicateBodyType } from "./IndicateBodyType";
+import { LowerExtremityStructure } from "./LowerExtremityStructure";
+import { MuscleAtrophy } from "./MuscleAtrophy";
+import { MuscleGuarding } from "./MuscleGuarding";
+import { MuscularAsymmetries } from "./MuscularAsymmetries";
+import { ProtractedScapulas } from "./ProtractedScapulas";
+import { Scoliosis } from "./Scoliosis";
+import { SixMinuteWalkTest } from "./SixMinuteWalkTest";
+import { StandingPosture } from "./StandingPosture";
+import { Transfers } from "./Transfers";
+import { Vitals } from "./Vitals";
+
+export interface Observation {
+  indicateBodyType: IndicateBodyType;
+  vitals: Vitals;
+  adlManagement: ADLManagement;
+  breathingatRest: BreathingatRest;
+  transfers: Transfers;
+  castSplint: CastSplint;
+  standingPosture: StandingPosture;
+  protractedScapulas: ProtractedScapulas;
+  scoliosis: Scoliosis;
+  lowerExtremityStructure: LowerExtremityStructure;
+  gait: Gait;
+  sixMinuteWalkTest: SixMinuteWalkTest;
+  assistiveDevice: AssistiveDevice;
+  immobilizer: Immobilizer;
+  muscularAsymmetries: MuscularAsymmetries;
+  muscleGuarding: MuscleGuarding;
+  muscleAtrophy: MuscleAtrophy;
+  edema: Edema;
+  apprehensionofMovement: ApprehensionofMovement;
+  additionalComments: AdditionalComments;
+}

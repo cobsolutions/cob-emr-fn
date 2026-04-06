@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import {
   CalendarEvent, CalendarEventTimesChangedEvent,
   CalendarUtils,
@@ -14,7 +15,9 @@ import { WeekDay } from "calendar-utils";
 import { ToastrService } from "ngx-toastr";
 import { filter, forkJoin, Observable, Subject } from 'rxjs';
 import { Calendar } from "../../../administration/model/calendar/calendar";
+import { Role } from "../../../security/model/role";
 import { LoggedInService } from "../../../security/service/loggedIn/logged-in.service";
+import { PermissionService } from "../../../security/service/permission.service";
 import { SchedulerUserSettings } from "../../model/scheduler.user.settings";
 import { Appointment } from "../../models/appointment";
 import { CalendarEvents } from "../../models/calendar/calendars";
@@ -74,7 +77,9 @@ export class ViewSchdulerComponent implements OnInit {
     private eventsCalendarService: EventsCalendarService,
     private handleDragableAppointmentService: HandleDragableAppointmentService,
     private handleEditableAppointmentService: HandleEditableAppointmentService,
-    private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService
+    private handleEditableStatusAppointmentService: HandleEditableStatusAppointmentService,
+    private permissionService: PermissionService,
+    private router: Router
   ) {
     this.handleDragableAppointmentService.refresh = this.refresh;
     this.handleDragableAppointmentService.dialog = this.dialog
@@ -103,10 +108,15 @@ export class ViewSchdulerComponent implements OnInit {
           // result[] : [0] calendars , [1] scheduler settings , [2] scheduler user setting for calendars selections
           this.userSelectedCalendars = result[2]
           this.calendars = result[0];
+          this.isLoading = false;
+          if (!FetchSchedulerSettings.isValid(result[1])) {
+            this.isSchedulerSetting = false;
+            return;
+          }
+          this.isSchedulerSetting = true;
           this.schedulerSettingsa = FetchSchedulerSettings.setup(result[1])
           this.eventsCalendarService.schedulerSettings = this.schedulerSettingsa;
           this.handleEditableAppointmentService.schedulerSettings = this.schedulerSettingsa;
-          this.isLoading = false;
           this.selected = this.calendars.length > 0 ? true : false;
           this.initSelectedCalendar();
           if (this.userSelectedCalendars.length !== 0)
@@ -114,6 +124,7 @@ export class ViewSchdulerComponent implements OnInit {
           this.selectedCalendars = this.calendars
             .filter(cal => cal.selected)
             .map(cal => cal);
+          this.clickNavigate();
         });
     });
     this.days = this.utils.getWeekViewHeader({
@@ -131,17 +142,23 @@ export class ViewSchdulerComponent implements OnInit {
     }));
   }
   dayClicked(segment: any) {
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     if (this.selectedCalendars.length === 0)
       return
     this.viewDate = segment.date.date;
     this.AddAppointment(segment.date.calendar);
   }
   weekClicked(date: Date, calendar: any): void {
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     this.viewDate = date;
     this.AddAppointment(calendar);
   }
   monthClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     this.checkOpenEvent(date, events);
+    if (!this.permissionService.canModify(Role.CALENDAR_ROLE))
+      return;
     this.AddAppointment(null, 'month');
   }
   eventTimesChanged({
@@ -172,6 +189,27 @@ export class ViewSchdulerComponent implements OnInit {
         return;
       if (result.action)
         var boundreiesScheduler: any = BoundreiesScheduler.getBoundreies(this.view, this.viewDate, this.schedulerSettingsa)
+      if (result.action === 'history') {
+        this.router.navigate(['emr', 'scheduler', 'history'], {
+          queryParams: { entityName: 'Appointment', entityId: result.event.id }
+        });
+        return;
+      }
+      if (result.action === 'delete') {
+        switch (module) {
+          case 'month':
+            RefreshSchedulerEvents.refresh(this.flatEvent, result.event, AppointmentAction.REMVOE_APPOINTMENT);
+            break;
+          case 'week':
+          case 'day':
+            RefreshSchedulerEvents.refresh(this.events.get(event.meta.calendar_id), result.event, AppointmentAction.REMVOE_APPOINTMENT);
+            break;
+        }
+        this.flatEvent = this.events.getAll();
+        this.refresh.next();
+        this.toastr.success('Appointment deleted successfully');
+        return;
+      }
       switch (module) {
         case 'month':
           if (result.action === 'edit')
@@ -223,25 +261,36 @@ export class ViewSchdulerComponent implements OnInit {
   }
 
   setView() {
-    this.selectedCalendars.forEach(calendars => {
-      this.enrichStatues()
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-        this.isLoading = false;
-        this.events.push(calendars.id, events)
-        this.flatEvent = this.events.getAll();
-        this.refresh.next();
-      })
-    })
+    if (this.selectedCalendars.length === 0) return;
+    this.isLoading = true;
+    this.enrichStatues();
+    const requests = this.selectedCalendars.map(calendar =>
+      this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view, this.statuses)
+    );
+    forkJoin(requests).subscribe(results => {
+      results.forEach((events, index) => {
+        this.events.push(this.selectedCalendars[index].id, events);
+      });
+      this.flatEvent = this.events.getAll();
+      this.refresh.next();
+      this.isLoading = false;
+    });
   }
 
   clickNavigate() {
-    this.selectedCalendars.forEach(calendars => {
-      this.eventsCalendarService.get(calendars.id, this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-        this.events.push(calendars.id, events)
-        this.flatEvent = this.events.getAll();
-        this.refresh.next();
-      })
-    })
+    if (this.selectedCalendars.length === 0) return;
+    this.isLoading = true;
+    const requests = this.selectedCalendars.map(calendar =>
+      this.eventsCalendarService.get(calendar.id, this.selectedClinic, this.viewDate, this.view, this.statuses)
+    );
+    forkJoin(requests).subscribe(results => {
+      results.forEach((events, index) => {
+        this.events.push(this.selectedCalendars[index].id, events);
+      });
+      this.flatEvent = this.events.getAll();
+      this.refresh.next();
+      this.isLoading = false;
+    });
   }
   getCalendars(clinicId: any): Observable<any> {
     return this.calendarServiceService.getAttachedCalendars(clinicId)
@@ -346,17 +395,9 @@ export class ViewSchdulerComponent implements OnInit {
     this.loadDefaultCalendars();
   }
   private loadDefaultCalendars() {
-    if (this.calendars.length > 1)
-      this.calendars.forEach(calendar => {
-        this.selectedCalendars.push(calendar)
-        this.eventsCalendarService.get(Number(calendar.id), this.selectedClinic, this.viewDate, this.view, this.statuses).subscribe(events => {
-          this.events.push(Number(calendar.id), events)
-          this.flatEvent = this.events.getAll();
-          this.refresh.next();
-        })
-      })
-    else
-      this.selectedCalendars = []
+    this.calendars.forEach(calendar => {
+      calendar.selected = true;
+    });
   }
   showCancel() {
     this.showCancelAppointment = !this.showCancelAppointment

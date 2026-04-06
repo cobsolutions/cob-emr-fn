@@ -1,0 +1,82 @@
+<div [formGroup]="currentFunctionalLimitationsForm" class="basic-form">
+
+  <hierarchy-checkbox #hierarchyCheckbox [data]="checkboxData" [formGroup]="currentFunctionalLimitationsForm"
+    [sectionPrefix]="'current-level-function'">
+  </hierarchy-checkbox>
+
+  <div class="form-row">
+    <c-form-check>
+      <input cFormCheckInput type="checkbox" formControlName="current_functional_limitations_other" value="other" />
+      <label cFormCheckLabel>Other</label>
+    </c-form-check>
+  </div>
+  <div *ngIf="showHoOther" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="current_functional_limitations_function_other_text" class="form-textarea"
+        rows="4"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Lymphedema</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="current_functional_limitations_function_other_lymphedema"
+            value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="current_functional_limitations_function_other_lymphedema"
+            value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showHoOtherlymphedema" class="dependent-field-box">
+      <div class="form-row">
+        <textarea formControlName="current_functional_limitations_function_other_lymphedema_text" class="form-textarea"
+          rows="4"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Wound Healing</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio"
+            formControlName="current_functional_limitations_function_other_wound_healing" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio"
+            formControlName="current_functional_limitations_function_other_wound_healing" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showHoOtherWoundhealing" class="dependent-field-box">
+      <div class="form-row">
+        <textarea formControlName="current_functional_limitations_function_other_wound_healing_text"
+          class="form-textarea" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Pelvic Health</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio"
+            formControlName="current_functional_limitations_function_other_pelvic_health" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio"
+            formControlName="current_functional_limitations_function_other_pelvic_health" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showHoOtherPelvicHealth" class="dependent-field-box">
+      <div class="form-row">
+        <textarea formControlName="current_functional_limitations_function_other_pelvic_health_text"
+          class="form-textarea" rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

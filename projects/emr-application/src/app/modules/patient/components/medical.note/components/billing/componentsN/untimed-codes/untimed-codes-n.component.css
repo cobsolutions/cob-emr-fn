@@ -1,0 +1,49 @@
+.untimed-codes-container {
+  padding: 15px;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+/* Enhanced tooltip styling for labels */
+.checkbox-item label {
+  cursor: help;
+  position: relative;
+}
+
+.checkbox-item label:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.sub-items-wrapper {
+  margin-left: 24px;
+  padding-left: 8px;
+}
+
+.sub-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.textarea-wrapper {
+  margin-top: 8px;
+}
+
+.textarea-wrapper textarea {
+  width: 100%;
+  max-width: 700px;
+  resize: vertical;
+}

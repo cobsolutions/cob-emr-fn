@@ -1,16 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
-  selector: 'lower-extremity-lefs-test',
+  selector: 'lefs-test',
   templateUrl: './lefs-test.component.html',
   styleUrls: ['./lefs-test.component.css']
 })
 export class LefsTestComponent implements OnInit {
   lefsForm: FormGroup;
   showInstructions = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'lefs';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
+
   // Activity descriptions for the form
   activities = [
     "Any of your usual work, housework or school activities",
@@ -34,6 +37,7 @@ export class LefsTestComponent implements OnInit {
     "Hopping",
     "Rolling over in bed"
   ];
+
   difficultyOptions = [
     { value: 0, text: 'Extreme Difficulty or Unable to Perform Activity' },
     { value: 1, text: 'Quite a bit of difficulty' },
@@ -46,21 +50,54 @@ export class LefsTestComponent implements OnInit {
     this.lefsForm = this.createForm();
   }
 
-  ngOnInit(): void {
-  }
   createForm(): FormGroup {
-    const formGroup: any = {
+    return this.fb.group({
       // Patient Satisfaction - Pain Level
-      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
-    };
+      painlevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
 
-    // Create form controls for all 20 activities
-    for (let i = 1; i <= 20; i++) {
-      formGroup[`q${i}`] = [0, Validators.required];
-    }
-
-    return this.fb.group(formGroup);
+      // LEFS sections (20 questions)
+      q1: [null, Validators.required],
+      q2: [null, Validators.required],
+      q3: [null, Validators.required],
+      q4: [null, Validators.required],
+      q5: [null, Validators.required],
+      q6: [null, Validators.required],
+      q7: [null, Validators.required],
+      q8: [null, Validators.required],
+      q9: [null, Validators.required],
+      q10: [null, Validators.required],
+      q11: [null, Validators.required],
+      q12: [null, Validators.required],
+      q13: [null, Validators.required],
+      q14: [null, Validators.required],
+      q15: [null, Validators.required],
+      q16: [null, Validators.required],
+      q17: [null, Validators.required],
+      q18: [null, Validators.required],
+      q19: [null, Validators.required],
+      q20: [null, Validators.required]
+    });
   }
+
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.lefsForm.patchValue(formValues);
+        }
+      });
+    }
+  }
+
+  toggleInstructions(): void {
+    this.showInstructions = !this.showInstructions;
+  }
+
   calculateScore(): void {
     if (this.lefsForm.invalid) {
       // Mark all fields as touched to show validation errors
@@ -69,41 +106,34 @@ export class LefsTestComponent implements OnInit {
       });
       return;
     }
-    const result = this.fillAnswers();
-    this.omtTestService.lowerExtremity(result, 'lefs').subscribe(val => {
-      this.getResult.emit(val)
-    })
+
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.lefsForm.controls).forEach(key => {
+      const value = this.lefsForm.get(key)?.value;
+      if (value !== null) {
+        // Convert key to uppercase (e.g., q1 -> Q1, painlevel -> PAINLEVEL)
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
+
   resetForm(): void {
     this.lefsForm.reset();
+    this.lefsForm.markAsUntouched();
   }
-  toggleInstructions(): void {
-    this.showInstructions = !this.showInstructions;
+
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.lefsForm.controls);
+    return controls.filter(key => this.lefsForm.get(key)?.value !== null).length;
   }
-  private fillAnswers() {
-    return {
-      "answers": {
-        "Q1": parseInt(this.lefsForm.value.q1, 10),
-        "Q2": parseInt(this.lefsForm.value.q2, 10),
-        "Q3": parseInt(this.lefsForm.value.q3, 10),
-        "Q4": parseInt(this.lefsForm.value.q4, 10),
-        "Q5": parseInt(this.lefsForm.value.q5, 10),
-        "Q6": parseInt(this.lefsForm.value.q6, 10),
-        "Q7": parseInt(this.lefsForm.value.q7, 10),
-        "Q8": parseInt(this.lefsForm.value.q8, 10),
-        "Q9": parseInt(this.lefsForm.value.q9, 10),
-        "Q10": parseInt(this.lefsForm.value.q10, 10),
-        "Q11": parseInt(this.lefsForm.value.q11, 10),
-        "Q12": parseInt(this.lefsForm.value.q12, 10),
-        "Q13": parseInt(this.lefsForm.value.q13, 10),
-        "Q14": parseInt(this.lefsForm.value.q14, 10),
-        "Q15": parseInt(this.lefsForm.value.q15, 10),
-        "Q16": parseInt(this.lefsForm.value.q16, 10),
-        "Q17": parseInt(this.lefsForm.value.q17, 10),
-        "Q18": parseInt(this.lefsForm.value.q18, 10),
-        "Q19": parseInt(this.lefsForm.value.q19, 10),
-        "Q20": parseInt(this.lefsForm.value.q20, 10),
-      }
-    };
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 21; // 20 sections + 1 pain level
+    return (this.getAnsweredCount() / totalQuestions) * 100;
   }
 }

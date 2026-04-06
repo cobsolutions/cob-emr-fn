@@ -1,0 +1,484 @@
+<div [formGroup]="medicalHistoryForm" class="basic-form">
+    <div class="form-row">
+        <label class="field-label">Previous History of Similar Symptoms</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="previous_history_of_similar_symptoms"
+                    value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="previous_history_of_similar_symptoms" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPreviousHistoryOfSimilarSymptoms" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Previous Episodes of Same Complaints</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        [value]="null" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_episodes_of_same_complaints"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPreviousEpisodesOfSameComplaints" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <select class="form-select-custom small-input"
+                    formControlName="previous_episodes_of_same_complaints_range">
+                    <option value="">None</option>
+                    <option value="r_1-5">1-5</option>
+                    <option value="r_6-10">6-10</option>
+                    <option value="g_10">11+</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Year of First Episode</label>
+                <select class="form-select-custom small-input"
+                    formControlName="previous_episodes_of_same_complaints_year_first_episode">
+                    <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Previous Treatments for Similar Symptoms</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        [value]="null" />
+                    <label cFormCheckLabel>N/A</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="previous_treatments_for_similar_symptoms"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+
+        <div *ngIf="showPreviousTreatmentsForSimilarSymptoms" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="previous_treatments_for_similar_symptoms_text" class="form-textarea"
+                    rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="previous_history_of_similar_symptoms_text" class="form-textarea"
+                rows="4"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">General Health:</label>
+        <select class="form-select-custom small-input" formControlName="general_health">
+            <option value="">Select</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+            <option value="poor">Custom</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Occupation/Social History</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="occupation_social_history" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showOccupationSocialHistory" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Social History</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_social_history"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_social_history"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showOccupationSocialHistorySocialHistory" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <select multiple class="form-multiselect-custom" formControlName="occupation_social_history_list">
+                    <option *ngFor="let option of socialHistoryOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input cFormInput formControlName="occupation_social_history_text" class="form-input" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Occupation and Work Status</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_occupation_and_work_status" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_occupation_and_work_status" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showOccupationSocialHistoryOccupationAndWorkStatus" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Name of Occupation</label>
+                <input cFormInput formControlName="occupation_social_history_occupation_and_work_name_of_occupation"
+                    class="form-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Status</label>
+                <select class="form-select-custom small-input"
+                    formControlName="occupation_social_history_occupation_and_work_status_status">
+                    <option value="">Select</option>
+                    <option *ngFor="let option of workStatusOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Duty Level</label>
+                <select class="form-select-custom small-input"
+                    formControlName="occupation_social_history_occupation_and_work_status_duty_level">
+                    <option value="">Select</option>
+                    <option *ngFor="let option of dutyLevelOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Description</label>
+                <input cFormInput formControlName="occupation_social_history_occupation_and_work_status_sescription"
+                    class="form-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Out of Work Since</label>
+                <input cFormInput type="date"
+                    formControlName="occupation_social_history_occupation_and_work_status_out_of_work_since"
+                    class="form-input small-input" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Return to Work Date</label>
+                <input cFormInput type="date"
+                    formControlName="occupation_social_history_occupation_and_work_status_return_to_work_date"
+                    class="form-input small-input" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Home Layout</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_home_layout"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_home_layout"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showOccupationSocialHistoryHomeLayout" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <select multiple class="form-multiselect-custom"
+                    formControlName="occupation_social_history_home_layout_list">
+                    <option *ngFor="let option of socialHistoryOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input cFormInput formControlName="occupation_social_history_home_layout_text" class="form-input" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Durable Medical Equipment</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_durable_medical_equipment" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio"
+                        formControlName="occupation_social_history_durable_medical_equipment" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showOccupationSocialHistoryDurableMedicalEquipment" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <select multiple class="form-multiselect-custom"
+                    formControlName="occupation_social_history_durable_medical_equipment_list">
+                    <option *ngFor="let option of durableMedicalEquipmentOptions" [value]="option.value">
+                        {{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input cFormInput formControlName="occupation_social_history_durable_medical_equipment_text"
+                    class="form-input" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Is Patient A Tobacco User?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_patient_tobacco_user"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="occupation_social_history_patient_tobacco_user"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showOccupationSocialHistoryPatientTobaccoUser" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Does patient smoke cigarettes and/or use other forms of tobacco??</label>
+                <div class="radio-group-primary">
+                    <c-form-check>
+                        <input cFormCheckInput type="radio"
+                            formControlName="occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco"
+                            value="yes" />
+                        <label cFormCheckLabel>Yes</label>
+                    </c-form-check>
+                    <c-form-check>
+                        <input cFormCheckInput type="radio"
+                            formControlName="occupation_social_history_patient_tobacco_user_cigarettes_or_and_other_forms_tobacco"
+                            value="no" />
+                        <label cFormCheckLabel>No</label>
+                    </c-form-check>
+                </div>
+            </div>
+            <div *ngIf="showOccupationSocialHistoryPatientTobaccoUserOtherForm" class="dependent-field-box">
+                <div class="form-row">
+                    <label class="field-label"></label>
+                    <div class="checkbox-group-vertical">
+                        <c-form-check *ngFor="let option of tobaccoCessationOptions">
+                            <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+                            <label cFormCheckLabel>{{ option.label }}</label>
+                        </c-form-check>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="field-label"></label>
+                    <textarea formControlName="occupation_social_history_patient_tobacco_user_other_form_text"
+                        class="form-textarea" rows="4"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Home Health Care</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="home_health_care" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="home_health_care" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showHomeHealthCare" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="home_health_care_text" class="form-textarea" rows="4"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">History of Falls</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="na" />
+                <label cFormCheckLabel>N/A</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="history_of_falls" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showHistoryOfFallsYES" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Falls Documented:Do you have documentation that supports the patient's fall
+                history?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHistoryOfFallsdocument" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="history_of_falls_document_text" class="form-textarea" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Risk Assessment</label>
+            <div class="checkbox-group-vertical">
+                <c-form-check *ngFor="let option of riskAssessmentOptions">
+                    <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
+                    <label cFormCheckLabel>{{ option.label }}</label>
+                </c-form-check>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showHistoryOfFallsNO" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Falls Documented:Do you have documentation that supports the patient's fall
+                history?</label>
+            <div class="radio-group-primary">
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="history_of_falls_document" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHistoryOfFallsdocument" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label"></label>
+                <textarea formControlName="history_of_falls_document_text" class="form-textarea" rows="4"></textarea>
+            </div>
+        </div>
+    </div>
+    <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Medical History"
+        [options]="medicalHistoryOptions"
+        [extraOptions]="showPelvicProfile ? pelvicProfileOptions : []"
+        [extraTitle]="'Pelvic Profile'">
+    </list-checkbox-with-child>
+    <div class="form-row">
+        <label class="field-label">Diagnostic Testing/Imaging:</label>
+        <textarea formControlName="diagnostic_testing_Imaging" class="form-textarea" rows="4"></textarea>
+    </div>
+    <list-checkbox-with-child [formGroup]="medicalHistoryForm" title="Complicating/Personal Factors"
+        [options]="complicatingPersonalFactorsOptions">
+    </list-checkbox-with-child>
+    <div class="form-row" *ngIf="!isDailyNote">
+        <label class="field-label">Medical History Review</label>
+        <div class="radio-group-vertical">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" value="Low_Complexity" />
+                <label cFormCheckLabel><strong>Low Complexity</strong> - The patient has a history of present problem
+                    without any personal factors and/or comorbidities that impact the plan of care.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review"
+                    value="Moderate_Complexity" />
+                <label cFormCheckLabel><strong>Moderate Complexity</strong> - The patient has a history of present
+                    problem with a history of 1-2 personal factors and/or comorbidities that impact the plan of
+                    care.</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="medical_history_review" value="High_Complexity" />
+                <label cFormCheckLabel><strong>High Complexity</strong> - The patient has a history of present problem
+                    with a history of 3 or more factors and/or comorbidities that impact the plan of care.</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Mental Status/Cognitive Function Appears Impaired</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired"
+                    value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="mental_status_cognitive_function_appears_impaired"
+                    value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showMentalStatusCognitiveFunctionAppearsImpaired" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label"></label>
+            <textarea formControlName="mental_status_cognitive_function_appears_impaired_text" class="form-textarea"
+                rows="4"></textarea>
+        </div>
+
+    </div>
+    <div class="form-row" *ngIf="!isDailyNote">
+        <label class="field-label">Unexplained Weight Loss</label>
+        <div class="radio-group-primary">
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="na" />
+                <label cFormCheckLabel>N/A</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="unexplained_weight_loss" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <list-checkbox-with-child *ngIf="!isDailyNote" [formGroup]="medicalHistoryForm" title="Current Medications"
+        [options]="currentMedicationsOptions">
+    </list-checkbox-with-child>
+    <div class="form-row" *ngIf="!isDailyNote">
+        <label class="field-label">Patient Goals</label>
+        <textarea formControlName="patient_goals" class="form-textarea" rows="6"></textarea>
+    </div>
+</div>

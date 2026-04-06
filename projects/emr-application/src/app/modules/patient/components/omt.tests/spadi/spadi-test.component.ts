@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InvalidFormControls } from 'projects/emr-application/src/app/util/invalid.form';
-import { OmtTestService } from '../../../services/test/omt-test.service';
+import { OmtTestService } from '../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'spadi-test',
@@ -10,9 +9,12 @@ import { OmtTestService } from '../../../services/test/omt-test.service';
 })
 export class SpadiTestComponent implements OnInit {
   spadiForm: FormGroup;
-  showInstructions = false;d
+  showInstructions = false;
+  private testName: string = 'spadi';
+  @Input() noteId: string;
   @Output() getResult = new EventEmitter<any>()
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService ) {
+
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.spadiForm = this.createForm();
   }
 
@@ -36,47 +38,62 @@ export class SpadiTestComponent implements OnInit {
       disability8: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
     });
   }
+
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.spadiForm.patchValue(formValues);
+        }
+      });
+    }
+  }
+
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
+
   calculateScore(): void {
     if (this.spadiForm.invalid) {
       // Mark all fields as touched to show validation errors
       Object.keys(this.spadiForm.controls).forEach(key => {
         this.spadiForm.get(key)?.markAsTouched();
       });
-      console.log(InvalidFormControls.findInvalidControlsRecursive(this.spadiForm))
       return;
     }
-    const result = {
-      "pain": {
-        "pain1": parseInt(this.spadiForm.value.pain1, 10),
-        "pain2": parseInt(this.spadiForm.value.pain2, 10),
-        "pain3": parseInt(this.spadiForm.value.pain3, 10),
-        "pain4": parseInt(this.spadiForm.value.pain4, 10),
-        "pain5": parseInt(this.spadiForm.value.pain5, 10)
-      },
-      "disability": {
-        "disability1": parseInt(this.spadiForm.value.disability1, 10),
-        "disability2": parseInt(this.spadiForm.value.disability2, 10),
-        "disability3": parseInt(this.spadiForm.value.disability3, 10),
-        "disability4": parseInt(this.spadiForm.value.disability4, 10),
-        "disability5": parseInt(this.spadiForm.value.disability5, 10),
-        "disability6": parseInt(this.spadiForm.value.disability6, 10),
-        "disability7": parseInt(this.spadiForm.value.disability7, 10),
-        "disability8": parseInt(this.spadiForm.value.disability8, 10)
+
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.spadiForm.controls).forEach(key => {
+      const value = this.spadiForm.get(key)?.value;
+      if (value !== null) {
+        // Convert key to uppercase (e.g., pain1 -> PAIN1)
+        answers[key.toUpperCase()] = parseInt(value, 10);
       }
-    }
-    this.omtTestService.spadiTest(result).subscribe(val=>{
-      console.log(JSON.stringify(val))
-      this.getResult.emit(val)
-    })
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
     this.spadiForm.reset();
-  }
-  ngOnInit(): void {
+    this.spadiForm.markAsUntouched();
   }
 
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.spadiForm.controls);
+    return controls.filter(key => this.spadiForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 13;
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }

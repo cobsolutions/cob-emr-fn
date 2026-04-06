@@ -1,75 +1,97 @@
-<!-- abc-scale.component.html -->
-<div class="container">
-  <div class="header">
-    <h2>ABC Scale</h2>
-  </div>
-  <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-    [Instructions]
-  </a>
-
-  <div class="form-section">
-    <div *ngIf="showInstructions" class="instructions-panel">
-      <p><span class="bold">Administration:</span><br>
-        The ABC can be self-administered or administered via personal or telephone interview. Larger typeset should
-        be used for self-administration, while an enlarged version of the rating scale on an index card will
-        facilitate in-person interviews. Regardless of method of administration, each respondent should be queried
-        concerning their understanding of instructions, and probed regarding difficulty answering specific items.</p>
-
-      <p><span class="bold">Instructions to Participants:</span><br>
-        For each of the following, please indicate your level of confidence in doing the activity without losing
-        your balance or becoming unsteady from choosing one of the percentage points on the scale form 0% to 100%.
-        If you do not currently do the activity in question, try and imagine how confident you would be if you had
-        to do the activity. If you normally use a walking aid to do the activity or hold onto someone, rate your
-        confidence as it you were using these supports. If you have any questions about answering any of these
-        items, please ask the administrator.</p>
-
-      <p><span class="bold">Instructions for Scoring:</span><br>
-        The ABC is an 11-point scale and ratings should consist of whole numbers (0-100) for each item. Total the
-        ratings (possible range = 0 - 1600) and divide by 16 to get each subject's ABC score. If a subject qualifies
-        his/her response to items #2, #9, #11, #14 or #15 (different ratings for "up" vs. "down"
-        or "onto" vs.
-        "off"), solicit separate ratings and use the lowest confidence of the two (as this will limit the
-        entire
-        activity, for instance the likelihood of using the stairs.)</p>
-
-      <p>
-      <ul>
-        <li>80% = high level of physical functioning</li>
-        <li>50-80% = moderate level of physical functioning</li>
-        <li>&lt; 50% = low level of physical functioning Myers AM (1998)</li>
-        <li>&lt; 67% = older adults at risk for falling; predictive of future fall LaJoie Y (2004)</li>
-      </ul>
-
-
-      <p>
-        <span class="bold">How confident are you that you will not lose your balance or become unsteady when
-          you...</span>
-      </p>
+<div class="abc-container">
+  <!-- Header -->
+  <div class="abc-header">
+    <div class="header-content">
+      <h2 class="abc-title">Activities-specific Balance Confidence (ABC) Scale</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
     </div>
 
-    <form [formGroup]="abcForm" (ngSubmit)="onSubmit()">
-      <div class="question-container" *ngFor="let question of questions; let i = index">
-        <div class="question">
-          <span class="bold">{{question.text}}</span>
-          <div class="options">
-            <label *ngFor="let option of options">
-              <input type="radio" [name]="question.id" [value]="option" [formControlName]="question.id">
-              {{option === 0 ? '0%' : option === 100 ? '100%' : option}}
-            </label>
-          </div>
-          <div class="error" *ngIf="abcForm.get(question.id)?.touched && abcForm.get(question.id)?.invalid">
-            This question is required
-          </div>
-        </div>
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
       </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Calculate Total</button>
-        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
-
-        <div *ngIf="abcForm.invalid && abcForm.touched" class="error-message completion-error">
-          Please select an answer for all questions.
-        </div>
+      <div class="instructions-content">
+        <p>For each of the following, please indicate your level of confidence in doing the activity without losing your balance or becoming unsteady from choosing one of the percentage points on the scale from 0% to 100%.</p>
+        <ul>
+          <li>If you do not currently do the activity in question, try and imagine how confident you would be if you had to do the activity</li>
+          <li>If you normally use a walking aid to do the activity or hold onto someone, rate your confidence as if you were using these supports</li>
+        </ul>
+        <p><strong>Scoring:</strong> Total the ratings (possible range = 0 - 1600) and divide by 16 to get each subject's ABC score.</p>
+        <p><strong>Interpretation:</strong></p>
+        <ul>
+          <li>≥80% = High level of physical functioning</li>
+          <li>50-80% = Moderate level of physical functioning</li>
+          <li>&lt;50% = Low level of physical functioning</li>
+          <li>&lt;67% = Older adults at risk for falling</li>
+        </ul>
       </div>
-    </form>
+    </div>
   </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 16 questions answered</span>
+  </div>
+
+  <form [formGroup]="abcForm" (ngSubmit)="calculateScore()">
+    <!-- ABC Questions Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">B</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Balance Confidence Assessment</h3>
+          <p class="section-subtitle">How confident are you that you will not lose your balance or become unsteady when you...</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let question of questions; let i = index"
+             class="question-card"
+             [class.answered]="abcForm.get(question.id)?.value !== null"
+             [class.error]="abcForm.get(question.id)?.invalid && abcForm.get(question.id)?.touched">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <div class="question-text">{{ question.text }}</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No confidence</span>
+                <span class="scale-label-end">Completely confident</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let option of options" class="radio-label">
+                  <input type="radio" [formControlName]="question.id" [value]="option">
+                  <span class="radio-value">{{ option }}%</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="abcForm.get(question.id)?.invalid && abcForm.get(question.id)?.touched" class="error-message">
+              Please select a confidence level
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="abcForm.invalid && abcForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

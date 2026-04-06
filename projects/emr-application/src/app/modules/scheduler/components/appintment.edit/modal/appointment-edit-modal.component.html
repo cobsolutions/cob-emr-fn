@@ -1,11 +1,58 @@
-<h2 mat-dialog-title>Edit Appointment</h2>
-<mat-dialog-content class="mat-typography">
-  <full-appointment *ngIf="data.event.meta.structure ==='Full'" [mode]="'edit'" [appointmentId]="data.event.id"
-    [schedulerSettings]="data.schedulerSettings" [appointmentSkeleton] ="data.appointmentSkeleton" #fullAppointment></full-appointment>
-  <block-appointment *ngIf="data.event.meta.structure ==='Block'" [mode]="'edit'" [appointmentId]="data.event.id"
-    [schedulerSettings]="data.schedulerSettings" #blockAppointment></block-appointment>
+<!-- Modal Header -->
+<div class="modal-header">
+  <div class="modal-title-section">
+    <div class="modal-icon-wrapper">
+      <svg cIcon name="cilPencil" class="modal-icon"></svg>
+    </div>
+    <div class="modal-title-content">
+      <h2 class="modal-title">Edit Appointment</h2>
+      <p class="modal-subtitle">Update appointment details</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="appointment-type-badge" [ngClass]="{'full': data.event.meta.structure === 'Full', 'block': data.event.meta.structure === 'Block'}">
+      <svg cIcon [name]="data.event.meta.structure === 'Full' ? 'cilUser' : 'cilCalendar'" class="type-icon"></svg>
+      {{ data.event.meta.structure === 'Full' ? 'Patient Appointment' : 'Block Appointment' }}
+    </span>
+    <button class="close-btn" (click)="cancel()" type="button">
+      <svg cIcon name="cilX" class="close-icon"></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Modal Content -->
+<mat-dialog-content class="modal-content">
+  <full-appointment
+    *ngIf="data.event.meta.structure === 'Full'"
+    [mode]="'edit'"
+    [appointmentId]="data.event.id"
+    [schedulerSettings]="data.schedulerSettings"
+    [appointmentSkeleton]="data.appointmentSkeleton"
+    #fullAppointment>
+  </full-appointment>
+  <block-appointment
+    *ngIf="data.event.meta.structure === 'Block'"
+    [mode]="'edit'"
+    [appointmentId]="data.event.id"
+    [schedulerSettings]="data.schedulerSettings"
+    #blockAppointment>
+  </block-appointment>
 </mat-dialog-content>
-<mat-dialog-actions align="end" *ngIf="data.event.id">
-  <button cButton (click)="update()" class="mx-3" variant="outline">Update</button>
-  <button cButton (click)="cancel()" variant="outline">Cancel</button>
+
+<!-- Modal Footer -->
+<mat-dialog-actions class="modal-footer" *ngIf="data.event.id">
+  <div class="footer-hint">
+    <svg cIcon name="cilInfo" class="hint-icon"></svg>
+    <span>Review changes before updating the appointment</span>
+  </div>
+  <div class="footer-actions">
+    <button class="btn-cancel" (click)="cancel()" type="button">
+      <svg cIcon name="cilX" class="btn-icon"></svg>
+      <span>Cancel</span>
+    </button>
+    <button class="btn-update" (click)="update()" type="button">
+      <svg cIcon name="cilCheckAlt" class="btn-icon"></svg>
+      <span>Update Appointment</span>
+    </button>
+  </div>
 </mat-dialog-actions>

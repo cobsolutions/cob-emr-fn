@@ -1,0 +1,70 @@
+<div class="signing-ceremony-container">
+  <!-- Purpose display -->
+  <div class="ceremony-purpose" *ngIf="purpose">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/>
+      <line x1="16" y1="17" x2="8" y2="17"/>
+    </svg>
+    <div>
+      <strong>Purpose:</strong> {{ purpose }}
+    </div>
+  </div>
+
+  <!-- Signature pad -->
+  <div class="ceremony-pad-wrapper">
+    <app-signature-pad
+      [config]="config"
+      (signatureOutput)="onSignatureOutput($event)">
+    </app-signature-pad>
+  </div>
+
+  <!-- Acknowledgment -->
+  <div class="ceremony-acknowledgment">
+    <label class="acknowledgment-label" for="acknowledgeCheckbox">
+      <input type="checkbox"
+             id="acknowledgeCheckbox"
+             [(ngModel)]="acknowledged"
+             aria-label="I acknowledge this is my legal signature">
+      <span class="acknowledgment-text">
+        I, <strong>{{ signerName || 'the undersigned' }}</strong>, acknowledge that the signature
+        captured above is my legal electronic signature and I intend it to be the equivalent
+        of my handwritten signature for the stated purpose.
+      </span>
+    </label>
+  </div>
+
+  <!-- Timestamp -->
+  <div class="ceremony-timestamp" *ngIf="signatureOutput">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polyline points="12 6 12 12 16 14"></polyline>
+    </svg>
+    Captured at: {{ currentTimestamp }}
+  </div>
+
+  <!-- Actions -->
+  <div class="ceremony-actions">
+    <button type="button"
+            class="btn btn-outline-secondary"
+            (click)="onCancel()"
+            [disabled]="submitting"
+            aria-label="Cancel signing">
+      Cancel
+    </button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+            [disabled]="!canSubmit"
+            aria-label="Submit signature">
+      <span *ngIf="!submitting">{{ submitLabel }}</span>
+      <span *ngIf="submitting" class="submitting-state">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Submitting...
+      </span>
+    </button>
+  </div>
+</div>

@@ -25,13 +25,14 @@ export interface Patient {
     suffix?: Suffix | null;
     employerName?: string;
     title?: Title | null;
-    addtionalInfo?: string;
+    additionalInfo?: string;
     idType?: IdType | null;
     patientId?: string;
     effectiveFromDate?: number;
     effectiveFromDate_Date?: Date | null;
     effectiveToDate?: number;
     effectiveToDate_Date?: Date | null;
+    uuid?:string,
     addresses?: Address[];
     contacts?: Contact[];
     emergencies?: Emergency[];
@@ -40,6 +41,8 @@ export interface Patient {
     clinicsId?: number[];
     clinicModels?: Clinic[]
     cases?: PatientCase[];
+    emrId?:string,
+    patientStatus?:string
     patientInsuranceModels?: PatientInsurance[];
 
 }

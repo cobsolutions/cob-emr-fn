@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IColumn, IItem } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Address } from '../../../common/models';
 import { Clinic } from '../../../patient/models/clinic';
 import { Organization } from '../../models/organiztion';
@@ -16,6 +17,7 @@ export class ListOrganizationComponent implements OnInit {
   selectedOrganization: Organization;
   data: IItem[] = orgData;
   public clinicsVisible: boolean = false;
+  isLoading: boolean = true;
 
   organiztions: IItem[]
   clinics: Clinic[];
@@ -49,15 +51,32 @@ export class ListOrganizationComponent implements OnInit {
       sorter: false,
     },
   ]
-  constructor(private organizationService: OrganizationService, private router: Router) { }
+  constructor(
+    private organizationService: OrganizationService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
+    this.loadOrganizations();
+  }
+
+  private loadOrganizations(): void {
+    this.isLoading = true;
+    this.spinner.show();
     this.organizationService.getAll()
-      .subscribe((organizations) => {
-        this.organiztions = organizations
-      }, error => {
-        console.log(error);
-      })
+      .subscribe({
+        next: (organizations) => {
+          this.organiztions = organizations;
+          this.isLoading = false;
+          this.spinner.hide();
+        },
+        error: (error) => {
+          console.log(error);
+          this.isLoading = false;
+          this.spinner.hide();
+        }
+      });
   }
   create() {
     this.router.navigate(['/emr/organization/create']);
@@ -71,5 +90,8 @@ export class ListOrganizationComponent implements OnInit {
   }
   toggleEditOrganization() {
     this.editOrganizationVisibility = !this.editOrganizationVisibility
+  }
+  manageUsers(item: any) {
+    this.router.navigate(['/emr/organization/' + item.id + '/users']);
   }
 }

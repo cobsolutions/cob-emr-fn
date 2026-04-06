@@ -1,2 +1,500 @@
 // Here you can add other styles
 
+// ============================================================================
+// EMR Sidebar Customization - Light Healthcare Theme
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// 1. CSS Variable Overrides for .sidebar-light
+// ---------------------------------------------------------------------------
+
+.sidebar.sidebar-light {
+  --cui-sidebar-bg: #FFFFFF;
+  --cui-sidebar-color: #475569;
+  --cui-sidebar-border-width: 0;
+  --cui-sidebar-border-color: transparent;
+
+  --cui-sidebar-brand-bg: #F8FAFB;
+  --cui-sidebar-brand-color: #0E7490;
+  --cui-sidebar-brand-height: 4rem;
+
+  --cui-sidebar-header-bg: #F8FAFB;
+
+  --cui-sidebar-nav-title-color: #94A3B8;
+
+  --cui-sidebar-nav-link-color: #475569;
+  --cui-sidebar-nav-link-bg: transparent;
+  --cui-sidebar-nav-link-icon-color: #94A3B8;
+
+  --cui-sidebar-nav-link-hover-color: #1E293B;
+  --cui-sidebar-nav-link-hover-bg: #F1F5F9;
+  --cui-sidebar-nav-link-hover-icon-color: #0891B2;
+
+  --cui-sidebar-nav-link-active-color: #0E7490;
+  --cui-sidebar-nav-link-active-bg: #F0FDFA;
+  --cui-sidebar-nav-link-active-icon-color: #0891B2;
+
+  --cui-sidebar-nav-link-disabled-color: #CBD5E1;
+  --cui-sidebar-nav-link-disabled-icon-color: #CBD5E1;
+
+  --cui-sidebar-nav-group-bg: #F8FAFC;
+  --cui-sidebar-nav-group-toggle-show-color: #0E7490;
+
+  --cui-sidebar-footer-bg: #F8FAFB;
+
+  --cui-sidebar-toggler-bg: #F8FAFB;
+  --cui-sidebar-toggler-hover-bg: #F1F5F9;
+
+  // Right shadow separator
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+
+  // Brand area styling
+  .sidebar-brand {
+    border-bottom: 1px solid #E2E8F0;
+    gap: 0;
+    padding: 0 1rem;
+    justify-content: flex-start;
+  }
+
+  // Custom brand content
+  .sidebar-brand-full {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .brand-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0E7490;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .brand-text-light {
+    font-weight: 400;
+    color: #64748B;
+  }
+
+  .sidebar-brand-narrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Nav link spacing and left-border accent
+  .sidebar-nav {
+
+    .nav-link {
+      padding: 0.75rem 1rem;
+      margin: 1px 0.5rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      border-left-color: #CBD5E1;
+    }
+
+    .nav-link.active {
+      border-left-color: #0891B2;
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      font-size: 1.125rem;
+      transition: color 0.2s ease;
+    }
+
+    // Expanded group styling
+    .nav-group.show {
+      border-radius: 6px;
+      margin: 2px 0.5rem;
+      overflow: hidden;
+
+      > .nav-group-toggle {
+        font-weight: 600;
+        color: #0E7490;
+      }
+    }
+
+    // Child nav links inside group items
+    .nav-group-items .nav-link {
+      font-size: 0.8125rem;
+      padding-left: 2.75rem;
+      font-weight: 400;
+      margin: 0;
+      border-radius: 0;
+      border-left: 3px solid transparent;
+      position: relative;
+    }
+
+    .nav-group-items .nav-link.active {
+      border-left-color: #0891B2;
+      font-weight: 500;
+    }
+
+    .nav-group-items .nav-link:hover {
+      border-left-color: #CBD5E1;
+    }
+
+    // ----- Tree-view connectors for child items -----
+    .nav-group-items {
+      position: relative;
+
+      // Vertical line segment on each child wrapper
+      > * {
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 1.75rem;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          background: #CBD5E1;
+          pointer-events: none;
+        }
+
+        // Last child: vertical line stops at center (└ style)
+        &:last-child::before {
+          bottom: auto;
+          height: 50%;
+        }
+      }
+
+      // Horizontal branch connector on each child link
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        left: calc(1.75rem - 3px);
+        top: 50%;
+        width: 0.625rem;
+        height: 1px;
+        background: #CBD5E1;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      // Leaf-node dot indicator
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: calc(1.75rem - 3px + 0.625rem);
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #CBD5E1;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .nav-link.active::after {
+        background: #0891B2;
+      }
+
+      .nav-link:hover::after {
+        background: #94A3B8;
+      }
+    }
+
+    // Group toggle arrow transition
+    .nav-group-toggle::after {
+      transition: transform 0.25s ease;
+    }
+  }
+
+  // Custom scrollbar
+  .sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E1 transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #CBD5E1;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #94A3B8;
+    }
+  }
+
+  // Toggler styling
+  .sidebar-toggler {
+    border-top: 1px solid #E2E8F0;
+  }
+}
+
+// ===========================================================================
+// Dark theme override
+// ===========================================================================
+.dark-theme .sidebar.sidebar-light {
+  --cui-sidebar-bg: #1E293B;
+  --cui-sidebar-color: rgba(255, 255, 255, 0.87);
+  --cui-sidebar-brand-bg: rgba(0, 0, 0, 0.2);
+  --cui-sidebar-brand-color: rgba(255, 255, 255, 0.87);
+  --cui-sidebar-nav-link-color: rgba(255, 255, 255, 0.6);
+  --cui-sidebar-nav-link-icon-color: rgba(255, 255, 255, 0.6);
+  --cui-sidebar-nav-link-hover-color: rgba(255, 255, 255, 0.87);
+  --cui-sidebar-nav-link-hover-bg: rgba(255, 255, 255, 0.05);
+  --cui-sidebar-nav-link-hover-icon-color: rgba(255, 255, 255, 0.87);
+  --cui-sidebar-nav-link-active-color: #5EEAD4;
+  --cui-sidebar-nav-link-active-bg: rgba(255, 255, 255, 0.05);
+  --cui-sidebar-nav-link-active-icon-color: #5EEAD4;
+  --cui-sidebar-nav-group-bg: rgba(0, 0, 0, 0.2);
+  --cui-sidebar-nav-group-toggle-show-color: rgba(255, 255, 255, 0.6);
+  --cui-sidebar-nav-title-color: rgba(255, 255, 255, 0.6);
+  --cui-sidebar-footer-bg: rgba(0, 0, 0, 0.2);
+  --cui-sidebar-toggler-bg: rgba(0, 0, 0, 0.2);
+  --cui-sidebar-toggler-hover-bg: rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+
+  .sidebar-brand {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .brand-text {
+    color: #5EEAD4;
+  }
+
+  .brand-text-light {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .sidebar-nav .nav-link.active {
+    border-left-color: #5EEAD4;
+  }
+
+  .sidebar-nav .nav-link:hover {
+    border-left-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link.active {
+    border-left-color: #5EEAD4;
+  }
+
+  .sidebar-nav .nav-group-items .nav-link:hover {
+    border-left-color: rgba(255, 255, 255, 0.2);
+  }
+
+  // Dark-theme tree connector colors
+  .sidebar-nav .nav-group-items > *::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link::after {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .sidebar-nav .nav-group-items .nav-link.active::after {
+    background: #5EEAD4;
+  }
+
+  .sidebar-nav .nav-group-items .nav-link:hover::after {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .sidebar-toggler {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .sidebar-nav {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+// ===========================================================================
+// Hide tree connectors when sidebar is collapsed (narrow mode)
+// ===========================================================================
+.sidebar.sidebar-narrow,
+.sidebar.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-nav .nav-group-items > *::before,
+  .sidebar-nav .nav-group-items .nav-link::before,
+  .sidebar-nav .nav-group-items .nav-link::after {
+    display: none;
+  }
+}
+
+// ===========================================================================
+// Custom Toastr Styling - Professional Slate Theme
+// ===========================================================================
+
+// Container positioning
+#toast-container {
+  margin-top: 0.75rem;
+
+  // Base toast card
+  > .ngx-toastr {
+    position: relative;
+    overflow: hidden;
+    padding: 0.875rem 1rem 0.875rem 3.25rem;
+    width: 380px;
+    border-radius: 0.5rem;
+    border: none;
+    border-left: 4px solid transparent;
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.06);
+    background-position: 1rem center;
+    background-size: 1.25rem;
+    background-repeat: no-repeat;
+    font-family: inherit;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+
+    &:hover {
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.14),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+      transform: translateX(-2px);
+      cursor: pointer;
+    }
+  }
+
+  // Title
+  .toast-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    margin-bottom: 0.1875rem;
+    letter-spacing: 0.01em;
+  }
+
+  // Message
+  .toast-message {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.45;
+    opacity: 0.9;
+  }
+
+  // Close button
+  .toast-close-button {
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.4;
+    text-shadow: none;
+    transition: opacity 0.15s ease;
+    line-height: 1;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  // Progress bar
+  .toast-progress {
+    height: 3px;
+    opacity: 0.3;
+    border-radius: 0 0 0.5rem 0;
+  }
+
+  // ---- Success ----
+  > .toast-success {
+    background-color: #f0fdf4;
+    border-left-color: #16a34a;
+    color: #15803d;
+
+    .toast-title {
+      color: #166534;
+    }
+
+    .toast-progress {
+      background: #16a34a;
+    }
+
+    // Custom checkmark icon
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3e%3cpath d='M22 4 12 14.01l-3-3'/%3e%3c/svg%3e");
+  }
+
+  // ---- Error ----
+  > .toast-error {
+    background-color: #fef2f2;
+    border-left-color: #dc2626;
+    color: #b91c1c;
+
+    .toast-title {
+      color: #991b1b;
+    }
+
+    .toast-progress {
+      background: #dc2626;
+    }
+
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='12' cy='12' r='10'/%3e%3cline x1='15' y1='9' x2='9' y2='15'/%3e%3cline x1='9' y1='9' x2='15' y2='15'/%3e%3c/svg%3e");
+  }
+
+  // ---- Warning ----
+  > .toast-warning {
+    background-color: #fffbeb;
+    border-left-color: #d97706;
+    color: #92400e;
+
+    .toast-title {
+      color: #78350f;
+    }
+
+    .toast-progress {
+      background: #d97706;
+    }
+
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d97706' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'/%3e%3cline x1='12' y1='9' x2='12' y2='13'/%3e%3cline x1='12' y1='17' x2='12.01' y2='17'/%3e%3c/svg%3e");
+  }
+
+  // ---- Info ----
+  > .toast-info {
+    background-color: #f0f9ff;
+    border-left-color: #0284c7;
+    color: #075985;
+
+    .toast-title {
+      color: #0c4a6e;
+    }
+
+    .toast-progress {
+      background: #0284c7;
+    }
+
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='12' cy='12' r='10'/%3e%3cline x1='12' y1='16' x2='12' y2='12'/%3e%3cline x1='12' y1='8' x2='12.01' y2='8'/%3e%3c/svg%3e");
+  }
+}
+
+// Responsive toast width
+@media (max-width: 480px) {
+  #toast-container > .ngx-toastr {
+    width: calc(100vw - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

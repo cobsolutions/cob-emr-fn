@@ -42,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SecurityModule } from './modules/security/security.module';
 import { AuthInterceptor } from './modules/security/service/auth.interceptor';
 import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
+import { SignatureLayoutComponent } from './core/signature.layout/signature-layout.component';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -51,7 +52,7 @@ const APP_CONTAINERS = [
 
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, OrganizationLayoutComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, OrganizationLayoutComponent, SignatureLayoutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -80,9 +81,15 @@ const APP_CONTAINERS = [
     FormsModule,
     DateRangePickerModule,
     ToastrModule.forRoot({
-      timeOut: 15000, // 15 seconds
+      timeOut: 4000,
       closeButton: true,
       progressBar: true,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      newestOnTop: true,
+      maxOpened: 3,
+      autoDismiss: true,
+      easeTime: 250,
     }),
     SecurityModule
   ],

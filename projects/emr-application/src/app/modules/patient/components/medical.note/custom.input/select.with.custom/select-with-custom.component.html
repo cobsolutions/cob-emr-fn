@@ -1,0 +1,14 @@
+<div [formGroup]="form" class="select-with-custom d-flex align-items-center gap-2" [style]="style">
+  <label *ngIf="display !== null">{{display}}</label>
+  <!-- Select Dropdown -->
+  <select [formControlName]="selectFieldName" class="form-select" style="width: 300px;">
+    <option *ngFor="let option of values" [value]="option.val">
+      {{ option.view }}
+    </option>
+  </select>
+
+  <!-- Render custom input dynamically -->
+  <ng-container *ngIf="hasCustom">
+    <input type="text" [formControlName]="customFieldName" class="form-control w-auto" />
+  </ng-container>
+</div>

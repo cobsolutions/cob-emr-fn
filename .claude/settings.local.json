@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(mkdir:*)",
+      "Bash(wc:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:emr-application:*)",
+      "Bash(npm run:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(npx ng build)",
+      "Bash(cat:*)",
+      "Bash(npx ng build:*)",
+      "Bash(git checkout:*)",
+      "Bash(ls:*)",
+      "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" log --oneline -20)",
+      "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" diff HEAD~5..HEAD --stat)",
+      "Bash(git -C \"C:\\\\cob\\\\emr\\\\emr-fn\" show cb354ea1 --stat)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(CONFIG_BASE=\"projects/emr-application/src/app/modules/patient/components/medical.note/components/objective/special-tests/config\")",
+      "Bash(for dir:*)",
+      "Bash(do)",
+      "Bash(mkdir -p \"$CONFIG_BASE/$dir\")",
+      "Bash(done)"
+    ]
+  }
+}

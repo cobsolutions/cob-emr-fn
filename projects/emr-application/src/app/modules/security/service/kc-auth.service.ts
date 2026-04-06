@@ -28,6 +28,7 @@ export class KcAuthService {
   }
 
   public login(): void {
+    localStorage.removeItem('LOGGEDINUSR')
     localStorage.removeItem('access-token')
     this.keycloakService.login();
   }

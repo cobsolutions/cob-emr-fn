@@ -5,16 +5,18 @@
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <c-header-nav class="me-auto">
-      
-      <select *ngIf="clinics && clinics.length !==0" #userClinics cSelect sizing="sm" style="line-height: 15px;"
-        (change)="setSelectedClinic($event)" [(ngModel)]="selectedValue">
-        <option *ngFor="let clinic of clinics" [value]="clinic.id">
-          {{clinic.name}}
-        </option>
-      </select>
+      <div *ngIf="clinics && clinics.length !== 0" class="clinic-select-wrapper">
+        <svg cIcon name="cilHouse" class="clinic-select-icon"></svg>
+        <select #userClinics class="clinic-select"
+          (change)="setSelectedClinic($event)" [(ngModel)]="selectedValue">
+          <option *ngFor="let clinic of clinics" [value]="clinic.id">
+            {{clinic.name}}
+          </option>
+        </select>
+      </div>
     </c-header-nav>
 
-    <c-header-nav class="ms-auto me-4">
+    <!-- <c-header-nav class="ms-auto me-4">
       <form [formGroup]="themeSwitch" cForm>
         <c-button-group aria-label="Theme switch">
           <input class="btn-check" formControlName="themeSwitchRadio" id="btn-light-theme" type="radio" value="light" />
@@ -27,9 +29,22 @@
           </label>
         </c-button-group>
       </form>
-    </c-header-nav>
+    </c-header-nav> -->
 
     <!-- todo: header nav dropdown menus  -->
+
+    <div class="header-patient-search">
+      <div class="header-search-wrapper">
+        <svg cIcon name="cilSearch" class="header-search-icon"></svg>
+        <input type="text" class="header-search-input"
+               placeholder="Search patient by name..."
+               [(ngModel)]="headerSearchName"
+               (keyup.enter)="searchPatient()" />
+        <button class="header-search-btn" (click)="searchPatient()" [disabled]="!headerSearchName.trim()">
+          Search
+        </button>
+      </div>
+    </div>
 
     <c-header-nav class="ms-3 me-sm-4">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
@@ -46,37 +61,50 @@
 
 <ng-template #userDropdown>
   <c-dropdown alignment="end" variant="nav-item">
-    <a href [caret]="false" cDropdownToggle class="py-0">
-      <c-avatar color="secondary"  *ngIf="loggedIn" status="success">{{loggedIn}}</c-avatar>
+    <a href [caret]="false" cDropdownToggle class="header-avatar-toggle">
+      <div class="header-avatar-wrapper">
+        <c-avatar *ngIf="loggedIn" class="header-avatar" color="info" status="success" textColor="primary">
+          {{loggedIn}}
+        </c-avatar>
+        <div *ngIf="fullName" class="header-user-info d-none d-md-flex">
+          <span class="header-user-name">{{fullName}}</span>
+          <span *ngIf="selectedClinicName" class="header-user-clinic">{{selectedClinicName}}</span>
+        </div>
+        <svg cIcon name="cilChevronBottom" class="header-caret d-none d-md-block"></svg>
+      </div>
     </a>
-    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
-
+    <ul cDropdownMenu class="dropdown-menu-user">
       <li>
-        <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Settings</h6>
+        <div class="dropdown-user-header">
+          <c-avatar *ngIf="loggedIn" class="dropdown-avatar" color="info" size="lg" textColor="primary">
+            {{loggedIn}}
+          </c-avatar>
+          <div class="dropdown-user-details">
+            <span class="dropdown-user-name">{{fullName}}</span>
+            <span class="dropdown-user-email" *ngIf="selectedClinicName">{{selectedClinicName}}</span>
+          </div>
+        </div>
       </li>
-      <li></li>
+      <li><hr cDropdownDivider /></li>
       <li>
-        <a [routerLink]="[]" cDropdownItem>
+        <a [routerLink]="[]" cDropdownItem class="dropdown-menu-item">
           <svg cIcon class="me-2" name="cilUser"></svg>
           Profile
         </a>
       </li>
       <li>
-        <a [routerLink]="[]" cDropdownItem>
+        <a [routerLink]="[]" cDropdownItem class="dropdown-menu-item">
           <svg cIcon class="me-2" name="cilSettings"></svg>
           Settings
         </a>
       </li>
+      <li><hr cDropdownDivider /></li>
       <li>
-        <hr cDropdownDivider />
-      </li>
-      <li>
-        <a (click)="logout()" cDropdownItem>
+        <a (click)="logout()" cDropdownItem class="dropdown-menu-item dropdown-logout">
           <svg cIcon class="me-2" name="cilLockLocked"></svg>
           Logout
         </a>
       </li>
-      <li></li>
     </ul>
   </c-dropdown>
 </ng-template>

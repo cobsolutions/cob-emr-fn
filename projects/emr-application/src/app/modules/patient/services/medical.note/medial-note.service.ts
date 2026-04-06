@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'projects/emr-application/src/environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FinalizeMedicalNoteRequest } from '../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
@@ -10,16 +10,23 @@ import { MedicalNoteType } from '../../models/medical.note/medical.note.type';
   providedIn: 'root'
 })
 export class MedialNoteService {
-  public closeFinalize: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private saveNote = new BehaviorSubject<any>(null);
-  saveNoteObservable$ = this.saveNote.asObservable();
   private baseUrl = environment.baseURL + 'medical/note'
   private soapBaseUrl = environment.baseURL + 'soap'
-  public noteType$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public medicalNoteType: BehaviorSubject<MedicalNoteType | null> = new BehaviorSubject<MedicalNoteType | null>(null);
+  private finalizeSubject = new Subject<boolean>();
+  private draftSubject = new Subject<boolean>();
+  public medicalNoteID$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  finalize$ = this.finalizeSubject.asObservable();
+  draft$ = this.draftSubject.asObservable();
+
   constructor(private httpClient: HttpClient) { }
-  pingSaveData(ping: any) {
-    this.saveNote.next(ping);
+
+  notifyFinalize(status: boolean): void {
+    this.finalizeSubject.next(status);
+  }
+
+  notifyDraft(status: boolean): void {
+    this.draftSubject.next(status);
   }
   find(section: string, type?: string) {
     var url: string = this.baseUrl + "/find/section/" + section + "/type/" + type;
@@ -36,7 +43,7 @@ export class MedialNoteService {
 
   create(request: MedicalNoteRequest) {
     const headers = { 'content-type': 'application/json' }
-    var url = this.baseUrl + '/action/create'
+    var url = this.baseUrl + '/initial-exam'
     return this.httpClient.post(`${url}`, JSON.stringify(request), { 'headers': headers })
   }
   remove(id: number) {
@@ -61,7 +68,7 @@ export class MedialNoteService {
     var url: string = this.baseUrl + "/action/find/rom/name/" + name
     return this.httpClient.get(url);
   }
-  forward(note: number, uuid: string) {
+  forward(note: string, uuid: string) {
     const headers = { 'content-type': 'application/json' }
     var url = this.baseUrl + '/action/forward/note/' + note + '/uuid/' + uuid;
     return this.httpClient.put(`${url}`, { 'headers': headers })

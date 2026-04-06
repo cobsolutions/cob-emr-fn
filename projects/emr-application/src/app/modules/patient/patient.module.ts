@@ -23,6 +23,7 @@ import {
 } from './components/create';
 import { PopoverModule, AccordionModule, DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule, TableModule, CalloutModule, SpinnerModule } from '@coreui/angular-pro';
 import { PatientPaymentComponent } from './components/chart/payment/patient-payment.component';
+import { PatientCasePaymentComponent } from './components/chart/payment/patient-case-payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { InitialExaminationComponent } from './components/medical.note/initial.examination/initial-examination.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -48,6 +49,8 @@ import { SubjectiveComponent } from './components/medical.note/components/subjec
 import { AssessmentComponent } from './components/medical.note/components/assessment/assessment.component';
 import { RomComponent } from './components/medical.note/components/objective/arom.prom/rom.component';
 import { InspectionComponent } from './components/medical.note/components/objective/inspection/inspection.component';
+import { InspectionNComponent } from './components/medical.note/components/objective/inspectionN/inspectionN.component';
+import { OutcomeMeasurementToolsComponent } from './components/medical.note/components/objective/outcome-measurement-tools/outcome-measurement-tools.component';
 import { NeuroVascularRightLeftComponent } from './components/medical.note/components/objective/neuro.vascular/components/neuro.vascular.right.left/neuro-vascular-right-left.component';
 import { SemmesWeinsteinUpperComponent } from './components/medical.note/components/objective/neuro.vascular/components/semmes.weinstein.upper/semmes-weinstein-upper.component';
 import { VertebralArteryComponent } from './components/medical.note/components/objective/neuro.vascular/components/vertebral.artery/vertebral-artery.component';
@@ -106,7 +109,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize/finalize-medical-note.component';
 import { DailyPlanComponent } from './components/medical.note/components/plan/daily/daily-plan.component';
 import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
+import { CdisquestiTestComponent } from './components/omt.tests/cdisquesti/cdisquesti-test.component';
+import { CongrscTestComponent } from './components/omt.tests/congrsc/congrsc-test.component';
+import { McgpquesTestComponent } from './components/omt.tests/mcgpques/mcgpques-test.component';
+import { PdisinTestComponent } from './components/omt.tests/pdisin/pdisin-test.component';
+import { WofaratTestComponent } from './components/omt.tests/wofarat/wofarat-test.component';
+import { DizzhinvTestComponent } from './components/omt.tests/dizzhinv/dizzhinv-test.component';
+import { LymphedemaTestComponent } from './components/omt.tests/lymphedema/lymphedema-test.component';
+import { PfimqsfTestComponent } from './components/omt.tests/pfimqsf/pfimqsf-test.component';
+import { PfopinsexTestComponent } from './components/omt.tests/pfopinsex/pfopinsex-test.component';
+import { PregmobindxTestComponent } from './components/omt.tests/pregmobindx/pregmobindx-test.component';
+import { UrdisinTestComponent } from './components/omt.tests/urdisin/urdisin-test.component';
+import { VuvpfunqueTestComponent } from './components/omt.tests/vuvpfunque/vuvpfunque-test.component';
 import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.component';
+import { UeqdnTestComponent } from './components/omt.tests/ueqdn/ueqdn-test.component';
 import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
 import { SpadiTestComponent } from './components/omt.tests/spadi/spadi-test.component';
 import { DashTestComponent } from './components/omt.tests/dash/dash-test.component';
@@ -125,8 +141,69 @@ import { ShowOMTTestComponent } from './components/medical.note/components/objec
 import { InitialExaminationScoreSummaryComponent } from './components/medical.note/summary/initial.examination.score.summary/initial-examination-score-summary.component';
 import { InitialExaminationPlanSummaryComponent } from './components/medical.note/summary/initial.examination.plan.summary/initial-examination-plan-summary.component';
 import { InitialExaminationSummaryComponent } from './components/medical.note/summary/initial.examination/initial-examination-summary.component';
+import { CosignNoteReviewComponent } from './components/cosign-note-review/cosign-note-review.component';
 import { EditPatientComponent } from './components/edit/edit-patient.component';
 import { AuthorizationPatientCaseComponent } from './components/authorization/authorization-patient-case.component';
+import { PatientAvatarComponent } from './patient.avatar/patient-avatar.component';
+import { TreatmentDiagnosisComponent } from './components/medical.note/components/subjective/basic/treatment.icd10/treatment-diagnosis.component';
+import { MultipleColumnsCheckboxComponent } from './components/medical.note/custom.input/multiple.columns.checkbox/multiple-columns-checkbox.component';
+import { SelectWithCustomComponent } from './components/medical.note/custom.input/select.with.custom/select-with-custom.component';
+import { CranialNerveComponent } from './components/medical.note/custom.input/strength/cranial.nerve/cranial-nerve.component';
+import { RightLeftCheckComponent } from './components/medical.note/custom.input/strength/right.left.radios/right-left-check.component';
+import { AssessmentProblemComponent } from './components/medical.note/components/assessment/problems/assessment-problem.component';
+import { AssessmentGoalsComponent } from './components/medical.note/components/assessment/goals/assessment-goals.component';
+import { CptBillingCheckBoxComponent } from './components/medical.note/custom.input/billing.cpt.checkbox/cpt-billing-check-box.component';
+import { CptBillingTextComponent } from './components/medical.note/custom.input/billing.cpt.text/cpt-billing-text.component';
+import { ObservationNComponent } from './components/medical.note/components/objective/observationN/observation-n.component';
+import { RangeOfMotionNComponent } from './components/medical.note/components/objective/range-of-motion/range-of-motion-n.component';
+import { StrengthNComponent } from './components/medical.note/components/objective/strengthN/strength-n.component';
+import { NeuroVascularNComponent } from './components/medical.note/components/objective/neuro-vascular/neuro-vascular-n.component';
+import { SpecialTestsNComponent } from './components/medical.note/components/objective/special-tests/special-tests-n.component';
+import { PalpationNComponent } from './components/medical.note/components/objective/palpationN/palpation-n.component';
+import { MeasurementTableComponent } from './components/medical.note/components/objective/common/measurement-table/measurement-table.component';
+import { MeasurementEndfeelTableComponent } from './components/medical.note/components/objective/common/measurement-endfeel-table/measurement-endfeel-table.component';
+import { DropdownTextTableComponent } from './components/medical.note/components/objective/common/dropdown-text-table/dropdown-text-table.component';
+import { MeasurementTableWithSelectsComponent } from './components/medical.note/components/objective/common/measurement-table-with-selects/measurement-table-with-selects.component';
+import { SingleColumnTableComponent } from './components/medical.note/components/objective/common/single-column-table/single-column-table.component';
+import { MeasurementInputTableComponent } from './components/medical.note/components/objective/common/measurement-table-inputs/measurement-input-table.component';
+import { MeasurementCheckTableComponent } from './components/medical.note/components/objective/common/measurement-table-check/measurement-check-table.component';
+import { MeasurementTableMultipleColumnsComponent } from './components/medical.note/components/objective/common/measurement-table-multiple-columns/measurement-table-multiple-columns.component';
+import { MaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/material-handling/material-handling-work-condition.component';
+import { NonMaterialHandlingWorkConditionComponent } from './components/medical.note/components/objective/common/non-material-handling/non-material-handling-work-condition.component';
+import { MeasurementTableRlInputColumnsComponent } from './components/medical.note/components/objective/common/measurement-table-rl-input-columns/measurement-table-rl-input-columns.component';
+import { TitleCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-list/title-checkbox-list.component';
+import { TitleMultipleColumnsCheckboxListComponent } from './components/medical.note/components/objective/common/title-checkbox-columns-list/title-multiple-columns-checkbox-list.component';
+import { BasicNComponent } from './components/medical.note/components/subjective/basicN/basic-n.component';
+import { PriorLevelFunctionNComponent } from './components/medical.note/components/subjective/prior-level-of-functionN/prior-level-function-n.component';
+import { HierarchyCheckboxComponent } from './components/medical.note/components/subjective/common/hierarchy-checkbox/hierarchy-checkbox.component';
+import { CurrentFunctionalLimitationsNComponent } from './components/medical.note/components/subjective/current-functional-limitationsN/current-functional-limitations-n.component';
+import { MedicalHistoryNComponent } from './components/medical.note/components/subjective/medical-historyN/medical-history-n.component';
+import { ListCheckboxWithChildComponent } from './components/medical.note/components/subjective/common/list-checkbox-with-child/list-checkbox-with-child.component';
+import { PainNComponent } from './components/medical.note/components/subjective/painN/pain-n.component';
+import { ProceduresNComponent } from './components/medical.note/components/plan/proceduresN/procedures-n.component';
+import { PlanHierarchyCheckboxListComponent } from './components/medical.note/components/plan/common/plan-hierarchy-checkbox-list/plan-hierarchy-checkbox-list.component';
+import { ModalitiesNComponent } from './components/medical.note/components/plan/modalitiesN/modalities-n.component';
+import { SpecialtiesNComponent } from './components/medical.note/components/plan/specialtiesN/specialties-n.component';
+import { BillingNComponent } from './components/medical.note/components/billing/billing-n.component';
+import { UntimedCodesNComponent } from './components/medical.note/components/billing/componentsN/untimed-codes/untimed-codes-n.component';
+import { StrappingNComponent } from './components/medical.note/components/billing/componentsN/strapping/strapping-n.component';
+import { DirectTimedCodeNComponent } from './components/medical.note/components/billing/componentsN/direct-timed-codes/direct-timed-code-n.component';
+import { CalendarMonthNComponent } from './components/medical.note/components/billing/componentsN/calendar-month/calendar-month-n.component';
+import { NerveConductionStudiesNComponent } from './components/medical.note/components/billing/componentsN/nerve-conduction-studies/nerve-conduction-studies-n.component';
+import { RespiratoryNComponent } from './components/medical.note/components/billing/componentsN/respiratory/respiratory-n.component';
+import { OtherTreatmentProceduresNComponent } from './components/medical.note/components/billing/componentsN/other-treatment-procedures/other-treatment-procedures-n.component';
+import { SuppliesNComponent } from './components/medical.note/components/billing/componentsN/supplies/supplies-n.component';
+import { SplintsOrthoticsNComponent } from './components/medical.note/components/billing/componentsN/splints-orthotics/splints-orthotics-n.component';
+import { CastsNComponent } from './components/medical.note/components/billing/componentsN/casts/casts-n.component';
+import { BracesNComponent } from './components/medical.note/components/billing/componentsN/braces/braces-n.component';
+import { DailyNoteNComponent } from './components/medical.note/daily.note.n/daily-note-n.component';
+import { DailyPlanNComponent } from './components/medical.note/daily.note.n/plan/daily-plan-n.component';
+import { ProgressNoteNComponent } from './components/medical.note/progress.note.n/progress-note-n.component';
+import { QuickDischargeNComponent } from './components/medical.note/quick.discharge.n/quick-discharge-n/quick-discharge-n.component';
+import { DischargeNComponent } from './components/medical.note/discharge-n/discharge-n.component';
+import { DischargePlanNComponent } from './components/medical.note/discharge-n/plan/discharge-plan.component';
+import { PatientCaseEDocumentComponent } from './components/chart/patient.case/e-document/patient-case-e-document.component';
+import { PatientCaseEDocumentListComponent } from './components/chart/patient.case/e-document/patient-case-e-document-list.component';
 const APP_PATIENTS_COMPONENTS = [
   ListPatientComponent,
   CreatePatientComponent,
@@ -156,6 +233,7 @@ const APP_PATIENT_CHART_COMPONENTS = [
     ...APP_PATIENTS_DEPENDENCIES_COMPONENTS,
     ...APP_PATIENT_CHART_COMPONENTS,
     PatientPaymentComponent,
+    PatientCasePaymentComponent,
     InitialExaminationComponent,
     SubjectiveComponent,
     BasicInformationComponent,
@@ -190,6 +268,8 @@ const APP_PATIENT_CHART_COMPONENTS = [
     BracesComponent,
     DirectTimedCodesComponent,
     InspectionComponent,
+    InspectionNComponent,
+    OutcomeMeasurementToolsComponent,
     OmtComponent,
     MultipleTextInputComponent,
     ObjectiveOMTTestComponent,
@@ -234,7 +314,20 @@ const APP_PATIENT_CHART_COMPONENTS = [
     FinalizeMedicalNoteComponent,
     DailyPlanComponent,
     DischargePlanComponent,
+    CdisquestiTestComponent,
+    CongrscTestComponent,
+    DizzhinvTestComponent,
+    McgpquesTestComponent,
+    PdisinTestComponent,
+    WofaratTestComponent,
+    LymphedemaTestComponent,
+    PfimqsfTestComponent,
+    PfopinsexTestComponent,
+    PregmobindxTestComponent,
+    UrdisinTestComponent,
+    VuvpfunqueTestComponent,
     UeqdTestComponent,
+    UeqdnTestComponent,
     UefiTestComponent,
     SpadiTestComponent,
     DashTestComponent,
@@ -255,6 +348,67 @@ const APP_PATIENT_CHART_COMPONENTS = [
     InitialExaminationSummaryComponent,
     EditPatientComponent,
     AuthorizationPatientCaseComponent,
+    PatientAvatarComponent,
+    TreatmentDiagnosisComponent,
+    MultipleColumnsCheckboxComponent,
+    SelectWithCustomComponent,
+    CranialNerveComponent,
+    RightLeftCheckComponent,
+    AssessmentProblemComponent,
+    AssessmentGoalsComponent,
+    CptBillingCheckBoxComponent,
+    CptBillingTextComponent,
+    ObservationNComponent,
+    RangeOfMotionNComponent,
+    StrengthNComponent,
+    NeuroVascularNComponent,
+    SpecialTestsNComponent,
+    PalpationNComponent,
+    MeasurementTableComponent,
+    MeasurementEndfeelTableComponent,
+    DropdownTextTableComponent,
+    MeasurementTableWithSelectsComponent,
+    SingleColumnTableComponent,
+    MeasurementInputTableComponent,
+    MeasurementCheckTableComponent,
+    MeasurementTableMultipleColumnsComponent,
+    MaterialHandlingWorkConditionComponent,
+    NonMaterialHandlingWorkConditionComponent,
+    MeasurementTableRlInputColumnsComponent,
+    TitleCheckboxListComponent,
+    TitleMultipleColumnsCheckboxListComponent,
+    BasicNComponent,
+    PriorLevelFunctionNComponent,
+    HierarchyCheckboxComponent,
+    CurrentFunctionalLimitationsNComponent,
+    MedicalHistoryNComponent,
+    ListCheckboxWithChildComponent,
+    PainNComponent,
+    ProceduresNComponent,
+    PlanHierarchyCheckboxListComponent,
+    ModalitiesNComponent,
+    SpecialtiesNComponent,
+    BillingNComponent,
+    UntimedCodesNComponent,
+    StrappingNComponent,
+    DirectTimedCodeNComponent,
+    CalendarMonthNComponent,
+    NerveConductionStudiesNComponent,
+    RespiratoryNComponent,
+    OtherTreatmentProceduresNComponent,
+    SuppliesNComponent,
+    SplintsOrthoticsNComponent,
+    CastsNComponent,
+    BracesNComponent,
+    DailyNoteNComponent,
+    DailyPlanNComponent,
+    ProgressNoteNComponent,
+    QuickDischargeNComponent,
+    DischargeNComponent,
+    DischargePlanNComponent,
+    PatientCaseEDocumentComponent,
+    PatientCaseEDocumentListComponent,
+    CosignNoteReviewComponent,
   ],
   imports: [
     CommonModule,

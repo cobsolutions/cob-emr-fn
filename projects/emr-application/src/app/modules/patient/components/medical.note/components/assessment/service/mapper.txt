@@ -1,0 +1,14 @@
+assessment_diagnosis
+patient_clinical_presentation
+parent_patient_education
+rehab_potential
+contraindications_to_therapy
+consent_to_care
+problems
+goals Obj
+	description
+            term
+            period
+            met
+            customPeriod
+            customMet

@@ -35,6 +35,28 @@ export class BlockAppointmentComponent implements OnInit {
   isLoading: boolean = true;
   selectedClinic: Clinic
   calendars: any
+
+  // Validation getters for UI
+  get isValidTitleSection(): boolean {
+    return this.appointment?.title !== null && this.appointment?.title !== undefined && this.appointment?.title !== '';
+  }
+
+  get isValidAppointmentDate(): boolean {
+    return this.isValidDate && this.appointment?.appointmentDate?.startDate !== null;
+  }
+
+  get isValidClinic(): boolean {
+    return this.selectedClinic !== null && this.selectedClinic !== undefined;
+  }
+
+  get isValidAppointmentType(): boolean {
+    return this.appointment?.appointmentTypeId !== null && this.appointment?.appointmentTypeId !== undefined;
+  }
+
+  get isFormValid(): boolean {
+    return this.isValidTitleSection && this.isValidAppointmentDate && this.isValidClinic && this.isValidAppointmentType;
+  }
+
   constructor(private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService
     , private calendarServiceService: CalendarServiceService

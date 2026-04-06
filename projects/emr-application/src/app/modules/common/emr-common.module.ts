@@ -34,22 +34,26 @@ import { IconModule } from '@coreui/icons-angular';
 import { SingleAddressComponent } from './components/single.address/single-address.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ViewAddressComponent } from './components/view.address/view-address.component';
-import { DispalyInputDirective } from './directives/permissions/dispaly-input.directive';
-import { FormScopeDirective } from './directives/permissions/form.scope.directive';
 import { ReadonlyFormDirective } from './directives/permissions/readonly-form.directive';
-import { DisableDatePickerDirective } from './directives/permissions/disable-date-picker.directive';
-import { DisableInputDirective } from './directives/permissions/disable-input.directive';
-import { DisableDateRangePickerDirective } from './directives/permissions/disable.date.range.picker.directive';
-import { ReadonlyInputDirective } from './directives/permissions/readonly-input.directive';
-import { MultiSelectDisableDirective } from './directives/permissions/multi-select-disable.directive';
-import { HideControlDirective } from './directives/permissions/hide.input/hide-control.directive';
-import { HideDivDirective } from './directives/permissions/hide.div/hide-div.directive';
+import { RoleScopeDirective } from './directives/permissions/role-scope.directive';
+import { SignaturePadComponent } from './components/signature-pad/signature-pad.component';
+import { SignaturePadDrawComponent } from './components/signature-pad/signature-pad-draw.component';
+import { SignaturePadUploadComponent } from './components/signature-pad/signature-pad-upload.component';
+import { SignaturePadTypeComponent } from './components/signature-pad/signature-pad-type.component';
+import { SigningCeremonyComponent } from './components/signing-ceremony/signing-ceremony.component';
+import { OtpVerificationComponent } from './components/otp-verification/otp-verification.component';
 
 const APP_COMMON_COMPONENTS = [
   AddressComponent,
   SingleAddressComponent,
   ContactComponent,
-  ViewAddressComponent
+  ViewAddressComponent,
+  SignaturePadComponent,
+  SignaturePadDrawComponent,
+  SignaturePadUploadComponent,
+  SignaturePadTypeComponent,
+  SigningCeremonyComponent,
+  OtpVerificationComponent
 ]
 
 const APP_COMMON_PIPES = [
@@ -59,16 +63,8 @@ const APP_COMMON_PIPES = [
 const APP_COMMON_DIRECTIVES = [
   ZipcodeDirective,
   NumberonlyDirective,
-  DispalyInputDirective,
-  FormScopeDirective,
   ReadonlyFormDirective,
-  DisableDatePickerDirective,
-  DisableInputDirective,
-  DisableDateRangePickerDirective,
-  ReadonlyInputDirective,
-  MultiSelectDisableDirective,
-  HideControlDirective,
-  HideDivDirective
+  RoleScopeDirective
 ]
 const COREUI_MODULES = [
   AvatarModule,
@@ -99,9 +95,6 @@ const COREUI_MODULES = [
     APP_COMMON_COMPONENTS,
     ...APP_COMMON_PIPES,
     ...APP_COMMON_DIRECTIVES,
-    ViewAddressComponent,
-    HideControlDirective,
-    HideDivDirective,
   ],
 
   imports: [
@@ -116,6 +109,8 @@ const COREUI_MODULES = [
     UtilitiesModule,
     IconModule,
     ButtonGroupModule,
+    NavModule,
+    TabsModule,
   ],
   exports: [
     APP_COMMON_COMPONENTS,

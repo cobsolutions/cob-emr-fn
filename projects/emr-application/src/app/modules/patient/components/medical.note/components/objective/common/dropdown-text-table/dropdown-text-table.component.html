@@ -1,0 +1,62 @@
+<div [formGroup]="formGroup">
+  <!-- Table with Labels -->
+  <table *ngIf="hasLabels" class="dropdown-text-table">
+    <thead>
+      <tr>
+        <th class="label-column"></th>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <td class="label-cell">{{ mapping.label }}</td>
+        <td *ngFor="let col of mapping.columns; trackBy: trackByColumn" class="input-cell">
+          <select cSelect class="dropdown-input" [formControlName]="col.dropdownField">
+            <option *ngFor="let option of col.options; trackBy: trackByValue" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+          <input *ngIf="customFieldVisible[col.customField]" cFormControl type="text"
+            [formControlName]="col.customField" class="dropdown-input custom-text-input"
+            placeholder="Enter custom value" />
+          <input *ngIf="hasTextInput"
+            type="text"
+            class="text-input"
+            [formControlName]="col.textField"
+            placeholder="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Layout without Labels (Side by Side) -->
+  <div *ngIf="!hasLabels" class="no-labels-layout">
+    <div class="column-container" *ngFor="let col of columnMappings; trackBy: trackByColumn">
+      <label class="column-header">{{ col.column }}</label>
+      <select cSelect class="dropdown-input-full" [formControlName]="col.dropdownField">
+        <option *ngFor="let option of col.options; trackBy: trackByValue" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <input *ngIf="customFieldVisible[col.customField]" cFormControl type="text"
+        [formControlName]="col.customField" class="dropdown-input-full custom-text-input"
+        placeholder="Enter custom value" />
+      <input *ngIf="hasTextInput"
+        type="text"
+        class="text-input-full"
+        [formControlName]="col.textField"
+        placeholder="">
+    </div>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="computedCommentsFieldName"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

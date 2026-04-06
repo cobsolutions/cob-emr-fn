@@ -1,107 +1,185 @@
-<form [formGroup]="planForm" *ngIf="fields">
-    <!-- Frequency, Duration, Plan (Styled Inline) -->
-    <div class="form-inline mb-3 mt-3">
-        <c-row>
-            <c-col xs="12">
-                <label style="margin-left: 3px;">Frequency:
-                    <select formControlName="frequency">
-                        <option selected="" value="F00">N/A</option>
-                        <option value="F01">1 time visit only</option>
-                        <option value="F02">1 time a week</option>
-                        <option value="F03">1-2 times a week</option>
-                        <option value="F04">2 times a week</option>
-                        <option value="F05">2-3 times a week</option>
-                        <option value="F06">3 times a week</option>
-                        <option value="F07">3-4 times a week</option>
-                        <option value="F08">4 times a week</option>
-                        <option value="F09">BID</option>
-                        <option value="F10">QD</option>
-                        <option value="F11">PRN</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </label>
-
-                <label style="margin-left: 3px;">Duration:
-                    <select formControlName="duration">
-                        <option selected="" value="D00">N/A</option>
-                        <option value="D05">1 week</option>
-                        <option value="D06">2 weeks</option>
-                        <option value="D07">3 weeks</option>
-                        <option value="D08">4 weeks</option>
-                        <option value="D09">5 weeks</option>
-                        <option value="D10">6 weeks</option>
-                        <option value="D11">8 weeks</option>
-                        <option value="D12">10 weeks</option>
-                        <option value="D13">12 weeks</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </label>
-
-                <label style="margin-left: 3px;">Plan:
-                    <select formControlName="plan">
-                        <option selected="" value="PL00">Begin Plan as Outlined</option>
-                        <option value="PL01">Begin Plan per Flowsheet</option>
-                        <option value="PL02">Begin Plan per Protocol</option>
-                        <option value="Custom">Custom</option>
-                    </select>
-                </label>
-            </c-col>
-            <c-col xs="12">
-                <div class="mt-3">
-                    <label>
-                        <input type="checkbox" formControlName="createPlanOfCare"> Create Plan of Care Document
-                    </label>
+<form [formGroup]="planForm">
+    <!-- Plan Configuration Card -->
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header plan-config-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Plan Configuration</span>
                 </div>
-            </c-col>
-            <c-col xs="12">
-                <div class="mt-3">
-                    <label>
-                        <input type="checkbox" formControlName="physicianSignature"> Add Physician Signature Request to
-                        this Note
-                    </label>
+                <span class="card-badge">Required</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <c-row class="mb-3">
+                <c-col xs="12" md="4">
+                    <div class="plan-select-group">
+                        <label class="plan-select-label">Frequency</label>
+                        <select class="plan-select" formControlName="frequency">
+                            <option selected="" value="F00">N/A</option>
+                            <option value="F01">1 time visit only</option>
+                            <option value="F02">1 time a week</option>
+                            <option value="F03">1-2 times a week</option>
+                            <option value="F04">2 times a week</option>
+                            <option value="F05">2-3 times a week</option>
+                            <option value="F06">3 times a week</option>
+                            <option value="F07">3-4 times a week</option>
+                            <option value="F08">4 times a week</option>
+                            <option value="F09">BID</option>
+                            <option value="F10">QD</option>
+                            <option value="F11">PRN</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                </c-col>
+                <c-col xs="12" md="4">
+                    <div class="plan-select-group">
+                        <label class="plan-select-label">Duration</label>
+                        <select class="plan-select" formControlName="duration">
+                            <option selected="" value="D00">N/A</option>
+                            <option value="D05">1 week</option>
+                            <option value="D06">2 weeks</option>
+                            <option value="D07">3 weeks</option>
+                            <option value="D08">4 weeks</option>
+                            <option value="D09">5 weeks</option>
+                            <option value="D10">6 weeks</option>
+                            <option value="D11">8 weeks</option>
+                            <option value="D12">10 weeks</option>
+                            <option value="D13">12 weeks</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                </c-col>
+                <c-col xs="12" md="4">
+                    <div class="plan-select-group">
+                        <label class="plan-select-label">Plan</label>
+                        <select class="plan-select" formControlName="plan">
+                            <option selected="" value="PL00">Begin Plan as Outlined</option>
+                            <option value="PL01">Begin Plan per Flowsheet</option>
+                            <option value="PL02">Begin Plan per Protocol</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col xs="12" md="6">
+                    <div class="plan-checkbox-group">
+                        <c-form-check>
+                            <input cFormCheckInput type="checkbox" formControlName="create_plan_of_care" id="create_plan_of_care" />
+                            <label cFormCheckLabel for="create_plan_of_care">Create Plan of Care Document</label>
+                        </c-form-check>
+                    </div>
+                </c-col>
+                <c-col xs="12" md="6">
+                    <div class="plan-checkbox-group">
+                        <c-form-check>
+                            <input cFormCheckInput type="checkbox" formControlName="physician_signature" id="physician_signature" />
+                            <label cFormCheckLabel for="physician_signature">Add Physician Signature Request to this Note</label>
+                        </c-form-check>
+                    </div>
+                </c-col>
+            </c-row>
+        </c-card-body>
+    </c-card>
+
+    <!-- Treatment to be Provided Card -->
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header treatment-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <span>Treatment to be Provided</span>
                 </div>
-            </c-col>
-        </c-row>
-    </div>
-
-    <h3>Treatment to be Provided:</h3>
-
-    <!-- Procedures -->
-    <c-row>
-        <c-col xs="6">
-            <div class="section">
-                <h4>Procedures</h4>
-                <hr />
-                <procedures (formReady)="setChildForm('procedures', $event)" [fields]="fields['procedures']"
-                    [data]="planData['procedures']">
-                </procedures>
+                <span class="card-badge">Treatment</span>
             </div>
-        </c-col>
-        <c-col xs="6">
-            <!-- Modalities -->
-            <div class="section">
-                <h4>Modalities</h4>
-                <hr />
-                <modalities (formReady)="setChildForm('modalities', $event)" [fields]="fields['modalities']"
-                    [data]="planData['modalities']">
-                </modalities>
-            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <c-row>
+                <!-- Procedures -->
+                <c-col xs="12" lg="4">
+                    <div class="treatment-section">
+                        <div class="treatment-section-header">
+                            <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
+                            <h4 class="treatment-section-title">Procedures</h4>
+                        </div>
+                        <plan-procedures-n
+                            [proceduresData]="proceduresData"
+                            (formReady)="setChildForm('procedures', $event)">
+                        </plan-procedures-n>
+                    </div>
+                </c-col>
 
-            <!-- Specialties -->
-            <div class="section">
-                <h4>Specialties</h4>
-                <hr />
-                <specialties (formReady)="setChildForm('specialties', $event)" [fields]="fields['specialties']"
-                    [data]="planData['specialties']">
-                </specialties>
-            </div>
-        </c-col>
-    </c-row>
-    <div class="mt-3">
-        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control
-            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()"
-            [componentRole]="['finalize-medical-note-role']">Finalize</button>
+                <!-- Modalities -->
+                <c-col xs="12" lg="4">
+                    <div class="treatment-section">
+                        <div class="treatment-section-header">
+                            <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <h4 class="treatment-section-title">Modalities</h4>
+                        </div>
+                        <plan-modalities-n
+                            [modalitiesData]="modalitiesData"
+                            (formReady)="setChildForm('modalities', $event)">
+                        </plan-modalities-n>
+                    </div>
+                </c-col>
+
+                <!-- Specialties -->
+                <c-col xs="12" lg="4">
+                    <div class="treatment-section">
+                        <div class="treatment-section-header">
+                            <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            <h4 class="treatment-section-title">Specialties</h4>
+                        </div>
+                        <plan-specialties-n
+                            [specialtiesData]="specialtiesData"
+                            (formReady)="setChildForm('specialties', $event)">
+                        </plan-specialties-n>
+                    </div>
+                </c-col>
+            </c-row>
+        </c-card-body>
+    </c-card>
+
+    <div class="action-buttons">
+        <button cButton matStepperPrevious class="action-button back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back</span>
+        </button>
+        <button cButton matStepperNext class="action-button next-button">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
     </div>
 </form>

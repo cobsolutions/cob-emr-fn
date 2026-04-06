@@ -11,7 +11,6 @@ export interface User {
     fullName?:string
     uuid?: string;
     email?: string
-    role?: string;
     password?: string
     clinicIds?: number[];
     userType?:string
@@ -20,5 +19,6 @@ export interface User {
     licence?:string
     speciality?:string
     credential?:string
+    phone?:string
     isClinicChanged?:boolean
 }

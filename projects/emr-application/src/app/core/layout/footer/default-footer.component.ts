@@ -7,9 +7,9 @@ import { FooterComponent } from '@coreui/angular-pro';
   styleUrls: ['./default-footer.component.css']
 })
 export class DefaultFooterComponent extends FooterComponent {
+  currentYear = new Date().getFullYear();
 
   constructor() {
     super();
   }
-
 }

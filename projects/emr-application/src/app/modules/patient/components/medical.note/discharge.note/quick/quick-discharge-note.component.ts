@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { FinalizeMedicalNoteRequest } from '../../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { QuickDischargeRequest } from '../../../../models/medical.note/quick.discharge.request';
@@ -19,36 +20,39 @@ export class QuickDischargeNoteComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Output() backToRecord = new EventEmitter<void>();
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() noteId: string
+  @Input() caseId: string
   @Input() patientName: string
   creator: string
   noteFinalizr: string
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
   noteType: MedicalNoteType = MedicalNoteType.Quick_Discharge_Note
-  private destroy$ = new Subject<void>();
+  private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService
     , private toastr: ToastrService) { }
 
-    ngOnDestroy() {
-      this.destroy$.next();
-      this.destroy$.complete();
-    }
+  ngOnDestroy() {
+    this.finalizeSub?.unsubscribe();
+  }
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(val => {
-      if (val !== null) {
-        const finalizeRequest = val;
+    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+      if (status) {
+        const finalizeRequest: FinalizeMedicalNoteRequest = {
+          caseId: this.caseId,
+          id: this.medicalNoteId,
+          noteType: MedicalNoteType.Quick_Discharge_Note,
+          finalizedBy: this.loggedInService.getLoggedUser().uuid
+        }
         this.draftAction().subscribe(d => {
           this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
             this.backtoPatientRecordActions();
           });
         });
       }
-    });
+    })
     this.dischargeForm = this.fb.group({
       dischargeDate: [Validators.required],
       numberOfVisits: [0, [Validators.required, Validators.min(0)]],
@@ -81,7 +85,7 @@ export class QuickDischargeNoteComponent implements OnInit {
       comment: this.dischargeForm.get('reason').value
     }
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       quickDischargeRequest: quickDischargeRequest
     }
@@ -114,8 +118,7 @@ export class QuickDischargeNoteComponent implements OnInit {
     }
     if (event === 'yes') {
       this.finalizeNoteVisibility = false
-      this.toastr.success('Medical note has been finalized');
-      this.backToRecord.emit()
+      this.toastr.success('Medical note has been finalized'); 
     }
   }
   finalize() {

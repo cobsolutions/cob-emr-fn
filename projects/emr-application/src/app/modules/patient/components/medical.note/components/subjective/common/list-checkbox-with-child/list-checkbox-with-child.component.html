@@ -1,0 +1,27 @@
+<div [formGroup]="formGroup" class="checkbox-with-child-container">
+    <div class="form-row" *ngIf="displayTitle || title">
+        <label class="field-label">{{ displayTitle || title }}</label>
+        <div class="checkbox-group-vertical-with-child" [class.multi-column]="useMultiColumn">
+            <div *ngFor="let column of optionColumns" class="checkbox-column">
+                <div *ngFor="let option of column" class="checkbox-with-child-item">
+                    <c-form-check class="checkbox-item">
+                        <input cFormCheckInput type="checkbox" [formControlName]="option.checkboxControlName" />
+                        <label cFormCheckLabel>{{ option.label }}</label>
+                    </c-form-check>
+                    <div *ngIf="!option.checkboxOnly && isCheckboxChecked(option.checkboxControlName)" class="child-input-container">
+                        <input *ngIf="option.childType === 'text'"
+                               cFormInput
+                               [formControlName]="option.childControlName"
+                               class="form-input child-input"
+                               [placeholder]="option.childPlaceholder || ''" />
+                        <textarea *ngIf="option.childType === 'textarea'"
+                                  [formControlName]="option.childControlName"
+                                  class="form-textarea child-textarea"
+                                  [rows]="option.childRows"
+                                  [placeholder]="option.childPlaceholder || ''"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

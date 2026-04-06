@@ -1,270 +1,469 @@
 <ngx-spinner></ngx-spinner>
 
-<c-card class="mb-3 ustify-content-center">
-    <c-card-body>
-        <!-- <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">Treating Doctor</span>
-                    <input cFormControl readonly [value]="treatingDoctor" />
-                </c-input-group>
-            </c-col>
-        </c-row> -->
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">Referring Doctor</span>
-                    <input cFormControl readonly [value]="referringDoctor" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">ReferringNPI</span>
-                    <input cFormControl readonly [value]="referringNPI" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">PlaceOfService</span>
-                    <input cFormControl readonly [value]="case.placeOfService | lowercase" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="g-3">
-            <c-col class="mb-1">
-                <c-input-group sizing="sm">
-                    <span cInputGroupText style="width: 8%;">InjuryCase</span>
-                    <input cFormControl readonly [value]="case.injuryCase | lowercase" />
-                </c-input-group>
-            </c-col>
-        </c-row>
-        <c-row class="mb-3">
-            <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
-                <strong>CaseDiagnosis</strong>
-            </label>
-            <c-col [sm]="12" *ngFor="let diagnosis of case.caseDiagnosis; let i = index">
-                <c-row>
-                    <c-col [sm]="1">
-                        <input cFormControl id="CaseDiagnosis" readonly type="text" [value]="diagnosis.diagnosisCode"
-                            sizing="sm" />
-                    </c-col>
-                    <c-col [sm]="11">
-                        <input cFormControl id="CaseDiagnosis" readonly type="text"
-                            [value]="diagnosis.diagnosisDescription" sizing="sm" />
-                    </c-col>
-                </c-row>
-            </c-col>
-            <div class="card shadow-sm border-0 mb-3"
-                [ngClass]="isExpired ? 'border-danger bg-light' : 'border-success'" *ngIf="case.authorizationData">
-                <div class="card-body d-flex align-items-center" *ngIf="case.authorizationData">
-                    <!-- Label -->
-                    <div class="me-3">
-                        <label [sm]="1" cCol cLabel="col" for="CaseDiagnosis" sizing="sm">
-                            <strong>Authorization</strong>
-                        </label>
-                    </div>
+<!-- Chart Note Section - Tree View -->
+<div class="tree-container chart-note-container" *ngIf="patientRecord">
+    <!-- Root Node -->
+    <div class="tree-root">
+        <div class="tree-root-header">
+            <svg cIcon name="cilDescription" class="tree-root-icon"></svg>
+            <span class="tree-root-title">Chart Note</span>
+        </div>
+    </div>
 
-                    <!-- Content -->
-                    <div class="flex-grow-1">
-                        <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-primary'">
-                            {{ case.authorizationData.counter >0 ?case.authorizationData.counter:0 }}
+    <!-- Tree Children -->
+    <div class="tree-children">
+        <!-- Note Entry Node -->
+        <div class="tree-node tree-node-last">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content chart-note-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilPencil" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Add Note</span>
+                </div>
+                <div class="tree-node-body chart-note-body">
+                    <textarea
+                        class="chart-note-textarea"
+                        [(ngModel)]="chartNote"
+                        placeholder="Enter chart note here..."
+                        rows="4">
+                    </textarea>
+                    <div class="chart-note-actions">
+                        <button class="chart-note-btn chart-note-btn-save" (click)="saveChartNote()" [disabled]="!chartNote?.trim()">
+                            <svg cIcon name="cilSave"></svg>
+                            Save Note
+                        </button>
+                        <button class="chart-note-btn chart-note-btn-clear" (click)="clearChartNote()" *ngIf="chartNote?.trim()">
+                            <svg cIcon name="cilX"></svg>
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Case Information Section - Tree View -->
+<div class="tree-container" *ngIf="patientRecord">
+    <!-- Root Node -->
+    <div class="tree-root">
+        <div class="tree-root-header">
+            <svg cIcon name="cilFolder" class="tree-root-icon"></svg>
+            <span class="tree-root-title">Case Information</span>
+        </div>
+    </div>
+
+    <!-- Tree Children -->
+    <div class="tree-children">
+        <!-- Referring Info Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilUserPlus" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Referring Info</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-data-grid">
+                        <div class="tree-data-item">
+                            <span class="tree-data-label">Doctor</span>
+                            <span class="tree-data-value">{{ referringDoctor || '-' }}</span>
+                        </div>
+                        <div class="tree-data-item">
+                            <span class="tree-data-label">NPI</span>
+                            <span class="tree-data-value">{{ referringNPI || '-' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place Of Service Node -->
+        <div class="tree-node tree-node-simple">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilLocationPin" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Place of Service</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-data-value text-capitalize">{{ case.placeOfService || '-' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Injury Case Node -->
+        <div class="tree-node tree-node-simple">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilMedicalCross" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Injury Case</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-data-value text-capitalize">{{ case.injuryCase || '-' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilNotes" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Additional Info</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-text-content" [class.empty]="!case.additionalInfo">
+                        {{ case.additionalInfo || 'No additional information' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case Diagnosis Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilMedicalCross" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Case Diagnosis</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-diagnosis-list" *ngIf="case.caseDiagnosis?.length > 0; else noDiagnosis">
+                        <div *ngFor="let diagnosis of case.caseDiagnosis; trackBy: trackByDiagnosis" class="tree-diagnosis-item">
+                            <span class="tree-diagnosis-code">{{ diagnosis.diagnosisCode }}</span>
+                            <span class="tree-diagnosis-desc">{{ diagnosis.diagnosisDescription }}</span>
+                        </div>
+                    </div>
+                    <ng-template #noDiagnosis>
+                        <div class="tree-text-content empty">No diagnosis assigned</div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance Node -->
+        <div class="tree-node">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilCreditCard" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Insurance</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-text-content" [class.empty]="!case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName">
+                        {{ case.caseInsuranceInformation?.primaryInsurance?.insuranceCompanyName || 'No insurance assigned' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authorization Node -->
+        <div class="tree-node tree-node-last" *ngIf="case.authorizationData">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilShieldAlt" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Authorization</span>
+                </div>
+                <div class="tree-node-body">
+                    <div class="tree-auth-content">
+                        <span class="auth-count" [ngClass]="isExpired ? 'expired' : 'current'">
+                            {{ case.authorizationData.counter > 0 ? case.authorizationData.counter : 0 }}
                         </span>
-                        of
-                        <span class="fw-bold" [ngClass]="isExpired ? 'text-danger' : 'text-success'">
+                        <span class="auth-separator">of</span>
+                        <span class="auth-total" [ngClass]="isExpired ? 'expired' : 'valid'">
                             {{ case.authorizationData.numberAuthorized }}
                         </span>
-                        Authorized
-
-                        <!-- Date -->
-                        <span class="ms-2" [ngClass]="isExpired ? 'text-danger fw-bold' : 'text-muted'">
-                            (until {{ case.authorizationData.effectiveEndtDate | date : 'MM/dd/yyyy' }})
+                        <span class="auth-label-text">Authorized</span>
+                        <span class="auth-date" [ngClass]="isExpired ? 'expired' : ''">
+                            (until {{ case.authorizationData.effectiveEndtDate | date:'MM/dd/yyyy' }})
                         </span>
-
-                        <!-- Expired Badge -->
-                        <span *ngIf="isExpired" class="badge bg-danger ms-2">
-                            Expired
-                        </span>
-                    </div>
-
-                    <!-- Icon -->
-                    <div class="ms-3">
-                        <i [ngClass]="isExpired 
-          ? 'bi bi-exclamation-triangle-fill text-danger fs-3' 
-          : 'bi bi-check-circle-fill text-success fs-3'">
-                        </i>
+                        <span *ngIf="isExpired" class="expired-badge">Expired</span>
                     </div>
                 </div>
             </div>
-            <div class="card shadow-sm border-0 mb-3" *ngIf="case.authorizationData ===null">
-                <div class="me-3">
-                    <label [sm]="3" cCol cLabel="col">
-                        <strong>
-                            <p style="color:red">Authorization is not set.</p>
-                        </strong>
-                    </label>
+        </div>
+
+        <!-- Authorization Not Set Node -->
+        <div class="tree-node tree-node-last tree-node-warning" *ngIf="case.authorizationData === null">
+            <div class="tree-connector"></div>
+            <div class="tree-node-content">
+                <div class="tree-node-header">
+                    <svg cIcon name="cilShieldAlt" class="tree-node-icon"></svg>
+                    <span class="tree-node-title">Authorization</span>
+                </div>
+                <div class="tree-node-body">
+                    <span class="tree-warning-text">Authorization is not set</span>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <c-col [sm]="12">
-            </c-col>
-            <c-col [sm]="12">
-                <div class="d-flex justify-content-end">
-                    <div class="p-2 d-flex align-items-center gap-2">
-                        <label for="patientRecordAction" class="mx-0 text-nowrap" style="padding-bottom: 15px;"
-                            hide-control [componentRole]="componentRole">Patient
-                            Record Actions:</label>
-                        <c-input-group class="mb-3">
-                            <select id="patientRecordAction" #patientActionSelect cSelect sizing="sm" hide-control
-                                [componentRole]="componentRole">
-                                <option [value]="action"
-                                    *ngFor="let action of case.patientRecordActions; let i = index">
-                                    {{ action }}
-                                </option>
-                            </select>
-                            <button cButton color="primary" variant="outline" size="sm"
-                                (click)="executeAction(patientActionSelect.value)" hide-control
-                                [componentRole]="componentRole">
-                                <svg cIcon name="cilArrowCircleRight"></svg>
-                            </button>
-                        </c-input-group>
-                    </div>
-                </div>
-            </c-col>
-        </c-row>
-    </c-card-body>
-</c-card>
-<!-- <div class="button-container m-2">
-    <button cButton color="primary" variant="outline" size="sm" (click)="show()">
-        OMT Test
-    </button>
-</div> -->
-<!--Patient Record-->
-<c-card class="mb-3 ustify-content-center" *ngIf="patientRecord ===true">
-    <c-card-body>
-        <c-nav variant="tabs">
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink>
-                    <svg cIcon class="me-2" name="cilNotes"></svg>
-                    Records
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=1 cNavLink>
-                    <svg cIcon class="me-2" name="cilPaperclip"></svg>
-                    E-Documents
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=2 cNavLink>
-                    <svg cIcon class="me-2" name="cilMoney"></svg>
-                    Patient Payment
-                </a>
-            </c-nav-item>
-            <c-nav-item>
-                <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=3 cNavLink>
-                    <svg cIcon class="me-2" name="cilHome"></svg>
-                    Home Exercise Program
-                </a>
-            </c-nav-item>
-        </c-nav>
-        <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
-            <c-tab-pane tabPaneIdx=0>
-                <c-card class="mb-3">
-                    <c-card-body>
-                        <ng-container *ngIf="props$ | async as props">
-                            <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-                                [items]="(patientRecords$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
-                                (itemsPerPageChange)="handleItemsPerPageChange($event)"
-                                [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-                                [tableProps]="{ hover: true, striped: false, small:true }"
-                                [tableBodyProps]="{ align: 'middle' }"
-                                (sorterValueChange)="handleSorterValueChange($event)" header>
-                                <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item"
-                                    let-tdContent="tdContent">
-                                    <td>
-                                        <ng-container [ngSwitch]="columnName">
-                                            <ng-container *ngSwitchCase="'record'">
-                                                {{item.status}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'date'">
-                                                {{item.date| date:'MMM d, y, h:mm a'}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchDefault>
-                                                {{tdContent}}
-                                            </ng-container>
-                                            <ng-container *ngSwitchCase="'actions'">
-                                                <c-input-group>
-                                                    <select id="patientRecordLineAction" #patientRecordLineAction
-                                                        cSelect sizing="sm">
-                                                        <option [value]="action"
-                                                            *ngFor="let action of item.actions; let i = index">
-                                                            {{ action }}
-                                                        </option>
-                                                    </select>
-                                                    <button cButton color="primary" variant="outline" size="sm"
-                                                        (click)="executeRecordLineAction(patientRecordLineAction.value, item.entityId,item.status)">
-                                                        <svg cIcon name="cilArrowCircleRight"></svg>
-                                                    </button>
-                                                </c-input-group>
-                                            </ng-container>
-                                        </ng-container>
-                                    </td>
-                                </ng-template>
-                            </c-smart-table>
-                            <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage" size="sm"
-                                (activePageChange)="handleActivePageChange($event)"
-                                [pages]="props.totalPages"></c-smart-pagination>
-                        </ng-container>
-                    </c-card-body>
-                </c-card>
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=1>
-                E-Documents component
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=2>
-
-                <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
-            </c-tab-pane>
-            <c-tab-pane tabPaneIdx=3>
-                Home Exercise Program component
-            </c-tab-pane>
-        </c-tab-content>
-    </c-card-body>
-</c-card>
-
-<span *ngIf="patientRecord ===false">
-    <c-card class="mb-3 ustify-content-center">
-        <!-- Initial Examination -->
-        <initial-examination *ngIf="patientRecordAction ==='Add Initial Examination' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id"></initial-examination>
-        <!-- Daily Note -->
-        <daily-note *ngIf="patientRecordAction ==='Add Daily Note' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.id"></daily-note>
-        <!--Progress Note-->
-        <progress-note *ngIf="patientRecordAction ==='Progress Note' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.id"></progress-note>
-        <!--Quick Discharge Note-->
-        <quick-discharge-note *ngIf="patientRecordAction ==='Quick Discharge' && medicalNoteId"
-            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.id" [patientName]="patientName"
-            (backToRecord)="handleBackAction()"></quick-discharge-note>
-        <full-discharge-note *ngIf="patientRecordAction ==='Discharge' && medicalNoteId" (back)="handleBackAction()"
-            [medicalNoteId]="medicalNoteId" [caseId]="case.id"></full-discharge-note>
-    </c-card>
-    <span *ngIf=" patientRecordAction==='ERROR_FINALIZE'">
-        <c-callout color="danger">
-            {{errorMessage}}
-        </c-callout>
-        <div class="button-container m-2">
-            <button cButton color="primary" variant="outline" size="sm" (click)="handleBackAction()">
-                Back to patient records
+    <!-- Actions Footer -->
+    <div class="tree-actions" *ngIf="filteredPatientCaseActions.length && canInitializeMedicalNote">
+        <label for="patientRecordAction" class="action-label">
+            Patient Record Actions:
+        </label>
+        <div class="action-controls">
+            <select id="patientRecordAction" #patientActionSelect class="action-select">
+                <option [value]="action.key" *ngFor="let action of filteredPatientCaseActions; trackBy: trackByAction">
+                    {{ action.label }}
+                </option>
+            </select>
+            <button class="action-btn" (click)="executeAction(patientActionSelect.value)">
+                <svg cIcon name="cilArrowCircleRight"></svg>
             </button>
         </div>
-    </span>
+    </div>
+</div>
+
+<!-- Case Details -->
+<div class="case-details-container" *ngIf="patientRecord === true">
+    <!-- Sidebar -->
+    <aside class="case-sidebar">
+        <div class="sidebar-header">Case Details</div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('records')"
+                    (click)="setActive('records')">
+                    <svg cIcon name="cilNotes" class="nav-icon"></svg>
+                    Patient Records
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('authorization')"
+                    (click)="setActive('authorization')">
+                    <svg cIcon name="cilShieldAlt" class="nav-icon"></svg>
+                    Authorization
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('documents')"
+                    (click)="setActive('documents')">
+                    <svg cIcon name="cilPaperclip" class="nav-icon"></svg>
+                    E-Documents
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('payments')"
+                    (click)="setActive('payments')">
+                    <svg cIcon name="cilMoney" class="nav-icon"></svg>
+                    Patient Payment
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="sidebar-nav-link" [class.active]="isActive('home-program')"
+                    (click)="setActive('home-program')">
+                    <svg cIcon name="cilHome" class="nav-icon"></svg>
+                    Home Exercise Program
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="case-content">
+        <!-- Records -->
+        <div *ngIf="isActive('records')">
+            <div class="records-card">
+                <ng-container *ngIf="props$ | async as props">
+                    <div class="records-table-container">
+                        <table class="records-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-record">Record Type</th>
+                                    <th class="th-dos">Date of Service</th>
+                                    <th class="th-actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of (patientRecords$ | async) ?? []; let i = index; trackBy: trackByRecord" class="record-row">
+                                    <td>
+                                        <span class="record-type-badge" [ngClass]="{
+                                            'badge-initial': item.status === 'Initial Examination',
+                                            'badge-initial-plan': item.status === 'Initial Exam Plan',
+                                            'badge-initial-score': item.status === 'Initial Exam Score',
+                                            'badge-daily': item.status === 'Daily Note',
+                                            'badge-progress': item.status === 'Progress Note',
+                                            'badge-progress-plan': item.status === 'Progress Note Plan',
+                                            'badge-progress-rom': item.status === 'Progress Note Score',
+                                            'badge-quick-discharge': item.status === 'Quick Discharge' || item.status === 'Quick_Discharge',
+                                            'badge-discharge': item.status === 'Discharge Note' || item.status === 'Discharge' || item.status === 'Discharge_Note'
+                                        }">
+                                            {{item.status}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="date-cell" *ngIf="item.dos; else noDos">
+                                            <span>{{item.dos | date:'MMM d, y'}}</span>
+                                        </div>
+                                        <ng-template #noDos>
+                                            <span class="no-dos">-</span>
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <div class="record-action-group" *ngIf="getFilteredRecordActions(item.actions).length > 0">
+                                            <select [id]="'actionSelect_' + i" #actionSelect class="record-action-select">
+                                                <option [value]="action" *ngFor="let action of getFilteredRecordActions(item.actions)">
+                                                    {{ action }}
+                                                </option>
+                                            </select>
+                                            <button class="record-action-btn"
+                                                (click)="executeRecordLineAction(actionSelect.value, item.entityId, item.status, item.noteId, item.isForwarded, item.coSigner)">
+                                                <svg cIcon name="cilArrowCircleRight"></svg>
+                                            </button>
+                                        </div>
+                                        <span class="badge bg-warning text-dark" *ngIf="getFilteredRecordActions(item.actions).length === 0">
+                                            Incomplete
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="(patientRecords$ | async)?.length === 0" class="empty-row">
+                                    <td colspan="4">
+                                        <div class="empty-state">
+                                            <svg cIcon name="cilNotes" class="empty-icon"></svg>
+                                            <span>No patient records found</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="records-pagination" *ngIf="props.totalPages > 1">
+                        <c-smart-pagination [activePage]="props.activePage" size="sm"
+                            (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages">
+                        </c-smart-pagination>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <!-- Authorization -->
+        <div *ngIf="isActive('authorization')">
+            <authorization-patient-case
+                [patientCase]="case"
+                (changeVisibility)="onAuthVisibilityChange($event)">
+            </authorization-patient-case>
+        </div>
+
+        <!-- Documents -->
+        <div *ngIf="isActive('documents')">
+            <div class="e-documents-section">
+                <div class="section-toolbar">
+                    <h5 class="content-title">E-Documents</h5>
+                    <button class="add-document-btn" (click)="toggleEDocumentForm()" *ngIf="!showEDocumentForm">
+                        <svg cIcon name="cilPlus"></svg>
+                        Add Document
+                    </button>
+                </div>
+
+                <!-- E-Document Form -->
+                <div class="upload-container" *ngIf="showEDocumentForm">
+                    <div class="upload-overlay" *ngIf="isUploadingDocument">
+                        <c-spinner color="primary"></c-spinner>
+                        <span class="upload-text">Uploading document...</span>
+                    </div>
+                    <patient-case-e-document
+                        [caseName]="case.title"
+                        [caseId]="case.uuid"
+                        (documentSubmitted)="onDocumentSubmitted($event)"
+                        (cancel)="onCancelEDocument()">
+                    </patient-case-e-document>
+                </div>
+
+                <!-- E-Document List -->
+                <patient-case-e-document-list
+                    [caseDocuments]="caseDocuments"
+                    [allCasesDocuments]="allCasesDocuments"
+                    [caseName]="case.title"
+                    (viewDocument)="onViewDocument($event)"
+                    (editDocument)="onEditDocument($event)"
+                    (deleteDocument)="onDeleteDocument($event)"
+                    (downloadDocument)="onDownloadDocument($event)">
+                </patient-case-e-document-list>
+            </div>
+        </div>
+
+        <!-- Payments -->
+        <div *ngIf="isActive('payments')">
+            <div class="content-placeholder">
+                <h5 class="content-title">Patient Payment</h5>
+            </div>
+            <patient-payment [patientId]="patientId" [caseId]="case.id"></patient-payment>
+        </div>
+
+        <!-- Home Program -->
+        <div *ngIf="isActive('home-program')">
+            <div class="content-placeholder">
+                <h5 class="content-title">Home Exercise Program</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SOAP Notes -->
+<span *ngIf="patientRecord === false">
+    <div class="note-container">
+        <!-- Initial Examination -->
+        <initial-examination *ngIf="patientRecordAction ==='Initial_Examination' && noteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [caseId]="case.uuid"
+            [noteId]="noteId" [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></initial-examination>
+        <!-- Daily Note -->
+        <daily-note-n *ngIf="patientRecordAction ==='Daily_Note' && noteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></daily-note-n>
+        <!-- Progress Note -->
+        <progress-note-n *ngIf="patientRecordAction ==='Progress_Note' && noteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></progress-note-n>
+        <!-- Quick Discharge Note -->
+        <quick-discharge-n *ngIf="patientRecordAction ==='Quick_Discharge' && noteId"
+            (back)="handleBackAction()" [medicalNoteId]="medicalNoteId" [noteId]="noteId" [caseId]="case.uuid"
+            [patientName]="patientName" (backToRecord)="handleBackAction()"></quick-discharge-n>
+        <!-- Discharge Note -->
+        <discharge-n *ngIf="patientRecordAction ==='Discharge' && noteId" (back)="handleBackAction()"
+            [medicalNoteId]="medicalNoteId" [caseId]="case.uuid" [noteId]="noteId"
+            [isForwarded]="noteIsForwarded" [coSigner]="noteCoSigner"></discharge-n>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-card" *ngIf="patientRecordAction==='ERROR_FINALIZE'">
+        <div class="error-card-header">
+            <div class="error-header-content">
+                <div class="error-icon-wrapper">
+                    <svg cIcon name="cilWarning"></svg>
+                </div>
+                <div class="error-header-text">
+                    <h6>Unable to Create Note</h6>
+                    <span class="error-subtitle">An error occurred while processing your request</span>
+                </div>
+            </div>
+            <div class="error-badge">Error</div>
+        </div>
+        <div class="error-card-body">
+            <p class="error-message">{{errorMessage}}</p>
+            <div class="error-suggestions">
+                <span class="suggestion-label">What you can try:</span>
+                <ul>
+                    <li>Check your network connection</li>
+                    <li>Verify patient case information is complete</li>
+                    <li>Contact support if the issue persists</li>
+                </ul>
+            </div>
+        </div>
+        <div class="error-card-footer">
+            <button cButton color="danger" variant="outline" size="sm" (click)="handleBackAction()">
+                <svg cIcon name="cilArrowLeft" class="me-1"></svg>
+                Back to Patient Records
+            </button>
+        </div>
+    </div>
 </span>
+
+<!-- Appointment Reason Modal -->
 <c-modal id="AppointmentAction" [visible]="reasonVisibility">
     <c-modal-header>
         <h5 cModalTitle>Appointment {{appointmentCancelNoShowReason?.status}} Reason</h5>
@@ -289,12 +488,8 @@
             [value]="appointmentCancelNoShowReason?.comment"></textarea>
     </c-modal-body>
 </c-modal>
-<c-modal id="omtTest" [visible]="showTest" size="lg" backdrop="static" scrollable="true">
-    <c-modal-body>
-        <button (click)="toggleOMTVisibility()" cButtonClose style="float: right;"></button>
-        <spine-molbp-test></spine-molbp-test>
-    </c-modal-body>
-</c-modal>
+
+<!-- View PDF Modal -->
 <c-modal id="viewPDF" [visible]="viewPDFVisibility" size="lg" backdrop="static" scrollable="true">
     <c-modal-body>
         <button (click)="toggleviewPDFVisibility()" cButtonClose style="float: right;"></button>
@@ -305,4 +500,87 @@
         <initial-examination-summary *ngIf="recordActionStauts ==='Initial Evaluation'"
             [id]="recordActionEntityId"></initial-examination-summary>
     </c-modal-body>
+</c-modal>
+
+<!-- E-Document Preview Modal -->
+<c-modal id="eDocumentPreview" [visible]="previewVisible" [fullscreen]="true" backdrop="static" scrollable="true">
+    <c-modal-header>
+        <h5 cModalTitle>{{ previewFileName }}</h5>
+        <button (click)="closePreview()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <div class="preview-loading" *ngIf="isLoadingPreview">
+            <c-spinner color="primary"></c-spinner>
+            <span>Loading document...</span>
+        </div>
+        <div class="preview-content" *ngIf="!isLoadingPreview && previewUrl">
+            <!-- Image Preview -->
+            <img *ngIf="isPreviewImage" [src]="previewSafeUrl" [alt]="previewFileName" class="preview-image" />
+            <!-- PDF Preview -->
+            <iframe *ngIf="isPreviewPdf" [src]="previewSafeUrl" class="preview-pdf"></iframe>
+            <!-- Unsupported Format -->
+            <div class="preview-unsupported" *ngIf="!isPreviewImage && !isPreviewPdf">
+                <svg cIcon name="cilFile" class="unsupported-icon"></svg>
+                <p>Preview not available for this file type.</p>
+                <p class="unsupported-hint">Use the download button to view this document.</p>
+            </div>
+        </div>
+    </c-modal-body>
+</c-modal>
+
+<!-- E-Document Edit Modal -->
+<c-modal id="eDocumentEdit" [visible]="editVisible" size="lg" backdrop="static" scrollable="true">
+    <div class="edit-modal-header">
+        <div class="edit-modal-title">
+            <svg cIcon name="cilPencil" class="edit-header-icon"></svg>
+            <span>Edit Document</span>
+        </div>
+        <button type="button" class="edit-close-btn" (click)="closeEdit()">
+            <svg cIcon name="cilX"></svg>
+        </button>
+    </div>
+    <c-modal-body class="edit-modal-body">
+        <form *ngIf="editForm" [formGroup]="editForm">
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label for="editDocumentType" class="edit-form-label">Document Type <span class="edit-required">*</span></label>
+                    <select id="editDocumentType" formControlName="documentType" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('documentType')?.invalid && editForm.get('documentType')?.touched">
+                        <option *ngFor="let type of documentTypes; trackBy: trackByDocType" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="edit-form-group">
+                    <label for="editNameOfDocument" class="edit-form-label">Name of Document <span class="edit-required">*</span></label>
+                    <input type="text" id="editNameOfDocument" formControlName="nameOfDocument" class="edit-form-control"
+                        placeholder="Enter document name"
+                        [class.is-invalid]="editForm.get('nameOfDocument')?.invalid && editForm.get('nameOfDocument')?.touched" />
+                </div>
+            </div>
+            <div class="edit-form-row">
+                <div class="edit-form-group">
+                    <label for="editDateOfReceipt" class="edit-form-label">Date of Receipt <span class="edit-required">*</span></label>
+                    <input type="date" id="editDateOfReceipt" formControlName="dateOfReceipt" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('dateOfReceipt')?.invalid && editForm.get('dateOfReceipt')?.touched" />
+                </div>
+                <div class="edit-form-group">
+                    <label for="editAssignedCase" class="edit-form-label">Assigned Case <span class="edit-required">*</span></label>
+                    <select id="editAssignedCase" formControlName="assignedCase" class="edit-form-control"
+                        [class.is-invalid]="editForm.get('assignedCase')?.invalid && editForm.get('assignedCase')?.touched">
+                        <option *ngFor="let caseOption of editAssignedCaseOptions" [value]="caseOption.value">{{ caseOption.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </c-modal-body>
+    <div class="edit-modal-footer">
+        <button type="button" class="edit-btn-cancel" (click)="closeEdit()">
+            <svg cIcon name="cilX"></svg>
+            Cancel
+        </button>
+        <button type="button" class="edit-btn-save" [disabled]="editForm?.invalid || isSavingEdit" (click)="onSaveEdit()">
+            <c-spinner *ngIf="isSavingEdit" size="sm"></c-spinner>
+            <svg *ngIf="!isSavingEdit" cIcon name="cilSave"></svg>
+            Save Changes
+        </button>
+    </div>
 </c-modal>

@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './core';
 import { OrganizationLayoutComponent } from './core/organization.layout/organization-layout.component';
+import { SignatureLayoutComponent } from './core/signature.layout/signature-layout.component';
 import { Role } from './modules/security/model/role';
 import { KcAuthGuard } from './modules/security/service/kc-auth.guard';
+import { PendingActivationGuard } from './modules/security/service/pending-activation.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'emr/dashboard',
+    redirectTo: 'emr',
     pathMatch: 'full',
   },
   {
@@ -28,16 +30,49 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'emr-signature',
+    component: SignatureLayoutComponent,
+    canActivate: [KcAuthGuard],
+    data: {
+      title: 'Signature Capture'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/doctor-signature/doctor-signature.module').then((m) => m.DoctorSignatureModule)
+      }
+    ]
+  },
+  {
     path: 'emr',
     component: DefaultLayoutComponent,
     canActivate: [KcAuthGuard],
+    canActivateChild: [PendingActivationGuard],
     data: {
       title: 'Home',
       type: 'user'
     },
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        canActivate: [KcAuthGuard],
+        data: {
+          defaultRedirect: true,
+          adminRedirect: '/emr/organization/list',
+          normalRedirect: '/emr/dashboard'
+        },
+        children: []
+      },
+      {
         path: 'dashboard',
+        data: {
+          title: 'Dashboard',
+          excludeRoles: [Role.ADMIN_ROLE],
+          excludeRedirect: '/emr/organization/list'
+        },
+        canActivate: [KcAuthGuard],
         loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
@@ -102,6 +137,35 @@ const routes: Routes = [
         path: 'referring/provider',
         loadChildren: () =>
           import('./modules/referring.provider/refering-provider.module').then((m) => m.ReferingProviderModule)
+      },
+      {
+        path: 'incoming-cosign-docs',
+        data: {
+          title: 'Incoming Cosign Docs',
+          excludeRoles: [Role.ADMIN_ROLE],
+          excludeRedirect: '/emr/organization/list'
+        },
+        canActivate: [KcAuthGuard],
+        loadChildren: () =>
+          import('./modules/incoming-cosign-docs/incoming-cosign-docs.module').then((m) => m.IncomingCosignDocsModule)
+      },
+      {
+        path: 'pending-activation',
+        data: { title: 'Pending Activation' },
+        loadChildren: () =>
+          import('./modules/activation/activation.module').then((m) => m.ActivationModule)
+      },
+      {
+        path: 'pending-account',
+        data: { title: 'Account Pending' },
+        loadChildren: () =>
+          import('./modules/activation/pending-doctor.module').then((m) => m.PendingDoctorModule)
+      },
+      {
+        path: 'account-inactive',
+        data: { title: 'Account Inactive' },
+        loadChildren: () =>
+          import('./modules/activation/account-inactive.module').then((m) => m.AccountInactiveModule)
       }
     ]
 

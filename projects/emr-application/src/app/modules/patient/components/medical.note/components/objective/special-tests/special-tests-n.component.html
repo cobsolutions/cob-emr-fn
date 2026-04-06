@@ -1,0 +1,2746 @@
+<div [formGroup]="specialTestForm" class="omt-form">
+    <div class="form-row">
+        <label class="field-label">Flexibility</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="flexibility" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="flexibility" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showFlexibilityFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Thomas Test</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="thomas_test" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="thomas_test" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityThomasTestFields" class="dependent-field-box">
+            <measurement-check-table [labels]="specialTestConfig.thomasTest.labels" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.thomasTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.thomasTest.commentsFieldName"
+                [showComments]="specialTestConfig.thomasTest.showComments"
+                [initialData]="formData">
+            </measurement-check-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Ober</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="ober" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="ober" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityoberFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.oberTestNoLabels.columns"
+                [labels]="specialTestConfig.oberTestNoLabels.labels"
+                [options]="specialTestConfig.oberTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.oberTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.oberTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.oberTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.oberTestNoLabels.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">90/90 Hamstring Flexibility</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="_90_90_hamstring_flexibility" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="_90_90_hamstring_flexibility" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityHamstringFlexibilityFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.columns"
+                [labels]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.labels"
+                [options]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.options"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.ninetynineHamstringFlexibilityTestNoLabels.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Gastrocnemius Length</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="gastrocnemius_length" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="gastrocnemius_length" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityGastrocnemiusLengthFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.gastrocnemiusLengthTest.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.gastrocnemiusLengthTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.gastrocnemiusLengthTest.commentsFieldName"
+                [showComments]="specialTestConfig.gastrocnemiusLengthTest.showComments"
+                [initialData]="formData">
+            </measurement-input-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Soleus Muscle Length</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="soleus_muscle_length" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="soleus_muscle_length" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilitySoleusMuscleLengthFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.soleusMuscleLengthTest.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.soleusMuscleLengthTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.soleusMuscleLengthTest.commentsFieldName"
+                [showComments]="specialTestConfig.soleusMuscleLengthTest.showComments"
+                [initialData]="formData">
+            </measurement-input-table>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Structural</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="structural" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="structural" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showStructuralFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Craig's Test</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="craigs_test" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="craigs_test" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityCraigTestFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.craigsTestNoLabels.columns"
+                [labels]="specialTestConfig.craigsTestNoLabels.labels"
+                [options]="specialTestConfig.craigsTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.craigsTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.craigsTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.craigsTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.craigsTestNoLabels.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Tibial Torsion</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="tibial_torsion" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="tibial_torsion" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFlexibilityTibialTorsionFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.tibialTorsionFieldTestNoLabels.columns"
+                [labels]="specialTestConfig.tibialTorsionFieldTestNoLabels.labels"
+                [options]="specialTestConfig.tibialTorsionFieldTestNoLabels.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.tibialTorsionFieldTestNoLabels.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.tibialTorsionFieldTestNoLabels.commentsFieldName"
+                [hasTextInput]="specialTestConfig.tibialTorsionFieldTestNoLabels.hasTextInput"
+                [showComments]="specialTestConfig.tibialTorsionFieldTestNoLabels.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Ligament Integrity Knee</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="ligament_integrity_knee" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="ligament_integrity_knee" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLigamentIntegrityKneeFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Valgus Stress at 0 Knee Flex</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="valgus_stress_at_0_knee_flex" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="valgus_stress_at_0_knee_flex" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeValgusStressAt0KneeFlexFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.valgusStressAt0KneeFlex.labels"
+                [options]="specialTestConfig.valgusStressAt0KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.valgusStressAt0KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.valgusStressAt0KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.valgusStressAt0KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.valgusStressAt0KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.valgusStressAt0KneeFlex.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Valgus Stress at 30 Knee Flex</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="valgus_stress_at_30_knee_flex" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="valgus_stress_at_30_knee_flex" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeValgusStressAt30KneeFlexFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.valgusStressAt30KneeFlex.labels"
+                [options]="specialTestConfig.valgusStressAt30KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.valgusStressAt30KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.valgusStressAt30KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.valgusStressAt30KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.valgusStressAt30KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.valgusStressAt30KneeFlex.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Varus Stress at 0 Knee Flex</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="varus_stress_at_0_knee_flex" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="varus_stress_at_0_knee_flex" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeVarusStressat0KneeFlexFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.varusStressAt0KneeFlex.labels"
+                [options]="specialTestConfig.varusStressAt0KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.varusStressAt0KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.varusStressAt0KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.varusStressAt0KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.varusStressAt0KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.varusStressAt0KneeFlex.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Varus Stress at 30 Knee Flex</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="varus_stress_at_30_knee_flex" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="varus_stress_at_30_knee_flex" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeVarusStressat30KneeFlexFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.varusStressAt30KneeFlex.labels"
+                [options]="specialTestConfig.varusStressAt30KneeFlex.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.varusStressAt30KneeFlex.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.varusStressAt30KneeFlex.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.varusStressAt30KneeFlex.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.varusStressAt30KneeFlex.showApplyToAll"
+                [showComments]="specialTestConfig.varusStressAt30KneeFlex.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Anterior Drawer</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="anterior_drawer" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="anterior_drawer" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeAnteriorDrawerFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.anteriorDrawer.labels"
+                [options]="specialTestConfig.anteriorDrawer.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.anteriorDrawer.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.anteriorDrawer.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.anteriorDrawer.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.anteriorDrawer.showApplyToAll"
+                [showComments]="specialTestConfig.anteriorDrawer.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Posterior Drawer</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="posterior_drawer" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="posterior_drawer" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneePosteriorDrawerFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.posteriorDrawer.labels"
+                [options]="specialTestConfig.posteriorDrawer.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.posteriorDrawer.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.posteriorDrawer.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.posteriorDrawer.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.posteriorDrawer.showApplyToAll"
+                [showComments]="specialTestConfig.posteriorDrawer.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Lachman's</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="lachmans" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="lachmans" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeLachmansFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.lachmans.labels"
+                [options]="specialTestConfig.lachmans.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.lachmans.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.lachmans.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.lachmans.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.lachmans.showApplyToAll"
+                [showComments]="specialTestConfig.lachmans.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Pivot Shift</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pivot_shift" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pivot_shift" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneePivotShiftFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.pivotShift.labels"
+                [options]="specialTestConfig.pivotShift.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.pivotShift.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.pivotShift.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.pivotShift.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.pivotShift.showApplyToAll"
+                [showComments]="specialTestConfig.pivotShift.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Sag Sign</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="sag_sign" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="sag_sign" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLigamentIntegrityKneeSagSignFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.sagSign.labels" [options]="specialTestConfig.sagSign.options"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.sagSign.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.sagSign.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.sagSign.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.sagSign.showApplyToAll"
+                [showComments]="specialTestConfig.sagSign.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Stork Stand SI Mobility Test</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="stork_stand_si_mobility_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="stork_stand_si_mobility_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showStorkStandSiMobilityTestFields" class="dependent-field-box">
+        <measurement-table [labels]="specialTestConfig.storkStandSiMobilityTest.labels"
+            [options]="specialTestConfig.storkStandSiMobilityTest.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.storkStandSiMobilityTest.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.storkStandSiMobilityTest.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.storkStandSiMobilityTest.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.storkStandSiMobilityTest.showApplyToAll"
+            [showComments]="specialTestConfig.storkStandSiMobilityTest.showComments"
+            [initialData]="formData">
+        </measurement-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Patellofemoral</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="patellofemoral" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="patellofemoral" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPatellofemoralFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">J Sign</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="j_sign" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="j_sign" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPatellofemoralJSignFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.jSign.labels" [options]="specialTestConfig.jSign.options"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.jSign.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.jSign.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.jSign.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.jSign.showApplyToAll"
+                [showComments]="specialTestConfig.jSign.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Patellar Ballottement</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="patellar_ballottement" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="patellar_ballottement" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPatellofemoralPatellarBallottementFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.patellarBallottement.labels"
+                [options]="specialTestConfig.patellarBallottement.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.patellarBallottement.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.patellarBallottement.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.patellarBallottement.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.patellarBallottement.showApplyToAll"
+                [showComments]="specialTestConfig.patellarBallottement.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Patellar Compression</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="patellar_compression" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="patellar_compression" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPatellofemoralPatellarCompressionFields" class="dependent-field-box">
+            <table class="walk-test-table" [formGroup]="specialTestForm">
+                <tbody>
+                    <tr>
+                        <td>Normal</td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_right_normal" />
+                            </c-form-check>
+                        </td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_left_normal" />
+                            </c-form-check>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Crepitus</td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_right_crepitus" />
+                            </c-form-check>
+                        </td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_left_crepitus" />
+                            </c-form-check>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Painful</td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_right_painful" />
+                            </c-form-check>
+                        </td>
+                        <td>
+                            <c-form-check>
+                                <input cFormCheckInput type="checkbox" formControlName="patellar_compression_left_painful" />
+                            </c-form-check>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Patellar Passive Mobility</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="patellar_passive_mobility" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="patellar_passive_mobility" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPatellofemoralPatellarPassiveMobilityFields" class="dependent-field-box">
+            <table class="walk-test-table" [formGroup]="specialTestForm">
+                <tbody>
+                    <tr>
+                        <td>Medial</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_medial_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_medial_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lateral</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_lateral_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_lateral_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Superior</td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_superior_right">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select cSelect class="table-input" formControlName="patellar_passive_mobility_superior_left">
+                                <option value="not_tested">Not Tested</option>
+                                <option value="normal">Normal</option>
+                                <option value="hypomobile">Hypomobile</option>
+                                <option value="hypermobile">Hypermobile</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Functional</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="functional" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="functional" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showFunctionalFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Core Stabilization</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="core_stabilization" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="core_stabilization" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalCoreStabilizationFields" class="dependent-field-box">
+            <label style="margin-right: 10px;">Hold Duration</label>
+            <input formControlName="hold_duration_comments_text" class="form-textarea" />
+        </div>
+        <div class="form-row">
+            <label class="field-label">Selective Functional Movement Assessment</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="selective_functional_movement_assessment"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalSelectiveFunctionalMovementAssessmentFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.selectiveFunctionalMovementAssessment.labels"
+                [options]="specialTestConfig.selectiveFunctionalMovementAssessment.options"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.selectiveFunctionalMovementAssessment.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.selectiveFunctionalMovementAssessment.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.selectiveFunctionalMovementAssessment.showApplyToAll"
+                [showComments]="specialTestConfig.selectiveFunctionalMovementAssessment.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">30 Second Chair Stand</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="_30_second_chair_stand" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="_30_second_chair_stand" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctional30SecondChairStandFields" class="dependent-field-box">
+            <c-row>
+                <c-col xs="2">
+                    <label style="margin-right: 10px">Number of Stands in 30 Seconds</label>
+                </c-col>
+                <c-col xs="10">
+                    <input formControlName="number_of_stands_30_second_chair_stand" class="form-textarea"
+                        style="max-width:290px" />
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col xs="2">
+                    <label style="margin-right: 10px"></label>
+                </c-col>
+                <c-col xs="10">
+                    <label style="margin-right: 10px"></label>
+                    <textarea formControlName="comment_30_second_chair_stand" class="form-textarea" rows="4"
+                        style="max-width:100%"></textarea>
+                </c-col>
+            </c-row>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Side Bridge/Plank</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="side_bridge_plank" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="side_bridge_plank" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalSideBridgePlankFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.sideBridgePlank.labels" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.sideBridgePlank.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.sideBridgePlank.commentsFieldName"
+                [showComments]="specialTestConfig.sideBridgePlank.showComments"
+                [initialData]="formData">
+            </measurement-input-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Prone Plank</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="prone_plank" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="prone_plank" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalPronePlankFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.pronePlank.labels" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.pronePlank.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.pronePlank.commentsFieldName"
+                [showComments]="specialTestConfig.pronePlank.showComments"
+                [initialData]="formData">
+            </measurement-input-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Single Leg Bridge Hold</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="single_leg_bridge_hold" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="single_leg_bridge_hold" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalSingleLegBridgeHoldFields" class="dependent-field-box">
+            <measurement-table [labels]="specialTestConfig.singleLegBridgeHold.labels"
+                [options]="specialTestConfig.singleLegBridgeHold.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.singleLegBridgeHold.fieldPrefix"
+                [applyToAllFieldName]="specialTestConfig.singleLegBridgeHold.applyToAllFieldName"
+                [commentsFieldName]="specialTestConfig.singleLegBridgeHold.commentsFieldName"
+                [showApplyToAll]="specialTestConfig.singleLegBridgeHold.showApplyToAll"
+                [showComments]="specialTestConfig.singleLegBridgeHold.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Single Leg Hop Test (for distance)</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="single_leg_hop_test_for_distance"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="single_leg_hop_test_for_distance" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalSingleLegHopTestForDistanceFields" class="dependent-field-box">
+            <measurement-input-table [labels]="specialTestConfig.singleLegHopTestForDistance.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.singleLegHopTestForDistance.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.singleLegHopTestForDistance.commentsFieldName"
+                [showComments]="specialTestConfig.singleLegHopTestForDistance.showComments"
+                [initialData]="formData">
+            </measurement-input-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">2 Leg Squat With Overhead Reach</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="_2_leg_squat_with_overhead_reach"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="_2_leg_squat_with_overhead_reach" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctional2LegSquatWithOverheadReachFields" class="dependent-field-box">
+            <measurement-check-table [labels]="specialTestConfig.twoLegSquatWithOverheadReach.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.twoLegSquatWithOverheadReach.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.twoLegSquatWithOverheadReach.commentsFieldName"
+                [showComments]="specialTestConfig.twoLegSquatWithOverheadReach.showComments"
+                [initialData]="formData">
+            </measurement-check-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">1 Leg Squat With Overhead Reach</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="_1_leg_squat_with_overhead_reach"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="_1_leg_squat_with_overhead_reach" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctional1LegSquatWithOverheadReachFields" class="dependent-field-box">
+            <measurement-check-table [labels]="specialTestConfig.oneLegSquatWithOverheadReach.labels"
+                [formGroup]="specialTestForm" [fieldPrefix]="specialTestConfig.oneLegSquatWithOverheadReach.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.oneLegSquatWithOverheadReach.commentsFieldName"
+                [showComments]="specialTestConfig.oneLegSquatWithOverheadReach.showComments"
+                [initialData]="formData">
+            </measurement-check-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Running Mechanics</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="running_mechanics" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="running_mechanics" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalRunningMechanicsFields" class="dependent-field-box">
+            <textarea formControlName="running_mechanics_comments_text" class="form-textarea" rows="4"></textarea>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Back Extension</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="back_extension" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="back_extension" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFunctionalBackExtensionFields" class="dependent-field-box">
+            <label cFormCheckLabel>Hold Duration</label>
+            <input formControlName="back_extension_comments_text" class="form-textarea" />
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Alar Ligament Test</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="alar_ligament_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="alar_ligament_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showAlarLigamentTestFields" class="dependent-field-box">
+        <measurement-table [labels]="specialTestConfig.alarLigamentTest.labels"
+            [options]="specialTestConfig.alarLigamentTest.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.alarLigamentTest.fieldPrefix"
+            [applyToAllFieldName]="specialTestConfig.alarLigamentTest.applyToAllFieldName"
+            [commentsFieldName]="specialTestConfig.alarLigamentTest.commentsFieldName"
+            [showApplyToAll]="specialTestConfig.alarLigamentTest.showApplyToAll"
+            [showComments]="specialTestConfig.alarLigamentTest.showComments"
+            [initialData]="formData">
+        </measurement-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Alar Ligament Stress</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="alar_ligament_stress" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="alar_ligament_stress" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showAlarLigamentStressFields" class="dependent-field-box">
+        <textarea formControlName="alar_ligament_stress_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Work Conditioning</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="work_conditioning" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="work_conditioning" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showWorkConditioningFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Material Handling (Bilateral Lifting)</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="material_handling_bilateral_lifting"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="material_handling_bilateral_lifting"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showWorkConditioningMaterialHandlingFields" class="dependent-field-box">
+            <material-handling-work-condition [labels]="specialTestConfig.liftingTest.labels"
+                [columnHeaders]="specialTestConfig.liftingTest.columnHeaders"
+                [columnPlaceholders]="specialTestConfig.liftingTest.columnPlaceholders"
+                [options]="specialTestConfig.liftingTest.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.liftingTest.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.liftingTest.commentsFieldName"
+                [commentsLabel]="specialTestConfig.liftingTest.commentsLabel"
+                [showComments]="specialTestConfig.liftingTest.showComments"
+                [initialData]="formData">
+            </material-handling-work-condition>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Non-Material Handling</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="non_material_handling" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="non_material_handling" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showWorkConditioningNonMaterialHandlingFields" class="dependent-field-box">
+            <non-material-handling-work-condition
+            [items]="specialTestConfig.nonMaterialHandling.items"
+            [columnHeaders]="specialTestConfig.nonMaterialHandling.columnHeaders"
+            [frequencyColumns]="specialTestConfig.nonMaterialHandling.frequencyColumns"
+            [adequateColumn]="specialTestConfig.nonMaterialHandling.adequateColumn"
+            [options]="specialTestConfig.nonMaterialHandling.options"
+            [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.nonMaterialHandling.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.nonMaterialHandling.commentsFieldName"
+            [commentsLabel]="specialTestConfig.nonMaterialHandling.commentsLabel"
+            [showComments]="specialTestConfig.nonMaterialHandling.showComments"
+            [columnWidths]="specialTestConfig.nonMaterialHandling.columnWidths"
+            [initialData]="formData">
+          </non-material-handling-work-condition>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <label class="field-label">TMR FAB 4 Worksheet</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="tmr_fab_4_worksheet" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="tmr_fab_4_worksheet" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showTmrFab4WorksheetFields" class="dependent-field-box">
+        <textarea formControlName="tmr_fab_4_worksheet_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Cervical Passive Vertebral Mobility</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="cervical_passive_vertebral_mobility" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="cervical_passive_vertebral_mobility" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCervicalPassiveVertebralMobilityFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">C2-3</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c2_3" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c2_3" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC2_3Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c2_3_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c2_3_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c2_3_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c2_3_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c2_3_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c2_3_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">C3-4</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c3_4" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c3_4" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC3_4Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c3_4_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c3_4_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c3_4_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c3_4_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c3_4_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c3_4_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">C4-5</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c4_5" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c4_5" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC4_5Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c4_5_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c4_5_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c4_5_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c4_5_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c4_5_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c4_5_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">C5-6</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c5_6" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c5_6" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC5_6Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c5_6_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c5_6_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c5_6_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c5_6_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c5_6_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c5_6_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">C6-7</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c6_7" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c6_7" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC6_7Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c6_7_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c6_7_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c6_7_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c6_7_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c6_7_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c6_7_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">C7-T1</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c7_t1" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cpvm_c7_t1" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCpvmC7T1Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="cpvm_c7_t1_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="cpvm_c7_t1_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="cpvm_c7_t1_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="cpvm_c7_t1_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="cpvm_c7_t1_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="cpvm_c7_t1_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Passive Vertebral Mobility Thoracic</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="passive_vertebral_mobility_thoracic" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="passive_vertebral_mobility_thoracic" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPassiveVertebralMobilityThoracicFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">T1-T2</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t1_t2" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t1_t2" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT1T2Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t1_t2_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t1_t2_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t1_t2_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t1_t2_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t1_t2_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t1_t2_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T2-T3</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t2_t3" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t2_t3" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT2T3Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t2_t3_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t2_t3_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t2_t3_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t2_t3_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t2_t3_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t2_t3_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T3-T4</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t3_t4" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t3_t4" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT3T4Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t3_t4_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t3_t4_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t3_t4_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t3_t4_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t3_t4_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t3_t4_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T4-T5</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t4_t5" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t4_t5" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT4T5Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t4_t5_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t4_t5_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t4_t5_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t4_t5_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t4_t5_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t4_t5_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T5-T6</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t5_t6" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t5_t6" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT5T6Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t5_t6_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t5_t6_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t5_t6_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t5_t6_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t5_t6_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t5_t6_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T6-T7</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t6_t7" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t6_t7" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT6T7Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t6_t7_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t6_t7_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t6_t7_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t6_t7_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t6_t7_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t6_t7_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T7-T8</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t7_t8" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t7_t8" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT7T8Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t7_t8_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t7_t8_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t7_t8_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t7_t8_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t7_t8_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t7_t8_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T8-T9</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t8_t9" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t8_t9" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT8T9Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t8_t9_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t8_t9_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t8_t9_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t8_t9_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t8_t9_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t8_t9_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T9-T10</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t9_t10" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t9_t10" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT9T10Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t9_t10_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t9_t10_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t9_t10_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t9_t10_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t9_t10_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t9_t10_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T10-T11</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t10_t11" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t10_t11" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT10T11Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t10_t11_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t10_t11_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t10_t11_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t10_t11_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t10_t11_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t10_t11_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T11-T12</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t11_t12" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t11_t12" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT11T12Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t11_t12_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t11_t12_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t11_t12_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t11_t12_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t11_t12_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t11_t12_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">T12-L1</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t12_l1" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pvmt_t12_l1" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPvmtT12L1Fields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="pvmt_t12_l1_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="pvmt_t12_l1_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="pvmt_t12_l1_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="pvmt_t12_l1_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Rotation</label>
+                <select formControlName="pvmt_t12_l1_right_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Rotation</label>
+                <select formControlName="pvmt_t12_l1_left_rotation" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Cervical Quadrant</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="cervical_quadrant" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="cervical_quadrant" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCervicalQuadrantFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.cervicalQuadrant.columns"
+            [labels]="specialTestConfig.cervicalQuadrant.labels"
+            [options]="specialTestConfig.cervicalQuadrant.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.cervicalQuadrant.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.cervicalQuadrant.commentsFieldName"
+            [hasTextInput]="specialTestConfig.cervicalQuadrant.hasTextInput"
+            [showComments]="specialTestConfig.cervicalQuadrant.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Cervical Comp/Dist</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="cervical_comp_dist" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="cervical_comp_dist" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCervicalCompDistFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Compression</label>
+            <select formControlName="cervical_comp_dist_compression" class="form-select">
+                <option *ngFor="let opt of cervicalCompDistOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Distraction</label>
+            <select formControlName="cervical_comp_dist_distraction" class="form-select">
+                <option *ngFor="let opt of cervicalCompDistOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Jaw Crepitus</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="jaw_crepitus" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="jaw_crepitus" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showJawCrepitusFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.jawCrepitus.columns"
+            [labels]="specialTestConfig.jawCrepitus.labels"
+            [options]="specialTestConfig.jawCrepitus.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.jawCrepitus.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.jawCrepitus.commentsFieldName"
+            [hasTextInput]="specialTestConfig.jawCrepitus.hasTextInput"
+            [showComments]="specialTestConfig.jawCrepitus.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Spurling's Maneuver</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="spurlings_maneuver" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="spurlings_maneuver" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSpurlingsManeuverFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.spurlingsManeuver.columns"
+            [labels]="specialTestConfig.spurlingsManeuver.labels"
+            [options]="specialTestConfig.spurlingsManeuver.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.spurlingsManeuver.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.spurlingsManeuver.commentsFieldName"
+            [hasTextInput]="specialTestConfig.spurlingsManeuver.hasTextInput"
+            [showComments]="specialTestConfig.spurlingsManeuver.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Subcranial Passive Vertebral Mobility</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="subcranial_passive_vertebral_mobility" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="subcranial_passive_vertebral_mobility" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSubcranialPassiveVertebralMobilityFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">OA</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="spvm_oa" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="spvm_oa" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSpvmOaFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="spvm_oa_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="spvm_oa_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="spvm_oa_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="spvm_oa_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">AA</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="spvm_aa" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="spvm_aa" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSpvmAaFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Forward Bending</label>
+                <select formControlName="spvm_aa_forward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Backward Bending</label>
+                <select formControlName="spvm_aa_backward_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Right Side Bending</label>
+                <select formControlName="spvm_aa_right_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Left Side Bending</label>
+                <select formControlName="spvm_aa_left_side_bending" class="form-select">
+                    <option *ngFor="let opt of cpvmOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Passive Joint Mobility Shoulder</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="passive_joint_mobility_shoulder" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="passive_joint_mobility_shoulder" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPassiveJointMobilityShoulderFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.passiveJointMobilityShoulder.columns"
+            [labels]="specialTestConfig.passiveJointMobilityShoulder.labels"
+            [options]="specialTestConfig.passiveJointMobilityShoulder.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.passiveJointMobilityShoulder.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.passiveJointMobilityShoulder.commentsFieldName"
+            [hasTextInput]="specialTestConfig.passiveJointMobilityShoulder.hasTextInput"
+            [showComments]="specialTestConfig.passiveJointMobilityShoulder.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">SC Joint</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="sc_joint" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="sc_joint" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showScJointFields" class="dependent-field-box">
+        <title-multiple-columns-checkbox-list [title]="specialTestConfig.scJoint.title"
+            [labels]="specialTestConfig.scJoint.labels" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.scJoint.fieldPrefix"
+            [showNormalCheckbox]="false" [showComments]="false"
+            [initialData]="formData">
+        </title-multiple-columns-checkbox-list>
+    </div>
+    <div class="form-row">
+        <label class="field-label">AC Joint</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="ac_joint" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="ac_joint" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showAcJointFields" class="dependent-field-box">
+        <title-multiple-columns-checkbox-list [title]="specialTestConfig.acJoint.title"
+            [labels]="specialTestConfig.acJoint.labels" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.acJoint.fieldPrefix"
+            [showNormalCheckbox]="false" [showComments]="false"
+            [initialData]="formData">
+        </title-multiple-columns-checkbox-list>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Impingement</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="impingement" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="impingement" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showImpingementFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.impingementConfig.columns"
+            [labels]="specialTestConfig.impingementConfig.labels"
+            [options]="specialTestConfig.impingementConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.impingementConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.impingementConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.impingementConfig.hasTextInput"
+            [showComments]="specialTestConfig.impingementConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">GHJ Stability</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="ghj_stability" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="ghj_stability" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGhjStabilityFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.ghjStability.columns"
+            [labels]="specialTestConfig.ghjStability.labels"
+            [options]="specialTestConfig.ghjStability.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ghjStability.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ghjStability.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ghjStability.hasTextInput"
+            [showComments]="specialTestConfig.ghjStability.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Labrum</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="labrum" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="labrum" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLabrumFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.labrumConfig.columns"
+            [labels]="specialTestConfig.labrumConfig.labels"
+            [options]="specialTestConfig.labrumConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.labrumConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.labrumConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.labrumConfig.hasTextInput"
+            [showComments]="specialTestConfig.labrumConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Rotator Cuff</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="rotator_cuff" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="rotator_cuff" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showRotatorCuffFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.rotatorCuff.columns"
+            [labels]="specialTestConfig.rotatorCuff.labels"
+            [options]="specialTestConfig.rotatorCuff.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.rotatorCuff.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.rotatorCuff.commentsFieldName"
+            [hasTextInput]="specialTestConfig.rotatorCuff.hasTextInput"
+            [showComments]="specialTestConfig.rotatorCuff.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Speed's Test</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="speeds_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="speeds_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSpeedsTestFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.speedsTest.columns"
+            [labels]="specialTestConfig.speedsTest.labels"
+            [options]="specialTestConfig.speedsTest.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.speedsTest.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.speedsTest.commentsFieldName"
+            [hasTextInput]="specialTestConfig.speedsTest.hasTextInput"
+            [showComments]="specialTestConfig.speedsTest.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Ligament Integrity Elbow</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="ligament_integrity_elbow" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="ligament_integrity_elbow" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLigamentIntegrityElbowFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.ligamentIntegrityElbow.columns"
+            [labels]="specialTestConfig.ligamentIntegrityElbow.labels"
+            [options]="specialTestConfig.ligamentIntegrityElbow.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ligamentIntegrityElbow.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ligamentIntegrityElbow.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ligamentIntegrityElbow.hasTextInput"
+            [showComments]="specialTestConfig.ligamentIntegrityElbow.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Ulnar Nerve Subluxation</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="ulnar_nerve_subluxation" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="ulnar_nerve_subluxation" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showUlnarNerveSubluxationFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.ulnarNerveSubluxation.columns"
+            [labels]="specialTestConfig.ulnarNerveSubluxation.labels"
+            [options]="specialTestConfig.ulnarNerveSubluxation.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.ulnarNerveSubluxation.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.ulnarNerveSubluxation.commentsFieldName"
+            [hasTextInput]="specialTestConfig.ulnarNerveSubluxation.hasTextInput"
+            [showComments]="specialTestConfig.ulnarNerveSubluxation.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Kemp's Test</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="kemps_test" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="kemps_test" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showKempsTestFields" class="dependent-field-box">
+        <div class="form-row">
+            <select formControlName="kemps_test_result" class="form-select">
+                <option *ngFor="let opt of kempsTestOptions" [value]="opt">{{opt}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">SI Compression</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="si_compression" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="si_compression" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSiCompressionFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.siCompression.columns"
+            [labels]="specialTestConfig.siCompression.labels"
+            [options]="specialTestConfig.siCompression.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.siCompression.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.siCompression.commentsFieldName"
+            [hasTextInput]="specialTestConfig.siCompression.hasTextInput"
+            [showComments]="specialTestConfig.siCompression.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">SI Distraction</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="si_distraction" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="si_distraction" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSiDistractionFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.siDistraction.columns"
+            [labels]="specialTestConfig.siDistraction.labels"
+            [options]="specialTestConfig.siDistraction.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.siDistraction.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.siDistraction.commentsFieldName"
+            [hasTextInput]="specialTestConfig.siDistraction.hasTextInput"
+            [showComments]="specialTestConfig.siDistraction.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Leg Length</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="leg_length" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="leg_length" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLegLengthFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.legLengthConfig.columns"
+            [labels]="specialTestConfig.legLengthConfig.labels"
+            [options]="specialTestConfig.legLengthConfig.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.legLengthConfig.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.legLengthConfig.commentsFieldName"
+            [hasTextInput]="specialTestConfig.legLengthConfig.hasTextInput"
+            [showComments]="specialTestConfig.legLengthConfig.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Proprioception/Balance</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="proprioception_balance" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="proprioception_balance" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showProprioceptionBalanceFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Past Pointing</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_past_pointing" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_past_pointing" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbPastPointingFields" class="dependent-field-box">
+            <div class="form-row">
+                <select formControlName="pb_past_pointing_result" class="form-select">
+                    <option *ngFor="let opt of pbPastPointingOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Fukuda Stepping</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_fukuda_stepping" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_fukuda_stepping" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFukudaSteppingFields" class="dependent-field-box">
+            <div class="form-row">
+                <select formControlName="pb_fukuda_stepping_result" class="form-select">
+                    <option *ngFor="let opt of pbFukudaSteppingOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">SL Balance</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_sl_balance" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_sl_balance" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbSlBalanceFields" class="dependent-field-box">
+            <dropdown-text-table [columns]="specialTestConfig.slBalance.columns"
+                [labels]="specialTestConfig.slBalance.labels"
+                [options]="specialTestConfig.slBalance.options" [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.slBalance.fieldPrefix"
+                [commentsFieldName]="specialTestConfig.slBalance.commentsFieldName"
+                [hasTextInput]="specialTestConfig.slBalance.hasTextInput"
+                [showComments]="specialTestConfig.slBalance.showComments"
+                [initialData]="formData">
+            </dropdown-text-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Romberg</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_romberg" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_romberg" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbRombergFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Eyes Open</label>
+                <select formControlName="pb_romberg_eyes_open" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Eyes Closed</label>
+                <select formControlName="pb_romberg_eyes_closed" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label class="field-label">Comments</label>
+                <textarea formControlName="pb_romberg_comments_text" class="form-textarea" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Sharpened Romberg</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_sharpened_romberg" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_sharpened_romberg" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbSharpenedRombergFields" class="dependent-field-box">
+        </div>
+        <div class="form-row">
+            <label class="field-label">Functional Reach UE</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_ue" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_ue" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFunctionalReachUeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="specialTestConfig.functionalReachUe.rows"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.functionalReachUe.fieldPrefix"
+                [showComments]="specialTestConfig.functionalReachUe.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Functional Reach LE</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_le" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pb_functional_reach_le" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPbFunctionalReachLeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="specialTestConfig.functionalReachLe.rows"
+                [formGroup]="specialTestForm"
+                [fieldPrefix]="specialTestConfig.functionalReachLe.fieldPrefix"
+                [showComments]="specialTestConfig.functionalReachLe.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Pelvic Clock</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="pelvic_clock" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="pelvic_clock" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showPelvicClockFields" class="dependent-field-box">
+        <textarea formControlName="pelvic_clock_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Introitus Clock</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="introitus_clock" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="introitus_clock" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showIntroitusClockFields" class="dependent-field-box">
+        <textarea formControlName="introitus_clock_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Lasegue's SLR</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="lasegues_slr" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="lasegues_slr" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showLaseguesSlrFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="specialTestConfig.laseguesSlr.columns"
+            [labels]="specialTestConfig.laseguesSlr.labels"
+            [options]="specialTestConfig.laseguesSlr.options" [formGroup]="specialTestForm"
+            [fieldPrefix]="specialTestConfig.laseguesSlr.fieldPrefix"
+            [commentsFieldName]="specialTestConfig.laseguesSlr.commentsFieldName"
+            [hasTextInput]="specialTestConfig.laseguesSlr.hasTextInput"
+            [showComments]="specialTestConfig.laseguesSlr.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Additional Comments</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="additionalCommentsFields" class="dependent-field-box">
+        <textarea formControlName="additional_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+</div>

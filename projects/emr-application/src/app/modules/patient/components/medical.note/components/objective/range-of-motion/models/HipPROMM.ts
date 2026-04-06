@@ -1,0 +1,29 @@
+export interface HipPROMM {
+  hipProm: boolean;
+  hipPromApplyToAll: string;
+  hipPromFlexionRight: string;
+  hipPromFlexionRightEndfeel: string;
+  hipPromFlexionLeft: string;
+  hipPromFlexionLeftEndfeel: string;
+  hipPromExtensionRight: string;
+  hipPromExtensionRightEndfeel: string;
+  hipPromExtensionLeft: string;
+  hipPromExtensionLeftEndfeel: string;
+  hipPromAbductionRight: string;
+  hipPromAbductionRightEndfeel: string;
+  hipPromAbductionLeft: string;
+  hipPromAbductionLeftEndfeel: string;
+  hipPromAdductionRight: string;
+  hipPromAdductionRightEndfeel: string;
+  hipPromAdductionLeft: string;
+  hipPromAdductionLeftEndfeel: string;
+  hipPromInternalRotationRight: string;
+  hipPromInternalRotationRightEndfeel: string;
+  hipPromInternalRotationLeft: string;
+  hipPromInternalRotationLeftEndfeel: string;
+  hipPromExternalRotationRight: string;
+  hipPromExternalRotationRightEndfeel: string;
+  hipPromExternalRotationLeft: string;
+  hipPromExternalRotationLeftEndfeel: string;
+  hipPromComments: string;
+}

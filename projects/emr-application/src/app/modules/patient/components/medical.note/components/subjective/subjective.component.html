@@ -1,48 +1,135 @@
-<div [formGroup]="subjectiveForm" *ngIf="subjectiveFormFields">
-    <c-card class="mb-2">
-        <c-card-header>Basic Information</c-card-header>
-        <c-card-body>
-            <basic-information (formReady)="setChildForm('basic', $event)"
+<div [formGroup]="subjectiveForm">
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header basic-info-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Basic Information</span>
+                </div>
+                <span class="card-badge">Required</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <!-- <basic-information (formReady)="setChildForm('basic', $event)"
                 [fields]="subjectiveFormFields['Basic Information']"
-                [basicFormData]="subjectiveData?.basic"></basic-information>
+                [basicFormData]="subjectiveData?.basic"></basic-information> -->
+            <subjective-basic-n (formReady)="setChildForm('basic', $event)"
+                [basicFormData]="subjectiveData?.basic" [noteType]="noteType"
+                (pelvicProfileChange)="isPelvicProfile = $event"></subjective-basic-n>
         </c-card-body>
     </c-card>
-    <c-card class="mb-2">
-        <c-card-header>Pain</c-card-header>
-        <c-card-body>
-            <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header pain-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <span>Pain</span>
+                </div>
+                <span class="card-badge">Symptoms</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <!-- <pain (formReady)="setChildForm('pain', $event)" [fields]="subjectiveFormFields['Pain']"
                 [painFormData]="subjectiveData?.pain">
-            </pain>
+            </pain> -->
+            <subjective-pain-n (formReady)="setChildForm('pain', $event)"
+                [painFormData]="subjectiveData?.pain"></subjective-pain-n>
         </c-card-body>
     </c-card>
-    <c-card class="mb-2">
-        <c-card-header>Prior Level Of Function</c-card-header>
-        <c-card-body>
-            <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header prior-function-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    <span>Prior Level Of Function</span>
+                </div>
+                <span class="card-badge">History</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <!-- <prior-level-function (formReady)="setChildForm('priorFunction', $event)"
                 [fields]="subjectiveFormFields['Prior Level Of Function']"
-                [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function>
+                [priorLevelFunctionFormData]="subjectiveData?.priorFunction"></prior-level-function> -->
+            <subjective-prior-level-function-n (formReady)="setChildForm('priorFunction', $event)"
+                [priorLevelFunctionFormData]="subjectiveData?.priorFunction">
+            </subjective-prior-level-function-n>
         </c-card-body>
     </c-card>
-    <c-card class="mb-2">
-        <c-card-header>Current Functional Limitations</c-card-header>
-        <c-card-body>
-            <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>Current Functional Limitations</span>
+                </div>
+                <span class="card-badge">Assessment</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <!-- <current-functionlimit (formReady)="setChildForm('currentFunction', $event)"
                 [fields]="subjectiveFormFields['Current Functional Limitations']"
-                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit>
+                [currentFunvtionlimitFormData]="subjectiveData?.currentFunction"></current-functionlimit> -->
+            <subjective-current-functional-limitations-n (formReady)="setChildForm('currentFunction', $event)"
+                [currentFunctionFormData]="subjectiveData?.currentFunction">
+            </subjective-current-functional-limitations-n>
+
         </c-card-body>
     </c-card>
 
-    <c-card class="mb-2">
-        <c-card-header>Medical History</c-card-header>
-        <c-card-body>
-            <medical-history (formReady)="setChildForm('medicalHistory', $event)"
+    <c-card class="mb-3 enhanced-card">
+        <c-card-header class="enhanced-card-header medical-history-header">
+            <div class="card-header-content">
+                <div class="card-header-title">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    <span>Medical History</span>
+                </div>
+                <span class="card-badge">Medical</span>
+            </div>
+        </c-card-header>
+        <c-card-body class="enhanced-card-body">
+            <!-- <medical-history (formReady)="setChildForm('medicalHistory', $event)"
                 [fields]="subjectiveFormFields['Medical History']"
-                [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history>
+                [medicalHistoryFormData]="subjectiveData?.medicalHistory"></medical-history> -->
+            <subjective-medical-history-n (formReady)="setChildForm('medicalHistory', $event)"
+                [noteType]="noteType" [showPelvicProfile]="isPelvicProfile">
+            </subjective-medical-history-n>
         </c-card-body>
     </c-card>
 
 
-    <div class="mt-3">
-        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    <div class="action-buttons">
+        <button cButton class="next-button" (click)="next()">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
     </div>
 </div>

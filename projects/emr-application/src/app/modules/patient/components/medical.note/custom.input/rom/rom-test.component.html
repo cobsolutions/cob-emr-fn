@@ -1,53 +1,84 @@
-<div [formGroup]="form">
-    <!-- Apply to All Dropdown -->
-    <div class="apply-all-row rom-container">
-        <div class="test-label apply-label">Apply to All</div>
-        <select class="dropdown" (change)="applyToAll($event)">
-            <option value=""> </option>
-            <option value="WNL">WNL</option>
-            <option value="WFL">WFL</option>
-            <option value="NT">Not Tested</option>
-        </select>
-        <div></div> <!-- Empty third column -->
+<div [formGroup]="form" class="rom-wrapper">
+  <!-- Apply to All -->
+  <div class="apply-all-row">
+    <label class="apply-label">Apply to All</label>
+    <select class="dropdown" (change)="applyToAll($event)">
+      <option value=""></option>
+      <option value="WNL">WNL</option>
+      <option value="WFL">WFL</option>
+      <option value="NT">Not Tested</option>
+    </select>
+  </div>
+
+  <!-- Two-column layout -->
+  <ng-container *ngIf="columns === 2">
+    <div class="section-labels">
+      <div class="section-title">{{ rightLabel }}</div>
+      <div class="section-title">{{ leftLabel }}</div>
     </div>
 
-    <!-- Two-column layout -->
-    <ng-container *ngIf="columns === 2">
-        <!-- Header Row -->
-        <div class="rom-container side-label">
-            <div></div>
-            <div>{{rightLabel}}</div>
-            <div>{{leftLabel}}</div>
-        </div>
-
-        <!-- Rows -->
-        <div *ngFor="let control of controlR; let i = index" class="rom-container">
-            <!-- Label -->
-            <div class="test-label">{{ control.label }}</div>
-
-            <!-- Right Select (from controlR) -->
-            <select class="dropdown" [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName">
-                <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+    <div class="two-column-layout">
+      <!-- Right Column -->
+      <div class="column-section">
+        <div class="column-header">{{ rightLabel }}</div>
+        <div class="column-row" *ngFor="let control of controlR">
+          <label class="field-label">{{ control.label }}</label>
+          <div class="dropdown-with-custom">
+            <select
+              class="dropdown"
+              [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName">
+              <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
             </select>
-
-            <!-- Left Select (from controlL) — use same index -->
-            <select class="dropdown"
-                [formControlName]="'left_' + toCamelCase(controlL[i]?.label || control.label) + '_' + parentFieldName">
-                <option *ngFor="let opt of controlL[i]?.value || control.value" [value]="opt.val">{{ opt.view }}
-                </option>
-            </select>
+            <input
+              *ngIf="form.get('right_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom')"
+              type="text"
+              class="custom-input"
+              [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom'"
+            />
+          </div>
         </div>
-    </ng-container>
+      </div>
 
-
-    <!-- One-column layout -->
-    <ng-container *ngIf="columns === 1">
-        <div *ngFor="let control of controlR" class="single-column-container">
-            <div class="single-label">{{ control.label }}</div>
-
-            <select class="dropdown" [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName">
-                <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+      <!-- Left Column -->
+      <div class="column-section">
+        <div class="column-header">{{ leftLabel }}</div>
+        <div class="column-row" *ngFor="let control of controlL; let i = index">
+          <label class="field-label">{{ control.label }}</label>
+          <div class="dropdown-with-custom">
+            <select
+              class="dropdown"
+              [formControlName]="'left_' + toCamelCase(control.label) + '_' + parentFieldName">
+              <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
             </select>
+            <input
+              *ngIf="form.get('left_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom')"
+              type="text"
+              class="custom-input"
+              [formControlName]="'left_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom'"
+            />
+          </div>
         </div>
-    </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- One-column layout -->
+  <ng-container *ngIf="columns === 1">
+    <div *ngFor="let control of controlR" class="single-column-container">
+      <div class="single-label">{{ control.label }}</div>
+      <div class="dropdown-with-custom">
+        <select
+          class="dropdown"
+          [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName">
+          <option *ngFor="let opt of control.value" [value]="opt.val">{{ opt.view }}</option>
+        </select>
+        <input
+          *ngIf="form.get('right_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom')"
+          type="text"
+          class="custom-input"
+          [formControlName]="'right_' + toCamelCase(control.label) + '_' + parentFieldName + '_custom'"
+        />
+      </div>
+    </div>
+  </ng-container>
 </div>

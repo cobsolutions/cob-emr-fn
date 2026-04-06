@@ -1,0 +1,49 @@
+<div class="p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5></h5>
+    <button cButton color="primary" (click)="openAddModal()">➕ Add Problem</button>
+  </div>
+
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Description</th>
+        <th class="text-center" style="width: 120px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let problem of problems.controls; let i = index">
+        <td>{{ problem.value }}</td>
+        <td class="text-center">
+          <button cButton color="info" variant="ghost" size="sm" (click)="openEditModal(i)">
+            <svg cIcon name="cilPencil"></svg>
+          </button>
+          <button cButton color="danger" variant="ghost" size="sm" (click)="removeProblem(i)">
+            <svg cIcon name="cilTrash"></svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal fade show" *ngIf="showModal" style="display: block; background: rgba(0, 0, 0, 0.4);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editIndex !== null ? 'Edit Goal' : 'Add Goal' }}</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Problem Description</label>
+          <input cFormControl [formControl]="descriptionControl" placeholder="Enter description" />
+        </div>
+        <div class="modal-footer">
+          <button cButton color="secondary" variant="outline" (click)="closeModal()">Cancel</button>
+          <button cButton color="success" (click)="save()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

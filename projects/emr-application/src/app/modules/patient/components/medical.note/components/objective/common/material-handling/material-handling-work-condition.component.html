@@ -1,0 +1,51 @@
+<div [formGroup]="formGroup">
+  <!-- Dynamic Column Table -->
+  <table class="walk-test-table">
+    <thead>
+      <tr>
+        <th style="width: 300px;"></th>
+        <th *ngFor="let column of columnHeaders; let i = index" [style.width.px]="getColumnWidth(i)">
+          {{ column }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let label of labels">
+        <td style="font-weight: 500; background-color: #f8f9fa; color: #5c4742;">
+          {{ label }}
+        </td>
+        <td *ngFor="let column of columnHeaders; let colIndex = index">
+          <!-- Use select for "Adequate For Job" column, input for others -->
+          <ng-container *ngIf="isSelectColumn(colIndex); else inputTemplate">
+            <select 
+              class="table-select"
+              [formControlName]="getFieldName(label, colIndex)">
+              <option value="">N/A</option>
+              <option value="YES">YES</option>
+              <option value="NO">NO</option>
+            </select>
+          </ng-container>
+          
+          <ng-template #inputTemplate>
+            <input 
+              type="text" 
+              class="table-input"
+              [formControlName]="getFieldName(label, colIndex)"
+              [placeholder]="getPlaceholderForColumn(colIndex)">
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="getCommentsFieldName()"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

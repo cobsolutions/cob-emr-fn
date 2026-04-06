@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MultiSelectComponent, SmartTableComponent } from '@coreui/angular-pro';
@@ -22,9 +22,10 @@ import { LoggedInService } from '../../../security/service/loggedIn/logged-in.se
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, DoCheck {
   @ViewChild('userCreateForm') userCreateForm: NgForm;
-  @ViewChild('userRoles') userRoles: SmartTableComponent;
+  @ViewChild('generalRolesTable') generalRolesTable: SmartTableComponent;
+  @ViewChild('medicalRolesTable') medicalRolesTable: SmartTableComponent;
   @ViewChild('mutliselectClinics') multiSelectComponent: MultiSelectComponent
   submitted: boolean = false;
   validAddress: boolean = true;
@@ -42,7 +43,7 @@ export class CreateUserComponent implements OnInit {
     },
     { key: 'scope', label: 'Scope', _style: { width: '30%' } },
   ];
-  roles: IItem[] = [
+  generalRoles: IItem[] = [
     { role: 'Patient', scope: '', name: 'emr-patient-role' },
     { role: 'Clinic', scope: '', name: 'clinic-role' },
     { role: 'User', scope: '', name: 'user-role' },
@@ -50,15 +51,18 @@ export class CreateUserComponent implements OnInit {
     { role: 'Referring Provider', scope: '', name: 'emr-referring-provider-role' },
     { role: 'Patient Payment', scope: '', name: 'patient-payment-role' },
     { role: 'Calendar', scope: '', name: 'calendar-role' },
+  ]
+  medicalRoles: IItem[] = [
     { role: 'Medical Note-Initialization', scope: '', name: 'initialize-medical-note-role' },
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
-  filteredRoles: IItem[] = [];
-  roles$: Observable<IItem[]>
+  filteredMedicalRoles: IItem[] = [];
+  generalRoles$: Observable<IItem[]>
+  medicalRoles$: Observable<IItem[]>
+  showMedicalPermissions: boolean = true;
   user: User = {
     userType: null,
-    role: null,
     clinicIds: [],
     roleScope: [],
     speciality: null,
@@ -73,6 +77,10 @@ export class CreateUserComponent implements OnInit {
   validEmail: boolean = undefined;
   validUserNameMessage: string = undefined
   validEmailMessage: string = undefined
+  isValidBasicInfo: boolean = false;
+  isValidUserType: boolean = false;
+  isValidPermissions: boolean = false;
+  isValidClinics: boolean = false;
   constructor(private clinicService: ClinicService
     , private userService: UserService
     , private toastr: ToastrService
@@ -81,8 +89,10 @@ export class CreateUserComponent implements OnInit {
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.filteredRoles = [...this.roles];
-    this.roles$ = of(this.filteredRoles)
+    console.log('USER', this.loggedInService.getLoggedUser())
+    this.generalRoles$ = of(this.generalRoles);
+    this.filteredMedicalRoles = [...this.medicalRoles];
+    this.medicalRoles$ = of(this.filteredMedicalRoles);
     this.checkUserName()
     this.checkEmail();
     if (!this.isOrganizationInit)
@@ -90,6 +100,46 @@ export class CreateUserComponent implements OnInit {
         .subscribe((response: any) => {
           this.clinics = response.records;
         })
+  }
+  ngDoCheck(): void {
+    this.updateSectionValidation();
+  }
+  private updateSectionValidation(): void {
+    const controls = this.userCreateForm?.form?.controls;
+    if (!controls) return;
+
+    // Basic Info: firstName, lastName, email, password, username, phone
+    const firstNameValid = controls['firstName']?.valid ?? false;
+    const lastNameValid = controls['lastName']?.valid ?? false;
+    const passwordValid = controls['password']?.valid ?? false;
+    const phoneValid = controls['phone']?.valid ?? false;
+    const emailFilled = !!this.user.email;
+    const usernameFilled = !!this.user.accountName;
+    this.isValidBasicInfo = firstNameValid && lastNameValid && passwordValid && phoneValid && emailFilled && usernameFilled;
+
+    // User Type: role selected, and if Clinical all clinical fields valid
+    const roleValid = controls['role']?.valid ?? false;
+    if (this.user.userType === 'Clinical') {
+      const npiValid = controls['npi']?.valid ?? false;
+      const licenceValid = controls['licence']?.valid ?? false;
+      const specialityValid = controls['speciality']?.valid ?? false;
+      const credentialValid = controls['credential']?.valid ?? false;
+      this.isValidUserType = roleValid && npiValid && licenceValid && specialityValid && credentialValid;
+    } else {
+      this.isValidUserType = roleValid;
+    }
+
+    // Permissions: all roles have a scope assigned
+    const generalValid = this.generalRolesTable?.items?.every((item: any) => item.scope !== '') ?? false;
+    if (this.showMedicalPermissions) {
+      const medicalValid = this.medicalRolesTable?.items?.every((item: any) => item.scope !== '') ?? false;
+      this.isValidPermissions = generalValid && medicalValid;
+    } else {
+      this.isValidPermissions = generalValid;
+    }
+
+    // Clinics: at least one clinic selected
+    this.isValidClinics = this.user.clinicIds?.length > 0;
   }
   create() {
     this.fillPermissions()
@@ -196,29 +246,38 @@ export class CreateUserComponent implements OnInit {
   }
   private fillPermissions() {
     this.isValidRoles = this.validateRoles();
-    if (this.isValidRoles)
-      this.userRoles.items.forEach((item: any) => {
-        var userRoleScope: UserRoleScope;
-        if (item.name === Role.INITIALIZE_MEDICAL_NOTE_ROLE || item.name === Role.FORWARD_MEDICAL_NOTE_ROLE
-          || item.name === Role.FINALIZE_MEDICAL_NOTE_ROLE) {
-          userRoleScope = {
+    if (this.isValidRoles) {
+      this.generalRolesTable.items.forEach((item: any) => {
+        var userRoleScope: UserRoleScope = {
+          role: item.name,
+          scope: item.scope
+        };
+        this.user.roleScope.push(userRoleScope);
+      });
+      if (this.showMedicalPermissions) {
+        this.medicalRolesTable.items.forEach((item: any) => {
+          var userRoleScope: UserRoleScope = {
             role: item.name,
             scope: item.scope ? 'modify' : 'hidden'
-          }
-        } else {
-          userRoleScope = {
-            role: item.name,
-            scope: item.scope
-          }
-        }
-        this.user.roleScope.push(userRoleScope);
-      })
+          };
+          this.user.roleScope.push(userRoleScope);
+        });
+      }
+    }
   }
   private validateRoles(): boolean {
-    for (let i = 0; i < this.userRoles.items.length; i++) {
-      var item: any = this.userRoles.items[i];
+    for (let i = 0; i < this.generalRolesTable.items.length; i++) {
+      var item: any = this.generalRolesTable.items[i];
       if (item.scope === '') {
         return false;
+      }
+    }
+    if (this.showMedicalPermissions) {
+      for (let i = 0; i < this.medicalRolesTable.items.length; i++) {
+        var item: any = this.medicalRolesTable.items[i];
+        if (item.scope === '') {
+          return false;
+        }
       }
     }
     return true;
@@ -245,7 +304,7 @@ export class CreateUserComponent implements OnInit {
           this.router.navigateByUrl('emr/users/list/clinical/users')
         }, (error) => {
           console.log(error);
-          this.toastr.error(error.error.message, 'Error In Creation');
+          this.handleCreateError(error);
         })
       }
       if (this.user.userType === 'Clerical') {
@@ -254,7 +313,7 @@ export class CreateUserComponent implements OnInit {
           this.router.navigateByUrl('emr/users/list/clerical/users')
         }, (error) => {
           console.log(error);
-          this.toastr.error(error.error.message, 'Error In Creation');
+          this.handleCreateError(error);
         })
       }
     } else {
@@ -267,37 +326,35 @@ export class CreateUserComponent implements OnInit {
       })
     }
   }
+  private handleCreateError(error: any) {
+    if (error.status === 409) {
+      const message: string = error.error?.message || '';
+      if (message.startsWith('User')) {
+        this.validUserName = false;
+        this.validUserNameMessage = 'Username is already taken';
+        this.toastr.error('Username is already taken', 'Error In Creation');
+      } else if (message.startsWith('email')) {
+        this.validEmail = false;
+        this.validEmailMessage = 'Email is already registered';
+        this.toastr.error('Email is already registered', 'Error In Creation');
+      }
+    } else {
+      this.toastr.error(error.error.message, 'Error In Creation');
+    }
+  }
   changeCredential(value: any) {
-
     if (value === 'SPT' || value === 'SOT' || value === 'SSLP') {
-      this.filteredRoles = this.roles.filter(
+      this.filteredMedicalRoles = this.medicalRoles.filter(
         (item: any) => {
           return item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
         }
       );
     } else {
-      this.filteredRoles = [...this.roles];
+      this.filteredMedicalRoles = [...this.medicalRoles];
     }
-    this.roles$ = of(this.filteredRoles)
+    this.medicalRoles$ = of(this.filteredMedicalRoles);
   }
   changeUSerType(value: any) {
-    if (value === 'Clerical') {
-      this.filteredRoles = this.roles.filter(
-        (item: any) => {
-          return item.name !== Role.FORWARD_MEDICAL_NOTE_ROLE && item.name !== Role.INITIALIZE_MEDICAL_NOTE_ROLE && item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
-        }
-      );
-    } else {
-      this.filteredRoles = [...this.roles];
-    }
-    this.roles$ = of(this.filteredRoles)
-  }
-  checkNonMedical(value: string) {
-    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
-    return !medicalList.includes(value)
-  }
-  checkMedical(value: string) {
-    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
-    return medicalList.includes(value)
+    this.showMedicalPermissions = value === 'Clinical';
   }
 }

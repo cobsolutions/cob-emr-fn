@@ -3,7 +3,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { FinalizeMedicalNoteRequest } from '../../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
@@ -19,31 +20,36 @@ export class FullDischargeNoteComponent implements OnInit {
   dischargeNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() noteId: string
+  @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
   noteCreator: string
   noteFinalizr: string
+  noteCoSigner: string
+  disableFinalize: boolean = false
   type: MedicalNoteType = MedicalNoteType.Discharge_Note;
-  private destroy$ = new Subject<void>();
+  private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(val => {
-        if (val !== null) {
-          const finalizeRequest = val;
-          this.draftAction().subscribe(d => {
-            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-              this.backtoPatientRecordActions();
-            });
-          });
+    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+      if (status) {
+        const finalizeRequest: FinalizeMedicalNoteRequest = {
+          caseId: this.caseId,
+          id: this.medicalNoteId,
+          noteType: MedicalNoteType.Discharge_Note,
+          finalizedBy: this.loggedInService.getLoggedUser().uuid
         }
-      });
-    this.medialNoteService.noteType$.next('discharge')
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          });
+        });
+      }
+    })
     this.visitedSteps = [true, false, false, false, false]
     this.dischargeNoteForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -56,13 +62,14 @@ export class FullDischargeNoteComponent implements OnInit {
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
+        this.noteCoSigner = data.coSigner;
+        this.disableFinalize = false;
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()
   }
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.finalizeSub?.unsubscribe();
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -76,7 +83,7 @@ export class FullDischargeNoteComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.dischargeNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
       objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,

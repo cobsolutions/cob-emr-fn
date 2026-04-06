@@ -34,12 +34,46 @@ export class MutlipleCheckBoxComponent implements OnInit {
           if (dep.fieldType === 'checkbox')
             this.form.addControl(dep.fieldFormName, this.fb.control(false));
           else
-          this.form.addControl(dep.fieldFormName, this.fb.control(''));
+            this.form.addControl(dep.fieldFormName, this.fb.control(''));
           this.form.get(`${dep.fieldFormName}`).valueChanges.subscribe(v => {
             this.parentForm.get(this.parentFieldName).setValue(this.form.getRawValue());
           })
         })
     });
+    if (Array.isArray(this.values)) {
+      const naControl = this.values.find((item: any) => item?.val === 'na');
+      if (naControl !== undefined) {
+        const naFormControl = this.form.get(naControl.val);
+        // --- Case 1: If "N/A" is selected, uncheck all others ---
+        naFormControl.valueChanges.subscribe((v: boolean) => {
+          if (v) {
+            this.values.forEach((item: any) => {
+              if (item.val !== 'na') {
+                const control = this.form.get(item.val);
+                if (control) {
+                  control.setValue(false, { emitEvent: false });
+                }
+              }
+            });
+          }
+        });
+        // --- Case 2: If any other is selected, uncheck "N/A" ---
+        this.values.forEach((item: any) => {
+          if (item.val !== 'na') {
+            const control = this.form.get(item.val);
+            if (control) {
+              control.valueChanges.subscribe((v: boolean) => {
+                if (v && naFormControl.value) {
+                  naFormControl.setValue(false, { emitEvent: false });
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+
+
     if (this.labelStyle === null || this.labelStyle === undefined) {
       this.labelStyle = "display: flex;align-items: center;gap: 10px;margin-bottom: 1px;margin-left: 400px;max-width:500px;"
     }

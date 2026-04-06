@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { FieldDependentsService } from '../../../../services/medical.note/field.dependents.builder/field-dependents.service';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 import { FieldControlStyles } from '../../filed.control.style.selector/field.control.style';
 import { AssessmentStyles } from './styles/assessment';
 
@@ -18,18 +19,59 @@ export class AssessmentComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() assessmentData: any
-  @Input() noteType:string
+  @Input() noteType: string
   problemsArray: FormArray;
   goalsArray: FormArray;
+  showPatientComplianceHEP: boolean
+  showPatientConsultationMaintain: boolean
+  showPatientConsultationbedRest: boolean
+  showContraindicationsToTherapy: boolean
+
   constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService
-    , private fieldDependentsService: FieldDependentsService) { }
+    , private fieldDependentsService: FieldDependentsService
+    , private soapService: SoapService) { }
   ngOnInit(): void {
-    this.medialNoteService.find('assessment',this.noteType).subscribe(fields => {
-      this.fields = fields['assessment']
-      this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
-      this.buildForm();
-      this.formReady.emit(this.assessmentForm);
+    this.buildForm();
+    this.setupValueChangeListeners();
+    this.formReady.emit(this.assessmentForm);
+    // this.soapService.findSoapFields('assessment', this.noteType).subscribe(fields => {
+    //   this.fields = fields['assessment']
+    //   this.fields = this.fieldDependentsService.buildHierarchyRecursive(this.fields);
+    // });
+  }
+  private setupValueChangeListeners() {
+    this.assessmentForm.get('patient_compliance_hep')?.valueChanges.subscribe(value => {
+      this.showPatientComplianceHEP = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_maintain_or_resume: false,
+          patient_consultation_against_bed_rest: false
+        })
+      }
+    })
+    this.assessmentForm.get('patient_consultation_maintain_or_resume')?.valueChanges.subscribe(value => {
+      this.showPatientConsultationMaintain = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_maintain_or_resume_txt: null
+        })
+      }
+    })
+    this.assessmentForm.get('contraindications_to_therapy')?.valueChanges.subscribe(value => {
+      this.showContraindicationsToTherapy = value === 'yes';
+      if (value !== 'yes') {
+        this.assessmentForm.patchValue({
+          contraindications_to_therapy_consent: false
+        });
+      }
+    });
+    this.assessmentForm.get('patient_consultation_against_bed_rest')?.valueChanges.subscribe(value => {
+      this.showPatientConsultationbedRest = value
+      if (value === false) {
+        this.assessmentForm.patchValue({
+          patient_consultation_against_bed_rest_txt: null
+        })
+      }
     })
   }
   get problems(): FormArray {
@@ -46,7 +88,38 @@ export class AssessmentComponent implements OnInit {
       input.value = ''; // Clear input after adding
     }
   }
+  onProblemAdded(problemValue: string) {
+    this.problems.push(new FormControl(problemValue));
+    console.log('✅ Problem added:', problemValue);
+  }
 
+  /** Handle when a problem is edited in child */
+  onProblemEdited(event: { index: number; value: string }) {
+    this.problems.at(event.index).setValue(event.value);
+    console.log(`✏️ Problem #${event.index} updated to:`, event.value);
+  }
+
+  /** Handle when a problem is removed in child */
+  onProblemRemoved(index: number) {
+    this.problems.removeAt(index);
+    console.log(`🗑 Problem #${index} removed`);
+  }
+
+  onGoalAdded(goalValue: any) {
+    // goalValue = { description, term, period, met }
+    this.goals.push(this.fb.group(goalValue));
+  }
+
+  onGoalEdited(event: { index: number; value: any }) {
+    const goalGroup = this.goals.at(event.index);
+    if (goalGroup) {
+      goalGroup.setValue(event.value);
+    }
+  }
+
+  onGoalRemoved(index: number) {
+    this.goals.removeAt(index);
+  }
   removeProblem(index: number) {
     this.problems.removeAt(index); // Remove value from FormArray
   }
@@ -81,6 +154,18 @@ export class AssessmentComponent implements OnInit {
 
   private buildForm() {
     this.assessmentForm = this.fb.group({
+      assessment_diagnosis: [''],
+      patient_clinical_presentation: [],
+      parent_patient_education: [],
+      rehab_potential: [''],
+      contraindications_to_therapy: ['no'],
+      contraindications_to_therapy_consent: [false],
+      consent_to_care: [],
+      patient_compliance_hep: [false],
+      patient_consultation_maintain_or_resume: [false],
+      patient_consultation_maintain_or_resume_txt: null,
+      patient_consultation_against_bed_rest: [false],
+      patient_consultation_against_bed_rest_txt: null,
       problems: this.fb.array([]),
       goals: this.fb.array([])
     })

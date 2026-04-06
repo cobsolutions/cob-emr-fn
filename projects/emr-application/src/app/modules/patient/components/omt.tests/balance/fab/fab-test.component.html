@@ -1,48 +1,96 @@
-<!-- fab-scale.component.html -->
-<div class="container">
-    <div class="header">
-      <h2>Fullerton Advanced Balance (FAB) Scale</h2>
-      
-      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-        [Instructions]
-      </a>
-      
-      <div *ngIf="showInstructions" class="instructions-panel">
-        <strong>Evaluating Risk for Falls:</strong>
-        <p>Long Form Fullerton Advanced Balance (FAB) scale Cut-Off Score: ≤ 25/40 Points</p>
-        <p>Short-Form Fullerton Advanced Balance (FAB) scale Cut-Off Score: ≤ 9/16 Points</p>
+<div class="fab-container">
+  <!-- Header -->
+  <div class="fab-header">
+    <div class="header-content">
+      <h2 class="fab-title">Fullerton Advanced Balance (FAB) Scale</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p><strong>Description:</strong> The Fullerton Advanced Balance (FAB) Scale is a 10-item test designed to measure static and dynamic balance in functionally independent older adults.</p>
+        <p><strong>Equipment needed:</strong></p>
+        <ul>
+          <li>Pencil</li>
+          <li>Stopwatch</li>
+          <li>6-inch bench</li>
+          <li>12-inch ruler</li>
+          <li>6-inch high-density foam (Airex balance pad or equivalent)</li>
+          <li>Tape measure</li>
+          <li>Masking tape</li>
+        </ul>
+        <p><strong>Scoring:</strong> Each item is scored 0-4 points. Total score ranges from 0-40.</p>
+        <p><strong>Evaluating Risk for Falls:</strong></p>
+        <ul>
+          <li>Long Form FAB Scale Cut-Off Score: ≤ 25/40 Points</li>
+          <li>Short-Form FAB Scale Cut-Off Score: ≤ 9/16 Points</li>
+        </ul>
       </div>
     </div>
-  
-    <form [formGroup]="fabForm" (ngSubmit)="calculateScore()">
-      <!-- FAB Scale Items -->
-      <div *ngFor="let item of fabItems" class="form-section">
-        <div class="section-header">
-          <strong>{{item.number}}. {{item.title}}</strong>
-        </div>
-        
-        <div *ngIf="item.instruction" class="instruction">
-          <em>{{item.instruction}}</em>
-        </div>
-        
-        <div class="options">
-          <label *ngFor="let option of item.options; let i = index">
-            <input type="radio" [formControlName]="'Q' + item.number" [value]="i"> {{i}}: {{option}}
-          </label>
-        </div>
-        
-        <div *ngIf="fabForm.get('Q' + item.number)?.invalid && fabForm.get('Q' + item.number)?.touched" class="error-message">
-          Please select an answer
-        </div>
-      </div>
-  
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Calculate Total</button>
-        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
-        
-        <div *ngIf="fabForm.invalid && fabForm.touched" class="error-message completion-error">
-          Please select an answer for all questions.
-        </div>
-      </div>
-    </form>
   </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 10 questions answered</span>
+  </div>
+
+  <form [formGroup]="fabForm" (ngSubmit)="calculateScore()">
+    <!-- FAB Scale Assessment Sections -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">F</span>
+        <div class="section-title-content">
+          <h3 class="section-title">FAB Balance Assessment</h3>
+          <p class="section-subtitle">Select the statement that best describes the patient's performance</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let item of fabItems"
+             class="question-card"
+             [class.answered]="fabForm.get('Q' + item.number)?.value !== null"
+             [class.error]="fabForm.get('Q' + item.number)?.invalid && fabForm.get('Q' + item.number)?.touched">
+          <div class="question-number">{{item.number}}</div>
+          <div class="question-content">
+            <div class="question-text">{{item.title}}</div>
+            <div *ngIf="item.instruction" class="question-instruction warning">{{item.instruction}}</div>
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of item.options; let i = index" class="radio-option-label">
+                <input type="radio" [formControlName]="'Q' + item.number" [value]="i">
+                <span class="option-text">{{i}}: {{option}}</span>
+              </label>
+            </div>
+            <div *ngIf="fabForm.get('Q' + item.number)?.invalid && fabForm.get('Q' + item.number)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="fabForm.invalid && fabForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

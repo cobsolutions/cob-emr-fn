@@ -1,0 +1,324 @@
+{
+    "time-stamp": 1769888314626,
+    "records": {
+        "content": [
+            {
+                "id": 40,
+                "clinicId": 182,
+                "clinicName": "Batridge",
+                "calendarId": 329,
+                "calendarName": "Adel-Cal",
+                "patientId": 59,
+                "patientName": "Mohamed Adel",
+                "entityName": "Appointment",
+                "entityId": 16707,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": 16707
+                    }
+                ],
+                "performedByUuid": "3eaa80e7-9d0f-4435-9ee1-a1571578128b",
+                "performedByName": "ahmed moahmed ahmed",
+                "performedAt": 1769798650649
+            },
+            {
+                "id": 39,
+                "clinicId": 182,
+                "clinicName": "Batridge",
+                "calendarId": 329,
+                "calendarName": "Adel-Cal",
+                "patientId": 59,
+                "patientName": "Mohamed Adel",
+                "entityName": "Appointment",
+                "entityId": 16707,
+                "action": "INSERT",
+                "changes": [
+                    {
+                        "field": "note",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "title",
+                        "oldValue": null,
+                        "newValue": "Adel,Mohamed:Low back Pain"
+                    },
+                    {
+                        "field": "clinic",
+                        "oldValue": null,
+                        "newValue": "Batridge"
+                    },
+                    {
+                        "field": "endDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 07:15"
+                    },
+                    {
+                        "field": "patient",
+                        "oldValue": null,
+                        "newValue": "Mohamed Adel"
+                    },
+                    {
+                        "field": "calendar",
+                        "oldValue": null,
+                        "newValue": "Adel-Cal"
+                    },
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "startDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 07:00"
+                    },
+                    {
+                        "field": "patientCase",
+                        "oldValue": null,
+                        "newValue": "Low back Pain"
+                    },
+                    {
+                        "field": "therapyUUID",
+                        "oldValue": null,
+                        "newValue": "khaled Ahmed"
+                    },
+                    {
+                        "field": "appointmentType",
+                        "oldValue": null,
+                        "newValue": "OK-9"
+                    },
+                    {
+                        "field": "appointmentStatus",
+                        "oldValue": null,
+                        "newValue": "Created"
+                    },
+                    {
+                        "field": "appointmentCancelNoShowReason",
+                        "oldValue": null,
+                        "newValue": null
+                    }
+                ],
+                "performedByUuid": "3eaa80e7-9d0f-4435-9ee1-a1571578128b",
+                "performedByName": "ahmed moahmed ahmed",
+                "performedAt": 1769798650612
+            },
+            {
+                "id": 38,
+                "clinicId": 182,
+                "clinicName": "Batridge",
+                "calendarId": 329,
+                "calendarName": "Adel-Cal",
+                "patientId": 59,
+                "patientName": "Mohamed Adel",
+                "entityName": "Appointment",
+                "entityId": 16706,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": 16706
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769714750196
+            },
+            {
+                "id": 37,
+                "clinicId": 182,
+                "clinicName": "Batridge",
+                "calendarId": 329,
+                "calendarName": "Adel-Cal",
+                "patientId": 59,
+                "patientName": "Mohamed Adel",
+                "entityName": "Appointment",
+                "entityId": 16706,
+                "action": "INSERT",
+                "changes": [
+                    {
+                        "field": "note",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "title",
+                        "oldValue": null,
+                        "newValue": "Adel,Mohamed:Low back Pain"
+                    },
+                    {
+                        "field": "clinic",
+                        "oldValue": null,
+                        "newValue": "Batridge"
+                    },
+                    {
+                        "field": "endDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:15"
+                    },
+                    {
+                        "field": "patient",
+                        "oldValue": null,
+                        "newValue": "Mohamed Adel"
+                    },
+                    {
+                        "field": "calendar",
+                        "oldValue": null,
+                        "newValue": "Adel-Cal"
+                    },
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "startDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:00"
+                    },
+                    {
+                        "field": "patientCase",
+                        "oldValue": null,
+                        "newValue": "Low back Pain"
+                    },
+                    {
+                        "field": "therapyUUID",
+                        "oldValue": null,
+                        "newValue": "khaled Ahmed"
+                    },
+                    {
+                        "field": "appointmentType",
+                        "oldValue": null,
+                        "newValue": "OK-9"
+                    },
+                    {
+                        "field": "appointmentStatus",
+                        "oldValue": null,
+                        "newValue": "Created"
+                    },
+                    {
+                        "field": "appointmentCancelNoShowReason",
+                        "oldValue": null,
+                        "newValue": null
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769714750187
+            },
+            {
+                "id": 36,
+                "clinicId": 182,
+                "clinicName": "Batridge",
+                "calendarId": 325,
+                "calendarName": "ID:325",
+                "patientId": 59,
+                "patientName": "Mohamed Adel",
+                "entityName": "Appointment",
+                "entityId": 16705,
+                "action": "DELETE",
+                "changes": [
+                    {
+                        "field": "note",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "title",
+                        "oldValue": null,
+                        "newValue": "Adel,Mohamed:Low back Pain"
+                    },
+                    {
+                        "field": "clinic",
+                        "oldValue": null,
+                        "newValue": "Batridge"
+                    },
+                    {
+                        "field": "endDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:15"
+                    },
+                    {
+                        "field": "patient",
+                        "oldValue": null,
+                        "newValue": "Mohamed Adel"
+                    },
+                    {
+                        "field": "calendar",
+                        "oldValue": null,
+                        "newValue": "ID:325"
+                    },
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": 16705
+                    },
+                    {
+                        "field": "startDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:00"
+                    },
+                    {
+                        "field": "patientCase",
+                        "oldValue": null,
+                        "newValue": "Low back Pain"
+                    },
+                    {
+                        "field": "therapyUUID",
+                        "oldValue": null,
+                        "newValue": "khaled Ahmed"
+                    },
+                    {
+                        "field": "appointmentType",
+                        "oldValue": null,
+                        "newValue": "OK-9"
+                    },
+                    {
+                        "field": "appointmentStatus",
+                        "oldValue": null,
+                        "newValue": "Created"
+                    },
+                    {
+                        "field": "appointmentCancelNoShowReason",
+                        "oldValue": null,
+                        "newValue": null
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769709160625
+            }
+        ],
+        "pageable": {
+            "sort": {
+                "empty": false,
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 0,
+            "pageSize": 5,
+            "pageNumber": 0,
+            "paged": true,
+            "unpaged": false
+        },
+        "last": false,
+        "totalElements": 26,
+        "totalPages": 6,
+        "number": 0,
+        "size": 5,
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 5,
+        "empty": false
+    },
+    "message": "Successfully retrieved clinic audit trail!",
+    "status": 200
+}

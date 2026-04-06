@@ -1,39 +1,59 @@
-<c-container fluid="true" class="my-2">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-        <button cButton color="primary" class="me-md-2" variant="outline" (click)="openCreateModal()" dispaly-input>
-            <svg cIcon name="cilPlus"></svg>
-            Create</button>
+<div class="appt-type-container">
+    <!-- Toolbar -->
+    <div class="appt-type-toolbar">
+        <div class="toolbar-info">
+            <span class="toolbar-label">Appointment Types</span>
+        </div>
+        <button cButton class="create-btn" (click)="openCreateModal()" *appRoleScope="'calendar-role'; requireModify: true">
+            <svg cIcon name="cilPlus" class="btn-icon"></svg>
+            Create Type
+        </button>
     </div>
-    <table cTable>
-        <thead cTableColor="light">
-            <tr>
-                <th scope="col">Appointment Name</th>
-                <th scope="col">Appointment Color</th>
-                <th scope="col">Appointment Font Color</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor=" let type of(appointmentTypes |async) ">
-                <td>{{type.name}}</td>
-                <td><Label [style.background]="type.color"
-                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;border-style: solid; border-width: 1px;"></Label></td>
-                <td><Label [style.background]="type.fontColor"
-                        style="height: 20px;width: 20px;border-radius: 50%;display: inline-block;border-style: solid; border-width: 1px;"></Label></td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button cButton variant="outline" size="sm" (click)="openEditModal(type)">
-                            <svg cIcon name="cilPen"></svg>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+        <table cTable class="appt-type-table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Background Color</th>
+                    <th scope="col">Font Color</th>
+                    <th scope="col" class="actions-col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let type of (appointmentTypes | async)">
+                    <td class="name-cell">{{ type.name }}</td>
+                    <td>
+                        <div class="color-preview">
+                            <span class="color-swatch" [style.background]="type.color"></span>
+                            <span class="color-value">{{ type.color }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="color-preview">
+                            <span class="color-swatch" [style.background]="type.fontColor"></span>
+                            <span class="color-value">{{ type.fontColor }}</span>
+                        </div>
+                    </td>
+                    <td class="actions-col" *appRoleScope="'calendar-role'; requireModify: true">
+                        <button cButton class="edit-btn" (click)="openEditModal(type)" cTooltip="Edit" cTooltipPlacement="left">
+                            <svg cIcon name="cilPen" class="edit-icon"></svg>
                         </button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</c-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Modal -->
 <c-modal id="addAppoitmentType" [visible]="addVisibility" size="lg" backdrop="static">
-    <c-modal-header>
-        <h3 cModalTitle>Add Appointment Type</h3>
+    <c-modal-header class="modal-header-custom">
+        <h3 cModalTitle class="modal-title-custom">
+            <svg cIcon name="cilPlus" class="modal-title-icon"></svg>
+            Add Appointment Type
+        </h3>
         <button (click)="toggleAdd()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
@@ -41,9 +61,14 @@
             (changeVisibility)="changeAddModalVisibility($event)"></apd-appointment-type>
     </c-modal-body>
 </c-modal>
+
+<!-- Edit Modal -->
 <c-modal id="editAppoitmentType" [visible]="editVisibility" size="lg" backdrop="static">
-    <c-modal-header>
-        <h3 cModalTitle>Edit Appointment Type</h3>
+    <c-modal-header class="modal-header-custom">
+        <h3 cModalTitle class="modal-title-custom">
+            <svg cIcon name="cilPen" class="modal-title-icon"></svg>
+            Edit Appointment Type
+        </h3>
         <button (click)="toggleEdit()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>

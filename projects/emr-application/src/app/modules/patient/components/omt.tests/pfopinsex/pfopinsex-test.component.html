@@ -1,0 +1,117 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Pelvic Organ Prolapse/Urinary Incontinence Sexual Questionnaire (PISQ-12)</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This questionnaire is designed to help evaluate sexual function in women with pelvic organ prolapse and/or urinary incontinence.</p>
+        <ul>
+          <li>Please answer each question by selecting the <strong>ONE CHOICE</strong> that most applies to you</li>
+          <li>Select "Not Tested" if the question does not apply or was not assessed</li>
+        </ul>
+        <p><strong>Scoring:</strong> Each question scores 0-4 points. Total score ranges from 0-48.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 12 questions answered</span>
+  </div>
+
+  <form [formGroup]="pfopinsexForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="pfopinsexForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PISQ-12 Questions -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">S</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Sexual Function Assessment</h3>
+          <p class="section-subtitle">Select the response that best describes your condition</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of questions; let i = index"
+             class="question-card"
+             [class.answered]="pfopinsexForm.get(q.key)?.value !== null && pfopinsexForm.get(q.key)?.value !== 'NT'"
+             [class.error]="pfopinsexForm.get(q.key)?.invalid && pfopinsexForm.get(q.key)?.touched">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <div class="question-text">{{ q.text }}</div>
+            <div class="radio-options-vertical">
+              <label *ngFor="let opt of q.options" class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="opt.value">
+                <span class="option-text">{{ opt.text }}</span>
+              </label>
+            </div>
+            <div *ngIf="pfopinsexForm.get(q.key)?.invalid && pfopinsexForm.get(q.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="pfopinsexForm.invalid && pfopinsexForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

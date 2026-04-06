@@ -1,0 +1,1012 @@
+<form [formGroup]="strengthForm" class="rom-form">
+    <!-- No Limitations Noted -->
+    <div class="form-row">
+        <label class="field-label">No Limitations Noted</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
+        <!-- Upper Extremity Checkbox -->
+        <div class="form-row">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" formControlName="uper_extremity" />
+                <label cFormCheckLabel>Upper Extremity</label>
+            </c-form-check>
+        </div>
+
+        <!-- Lower Extremity Checkbox -->
+        <div class="form-row">
+            <c-form-check>
+                <input cFormCheckInput type="checkbox" formControlName="lower_extremity" />
+                <label cFormCheckLabel>Lower Extremity</label>
+            </c-form-check>
+        </div>
+    </div>
+    <!-- Selective Tissue Tension Upper -->
+    <div class="form-row">
+        <label class="field-label">Selective Tissue Tension Upper</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSelectiveTissueTensionUpperFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Cervical</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCervicalFields" class="dependent-field-box">
+            <measurement-table-with-selects [labels]="strengthConfig.cervical.labels"
+                [options]="strengthConfig.cervical.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervical.fieldPrefix"
+                [topSelects]="strengthConfig.cervical.topSelects"
+                [commentsFieldName]="strengthConfig.cervical.commentsFieldName"
+                [showComments]="strengthConfig.cervical.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Trunk</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="trunk" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="trunk" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showTrunkFields" class="dependent-field-box">
+            <measurement-table-with-selects [labels]="strengthConfig.trunk.labels"
+                [options]="strengthConfig.trunk.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.trunk.fieldPrefix"
+                [topSelects]="strengthConfig.trunk.topSelects"
+                [commentsFieldName]="strengthConfig.trunk.commentsFieldName"
+                [showComments]="strengthConfig.trunk.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Back Ribs</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="back_ribs" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="back_ribs" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showBackRibsFields" class="dependent-field-box">
+            <single-column-table [labels]="strengthConfig.backRibs.labels"
+                [options]="strengthConfig.backRibs.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.backRibs.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.backRibs.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.backRibs.commentsFieldName"
+                [showApplyToAll]="strengthConfig.backRibs.showApplyToAll"
+                [showComments]="strengthConfig.backRibs.showComments"
+                [initialData]="formData">
+            </single-column-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Shoulder</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="shoulder" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="shoulder" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showShoulderFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.shoulder.labels"
+                [options]="strengthConfig.shoulder.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.shoulder.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.shoulder.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.shoulder.commentsFieldName"
+                [showApplyToAll]="strengthConfig.shoulder.showApplyToAll"
+                [showComments]="strengthConfig.shoulder.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Elbow</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="elbow" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="elbow" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showElbowFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.elbow.labels"
+                [options]="strengthConfig.elbow.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.elbow.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.elbow.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.elbow.commentsFieldName"
+                [showApplyToAll]="strengthConfig.elbow.showApplyToAll"
+                [showComments]="strengthConfig.elbow.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Wrist</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="wrist" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="wrist" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showWristFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.wrist.labels"
+                [options]="strengthConfig.wrist.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.wrist.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.wrist.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.wrist.commentsFieldName"
+                [showApplyToAll]="strengthConfig.wrist.showApplyToAll"
+                [showComments]="strengthConfig.wrist.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Hand</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="hand" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="hand" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHandFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.hand.labels"
+                [options]="strengthConfig.hand.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.hand.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.hand.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.hand.commentsFieldName"
+                [showApplyToAll]="strengthConfig.hand.showApplyToAll"
+                [showComments]="strengthConfig.hand.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+    </div>
+
+
+    <!-- Selective Tissue Tension Lower -->
+    <div class="form-row">
+        <label class="field-label">Selective Tissue Tension Lower</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="selective_tissue_tension_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showSelectiveTissueTensionLowerFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Hip</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="hip" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="hip" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHipFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.hip.labels"
+                [options]="strengthConfig.hip.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.hip.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.hip.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.hip.commentsFieldName"
+                [showApplyToAll]="strengthConfig.hip.showApplyToAll"
+                [showComments]="strengthConfig.hip.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Knee</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="knee" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="knee" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showKneeFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.knee.labels"
+                [options]="strengthConfig.knee.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.knee.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.knee.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.knee.commentsFieldName"
+                [showApplyToAll]="strengthConfig.knee.showApplyToAll"
+                [showComments]="strengthConfig.knee.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Ankle</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="ankle" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="ankle" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showAnkleFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.ankle.labels"
+                [options]="strengthConfig.ankle.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.ankle.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.ankle.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.ankle.commentsFieldName"
+                [showApplyToAll]="strengthConfig.ankle.showApplyToAll"
+                [showComments]="strengthConfig.ankle.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Foot</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="foot" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="foot" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFootFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.foot.labels"
+                [options]="strengthConfig.foot.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.foot.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.foot.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.foot.commentsFieldName"
+                [showApplyToAll]="strengthConfig.foot.showApplyToAll"
+                [showComments]="strengthConfig.foot.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Grip / Pinch</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="grip_pinch" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="grip_pinch" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGripPinchFields" class="dependent-field-box">
+        <dropdown-text-table [columns]="strengthConfig.gripPinch.columns" [labels]="strengthConfig.gripPinch.labels"
+            [options]="strengthConfig.gripPinch.options" [specialOptions]="strengthConfig.gripPinch.specialOptions" ,
+            [formGroup]="strengthForm" [fieldPrefix]="strengthConfig.gripPinch.fieldPrefix"
+            [commentsFieldName]="strengthConfig.gripPinch.commentsFieldName"
+            [showComments]="strengthConfig.gripPinch.showComments"
+            [initialData]="formData">
+        </dropdown-text-table>
+        <div class="form-row">
+            <label class="field-label">Rapid Exchange</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="rapid_exchange" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="rapid_exchange" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showRapidExchangeFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.rapidExchange.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.rapidExchange.fieldPrefix"
+                [showComments]="strengthConfig.rapidExchange.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Repeated Grip</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="repeated_grip" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="repeated_grip" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showRepeatedGripFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.repeatedGrip.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.repeatedGrip.fieldPrefix"
+                [showComments]="strengthConfig.repeatedGrip.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Five Level Grip</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="five_level_grip" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="five_level_grip" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showFiveLevelGripFields" class="dependent-field-box">
+            <measurement-table-rl-input-columns
+                [rows]="strengthConfig.fiveLevelGrip.rows"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.fiveLevelGrip.fieldPrefix"
+                [showComments]="strengthConfig.fiveLevelGrip.showComments"
+                [initialData]="formData">
+            </measurement-table-rl-input-columns>
+        </div>
+
+    </div>
+    <!-- Gross Muscle Tests Upper -->
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Upper</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_upper" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_upper" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsUpperFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Cervical</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical_gross_muscle_tests_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical_gross_muscle_tests_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCervicalGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table-with-selects [labels]="strengthConfig.cervicalGmtUpper.labels"
+                [options]="strengthConfig.cervicalGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalGmtUpper.fieldPrefix"
+                [topSelects]="strengthConfig.cervicalGmtUpper.topSelects"
+                [commentsFieldName]="strengthConfig.cervicalGmtUpper.commentsFieldName"
+                [showComments]="strengthConfig.cervicalGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Shoulder</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="shoulder_gross_muscle_tests_upper"
+                        value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="shoulder_gross_muscle_tests_upper"
+                        value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showShoulderGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.shoulderGmtUpper.labels"
+                [options]="strengthConfig.shoulderGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.shoulderGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.shoulderGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.shoulderGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.shoulderGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.shoulderGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Elbow</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="elbow_gross_muscle_tests_upper" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showElbowGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.elbowGmtUpper.labels"
+                [options]="strengthConfig.elbowGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.elbowGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.elbowGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.elbowGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.elbowGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.elbowGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Wrist</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="wrist_gross_muscle_tests_upper" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showWristGrossMuscleTestsUpperFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.wristGmtUpper.labels"
+                [options]="strengthConfig.wristGmtUpper.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.wristGmtUpper.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.wristGmtUpper.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.wristGmtUpper.commentsFieldName"
+                [showApplyToAll]="strengthConfig.wristGmtUpper.showApplyToAll"
+                [showComments]="strengthConfig.wristGmtUpper.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+    </div>
+    <!-- Redcord Neurac Stability Tests -->
+    <div class="form-row">
+        <label class="field-label">Redcord Neurac Stability Tests</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="redcord_neurac_stability_tests" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="redcord_neurac_stability_tests" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showRedcordNeuracStabilityTestsFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Upper Body Myofascial Tests</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="upper_body_myofascial_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="upper_body_myofascial_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showUpperBodyMyofascialTestsFields" class="dependent-field-box">
+            <measurement-table-with-selects
+                [labels]="strengthConfig.upperBodyMyofascialTests.labels"
+                [options]="strengthConfig.upperBodyMyofascialTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.upperBodyMyofascialTests.fieldPrefix"
+                [topSelects]="strengthConfig.upperBodyMyofascialTests.topSelects"
+                [commentsFieldName]="strengthConfig.upperBodyMyofascialTests.commentsFieldName"
+                [showComments]="strengthConfig.upperBodyMyofascialTests.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Lower Body Myofascial Tests</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="lower_body_myofascial_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="lower_body_myofascial_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLowerBodyMyofascialTestsFields" class="dependent-field-box">
+            <measurement-table-with-selects
+                [labels]="strengthConfig.lowerBodyMyofascialTests.labels"
+                [options]="strengthConfig.lowerBodyMyofascialTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.lowerBodyMyofascialTests.fieldPrefix"
+                [topSelects]="strengthConfig.lowerBodyMyofascialTests.topSelects"
+                [commentsFieldName]="strengthConfig.lowerBodyMyofascialTests.commentsFieldName"
+                [showComments]="strengthConfig.lowerBodyMyofascialTests.showComments"
+                [initialData]="formData">
+            </measurement-table-with-selects>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Cervical Movements</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical_movements" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical_movements" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCervicalMovementsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.cervicalMovements.labels"
+                [columns]="strengthConfig.cervicalMovements.columns"
+                [options]="strengthConfig.cervicalMovements.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalMovements.fieldPrefix"
+                [cellType]="strengthConfig.cervicalMovements.cellType"
+                [showComments]="strengthConfig.cervicalMovements.showComments"
+                [commentsFieldName]="strengthConfig.cervicalMovements.commentsFieldName"
+                [showApplyToAll]="strengthConfig.cervicalMovements.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Cervical Motor Control Tests</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="cervical_motor_control_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="cervical_motor_control_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showCervicalMotorControlTestsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.cervicalMotorControlTests.labels"
+                [columns]="strengthConfig.cervicalMotorControlTests.columns"
+                [options]="strengthConfig.cervicalMotorControlTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.cervicalMotorControlTests.fieldPrefix"
+                [cellType]="strengthConfig.cervicalMotorControlTests.cellType"
+                [showComments]="strengthConfig.cervicalMotorControlTests.showComments"
+                [commentsFieldName]="strengthConfig.cervicalMotorControlTests.commentsFieldName"
+                [showApplyToAll]="strengthConfig.cervicalMotorControlTests.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Lumbar Motor Control Tests</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="lumbar_motor_control_tests" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="lumbar_motor_control_tests" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showLumbarMotorControlTestsFields" class="dependent-field-box">
+            <measurement-table-multiple-columns
+                [labels]="strengthConfig.lumbarMotorControlTests.labels"
+                [columns]="strengthConfig.lumbarMotorControlTests.columns"
+                [options]="strengthConfig.lumbarMotorControlTests.options"
+                [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.lumbarMotorControlTests.fieldPrefix"
+                [cellType]="strengthConfig.lumbarMotorControlTests.cellType"
+                [showComments]="strengthConfig.lumbarMotorControlTests.showComments"
+                [commentsFieldName]="strengthConfig.lumbarMotorControlTests.commentsFieldName"
+                [showApplyToAll]="strengthConfig.lumbarMotorControlTests.showApplyToAll"
+                [initialData]="formData">
+            </measurement-table-multiple-columns>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Trunk</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_trunk" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_trunk" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsTrunkFields" class="dependent-field-box">
+        <measurement-table-with-selects [labels]="strengthConfig.grossMuscleTestsTrunk.labels"
+            [options]="strengthConfig.grossMuscleTestsTrunk.options" [formGroup]="strengthForm"
+            [fieldPrefix]="strengthConfig.grossMuscleTestsTrunk.fieldPrefix"
+            [topSelects]="strengthConfig.grossMuscleTestsTrunk.topSelects"
+            [commentsFieldName]="strengthConfig.grossMuscleTestsTrunk.commentsFieldName"
+            [showComments]="strengthConfig.grossMuscleTestsTrunk.showComments"
+            [initialData]="formData">
+        </measurement-table-with-selects>
+    </div>
+
+    <!-- Gross Muscle Tests Lower -->
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Lower</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_lower" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_lower" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsLowerFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Hip</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="hip_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="hip_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showHipGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.hipGmtLower.labels"
+                [options]="strengthConfig.hipGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.hipGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.hipGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.hipGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.hipGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.hipGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Knee</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="knee_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="knee_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showKneeGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.kneeGmtLower.labels"
+                [options]="strengthConfig.kneeGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.kneeGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.kneeGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.kneeGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.kneeGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.kneeGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+
+        <div class="form-row">
+            <label class="field-label">Ankle</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="ankle_gross_muscle_tests_lower" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="ankle_gross_muscle_tests_lower" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showAnkleGrossMuscleTestsLowerFields" class="dependent-field-box">
+            <measurement-table [labels]="strengthConfig.ankleGmtLower.labels"
+                [options]="strengthConfig.ankleGmtLower.options" [formGroup]="strengthForm"
+                [fieldPrefix]="strengthConfig.ankleGmtLower.fieldPrefix"
+                [applyToAllFieldName]="strengthConfig.ankleGmtLower.applyToAllFieldName"
+                [commentsFieldName]="strengthConfig.ankleGmtLower.commentsFieldName"
+                [showApplyToAll]="strengthConfig.ankleGmtLower.showApplyToAll"
+                [showComments]="strengthConfig.ankleGmtLower.showComments"
+                [initialData]="formData">
+            </measurement-table>
+        </div>
+    </div>
+    <!-- Core Strength -->
+    <div class="form-row">
+        <label class="field-label">Core Strength</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="core_strength" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="core_strength" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showCoreStrengthFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">Prone Extension</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="prone_extensioncore_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="prone_extensioncore_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showProneExtensionCoreStrengthFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Seconds</label>
+                <input type="text" class="form-control" formControlName="prone_extension_cs_seconds" />
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="prone_extension_cs_value" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Supine Flexion</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="supine_flexion_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="supine_flexion_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSupineFlexionCoreStrengthFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Seconds</label>
+                <input type="text" class="form-control" formControlName="supine_flexion_cs_seconds" />
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="supine_flexion_cs_value" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Situps</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="situps_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="situps_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showSitupsCoreStrengthFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Situps Completed</label>
+                <input type="text" class="form-control" formControlName="situps_cs_completed" />
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="situps_cs_value" />
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="field-label">Pushup</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="pushup_core_strength" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="pushup_core_strength" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showPushupCoreStrengthFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Pushups Completed</label>
+                <input type="text" class="form-control" formControlName="pushup_cs_completed" />
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="pushup_cs_value1" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Knee Pushups Completed</label>
+                <input type="text" class="form-control" formControlName="pushup_cs_knee_completed" />
+            </div>
+            <div class="form-row">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="pushup_cs_value2" />
+            </div>
+        </div>
+    </div>
+    <!-- Gross Muscle Tests Pelvic Floor -->
+    <div class="form-row">
+        <label class="field-label">Gross Muscle Tests Pelvic Floor</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showGrossMuscleTestsPelvicFloorFields" class="dependent-field-box">
+        <div class="form-row">
+            <label class="field-label">1st Layer Superficial Muscles</label>
+            <div class="radio-group-primary">
+                <c-form-check class="me-3">
+                    <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor_value" value="yes" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check>
+                    <input cFormCheckInput type="radio" formControlName="gross_muscle_tests_pelvic_floor_value" value="no" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </div>
+        </div>
+        <div *ngIf="showGrossMuscleTestsPelvicFloorValueFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">1st Layer Superficial Muscles</label>
+                <select class="form-control" formControlName="first_layer_superficial_muscles">
+                    <option value="">Select</option>
+                    <option value="not_tested">Not Tested</option>
+                    <option value="5/5">5/5</option>
+                    <option value="5-/5">5-/5</option>
+                    <option value="4+/5">4+/5</option>
+                    <option value="4/5">4/5</option>
+                    <option value="4-/5">4-/5</option>
+                    <option value="3+/5">3+/5</option>
+                    <option value="3/5">3/5</option>
+                    <option value="3-/5">3-/5</option>
+                    <option value="2+/5">2+/5</option>
+                    <option value="2/5">2/5</option>
+                    <option value="2-/5">2-/5</option>
+                    <option value="1+/5">1+/5</option>
+                    <option value="1/5">1/5</option>
+                    <option value="1-/5">1-/5</option>
+                    <option value="0/5">0/5</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            <div class="form-row" *ngIf="showFirstLayerSuperficialMusclesCustom">
+                <label class="field-label"></label>
+                <input type="text" class="form-control" formControlName="first_layer_superficial_muscles_custom" placeholder="Enter custom value" />
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Manual Muscle Tests</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="manual_muscle_tests" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="manual_muscle_tests" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+    <div *ngIf="showManualMuscleTestsFields" class="dependent-field-box">
+        <measurement-table-with-selects [labels]="strengthConfig.manualMuscleTests.labels"
+            [options]="strengthConfig.manualMuscleTests.options" [formGroup]="strengthForm"
+            [fieldPrefix]="strengthConfig.manualMuscleTests.fieldPrefix"
+            [topSelects]="strengthConfig.manualMuscleTests.topSelects"
+            [commentsFieldName]="strengthConfig.manualMuscleTests.commentsFieldName"
+            [showComments]="strengthConfig.manualMuscleTests.showComments"
+            [initialData]="formData">
+        </measurement-table-with-selects>
+    </div>
+    <div class="form-row">
+        <label class="field-label">Additional Comments</label>
+        <div class="radio-group-primary">
+            <c-form-check class="me-3">
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </div>
+    </div>
+
+    <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+        <textarea formControlName="additional_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+</form>

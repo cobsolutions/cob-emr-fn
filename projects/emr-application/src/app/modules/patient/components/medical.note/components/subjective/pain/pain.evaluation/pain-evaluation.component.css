@@ -1,102 +1,391 @@
-.borderless td,
-.borderless th {
-  border: none;
+/* Enhanced Modal Styling - Clinical EMR Theme */
+:host {
+  overflow: visible !important;
 }
 
-.small-table {
+.modal {
+  display: block;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  z-index: 9999 !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+  margin: 0 !important;
+  padding: 0;
+  transform: none !important;
+  will-change: auto;
+  contain: none;
+  clip-path: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-dialog {
+  position: relative;
   width: auto;
-  border-collapse: collapse;
+  margin: 1.75rem auto;
+  max-width: 900px;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(100% - 3.5rem);
 }
 
-.small-text {
-  font-size: 12px;
-  white-space: nowrap;
-  padding: 2px 5px;
+.modal-dialog .modal-content {
+  pointer-events: auto;
+  position: relative;
 }
 
-.radio-cell {
-  padding: 10px;
-  text-align: center;
+.modal-content {
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(33, 150, 243, 0.2);
+  background: #ffffff;
+  animation: slideDown 0.3s ease;
 }
 
-input[type="radio"] {
-  transform: scale(0.8);
-  /* Reduce radio button size */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  background: linear-gradient(to right, #f8fbff 0%, #ffffff 100%);
+  border-bottom: 2px solid #2196F3;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-title {
+  color: #1565c0;
+  font-weight: 600;
+  font-size: 1.25rem;
   margin: 0;
 }
 
-th,
-td {
-  padding: 2px 5px;
-  /* Reduce padding */
+.btn-close {
+  background-color: transparent;
+  border: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
 }
 
-th {
-  font-size: 12px;
+.btn-close:hover {
+  opacity: 1;
 }
 
-.gray-text {
-  color: gray;
-  font-size: 12px;
-  font-weight: normal;
-  padding-right: 10px;
-  /* Adds spacing from the right edge */
+.modal-body {
+  padding: 1.5rem;
+  background: #ffffff;
 }
 
-.goal-form-container {
-  display: flex;
-  flex-direction: column;
-  width: 700px;
-  padding: 15px;
-  background: #f8f9fa;
+.modal-footer {
+  background: #f8fbff;
+  border-top: 1px solid #e3f2fd;
+  padding: 1rem 1.5rem;
+  border-radius: 0 0 12px 12px;
+}
+
+.radio-cell {
+  padding: 2px;
+}
+
+.small-table {
+  border: 1px solid #e3f2fd;
   border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.small-table th, .small-table td {
+  padding: 8px;
+  font-size: 13px;
+}
+
+.small-table thead {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.small-table thead th {
+  color: #1565c0;
+  font-weight: 600;
+  border-bottom: 2px solid #2196F3;
+}
+
+.small-table tbody tr {
+  border-bottom: 1px solid #f0f4f8;
+  transition: background-color 0.2s;
+}
+
+.small-table tbody tr:hover {
+  background-color: #f8fbff;
 }
 
 .add-btn-container {
-  display: flex;
-  justify-content: flex-end;
+  text-align: right;
 }
 
-.add-goal-btn {
-  background-color: #f8f9fa;
-  /* Light gray for a subtle look */
-  color: #333;
-  /* Dark text for better readability */
-  border: 1px solid #ccc;
-  /* Soft border for a clean look */
-  padding: 8px 15px;
-  border-radius: 5px;
+.gray-text {
+  color: #546e7a;
+  font-weight: 500;
+}
+/* Enhanced Action Buttons - Clinical EMR Theme */
+.action-btn {
+  border: 1px solid transparent;
   font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.add-goal-btn:hover {
-  background-color: #e2e6ea;
-  /* Slightly darker gray on hover */
-}
-.goal-table {
-  width: 100%;
-  margin-top: 15px;
-  border-collapse: collapse;
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
-.goal-table th,
-.goal-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+/* Remove Button */
+.action-btn.remove {
+  color: #c62828;
+  background-color: #ffebee;
+  border-color: #ef5350;
 }
-.btn-remove {
-  background: none;
-  border: none;
-  cursor: pointer;
+
+.action-btn.remove:hover {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+}
+
+/* Edit Button */
+.action-btn.edit {
+  color: #1976d2;
+  background-color: #e3f2fd;
+  border-color: #64b5f6;
+}
+
+.action-btn.edit:hover {
+  background-color: #bbdefb;
+  border-color: #1976d2;
+}
+
+/* Add Button - Medical Green */
+.action-btn.add {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border-color: #66bb6a;
+}
+
+.action-btn.add:hover {
+  background-color: #c8e6c9;
+  border-color: #2e7d32;
+}
+/* Enhanced Circle Buttons - Clinical EMR Theme */
+.action-btn-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
-  color: red;
-  transition: 0.3s;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin: 0 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.btn-remove:hover {
-  color: darkred;
+.action-btn-circle:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Edit Button - Medical Blue */
+.action-btn-circle.edit {
+  color: #1976d2;
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+.action-btn-circle.edit:hover {
+  background-color: #bbdefb;
+  border-color: #1976d2;
+  color: #0d47a1;
+}
+
+/* Remove Button - Medical Red */
+.action-btn-circle.remove {
+  color: #c62828;
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+}
+
+.action-btn-circle.remove:hover {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+  color: #b71c1c;
+}
+
+/* Pain Evaluation Table Styling */
+.table {
+  border: 1px solid #e3f2fd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  margin-bottom: 0;
+}
+
+.table-light {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-bottom: 2px solid #2196F3;
+}
+
+.table-light th {
+  color: #1565c0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 12px;
+  border-bottom: none;
+}
+
+.table-hover tbody tr {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8fbff;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.table tbody td {
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: #37474f;
+  border-bottom: 1px solid #f0f4f8;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Empty State Styling */
+.text-muted {
+  color: #78909c !important;
+}
+
+.bg-light {
+  background-color: #f8fbff !important;
+}
+
+.border {
+  border: 1px solid #e3f2fd !important;
+}
+
+.rounded {
+  border-radius: 8px !important;
+}
+
+/* Form Controls in Modal */
+.modal-body label {
+  color: #546e7a;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.modal-body input[cFormControl],
+.modal-body select[cSelect] {
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.modal-body input[cFormControl]:focus,
+.modal-body select[cSelect]:focus {
+  border-color: #2196F3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  outline: none;
+}
+
+/* Radio buttons in pain scale table */
+.small-table input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #2196F3;
+}
+
+.small-table input[type="radio"]:checked {
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Responsive Modal Adjustments */
+@media (max-width: 992px) {
+  .modal-dialog {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    max-width: 95%;
+    margin: 0.5rem auto;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .small-table th,
+  .small-table td {
+    padding: 6px 4px;
+    font-size: 11px;
+  }
+
+  .modal-body label {
+    min-width: 120px !important;
+    font-size: 0.85rem;
+  }
+
+  .modal-body input[cFormControl],
+  .modal-body select[cSelect] {
+    max-width: 100% !important;
+  }
+}
+
+

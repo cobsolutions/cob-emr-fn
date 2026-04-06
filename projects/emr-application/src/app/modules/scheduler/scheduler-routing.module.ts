@@ -4,6 +4,7 @@ import { AppointmentTypeListComponent } from './components/appointment.type/list
 import { CalendarListComponent } from './components/calendarList/calendar-list.component';
 import { ListSchedulerConfigurationComponent } from './components/scheduler.configuration/list/list-scheduler-configuration.component';
 import { SchedulerSettingsComponent } from './components/scheduler.settings/scheduler.settings.component';
+import { SchedulerHistoryComponent } from './components/scheduler.history/scheduler-history.component';
 import { ViewSchdulerComponent } from './components/scheduler.view/view-schduler.component';
 import { SchedulerSetupResolverService } from './service/scheduler/scheduler-setup-resolver.service';
 
@@ -32,6 +33,13 @@ const routes: Routes = [{
       component: CalendarListComponent,
       data: {
         title: 'calendars',
+      },
+    },
+    {
+      path: 'history',
+      component: SchedulerHistoryComponent,
+      data: {
+        title: 'history',
       },
     }
   ]

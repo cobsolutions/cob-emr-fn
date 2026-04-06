@@ -1,112 +1,266 @@
-<ngx-spinner></ngx-spinner>
-<c-row>
-    <!--Search Panel-->
-    <c-col xs="12">
-        <c-card class="mb-4">
-            <c-card-header ngPreserveWhitespaces>
-                <strong>Calendar Search</strong> <small>From Calendars list</small>
-            </c-card-header>
-            <c-card-body>
-                <p class="text-medium-emphasis small">
-                    The Abiltiy to filter the Calendar list
-                </p>
-                <form cForm>
-                    <c-row>
-                        <c-col class="mb-2" xs="12">
-                            <c-input-group sizing="sm">
-                                <span cInputGroupText id="basic-addon1">Name</span>
-                                <input aria-describedby="basic-addon1" aria-label="Username" cFormControl
-                                    placeholder="Name" sizing="sm" [(ngModel)]="searchCriteria.name" name="sc_pname" />
-                                <button cButton size="sm" variant="outline" (click)="clearFilter('name')">
-                                    <svg cIcon name="cilFilter" title="cilFilterX"></svg>
-                                </button>
-                            </c-input-group>
-                        </c-col>
-                        <c-col xs="12">
-                            <c-input-group class="mb-3" sizing="sm">
-                                <span cInputGroupText id="basic-addon1">Create</span>
-                                <input type="date" cFormControl sizing="sm"
-                                    [ngModel]="searchCriteria.searchStartDate | date:'yyyy-MM-dd'"
-                                    (ngModelChange)="searchCriteria.searchStartDate = $event" name="dosStart_Date"
-                                    id="dosStart_Date" #dosEnd_Date>
-                                <input type="date" cFormControl
-                                    [ngModel]="searchCriteria.searchEndDate | date:'yyyy-MM-dd'" sizing="sm"
-                                    (ngModelChange)="searchCriteria.searchEndDate = $event" name="dosEnd_Date"
-                                    #dosEnd_Date>
-                                <button cButton size="sm" variant="outline" (click)="clearFilter('createdAt')">
-                                    <svg cIcon name="cilFilter" title="cilFilterX"></svg>
-                                </button>
-                            </c-input-group>
-                        </c-col>
-                        <c-col xs="12" class="text-center">
-                            <button cButton class="me-1" color="primary" (click)="search()">
-                                Search
-                            </button>
-                        </c-col>
-                    </c-row>
-                </form>
-            </c-card-body>
-        </c-card>
-    </c-col>
-    <c-col xs="12">
-        <c-button-group aria-label="Button outlined group with nested dropdown" role="group">
-            <button cButton color="primary" variant="outline" (click)="openAddCalendarModal()">Add Calendar</button>
-            <button cButton color="primary" variant="outline" (click)="updateCalendar()">Save</button>
-        </c-button-group>
-    </c-col>
-</c-row>
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilCalendar" class="page-icon"></svg>
+        Calendars
+      </h2>
+      <p class="page-subtitle">Manage and configure clinic calendars</p>
+    </div>
+    <div class="header-actions" *appRoleScope="'calendar-role'; requireModify: true">
+      <button cButton class="action-btn create-btn" (click)="openAddCalendarModal()">
+        <svg cIcon name="cilPlus" class="btn-icon"></svg>
+        Add Calendar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Search Panel -->
+<div class="search-panel">
+  <div class="search-panel-header" (click)="searchCollapsed = !searchCollapsed">
+    <div class="search-header-title">
+      <svg cIcon name="cilSearch" class="search-icon"></svg>
+      <span>Search Filters</span>
+    </div>
+    <svg cIcon name="cilChevronBottom" class="collapse-icon" [class.expanded]="!searchCollapsed"></svg>
+  </div>
+  <div class="search-panel-body" *ngIf="!searchCollapsed">
+    <form cForm>
+      <div class="search-grid">
+        <!-- Name Filter -->
+        <div class="search-field">
+          <label class="field-label">Calendar Name</label>
+          <div class="input-with-action">
+            <input cFormControl placeholder="Search by name" [(ngModel)]="searchCriteria.name" name="sc_pname" />
+            <button class="clear-btn" (click)="clearFilter('name')" cTooltip="Clear" cTooltipPlacement="top">
+              <svg cIcon name="cilX" class="clear-icon"></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="search-field">
+          <label class="field-label">Created Date Range</label>
+          <div class="date-range-row">
+            <div class="input-with-action date-input">
+              <input type="date" cFormControl
+                [ngModel]="searchCriteria.searchStartDate | date:'yyyy-MM-dd'"
+                (ngModelChange)="searchCriteria.searchStartDate = $event" name="dosStart_Date" id="dosStart_Date" />
+            </div>
+            <span class="date-separator">to</span>
+            <div class="input-with-action date-input">
+              <input type="date" cFormControl
+                [ngModel]="searchCriteria.searchEndDate | date:'yyyy-MM-dd'"
+                (ngModelChange)="searchCriteria.searchEndDate = $event" name="dosEnd_Date" />
+            </div>
+            <button class="clear-btn" (click)="clearFilter('createdAt')" cTooltip="Clear dates" cTooltipPlacement="top">
+              <svg cIcon name="cilX" class="clear-icon"></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-actions">
+        <button cButton class="search-btn" (click)="search()">
+          <svg cIcon name="cilSearch" class="btn-icon"></svg>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Table -->
 <ng-container *ngIf="props$ | async as props" fluid="true">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
-        #calendarsItems [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
+  <div class="table-section">
+    <!-- Table Toolbar -->
+    <div class="table-toolbar">
+      <div class="table-toolbar-left">
+        <svg cIcon name="cilList" class="toolbar-icon"></svg>
+        <span class="toolbar-title">Calendar List</span>
+        <span class="toolbar-count" *ngIf="totalItems$ | async as totalItems">{{ totalItems }}</span>
+      </div>
+      <div class="table-toolbar-right" *appRoleScope="'calendar-role'; requireModify: true">
+        <div class="toolbar-hint">
+          <svg cIcon name="cilInfo" class="toolbar-hint-icon"></svg>
+          <span>Changes are saved automatically</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="table-card">
+      <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(calendars$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
         [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-        [tableProps]="{ hover: true, striped: true, small:true }" [columnFilterValue]="props.columnFilterValue?? []"
+        [tableProps]="{ hover: true, striped: false, small: false }" [columnFilterValue]="props.columnFilterValue ?? []"
         [sorterValue]="props.sorterValue" [tableBodyProps]="{ align: 'middle' }"
         (sorterValueChange)="handleSorterValueChange($event)" header>
         <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-            <td>
-                <ng-container [ngSwitch]="columnName">
-                    <ng-container *ngSwitchCase="'isPublic'" class="py-2">
-                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isPublic" type="checkbox"
-                            [disabled]="!(item.createdBy === loggedInUserUUID)">
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'attached'" class="py-2">
-                        <input cFormCheckInput sizing="sm" [(ngModel)]="item.isAttach" type="checkbox">
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'actions'" class="py-2">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button cButton variant="outline" size="sm" (click)="openEditCalendarModal(item)">
-                                <svg cIcon name="cilPen"></svg>
-                            </button>
-                        </div>
-                    </ng-container>
-                    <ng-container *ngSwitchDefault>
-                        {{tdContent}}
-                    </ng-container>
-                </ng-container>
-            </td>
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <!-- Calendar Name -->
+              <ng-container *ngSwitchCase="'name'">
+                <div class="calendar-name-cell">
+                  <div class="calendar-avatar">
+                    <svg cIcon name="cilCalendar" class="calendar-avatar-icon"></svg>
+                  </div>
+                  <div class="calendar-name-info">
+                    <span class="calendar-name-text">{{ item.name }}</span>
+                    <div class="calendar-name-meta">
+                      <span class="calendar-id-badge">#{{ item.calendarId }}</span>
+                      <span class="calendar-owner-badge" *ngIf="item.createdBy === loggedInUserUUID">
+                        <svg cIcon name="cilUser" class="owner-badge-icon"></svg>
+                        Owner
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Public Toggle -->
+              <ng-container *ngSwitchCase="'isPublic'">
+                <div class="toggle-cell">
+                  <label class="table-toggle" [class.toggle-disabled]="!(item.createdBy === loggedInUserUUID)">
+                    <input type="checkbox" [(ngModel)]="item.isPublic"
+                      [disabled]="!(item.createdBy === loggedInUserUUID)"
+                      (ngModelChange)="onPublicToggle(item)" />
+                    <span class="table-toggle-slider"></span>
+                  </label>
+                  <span class="toggle-label" [class.toggle-label-active]="item.isPublic">
+                    {{ item.isPublic ? 'Public' : 'Private' }}
+                  </span>
+                </div>
+              </ng-container>
+
+              <!-- Attached Toggle -->
+              <ng-container *ngSwitchCase="'attached'">
+                <div class="toggle-cell">
+                  <label class="table-toggle">
+                    <input type="checkbox" [(ngModel)]="item.isAttach"
+                      (ngModelChange)="onAttachToggle(item)" />
+                    <span class="table-toggle-slider"></span>
+                  </label>
+                  <span class="toggle-label" [class.toggle-label-active]="item.isAttach">
+                    {{ item.isAttach ? 'Attached' : 'Detached' }}
+                  </span>
+                </div>
+              </ng-container>
+
+              <!-- Actions -->
+              <ng-container *ngSwitchCase="'actions'">
+                <div class="actions-cell">
+                  <button cButton class="edit-btn" (click)="openEditCalendarModal(item)" cTooltip="Edit Calendar"
+                    cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
+                    <svg cIcon name="cilPen" class="edit-icon"></svg>
+                  </button>
+                  <button cButton class="delete-btn" (click)="confirmDeleteCalendar(item)" cTooltip="Delete Calendar"
+                    cTooltipPlacement="left" *appRoleScope="'calendar-role'; requireModify: true">
+                    <svg cIcon name="cilTrash" class="delete-icon"></svg>
+                  </button>
+                </div>
+              </ng-container>
+
+              <!-- Default -->
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
+            </ng-container>
+          </td>
         </ng-template>
-    </c-smart-table>
-    <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
-        (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+      </c-smart-table>
+      <div class="pagination-wrapper" *ngIf="props.totalPages">
+        <c-smart-pagination [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+      </div>
+    </div>
+  </div>
 </ng-container>
 
-<c-modal id="createCalendar" [visible]="createCalendarVisibility" size="lg" backdrop="static" scrollable>
-    <c-modal-header>
-        <h2>Create Calendar</h2>
-        <button (click)="toggleCreate()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-        <create-calendar *ngIf="createCalendarVisibility"
-            (changeCreateVisibility)="changeCreateVisibility($event)" [clinicId]="clinicId"></create-calendar>
-    </c-modal-body>
+<!-- Create Calendar Modal -->
+<c-modal id="createCalendar" [visible]="createCalendarVisibility" backdrop="static" alignment="center">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilCalendar" class="modal-title-icon"></svg>
+      Create Calendar
+    </h3>
+    <button (click)="toggleCreate()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body class="create-modal-body">
+    <create-calendar *ngIf="createCalendarVisibility"
+      (changeCreateVisibility)="changeCreateVisibility($event)" [clinicId]="clinicId"></create-calendar>
+  </c-modal-body>
 </c-modal>
-<c-modal id="editClinic" [visible]="editCalendarVisibility" size="sm" backdrop="static">
-    <c-modal-header>
-        <h3 cModalTitle>Edit Calendar</h3>
-        <button (click)="toggleEdit()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>
-        <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar"
-            (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
-    </c-modal-body>
+
+<!-- Edit Calendar Modal -->
+<c-modal id="editCalendar" [visible]="editCalendarVisibility" backdrop="static" alignment="center">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilPen" class="modal-title-icon"></svg>
+      Edit Calendar
+    </h3>
+    <button (click)="toggleEdit()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body class="edit-modal-body">
+    <edit-calendar *ngIf="editCalendarVisibility" [calendar]="selectedCalednar"
+      (changeVisibility)="changeEditVisibility($event)"></edit-calendar>
+  </c-modal-body>
+</c-modal>
+
+<!-- Delete Confirmation Modal -->
+<c-modal id="deleteCalendarConfirm" [visible]="deleteConfirmCalendar !== null" backdrop="static" alignment="center">
+  <div class="delete-modal-container">
+    <!-- Left: Icon -->
+    <div class="delete-modal-icon-section">
+      <div class="delete-icon-circle">
+        <svg cIcon name="cilTrash" class="delete-modal-icon"></svg>
+      </div>
+    </div>
+
+    <!-- Right: Content -->
+    <div class="delete-modal-content-section">
+      <div class="delete-modal-header">
+        <h3 class="delete-modal-title">Delete Calendar</h3>
+        <p class="delete-modal-subtitle">This action is permanent and cannot be undone</p>
+      </div>
+
+      <div class="delete-modal-body">
+        <!-- Calendar Info -->
+        <div class="delete-calendar-info">
+          <svg cIcon name="cilCalendar" class="delete-info-icon"></svg>
+          <div class="delete-info-details">
+            <span class="delete-info-label">Calendar</span>
+            <span class="delete-info-name">{{ deleteConfirmCalendar?.name }}</span>
+          </div>
+        </div>
+
+        <p class="delete-modal-message">
+          Are you sure you want to delete this calendar? All associated appointments and configurations will be permanently removed.
+        </p>
+
+        <!-- Inline Error -->
+        <div class="delete-error-banner" *ngIf="deleteError">
+          <div class="delete-error-content">
+            <svg cIcon name="cilWarning" class="delete-error-icon"></svg>
+            <span>{{ deleteError }}</span>
+          </div>
+          <button class="delete-error-dismiss" (click)="dismissDeleteError()">
+            <svg cIcon name="cilX" class="delete-error-dismiss-icon"></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="delete-modal-footer">
+        <button class="delete-modal-btn delete-modal-btn-cancel" (click)="cancelDelete()" [disabled]="isDeleting">
+          Cancel
+        </button>
+        <button class="delete-modal-btn delete-modal-btn-confirm" (click)="deleteCalendar()" [disabled]="isDeleting">
+          <svg cIcon name="cilTrash" class="delete-modal-btn-icon" *ngIf="!isDeleting"></svg>
+          {{ isDeleting ? 'Deleting...' : 'Delete Calendar' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </c-modal>

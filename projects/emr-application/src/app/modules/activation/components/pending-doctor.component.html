@@ -1,0 +1,72 @@
+<div class="pending-container">
+  <div class="pending-card">
+
+    <!-- Icon -->
+    <div class="pending-icon-wrapper">
+      <div class="pending-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h2 class="pending-title">Account Pending</h2>
+    <p class="pending-subtitle">
+      Your doctor account has not been fully set up yet.
+      Please complete your profile information to gain access to the system.
+    </p>
+
+    <!-- Steps -->
+    <div class="pending-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>Complete your profile</strong>
+          <span>Contact your organization administrator to finalize your account details.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>Wait for approval</strong>
+          <span>Your administrator will review and activate your account.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>Log back in</strong>
+          <span>Once activated, log in again to access all features.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="pending-divider"></div>
+
+    <!-- Info box -->
+    <div class="pending-info">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      <span>If you believe this is an error, please reach out to your system administrator for assistance.</span>
+    </div>
+
+    <!-- Logout -->
+    <button class="btn-logout" (click)="logout()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      Sign Out
+    </button>
+  </div>
+</div>

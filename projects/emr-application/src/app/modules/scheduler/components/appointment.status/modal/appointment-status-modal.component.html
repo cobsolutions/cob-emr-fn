@@ -1,23 +1,120 @@
 <div *ngIf="appointment">
-    <h2 mat-dialog-title>Appointment Status</h2>
-    <mat-dialog-content class="mat-typography">
-        <c-callout color="danger" *ngIf="!appointment.isStatusChangeable">
-            <strong>Check-In</strong>,<strong>Check-out</strong>,<strong>No-Show</strong> statuses <br />
-            are not available since appointment date in the future
-        </c-callout>
-        <div class="d-grid gap-2" *ngIf="appointment">
-            <button class="btn btn-outline-primary" type="button" (click)="onConfirmed()">Confirm</button>
-            <button class="btn btn-outline-primary" type="button" (click)="onCheckin()"
-                [disabled]="!appointment.isStatusChangeable">Check
-                In</button>
-            <button class="btn btn-outline-primary" type="button" (click)="onCheckout()"
-                [disabled]="!appointment.isStatusChangeable">Check
-                Out</button>
-            <button class="btn btn-outline-primary" type="button" (click)="onNoShow()"
-                [disabled]="!appointment.isStatusChangeable">No
-                Show</button>
-            <button class="btn btn-outline-primary" type="button" (click)="onCancel()">Cancel</button>
+
+  <!-- Modal Header -->
+  <div class="modal-header-custom">
+    <div class="modal-title-section">
+      <svg cIcon name="cilSwapHorizontal" class="modal-title-icon"></svg>
+      <div>
+        <h3 class="modal-title">Update Status</h3>
+        <span class="modal-subtitle">{{ appointment.appointmentType }}</span>
+      </div>
+    </div>
+    <button class="modal-close-btn" (click)="cancel()">
+      <svg cIcon name="cilX"></svg>
+    </button>
+  </div>
+
+  <!-- Modal Body -->
+  <mat-dialog-content class="modal-body-custom">
+
+    <!-- Current Status -->
+    <div class="current-status-card">
+      <span class="current-status-label">Current Status</span>
+      <span class="current-status-badge"
+        [ngClass]="{
+          'cs-scheduled': appointment.appointmentStatus === 'Scheduled',
+          'cs-confirmed': appointment.appointmentStatus === 'Confirmed',
+          'cs-checkin': appointment.appointmentStatus === 'CheckIn',
+          'cs-checkout': appointment.appointmentStatus === 'Checkout',
+          'cs-cancelled': appointment.appointmentStatus === 'Cancelled',
+          'cs-noshow': appointment.appointmentStatus === 'Noshow'
+        }">
+        <span class="cs-dot"></span>
+        {{ appointment.appointmentStatus }}
+      </span>
+    </div>
+
+    <!-- Future Appointment Warning -->
+    <div class="warning-banner" *ngIf="!appointment.isStatusChangeable">
+      <svg cIcon name="cilWarning" class="warning-icon"></svg>
+      <div class="warning-text">
+        <strong>Restricted Actions</strong>
+        <span>Check-In, Check-Out, and No-Show are unavailable for future appointments.</span>
+      </div>
+    </div>
+
+    <!-- Status Actions -->
+    <div class="status-actions">
+      <span class="actions-label">Change Status To</span>
+
+      <button class="status-btn status-btn-confirm" (click)="onConfirmed()">
+        <div class="status-btn-content">
+          <svg cIcon name="cilCheckCircle" class="status-btn-icon"></svg>
+          <div class="status-btn-text">
+            <span class="status-btn-title">Confirmed</span>
+            <span class="status-btn-desc">Confirm patient's appointment</span>
+          </div>
         </div>
-        <c-spinner color="dark" variant="grow" *ngIf="!appointment"></c-spinner>
-    </mat-dialog-content>
+        <svg cIcon name="cilArrowRight" class="status-btn-arrow"></svg>
+      </button>
+
+      <button class="status-btn status-btn-checkin" (click)="onCheckin()"
+        [disabled]="!appointment.isStatusChangeable">
+        <div class="status-btn-content">
+          <svg cIcon name="cilAccountLogout" class="status-btn-icon"></svg>
+          <div class="status-btn-text">
+            <span class="status-btn-title">Check In</span>
+            <span class="status-btn-desc">Patient has arrived at the clinic</span>
+          </div>
+        </div>
+        <svg cIcon name="cilArrowRight" class="status-btn-arrow"></svg>
+      </button>
+
+      <button class="status-btn status-btn-checkout" (click)="onCheckout()"
+        [disabled]="!appointment.isStatusChangeable">
+        <div class="status-btn-content">
+          <svg cIcon name="cilCheckAlt" class="status-btn-icon"></svg>
+          <div class="status-btn-text">
+            <span class="status-btn-title">Check Out</span>
+            <span class="status-btn-desc">Patient visit is complete</span>
+          </div>
+        </div>
+        <svg cIcon name="cilArrowRight" class="status-btn-arrow"></svg>
+      </button>
+
+      <div class="actions-divider"></div>
+
+      <button class="status-btn status-btn-noshow" (click)="onNoShow()"
+        [disabled]="!appointment.isStatusChangeable">
+        <div class="status-btn-content">
+          <svg cIcon name="cilBan" class="status-btn-icon"></svg>
+          <div class="status-btn-text">
+            <span class="status-btn-title">No Show</span>
+            <span class="status-btn-desc">Patient did not attend</span>
+          </div>
+        </div>
+        <svg cIcon name="cilArrowRight" class="status-btn-arrow"></svg>
+      </button>
+
+      <button class="status-btn status-btn-cancel" (click)="onCancel()">
+        <div class="status-btn-content">
+          <svg cIcon name="cilXCircle" class="status-btn-icon"></svg>
+          <div class="status-btn-text">
+            <span class="status-btn-title">Cancel</span>
+            <span class="status-btn-desc">Cancel this appointment</span>
+          </div>
+        </div>
+        <svg cIcon name="cilArrowRight" class="status-btn-arrow"></svg>
+      </button>
+
+    </div>
+
+  </mat-dialog-content>
+
+</div>
+
+<!-- Loading State -->
+<div class="loading-state" *ngIf="!appointment">
+  <c-spinner color="dark" variant="grow"></c-spinner>
+  <span class="loading-text">Loading appointment...</span>
 </div>

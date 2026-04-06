@@ -1,208 +1,401 @@
-<!-- spadi.component.html -->
-<div class="container">
-  <div class="header">
-    <h2>Shoulder Pain and Disability Index</h2>
+<div class="spadi-container">
+  <!-- Header -->
+  <div class="spadi-header">
+    <div class="header-content">
+      <h2 class="spadi-title">Shoulder Pain and Disability Index (SPADI)</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
 
-    <!-- <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-      [Instructions]
-    </a> -->
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>Please answer every question based on your condition in the <strong>last week</strong>.</p>
+        <ul>
+          <li>For the <strong>Pain Scale</strong>: Select the number that best describes your pain where 0 = no pain and 10 = the worst pain imaginable</li>
+          <li>For the <strong>Disability Scale</strong>: Select the number that best describes your difficulty where 0 = no difficulty and 10 = so difficult it requires help</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 13 questions answered</span>
   </div>
 
   <form [formGroup]="spadiForm" (ngSubmit)="calculateScore()">
     <!-- Pain Scale Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Pain Scale:</strong> How severe is your pain?
-        <br>Select the number that best describes the pain where:
-        <br>0 = no pain and 10 = the worst pain imaginable.
-      </div>
-
-      <!-- Question 1 -->
-      <div class="question">
-        <strong>1. At its worst?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="pain1" [value]="level">
-          </label>
-        </div>
-        <div *ngIf="spadiForm.get('pain1')?.invalid && spadiForm.get('pain1')?.touched" class="error-message">
-          Please select a pain level
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Pain Scale</h3>
+          <p class="section-subtitle">How severe is your pain?</p>
         </div>
       </div>
 
-      <!-- Question 2 -->
-      <div class="question">
-        <strong>2. When lying on the involved side?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="pain2" [value]="level">
-          </label>
+      <div class="questions-container">
+        <!-- Question 1 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('pain1')?.value !== null"
+             [class.error]="spadiForm.get('pain1')?.invalid && spadiForm.get('pain1')?.touched">
+          <div class="question-number">1</div>
+          <div class="question-content">
+            <div class="question-text">At its worst?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Worst pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="pain1" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('pain1')?.invalid && spadiForm.get('pain1')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('pain2')?.invalid && spadiForm.get('pain2')?.touched" class="error-message">
-          Please select a pain level
-        </div>
-      </div>
 
-      <!-- Questions 3-5 following the same pattern -->
-      <!-- Question 3 -->
-      <div class="question">
-        <strong>3. Reaching for something on a high shelf?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="pain3" [value]="level">
-          </label>
+        <!-- Question 2 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('pain2')?.value !== null"
+             [class.error]="spadiForm.get('pain2')?.invalid && spadiForm.get('pain2')?.touched">
+          <div class="question-number">2</div>
+          <div class="question-content">
+            <div class="question-text">When lying on the involved side?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Worst pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="pain2" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('pain2')?.invalid && spadiForm.get('pain2')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('pain3')?.invalid && spadiForm.get('pain3')?.touched" class="error-message">
-          Please select a pain level
-        </div>
-      </div>
 
-      <!-- Question 4 -->
-      <div class="question">
-        <strong>4. Touching the back of your neck?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="pain4" [value]="level">
-          </label>
+        <!-- Question 3 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('pain3')?.value !== null"
+             [class.error]="spadiForm.get('pain3')?.invalid && spadiForm.get('pain3')?.touched">
+          <div class="question-number">3</div>
+          <div class="question-content">
+            <div class="question-text">Reaching for something on a high shelf?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Worst pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="pain3" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('pain3')?.invalid && spadiForm.get('pain3')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('pain4')?.invalid && spadiForm.get('pain4')?.touched" class="error-message">
-          Please select a pain level
-        </div>
-      </div>
 
-      <!-- Question 5 -->
-      <div class="question">
-        <strong>5. Pushing with the involved arm?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="pain5" [value]="level">
-          </label>
+        <!-- Question 4 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('pain4')?.value !== null"
+             [class.error]="spadiForm.get('pain4')?.invalid && spadiForm.get('pain4')?.touched">
+          <div class="question-number">4</div>
+          <div class="question-content">
+            <div class="question-text">Touching the back of your neck?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Worst pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="pain4" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('pain4')?.invalid && spadiForm.get('pain4')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('pain5')?.invalid && spadiForm.get('pain5')?.touched" class="error-message">
-          Please select a pain level
+
+        <!-- Question 5 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('pain5')?.value !== null"
+             [class.error]="spadiForm.get('pain5')?.invalid && spadiForm.get('pain5')?.touched">
+          <div class="question-number">5</div>
+          <div class="question-content">
+            <div class="question-text">Pushing with the involved arm?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Worst pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="pain5" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('pain5')?.invalid && spadiForm.get('pain5')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Disability Scale Section -->
-    <div class="form-section">
-      <div class="section-header">
-        <strong>Disability Scale:</strong> How much difficulty do you have?
-        <br>Select the number that best describes your experience where:
-        <br>0 = no difficulty and 10 = so difficult it requires help.
-      </div>
-
-      <!-- Question 6 -->
-      <div class="question">
-        <strong>6. Washing your hair?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability1" [value]="level">
-          </label>
-        </div>
-        <div *ngIf="spadiForm.get('disability1')?.invalid && spadiForm.get('disability1')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
-      <div class="question">
-        <strong>7. Washing your back?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability2" [value]="level">
-          </label>
-        </div>
-        <div *ngIf="spadiForm.get('disability2')?.invalid && spadiForm.get('disability2')?.touched"
-          class="error-message">
-          Please select a difficulty level
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">D</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Disability Scale</h3>
+          <p class="section-subtitle">How much difficulty do you have?</p>
         </div>
       </div>
 
+      <div class="questions-container">
+        <!-- Question 6 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability1')?.value !== null"
+             [class.error]="spadiForm.get('disability1')?.invalid && spadiForm.get('disability1')?.touched">
+          <div class="question-number">6</div>
+          <div class="question-content">
+            <div class="question-text">Washing your hair?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability1" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability1')?.invalid && spadiForm.get('disability1')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
+        </div>
 
-      <div class="question">
-        <strong>8. Putting on an undershirt or jumper?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability3" [value]="level">
-          </label>
+        <!-- Question 7 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability2')?.value !== null"
+             [class.error]="spadiForm.get('disability2')?.invalid && spadiForm.get('disability2')?.touched">
+          <div class="question-number">7</div>
+          <div class="question-content">
+            <div class="question-text">Washing your back?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability2" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability2')?.invalid && spadiForm.get('disability2')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('disability3')?.invalid && spadiForm.get('disability3')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
 
-      <div class="question">
-        <strong>9. Putting on a shirt that buttons down the front?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability4" [value]="level">
-          </label>
+        <!-- Question 8 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability3')?.value !== null"
+             [class.error]="spadiForm.get('disability3')?.invalid && spadiForm.get('disability3')?.touched">
+          <div class="question-number">8</div>
+          <div class="question-content">
+            <div class="question-text">Putting on an undershirt or jumper?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability3" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability3')?.invalid && spadiForm.get('disability3')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('disability4')?.invalid && spadiForm.get('disability4')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
 
-      <div class="question">
-        <strong>10. Putting on your pants?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability5" [value]="level">
-          </label>
+        <!-- Question 9 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability4')?.value !== null"
+             [class.error]="spadiForm.get('disability4')?.invalid && spadiForm.get('disability4')?.touched">
+          <div class="question-number">9</div>
+          <div class="question-content">
+            <div class="question-text">Putting on a shirt that buttons down the front?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability4" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability4')?.invalid && spadiForm.get('disability4')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('disability5')?.invalid && spadiForm.get('disability5')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
 
-      <div class="question">
-        <strong>11. Placing an object on a high shelf?</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability6" [value]="level">
-          </label>
+        <!-- Question 10 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability5')?.value !== null"
+             [class.error]="spadiForm.get('disability5')?.invalid && spadiForm.get('disability5')?.touched">
+          <div class="question-number">10</div>
+          <div class="question-content">
+            <div class="question-text">Putting on your pants?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability5" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability5')?.invalid && spadiForm.get('disability5')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
         </div>
-        <div *ngIf="spadiForm.get('disability6')?.invalid && spadiForm.get('disability6')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
-      <div class="question">
-        <strong>12. Carrying a heavy object of 10 pounds (4.5 kilograms)</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability7" [value]="level">
-          </label>
-        </div>
-        <div *ngIf="spadiForm.get('disability7')?.invalid && spadiForm.get('disability7')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
-      <div class="question">
-        <strong>13. Removing something from your back pocket</strong>
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="disability8" [value]="level">
-          </label>
-        </div>
-        <div *ngIf="spadiForm.get('disability8')?.invalid && spadiForm.get('disability8')?.touched"
-          class="error-message">
-          Please select a difficulty level
-        </div>
-      </div>
 
+        <!-- Question 11 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability6')?.value !== null"
+             [class.error]="spadiForm.get('disability6')?.invalid && spadiForm.get('disability6')?.touched">
+          <div class="question-number">11</div>
+          <div class="question-content">
+            <div class="question-text">Placing an object on a high shelf?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability6" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability6')?.invalid && spadiForm.get('disability6')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability7')?.value !== null"
+             [class.error]="spadiForm.get('disability7')?.invalid && spadiForm.get('disability7')?.touched">
+          <div class="question-number">12</div>
+          <div class="question-content">
+            <div class="question-text">Carrying a heavy object of 10 pounds (4.5 kilograms)?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability7" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability7')?.invalid && spadiForm.get('disability7')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 13 -->
+        <div class="question-card"
+             [class.answered]="spadiForm.get('disability8')?.value !== null"
+             [class.error]="spadiForm.get('disability8')?.invalid && spadiForm.get('disability8')?.touched">
+          <div class="question-number">13</div>
+          <div class="question-content">
+            <div class="question-text">Removing something from your back pocket?</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No difficulty</span>
+                <span class="scale-label-end">Requires help</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="disability8" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="spadiForm.get('disability8')?.invalid && spadiForm.get('disability8')?.touched" class="error-message">
+              Please select a difficulty level
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Form Actions -->
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Calculate Total</button>
-      <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
+      <div *ngIf="spadiForm.invalid && spadiForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
 
-      <div *ngIf="spadiForm.invalid && spadiForm.touched" class="error-message completion-error">
-        Please select an answer for all questions.
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
       </div>
     </div>
   </form>

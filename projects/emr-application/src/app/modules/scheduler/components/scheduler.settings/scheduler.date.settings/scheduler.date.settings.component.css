@@ -1,0 +1,150 @@
+/* ========================================
+   Scheduler Date Settings - Sub-component
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Container --- */
+.date-settings-container {
+  padding: 1.75rem 2rem;
+}
+
+/* --- Validation Alert --- */
+.validation-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #dc2626;
+  border-radius: 0.375rem;
+  color: #991b1b;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.alert-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+/* --- Form Grid --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- Form Field --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: 0.015em;
+  margin: 0;
+}
+
+.required-mark {
+  color: #dc2626;
+  margin-left: 0.125rem;
+}
+
+.form-field select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  background: #ffffff;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.form-field select:focus {
+  border-color: #334155;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+  outline: none;
+}
+
+.form-field select.field-invalid {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.form-field select.field-invalid:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* --- Form Actions --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1.75rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border: none;
+  border-radius: 0.375rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.25);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.save-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(30, 41, 59, 0.2);
+}
+
+.save-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .date-settings-container {
+    padding: 1.25rem 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .form-actions {
+    justify-content: center;
+  }
+}

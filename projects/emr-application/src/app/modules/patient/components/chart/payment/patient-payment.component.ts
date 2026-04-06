@@ -1,48 +1,108 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PatientCasePaymentComponent } from './patient-case-payment.component';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { map, Observable, retry, tap } from 'rxjs';
-import { ListTemplate } from '../../../../common/template/list.template';
-import { PatientPaymentRecordResponse } from '../../../models/chart/patient.payment/patient.payment.record.response';
 import { PatientPaymentService } from '../../../services/patient/payment/patient-payment.service';
+import { PatientCasePayment, PatientCasePaymentResponse } from '../../../models/chart/patient.payment/patient-case-payment.request';
 
 @Component({
   selector: 'patient-payment',
   templateUrl: './patient-payment.component.html',
   styleUrls: ['./patient-payment.component.css']
 })
-export class PatientPaymentComponent extends ListTemplate implements OnInit {
-  patientPaymentRecordResponse$!: Observable<PatientPaymentRecordResponse[]>;
+export class PatientPaymentComponent implements OnInit {
+  payments: PatientCasePayment[] = [];
+  totalCharge: number = 0;
+  totalPaid: number = 0;
+  balance: number = 0;
   columns: (string | IColumn)[];
   @Input() patientId: number;
   @Input() caseId: number;
-  constructor(private patientPaymentService: PatientPaymentService) { super(); }
+  @ViewChild(PatientCasePaymentComponent) casePaymentComponent: PatientCasePaymentComponent;
+  showPaymentModal = false;
+  showDeleteConfirmModal = false;
+  paymentToDelete: number | null = null;
+  isSaving = false;
+  commonData: any;
 
-  ngOnInit(): void {
-    this.columns = this.constructColumns(['amount', 'reason', 'createdAt', 'Actions']);
-    this.getPatientPayments();
+  constructor(private patientPaymentService: PatientPaymentService) { }
+
+  savePayment(): void {
+    if (this.casePaymentComponent) {
+      this.casePaymentComponent.savePayment();
+    }
   }
 
-  private getPatientPayments() {
-    this.patientPaymentRecordResponse$ = this.patientPaymentService.findPatientPayments(this.apiParams$, this.patientId , this.caseId).pipe(
-      retry({
-        delay: (error) => {
-          console.warn('Retry: ', error);
-          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
-          this.loadingData$.next(false);
-          return this.retry$;
-        }
-      }),
-      tap((response: any) => {
-        this.totalItems$.next(response.number_of_matching_records);
-        if (response.number_of_records) {
-          this.errorMessage$.next('');
-        }
-        this.retry$.next(false);
-        this.loadingData$.next(false);
-      }),
-      map((response: any) => {
-        return response.records;
-      })
-    )
+  get savingState(): boolean {
+    return this.casePaymentComponent?.isSaving || false;
+  }
+
+  openPaymentModal(): void {
+    this.showPaymentModal = true;
+  }
+
+  closePaymentModal(): void {
+    this.showPaymentModal = false;
+  }
+
+  onPaymentSaved(): void {
+    this.closePaymentModal();
+    this.loadPayments();
+  }
+
+  ngOnInit(): void {
+    this.loadPayments();
+  }
+
+  private loadPayments(): void {
+    this.patientPaymentService.findCasePayments(this.caseId).subscribe({
+      next: (response: PatientCasePaymentResponse) => {
+        this.payments = response?.payments || [];
+        this.totalCharge = response?.totalCharge || 0;
+        this.totalPaid = response?.totalPaid || 0;
+        this.balance = response?.balance || 0;
+        this.commonData = {
+          dateOfTransaction: response?.payments[0]?.dateOfTransaction,
+          paymentMethod: response?.payments[0]?.paymentMethod,
+          providerId: response?.payments[0]?.providerId
+        };
+      },
+      error: (err) => {
+        console.error('Error loading payments:', err);
+        this.payments = [];
+        this.totalCharge = 0;
+        this.totalPaid = 0;
+        this.balance = 0;
+      }
+    });
+  }
+
+  formatChargeType(type: string): string {
+    if (!type) return '';
+    return type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()).toLowerCase().replace(/^\w/, c => c.toUpperCase());
+  }
+
+  deletePayment(id: number): void {
+    this.paymentToDelete = id;
+    this.showDeleteConfirmModal = true;
+  }
+
+  confirmDelete(): void {
+    if (this.paymentToDelete === null) return;
+
+    this.patientPaymentService.deleteCasePayment(this.paymentToDelete).subscribe({
+      next: () => {
+        this.loadPayments();
+        this.closeDeleteConfirmModal();
+      },
+      error: (err) => {
+        console.error('Error deleting payment:', err);
+        this.closeDeleteConfirmModal();
+      }
+    });
+  }
+
+  closeDeleteConfirmModal(): void {
+    this.showDeleteConfirmModal = false;
+    this.paymentToDelete = null;
   }
 }

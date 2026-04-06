@@ -1,0 +1,540 @@
+<div [formGroup]="inspectionNForm" class="inspection-n-form">
+  <!-- Patient Consent -->
+  <div class="form-row">
+    <label class="field-label">Patient Consent</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="patient_consent" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="patient_consent" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Patient/Parent/Guardian Consent (Dependent) -->
+  <div class="dependent-field-box" *ngIf="showPatientParentGuardianConsent">
+    <div class="form-row">
+      <label class="field-label">Patient/Parent/Guardian Consent</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="patient_parent_guardian_consent" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="patient_parent_guardian_consent" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chaperone -->
+  <div class="form-row">
+    <label class="field-label">Chaperone</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="chaperone" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="chaperone" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Chaperone Present (Dependent) -->
+  <div class="dependent-field-box" *ngIf="showChaperonePresent">
+    <div class="form-row">
+      <label class="field-label">Chaperone Present</label>
+      <select cSelect formControlName="chaperone_present" class="form-select-custom">
+        <option [value]="null" disabled>Select...</option>
+        <option *ngFor="let option of chaperoneOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Inspection Textarea -->
+  <div class="form-row">
+    <label class="field-label">Inspection</label>
+    <textarea formControlName="inspection" class="form-textarea" rows="4"></textarea>
+  </div>
+
+  <!-- Girth Measurement Upper -->
+  <div class="form-row">
+    <label class="field-label">Girth Measurement Upper</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="girth_measurement_upper" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="girth_measurement_upper" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Girth Upper Measurements (Dependent) -->
+  <div *ngIf="showGirthUpper" class="dependent-field-box">
+    <div class="measurement-header">
+      <div class="measurement-label"></div>
+      <div class="measurement-column">Right</div>
+      <div class="measurement-column">Left</div>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Upper Arm</label>
+      <input cFormControl type="text" formControlName="upper_arm_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="upper_arm_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Biceps</label>
+      <input cFormControl type="text" formControlName="mid_biceps_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_biceps_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Elbow Flexion Crease</label>
+      <input cFormControl type="text" formControlName="elbow_flexion_crease_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="elbow_flexion_crease_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Forearm</label>
+      <input cFormControl type="text" formControlName="forearm_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="forearm_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Wrist</label>
+      <input cFormControl type="text" formControlName="wrist_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="wrist_left" class="measurement-input" />
+    </div>
+  </div>
+
+  <!-- Girth Measurement Lower -->
+  <div class="form-row">
+    <label class="field-label">Girth Measurement Lower</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="girth_measurement_lower" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="girth_measurement_lower" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Girth Lower Measurements (Dependent) -->
+  <div *ngIf="showGirthLower" class="dependent-field-box">
+    <div class="measurement-header">
+      <div class="measurement-label"></div>
+      <div class="measurement-column">Right</div>
+      <div class="measurement-column">Left</div>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Patella</label>
+      <input cFormControl type="text" formControlName="mid_patella_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_patella_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Thigh</label>
+      <input cFormControl type="text" formControlName="mid_thigh_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_thigh_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Calf</label>
+      <input cFormControl type="text" formControlName="mid_calf_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_calf_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Malleoli</label>
+      <input cFormControl type="text" formControlName="mid_malleoli_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_malleoli_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Ankle Figure 8</label>
+      <input cFormControl type="text" formControlName="ankle_figure_8_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="ankle_figure_8_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Mid Foot</label>
+      <input cFormControl type="text" formControlName="mid_foot_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="mid_foot_left" class="measurement-input" />
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Metatarsal Heads</label>
+      <input cFormControl type="text" formControlName="metatarsal_heads_right" class="measurement-input" />
+      <input cFormControl type="text" formControlName="metatarsal_heads_left" class="measurement-input" />
+    </div>
+  </div>
+
+  <!-- Post Operative/Wound Healing -->
+  <div class="form-row">
+    <label class="field-label">Post Operative/Wound Healing</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="post_operative_wound_healing" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="post_operative_wound_healing" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Post Operative/Wound Healing Dependent Fields -->
+  <div *ngIf="showPostOperativeFields" class="dependent-field-box">
+    <!-- Incision Sites -->
+    <div class="form-row">
+      <label class="field-label">Incision Sites</label>
+      <select cSelect formControlName="incision_sites" class="form-select-custom">
+        <option [value]="null" disabled>Select...</option>
+        <option *ngFor="let option of incisionSitesOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showIncisionSitesCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="incision_sites_custom_text" class="full-width-input" placeholder="Enter custom incision site" />
+    </div>
+
+    <!-- Surgical Precautions -->
+    <div class="form-row">
+      <label class="field-label">Surgical Precautions</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="surgical_precautions" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="surgical_precautions" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Surgical Precautions Select (Nested Dependent) -->
+    <div class="nested-dependent-field-box" *ngIf="showSurgicalPrecautions">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <select cSelect formControlName="surgical_precautions_select" class="form-select-custom">
+          <option [value]="null" disabled>Select...</option>
+          <option *ngFor="let option of surgicalPrecautionsOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <!-- Custom Text Input (shown when Custom is selected) -->
+      <div class="form-row" *ngIf="showSurgicalPrecautionsCustom">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="surgical_precautions_custom_text" class="full-width-input" placeholder="Enter custom surgical precaution" />
+      </div>
+    </div>
+
+    <!-- Scar Mobility -->
+    <div class="form-row">
+      <label class="field-label">Scar Mobility</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="scar_mobility" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="scar_mobility" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Scar Mobility Text (Nested Dependent) -->
+    <div class="nested-dependent-field-box" *ngIf="showScarMobility">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="scar_mobility_text" class="full-width-input" />
+      </div>
+    </div>
+
+    <!-- Scar Type -->
+    <div class="form-row">
+      <label class="field-label">Scar Type</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="scar_type" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="scar_type" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Scar Type Select (Nested Dependent) -->
+    <div class="nested-dependent-field-box" *ngIf="showScarType">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <select cSelect formControlName="scar_type_select" class="form-select-custom">
+          <option [value]="null" disabled>Select...</option>
+          <option *ngFor="let option of scarTypeOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <!-- Custom Text Input (shown when Custom is selected) -->
+      <div class="form-row" *ngIf="showScarTypeCustom">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="scar_type_custom_text" class="full-width-input" placeholder="Enter custom scar type" />
+      </div>
+    </div>
+
+    <!-- Wound Description -->
+    <div class="form-row">
+      <label class="field-label">Wound Description</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="wound_description" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="wound_description" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Wound Description Text (Nested Dependent) -->
+    <div class="nested-dependent-field-box" *ngIf="showWoundDescription">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <input cFormControl type="text" formControlName="wound_description_text" class="full-width-input" />
+      </div>
+    </div>
+
+    <!-- Wound Measurements -->
+    <div class="form-row">
+      <label class="field-label">Wound Measurements</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="wound_measurements" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="wound_measurements" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Wound Length and Width (Nested Dependent) -->
+    <div *ngIf="showWoundMeasurements" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Length</label>
+        <input cFormControl type="text" formControlName="wound_length" class="small-input" />
+      </div>
+      <div class="form-row">
+        <label class="field-label">Width</label>
+        <input cFormControl type="text" formControlName="wound_width" class="small-input" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Wound Care -->
+  <div class="form-row">
+    <label class="field-label">Wound Care</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wound_care" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wound_care" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Wound Care Dependent Fields -->
+  <div *ngIf="showWoundCareFields" class="dependent-field-box">
+    <!-- Surface Culture Used To Exudate? -->
+    <div class="form-row">
+      <label class="field-label">Surface Culture Used To Exudate?</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="surface_culture_used" [value]="null" />
+          <label cFormCheckLabel>N/A</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="surface_culture_used" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="surface_culture_used" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Surface Culture Fields (Dependent on Yes) -->
+    <div *ngIf="showSurfaceCultureFields" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label"></label>
+        <div class="checkbox-group">
+          <c-form-check class="mb-2">
+            <input cFormCheckInput type="checkbox" formControlName="surface_culture_levine" />
+            <label cFormCheckLabel>Levine</label>
+          </c-form-check>
+          <c-form-check class="mb-2">
+            <input cFormCheckInput type="checkbox" formControlName="surface_culture_deep_swab" />
+            <label cFormCheckLabel>Deep Swab</label>
+          </c-form-check>
+          <c-form-check class="mb-2">
+            <input cFormCheckInput type="checkbox" formControlName="surface_culture_semiquantitative" />
+            <label cFormCheckLabel>Semiquantitative Swab</label>
+          </c-form-check>
+          <c-form-check class="mb-2">
+            <input cFormCheckInput type="checkbox" formControlName="surface_culture_quantitative" />
+            <label cFormCheckLabel>Quantitative Swab</label>
+          </c-form-check>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Provide medical reasoning for use of wound surface technique (ex: MRSA screen surface culture)</label>
+        <textarea formControlName="surface_culture_reasoning" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Surface Culture Technique (Dependent on No) -->
+    <div *ngIf="showSurfaceCultureTechnique" class="nested-dependent-field-box">
+      <div class="form-row">
+        <label class="field-label">Technique Utilized</label>
+        <textarea formControlName="surface_culture_technique" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Surgical Scarring -->
+  <div class="form-row">
+    <label class="field-label">Surgical Scarring</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="surgical_scarring" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="surgical_scarring" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Surgical Scarring Select (Dependent) -->
+  <div *ngIf="showSurgicalScarringSelect" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label"></label>
+      <div class="d-flex flex-column">
+        <select cSelect multiple formControlName="surgical_scarring_select" class="form-select-custom" style="height: 150px;">
+          <option *ngFor="let option of surgicalScarringOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <span class="small mt-1 fst-italic">Hold CTRL for Multiple Select</span>
+      </div>
+    </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showSurgicalScarringCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="surgical_scarring_custom_text" class="full-width-input" placeholder="Enter custom surgical scarring" />
+    </div>
+  </div>
+
+  <!-- Body Mass Index -->
+  <div class="form-row">
+    <label class="field-label">Body Mass Index</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="body_mass_index" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="body_mass_index" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Body Mass Index Fields (Dependent) -->
+  <div *ngIf="showBodyMassIndexFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Weight</label>
+      <input cFormControl type="text" formControlName="bmi_weight" class="small-input" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Height</label>
+      <input cFormControl type="text" formControlName="bmi_height" class="small-input" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Units</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="bmi_units" value="lbs_in" />
+          <label cFormCheckLabel>lbs/in</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="bmi_units" value="kg_cm" />
+          <label cFormCheckLabel>kg/cm</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Index</label>
+      <input cFormControl type="text" formControlName="bmi_index" class="small-input" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Followup Plan<br/><span class="small">(Validation of Future Appointment, Patient Education, Referral to other medical professional)</span></label>
+      <textarea formControlName="bmi_followup_plan" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- Additional Comments -->
+  <div class="form-row">
+    <label class="field-label">Additional Comments</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- Additional Comments Text (Dependent) -->
+  <div *ngIf="showAdditionalCommentsText" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label"></label>
+      <textarea formControlName="additional_comments_text" class="form-textarea" rows="5"></textarea>
+    </div>
+  </div>
+</div>

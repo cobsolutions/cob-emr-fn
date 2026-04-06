@@ -1,4 +1,4 @@
-<form cForm #singleAddressForm="ngForm"  readonly-form [componentRole]="componentRole">
+<form cForm #singleAddressForm="ngForm">
 <small *ngIf="submitted   && (addresstype.errors) ||(addresstype.invalid && (addresstype.dirty || addresstype.touched))" class="form-text text-danger">
     Address Type is required
 </small>

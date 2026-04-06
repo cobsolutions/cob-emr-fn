@@ -1,0 +1,142 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Wong-Baker FACES Pain Rating Scale</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This scale is used to assess pain intensity by selecting the face that best describes how you feel.</p>
+        <ul>
+          <li>Look at each face and select the one that best describes how you are feeling <strong>right now</strong></li>
+          <li>Face 0 is very happy because there is no hurt at all</li>
+          <li>Face 5 hurts as much as you can imagine, although you do not have to be crying to feel this bad</li>
+        </ul>
+        <p><strong>Scoring:</strong> The selected face value (0-5) represents the pain rating.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 1 questions answered</span>
+  </div>
+
+  <form [formGroup]="wofaratForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Pain Level</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="wofaratForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACES Pain Rating Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">W</span>
+        <div class="section-title-content">
+          <h3 class="section-title">FACES Pain Rating</h3>
+          <p class="section-subtitle">Select the face that best describes how you feel</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="wofaratForm.get('q1')?.value !== null"
+             [class.error]="wofaratForm.get('q1')?.invalid && wofaratForm.get('q1')?.touched">
+          <div class="question-content">
+            <div class="question-text">Select the face that best describes how you feel</div>
+            <div class="faces-row">
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 0" (click)="onFaceSelect(0)">
+                <i class="fa-regular fa-face-laugh-beam face-icon face-0"></i>
+                <span class="face-score">0</span>
+                <span class="face-text">No Hurt</span>
+              </div>
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 1" (click)="onFaceSelect(1)">
+                <i class="fa-regular fa-face-smile face-icon face-1"></i>
+                <span class="face-score">1</span>
+                <span class="face-text">Hurts Little Bit</span>
+              </div>
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 2" (click)="onFaceSelect(2)">
+                <i class="fa-regular fa-face-meh face-icon face-2"></i>
+                <span class="face-score">2</span>
+                <span class="face-text">Hurts Little More</span>
+              </div>
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 3" (click)="onFaceSelect(3)">
+                <i class="fa-regular fa-face-frown-open face-icon face-3"></i>
+                <span class="face-score">3</span>
+                <span class="face-text">Hurts Even More</span>
+              </div>
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 4" (click)="onFaceSelect(4)">
+                <i class="fa-regular fa-face-sad-tear face-icon face-4"></i>
+                <span class="face-score">4</span>
+                <span class="face-text">Hurts Whole Lot</span>
+              </div>
+              <div class="face-option" [class.selected]="wofaratForm.get('q1')?.value === 5" (click)="onFaceSelect(5)">
+                <i class="fa-regular fa-face-sad-cry face-icon face-5"></i>
+                <span class="face-score">5</span>
+                <span class="face-text">Hurts Worst</span>
+              </div>
+            </div>
+            <div *ngIf="wofaratForm.get('q1')?.invalid && wofaratForm.get('q1')?.touched" class="error-message">
+              Please select a face
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="wofaratForm.invalid && wofaratForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

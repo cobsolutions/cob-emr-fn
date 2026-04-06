@@ -1,0 +1,487 @@
+/* ========================================
+   Create Clinic Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Page Header Section --- */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+/* --- Header Progress Badge --- */
+.header-progress {
+  display: flex;
+  align-items: center;
+}
+
+.progress-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.progress-badge.valid {
+  background: rgba(5, 150, 105, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.progress-badge.invalid {
+  background: rgba(217, 119, 6, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.progress-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Page Layout with Sidebar --- */
+.page-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* --- Progress Sidebar --- */
+.progress-sidebar {
+  position: sticky;
+  top: 80px;
+  flex-shrink: 0;
+  width: 180px;
+  align-self: flex-start;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.progress-sidebar-content {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.progress-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.progress-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0;
+  transition: all 0.2s ease;
+}
+
+.progress-item.completed .progress-label {
+  color: #059669;
+}
+
+.progress-item.completed .indicator-icon {
+  color: #059669;
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.indicator-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.progress-label {
+  font-size: 0.8125rem;
+  color: #475569;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+/* --- Form Container --- */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Section Cards --- */
+.section-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  transition: all 0.2s ease;
+}
+
+.section-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.125rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  transition: all 0.2s ease;
+}
+
+.card-header-custom.invalid {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+/* --- Card Status Badges --- */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.5rem;
+  background: rgba(217, 119, 6, 0.25);
+  color: #fef3c7;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+.card-status.valid {
+  background: rgba(5, 150, 105, 0.25);
+  color: #d1fae5;
+}
+
+.status-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+/* --- Form Elements --- */
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.required-marker {
+  color: #dc2626;
+  margin-left: 0.125rem;
+}
+
+/* --- Address Alert --- */
+.address-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+.alert-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* --- Action Section --- */
+.action-section {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 0;
+  margin-top: 0.5rem;
+}
+
+/* --- Create Button --- */
+.create-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 200px;
+  padding: 0.75rem 1.75rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.create-btn:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.create-btn:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.create-btn.disabled {
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.create-btn.disabled:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* --- Form Controls --- */
+:host ::ng-deep .form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  transition: all 0.15s ease;
+}
+
+:host ::ng-deep .form-control:focus {
+  border-color: #334155;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+  outline: none;
+}
+
+:host ::ng-deep .form-control::placeholder {
+  color: #94a3b8;
+}
+
+:host ::ng-deep .form-control.is-invalid {
+  border-color: #dc2626;
+}
+
+:host ::ng-deep .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+  .page-layout {
+    flex-direction: column;
+  }
+
+  .progress-sidebar {
+    position: relative;
+    top: 0;
+    width: 100%;
+  }
+
+  .progress-sidebar-content {
+    padding: 0.75rem 1rem;
+  }
+
+  .progress-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .progress-item {
+    padding: 0.25rem 0;
+  }
+
+  .progress-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    padding-left: 0;
+  }
+
+  .header-progress {
+    justify-content: center;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .card-header-title {
+    justify-content: center;
+  }
+
+  .card-body-custom {
+    padding: 1rem;
+  }
+
+  .action-section {
+    padding: 1rem 0;
+  }
+
+  .create-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header-content {
+    padding: 0.875rem;
+  }
+
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .form-container {
+    gap: 0.875rem;
+  }
+
+  .section-card {
+    border-radius: 0.375rem !important;
+  }
+
+  .card-header-title {
+    font-size: 0.875rem;
+  }
+
+  .card-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .card-body-custom {
+    padding: 0.875rem;
+  }
+
+  .create-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    min-width: unset;
+  }
+}

@@ -1,0 +1,417 @@
+/* ========================================
+   Appointment Status Modal Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Modal Header --- */
+.modal-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+}
+
+.modal-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-title-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.015em;
+}
+
+.modal-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.02em;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-close-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* --- Modal Body --- */
+.modal-body-custom {
+  padding: 1.25rem !important;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* --- Current Status Card --- */
+.current-status-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.current-status-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.current-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.cs-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cs-scheduled {
+  background: #eff6ff;
+  color: #2563eb;
+  border-color: #bfdbfe;
+}
+
+.cs-confirmed {
+  background: #f0fdf4;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.cs-checkin {
+  background: #fefce8;
+  color: #ca8a04;
+  border-color: #fde68a;
+}
+
+.cs-checkout {
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+.cs-cancelled {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.cs-noshow {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+/* --- Warning Banner --- */
+.warning-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0.375rem;
+}
+
+.warning-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #f59e0b;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.warning-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  font-size: 0.8125rem;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.warning-text strong {
+  font-weight: 600;
+  color: #78350f;
+}
+
+/* --- Status Actions --- */
+.status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.actions-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.125rem;
+}
+
+.actions-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 0.25rem 0;
+}
+
+/* --- Status Button --- */
+.status-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.status-btn:hover:not(:disabled) {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.status-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.status-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-btn-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+  flex-shrink: 0;
+}
+
+.status-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+}
+
+.status-btn-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.status-btn-desc {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.status-btn-arrow {
+  width: 1rem;
+  height: 1rem;
+  color: #cbd5e1;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.status-btn:hover:not(:disabled) .status-btn-arrow {
+  transform: translateX(2px);
+}
+
+/* --- Confirm --- */
+.status-btn-confirm {
+  border-left: 3px solid #16a34a;
+}
+
+.status-btn-confirm .status-btn-icon {
+  color: #16a34a;
+}
+
+.status-btn-confirm .status-btn-title {
+  color: #15803d;
+}
+
+.status-btn-confirm:hover:not(:disabled) {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.status-btn-confirm:hover:not(:disabled) .status-btn-arrow {
+  color: #16a34a;
+}
+
+/* --- Check In --- */
+.status-btn-checkin {
+  border-left: 3px solid #2563eb;
+}
+
+.status-btn-checkin .status-btn-icon {
+  color: #2563eb;
+}
+
+.status-btn-checkin .status-btn-title {
+  color: #1d4ed8;
+}
+
+.status-btn-checkin:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.status-btn-checkin:hover:not(:disabled) .status-btn-arrow {
+  color: #2563eb;
+}
+
+/* --- Check Out --- */
+.status-btn-checkout {
+  border-left: 3px solid #0891b2;
+}
+
+.status-btn-checkout .status-btn-icon {
+  color: #0891b2;
+}
+
+.status-btn-checkout .status-btn-title {
+  color: #0e7490;
+}
+
+.status-btn-checkout:hover:not(:disabled) {
+  background: #ecfeff;
+  border-color: #a5f3fc;
+}
+
+.status-btn-checkout:hover:not(:disabled) .status-btn-arrow {
+  color: #0891b2;
+}
+
+/* --- No Show --- */
+.status-btn-noshow {
+  border-left: 3px solid #f59e0b;
+}
+
+.status-btn-noshow .status-btn-icon {
+  color: #f59e0b;
+}
+
+.status-btn-noshow .status-btn-title {
+  color: #d97706;
+}
+
+.status-btn-noshow:hover:not(:disabled) {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.status-btn-noshow:hover:not(:disabled) .status-btn-arrow {
+  color: #f59e0b;
+}
+
+/* --- Cancel --- */
+.status-btn-cancel {
+  border-left: 3px solid #dc2626;
+}
+
+.status-btn-cancel .status-btn-icon {
+  color: #dc2626;
+}
+
+.status-btn-cancel .status-btn-title {
+  color: #b91c1c;
+}
+
+.status-btn-cancel:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.status-btn-cancel:hover:not(:disabled) .status-btn-arrow {
+  color: #dc2626;
+}
+
+/* --- Loading State --- */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+}
+
+.loading-text {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .modal-body-custom {
+    padding: 1rem !important;
+  }
+
+  .status-btn {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .status-btn-desc {
+    display: none;
+  }
+}

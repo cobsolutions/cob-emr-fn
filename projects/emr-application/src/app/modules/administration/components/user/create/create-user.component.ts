@@ -51,7 +51,6 @@ export class CreateUserComponent implements OnInit {
   ]
   user: User = {
     userType: null,
-    role: null,
     clinicIds: [],
     roleScope: [],
     speciality: null,

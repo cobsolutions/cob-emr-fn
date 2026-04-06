@@ -1,31 +1,100 @@
-<c-container fluid>
-    <c-row class="justify-content-center">
-        <c-col>
-            <c-card class="mb-3 ustify-content-center">
-                <c-card-header><strong>Patient Quick Search</strong></c-card-header>
-                <c-card-body>
-                    <div class="mb-1">
-                        <c-row>
-                            <c-col xs="11">
-                                <c-input-group class="mb-3" sizing="sm">
-                                    <input cFormControl name="patientname" [formControl]="patientClient"
-                                        placeholder="Patient" class="mb-2" />
-                                </c-input-group>
-                            </c-col>
-                            <c-col xs="1">
-                                <div class="spinner-border" role="status" *ngIf="isLoading">
-                                </div>
-                            </c-col>
-                        </c-row>
-                    </div>
-                </c-card-body>
-            </c-card>
-        </c-col>
-    </c-row>
-    <full-appointment *ngIf="filteredPatients?.length > 0" [patientsList]="filteredPatients" [startDate]="startDate"
-        #fullAppointment [mode]="'create'" [schedulerSettings]="schedulerSettings" [module]="module"></full-appointment>
+<!-- Page Header (hidden when used in modal) -->
+<div class="page-header" *ngIf="showHeader">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilCalendarCheck" class="page-icon"></svg>
+        New Appointment
+      </h2>
+      <p class="page-subtitle">Search for a patient to create an appointment</p>
+    </div>
+    <div class="header-info">
+      <span class="appointment-badge" [ngClass]="{'has-patient': filteredPatients?.length > 0}">
+        <svg cIcon [name]="filteredPatients?.length > 0 ? 'cilUser' : 'cilSearch'" class="badge-icon"></svg>
+        {{ filteredPatients?.length > 0 ? 'Patient Selected' : 'Search Patient' }}
+      </span>
+    </div>
+  </div>
+</div>
 
+<!-- Main Content -->
+<div class="appointment-container" [class.modal-mode]="!showHeader">
+  <!-- Patient Search Section -->
+  <c-card class="section-card search-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilSearch" class="card-icon"></svg>
+        <span>Patient Quick Search</span>
+      </div>
+      <span class="card-status" *ngIf="!filteredPatients?.length">
+        <svg cIcon name="cilInfo" class="status-icon"></svg>
+        Type to search
+      </span>
+      <span class="card-status valid" *ngIf="filteredPatients?.length > 0">
+        <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+        {{ filteredPatients.length }} Found
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <div class="search-input-wrapper">
+        <div class="search-input-container">
+          <svg cIcon name="cilSearch" class="search-icon"></svg>
+          <input
+            cFormControl
+            name="patientname"
+            [formControl]="patientClient"
+            placeholder="Search by patient name (min. 4 characters)..."
+            class="search-input" />
+          <div class="search-loader" *ngIf="isLoading">
+            <div class="loader-spinner"></div>
+          </div>
+        </div>
+        <p class="search-hint">
+          <svg cIcon name="cilLightbulb" class="hint-icon"></svg>
+          Start typing the patient's name to search. Results will appear automatically.
+        </p>
+      </div>
+    </c-card-body>
+  </c-card>
 
-    <block-appointment *ngIf="!(filteredPatients?.length > 0)" [startDate]="startDate" [mode]="'create'"
-        #blockAppointment [schedulerSettings]="schedulerSettings" [module]="module"></block-appointment>
-</c-container>
+  <!-- Full Appointment Component (when patients found) -->
+  <div class="appointment-form-section" *ngIf="filteredPatients?.length > 0">
+    <full-appointment
+      [patientsList]="filteredPatients"
+      [startDate]="startDate"
+      #fullAppointment
+      [mode]="'create'"
+      [schedulerSettings]="schedulerSettings"
+      [module]="module">
+    </full-appointment>
+  </div>
+
+  <!-- Block Appointment Component (when no patients found) -->
+  <div class="appointment-form-section" *ngIf="!(filteredPatients?.length > 0)">
+    <block-appointment
+      [startDate]="startDate"
+      [mode]="'create'"
+      #blockAppointment
+      [schedulerSettings]="schedulerSettings"
+      [module]="module">
+    </block-appointment>
+  </div>
+
+  <!-- Action Buttons (shown in modal mode) -->
+  <div class="form-actions-bar" *ngIf="!showHeader">
+    <div class="actions-hint">
+      <svg cIcon name="cilInfo" class="actions-hint-icon"></svg>
+      <span>Fill in all required fields to create the appointment</span>
+    </div>
+    <div class="actions-buttons">
+      <button class="action-btn-cancel" (click)="cancelClicked.emit()" type="button">
+        <svg cIcon name="cilX" class="action-btn-icon"></svg>
+        <span>Cancel</span>
+      </button>
+      <button class="action-btn-create" (click)="createClicked.emit()" type="button">
+        <svg cIcon name="cilCheck" class="action-btn-icon"></svg>
+        <span>Create Appointment</span>
+      </button>
+    </div>
+  </div>
+</div>

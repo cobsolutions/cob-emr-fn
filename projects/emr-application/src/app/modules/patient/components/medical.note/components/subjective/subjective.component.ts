@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 @Component({
   selector: 'subjective',
   templateUrl: './subjective.component.html',
@@ -12,34 +12,38 @@ export class SubjectiveComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() stepper!: MatStepper
   @Input() subjectiveData: any
-  @Input() noteType:string
+  @Input() noteType: string
+  isPelvicProfile = false;
   subjectiveFormFields: any
-  constructor(private fb: FormBuilder, private medialNoteService: MedialNoteService) {
+  constructor(private fb: FormBuilder,
+    private soapService: SoapService) {
 
   }
   ngOnInit(): void {
-    this.medialNoteService.find('subjective',this.noteType).subscribe(fields => {
-      this.subjectiveFormFields = fields;
-      if (this.subjectiveData === undefined)
-        this.subjectiveForm = this.fb.group({
-          basic: this.fb.group({}),
-          priorFunction: this.fb.group({}),
-          currentFunction: this.fb.group({}),
-          pain: this.fb.group({}),
-          medicalHistory: this.fb.group({})
+    this.subjectiveForm = this.fb.group({
+      basic: this.fb.group({}),
+      priorFunction: this.fb.group({}),
+      currentFunction: this.fb.group({}),
+      pain: this.fb.group({}),
+      medicalHistory: this.fb.group({})
 
-        });
-      else
-        this.subjectiveForm = this.fb.group({
-          basic: this.fb.group({}),
-          priorFunction: this.fb.group({}),
-          currentFunction: this.fb.group({}),
-          pain: this.fb.group({}),
-          medicalHistory: this.fb.group({})
+    });
+    this.formReady.emit(this.subjectiveForm);
+    // this.soapService.findSoapFields('subjective', this.noteType).subscribe(fields => {
+    //   this.subjectiveFormFields = fields;
+    //   if (this.subjectiveData === undefined)
+        
+    //   else
+    //     this.subjectiveForm = this.fb.group({
+    //       basic: this.fb.group({}),
+    //       priorFunction: this.fb.group({}),
+    //       currentFunction: this.fb.group({}),
+    //       pain: this.fb.group({}),
+    //       medicalHistory: this.fb.group({})
 
-        });
-      this.formReady.emit(this.subjectiveForm);
-    })
+    //     });
+      
+    // })
   }
   createFormGroup(obj: any): FormGroup {
     const group: any = {};

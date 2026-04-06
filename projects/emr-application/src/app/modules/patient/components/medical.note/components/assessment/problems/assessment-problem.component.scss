@@ -1,0 +1,31 @@
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+thead {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+td,
+th {
+  vertical-align: middle;
+}
+
+button[cbutton][variant='ghost'] {
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+c-modal-body {
+  input {
+    width: 100%;
+  }
+}

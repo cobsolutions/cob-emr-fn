@@ -1,22 +1,68 @@
-<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;" *ngIf="clinicalUsers">
-    <span *ngIf="!errorMessage">
-        <select id="userSelect" [(ngModel)]="selectedUserUuid" cFormControl cSelect sizing="sm"
-            style="padding: 6px 12px; font-size: 16px; min-width: 250px;">
-            <option *ngFor="let user of clinicalUsers" [value]="user.uuid">
-                {{ user.lastName +','+user.firstName }}
-            </option>
-        </select>
-        <div class="text-center">
-            <button (click)="forward()" style="margin-top: 16px; padding: 6px 16px; font-size: 16px;" cButton>
-                Forward
+<div *ngIf="loading" class="forward-modal-container" style="display: flex; justify-content: center; align-items: center; padding: 2rem;">
+    <c-spinner color="primary"></c-spinner>
+</div>
+<div class="forward-modal-container" *ngIf="!loading && clinicalUsers">
+    <div *ngIf="!errorMessage" class="forward-content">
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            </div>
+            <div class="info-text">
+                <p class="info-title">Forward Medical Note</p>
+                <p class="info-description">Select a provider to forward this medical note for review and finalization.</p>
+            </div>
+        </div>
+
+        <!-- Provider Selection -->
+        <div class="user-select-wrapper">
+            <label for="userSelect" class="select-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Select Provider <span class="required">*</span></span>
+            </label>
+            <select id="userSelect" [(ngModel)]="selectedUserUuid" cFormControl cSelect class="user-select">
+                <option *ngFor="let user of clinicalUsers" [value]="user.uuid">
+                    {{ user.lastName + ', ' + user.firstName }}
+                </option>
+            </select>
+            <p class="help-text">Choose an authorized provider to receive this note</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button (click)="forward()" cButton class="btn-forward">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13"></path>
+                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                </svg>
+                <span>Forward Note</span>
             </button>
         </div>
-    </span>
-    <span *ngIf="errorMessage" style="color: red; margin-bottom: 12px;">
+    </div>
 
-    </span>
-    <div *ngIf="errorMessage" style="background-color: #ffe6e6; border: 1px solid #ff4d4d; color: #b30000;
-           padding: 10px 20px; border-radius: 8px; margin-bottom: 16px; font-weight: 500;">
-        ⚠️{{errorMessage}}
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="error-message">
+        <div class="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        </div>
+        <div class="error-content">
+            <p class="error-title">Error Forwarding Note</p>
+            <p class="error-text">{{errorMessage}}</p>
+        </div>
     </div>
 </div>

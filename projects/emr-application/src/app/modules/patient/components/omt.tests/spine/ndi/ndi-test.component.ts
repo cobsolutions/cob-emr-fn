@@ -1,16 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
-  selector: 'spine-ndi-test',
+  selector: 'ndi-test',
   templateUrl: './ndi-test.component.html',
   styleUrls: ['./ndi-test.component.css']
 })
 export class NdiTestComponent implements OnInit {
   ndiForm: FormGroup;
   showInstructions = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'ndi';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
+
   // Section titles for the form
   sections = [
     "Pain Intensity",
@@ -28,10 +31,11 @@ export class NdiTestComponent implements OnInit {
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.ndiForm = this.createForm();
   }
+
   createForm(): FormGroup {
     return this.fb.group({
       // Patient Satisfaction - Pain Level
-      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      painlevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
 
       // NDI sections
       q1: [null, Validators.required],
@@ -47,6 +51,21 @@ export class NdiTestComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.ndiForm.patchValue(formValues);
+        }
+      });
+    }
+  }
+
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
@@ -60,28 +79,33 @@ export class NdiTestComponent implements OnInit {
       return;
     }
 
-    const result = {
-      "Q1": parseInt(this.ndiForm.value.q1, 10),
-      "Q2": parseInt(this.ndiForm.value.q2, 10),
-      "Q3": parseInt(this.ndiForm.value.q3, 10),
-      "Q4": parseInt(this.ndiForm.value.q4, 10),
-      "Q5": parseInt(this.ndiForm.value.q5, 10),
-      "Q6": parseInt(this.ndiForm.value.q6, 10),
-      "Q7": parseInt(this.ndiForm.value.q7, 10),
-      "Q8": parseInt(this.ndiForm.value.q8, 10),
-      "Q9": parseInt(this.ndiForm.value.q9, 10),
-      "Q10": parseInt(this.ndiForm.value.q10, 10)
-    };
-    this.omtTestService.spine(result, "ndi").subscribe(val => {
-      this.getResult.emit(val)
-    })
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.ndiForm.controls).forEach(key => {
+      const value = this.ndiForm.get(key)?.value;
+      if (value !== null) {
+        // Convert key to uppercase (e.g., q1 -> Q1, painLevel -> PAINLEVEL)
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
     this.ndiForm.reset();
+    this.ndiForm.markAsUntouched();
   }
 
-  ngOnInit(): void {
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.ndiForm.controls);
+    return controls.filter(key => this.ndiForm.get(key)?.value !== null).length;
   }
 
+  getCompletionPercentage(): number {
+    const totalQuestions = 11; // 10 sections + 1 pain level
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }

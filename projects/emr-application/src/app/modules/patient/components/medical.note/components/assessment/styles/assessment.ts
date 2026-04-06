@@ -43,11 +43,36 @@ export const AssessmentStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
-        "name": "agreesToTheCurrentTreatmentPlanConcentAssessment",        
+        "name": "agreesToTheCurrentTreatmentPlanConcentAssessment",
     },
     {
         "label_style": "white-space: nowrap; min-width: 500px;",
         "name": "consentToCareAssessment",
         "style": "width:300px"
     },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "patientDemonstratesComplianceAssessment",
+    },
+
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "patientDemonstratesCompliancenormalActivitiesAssessment",
+        "style": "margin-left:20px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "patientDemonstratesCompliancenormalActivitiesAssessmentText",
+        "style": "margin-left:30px;width:200px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "patientDemonstratesCompliancerestLastingFourAssessment",
+        "style": "margin-left:20px"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "patientDemonstratesCompliancerestLastingFourAssessmentText",
+        "style": "margin-left:30px;width:200px"
+    }
 ]

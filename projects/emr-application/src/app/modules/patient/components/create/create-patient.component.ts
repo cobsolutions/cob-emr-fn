@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from "lodash";
 import * as moment from 'moment';
@@ -19,7 +19,7 @@ import { PatientInsuranceInfoComponent } from './patient.insurance.info/patient-
   templateUrl: './create-patient.component.html',
   styleUrls: ['./create-patient.component.css']
 })
-export class CreatePatientComponent implements OnInit, AfterViewInit {
+export class CreatePatientComponent implements OnInit, AfterViewInit, DoCheck {
   @ViewChildren('component') components: QueryList<BasicComponent>;
   @Input() selectedPatient: Patient;
   @Input() mode: string;
@@ -27,6 +27,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
   valid: boolean = true;
   isValidPatientCase: boolean = true;
   isValidPatientInsurance: boolean = true;
+  isValidPatientClinic: boolean = true;
   isValidPatientAddress: boolean = true;
   isValidPatientContact: boolean = true;
   isValidPatientInformation: boolean = true;
@@ -50,7 +51,7 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     suffix: null,
     employerName: '',
     title: null,
-    addtionalInfo: '',
+    additionalInfo: '',
     idType: null,
     patientId: '',
     effectiveFromDate: 0,
@@ -80,11 +81,16 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     cases: [],
     patientInsuranceModels: []
   };
+  patientStatuses: string[] = ['Active', 'Inactive', 'Discharged', 'Pending'];
   componentRole: string[] = [Role.PATIENT_ROLE ];
   constructor(private toastr: ToastrService,
     private patientCreationService: PatientCreationService,
     private router: Router) { }
   ngAfterViewInit(): void {
+  }
+
+  ngDoCheck(): void {
+    this.updateValidationStatus();
   }
 
   ngOnInit(): void {
@@ -155,8 +161,9 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
     this.patient.clinicsId = this.patient.clinicsId.map(i => Number(i))
   }
 
-  isPatientFeildsAreValid() {
-    this.resetInvalidFields()
+  updateValidationStatus() {
+    if (!this.components) return;
+
     this.components.forEach(component => {
       if (component instanceof PatientBasicInfoComponent) {
         this.isValidPatientInformation = component.isValid();
@@ -165,20 +172,25 @@ export class CreatePatientComponent implements OnInit, AfterViewInit {
         this.isValidPatientIdentification = component.isValid();
       }
       if (component instanceof ContactComponent) {
-        this.isValidPatientContact = !(this.patient.contacts.length === 0)
+        this.isValidPatientContact = this.patient.contacts.length > 0;
       }
-
       if (component instanceof AddressComponent) {
-        this.isValidPatientAddress = !(this.patient.addresses.length === 0)
+        this.isValidPatientAddress = this.patient.addresses.length > 0;
       }
       if (component instanceof PatientInsuranceInfoComponent) {
-        this.isValidPatientInsurance = !(this.patient.patientInsuranceModels.length === 0)
+        this.isValidPatientInsurance = this.patient.patientInsuranceModels.length > 0;
       }
       if (component instanceof PatientCaseInfoComponent) {
-        this.isValidPatientCase = !(this.patient.cases.length === 0)
+        this.isValidPatientCase = this.patient.cases.length > 0;
       }
     });
-    this.valid = this.isValidPatientCase && this.isValidPatientInsurance && this.isValidPatientAddress && this.isValidPatientContact && this.isValidPatientInformation && this.isValidPatientIdentification
+    this.isValidPatientClinic = this.patient.clinicsId.length > 0;
+    this.valid = this.isValidPatientClinic && this.isValidPatientContact && this.isValidPatientInformation;
+  }
+
+  isPatientFeildsAreValid() {
+    this.resetInvalidFields();
+    this.updateValidationStatus();
   }
   resetInvalidFields() {
     this.basicInvalidFields = [];

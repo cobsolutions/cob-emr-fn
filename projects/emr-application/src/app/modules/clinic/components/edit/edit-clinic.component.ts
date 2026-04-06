@@ -20,6 +20,18 @@ export class EditClinicComponent implements OnInit {
   constructor(private clinicService: ClinicService
     , private toastr: ToastrService) { }
 
+  get isValidClinicName(): boolean {
+    return this.clinic?.name !== null && this.clinic?.name?.trim() !== '';
+  }
+
+  get isValidClinicAddress(): boolean {
+    return this.isAddressValid();
+  }
+
+  get valid(): boolean {
+    return this.isValidClinicName && this.isValidClinicAddress;
+  }
+
   ngOnInit(): void {
   }
     update() {

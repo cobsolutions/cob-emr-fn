@@ -1,0 +1,208 @@
+Indicate Body Type Obj
+	indicate_body_type
+	body_type
+Vitals Obj
+	vitals
+	Blood Pressure Obj 
+		blood_pressure
+		blood_pressure_orthostatic_risk
+		blood_pressure_arm
+		blood_pressure_systolic
+		blood_pressure_diastolic
+		blood_pressure_location
+		blood_pressure_position
+	Temperature
+		temperature
+	Pulse Obj
+		pulse
+		pulse_value
+		pulse_bpm_type
+		pulse_right
+		pulse_left
+	Respiration Obj
+		respiration
+		respiration_selections
+		respiration_comments
+	Weight Obj
+		weight
+		weight_value
+		weight_unit
+
+
+
+ADL Management Obj
+	adl_management
+	adl_bathing
+	adl_bathing_status
+	adl_toileting
+	adl_toileting_status
+	adl_dressing
+	adl_dressing_status
+	adl_grooming
+	adl_grooming_status
+	adl_eating
+	adl_eating_status
+
+
+
+
+Breathing at Rest Obj
+	breathing_at_rest
+	breathing_apical
+	breathing_diaphragmatically
+	breathing_shortened
+	breathing_asymmetrical
+	breathing_decreased
+	breathing_accessory
+	breathing_comments
+
+
+
+Transfers Obj
+	transfers
+	transfer_supine_to_sit
+	transfer_supine_to_sit_status
+	transfer_supine_to_sit_comments
+	transfer_sit_to_stand
+	transfer_sit_to_stand_status
+	transfer_sit_to_stand_comments
+	transfer_toilet
+	transfer_toilet_status
+	transfer_toilet_comments
+
+Cast Splint Obj
+	cast_splint
+	cast_splint_type_1
+	cast_splint_complaints_1
+	cast_splint_date_applied_1	
+	cast_splint_comments_1
+	cast_splint_type_2
+	cast_splint_complaints_2
+	cast_splint_date_applied_2
+	cast_splint_date_removed_2
+	cast_splint_comments_2
+
+Standing Posture Obj
+	standing_posture
+	standing_posture_selections
+	standing_posture_comments
+
+Protracted Scapulas Obj
+	protracted_scapulas
+	protracted_scapulas_right
+	protracted_scapulas_left
+
+Scoliosis Obj
+	scoliosis
+	scoliosis_type
+	scoliosis_curvature
+
+Lower Extremity Structure Obj
+	lower_extremity_structure
+	les_genu_valgus_right
+    les_genu_valgus_left
+    les_genu_varus_right
+    les_genu_varus_left
+    les_tibial_torsion_right
+    les_tibial_torsion_left
+    les_genu_recurvatum_right
+    les_genu_recurvatum_left
+    les_foot_pronation_right
+    les_foot_pronation_left
+    les_foot_supination_right
+    les_foot_supination_left
+    les_femoral_anteversion_right
+    les_femoral_anteversion_left
+    les_femoral_retroversion_right
+    les_femoral_retroversion_left
+    les_dyskinetic_le_chain_right
+    les_dyskinetic_le_chain_left
+    les_patellar_position_right
+    les_patellar_position_left
+    les_calcaneal_exostosis_right
+    les_calcaneal_exostosis_left
+    les_calcaneal_valgus_right
+    les_calcaneal_valgus_left
+    les_calcaneal_varus_right
+    les_calcaneal_varus_left
+    les_hallux_valgus_right
+    les_hallux_valgus_left
+
+Gait Obj
+	gait
+	gait_selections
+	gait_comments
+
+SixMinute Walk Test  Obj
+	six_minute_walk_test
+	walk_rest_sp02
+    walk_rest_heart_rate
+    walk_rest_respiratory_rate
+    walk_rest_borg_scale
+    walk_rest_distance
+    walk_1min_sp02
+    walk_1min_heart_rate
+    walk_1min_respiratory_rate
+    walk_1min_borg_scale
+    walk_1min_distance
+    walk_2min_sp02
+    walk_2min_heart_rate
+    walk_2min_respiratory_rate
+    walk_2min_borg_scale
+    walk_2min_distance
+    walk_3min_sp02
+    walk_3min_heart_rate
+    walk_3min_respiratory_rate
+    walk_3min_borg_scale
+    walk_3min_distance
+    walk_4min_sp02
+    walk_4min_heart_rate
+    walk_4min_respiratory_rate
+    walk_4min_borg_scale
+    walk_4min_distance
+    walk_5min_sp02
+    walk_5min_heart_rate
+    walk_5min_respiratory_rate
+    walk_5min_borg_scale
+    walk_5min_distance
+    walk_6min_sp02
+    walk_6min_heart_rate
+    walk_6min_respiratory_rate
+    walk_6min_borg_scale
+    walk_6min_distance
+    walk_comments
+
+Assistive Device  Obj
+	assistive_device
+	assistive_device_type
+	assistive_device_hand
+	assistive_device_comments
+Immobilizer Obj
+	immobilizer
+	immobilizer_type
+	immobilizer_compliant
+
+Muscular Asymmetries Obj
+	muscular_asymmetries
+	muscular_asymmetries_description
+	
+Muscle Guarding Obj
+	muscle_guarding
+	muscle_guarding_value
+
+Muscle Atrophy Obj
+	muscle_atrophy
+	muscle_atrophy_description
+
+Edema Obj
+	edema_description
+	edema_pitting
+
+
+Apprehension of Movement Obj
+	apprehension_of_movement
+	apprehension_value
+	
+Additional Comments Obj
+	additional_comments
+	additional_comments_text

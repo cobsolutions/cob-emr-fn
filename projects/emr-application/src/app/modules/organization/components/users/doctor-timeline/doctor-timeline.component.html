@@ -1,0 +1,80 @@
+<!-- User Summary Header -->
+<div class="user-summary">
+  <div class="user-avatar">{{ getUserInitials() }}</div>
+  <div class="user-info">
+    <h4 class="user-name">{{ getUserDisplayName() }}</h4>
+    <p class="user-email">{{ user?.email }}</p>
+    <p class="user-npi" *ngIf="user?.npi">NPI: {{ user?.npi }}</p>
+  </div>
+  <div class="progress-indicator">
+    <span class="progress-text">{{ completedCount }}/{{ totalSteps }} steps</span>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar-fill" [style.width.%]="(completedCount / totalSteps) * 100"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Empty state -->
+<div class="empty-state" *ngIf="auditRecords.length === 0">
+  <svg cIcon name="cilInfo" class="empty-icon"></svg>
+  <span>No audit records found for this user.</span>
+</div>
+
+<!-- Vertical Timeline -->
+<div class="timeline" *ngIf="auditRecords.length > 0">
+  <div class="timeline-item" *ngFor="let step of steps; let last = last"
+       [ngClass]="{
+         'step-completed': step.state === 'completed',
+         'step-active': step.state === 'active',
+         'step-pending': step.state === 'pending'
+       }">
+    <div class="timeline-marker-wrapper">
+      <div class="timeline-marker">
+        <svg cIcon name="cilCheckCircle" *ngIf="step.state === 'completed'" class="marker-icon"></svg>
+        <span class="pulse-dot" *ngIf="step.state === 'active'"></span>
+        <span class="step-number" *ngIf="step.state === 'pending'">{{ step.stepNumber }}</span>
+      </div>
+      <div class="timeline-line" *ngIf="!last"></div>
+    </div>
+    <div class="timeline-content">
+      <div class="step-main" [ngClass]="{ 'clickable': step.state === 'completed' }" (click)="toggleExpand(step)">
+        <div class="step-icon-wrapper">
+          <svg cIcon [name]="step.icon" class="step-icon"></svg>
+        </div>
+        <div class="step-text">
+          <span class="step-label">{{ step.label }}</span>
+          <span class="step-time" *ngIf="step.timestamp">{{ formatTimestamp(step.timestamp) }}</span>
+          <span class="step-detail" *ngIf="step.detail">{{ step.detail }}</span>
+        </div>
+        <span class="expand-toggle" *ngIf="step.state === 'completed'">
+          {{ step.expanded ? 'Hide' : 'Details' }}
+        </span>
+      </div>
+      <!-- Audit Detail Panel -->
+      <div class="audit-panel" *ngIf="step.expanded">
+        <div class="audit-row">
+          <span class="audit-key">
+            <svg cIcon name="cilClock" class="audit-icon"></svg>
+            Performed At
+          </span>
+          <span class="audit-value">{{ formatTimestamp(step.timestamp) }}</span>
+        </div>
+        <div class="audit-row">
+          <span class="audit-key">
+            <svg cIcon name="cilLocationPin" class="audit-icon"></svg>
+            IP Address
+          </span>
+          <span class="audit-value mono">{{ step.ipAddress || '-' }}</span>
+        </div>
+        <div class="audit-row">
+          <span class="audit-key">
+            <svg cIcon name="cilDevices" class="audit-icon"></svg>
+            User Agent
+          </span>
+          <span class="audit-value">{{ step.browserShort }}</span>
+        </div>
+        <div class="audit-ua-full" *ngIf="step.userAgent">{{ step.userAgent }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<!-- Case Documents Table -->
+<div class="e-document-list-card">
+    <div class="list-header">
+        <svg cIcon name="cilFile" class="header-icon"></svg>
+        <span>{{ caseName || 'Case' }} Documents</span>
+        <span class="document-count" *ngIf="caseDocuments.length > 0">{{ caseDocuments.length }}</span>
+    </div>
+    <div class="list-body">
+        <div class="table-container">
+            <table class="documents-table">
+                <thead>
+                    <tr>
+                        <th class="th-type">Document Type</th>
+                        <th class="th-name">Name</th>
+                        <th class="th-date">Date of Receipt</th>
+                        <th class="th-actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doc of caseDocuments" class="document-row">
+                        <td>
+                            <span class="document-type-badge">{{ getDocumentTypeName(doc.documentType) }}</span>
+                        </td>
+                        <td>
+                            <div class="document-name">
+                                <svg cIcon name="cilDescription" class="doc-icon"></svg>
+                                <span>{{ doc.nameOfDocument }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="date-cell">
+                                <svg cIcon name="cilCalendar" class="date-icon"></svg>
+                                <span>{{ doc.dateOfReceipt | date:'MMM d, y' }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn view-btn" (click)="onView(doc)" title="View">
+                                    <svg cIcon name="cilNotes"></svg>
+                                </button>
+                                <button class="action-btn edit-btn" (click)="onEdit(doc)" title="Edit">
+                                    <svg cIcon name="cilPencil"></svg>
+                                </button>
+                                <button class="action-btn download-btn" (click)="onDownload(doc)" title="Download">
+                                    <svg cIcon name="cilCloudDownload"></svg>
+                                </button>
+                                <button class="action-btn delete-btn" (click)="onDelete(doc)" title="Delete">
+                                    <svg cIcon name="cilTrash"></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="caseDocuments.length === 0" class="empty-row">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <svg cIcon name="cilFile" class="empty-icon"></svg>
+                                <span>No documents for this case</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- All Cases Documents Table -->
+<div class="e-document-list-card all-cases">
+    <div class="list-header all-cases-header">
+        <svg cIcon name="cilFolder" class="header-icon"></svg>
+        <span>All Cases Documents</span>
+        <span class="document-count" *ngIf="allCasesDocuments.length > 0">{{ allCasesDocuments.length }}</span>
+    </div>
+    <div class="list-body">
+        <div class="table-container">
+            <table class="documents-table">
+                <thead>
+                    <tr>
+                        <th class="th-type">Document Type</th>
+                        <th class="th-name">Name</th>
+                        <th class="th-date">Date of Receipt</th>
+                        <th class="th-actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let doc of allCasesDocuments" class="document-row">
+                        <td>
+                            <span class="document-type-badge">{{ getDocumentTypeName(doc.documentType) }}</span>
+                        </td>
+                        <td>
+                            <div class="document-name">
+                                <svg cIcon name="cilDescription" class="doc-icon"></svg>
+                                <span>{{ doc.nameOfDocument }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="date-cell">
+                                <svg cIcon name="cilCalendar" class="date-icon"></svg>
+                                <span>{{ doc.dateOfReceipt | date:'MMM d, y' }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn view-btn" (click)="onView(doc)" title="View">
+                                    <svg cIcon name="cilNotes"></svg>
+                                </button>
+                                <button class="action-btn edit-btn" (click)="onEdit(doc)" title="Edit">
+                                    <svg cIcon name="cilPencil"></svg>
+                                </button>
+                                <button class="action-btn download-btn" (click)="onDownload(doc)" title="Download">
+                                    <svg cIcon name="cilCloudDownload"></svg>
+                                </button>
+                                <button class="action-btn delete-btn" (click)="onDelete(doc)" title="Delete">
+                                    <svg cIcon name="cilTrash"></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="allCasesDocuments.length === 0" class="empty-row">
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <svg cIcon name="cilFolder" class="empty-icon"></svg>
+                                <span>No documents for all cases</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

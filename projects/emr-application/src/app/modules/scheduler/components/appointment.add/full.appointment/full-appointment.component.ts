@@ -44,6 +44,37 @@ export class FullAppointmentComponent implements OnInit {
   selectedPateint: Patient;
   selectedPatientCase: PatientCase
   selectedClinic: Clinic;
+
+  // Validation getters for UI
+  get isValidPatientSelection(): boolean {
+    return this.selectedPateint !== null && this.selectedPateint !== undefined;
+  }
+
+  get isValidPatientCase(): boolean {
+    return this.selectedPatientCase !== null && this.selectedPatientCase !== undefined;
+  }
+
+  get isValidAppointmentDate(): boolean {
+    return this.validDate && this.appointment?.appointmentDate?.startDate !== null;
+  }
+
+  get isValidClinic(): boolean {
+    return this.selectedClinic !== null && this.selectedClinic !== undefined;
+  }
+
+  get isValidTherapist(): boolean {
+    return this.appointment?.therapyUUID !== null && this.appointment?.therapyUUID !== undefined;
+  }
+
+  get isValidAppointmentType(): boolean {
+    return this.appointment?.appointmentTypeId !== null && this.appointment?.appointmentTypeId !== undefined;
+  }
+
+  get isFormValid(): boolean {
+    return this.isValidPatientSelection && this.isValidPatientCase && this.isValidAppointmentDate &&
+           this.isValidClinic && this.isValidTherapist && this.isValidAppointmentType;
+  }
+
   constructor(private loggedInService: LoggedInService
     , private initializeAppointmentService: InitializeAppointmentService
     , private appointmentService: AppointmentService

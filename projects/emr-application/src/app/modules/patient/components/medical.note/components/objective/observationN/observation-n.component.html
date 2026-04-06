@@ -1,0 +1,1235 @@
+<div [formGroup]="omtForm" class="omt-form">
+  <div class="form-row">
+    <label class="field-label">Indicate Body Type</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="indicate_body_type" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showBodyTypeFields" class="dependent-field-box">
+    <div class="form-row">
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="body_type" value="mesomorph" />
+          <label cFormCheckLabel>Mesomorph</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="body_type" value="endomorph" />
+          <label cFormCheckLabel>Endomorph</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="body_type" value="ectomorph" />
+          <label cFormCheckLabel>Ectomorph</label>
+        </c-form-check>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Vitals</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="vitals" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="vitals" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showVitalsFields" class="dependent-field-box">
+    <!-- Blood Pressure -->
+    <div class="form-row">
+      <label class="field-label">Blood Pressure</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="blood_pressure" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="blood_pressure" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showBloodPressureFields" class="dependent-field-box">
+      <div class="form-row">
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="blood_pressure_orthostatic_risk" />
+          <label cFormCheckLabel>Orthostatic Risk</label>
+        </c-form-check>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Arm</label>
+        <select cSelect formControlName="blood_pressure_arm" class="form-select-custom">
+          <option *ngFor="let option of bloodPressureArmOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Systolic</label>
+        <select cSelect formControlName="blood_pressure_systolic" class="form-select-custom">
+          <option value="">Select...</option>
+          <option value="120">120</option>
+          <option value="130">130</option>
+          <option value="140">140</option>
+          <option value="150">150</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Diastolic</label>
+        <select cSelect formControlName="blood_pressure_diastolic" class="form-select-custom">
+          <option value="">Select...</option>
+          <option value="80">80</option>
+          <option value="90">90</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Location</label>
+        <select cSelect formControlName="blood_pressure_location" class="form-select-custom">
+          <option *ngFor="let option of bloodPressureLocationOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Position</label>
+        <select cSelect formControlName="blood_pressure_position" class="form-select-custom">
+          <option *ngFor="let option of bloodPressurePositionOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="form-row">
+      <label class="field-label">Temperature</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="temperature" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="temperature" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+
+    <!-- Pulse -->
+    <div class="form-row">
+      <label class="field-label">Pulse</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="pulse" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="pulse" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showPulseFields" class="dependent-field-box">
+      <div class="form-row">
+        <input cFormControl type="text" formControlName="pulse_value" class="form-input" placeholder="Pulse value" />
+      </div>
+      <div class="form-row">
+        <div class="radio-group-primary">
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="pulse_bpm_type" value="bpm_radial" />
+            <label cFormCheckLabel>BPM Radial</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="pulse_bpm_type" value="bpm_carotid" />
+            <label cFormCheckLabel>BPM Carotid</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="pulse_bpm_type" value="bpm_posterior" />
+            <label cFormCheckLabel>BPM Posterior</label>
+          </c-form-check>
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Right</label>
+        <select cSelect formControlName="pulse_right" class="form-select-custom">
+          <option *ngFor="let option of pulseRightLeftOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Left</label>
+        <select cSelect formControlName="pulse_left" class="form-select-custom">
+          <option *ngFor="let option of pulseRightLeftOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Respiration -->
+    <div class="form-row">
+      <label class="field-label">Respiration</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="respiration" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="respiration" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showRespirationFields" class="dependent-field-box">
+      <div class="form-row">
+        <select cSelect formControlName="respiration_selections" class="form-select-custom" multiple>
+          <option *ngFor="let option of respirationOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <small class="form-text">Hold CTRL for Multiple Select</small>
+      </div>
+      <div class="form-row">
+        <textarea formControlName="respiration_comments" class="form-textarea" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="form-row">
+      <label class="field-label">Weight</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="weight" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="weight" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showWeightFields" class="dependent-field-box">
+      <div class="form-row">
+        <input cFormControl type="text" formControlName="weight_value" class="form-input" />
+      </div>
+      <div class="form-row">
+        <div class="radio-group-primary">
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="weight_unit" value="lbs" />
+            <label cFormCheckLabel>Lbs</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="weight_unit" value="kg" />
+            <label cFormCheckLabel>Kg</label>
+          </c-form-check>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">ADL Management</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="adl_management" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="adl_management" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdlManagementFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Bathing</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_bathing" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_bathing" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showBathingStatus" class="nested-dependent-field-box">
+      <select cSelect formControlName="adl_bathing_status" class="form-select-custom">
+        <option *ngFor="let option of adlStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row" *ngIf="showBathingCustom">
+        <input cFormControl type="text" formControlName="adl_bathing_custom_text" class="full-width-input" placeholder="Enter custom bathing status" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Toileting</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_toileting" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_toileting" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showToiletingStatus" class="nested-dependent-field-box">
+      <select cSelect formControlName="adl_toileting_status" class="form-select-custom">
+        <option *ngFor="let option of adlStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row" *ngIf="showToiletingCustom">
+        <input cFormControl type="text" formControlName="adl_toileting_custom_text" class="full-width-input" placeholder="Enter custom toileting status" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Dressing</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_dressing" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_dressing" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showDressingStatus" class="nested-dependent-field-box">
+      <select cSelect formControlName="adl_dressing_status" class="form-select-custom">
+        <option *ngFor="let option of adlStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row" *ngIf="showDressingCustom">
+        <input cFormControl type="text" formControlName="adl_dressing_custom_text" class="full-width-input" placeholder="Enter custom dressing status" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Grooming</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_grooming" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_grooming" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showGroomingStatus" class="nested-dependent-field-box">
+      <select cSelect formControlName="adl_grooming_status" class="form-select-custom">
+        <option *ngFor="let option of adlStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row" *ngIf="showGroomingCustom">
+        <input cFormControl type="text" formControlName="adl_grooming_custom_text" class="full-width-input" placeholder="Enter custom grooming status" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Eating</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_eating" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="adl_eating" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showEatingStatus" class="nested-dependent-field-box">
+      <select cSelect formControlName="adl_eating_status" class="form-select-custom">
+        <option *ngFor="let option of adlStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row" *ngIf="showEatingCustom">
+        <input cFormControl type="text" formControlName="adl_eating_custom_text" class="full-width-input" placeholder="Enter custom eating status" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Breathing at Rest</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="breathing_at_rest" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showBreathingAtRestFields" class="dependent-field-box">
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_apical" />
+        <label cFormCheckLabel>Apical</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_diaphragmatically" />
+        <label cFormCheckLabel>Diaphragmatically</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_shortened" />
+        <label cFormCheckLabel>Shortened Inhalation/Exhalation</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_asymmetrical" />
+        <label cFormCheckLabel>Asymmetrical Rib Excursion</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_decreased" />
+        <label cFormCheckLabel>Decreased Rib Motion</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="breathing_accessory" />
+        <label cFormCheckLabel>Use of Accessory Muscles</label>
+      </c-form-check>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Breathing Comments</label>
+      <textarea formControlName="breathing_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Transfers</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="transfers" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="transfers" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showTransfersFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Supine to Sit</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_supine_to_sit" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_supine_to_sit" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showSupineToSitFields" class="nested-dependent-field-box">
+      <select cSelect formControlName="transfer_supine_to_sit_status" class="form-select-custom">
+        <option *ngFor="let option of transferStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row">
+        <textarea formControlName="transfer_supine_to_sit_comments" class="form-textarea" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Sit to Stand</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_sit_to_stand" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_sit_to_stand" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showSitToStandFields" class="nested-dependent-field-box">
+      <select cSelect formControlName="transfer_sit_to_stand_status" class="form-select-custom">
+        <option *ngFor="let option of transferStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row">
+        <textarea formControlName="transfer_sit_to_stand_comments" class="form-textarea" rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="field-label">Toilet Transfers</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_toilet" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="transfer_toilet" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showToiletTransfersFields" class="nested-dependent-field-box">
+      <select cSelect formControlName="transfer_toilet_status" class="form-select-custom">
+        <option *ngFor="let option of transferStatusOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div class="form-row">
+        <textarea formControlName="transfer_toilet_comments" class="form-textarea" rows="2"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Cast/Splint</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cast_splint" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cast_splint" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCastSplintFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Type</label>
+      <select cSelect formControlName="cast_splint_type_1" class="form-select-custom">
+        <option *ngFor="let option of castSplintTypeOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Complaints with use</label>
+      <select cSelect formControlName="cast_splint_complaints_1" class="form-select-custom">
+        <option *ngFor="let option of complaintsOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Date Applied</label>
+      <input cFormControl type="date" formControlName="cast_splint_date_applied_1" class="form-input" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Date Removed</label>
+      <input cFormControl type="date" formControlName="cast_splint_date_removed_1" class="form-input" />
+    </div>
+    <div class="form-row">
+      <textarea formControlName="cast_splint_comments_1" class="form-textarea" rows="3"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Type</label>
+      <select cSelect formControlName="cast_splint_type_2" class="form-select-custom">
+        <option *ngFor="let option of castSplintTypeOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Complaints with use</label>
+      <select cSelect formControlName="cast_splint_complaints_2" class="form-select-custom">
+        <option *ngFor="let option of complaintsOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Date Applied</label>
+      <input cFormControl type="date" formControlName="cast_splint_date_applied_2" class="form-input" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Date Removed</label>
+      <input cFormControl type="date" formControlName="cast_splint_date_removed_2" class="form-input" />
+    </div>
+    <div class="form-row">
+      <textarea formControlName="cast_splint_comments_2" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Standing Posture</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="standing_posture" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="standing_posture" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showStandingPostureFields" class="dependent-field-box">
+    <div class="form-row">
+      <select cSelect formControlName="standing_posture_selections" class="form-select-custom" multiple>
+        <option *ngFor="let option of standingPostureOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <small class="form-text">Hold CTRL for Multiple Select</small>
+    </div>
+    <div class="form-row">
+      <textarea formControlName="standing_posture_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Protracted Scapulas</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="protracted_scapulas" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showProtractedScapulasFields" class="dependent-field-box">
+    <div class="measurement-header">
+      <div class="measurement-label"></div>
+      <div class="measurement-column">Right</div>
+      <div class="measurement-column">Left</div>
+    </div>
+    <div class="measurement-row">
+      <label class="measurement-label">Distance from thoracic spine to medial scapular border</label>
+      <select cSelect formControlName="protracted_scapulas_right" class="measurement-input">
+        <option *ngFor="let option of protractedScapulasDistanceOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="protracted_scapulas_left" class="measurement-input">
+        <option *ngFor="let option of protractedScapulasDistanceOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Scoliosis</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="scoliosis" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="scoliosis" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showScoliosisFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Type</label>
+      <select cSelect formControlName="scoliosis_type" class="form-select-custom">
+        <option *ngFor="let option of scoliosisTypeOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Curvature</label>
+      <select cSelect formControlName="scoliosis_curvature" class="form-select-custom">
+        <option *ngFor="let option of scoliosisCurvatureOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Lower Extremity Structure</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lower_extremity_structure" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showLowerExtremityStructureFields" class="dependent-field-box">
+    <div class="measurement-header">
+      <div class="measurement-label"></div>
+      <div class="measurement-column">Right</div>
+      <div class="measurement-column">Left</div>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Genu Valgus</label>
+      <select cSelect formControlName="les_genu_valgus_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_genu_valgus_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Genu Varus</label>
+      <select cSelect formControlName="les_genu_varus_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_genu_varus_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Tibial Torsion</label>
+      <select cSelect formControlName="les_tibial_torsion_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_tibial_torsion_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Genu Recurvatum</label>
+      <select cSelect formControlName="les_genu_recurvatum_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_genu_recurvatum_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Foot Pronation</label>
+      <select cSelect formControlName="les_foot_pronation_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_foot_pronation_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Foot Supination</label>
+      <select cSelect formControlName="les_foot_supination_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_foot_supination_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Femoral Anteversion</label>
+      <select cSelect formControlName="les_femoral_anteversion_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_femoral_anteversion_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Femoral Retroversion</label>
+      <select cSelect formControlName="les_femoral_retroversion_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_femoral_retroversion_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Dyskinetic LE Chain</label>
+      <select cSelect formControlName="les_dyskinetic_le_chain_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_dyskinetic_le_chain_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Patellar Position</label>
+      <select cSelect formControlName="les_patellar_position_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_patellar_position_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Calcaneal Exostosis</label>
+      <select cSelect formControlName="les_calcaneal_exostosis_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_calcaneal_exostosis_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Calcaneal Valgus</label>
+      <select cSelect formControlName="les_calcaneal_valgus_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_calcaneal_valgus_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Calcaneal Varus</label>
+      <select cSelect formControlName="les_calcaneal_varus_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_calcaneal_varus_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="measurement-row">
+      <label class="measurement-label">Hallux Valgus</label>
+      <select cSelect formControlName="les_hallux_valgus_right" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <select cSelect formControlName="les_hallux_valgus_left" class="measurement-input">
+        <option *ngFor="let option of lowerExtremityOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Gait</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="gait" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="gait" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showGaitFields" class="dependent-field-box">
+    <div class="form-row">
+      <select cSelect formControlName="gait_selections" class="form-select-custom" multiple>
+        <option *ngFor="let option of gaitOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <small class="form-text">Hold CTRL for Multiple Select</small>
+    </div>
+    <div class="form-row">
+      <textarea formControlName="gait_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">6 Minute Walk Test</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="six_minute_walk_test" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show6MinuteWalkTestFields" class="dependent-field-box">
+    <table class="walk-test-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>SpO2%</th>
+          <th>Heart Rate</th>
+          <th>Respiratory Rate</th>
+          <th>Rate of Perceived Exertion Distance (BORG Scale)</th>
+          <th>(feet)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rest</td>
+          <td><input cFormControl type="text" formControlName="walk_rest_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_rest_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_rest_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_rest_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_rest_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>1 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_1min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_1min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_1min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_1min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_1min_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>2 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_2min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_2min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_2min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_2min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_2min_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>3 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_3min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_3min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_3min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_3min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_3min_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>4 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_4min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_4min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_4min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_4min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_4min_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>5 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_5min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_5min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_5min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_5min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_5min_distance" class="table-input" /></td>
+        </tr>
+        <tr>
+          <td>6 min.</td>
+          <td><input cFormControl type="text" formControlName="walk_6min_sp02" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_6min_heart_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_6min_respiratory_rate" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_6min_borg_scale" class="table-input" /></td>
+          <td><input cFormControl type="text" formControlName="walk_6min_distance" class="table-input" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="form-row">
+      <label class="field-label">Comments</label>
+      <textarea formControlName="walk_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Assistive Device</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="assistive_device" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="assistive_device" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAssistiveDeviceFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Type</label>
+      <select cSelect formControlName="assistive_device_type" class="form-select-custom">
+        <option *ngFor="let option of assistiveDeviceTypeOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <!-- Custom Text Input (shown when Custom is selected) -->
+    <div class="form-row" *ngIf="showAssistiveDeviceCustom">
+      <label class="field-label"></label>
+      <input cFormControl type="text" formControlName="assistive_device_custom_text" class="full-width-input" placeholder="Enter custom assistive device type" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Hand Used</label>
+      <select cSelect formControlName="assistive_device_hand" class="form-select-custom">
+        <option *ngFor="let option of handUsedOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="field-label"></label>
+      <textarea formControlName="assistive_device_comments" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Immobilizer</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="immobilizer" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="immobilizer" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showImmobilizerFields" class="dependent-field-box">
+    <div class="form-row">
+      <input cFormControl type="text" formControlName="immobilizer_type" class="form-input" placeholder="Type" />
+    </div>
+    <div class="form-row">
+      <label class="field-label">Compliant with Use</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="immobilizer_compliant" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="immobilizer_compliant" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscular Asymmetries</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscular_asymmetries" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscularAsymmetriesFields" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="muscular_asymmetries_description" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscle Guarding</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_guarding" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscleGuardingFields" class="dependent-field-box">
+    <div class="form-row">
+      <select cSelect formControlName="muscle_guarding_value" class="form-select-custom">
+        <option *ngFor="let option of muscleGuardingOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Muscle Atrophy</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="muscle_atrophy" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showMuscleAtrophyFields" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="muscle_atrophy_description" class="form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label class="field-label">Edema</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="edema" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="edema" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showEdemaFields" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="edema_description" class="form-textarea" rows="3" placeholder="Description"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Pitting</label>
+      <div class="radio-group-primary">
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="edema_pitting" value="no" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="edema_pitting" value="yes" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <!-- Pitting Dependent Field -->
+    <div class="nested-dependent-field-box" *ngIf="showEdemaPittingFields">
+      <div class="form-row">
+        <label class="field-label">Pitting Description</label>
+        <select cSelect formControlName="edema_pitting_grade" class="form-select-custom">
+          <option [value]="null" disabled>Select...</option>
+          <option *ngFor="let option of edemaPittingGradeOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="field-label">Joint Effusion</label>
+        <div class="radio-group-primary">
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="edema_joint_effusion" value="no" />
+            <label cFormCheckLabel>No</label>
+          </c-form-check>
+          <c-form-check>
+            <input cFormCheckInput type="radio" formControlName="edema_joint_effusion" value="yes" />
+            <label cFormCheckLabel>Yes</label>
+          </c-form-check>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Apprehension of Movement</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="apprehension_of_movement" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showApprehensionOfMovementFields" class="dependent-field-box">
+    <div class="form-row">
+      <select cSelect formControlName="apprehension_value" class="form-select-custom">
+        <option *ngFor="let option of apprehensionOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Additional Comments</label>
+    <div class="radio-group-primary">
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+    <div class="form-row">
+      <textarea formControlName="additional_comments_text" class="form-textarea" rows="4"></textarea>
+    </div>
+  </div>
+
+</div>

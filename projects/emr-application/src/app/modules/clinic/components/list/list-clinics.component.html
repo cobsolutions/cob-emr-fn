@@ -1,60 +1,120 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
-<c-row>
-  <c-col xs="12" class="mb-2">
-    <h1>Clinics</h1>
-  </c-col>
-</c-row>
-<hr />
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-  <button cButton color="primary" class="me-md-2" variant="outline" (click)="create()" dispaly-input
-    [componentRole]="componentRole">Create Clinic</button>
+
+<!-- Page Header Section -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilHospital" class="page-icon"></svg>
+        Clinic List
+      </h2>
+      <p class="page-subtitle">Browse, edit, and manage clinic records</p>
+    </div>
+  </div>
 </div>
-<ng-container *ngIf="props$ | async as props" fluid="true">
-  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [items]="(clinics$ | async) ?? []"
-    [itemsPerPage]="props.itemsPerPage" (itemsPerPageChange)="handleItemsPerPageChange($event)"
-    [itemsPerPageOptions]="[5,10,20]" [itemsPerPageSelect]="true"
-    [tableProps]="{ hover: true, striped: true, responsive: true , small:true }"
-    [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
-    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
-    (sorterValueChange)="handleSorterValueChange($event)" header>
-    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-      <td>
-        <ng-container [ngSwitch]="columnName">
-          <ng-container *ngSwitchCase="'actions'" class="py-2">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton variant="outline" (click)="remove(item)" size="sm" dispaly-input
-                [componentRole]="componentRole">
-                <svg cIcon name="cilTrash"></svg>
-              </button>
-              <button cButton variant="outline" (click)="edit(item)" size="sm">
-                <svg cIcon name="cilPen"></svg>
-              </button>
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            {{tdContent}}
-          </ng-container>
-          <ng-container *ngSwitchCase="'address'" class="py-2">
-            {{constructAddress(tdContent)}}
-          </ng-container>
-        </ng-container>
-      </td>
-    </ng-template>
-  </c-smart-table>
-  <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
-    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+
+<!-- Clinic Table Card -->
+<ng-container *ngIf="props$ | async as props">
+  <c-card class="clinic-card">
+    <div class="card-header-custom">
+      <div class="card-header-title">
+        <svg cIcon name="cilList" class="card-icon"></svg>
+        <span>All Clinics</span>
+      </div>
+      <span class="card-badge">
+        {{ (clinics$ | async)?.length || 0 }} Records
+      </span>
+    </div>
+    <c-card-body class="card-body-custom">
+      <c-smart-table
+        [columnSorter]="{ resetable: true }"
+        [columns]="columns"
+        [items]="(clinics$ | async) ?? []"
+        [itemsPerPage]="props.itemsPerPage"
+        (itemsPerPageChange)="handleItemsPerPageChange($event)"
+        [itemsPerPageOptions]="[5,10,20]"
+        [itemsPerPageSelect]="true"
+        [tableProps]="{ hover: true, striped: true, small: true, borderless: true }"
+        [columnFilterValue]="props.columnFilterValue ?? []"
+        [sorterValue]="props.sorterValue"
+        [tableBodyProps]="{ align: 'middle' }"
+        (sorterValueChange)="handleSorterValueChange($event)"
+        header>
+        <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+          <td>
+            <ng-container [ngSwitch]="columnName">
+              <ng-container *ngSwitchCase="'name'">
+                <span class="clinic-name">
+                  <svg cIcon name="cilHospital" class="clinic-icon"></svg>
+                  {{item.name}}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'address'">
+                <span class="address-info">
+                  <svg cIcon name="cilLocationPin" class="address-icon"></svg>
+                  {{constructAddress(tdContent)}}
+                </span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'actions'">
+                <div class="action-buttons">
+                  <button *appRoleScope="'clinic-role'; requireModify: true" cButton class="action-btn-edit" (click)="edit(item)" title="Edit Clinic">
+                    <svg cIcon name="cilPen" class="action-icon"></svg>
+                  </button>
+                  <button *appRoleScope="'clinic-role'; requireModify: true" cButton class="action-btn-delete" (click)="remove(item)" title="Delete Clinic">
+                    <svg cIcon name="cilTrash" class="action-icon"></svg>
+                  </button>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ tdContent }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-template>
+      </c-smart-table>
+
+      <!-- Pagination -->
+      <div class="pagination-container">
+        <c-smart-pagination
+          *ngIf="props.totalPages"
+          [activePage]="props.activePage"
+          (activePageChange)="handleActivePageChange($event)"
+          [pages]="props.totalPages">
+        </c-smart-pagination>
+      </div>
+    </c-card-body>
+  </c-card>
 </ng-container>
+
+<!-- Error Alert -->
 <ng-container *ngIf="errorMessage$ | async as errorMessage">
-  <hr>
-  <c-alert>{{errorMessage}}</c-alert>
+  <div class="error-alert">
+    <svg cIcon name="cilWarning" class="error-icon"></svg>
+    <span>{{ errorMessage }}</span>
+  </div>
 </ng-container>
-<c-modal id="editClinic" [visible]="editClinicVisibility" size="xl" backdrop="static">
-  <c-modal-header>
-    <h3 cModalTitle>Edit Clinic</h3>
-    <button (click)="toggleEditClinic()" cButtonClose></button>
+
+<!-- Edit Clinic Modal -->
+<c-modal id="editClinic" [visible]="editClinicVisibility" size="xl" [backdrop]="'static'">
+  <c-modal-header class="modal-header-custom">
+    <h3 cModalTitle class="modal-title-custom">
+      <svg cIcon name="cilHospital" class="modal-icon"></svg>
+      Edit Clinic
+    </h3>
+    <button (click)="toggleEditClinic()" class="modal-close-btn">
+      <svg cIcon name="cilX"></svg>
+    </button>
   </c-modal-header>
-  <c-modal-body>
-    <app-edit-clinic *ngIf="editClinicVisibility" [clinic]="selectedClinic"
-      (changeVisibility)="changeFacilityVisibility($event)"></app-edit-clinic>
+  <c-modal-body class="modal-body-custom">
+    <app-edit-clinic
+      *ngIf="editClinicVisibility"
+      [clinic]="selectedClinic"
+      (changeVisibility)="changeFacilityVisibility($event)">
+    </app-edit-clinic>
   </c-modal-body>
 </c-modal>
+
+<!-- Floating Action Button -->
+<button *appRoleScope="'clinic-role'; requireModify: true" class="fab-button" (click)="create()" title="Create New Clinic">
+  <svg cIcon name="cilPlus" class="fab-icon"></svg>
+</button>

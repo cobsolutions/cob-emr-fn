@@ -1,0 +1,59 @@
+<div [formGroup]="formGroup">
+  <!-- Apply to All -->
+  <div *ngIf="showApplyToAll" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+    <label style="min-width: 150px; text-align: right; font-weight: 500; color: #5c4742;">{{ applyToAllLabel }}</label>
+    <select cSelect style="max-width: 200px;" [formControlName]="computedApplyToAllFieldName">
+      <option value="" selected>Select...</option>
+      <option *ngFor="let option of computedApplyToAllOptions; trackBy: trackByValue" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Measurement Table -->
+  <table class="walk-test-table">
+    <thead>
+      <tr>
+        <th style="width: 300px;"></th>
+        <th style="width: 200px;">Right</th>
+        <th style="width: 200px;">Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <td>{{ mapping.label }}</td>
+        <td>
+          <select cSelect class="table-input" [formControlName]="mapping.rightField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+          <input *ngIf="customFieldVisible[mapping.rightCustomField]" cFormControl type="text"
+            [formControlName]="mapping.rightCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
+        </td>
+        <td>
+          <select cSelect class="table-input" [formControlName]="mapping.leftField">
+            <option *ngFor="let option of mapping.options; trackBy: trackByValue" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+          <input *ngIf="customFieldVisible[mapping.leftCustomField]" cFormControl type="text"
+            [formControlName]="mapping.leftCustomField" class="table-input custom-text-input"
+            placeholder="Enter custom value" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="computedCommentsFieldName"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

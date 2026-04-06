@@ -1,0 +1,37 @@
+<div [formGroup]="form" class="form-container">
+  <div class="two-column-layout">
+    <!-- Right Column -->
+    <div class="column-section">
+      <div class="column-header">{{ rightLabel }}</div>
+      <div class="column-row" *ngFor="let rCtrl of controlR">
+        <div class="checkbox-group">
+          <label *ngFor="let opt of rCtrl.value" class="checkbox-item">
+            <input
+              type="checkbox"
+              [checked]="form.get(getControlName('right', rCtrl.label))?.value?.includes(opt.val)"
+              (click)="toggleCheckbox(getControlName('right', rCtrl.label), opt.val)"
+            />
+            {{ opt.view }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left Column -->
+    <div class="column-section">
+      <div class="column-header">{{ leftLabel }}</div>
+      <div class="column-row" *ngFor="let lCtrl of controlL">
+        <div class="checkbox-group">
+          <label *ngFor="let opt of lCtrl.value" class="checkbox-item">
+            <input
+              type="checkbox"
+              [checked]="form.get(getControlName('left', lCtrl.label))?.value?.includes(opt.val)"
+              (click)="toggleCheckbox(getControlName('left', lCtrl.label), opt.val)"
+            />
+            {{ opt.view }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

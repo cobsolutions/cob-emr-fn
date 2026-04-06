@@ -1,17 +1,21 @@
-<!-- berg-balance.component.html -->
-<div class="container">
-    <div class="header">
-      <h2>Berg Balance Scale</h2>
-      
-      <a href="javascript:void(0)" (click)="toggleInstructions()" class="instructions-link">
-        [Instructions]
-      </a>
-      
-      <div *ngIf="showInstructions" class="instructions-panel">
-        <strong>Description:</strong>
-        <p>14-item scale designed to measure balance of the older adult in a clinical setting.</p>
-        
-        <strong>Equipment needed:</strong>
+<div class="berg-container">
+  <!-- Header -->
+  <div class="berg-header">
+    <div class="header-content">
+      <h2 class="berg-title">Berg Balance Scale</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p><strong>Description:</strong> 14-item scale designed to measure balance of the older adult in a clinical setting.</p>
+        <p><strong>Equipment needed:</strong></p>
         <ul>
           <li>Ruler</li>
           <li>2 standard chairs (one with arm rests, one without)</li>
@@ -19,84 +23,111 @@
           <li>Stopwatch or wristwatch</li>
           <li>15 foot walkway</li>
         </ul>
-        
-        <strong>Completion Time:</strong>
-        <p>15-20 minutes</p>
-        
-        <strong>General Instructions:</strong>
-        <p>Please document each task and/or give instructions as written. When scoring, please <strong>record the lowest response category that applies</strong> for each item.</p>
-        
-        <strong>Score Meaning:</strong>
+        <p><strong>Completion Time:</strong> 15-20 minutes</p>
+        <p><strong>General Instructions:</strong> Please document each task and/or give instructions as written. When scoring, please <strong>record the lowest response category that applies</strong> for each item.</p>
+        <p><strong>Score Interpretation:</strong></p>
         <ul>
-          <li>0-20 - High fall risk</li>
-          <li>21-40 - Medium fall risk</li>
-          <li>41-56 - Low fall risk</li>
+          <li>0-20 = High fall risk</li>
+          <li>21-40 = Medium fall risk</li>
+          <li>41-56 = Low fall risk</li>
         </ul>
       </div>
     </div>
-  
-    <form [formGroup]="bergForm" (ngSubmit)="calculateScore()">
-      <!-- Patient Satisfaction Section -->
-      <div class="form-section">
-        <div class="section-header">
-          <strong>Patient Satisfaction</strong>
-        </div>
-        
-        <div class="instruction">
-          Please ask the patient this question and record the response.
-        </div>
-        
-        <div class="question">
-          <label>
-            <strong><span class="asterisk">*</span></strong>
-            1. Please rate your pain level with activity
-          </label>
-        </div>
-        
-        <div class="options-row">
-          <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="pain-level-label">
-            {{level}} <input type="radio" formControlName="painLevel" [value]="level">
-          </label>
-        </div>
-        
-        <div class="scale-labels">
-          <span class="scale-start">NO PAIN</span>
-          <span class="scale-end">VERY SEVERE PAIN</span>
-        </div>
-        
-        <div *ngIf="bergForm.get('painLevel')?.invalid && bergForm.get('painLevel')?.touched" class="error-message">
-          Please select a pain level
-        </div>
-      </div>
-  
-      <!-- Berg Balance Items -->
-      <div *ngFor="let item of bergItems" class="form-section">
-        <div class="section-header">
-          <strong>{{item.number}}. {{item.title}}</strong>
-        </div>
-        
-        <div class="instruction">
-          <em>{{item.instruction}}</em>
-        </div>
-        
-        <div class="options">
-          <label *ngFor="let option of item.options; let i = index">
-            <input type="radio" [formControlName]="'Q' + item.number" [value]="i"> {{option}}
-          </label>
-        </div>
-        
-        <div *ngIf="bergForm.get('Q' + item.number)?.invalid && bergForm.get('Q' + item.number)?.touched" class="error-message">
-          Please select an answer
-        </div>
-      </div>
-  
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Calculate Total</button>
-        <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
-        
-        <div *ngIf="bergForm.invalid && bergForm.touched" class="error-message completion-error">
-          Please select an answer for all questions.
-        </div>
-      </div>
-    </form>
   </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 15 questions answered</span>
+  </div>
+
+  <form [formGroup]="bergForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="bergForm.get('painLevel')?.value !== null"
+             [class.error]="bergForm.get('painLevel')?.invalid && bergForm.get('painLevel')?.touched">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painLevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="bergForm.get('painLevel')?.invalid && bergForm.get('painLevel')?.touched" class="error-message">
+              Please select a pain level
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Berg Balance Assessment Sections -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">B</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Berg Balance Assessment</h3>
+          <p class="section-subtitle">Select the statement that best describes the patient's performance</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let item of bergItems"
+             class="question-card"
+             [class.answered]="bergForm.get('Q' + item.number)?.value !== null"
+             [class.error]="bergForm.get('Q' + item.number)?.invalid && bergForm.get('Q' + item.number)?.touched">
+          <div class="question-number">{{item.number}}</div>
+          <div class="question-content">
+            <div class="question-text">{{item.title}}</div>
+            <div class="question-instruction">{{item.instruction}}</div>
+            <div class="radio-options-vertical">
+              <label *ngFor="let option of item.options; let i = index" class="radio-option-label">
+                <input type="radio" [formControlName]="'Q' + item.number" [value]="i">
+                <span class="option-text">{{option}}</span>
+              </label>
+            </div>
+            <div *ngIf="bergForm.get('Q' + item.number)?.invalid && bergForm.get('Q' + item.number)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="bergForm.invalid && bergForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

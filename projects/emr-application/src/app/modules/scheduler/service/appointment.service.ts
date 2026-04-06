@@ -83,6 +83,10 @@ export class AppointmentService {
     const createAppointmentTypURL = this.baseUrl + 'appointment/id/' + id;
     return this._http.delete(createAppointmentTypURL)
   }
+  deleteAppointmentByClinic(appointmentId: string | number, clinicId: number) {
+    const url = this.baseUrl + 'appointment/delete/' + appointmentId + '/clinic/' + clinicId;
+    return this._http.delete(url);
+  }
   deleteAppointmentList(repeatId: number, clinicId: number) {
     const createAppointmentTypURL = this.baseUrl + 'appointment/list/repeatId/' + repeatId + '/clinicId/' + clinicId;
     return this._http.delete(createAppointmentTypURL)

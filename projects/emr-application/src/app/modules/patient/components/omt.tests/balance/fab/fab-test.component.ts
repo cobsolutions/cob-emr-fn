@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'balance-fab-test',
@@ -10,7 +10,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class FabTestComponent implements OnInit {
   fabForm: FormGroup;
   showInstructions = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'fab';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
 
   // FAB Scale test items
   fabItems = [
@@ -107,11 +109,11 @@ export class FabTestComponent implements OnInit {
       number: 9,
       title: "Walk with head turns",
       options: [
-        "Unable to walk 10 steps independently while maintaining 30º head turns at an established pace",
-        "Able to walk 10 steps independently but unable to complete required number of 30º head turns at an established pace",
-        "Able to walk 10 steps but veers from a straight line while performing 30º head turns at an established pace",
-        "Able to walk 10 steps in a straight line while performing 30º head turns at an established pace but head turns less than 30º in one or both directions",
-        "Able to walk 10 steps in a straight line while performing required number of 30º head turns at established pace"
+        "Unable to walk 10 steps independently while maintaining 30° head turns at an established pace",
+        "Able to walk 10 steps independently but unable to complete required number of 30° head turns at an established pace",
+        "Able to walk 10 steps but veers from a straight line while performing 30° head turns at an established pace",
+        "Able to walk 10 steps in a straight line while performing 30° head turns at an established pace but head turns less than 30° in one or both directions",
+        "Able to walk 10 steps in a straight line while performing required number of 30° head turns at established pace"
       ]
     },
     {
@@ -127,23 +129,40 @@ export class FabTestComponent implements OnInit {
     }
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService:OmtTestService) {
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.fabForm = this.createForm();
   }
+
   createForm(): FormGroup {
     const formGroup: any = {};
-    
+
     // Create form controls for all 10 FAB items
     for (let i = 1; i <= 10; i++) {
       formGroup[`Q${i}`] = [null, Validators.required];
     }
-    
+
     return this.fb.group(formGroup);
+  }
+
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toUpperCase().startsWith('Q') ? key.toUpperCase() : `Q${key}`;
+            formValues[formKey] = value as number;
+          });
+          this.fabForm.patchValue(formValues);
+        }
+      });
+    }
   }
 
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
+
   calculateScore(): void {
     if (this.fabForm.invalid) {
       // Mark all fields as touched to show validation errors
@@ -152,28 +171,33 @@ export class FabTestComponent implements OnInit {
       });
       return;
     }
-    const result = this.fillAnswers()
-    console.log(JSON.stringify(result))
-    
-    this.omtTestService.balance(result).subscribe(val => {
-      this.getResult.emit(val)
-    })
-  }
-  private fillAnswers() {
-    const answers: Record<string, number> = {};
-    for (var i = 1; i <= 10; i++) {
-      const key = `${'Q' + i}`
-      const value = this.fabForm.value[key];
-      answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-    }
-    return { answers, "testType": "fab" };
-  }
-  resetForm(): void {
-    this.fabForm.reset();
+
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.fabForm.controls).forEach(key => {
+      const value = this.fabForm.get(key)?.value;
+      if (value !== null) {
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
-  ngOnInit(): void {
-    
+  resetForm(): void {
+    this.fabForm.reset();
+    this.fabForm.markAsUntouched();
   }
- 
+
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.fabForm.controls);
+    return controls.filter(key => this.fabForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 10;
+    return (this.getAnsweredCount() / totalQuestions) * 100;
+  }
 }

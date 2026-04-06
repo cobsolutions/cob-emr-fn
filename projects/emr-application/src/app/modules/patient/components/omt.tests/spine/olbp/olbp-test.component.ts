@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'spine-olbp-test',
@@ -10,7 +10,9 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class OlbpTestComponent implements OnInit {
   oswestryForm: FormGroup;
   showInstructions = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'olbp';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
   sections = [
     "Pain Intensity",
     "Personal Care (Washing, Dressing, etc.)",
@@ -21,19 +23,28 @@ export class OlbpTestComponent implements OnInit {
     "Sleeping",
     "Social Life",
     "Traveling",
-    "Employment / Homemaking"
+    "Changing Degree of Pain"
   ];
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.oswestryForm = this.createForm();
   }
 
   ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.oswestryForm.patchValue(formValues);
+        }
+      });
+    }
   }
   createForm(): FormGroup {
-    return this.fb.group({
-      // Patient Satisfaction - Pain Level
-      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-
+    return this.fb.group({  
       // Oswestry sections
       q1: [null, Validators.required],
       q2: [null, Validators.required],
@@ -60,24 +71,34 @@ export class OlbpTestComponent implements OnInit {
       });
       return;
     }
-    const result = {
-      "Q1": parseInt(this.oswestryForm.value.q1, 10),
-      "Q2": parseInt(this.oswestryForm.value.q2, 10),
-      "Q3": parseInt(this.oswestryForm.value.q3, 10),
-      "Q4": parseInt(this.oswestryForm.value.q4, 10),
-      "Q5": parseInt(this.oswestryForm.value.q5, 10),
-      "Q6": parseInt(this.oswestryForm.value.q6, 10),
-      "Q7": parseInt(this.oswestryForm.value.q7, 10),
-      "Q8": parseInt(this.oswestryForm.value.q8, 10),
-      "Q9": parseInt(this.oswestryForm.value.q9, 10),
-      "Q10": parseInt(this.oswestryForm.value.q10, 10)
-    };
-    this.omtTestService.spine(result, "olbp").subscribe(val => {
-      this.getResult.emit(val)
-    })
+
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.oswestryForm.controls).forEach(key => {
+      const value = this.oswestryForm.get(key)?.value;
+      if (value !== null) {
+        // Convert key to uppercase (e.g., q1 -> Q1)
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
     this.oswestryForm.reset();
+    this.oswestryForm.markAsUntouched();
+  }
+
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.oswestryForm.controls);
+    return controls.filter(key => this.oswestryForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 10; // 10 sections
+    return (this.getAnsweredCount() / totalQuestions) * 100;
   }
 }

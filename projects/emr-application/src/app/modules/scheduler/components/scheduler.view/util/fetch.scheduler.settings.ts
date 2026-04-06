@@ -10,7 +10,15 @@ export interface Settings {
 }
 export class FetchSchedulerSettings {
     static schedulerSetting: Settings = {};
+    public static isValid(schedulerDateSettings: any): boolean {
+        return schedulerDateSettings
+            && schedulerDateSettings.startDay
+            && schedulerDateSettings.endDay
+            && schedulerDateSettings.timeInterval
+            && schedulerDateSettings.appointmentDuration;
+    }
     public static setup(schedulerDateSettings: SchedulerSettings) {
+        this.schedulerSetting = {};
         this.setStartWeek(schedulerDateSettings.startWeek)
         this.setDayHours(schedulerDateSettings.startDay, schedulerDateSettings.endDay);
         this.setTimeInterval(schedulerDateSettings.timeInterval)

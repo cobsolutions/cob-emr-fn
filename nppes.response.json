@@ -1,0 +1,2416 @@
+{
+    "time-stamp": 1769700046070,
+    "records": {
+        "results": [
+            {
+                "number": "1730676875",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ABBY GAIL",
+                    "last_name": "SHALABY",
+                    "middle_name": "GAIL",
+                    "enumeration_date": "2018-04-14",
+                    "last_updated": "2022-02-22",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "EL CERRITO",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "170 EL CERRITO PLZ",
+                        "address_2": null,
+                        "postal_code": "945304002",
+                        "telephone_number": "628-444-8975",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "OAKLAND",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "2302 VALDEZ ST APT 345",
+                        "address_2": null,
+                        "postal_code": "946123195",
+                        "telephone_number": "628-444-8975",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "1223G0001X",
+                        "desc": "Dentist, General Practice",
+                        "state": "CA",
+                        "license": "103459",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "204E00000X",
+                        "desc": "Oral & Maxillofacial Surgery",
+                        "state": "WA",
+                        "license": "DR60854921",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "390200000X",
+                        "desc": "Student in an Organized Health Care Education/Training Program",
+                        "state": null,
+                        "license": null,
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "1223G0001X",
+                        "desc": "Dentist, General Practice",
+                        "state": "GA",
+                        "license": "DN122584",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1497330393",
+                "basic": {
+                    "credential": "DPT",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ADEL",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2021-03-11",
+                    "last_updated": "2021-03-11",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "FRESH MEADOWS",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "6706E 186TH LN",
+                        "address_2": null,
+                        "postal_code": "113653683",
+                        "telephone_number": "407-668-6345",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "FRESH MEADOWS",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "6706E 186TH LN",
+                        "address_2": null,
+                        "postal_code": "113653683",
+                        "telephone_number": "407-668-6345",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "225100000X",
+                        "desc": "Physical Therapist",
+                        "state": "NY",
+                        "license": "035749",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1952982829",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "AHMED",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2021-04-21",
+                    "last_updated": "2021-04-21",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "FLUSHING",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "4500 PARSONS BLVD",
+                        "address_2": null,
+                        "postal_code": "113552205",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "FLUSHING",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4500 PARSONS BLVD",
+                        "address_2": null,
+                        "postal_code": "113552205",
+                        "telephone_number": "718-670-5000",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "390200000X",
+                        "desc": "Student in an Organized Health Care Education/Training Program",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1033647714",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "AKRAM",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2017-05-25",
+                    "last_updated": "2024-12-23",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "CLEVELAND",
+                        "state": "OH",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "11100 EUCLID AVE",
+                        "address_2": null,
+                        "postal_code": "441061716",
+                        "telephone_number": "216-983-3421",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "CLEVELAND",
+                        "state": "OH",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "11100 EUCLID AVE",
+                        "address_2": null,
+                        "postal_code": "441061716",
+                        "telephone_number": null,
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207ZP0102X",
+                        "desc": "Pathology, Anatomic Pathology & Clinical Pathology",
+                        "state": "OH",
+                        "license": "35.145267",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1316912595",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ALAAELDIN",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2006-02-21",
+                    "last_updated": "2022-10-12",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "PITTSBURGH",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "200 LOTHROP ST",
+                        "address_2": "WING 5B PUH",
+                        "postal_code": "152132536",
+                        "telephone_number": "412-647-6000",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "PITTSBURGH",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "200 LOTHROP ST",
+                        "address_2": "WING 5B PUH",
+                        "postal_code": "152132536",
+                        "telephone_number": null,
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207RC0000X",
+                        "desc": "Internal Medicine, Cardiovascular Disease",
+                        "state": "PA",
+                        "license": "MD067646L",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "207RC0001X",
+                        "desc": "Internal Medicine, Clinical Cardiac Electrophysiology",
+                        "state": "PA",
+                        "license": "MD067646L",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1225597933",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "AMIRA",
+                    "last_name": "SHALABY",
+                    "middle_name": "H",
+                    "enumeration_date": "2019-03-13",
+                    "last_updated": "2019-03-13",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "WINTER PARK",
+                        "state": "FL",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "PO BOX 5348",
+                        "address_2": null,
+                        "postal_code": "327935348",
+                        "telephone_number": "407-867-1033",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "WINTER PARK",
+                        "state": "FL",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4063 N GOLDENROD RD STE 210",
+                        "address_2": null,
+                        "postal_code": "327928900",
+                        "telephone_number": "407-624-4002",
+                        "fax_number": "866-920-4210"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "106S00000X",
+                        "desc": "Behavior Technician",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1336000868",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ASHRAF",
+                    "last_name": "SHALABY",
+                    "middle_name": "MONIR KAMEL",
+                    "enumeration_date": "2025-11-24",
+                    "last_updated": "2025-11-24",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "EDMONTON",
+                        "state": "ALBERTA",
+                        "country_code": "CA",
+                        "country_name": "Canada",
+                        "address_purpose": "MAILING",
+                        "address_type": "FGN",
+                        "address_1": "123 WEBER CLOSE NW",
+                        "address_2": null,
+                        "postal_code": "T6M0L4",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "OMAK",
+                        "state": "WA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "810 JASMINE ST",
+                        "address_2": null,
+                        "postal_code": "988419578",
+                        "telephone_number": "509-826-7646",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207P00000X",
+                        "desc": "Emergency Medicine",
+                        "state": "ND",
+                        "license": "15615",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "207Q00000X",
+                        "desc": "Family Medicine",
+                        "state": "ND",
+                        "license": "15615",
+                        "primary": true,
+                        "taxonomy_group": "193200000X - Multi-Specialty Group"
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1225345499",
+                "basic": {
+                    "credential": "Pharm, D",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "CHRISTINE",
+                    "last_name": "SHALABY",
+                    "middle_name": "MONIR",
+                    "enumeration_date": "2010-09-08",
+                    "last_updated": "2010-09-08",
+                    "name_prefix": "--",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "METAIRIE",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "4545 W ESPLANADE AVE",
+                        "address_2": null,
+                        "postal_code": "700062800",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "METAIRIE",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4545 W ESPLANADE AVE",
+                        "address_2": null,
+                        "postal_code": "700062800",
+                        "telephone_number": "504-888-0472",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "LA",
+                        "license": "19249",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1316267636",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "EMAD",
+                    "last_name": "SHALABY",
+                    "middle_name": "A",
+                    "enumeration_date": "2010-06-09",
+                    "last_updated": "2010-06-09",
+                    "name_prefix": "--",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LEMON GROVE",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "7224 BROADWAY",
+                        "address_2": null,
+                        "postal_code": "919451501",
+                        "telephone_number": "619-465-6694",
+                        "fax_number": "619-465-1583"
+                    },
+                    {
+                        "city": "LEMON GROVE",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "7224 BROADWAY",
+                        "address_2": null,
+                        "postal_code": "919451501",
+                        "telephone_number": "619-465-6694",
+                        "fax_number": "619-465-1583"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "CA",
+                        "license": "47690",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1902165962",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ERINY",
+                    "last_name": "SHALABY",
+                    "middle_name": "MOURZAK",
+                    "enumeration_date": "2012-05-11",
+                    "last_updated": "2012-05-11",
+                    "name_prefix": "--",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "JERSEY CITY",
+                        "state": "NJ",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "54 STUYVESANT AVENUE",
+                        "address_2": null,
+                        "postal_code": "073065755",
+                        "telephone_number": "201-471-1467",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "JERSEY CITY",
+                        "state": "NJ",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "54 STUYVESANT AVENUE",
+                        "address_2": null,
+                        "postal_code": "073065755",
+                        "telephone_number": "201-471-1467",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "225100000X",
+                        "desc": "Physical Therapist",
+                        "state": "NY",
+                        "license": "034441-1",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1821880451",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "EVELYN",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2025-05-20",
+                    "last_updated": "2025-05-20",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LANCASTER",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "45612 6TH ST E",
+                        "address_2": null,
+                        "postal_code": "935351918",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "LANCASTER",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "44430 CHALLENGER WAY",
+                        "address_2": null,
+                        "postal_code": "935353205",
+                        "telephone_number": "661-940-8311",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "CA",
+                        "license": "90944",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1053374769",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "IBRAHIM",
+                    "last_name": "SHALABY",
+                    "middle_name": "ADLY",
+                    "enumeration_date": "2006-04-11",
+                    "last_updated": "2009-07-20",
+                    "name_prefix": "--",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LUBBOCK",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "4101 22ND PL",
+                        "address_2": null,
+                        "postal_code": "794101121",
+                        "telephone_number": "806-725-8000",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "LUBBOCK",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4101 22ND PL",
+                        "address_2": null,
+                        "postal_code": "794101121",
+                        "telephone_number": "806-725-8000",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207RX0202X",
+                        "desc": "Internal Medicine, Medical Oncology",
+                        "state": "TX",
+                        "license": "L3469",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1790862803",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "IBRAHIM",
+                    "last_name": "SHALABY",
+                    "middle_name": "F",
+                    "enumeration_date": "2006-11-01",
+                    "last_updated": "2025-10-30",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "GREENVILLE",
+                        "state": "SC",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "300 E MCBEE AVE FL 4",
+                        "address_2": null,
+                        "postal_code": "296012842",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "MARYVILLE",
+                        "state": "TN",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "1702 E LAMAR ALEXANDER PKWY",
+                        "address_2": null,
+                        "postal_code": "378046204",
+                        "telephone_number": "865-980-5370",
+                        "fax_number": "865-980-5352"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207R00000X",
+                        "desc": "Internal Medicine",
+                        "state": "TN",
+                        "license": "27980",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1881761815",
+                "basic": {
+                    "credential": "MD PhD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "ISMAIL",
+                    "last_name": "SHALABY",
+                    "middle_name": "AHMAD",
+                    "enumeration_date": "2006-11-28",
+                    "last_updated": "2010-07-02",
+                    "name_prefix": "--",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LUTHERVILLE",
+                        "state": "MD",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "1349 WEST SEMINARY AVENUE",
+                        "address_2": null,
+                        "postal_code": "21093",
+                        "telephone_number": "410-675-0050",
+                        "fax_number": "410-675-4692"
+                    },
+                    {
+                        "city": "BALTIMORE",
+                        "state": "MD",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "2801 HUDSON STREET",
+                        "address_2": "UPPER LEVEL SUITE C",
+                        "postal_code": "21224",
+                        "telephone_number": "410-675-0050",
+                        "fax_number": "410-675-4692"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207W00000X",
+                        "desc": "Ophthalmology",
+                        "state": "MD",
+                        "license": "D0055532",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1720632391",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "KHALED",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2019-07-31",
+                    "last_updated": "2019-07-31",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "SCHAUMBURG",
+                        "state": "IL",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "2050 E ALGONQUIN RD STE 610",
+                        "address_2": null,
+                        "postal_code": "601734166",
+                        "telephone_number": "888-988-4066",
+                        "fax_number": "847-496-4850"
+                    },
+                    {
+                        "city": "ODESSA",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "1401 E 8TH ST",
+                        "address_2": null,
+                        "postal_code": "797614802",
+                        "telephone_number": "888-988-4066",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "122300000X",
+                        "desc": "Dentist",
+                        "state": "TX",
+                        "license": "35578",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1336297522",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "KHALID",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2007-01-06",
+                    "last_updated": "2021-03-25",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "ASHLAND",
+                        "state": "KY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "617 23RD ST STE 13",
+                        "address_2": "SUITE 6, PAINTER BLDG.",
+                        "postal_code": "411012845",
+                        "telephone_number": "606-325-1151",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "ASHLAND",
+                        "state": "KY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "PO BOX 2379",
+                        "address_2": "SUITE 6, PAINTER BLDG.",
+                        "postal_code": "411052379",
+                        "telephone_number": null,
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "208600000X",
+                        "desc": "Surgery",
+                        "state": "KY",
+                        "license": "TP976",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1649761545",
+                "basic": {
+                    "credential": "MBBCh",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "KHALID",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2018-05-25",
+                    "last_updated": "2022-06-22",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "BUFFALO",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "ELM AND CARLTON ST",
+                        "address_2": null,
+                        "postal_code": "142630001",
+                        "telephone_number": "716-845-2300",
+                        "fax_number": "716-845-8008"
+                    },
+                    {
+                        "city": "BUFFALO",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "ELM AND CARLTON ST",
+                        "address_2": null,
+                        "postal_code": "142630001",
+                        "telephone_number": "716-845-2300",
+                        "fax_number": "716-845-8008"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "390200000X",
+                        "desc": "Student in an Organized Health Care Education/Training Program",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1417120205",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MAGED",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2008-04-11",
+                    "last_updated": "2010-11-04",
+                    "name_prefix": "Mr.",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "PANAMA CITY",
+                        "state": "FL",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "340 W 23RD ST STE D2",
+                        "address_2": null,
+                        "postal_code": "324054541",
+                        "telephone_number": "850-615-1000",
+                        "fax_number": "850-215-3344"
+                    },
+                    {
+                        "city": "PANAMA CITY",
+                        "state": "FL",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "340 W 23RD ST STE D2",
+                        "address_2": null,
+                        "postal_code": "324054541",
+                        "telephone_number": "850-615-1000",
+                        "fax_number": "850-215-3344"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "NY",
+                        "license": "047484",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "GA",
+                        "license": "RPH023796",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "FL",
+                        "license": "PS43085",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1164893780",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MAHMOUD",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2015-10-08",
+                    "last_updated": "2020-05-26",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "BROOKLYN",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "815 GRAVESEND NECK RD",
+                        "address_2": "APT 1B",
+                        "postal_code": "112235566",
+                        "telephone_number": "347-257-2790",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "BROOKLYN",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "815 GRAVESEND NECK RD",
+                        "address_2": "APT 1B",
+                        "postal_code": "112235566",
+                        "telephone_number": "347-257-2790",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "225100000X",
+                        "desc": "Physical Therapist",
+                        "state": "NY",
+                        "license": "62 038610",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1952929804",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MAHMOUD",
+                    "last_name": "SHALABY",
+                    "middle_name": "M",
+                    "enumeration_date": "2020-07-08",
+                    "last_updated": "2025-09-23",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LANSDOWNE",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "225 SCOTTDALE RD APT A304",
+                        "address_2": null,
+                        "postal_code": "190502340",
+                        "telephone_number": "201-736-7171",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "PHILADELPHIA",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "3400 SPRUCE ST",
+                        "address_2": null,
+                        "postal_code": "191044238",
+                        "telephone_number": "215-662-4000",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "2085R0202X",
+                        "desc": "Radiology, Diagnostic Radiology",
+                        "state": "PA",
+                        "license": "MD491934",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "2085R0202X",
+                        "desc": "Radiology, Diagnostic Radiology",
+                        "state": "DE",
+                        "license": "C1-0028374",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1780613323",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MARC",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2006-07-03",
+                    "last_updated": "2012-06-05",
+                    "name_prefix": "--",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "PHILADELPHIA",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "51 N. 39TH STREET",
+                        "address_2": "MAB, SUITE 102",
+                        "postal_code": "191042640",
+                        "telephone_number": "215-662-9990",
+                        "fax_number": "215-243-3297"
+                    },
+                    {
+                        "city": "PHILADELPHIA",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "51 N. 39TH STREET",
+                        "address_2": "MAB, SUITE 102",
+                        "postal_code": "191042640",
+                        "telephone_number": "215-662-9990",
+                        "fax_number": "215-243-3297"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207R00000X",
+                        "desc": "Internal Medicine",
+                        "state": "PA",
+                        "license": "MD072978L",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1992408793",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MARIAM",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2023-03-22",
+                    "last_updated": "2023-03-22",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "NEW YORK",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "10 NATHAN D PERLMAN PL",
+                        "address_2": null,
+                        "postal_code": "100033841",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "NEW YORK",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "10 NATHAN D PERLMAN PL",
+                        "address_2": null,
+                        "postal_code": "100033841",
+                        "telephone_number": "212-420-2390",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "390200000X",
+                        "desc": "Student in an Organized Health Care Education/Training Program",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1417487661",
+                "basic": {
+                    "credential": "DDS",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MARK",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2017-06-19",
+                    "last_updated": "2017-06-19",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "TROY",
+                        "state": "MI",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "1073 FOXBORO",
+                        "address_2": null,
+                        "postal_code": "480835460",
+                        "telephone_number": "760-554-4569",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "LIVONIA",
+                        "state": "MI",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "33428 FIVE MILE RD",
+                        "address_2": null,
+                        "postal_code": "481542860",
+                        "telephone_number": "734-427-7555",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "122300000X",
+                        "desc": "Dentist",
+                        "state": "MI",
+                        "license": "2901022352",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1376807073",
+                "basic": {
+                    "credential": "D.D.S.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MAYKEL",
+                    "last_name": "SHALABY",
+                    "middle_name": "EMAD",
+                    "enumeration_date": "2012-06-27",
+                    "last_updated": "2021-02-28",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "AUSTIN",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "12912 HILL COUNTRY BLVD STE F-205",
+                        "address_2": null,
+                        "postal_code": "787386717",
+                        "telephone_number": "760-554-6565",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "AUSTIN",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "12912 HILL COUNTRY BLVD STE F-205",
+                        "address_2": null,
+                        "postal_code": "787386717",
+                        "telephone_number": "760-554-6565",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "122300000X",
+                        "desc": "Dentist",
+                        "state": "MI",
+                        "license": "2901020737",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "122300000X",
+                        "desc": "Dentist",
+                        "state": "TX",
+                        "license": "32843",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1912369919",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MICHAEL",
+                    "last_name": "SHALABY",
+                    "middle_name": "MONIR",
+                    "enumeration_date": "2016-03-28",
+                    "last_updated": "2024-07-25",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "PHILADELPHIA",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "3400 SPRUCE STREET",
+                        "address_2": "GRD RAVDIN",
+                        "postal_code": "19104",
+                        "telephone_number": "504-417-0249",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "PHILADELPHIA",
+                        "state": "PA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "3400 SPRUCE STREET",
+                        "address_2": "GROUND SILVERSTEIN BLDG",
+                        "postal_code": "191044206",
+                        "telephone_number": "504-417-0249",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207P00000X",
+                        "desc": "Emergency Medicine",
+                        "state": "PA",
+                        "license": "MD485444",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1851793095",
+                "basic": {
+                    "credential": "Psy.D.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MINA",
+                    "last_name": "SHALABY",
+                    "middle_name": "M",
+                    "enumeration_date": "2014-09-18",
+                    "last_updated": "2020-10-06",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LOS ANGELES",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "6043 HOLLYWOOD BLVD",
+                        "address_2": null,
+                        "postal_code": "900285411",
+                        "telephone_number": "323-330-1673",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "LOS ANGELES",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "6043 HOLLYWOOD BLVD",
+                        "address_2": null,
+                        "postal_code": "900285411",
+                        "telephone_number": "323-330-1673",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "103TC0700X",
+                        "desc": "Psychologist, Clinical",
+                        "state": "CA",
+                        "license": "32015",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1699590760",
+                "basic": {
+                    "credential": "DPT",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MIRIAM",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2024-11-22",
+                    "last_updated": "2024-11-22",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "HAMPTON BAYS",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "18 E MONTAUK HWY",
+                        "address_2": null,
+                        "postal_code": "119461817",
+                        "telephone_number": "631-418-8283",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "MOUNT SINAI",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "83 HAMLET DR",
+                        "address_2": null,
+                        "postal_code": "117663001",
+                        "telephone_number": "973-699-2737",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "225100000X",
+                        "desc": "Physical Therapist",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1245546779",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MOHAMED",
+                    "last_name": "SHALABY",
+                    "middle_name": "B",
+                    "enumeration_date": "2010-08-22",
+                    "last_updated": "2010-08-22",
+                    "name_prefix": "--",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "WILDWOOD",
+                        "state": "NJ",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "3400 NEW JERSEY AVE",
+                        "address_2": null,
+                        "postal_code": "082606116",
+                        "telephone_number": "609-729-0162",
+                        "fax_number": "609-729-4682"
+                    },
+                    {
+                        "city": "WILDWOOD",
+                        "state": "NJ",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "3400 NEW JERSEY AVE",
+                        "address_2": null,
+                        "postal_code": "082606116",
+                        "telephone_number": "609-729-0162",
+                        "fax_number": "609-729-4682"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "NJ",
+                        "license": "28ri03048200",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1700889961",
+                "basic": {
+                    "credential": "M.D.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MOHAMED",
+                    "last_name": "SHALABY",
+                    "middle_name": "L",
+                    "enumeration_date": "2005-05-23",
+                    "last_updated": "2011-04-28",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "WEBSTER",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "290 E MEDICAL CENTER BLVD",
+                        "address_2": null,
+                        "postal_code": "775984319",
+                        "telephone_number": "281-332-1515",
+                        "fax_number": "281-332-2525"
+                    },
+                    {
+                        "city": "WEBSTER",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "PO BOX 58106",
+                        "address_2": null,
+                        "postal_code": "775988106",
+                        "telephone_number": "281-332-1515",
+                        "fax_number": "281-332-2525"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207RC0000X",
+                        "desc": "Internal Medicine, Cardiovascular Disease",
+                        "state": "TX",
+                        "license": "L8951",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1366642522",
+                "basic": {
+                    "credential": "M.D.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MOHSEN",
+                    "last_name": "SHALABY",
+                    "middle_name": "N",
+                    "enumeration_date": "2007-07-24",
+                    "last_updated": "2022-04-12",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "HEMET",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "1023 E FLORIDA AVE",
+                        "address_2": null,
+                        "postal_code": "925434510",
+                        "telephone_number": "951-599-8403",
+                        "fax_number": "951-766-0930"
+                    },
+                    {
+                        "city": "HEMET",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "1023 E FLORIDA AVE",
+                        "address_2": null,
+                        "postal_code": "925434510",
+                        "telephone_number": "951-599-8403",
+                        "fax_number": "951-766-0930"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207R00000X",
+                        "desc": "Internal Medicine",
+                        "state": "CA",
+                        "license": "A48780",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1982733648",
+                "basic": {
+                    "credential": "M.D.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MONA",
+                    "last_name": "SHALABY",
+                    "middle_name": "ADLY",
+                    "enumeration_date": "2007-03-05",
+                    "last_updated": "2007-07-08",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "METAIRIE",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "4008 TOLMAS DR",
+                        "address_2": null,
+                        "postal_code": "700021851",
+                        "telephone_number": "504-421-5511",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "NEW ORLEANS",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4422 GENERAL MEYER AVE",
+                        "address_2": "SUITE 100",
+                        "postal_code": "701313588",
+                        "telephone_number": "504-364-4066",
+                        "fax_number": "504-364-4077"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207QA0000X",
+                        "desc": "Family Medicine, Adolescent Medicine",
+                        "state": "LA",
+                        "license": "07543R",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1740333012",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MONIR",
+                    "last_name": "SHALABY",
+                    "middle_name": "TAWFIK",
+                    "enumeration_date": "2007-01-19",
+                    "last_updated": "2016-12-22",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "METAIRIE",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "4008 TOLMAS DR",
+                        "address_2": null,
+                        "postal_code": "700021851",
+                        "telephone_number": "504-666-4540",
+                        "fax_number": "504-834-5569"
+                    },
+                    {
+                        "city": "NEW ORLEANS",
+                        "state": "LA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "4422 GENERAL MEYER AVE STE 100",
+                        "address_2": null,
+                        "postal_code": "701314328",
+                        "telephone_number": "504-364-4065",
+                        "fax_number": "504-363-4077"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "208000000X",
+                        "desc": "Pediatrics",
+                        "state": "LA",
+                        "license": "07414R",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "208D00000X",
+                        "desc": "General Practice",
+                        "state": "LA",
+                        "license": "07414r",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1740415447",
+                "basic": {
+                    "credential": "M.D.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MOSTAFA",
+                    "last_name": "SHALABY",
+                    "middle_name": "HELMY AHMED MOHAMED",
+                    "enumeration_date": "2009-05-26",
+                    "last_updated": "2018-09-24",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "GALVESTON",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "301 UNIVERSITY BLVD 5.106 JSA",
+                        "address_2": null,
+                        "postal_code": "775550553",
+                        "telephone_number": "409-772-1533",
+                        "fax_number": "409-772-4982"
+                    },
+                    {
+                        "city": "GALVESTON",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "301 UNIVERSITY BLVD 5.106 JSA",
+                        "address_2": null,
+                        "postal_code": "775550553",
+                        "telephone_number": "409-772-1533",
+                        "fax_number": "409-772-4982"
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207RC0000X",
+                        "desc": "Internal Medicine, Cardiovascular Disease",
+                        "state": "TX",
+                        "license": "BP10052127",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1528351210",
+                "basic": {
+                    "credential": "M.D",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "MOSTAFA",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2011-05-27",
+                    "last_updated": "2024-04-24",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "PITTSBURG",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "2220 GLADSTONE DR",
+                        "address_2": null,
+                        "postal_code": "945655123",
+                        "telephone_number": "925-432-3318",
+                        "fax_number": "925-432-4590"
+                    },
+                    {
+                        "city": "STANFORD",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "300 PASTEUR DR",
+                        "address_2": null,
+                        "postal_code": "943052200",
+                        "telephone_number": "650-723-4000",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207R00000X",
+                        "desc": "Internal Medicine",
+                        "state": "CA",
+                        "license": "A140426",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "207RS0012X",
+                        "desc": "Internal Medicine, Sleep Medicine",
+                        "state": "CA",
+                        "license": "A142426",
+                        "primary": false,
+                        "taxonomy_group": ""
+                    },
+                    {
+                        "code": "207RP1001X",
+                        "desc": "Internal Medicine, Pulmonary Disease",
+                        "state": "CA",
+                        "license": "A140426",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1417740812",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "OMAR",
+                    "last_name": "SHALABY",
+                    "middle_name": "MOHAMED",
+                    "enumeration_date": "2025-05-28",
+                    "last_updated": "2025-05-28",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "GALVESTON",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "301 UNIVERSITY BLVD",
+                        "address_2": null,
+                        "postal_code": "775550193",
+                        "telephone_number": "409-772-0770",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "GALVESTON",
+                        "state": "TX",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "301 UNIVERSITY BLVD",
+                        "address_2": null,
+                        "postal_code": "775550193",
+                        "telephone_number": "409-772-0770",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "2084P0800X",
+                        "desc": "Psychiatry & Neurology, Psychiatry",
+                        "state": "TX",
+                        "license": "BP10094166",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1659188555",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "RASHA",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2024-12-13",
+                    "last_updated": "2024-12-13",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "SAN FRANCISCO",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "447 SUTTER ST STE 405",
+                        "address_2": null,
+                        "postal_code": "941084618",
+                        "telephone_number": "415-992-6155",
+                        "fax_number": "650-360-6913"
+                    },
+                    {
+                        "city": "SAN FRANCISCO",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "580 CALIFORNIA ST FL 12",
+                        "address_2": null,
+                        "postal_code": "941041033",
+                        "telephone_number": "415-992-6155",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "106H00000X",
+                        "desc": "Marriage & Family Therapist",
+                        "state": "CA",
+                        "license": "143277",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1801259916",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "SAMY",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2016-04-05",
+                    "last_updated": "2016-04-05",
+                    "name_prefix": "--",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "SOUTH GATE",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "3270 TWEEDY BLVD",
+                        "address_2": null,
+                        "postal_code": "902804372",
+                        "telephone_number": "323-564-2056",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "SOUTH GATE",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "3270 TWEEDY BLVD",
+                        "address_2": null,
+                        "postal_code": "902804372",
+                        "telephone_number": "323-564-2056",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "183500000X",
+                        "desc": "Pharmacist",
+                        "state": "CA",
+                        "license": "49748",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1396339875",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "SANDY",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2021-02-24",
+                    "last_updated": "2021-02-24",
+                    "name_prefix": null,
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "RAINELLE",
+                        "state": "WV",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "139 ORCHARD DR",
+                        "address_2": null,
+                        "postal_code": "259621863",
+                        "telephone_number": "681-318-0358",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "RAINELLE",
+                        "state": "WV",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "139 ORCHARD DR",
+                        "address_2": null,
+                        "postal_code": "259621863",
+                        "telephone_number": "681-318-0358",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "172V00000X",
+                        "desc": "Community Health Worker",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1467268706",
+                "basic": {
+                    "credential": null,
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "SHAIMAA",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2024-12-10",
+                    "last_updated": "2024-12-10",
+                    "name_prefix": null,
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "FULLERTON",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "719 W COMMONWEALTH AVE",
+                        "address_2": "SUITE C",
+                        "postal_code": "928321612",
+                        "telephone_number": null,
+                        "fax_number": null
+                    },
+                    {
+                        "city": "FULLERTON",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "719 W COMMONWEALTH AVE STE C",
+                        "address_2": null,
+                        "postal_code": "928321612",
+                        "telephone_number": "714-879-4274",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "106S00000X",
+                        "desc": "Behavior Technician",
+                        "state": null,
+                        "license": null,
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1770771560",
+                "basic": {
+                    "credential": "D.D.S.",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "TAMER",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2007-10-05",
+                    "last_updated": "2024-01-24",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "LAGUNA HILLS",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "24953 PASEO DE VALENCIA STE 2C",
+                        "address_2": null,
+                        "postal_code": "926534337",
+                        "telephone_number": "949-441-5617",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "LAGUNA HILLS",
+                        "state": "CA",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "24953 PASEO DE VALENCIA STE 2C",
+                        "address_2": null,
+                        "postal_code": "926534337",
+                        "telephone_number": "949-441-5617",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "1223G0001X",
+                        "desc": "Dentist, General Practice",
+                        "state": "CA",
+                        "license": "55911",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1407969587",
+                "basic": {
+                    "credential": "MD",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "WALEED",
+                    "last_name": "SHALABY",
+                    "middle_name": null,
+                    "enumeration_date": "2006-08-16",
+                    "last_updated": "2008-03-04",
+                    "name_prefix": "Dr.",
+                    "sole_proprietor": "NO",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "WILMINGTON",
+                        "state": "DE",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "1100 N GRANT AVE",
+                        "address_2": null,
+                        "postal_code": "198052671",
+                        "telephone_number": "302-421-4670",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "WILMINGTON",
+                        "state": "DE",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "1100 N GRANT AVE",
+                        "address_2": null,
+                        "postal_code": "198052671",
+                        "telephone_number": "302-421-4670",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "207VX0201X",
+                        "desc": "Obstetrics & Gynecology, Gynecologic Oncology",
+                        "state": "PA",
+                        "license": "MD067880L",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            },
+            {
+                "number": "1689716326",
+                "basic": {
+                    "credential": "physical therapist",
+                    "gender": null,
+                    "status": "A",
+                    "first_name": "YASSER",
+                    "last_name": "SHALABY",
+                    "middle_name": "H",
+                    "enumeration_date": "2007-02-12",
+                    "last_updated": "2007-07-08",
+                    "name_prefix": "--",
+                    "sole_proprietor": "YES",
+                    "organization_name": null
+                },
+                "addresses": [
+                    {
+                        "city": "BROOKLYN",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "MAILING",
+                        "address_type": "DOM",
+                        "address_1": "2640 HARWAY AVE",
+                        "address_2": "2ND FLOOR",
+                        "postal_code": "112145534",
+                        "telephone_number": "718-522-2004",
+                        "fax_number": null
+                    },
+                    {
+                        "city": "BROOKLYN",
+                        "state": "NY",
+                        "country_code": "US",
+                        "country_name": "United States",
+                        "address_purpose": "LOCATION",
+                        "address_type": "DOM",
+                        "address_1": "78 LIVINGSTON ST",
+                        "address_2": "5TH FLOOR",
+                        "postal_code": "112015043",
+                        "telephone_number": "718-522-2004",
+                        "fax_number": null
+                    }
+                ],
+                "taxonomies": [
+                    {
+                        "code": "174400000X",
+                        "desc": "Specialist",
+                        "state": "NY",
+                        "license": "017554",
+                        "primary": true,
+                        "taxonomy_group": ""
+                    }
+                ],
+                "enumeration_type": "NPI-1"
+            }
+        ],
+        "result_count": 42
+    },
+    "message": "Successfully retrieved NPPES results",
+    "status": 200
+}

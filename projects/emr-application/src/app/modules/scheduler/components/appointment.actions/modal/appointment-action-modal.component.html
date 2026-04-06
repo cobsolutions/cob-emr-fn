@@ -1,45 +1,165 @@
-<h2 mat-dialog-title>Appointment Actions</h2>
-<mat-dialog-content class="mat-typography">
-    <c-container fluid>
-        <div class="mb-2">
-            <c-row>
-                <ul cListGroup flush>
-                    <li cListGroupItem *ngIf="appointmentStructure ==='Full'"><strong>Patient-Name</strong> :
-                        <div [ngSwitch]="patientChartAccessibilityModelResponse?.patientChartAccessibility"
-                            class="inline-div" *ngIf="patientChartAccessibilityModelResponse">
-                            <a *ngSwitchCase="'AccessWithoutPrompt'" class="link-primary"
-                                (mwlClick)="redirectToPatientChart()">{{patientName}}
-                            </a>
-                            <a *ngSwitchCase="'AccessWithPrompt'" class="link-primary"
-                                (mwlClick)="redirectWithPrompting(patientChartAccessibilityModelResponse.promptedClinics)">{{patientName}}
-                            </a>
-                            <span *ngSwitchCase="'NoAccess'">
-                                {{patientName}}
-                            </span>
-                        </div>
-                    </li>
-                    <li cListGroupItem *ngIf="appointmentStructure ==='Full'"><strong>Patient-Case</strong> :
-                        {{pateintCase}} </li>
-                    <li cListGroupItem><strong>StartDate</strong> : {{appointmentStartDate | date: 'MM/dd/yyyy hh:mm'}}
-                    </li>
-                    <li cListGroupItem><strong>EndDate</strong> : {{appointmentEndDate | date: 'MM/dd/yyyy hh:mm'}}
-                    </li>
-                    <li cListGroupItem *ngIf="appointmentStructure ==='Full'"><strong>Appointmet Status</strong> :
-                        {{appointmentStatus}}</li>
-                    <li cListGroupItem><strong>Appointmet Type</strong> : {{appointmentType}}</li>
-                </ul>
-            </c-row>
-        </div>
+<!-- Modal Header -->
+<div class="modal-header-custom">
+  <div class="modal-title-section">
+    <svg cIcon name="cilCalendar" class="modal-title-icon"></svg>
+    <div>
+      <h3 class="modal-title">Appointment Details</h3>
+      <span class="modal-subtitle">{{ appointmentType }}</span>
+    </div>
+  </div>
+  <button class="modal-close-btn" (click)="close()">
+    <svg cIcon name="cilX"></svg>
+  </button>
+</div>
 
-    </c-container>
+<!-- Modal Body -->
+<mat-dialog-content class="modal-body-custom">
+
+  <!-- Patient Info Card -->
+  <div class="info-card" *ngIf="appointmentStructure === 'Full'">
+    <div class="info-card-header">
+      <svg cIcon name="cilUser" class="info-card-icon"></svg>
+      <span>Patient Information</span>
+    </div>
+    <div class="info-card-body">
+      <div class="info-row">
+        <span class="info-label">Name</span>
+        <div [ngSwitch]="patientChartAccessibilityModelResponse?.patientChartAccessibility"
+          *ngIf="patientChartAccessibilityModelResponse">
+          <a *ngSwitchCase="'AccessWithoutPrompt'" class="patient-link"
+            (mwlClick)="redirectToPatientChart()">
+            <svg cIcon name="cilExternalLink" class="link-icon"></svg>
+            {{ patientName }}
+          </a>
+          <a *ngSwitchCase="'AccessWithPrompt'" class="patient-link"
+            (mwlClick)="redirectWithPrompting(patientChartAccessibilityModelResponse.promptedClinics)">
+            <svg cIcon name="cilExternalLink" class="link-icon"></svg>
+            {{ patientName }}
+          </a>
+          <span *ngSwitchCase="'NoAccess'" class="info-value">{{ patientName }}</span>
+        </div>
+      </div>
+      <div class="info-row" *ngIf="pateintCase">
+        <span class="info-label">Case</span>
+        <span class="info-value">{{ pateintCase }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule Info Card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <svg cIcon name="cilClock" class="info-card-icon"></svg>
+      <span>Schedule</span>
+    </div>
+    <div class="info-card-body">
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <span class="info-label">Start</span>
+          <span class="info-value">
+            <svg cIcon name="cilArrowRight" class="schedule-icon"></svg>
+            {{ appointmentStartDate | date: 'MMM dd, yyyy' }}
+            <span class="time-badge">{{ appointmentStartDate | date: 'hh:mm a' }}</span>
+          </span>
+        </div>
+        <div class="schedule-item">
+          <span class="info-label">End</span>
+          <span class="info-value">
+            <svg cIcon name="cilArrowLeft" class="schedule-icon"></svg>
+            {{ appointmentEndDate | date: 'MMM dd, yyyy' }}
+            <span class="time-badge">{{ appointmentEndDate | date: 'hh:mm a' }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appointment Details Card -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <svg cIcon name="cilNotes" class="info-card-icon"></svg>
+      <span>Details</span>
+    </div>
+    <div class="info-card-body">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="info-label">Type</span>
+          <span class="type-badge">{{ appointmentType }}</span>
+        </div>
+        <div class="detail-item" *ngIf="appointmentStructure === 'Full'">
+          <span class="info-label">Status</span>
+          <span class="status-badge"
+            [ngClass]="{
+              'status-scheduled': appointmentStatus === 'Scheduled',
+              'status-confirmed': appointmentStatus === 'Confirmed',
+              'status-checked-in': appointmentStatus === 'CheckedIn',
+              'status-completed': appointmentStatus === 'Completed',
+              'status-cancelled': appointmentStatus === 'Cancelled' || appointmentStatus === 'NoShow'
+            }">
+            <span class="status-dot"></span>
+            {{ appointmentStatus }}
+          </span>
+        </div>
+        <div class="detail-item" *ngIf="isAppointmetSeries">
+          <span class="info-label">Series</span>
+          <span class="series-badge">
+            <svg cIcon name="cilLoopCircular" class="series-icon"></svg>
+            Recurring
+          </span>
+        </div>
+      </div>
+      <div class="history-link-row" *ngIf="appointmentStructure === 'Full'">
+        <a class="history-link" (click)="showAppointmentHistory()">
+          <svg cIcon name="cilHistory" class="history-link-icon"></svg>
+          Show Appointment History
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Payment Card -->
+  <div class="info-card" *ngIf="appointmentStructure === 'Full' && patientPayment">
+    <div class="info-card-header">
+      <svg cIcon name="cilCreditCard" class="info-card-icon"></svg>
+      <span>Patient Payment</span>
+    </div>
+    <div class="info-card-body">
+      <div class="details-grid">
+        <div class="detail-item" *ngIf="patientPayment.insuranceName">
+          <span class="info-label">Insurance</span>
+          <span class="info-value">{{ patientPayment.insuranceName }}</span>
+        </div>
+        <div class="detail-item" *ngIf="patientPayment.paymentType">
+          <span class="info-label">Payment Type</span>
+          <span class="info-value">{{ patientPayment.paymentType | lowercase }}</span>
+        </div>
+        <div class="detail-item" *ngIf="patientPayment.payment">
+          <span class="info-label">Payment</span>
+          <span class="info-value">{{ patientPayment.payment | currency }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </mat-dialog-content>
-<c-row class="text-center">
-    <c-button-group role="group">
-        <button id="btnSearch" class="btn btn-primary btn-sm " Style="width: 100px;"
-            (click)="editAppointment()">Edit</button>
-        <button id="btnClear" class="btn btn-info btn-sm " Style="width: 100px;" *ngIf="appointmentStructure ==='Full'"
-            (click)="openAppointmentStatus()">Status</button>
-        <button id="btnClear" class="btn btn-danger btn-sm " Style="width: 100px;">Delete</button>
-        <button id="btnClear" class="btn btn-warning btn-sm " Style="width: 100px;" (click)="close()">Close</button>
-    </c-button-group>
-</c-row>
+
+<!-- Modal Footer -->
+<div class="modal-footer-custom">
+  <button class="action-btn action-btn-edit" (click)="editAppointment()">
+    <svg cIcon name="cilPen" class="btn-icon"></svg>
+    Edit
+  </button>
+  <button class="action-btn action-btn-status" *ngIf="appointmentStructure === 'Full'"
+    (click)="openAppointmentStatus()">
+    <svg cIcon name="cilSwapHorizontal" class="btn-icon"></svg>
+    Status
+  </button>
+  <button class="action-btn action-btn-delete" (click)="deleteAppointment()" [disabled]="isDeleting">
+    <svg cIcon name="cilTrash" class="btn-icon"></svg>
+    {{ isDeleting ? 'Deleting...' : 'Delete' }}
+  </button>
+  <button class="action-btn action-btn-close" (click)="close()">
+    <svg cIcon name="cilX" class="btn-icon"></svg>
+    Close
+  </button>
+</div>

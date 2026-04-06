@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { AddressUtil } from 'projects/emr-application/src/app/util/address.util';
 import { PatientName } from 'projects/emr-application/src/app/util/name.util';
-import { filter, switchMap, tap } from 'rxjs';
-import { ClinicEmittingService } from '../../../common/service/emitting/clinic-emitting.service';
+import { filter, Subscription, switchMap, tap } from 'rxjs';
 import { LoggedInService } from '../../../security/service/loggedIn/logged-in.service';
+import { MedialNoteService } from '../../services/medical.note/medial-note.service';
 import { PatientCase } from '../../models/case/patient.case';
 import { PatientChartInfo } from '../../models/chart/patient.chart.info';
+import { PatientRequest } from '../../models/medical.note/requester/patient.request';
 import { Patient } from '../../models/patient';
 import { PateintResponse } from '../../models/response/patient.response';
 import { PateintCaseService } from '../../services/patient/cases/pateint-case.service';
@@ -18,8 +19,9 @@ import { PatientFinderService } from '../../services/patient/patient-finder.serv
   templateUrl: './patient-chart.component.html',
   styleUrls: ['./patient-chart.component.css']
 })
-export class PatientChartComponent implements OnInit {
-  patient: Patient;
+export class PatientChartComponent implements OnInit, OnDestroy {
+  patient:PatientRequest
+  private draftSub!: Subscription;
   patientChartInfo: PatientChartInfo = {
     id: 0,
     name: '',
@@ -28,19 +30,42 @@ export class PatientChartComponent implements OnInit {
     gender: '',
     address: [],
     email: '',
-    phone: ''
-
+    phone: '',
+    insurance: '',
+    emrId: '',
+    patientStatus: ''
   };
   patientCases: PatientCase[];
   patientId: number;
   caseId: number = 0;
   clinicId: number;
   selectedIndex = 0;  // Default to first tab
+  showFullAddress = false;
+  copiedAddressIndex: number | null = null;
+  activeTabIndex = 0;
+  isNoteOpen = false;
+
+  setActiveTab(index: number) {
+    this.activeTabIndex = index;
+  }
+  Templat
+  toggleAddress() {
+    this.showFullAddress = !this.showFullAddress;
+  }
+
+  copyAddress(address: string, index: number) {
+    navigator.clipboard.writeText(address).then(() => {
+      this.copiedAddressIndex = index;
+      setTimeout(() => this.copiedAddressIndex = null, 2000);
+    });
+  }
+
   constructor(private route: ActivatedRoute
     , private patientFinderService: PatientFinderService
     , private pateintCaseService: PateintCaseService
     , private loggedInService: LoggedInService
-    , private router: Router) { }
+    , private router: Router
+    , private medialNoteService: MedialNoteService) { }
 
   ngOnInit(): void {
     this.patientId = Number(this.route.snapshot.paramMap.get('patientId'))
@@ -50,21 +75,53 @@ export class PatientChartComponent implements OnInit {
         tap((clinicId) => this.clinicId = clinicId),
         switchMap((clinicId) => this.patientFinderService.getPatient(this.patientId, clinicId)))
       .subscribe((response: PateintResponse) => {
-        var patient: Patient = response.records
-        this.patientCases = patient.cases;
-        this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
-        this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");
-        this.patientChartInfo.email = patient.contacts[0].email;
-        this.patientChartInfo.phone = patient.contacts[0].phoneNumber;
-        this.patientChartInfo.gender = patient.gender
-        for (var i = 0; i < patient.addresses.length; i++) {
-
-          this.patientChartInfo.address.push(AddressUtil.formatAddress(patient.addresses[i]))
-        }
-        this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
+        this.updatePatientData(response);
       }, error => {
         this.router.navigate(['/emr/patient/list']);
       })
+
+    this.draftSub = this.medialNoteService.draft$.subscribe(() => {
+      this.refreshPatientData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.draftSub?.unsubscribe();
+  }
+
+  private refreshPatientData(): void {
+    if (this.clinicId) {
+      this.patientFinderService.getPatient(this.patientId, this.clinicId)
+        .subscribe((response: PateintResponse) => {
+          this.updatePatientData(response);
+        });
+    }
+  }
+
+  private updatePatientData(response: PateintResponse): void {
+    var patient: Patient = response.records
+    this.patient = {
+      firstName: patient.firstName,
+      middleName: patient.middleName,
+      lastName: patient.lastName,
+      patientId: patient.uuid,
+      dateOfBirth: new Date(patient.birthDate),
+      clinicIds: patient.clinicsId
+    }
+    this.patientCases = (patient.cases || []).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    this.patientChartInfo.name = PatientName.formatName(patient.firstName, patient.middleName, patient.lastName);
+    this.patientChartInfo.dateOfBirth = moment(patient.birthDate).format("MM-DD-YYYY");
+    this.patientChartInfo.email = patient.contacts[0].email;
+    this.patientChartInfo.phone = patient.contacts[0].phoneNumber;
+    this.patientChartInfo.gender = patient.gender
+    this.patientChartInfo.address = [];
+    for (var i = 0; i < patient.addresses.length; i++) {
+      this.patientChartInfo.address.push(AddressUtil.formatAddress(patient.addresses[i]))
+    }
+    this.patientChartInfo.age = moment().diff(patient.birthDate, 'years');
+    this.patientChartInfo.insurance = patient.patientInsuranceModels?.[0]?.insuranceCompany?.name || '';
+    this.patientChartInfo.emrId = patient.emrId || '';
+    this.patientChartInfo.patientStatus = patient.patientStatus || '';
   }
   selectTab(index: number) {
     this.selectedIndex = index;

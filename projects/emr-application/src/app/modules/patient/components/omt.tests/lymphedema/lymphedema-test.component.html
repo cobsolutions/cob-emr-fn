@@ -1,0 +1,132 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Lymphedema Life Impact Scale (v2)</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>Listed below are symptoms or problems reported by many individuals with lymphedema. Please indicate to what extent these problems associated with your lymphedema have affected you in the past week.</p>
+        <ul>
+          <li>Rate each item on a scale of <strong>0 to 4</strong></li>
+          <li>The labels at 0 and 4 describe the extremes of each scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 18 questions answered</span>
+  </div>
+
+  <form [formGroup]="lymphedemaForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="lymphedemaForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Sections -->
+    <div *ngFor="let section of sections" class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">{{ section.icon }}</span>
+        <div class="section-title-content">
+          <h3 class="section-title">{{ section.title }}</h3>
+          <p *ngIf="section.subtitle" class="section-subtitle">{{ section.subtitle }}</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of section.questions"
+             class="question-card"
+             [class.answered]="lymphedemaForm.get(q.key)?.value !== null"
+             [class.error]="lymphedemaForm.get(q.key)?.invalid && lymphedemaForm.get(q.key)?.touched">
+          <div class="question-number">{{ q.key.substring(1) }}</div>
+          <div class="question-content">
+            <div class="question-text">{{ q.text }}</div>
+            <div class="radio-options-vertical">
+              <label class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="0">
+                <span class="option-text">0 {{ q.low }}</span>
+              </label>
+              <label class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="1">
+                <span class="option-text">1</span>
+              </label>
+              <label class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="2">
+                <span class="option-text">2</span>
+              </label>
+              <label class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="3">
+                <span class="option-text">3</span>
+              </label>
+              <label class="radio-option-label">
+                <input type="radio" [formControlName]="q.key" [value]="4">
+                <span class="option-text">4 {{ q.high }}</span>
+              </label>
+            </div>
+            <div *ngIf="lymphedemaForm.get(q.key)?.invalid && lymphedemaForm.get(q.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="lymphedemaForm.invalid && lymphedemaForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

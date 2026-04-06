@@ -1,0 +1,68 @@
+<div [formGroup]="formGroup">
+  <!-- Measurement Table -->
+  <table class="walk-test-table">
+    <thead>
+      <tr>
+        <th style="width: 300px;"></th>
+        <th>Right</th>
+        <th>Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mapping of fieldMappings; trackBy: trackByLabel">
+        <td>{{ mapping.label }}</td>
+        <!-- Right column -->
+        <td>
+          <ng-container *ngIf="mapping.type === 'textarea'; else inputBlock">
+            <textarea
+              class="form-textarea"
+              [formControlName]="mapping.rightFields[0]"
+              rows="3"
+              placeholder="">
+            </textarea>
+          </ng-container>
+          <ng-template #inputBlock>
+            <div [class.multi-input-row]="mapping.inputCount > 1">
+              <input *ngFor="let field of mapping.rightFields; trackBy: trackByIndex"
+                cFormControl type="text"
+                [formControlName]="field"
+                class="table-input"
+                placeholder="" />
+            </div>
+          </ng-template>
+        </td>
+        <!-- Left column -->
+        <td>
+          <ng-container *ngIf="mapping.type === 'textarea'; else inputBlockLeft">
+            <textarea
+              class="form-textarea"
+              [formControlName]="mapping.leftFields[0]"
+              rows="3"
+              placeholder="">
+            </textarea>
+          </ng-container>
+          <ng-template #inputBlockLeft>
+            <div [class.multi-input-row]="mapping.inputCount > 1">
+              <input *ngFor="let field of mapping.leftFields; trackBy: trackByIndex"
+                cFormControl type="text"
+                [formControlName]="field"
+                class="table-input"
+                placeholder="" />
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="computedCommentsFieldName"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

@@ -35,7 +35,6 @@ export class UserInfoComponent implements OnInit {
       lastName: [user.lastName],
       accountName: [user.accountName],
       email: [user.email],
-      role: [user.role],
       password: [user.password],
       clinicIds: [user.clinicIds],
       userType: [user.userType],

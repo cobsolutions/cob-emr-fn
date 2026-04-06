@@ -1,7 +1,6 @@
-// hoos-survey.component.ts
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'lower-extremity-hoos-test',
@@ -11,12 +10,11 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
 export class HoosTestComponent implements OnInit {
   hoosForm: FormGroup;
   showInstructions = false;
-  calculatedScores: any = null;
-  showCompletionError = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'hoos';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
 
   // Question options
-  painLevelOptions = Array.from({ length: 11 }, (_, i) => i);
   frequencyOptions = [
     { value: 0, text: 'Never' },
     { value: 1, text: 'Rarely' },
@@ -49,18 +47,24 @@ export class HoosTestComponent implements OnInit {
     { value: 4, text: 'Totally' }
   ];
 
-  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
-    this.hoosForm = this.createForm();
-  }
+  // Section configurations
   symptoms = this.rangeKeys('S', 5);
   pain = this.rangeKeys('P', 10);
   dailyLiving = this.rangeKeys('A', 17);
   sports = this.rangeKeys('SP', 4);
   qol = this.rangeKeys('Q', 4);
 
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+    this.hoosForm = this.createForm();
+  }
+
+  private rangeKeys(prefix: string, count: number): string[] {
+    return Array.from({ length: count }, (_, i) => `${prefix}${i + 1}`);
+  }
+
   createForm(): FormGroup {
     return this.fb.group({
-      T745PatientSatisfaction1: [null, Validators.required],
+      painlevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
       ...this.buildControls(this.symptoms),
       ...this.buildControls(this.pain),
       ...this.buildControls(this.dailyLiving),
@@ -68,6 +72,7 @@ export class HoosTestComponent implements OnInit {
       ...this.buildControls(this.qol),
     });
   }
+
   private buildControls(keys: string[]): { [key: string]: any } {
     return keys.reduce((acc, key) => {
       acc[key] = [null, Validators.required];
@@ -75,61 +80,60 @@ export class HoosTestComponent implements OnInit {
     }, {} as { [key: string]: any });
   }
 
-
-  private rangeKeys(prefix: string, count: number): string[] {
-    return Array.from({ length: count }, (_, i) => `${prefix}${i + 1}`);
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            // PAINLEVEL -> painlevel, but keep S1, P1, A1, etc. as-is
+            const formKey = key === 'PAINLEVEL' ? 'painlevel' : key;
+            formValues[formKey] = value as number;
+          });
+          this.hoosForm.patchValue(formValues);
+        }
+      });
+    }
   }
 
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
 
-  ngOnInit(): void {
-  }
-
   calculateScore(): void {
     if (this.hoosForm.invalid) {
-      // Mark all fields as touched to show validation errors
       Object.keys(this.hoosForm.controls).forEach(key => {
         this.hoosForm.get(key)?.markAsTouched();
       });
-      this.showCompletionError = true;
       return;
     }
 
-    this.showCompletionError = false;
-    const result = this.fillAnswers()
-
-
-    this.omtTestService.lowerExtremity(result, 'oos').subscribe(val => {
-      this.getResult.emit(val)
-    })
-  }
-
-  private fillAnswers(): any {
-    // Define your keys consistently (reuse the ones from the component if possible)
-    const sections = {
-      S: this.rangeKeys('S', 5),
-      A: this.rangeKeys('A', 17),
-      P: this.rangeKeys('P', 10),
-      SP: this.rangeKeys('SP', 4),
-      Q: this.rangeKeys('Q', 4),
-    };
-    const answers: Record<string, number> = {};
-
-    // Loop through all sections
-    Object.values(sections).forEach(keys => {
-      keys.forEach(key => {
-        const value = this.hoosForm.value[key];
-        answers[key] = value !== null && value !== undefined ? parseInt(value, 10) : null;
-      });
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.hoosForm.controls).forEach(key => {
+      const value = this.hoosForm.get(key)?.value;
+      if (value !== null) {
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
     });
 
-    return { answers, "oosType": "hoos" };
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
+
   resetForm(): void {
     this.hoosForm.reset();
-    this.calculatedScores = null;
-    this.showCompletionError = false;
+    this.hoosForm.markAsUntouched();
+  }
+
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.hoosForm.controls);
+    return controls.filter(key => this.hoosForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 41; // 5 symptoms + 10 pain + 17 ADL + 4 sports + 4 QOL + 1 pain level
+    return (this.getAnsweredCount() / totalQuestions) * 100;
   }
 }

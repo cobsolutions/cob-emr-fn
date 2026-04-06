@@ -16,7 +16,7 @@ export class CaseDiagnosisService {
     var url:string = this.baseUrl + "/find/term/"+ term;
     return this.httpClient.get(url).pipe(tap(data => data))
   }
-  updateData(data: any) {
+  copy(data: any) {
     this.parentICD10Codes.next(data);
   }
 }

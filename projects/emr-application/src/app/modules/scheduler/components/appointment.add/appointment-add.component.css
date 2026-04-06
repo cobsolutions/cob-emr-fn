@@ -1,0 +1,554 @@
+/* ========================================
+   Appointment Add Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Page Header Section --- */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+/* --- Header Info Badge --- */
+.header-info {
+  display: flex;
+  align-items: center;
+}
+
+.appointment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background: rgba(217, 119, 6, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  transition: all 0.3s ease;
+}
+
+.appointment-badge.has-patient {
+  background: rgba(5, 150, 105, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.badge-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Appointment Container --- */
+.appointment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- Section Cards --- */
+.section-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.section-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.125rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  transition: all 0.2s ease;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+/* --- Card Status Badges --- */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.5rem;
+  background: rgba(148, 163, 184, 0.25);
+  color: #e2e8f0;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+.card-status.valid {
+  background: rgba(5, 150, 105, 0.25);
+  color: #d1fae5;
+}
+
+.status-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+/* --- Search Input Wrapper --- */
+.search-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #64748b;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #334155;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(51, 65, 85, 0.1);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+/* --- Search Loader --- */
+.search-loader {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-top-color: #334155;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Search Hint --- */
+.search-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.625rem 0.875rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.hint-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+/* --- Appointment Form Section --- */
+.appointment-form-section {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Modal Mode Overrides (flatten cards when inside modal) --- */
+.modal-mode {
+  gap: 0;
+  padding: 1rem;
+}
+
+.modal-mode .section-card {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.modal-mode .section-card:hover {
+  box-shadow: none !important;
+}
+
+.modal-mode .card-header-custom {
+  background: none;
+  padding: 0 0 0.5rem 0;
+  border-bottom: none;
+}
+
+.modal-mode .card-header-title {
+  color: #475569;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-mode .card-icon {
+  color: #64748b;
+  opacity: 1;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.modal-mode .card-status {
+  background: none;
+  color: #94a3b8;
+  padding: 0;
+  font-size: 0.6875rem;
+}
+
+.modal-mode .card-status.valid {
+  background: none;
+  color: #059669;
+}
+
+.modal-mode .card-body-custom {
+  padding: 0;
+  background: transparent;
+}
+
+.modal-mode .search-input {
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border-width: 1px;
+}
+
+.modal-mode .search-hint {
+  border: none;
+  background: none;
+  padding: 0.375rem 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.modal-mode .appointment-form-section {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.modal-mode .form-actions-bar {
+  margin-top: 0.75rem;
+}
+
+/* --- Action Buttons Bar --- */
+.form-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  gap: 1rem;
+}
+
+.actions-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.actions-hint-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: #94a3b8;
+}
+
+.actions-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #475569;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.action-btn-cancel:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn-cancel:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.action-btn-cancel .action-btn-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: #64748b;
+}
+
+.action-btn-cancel:hover .action-btn-icon {
+  color: #475569;
+}
+
+.action-btn-create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border: 1px solid #1e293b;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 2px 4px rgba(30, 41, 59, 0.2),
+    0 1px 2px rgba(30, 41, 59, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.action-btn-create:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 8px rgba(30, 41, 59, 0.25),
+    0 2px 4px rgba(30, 41, 59, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.action-btn-create:active {
+  transform: translateY(0);
+  box-shadow:
+    0 1px 2px rgba(30, 41, 59, 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-create .action-btn-icon {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: #ffffff;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    padding-left: 0;
+  }
+
+  .header-info {
+    justify-content: center;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.625rem 0.875rem;
+  }
+
+  .card-header-title {
+    justify-content: center;
+  }
+
+  .card-body-custom {
+    padding: 1rem;
+  }
+
+  .search-input {
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    font-size: 0.875rem;
+  }
+
+  .search-icon {
+    left: 0.875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .search-hint {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.375rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header-content {
+    padding: 0.875rem;
+  }
+
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .appointment-container {
+    gap: 1rem;
+  }
+
+  .section-card {
+    border-radius: 0.375rem !important;
+  }
+
+  .card-header-title {
+    font-size: 0.875rem;
+  }
+
+  .card-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .card-body-custom {
+    padding: 0.875rem;
+  }
+
+  .search-input {
+    padding: 0.625rem 0.875rem 0.625rem 2.5rem;
+  }
+
+  .search-hint {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}

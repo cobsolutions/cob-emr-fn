@@ -1,187 +1,431 @@
-.form-group {
+.form-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  /* Centers content horizontally */
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.dependent-field-box {
+    margin-left: 50px;
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-left: 3px solid #6c757d;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .form-input {
+    width: 100%;
+    max-width: 800px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+  
+  .small-input {
+    width: 200px;
+    max-width: 200px;
+  }
+  .form-textarea:focus{
+    outline: none;
+    border-color: #5c4742;
+    box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
+  }
+  .form-textarea {
+    width: 100%;
+    max-width: 800px;
+    resize: vertical;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+  .field-label {
+    min-width: 360px;
+    text-align: right;
+    font-weight: 500;
+    color: #5c4742;
+    margin-bottom: 0;
+    margin-right: 9px;
+  }
+  .field-label-vertical {
+    font-weight: 500;
+    color: #5c4742;
+    margin-bottom: 0.5rem;
+  }
+  /* Enhanced primary radio button styling */
+.radio-group-primary {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.radio-group-primary c-form-check {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 100px;
   justify-content: center;
-  /* Centers content vertically (if parent has a height) */
-  margin-bottom: 16px;
 }
 
-textarea {
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 8px;
-  font-size: 14px;
-  resize: vertical;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.smart-text {
-  color: blue;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 4px;
-  text-decoration: underline;
-}
-
-.table {
-  width: 100%;
-  margin-top: 10px;
-}
-
-.goal-form-container {
-  display: flex;
-  flex-direction: column;
-  width: 700px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.goal-row {
-  display: flex;
-  gap: 10px;
-}
-
-.goal-input {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.goal-input label {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.goal-input select,
-.goal-input textarea {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.goal-input textarea {
-  resize: none;
-  height: 60px;
-}
-
-.add-btn-container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.add-goal-btn {
+.radio-group-primary c-form-check:hover {
+  border-color: #5c4742;
   background-color: #f8f9fa;
-  /* Light gray for a subtle look */
-  color: #333;
-  /* Dark text for better readability */
-  border: 1px solid #ccc;
-  /* Soft border for a clean look */
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.radio-group-primary c-form-check input[type="radio"] {
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  margin-right: 0.5rem;
 }
 
-.add-goal-btn:hover {
-  background-color: #e2e6ea;
-  /* Slightly darker gray on hover */
+.radio-group-primary c-form-check input[type="radio"]:checked + label {
+  color: #5c4742;
+  font-weight: 600;
 }
 
-.goal-table {
+.radio-group-primary c-form-check:has(input[type="radio"]:checked) {
+  border-color: #5c4742;
+  background-color: #e8e3e1;
+  box-shadow: 0 3px 6px rgba(92, 71, 66, 0.2);
+}
+
+.radio-group-primary c-form-check label {
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 0;
+}
+
+/* Color coding for Yes/No options (Medical Safety) */
+
+/* YES option - Green theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]) {
+  border-color: #d4edda;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]):hover {
+  border-color: #28a745;
+  background-color: #f1f9f3;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="yes"]:checked) {
+  border-color: #28a745;
+  background-color: #d4edda;
+  box-shadow: 0 3px 6px rgba(40, 167, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="yes"]:checked + label {
+  color: #155724;
+  font-weight: 600;
+}
+
+/* NO option - Red theme */
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]) {
+  border-color: #f8d7da;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]):hover {
+  border-color: #dc3545;
+  background-color: #fef5f6;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="no"]:checked) {
+  border-color: #dc3545;
+  background-color: #f8d7da;
+  box-shadow: 0 3px 6px rgba(220, 53, 69, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="no"]:checked + label {
+  color: #721c24;
+  font-weight: 600;
+}
+
+/* IN/OUT options - Blue theme for Time In/Out */
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]) {
+  border-color: #cce5ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]):hover {
+  border-color: #007bff;
+  background-color: #e7f3ff;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="in"]:checked) {
+  border-color: #007bff;
+  background-color: #cce5ff;
+  box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="in"]:checked + label {
+  color: #004085;
+  font-weight: 600;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]) {
+  border-color: #d1ecf1;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]):hover {
+  border-color: #17a2b8;
+  background-color: #e8f6f8;
+}
+
+.radio-group-primary c-form-check:has(input[type="radio"][value="out"]:checked) {
+  border-color: #17a2b8;
+  background-color: #d1ecf1;
+  box-shadow: 0 3px 6px rgba(23, 162, 184, 0.3);
+}
+
+.radio-group-primary c-form-check input[type="radio"][value="out"]:checked + label {
+  color: #0c5460;
+  font-weight: 600;
+}
+.form-select-custom {
   width: 100%;
-  margin-top: 15px;
-  border-collapse: collapse;
+  max-width: 800px;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+  font-size: 1rem;
+}
+.form-select-custom:focus {
+  outline: none;
+  border-color: #5c4742;
+  box-shadow: 0 0 0 0.2rem rgba(92, 71, 66, 0.15);
 }
 
-.goal-table th,
-.goal-table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.btn-remove {
-  background: none;
-  border: none;
+.form-multiselect-custom {
+  width: 100%;
+  max-width: 800px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #ced4da;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  font-size: 1rem;
+  min-height: 200px;
   cursor: pointer;
-  font-size: 16px;
-  color: red;
-  transition: 0.3s;
+  transition: all 0.2s ease;
 }
 
-.btn-remove:hover {
-  color: darkred;
+.form-multiselect-custom:hover {
+  border-color: #5c4742;
+  background-color: #f8f9fa;
 }
 
-.goal-row {
-  display: flex;
-  gap: 10px;
+.form-multiselect-custom:focus {
+  outline: none;
+  border-color: #5c4742;
+  box-shadow: 0 0 0 0.3rem rgba(92, 71, 66, 0.2);
+  background-color: #ffffff;
 }
 
-.goal-input {
+.form-multiselect-custom option {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 0.125rem 0;
+  cursor: pointer;
+}
+
+.form-multiselect-custom option:hover {
+  background-color: #e8e3e1;
+}
+
+.form-multiselect-custom option:checked {
+  background-color: #5c4742;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Vertical checkbox group styling */
+.checkbox-group-vertical {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  gap: 0.75rem;
   width: 100%;
-  /* Makes all inputs take full available width */
+  max-width: 800px;
 }
 
-/* Increase width for Goal Term & Goal Period */
-.goal-row .goal-input select {
-  width: 100%;
-  min-width: 180px;
-  /* Ensures it's wider */
-}
-
-.goal-input select,
-.goal-input textarea {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* Ensure Goal Description remains full width */
-.goal-input textarea {
-  resize: none;
-  height: 60px;
-}
-
-.d-flex.align-items-center {
-  align-items: center !important;
-  /* Ensure vertical alignment */
-}
-
-.checkbox-container {
+.checkbox-group-vertical c-form-check {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0px;
-  column-gap: 165px;
-  /* Space between columns */
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.checkbox-item {
-  flex: 1 1 calc(50% - 16px);
-  /* Two columns with spacing */
-  min-width: 20px;
-  /* Ensures a minimum width */
+.checkbox-group-vertical c-form-check:hover {
+  border-color: #5c4742;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.parent-label {
-  font-size: 16px;
-  display: block;
-  margin-bottom: 10px;
-  align-items: start;
+.checkbox-group-vertical c-form-check input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 0.75rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.checkbox-group-vertical c-form-check label {
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.checkbox-group-vertical c-form-check:has(input[type="checkbox"]:checked) {
+  border-color: #5c4742;
+  background-color: #e8e3e1;
+  box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+}
+
+.checkbox-group-vertical c-form-check input[type="checkbox"]:checked + label {
+  color: #5c4742;
+  font-weight: 500;
+}
+
+/* Vertical radio button group styling */
+.radio-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.radio-group-vertical c-form-check {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.radio-group-vertical c-form-check:hover {
+  border-color: #5c4742;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.radio-group-vertical c-form-check input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 0.75rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.radio-group-vertical c-form-check label {
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.radio-group-vertical c-form-check:has(input[type="radio"]:checked) {
+  border-color: #5c4742;
+  background-color: #e8e3e1;
+  box-shadow: 0 2px 6px rgba(92, 71, 66, 0.15);
+}
+
+.radio-group-vertical c-form-check input[type="radio"]:checked + label {
+  color: #5c4742;
+  font-weight: 500;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+}
+
+.back-button svg {
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: translateX(-4px);
+}
+
+.next-button {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.next-button svg {
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover svg {
+  transform: translateX(4px);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
 }

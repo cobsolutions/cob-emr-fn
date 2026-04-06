@@ -1,0 +1,706 @@
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { CheckboxHierarchy } from './interface/checkbox-hierarchy';
+import { CheckboxItem } from './interface/checkbox-item';
+
+@Component({
+  selector: 'hierarchy-checkbox',
+  templateUrl: './hierarchy-checkbox.component.html',
+  styleUrls: ['./hierarchy-checkbox.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class HierarchyCheckboxComponent implements OnInit {
+  @Input() data: CheckboxHierarchy[] = [];
+  @Input() columns: number = 2;
+  @Input() formGroup!: FormGroup;
+  @Input() sectionPrefix: string = ''; // Optional prefix for form control names
+  @Output() selectionChange = new EventEmitter<CheckboxHierarchy[]>();
+
+  // Track category checked states separately
+  categoryCheckedStates: Map<string, boolean> = new Map();
+  categoryIndeterminateStates: Map<string, boolean> = new Map();
+
+  // Map to store the unique form control names for each item
+  private itemFormControlNames: Map<CheckboxItem, string> = new Map();
+
+  // Map to store the unique form control names for item inputs
+  private itemInputFormControlNames: Map<CheckboxItem, string> = new Map();
+
+  // Map to store the unique form control names for category comments
+  private categoryCommentFormControlNames: Map<CheckboxHierarchy, string> = new Map();
+
+  // Map to store the unique form control names for category checkboxes
+  private categoryFormControlNames: Map<CheckboxHierarchy, string> = new Map();
+
+  // Cached column data to avoid recalculating on every change detection
+  columnData: CheckboxHierarchy[][] = [];
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    this.initializeCollapsedState();
+    this.initializeFormControls();
+    this.expandCheckedItems();
+    this.updateColumnData();
+  }
+
+  // Update cached column data
+  private updateColumnData(): void {
+    const result: CheckboxHierarchy[][] = [];
+    const itemsPerColumn = Math.ceil(this.data.length / this.columns);
+
+    for (let i = 0; i < this.columns; i++) {
+      const startIndex = i * itemsPerColumn;
+      const endIndex = startIndex + itemsPerColumn;
+      result.push(this.data.slice(startIndex, endIndex));
+    }
+
+    this.columnData = result;
+  }
+
+  // TrackBy functions to optimize *ngFor rendering
+  trackByColumnIndex(index: number): number {
+    return index;
+  }
+
+  trackByCategory(index: number, category: CheckboxHierarchy): string {
+    return category.title;
+  }
+
+  trackByItem(index: number, item: CheckboxItem): string {
+    return item.id;
+  }
+
+  // Initialize form controls for all hierarchy items
+  private initializeFormControls(): void {
+    if (!this.formGroup) return;
+
+    this.data.forEach(category => {
+      const categoryKey = this.sanitizeKey(category.title);
+
+      // Add form control for category checkbox
+      this.addCategoryToForm(category, categoryKey);
+
+      // Add form control for category comment
+      this.addCategoryCommentToForm(category, categoryKey);
+
+      category.items.forEach(item => {
+        this.addItemToForm(item, categoryKey);
+      });
+    });
+  }
+
+  // Add category checkbox form control
+  private addCategoryToForm(category: CheckboxHierarchy, categoryKey: string): void {
+    if (!this.formGroup) return;
+
+    const categoryFormControlName = this.generateCategoryFormControlName(categoryKey);
+
+    // Store the mapping between category and its form control name
+    this.categoryFormControlNames.set(category, categoryFormControlName);
+
+    // Add form control for the category checkbox
+    this.formGroup.addControl(categoryFormControlName, new FormControl(category.checked || false));
+  }
+
+  // Add category comment form control
+  private addCategoryCommentToForm(category: CheckboxHierarchy, categoryKey: string): void {
+    if (!this.formGroup) return;
+
+    const commentFormControlName = this.generateCategoryCommentFormControlName(categoryKey);
+
+    // Store the mapping between category and its comment form control name
+    this.categoryCommentFormControlNames.set(category, commentFormControlName);
+
+    // Add form control for the comment
+    this.formGroup.addControl(commentFormControlName, new FormControl(category.comment || ''));
+  }
+
+  // Generate unique form control name for category checkbox
+  private generateCategoryFormControlName(categoryKey: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+
+    return parts.join('_');
+  }
+
+  // Generate unique form control name for category comment
+  private generateCategoryCommentFormControlName(categoryKey: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+    parts.push('comment');
+
+    return parts.join('_');
+  }
+
+  // Generate unique form control name for an item
+  private generateFormControlName(categoryKey: string, itemPath: string): string {
+    const parts: string[] = [];
+
+    if (this.sectionPrefix) {
+      parts.push(this.sectionPrefix);
+    }
+
+    parts.push(categoryKey);
+    // Replace dots and hyphens with underscores to maintain consistent naming for nested items
+    parts.push(itemPath.replace(/[\.\-]/g, '_'));
+
+    return parts.join('_');
+  }
+
+  // Sanitize a string to be used as a key (remove spaces, special chars, convert to lowercase)
+  private sanitizeKey(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  // Recursively add item and its children to the form
+  private addItemToForm(item: CheckboxItem, categoryKey: string, parentPath: string = ''): void {
+    if (!this.formGroup) return;
+
+    // Build the hierarchical path for this item
+    const itemPath = parentPath ? `${parentPath}.${item.id}` : item.id;
+
+    // Generate unique form control name
+    const formControlName = this.generateFormControlName(categoryKey, itemPath);
+
+    // Store the mapping between item and its form control name
+    this.itemFormControlNames.set(item, formControlName);
+
+    // Add form control for this item
+    this.formGroup.addControl(formControlName, new FormControl(item.checked || false));
+
+    // Add input form control if item has hasInput property
+    if (item.hasInput) {
+      const inputFormControlName = `${formControlName}_input`;
+      this.itemInputFormControlNames.set(item, inputFormControlName);
+      this.formGroup.addControl(inputFormControlName, new FormControl(item.inputValue || ''));
+    }
+
+    // Recursively add children
+    if (item.children) {
+      item.children.forEach(child => {
+        this.addItemToForm(child, categoryKey, itemPath);
+      });
+    }
+  }
+
+  // Update category form control value when category checkbox changes
+  private updateCategoryFormControl(category: CheckboxHierarchy): void {
+    if (!this.formGroup) return;
+
+    // Get the unique form control name for this category
+    const formControlName = this.categoryFormControlNames.get(category);
+    if (!formControlName) return;
+
+    const control = this.formGroup.get(formControlName);
+    if (control) {
+      control.setValue(category.checked || false);
+    }
+  }
+
+  // Update form control value when checkbox changes
+  private updateFormControl(item: CheckboxItem): void {
+    if (!this.formGroup) return;
+
+    // Get the unique form control name for this item
+    const formControlName = this.itemFormControlNames.get(item);
+    if (!formControlName) return;
+
+    const control = this.formGroup.get(formControlName);
+    if (control) {
+      control.setValue(item.checked || false);
+    }
+  }
+
+  // Update all form controls recursively
+  private updateFormControlsRecursively(item: CheckboxItem): void {
+    this.updateFormControl(item);
+
+    if (item.children) {
+      item.children.forEach(child => {
+        this.updateFormControlsRecursively(child);
+      });
+    }
+  }
+
+  private initializeCollapsedState(): void {
+    this.data.forEach(category => {
+      if (category.collapsed === undefined) {
+        category.collapsed = true; // Collapsed by default
+      }
+      if (category.checked === undefined) {
+        category.checked = false; // Unchecked by default
+      }
+
+      // Initialize category states
+      this.updateCategoryState(category);
+
+      category.items.forEach(item => {
+        this.setInitialCollapsedState(item);
+      });
+    });
+  }
+
+  // Expand categories and items that are checked (when loading data)
+  // Public method so parent components can call it after updating data
+  public expandCheckedItems(): void {
+    this.data.forEach(category => {
+      // Expand category if it's checked or has any checked children
+      if (category.checked || this.hasAnyCheckedChild(category.items)) {
+        category.collapsed = false;
+      }
+
+      category.items.forEach(item => {
+        this.expandCheckedItemRecursive(item);
+      });
+    });
+
+    // Update column data and trigger change detection
+    this.updateColumnData();
+    this.detectChanges();
+  }
+
+  // Recursively expand items that are checked
+  private expandCheckedItemRecursive(item: CheckboxItem): void {
+    if (item.checked) {
+      item.collapsed = false;
+    }
+
+    // If item has any checked children, expand it
+    if (item.children && this.hasAnyCheckedChild(item.children)) {
+      item.collapsed = false;
+    }
+
+    // Recursively check children
+    if (item.children) {
+      item.children.forEach(child => {
+        this.expandCheckedItemRecursive(child);
+      });
+    }
+  }
+
+  // Helper to check if any child in the array is checked
+  private hasAnyCheckedChild(items: CheckboxItem[]): boolean {
+    return items.some(item => {
+      if (item.checked) return true;
+      if (item.children) {
+        return this.hasAnyCheckedChild(item.children);
+      }
+      return false;
+    });
+  }
+
+  private setInitialCollapsedState(item: CheckboxItem): void {
+    if (item.collapsed === undefined) {
+      item.collapsed = true; // Collapsed by default
+    }
+
+    if (item.children) {
+      item.children.forEach(child => {
+        this.setInitialCollapsedState(child);
+      });
+    }
+  }
+
+  // Update category checkbox state based on children
+  updateCategoryState(category: CheckboxHierarchy): void {
+    const hasCheckedChildren = category.items.some(item => this.isItemChecked(item));
+    const allChildrenChecked = category.items.every(item => this.isItemChecked(item));
+    const hasIndeterminate = category.items.some(item => this.isItemIndeterminate(item));
+
+    this.categoryCheckedStates.set(category.title, allChildrenChecked);
+    this.categoryIndeterminateStates.set(category.title, hasCheckedChildren && !allChildrenChecked || hasIndeterminate);
+  }
+
+  // Toggle category checkbox - using change event like item checkboxes
+  onCategoryCheckboxChange(category: CheckboxHierarchy, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+
+    // Set checked state from the native checkbox
+    category.checked = checked;
+
+    // Update form control for category
+    this.updateCategoryFormControl(category);
+
+    if (category.checked) {
+      // When checking, expand the category without checking children
+      category.collapsed = false;
+    } else {
+      // When unchecking, collapse the category and uncheck all children
+      category.collapsed = true;
+      category.items.forEach(item => {
+        this.uncheckChildren(item);
+      });
+    }
+
+    this.selectionChange.emit(this.data);
+    this.detectChanges();
+  }
+
+  // Toggle regular item checkbox
+  onItemCheckboxChange(item: CheckboxItem, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const checked = target.checked;
+
+    this.toggleItem(item, checked);
+
+    // Update form controls recursively
+    this.updateFormControlsRecursively(item);
+
+    // Update category states
+    this.updateAllCategoryStates();
+
+    this.selectionChange.emit(this.data);
+    this.detectChanges();
+  }
+
+  // Expand first level children
+  expandFirstLevelChildren(item: CheckboxItem): void {
+    item.collapsed = false;
+
+    if (item.children) {
+      item.children.forEach(child => {
+        child.collapsed = true; // Keep children's children collapsed
+      });
+    }
+  }
+
+  // Collapse all children of an item
+  collapseAllChildren(item: CheckboxItem): void {
+    item.collapsed = true;
+
+    if (item.children) {
+      item.children.forEach(child => {
+        this.collapseAllChildren(child);
+      });
+    }
+  }
+
+  // Add All functionality for item
+  addAllFirstLevel(item: CheckboxItem): void {
+    if (item.children) {
+      // Check only first level children
+      item.children.forEach(child => {
+        child.checked = true;
+        child.indeterminate = false;
+
+        // Update form control for this child
+        this.updateFormControl(child);
+
+        // Uncheck deeper levels (grandchildren and beyond)
+        this.uncheckDescendants(child);
+      });
+
+      // Update parent state
+      this.updateParentState(item);
+
+      // Update category states
+      this.updateAllCategoryStates();
+
+      this.selectionChange.emit(this.data);
+      this.detectChanges();
+    }
+  }
+
+  // Remove All functionality for item
+  removeAllFirstLevel(item: CheckboxItem): void {
+    if (item.children) {
+      // Uncheck only first level children
+      item.children.forEach(child => {
+        child.checked = false;
+        child.indeterminate = false;
+
+        // Update form control for this child
+        this.updateFormControl(child);
+
+        // Also uncheck all their descendants
+        this.uncheckDescendants(child);
+      });
+
+      // Update parent state
+      this.updateParentState(item);
+
+      // Update category states
+      this.updateAllCategoryStates();
+
+      this.selectionChange.emit(this.data);
+      this.detectChanges();
+    }
+  }
+
+  // Check if all first level children are checked
+  areAllFirstLevelChildrenChecked(item: CheckboxItem): boolean {
+    if (!item.children || item.children.length === 0) return false;
+    return item.children.every(child => child.checked);
+  }
+
+  // Add All for entire category - check only the direct items, not their children
+  addAllFirstLevelForCategory(category: CheckboxHierarchy): void {
+    category.items.forEach(item => {
+      item.checked = true;
+      item.indeterminate = false;
+
+      // Update form control for this item
+      this.updateFormControl(item);
+
+      // Uncheck all descendants of this item
+      this.uncheckDescendants(item);
+    });
+
+    // Update category states
+    this.updateAllCategoryStates();
+
+    this.selectionChange.emit(this.data);
+    this.detectChanges();
+  }
+
+  // Remove All for entire category
+  removeAllFirstLevelForCategory(category: CheckboxHierarchy): void {
+    category.items.forEach(item => {
+      item.checked = false;
+      item.indeterminate = false;
+
+      // Update form control for this item
+      this.updateFormControl(item);
+
+      // Uncheck all descendants of this item
+      this.uncheckDescendants(item);
+    });
+
+    // Update category states
+    this.updateAllCategoryStates();
+
+    this.selectionChange.emit(this.data);
+    this.detectChanges();
+  }
+
+  // Check if all direct items in category are checked
+  areAllCategoryItemsChecked(category: CheckboxHierarchy): boolean {
+    return category.items.length > 0 && category.items.every(item => item.checked);
+  }
+
+  // Uncheck all children
+  private uncheckChildren(item: CheckboxItem): void {
+    item.checked = false;
+    item.indeterminate = false;
+
+    // Update form control
+    this.updateFormControl(item);
+
+    if (item.children) {
+      item.children.forEach(child => {
+        this.uncheckChildren(child);
+      });
+    }
+  }
+
+  // Uncheck only descendants (not the item itself)
+  private uncheckDescendants(item: CheckboxItem): void {
+    if (item.children) {
+      item.children.forEach(child => {
+        child.checked = false;
+        child.indeterminate = false;
+
+        // Update form control for this child
+        this.updateFormControl(child);
+
+        this.uncheckDescendants(child);
+      });
+    }
+  }
+
+  // Check if item should show "Add All" button - only when item is checked and expanded
+  shouldShowAddAllButton(item: CheckboxItem): boolean {
+    return item.checked && !item.collapsed && item.children && item.children.length > 0;
+  }
+
+  // Toggle item collapse
+  toggleItemCollapse(item: CheckboxItem): void {
+    item.collapsed = !item.collapsed;
+    this.detectChanges();
+  }
+
+  // Get arrow icon for categories
+  getCategoryArrowIcon(category: CheckboxHierarchy): string {
+    return category.collapsed ? '▶' : '▼';
+  }
+
+  // Get arrow icon for items
+  getItemArrowIcon(item: CheckboxItem): string {
+    if (!this.hasExpandableContent(item)) {
+      return '';
+    }
+    return item.collapsed ? '▶' : '▼';
+  }
+
+  // Toggle item with proper parent updates
+  toggleItem(item: CheckboxItem, checked: boolean): void {
+    item.checked = checked;
+    item.indeterminate = false;
+
+    // Handle expand/collapse based on checked state
+    if (checked) {
+      this.expandFirstLevelChildren(item);
+      // Don't automatically check children - let user use "Add All" button
+    } else {
+      this.collapseAllChildren(item);
+      // Uncheck all children when parent is unchecked
+      if (item.children) {
+        this.updateChildren(item, false);
+      }
+    }
+
+    // Update parent state
+    this.updateParentState(item);
+  }
+
+  // Update children check state
+  updateChildren(item: CheckboxItem, checked: boolean): void {
+    if (!item.children) return;
+
+    item.children.forEach(child => {
+      child.checked = checked;
+      child.indeterminate = false;
+
+      // Update form control for this child
+      this.updateFormControl(child);
+
+      this.updateChildren(child, checked);
+    });
+  }
+
+  // Update parent state
+  updateParentState(item: CheckboxItem): void {
+    if (!item.parent) return;
+
+    const parent = item.parent;
+    const children = parent.children;
+
+    if (!children) return;
+
+    const allChecked = children.every(child => child.checked);
+    const someChecked = children.some(child => child.checked || child.indeterminate);
+
+    parent.checked = allChecked;
+    parent.indeterminate = !allChecked && someChecked;
+
+    this.updateParentState(parent);
+  }
+
+  // Update all category states
+  updateAllCategoryStates(): void {
+    this.data.forEach(category => {
+      this.updateCategoryState(category);
+    });
+  }
+
+  // Helper methods
+  isItemChecked(item: CheckboxItem): boolean {
+    if (item.checked) return true;
+    if (item.children) {
+      return item.children.some(child => this.isItemChecked(child));
+    }
+    return false;
+  }
+
+  isItemIndeterminate(item: CheckboxItem): boolean {
+    if (item.indeterminate) return true;
+    if (item.children) {
+      return item.children.some(child => this.isItemIndeterminate(child) ||
+        (this.isItemChecked(child) && !this.isAllChildrenChecked(child)));
+    }
+    return false;
+  }
+
+  private isAllChildrenChecked(item: CheckboxItem): boolean {
+    if (!item.children) return true;
+    return item.children.every(child => this.isItemChecked(child));
+  }
+
+  // Trigger change detection manually when needed
+  private detectChanges(): void {
+    this.cdr.detectChanges();
+  }
+
+  hasChildren(item: CheckboxItem): boolean {
+    return !!item.children && item.children.length > 0;
+  }
+
+  // Check if item has expandable content (children or input)
+  hasExpandableContent(item: CheckboxItem): boolean {
+    return this.hasChildren(item) || !!item.hasInput;
+  }
+
+  // Get the input form control name for an item
+  getItemInputFormControlName(item: CheckboxItem): string {
+    return this.itemInputFormControlNames.get(item) || '';
+  }
+
+  // Handle item input change
+  onItemInputChange(item: CheckboxItem, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    item.inputValue = target.value;
+
+    // Update form control
+    if (this.formGroup) {
+      const formControlName = this.itemInputFormControlNames.get(item);
+      if (formControlName) {
+        const control = this.formGroup.get(formControlName);
+        if (control) {
+          control.setValue(target.value);
+        }
+      }
+    }
+
+    this.selectionChange.emit(this.data);
+  }
+
+  // Check if category is checked (for visual state)
+  isCategoryChecked(category: CheckboxHierarchy): boolean {
+    return category.checked || false;
+  }
+
+  isCategoryIndeterminate(category: CheckboxHierarchy): boolean {
+    // Don't show indeterminate if category is explicitly checked
+    if (category.checked) return false;
+    return this.categoryIndeterminateStates.get(category.title) || false;
+  }
+  // Toggle category collapse (for arrow button)
+  toggleCategoryCollapse(category: CheckboxHierarchy): void {
+    category.collapsed = !category.collapsed;
+    this.detectChanges();
+  }
+
+  // Handle category comment change
+  onCategoryCommentChange(category: CheckboxHierarchy, event: Event): void {
+    const target = event.target as HTMLTextAreaElement;
+    category.comment = target.value;
+
+    // Update form control
+    if (this.formGroup) {
+      const formControlName = this.categoryCommentFormControlNames.get(category);
+      if (formControlName) {
+        const control = this.formGroup.get(formControlName);
+        if (control) {
+          control.setValue(target.value);
+        }
+      }
+    }
+
+    this.selectionChange.emit(this.data);
+  }
+}

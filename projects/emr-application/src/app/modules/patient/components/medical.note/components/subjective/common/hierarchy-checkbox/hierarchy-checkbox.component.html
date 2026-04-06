@@ -1,0 +1,151 @@
+<div class="checkbox-container">
+  <div class="columns-wrapper">
+    <div *ngFor="let column of columnData; let colIndex = index; trackBy: trackByColumnIndex" class="column">
+      <div *ngFor="let category of column; trackBy: trackByCategory" class="category-section">
+        <div class="category-header">
+          <button class="expand-category-btn" (click)="toggleCategoryCollapse(category)">
+            {{ getCategoryArrowIcon(category) }}
+          </button>
+          <label class="main-checkbox" [class.checked]="category.checked">
+            <input
+              type="checkbox"
+              [checked]="category.checked"
+              [indeterminate]="isCategoryIndeterminate(category)"
+              (change)="onCategoryCheckboxChange(category, $event)"
+            />
+            <span class="checkmark" [class.checked]="category.checked"></span>
+            <span class="category-title">{{ category.title }}</span>
+          </label>
+          <!-- Category level Add/Remove All button - show when category is checked and expanded -->
+          <button
+            *ngIf="category.checked && !category.collapsed"
+            [class]="areAllCategoryItemsChecked(category) ? 'remove-all-btn' : 'add-all-btn'"
+            (click)="areAllCategoryItemsChecked(category) ? removeAllFirstLevelForCategory(category) : addAllFirstLevelForCategory(category)"
+          >
+            {{ areAllCategoryItemsChecked(category) ? 'Remove All' : 'Add All' }}
+          </button>
+        </div>
+        
+        <!-- Category content - collapsible -->
+        <div *ngIf="!category.collapsed" class="category-content">
+          <div class="items-list">
+            <div *ngFor="let item of category.items; trackBy: trackByItem" class="item-level-1">
+              <div class="item-row">
+                <div class="item-controls">
+                  <button
+                    *ngIf="hasExpandableContent(item)"
+                    class="expand-btn"
+                    (click)="toggleItemCollapse(item)"
+                  >
+                    {{ getItemArrowIcon(item) }}
+                  </button>
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      [checked]="item.checked"
+                      [indeterminate]="item.indeterminate"
+                      (change)="onItemCheckboxChange(item, $event)"
+                    />
+                    <span class="checkmark"></span>
+                    {{ item.label }}
+                  </label>
+                </div>
+                <!-- Item level Add/Remove All button - only show when item is checked -->
+                <button
+                  *ngIf="shouldShowAddAllButton(item)"
+                  [class]="areAllFirstLevelChildrenChecked(item) ? 'remove-all-item-btn' : 'add-all-item-btn'"
+                  (click)="areAllFirstLevelChildrenChecked(item) ? removeAllFirstLevel(item) : addAllFirstLevel(item)"
+                >
+                  {{ areAllFirstLevelChildrenChecked(item) ? 'Remove All' : 'Add All' }}
+                </button>
+              </div>
+              
+              <!-- Input field for items with hasInput but NO children (show before level-2 area) -->
+              <div *ngIf="item.hasInput && !item.children && item.checked && !item.collapsed" class="item-input-container">
+                <input
+                  type="text"
+                  class="item-input-field"
+                  [value]="item.inputValue || ''"
+                  (input)="onItemInputChange(item, $event)"
+                />
+              </div>
+
+              <!-- Level 2 - Collapsible -->
+              <div *ngIf="item.children && !item.collapsed" class="level-2">
+                <div *ngFor="let child of item.children; trackBy: trackByItem" class="item-level-2">
+                  <div class="item-row">
+                    <div class="item-controls">
+                      <button
+                        *ngIf="hasChildren(child)"
+                        class="expand-btn"
+                        (click)="toggleItemCollapse(child)"
+                      >
+                        {{ getItemArrowIcon(child) }}
+                      </button>
+                      <label>
+                        <input
+                          type="checkbox"
+                          [checked]="child.checked"
+                          [indeterminate]="child.indeterminate"
+                          (change)="onItemCheckboxChange(child, $event)"
+                        />
+                        <span class="checkmark"></span>
+                        {{ child.label }}
+                      </label>
+                    </div>
+                    <!-- Child level Add/Remove All button -->
+                    <button
+                      *ngIf="shouldShowAddAllButton(child)"
+                      [class]="areAllFirstLevelChildrenChecked(child) ? 'remove-all-item-btn' : 'add-all-item-btn'"
+                      (click)="areAllFirstLevelChildrenChecked(child) ? removeAllFirstLevel(child) : addAllFirstLevel(child)"
+                    >
+                      {{ areAllFirstLevelChildrenChecked(child) ? 'Remove All' : 'Add All' }}
+                    </button>
+                  </div>
+
+                  <!-- Level 3 - Collapsible -->
+                  <div *ngIf="child.children && !child.collapsed" class="level-3">
+                    <div *ngFor="let grandChild of child.children; trackBy: trackByItem" class="item-level-3">
+                      <label>
+                        <input
+                          type="checkbox"
+                          [checked]="grandChild.checked"
+                          [indeterminate]="grandChild.indeterminate"
+                          (change)="onItemCheckboxChange(grandChild, $event)"
+                        />
+                        <span class="checkmark"></span>
+                        {{ grandChild.label }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Input field for items with hasInput AND children (show after children) -->
+                <div *ngIf="item.hasInput && item.checked" class="item-input-container">
+                  <input
+                    type="text"
+                    class="item-input-field"
+                    [value]="item.inputValue || ''"
+                    (input)="onItemInputChange(item, $event)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Comment Textarea - show only when category is checked -->
+          <div *ngIf="category.checked" class="category-comment-section">
+            <label class="comment-label">Comments:</label>
+            <textarea
+              class="category-comment-textarea"
+              [value]="category.comment || ''"
+              (input)="onCategoryCommentChange(category, $event)"
+              placeholder="Add your comments here..."
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

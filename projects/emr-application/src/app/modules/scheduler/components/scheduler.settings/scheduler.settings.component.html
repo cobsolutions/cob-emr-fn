@@ -1,45 +1,57 @@
-<ngx-spinner></ngx-spinner>
-<c-row>
-    <c-col xs="12" class="mb-2">
-        <h1>Scheduler Settings</h1>
-    </c-col>
-</c-row>
-<hr />
-<c-row>
-    <c-col xs="12">
-        <c-card>
-            <c-card-body>
-                <c-nav variant="tabs">
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink>
-                            Scheduler Dates Settings
-                        </a>
-                    </c-nav-item>
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=1 cNavLink>
-                            Clinic Appointment Type Settings
-                        </a>
-                    </c-nav-item>
-                    <c-nav-item>
-                        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]=2 cNavLink>
-                            Cancellation fee
-                        </a>
-                    </c-nav-item>
-                </c-nav>
-                <ng-container fluid="true">
-                    <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
-                        <c-tab-pane tabPaneIdx=0>
-                            <SchedulerDateSettings></SchedulerDateSettings>
-                        </c-tab-pane>
-                        <c-tab-pane tabPaneIdx=1>
-                            <SchedulerAppointmentSettings></SchedulerAppointmentSettings>
-                        </c-tab-pane>
-                        <c-tab-pane tabPaneIdx=2>
-                            <cancelation-fee></cancelation-fee>
-                        </c-tab-pane>
-                    </c-tab-content>
-                </ng-container>
-            </c-card-body>
-        </c-card>
-    </c-col>
-</c-row>
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilSettings" class="page-icon"></svg>
+        Scheduler Settings
+      </h2>
+      <p class="page-subtitle">Configure scheduling preferences for your clinic</p>
+    </div>
+    <div class="header-actions">
+      <a cButton class="back-btn" routerLink="/emr/scheduler/view">
+        <svg cIcon name="cilArrowLeft" class="btn-icon"></svg>
+        Back to Scheduler
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Tabs Card -->
+<c-card class="settings-card">
+  <div class="settings-tabs-header">
+    <c-nav variant="tabs" class="settings-nav">
+      <c-nav-item>
+        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="0" cNavLink class="settings-tab-link">
+          <svg cIcon name="cilCalendar" class="tab-icon"></svg>
+          Scheduler Dates Settings
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="1" cNavLink class="settings-tab-link">
+          <svg cIcon name="cilList" class="tab-icon"></svg>
+          Clinic Appointment Type Settings
+        </a>
+      </c-nav-item>
+      <c-nav-item *appRoleScope="'patient-payment-role'">
+        <a [cTabContent]="tabContent2" [routerLink] [tabPaneIdx]="2" cNavLink class="settings-tab-link">
+          <svg cIcon name="cilDollar" class="tab-icon"></svg>
+          Cancellation Fee
+        </a>
+      </c-nav-item>
+    </c-nav>
+  </div>
+  <c-card-body class="settings-tab-body">
+    <c-tab-content #tabContent2="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
+      <c-tab-pane tabPaneIdx="0">
+        <SchedulerDateSettings></SchedulerDateSettings>
+      </c-tab-pane>
+      <c-tab-pane tabPaneIdx="1">
+        <SchedulerAppointmentSettings></SchedulerAppointmentSettings>
+      </c-tab-pane>
+      <c-tab-pane tabPaneIdx="2" *appRoleScope="'patient-payment-role'">
+        <cancelation-fee></cancelation-fee>
+      </c-tab-pane>
+    </c-tab-content>
+  </c-card-body>
+</c-card>

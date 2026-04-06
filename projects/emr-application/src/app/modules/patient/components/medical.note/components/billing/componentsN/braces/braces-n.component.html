@@ -1,0 +1,22 @@
+<div class="direct-timed-code-container" [formGroup]="BracesForm">
+    <div class="direct-timed-code-list">
+        <div *ngFor="let code of billingCPTCodeList" class="direct-timed-code-item">
+            <div class="input-row">
+                <input
+                  type="number"
+                  [id]="'direct-timed-' + code.cpt"
+                  [formControlName]="code.cpt"
+                  class="form-control direct-timed-input"
+                  min="0"
+                />
+                <label
+                  [for]="'direct-timed-' + code.cpt"
+                  class="direct-timed-label"
+                  [title]="'CPT Code: ' + code.cpt"
+                >
+                  {{ code.description }}
+                </label>
+            </div>    
+        </div>
+    </div>
+  </div>

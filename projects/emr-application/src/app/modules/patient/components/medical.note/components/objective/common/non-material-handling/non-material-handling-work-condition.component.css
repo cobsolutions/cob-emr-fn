@@ -1,0 +1,150 @@
+/* Demonstrated Table Styles - Matching original design */
+.demonstrated-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  table-layout: fixed; /* Add fixed layout for consistent column widths */
+}
+
+.demonstrated-table th,
+.demonstrated-table td {
+  border: 1px solid #dee2e6;
+  padding: 0.5rem; /* Reduced padding for tighter layout */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.demonstrated-table th {
+  background-color: #e9ecef;
+  font-weight: 600;
+  color: #495057;
+  white-space: nowrap; /* Prevent header text wrapping */
+}
+
+.demonstrated-table td:first-child {
+  background-color: #f8f9fa;
+  color: #5c4742;
+  text-align: left;
+  width: 250px; /* Fixed width for first column */
+}
+
+/* Checkbox columns - Make them narrower */
+.demonstrated-table th:nth-child(2),
+.demonstrated-table th:nth-child(3),
+.demonstrated-table th:nth-child(4) {
+  width: 80px; /* Smaller width for checkbox columns */
+  min-width: 80px;
+  max-width: 80px;
+}
+
+.demonstrated-table td:nth-child(2),
+.demonstrated-table td:nth-child(3),
+.demonstrated-table td:nth-child(4) {
+  width: 80px; /* Smaller width for checkbox columns */
+  min-width: 80px;
+  max-width: 80px;
+  padding: 0.25rem; /* Even smaller padding for checkbox cells */
+}
+
+/* Last column (Adequate For Job) */
+.demonstrated-table th:last-child {
+  width: 120px; /* Slightly wider for select */
+  min-width: 120px;
+}
+
+.demonstrated-table td:last-child {
+  width: 120px; /* Slightly wider for select */
+  min-width: 120px;
+  padding: 0.25rem; /* Reduced padding */
+}
+
+/* Item with unit styling */
+.item-with-unit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem; /* Reduced gap */
+  font-size: 0.875rem; /* Slightly smaller font */
+}
+
+.item-label {
+  font-weight: 500;
+  color: #5c4742;
+}
+
+.item-unit {
+  font-size: 0.7rem; /* Smaller unit text */
+  color: #6c757d;
+  font-weight: normal;
+}
+
+/* Checkbox styling - Centered in small cell */
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.table-checkbox {
+  width: 18px; /* Slightly smaller checkbox */
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #007bff;
+}
+
+.table-checkbox:focus {
+  outline: 2px solid #80bdff;
+  outline-offset: 1px; /* Reduced offset */
+}
+
+/* Select styling - Compact for small cell */
+.table-select {
+  width: 100%;
+  padding: 0.25rem 0.375rem; /* Reduced padding */
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 0.75rem; /* Smaller font */
+  line-height: 1.2;
+  color: #495057;
+  background-color: #fff;
+  text-align: center;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+  min-height: 32px; /* Fixed height */
+}
+
+.table-select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.25);
+}
+
+/* Compact option styling */
+.table-select option {
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Comments textarea styling */
+.form-textarea {
+  width: 100%;
+  max-width: 800px;
+  resize: vertical;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

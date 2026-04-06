@@ -12,13 +12,15 @@ export class DailyPlanComponent implements OnInit {
   dailyPlanForm: FormGroup;
   @Output() formReady = new EventEmitter<FormGroup>();
   @Input() planData: any
-  @Input() noteId: number
+  @Input() noteId: string
+  @Input() medicalNoteId: number
   @Input() noteType: MedicalNoteType
-  @Input() caseId: number
+  @Input() caseId: string
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
   @Input() creator: string
   @Input() noteFinalizr: string
+  @Input() disableFinalize: boolean = false
   @Output() backToRecord = new EventEmitter<void>();
   constructor(private fb: FormBuilder, private toastr: ToastrService) { }
 
@@ -56,7 +58,6 @@ export class DailyPlanComponent implements OnInit {
     if (event === 'yes') {
       this.finalizeNoteVisibility = false
       this.toastr.success('Medical note has been finalized');
-      this.backToRecord.emit()
     }
   }
 }

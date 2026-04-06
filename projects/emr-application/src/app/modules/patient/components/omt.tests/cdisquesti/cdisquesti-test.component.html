@@ -1,0 +1,111 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Croft Disability Questionnaire</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This questionnaire is designed to find out how your shoulder problem affects your ability to manage everyday activities.</p>
+        <ul>
+          <li>Please read each statement carefully and <strong>check the box</strong> if the statement applies to you <strong>today</strong></li>
+          <li>If the statement does not apply to you, leave the box unchecked</li>
+        </ul>
+        <p><strong>Scoring:</strong> Each checked item scores 1 point. Total score ranges from 0-22.</p>
+        <p><strong>Interpretation:</strong></p>
+        <ul>
+          <li>0-5 = Minimal disability</li>
+          <li>6-11 = Moderate disability</li>
+          <li>12-17 = Severe disability</li>
+          <li>18-22 = Very severe disability</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checked count indicator -->
+  <div class="progress-section">
+    <span class="progress-text">{{ getCheckedCount() }} of 22 items checked</span>
+  </div>
+
+  <form [formGroup]="cdisquestiForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Pain Level</h3>
+          <p class="section-subtitle">Rate your current pain with activity (optional)</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="cdisquestiForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shoulder Disability Assessment Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">C</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Shoulder Disability Assessment</h3>
+          <p class="section-subtitle">Check the box if the statement applies to you today</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let question of questions; let i = index"
+             class="question-card"
+             [class.answered]="cdisquestiForm.get(question.key)?.value === true">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <label class="checkbox-option-label">
+              <input type="checkbox" [formControlName]="question.key">
+              <span class="checkbox-custom"></span>
+              <span class="option-text">{{ question.text }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

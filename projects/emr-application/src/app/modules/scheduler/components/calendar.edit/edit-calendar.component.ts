@@ -12,16 +12,40 @@ export class EditCalendarComponent implements OnInit {
   @Input() calendar: Calendar
   @ViewChild('claendarName') claendarNameInput: ElementRef;
   @Output() changeVisibility = new EventEmitter<string>()
+  isEditing: boolean = false;
+  nameEmpty: boolean = false;
   constructor(private toastrService: ToastrService,
     private calendarServiceService: CalendarServiceService) { }
 
   ngOnInit(): void {
   }
   edit() {
-    this.calendar.name = this.claendarNameInput.nativeElement.value;
-    this.calendarServiceService.updateName(this.calendar).subscribe(() => {
-      this.changeVisibility.emit('close');
-      this.toastrService.success("Calendar update.")
-    })
+    const name = this.claendarNameInput.nativeElement.value?.trim();
+    if (!name) {
+      this.nameEmpty = true;
+      return;
+    }
+    this.nameEmpty = false;
+    this.isEditing = true;
+    this.calendar.name = name;
+    this.calendarServiceService.updateName(this.calendar).subscribe({
+      next: () => {
+        this.isEditing = false;
+        this.toastrService.success('Calendar updated successfully');
+        this.changeVisibility.emit('close');
+      },
+      error: () => {
+        this.isEditing = false;
+        this.toastrService.error('Failed to update calendar');
+      }
+    });
+  }
+  cancel() {
+    this.changeVisibility.emit('close');
+  }
+  onNameInput() {
+    if (this.nameEmpty) {
+      this.nameEmpty = !this.claendarNameInput.nativeElement.value?.trim();
+    }
   }
 }

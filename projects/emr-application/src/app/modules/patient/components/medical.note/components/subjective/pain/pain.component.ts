@@ -29,7 +29,7 @@ export class PainComponent implements OnInit {
       evals: this.fb.array([])
     });
     this.handlePainScale();
-    if (this.painFormData.evals)
+    if (this.painFormData !== null && this.painFormData.evals)
       this.fillEvals();
     this.formReady.emit(this.painForm);
   }
@@ -43,13 +43,16 @@ export class PainComponent implements OnInit {
     }
   }
   private handlePainScale() {
-    if (this.painFormData['pain_scale'] !== null || this.painFormData['pain_scale'] !== undefined) {
-      this.painForm.get('pain_scale').setValue(this.painFormData['pain_scale'])
-      if (this.painFormData['pain_scale'] === 'yes') {
-        this.showPainEval = true
+
+    if (this.painFormData !== null) {
+      if (this.painFormData['pain_scale'] !== null || this.painFormData['pain_scale'] !== undefined) {
+        this.painForm.get('pain_scale').setValue(this.painFormData['pain_scale'])
+        if (this.painFormData['pain_scale'] === 'yes') {
+          this.showPainEval = true
+        }
+        else
+          this.showPainEval = false
       }
-      else
-        this.showPainEval = false
     }
     this.painForm.get('pain_scale').valueChanges.subscribe(v => {
       if (v === "yes")

@@ -1,54 +1,121 @@
 <ngx-spinner></ngx-spinner>
-<c-row>
-    <c-col xs="12" class="mb-2">
-        <h1>Clinic Creation</h1>
-    </c-col>
-</c-row>
-<hr />
-<c-container fluid>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-content">
+    <div class="page-title-section">
+      <h2 class="page-title">
+        <svg cIcon name="cilHospital" class="page-icon"></svg>
+        {{ isCreated ? 'Clinic Creation' : 'Clinic Update' }}
+      </h2>
+      <p class="page-subtitle">Complete all required sections to {{ isCreated ? 'register a new clinic' : 'update clinic information' }}</p>
+    </div>
+    <div class="header-progress">
+      <span class="progress-badge" [ngClass]="{'valid': valid, 'invalid': !valid}">
+        <svg cIcon [name]="valid ? 'cilCheckCircle' : 'cilWarning'" class="progress-icon"></svg>
+        {{ valid ? 'Ready to Submit' : 'Incomplete' }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Layout with Progress Sidebar -->
+<div class="page-layout">
+  <!-- Progress Indicator Sidebar -->
+  <aside class="progress-sidebar">
+    <div class="progress-sidebar-content">
+      <div class="progress-title">Sections</div>
+      <ul class="progress-list">
+        <li class="progress-item" [ngClass]="{'completed': isValidClinicName}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidClinicName ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Clinic Name</span>
+        </li>
+        <li class="progress-item" [ngClass]="{'completed': isValidClinicAddress}">
+          <span class="progress-indicator">
+            <svg cIcon [name]="isValidClinicAddress ? 'cilCheckCircle' : 'cilCircle'" class="indicator-icon"></svg>
+          </span>
+          <span class="progress-label">Address</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Form Content -->
+  <div class="form-container">
     <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
-        <c-row class="justify-content-center">
-            <c-col class="col">
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <h3>Clinic Name</h3>
-                    </c-card-header>
-                    <c-card-body>
-                        <small *ngIf="submitted   && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
-                            class="form-text text-danger">
-                            Clinic Name is required
-                        </small>
-                        <c-input-group class="mb-3">
-                            <input autoComplete="name" cFormControl id="clinicname" name="clinicname" sizing="sm"
-                                placeholder="Enter Clinic Name" required
-                                [ngClass]="{'is-invalid': clinicname.invalid && (clinicname.dirty || clinicname.touched)}"
-                                [(ngModel)]="clinic.name" #clinicname="ngModel" />
-                        </c-input-group>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-        <c-row class="justify-content-center">
-            <c-col class="col">
-                <c-card class="mb-3 ustify-content-center">
-                    <c-card-header>
-                        <h3>Address information</h3>
-                    </c-card-header>
-                    <c-card-body>
-                        <ng-container *ngIf="!validAddress">
-                            <hr>
-                            <c-alert>Please add correct clinic's address</c-alert>
-                          </ng-container>
-                        <app-single-address [address]="clinic.address"></app-single-address>
-                    </c-card-body>
-                </c-card>
-            </c-col>
-        </c-row>
-        <div class="d-grid gap-2 col-2 mx-auto mb-5">
-            <button cButton color="primary" variant="outline" type="submit">
-                <span *ngIf="isCreated">Create</span>
-                <span *ngIf="!isCreated">Update</span>
-            </button>
+      <!-- Clinic Name Section -->
+      <c-card class="section-card" id="section-clinic-name">
+        <div class="card-header-custom" [ngClass]="{'invalid': !isValidClinicName}">
+          <div class="card-header-title">
+            <svg cIcon name="cilBuilding" class="card-icon"></svg>
+            <span>Clinic Name</span>
+          </div>
+          <span class="card-status" *ngIf="!isValidClinicName">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="isValidClinicName">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
         </div>
+        <c-card-body class="card-body-custom">
+          <div class="form-group">
+            <label class="form-label" for="clinicname">Clinic Name <span class="required-marker">*</span></label>
+            <c-input-group>
+              <input autoComplete="name" cFormControl id="clinicname" name="clinicname"
+                placeholder="Enter Clinic Name" required
+                [ngClass]="{'is-invalid': clinicname.invalid && (clinicname.dirty || clinicname.touched)}"
+                [(ngModel)]="clinic.name" #clinicname="ngModel" />
+            </c-input-group>
+            <small *ngIf="submitted && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))"
+              class="form-text text-danger">
+              Clinic Name is required
+            </small>
+          </div>
+        </c-card-body>
+      </c-card>
+
+      <!-- Address Information Section -->
+      <c-card class="section-card" id="section-address">
+        <div class="card-header-custom" [ngClass]="{'invalid': !isValidClinicAddress}">
+          <div class="card-header-title">
+            <svg cIcon name="cilLocationPin" class="card-icon"></svg>
+            <span>Address Information</span>
+          </div>
+          <span class="card-status" *ngIf="!isValidClinicAddress">
+            <svg cIcon name="cilWarning" class="status-icon"></svg>
+            Required
+          </span>
+          <span class="card-status valid" *ngIf="isValidClinicAddress">
+            <svg cIcon name="cilCheckCircle" class="status-icon"></svg>
+            Complete
+          </span>
+        </div>
+        <c-card-body class="card-body-custom">
+          <ng-container *ngIf="!validAddress && submitted">
+            <c-alert color="warning" class="address-alert">
+              <svg cIcon name="cilWarning" class="alert-icon"></svg>
+              Please add correct clinic's address
+            </c-alert>
+          </ng-container>
+          <app-single-address [address]="clinic.address"></app-single-address>
+        </c-card-body>
+      </c-card>
+
+      <!-- Action Section -->
+      <div class="action-section">
+        <button
+          cButton
+          class="create-btn"
+          [ngClass]="{'disabled': !valid}"
+          type="submit">
+          <svg cIcon [name]="isCreated ? 'cilPlus' : 'cilPencil'" class="btn-icon"></svg>
+          {{ isCreated ? 'Create Clinic' : 'Update Clinic' }}
+        </button>
+      </div>
     </form>
-</c-container>
+  </div>
+</div>

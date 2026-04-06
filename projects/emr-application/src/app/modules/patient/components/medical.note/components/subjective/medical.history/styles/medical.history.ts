@@ -39,5 +39,44 @@ export var MedicalHistoryStyles: FieldControlStyles[] = [
         "name": "currentMedicationsMedicalHistory",
         "style": "margin-left: 250px;"
     },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "pelvicFloorMedicalHistory"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "abusePelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "sexualHistoryPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "menstrualHistoryPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "birthControlPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "pregnancyPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "bladderPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 500px;",
+        "name": "sexualActivityPelvicFloorMedicalHistory",
+        "style": "margin-left: 15px;"
+    },
 
 ]

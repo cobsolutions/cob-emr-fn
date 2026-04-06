@@ -104,6 +104,34 @@ export var SpecialTestStyles: FieldControlStyles[] = [
         "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStressAtKneeFlex",
         "style": "margin-left: 10px;"
     },
+    //
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress0AtKneeFlex_rightleft_select",
+        "style": "margin-left: 20px;"
+    },
+    ///
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress0AtKneeFlex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress0AtKneeFlex_rightleft_select",
+        "style": "margin-left: 20px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress30AtKneeFlex",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_valgusStress30AtKneeFlex_rightleft_select",
+        "style": "margin-left: 10px;"
+    },
+    //
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
         "name": "special_tests_452a15a6-b2ed-460e-b21d-94610276ba2f_varusStress0AtKneeFlex",
@@ -153,7 +181,12 @@ export var SpecialTestStyles: FieldControlStyles[] = [
     },
     {
         "label_style": "white-space: nowrap; min-width: 550px;",
-        "name": "special_tests_ea07dc69-4dd0-4ebb-b8db-88895253a2e6_patellarBallottement",
+        "name": "special_tests_ea07dc69-4dd0-4ebb-b8db-88895253a2e6_patellarCompression",
+        "style": "margin-left: 10px;"
+    },
+    {
+        "label_style": "white-space: nowrap; min-width: 550px;",
+        "name": "special_tests_da4d89bc-906b-49ff-8eaa-8b93b388bbb4_specialtestspatellarcompressiontesttoprightleftselects",
         "style": "margin-left: 10px;"
     },
     {

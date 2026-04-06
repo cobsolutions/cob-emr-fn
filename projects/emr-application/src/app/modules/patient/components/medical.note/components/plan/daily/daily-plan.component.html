@@ -21,9 +21,8 @@
     </div>
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control
-            [componentRole]="['forward-medical-note-role']" (click)="toggleFrowardModal()">Forward</button>
-        <button cButton variant="outline" size="sm" class="mx-2" hide-control (click)="finalize()">Finalize</button>
+        <button cButton variant="outline" size="sm" class="mx-2" *appRoleScope="'forward-medical-note-role'; requireModify: true" (click)="toggleFrowardModal()">Forward</button>
+        <button cButton variant="outline" size="sm" class="mx-2" *appRoleScope="'finalize-medical-note-role'; requireModify: true" (click)="finalize()" [disabled]="disableFinalize">Finalize</button>
     </div>
 </form>
 <c-modal id="foDMN" [visible]="forwardVisibility" backdrop="static">
@@ -33,7 +32,8 @@
     </c-modal-header>
     <c-modal-body>
         <forward-modal *ngIf="forwardVisibility" (changeVisibility)="changeVisibility($event)"
-            [noteId]="noteId"></forward-modal>
+            [noteId]="noteId" [noteType]="noteType" [caseId]="caseId"
+            (backToRecords)="backToRecord.emit()"></forward-modal>
     </c-modal-body>
 </c-modal>
 <c-modal id="finalizeNote" [visible]="finalizeNoteVisibility" size="lg" backdrop="static">
@@ -44,7 +44,7 @@
     <c-modal-body>
         <finalize-medical-note *ngIf="finalizeNoteVisibility"
         [patientCaseId]="caseId"
-        [medicalNoteId]="noteId"
+        [medicalNoteId]="medicalNoteId"
         [noteType] ="noteType"
         (changeVisibility)="changeFinalizeNoteVisibility($event)"></finalize-medical-note>
     </c-modal-body>

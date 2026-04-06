@@ -1,0 +1,31 @@
+export interface LowerExtremityStructure {
+  lowerExtremityStructure: boolean;
+  lesGenuValgusRight: string;
+  lesGenuValgusLeft: string;
+  lesGenuVarusRight: string;
+  lesGenuVarusLeft: string;
+  lesTibialTorsionRight: string;
+  lesTibialTorsionLeft: string;
+  lesGenuRecurvatumRight: string;
+  lesGenuRecurvatumLeft: string;
+  lesFootPronationRight: string;
+  lesFootPronationLeft: string;
+  lesFootSupinationRight: string;
+  lesFootSupinationLeft: string;
+  lesFemoralAnteversionRight: string;
+  lesFemoralAnteversionLeft: string;
+  lesFemoralRetroversionRight: string;
+  lesFemoralRetroversionLeft: string;
+  lesDyskineticLeChainRight: string;
+  lesDyskineticLeChainLeft: string;
+  lesPatellarPositionRight: string;
+  lesPatellarPositionLeft: string;
+  lesCalcanealExostosisRight: string;
+  lesCalcanealExostosisLeft: string;
+  lesCalcanealValgusRight: string;
+  lesCalcanealValgusLeft: string;
+  lesCalcanealVarusRight: string;
+  lesCalcanealVarusLeft: string;
+  lesHalluxValgusRight: string;
+  lesHalluxValgusLeft: string;
+}

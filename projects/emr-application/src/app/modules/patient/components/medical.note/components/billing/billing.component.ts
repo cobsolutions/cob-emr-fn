@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoggedInService } from 'projects/emr-application/src/app/modules/security/service/loggedIn/logged-in.service';
 import { MedicalNoteType } from '../../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../../services/medical.note/medial-note.service';
+import { SoapService } from '../../../../services/medical.note/soap/soap.service';
 
 @Component({
   selector: 'billing',
@@ -19,10 +20,12 @@ export class BillingComponent implements OnInit {
   @Input() billingData: any
   @Input() creator: string
   @Input() noteFinalizr: string
-  @Input() noteId: number
-  @Input() caseId: number
+  @Input() noteId: string
+  @Input() medicalNoteId: number
+  @Input() caseId: string
   @Input() noteType: MedicalNoteType
-  @Input() noteTypeId:string
+  @Input() noteTypeId: string
+  @Input() disableFinalize: boolean = false
   fields: any
   forwardVisibility: boolean = false;
   finalizeNoteVisibility: boolean = false;
@@ -35,17 +38,16 @@ export class BillingComponent implements OnInit {
     { label: '(Type Below)', value: 'DNTB' },
   ]
   // authorizthedToFinalize: boolean = false
-  constructor(private fb: FormBuilder
-    , private medialNoteService: MedialNoteService
-    , private loggedInService: LoggedInService
-    , private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder,
+    private soapService:SoapService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // this.isAuthorizthedToFinalize()
-    this.medialNoteService.find('billing', this.noteTypeId).subscribe(fields => {
+    this.soapService.findSoapFields('billing', this.noteTypeId).subscribe(fields => {
       this.fields = fields
       this.billingForm = this.fb.group({
-        'dailyNoteIncluded': this.fb.control(false),
+        'dailyNoteIncluded': this.fb.control(true),
         'dn_nstructions': this.fb.control("DN1"),
         'precautions': this.fb.control(null),
         'instructionsTxt': this.fb.control(null),
@@ -63,7 +65,6 @@ export class BillingComponent implements OnInit {
         braces: this.fb.group({}),
         directTimedCodes: this.fb.group({})
       });
-      console.log(JSON.stringify(this.billingData))
       if (this.billingData) {
         this.billingForm.patchValue(this.billingData);
       }
@@ -90,6 +91,11 @@ export class BillingComponent implements OnInit {
     return values;
   }
   setChildForm(section: string, formGroup: FormGroup) {
+    // console.log('section ' + section);
+    // console.log('formGroup.controls ' + JSON.stringify(formGroup.controls))
+    // Object.keys(formGroup.controls).forEach(key => {
+    //   console.log(key, formGroup.get(key));
+    // });
     this.billingForm.setControl(section, formGroup);
   }
   // isAuthorizthedToFinalize() {
@@ -123,5 +129,7 @@ export class BillingComponent implements OnInit {
       this.toastr.success('Medical note has been finalized');
     }
   }
-
+  onBillingChange(event: { cpt: string; checked: boolean; description: string }) {
+    console.log('Billing CPT Changed:', event);
+  }
 }

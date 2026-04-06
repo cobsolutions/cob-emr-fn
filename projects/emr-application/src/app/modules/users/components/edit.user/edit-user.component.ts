@@ -24,7 +24,8 @@ export class EditUserComponent implements OnInit {
   @Input() uuid: string
   @Input() userType: string
   @Input() componentRole: string[]
-  @ViewChild('editUserRoles') editUserRoles: SmartTableComponent;
+  @ViewChild('generalRolesTable') generalRolesTable: SmartTableComponent;
+  @ViewChild('medicalRolesTable') medicalRolesTable: SmartTableComponent;
   @Output() changeVisibility = new EventEmitter<string>()
   isValidRoles: boolean = true;
   isValidClinic: boolean = true;
@@ -39,7 +40,7 @@ export class EditUserComponent implements OnInit {
     },
     { key: 'scope', label: 'Scope', _style: { width: '30%' } },
   ];
-  roles: IItem[] = [
+  generalRoles: IItem[] = [
     { role: 'Patient', scope: '', name: 'emr-patient-role' },
     { role: 'Clinic', scope: '', name: 'clinic-role' },
     { role: 'User', scope: '', name: 'user-role' },
@@ -47,12 +48,16 @@ export class EditUserComponent implements OnInit {
     { role: 'Referring Provider', scope: '', name: 'emr-referring-provider-role' },
     { role: 'Patient Payment', scope: '', name: 'patient-payment-role' },
     { role: 'Calendar', scope: '', name: 'calendar-role' },
+  ]
+  medicalRoles: IItem[] = [
     { role: 'Medical Note-Initialization', scope: '', name: 'initialize-medical-note-role' },
     { role: 'Medical Note-Forward', scope: '', name: 'forward-medical-note-role' },
     { role: 'Medical Note-Finalization', scope: '', name: 'finalize-medical-note-role' },
   ]
-  filteredRoles: IItem[] = [];
-  roles$: Observable<IItem[]>
+  filteredMedicalRoles: IItem[] = [];
+  generalRoles$: Observable<IItem[]>
+  medicalRoles$: Observable<IItem[]>
+  showMedicalPermissions: boolean = false;
   credentials: string[];
   specialties = Specialties;
   constructor(
@@ -64,13 +69,18 @@ export class EditUserComponent implements OnInit {
     , private clericlaUserService: ClericlaUserService) { }
 
   ngOnInit(): void {
-    this.filteredRoles = [...this.roles];
-    this.roles$ = of(this.filteredRoles)
+    this.showMedicalPermissions = this.userType === 'Clinical';
+    this.generalRoles$ = of(this.generalRoles);
+    this.filteredMedicalRoles = [...this.medicalRoles];
+    this.medicalRoles$ = of(this.filteredMedicalRoles);
     this.clinicService.getByOrganizationId(this.loggedInService.getLoggedUser().organizationId)
       .subscribe((response: any) => {
         console.log(response.records)
         this.clinics = response.records;
+        this.fetchUser();
       })
+  }
+  private fetchUser() {
     switch (this.userType) {
       case 'Clinical':
         this.fetchClinicalUser();
@@ -101,15 +111,22 @@ export class EditUserComponent implements OnInit {
     this.getDoctorCredentials()
   }
   private populateRoles() {
-    this.editUserRoles.items.forEach((item: any) => {
-      var scope: any = this.user.roleScope.find(roleScope => roleScope.role === item.name).scope
+    this.generalRolesTable.items.forEach((item: any) => {
+      var scope: any = this.user.roleScope.find(roleScope => roleScope.role === item.name)?.scope;
       if (scope === 'true')
         item.scope = true
       else if (scope === 'false')
         item.scope = false
-      else
+      else if (scope)
         item.scope = scope
-    })
+    });
+    if (this.showMedicalPermissions) {
+      this.medicalRolesTable.items.forEach((item: any) => {
+        var scope: any = this.user.roleScope.find(roleScope => roleScope.role === item.name)?.scope;
+        // Medical roles use 'modify'/'hidden' values - convert to boolean for toggle
+        item.scope = scope === 'modify';
+      });
+    }
   }
   private populateClinics(user: User) {
     console.log(this.clinics)
@@ -164,49 +181,40 @@ export class EditUserComponent implements OnInit {
   private fillPermissions() {
     if (this.isValidRoles) {
       this.user.roleScope = []
-      this.editUserRoles.items.forEach((item: any) => {
+      this.generalRolesTable.items.forEach((item: any) => {
         var userRoleScope: UserRoleScope = {
           role: item.name,
           scope: item.scope
-        }
+        };
         this.user.roleScope.push(userRoleScope);
-      })
+      });
+      if (this.showMedicalPermissions) {
+        this.medicalRolesTable.items.forEach((item: any) => {
+          var userRoleScope: UserRoleScope = {
+            role: item.name,
+            scope: item.scope ? 'modify' : 'hidden'
+          };
+          this.user.roleScope.push(userRoleScope);
+        });
+      }
     }
   }
   isClinicTouched(event: any) {
     this.isClinicChanged = true;
   }
   changeCredential(value: any) {
-
     if (value === 'SPT' || value === 'SOT' || value === 'SSLP') {
-      this.filteredRoles = this.roles.filter(
+      this.filteredMedicalRoles = this.medicalRoles.filter(
         (item: any) => {
           return item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
         }
       );
     } else {
-      this.filteredRoles = [...this.roles];
+      this.filteredMedicalRoles = [...this.medicalRoles];
     }
-    this.roles$ = of(this.filteredRoles)
+    this.medicalRoles$ = of(this.filteredMedicalRoles);
   }
   changeUSerType(value: any) {
-    if (value === 'Clerical') {
-      this.filteredRoles = this.roles.filter(
-        (item: any) => {
-          return item.name !== Role.FORWARD_MEDICAL_NOTE_ROLE && item.name !== Role.INITIALIZE_MEDICAL_NOTE_ROLE && item.name !== Role.FINALIZE_MEDICAL_NOTE_ROLE
-        }
-      );
-    } else {
-      this.filteredRoles = [...this.roles];
-    }
-    this.roles$ = of(this.filteredRoles)
-  }
-  checkNonMedical(value: string) {
-    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
-    return !medicalList.includes(value)
-  }
-  checkMedical(value: string) {
-    const medicalList = [Role.INITIALIZE_MEDICAL_NOTE_ROLE, Role.FORWARD_MEDICAL_NOTE_ROLE, Role.FINALIZE_MEDICAL_NOTE_ROLE];
-    return medicalList.includes(value)
+    this.showMedicalPermissions = value === 'Clinical';
   }
 }

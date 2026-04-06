@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../../services/test/omt-test.service';
+import { OmtTestService } from '../../../medical.note/components/objective/service/omt-test/omt-test.service';
 
 @Component({
   selector: 'lower-extremity-faam-test',
@@ -8,9 +8,12 @@ import { OmtTestService } from '../../../../services/test/omt-test.service';
   styleUrls: ['./faam-test.component.css']
 })
 export class FaamTestComponent implements OnInit {
-  faamSportsForm: FormGroup;
+  faamForm: FormGroup;
   showInstructions = false;
-  @Output() getResult = new EventEmitter<any>()
+  private testName: string = 'faam';
+  @Input() noteId: string;
+  @Output() getResult = new EventEmitter<any>();
+
   // Activity descriptions for the form
   activities = [
     "Running",
@@ -22,6 +25,7 @@ export class FaamTestComponent implements OnInit {
     "Ability to perform activity with your normal technique",
     "Ability to participate in your desired sport as long as you would like"
   ];
+
   difficultyOptions = [
     { value: 4, text: 'No Difficulty' },
     { value: 3, text: 'Slight Difficulty' },
@@ -30,64 +34,78 @@ export class FaamTestComponent implements OnInit {
     { value: 0, text: 'Unable to Do' },
     { value: 5, text: 'N/A' }
   ];
-  constructor(private fb: FormBuilder,private omtTestService: OmtTestService) {
-    this.faamSportsForm = this.createForm();
+
+  constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
+    this.faamForm = this.createForm();
   }
 
   createForm(): FormGroup {
-    const formGroup: any = {
-      // Patient Satisfaction - Pain Level
-      painLevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]]
-    };
-
-    // Create form controls for all 8 activities
-    for (let i = 1; i <= 8; i++) {
-      formGroup[`q${i}`] = [null, Validators.required];
-    }
-
-    return this.fb.group(formGroup);
+    return this.fb.group({
+      painlevel: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
+      q1: [null, Validators.required],
+      q2: [null, Validators.required],
+      q3: [null, Validators.required],
+      q4: [null, Validators.required],
+      q5: [null, Validators.required],
+      q6: [null, Validators.required],
+      q7: [null, Validators.required],
+      q8: [null, Validators.required]
+    });
   }
+
+  ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: number } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = value as number;
+          });
+          this.faamForm.patchValue(formValues);
+        }
+      });
+    }
+  }
+
   toggleInstructions(): void {
     this.showInstructions = !this.showInstructions;
   }
-  ngOnInit(): void {
-  }
+
   calculateScore(): void {
-    if (this.faamSportsForm.invalid) {
-      // Mark all fields as touched to show validation errors
-      Object.keys(this.faamSportsForm.controls).forEach(key => {
-        this.faamSportsForm.get(key)?.markAsTouched();
+    if (this.faamForm.invalid) {
+      Object.keys(this.faamForm.controls).forEach(key => {
+        this.faamForm.get(key)?.markAsTouched();
       });
       return;
     }
-    const result= this.fillAnswers();
-    this.omtTestService.lowerExtremity(result,'faam').subscribe(val=>{
-      this.getResult.emit(val)
-    })
+
+    // Build answers object with uppercase keys for backend
+    const answers: { [key: string]: number } = {};
+    Object.keys(this.faamForm.controls).forEach(key => {
+      const value = this.faamForm.get(key)?.value;
+      if (value !== null) {
+        answers[key.toUpperCase()] = parseInt(value, 10);
+      }
+    });
+
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
-    this.faamSportsForm.reset();
+    this.faamForm.reset();
+    this.faamForm.markAsUntouched();
   }
-  private fillAnswers():any {
-    var faamResult = {
-      "answers": {
-        "Q1": parseInt(this.faamSportsForm.value.q1, 10),
-        "Q2": parseInt(this.faamSportsForm.value.q2, 10),
-        "Q3": parseInt(this.faamSportsForm.value.q3, 10),
-        "Q4": parseInt(this.faamSportsForm.value.q4, 10),
-        "Q5": parseInt(this.faamSportsForm.value.q5, 10),
-        "Q6": parseInt(this.faamSportsForm.value.q6, 10),
-        "Q7": parseInt(this.faamSportsForm.value.q7, 10),
-        "Q8": parseInt(this.faamSportsForm.value.q8, 10)
-      }
-    };
-    // Filter out N/A values (value 5)
-    const filteredResult = {
-      answers: Object.fromEntries(
-        Object.entries(faamResult.answers).filter(([_, value]) => value !== 5)
-      )
-    };
-    return filteredResult;
+
+  getAnsweredCount(): number {
+    const controls = Object.keys(this.faamForm.controls);
+    return controls.filter(key => this.faamForm.get(key)?.value !== null).length;
+  }
+
+  getCompletionPercentage(): number {
+    const totalQuestions = 9; // 8 activities + 1 pain level
+    return (this.getAnsweredCount() / totalQuestions) * 100;
   }
 }

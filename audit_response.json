@@ -1,0 +1,252 @@
+{
+    "time-stamp": 1769685431621,
+    "records": {
+        "content": [
+            {
+                "id": 23,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "therapyUUID",
+                        "oldValue": "khaled Ahmed",
+                        "newValue": "yasser ahmed"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769685232204
+            },
+            {
+                "id": 22,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "note",
+                        "oldValue": null,
+                        "newValue": "add note"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769685130559
+            },
+            {
+                "id": 21,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "endDate",
+                        "oldValue": "2026-01-29 06:30",
+                        "newValue": "2026-01-29 07:00"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769685104470
+            },
+            {
+                "id": 19,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "endDate",
+                        "oldValue": "2026-01-28 06:15",
+                        "newValue": "2026-01-29 06:15"
+                    },
+                    {
+                        "field": "startDate",
+                        "oldValue": "2026-01-28 06:00",
+                        "newValue": "2026-01-29 06:00"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684927552
+            },
+            {
+                "id": 18,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "appointmentType",
+                        "oldValue": "Error",
+                        "newValue": "OK-9"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684902503
+            },
+            {
+                "id": 17,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "appointmentType",
+                        "oldValue": "OK-9",
+                        "newValue": "Error"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684676878
+            },
+            {
+                "id": 16,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "appointmentStatus",
+                        "oldValue": "Created",
+                        "newValue": "Confirmed"
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684287989
+            },
+            {
+                "id": 15,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "UPDATE",
+                "changes": [
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": 16702
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684102057
+            },
+            {
+                "id": 14,
+                "clinicId": 182,
+                "entityName": "Appointment",
+                "entityId": 16702,
+                "action": "INSERT",
+                "changes": [
+                    {
+                        "field": "note",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "title",
+                        "oldValue": null,
+                        "newValue": "Adel,Mohamed:Low back Pain"
+                    },
+                    {
+                        "field": "clinic",
+                        "oldValue": null,
+                        "newValue": "Batridge"
+                    },
+                    {
+                        "field": "endDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:15"
+                    },
+                    {
+                        "field": "patient",
+                        "oldValue": null,
+                        "newValue": "Mohamed Adel"
+                    },
+                    {
+                        "field": "calendar",
+                        "oldValue": null,
+                        "newValue": "ddd"
+                    },
+                    {
+                        "field": "seriesId",
+                        "oldValue": null,
+                        "newValue": null
+                    },
+                    {
+                        "field": "startDate",
+                        "oldValue": null,
+                        "newValue": "2026-01-28 06:00"
+                    },
+                    {
+                        "field": "patientCase",
+                        "oldValue": null,
+                        "newValue": "Low back Pain"
+                    },
+                    {
+                        "field": "therapyUUID",
+                        "oldValue": null,
+                        "newValue": "khaled Ahmed"
+                    },
+                    {
+                        "field": "appointmentType",
+                        "oldValue": null,
+                        "newValue": "OK-9"
+                    },
+                    {
+                        "field": "appointmentStatus",
+                        "oldValue": null,
+                        "newValue": "Created"
+                    },
+                    {
+                        "field": "appointmentCancelNoShowReason",
+                        "oldValue": null,
+                        "newValue": null
+                    }
+                ],
+                "performedByUuid": "a08e411c-2756-4bb0-9b86-e477412c17bb",
+                "performedByName": "khaled Mohamed Ahmed",
+                "performedAt": 1769684102051
+            }
+        ],
+        "pageable": {
+            "sort": {
+                "empty": false,
+                "sorted": true,
+                "unsorted": false
+            },
+            "offset": 0,
+            "pageNumber": 0,
+            "pageSize": 10,
+            "unpaged": false,
+            "paged": true
+        },
+        "last": true,
+        "totalElements": 9,
+        "totalPages": 1,
+        "size": 10,
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "first": true,
+        "numberOfElements": 9,
+        "number": 0,
+        "empty": false
+    },
+    "message": "Successfully retrieved clinic audit trail!",
+    "status": 200
+}

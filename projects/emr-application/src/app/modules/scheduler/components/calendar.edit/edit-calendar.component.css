@@ -1,0 +1,227 @@
+/* ========================================
+   Edit Calendar Component Styles
+   Professional Slate Theme
+   ======================================== */
+
+/* --- Wrapper --- */
+.edit-calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Current Calendar Info --- */
+.current-info {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 1.25rem 1.5rem 0;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.current-info-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.current-info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.current-info-label {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.current-info-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Form --- */
+.edit-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --- Form Field --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: 0.015em;
+  margin: 0;
+}
+
+.field-required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+/* --- Input with Icon --- */
+.field-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  transition: all 0.15s ease;
+  overflow: hidden;
+}
+
+.field-input-wrapper:focus-within {
+  border-color: #334155;
+  box-shadow: 0 0 0 3px rgba(51, 65, 85, 0.08);
+}
+
+.field-input-wrapper.field-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+.field-input-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #94a3b8;
+  margin-left: 0.75rem;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.field-input-wrapper:focus-within .field-input-icon {
+  color: #334155;
+}
+
+.field-input-wrapper.field-error .field-input-icon {
+  color: #dc2626;
+}
+
+.field-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  background: transparent;
+}
+
+.field-input::placeholder {
+  color: #94a3b8;
+}
+
+/* --- Hint / Error Text --- */
+.field-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.field-hint span {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.field-error-text {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.field-error-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #dc2626;
+}
+
+.field-error-text span {
+  font-size: 0.75rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* --- Footer --- */
+.edit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.625rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5625rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.footer-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.footer-btn-cancel {
+  background: #ffffff;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+
+.footer-btn-cancel:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #1e293b;
+  border-color: #cbd5e1;
+}
+
+.footer-btn-save {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  min-width: 140px;
+  box-shadow: 0 1px 3px rgba(30, 41, 59, 0.15);
+}
+
+.footer-btn-save:hover:not(:disabled) {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.25);
+  transform: translateY(-1px);
+}
+
+.footer-btn-save:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.footer-btn-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}

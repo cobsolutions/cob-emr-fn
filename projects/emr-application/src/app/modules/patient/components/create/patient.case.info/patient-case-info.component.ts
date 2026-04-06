@@ -64,7 +64,9 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   diagnosisCtrl = new FormControl();
   diagnosisCode: string[] = [];
   selectedPrimaryPatientInsurance: PatientInsurance;
+  selectedSecondaryPatientInsurance: PatientInsurance;
   selectedTherapist: number;
+  editIndex: number | null = null;
   constructor(private caseDiagnosisService: CaseDiagnosisService,
     private spinner: NgxSpinnerService,
     private loggedService: LoggedInService,
@@ -126,6 +128,9 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
           this.isLoading = false
         });
   }
+  removeDiagnosis(index: number) {
+    this.case.caseDiagnosis.splice(index, 1);
+  }
   addICD10diagnosis(diagnosis: any) {
     diagnosis.forEach((element: string) => {
       var code: string = element.split(',')[0]
@@ -140,25 +145,78 @@ export class PatientCaseInfoComponent extends BasicComponent implements OnInit, 
   }
   add() {
     if (this.caseForm.valid) {
-      console.log(this.selectedTherapist)
       let patientCase: PatientCase = Object.assign({}, this.case);
       this.fillCasePrimaryInsurance(patientCase)
       patientCase.referralCase = Object.assign({}, this.case.referralCase);
       patientCase.caseOtherInformation = Object.assign({}, this.case.caseOtherInformation);
+      patientCase.caseDiagnosis = this.case.caseDiagnosis ? [...this.case.caseDiagnosis] : [];
+      patientCase.additionalInfo = this.case.additionalInfo;
       patientCase.therapist = this.selectedTherapist;
-      this.pateint.cases.push(patientCase);
+      if (this.editIndex !== null) {
+        this.pateint.cases[this.editIndex] = patientCase;
+        this.editIndex = null;
+      } else {
+        this.pateint.cases.push(patientCase);
+      }
       this.caseForm.reset();
     }
   }
+  edit(index: number) {
+    const caseItem = this.pateint.cases[index];
+    this.case = {
+      id: caseItem.id,
+      title: caseItem.title,
+      placeOfService: caseItem.placeOfService,
+      treatingDoctor: caseItem.treatingDoctor,
+      injuryCase: caseItem.injuryCase,
+      caseInsuranceInformation: Object.assign({}, caseItem.caseInsuranceInformation),
+      caseDiagnosis: caseItem.caseDiagnosis ? [...caseItem.caseDiagnosis] : [],
+      referralCase: Object.assign({}, caseItem.referralCase),
+      caseOtherInformation: Object.assign({}, caseItem.caseOtherInformation),
+      therapist: caseItem.therapist,
+      therapistUUID: caseItem.therapistUUID,
+      additionalInfo: caseItem.additionalInfo
+    };
+    this.editIndex = index;
+    setTimeout(() => {
+      console.log('caseItem.therapist',caseItem.therapist)
+      this.selectedTherapist = caseItem.therapist;
+      if (caseItem.caseInsuranceInformation?.primaryInsurance) {
+        this.selectedPrimaryPatientInsurance = this.pateint.patientInsuranceModels?.find(
+          ins => ins.insuranceCompany.name === caseItem.caseInsuranceInformation.primaryInsurance.insuranceCompanyName
+        );
+      }
+      if (caseItem.caseInsuranceInformation?.secondaryInsurance) {
+        this.selectedSecondaryPatientInsurance = this.pateint.patientInsuranceModels?.find(
+          ins => ins.insuranceCompany.name === caseItem.caseInsuranceInformation.secondaryInsurance.insuranceCompanyName
+        );
+      }
+    });
+  }
+  cancelEdit() {
+    this.editIndex = null;
+    this.caseForm.reset();
+  }
   private fillCasePrimaryInsurance(patientCase: PatientCase) {
     patientCase.caseInsuranceInformation = Object.assign({}, this.case.caseInsuranceInformation);
-    var primaryInsurance: CaseInsurance = {
-      id: this.selectedPrimaryPatientInsurance.id,
-      insuranceCompanyName: this.selectedPrimaryPatientInsurance.insuranceCompany.name,
-      insuranceIdNumber: this.selectedPrimaryPatientInsurance.insuranceNumber,
-      groupNumber: this.selectedPrimaryPatientInsurance.groupNumber,
+    if (this.selectedPrimaryPatientInsurance) {
+      var primaryInsurance: CaseInsurance = {
+        id: this.selectedPrimaryPatientInsurance.id,
+        insuranceCompanyName: this.selectedPrimaryPatientInsurance.insuranceCompany.name,
+        insuranceIdNumber: this.selectedPrimaryPatientInsurance.insuranceNumber,
+        groupNumber: this.selectedPrimaryPatientInsurance.groupNumber,
+      }
+      patientCase.caseInsuranceInformation.primaryInsurance = primaryInsurance;
     }
-    patientCase.caseInsuranceInformation.primaryInsurance = primaryInsurance;
+    if (this.selectedSecondaryPatientInsurance) {
+      var secondaryInsurance: CaseInsurance = {
+        id: this.selectedSecondaryPatientInsurance.id,
+        insuranceCompanyName: this.selectedSecondaryPatientInsurance.insuranceCompany.name,
+        insuranceIdNumber: this.selectedSecondaryPatientInsurance.insuranceNumber,
+        groupNumber: this.selectedSecondaryPatientInsurance.groupNumber,
+      }
+      patientCase.caseInsuranceInformation.secondaryInsurance = secondaryInsurance;
+    }
   }
   remove(index: number) {
     this.pateint.cases.splice(index, 1);

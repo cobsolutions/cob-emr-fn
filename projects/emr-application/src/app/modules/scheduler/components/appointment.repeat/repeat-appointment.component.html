@@ -1,76 +1,273 @@
-<!--Daily-->
-<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Daily'">
-    <div class="form-group" class="mb-3">
-        <input cFormControl sizing="sm" type="number" [(ngModel)]="dailyRepeatAppointment.every" placeholder="Every" [disabled]="appointmentSkeleton ===1"/>
+<!-- Daily Repetition -->
+<div class="repetition-panel" *ngIf="configuration.appointmentRepetitionType === 'Daily'">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg cIcon name="cilCalendar" class="panel-icon"></svg>
+      <span>Daily Repetition Settings</span>
     </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" [ngModel]="dailyRepeatAppointment._dateStart"
-            (dateChange)="changeDailyStartDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
+    <span class="panel-badge">
+      <svg cIcon name="cilSync" class="badge-icon"></svg>
+      Daily
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="config-grid">
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilReload" class="label-icon"></svg>
+          Repeat Every <span class="label-hint">(days)</span>
+        </label>
+        <div class="input-wrapper">
+          <input cFormControl type="number"
+            [(ngModel)]="dailyRepeatAppointment.every"
+            placeholder="e.g., 1"
+            [disabled]="appointmentSkeleton === 1"
+            class="number-input" />
+          <span class="input-suffix">day(s)</span>
+        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          Start Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select start date'"
+          [ngModel]="dailyRepeatAppointment._dateStart"
+          (dateChange)="changeDailyStartDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          End Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select end date'"
+          [ngModel]="dailyRepeatAppointment._dateEnd"
+          (dateChange)="changeDailyEndDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
     </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'" [ngModel]="dailyRepeatAppointment._dateEnd"
-            (dateChange)="changeDailyEndDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-    </div>
-</c-container>
+  </div>
+</div>
 
-<!--Weekly-->
-<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Weekly'">
-    <div class="form-group" class="mb-3">
-        <input cFormControl sizing="sm" type="number" placeholder="Every" [(ngModel)]="weeklyRepeatAppointment.every" [disabled]="appointmentSkeleton ===1"/>
+<!-- Weekly Repetition -->
+<div class="repetition-panel" *ngIf="configuration.appointmentRepetitionType === 'Weekly'">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg cIcon name="cilCalendar" class="panel-icon"></svg>
+      <span>Weekly Repetition Settings</span>
     </div>
-    <div class="form-group" class="mb-3">
-        <c-multi-select cFormControl cSelect class="mb-2" sizing="sm" multiple [(ngModel)]="weeklyRepeatAppointment.days" [disabled]="appointmentSkeleton ===1">
-            <c-multi-select-option *ngFor="let day of days" [selected]="day.selected" 
-                [value]="day.dayNumber.toString()">{{day.dayName}}</c-multi-select-option>
+    <span class="panel-badge weekly">
+      <svg cIcon name="cilSync" class="badge-icon"></svg>
+      Weekly
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="config-grid">
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilReload" class="label-icon"></svg>
+          Repeat Every <span class="label-hint">(weeks)</span>
+        </label>
+        <div class="input-wrapper">
+          <input cFormControl type="number"
+            placeholder="e.g., 1"
+            [(ngModel)]="weeklyRepeatAppointment.every"
+            [disabled]="appointmentSkeleton === 1"
+            class="number-input" />
+          <span class="input-suffix">week(s)</span>
+        </div>
+      </div>
+      <div class="config-group full-width">
+        <label class="config-label">
+          <svg cIcon name="cilListRich" class="label-icon"></svg>
+          Days of Week
+        </label>
+        <c-multi-select cFormControl cSelect
+          multiple
+          [(ngModel)]="weeklyRepeatAppointment.days"
+          [disabled]="appointmentSkeleton === 1"
+          placeholder="Select days...">
+          <c-multi-select-option *ngFor="let day of days"
+            [selected]="day.selected"
+            [value]="day.dayNumber.toString()">
+            {{ day.dayName }}
+          </c-multi-select-option>
         </c-multi-select>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          Start Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select start date'"
+          [ngModel]="weeklyRepeatAppointment._dateStart"
+          (dateChange)="changeWeeklyStartDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          End Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select end date'"
+          [ngModel]="weeklyRepeatAppointment._dateEnd"
+          (dateChange)="changeWeeklyEndDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
     </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" [ngModel]="weeklyRepeatAppointment._dateStart"
-            (dateChange)="changeWeeklyStartDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-    </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'" [ngModel]="weeklyRepeatAppointment._dateEnd"
-            (dateChange)="changeWeeklyEndDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-    </div>
-</c-container>
+  </div>
+</div>
 
-<!--Monthly-->
-<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Monthly'">
-    <div class="form-group" class="mb-3">
-        <input cFormControl sizing="sm" type="number" placeholder="Every"
-            [(ngModel)]="monthlyRepeatAppointment.every" [disabled]="appointmentSkeleton ===1"/>
+<!-- Monthly Repetition -->
+<div class="repetition-panel" *ngIf="configuration.appointmentRepetitionType === 'Monthly'">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg cIcon name="cilCalendar" class="panel-icon"></svg>
+      <span>Monthly Repetition Settings</span>
     </div>
-    <div class="form-group" class="mb-3">
-        <select cFormControl cSelect class="mb-2" sizing="sm" [(ngModel)]="monthlyRepeatAppointment.days" [disabled]="appointmentSkeleton ===1">
-            <option [value]="undefined">Select..</option>
-            <option *ngFor="let day of dayMonth " [ngValue]="day" [selected]="day.selected">{{day.dayName}}</option>
+    <span class="panel-badge monthly">
+      <svg cIcon name="cilSync" class="badge-icon"></svg>
+      Monthly
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="config-grid">
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilReload" class="label-icon"></svg>
+          Repeat Every <span class="label-hint">(months)</span>
+        </label>
+        <div class="input-wrapper">
+          <input cFormControl type="number"
+            placeholder="e.g., 1"
+            [(ngModel)]="monthlyRepeatAppointment.every"
+            [disabled]="appointmentSkeleton === 1"
+            class="number-input" />
+          <span class="input-suffix">month(s)</span>
+        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendarCheck" class="label-icon"></svg>
+          Day of Month
+        </label>
+        <select cFormControl cSelect
+          [(ngModel)]="monthlyRepeatAppointment.days"
+          [disabled]="appointmentSkeleton === 1">
+          <option [value]="undefined">Select day...</option>
+          <option *ngFor="let day of dayMonth" [ngValue]="day" [selected]="day.selected">
+            {{ day.dayName }}
+          </option>
         </select>
-        <div class="form-group" class="mb-3">
-            <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'"
-                [ngModel]="monthlyRepeatAppointment._dateStart"
-                (dateChange)="changeMonthlyStartDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-        </div>
-        <div class="form-group" class="mb-3">
-            <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
-                [ngModel]="monthlyRepeatAppointment._dateEnd"
-                (dateChange)="changeMonthlyEndDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          Start Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select start date'"
+          [ngModel]="monthlyRepeatAppointment._dateStart"
+          (dateChange)="changeMonthlyStartDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          End Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select end date'"
+          [ngModel]="monthlyRepeatAppointment._dateEnd"
+          (dateChange)="changeMonthlyEndDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
     </div>
-</c-container>
-<!--Yearly-->
-<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Yearly'">
-    <div class="form-group" class="mb-3">
-        <input cFormControl sizing="sm" type="number" [(ngModel)]="yearlyRepeatAppointment.every" placeholder="Every" [disabled]="appointmentSkeleton ===1"/>
-    </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'Start at'" (dateChange)="changeYearlyStartDate($event)"
-            [(ngModel)]="startDate" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-    </div>
-    <div class="form-group" class="mb-3">
-        <c-date-picker closeOnSelect size="sm" [placeholder]="'End at'"
-            (dateChange)="changeYearlEndDate($event)" [disabled]="appointmentSkeleton ===1"></c-date-picker>
-    </div>
-</c-container>
+  </div>
+</div>
 
-<!--Every Week Day-->
-<c-container fluid *ngIf="configuration.appointmentRepetitionType ==='Every_Week_Day'"></c-container>
+<!-- Yearly Repetition -->
+<div class="repetition-panel" *ngIf="configuration.appointmentRepetitionType === 'Yearly'">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg cIcon name="cilCalendar" class="panel-icon"></svg>
+      <span>Yearly Repetition Settings</span>
+    </div>
+    <span class="panel-badge yearly">
+      <svg cIcon name="cilSync" class="badge-icon"></svg>
+      Yearly
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="config-grid">
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilReload" class="label-icon"></svg>
+          Repeat Every <span class="label-hint">(years)</span>
+        </label>
+        <div class="input-wrapper">
+          <input cFormControl type="number"
+            [(ngModel)]="yearlyRepeatAppointment.every"
+            placeholder="e.g., 1"
+            [disabled]="appointmentSkeleton === 1"
+            class="number-input" />
+          <span class="input-suffix">year(s)</span>
+        </div>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          Start Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select start date'"
+          (dateChange)="changeYearlyStartDate($event)"
+          [(ngModel)]="startDate"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
+      <div class="config-group">
+        <label class="config-label">
+          <svg cIcon name="cilCalendar" class="label-icon"></svg>
+          End Date
+        </label>
+        <c-date-picker closeOnSelect
+          [placeholder]="'Select end date'"
+          (dateChange)="changeYearlEndDate($event)"
+          [disabled]="appointmentSkeleton === 1">
+        </c-date-picker>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Every Week Day (placeholder for future implementation) -->
+<div class="repetition-panel" *ngIf="configuration.appointmentRepetitionType === 'Every_Week_Day'">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg cIcon name="cilCalendar" class="panel-icon"></svg>
+      <span>Every Weekday Settings</span>
+    </div>
+    <span class="panel-badge weekday">
+      <svg cIcon name="cilSync" class="badge-icon"></svg>
+      Weekdays
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="empty-state">
+      <svg cIcon name="cilInfo" class="empty-icon"></svg>
+      <span>Repeats every weekday (Monday - Friday)</span>
+    </div>
+  </div>
+</div>

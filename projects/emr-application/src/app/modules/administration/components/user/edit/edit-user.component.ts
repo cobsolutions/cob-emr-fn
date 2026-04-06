@@ -61,7 +61,10 @@ export class EditUserComponent implements OnInit {
     this.clinicService.getByOrganizationId(this.loggedInService.getLoggedUser().organizationId)
       .subscribe((response: any) => {
         this.clinics = response.records;
+        this.fetchUser();
       })
+  }
+  private fetchUser() {
     switch (this.userType) {
       case 'Clinical':
         this.fetchClinicalUser();

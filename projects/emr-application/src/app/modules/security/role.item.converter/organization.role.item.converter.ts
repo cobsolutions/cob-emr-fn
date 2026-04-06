@@ -4,6 +4,7 @@ import { Role } from "../model/role"
 export class OrganizationRoleItemConverter{
     public static convert(roles: string[], menuItems: MenuItem[]) {
         var menuItem: MenuItem = undefined
+        console.log('roles',roles)
         for (var i = 0; i < roles.length; i++) {
             if (roles[i] === Role.ADMIN_ROLE)
                 menuItem = {

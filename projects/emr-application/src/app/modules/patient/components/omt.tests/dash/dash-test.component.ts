@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OmtTestService } from '../../../services/test/omt-test.service';
+import { OmtTestService } from '../../medical.note/components/objective/service/omt-test/omt-test.service';
 import { dashValidator } from '../validator/not.selected';
 
 @Component({
@@ -11,6 +11,8 @@ import { dashValidator } from '../validator/not.selected';
 export class DashTestComponent implements OnInit {
   dashForm: FormGroup;
   showInstructions = false;
+  private testName: string = 'dash';
+  @Input() noteId: string;
   @Output() getResult = new EventEmitter<any>()
   // Question labels for the form
   questions = [
@@ -102,7 +104,20 @@ export class DashTestComponent implements OnInit {
   constructor(private fb: FormBuilder, private omtTestService: OmtTestService) {
     this.dashForm = this.createForm();
   }
+
   ngOnInit(): void {
+    if (this.noteId) {
+      this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
+        if (response?.answers) {
+          const formValues: { [key: string]: string } = {};
+          Object.entries(response.answers).forEach(([key, value]) => {
+            const formKey = key.toLowerCase();
+            formValues[formKey] = String((value as number) + 1);
+          });
+          this.dashForm.patchValue(formValues);
+        }
+      });
+    }
   }
   createForm(): FormGroup {
     const formGroup: any = {};
@@ -156,20 +171,40 @@ export class DashTestComponent implements OnInit {
     }
 
     // Calculate DASH score
-    const result: { [key: string]: number } = {};
+    const answers: { [key: string]: number } = {};
     for (let i = 1; i <= 30; i++) {
       const value = this.dashForm.get(`q${i}`)?.value;
       // Only include if not "Not Tested"
       if (value !== 'NT') {
-        result[`Q${i}`] = (parseInt(value, 10) - 1);
+        answers[`Q${i}`] = (parseInt(value, 10) - 1);
       }
     }
-    this.omtTestService.dashTest(result).subscribe(val => {
-      this.getResult.emit(val)
-    })
+    this.omtTestService.calculate(this.testName, this.noteId, answers).subscribe(val => {
+      this.getResult.emit(val);
+    });
   }
 
   resetForm(): void {
-    this.dashForm.reset();
+    // Reset all controls to 'NT' (Not Tested)
+    const resetValues: { [key: string]: string } = {};
+    for (let i = 1; i <= 30; i++) {
+      resetValues[`q${i}`] = 'NT';
+    }
+    this.dashForm.patchValue(resetValues);
+    this.dashForm.markAsUntouched();
+  }
+
+  getAnsweredCount(): number {
+    let count = 0;
+    for (let i = 1; i <= 30; i++) {
+      if (this.dashForm.get(`q${i}`)?.value !== 'NT') {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  getCompletionPercentage(): number {
+    return (this.getAnsweredCount() / 30) * 100;
   }
 }

@@ -1,0 +1,86 @@
+<div [formGroup]="formGroup">
+  <!-- Apply to All -->
+  <div *ngIf="showApplyToAll" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+    <label style="min-width: 150px; text-align: right; font-weight: 500; color: #5c4742;">{{ applyToAllLabel }}</label>
+    <select cSelect style="max-width: 200px;" [formControlName]="computedApplyToAllFieldName">
+      <option value="" selected>Select...</option>
+      <option *ngFor="let option of computedApplyToAllMeasurementOptions; trackBy: trackByValue" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Measurement & Endfeel Table -->
+  <table class="walk-test-table">
+    <thead>
+      <tr>
+        <th style="width: 300px;"></th>
+        <th style="width: 200px;">Measurement</th>
+        <th style="width: 200px;">Endfeel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let mapping of labelMappings; trackBy: trackByLabel">
+        <!-- Right side -->
+        <tr>
+          <td>{{ mapping.label }} (Right)</td>
+          <td>
+            <select cSelect class="table-input" [formControlName]="mapping.rightMeasurementField">
+              <option *ngFor="let option of mapping.measurementOptions; trackBy: trackByValue" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            <input *ngIf="customFieldVisible[mapping.rightMeasurementCustomField]" cFormControl type="text"
+              [formControlName]="mapping.rightMeasurementCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
+          </td>
+          <td>
+            <select cSelect class="table-input" [formControlName]="mapping.rightEndfeelField">
+              <option *ngFor="let option of endfeelOptions; trackBy: trackByValue" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            <input *ngIf="customFieldVisible[mapping.rightEndfeelCustomField]" cFormControl type="text"
+              [formControlName]="mapping.rightEndfeelCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
+          </td>
+        </tr>
+        <!-- Left side -->
+        <tr>
+          <td>{{ mapping.label }} (Left)</td>
+          <td>
+            <select cSelect class="table-input" [formControlName]="mapping.leftMeasurementField">
+              <option *ngFor="let option of mapping.measurementOptions; trackBy: trackByValue" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            <input *ngIf="customFieldVisible[mapping.leftMeasurementCustomField]" cFormControl type="text"
+              [formControlName]="mapping.leftMeasurementCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
+          </td>
+          <td>
+            <select cSelect class="table-input" [formControlName]="mapping.leftEndfeelField">
+              <option *ngFor="let option of endfeelOptions; trackBy: trackByValue" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            <input *ngIf="customFieldVisible[mapping.leftEndfeelCustomField]" cFormControl type="text"
+              [formControlName]="mapping.leftEndfeelCustomField" class="table-input custom-text-input"
+              placeholder="Enter custom value" />
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="computedCommentsFieldName"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

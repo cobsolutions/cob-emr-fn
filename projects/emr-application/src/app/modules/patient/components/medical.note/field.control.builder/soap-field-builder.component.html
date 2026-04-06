@@ -1,11 +1,19 @@
 <div [formGroup]="form">
     <!--input-->
-    <div class="d-flex align-items-center mb-1" *ngIf="field.type !== 'checkbox' && field.type !== 'radio' 
+    <div class="d-flex align-items-center mb-1" *ngIf="
+        field.type !== 'checkbox' 
+     && field.type !== 'cranial-nerve' 
+     && field.type !== 'cpt-billing-check-box' 
+     && field.type !== 'cpt-billing-text' 
+     && field.type !== 'right-left-check' 
+     && field.type !== 'radio' 
      && field.type !== 'textArea' 
      && field.type !== 'mutliple-checkBox'
+     && field.type !== 'multiple-columns-checkbox'
      && field.type !== 'checkbox'
      && field.type !== 'multiple_radio'
      && field.type !== 'select'
+     && field.type !== 'select-with-custom'
      && field.type !== 'multiple_select'
      && field.type !== 'custom-mutliple-radio'
      && field.type !== 'billing-code-number'
@@ -61,6 +69,10 @@
             [matTooltipPosition]="soapModule ==='billing'? 'above' : null">
             <input cFormCheckInput [id]="field.id" type="checkbox" [formControlName]="field.name" size="sm" />
             <label cFormCheckLabel for="na">{{field.display}}</label>
+
+            <a href="javascript:void(0)" class="ms-2 learn-more-link" *ngIf="field.isAll" (click)="clickAddAll(field)">
+                {{ field.displayText === 'Remove All' ? 'Remove All' : 'Add All' }}
+            </a>
         </c-form-check>
     </div>
     <!--radio-->
@@ -102,6 +114,13 @@
             [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
             [contorl_style]="filedStyle?.contorl_style"></mutliple-check-box>
     </div>
+    <!--multiple-columns-checkbox-->
+    <div class="mb-3" *ngIf="field.type === 'multiple-columns-checkbox'">
+        <multiple-columns-checkbox [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [label]="field.display" [splitColumn]="field.checkBoxCol"
+            [labelStyle]="filedStyle!.label_style" [checkBoxStyle]="filedStyle?.style"
+            [contorl_style]="filedStyle?.contorl_style"></multiple-columns-checkbox>
+    </div>
     <!--multiple_profile_text-->
     <div class="mb-3" *ngIf="field.type === 'multiple-profile-text'">
         <multiple-text-input [parentForm]="form" [parentFieldName]="field.name"
@@ -113,9 +132,14 @@
             [splitColumn]="1" [style]="getstyleFieldControl(field.name)"></multiple-radio>
     </div>
     <div class="mb-3" *ngIf="field.type === 'billing-code-number'">
-        <billing-code-number [form]="form" [label]="field.display" [value]="field.name"></billing-code-number>
+        <billing-code-number [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name"
+            [label]='field.display' [data]="data"></billing-code-number>
     </div>
-    <!--select-->
+    <!--select-with-custom-->
+    <div class="d-flex mb-1" *ngIf="field.type === 'select-with-custom'">
+        <select-with-custom [parentForm]="form" [parentFieldName]="field.name" [values]="field.value"
+            [style]="filedStyle!.style" [display]="field.display"></select-with-custom>
+    </div>
     <div class="d-flex mb-1" *ngIf="field.type === 'select'">
         <label class="me-2 text-end" [style]="filedStyle!.label_style">
             {{field.display}}
@@ -235,6 +259,15 @@
             [controlR]="field.value.controlR" [controlL]="field.value.controlL" [rightLabel]="field.value.rightLabel"
             [leftLabel]="field.value.leftLabel"></rom-test-right-left>
     </div>
+    <div *ngIf="field.type === 'cranial-nerve'">
+        <cranial-nerve [parentForm]="form" [parentFieldName]="field.name" [controls]="field.value.controls"
+            [dependentOptions]="field.value.dependentOptions"></cranial-nerve>
+    </div>
+    <div *ngIf="field.type === 'right-left-check'">
+        <right-left-check [parentForm]="form" [parentFieldName]="field.name" [controlR]="field.value.controlR"
+            [controlL]="field.value.controlL">
+        </right-left-check>
+    </div>
     <div *ngIf="field.type === 'hand-rom'">
         <hand-rom [parentForm]="form" [parentFieldName]="field.name" [controlR1]="field.value.controlR1"
             [controlR2]="field.value.controlR2" [controlL1]="field.value.controlL1" [controlL2]="field.value.controlL2"
@@ -267,8 +300,17 @@
             [singleSections]="field.value.singleSections" [dualSections]="field.value.dualSections"></cutom-palpation>
     </div>
     <div *ngIf="field.type === 'icdten'">
-        <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style" [parentForm]="form" [parentFieldName]="field.name">
+        <icdten [title]="field.display" [hierarchy]="field.value?.hierarchy" [style]="filedStyle!.style"
+            [parentForm]="form" [parentFieldName]="field.name">
         </icdten>
+    </div>
+    <div *ngIf="field.type === 'cpt-billing-check-box'">
+        <cpt-billing-check-box [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name"
+            [label]='field.display' [data]="data"></cpt-billing-check-box>
+    </div>
+    <div *ngIf="field.type === 'cpt-billing-text'">
+        <cpt-billing-text [cpt]='field.name' [parentForm]="form" [parentFieldName]="field.name" [label]='field.display'
+            [data]="data"></cpt-billing-text>
     </div>
     <div *ngIf="field.dependents!==undefined && field.dependents.length > 0">
         <span *ngFor="let dependent of field.dependents;">

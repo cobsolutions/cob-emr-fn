@@ -1,0 +1,2175 @@
+<form [formGroup]="romForm" class="rom-form">
+
+  <!-- No Limitations Noted -->
+  <div class="form-row">
+    <label class="field-label">No Limitations Noted</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="no_limitations_noted" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <!-- No Limitations Noted Child Fields -->
+  <div *ngIf="showNoLimitationsNotedFields" class="dependent-field-box">
+    <!-- AROM Checkbox -->
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="arom" />
+        <label cFormCheckLabel>AROM</label>
+      </c-form-check>
+    </div>
+
+    <!-- PROM Checkbox -->
+    <div class="form-row">
+      <c-form-check>
+        <input cFormCheckInput type="checkbox" formControlName="prom" />
+        <label cFormCheckLabel>PROM</label>
+      </c-form-check>
+    </div>
+
+    <!-- PROM Child Fields -->
+    <div *ngIf="showPromFields" class="nested-dependent-field-box">
+      <div class="checkbox-group">
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_cervical" />
+          <label cFormCheckLabel>Cervical</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_thoracic" />
+          <label cFormCheckLabel>Thoracic</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_shoulder" />
+          <label cFormCheckLabel>Shoulder</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_elbow" />
+          <label cFormCheckLabel>Elbow</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_wrist" />
+          <label cFormCheckLabel>Wrist</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_hand" />
+          <label cFormCheckLabel>Hand</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_lumbar" />
+          <label cFormCheckLabel>Lumbar</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_hip" />
+          <label cFormCheckLabel>Hip</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_knee" />
+          <label cFormCheckLabel>Knee</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_ankle" />
+          <label cFormCheckLabel>Ankle</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="checkbox" formControlName="prom_feet" />
+          <label cFormCheckLabel>Feet</label>
+        </c-form-check>
+      </div>
+
+      <!-- Comments Textarea -->
+      <div class="form-row">
+        <textarea formControlName="prom_comments" class="form-textarea" rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cervical AROM Fields -->
+  <div class="form-row">
+    <label class="field-label">Cervical AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cervical_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <div *ngIf="showCervicalAromFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.cervicalArom.labels" [options]="romConfig.cervicalArom.options"
+      [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
+      [specialOptions]="romConfig.cervicalArom.specialOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
+      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll" [showComments]="romConfig.cervicalArom.showComments">
+    </single-column-table>
+  </div>
+  <!-- Costovertebral Expansion-->
+  <div class="form-row">
+    <label class="field-label">Costovertebral Expansion</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="costovertebral_expansion" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCostovertebralExpansionFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.costovertebralExpansion.labels"
+      [options]="romConfig.costovertebralExpansion.options" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.costovertebralExpansion.fieldPrefix"
+      [applyToAllFieldName]="romConfig.costovertebralExpansion.applyToAllFieldName"
+      [commentsFieldName]="romConfig.costovertebralExpansion.commentsFieldName"
+      [showApplyToAll]="romConfig.costovertebralExpansion.showApplyToAll"
+      [showComments]="romConfig.costovertebralExpansion.showComments">
+    </single-column-table>
+  </div>
+  <!--Shoulder AROM -->
+  <div class="form-row">
+    <label class="field-label">Shoulder AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.shoulderArom.labels" [options]="romConfig.shoulderArom.options"
+      [specialOptions]="romConfig.shoulderArom.specialOptions"
+      [applyToAllOptions]="romConfig.shoulderArom.applyToAllOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.shoulderArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.shoulderArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.shoulderArom.commentsFieldName"
+      [showApplyToAll]="romConfig.shoulderArom.showApplyToAll" [showComments]="romConfig.shoulderArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!-- Shoulder PROM -->
+  <div class="form-row">
+    <label class="field-label">Shoulder PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderPromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.shoulderProm.labels"
+      [measurementOptions]="romConfig.shoulderProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.shoulderProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.shoulderProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.shoulderProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.shoulderProm.fieldPrefix"
+      [applyToAllFieldName]="romConfig.shoulderProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.shoulderProm.commentsFieldName"
+      [showApplyToAll]="romConfig.shoulderProm.showApplyToAll" [showComments]="romConfig.shoulderProm.showComments"
+      [initialData]="formData">
+    </measurement-endfeel-table>
+  </div>
+  <!--Elbow AROM -->
+  <div class="form-row">
+    <label class="field-label">Elbow AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.elbowArom.labels" [options]="romConfig.elbowArom.options"
+      [specialOptions]="romConfig.elbowArom.specialOptions" [applyToAllOptions]="romConfig.elbowArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.elbowArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.elbowArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.elbowArom.commentsFieldName" [showApplyToAll]="romConfig.elbowArom.showApplyToAll"
+      [showComments]="romConfig.elbowArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--Elbow PROM-->
+  <div class="form-row">
+    <label class="field-label">Elbow PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowPromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.elbowProm.labels"
+      [measurementOptions]="romConfig.elbowProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.elbowProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.elbowProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.elbowProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.elbowProm.fieldPrefix" [applyToAllFieldName]="romConfig.elbowProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.elbowProm.commentsFieldName" [showApplyToAll]="romConfig.elbowProm.showApplyToAll"
+      [showComments]="romConfig.elbowProm.showComments"
+      [initialData]="formData">
+    </measurement-endfeel-table>
+  </div>
+  <!--Wrist AROM-->
+  <div class="form-row">
+    <label class="field-label">Wrist AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wrist_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showWristAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.wristArom.labels" [options]="romConfig.wristArom.options"
+      [specialOptions]="romConfig.wristArom.specialOptions" [applyToAllOptions]="romConfig.wristArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.wristArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.wristArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.wristArom.commentsFieldName" [showApplyToAll]="romConfig.wristArom.showApplyToAll"
+      [showComments]="romConfig.wristArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+
+  </div>
+  <!--Wrist PROM-->
+  <div class="form-row">
+    <label class="field-label">Wrist PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="wrist_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="wrist_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <div *ngIf="showWristPromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.wristProm.labels"
+      [measurementOptions]="romConfig.wristProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.wristProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.wristProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.wristProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.wristProm.fieldPrefix" [applyToAllFieldName]="romConfig.wristProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.wristProm.commentsFieldName" [showApplyToAll]="romConfig.wristProm.showApplyToAll"
+      [showComments]="romConfig.wristProm.showComments"
+      [initialData]="formData">
+    </measurement-endfeel-table>
+  </div>
+
+  <!--Hand AROM/PROM -->
+  <div class="form-row">
+    <label class="field-label">Hand AROM-PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hand_arrom_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHandAromPromFields" class="dependent-field-box">
+    <div class="form-row">
+      <label class="field-label">Calculate Total ROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="calculate_total_rom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="calculate_total_rom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Thumb AROM/PROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="thumb_arrom_prom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="thumb_arrom_prom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showThumbAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CMC Palmar Abduction</td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_palmar_abduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_palmar_abduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_palmar_abduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_palmar_abduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>CMC Radial Abduction</td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_radial_abduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_radial_abduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_radial_abduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_radial_abduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>CMC Adduction</td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>CMC Extension</td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>CMC Flexion</td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_cmc_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>CMC Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_cmc_total_motion_right_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_cmc_total_motion_right_prom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_cmc_total_motion_left_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_cmc_total_motion_left_prom" class="table-input" />
+            </td>
+          </tr>
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="thumb_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="thumb_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_mp_total_motion_right_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_mp_total_motion_right_prom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_mp_total_motion_left_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_mp_total_motion_left_prom" class="table-input" />
+            </td>
+          </tr>
+          <tr>
+            <td>IP Extension</td>
+            <td>
+              <select cSelect formControlName="thumb_ip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>IP Flexion</td>
+            <td>
+              <select cSelect formControlName="thumb_ip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="thumb_ip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>IP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_ip_total_motion_right_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_ip_total_motion_right_prom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_ip_total_motion_left_arom" class="table-input" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="thumb_ip_total_motion_left_prom" class="table-input" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="thumb_comments" rows="3" class="form-textarea"
+          placeholder="Comments"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Index Finger AROM/PROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="index_finger_arrom_prom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="index_finger_arrom_prom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showIndexFingerAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MP Adduction -->
+          <tr>
+            <td>MP Adduction</td>
+            <td>
+              <select cSelect formControlName="index_mp_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Extension -->
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="index_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Flexion -->
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="index_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Total Motion -->
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="index_mp_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_mp_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_mp_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_mp_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- PIP Extension -->
+          <tr>
+            <td>PIP Extension</td>
+            <td>
+              <select cSelect formControlName="index_pip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Flexion -->
+          <tr>
+            <td>PIP Flexion</td>
+            <td>
+              <select cSelect formControlName="index_pip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_pip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Total Motion -->
+          <tr>
+            <td>PIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="index_pip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_pip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_pip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_pip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- DIP Extension -->
+          <tr>
+            <td>DIP Extension</td>
+            <td>
+              <select cSelect formControlName="index_dip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Flexion -->
+          <tr>
+            <td>DIP Flexion</td>
+            <td>
+              <select cSelect formControlName="index_dip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="index_dip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Total Motion -->
+          <tr>
+            <td>DIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="index_dip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_dip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_dip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="index_dip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="index_comments" rows="3" class="form-textarea"
+          placeholder="Comments"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Middle Finger AROM/PROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="middle_finger_arrom_prom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="middle_finger_arrom_prom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showMiddleFingerAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MP Adduction -->
+          <tr>
+            <td>MP Adduction</td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Extension -->
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Flexion -->
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Total Motion -->
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_mp_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- PIP Extension -->
+          <tr>
+            <td>PIP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Flexion -->
+          <tr>
+            <td>PIP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_pip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Total Motion -->
+          <tr>
+            <td>PIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_pip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- DIP Extension -->
+          <tr>
+            <td>DIP Extension</td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Flexion -->
+          <tr>
+            <td>DIP Flexion</td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="middle_dip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Total Motion -->
+          <tr>
+            <td>DIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="middle_dip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="middle_comments" rows="3" class="form-textarea"
+          placeholder="Comments"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Ring Finger AROM/PROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="ring_finger_arrom_prom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="ring_finger_arrom_prom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showRingFingerAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MP Adduction -->
+          <tr>
+            <td>MP Adduction</td>
+            <td>
+              <select cSelect formControlName="ring_mp_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Extension -->
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="ring_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Flexion -->
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="ring_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Total Motion -->
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_mp_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_mp_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_mp_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_mp_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- PIP Extension -->
+          <tr>
+            <td>PIP Extension</td>
+            <td>
+              <select cSelect formControlName="ring_pip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Flexion -->
+          <tr>
+            <td>PIP Flexion</td>
+            <td>
+              <select cSelect formControlName="ring_pip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_pip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Total Motion -->
+          <tr>
+            <td>PIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_pip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_pip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_pip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_pip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- DIP Extension -->
+          <tr>
+            <td>DIP Extension</td>
+            <td>
+              <select cSelect formControlName="ring_dip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Flexion -->
+          <tr>
+            <td>DIP Flexion</td>
+            <td>
+              <select cSelect formControlName="ring_dip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="ring_dip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Total Motion -->
+          <tr>
+            <td>DIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_dip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_dip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_dip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="ring_dip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="ring_comments" rows="3" class="form-textarea"
+          placeholder="Comments"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="field-label">Small Finger AROM/PROM</label>
+      <div class="radio-group radio-group-primary">
+        <c-form-check class="me-3">
+          <input cFormCheckInput type="radio" formControlName="small_finger_arrom_prom" [value]="false" />
+          <label cFormCheckLabel>No</label>
+        </c-form-check>
+        <c-form-check>
+          <input cFormCheckInput type="radio" formControlName="small_finger_arrom_prom" [value]="true" />
+          <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+      </div>
+    </div>
+    <div *ngIf="showSmallFingerAromPromFields" class="nested-dependent-field-box">
+      <table class="walk-test-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Right</th>
+            <th colspan="2">Left</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>AROM</th>
+            <th>PROM</th>
+            <th>AROM</th>
+            <th>PROM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MP Adduction -->
+          <tr>
+            <td>MP Adduction</td>
+            <td>
+              <select cSelect formControlName="small_mp_adduction_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_adduction_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_adduction_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_adduction_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Extension -->
+          <tr>
+            <td>MP Extension</td>
+            <td>
+              <select cSelect formControlName="small_mp_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Flexion -->
+          <tr>
+            <td>MP Flexion</td>
+            <td>
+              <select cSelect formControlName="small_mp_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_mp_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- MP Total Motion -->
+          <tr>
+            <td>MP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="small_mp_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_mp_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_mp_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_mp_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- PIP Extension -->
+          <tr>
+            <td>PIP Extension</td>
+            <td>
+              <select cSelect formControlName="small_pip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Flexion -->
+          <tr>
+            <td>PIP Flexion</td>
+            <td>
+              <select cSelect formControlName="small_pip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_pip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- PIP Total Motion -->
+          <tr>
+            <td>PIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="small_pip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_pip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_pip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_pip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+          <!-- DIP Extension -->
+          <tr>
+            <td>DIP Extension</td>
+            <td>
+              <select cSelect formControlName="small_dip_extension_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_extension_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_extension_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_extension_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Flexion -->
+          <tr>
+            <td>DIP Flexion</td>
+            <td>
+              <select cSelect formControlName="small_dip_flexion_right_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_flexion_right_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_flexion_left_arom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+            <td>
+              <select cSelect formControlName="small_dip_flexion_left_prom" class="table-input">
+                <option *ngFor="let option of romTestOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </td>
+          </tr>
+          <!-- DIP Total Motion -->
+          <tr>
+            <td>DIP Total Motion</td>
+            <td>
+              <input cFormControl type="text" formControlName="small_dip_total_motion_right_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_dip_total_motion_right_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_dip_total_motion_left_arom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+            <td>
+              <input cFormControl type="text" formControlName="small_dip_total_motion_left_prom" class="table-input"
+                placeholder="Total Motion" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-row">
+        <textarea cFormControl formControlName="small_comments" rows="3" class="form-textarea"
+          placeholder="Comments"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--Thoracic AROM Sitting with Passive Overpressure-->
+  <div class="form-row">
+    <label class="field-label">Thoracic AROM Sitting with Passive Overpressure</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure"
+          value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_sitting_with_passive_overpressure"
+          value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showThoracicAromSittingWithPassiveOverpressureFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.thoracicAromSitting.labels"
+      [options]="romConfig.thoracicAromSitting.options" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.thoracicAromSitting.fieldPrefix"
+      [applyToAllFieldName]="romConfig.thoracicAromSitting.applyToAllFieldName"
+      [commentsFieldName]="romConfig.thoracicAromSitting.commentsFieldName"
+      [showApplyToAll]="romConfig.thoracicAromSitting.showApplyToAll"
+      [showComments]="romConfig.thoracicAromSitting.showComments">
+    </single-column-table>
+
+
+
+  </div>
+  <!--Thoracic AROM Standing-->
+  <div class="form-row">
+    <label class="field-label">Thoracic AROM Standing</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="thoracic_arrom_standing" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showThoracicAromStandingFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.thoracicAromStanding.labels"
+      [options]="romConfig.thoracicAromStanding.options" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.thoracicAromStanding.fieldPrefix"
+      [applyToAllFieldName]="romConfig.thoracicAromStanding.applyToAllFieldName"
+      [commentsFieldName]="romConfig.thoracicAromStanding.commentsFieldName"
+      [showApplyToAll]="romConfig.thoracicAromStanding.showApplyToAll"
+      [showComments]="romConfig.thoracicAromStanding.showComments">
+    </single-column-table>
+
+  </div>
+  <!--Lumbar AROM -->
+  <div class="form-row">
+    <label class="field-label">Lumbar AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="lumbar_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showLumbarAromFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.lumbarArom.labels" [options]="romConfig.lumbarArom.options"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.lumbarArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.lumbarArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.lumbarArom.commentsFieldName"
+      [showApplyToAll]="romConfig.lumbarArom.showApplyToAll" [showComments]="romConfig.lumbarArom.showComments">
+    </single-column-table>
+
+  </div>
+  <!--Hip AROM-->
+  <div class="form-row">
+    <label class="field-label">Hip AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hip_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hip_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHipAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.hipArom.labels" [options]="romConfig.hipArom.options"
+      [specialOptions]="romConfig.hipArom.specialOptions" [applyToAllOptions]="romConfig.hipArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.hipArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.hipArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.hipArom.commentsFieldName" [showApplyToAll]="romConfig.hipArom.showApplyToAll"
+      [showComments]="romConfig.hipArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--Hip PROM-->
+  <div class="form-row">
+    <label class="field-label">Hip PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="hip_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="hip_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showHipPromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.hipProm.labels"
+      [measurementOptions]="romConfig.hipProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.hipProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.hipProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.hipProm.endfeelOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.hipProm.fieldPrefix" [applyToAllFieldName]="romConfig.hipProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.hipProm.commentsFieldName" [showApplyToAll]="romConfig.hipProm.showApplyToAll"
+      [showComments]="romConfig.hipProm.showComments"
+      [initialData]="formData">
+    </measurement-endfeel-table>
+  </div>
+  <!--Knee AROM-->
+  <div class="form-row">
+    <label class="field-label">Knee AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="knee_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="knee_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showKneeAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.kneeArom.labels" [options]="romConfig.kneeArom.options"
+      [specialOptions]="romConfig.kneeArom.specialOptions" [applyToAllOptions]="romConfig.kneeArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.kneeArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.kneeArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.kneeArom.commentsFieldName" [showApplyToAll]="romConfig.kneeArom.showApplyToAll"
+      [showComments]="romConfig.kneeArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--Knee PROM-->
+  <div class="form-row">
+    <label class="field-label">Knee PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="knee_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="knee_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showKneePromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+    [labels]="romConfig.kneeProm.labels"
+    [measurementOptions]="romConfig.kneeProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.kneeProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.kneeProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.kneeProm.endfeelOptions" 
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.kneeProm.fieldPrefix" 
+    [applyToAllFieldName]="romConfig.kneeProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.kneeProm.commentsFieldName" 
+    [showApplyToAll]="romConfig.kneeProm.showApplyToAll"
+    [showComments]="romConfig.kneeProm.showComments"
+    [initialData]="formData">
+</measurement-endfeel-table>
+  </div>
+  <!--Ankle AROM-->
+  <div class="form-row">
+    <label class="field-label">Ankle AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="ankle_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAnkleAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.ankleArom.labels" [options]="romConfig.ankleArom.options"
+      [specialOptions]="romConfig.ankleArom.specialOptions" [applyToAllOptions]="romConfig.ankleArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.ankleArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.ankleArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.ankleArom.commentsFieldName" [showApplyToAll]="romConfig.ankleArom.showApplyToAll"
+      [showComments]="romConfig.ankleArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--Ankle PROM-->
+  <div class="form-row">
+    <label class="field-label">Ankle PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="ankle_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="ankle_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAnklePromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.ankleProm.labels"
+        [measurementOptions]="romConfig.ankleProm.measurementOptions"
+        [applyToAllMeasurementOptions]="romConfig.ankleProm.applyToAllMeasurementOptions"
+        [specialMeasurementOptions]="romConfig.ankleProm.specialMeasurementOptions"
+        [endfeelOptions]="romConfig.ankleProm.endfeelOptions" [formGroup]="romForm"
+        [fieldPrefix]="romConfig.ankleProm.fieldPrefix" [applyToAllFieldName]="romConfig.ankleProm.applyToAllFieldName"
+        [commentsFieldName]="romConfig.ankleProm.commentsFieldName" [showApplyToAll]="romConfig.ankleProm.showApplyToAll"
+        [showComments]="romConfig.ankleProm.showComments"
+        [initialData]="formData">
+      </measurement-endfeel-table>
+  </div>
+  <!--1st MTP AROM-->
+  <div class="form-row">
+    <label class="field-label">1st MTP AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stMtpAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.fstMTPArom.labels" [options]="romConfig.fstMTPArom.options"
+      [specialOptions]="romConfig.fstMTPArom.specialOptions"
+      [applyToAllOptions]="romConfig.fstMTPArom.applyToAllOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.fstMTPArom.fieldPrefix" [applyToAllFieldName]="romConfig.fstMTPArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstMTPArom.commentsFieldName"
+      [showApplyToAll]="romConfig.fstMTPArom.showApplyToAll" [showComments]="romConfig.fstMTPArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+
+  <!--1st MTP PROM-->
+  <div class="form-row">
+    <label class="field-label">1st MTP PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_mtp_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stMtpPromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+    [labels]="romConfig.fstmtpProm.labels"
+    [measurementOptions]="romConfig.fstmtpProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.fstmtpProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.fstmtpProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.fstmtpProm.endfeelOptions" 
+    [formGroup]="romForm"
+    [fieldPrefix]="romConfig.fstmtpProm.fieldPrefix" 
+    [applyToAllFieldName]="romConfig.fstmtpProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.fstmtpProm.commentsFieldName"
+    [showApplyToAll]="romConfig.fstmtpProm.showApplyToAll"
+    [showComments]="romConfig.fstmtpProm.showComments"
+    [initialData]="formData">
+</measurement-endfeel-table>
+  </div>
+  <!--1st IP AROM-->
+  <div class="form-row">
+    <label class="field-label">1st IP AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_ip_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stIpAromFields" class="dependent-field-box">
+    <measurement-table [labels]="romConfig.fstipArom.labels" [options]="romConfig.fstipArom.options"
+      [specialOptions]="romConfig.fstipArom.specialOptions" [applyToAllOptions]="romConfig.fstipArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.fstipArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.fstipArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstipArom.commentsFieldName" [showApplyToAll]="romConfig.fstipArom.showApplyToAll"
+      [showComments]="romConfig.fstipArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--1st IP PROM-->
+  <div class="form-row">
+    <label class="field-label">1st IP PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="fst_ip_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="show1stIpPromFields" class="dependent-field-box">
+    <measurement-endfeel-table 
+      [labels]="romConfig.fstipProm.labels"
+      [measurementOptions]="romConfig.fstipProm.measurementOptions"
+      [applyToAllMeasurementOptions]="romConfig.fstipProm.applyToAllMeasurementOptions"
+      [specialMeasurementOptions]="romConfig.fstipProm.specialMeasurementOptions"
+      [endfeelOptions]="romConfig.fstipProm.endfeelOptions" 
+      [formGroup]="romForm"
+      [fieldPrefix]="romConfig.fstipProm.fieldPrefix" 
+      [applyToAllFieldName]="romConfig.fstipProm.applyToAllFieldName"
+      [commentsFieldName]="romConfig.fstipProm.commentsFieldName"
+      [showApplyToAll]="romConfig.fstipProm.showApplyToAll"
+      [showComments]="romConfig.fstipProm.showComments"
+      [initialData]="formData">
+</measurement-endfeel-table>
+  </div>
+  <!--Toe AROM-->
+  <div class="form-row">
+    <label class="field-label">Toe AROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="toe_arrom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="toe_arrom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+
+  <div *ngIf="showToeAromFields" class="dependent-field-box">
+
+    <measurement-table [labels]="romConfig.toeArom.labels" [options]="romConfig.toeArom.options"
+      [specialOptions]="romConfig.toeArom.specialOptions" [applyToAllOptions]="romConfig.toeArom.applyToAllOptions"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.toeArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.toeArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.toeArom.commentsFieldName" [showApplyToAll]="romConfig.toeArom.showApplyToAll"
+      [showComments]="romConfig.toeArom.showComments"
+      [initialData]="formData">
+    </measurement-table>
+  </div>
+  <!--Toe PROM-->
+  <div class="form-row">
+    <label class="field-label">Toe PROM</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="toe_prom" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="toe_prom" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showToePromFields" class="dependent-field-box">
+    <measurement-endfeel-table [labels]="romConfig.toeProm.labels"
+    [measurementOptions]="romConfig.toeProm.measurementOptions"
+    [applyToAllMeasurementOptions]="romConfig.toeProm.applyToAllMeasurementOptions"
+    [specialMeasurementOptions]="romConfig.toeProm.specialMeasurementOptions"
+    [endfeelOptions]="romConfig.toeProm.endfeelOptions" [formGroup]="romForm"
+    [fieldPrefix]="romConfig.toeProm.fieldPrefix" [applyToAllFieldName]="romConfig.toeProm.applyToAllFieldName"
+    [commentsFieldName]="romConfig.toeProm.commentsFieldName" [showApplyToAll]="romConfig.toeProm.showApplyToAll"
+    [showComments]="romConfig.toeProm.showComments"
+    [initialData]="formData">
+  </measurement-endfeel-table>
+  </div>
+  <div class="form-row">
+    <label class="field-label">Additional Comments</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="additional_comments" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showAdditionalCommentsFields" class="dependent-field-box">
+    <textarea formControlName="additional_comments_text" class="form-textarea" rows="4"></textarea>
+  </div>
+  <!-- DUMMY EXAMPLE 1: Shoulder AROM with Labels -->
+  <!-- <div class="form-row">
+    <label class="field-label">Shoulder AROM (Dummy With Labels)</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="shoulder_arom_with_labels" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="shoulder_arom_with_labels" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showShoulderAromWithLabelsFields" class="dependent-field-box">
+    <dropdown-text-table [columns]="romConfig.shoulderAromWithLabels.columns"
+      [labels]="romConfig.shoulderAromWithLabels.labels" [options]="romConfig.shoulderAromWithLabels.options"
+      [formGroup]="romForm" [fieldPrefix]="romConfig.shoulderAromWithLabels.fieldPrefix"
+      [commentsFieldName]="romConfig.shoulderAromWithLabels.commentsFieldName"
+      [showComments]="romConfig.shoulderAromWithLabels.showComments">
+    </dropdown-text-table>
+  </div> -->
+
+  <!-- DUMMY EXAMPLE 2: Grip Test without Labels -->
+  <!-- <div class="form-row">
+    <label class="field-label">Grip Test (Dummy Without Labels)</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="grip_test_no_labels" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="grip_test_no_labels" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showGripTestNoLabelsFields" class="dependent-field-box">
+    <dropdown-text-table [columns]="romConfig.gripTestNoLabels.columns" [labels]="romConfig.gripTestNoLabels.labels"
+      [options]="romConfig.gripTestNoLabels.options" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.gripTestNoLabels.fieldPrefix"
+      [commentsFieldName]="romConfig.gripTestNoLabels.commentsFieldName"
+      [showComments]="romConfig.gripTestNoLabels.showComments">
+    </dropdown-text-table>
+  </div> -->
+
+  <!-- DUMMY EXAMPLE 3: Elbow AROM with Top Selects -->
+  <!-- <div class="form-row">
+    <label class="field-label">Elbow AROM (Dummy With Top Selects)</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="elbow_arom_with_selects" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="elbow_arom_with_selects" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showElbowAromWithSelectsFields" class="dependent-field-box">
+    <measurement-table-with-selects [labels]="romConfig.elbowAromWithSelects.labels"
+      [options]="romConfig.elbowAromWithSelects.options" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.elbowAromWithSelects.fieldPrefix"
+      [topSelects]="romConfig.elbowAromWithSelects.topSelects"
+      [commentsFieldName]="romConfig.elbowAromWithSelects.commentsFieldName"
+      [showComments]="romConfig.elbowAromWithSelects.showComments">
+    </measurement-table-with-selects>
+  </div> -->
+
+  <!-- <div class="form-row">
+    <label class="field-label">Cervical AROM (Dummy - Single Column)</label>
+    <div class="radio-group radio-group-primary">
+      <c-form-check class="me-3">
+        <input cFormCheckInput type="radio" formControlName="cervical_arom_single_column_dummy" value="yes" />
+        <label cFormCheckLabel>Yes</label>
+      </c-form-check>
+      <c-form-check>
+        <input cFormCheckInput type="radio" formControlName="cervical_arom_single_column_dummy" value="no" />
+        <label cFormCheckLabel>No</label>
+      </c-form-check>
+    </div>
+  </div>
+  <div *ngIf="showCervicalAromSingleColumnFields" class="dependent-field-box">
+    <single-column-table [labels]="romConfig.cervicalArom.labels" [options]="romConfig.cervicalArom.options"
+      [applyToAllOptions]="romConfig.cervicalArom.applyToAllOptions"
+      [specialOptions]="romConfig.cervicalArom.specialOptions" [formGroup]="romForm"
+      [fieldPrefix]="romConfig.cervicalArom.fieldPrefix"
+      [applyToAllFieldName]="romConfig.cervicalArom.applyToAllFieldName"
+      [commentsFieldName]="romConfig.cervicalArom.commentsFieldName"
+      [showApplyToAll]="romConfig.cervicalArom.showApplyToAll" [showComments]="romConfig.cervicalArom.showComments">
+    </single-column-table>
+  </div> -->
+</form>

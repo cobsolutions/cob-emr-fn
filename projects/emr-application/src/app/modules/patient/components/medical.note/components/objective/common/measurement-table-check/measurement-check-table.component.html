@@ -1,0 +1,52 @@
+<div [formGroup]="formGroup">
+
+  <!-- Checkbox Table - Each label appears in both columns -->
+  <table class="walk-test-table">
+    <thead>
+      <tr>
+        <th style="width: 50%; text-align: center;">Right</th>
+        <th style="width: 50%; text-align: center;">Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let label of labels">
+        <!-- Right Column -->
+        <td style="background-color: #f8f9fa;">
+          <div class="checkbox-container">
+            <label class="checkbox-wrapper">
+              <input 
+                type="checkbox" 
+                class="table-checkbox"
+                [formControlName]="getFieldName(label, 'right')">
+              <span class="checkbox-label">{{ label }}</span>
+            </label>
+          </div>
+        </td>
+        
+        <!-- Left Column -->
+        <td style="background-color: #f8f9fa;">
+          <div class="checkbox-container">
+            <label class="checkbox-wrapper">
+              <input 
+                type="checkbox" 
+                class="table-checkbox"
+                [formControlName]="getFieldName(label, 'left')">
+              <span class="checkbox-label">{{ label }}</span>
+            </label>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Comments -->
+  <div *ngIf="showComments" style="margin-top: 1rem;">
+    <label style="font-weight: 500; color: #5c4742; display: block; margin-bottom: 0.5rem;">{{ commentsLabel }}</label>
+    <textarea
+      class="form-textarea"
+      [formControlName]="getCommentsFieldName()"
+      rows="3"
+      placeholder="Enter any comments...">
+    </textarea>
+  </div>
+</div>

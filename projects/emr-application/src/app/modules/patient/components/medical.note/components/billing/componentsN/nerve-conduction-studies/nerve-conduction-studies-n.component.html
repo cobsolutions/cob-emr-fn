@@ -1,0 +1,33 @@
+<div class="untimed-codes-container" [formGroup]="NerveConductionStudiesForm">
+    <div class="checkbox-list">
+      <div *ngFor="let code of billingCPTCodeList" class="checkbox-item">
+        <c-form-check>
+          <input
+            cFormCheckInput
+            type="checkbox"
+            [id]="'cpt-' + code.cpt"
+            [formControlName]="code.cpt + '_checked'"
+            (change)="onCheckboxChange(code.cpt, $event)"
+          />
+          <label
+            cFormCheckLabel
+            [for]="'cpt-' + code.cpt"
+            [title]="'CPT Code: ' + code.cpt"
+          >
+            {{ code.description }}
+          </label>
+        </c-form-check>
+  
+        <div *ngIf="isChecked(code.cpt)" class="textarea-wrapper">
+          <textarea
+            [id]="'notes-' + code.cpt"
+            [formControlName]="code.cpt + '_notes'"
+            placeholder="Enter notes for {{ code.cpt }}"
+            rows="3"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -2,11 +2,13 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { LoggedInService } from '../../../../security/service/loggedIn/logged-in.service';
+import { FinalizeMedicalNoteRequest } from '../../../models/medical.note/finalize.medical.note.request';
 import { MedicalNoteRequest } from '../../../models/medical.note/medical.note.request';
 import { MedicalNoteType } from '../../../models/medical.note/medical.note.type';
 import { MedialNoteService } from '../../../services/medical.note/medial-note.service';
+import { CPTBillingConverter } from '../components/billing/util/cpt.billing.code.converter';
 @Component({
   selector: 'daily-note',
   templateUrl: './daily-note.component.html',
@@ -19,31 +21,36 @@ export class DailyNoteComponent implements OnInit {
   dailyNoteForm: FormGroup
   visitedSteps: boolean[] = [];
   @Input() medicalNoteId: number
-  @Input() caseId: number
+  @Input() noteId: string
+  @Input() caseId: string
   medicalNoteSOAP: any
   @Output() back = new EventEmitter<void>();
   type: MedicalNoteType = MedicalNoteType.Daily_Note;
   noteCreator: string
   noteFinalizr: string
-  private destroy$ = new Subject<void>();
+  noteCoSigner: string
+  disableFinalize: boolean = false
+  private finalizeSub!: Subscription;
   constructor(private fb: FormBuilder
     , private medialNoteService: MedialNoteService
     , private loggedInService: LoggedInService) { }
 
   ngOnInit(): void {
-    this.medialNoteService.saveNoteObservable$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(val => {
-        if (val !== null) {
-          const finalizeRequest = val;
-          this.draftAction().subscribe(d => {
-            this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
-              this.backtoPatientRecordActions();
-            });
-          });
+    this.finalizeSub = this.medialNoteService.finalize$.subscribe((status) => {
+      if (status) {
+        const finalizeRequest: FinalizeMedicalNoteRequest = {
+          caseId: this.caseId,
+          id: this.medicalNoteId,
+          noteType: MedicalNoteType.Daily_Note,
+          finalizedBy: this.loggedInService.getLoggedUser().uuid
         }
-      });
-    this.medialNoteService.noteType$.next('daily')
+        this.draftAction().subscribe(d => {
+          this.medialNoteService.finalizea(finalizeRequest).subscribe(v => {
+            this.backtoPatientRecordActions();
+          });
+        });
+      }
+    })
     this.visitedSteps = [true, false, false, false]
     this.dailyNoteForm = this.fb.group({
       subjective: this.fb.group({}),
@@ -55,13 +62,14 @@ export class DailyNoteComponent implements OnInit {
       this.medialNoteService.findMedicalNoteType(this.medicalNoteId).subscribe((data: any) => {
         this.noteCreator = data.createdBy;
         this.noteFinalizr = data.finalizedBy;
+        this.noteCoSigner = data.coSigner;
+        this.disableFinalize = false;
         this.medicalNoteSOAP = data
       })
     this.handleNoteFinalization()
   }
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.finalizeSub?.unsubscribe();
   }
   soapActions(action: string) {
     if (action === 'back')
@@ -75,10 +83,10 @@ export class DailyNoteComponent implements OnInit {
   private buildMedicalNoteModel(): MedicalNoteRequest {
     var createdNote: any = this.getAllFormValues(this.dailyNoteForm)
     var medicalNoteRequest: MedicalNoteRequest = {
-      caseId: this.caseId,
+      patientCaseId: this.caseId,
       id: this.medicalNoteId,
       subjective: createdNote.subjective,
-      objective: Object.keys(createdNote.objective).length === 0 ? null : createdNote.objective,
+      billing: Object.keys(createdNote.objective).length === 0 ? null : CPTBillingConverter.convertBillingSections(createdNote.objective),
       assessment: Object.keys(createdNote.assessment).length === 0 ? null : createdNote.assessment,
       planOfCare: Object.keys(createdNote.planOfCare).length === 0 ? null : createdNote.planOfCare,
     }

@@ -1,101 +1,748 @@
-h2 {
-    font-size: 1.9rem;
-    letter-spacing: 3.5px;
-  }
-  
-  .input-group .form-control {
-    font-size: 0.95rem;
-    border-radius: 0 0.75rem 0.75rem 0;
-  }
-  
-  .input-group-text {
-    border-radius: 0.75rem 0 0 0.75rem;
-  }
-  
-  .action-btn {
-    border-radius: 50% !important;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.25s ease;
-  }
-  
-  .action-btn:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  }
-  
-  c-card {
-    border-radius: 1rem !important;
-  }
-  
-  c-modal h3 {
-    font-size: 1.4rem;
-  }
-  
-  c-alert {
-    font-size: 0.95rem;
-  }
-  .icon-large {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-    
-  /* Larger circular action buttons */
-.action-btn-lg {
-    border-radius: 50% !important;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.25s ease;
-    background-color: #f8f9fa; /* subtle background */
-  }
-  
-  /* Larger icons inside */
-  .action-icon {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
-  
-  /* Hover effects */
-  .action-btn-lg:hover {
-    transform: translateY(-3px) scale(1.08);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    background-color: white;
-  }
-  /* General table font style */
-.c-smart-table {
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #212529;
+/* ========================================
+   Patient List Component Styles
+   Professional Slate Theme for EMR
+   ======================================== */
+
+/* --- Page Header Section --- */
+.page-header {
+  margin-bottom: 1.5rem;
 }
 
-/* Table header - stronger, clearer */
-.c-smart-table thead th {
+.page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.page-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.375rem;
   font-weight: 600;
-  font-size: 0.9rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+
+.page-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+/* --- Search Panel --- */
+.search-panel-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  margin-bottom: 1.5rem;
+}
+
+.search-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-radius: 0.5rem 0.5rem 0 0;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.search-panel-header:hover {
+  background: linear-gradient(135deg, #3b4d63 0%, #253345 100%);
+}
+
+.search-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.search-panel-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.search-toggle-icon {
+  width: 1rem;
+  height: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.2s ease;
+}
+
+.search-panel-body {
+  padding: 1.25rem;
+  background: #ffffff;
+  border-radius: 0 0 0.5rem 0.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.search-label {
+  font-size: 0.75rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background-color: #f8f9fa;
-  color: #495057;
-  border-bottom: 2px solid #dee2e6;
+  letter-spacing: 0.05em;
+  color: #64748b;
 }
 
-/* Table body - cleaner look */
-.c-smart-table tbody td {
-  font-size: 0.95rem;
-  color: #333;
+.search-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  grid-column: -2 / -1;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.btn-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin-right: 0.25rem;
+}
+
+/* --- Phone Input --- */
+.phone-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.phone-input-icon {
+  position: absolute;
+  left: 0.625rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.phone-input {
+  padding-left: 2rem !important;
+  letter-spacing: 0.025em;
+}
+
+/* --- Insurance Autocomplete --- */
+.insurance-autocomplete-wrapper {
+  position: relative;
+}
+
+.insurance-input-container {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.insurance-input-container:focus-within {
+  border-color: #334155;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+}
+
+.insurance-input-container input {
+  flex: 1;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.insurance-input-container input:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+.insurance-clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  background: #f8fafc;
+  border: none;
+  border-left: 1px solid #e2e8f0;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.insurance-clear-btn:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.insurance-clear-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.insurance-dropdown {
+  position: absolute;
+  z-index: 1050;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.insurance-dropdown-item {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.insurance-dropdown-item:hover {
+  background: #f1f5f9;
+}
+
+.search-btn-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+:host ::ng-deep .search-panel-body c-date-picker .dropdown-menu,
+:host ::ng-deep .search-panel-body c-date-picker .datepicker-dropdown,
+:host ::ng-deep .search-panel-body .datepicker.show {
+  z-index: 1050;
+}
+
+/* --- Empty State --- */
+.empty-state-card {
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.empty-state-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #94a3b8;
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+}
+
+.empty-state-text {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* --- Floating Action Button --- */
+.fab-button {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(51, 65, 85, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.fab-button:hover {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  box-shadow: 0 6px 20px rgba(51, 65, 85, 0.5);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.fab-button:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 8px rgba(51, 65, 85, 0.4);
+}
+
+.fab-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #ffffff;
+}
+
+/* --- Patient Card --- */
+.patient-card {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.patient-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Card Header --- */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-bottom: 1px solid #1e293b;
+}
+
+.card-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.card-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+}
+
+/* --- Card Body --- */
+.card-body-custom {
+  padding: 1.25rem;
+  background: #ffffff;
+}
+
+/* --- Table Styles --- */
+:host ::ng-deep .c-smart-table {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #1e293b;
+}
+
+:host ::ng-deep .c-smart-table thead th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #f8fafc;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.75rem 0.875rem;
+}
+
+:host ::ng-deep .c-smart-table tbody td {
+  font-size: 0.875rem;
+  color: #334155;
   vertical-align: middle;
-  padding: 0.75rem;
+  padding: 0.75rem 0.875rem;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-/* Hover effect for rows */
-.c-smart-table tbody tr:hover {
-  background-color: #f1f5f9; /* soft gray-blue */
-  transition: background-color 0.2s ease;
+:host ::ng-deep .c-smart-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+:host ::ng-deep .c-smart-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* --- Patient Name Link --- */
+.patient-name-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: #0284c7;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 0.25rem;
+}
+
+.patient-name-link:hover {
+  background: #f0f9ff;
+  color: #0369a1;
+  text-decoration: none;
+}
+
+.patient-icon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: #64748b;
+}
+
+/* --- Gender Badge --- */
+.gender-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1875rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+}
+
+.gender-badge.male {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.gender-badge.female {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+/* --- Contact Info --- */
+.contact-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+.contact-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #94a3b8;
+}
+
+/* --- Date of Birth --- */
+.dob-info {
+  color: #475569;
+  font-size: 0.875rem;
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+  display: flex;
+  gap: 0.375rem;
+  justify-content: center;
+}
+
+.action-btn-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn-edit:hover {
+  background: #334155;
+  border-color: #334155;
+  color: #ffffff;
+}
+
+.action-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* --- Pagination --- */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+:host ::ng-deep c-smart-pagination .page-link {
+  color: #475569;
+  border-color: #e2e8f0;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+}
+
+:host ::ng-deep c-smart-pagination .page-item.active .page-link {
+  background: #334155;
+  border-color: #334155;
+  color: #ffffff;
+}
+
+:host ::ng-deep c-smart-pagination .page-link:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}
+
+/* --- Error Alert --- */
+.error-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 1.25rem;
+  padding: 0.875rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #dc2626;
+  border-radius: 0.375rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.error-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: #dc2626;
+}
+
+/* --- Modal Styles --- */
+.modal-header-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  border-bottom: none;
+}
+
+.modal-title-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.modal-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-close-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.modal-body-custom {
+  padding: 1.5rem;
+  background: #ffffff;
+}
+
+/* --- Items Per Page Select Styling --- */
+:host ::ng-deep .items-per-page select {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+  color: #334155;
+  transition: border-color 0.15s ease;
+}
+
+:host ::ng-deep .items-per-page select:focus {
+  border-color: #334155;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(51, 65, 85, 0.1);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .page-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .page-title {
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    padding-left: 0;
+  }
+
+  .card-header-custom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: 0.375rem;
+  }
+
+  .fab-button {
+    bottom: 4rem;
+    right: 1.5rem;
+    width: 60px;
+    height: 60px;
+  }
+
+  .fab-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .search-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search-buttons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.125rem;
+  }
+
+  .page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .card-body-custom {
+    padding: 1rem;
+  }
+
+  .fab-button {
+    bottom: 3rem;
+    right: 1rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .fab-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-panel-body {
+    padding: 1rem;
+  }
+
+  .search-buttons {
+    justify-content: stretch;
+  }
+
+  .search-buttons button {
+    flex: 1;
+  }
 }

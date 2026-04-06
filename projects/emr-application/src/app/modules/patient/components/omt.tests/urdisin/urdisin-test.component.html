@@ -1,0 +1,134 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Urogenital Distress Inventory</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>Do you experience, and if so, how much are you bothered by:</p>
+        <ul>
+          <li>For each question, select <strong>No</strong> or <strong>Yes</strong> to indicate whether you experience the symptom</li>
+          <li>If you select <strong>Yes</strong>, please rate how much it bothers you: <strong>Not At All</strong>, <strong>Slightly</strong>, <strong>Moderately</strong>, or <strong>Greatly</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 9 questions answered</span>
+  </div>
+
+  <form [formGroup]="urdisinForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="urdisinForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Urogenital Distress Inventory Questions -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">U</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Urogenital Distress Assessment</h3>
+          <p class="section-subtitle">Do you experience, and if so, how much are you bothered by:</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of questions; let i = index"
+             class="question-card"
+             [class.answered]="urdisinForm.get(q.key + '_presence')?.value !== null"
+             [class.error]="urdisinForm.get(q.key + '_presence')?.invalid && urdisinForm.get(q.key + '_presence')?.touched">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <div class="question-text">{{ q.text }}</div>
+
+            <!-- Presence: No / Yes -->
+            <div class="presence-options">
+              <label class="presence-label">
+                <input type="radio" [formControlName]="q.key + '_presence'" value="No">
+                <span class="presence-text">No</span>
+              </label>
+              <label class="presence-label">
+                <input type="radio" [formControlName]="q.key + '_presence'" value="Yes">
+                <span class="presence-text">Yes</span>
+              </label>
+            </div>
+
+            <!-- Bother level: shown only when presence is Yes -->
+            <div *ngIf="urdisinForm.get(q.key + '_presence')?.value === 'Yes'" class="bother-section">
+              <div class="bother-label">If yes, how much does it bother you?</div>
+              <div class="bother-options">
+                <label *ngFor="let opt of botherOptions" class="bother-radio-label">
+                  <input type="radio" [formControlName]="q.key + '_bother'" [value]="opt.value">
+                  <span class="bother-radio-text">{{ opt.text }}</span>
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="urdisinForm.get(q.key + '_presence')?.invalid && urdisinForm.get(q.key + '_presence')?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="urdisinForm.invalid && urdisinForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
