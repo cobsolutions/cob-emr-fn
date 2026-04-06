@@ -48,7 +48,9 @@
 
 /* Adjust field label width inside dependent boxes */
 .dependent-field-box > .form-row > .field-label {
-  min-width: 360px;
+  width: 520px;
+  min-width: 520px;
+  white-space: normal;
 }
 
 .dependent-field-box .nested-dependent-field-box .field-label {

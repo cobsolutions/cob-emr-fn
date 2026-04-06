@@ -1,6 +1,9 @@
 import { Balance } from "./Balance";
 import { CustomOutcomeMeasurement } from "./CustomOutcomeMeasurement";
+import { DizzinessHandicapInventory } from "./DizzinessHandicapInventory";
 import { GeneralFunction } from "./GeneralFunction";
+import { Lymphedema } from "./Lymphedema";
+import { Pelvic } from "./Pelvic";
 import { LowerExtremity } from "./LowerExtremity";
 import { Pain } from "./Pain";
 import { Spine } from "./Spine";
@@ -15,5 +18,8 @@ export interface Omt {
   lowerExtremity: LowerExtremity;
   balance: Balance;
   pain: Pain;
+  dizzinessHandicapInventory: DizzinessHandicapInventory;
+  lymphedema: Lymphedema;
+  pelvic: Pelvic;
   generalFunction: GeneralFunction;
 }

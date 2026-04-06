@@ -41,6 +41,19 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
     { key: 'tinetti', scoreField: 'tinetti_score' },
     { key: 'berg', scoreField: 'berg_score' },
     { key: 'fab', scoreField: 'fullerton_score' },
+    { key: 'ueqdn', scoreField: 'upper_extremity_quick_dash_text' },
+    { key: 'dizzhinv', scoreField: 'dizziness_handicap_inventory_text' },
+    { key: 'lymphedema', scoreField: 'lymphedema_text' },
+    { key: 'congrsc', scoreField: 'continence_grading_scale_text' },
+    { key: 'pfimqsf', scoreField: 'pelvic_floor_impact_7_text' },
+    { key: 'pfopinsex', scoreField: 'pisq_12_text' },
+    { key: 'pregmobindx', scoreField: 'pregnancy_mobility_daily' },
+    { key: 'vuvpfunque', scoreField: 'vulvar_pain_functional_text' },
+    { key: 'urdisin', scoreField: 'urogenital_distress_inventory_text' },
+    { key: 'mcgpques', scoreField: 'mcgill_pain_score' },
+    { key: 'wofarat', scoreField: 'wong_baker_score' },
+    { key: 'pdisin', scoreField: 'pain_disability_score' },
+    { key: 'cdisquesti', scoreField: 'croft_disability_score' },
   ];
 
   // Visibility flags for dependent fields
@@ -55,6 +68,7 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   showUpperExtremityFunctionalFields: boolean = false;
   showDashFields: boolean = false;
   showHandProfileFields: boolean = false;
+  showUpperExtremityQuickDASH: boolean = false;
   showSpineFields: boolean = false;
   showNeckDisabilityFields: boolean = false;
   showOswestryLowBackPainFields: boolean = false;
@@ -77,6 +91,15 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   showPainDisabilityIndexFields: boolean = false;
   showCroftDisabilityFields: boolean = false;
   showFabqFields: boolean = false;
+  showDizzinessHandicapInventoryFields: boolean = false;
+  showLymphedemaFields: boolean = false;
+  showPelvicFields: boolean = false;
+  showContinenceGradingScaleFields: boolean = false;
+  showPelvicFloorImpact7Fields: boolean = false;
+  showPisq12Fields: boolean = false;
+  showPregnancyMobilityIndexFields: boolean = false;
+  showVulvarPainFunctionalFields: boolean = false;
+  showUrogenitalDistressInventoryFields: boolean = false;
   showGeneralFunctionFields: boolean = false;
   showTimedUpAndGoFields: boolean = false;
   showTimedUpAndGoAloneFields: boolean = false;
@@ -169,6 +192,8 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       dash_score: [''],
       hand_profile: ['no'],
       hand_profile_text: [''],
+      upper_extremity_quick_dash: ['no'],
+      upper_extremity_quick_dash_text: [''],
       spine: ['no'],
       neck_disability_index: ['no'],
       neck_disability_score: [''],
@@ -222,6 +247,26 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       fabq_scale_1: [''],
       fabq_scale_2: [''],
       fabq_followup_plan: [''],
+      dizziness_handicap_inventory: ['no'],
+      dizziness_handicap_inventory_text: [''],
+      lymphedema: ['no'],
+      lymphedema_text: [''],
+      pelvic: ['no'],
+      pelvic_distress_floor_20: ['no'],
+      continence_grading_scale: ['no'],
+      pelvic_floor_impact_7: ['no'],
+      pisq_12: ['no'],
+      pregnancy_mobility_index: ['no'],
+      vulvar_pain_functional: ['no'],
+      urogenital_distress_inventory: ['no'],
+      continence_grading_scale_text: [''],
+      pelvic_floor_impact_7_text: [''],
+      pisq_12_text: [''],
+      pregnancy_mobility_daily: [''],
+      pregnancy_mobility_household: [''],
+      pregnancy_mobility_outdoors: [''],
+      vulvar_pain_functional_text: [''],
+      urogenital_distress_inventory_text: [''],
       general_function: ['no'],
       timed_up_and_go: ['no'],
       timed_up_and_go_alone: ['no'],
@@ -335,15 +380,18 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
           shoulder_pain_disability: 'no',
           upper_extremity_functional: 'no',
           dash: 'no',
-          hand_profile: 'no'
+          hand_profile: 'no',
+          upper_extremity_quick_dash: 'no'
         });
         this.showShoulderPainDisabilityFields = false;
         this.showUpperExtremityFunctionalFields = false;
         this.showDashFields = false;
         this.showHandProfileFields = false;
+        this.showUpperExtremityQuickDASH = false;
       }
     });
 
+    
     // Shoulder Pain and Disability Index dependency
     this.omtForm.get('shoulder_pain_disability')?.valueChanges.subscribe(value => {
       this.showShoulderPainDisabilityFields = value === 'yes';
@@ -382,6 +430,16 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       if (!this.showHandProfileFields) {
         this.omtForm.patchValue({
           hand_profile_text: ''
+        });
+      }
+    });
+
+    // Upper Extremity Quick DASH dependency
+    this.omtForm.get('upper_extremity_quick_dash')?.valueChanges.subscribe(value => {
+      this.showUpperExtremityQuickDASH = value === 'yes';
+      if (!this.showUpperExtremityQuickDASH) {
+        this.omtForm.patchValue({
+          upper_extremity_quick_dash_text: ''
         });
       }
     });
@@ -651,6 +709,100 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
       }
     });
 
+    // Dizziness Handicap Inventory dependency
+    this.omtForm.get('dizziness_handicap_inventory')?.valueChanges.subscribe(value => {
+      this.showDizzinessHandicapInventoryFields = value === 'yes';
+      if (!this.showDizzinessHandicapInventoryFields) {
+        this.omtForm.patchValue({
+          dizziness_handicap_inventory_text: ''
+        });
+      }
+    });
+
+    // Lymphedema Life Impact Scale dependency
+    this.omtForm.get('lymphedema')?.valueChanges.subscribe(value => {
+      this.showLymphedemaFields = value === 'yes';
+      if (!this.showLymphedemaFields) {
+        this.omtForm.patchValue({
+          lymphedema_text: ''
+        });
+      }
+    });
+
+    // Pelvic dependency
+    this.omtForm.get('pelvic')?.valueChanges.subscribe(value => {
+      this.showPelvicFields = value === 'yes';
+      if (!this.showPelvicFields) {
+        this.omtForm.patchValue({
+          pelvic_distress_floor_20: 'no',
+          continence_grading_scale: 'no',
+          pelvic_floor_impact_7: 'no',
+          pisq_12: 'no',
+          pregnancy_mobility_index: 'no',
+          vulvar_pain_functional: 'no',
+          urogenital_distress_inventory: 'no'
+        });
+        this.showContinenceGradingScaleFields = false;
+        this.showPelvicFloorImpact7Fields = false;
+        this.showPisq12Fields = false;
+        this.showPregnancyMobilityIndexFields = false;
+        this.showVulvarPainFunctionalFields = false;
+        this.showUrogenitalDistressInventoryFields = false;
+      }
+    });
+
+    // Continence Grading Scale dependency
+    this.omtForm.get('continence_grading_scale')?.valueChanges.subscribe(value => {
+      this.showContinenceGradingScaleFields = value === 'yes';
+      if (!this.showContinenceGradingScaleFields) {
+        this.omtForm.patchValue({ continence_grading_scale_text: '' });
+      }
+    });
+
+    // Pelvic Floor Impact Questionnaire Short Form 7 dependency
+    this.omtForm.get('pelvic_floor_impact_7')?.valueChanges.subscribe(value => {
+      this.showPelvicFloorImpact7Fields = value === 'yes';
+      if (!this.showPelvicFloorImpact7Fields) {
+        this.omtForm.patchValue({ pelvic_floor_impact_7_text: '' });
+      }
+    });
+
+    // PISQ-12 dependency
+    this.omtForm.get('pisq_12')?.valueChanges.subscribe(value => {
+      this.showPisq12Fields = value === 'yes';
+      if (!this.showPisq12Fields) {
+        this.omtForm.patchValue({ pisq_12_text: '' });
+      }
+    });
+
+    // Pregnancy Mobility Index dependency
+    this.omtForm.get('pregnancy_mobility_index')?.valueChanges.subscribe(value => {
+      this.showPregnancyMobilityIndexFields = value === 'yes';
+      if (!this.showPregnancyMobilityIndexFields) {
+        this.omtForm.patchValue({
+          pregnancy_mobility_daily: '',
+          pregnancy_mobility_household: '',
+          pregnancy_mobility_outdoors: ''
+        });
+      }
+    });
+
+    // Vulvar Pain Functional Questionnaire dependency
+    this.omtForm.get('vulvar_pain_functional')?.valueChanges.subscribe(value => {
+      this.showVulvarPainFunctionalFields = value === 'yes';
+      if (!this.showVulvarPainFunctionalFields) {
+        this.omtForm.patchValue({ vulvar_pain_functional_text: '' });
+      }
+    });
+
+    // Urogenital Distress Inventory dependency
+    this.omtForm.get('urogenital_distress_inventory')?.valueChanges.subscribe(value => {
+      this.showUrogenitalDistressInventoryFields = value === 'yes';
+      if (!this.showUrogenitalDistressInventoryFields) {
+        this.omtForm.patchValue({ urogenital_distress_inventory_text: '' });
+      }
+    });
+
     // General Function dependency
     this.omtForm.get('general_function')?.valueChanges.subscribe(value => {
       this.showGeneralFunctionFields = value === 'yes';
@@ -886,6 +1038,60 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
         // Special handling for FAB which returns score field
         this.omtForm.patchValue({
           fullerton_score: event.results.score
+        });
+      } else if (this.activeTest === 'ueqdn') {
+        this.omtForm.patchValue({
+          upper_extremity_quick_dash_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'dizzhinv') {
+        this.omtForm.patchValue({
+          dizziness_handicap_inventory_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'lymphedema') {
+        this.omtForm.patchValue({
+          lymphedema_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'congrsc') {
+        this.omtForm.patchValue({
+          continence_grading_scale_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'pfimqsf') {
+        this.omtForm.patchValue({
+          pelvic_floor_impact_7_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'pfopinsex') {
+        this.omtForm.patchValue({
+          pisq_12_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'pregmobindx') {
+        this.omtForm.patchValue({
+          pregnancy_mobility_daily: event.results.daily ?? event.results.score ?? event.results.total ?? '',
+          pregnancy_mobility_household: event.results.household ?? '',
+          pregnancy_mobility_outdoors: event.results.outdoors ?? ''
+        });
+      } else if (this.activeTest === 'vuvpfunque') {
+        this.omtForm.patchValue({
+          vulvar_pain_functional_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'urdisin') {
+        this.omtForm.patchValue({
+          urogenital_distress_inventory_text: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'mcgpques') {
+        this.omtForm.patchValue({
+          mcgill_pain_score: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'wofarat') {
+        this.omtForm.patchValue({
+          wong_baker_score: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'pdisin') {
+        this.omtForm.patchValue({
+          pain_disability_score: event.results.score ?? event.results.total ?? ''
+        });
+      } else if (this.activeTest === 'cdisquesti') {
+        this.omtForm.patchValue({
+          croft_disability_score: event.results.score ?? event.results.total ?? ''
         });
       } else if (event.results.total !== undefined) {
         const config = this.testConfigs.find(c => c.key === this.activeTest);

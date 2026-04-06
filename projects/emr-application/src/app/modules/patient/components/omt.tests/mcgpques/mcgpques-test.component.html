@@ -1,0 +1,179 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">McGill Pain Questionnaire</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>The McGill Pain Questionnaire is used to assess the quality and intensity of pain experienced by the patient.</p>
+        <ul>
+          <li>Select the word that best describes your pain for each category</li>
+          <li>If no word applies, leave the question as "Not Tested"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 27 questions answered</span>
+  </div>
+
+  <form [formGroup]="mcgpquesForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="mcgpquesForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section I: What does your pain feel like? -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">I</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Section I: What Does Your Pain Feel Like?</h3>
+          <p class="section-subtitle">Select the word that best describes your pain for each category</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of sectionIQuestions; let i = index"
+             class="question-card"
+             [class.answered]="mcgpquesForm.get(q.key)?.value !== 'NT'"
+             [class.error]="mcgpquesForm.get(q.key)?.invalid && mcgpquesForm.get(q.key)?.touched">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <div class="question-text"><strong>{{ q.label }}</strong></div>
+            <div class="select-wrapper">
+              <select [formControlName]="q.key" class="question-select">
+                <option *ngFor="let opt of q.options" [ngValue]="opt.value">{{ opt.text }}</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+            <div *ngIf="mcgpquesForm.get(q.key)?.invalid && mcgpquesForm.get(q.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section II: How does your pain change with time? -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">II</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Section II: How Does Your Pain Change With Time?</h3>
+          <p class="section-subtitle">Describe the pattern of your pain</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="mcgpquesForm.get(sectionIIQuestion.key)?.value !== 'NT'"
+             [class.error]="mcgpquesForm.get(sectionIIQuestion.key)?.invalid && mcgpquesForm.get(sectionIIQuestion.key)?.touched">
+          <div class="question-number">21</div>
+          <div class="question-content">
+            <div class="question-text"><strong>{{ sectionIIQuestion.label }}</strong></div>
+            <div class="select-wrapper">
+              <select [formControlName]="sectionIIQuestion.key" class="question-select">
+                <option *ngFor="let opt of sectionIIQuestion.options" [ngValue]="opt.value">{{ opt.text }}</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+            <div *ngIf="mcgpquesForm.get(sectionIIQuestion.key)?.invalid && mcgpquesForm.get(sectionIIQuestion.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section III: How strong is your pain? -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">III</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Section III: How Strong Is Your Pain?</h3>
+          <p class="section-subtitle">Select the word that describes the intensity of your pain</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of sectionIIIQuestions; let i = index"
+             class="question-card"
+             [class.answered]="mcgpquesForm.get(q.key)?.value !== 'NT'"
+             [class.error]="mcgpquesForm.get(q.key)?.invalid && mcgpquesForm.get(q.key)?.touched">
+          <div class="question-number">{{ i + 22 }}</div>
+          <div class="question-content">
+            <div class="question-text"><strong>{{ q.label }}</strong></div>
+            <div class="select-wrapper">
+              <select [formControlName]="q.key" class="question-select">
+                <option *ngFor="let opt of intensityOptions" [ngValue]="opt.value">{{ opt.text }}</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+            <div *ngIf="mcgpquesForm.get(q.key)?.invalid && mcgpquesForm.get(q.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="mcgpquesForm.invalid && mcgpquesForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -172,6 +172,38 @@ export class OutcomeMeasurementToolsMapperService {
         }
       },
 
+      // Dizziness Handicap Inventory
+      dizzinessHandicapInventory: {
+        dizzinessHandicapInventory: formValue.dizziness_handicap_inventory === 'yes',
+        dizzinessHandicapInventoryText: formValue.dizziness_handicap_inventory_text || ''
+      },
+
+      // Lymphedema Life Impact Scale
+      lymphedema: {
+        lymphedema: formValue.lymphedema === 'yes',
+        lymphedemaText: formValue.lymphedema_text || ''
+      },
+
+      // Pelvic
+      pelvic: {
+        pelvic: formValue.pelvic === 'yes',
+        pelvicDistressFloor20: formValue.pelvic_distress_floor_20 === 'yes',
+        continenceGradingScale: formValue.continence_grading_scale === 'yes',
+        continenceGradingScaleText: formValue.continence_grading_scale_text || '',
+        pelvicFloorImpact7: formValue.pelvic_floor_impact_7 === 'yes',
+        pelvicFloorImpact7Text: formValue.pelvic_floor_impact_7_text || '',
+        pisq12: formValue.pisq_12 === 'yes',
+        pisq12Text: formValue.pisq_12_text || '',
+        pregnancyMobilityIndex: formValue.pregnancy_mobility_index === 'yes',
+        pregnancyMobilityDaily: formValue.pregnancy_mobility_daily || '',
+        pregnancyMobilityHousehold: formValue.pregnancy_mobility_household || '',
+        pregnancyMobilityOutdoors: formValue.pregnancy_mobility_outdoors || '',
+        vulvarPainFunctional: formValue.vulvar_pain_functional === 'yes',
+        vulvarPainFunctionalText: formValue.vulvar_pain_functional_text || '',
+        urogenitalDistressInventory: formValue.urogenital_distress_inventory === 'yes',
+        urogenitalDistressInventoryText: formValue.urogenital_distress_inventory_text || ''
+      },
+
       // General Function
       generalFunction: {
         generalFunction: formValue.general_function === 'yes',
@@ -327,6 +359,32 @@ export class OutcomeMeasurementToolsMapperService {
       fabq_scale_1: dto.pain?.theFearAvoidanceBeliefsQuestionnaireFABQ?.fabqScale_1 || '',
       fabq_scale_2: dto.pain?.theFearAvoidanceBeliefsQuestionnaireFABQ?.fabqScale_2 || '',
       fabq_followup_plan: dto.pain?.theFearAvoidanceBeliefsQuestionnaireFABQ?.fabqFollowupPlan || '',
+
+      // Dizziness Handicap Inventory
+      dizziness_handicap_inventory: dto.dizzinessHandicapInventory?.dizzinessHandicapInventory ? 'yes' : 'no',
+      dizziness_handicap_inventory_text: dto.dizzinessHandicapInventory?.dizzinessHandicapInventoryText || '',
+
+      // Lymphedema Life Impact Scale
+      lymphedema: dto.lymphedema?.lymphedema ? 'yes' : 'no',
+      lymphedema_text: dto.lymphedema?.lymphedemaText || '',
+
+      // Pelvic
+      pelvic: dto.pelvic?.pelvic ? 'yes' : 'no',
+      pelvic_distress_floor_20: dto.pelvic?.pelvicDistressFloor20 ? 'yes' : 'no',
+      continence_grading_scale: dto.pelvic?.continenceGradingScale ? 'yes' : 'no',
+      continence_grading_scale_text: dto.pelvic?.continenceGradingScaleText || '',
+      pelvic_floor_impact_7: dto.pelvic?.pelvicFloorImpact7 ? 'yes' : 'no',
+      pelvic_floor_impact_7_text: dto.pelvic?.pelvicFloorImpact7Text || '',
+      pisq_12: dto.pelvic?.pisq12 ? 'yes' : 'no',
+      pisq_12_text: dto.pelvic?.pisq12Text || '',
+      pregnancy_mobility_index: dto.pelvic?.pregnancyMobilityIndex ? 'yes' : 'no',
+      pregnancy_mobility_daily: dto.pelvic?.pregnancyMobilityDaily || '',
+      pregnancy_mobility_household: dto.pelvic?.pregnancyMobilityHousehold || '',
+      pregnancy_mobility_outdoors: dto.pelvic?.pregnancyMobilityOutdoors || '',
+      vulvar_pain_functional: dto.pelvic?.vulvarPainFunctional ? 'yes' : 'no',
+      vulvar_pain_functional_text: dto.pelvic?.vulvarPainFunctionalText || '',
+      urogenital_distress_inventory: dto.pelvic?.urogenitalDistressInventory ? 'yes' : 'no',
+      urogenital_distress_inventory_text: dto.pelvic?.urogenitalDistressInventoryText || '',
 
       // General Function
       general_function: dto.generalFunction?.generalFunction ? 'yes' : 'no',

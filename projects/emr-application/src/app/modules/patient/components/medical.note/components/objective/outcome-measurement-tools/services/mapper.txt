@@ -110,6 +110,32 @@ Pain Obj
 		fabq_scale_2
 		fabq_followup_plan
 		
+Dizziness Handicap Inventory Obj
+	dizziness_handicap_inventory
+	dizziness_handicap_inventory_text
+
+Lymphedema Life Impact Scale Obj
+	lymphedema
+	lymphedema_text
+
+Pelvic Obj
+	pelvic
+	pelvic_distress_floor_20
+	continence_grading_scale
+	continence_grading_scale_text
+	pelvic_floor_impact_7
+	pelvic_floor_impact_7_text
+	pisq_12
+	pisq_12_text
+	pregnancy_mobility_index
+	pregnancy_mobility_daily
+	pregnancy_mobility_household
+	pregnancy_mobility_outdoors
+	vulvar_pain_functional
+	vulvar_pain_functional_text
+	urogenital_distress_inventory
+	urogenital_distress_inventory_text
+
 General Function Obj
 	general_function
 		Timed Up and Go Obj

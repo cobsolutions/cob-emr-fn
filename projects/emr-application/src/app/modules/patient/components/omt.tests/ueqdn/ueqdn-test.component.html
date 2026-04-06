@@ -1,0 +1,118 @@
+<div class="ndi-container">
+  <!-- Header -->
+  <div class="ndi-header">
+    <div class="header-content">
+      <h2 class="ndi-title">Upper Extremity Quick DASH</h2>
+      <button type="button" class="btn-instructions" (click)="toggleInstructions()">
+        <span class="icon">i</span>
+        Instructions
+      </button>
+    </div>
+
+    <div *ngIf="showInstructions" class="instructions-panel">
+      <div class="instructions-header">
+        <strong>Instructions</strong>
+      </div>
+      <div class="instructions-content">
+        <p>This questionnaire asks about your symptoms as well as your ability to perform certain activities.</p>
+        <ul>
+          <li>Please answer every question, based on your condition in the <strong>last week</strong>, by selecting the appropriate option.</li>
+          <li>If you did not have the opportunity to perform an activity in the past week, please make your best estimate of which response would be the most accurate.</li>
+          <li>It does not matter which hand or arm you use to perform the activity; please answer based on your ability regardless of how you perform the task.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress indicator -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+    </div>
+    <span class="progress-text">{{ getAnsweredCount() }} of 11 questions answered</span>
+  </div>
+
+  <form [formGroup]="ueqdnForm" (ngSubmit)="calculateScore()">
+    <!-- Pain Level Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">P</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Patient Satisfaction</h3>
+          <p class="section-subtitle">Rate your current pain with activity</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div class="question-card"
+             [class.answered]="ueqdnForm.get('painlevel')?.value !== null">
+          <div class="question-number">0</div>
+          <div class="question-content">
+            <div class="question-text">Please rate your pain level with activity</div>
+            <div class="radio-scale">
+              <div class="scale-labels">
+                <span class="scale-label-start">No pain</span>
+                <span class="scale-label-end">Very severe pain</span>
+              </div>
+              <div class="radio-options">
+                <label *ngFor="let level of [0,1,2,3,4,5,6,7,8,9,10]" class="radio-label">
+                  <input type="radio" formControlName="painlevel" [value]="level">
+                  <span class="radio-value">{{level}}</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick DASH Questions Section -->
+    <div class="section-container">
+      <div class="section-header-bar">
+        <span class="section-icon">Q</span>
+        <div class="section-title-content">
+          <h3 class="section-title">Quick DASH Assessment</h3>
+          <p class="section-subtitle">Please rate your ability to do the following activities in the last week</p>
+        </div>
+      </div>
+
+      <div class="questions-container">
+        <div *ngFor="let q of questions; let i = index"
+             class="question-card"
+             [class.answered]="ueqdnForm.get(q.key)?.value !== 'NT'"
+             [class.error]="ueqdnForm.get(q.key)?.invalid && ueqdnForm.get(q.key)?.touched">
+          <div class="question-number">{{ i + 1 }}</div>
+          <div class="question-content">
+            <div class="question-text">{{ q.text }}</div>
+            <div class="select-wrapper">
+              <select [formControlName]="q.key" class="question-select">
+                <option value="NT">Not Tested</option>
+                <option *ngFor="let opt of optionSets[q.options]" [value]="opt.value">{{ opt.text }}</option>
+              </select>
+              <span class="select-arrow"></span>
+            </div>
+            <div *ngIf="ueqdnForm.get(q.key)?.invalid && ueqdnForm.get(q.key)?.touched" class="error-message">
+              Please select an answer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <div *ngIf="ueqdnForm.invalid && ueqdnForm.touched" class="completion-error">
+        Please answer all questions before calculating the score.
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" (click)="resetForm()" class="btn btn-reset">
+          Reset Form
+        </button>
+        <button type="submit" class="btn btn-calculate">
+          Calculate Score
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

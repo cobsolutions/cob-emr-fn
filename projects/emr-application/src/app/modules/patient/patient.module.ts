@@ -109,7 +109,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FinalizeMedicalNoteComponent } from './components/medical.note/finalize/finalize-medical-note.component';
 import { DailyPlanComponent } from './components/medical.note/components/plan/daily/daily-plan.component';
 import { DischargePlanComponent } from './components/medical.note/components/plan/discharge/discharge-plan.component';
+import { CdisquestiTestComponent } from './components/omt.tests/cdisquesti/cdisquesti-test.component';
+import { CongrscTestComponent } from './components/omt.tests/congrsc/congrsc-test.component';
+import { McgpquesTestComponent } from './components/omt.tests/mcgpques/mcgpques-test.component';
+import { PdisinTestComponent } from './components/omt.tests/pdisin/pdisin-test.component';
+import { WofaratTestComponent } from './components/omt.tests/wofarat/wofarat-test.component';
+import { DizzhinvTestComponent } from './components/omt.tests/dizzhinv/dizzhinv-test.component';
+import { LymphedemaTestComponent } from './components/omt.tests/lymphedema/lymphedema-test.component';
+import { PfimqsfTestComponent } from './components/omt.tests/pfimqsf/pfimqsf-test.component';
+import { PfopinsexTestComponent } from './components/omt.tests/pfopinsex/pfopinsex-test.component';
+import { PregmobindxTestComponent } from './components/omt.tests/pregmobindx/pregmobindx-test.component';
+import { UrdisinTestComponent } from './components/omt.tests/urdisin/urdisin-test.component';
+import { VuvpfunqueTestComponent } from './components/omt.tests/vuvpfunque/vuvpfunque-test.component';
 import { UeqdTestComponent } from './components/omt.tests/ueqd/ueqd-test.component';
+import { UeqdnTestComponent } from './components/omt.tests/ueqdn/ueqdn-test.component';
 import { UefiTestComponent } from './components/omt.tests/uefi/uefi-test.component';
 import { SpadiTestComponent } from './components/omt.tests/spadi/spadi-test.component';
 import { DashTestComponent } from './components/omt.tests/dash/dash-test.component';
@@ -301,7 +314,20 @@ const APP_PATIENT_CHART_COMPONENTS = [
     FinalizeMedicalNoteComponent,
     DailyPlanComponent,
     DischargePlanComponent,
+    CdisquestiTestComponent,
+    CongrscTestComponent,
+    DizzhinvTestComponent,
+    McgpquesTestComponent,
+    PdisinTestComponent,
+    WofaratTestComponent,
+    LymphedemaTestComponent,
+    PfimqsfTestComponent,
+    PfopinsexTestComponent,
+    PregmobindxTestComponent,
+    UrdisinTestComponent,
+    VuvpfunqueTestComponent,
     UeqdTestComponent,
+    UeqdnTestComponent,
     UefiTestComponent,
     SpadiTestComponent,
     DashTestComponent,
