@@ -235,4 +235,13 @@
 /emr/api/patient/case/payment/delete/:id http://161.97.126.192:7070/emr/api/patient/case/payment/delete/:id 200
 /emr/api/patient/case/payment/find/unpaid/caseId/:caseId http://161.97.126.192:7070/emr/api/patient/case/payment/find/unpaid/caseId/:caseId 200
 /emr/api/clinical/user/find-all/organizationId/:organizationId http://161.97.126.192:7070/emr/api/clinical/user/find-all/organizationId/:organizationId 200
+/emr/api/medical/note/forward-info http://161.97.126.192:7070/emr/api/medical/note/forward-info 200
+/emr/api/medical/note/initial-exam/:noteId/export/plan-of-care/pdf http://161.97.126.192:7070/emr/api/medical/note/initial-exam/:noteId/export/plan-of-care/pdf 200
+/emr/api/medical/note/initial-exam/:noteId/export/score/test/pdf http://161.97.126.192:7070/emr/api/medical/note/initial-exam/:noteId/export/score/test/pdf 200
+/emr/api/medical/note/daily-note/:noteId/forward http://161.97.126.192:7070/emr/api/medical/note/daily-note/:noteId/forward 200
+/emr/api/medical/note/discharge/:noteId/forward http://161.97.126.192:7070/emr/api/medical/note/discharge/:noteId/forward 200
+/emr/api/medical/note/progress-note/:noteId/export/plan-of-care/pdf http://161.97.126.192:7070/emr/api/medical/note/progress-note/:noteId/export/plan-of-care/pdf 200
+/emr/api/medical/note/progress-note/:noteId/export/score/test/pdf http://161.97.126.192:7070/emr/api/medical/note/progress-note/:noteId/export/score/test/pdf 200
+/emr/api/medical/note/progress-note/:noteId/forward http://161.97.126.192:7070/emr/api/medical/note/progress-note/:noteId/forward 200
+/emr/api/medical/note/quick-discharge/:noteId/forward http://161.97.126.192:7070/emr/api/medical/note/quick-discharge/:noteId/forward 200
 /*  /index.html   200
