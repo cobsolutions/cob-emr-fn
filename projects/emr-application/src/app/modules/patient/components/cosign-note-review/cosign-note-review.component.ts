@@ -21,6 +21,7 @@ export class CosignNoteReviewComponent implements OnInit {
     private loggedInService: LoggedInService
   ) { }
 
+  //dummy comment
   ngOnInit(): void {
     this.noteId = this.route.snapshot.paramMap.get('noteId');
     this.noteType = this.route.snapshot.paramMap.get('noteType');
