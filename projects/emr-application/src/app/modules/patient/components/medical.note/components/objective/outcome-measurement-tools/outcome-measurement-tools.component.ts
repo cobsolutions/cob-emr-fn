@@ -25,6 +25,9 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   activeTest: string | null = null;
   showTestModal: boolean = false;
 
+  // "Test not implemented" modal state (shown for tests not yet wired to showTestPopup)
+  showNotImplementedModal: boolean = false;
+
   // Test configurations
   testConfigs: OmtTestConfig[] = [
     { key: 'dash', scoreField: 'dash_score' },
@@ -968,6 +971,21 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   closeTestModal(): void {
     this.showTestModal = false;
     this.activeTest = null;
+  }
+
+  /**
+   * Opens the "Test Still not implemented" modal. Used by Show Test / Print Test
+   * links for tests that have not yet been wired up to showTestPopup.
+   */
+  showNotImplementedPopup(): void {
+    this.showNotImplementedModal = true;
+  }
+
+  /**
+   * Closes the "Test Still not implemented" modal
+   */
+  closeNotImplementedModal(): void {
+    this.showNotImplementedModal = false;
   }
 
   /**
