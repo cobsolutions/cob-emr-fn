@@ -123,8 +123,12 @@ export class SpecialTestsNComponent implements OnInit {
   pbFukudaSteppingOptions: string[] = ['Normal', 'Veers Left', 'Veers Right', 'Unable To Complete'];
   showPbSlBalanceFields: boolean = false;
   showPbRombergFields: boolean = false;
-  pbRombergOptions: string[] = ['Not Tested', 'Good', 'Fair', 'Poor', 'Custom'];
+  pbRombergOptions: string[] = ['Not Tested', 'Negative', 'Positive', 'Custom'];
+  showPbRombergEyesOpenCustom: boolean = false;
+  showPbRombergEyesClosedCustom: boolean = false;
   showPbSharpenedRombergFields: boolean = false;
+  showPbSharpenedRombergEyesOpenCustom: boolean = false;
+  showPbSharpenedRombergEyesClosedCustom: boolean = false;
   showPbFunctionalReachUeFields: boolean = false;
   showPbFunctionalReachLeFields: boolean = false;
   showPelvicClockFields: boolean = false;
@@ -395,9 +399,16 @@ export class SpecialTestsNComponent implements OnInit {
       pb_sl_balance: ['no'],
       pb_romberg: ['no'],
       pb_romberg_eyes_open: ['Not Tested'],
+      pb_romberg_eyes_open_custom_text: [''],
       pb_romberg_eyes_closed: ['Not Tested'],
+      pb_romberg_eyes_closed_custom_text: [''],
       pb_romberg_comments_text: [''],
       pb_sharpened_romberg: ['no'],
+      pb_sharpened_romberg_eyes_open: ['Not Tested'],
+      pb_sharpened_romberg_eyes_open_custom_text: [''],
+      pb_sharpened_romberg_eyes_closed: ['Not Tested'],
+      pb_sharpened_romberg_eyes_closed_custom_text: [''],
+      pb_sharpened_romberg_comments_text: [''],
       pb_functional_reach_ue: ['no'],
       pb_functional_reach_le: ['no'],
       pelvic_clock: ['no'],
@@ -702,8 +713,32 @@ export class SpecialTestsNComponent implements OnInit {
     this.specialTestForm.get('pb_romberg')?.valueChanges.subscribe(value => {
       this.showPbRombergFields = value === 'yes';
     });
+    this.specialTestForm.get('pb_romberg_eyes_open')?.valueChanges.subscribe(value => {
+      this.showPbRombergEyesOpenCustom = value === 'Custom';
+      if (!this.showPbRombergEyesOpenCustom) {
+        this.specialTestForm.get('pb_romberg_eyes_open_custom_text')?.setValue('', { emitEvent: false });
+      }
+    });
+    this.specialTestForm.get('pb_romberg_eyes_closed')?.valueChanges.subscribe(value => {
+      this.showPbRombergEyesClosedCustom = value === 'Custom';
+      if (!this.showPbRombergEyesClosedCustom) {
+        this.specialTestForm.get('pb_romberg_eyes_closed_custom_text')?.setValue('', { emitEvent: false });
+      }
+    });
     this.specialTestForm.get('pb_sharpened_romberg')?.valueChanges.subscribe(value => {
       this.showPbSharpenedRombergFields = value === 'yes';
+    });
+    this.specialTestForm.get('pb_sharpened_romberg_eyes_open')?.valueChanges.subscribe(value => {
+      this.showPbSharpenedRombergEyesOpenCustom = value === 'Custom';
+      if (!this.showPbSharpenedRombergEyesOpenCustom) {
+        this.specialTestForm.get('pb_sharpened_romberg_eyes_open_custom_text')?.setValue('', { emitEvent: false });
+      }
+    });
+    this.specialTestForm.get('pb_sharpened_romberg_eyes_closed')?.valueChanges.subscribe(value => {
+      this.showPbSharpenedRombergEyesClosedCustom = value === 'Custom';
+      if (!this.showPbSharpenedRombergEyesClosedCustom) {
+        this.specialTestForm.get('pb_sharpened_romberg_eyes_closed_custom_text')?.setValue('', { emitEvent: false });
+      }
     });
     this.specialTestForm.get('pb_functional_reach_ue')?.valueChanges.subscribe(value => {
       this.showPbFunctionalReachUeFields = value === 'yes';
