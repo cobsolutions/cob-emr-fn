@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PainDescription } from '../../../../lookups/pain.description';
 
@@ -7,7 +17,7 @@ import { PainDescription } from '../../../../lookups/pain.description';
   templateUrl: './pain-evaluation.component.html',
   styleUrls: ['./pain-evaluation.component.css']
 })
-export class PainEvaluationComponent implements OnInit, OnDestroy {
+export class PainEvaluationComponent implements OnInit, AfterViewInit, OnDestroy {
   painEval: FormGroup;
   numbers = ['NT', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -20,6 +30,14 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
   showModal = false;
   editIndex: number | null = null;
 
+  // Reference to the c-modal host element so we can portal it to <body>.
+  // CoreUI's c-modal renders in place; any ancestor with `transform` /
+  // `filter` / `perspective` (e.g. `.enhanced-card:hover` in subjective.component.css)
+  // becomes the containing block for `position: fixed`, which breaks the
+  // modal's viewport anchoring. Appending to <body> sidesteps that entirely.
+  @ViewChild('painModalRef', { read: ElementRef, static: true })
+  private painModalRef: ElementRef<HTMLElement>;
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -27,10 +45,18 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
+  ngAfterViewInit(): void {
+    const el = this.painModalRef?.nativeElement;
+    if (el && el.parentNode !== document.body) {
+      document.body.appendChild(el);
+    }
+  }
+
   ngOnDestroy(): void {
-    // Ensure body scroll is unlocked when component is destroyed
-    if (this.showModal) {
-      this.unlockBodyScroll();
+    // Tear down the portalled element so it doesn't leak when the component unmounts.
+    const el = this.painModalRef?.nativeElement;
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
     }
   }
 
@@ -58,7 +84,6 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
       plan: ''
     });
     this.showModal = true;
-    this.lockBodyScroll();
   }
 
   openEditModal(index: number): void {
@@ -76,7 +101,6 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
     });
 
     this.showModal = true;
-    this.lockBodyScroll();
   }
 
   closeModal(): void {
@@ -91,21 +115,6 @@ export class PainEvaluationComponent implements OnInit, OnDestroy {
       plan: ''
     });
     this.editIndex = null;
-    this.unlockBodyScroll();
-  }
-
-  private lockBodyScroll(): void {
-    document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = this.getScrollbarWidth() + 'px';
-  }
-
-  private unlockBodyScroll(): void {
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-  }
-
-  private getScrollbarWidth(): number {
-    return window.innerWidth - document.documentElement.clientWidth;
   }
 
   remove(index: number): void {
