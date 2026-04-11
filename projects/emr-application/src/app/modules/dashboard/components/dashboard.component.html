@@ -98,6 +98,201 @@
     </article>
   </section>
 
+  <!-- Scheduled Appointments (Mini Calendar + Patient List) -->
+  <section class="scheduled-section" aria-label="Scheduled appointments">
+    <div class="scheduled-header">
+      <div class="scheduled-title-group">
+        <h2 class="scheduled-title">
+          <svg viewBox="0 0 24 24" class="scheduled-title-icon" aria-hidden="true">
+            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Scheduled Appointments
+        </h2>
+        <p class="scheduled-subtitle">{{ selectedDateLabel }} &middot; {{ selectedAppointments.length }} patient(s)</p>
+      </div>
+
+      <!-- Mini Week Calendar -->
+      <div class="mini-calendar" role="group" aria-label="Day selector">
+        <button type="button" class="mini-cal-nav" (click)="shiftWeek(-1)" aria-label="Previous week">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="mini-cal-days">
+          <button
+            type="button"
+            class="mini-cal-day"
+            *ngFor="let day of weekDays; trackBy: trackByDayIso"
+            [class.active]="day.iso === selectedDateIso"
+            [class.today]="day.isToday"
+            (click)="selectDay(day)"
+            [attr.aria-pressed]="day.iso === selectedDateIso"
+            [attr.aria-label]="day.weekdayShort + ' ' + day.dayNumber">
+            <span class="mini-cal-weekday">{{ day.weekdayShort }}</span>
+            <span class="mini-cal-daynum">{{ day.dayNumber }}</span>
+            <span class="mini-cal-dot" *ngIf="day.appointmentCount > 0"></span>
+          </button>
+        </div>
+
+        <button type="button" class="mini-cal-nav" (click)="shiftWeek(1)" aria-label="Next week">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <button type="button" class="mini-cal-today" (click)="goToToday()">Today</button>
+      </div>
+    </div>
+
+    <!-- Toolbar: search + status filters -->
+    <div class="scheduled-toolbar">
+      <div class="scheduled-search">
+        <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true">
+          <path d="M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search by patient, type, or provider..."
+          [value]="searchTerm"
+          (input)="onSearchInput($event)"
+          aria-label="Search appointments" />
+        <button type="button" class="search-clear" *ngIf="searchTerm" (click)="clearSearch()" aria-label="Clear search">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="scheduled-filters" role="group" aria-label="Filter by status">
+        <button type="button" class="filter-chip" [class.active]="statusFilter === ''" (click)="setStatusFilter('')">
+          All <span class="chip-count">{{ statusCounts.all }}</span>
+        </button>
+        <button type="button" class="filter-chip confirmed" [class.active]="statusFilter === 'confirmed'" (click)="setStatusFilter('confirmed')">
+          Confirmed <span class="chip-count">{{ statusCounts.confirmed }}</span>
+        </button>
+        <button type="button" class="filter-chip pending" [class.active]="statusFilter === 'pending'" (click)="setStatusFilter('pending')">
+          Pending <span class="chip-count">{{ statusCounts.pending }}</span>
+        </button>
+        <button type="button" class="filter-chip cancelled" [class.active]="statusFilter === 'cancelled'" (click)="setStatusFilter('cancelled')">
+          Cancelled <span class="chip-count">{{ statusCounts.cancelled }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Appointments Table -->
+    <div class="scheduled-body">
+      <div class="scheduled-table-wrapper" *ngIf="filteredAppointments.length > 0; else emptyDay">
+        <table class="scheduled-table" aria-label="Scheduled patients">
+          <thead>
+            <tr>
+              <th class="col-time">Time</th>
+              <th class="col-patient">Patient</th>
+              <th class="col-type">Visit Type</th>
+              <th class="col-provider">Provider</th>
+              <th class="col-status">Status</th>
+              <th class="col-actions" aria-label="Actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of paginatedAppointments; trackBy: trackByPatientId" class="scheduled-row">
+              <td class="col-time">
+                <div class="cell-time">
+                  <span class="cell-time-value">{{ patient.time }}</span>
+                  <span class="cell-time-duration">{{ patient.duration }}</span>
+                </div>
+              </td>
+              <td class="col-patient">
+                <div class="cell-patient">
+                  <div class="cell-avatar" [class.female]="patient.gender === 'female'">{{ patient.initials }}</div>
+                  <span class="cell-patient-name">{{ patient.name }}</span>
+                </div>
+              </td>
+              <td class="col-type">{{ patient.type }}</td>
+              <td class="col-provider">{{ patient.provider }}</td>
+              <td class="col-status">
+                <span class="status-pill"
+                      [class.confirmed]="patient.status === 'confirmed'"
+                      [class.pending]="patient.status === 'pending'"
+                      [class.cancelled]="patient.status === 'cancelled'">
+                  <span class="status-dot"></span>
+                  {{ patient.status }}
+                </span>
+              </td>
+              <td class="col-actions">
+                <div class="row-actions">
+                  <button type="button" class="row-action" title="View chart" aria-label="View chart">
+                    <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 15a3 3 0 100-6 3 3 0 000 6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button type="button" class="row-action" title="Reschedule" aria-label="Reschedule">
+                    <svg viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button type="button" class="row-action primary" title="Start visit" aria-label="Start visit">
+                    <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination Bar -->
+        <div class="pagination-bar">
+          <div class="pagination-info">
+            Showing <strong>{{ paginationRange.start }}</strong>&ndash;<strong>{{ paginationRange.end }}</strong>
+            of <strong>{{ paginationRange.total }}</strong> appointments
+          </div>
+
+          <div class="pagination-size">
+            <label for="pageSizeSelect">Rows per page</label>
+            <select id="pageSizeSelect" class="page-size-select"
+                    [value]="pageSize" (change)="onPageSizeChange($event)">
+              <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+            </select>
+          </div>
+
+          <nav class="pagination-pages" aria-label="Pagination">
+            <button type="button" class="page-btn page-nav"
+                    (click)="setPage(currentPage - 1)"
+                    [disabled]="currentPage === 1"
+                    aria-label="Previous page">
+              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <ng-container *ngFor="let p of visiblePages; trackBy: trackByPage">
+              <button *ngIf="p !== 'ellipsis'; else ellipsis"
+                      type="button"
+                      class="page-btn"
+                      [class.active]="p === currentPage"
+                      [attr.aria-current]="p === currentPage ? 'page' : null"
+                      (click)="setPage(p)">
+                {{ p }}
+              </button>
+              <ng-template #ellipsis>
+                <span class="page-ellipsis" aria-hidden="true">&hellip;</span>
+              </ng-template>
+            </ng-container>
+
+            <button type="button" class="page-btn page-nav"
+                    (click)="setPage(currentPage + 1)"
+                    [disabled]="currentPage === totalPages"
+                    aria-label="Next page">
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </nav>
+        </div>
+      </div>
+      <ng-template #emptyDay>
+        <div class="scheduled-empty">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="scheduled-empty-title">
+            {{ selectedAppointments.length === 0 ? 'No appointments scheduled' : 'No results match your filters' }}
+          </p>
+          <p class="scheduled-empty-sub">
+            {{ selectedAppointments.length === 0 ? 'Pick another day or create a new appointment.' : 'Try adjusting the search term or status filter.' }}
+          </p>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+
   <!-- Charts Grid - 4 columns -->
   <section class="charts-grid">
 
@@ -342,95 +537,8 @@
 
   </section>
 
-  <!-- Bottom Grid - Appointments & Activity -->
+  <!-- Bottom Grid - Quick Tools & Activity -->
   <section class="bottom-grid">
-
-    <!-- Upcoming Appointments -->
-    <div class="card appointments-card">
-      <div class="card-header">
-        <div class="card-title-group">
-          <h3 class="card-title">Upcoming Appointments</h3>
-          <p class="card-subtitle">Today's schedule</p>
-        </div>
-        <a href="#" class="view-all-link">View All</a>
-      </div>
-      <div class="card-body appointments-list">
-        <div class="appointment-item">
-          <div class="appointment-time">
-            <span class="time">2:30 PM</span>
-            <span class="duration">30 min</span>
-          </div>
-          <div class="appointment-info">
-            <div class="patient-avatar">JD</div>
-            <div class="appointment-details">
-              <span class="patient-name">John Doe</span>
-              <span class="appointment-type">Physical Therapy - Follow-up</span>
-            </div>
-          </div>
-          <span class="appointment-status confirmed">Confirmed</span>
-        </div>
-
-        <div class="appointment-item">
-          <div class="appointment-time">
-            <span class="time">3:00 PM</span>
-            <span class="duration">45 min</span>
-          </div>
-          <div class="appointment-info">
-            <div class="patient-avatar female">SM</div>
-            <div class="appointment-details">
-              <span class="patient-name">Sarah Miller</span>
-              <span class="appointment-type">Initial Evaluation</span>
-            </div>
-          </div>
-          <span class="appointment-status pending">Pending</span>
-        </div>
-
-        <div class="appointment-item">
-          <div class="appointment-time">
-            <span class="time">3:45 PM</span>
-            <span class="duration">30 min</span>
-          </div>
-          <div class="appointment-info">
-            <div class="patient-avatar">RJ</div>
-            <div class="appointment-details">
-              <span class="patient-name">Robert Johnson</span>
-              <span class="appointment-type">Occupational Therapy</span>
-            </div>
-          </div>
-          <span class="appointment-status confirmed">Confirmed</span>
-        </div>
-
-        <div class="appointment-item">
-          <div class="appointment-time">
-            <span class="time">4:30 PM</span>
-            <span class="duration">60 min</span>
-          </div>
-          <div class="appointment-info">
-            <div class="patient-avatar female">EW</div>
-            <div class="appointment-details">
-              <span class="patient-name">Emily Watson</span>
-              <span class="appointment-type">Re-evaluation</span>
-            </div>
-          </div>
-          <span class="appointment-status confirmed">Confirmed</span>
-        </div>
-
-        <div class="appointment-item">
-          <div class="appointment-time">
-            <span class="time">5:30 PM</span>
-            <span class="duration">30 min</span>
-          </div>
-          <div class="appointment-info">
-            <div class="patient-avatar">MK</div>
-            <div class="appointment-details">
-              <span class="patient-name">Michael Kim</span>
-              <span class="appointment-type">Physical Therapy</span>
-            </div>
-          </div>
-          <span class="appointment-status confirmed">Confirmed</span>
-        </div>
-      </div>
-    </div>
 
     <!-- Middle Column: Quick Actions + Performance -->
     <div class="middle-column">
