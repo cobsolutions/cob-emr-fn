@@ -1,5 +1,6 @@
 import { RomOption } from "../../range-of-motion/config";
 import { ColumnDefinition } from "../../common/measurement-table-multiple-columns/measurement-table-multiple-columns.component";
+import { Motor_Control_Tests_HOLD_TIME_OPTION } from "./cervical-motor-control-tests-config";
 
 export const Lumbar_Motor_Control_Tests_OPTION: RomOption[] = [
     { value: 'not_tested', label: 'Not Tested' },
@@ -12,6 +13,7 @@ export interface LumbarMotorControlTestsSectionConfig {
     labels: string[];
     columns: ColumnDefinition[];
     options: RomOption[];
+    columnOptions?: { [columnName: string]: RomOption[] };
     fieldPrefix: string;
     showComments: boolean;
     commentsFieldName: string;
@@ -35,6 +37,9 @@ export class LumbarMotorControlTestsConfig {
             { name: 'Hold Time' }
         ],
         options: Lumbar_Motor_Control_Tests_OPTION,
+        columnOptions: {
+            'Hold Time': Motor_Control_Tests_HOLD_TIME_OPTION
+        },
         fieldPrefix: 'lumbar_mct_',
         showComments: true,
         commentsFieldName: 'lumbar_mct_comments',
