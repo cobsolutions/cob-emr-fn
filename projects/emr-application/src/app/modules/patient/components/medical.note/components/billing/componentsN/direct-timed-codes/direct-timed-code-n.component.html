@@ -29,4 +29,67 @@
             </div>
         </div>
     </div>
+
+    <!-- Custom codes section -->
+    <div class="custom-codes-section">
+      <div class="custom-codes-header">Custom Codes</div>
+
+      <div *ngIf="customCodeIds.length === 0" class="custom-codes-empty">
+        No custom codes added yet.
+      </div>
+
+      <div *ngFor="let id of customCodeIds" class="custom-code-item">
+        <div class="custom-code-row">
+          <input
+            type="number"
+            class="form-control custom-code-quantity direct-timed-input"
+            [formControlName]="customControlKey(id, 'quantity')"
+            min="0"
+            placeholder="Qty"
+          />
+
+          <input
+            cFormControl
+            type="text"
+            class="form-control custom-code-name"
+            [formControlName]="customControlKey(id, 'name')"
+            placeholder="Description"
+          />
+
+          <input
+            cFormControl
+            type="text"
+            class="form-control custom-code-code"
+            [formControlName]="customControlKey(id, 'code')"
+            placeholder="Code"
+          />
+
+          <button
+            type="button"
+            class="custom-code-remove"
+            (click)="removeCustomCode(id)"
+            title="Remove custom code"
+          >
+            &times;
+          </button>
+        </div>
+
+        <div *ngIf="customHasValue(id)" class="notes-wrapper custom-code-notes">
+          <textarea
+            [formControlName]="customControlKey(id, 'notes')"
+            placeholder="Enter notes"
+            rows="3"
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="custom-code-add"
+        (click)="addCustomCode()"
+      >
+        + Add custom code
+      </button>
+    </div>
 </div>

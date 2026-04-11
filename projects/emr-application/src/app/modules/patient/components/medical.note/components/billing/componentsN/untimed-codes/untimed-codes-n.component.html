@@ -50,4 +50,72 @@
       </div>
     </div>
   </div>
+
+  <!-- Custom codes section -->
+  <div class="custom-codes-section">
+    <div class="custom-codes-header">Custom Codes</div>
+
+    <div *ngIf="customCodeIds.length === 0" class="custom-codes-empty">
+      No custom codes added yet.
+    </div>
+
+    <div *ngFor="let id of customCodeIds" class="custom-code-item">
+      <div class="custom-code-row">
+        <c-form-check class="custom-code-check">
+          <input
+            cFormCheckInput
+            type="checkbox"
+            [id]="'custom-' + id + '-checked'"
+            [formControlName]="customControlKey(id, 'checked')"
+          />
+          <label
+            cFormCheckLabel
+            [for]="'custom-' + id + '-checked'"
+          ></label>
+        </c-form-check>
+
+        <input
+          cFormControl
+          type="text"
+          class="form-control custom-code-name"
+          [formControlName]="customControlKey(id, 'name')"
+          placeholder="Description"
+        />
+
+        <input
+          cFormControl
+          type="text"
+          class="form-control custom-code-code"
+          [formControlName]="customControlKey(id, 'code')"
+          placeholder="Code"
+        />
+
+        <button
+          type="button"
+          class="custom-code-remove"
+          (click)="removeCustomCode(id)"
+          title="Remove custom code"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div *ngIf="isCustomChecked(id)" class="textarea-wrapper custom-code-notes">
+        <textarea
+          [formControlName]="customControlKey(id, 'notes')"
+          placeholder="Enter notes"
+          rows="3"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="custom-code-add"
+      (click)="addCustomCode()"
+    >
+      + Add custom code
+    </button>
+  </div>
 </div>
