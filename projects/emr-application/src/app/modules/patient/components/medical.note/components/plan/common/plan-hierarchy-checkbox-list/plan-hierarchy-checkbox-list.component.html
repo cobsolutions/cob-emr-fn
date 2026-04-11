@@ -11,7 +11,7 @@
     <ng-container [formGroup]="formGroup">
         <c-form-check>
             <input cFormCheckInput type="checkbox" [formControlName]="option.formControlName" />
-            <label cFormCheckLabel>{{ option.label }}</label>
+            <label cFormCheckLabel (click)="toggleCheckbox(option)">{{ option.label }}</label>
         </c-form-check>
 
         <!-- Show children and textarea if option has children -->

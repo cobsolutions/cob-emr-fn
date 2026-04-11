@@ -130,4 +130,12 @@ export class PlanHierarchyCheckboxListComponent implements OnInit, OnChanges {
     return this.formGroup.get(option.formControlName)?.value === true;
   }
 
+  // Toggle checkbox when clicking the label text
+  toggleCheckbox(option: HierarchyCheckboxOption): void {
+    const control = this.formGroup.get(option.formControlName);
+    if (control) {
+      control.setValue(!control.value);
+    }
+  }
+
 }
