@@ -123,14 +123,16 @@ export class OutcomeMeasurementToolsComponent implements OnInit {
   // Dropdown options for vestibular
   lossOfConsciousnessOptions = [
     { value: 'not_tested', label: 'Not Tested' },
-    { value: 'less_than_30_min', label: 'Less than 30 minutes' },
-    { value: 'more_than_30_min', label: 'More than 30 minutes' }
+    { value: 'did_not_occur', label: 'Did not occur' },
+    { value: 'at_injury_less_than_one_min', label: 'At time of injury, less than one minute' },
+    { value: 'at_injury_more_than_one_min', label: 'At time of injury, for more than one minute' }
   ];
 
   postTraumaticAmnesiaOptions = [
     { value: 'not_tested', label: 'Not Tested' },
-    { value: 'less_than_24_hrs', label: 'Less than 24 hours' },
-    { value: 'more_than_24_hrs', label: 'More than 24 hours' }
+    { value: 'did_not_occur', label: 'Did not occur' },
+    { value: 'at_injury_less_than_one_min', label: 'At time of injury, less than one minute' },
+    { value: 'at_injury_more_than_one_min', label: 'At time of injury, for more than one minute' }
   ];
 
   constructor(
