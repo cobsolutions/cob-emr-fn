@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BillingCPTCode } from '../interface/billing-cpt-code';
 import { UNTIMED_CODES_DATA } from './untimed-codes.data';
 import { untimedCodes } from '../../model/untimedCodes';
@@ -18,6 +18,11 @@ export class UntimedCodesNComponent implements OnInit, OnChanges {
   billingCPTCodeList: BillingCPTCode[] = [];
   checkedCodes: Map<string, boolean> = new Map();
   checkedSubItems: Map<string, boolean> = new Map();
+
+  // Ids of custom codes rendered in the template. Each id maps to 4 form
+  // controls: custom_<id>_name, custom_<id>_code, custom_<id>_checked, custom_<id>_notes.
+  customCodeIds: string[] = [];
+  private customCodeCounter = 0;
 
   // Hardcoded sub-items for specific CPT codes
   cptSubItems: { code: string; children: string[] }[] = [
@@ -42,7 +47,23 @@ export class UntimedCodesNComponent implements OnInit, OnChanges {
 
   patchFormData(): void {
     if (!this.untimedCodesData?.codes || !this.UntimedCodes) return;
+
+    // Clear any previously-rendered custom code rows before re-patching so
+    // repeated patches do not accumulate duplicates.
+    this.clearCustomCodes();
+
     this.untimedCodesData.codes.forEach(item => {
+      if (item.isCustom) {
+        // Rehydrate a custom code row from the saved data.
+        this.addCustomCode({
+          name: item.name || '',
+          code: item.code || '',
+          isCheck: item.isCheck || false,
+          note: item.note || ''
+        });
+        return;
+      }
+
       const checkedControl = this.UntimedCodes.get(item.code + '_checked');
       const notesControl = this.UntimedCodes.get(item.code + '_notes');
       if (checkedControl) {
@@ -126,6 +147,64 @@ export class UntimedCodesNComponent implements OnInit, OnChanges {
       });
     });
     return result;
+  }
+
+  // ---------------- Custom codes ----------------
+
+  /**
+   * Append a new custom code row. When called with no args it adds an empty
+   * row for the user to fill in; when called with initial values it is used
+   * by patchFormData to rehydrate previously-saved custom codes.
+   */
+  addCustomCode(initial?: { name: string; code: string; isCheck: boolean; note: string }): void {
+    if (!this.UntimedCodes) return;
+
+    const id = 'c' + (++this.customCodeCounter);
+    const nameKey = this.customControlKey(id, 'name');
+    const codeKey = this.customControlKey(id, 'code');
+    const checkedKey = this.customControlKey(id, 'checked');
+    const notesKey = this.customControlKey(id, 'notes');
+
+    this.UntimedCodes.addControl(nameKey, new FormControl(initial?.name ?? ''));
+    this.UntimedCodes.addControl(codeKey, new FormControl(initial?.code ?? ''));
+    this.UntimedCodes.addControl(checkedKey, new FormControl(initial?.isCheck ?? false));
+    this.UntimedCodes.addControl(notesKey, new FormControl(initial?.note ?? ''));
+
+    this.customCodeIds.push(id);
+  }
+
+  removeCustomCode(id: string): void {
+    if (!this.UntimedCodes) return;
+
+    const suffixes: Array<'name' | 'code' | 'checked' | 'notes'> = ['name', 'code', 'checked', 'notes'];
+    suffixes.forEach(suffix => {
+      const key = this.customControlKey(id, suffix);
+      if (this.UntimedCodes.contains(key)) {
+        this.UntimedCodes.removeControl(key);
+      }
+    });
+
+    this.customCodeIds = this.customCodeIds.filter(existing => existing !== id);
+  }
+
+  isCustomChecked(id: string): boolean {
+    return !!this.UntimedCodes?.get(this.customControlKey(id, 'checked'))?.value;
+  }
+
+  customControlKey(id: string, suffix: 'name' | 'code' | 'checked' | 'notes'): string {
+    return 'custom_' + id + '_' + suffix;
+  }
+
+  private clearCustomCodes(): void {
+    if (!this.UntimedCodes) {
+      this.customCodeIds = [];
+      return;
+    }
+    // Remove any existing custom_* controls so a re-patch does not duplicate rows.
+    Object.keys(this.UntimedCodes.controls)
+      .filter(key => key.startsWith('custom_'))
+      .forEach(key => this.UntimedCodes.removeControl(key));
+    this.customCodeIds = [];
   }
 
 }
