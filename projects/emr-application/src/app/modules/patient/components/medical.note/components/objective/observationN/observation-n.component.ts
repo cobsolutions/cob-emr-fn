@@ -124,7 +124,28 @@ export class ObservationNComponent implements OnInit {
     { value: 'forward_head', label: 'Forward Head' },
     { value: 'wry_neck', label: 'Wry Neck' },
     { value: 'abnormal', label: 'Abnormal' },
-    { value: 'rounded_shoulders', label: 'Rounded Shoulders' }
+    { value: 'rounded_shoulders', label: 'Rounded Shoulders' },
+    { value: 'squinting_patella', label: 'Squinting Patella' },
+    { value: 'scapular_asymmetry', label: 'Scapular Asymmetry' },
+    { value: 'muscular_asymmetry', label: 'Muscular Asymmetry' },
+    { value: 'increased_thoracic_kyphosis', label: 'Increased Thoracic Kyphosis' },
+    { value: 'decreased_thoracic_kyphosis', label: 'Decreased Thoracic Kyphosis' },
+    { value: 'increased_lumbar_lordosis', label: 'Increased Lumbar Lordosis' },
+    { value: 'decreased_lumbar_lordosis', label: 'Decreased Lumbar Lordosis' },
+    { value: 'increased_cervical_lordosis', label: 'Increased Cervical Lordosis' },
+    { value: 'decreased_cervical_lordosis', label: 'Decreased Cervical Lordosis' },
+    { value: 'posterior_pelvic_tilt', label: 'Posterior Pelvic Tilt' },
+    { value: 'anterior_pelvic_tilt', label: 'Anterior Pelvic Tilt' },
+    { value: 'scoliosis', label: 'Scoliosis' },
+    { value: 'lateral_shift', label: 'Lateral Shift' },
+    { value: 'pes_planus', label: 'Pes Planus' },
+    { value: 'pes_cavus', label: 'Pes Cavus' },
+    { value: 'obesity', label: 'Obesity' },
+    { value: 'paunch', label: 'Paunch' },
+    { value: 'patella_alta', label: 'Patella Alta' },
+    { value: 'patella_baja', label: 'Patella Baja' },
+    { value: 'anteversion', label: 'Anteversion' },
+    { value: 'retroversion', label: 'Retroversion' }
   ];
 
   protractedScapulasDistanceOptions = [
