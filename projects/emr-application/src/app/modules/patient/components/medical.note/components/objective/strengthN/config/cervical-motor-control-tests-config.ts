@@ -8,10 +8,24 @@ export const Cervical_Motor_Control_Tests_OPTION: RomOption[] = [
     { value: 'custom', label: 'Custom' }
 ];
 
+export const Motor_Control_Tests_HOLD_TIME_OPTION: RomOption[] = [
+    { value: 'not_tested', label: 'Not Tested' },
+    { value: '120_sec', label: '120 Seconds' },
+    { value: '90_sec', label: '90 Seconds' },
+    { value: '60_sec', label: '60 Seconds' },
+    { value: '30_sec', label: '30 Seconds' },
+    { value: '15_sec', label: '15 Seconds' },
+    { value: '10_sec', label: '10 Seconds' },
+    { value: '5_sec', label: '5 Seconds' },
+    { value: 'less_than_5_sec', label: '<5 Seconds' },
+    { value: 'custom', label: 'Custom' }
+];
+
 export interface CervicalMotorControlTestsSectionConfig {
     labels: string[];
     columns: ColumnDefinition[];
     options: RomOption[];
+    columnOptions?: { [columnName: string]: RomOption[] };
     fieldPrefix: string;
     showComments: boolean;
     commentsFieldName: string;
@@ -34,6 +48,9 @@ export class CervicalMotorControlTestsConfig {
             { name: 'Hold Time' }
         ],
         options: Cervical_Motor_Control_Tests_OPTION,
+        columnOptions: {
+            'Hold Time': Motor_Control_Tests_HOLD_TIME_OPTION
+        },
         fieldPrefix: 'cervical_mct_',
         showComments: true,
         commentsFieldName: 'cervical_mct_comments',

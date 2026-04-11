@@ -2600,11 +2600,21 @@
                     <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
                 </select>
             </div>
+            <div class="form-row" *ngIf="showPbRombergEyesOpenCustom">
+                <label class="field-label"></label>
+                <input cFormControl type="text" formControlName="pb_romberg_eyes_open_custom_text"
+                    class="full-width-input" placeholder="Enter custom value" />
+            </div>
             <div class="form-row">
                 <label class="field-label">Eyes Closed</label>
                 <select formControlName="pb_romberg_eyes_closed" class="form-select">
                     <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
                 </select>
+            </div>
+            <div class="form-row" *ngIf="showPbRombergEyesClosedCustom">
+                <label class="field-label"></label>
+                <input cFormControl type="text" formControlName="pb_romberg_eyes_closed_custom_text"
+                    class="full-width-input" placeholder="Enter custom value" />
             </div>
             <div class="form-row">
                 <label class="field-label">Comments</label>
@@ -2625,6 +2635,33 @@
             </div>
         </div>
         <div *ngIf="showPbSharpenedRombergFields" class="dependent-field-box">
+            <div class="form-row">
+                <label class="field-label">Eyes Open</label>
+                <select formControlName="pb_sharpened_romberg_eyes_open" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row" *ngIf="showPbSharpenedRombergEyesOpenCustom">
+                <label class="field-label"></label>
+                <input cFormControl type="text" formControlName="pb_sharpened_romberg_eyes_open_custom_text"
+                    class="full-width-input" placeholder="Enter custom value" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Eyes Closed</label>
+                <select formControlName="pb_sharpened_romberg_eyes_closed" class="form-select">
+                    <option *ngFor="let opt of pbRombergOptions" [value]="opt">{{opt}}</option>
+                </select>
+            </div>
+            <div class="form-row" *ngIf="showPbSharpenedRombergEyesClosedCustom">
+                <label class="field-label"></label>
+                <input cFormControl type="text" formControlName="pb_sharpened_romberg_eyes_closed_custom_text"
+                    class="full-width-input" placeholder="Enter custom value" />
+            </div>
+            <div class="form-row">
+                <label class="field-label">Comments</label>
+                <textarea formControlName="pb_sharpened_romberg_comments_text" class="form-textarea"
+                    rows="4"></textarea>
+            </div>
         </div>
         <div class="form-row">
             <label class="field-label">Functional Reach UE</label>
