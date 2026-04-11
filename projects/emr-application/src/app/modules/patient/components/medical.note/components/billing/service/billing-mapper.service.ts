@@ -169,7 +169,9 @@ export class BillingMapperService {
   }
 
   /**
-   * Maps QuantityCPTCode array from FormGroup format (code: quantity) to model format
+   * Maps QuantityCPTCode array from FormGroup format (code: quantity) to model format.
+   * Also extracts user-added custom codes stored under keys like
+   * custom_<id>_{quantity|name|code|notes}.
    */
   private mapQuantityCodesToModel(formGroup: FormGroup): QuantityCPTCode[] {
     if (!formGroup) {
@@ -179,11 +181,16 @@ export class BillingMapperService {
     const codes: QuantityCPTCode[] = [];
     const processedCodes = new Set<string>();
     const controls = formGroup.controls;
+    const controlKeys = Object.keys(controls);
 
     // Iterate through all keys in the FormGroup
-    Object.keys(controls).forEach(key => {
+    controlKeys.forEach(key => {
       // Skip notes keys for now, we'll handle them when processing the code
       if (key.endsWith('_notes')) {
+        return;
+      }
+      // Custom codes are handled in a separate pass below.
+      if (key.startsWith('custom_')) {
         return;
       }
 
@@ -196,6 +203,31 @@ export class BillingMapperService {
           note: formGroup.get(`${code}_notes`)?.value ?? ''
         });
       }
+    });
+
+    // Second pass: custom codes. Group keys by id and emit one entry per id.
+    const customIds = new Set<string>();
+    controlKeys.forEach(key => {
+      const match = key.match(/^custom_(.+?)_(quantity|name|code|notes)$/);
+      if (match) {
+        customIds.add(match[1]);
+      }
+    });
+
+    customIds.forEach(id => {
+      const name = formGroup.get(`custom_${id}_name`)?.value ?? '';
+      const code = formGroup.get(`custom_${id}_code`)?.value ?? '';
+      // Skip empty rows (user added a row but never filled it in).
+      if (!name && !code) {
+        return;
+      }
+      codes.push({
+        code: code,
+        name: name,
+        quantity: formGroup.get(`custom_${id}_quantity`)?.value ?? 0,
+        note: formGroup.get(`custom_${id}_notes`)?.value ?? '',
+        isCustom: true
+      });
     });
 
     return codes;
@@ -235,7 +267,9 @@ export class BillingMapperService {
       codes: codes.map(codeItem => ({
         code: codeItem.code,
         quantity: codeItem.quantity ?? 0,
-        note: codeItem.note ?? ''
+        note: codeItem.note ?? '',
+        name: codeItem.name,
+        isCustom: codeItem.isCustom ?? false
       }))
     };
   }

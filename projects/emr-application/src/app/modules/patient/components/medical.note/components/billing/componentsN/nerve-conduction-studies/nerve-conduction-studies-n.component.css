@@ -36,4 +36,90 @@
     max-width: 700px;
     resize: vertical;
   }
-  
+
+  /* ---------------- Custom codes ---------------- */
+
+  .custom-codes-section {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px dashed #d0d5dd;
+  }
+
+  .custom-codes-header {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #344054;
+  }
+
+  .custom-codes-empty {
+    color: #98a2b3;
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .custom-code-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    max-width: 700px;
+  }
+
+  .custom-code-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .custom-code-check {
+    margin: 0;
+  }
+
+  .custom-code-name {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .custom-code-code {
+    flex: 0 0 140px;
+  }
+
+  .custom-code-remove {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #98a2b3;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0;
+  }
+
+  .custom-code-remove:hover {
+    color: #d92d20;
+    border-color: #fecdca;
+    background: #fef3f2;
+  }
+
+  .custom-code-notes {
+    margin-left: 28px;
+  }
+
+  .custom-code-add {
+    margin-top: 6px;
+    background: transparent;
+    border: 1px dashed #98a2b3;
+    color: #344054;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .custom-code-add:hover {
+    border-color: #667085;
+    background: #f9fafb;
+  }
