@@ -67,8 +67,8 @@
             <div class="goal-input">
               <label>Goal Met</label>
               <select formControlName="met" cSelect>
-                <option *ngFor="let i of [].constructor(11); let idx = index" [value]="(idx * 10) + '%'">
-                  {{ idx * 10 }}%
+                <option *ngFor="let i of [].constructor(21); let idx = index" [value]="(idx * 5) + '%'">
+                  {{ idx * 5 }}%
                 </option>
                 <option value="custom">Custom</option>
               </select>
