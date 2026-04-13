@@ -1,0 +1,142 @@
+[
+  {
+    "testName": "pregmobindx",
+    "testDescription": "Pregnancy Mobility Index (PMI)",
+    "scale": { "min": 0, "max": 4, "labels": { "0": "No problems performing this task.", "1": "Slight problems performing this task.", "2": "Moderate problems performing this task.", "3": "Severe problems performing this task.", "4": "Unable to perform this task." } },
+    "questions": [
+      { "key": "q1", "order": 1, "section": "Section I: Daily Mobility in the House", "text": "Standing up from a hard chair" },
+      { "key": "q2", "order": 2, "section": "Section I: Daily Mobility in the House", "text": "Standing up from a soft chair" },
+      { "key": "q3", "order": 3, "section": "Section I: Daily Mobility in the House", "text": "Standing up from the bed" },
+      { "key": "q4", "order": 4, "section": "Section I: Daily Mobility in the House", "text": "Getting things from the floor" },
+      { "key": "q5", "order": 5, "section": "Section I: Daily Mobility in the House", "text": "Putting on shoes" },
+      { "key": "q6", "order": 6, "section": "Section I: Daily Mobility in the House", "text": "Turning around in bed" },
+      { "key": "q7", "order": 7, "section": "Section I: Daily Mobility in the House", "text": "Standing up from the floor" },
+      { "key": "q8", "order": 8, "section": "Section II: Household Activities", "text": "Vacuum Cleaning" },
+      { "key": "q9", "order": 9, "section": "Section II: Household Activities", "text": "Doing laundry" },
+      { "key": "q10", "order": 10, "section": "Section II: Household Activities", "text": "Hanging wash to dry" },
+      { "key": "q11", "order": 11, "section": "Section II: Household Activities", "text": "Working on the knees" },
+      { "key": "q12", "order": 12, "section": "Section II: Household Activities", "text": "Sitting in squatted position" },
+      { "key": "q13", "order": 13, "section": "Section II: Household Activities", "text": "Working standing up" },
+      { "key": "q14", "order": 14, "section": "Section II: Household Activities", "text": "Lifting 5 kilograms" },
+      { "key": "q15", "order": 15, "section": "Section II: Household Activities", "text": "Lifting 10 kilograms" },
+      { "key": "q16", "order": 16, "section": "Section II: Household Activities", "text": "Walking stairs" },
+      { "key": "q17", "order": 17, "section": "Section III: Mobility Outdoors", "text": "Traveling by train" },
+      { "key": "q18", "order": 18, "section": "Section III: Mobility Outdoors", "text": "Traveling by car" },
+      { "key": "q19", "order": 19, "section": "Section III: Mobility Outdoors", "text": "Traveling by bicycle" },
+      { "key": "q20", "order": 20, "section": "Section III: Mobility Outdoors", "text": "Traveling by bus" },
+      { "key": "q21", "order": 21, "section": "Section III: Mobility Outdoors", "text": "Walking 50 meters" },
+      { "key": "q22", "order": 22, "section": "Section III: Mobility Outdoors", "text": "Walking 200 meters" },
+      { "key": "q23", "order": 23, "section": "Section III: Mobility Outdoors", "text": "Walking 500 meters" },
+      { "key": "q24", "order": 24, "section": "Section III: Mobility Outdoors", "text": "Walking on uneven area" }
+    ]
+  },
+  {
+    "testName": "pdisin",
+    "testDescription": "Pain Disability Index",
+    "scale": { "min": 0, "max": 4, "labels": { "0": "No Disability", "1": "Mild Disability", "2": "Moderate Disability", "3": "Severe Disability", "4": "Total Disability" } },
+    "questions": [
+      { "key": "q1", "order": 1, "section": "Family/Home", "text": "Family/Home Responsibilities" },
+      { "key": "q2", "order": 2, "section": "Recreation", "text": "Recreation" },
+      { "key": "q3", "order": 3, "section": "Social", "text": "Social Activity" },
+      { "key": "q4", "order": 4, "section": "Occupation", "text": "Occupation" },
+      { "key": "q5", "order": 5, "section": "Sexual", "text": "Sexual Behavior" },
+      { "key": "q6", "order": 6, "section": "Self-Care", "text": "Self-Care" },
+      { "key": "q7", "order": 7, "section": "Life-Support", "text": "Life-Support Activity" }
+    ]
+  },
+  {
+    "testName": "dizzhinv",
+    "testDescription": "Dizziness Handicap Inventory",
+    "scale": { "min": 0, "max": 4, "labels": { "0": "No", "2": "Sometimes", "4": "Yes" } },
+    "questions": [
+      { "key": "q1", "order": 1, "text": "Does looking up increase your problem?" },
+      { "key": "q2", "order": 2, "text": "Because of your problem, do you feel frustrated?" },
+      { "key": "q3", "order": 3, "text": "Because of your problem, do you restrict your travel for business or recreation?" },
+      { "key": "q4", "order": 4, "text": "Does walking down the aisle of a supermarket increase your problem?" },
+      { "key": "q5", "order": 5, "text": "Because of your problem, do you have difficulty getting into or out of bed?" },
+      { "key": "q6", "order": 6, "text": "Does your problem significantly restrict your participation in social activities such as going out to dinner, going to the movies, dancing, or to parties?" },
+      { "key": "q7", "order": 7, "text": "Because of your problem, do you have difficulty reading?" },
+      { "key": "q8", "order": 8, "text": "Does performing more ambitious activities like sports, dancing, household chores such as sweeping or putting away dishes increase your problem?" },
+      { "key": "q9", "order": 9, "text": "Because of your problem, are you afraid to leave your home without having someone accompany you?" },
+      { "key": "q10", "order": 10, "text": "Because of your problem, have you been embarrassed in front of others?" },
+      { "key": "q11", "order": 11, "text": "Do quick movements of your head increase your problem?" },
+      { "key": "q12", "order": 12, "text": "Because of your problem, do you avoid heights?" },
+      { "key": "q13", "order": 13, "text": "Does turning over in bed increase your problem?" },
+      { "key": "q14", "order": 14, "text": "Because of your problem, is it difficult for you to do strenuous housework or yard work?" },
+      { "key": "q15", "order": 15, "text": "Because of your problem, are you afraid people might think you are intoxicated?" },
+      { "key": "q16", "order": 16, "text": "Because of your problem, is it difficult for you to go for a walk by yourself?" },
+      { "key": "q17", "order": 17, "text": "Does walking down a sidewalk increase your problem?" },
+      { "key": "q18", "order": 18, "text": "Because of your problem, is it difficult for you to concentrate?" },
+      { "key": "q19", "order": 19, "text": "Because of your problem, is it difficult for you walk around the house in the dark?" },
+      { "key": "q20", "order": 20, "text": "Because of your problem, are you afraid to stay home alone?" },
+      { "key": "q21", "order": 21, "text": "Because of your problem, do you feel handicapped?" },
+      { "key": "q22", "order": 22, "text": "Has your problem placed stress on your relationships with members of your family or friends?" },
+      { "key": "q23", "order": 23, "text": "Because of your problem, are you depressed?" },
+      { "key": "q24", "order": 24, "text": "Does your problem interfere with your job or household responsibilities?" },
+      { "key": "q25", "order": 25, "text": "Does bending over increase your problem?" }
+    ],
+    "_note": "Non-monotonic scoring: only values 0/2/4 are used (Yes=4, Sometimes=2, No=0)."
+  },
+  {
+    "testName": "lymphedema",
+    "testDescription": "Lymphedema Functional/Psychosocial",
+    "scale": { "min": 0, "max": 4, "labels": { "0": "Minimum impact", "4": "Maximum impact" } },
+    "questions": [
+      { "key": "q1", "order": 1, "section": "I. Physical concerns", "text": "The amount of pain associated with my lymphedema is:" },
+      { "key": "q2", "order": 2, "section": "I. Physical concerns", "text": "The amount of limb heaviness associated with my lymphedema is:" },
+      { "key": "q3", "order": 3, "section": "I. Physical concerns", "text": "The amount of skin tightness associated with my lymphedema is:" },
+      { "key": "q4", "order": 4, "section": "I. Physical concerns", "text": "The size of my swollen limb(s) seems:" },
+      { "key": "q5", "order": 5, "section": "I. Physical concerns", "text": "Lymphedema affects the movement of my swollen limb(s):" },
+      { "key": "q6", "order": 6, "section": "I. Physical concerns", "text": "The strength in my swollen limb(s) is:" },
+      { "key": "q7", "order": 7, "section": "II. Psychosocial concerns", "text": "Lymphedema affects my body image (how I think I look):" },
+      { "key": "q8", "order": 8, "section": "II. Psychosocial concerns", "text": "Lymphedema affects my socializing with others." },
+      { "key": "q9", "order": 9, "section": "II. Psychosocial concerns", "text": "Lymphedema affects my intimate relations with spouse or partner (rate 0 if not applicable)." },
+      { "key": "q10", "order": 10, "section": "II. Psychosocial concerns", "text": "Lymphedema \"gets me down\" (i.e., I have feelings of depression, frustration, or anger due to the lymphedema)." },
+      { "key": "q11", "order": 11, "section": "II. Psychosocial concerns", "text": "I must rely on others for help due to my lymphedema." },
+      { "key": "q12", "order": 12, "section": "II. Psychosocial concerns", "text": "I know what to do to manage my lymphedema." },
+      { "key": "q13", "order": 13, "section": "III. Functional concerns", "text": "Lymphedema affects my ability to perform self-care activities (i.e., eating, dressing, hygiene)." },
+      { "key": "q14", "order": 14, "section": "III. Functional concerns", "text": "Lymphedema affects my ability to perform routine home or work-related activities." },
+      { "key": "q15", "order": 15, "section": "III. Functional concerns", "text": "Lymphedema affects my performance of preferred leisure activities." },
+      { "key": "q16", "order": 16, "section": "III. Functional concerns", "text": "Lymphedema affects the proper fit of clothing/shoes." },
+      { "key": "q17", "order": 17, "section": "III. Functional concerns", "text": "Lymphedema affects my sleep." },
+      { "key": "q18", "order": 18, "section": "IV. Infection Occurrence", "text": "In the past year, I have become ill with an infection in my swollen limb requiring oral antibiotics or hospitalization." }
+    ]
+  },
+  {
+    "testName": "cdisquesti",
+    "testDescription": "Croft Disability Questionnaire Shoulder",
+    "scale": { "min": 0, "max": 1, "labels": { "0": "No", "1": "Yes" } },
+    "questions": [
+      { "key": "q1", "order": 1, "text": "Because of pain in my shoulder, I move my arm or hand with some difficulty." },
+      { "key": "q2", "order": 2, "text": "I do not bath myself completely because of my shoulder." },
+      { "key": "q3", "order": 3, "text": "Because of my shoulder trouble, I get dressed with help from someone else." },
+      { "key": "q4", "order": 4, "text": "I get dressed more slowly than usual because of my shoulder." },
+      { "key": "q5", "order": 5, "text": "Because of my shoulder trouble, I fasten my clothing with some difficulty (eg buttons, zips, shoelaces or bra)." },
+      { "key": "q6", "order": 6, "text": "I have trouble putting on a jumper, shirt, blouse or jacket because of my shoulder problem." },
+      { "key": "q7", "order": 7, "text": "Because of my shoulder problem, I change position frequently in bed at night." },
+      { "key": "q8", "order": 8, "text": "I cannot lie on my right side at night because of my shoulder." },
+      { "key": "q9", "order": 9, "text": "I cannot lie on my left side at night because of my shoulder." },
+      { "key": "q10", "order": 10, "text": "I stay at home most of the time because of my shoulder problem." },
+      { "key": "q11", "order": 11, "text": "Because of my shoulder problem, I do less of the daily household jobs than I would usually do." },
+      { "key": "q12", "order": 12, "text": "I avoid heavy jobs around the house because of my shoulder trouble." },
+      { "key": "q13", "order": 13, "text": "Because of my shoulder, I do no carry any shopping." },
+      { "key": "q14", "order": 14, "text": "Because of my shoulder trouble, I am cutting down on some of my usual sports or more active pastimes." },
+      { "key": "q15", "order": 15, "text": "Because of my shoulder trouble, I am not doing any of my usual physical recreation or more active pastimes." },
+      { "key": "q16", "order": 16, "text": "Because of my shoulder, I try to get other people to do things for me." },
+      { "key": "q17", "order": 17, "text": "My shoulder makes me more irritable and bad tempered with people than usual." },
+      { "key": "q18", "order": 18, "text": "Because of my shoulder, I have more minor accidents (eg dropping things)." },
+      { "key": "q19", "order": 19, "text": "I sleep less well because of my shoulder." },
+      { "key": "q20", "order": 20, "text": "Because of my shoulder, I rest more often during the day." },
+      { "key": "q21", "order": 21, "text": "My appetite is not very good because of my shoulder problem." },
+      { "key": "q22", "order": 22, "text": "Because of my shoulder, I have trouble writing or typing." }
+    ]
+  },
+  {
+    "testName": "wofarat",
+    "testDescription": "Wong-Baker Faces Pain Rating",
+    "scale": { "min": 0, "max": 5, "labels": { "0": "No Hurt", "1": "Hurts Little Bit", "2": "Hurts Little More", "3": "Hurts Even More", "4": "Hurts Whole Lot", "5": "Hurts Worst" } },
+    "questions": [
+      { "key": "q1", "order": 1, "text": "Select the face that best describes how you feel" }
+    ]
+  }
+]

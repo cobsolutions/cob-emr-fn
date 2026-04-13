@@ -5,7 +5,7 @@ import { environment } from 'projects/emr-application/src/environments/environme
 
 export interface CalculateOMTTestRequest {
   medicalNoteId: string;
-  answers: { [key: string]: number };
+  answers: { [key: string]: number | string };
 }
 
 @Injectable({
@@ -15,7 +15,7 @@ export class OmtTestService {
   private baseUrl = environment.baseURL + 'medical/note/omt-test'
   constructor(private httpClient: HttpClient) { }
 
-  calculate(testName: string, medicalNoteId: string, answers: { [key: string]: number }): Observable<any> {
+  calculate(testName: string, medicalNoteId: string, answers: { [key: string]: number | string }): Observable<any> {
     const headers = { 'content-type': 'application/json' };
     const url = `${this.baseUrl}/${testName}/calculate`;
     const request: CalculateOMTTestRequest = { medicalNoteId, answers };

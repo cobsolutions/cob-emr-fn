@@ -59,10 +59,10 @@ export class PfimqsfTestComponent implements OnInit {
     if (this.noteId) {
       this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
         if (response?.answers) {
-          const formValues: { [key: string]: string } = {};
+          const formValues: { [key: string]: number } = {};
           Object.entries(response.answers).forEach(([key, value]) => {
             const formKey = key.toLowerCase();
-            formValues[formKey] = String(value);
+            formValues[formKey] = value as number;
           });
           this.pfimqsfForm.patchValue(formValues);
         }

@@ -204,15 +204,38 @@ export class McgpquesTestComponent implements OnInit {
     if (this.noteId) {
       this.omtTestService.getAnswers(this.testName, this.noteId).subscribe(response => {
         if (response?.answers) {
-          const formValues: { [key: string]: string } = {};
+          const formValues: { [key: string]: any } = {};
           Object.entries(response.answers).forEach(([key, value]) => {
             const formKey = key.toLowerCase();
-            formValues[formKey] = String(value);
+            if (formKey === 'painlevel') {
+              formValues[formKey] = Number(value);
+            } else if (/^q\d+$/.test(formKey)) {
+              formValues[formKey] = this.codeToWord(formKey, Number(value));
+            } else {
+              formValues[formKey] = value;
+            }
           });
           this.mcgpquesForm.patchValue(formValues);
         }
       });
     }
+  }
+
+  private getOptionsFor(qKey: string): { value: string; text: string }[] {
+    const num = parseInt(qKey.replace('q', ''), 10);
+    if (num >= 1 && num <= 20) return this.sectionIQuestions[num - 1].options;
+    if (num === 21) return this.sectionIIQuestion.options;
+    if (num >= 22 && num <= 27) return this.intensityOptions;
+    return [];
+  }
+
+  private wordToCode(qKey: string, word: string): number {
+    const idx = this.getOptionsFor(qKey).findIndex(o => o.value === word);
+    return idx >= 0 ? idx : 0;
+  }
+
+  private codeToWord(qKey: string, code: number): string {
+    return this.getOptionsFor(qKey)[code]?.value ?? 'NT';
   }
 
   toggleInstructions(): void {
@@ -229,12 +252,12 @@ export class McgpquesTestComponent implements OnInit {
 
     const answers: { [key: string]: number } = {};
     if (this.mcgpquesForm.value.painlevel !== null) {
-      answers['PAINLEVEL'] = parseInt(this.mcgpquesForm.value.painlevel, 10);
+      answers['PAINLEVEL'] = Number(this.mcgpquesForm.value.painlevel);
     }
     for (let i = 1; i <= 27; i++) {
       const value = this.mcgpquesForm.get(`q${i}`)?.value;
       if (value !== 'NT') {
-        answers[`Q${i}`] = parseInt(value, 10) || 0;
+        answers[`Q${i}`] = this.wordToCode(`q${i}`, value);
       }
     }
 
