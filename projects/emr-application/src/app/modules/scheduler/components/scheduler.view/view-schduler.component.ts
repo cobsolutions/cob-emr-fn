@@ -60,7 +60,7 @@ export class ViewSchdulerComponent implements OnInit {
   schedulerSettingsa: Settings
   userSelectedCalendars: Calendar[]
   selectedClinic: number;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   editEvent: CalendarEvent
   editResult: any
   eventTimesChangedAppointment: Appointment

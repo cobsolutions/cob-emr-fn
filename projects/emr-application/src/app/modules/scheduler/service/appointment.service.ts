@@ -18,11 +18,15 @@ export class AppointmentService {
 
   createRepetitionAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/series/create';
-    return this._http.post(createAppointmentURL, appointment);
+    return this._http.post(createAppointmentURL, this.toSchedulerAppointmentPayload(appointment));
   }
   createSingleAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/create';
-    return this._http.post(createAppointmentURL, appointment);
+    return this._http.post(createAppointmentURL, this.toSchedulerAppointmentPayload(appointment));
+  }
+  private toSchedulerAppointmentPayload(appointment: Appointment) {
+    const { appointmentDate, appointmentType, appointmentTypeColor, appointmentFontTypeColor, ...payload } = appointment;
+    return payload;
   }
   updateSingleAppointment(appointment: Appointment) {
     const createAppointmentURL = this.baseUrl + 'appointment/update';

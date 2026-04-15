@@ -27,7 +27,9 @@
       "Bash(command -v jq node python3)",
       "Read(//c/Users/HP/.claude/projects/C--cob-products-emr-cob-emr-fn/fe227866-ea1e-498b-acd0-d83736d01f58/tool-results/**)",
       "Bash(node -e ':*)",
-      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('scripts:', Object.keys\\(p.scripts||{}\\).slice\\(0,20\\).join\\(', '\\)\\)\")"
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('scripts:', Object.keys\\(p.scripts||{}\\).slice\\(0,20\\).join\\(', '\\)\\)\")",
+      "Bash(rm -f README.md 01-system-context.md 02-frontend-map.md 03-auth-and-gateway.md 04-add-a-feature-walkthrough.md 05-gotchas.md)",
+      "Bash(rm -rf features flows)"
     ]
   }
 }
