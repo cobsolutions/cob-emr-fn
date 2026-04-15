@@ -7,5 +7,7 @@ export interface CheckCPTCode{
     code?:string
     isCheck?:boolean,
     note?:string,
-    subItems?: SubItem[]
+    subItems?: SubItem[],
+    name?: string,
+    isCustom?: boolean
 }
