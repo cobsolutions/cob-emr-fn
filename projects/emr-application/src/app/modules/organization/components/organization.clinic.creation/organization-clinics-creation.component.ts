@@ -56,6 +56,8 @@ export class OrganizationClinicsCreationComponent implements OnInit {
   add() {
     if (this.clinicForm.valid && this.createdClinic.administratorDoctor !== undefined) {
       this.createdClinic.address = this.clinicAddress.getAddress();
+      const { administratorDoctor, selected, generatedId, ...clinicModel } = this.createdClinic;
+      this.clinicDataHolder.clinicModel = clinicModel;
       this.clinicDataHolder.clinicModel = this.createdClinic;
       this.clinicDataHolder.administratorDoctor = this.administratorDoctor
       this.clinicDataHolders.push(this.clinicDataHolder);
